@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'), // 输出的路径
     filename: 'app/[name]_[hash:8].js', // 打包后文件
+    publicPath:'/'
   },
   module: {
     rules: [

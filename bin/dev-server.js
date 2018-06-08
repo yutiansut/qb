@@ -5,15 +5,26 @@ const config = require('../webpack/webpack.dev.config');
 const webpack = require('webpack');
 const path = require('path');
 const compiler = webpack(config);
+const localServerConfig = require('../config/local.server.js')
+
+const host = localServerConfig.host || '127.0.0.1';
+const port = localServerConfig.port || '8080';
+
 
 const server = new WebpackDevServer(compiler, {
-    contentBase: path.resolve(__dirname, '../dist'), //默认会以根文件夹提供本地服务器，这里指定文件夹
+    contentBase: path.resolve(__dirname, '../dist'), //默认会以根文件夹提供本地服务器，这里指定文件夹,
+    stats: {
+      colors: true
+    },
     inline: true, // 自动刷新
     hot: true, // 开启热模块替换
     historyApiFallback: true, //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-    port: 8080, //如果省略，默认8080
-    publicPath: "/"
+    port: port, //如果省略，默认8080
+    publicPath: "/",
+    host: host,
+    open: true
 });
-server.listen(8080, 'localhost', function (err) {
+server.listen(port, 'localhost', function (err) {
+   console.log(`Starting server on ${host}:${port}`);
     if (err) throw err
 })

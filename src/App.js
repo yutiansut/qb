@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './test.styl'
 import TestApp from './TestApp.jsx'
 
