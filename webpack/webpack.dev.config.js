@@ -4,26 +4,24 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const config = require('../config')
 
-const localServerConfig = require('../config/local.server.js')
-
-const host = localServerConfig.host || '127.0.0.1';
-const port = localServerConfig.port || '8080';
-
-process.env.NODE_ENV = 'development';
+const HOST = process.env.HOST
+const PORT = process.env.PORT && Number(process.env.PORT)
+const env = require('../config/dev.env.js')
 
 module.exports = merge(webpackConfig, {
-  devtool: 'cheap-module-eval-source-map',
-  mode: process.env.NODE_ENV,
+  devtool: config.dev.devtool,
+  mode: config.dev.mode,
   entry: [
-    `webpack-dev-server/client?http://${host}:${port}`,
+    `webpack-dev-server/client?http://${HOST || config.dev.host}:${PORT || config.dev.port}`,
     'webpack/hot/only-dev-server',
     path.resolve(__dirname, '../src/index.js'),
   ],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env': env
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.template.html'),
@@ -34,7 +32,7 @@ module.exports = merge(webpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
-        to: 'static',
+        to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
     ])

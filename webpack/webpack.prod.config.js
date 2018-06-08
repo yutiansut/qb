@@ -5,11 +5,12 @@ const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpackConfig = require('./webpack.config');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-process.env.NODE_ENV = 'production';
+const env = require('../config/prod.env.js')
+const config = require('../config')
 
 module.exports = merge(webpackConfig, {
-  mode: process.env.NODE_ENV,
+  mode: 'production',
+  devtool: config.build.productionSourceMap ? config.build.devtool : false,
   //插件
   plugins: [
     //简化JavaScript
@@ -20,22 +21,24 @@ module.exports = merge(webpackConfig, {
           beautify: false,
         },
       },
+      sourceMap: config.build.productionSourceMap,
+      parallel: true
     }),
     //传递环境变量，todo此处有待修改
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env': env
     }),
     //配置static目录拷贝到服务器目录下
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
-        to: 'static',
+        to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
     ]),
     //生成简化的html文件，
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../src/index.template.html'),
+      template: config.build.index,
       inject: true,
       minify: {
         html5: true,
