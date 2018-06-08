@@ -15,19 +15,19 @@ module.exports = {
         loader: 'babel-loader', // 加载器
         exclude: /node_modules/,
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: 'style-loader',
+      //     },
+      //     {
+      //       loader: 'css-loader',
+      //     },
+      //   ],
+      // },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-        ],
-      },
-      {
-        test: /\.styl$/,
+        test: /\.(css|styl)$/,
         // loaders: ['style-loader', 'css-loader', 'stylus-loader']
         use: [
             {

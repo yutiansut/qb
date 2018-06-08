@@ -1,2 +1,21 @@
-h1
+@import './common/base.styl'
+
+@import "~stylus-px2rem/index"
+html-font-size = 16px;
+
+div
   color red
+
+.color1
+  //px2rem('width', 300)
+  //px2rem('height', 200)
+  width 1000px // 62.5rem
+  height 200px // 12.5rem
+  background aqua
+  margin-top 2rem
+
+.testAAA
+  width 1000px // 62.5rem
+  height 200px // 12.5rem
+  background pink
+  margin-top 2rem
