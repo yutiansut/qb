@@ -9,6 +9,7 @@ module.exports = {
   },
   module: {
     rules: [
+      
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader', // 加载器
@@ -25,6 +26,28 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.styl$/,
+        // loaders: ['style-loader', 'css-loader', 'stylus-loader']
+        use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'stylus-loader'
+            }]
+      },
+      {
+        exclude: [/\.js$/, /\.html$/, /\.json$/,/\.styl$/],
+        loader:require.resolve('file-loader'),
+        
+        options: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      }
     ],
   },
 };

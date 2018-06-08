@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './test.styl'
 export default class App extends Component {
     constructor(props) {
         super(props);
