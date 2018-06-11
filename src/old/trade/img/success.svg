@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>success</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon" transform="translate(-265.000000, -422.000000)" fill="#FFFFFF">
+            <g id="10*10" transform="translate(60.000000, 399.000000)">
+                <path d="M218.270562,46.8910867 L237.89611,27.2655381 L240.892454,30.2618821 L218.419875,52.7344619 L218.255861,52.5704484 L218.106548,52.7197612 L205.122391,39.735604 L208.118735,36.73926 L218.270562,46.8910867 Z" id="success"></path>
+            </g>
+        </g>
+    </g>
+</svg>

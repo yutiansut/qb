@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>chucuo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon" transform="translate(-361.000000, -427.000000)" fill="#FFFFFF">
+            <g id="10*10" transform="translate(60.000000, 399.000000)">
+                <path d="M313,28 L318.625,28 L317.6875,50.5 L313.9375,50.5 L313,28 Z M315.8125,58 C314.259199,58 313,56.7408009 313,55.1875 C313,53.6341991 314.259199,52.375 315.8125,52.375 C317.365801,52.375 318.625,53.6341991 318.625,55.1875 C318.625,56.7408009 317.365801,58 315.8125,58 Z" id="chucuo"></path>
+            </g>
+        </g>
+    </g>
+</svg>

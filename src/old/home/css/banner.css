@@ -1,0 +1,54 @@
+.swiper-container,.swiper-wrapper img {
+  width: 100%;
+  /*height: 760px;*/
+}
+/*document.documentElement.clientHeight*/
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+  bottom: 140px;
+}
+.swiper-pagination-bullet {
+  width: 18px;
+  height: 3px;
+  background: rgba(255,255,255,.6);
+  margin: 0 5px;
+  border-radius: unset;
+}
+.swiper-pagination-bullet-active{
+  background: rgb(255,255,255);
+}
+.banner-bottom{
+  position: absolute;
+  bottom: 0;
+  z-index: 666;
+  width: 100%;
+  height: 140px;
+  background: url("/static/img/commonImg/img_banner_down_3x.png") no-repeat 0 / 100% 140px;
+}
+.banner-img h2{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  top: 26.4%;
+  font-size: 4.5rem;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+.banner-img h3{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  top: 36.18%;
+  font-size: 5rem;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+.banner-img a{
+  position: absolute;
+  left: 50%;
+  top:54.5%;
+  transform: translateX(-50%);
+  color: #0080D0;
+  background: white;
+  padding: 10px 35px;
+  font-size: 2rem;
+}

@@ -11,6 +11,13 @@ const config = require('../config')
 module.exports = merge(webpackConfig, {
   mode: 'production',
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
+  output: {
+      path: config.build.assetsRoot, // 输出的路径
+      filename: 'app/[name].js', // 打包后文件
+      publicPath: process.env.NODE_ENV === 'production'
+          ? config.build.assetsPublicPath
+          : config.dev.assetsPublicPath
+  },
   //插件
   plugins: [
     //简化JavaScript

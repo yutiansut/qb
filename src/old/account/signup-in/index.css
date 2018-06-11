@@ -1,0 +1,13 @@
+.signUpInCol {
+  float: none;
+  margin: 200px auto 100px;
+  width: 25%;
+}
+.select-manage:after{
+  content: '';
+
+}
+.signUpIn .active {
+  background-color: #428BCA !important;
+  color: #ffffff !important;
+}

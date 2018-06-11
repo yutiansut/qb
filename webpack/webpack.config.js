@@ -6,7 +6,7 @@ module.exports = {
   // entry: ['babel-polyfill', path.resolve(__dirname, '../src/index.js')],// 指定入口文件，程序从这里开始编译,__dirname当前目录, ../表示上一级目录, ./同级目录
   output: {
     path: config.build.assetsRoot, // 输出的路径
-    filename: 'app/[name]_[hash:8].js', // 打包后文件
+    filename: 'app/[name].js', // 打包后文件
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
@@ -33,25 +33,16 @@ module.exports = {
       {
         test: /\.(css|styl)$/,
         // loaders: ['style-loader', 'css-loader', 'stylus-loader']
-        use: [
-            {
-              loader: 'style-loader'
-            },
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'stylus-loader'
-            }]
+        use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'stylus-loader'}]
       },
-      {
-        exclude: [/\.js$/, /\.html$/, /\.json$/,/\.styl$/],
-        loader:require.resolve('file-loader'),
-
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      }
+      // {
+      //   exclude: [/\.js$/, /\.html$/, /\.json$/,/\.styl$/],
+      //   loader:require.resolve('file-loader'),
+      //
+      //   options: {
+      //     name: 'static/[name].[ext]',
+      //   },
+      // }
     ],
   },
   externals: process.env.NODE_ENV === 'production'
