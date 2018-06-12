@@ -13,6 +13,7 @@ export default class Calendar extends Component {
       day:  new Date().getDate(),
       view: "month",
       showCalendar: 'none',
+
       inputValue: '',
       clickActive: 0,
     };

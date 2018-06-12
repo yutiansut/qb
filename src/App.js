@@ -117,7 +117,10 @@ export default class App extends Component {
     return (
       <div>
 
+
         <BasicExample> </BasicExample>
+
+
         <div className="color1">1111</div>
         <BasicExample> </BasicExample>
         <div className="color2">
