@@ -1,30 +1,54 @@
 import React, {Component} from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import exchangeViewBase from './ExchangeViewBase'
 
-export default class testApp  extends Component {
+export default class testApp extends exchangeViewBase {
 
   constructor(props) {
     super(props);
-
+    // this.state = {count: 1}
+    // console.log(props)
+    const {controller} = props
+    //绑定view
+    this.state = controller.setView(this)
+    // console.log(this.state)
+    //绑定方法
+    this.getData = controller.getData.bind(controller)
+    // this.data =
   }
+
+  componentWillMount() {
+    // super.componentWillMount();
+    this.getData()
+    console.log('testApp componentWillMount')
+  }
+
+  componentDidMount() {
+    // super.componentDidMount();
+    console.log('testApp componenDidMount')
+  }
+
+  componentWillUpdate(...parmas) {
+    console.log('testApp componentWillUpdate', ...parmas)
+  }
+
 
   render() {
     return (
       <div>
         <div>{this.props.sta}</div>
-          {/*<Router>*/}
-            <div>
-            <Link to="/">
-                回退
-            </Link>
-              <Link to="/topics">
-                  回退
-              </Link></div>
-          {/*</Router>*/}
+        <div>{this.state.count}</div>
+        <button onClick={this.getData}>11111</button>
+        {/*<Router>*/}
+        <div>
+          <Link to="/">
+            回退
+          </Link>
+          <Link to="/topics">
+            回退
+          </Link>
+        </div>
+        {/*</Router>*/}
       </div>
     );
   }
