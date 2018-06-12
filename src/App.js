@@ -6,29 +6,39 @@ import {
 } from 'react-router-dom'
 import './test.styl'
 import TestApp from './TestApp.jsx'
+import Button from "./common/component/Button/";
+import SelectButton from "./common/component/SelectButton/";
+import Popup from "./common/component/Popup/";
 
 import testPanage from './testPanage'
 
 // import HomeOld from  './old/home/app.jsx'
 
 import './core/ChangeFontSize'
+import './common/rest.styl'
 
 const BasicExample = () => (
-    <Router>
-        <div>
-            <ul>
-                <li><Link to="/">首页</Link></li>
-                <li><Link to="/about">关于</Link></li>
-                <li><Link to="/topics">主题列表</Link></li>
-            </ul>
+  <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">首页</Link>
+        </li>
+        <li>
+          <Link to="/about">关于</Link>
+        </li>
+        <li>
+          <Link to="/topics">主题列表</Link>
+        </li>
+      </ul>
 
-            <hr/>
+      <hr />
 
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route path="/topics" component={Topics}/>
-        </div>
-    </Router>
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/topics" component={Topics} />
+    </div>
+  </Router>
 );
 
 const Home = () => (
@@ -95,6 +105,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       count: 1,
+      showPopup: false
     }
     testPanage.setThis(this);
   }
@@ -104,10 +115,9 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div>
+    return <div>
         <div className="color1">1111</div>
-          <BasicExample> </BasicExample>
+        <BasicExample> </BasicExample>
         <div className="color2">
           <p>2222</p>
           <p>3333</p>
@@ -115,7 +125,7 @@ export default class App extends Component {
         <div className="color3"> </div>
         <h1>{this.state.count}</h1>
         <button onClick={() => this.add()}>增加1</button>
-          <button onClick={() => testPanage.addOne.apply(this)}>增加2</button>
+        <button onClick={() => testPanage.addOne.apply(this)}>增加2</button>
         <h1>{this.state.count}</h1>
         <h1>h1</h1>
         <h1>{this.state.count}</h1>
@@ -123,7 +133,57 @@ export default class App extends Component {
         <h1>h1</h1>
         <h1>h1</h1>
         <h1>{this.state.count}</h1>
-      </div>
-    );
+        <Button title="默认" className="button" />
+        <Button title="defalut禁用" disable={true} />
+        <Button title="链接百度" theme="positive" href="https://www.baidu.com" target={true} />
+        <Button title="链接百度" type="base" theme="positive" className="button-a" href="https://www.baidu.com" target={true} />
+        <Button title="警示" theme="warn" />
+        <Button title="危险" theme="danger" />
+        <br />
+        <Button title="默认" type="base" />
+        <Button title="base禁用" type="base" disable={true} />
+        <Button title="弹窗" type="base" theme="positive" onClick={() => this.setState({ showPopup: true })} />
+        <Button title="警示" type="base" theme="warn" />
+        <Button title="危险" type="base" theme="danger" />
+        <br />
+        <Button title="带背景按钮" type="back1" />
+        <Button title="带背景按钮" type="back2" className="button-back2" theme="danger" />
+        <a href="#">文字按钮</a>
+        <br />
+        <br />
+        <br />
+        <SelectButton className="select" valueArr={["1", 2, 3, 4, 5]} title="简体中文" onSelect={item => {
+            console.log(item);
+          }} />
+        <SelectButton className="select" type="main" valueArr={["撒发达", "fsdgg", 3, 4, 5]} title="更多操作" onSelect={item => {
+            console.log(item);
+          }} />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        {/* {this.state.showPopup && <Popup title="标题" msg="khlsdhfshfdasujdasfh" onClose={() => { this.setState({showPopup: false})}}></Popup>} */}
+        {this.state.showPopup && <Popup title="标题" type="tip" msg="khlsdhfshfdasujdasfh" onClose={() => { this.setState({showPopup: false})}}></Popup>}
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>;
   }
 }

@@ -11,6 +11,9 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
   module: {
     rules: [
 

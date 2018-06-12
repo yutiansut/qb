@@ -1,0 +1,97 @@
+@import '../../base.styl'
+.wrap
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  .popup
+    box-sizing()
+    position absolute
+    top 50%
+    left 50%
+    transform translateX(-50%) translateY(-50%)
+    -ms-transform translateX(-50%) translateY(-50%)
+    -moz-transform translateX(-50%) translateY(-50%)
+    -webkit-transform translateX(-50%) translateY(-50%)
+    -o-transform translateX(-50%) translateY(-50%)
+    background #FFFFFF
+    border 1px solid #D3DCE6;
+    box-shadow 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04)
+    border-radius 2px
+    &.default, &.confirm, &.custom
+      width 390px
+      padding 20px 20px 16px 20px
+    &.default  
+      min-height 172px
+      h5
+        margin-bottom 30px
+      p
+        min-height 38px
+        color #475669
+        margin-bottom 20px
+      .button
+        width 74px
+        height 36px
+    &.confirm, &.custom 
+      min-height 202px
+      h5
+        margin-bottom 30px
+      p
+        color #475669
+        min-height 84px
+        margin-bottom 20px
+        line-height 40px
+        img
+          float left
+          width 40px
+          height 40px
+          margin-right 14px
+          background yellowgreen
+      .button
+        width 64px
+        height 36px
+    &.base
+      width 320px
+      padding 20px
+      h5
+        margin-bottom 10px
+      p
+        color #8492A6
+        letter-spacing 0
+        line-height 21px
+    &.tip1,&.tip2,&.tip3,&.tip4,
+      position relative
+      width 330px
+      padding 20px
+      padding 20px 20px 20px 74px
+      h5
+        margin-bottom 10px
+      .img
+        position absolute
+        left 20px
+        top 24px
+        width 40px
+        height 40px
+        background-color green
+      p
+        font-size 14px
+        color #8492A6
+        letter-spacing 0
+        line-height 21px
+    h5
+      font-size 16px
+      color #1F2D3D
+      letter-spacing 0
+      line-height 16px
+      img
+        float right
+        width 12px
+        height 12px
+        background-color green
+        cursor pointer
+        &.hide
+          display none
+    .button
+      float right
+      margin-left 10px

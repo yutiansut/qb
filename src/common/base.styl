@@ -6,4 +6,17 @@
 //
 //html
 //  font-size $baseFontSize
+@import "~stylus-px2rem/index.styl"
+html-font-size = 16px;
 
+box-sizing()
+  box-sizing border-box
+  -moz-box-sizing border-box
+  -webkit-box-sizing border-box
+
+_rotate(deg)
+  transform rotate(deg)
+  -ms-transform rotate(deg); 	/* IE 9 */
+  -moz-transform rotate(deg); 	/* Firefox */
+  -webkit-transform rotate(deg); /* Safari 和 Chrome */
+  -o-transform rotate(deg); 	/* Opera */
