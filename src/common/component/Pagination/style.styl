@@ -1,2 +1,17 @@
-@import "../../../node_modules/stylus-px2rem"
-html-font-size = 16px;
+@import '../../base.styl'
+.pagination
+  overflow hidden
+  li
+    box-sizing()
+    float left
+    min-width 28px
+    height 28px
+    line-height 28px
+    font-size 13px
+    color #475669
+    letter-spacing 0
+    border 1px solid #D3DCE6
+    border-right none
+    text-align center
+    &.next
+      border-right 1px solid #D3DCE6

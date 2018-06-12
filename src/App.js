@@ -9,6 +9,7 @@ import TestApp from './TestApp.jsx'
 import Button from "./common/component/Button/";
 import SelectButton from "./common/component/SelectButton/";
 import Popup from "./common/component/Popup/";
+import Pagination from "./common/component/Pagination/";
 
 import testPanage from './testPanage'
 
@@ -142,7 +143,9 @@ export default class App extends Component {
         <br />
         <Button title="默认" type="base" />
         <Button title="base禁用" type="base" disable={true} />
-        <Button title="弹窗" type="base" theme="positive" onClick={() => this.setState({ showPopup: true })} />
+        <Button title="弹窗" type="base" theme="positive" onClick={() => this.setState(
+              { showPopup: true }
+            )} />
         <Button title="警示" type="base" theme="warn" />
         <Button title="危险" type="base" theme="danger" />
         <br />
@@ -179,11 +182,14 @@ export default class App extends Component {
         <br />
         <br />
         {/* {this.state.showPopup && <Popup title="标题" msg="khlsdhfshfdasujdasfh" onClose={() => { this.setState({showPopup: false})}}></Popup>} */}
-        {this.state.showPopup && <Popup title="标题" type="tip" msg="khlsdhfshfdasujdasfh" onClose={() => { this.setState({showPopup: false})}}></Popup>}
+        {this.state.showPopup && <Popup title="标题" type="tip" msg="khlsdhfshfdasujdasfh" onClose={() => {
+              this.setState({ showPopup: false });
+            }} />}
         <br />
         <br />
         <br />
         <br />
+        <Pagination total={500} pageSize={20}></Pagination>
       </div>;
   }
 }
