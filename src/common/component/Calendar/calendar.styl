@@ -1,0 +1,60 @@
+@import "../../stylus/base.styl"
+.calendar-wrap
+  position relative
+  input
+    box-sizing()
+    width 180px
+    height 36px
+    padding-left 10px
+    margin-bottom 5px
+    background #FFF
+    border 1px solid #C0CCDA
+    border-radius 4px
+
+.calendar
+  position absolute
+  z-index 22
+  box-sizing()
+  width 258px
+  padding 16px 26px 18px
+  background #FFF
+  border 1px solid #D3DCE6
+  box-shadow 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04)
+  border-radius 2px
+  text-align center
+  font-size 14px
+  h3
+    margin 0 auto 16px
+    color #00262D
+    i
+      cursor pointer
+      &.year-i
+        margin-right 5px
+  table
+    width 100%
+    thead
+     color #8492A6
+    tbody
+      td
+        width 32px
+        height 28px
+        //min-width 30px
+        //min-height 27px
+        padding 0
+        &.today-text
+          color #0080D0
+        &.active-text:hover
+          cursor pointer
+          background #E5E9F2
+        &.active-set:hover
+          cursor pointer
+          color #0080D0
+        &.active
+          color #FFF
+          background #0080D0
+          &:hover
+            color #FFF
+            background #0080D0
+
+  .calendar-content
+    font-size 12px

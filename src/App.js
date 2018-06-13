@@ -8,7 +8,13 @@ import './test.styl'
 import TestApp from './TestApp.jsx'
 import Pagination from './common/component/Pagination'
 
+
 import './core/libs/ChangeFontSize'
+
+// import testPanage from './testPanage'
+import Calendar from './common/component/DatePicker/DatePicker.jsx'
+import './common/stylus/qbBase.styl'
+
 
 import TestAppController from './TestAppController'
 
@@ -45,6 +51,7 @@ const About = () => (
       <li><Link to="/">首页</Link></li>
       <li><Link to="/about">关于</Link></li>
       <li><Link to="/topics">主题列表</Link></li>
+
       <TestApp className="testAAA" sta="aaaaaaaa" controller={testAppController}/>
     </ul>
   </div>
@@ -104,12 +111,36 @@ export default class App extends Component {
     this.setState({count: this.state.count + 1});
   }
 
+  seletTime(state) {
+    console.log('日历', state, new Date(state).getTime())
+  }
   render() {
-    return <div>
+    return (
+      <div>
+
+
         <BasicExample> </BasicExample>
-        <Pagination showTotal={true} showQuickJumper={true} pageSize={20} total={1000} onChange={number => {
-            console.log(number);
-          }} />
-      </div>;
+
+
+        <div className="color1">1111</div>
+        <BasicExample> </BasicExample>
+        <div className="color2">
+          <p>2222</p>
+          <p>3333</p>
+        </div>
+        <div className="color3"></div>
+        <h1>{this.state.count}</h1>
+        <button onClick={() => this.add()}>增加1</button>
+        <button onClick={() => testPanage.addOne.apply(this)}>增加2</button>
+        <h1>{this.state.count}</h1>
+        <h1>h1</h1>
+        <h1>{this.state.count}</h1>
+        <h1>h1</h1>
+        <h1>h1</h1>
+        <h1>h1</h1>
+        <h1>{this.state.count}</h1>
+
+      </div>
+    );
   }
 }
