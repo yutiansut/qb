@@ -25,7 +25,6 @@ export default class SelectButton extends Component {
   componentWillUnmount(){
     window.removeEventListener("click", this.clickoutside);
   }
-  comp
   render() {
 /*  
   title 按钮文案

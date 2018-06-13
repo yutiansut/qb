@@ -1,17 +1,69 @@
 @import '../../base.styl'
-.pagination
-  overflow hidden
-  li
-    box-sizing()
-    float left
-    min-width 28px
+.pagination-wrap
+  display flex
+  justify-content center
+  p
     height 28px
     line-height 28px
     font-size 13px
-    color #475669
+    color #00262D
     letter-spacing 0
-    border 1px solid #D3DCE6
-    border-right none
-    text-align center
-    &.next
-      border-right 1px solid #D3DCE6
+    &.total
+      margin-right 10px
+      span
+        color #475669
+    &.jump
+      margin-left 10px
+      input
+        width 34px
+        height 28px
+        font-size 13px
+        color #475669
+        margin 0 6px 0
+        background #FFFFFF
+        text-align center
+        border 1px solid #D3DCE6
+        border-radius 2px
+        &:focus
+          border 1px solid #0080D0
+  .pagination
+    overflow hidden
+    li
+      box-sizing()
+      float left
+      min-width 28px
+      height 28px
+      line-height 28px
+      font-size 13px
+      color #475669
+      letter-spacing 0
+      border 1px solid #D3DCE6
+      border-right none
+      text-align center
+      cursor pointer
+      &.last
+        color #99A9BF
+        border-radius 2px 0 0 2px
+        &.disable, &.disable:hover
+          color #D3DCE6
+          background #EFF2F7
+      &.next
+        color #99A9BF
+        border-radius 0 2px 2px 0
+        &.disable, &.disable:hover
+          color #D3DCE6
+          background #EFF2F7
+      &.page-button, &.last, &.next
+        padding 0 9px 0 9px
+        &:hover
+          color #0080D0
+        &.active
+          background #0080D0
+          color #FFF
+          border none
+        &.omit
+          color #99A9BF
+          &:hover
+            color #99A9BF
+      &.next
+        border-right 1px solid #D3DCE6

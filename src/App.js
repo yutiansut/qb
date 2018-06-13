@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import './test.styl'
 import TestApp from './TestApp.jsx'
+import Pagination from './common/component/Pagination'
 
 import './core/libs/ChangeFontSize'
 
@@ -104,10 +105,11 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div>
+    return <div>
         <BasicExample> </BasicExample>
-      </div>
-    );
+        <Pagination showTotal={true} showQuickJumper={true} pageSize={20} total={1000} onChange={number => {
+            console.log(number);
+          }} />
+      </div>;
   }
 }
