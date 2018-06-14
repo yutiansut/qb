@@ -6,20 +6,14 @@ import {
 } from 'react-router-dom'
 import './test.styl'
 import TestApp from './TestApp.jsx'
-import Pagination from './common/component/Pagination'
-
 
 import './core/libs/ChangeFontSize'
 
-// import testPanage from './testPanage'
-import Calendar from './common/component/DatePicker/DatePicker.jsx'
 import './common/stylus/qbBase.styl'
-
 
 import TestAppController from './TestAppController'
 
 const testAppController = new TestAppController()
-
 
 const BasicExample = () => (
   <Router>
@@ -111,35 +105,10 @@ export default class App extends Component {
     this.setState({count: this.state.count + 1});
   }
 
-  seletTime(state) {
-    console.log('日历', state, new Date(state).getTime())
-  }
   render() {
     return (
       <div>
-
-
         <BasicExample> </BasicExample>
-
-
-        <div className="color1">1111</div>
-        <BasicExample> </BasicExample>
-        <div className="color2">
-          <p>2222</p>
-          <p>3333</p>
-        </div>
-        <div className="color3"></div>
-        <h1>{this.state.count}</h1>
-        <button onClick={() => this.add()}>增加1</button>
-        <button onClick={() => testPanage.addOne.apply(this)}>增加2</button>
-        <h1>{this.state.count}</h1>
-        <h1>h1</h1>
-        <h1>{this.state.count}</h1>
-        <h1>h1</h1>
-        <h1>h1</h1>
-        <h1>h1</h1>
-        <h1>{this.state.count}</h1>
-
       </div>
     );
   }

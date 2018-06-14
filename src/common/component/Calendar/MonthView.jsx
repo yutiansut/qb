@@ -5,8 +5,9 @@ export default class MonthView extends Component {
     super(props);
   }
 
+
   render() {
-    const { year, month, day, setDay, index} = this.props;
+    const { year, month, day, setDay, index, isStart, isEnd} = this.props;
 
     //计算三要素
     //① 本月1号星期几
@@ -43,12 +44,19 @@ export default class MonthView extends Component {
         for (let j = 0; j < 7; j++) {
           (year === new Date().getFullYear() && month === new Date().getMonth() + 1 && arr[i * 7 + j] === day) && (arr[i * 7 + j] = '今天')
           temp.push(<td key={j}
-                        className={`${(arr[i * 7 + j] === '今天') ? 'today-text' : ''} ${(arr[i * 7 + j] !== '') ? 'active-text' : ''} ${arr[i * 7 + j] === index ? 'active' : ''}`}
+                        className={`${(arr[i * 7 + j] === '今天') ? ((isStart && new Date().getDate() < new Date(isStart).getDate()) || (isEnd && new Date().getDate() > new Date(isEnd).getDate()) ? 'is-disabled' : 'today-text') : ''}
+                                    ${(arr[i * 7 + j] !== '') ? 'active-text' : ''}
+                                    ${arr[i * 7 + j] === index ? 'active' : ''}
+                                    ${(new Date(isStart).getFullYear() === year && new Date(isStart).getMonth() + 1 === month && arr[i * 7 + j] < new Date(isStart).getDate()) ? 'is-disabled' : ''}
+                                    ${new Date(isStart).getMonth() + 1 > month ? 'is-disabled' : ''}
+                                    ${new Date(isStart).getFullYear() > year ? 'is-disabled' : ''}
+                                    ${(isEnd && new Date(isEnd).getFullYear() === year && new Date(isEnd).getMonth() + 1 === month && arr[i * 7 + j] > new Date(isEnd).getDate()) ? 'is-disabled' : ''}
+                                    ${isEnd && new Date(isEnd).getMonth() + 1 < month ? 'is-disabled' : ''}
+                                    ${isEnd && new Date(isEnd).getFullYear() < year ? 'is-disabled' : ''}`}
                         onClick={() => {
                           setDay(arr[i * 7 + j]);
                         }}>{arr[i * 7 + j]}</td>);
         }
-
         domarr.push(<tr key={i}>{temp}</tr>);
       }
       return domarr;

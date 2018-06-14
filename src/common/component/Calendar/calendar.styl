@@ -1,15 +1,33 @@
 @import "../../stylus/base.styl"
 .calendar-wrap
   position relative
-  input
-    box-sizing()
-    width 180px
-    height 36px
-    padding-left 10px
-    margin-bottom 5px
-    background #FFF
-    border 1px solid #C0CCDA
-    border-radius 4px
+  .input-wrap
+    &:before
+      position absolute
+      top 7px
+      right 5px
+      width 20px
+      height 20px
+      content ''
+      background url(/static/img/calendar/calendar_lan.svg) no-repeat
+      background-size 1.25rem 1.25rem
+    input
+      box-sizing()
+      width 180px
+      height 36px
+      padding-left 10px
+      margin-bottom 5px
+      font-size 14px
+      line-height 36px
+      background #FFF
+      border 1px solid #C0CCDA
+      border-radius 4px
+      &.active
+        border 1px solid #0080D0
+      &::-webkit-input-placeholder
+        font-size 14px
+      &::-moz-placeholder
+        font-size 14px
 
 .calendar
   position absolute
@@ -19,13 +37,31 @@
   padding 16px 26px 18px
   background #FFF
   border 1px solid #D3DCE6
-  box-shadow 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04)
+  box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04)
   border-radius 2px
   text-align center
   font-size 14px
   h3
     margin 0 auto 16px
-    color #00262D
+    font-size 14px
+    font-weight normal
+    color #475669
+    img
+      position relative
+      top 0
+      cursor pointer
+      &.pre-year-img, &.next-year-img
+        width 12px
+        height 12px
+      &.pre-month-img, &.next-month-img
+        width 12px
+        height 12px
+      &.pre-month-img
+        margin-left 20px
+        margin-right 12px
+      &.next-month-img
+        margin-left 12px
+        margin-right 20px
     i
       cursor pointer
       &.year-i
@@ -33,14 +69,18 @@
   table
     width 100%
     thead
-     color #8492A6
+      color #8492A6
     tbody
       td
         width 32px
         height 28px
         //min-width 30px
         //min-height 27px
-        padding 0
+        padding
+        &.is-disabled, &.today-disabled
+          color #E1E1E1
+          pointer-events none
+          cursor not-allowed
         &.today-text
           color #0080D0
         &.active-text:hover

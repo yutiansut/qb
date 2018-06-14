@@ -13,17 +13,20 @@ export default class Calendar extends Component {
       day:  new Date().getDate(),
       view: "month",
       showCalendar: 'none',
-
+      calendarActive: false,
+      istarget: false,
       inputValue: '',
       clickActive: 0,
     };
-    this.hide = (evt) => {
-      console.log('evt', evt)
-      if (evt.target.className === 'date-interval clearfix') {
-        this.setState({
-          showCalendar: 'none'
-        })
-      }
+    this.hide = () => {
+      if (this.state.istarget) {
+        this.state.istarget = false;
+        return;
+      };
+      if (this.state.showCalendar === 'none') return;
+      this.setState({
+        showCalendar: 'none'
+      });
     }
   }
 
@@ -40,11 +43,15 @@ export default class Calendar extends Component {
     if (this.state.month == 12) {
       this.setState({
         year: this.state.year + 1,
-        month: 1
+        month: 1,
+        showCalendar: 'block',
+        istarget: true
       });
     } else {
       this.setState({
-        month: this.state.month + 1
+        month: this.state.month + 1,
+        showCalendar: 'block',
+        istarget: true
       });
     }
   };
@@ -54,37 +61,66 @@ export default class Calendar extends Component {
     if (this.state.month == 1) {
       this.setState({
         year: this.state.year - 1,
-        month: 12
+        month: 12,
+        showCalendar: 'block',
+        istarget: true
       });
     } else {
       this.setState({
-        month: this.state.month - 1
+        month: this.state.month - 1,
+        showCalendar: 'block',
+        istarget: true
       });
     }
   };
 
   goNextYear() {
     this.setState({
-      year: this.state.year + 1
+      year: this.state.year + 1,
+      showCalendar: 'block',
+      istarget: true
     });
   };
 
   goPrevYear() {
     this.setState({
-      year: this.state.year - 1
+      year: this.state.year - 1,
+      showCalendar: 'block',
+      istarget: true
     });
   };
+
+  goNextTenYear() {
+    this.setState({
+      year: this.state.year + 10,
+      showCalendar: 'block',
+      istarget: true
+    });
+  };
+
+  goPreTenYear() {
+    this.setState({
+      year: this.state.year - 10,
+      showCalendar: 'block',
+      istarget: true
+    });
+  };
+
   setYear(year) {
     this.setState({
       year,
-      view: "changeMonth"
+      view: "changeMonth",
+      showCalendar: 'block',
+      istarget: true
     });
   };
 
   setMonth(month) {
     this.setState({
       month,
-      view: "month"
+      view: "month",
+      showCalendar: 'block',
+      istarget: true
     });
   };
 
@@ -98,44 +134,52 @@ export default class Calendar extends Component {
   };
 
   showCalendar(state) {
-    console.log(111, this.props.showOtherNum)
     this.setState({
-      showCalendar: state
-    })
+      showCalendar: 'block',
+      istarget: true,
+      calendarActive: true
+    });
   };
-
-
 
   render() {
     return (
       <div className="calendar-wrap">
-        <input type="text"
-               className="check-calendar"
-               placeholder="选择日期"
-               onFocus={state => {this.showCalendar('block')}}
-               value={this.state.inputValue}/>
+        <div className="input-wrap">
+          <input type="text"
+                 className={this.state.calendarActive ? "active" : ""}
+                 placeholder="选择日期"
+                 onFocus={this.showCalendar.bind(this)}
+                 onBlur={() => {this.setState({calendarActive: false})}}
+                 value={this.state.inputValue}/>
+        </div>
         <div className="calendar" style={{display: this.state.showCalendar}}>
           {this.state.view == "month" ? (
             <h3>
-              <span onClick={this.goPrevYear.bind(this)}>《</span>
-              <b onClick={this.goPrevMonth.bind(this)}>{'<'}</b>
-              <i className="year-i" onClick={() => {this.setState({view: "decade"})}}>{this.state.year}年</i>
-              <i onClick={() => {this.setState({view: "changeMonth"})}}>{this.state.month}月</i>
-              <b onClick={this.goNextMonth.bind(this)}>{'>'}</b>
-              <span onClick={this.goNextYear.bind(this)}>》</span>
+              <img src="/static/img/calendar/calendar_pre_year.svg" alt="" onClick={this.goPrevYear.bind(this)} className="pre-year-img"/>
+              <img src="/static/img/calendar/calendar_pre_month.svg" alt=""  onClick={this.goPrevMonth.bind(this)} className="pre-month-img"/>
+              <i className="year-i" onClick={() => {this.setState({view: "decade", showCalendar: "block", istarget: true})}}>{this.state.year}年</i>
+              <i onClick={() => {this.setState({view: "changeMonth", showCalendar: "block", istarget: true})}}>{this.state.month}月</i>
+              <img src="/static/img/calendar/calendar_next_month.svg" alt=""  onClick={this.goNextMonth.bind(this)} className="next-month-img"/>
+              <img src="/static/img/calendar/calendar_next_year.svg" alt="" onClick={this.goNextYear.bind(this)} className="next-year-img"/>
             </h3>
           ) : (this.state.view == "decade" ? (
             <h3>
-              <b onClick={this.goPrevYear.bind(this)}>{'<'}</b>
+              <img src="/static/img/calendar/calendar_pre_month.svg" alt="" onClick={this.goPreTenYear.bind(this)} className="pre-month-img"/>
               {this.state.year - (this.state.year % 10)}年 - {this.state.year - (this.state.year % 10) + 9}年
-              <b onClick={this.goNextYear.bind(this)}>{'>'}</b>
+              <img src="/static/img/calendar/calendar_next_month.svg" alt="" onClick={this.goNextTenYear.bind(this)} className="next-month-img"/>
             </h3>
           ) : (
             <h3>{this.state.year}年</h3>
           ))}
 
           {this.state.view == "month" ? (
-            <MonthView year={this.state.year} month={this.state.month} day={this.state.day} setDay={this.setDay.bind(this)} index={this.state.clickActive} />
+            <MonthView year={this.state.year}
+                       month={this.state.month}
+                       day={this.state.day}
+                       setDay={this.setDay.bind(this)}
+                       index={this.state.clickActive}
+                       isStart={this.props.startTime}
+                       isEnd={this.props.endTime}/>
           ) : (this.state.view == "decade" ? (
             <DecadeView
               year={this.state.year}
