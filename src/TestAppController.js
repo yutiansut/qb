@@ -9,11 +9,11 @@ export default class TestAppController extends ExchangeControllerBase {
 
   }
 
-  setView(view){
-    super.setView(view);
+  // setView(view){
+  //   super.setView(view);
     // view.setState({count: this.store.count})
     // return this.store.data
-  }
+  // }
 
   async getData() {
     console.log(this)

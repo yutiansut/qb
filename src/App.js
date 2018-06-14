@@ -6,6 +6,9 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom'
+import "./common/css/index.styl"
+
+import './common/css/headerNav.styl'
 // import './test.styl'
 import TestApp from './TestApp.jsx'
 
@@ -13,9 +16,11 @@ import './core/libs/ChangeFontSize'
 
 import TestAppController from './TestAppController'
 
-const testAppController = new TestAppController()
+const testAppController = new TestAppController();
 
 import UserInfo from './components/user/UserCenter.jsx'
+
+import Header from './components/home/children/header.jsx'
 
 const Home = () => (
   <div>
@@ -33,7 +38,6 @@ const About = () => (
     </ul>
   </div>
 );
-
 const Topics = ({match}) => (
   <div>
     <h2>主题列表</h2>
@@ -78,35 +82,37 @@ const Topic = ({match}) => {
 
 const User = ({match}) => {
   return <UserInfo  match={match}/>
-}
+};
+
+const navArray = [
+  {label:'首页', to:'/home', select: false, linkUser:false},
+  // {label:'币币交易页', to:'/home', select: false, linkUser:false},
+  {label:'用户', to:'/user', select: false, linkUser:false},
+  {label:'关于', to:'/about', select: false, linkUser:false},
+  {label:'主题列表', to:'/topics', select: false, linkUser:false},
+];
+
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 1,
-    }
   }
-
-  add() {
-    this.setState({count: this.state.count + 1});
-  }
-
+  
   render() {
+
     return (
       <div>
         <Router>
           <div>
-            <ul className="headerNav" style={{height: '72px',width:'10rem'}}>
-              <li><Link to="/">首页</Link></li>
-              <li><Link to="/user">用户</Link></li>
-              <li><Link to="/about">关于</Link></li>
-              <li><Link to="/topics">主题列表</Link></li>
-            </ul>
+            {/*<ul className="headerNav">*/}
+              {/*{navList}*/}
+              <Header/>
+            {/*</ul>*/}
 
             <hr/>
 
             <Switch>
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/home" component={Home}/>
+              <Route path="/trade" component={Home}/>
               <Route path="/user" component={User}/>
               <Route path="/about" component={About}/>
               <Route path="/topics" component={Topics}/>
