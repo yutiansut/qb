@@ -22,9 +22,6 @@ body
     height 0
     clear both
     content ""
-.inner // 中心内容
-  width 12rem
-  margin 0 auto
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -37,3 +34,96 @@ border-radius()
 box-shadow()
   vendor('box-shadow', arguments)
 //需要兼容按上述方法先声明,即可直接写属性
+
+
+// 中心内容
+.inner // 中心内容
+  width 12rem
+  margin 0 auto
+
+
+ // 划入控件展示  父亲加.pop-parent  控件加.pop-children 和 方位词
+.pop-parent
+  position relative
+
+.pop-children
+  position absolute
+  display none
+  padding 0 .1rem
+  color #25272D
+  height .25rem
+  line-height .25rem
+  font-size .12rem
+  letter-spacing 0.05rem
+  text-align center
+  background-color #CCC
+  border-radius .02rem
+
+.pop-parent:hover .pop-children
+  display block
+
+
+.uppop-children
+  top -.3rem
+
+.uppop-children:before
+  content ""
+  width 0
+  height 0
+  border .05rem solid #CCC
+  border-left .05rem solid transparent
+  border-right .05rem solid transparent
+  border-bottom .05rem solid transparent
+  position absolute
+  left 50%
+  transform translateX(-50%)
+  bottom -.1rem
+
+
+.downpop-children
+  bottom -.3rem
+
+.downpop-children:before
+  content ""
+  width 0
+  height 0
+  border .05rem solid #CCC
+  border-left .05rem solid transparent
+  border-right .05rem solid transparent
+  border-top .05rem solid transparent
+  position absolute
+  right 50%
+  transform translateX(-50%)
+  top -.1rem
+
+.leftpop-children
+  left -1.78rem
+
+.leftpop-children:before
+  content ""
+  width 0
+  height 0
+  border .05rem solid #CCC
+  border-bottom .05rem solid transparent
+  border-right .05rem solid transparent
+  border-top .05rem solid transparent
+  position absolute
+  top 50%
+  transform translateY(-50%)
+  right  -.1rem
+
+.rightpop-children
+  left .65rem
+
+.rightpop-children:before
+  content ""
+  width 0
+  height 0
+  border .05rem solid #CCC
+  border-bottom .05rem solid transparent
+  border-left .05rem solid transparent
+  border-top .05rem solid transparent
+  position absolute
+  top 50%
+  transform translateY(-50%)
+  left  -.1rem
