@@ -12,7 +12,7 @@ export default class Button extends React.Component {
   disable 按钮失效状态
   onClick click 事件的 handler
   theme 主题色 main、positive、warn、danger四种（type 为 default、base 时有效,
-  className 自定义类名方便自定义宽高
+  className 未预设宽高，自定义类名设置宽高，行高
 */
   render() {
     let {

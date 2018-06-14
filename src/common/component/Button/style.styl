@@ -1,49 +1,44 @@
-  base-button
+@import "../../css/variable.styl"
+.base-button 
   display inline-block
   outline none
-  box-sizing border-box
-  -moz-box-sizing border-box 
-  -webkit-box-sizing border-box 
-  //min-width 64px
-  //min-height 36px
-  font-size 14px
-  //line-height 36px
+  font-size 0.14rem
   letter-spacing 0
   text-align center
-  border-radius 2px
+  border-radius 0.02rem
   cursor pointer
 .default 
-  border 1px solid #D9E3EE
+  border 0.01rem solid #D9E3EE
   background-color #FFF
   color #25272D
   &.main
     &:hover
-      color #0080D0
-      border-color #0080D0
+      color $main-color
+      border-color $main-color
     &:active
-      color #0066A6
-      border-color #0066A6
+      color $main-color-active
+      border-color $main-color-active
   &.positive
     &:hover
-      color #219D05
-      border-color #219D05
+      color $positive-color
+      border-color $positive-color
     &:active
-      color #1A7D04
-      border-color #1A7D04
+      color $positive-color-active
+      border-color $positive-color-active
   &.warn
     &:hover
-      color #E6AD26
-      border-color #E6AD26
+      color $warn-color
+      border-color $warn-color
     &:active
       color #B88A1E;
       border-color #B88A1E;
   &.danger
     &:hover
-      color #DE4A01
-      border-color #DE4A01
+      color $negative-color
+      border-color $negative-color
     &:active
-      color #B13B00;
-      border-color #B13B00;
+      color $negative-color-active;
+      border-color $negative-color-active;
   &.disable
     border-color #E0E6ED;
     color #C0CCDA
@@ -54,55 +49,55 @@
   color #FFF
   border none
   &.main
-    background-color #0080D0
+    background-color $main-color
     &:hover
       color #FFF
-      background-color #48A5E0
+      background-color $main-color-hover
     &:active
       color #FFF
-      background-color #0066A6
+      background-color $main-color-active
   &.positive
-    background-color #219D05
+    background-color $positive-color
     &:hover
       color #FFF
-      background-color #64BA50
+      background-color $positive-color-hover
     &:active
       color #FFF
-      background-color #1A7D04
+      background-color $positive-color-active
   &.warn
-    background-color #E6AD26
+    background-color $warn-color
     &:hover
       color #FFF
-      background-color #EDC567
+      background-color $warn-color-hover
     &:active
       color #FFF
-      background-color #B88A1E
+      background-color $warn-color-active
   &.danger
-    background-color #DE4A01
+    background-color $negative-color
     &:hover
       color #FFF
-      background-color #E7804D
+      background-color $negative-color-hover
     &:active
       color #FFF
-      background-color #B13B00
+      background-color $negative-color-active
   &.disable
     background-color #F9FBFE
-    border 1px solid #D9E3EE
+    border 0.01rem solid #D9E3EE
     color #D9E3EE
     &:hover, &:active
       background-color #F9FBFE
-      border 1px solid #D9E3EE
+      border 0.01rem solid #D9E3EE
       color #D9E3EE
 .back1
   background-color transparent
-  border 1px solid #1F2D3D
+  border 0.01rem solid #1F2D3D
   color #1F2D3D
   &:hover
     background-color #1F2D3D
     color #FFF
 .back2
   background-color transparent
-  border 1px solid #FFF
+  border 0.01rem solid #FFF
   color #FFF
   &:hover
     background-color #FFF

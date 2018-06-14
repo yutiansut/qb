@@ -1,0 +1,48 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.asset
+  .balance
+    padding 0.32rem 0 1.25rem 0
+    border-left 0.02rem solid $line-light
+    .total-asset
+      padding-left 0.3rem
+      h3
+        width 0.81rem
+        height 0.2rem
+        font-size 0.2rem
+        color $normal-black-color
+        letter-spacing 0.0008rem
+        text-align justify
+      .item
+        height 0.45rem
+        padding-left 3.02rem
+        line-height 0.45rem
+        button 
+          width 0.64rem
+          height 0.36rem
+        b
+          font-size 0.16rem
+          color $normal-black-color
+          letter-spacing 0.0006rem
+          text-align justify
+        &.total b
+          font-size 0.18rem
+          color $main-color 
+          letter-spacing 0.0007rem
+          text-align justify
+        &.limit
+          a
+            font-size 0.12rem
+            color $main-color
+            text-decoration underline
+            margin-left 0.3rem
+            &:hover
+              color $main-color-hover
+            &:active
+              color $main-color-active 
+        span
+          font-size 0.14rem
+          margin 0 0.1rem 0 0.1rem
+          color $normal-gray-color
+          letter-spacing: 0.0006rem
+          text-align justify

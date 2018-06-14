@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
-import assetManage from "./AssetManage";
+import exchangeViewBase from "../ExchangeViewBase";
+import TotalAsset from "./balance/TotalAsset";
+import Wallets from "./balance/Wallets";
 
-export default class Balance extends assetManage {
-
+export default class Balance extends exchangeViewBase {
   constructor(props) {
-    super(props);
-    // console.log(this.state)
+    super(props)
     //绑定方法
     // this.getData = controller.getData.bind(controller)
-    // this.data =
+    // this.state = {
+    // console.log(this.controller)
+    // }
   }
-
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
- 
-  }
-
-  componentWillUpdate(...parmas) {
-
-  }
-
-
   render() {
-    return (
-      <div>
-       账户余额
-      </div>
-    );
+    console.log(this.props.data.totalAsset);
+    return <div className="balance clearfix">
+        <TotalAsset totalAsset={this.props.data.totalAsset} />
+        <Wallets wallet={this.props.data.wallet} />
+      </div>;
   }
 
 }
