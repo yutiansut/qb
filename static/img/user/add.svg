@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>add</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="5.-个人中心" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.7">
+        <g id="46-个人中心-身份认证" transform="translate(-569.000000, -1073.000000)" fill="#0080D0">
+            <g id="基本资料" transform="translate(338.000000, 677.000000)">
+                <g id="Group-5" transform="translate(158.000000, 0.000000)">
+                    <g id="Group-7" transform="translate(0.000000, 306.000000)">
+                        <g id="Group-10" transform="translate(0.000000, 47.000000)">
+                            <g id="身份证正面">
+                                <g id="add" transform="translate(73.000000, 43.000000)">
+                                    <rect id="Rectangle-5" x="0" y="19" width="44" height="6"></rect>
+                                    <rect id="Rectangle-5" transform="translate(22.000000, 22.000000) rotate(90.000000) translate(-22.000000, -22.000000) " x="0" y="19" width="44" height="6"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
+  NavLink,
   Redirect,
   Switch
 } from 'react-router-dom'
@@ -10,6 +10,7 @@ import {
 import UserSafeCenter from './children/UserSafeCenter.jsx' // 安全中心
 import UserIdentity from './children/UserIdentity.jsx' // 身份认证
 import UserIntegration from './children/UserIntegration.jsx' // 我的积分
+
 import "./stylus/user.styl"
 
 
@@ -23,9 +24,9 @@ export default class User extends Component {
     return (
       <div className="clearfix inner">
         <ul className="user-nav fl">
-          <li><Link to={`${match.url}/safe`}>安全中心</Link></li>
-          <li><Link to={`${match.url}/identity`}>身份认证</Link></li>
-          <li><Link to={`${match.url}/integration`}>我的积分</Link></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/safe`} >安全中心</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/identity`}>身份认证</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/integration`}>我的积分</NavLink></li>
         </ul>
         <div className="user-content fl">
           <Switch>
