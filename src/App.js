@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect,
+  Switch
 } from 'react-router-dom'
 import './test.styl'
 import TestApp from './TestApp.jsx'
@@ -12,6 +14,8 @@ import './core/libs/ChangeFontSize'
 import TestAppController from './TestAppController'
 
 const testAppController = new TestAppController()
+
+import UserInfo from './components/user/UserCenter.jsx'
 
 const Home = () => (
   <div>
@@ -72,6 +76,9 @@ const Topic = ({match}) => {
   )
 };
 
+const User = ({match}) => {
+  return <UserInfo  match={match}/>
+}
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -89,17 +96,22 @@ export default class App extends Component {
       <div>
         <Router>
           <div>
-            <ul className="headerNav">
-              <li><Link to="/">首页</Link></li>
-              <li><Link to="/about">关于</Link></li>
-              <li><Link to="/topics">主题列表</Link></li>
+            <ul className="headerNav" style={{height: '72px'}}>
+              {/*<li><Link to="/">首页</Link></li>*/}
+              <li><Link to="/user">用户</Link></li>
+              {/*<li><Link to="/about">关于</Link></li>*/}
+              {/*<li><Link to="/topics">主题列表</Link></li>*/}
             </ul>
 
             <hr/>
 
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route path="/topics" component={Topics}/>
+            <Switch>
+              {/*<Route exact path="/" component={Home}/>*/}
+              <Route path="/user" component={User}/>
+              {/*<Route path="/about" component={About}/>*/}
+              {/*<Route path="/topics" component={Topics}/>*/}
+              <Redirect to="/user" />
+            </Switch>
           </div>
         </Router>
       </div>
