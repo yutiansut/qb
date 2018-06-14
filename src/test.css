@@ -1,3 +1,18 @@
-h1 {
-  color: #f00;
+.color1 {
+  width: 1000px;
+  height: 200px;
+  background: #0ff;
+  margin-top: 2rem;
+}
+.color3 {
+  width: 1000px;
+  height: 200px;
+  background: #0ff;
+  margin-top: 2rem;
+}
+.testAAA {
+  width: 1000px;
+  height: 200px;
+  background: #ffc0cb;
+  margin-top: 2rem;
 }

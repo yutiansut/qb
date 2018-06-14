@@ -1,0 +1,24 @@
+//$baseFontSize = 16px
+//
+//px2rem(name, px){
+//  {name}: px / $baseFontSize * 1rem;
+//}
+//
+//html
+//  font-size $baseFontSize
+@import "./variable.styl"
+body
+  color: #25272D
+  font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif !important
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  {prop} args
+  
+border-radius()
+  vendor('border-radius', arguments)
+ 
+box-shadow()
+  vendor('box-shadow', arguments)
+//需要兼容按上述方法先声明,即可直接写属性
