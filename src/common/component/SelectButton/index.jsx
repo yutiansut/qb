@@ -36,6 +36,7 @@ export default class SelectButton extends Component {
     let { type, title, className, valueArr, onSelect } = this.props;
     let { show } = this.state;
     type ? type : "";
+    !valueArr && (vallueArr = []);
     return (
       <div className="select-button">
         {!type ? (
