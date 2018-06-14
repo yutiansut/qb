@@ -1,4 +1,4 @@
-import ViewBase from "./core/ViewBase";
+import ViewBase from "../core/ViewBase";
 
 export default class ExchangeViewBase extends ViewBase {
   constructor(props) {

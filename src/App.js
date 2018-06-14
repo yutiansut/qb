@@ -9,29 +9,9 @@ import TestApp from './TestApp.jsx'
 
 import './core/libs/ChangeFontSize'
 
-import './common/stylus/qbBase.styl'
-
 import TestAppController from './TestAppController'
 
 const testAppController = new TestAppController()
-
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">首页</Link></li>
-        <li><Link to="/about">关于</Link></li>
-        <li><Link to="/topics">主题列表</Link></li>
-      </ul>
-
-      <hr/>
-
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
-    </div>
-  </Router>
-);
 
 const Home = () => (
   <div>
@@ -45,7 +25,6 @@ const About = () => (
       <li><Link to="/">首页</Link></li>
       <li><Link to="/about">关于</Link></li>
       <li><Link to="/topics">主题列表</Link></li>
-
       <TestApp className="testAAA" sta="aaaaaaaa" controller={testAppController}/>
     </ul>
   </div>
@@ -108,7 +87,21 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <BasicExample> </BasicExample>
+        <Router>
+          <div>
+            <ul className="headerNav">
+              <li><Link to="/">首页</Link></li>
+              <li><Link to="/about">关于</Link></li>
+              <li><Link to="/topics">主题列表</Link></li>
+            </ul>
+
+            <hr/>
+
+            <Route exact path="/" component={Home}/>
+            <Route path="/about" component={About}/>
+            <Route path="/topics" component={Topics}/>
+          </div>
+        </Router>
       </div>
     );
   }

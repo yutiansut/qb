@@ -1,4 +1,4 @@
-import StoreBase from './core/StoreBase'
+import StoreBase from '../core/StoreBase'
 
 export default class ExchangeStoreBase extends StoreBase {
   // constructor() {

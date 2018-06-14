@@ -1,4 +1,4 @@
-import ControllerBase from './core/ControllerBase'
+import ControllerBase from '../core/ControllerBase'
 
 export default class ExchangeControllerBase extends ControllerBase {
   // constructor() {

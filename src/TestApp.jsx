@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import exchangeViewBase from './ExchangeViewBase'
+import exchangeViewBase from './components/ExchangeViewBase'
 
 export default class testApp extends exchangeViewBase {
 
