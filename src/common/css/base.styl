@@ -11,6 +11,21 @@ body
   color: #25272D
   font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif !important
 
+.fl
+  float left
+.fr
+  float right
+.clearfix
+  zoom 1
+  &:after
+    display block
+    height 0
+    clear both
+    content ""
+.inner // 中心内容
+  width 12rem
+  margin 0 auto
+
 vendor(prop, args)
   -webkit-{prop} args
   -moz-{prop} args
