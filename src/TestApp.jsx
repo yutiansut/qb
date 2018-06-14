@@ -8,7 +8,7 @@ export default class testApp extends exchangeViewBase {
     super(props);
     // this.state = {count: 1}
     // console.log(props)
-    const {controller} = props
+    const {controller} = props 
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
