@@ -10,11 +10,13 @@
 //   fontSizeInit();
 // });
 (function (doc, win) {
+  // console.log(111111111)
   let docEl = doc.documentElement,
       resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
       recalc = function () {
         let clientWidth = docEl.clientWidth;
-        clientWidth && (clientWidth /= 1440, clientWidth > 2 && (clientWidth = 2), clientWidth < 0.8 && (clientWidth = 0.8), docEl.style.fontSize = 16 * clientWidth + "px");
+        console.log(clientWidth)
+        clientWidth && (clientWidth /= 1440, clientWidth > 2 && (clientWidth = 2), clientWidth < 0.8 && (clientWidth = 0.8), docEl.style.fontSize = 100 * clientWidth + "px");
 
       };
 

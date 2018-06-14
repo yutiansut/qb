@@ -6,7 +6,7 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom'
-import './test.styl'
+// import './test.styl'
 import TestApp from './TestApp.jsx'
 
 import './core/libs/ChangeFontSize'
@@ -96,20 +96,20 @@ export default class App extends Component {
       <div>
         <Router>
           <div>
-            <ul className="headerNav" style={{height: '72px'}}>
-              {/*<li><Link to="/">首页</Link></li>*/}
+            <ul className="headerNav" style={{height: '72px',width:'10rem'}}>
+              <li><Link to="/">首页</Link></li>
               <li><Link to="/user">用户</Link></li>
-              {/*<li><Link to="/about">关于</Link></li>*/}
-              {/*<li><Link to="/topics">主题列表</Link></li>*/}
+              <li><Link to="/about">关于</Link></li>
+              <li><Link to="/topics">主题列表</Link></li>
             </ul>
 
             <hr/>
 
             <Switch>
-              {/*<Route exact path="/" component={Home}/>*/}
+              <Route exact path="/" component={Home}/>
               <Route path="/user" component={User}/>
-              {/*<Route path="/about" component={About}/>*/}
-              {/*<Route path="/topics" component={Topics}/>*/}
+              <Route path="/about" component={About}/>
+              <Route path="/topics" component={Topics}/>
               <Redirect to="/user" />
             </Switch>
           </div>
