@@ -1,3 +1,5 @@
+// import StoreBase from './StoreBase'
+
 export default class ControllerBase {
   constructor() {
 
@@ -5,6 +7,9 @@ export default class ControllerBase {
 
   setView(view) {
     this.view = view
-    return {}
+  }
+
+  getInitState() {
+    return this.store.state
   }
 }
