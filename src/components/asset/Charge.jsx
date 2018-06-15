@@ -51,7 +51,7 @@ export default class Charge extends exchangeViewBase {
         <Button title="EOS/BTC" type="base"></Button>
       </div>
       <div className="history clearfix">
-        <span className="title">提币记录</span>
+        <span className="title">充币记录</span>
         <table>
           <thead>
             <tr>

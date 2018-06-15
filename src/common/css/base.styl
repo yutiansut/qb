@@ -41,6 +41,15 @@ fz11()
   -webkit-transform scale(0.916666666)
   -webkit-transform-origin 0 0
 
+// 旋转方法rotate兼容
+_rotate(deg)
+  transform rotate(deg)
+  -ms-transform rotate(deg); 	/* IE 9 */
+  -moz-transform rotate(deg); 	/* Firefox */
+  -webkit-transform rotate(deg); /* Safari 和 Chrome */
+  -o-transform rotate(deg); 	/* Opera */
+
+
 // 中心内容
 .inner // 中心内容
   width 12rem
@@ -59,7 +68,6 @@ fz11()
   height .25rem
   line-height .25rem
   font-size .12rem
-  letter-spacing 0.05rem
   text-align center
   background-color #CCC
   border-radius .02rem

@@ -1,0 +1,118 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.asset  
+  .hist
+    padding 0.32rem 0 0.45rem 0.3rem
+    border-left 0.02rem solid $line-light
+    a
+      color $main-color
+      cursor pointer
+      &:hover
+        color $main-color-hover
+      &:active
+        color $main-color-active 
+    h3
+      height 0.2rem
+      margin-bottom 0.63rem
+      font-size 0.2rem
+      color $normal-black-color
+      letter-spacing 0.0008rem
+      text-align justify
+    .filtrate
+      width 9.52rem
+      height 0.3rem
+      line-height 0.3rem
+      margin-bottom 0.327rem
+      ul
+        float left
+        margin-right 0.54rem
+        li
+          float left
+          width 1.63rem
+          span 
+            margin-right 0.1rem
+            font-size 0.16rem
+            color $dark-font-color
+            letter-spacing 0.0006rem
+            text-align justify
+          .select
+            width 0.8rem
+            height 0.3rem
+            line-height 0.3rem
+      p
+        float left
+        width 2.5rem
+      .handel
+        float right
+        button
+          width 0.64rem
+          height 0.3rem
+          line-height 0.3rem
+          margin-left 0.1rem
+    table
+      margin-bottom 0.44rem
+      thead
+        tr
+          background-color $bg-light-color
+          th
+            height 0.3rem
+            line-height 0.3rem
+            font-size 0.12rem
+            color $normal-gray-color
+            letter-spacing 0.0005rem
+            text-align justify
+            &.confirm, &.state, &.fee
+              text-align center
+            &.time
+              width 1.13rem
+              padding-left 0.1rem
+            &.currency
+              width 1.03rem
+            &.type
+              width 0.6rem
+            &.cash
+              width 0.88rem
+            &.balan
+              width 0.88rem
+            &.send
+              width 1.28rem
+            &.receive
+              width 1.60rem
+            &.confirm
+              width 0.7rem
+            &.state
+              width 0.7rem
+            &.fee
+              width 0.61rem
+      tbody
+        height 0.7rem
+        line-height 0.7rem
+        tr
+          border-bottom 0.01rem solid $line-light
+          &:hover
+            background $bg-dark-color
+          td
+            font-size 0.14rem
+            color $normal-black-color
+            letter-spacing 0.0006rem
+            text-align justify
+            &.send
+              &::after
+                content ' >'
+                width 0.05rem
+                height 0.05rem
+                
+            &.time
+              padding-left 0.1rem
+            &.cash
+              &.red
+                color $up-red-color
+              &.green
+                color $up-green-color
+             &.state
+              &.passing
+                color $warn-color-hover
+              &.unpassed
+                color $normal-gray-color
+            &.confirm, &.state, &.fee
+              text-align center

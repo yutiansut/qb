@@ -1,60 +1,60 @@
-@import '../../base.styl'
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
 .pagination-wrap
   display flex
   justify-content center
   p
-    height 28px
-    line-height 28px
-    font-size 13px
+    height 0.28rem
+    line-height 0.28rem
+    font-size 0.13rem
     color #00262D
     letter-spacing 0
     &.total
-      margin-right 10px
+      margin-right 0.1rem
       span
         color #475669
     &.jump
-      margin-left 10px
+      margin-left 0.1rem
       input
-        width 34px
-        height 28px
-        font-size 13px
+        width 0.34rem
+        height 0.28rem
+        font-size 0.13rem
         color #475669
-        margin 0 6px 0
+        margin 0 0.06rem 0
         background #FFFFFF
         text-align center
-        border 1px solid #D3DCE6
-        border-radius 2px
+        border 0.01rem solid #D3DCE6
+        border-radius 0.02rem
         &:focus
-          border 1px solid #0080D0
+          border 0.01rem solid #0080D0
   .pagination
     overflow hidden
     li
-      box-sizing()
       float left
-      min-width 28px
-      height 28px
-      line-height 28px
-      font-size 13px
+      min-width 0.28rem
+      height 0.28rem
+      line-height 0.28rem
+      font-size 0.13rem
       color #475669
       letter-spacing 0
-      border 1px solid #D3DCE6
+      border 0.01rem solid #D3DCE6
       border-right none
       text-align center
       cursor pointer
       &.last
         color #99A9BF
-        border-radius 2px 0 0 2px
+        border-radius 0.02rem 0 0 0.02rem
         &.disable, &.disable:hover
           color #D3DCE6
           background #EFF2F7
       &.next
         color #99A9BF
-        border-radius 0 2px 2px 0
+        border-radius 0 0.02rem 0.02rem 0
         &.disable, &.disable:hover
           color #D3DCE6
           background #EFF2F7
       &.page-button, &.last, &.next
-        padding 0 9px 0 9px
+        padding 0 0.09rem 0 0.09rem
         &:hover
           color #0080D0
         &.active
@@ -66,4 +66,4 @@
           &:hover
             color #99A9BF
       &.next
-        border-right 1px solid #D3DCE6
+        border-right 0.01rem solid #D3DCE6

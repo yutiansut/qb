@@ -12,21 +12,21 @@ export default class SelectButton extends Component {
       if (this.state.istarget) {
         this.state.istarget = false;
         return;
-      };
+      }
       if (!this.state.show) return;
       this.setState({
         show: false
       });
-    } 
+    };
   }
   componentDidMount() {
     window.addEventListener("click", this.clickoutside);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener("click", this.clickoutside);
   }
   render() {
-/*  
+    /*  
   title 按钮文案
   type  默认无, 可选main
   className 自定义类名方便自定义按钮宽高
@@ -36,13 +36,13 @@ export default class SelectButton extends Component {
     let { type, title, className, valueArr, onSelect } = this.props;
     let { show } = this.state;
     type ? type : "";
-    !valueArr && (vallueArr = []);
+    !valueArr && (valueArr = []);
     return (
       <div className="select-button">
         {!type ? (
           <button
             className={`${className ? className : ""} ${show ? "" : "hide"}`}
-            onClick={(e) => {
+            onClick={e => {
               this.state.istarget = true;
               this.setState({
                 show: show ? false : true
@@ -53,8 +53,10 @@ export default class SelectButton extends Component {
           </button>
         ) : (
           <div
-            className={`${className ? className : ""} ${show ? "" : "hide"} ${type}`}
-            onClick={(e) => {
+            className={`${className ? className : ""} ${
+              show ? "" : "hide"
+            } ${type}`}
+            onClick={e => {
               this.state.istarget = true;
               this.setState({
                 show: show ? false : true
@@ -64,24 +66,26 @@ export default class SelectButton extends Component {
             {title}
           </div>
         )}
-        <ul className={`${show ? "" : "hide"}`}>
-          {valueArr.map((item, index) => {
-            return (
-              <li
-                key={index}
-                onClick={(e) => {
-                  e.nativeEvent.stopImmediatePropagation();
-                  onSelect(item);
-                  this.setState({
-                    show: false
-                  });
-                }}
-              >
-                {item}
-              </li>
-            );
-          })}
-        </ul>
+        {valueArr.length > 0 && (
+          <ul className={`${show ? "" : "hide"}`}>
+            {valueArr.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  onClick={e => {
+                    e.nativeEvent.stopImmediatePropagation();
+                    onSelect(item);
+                    this.setState({
+                      show: false
+                    });
+                  }}
+                >
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     );
   }

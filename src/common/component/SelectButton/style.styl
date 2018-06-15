@@ -1,99 +1,94 @@
-@import '../../base.styl'
-
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
 .select-button
   position relative
   display inline-block
   button
     display block
     position relative
-    min-width 106px
-    min-height 36px
-    font-size 16px
+    font-size 0.16rem
     color #25272D
-    letter-spacing 0.06px
+    letter-spacing 0.0006rem
     text-align justify
     opacity 0.6
     cursor pointer
     &::after
       position absolute
       content ''
-      bottom 10px
-      right 23px
-      width 9px
-      height 9px
+      bottom 0.1rem
+      right 0.23rem
+      width .09rem
+      height .09rem
       opacity 0.6
-      border 2px solid #25272D
+      border .02rem solid #25272D
       border-bottom none
       border-right none
       _rotate(45deg)
     &.hide::after
       position absolute
       content ''
-      bottom 15px
-      right 23px
-      width 9px
-      height 9px
+      bottom .15rem
+      right .23rem
+      width .09rem
+      height .09rem
       opacity 0.6
-      border 2px solid #25272D
+      border .002rem solid #25272D
       border-bottom none
       border-right none
       _rotate(-135deg)
   .main
     box-sizing()
     position relative
-    min-width 106px
-    min-height 36px
-    padding-left 16px
-    margin-bottom 5px
-    font-size 14px
+    padding-left .16rem
+    margin-bottom .05rem
+    font-size .14rem
     color #FFFFFF
     letter-spacing 0
     text-align left
-    line-height 36px
+    line-height .36rem
     background: #20A0FF
-    border-radius 4px
+    border-radius .04rem
     cursor pointer
     &::after
       position absolute
       content ''
-      bottom 15px
-      right 16px
-      border-bottom 5px solid #FFF
-      border-left 5.5px solid transparent
-      border-right 5.5px solid transparent
+      bottom .15rem
+      right .16rem
+      border-bottom .05rem solid #FFF
+      border-left .055rem solid transparent
+      border-right .055rem solid transparent
       border-top none
-      height 6px
+      height .06rem
       opacity 0.7
     &.hide::after
       position absolute
       content ''
-      bottom 10px
-      right 16px
-      border-top 5px solid #FFF
+      bottom .1rem
+      right .16rem
+      border-top .05rem solid #FFF
       border-bottom none
-      border-left 5.5px solid transparent
-      border-right 5.5px solid transparent
-      height 6px
+      border-left .055rem solid transparent
+      border-right .055rem solid transparent
+      height .06rem
       opacity 0.7
   ul
     position absolute
     width 100%
     background #FFF
-    border 1px solid #D9E3EE
-    box-shadow 0 1px 4px 0 rgba(151,168,178,0.30)
-    border-radius 2px
+    border 0.01rem solid #D9E3EE
+    box-shadow 0 0.01rem 0.04rem 0 rgba(151,168,178,0.30)
+    border-radius(0.02rem)
     &.hide
       display none
     li
-      box-sizing()
       width 100%
-      height 36px
-      padding 0 10px 0 10px
-      font-size 14px
+      height 0.36rem
+      padding 0 .1rem 0 .1rem
+      font-size .14rem
       color #475669
       letter-spacing 0
-      line-height 36px
-      border-top 1px solid #EEEEEE
+      line-height .36rem
+      border-top .01rem solid #EEEEEE
       cursor pointer
       &:hover
         background #E5E9F2

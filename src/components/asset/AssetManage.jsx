@@ -10,6 +10,7 @@ import exchangeViewBase from "../ExchangeViewBase";
 import Balance from "./Balance";
 import Charge from "./Charge";
 import Extract from "./Extract";
+import History from "./History";
 
 import "./style/index.styl";
 
@@ -48,38 +49,41 @@ export default class AssetManage extends exchangeViewBase {
     const Extr = ({ match }) => {
       return <Extract></Extract>;
     };
+    const Hist = ({ match }) => {
+      return <History></History>
+    };
     return <div className="asset clearfix">
-      <ul>
-        <li>
-          <NavLink activeClassName="active" to={`${match.url}/balance`}>
-            账户余额
+        <ul className="nav">
+          <li>
+            <NavLink activeClassName="active" to={`${match.url}/balance`}>
+              账户余额
             </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="active" to={`${match.url}/charge`}>
-            充币
+          </li>
+          <li>
+            <NavLink activeClassName="active" to={`${match.url}/charge`}>
+              充币
             </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="active" to={`${match.url}/extract`}>
-            提币
+          </li>
+          <li>
+            <NavLink activeClassName="active" to={`${match.url}/extract`}>
+              提币
             </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="active" to={`${match.url}/history`}>
-            资产记录
+          </li>
+          <li>
+          <NavLink activeClassName="active" to={`${match.url}/dashboard`}>
+              资产记录
             </NavLink>
-        </li>
-      </ul>
-      <div className="route">
-        <Switch>
-          <Route path={`${match.url}/balance`} component={Bala} />
-          <Route path={`${match.url}/charge`} component={Char} />
-          <Route path={`${match.url}/extract`} component={Extr} />
-          <Route path={`${match.url}/history`} component={Char} />
-          <Redirect to={`${match.url}/balance`} />
-        </Switch>
-      </div>
-    </div>;
+          </li>
+        </ul>
+        <div className="route">
+          <Switch>
+            <Route path={`${match.url}/balance`} component={Bala} />
+            <Route path={`${match.url}/charge`} component={Char} />
+            <Route path={`${match.url}/extract`} component={Extr} />
+            <Route path={`${match.url}/dashboard`} component={Hist} />
+            <Redirect to={`${match.url}/balance`} />
+          </Switch>
+        </div>
+      </div>;
   }
 }

@@ -4,66 +4,7 @@ import AssetStore from "./AssetStore";
 export default class AssetController extends ExchangeControllerBase {
   constructor(props) {
     super(props);
-    this.store = new AssetStore({
-      totalAsset: {
-        usd: 0,
-        cny: 0,
-        btc: 91516.153351323,
-        limit: 2,
-        usedlimit: 0
-      },
-      wallet: [
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        },
-        {
-          currency: "BTC",
-          avail: 0.21136,
-          lock: 0.21136,
-          tobtc: 0.21136,
-          fullname: "Bitcoin"
-        }
-      ]
-    });
+    this.store = new AssetStore();
   }
   setView(view) {
     super.setView(view);

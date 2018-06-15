@@ -19,7 +19,7 @@ export default class Pagination extends Component {
   }
   list(totalPage, currentPage) {
     if (totalPage < 7) {
-      return [1, 2, 3, 4, 5, 6, 7];
+      return Array.from({ length: totalPage }, (item, index) => index+1);
     }
     if (currentPage <= 4) {
       return [1, 2, 3, 4, 5, "...", totalPage];
@@ -49,7 +49,7 @@ export default class Pagination extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    this.props.onChange(nextState.currentPage);
+    this.props.onChange && this.props.onChange(nextState.currentPage);
   }
 
   render() {
