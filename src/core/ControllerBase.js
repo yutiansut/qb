@@ -40,12 +40,13 @@ export default class ControllerBase {
     this.Loop[key].setDelayTime(1000)
     this.Loop[key].set(async ()=>{
       // console.log(state, view.state[state])
+      if(view.state[state] === 0 ){
+        this.Loop[key].stop()
+        return
+      }
       let obj = {};
       obj[state] = view.state[state]-1;
       view.setState(obj);
-      if(view.state[state] === 0 ){
-        this.Loop[key].stop()
-      }
     }, 1000);
     this.Loop[key].start()
   }

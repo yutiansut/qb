@@ -11,16 +11,16 @@ export default class userIntegration extends exchangeViewBase {
 
   componentWillMount() {
     // super.componentWillMount();
-    console.log('testApp componentWillMount')
+    // console.log('testApp componentWillMount')
   }
 
   componentDidMount() {
     // super.componentDidMount();
-    console.log('testApp componenDidMount')
+    // console.log('testApp componenDidMount')
   }
 
   componentWillUpdate(...parmas) {
-    console.log('testApp componentWillUpdate', ...parmas)
+    // console.log('testApp componentWillUpdate', ...parmas)
   }
 
 

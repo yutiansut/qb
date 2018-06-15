@@ -14,11 +14,13 @@ import "./core/libs/ChangeFontSize";
 import ConfigController from "./class/config/ConfigController";
 import TestAppController from "./TestAppController";
 import AssetController from "./class/asset/AssetController";
+import UserController from "./class/user/UserController";
 
 
 const configController = new ConfigController();
 const testAppController = new TestAppController();
 const assetController = new AssetController();
+const userController = new UserController();
 
 testAppController.configController = configController;
 
@@ -90,7 +92,7 @@ const Asset = ({match}) => {
 };
 
 const User = ({match}) => {
-  return <UserInfo match={match}/>
+  return <UserInfo controller={userController} match={match}/>
 };
 
 const navArray = [
@@ -119,10 +121,11 @@ export default class App extends Component {
 
             <hr/>
 
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route path="/topics" component={Topics}/>
-            <Route path="/wallet" component={Asset}/>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/topics" component={Topics} />
+            <Route path="/wallet" component={Asset} />
+            <Route path="/user" component={User} />
           </div>
         </Router>
       </div>

@@ -6,47 +6,40 @@ import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup'
 
-export default class userSafeCenter extends exchangeViewBase {
+import UserController from "../../../class/user/UserController";
+const userController = new UserController();
 
+export default class userSafeCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
     console.log(props)
-    this.state={
-      showGoogle: 'none'
+    this.state = {
+      showGoogle: 'none',
+      showSet: 'none'
     }
-    // Object.assign()
-    // this.state = {count: 1}
-    // console.log(props)
-    // const {controller} = props
-    // //绑定view
-    // this.state = controller.setView(this)
-    // // console.log(this.state)
-    // //绑定方法
-    // this.getData = controller.getData.bind(controller)
-    // this.data =
-    this.test = this.test.bind(this)
-  }
-
-  test(){
-    this.setState({testAaA:'222222'})
   }
   changeGooglePopup(state) {
     this.setState({
       showGoogle: state
     })
   }
+  changeSetPopup(state) {
+    this.setState({
+      showSet: state
+    })
+  }
   componentWillMount() {
     // super.componentWillMount();
-    console.log('user componentWillMount')
+    // console.log('user componentWillMount')
   }
 
   componentDidMount() {
     // super.componentDidMount();
-    console.log('user componenDidMount')
+    // console.log('user componenDidMount')
   }
 
   componentWillUpdate(props, state, next) {
-    console.log('user componentWillUpdate', props.match, props, state, next)
+    // console.log('user componentWillUpdate', props.match, props, state, next)
   }
 
 
@@ -60,7 +53,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>用户ID</li>
             <li>111111</li>
             <li>电子邮件</li>
-            <li>绑定邮箱</li>
+            <li onClick = {state => this.changeSetPopup('block')}>绑定邮箱</li>
             <li>手机号</li>
             <li>22222</li>
             <li>用户等级</li>
@@ -208,7 +201,7 @@ export default class userSafeCenter extends exchangeViewBase {
           </div>
         </div>
         <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)} isGoogle = {this.state.showGoogle}/>
-        <PassPopup/>
+        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)} isSet = {this.state.showSet} controller={userController}/>
       </div>
     );
   }

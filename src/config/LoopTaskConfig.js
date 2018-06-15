@@ -21,6 +21,7 @@ export default {
   symbolsRefresh: {},
   topCurrency: {},
   topCurrencyRoll: {},
-  noticeRoll:{},
-  countDown:{}
+  noticeRoll: {},
+  countDown: {},
+  verifyCountDown: {}
 }
