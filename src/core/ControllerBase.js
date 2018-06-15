@@ -21,14 +21,15 @@ export default class ControllerBase {
     this.AsyncAll = AsyncAll;
     this.Sleep = Sleep;
     this.Loop = Loop;
+    this.Util = GlobalUtil;
   }
 
   setView(view) {
     this.view = view
   }
 
-  getInitState() {
-    return this.store && this.store.state || {}
+  get initState() {
+    return this.store && this.Util.deepCopy(this.store.state) || {}
   }
 
   /**
@@ -38,7 +39,7 @@ export default class ControllerBase {
     this.Loop[key].clear()
     this.Loop[key].setDelayTime(1000)
     this.Loop[key].set(async ()=>{
-      console.log(state, view.state[state])
+      // console.log(state, view.state[state])
       let obj = {};
       obj[state] = view.state[state]-1;
       view.setState(obj);
@@ -75,7 +76,7 @@ export default class ControllerBase {
    * return 排序后的数组
    */
   sort(arr, sortValue, type, sortDefault) {
-    return GlobalUtil.deepCopy(arr).sort((a, b) => {
+    return this.Util.deepCopy(arr).sort((a, b) => {
       let first = a, second = b;
       sortValue.forEach(v => {
         first = first[v];

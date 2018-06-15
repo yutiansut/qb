@@ -1,21 +1,27 @@
-
 import "./common/css/index.styl"
 
 import './common/css/headerNav.styl'
 
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import "./test.styl";
+
 import TestApp from "./TestApp.jsx";
 import AssetManange from "./components/asset/AssetManage";
 
 import "./core/libs/ChangeFontSize";
 
+import ConfigController from "./class/config/ConfigController";
 import TestAppController from "./TestAppController";
 import AssetController from "./class/asset/AssetController";
 
+
+const configController = new ConfigController();
 const testAppController = new TestAppController();
 const assetController = new AssetController();
+
+testAppController.configController = configController;
+
 
 import UserInfo from './components/user/UserCenter.jsx'
 
@@ -65,34 +71,34 @@ const Topics = ({match}) => (
       </li>
     </ul>
 
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route exact path={match.url} render={() => <h3>请选择一个主题。</h3>} />
+    <Route path={`${match.url}/:topicId`} component={Topic}/>
+    <Route exact path={match.url} render={() => <h3>请选择一个主题。</h3>}/>
   </div>
 );
 
-// const Topic = ({ match }) => {
-//   console.log(match);
-//   return (
-//     <div>
-//       <h3>{match.params.topicId}</h3>
-//     </div>
-//   );
-// };
+const Topic = ({match}) => {
+  console.log(match);
+  return (
+    <div>
+      <h3>{match.params.topicId}</h3>
+    </div>
+  );
+};
 
-const Asset = ({ match }) => {
-  return <AssetManange controller={assetController} match={match} />;
+const Asset = ({match}) => {
+  return <AssetManange controller={assetController} match={match}/>;
 };
 
 const User = ({match}) => {
-  return <UserInfo  match={match}/>
+  return <UserInfo match={match}/>
 };
 
 const navArray = [
-  {label:'首页', to:'/home', select: false, linkUser:false},
+  {label: '首页', to: '/home', select: false, linkUser: false},
   // {label:'币币交易页', to:'/home', select: false, linkUser:false},
-  {label:'用户', to:'/user', select: false, linkUser:false},
-  {label:'关于', to:'/about', select: false, linkUser:false},
-  {label:'主题列表', to:'/topics', select: false, linkUser:false},
+  {label: '用户', to: '/user', select: false, linkUser: false},
+  {label: '关于', to: '/about', select: false, linkUser: false},
+  {label: '主题列表', to: '/topics', select: false, linkUser: false},
 ];
 
 export default class App extends Component {
@@ -107,16 +113,16 @@ export default class App extends Component {
         <Router>
           <div>
             {/*<ul className="headerNav">*/}
-              {/*{navList}*/}
-              <Header/>
+            {/*{navList}*/}
+            <Header/>
             {/*</ul>*/}
 
-            <hr />
+            <hr/>
 
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
-            <Route path="/wallet" component={Asset} />
+            <Route exact path="/" component={Home}/>
+            <Route path="/about" component={About}/>
+            <Route path="/topics" component={Topics}/>
+            <Route path="/wallet" component={Asset}/>
           </div>
         </Router>
       </div>

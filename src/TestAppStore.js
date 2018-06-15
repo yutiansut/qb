@@ -1,8 +1,8 @@
 import ExchangeStoreBase from './class/ExchangeStoreBase'
 
 export default class TestAppStore extends ExchangeStoreBase {
-  constructor(count) {
+  constructor() {
     super();
-    this.state = {count, price:1000}
+    this.state = {count: 20, price:1000 , testObj:{b:1}}
   }
 }

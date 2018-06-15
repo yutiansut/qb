@@ -6,17 +6,17 @@ export default class testApp extends exchangeViewBase {
 
   constructor(props) {
     super(props);
-    // this.state = {count: 1}
+    this.state = {count: 1, test: { a: 1}}
     // console.log(props)
-    const {controller} = props 
+    const {controller} = props;
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
-    this.state = controller.getInitState()
+    this.state = Object.assign(this.state, controller.initState);
     // console.log(this.state)
     //绑定方法
     this.getData = controller.getData.bind(controller)
-
+    console.log(controller.configData)
     // this.data =
   }
 
@@ -52,7 +52,9 @@ export default class testApp extends exchangeViewBase {
       <div>
         <div>{this.props.sta}</div>
         <div>{this.state.count}</div>
+        <div>{this.state.test.a}</div>
         <div>{this.state.price}</div>
+        <div>{this.state.testObj.b}</div>
         <button onClick={this.getData}>11111</button>
         {/*<Router>*/}
         <div>
