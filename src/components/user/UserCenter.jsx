@@ -12,9 +12,10 @@ import UserIdentity from './children/UserIdentity.jsx' // 身份认证
 import UserIntegration from './children/UserIntegration.jsx' // 我的积分
 
 import "./stylus/user.styl"
+import exchangeViewBase from "../ExchangeViewBase";
 
 
-export default class User extends Component {
+export default class User extends exchangeViewBase {
   constructor(props) {
     super(props);
   }

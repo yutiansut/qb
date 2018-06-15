@@ -3,7 +3,7 @@ import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
 import Select from '../../../common/component/SelectButton/index.jsx'
 import "../stylus/safe.styl"
-import SelectButton from "../../../common/component/SelectButton";
+// import GooglePopup from '../userPopup/GooglePopup.jsx'
 
 export default class userSafeCenter extends exchangeViewBase {
 
@@ -196,12 +196,12 @@ export default class userSafeCenter extends exchangeViewBase {
                   <td>106.38.92.64</td>
                   <td>216.58.197.238</td>
                   <td>China Beijing</td>
-                  <td>是</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+        {/*<GooglePopup/>*/}
       </div>
     );
   }

@@ -1,0 +1,64 @@
+@import "../../../common/css/variable.styl"
+
+.integration-wrap
+
+  .info
+    padding .44rem 0
+    border-bottom 1px solid $line-light
+    h3
+      margin-bottom .44rem
+      b
+        margin-right .25rem
+      a
+        color $main-color
+    ul
+      margin-bottom .64rem
+      li
+        float left
+        width 1.2rem
+    .progress-line
+      position relative
+      width 7.2rem
+      height .1rem
+      background $line-light
+      border-radius (1rem)
+      p
+        width 2rem
+        height .1rem
+        border-radius (1rem)
+        background: linear-gradient(-90deg, $main-color 0%, $main-color-hover 100%)
+      span
+        position absolute
+        display block
+        top -.35rem
+        left 2rem
+        padding .05rem .15rem
+        background: linear-gradient(-90deg, $main-color 0%, $main-color-hover 100%)
+        border-radius (.02rem)
+        &::after
+          position absolute
+          top .23rem
+          left 50%
+          transform translateX(-50%)
+          content ''
+          border-width .05rem
+          border-style solid dashed dashed
+          border-color $main-color transparent transparent
+          font-size 0
+          line-height 0
+
+
+  .item
+    padding .44rem 0
+    a
+      display block
+      margin-bottom .37rem
+      color $main-color
+    table
+      width 7.79rem
+      margin-bottom .2rem
+      th, td
+        padding-bottom .24rem
+        text-align left
+      th
+        color $normal-gray-color
