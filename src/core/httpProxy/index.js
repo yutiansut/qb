@@ -17,7 +17,7 @@ const formatParams = req => {
     req.url.path = `${url}${req.data.params[replaceKey]}`;
     delete req.data.params[replaceKey];
   }
-  console.log(req)
+  // console.log(req)
   req.url.path && (req.url = `http://${req.url.host}:${req.url.port}${req.url.path}`);
   if (req.data && req.data.method === "post" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.data.body = JSON.stringify(req.data.params));
@@ -27,7 +27,7 @@ const formatParams = req => {
 
   req.data = JSON.parse(JSON.stringify(req.data));
   // delete req.data.params
-  console.log(req)
+  // console.log(req)
   return req
 }
 
@@ -44,12 +44,12 @@ const HTTP_PROXY = {
         let data = JSON.parse(JSON.stringify(v.data));
         delete data.url
         req.data = Object.assign({params}, data);
-        console.log('0', req)
+        // console.log('0', req)
         if (httpPreHandler) {
           httpPreHandler(app, req);
         }
         req = formatParams(req)
-        console.log(1, req)
+        // console.log(1, req)
         res.result = await Fetch(req.url, req.data);
         // console.log(data.url, !result, result.code !== 200, result.msg !== 'ok', result,httpFilter)
         if (httpAfterHandler) {

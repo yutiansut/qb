@@ -114,6 +114,11 @@ const TASK_HANDLER = {
     })
     taskLoop()
   },
+  // setTask(tasks){
+  //   TASKS[tasks].task = []
+  //   TASKS[tasks].step = 0 // 记录当前系列任务执行到第几步
+  //   TASKS[tasks].flag = 0
+  // }
 }
 
 export default TASK_HANDLER

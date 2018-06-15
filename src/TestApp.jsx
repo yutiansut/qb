@@ -16,6 +16,7 @@ export default class testApp extends exchangeViewBase {
     // console.log(this.state)
     //绑定方法
     this.getData = controller.getData.bind(controller)
+
     // this.data =
   }
 
@@ -30,8 +31,19 @@ export default class testApp extends exchangeViewBase {
     console.log('testApp componenDidMount')
   }
 
-  componentWillUpdate(...parmas) {
-    console.log('testApp componentWillUpdate', ...parmas)
+  componentWillUpdate(props, state, next) {
+    const {controller} = props
+    console.log('testApp componentWillUpdate', props, state, next)
+
+    // let arr = controller.filter([0], false)
+    // console.log('start', Date.now())
+    // let arr = controller.sort([{title: 'abc', pair: 'usd/btc', market: 'btc', trade: 'usd', price:{cny:1000, usd: 1001}},
+    //   {title: 'defa', pair: 'usd/btc', market: 'btc', trade: 'usdt', price:{cny:1100, usd: 1000}},
+    //   {title: 'ghi', pair: 'usd/btc', market: 'btc', trade: 'usd', price:{cny:100, usd: 1002}},
+    //   {title: 'jkla', pair: 'usd/btc', market: 'btc', trade: 'usdt', price:{cny:100, usd: 1001}}], ['price', 'cny'], 1, ['price', 'usd'])
+    // console.log('bbbbb', arr)
+
+    // countDown(key, state, view) {
   }
 
 
@@ -40,6 +52,7 @@ export default class testApp extends exchangeViewBase {
       <div>
         <div>{this.props.sta}</div>
         <div>{this.state.count}</div>
+        <div>{this.state.price}</div>
         <button onClick={this.getData}>11111</button>
         {/*<Router>*/}
         <div>
