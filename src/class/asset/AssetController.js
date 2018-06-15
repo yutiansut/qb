@@ -68,7 +68,7 @@ export default class AssetController extends ExchangeControllerBase {
   setView(view) {
     super.setView(view);
     // view.setState({count: this.store.count})
-    return this.store.state;
+    // return this.store.state;
   }
 
   // 获取总资产
@@ -90,5 +90,4 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-
 }

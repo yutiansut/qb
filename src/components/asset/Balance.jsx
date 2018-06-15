@@ -13,11 +13,10 @@ export default class Balance extends exchangeViewBase {
     // }
   }
   render() {
-    console.log(this.props.data.totalAsset);
-    return <div className="balance clearfix">
-        <TotalAsset totalAsset={this.props.data.totalAsset} />
-        <Wallets wallet={this.props.data.wallet} />
-      </div>;
+    return <div className="balance">
+      <TotalAsset totalAsset={this.props.data.totalAsset} />
+      <Wallets wallet={this.props.data.wallet} />
+    </div>;
   }
 
 }
