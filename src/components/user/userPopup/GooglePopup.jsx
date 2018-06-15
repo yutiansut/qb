@@ -12,9 +12,9 @@ export default class GooglePopup extends exchangeViewBase {
 
   render() {
     return (
-      <div className="google-wrap">
+      <div className="google-wrap" style={{display: this.props.isGoogle}}>
         <div className="google-info">
-          <img src="" alt="" className="close-popup"/>
+          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.changeGooglePopup('none')}}/>
           <h1>开启谷歌验证</h1>
           <div className="clearfix">
             <ul>

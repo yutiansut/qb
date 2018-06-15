@@ -1,4 +1,4 @@
-import ExchangeControllerBase from './class/ExchangeControllerBase'
+import ExchangeControllerBase from '../ExchangeControllerBase'
 
 import UserStore from './UserStore'
 

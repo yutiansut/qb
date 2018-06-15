@@ -3,7 +3,8 @@ import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
 import Select from '../../../common/component/SelectButton/index.jsx'
 import "../stylus/safe.styl"
-// import GooglePopup from '../userPopup/GooglePopup.jsx'
+import GooglePopup from '../userPopup/GooglePopup.jsx'
+import PassPopup from '../userPopup/SetPassPopup'
 
 export default class userSafeCenter extends exchangeViewBase {
 
@@ -11,8 +12,9 @@ export default class userSafeCenter extends exchangeViewBase {
     super(props);
     console.log(props)
     this.state={
-      testAaA:'11111'
+      showGoogle: 'none'
     }
+    // Object.assign()
     // this.state = {count: 1}
     // console.log(props)
     // const {controller} = props
@@ -28,7 +30,11 @@ export default class userSafeCenter extends exchangeViewBase {
   test(){
     this.setState({testAaA:'222222'})
   }
-
+  changeGooglePopup(state) {
+    this.setState({
+      showGoogle: state
+    })
+  }
   componentWillMount() {
     // super.componentWillMount();
     console.log('user componentWillMount')
@@ -81,7 +87,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <p>当您开启两步验证后，在进行登录、修改密码、提币、提现交易等重要操作时，必须输入某个一次性密码才能继续。</p>
             <dl className="clearfix">
               <dt>登录验证</dt>
-              <dd>谷歌验证</dd>
+              <dd onClick = {state => this.changeGooglePopup('block')}>谷歌验证</dd>
               <dd>邮件</dd>
               <dd>短信</dd>
               <dd>无</dd>
@@ -201,7 +207,8 @@ export default class userSafeCenter extends exchangeViewBase {
             </table>
           </div>
         </div>
-        {/*<GooglePopup/>*/}
+        <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)} isGoogle = {this.state.showGoogle}/>
+        <PassPopup/>
       </div>
     );
   }

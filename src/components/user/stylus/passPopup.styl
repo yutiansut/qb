@@ -1,0 +1,55 @@
+@import "../../../common/css/variable.styl"
+
+.pass-wrap
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .7)
+  z-index 5
+  .pass-info
+    position absolute
+    left 50%
+    top 50%
+    width 5.64rem
+    height 5.55rem
+    padding .24rem .3rem .44rem
+    background $normal-white-color
+    border-radius (.06rem)
+    transform translateX(-50%) translateY(-50%)
+    .close-popup
+      width .16rem
+      height .16rem
+      margin-left 4.9rem
+      cursor pointer
+    h1
+      margin .04rem 0 .44rem
+    ul
+      li
+        margin-bottom .44rem
+        p
+          margin-bottom .24rem
+        input
+          width 4.04rem
+          height .4rem
+          margin-right .2rem
+          padding-left .1rem
+          background $main-bg-active
+          border 1px solid $line-light
+          border-radius (.02rem)
+          vertical-align bottom
+        .btn
+          width .8rem
+          height .4rem
+          font-size .13rem
+          color $normal-white-color
+          border-radius (.02rem)
+          border none
+        .picture-btn
+            background $normal-gray-color
+        .verify-btn
+          background $main-color
+        &:first-child
+          input
+            width 5.04rem
