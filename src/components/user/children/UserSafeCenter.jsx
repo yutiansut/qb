@@ -6,17 +6,32 @@ import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup'
 
-import UserController from "../../../class/user/UserController";
-const userController = new UserController();
+const verifyList = [
+  {name: '谷歌验证', select: false, flag: true},
+  {name: '邮件', select: false, flag: true},
+  {name: '短信', select: false, flag: true},
+  {name: '无', select: false, flag: false},
+];
+
+const noticeList = [
+  {name: '邮件通知', select: false, flag: true},
+  {name: '短信通知', select: false, flag: true}
+];
 
 export default class userSafeCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       showGoogle: 'none',
       showSet: 'none'
     }
+    const {controller} = props
+    //绑定view
+    controller.setView(this)
+    //初始化数据，数据来源即store里面的state
+    this.state = Object.assign(this.state, controller.initState);
+    this.getVerify = controller.getVerify.bind(controller)
+    console.log(3333,this.state)
   }
   changeGooglePopup(state) {
     this.setState({
@@ -51,13 +66,15 @@ export default class userSafeCenter extends exchangeViewBase {
           <h2>基本资料</h2>
           <ul className="fl clearfix">
             <li>用户ID</li>
-            <li>111111</li>
+            <li>{this.state.user_info.name && this.state.user_info.name || ''}</li>
             <li>电子邮件</li>
-            <li onClick = {state => this.changeSetPopup('block')}>绑定邮箱</li>
+            <li onClick = {state => !this.state.user_info.email && this.changeSetPopup('block')}>{this.state.user_info.email && this.state.user_info.email || '绑定邮箱'}</li>
             <li>手机号</li>
-            <li>22222</li>
+            <li onClick = {state => !this.state.user_info.phone && this.changeSetPopup('block')}>{this.state.user_info.phone && this.state.user_info.phone || '绑定手机号'}</li>
             <li>用户等级</li>
-            <li>333333</li>
+            <li>
+              <span>VIP{this.state.user_info.grade}</span>(积分：<span>{this.state.user_info.score}</span>)
+            </li>
           </ul>
         </div>
         <div className="change-pass model-div clearfix">
@@ -65,11 +82,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>登录密码</li>
-              <li>设置</li>
+              <li onClick = {state => !this.state.user_info.password && this.changeSetPopup('block')}>{this.state.user_info.password && '修改' || '设置'}</li>
             </ol>
             <ul className="clearfix">
               <li>资金密码</li>
-              <li>设置</li>
+              <li onClick = {state => !this.state.user_info.fundpass && this.changeSetPopup('block')}>{this.state.user_info.fundpass && '修改' || '设置'}</li>
               <li>设置了资金密码后，提币和提现时均需要输入，账户更安全。</li>
             </ul>
           </div>
@@ -80,22 +97,28 @@ export default class userSafeCenter extends exchangeViewBase {
             <p>当您开启两步验证后，在进行登录、修改密码、提币、提现交易等重要操作时，必须输入某个一次性密码才能继续。</p>
             <dl className="clearfix">
               <dt>登录验证</dt>
-              <dd onClick = {state => this.changeGooglePopup('block')}>谷歌验证</dd>
-              <dd>邮件</dd>
-              <dd>短信</dd>
-              <dd>无</dd>
+              {verifyList.map((v, index) => (<dd key={index}>
+                <img src="/static/img/normal.svg" alt=""/>
+                <span>{v.name}</span>
+              </dd>))}
+              {/*<dd onClick = {state => this.changeGooglePopup('block')}>谷歌验证</dd>*/}
+              {/*<dd>邮件</dd>*/}
+              {/*<dd>短信</dd>*/}
+              {/*<dd>无</dd>*/}
             </dl>
             <dl className="clearfix">
               <dt>提现验证</dt>
-              <dd>谷歌验证</dd>
-              <dd>邮件</dd>
-              <dd>短信</dd>
+              {verifyList.map((v, index) => (<dd key={index} className={`${v.flag ? '' : 'hide'}`}>
+                <img src="/static/img/normal.svg" alt=""/>
+                <span>{v.name}</span>
+              </dd>))}
             </dl>
             <dl className="clearfix">
               <dt>修改资金密码验证</dt>
-              <dd>谷歌验证</dd>
-              <dd>邮件</dd>
-              <dd>短信</dd>
+              {verifyList.map((v, index) => (<dd key={index} className={`${v.flag ? '' : 'hide'}`}>
+                <img src="/static/img/normal.svg" alt=""/>
+                <span>{v.name}</span>
+              </dd>))}
             </dl>
           </div>
         </div>
@@ -115,8 +138,10 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl">
               <li>登录/充值/提现到账区</li>
               <li>
-                <span>邮件通知</span>
-                <span>短信通知</span>
+                {noticeList.map((v, index) => (<span key={index}>
+                  <img src="/static/img/normal.svg" alt=""/>
+                  <b>{v.name}</b>
+                </span>))}
               </li>
             </ul>
           </div>
@@ -166,13 +191,13 @@ export default class userSafeCenter extends exchangeViewBase {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>2018-01-18 10:23:22</td>
-                    <td>Windows 10/Chrome55.0.2883</td>
-                    <td>216.58.197.238</td>
-                    <td>China Beijing</td>
-                    <td>是</td>
-                  </tr>
+                  {this.state.user_info.state.map((v, index) => (<tr key={index}>
+                    <td>{v.time}</td>
+                    <td>{v.dev}</td>
+                    <td>{v.ip}</td>
+                    <td>{v.ip_addr}</td>
+                    <td>{`${v.key === this.state.user_info.session_key ? '是' : '否'}`}</td>
+                  </tr>))}
                 </tbody>
               </table>
               <Button title="退出所有其他状态" className="notify-btn"/>
@@ -190,18 +215,18 @@ export default class userSafeCenter extends exchangeViewBase {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2登录日志</td>
-                  <td>106.38.92.64</td>
-                  <td>216.58.197.238</td>
-                  <td>China Beijing</td>
-                </tr>
+                {this.state.recent_info.map((v, index) => (<tr key={index}>
+                  <td>{v.catalog_name}</td>
+                  <td>{v.ip}</td>
+                  <td>{v.ip_addr}</td>
+                  <td>{v.time}</td>
+                </tr>))}
               </tbody>
             </table>
           </div>
         </div>
         <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)} isGoogle = {this.state.showGoogle}/>
-        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)} isSet = {this.state.showSet} controller={userController}/>
+        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)} isSet = {this.state.showSet} getVerify = {this.getVerify} verifyNum={this.state.verifyNum}/>
       </div>
     );
   }

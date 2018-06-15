@@ -9,15 +9,14 @@ import "../stylus/passPopup.styl"
 export default class SetPassPopup extends exchangeViewBase {
   constructor(props) {
     super(props);
-    console.log(2221, props)
-    const {controller} = props
-    //绑定view
-    controller.setView(this)
-    //初始化数据，数据来源即store里面的state
-    this.state = controller.getInitState()
-    console.log(3333,this.state)
+    // const {controller} = props
+    // //绑定view
+    // controller.setView(this)
+    // //初始化数据，数据来源即store里面的state
+    // this.state = controller.initState
+    // this.state = Object.assign(this.state, controller.initState);
     //绑定方法
-    this.getVerify = controller.getVerify.bind(controller)
+
   }
   componentWillMount() {
     // super.componentWillMount();
@@ -54,7 +53,7 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>邮箱／手机验证码</p>
                 <div>
                   <input type="text" placeholder="请输入邮箱／手机验证码"/>
-                  <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && '重新获取' || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={this.getVerify}/>
+                  <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={this.props.getVerify}/>
                 </div>
               </li>
               <li>

@@ -14,6 +14,9 @@ import UserIntegration from './children/UserIntegration.jsx' // 我的积分
 import "./stylus/user.styl"
 import exchangeViewBase from "../ExchangeViewBase";
 
+import UserController from "../../class/user/UserController";
+const userController = new UserController();
+
 
 export default class User extends exchangeViewBase {
   constructor(props) {
@@ -31,9 +34,15 @@ export default class User extends exchangeViewBase {
         </ul>
         <div className="user-content fl">
           <Switch>
-            <Route path={`${match.url}/safe`} component={UserSafeCenter}/>
-            <Route path={`${match.url}/identity`} component={UserIdentity}/>
-            <Route path={`${match.url}/integration`} component={UserIntegration}/>
+            <Route path={`${match.url}/safe`} component={({match}) => (
+              <UserSafeCenter controller={userController} />
+              )}/>
+            <Route path={`${match.url}/identity`} component={({match}) => (
+              <UserIdentity controller={userController} />
+            )}/>
+            <Route path={`${match.url}/integration`} component={({match}) => (
+              <UserIntegration controller={userController} />
+            )}/>
             <Redirect to={`${match.url}/safe`} />
           </Switch>
         </div>

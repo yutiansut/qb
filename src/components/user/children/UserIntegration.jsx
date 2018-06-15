@@ -4,17 +4,53 @@ import exchangeViewBase from '../../../components/ExchangeViewBase'
 import "../stylus/integration.styl"
 
 export default class userIntegration extends exchangeViewBase {
-
   constructor(props) {
     super(props);
+    this.state = {
+      scoreEnd: 0,
+      scoreStart: 0,
+      scoreIndex: 0
+    }
+    const {controller} = props
+    //绑定view
+    controller.setView(this)
+    //初始化数据，数据来源即store里面的state
+    this.state = Object.assign(this.state, controller.initState);
+    console.log(445555, this.state)
+    let obj = this.checkNum(this.state.user_info.score)
+    console.log(3333, this.state, obj)
+    this.state = Object.assign(this.state, {
+      scoreEnd: obj.checkEnd,
+      scoreStart: obj.checkStart,
+      scoreIndex: obj.checkIndex
+    })
+    console.log(6667788787, this.state)
+    this.test = this.test.bind(this)
   }
 
+  checkNum(num) {
+    let scoreArr = [0, 10000, 50000, 100000, 200000, 500000], sum = 0, index = 0, start = 0, end = 0;
+    if(!(scoreArr.length > 0)){
+      return;
+    }
+    for (let i = 0; i < scoreArr.length; i++) {
+      sum += scoreArr[i];
+      if(sum >= num){
+        index = i
+        start = scoreArr[i-1]
+        end = scoreArr[i]
+        return {checkStart: start, checkEnd: end, checkIndex: index}
+      }
+    }
+  }
   componentWillMount() {
+
     // super.componentWillMount();
     // console.log('testApp componentWillMount')
   }
 
   componentDidMount() {
+    // console.log(2222222, this.checkNum(this.state.user_info.score))
     // super.componentDidMount();
     // console.log('testApp componenDidMount')
   }
@@ -23,6 +59,16 @@ export default class userIntegration extends exchangeViewBase {
     // console.log('testApp componentWillUpdate', ...parmas)
   }
 
+  test() {
+    let obj = this.checkNum(this.state.user_info.score)
+    console.log('test', 3333, this.state, obj)
+    this.setState({
+      scoreEnd: obj.checkEnd,
+      scoreStart: obj.checkStart,
+      scoreIndex: obj.checkIndex
+    })
+    console.log('test', 6667788787, this.state)
+  }
 
   render() {
     return (
@@ -32,7 +78,7 @@ export default class userIntegration extends exchangeViewBase {
           <h2>积分信息</h2>
           <div className="fl">
             <h3>
-              <b>目前等级：VIP1（积分：3000）</b>
+              <b>目前等级：VIP{this.state.user_info.grade}（积分：{this.state.user_info.score}）</b>
               <a href="javascript:void(0)">等级说明</a>
             </h3>
             <ul className="clearfix">
@@ -60,8 +106,8 @@ export default class userIntegration extends exchangeViewBase {
               <li>MVP</li>
             </ul>
             <div className="progress-line">
-              <span>3000</span>
-              <p></p>
+              <span onClick={this.test}>{this.state.user_info.score}</span>
+              {/*<p style={{width: `calc(120 * ${this.state.scoreIndex} + (${this.state.scoreEnd} / 120) * (${this.state.user_info.score} - ${this.state.scoreStart})rem`}}></p>*/}
             </div>
           </div>
         </div>
@@ -78,11 +124,11 @@ export default class userIntegration extends exchangeViewBase {
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>+2</td>
-                <td>每日登录</td>
-                <td>2018-01-18 10:23:22</td>
-              </tr>
+                {this.state.score_info.items.map((v, index) => (<tr key={index}>
+                  <td>+{v.gain}</td>
+                  <td>{v.event}</td>
+                  <td>{v.time}</td>
+                </tr>))}
               </tbody>
             </table>
           </div>

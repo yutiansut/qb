@@ -1,15 +1,8 @@
 @import "../../../common/css/variable.styl"
 
 .safe-content
-  //h1
-  //  margin .3rem 0 .16rem
-  //  color $normal-black-color
-  //  font-size .2rem
-  //h2
-  //  float left
-  //  font-size .15rem
-  //  color $normal-black-color
-  //  width 1.5rem
+  .hide
+    display none
   .model-div
     padding .44rem 0 0
     border-bottom 1px solid $line-light
@@ -37,6 +30,8 @@
           width 2.6rem
         &:nth-child(3), &:nth-child(7)
           width  1.56rem
+        span
+          color $main-color
 
   .change-pass
     ol, ul
@@ -45,6 +40,11 @@
         float left
         &:first-child
           width 1.52rem
+        &:nth-child(2)
+          margin-right .3rem
+          color $main-color
+        &:nth-child(3)
+          color $normal-gray-color
 
   .verify
     p
@@ -59,8 +59,14 @@
         width 1.42rem
       dd
         width 1.1rem
+        cursor pointer
         &:nth-of-type(1)
           width 1.62rem
+        img
+          width .14rem
+          height .14rem
+          margin-right .08rem
+          vertical-align top
 
   .other
     padding-bottom .44rem
@@ -85,6 +91,13 @@
   .notify
     ul
       padding-bottom .44rem
+      li
+        cursor pointer
+        img
+          width .14rem
+          height .14rem
+          margin-right .08rem
+          vertical-align top
       li:first-child
         margin-bottom .44rem
       li:last-child
