@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../ExchangeViewBase";
-import SelectButton from "../../common/component/SelectButton";
-import Button from "../../common/component/Button";
-import DatePicker from "../../common/component/DatePicker/DatePicker";
-import Pagination from "../../common/component/Pagination";
-import "./style/history.styl";
+import exchangeViewBase from "../../ExchangeViewBase";
+import SelectButton from "../../../common/component/SelectButton";
+import Button from "../../../common/component/Button";
+import DatePicker from "../../../common/component/DatePicker/DatePicker";
+import Pagination from "../../../common/component/Pagination";
+import "../style/history.styl";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);

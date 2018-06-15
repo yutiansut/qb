@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Button from "../../../common/component/Button";
-import "../style/wallet.styl";
+import Button from "../../../../common/component/Button";
+import "../../style/wallet.styl";
 export default class Wallets extends Component {
   constructor(props) {
     super(props);

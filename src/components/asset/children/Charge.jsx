@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../ExchangeViewBase";
-import Button from "../../common/component/Button";
-import "./style/charge.styl"
+import exchangeViewBase from "../../ExchangeViewBase";
+import Button from "../../../common/component/Button";
+import "../style/charge.styl"
 export default class Charge extends exchangeViewBase {
   constructor(props) {
     super(props)

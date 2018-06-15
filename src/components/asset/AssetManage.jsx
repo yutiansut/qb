@@ -7,10 +7,11 @@ import {
   Switch
 } from "react-router-dom";
 import exchangeViewBase from "../ExchangeViewBase";
-import Balance from "./Balance";
-import Charge from "./Charge";
-import Extract from "./Extract";
-import History from "./History";
+import Balance from "./children/Balance";
+import Charge from "./children/Charge";
+import Extract from "./children/Extract";
+import History from "./children/History";
+import Popup from "./components/popup/";
 
 import "./style/index.styl";
 
@@ -19,11 +20,12 @@ import "./style/index.styl";
 export default class AssetManage extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.state = {}
     let { controller } = props;
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
-    this.state = controller.getInitState()
+    this.state = Object.assign(this.state, controller.initState);
     //绑定方法
     this.getAssets = controller.getAssets.bind(controller)
     this.getWallet = controller.getWallet.bind(controller)
@@ -70,7 +72,7 @@ export default class AssetManage extends exchangeViewBase {
             </NavLink>
           </li>
           <li>
-          <NavLink activeClassName="active" to={`${match.url}/dashboard`}>
+            <NavLink activeClassName="active" to={`${match.url}/dashboard`}>
               资产记录
             </NavLink>
           </li>

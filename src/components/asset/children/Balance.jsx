@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../ExchangeViewBase";
 import TotalAsset from "./balance/TotalAsset";
 import Wallets from "./balance/Wallets";
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "../style/total.styl"
+import "../../style/total.styl"
 
 export default class TotalAsset extends Component {
   constructor(props){

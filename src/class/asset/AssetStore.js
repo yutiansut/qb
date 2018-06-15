@@ -1,8 +1,8 @@
 import ExchangeStoreBase from "../ExchangeStoreBase";
 
 export default class AssetStore extends ExchangeStoreBase {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       totalAsset: {
         usd: 0,
