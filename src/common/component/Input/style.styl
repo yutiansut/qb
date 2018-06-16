@@ -1,0 +1,59 @@
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
+.base-input-wrap
+  position relative
+  height 100%
+  &.search2
+    &::after
+      position absolute
+      top 0
+      right 0
+      content ''
+      width 13%
+      height 100%
+    input
+      padding-right 13%
+      background $normal-input-color
+      border 0.01rem solid $line-dark
+      border-radius(0.02rem)
+  &.search1
+    input
+      width 84.21%
+      height 100%
+      border-right 0
+      border-radius(0.02rem 0 0 0.02rem)
+  input, textarea
+    padding-left 0.1rem
+    padding-right 0.1rem
+    font-size 0.14rem
+    color $normal-black-color
+    background $normal-white-color
+    border 0.01rem solid $line-dark
+    letter-spacing 0
+    border-radius(0.02rem)
+    placeholder($normal-gray-color, 0.14rem)
+    &:hover, &:focus
+      border-color $main-color
+    &.disabled
+      background $disale-bg-color
+      border 0.01rem solid $disale-border-color
+      border-radius 0.02rem
+      placeholder($line-dark, 0.14rem)
+  textarea
+    padding-top 0.1rem
+    padding-bottom 0.1rem
+    resize none
+  button
+    position absolute
+    right 0
+    top 0
+    width 15.79%
+    height 100%
+    cursor pointer
+    border-radius(0 0.02rem 0.02rem 0)
+    background url('/static/images/search_bai.svg') no-repeat center center $main-color
+    background-size 0.2rem 0.2rem
+    &:hover
+      background-color $main-color-hover
+    &:active
+      background-color $main-color-active

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from "../../../common/component/Button";
+import Input from "../../../common/component/Input";
 import "../style/extract.styl";
 export default class Extract extends exchangeViewBase {
   constructor(props) {
@@ -18,7 +19,9 @@ export default class Extract extends exchangeViewBase {
           <div className="search clearfix">
             <span className="title">选择币种</span>
             <div className="currency-asset">
-              <p />
+              <div className="input">
+                <Input type="search1"></Input>
+              </div>
               <ul>
                 <li>
                   <span>总额</span>
@@ -42,7 +45,7 @@ export default class Extract extends exchangeViewBase {
             ，我们不会处理未来代币的发放。
           </p>
           <div className="currency-address clearfix">
-            <span className="title">充值地址</span>
+            <span className="title">ETH提现地址</span>
             <div className="content">
               <p>sfhghdfjhsa5yrehhjj35ahdhgjhjhtjdrheadhf</p>
               <a>添加地址</a>
@@ -54,11 +57,11 @@ export default class Extract extends exchangeViewBase {
               <p className="limit">
                 24H提现额度：1/2 BTC <a>提额申请</a>
               </p>
-              <p className="input">
-                <input type="text" placeholder="提现数量" />
+              <div className="input">
+                <Input placeholder="提现数量" />
                 <a>可提现余额: 0</a>
                 <span>ETH</span>
-              </p>
+              </div>
               <div className="fee">
                 <p>
                   手续费：0 EOS
@@ -69,9 +72,9 @@ export default class Extract extends exchangeViewBase {
             </div>
           </div>
           <div className="password clearfix">
-            <span className="title">提现数量</span>
+            <span className="title">资金密码</span>
             <div className="content">
-              <input type="passwword" palce="请输入您的资金密码" />
+              <Input oriType="password" placeholder="请输入您的资金密码" />
               <div className="set">
                 <a>设置资金密码</a>
               </div>

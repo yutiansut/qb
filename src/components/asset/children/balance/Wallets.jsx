@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../../../common/component/Button";
+import Input from "../../../../common/component/Input";
 import "../../style/wallet.styl";
 export default class Wallets extends Component {
   constructor(props) {
@@ -7,10 +8,11 @@ export default class Wallets extends Component {
   }
   render() {
     let { wallet } = this.props;
-    return (
-      <div className="asset-wallet">
-        <p>
-          <input type="text" />
+    return <div className="asset-wallet">
+        <div className="input-wrap">
+          <div className="input">
+            <Input type="search2"></Input>
+          </div>
           <span className="hide-little">
             <i />隐藏小额资产
             <b className="pop-parent">
@@ -21,7 +23,7 @@ export default class Wallets extends Component {
           <span className="hide-zero">
             <i />隐藏0余额币种
           </span>
-        </p>
+        </div>
         <table>
           <thead>
             <tr>
@@ -36,7 +38,9 @@ export default class Wallets extends Component {
                 冻结中金额
                 <b className="pop-parent">
                   <img src="/static/images/yiwen.png" alt="" />
-                  <em className="pop-children uppop-children">小于0.001btc</em>
+                  <em className="pop-children uppop-children">
+                    小于0.001btc
+                  </em>
                 </b>
                 <img className="img" src="/static/images/rank_normal.svg" alt="" />
               </th>
@@ -46,8 +50,7 @@ export default class Wallets extends Component {
           </thead>
           <tbody>
             {wallet.map((item, index) => {
-              return (
-                <tr key={index}>
+              return <tr key={index}>
                   <td className="currency">
                     <img src="/static/images/rank_normal.svg" alt="" />
                     {item.currency}
@@ -61,12 +64,10 @@ export default class Wallets extends Component {
                     <Button type="base" theme="main" title="提币" />
                     <Button type="base" theme="main" title="交易" />
                   </td>
-                </tr>
-              );
+                </tr>;
             })}
           </tbody>
         </table>
-      </div>
-    );
+      </div>;
   }
 }

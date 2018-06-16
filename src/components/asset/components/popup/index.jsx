@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../ExchangeViewBase";
 import Button from "../../../../common/component/Button";
+import Input from "../../../../common/component/Input";
 import "./style.styl";
 
 export default class Popup extends exchangeViewBase {
@@ -47,14 +48,8 @@ export default class Popup extends exchangeViewBase {
       },
       // 添加地址弹窗
       popup3: () => {
-        return (
-          <div className="asset-popup-content base3">
-            <img
-              className="close"
-              src="/static/img/guanbi_hei.svg"
-              alt=""
-              onClick={onClose && onClose()}
-            />
+        return <div className="asset-popup-content base3">
+            <img className="close" src="/static/img/guanbi_hei.svg" alt="" onClick={onClose && onClose()} />
             <h3>
               添加地址<span>添加</span>
             </h3>
@@ -69,17 +64,13 @@ export default class Popup extends exchangeViewBase {
               <tbody>
                 <tr className="input">
                   <td>
-                    <input type="text" />
+                  <Input type="text" value="dsfsdf" placeholder="输入名称" onEnter={(e) => { console.log(e) }} onInput={(e) => { console.log(e) }}/>
                   </td>
                   <td>
-                    <input type="text" />
+                    <Input type="text" placeholder="输入地址" />
                   </td>
                   <td>
-                    <Button
-                      type="base"
-                      title="保存"
-                      onClick={onSave && onSave()}
-                    />
+                    <Button type="base" title="保存" onClick={onSave && onSave()} />
                     <Button title="取消" onClick={onCancel && onCancel()} />
                   </td>
                 </tr>
@@ -87,43 +78,30 @@ export default class Popup extends exchangeViewBase {
                   <td>yy</td>
                   <td>0x046e59335aaffd964cfbb05c6c15a1238d7e3543</td>
                   <td>
-                    <Button
-                      title="删除"
-                      theme="danger"
-                      onClick={onDelete && onDelete()}
-                    />
+                    <Button title="删除" theme="danger" onClick={onDelete && onDelete()} />
                   </td>
                 </tr>
                 <tr className="content">
                   <td>yy</td>
                   <td>0x046e59335aaffd964cfbb05c6c15a1238d7e3543</td>
                   <td>
-                    <Button
-                      title="删除"
-                      theme="danger"
-                      onClick={onDelete && onDelete()}
-                    />
+                    <Button title="删除" theme="danger" onClick={onDelete && onDelete()} />
                   </td>
                 </tr>
                 <tr className="content">
                   <td>yy</td>
                   <td>0x046e59335aaffd964cfbb05c6c15a1238d7e3543</td>
                   <td>
-                    <Button
-                      title="删除"
-                      theme="danger"
-                      onClick={onDelete && onDelete()}
-                    />
+                    <Button title="删除" theme="danger" onClick={onDelete && onDelete()} />
                   </td>
                 </tr>
               </tbody>
             </table>
-          </div>
-        );
+          </div>;
       }
     };
   }
   render() {
-    return <div className="asset-popup">{this.popup[type]()}</div>;
+    return <div className="asset-popup">{this.popup[this.props.type]()}</div>;
   }
 }

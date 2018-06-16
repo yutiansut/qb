@@ -49,6 +49,19 @@ _rotate(deg)
   -webkit-transform rotate(deg); /* Safari 和 Chrome */
   -o-transform rotate(deg); 	/* Opera */
 
+placeholder(col, fz)
+  &::-webkit-input-placeholder
+    color col
+    font-size fz
+  &::-moz-placeholder
+    color col
+    font-size fz
+  &:-moz-placeholder
+    color col
+    font-size fz
+  &:-ms-input-placeholder
+    color col
+    font-size fz
 
 // 中心内容
 .inner // 中心内容

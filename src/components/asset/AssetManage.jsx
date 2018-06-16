@@ -11,7 +11,8 @@ import Balance from "./children/Balance";
 import Charge from "./children/Charge";
 import Extract from "./children/Extract";
 import History from "./children/History";
-import Popup from "./components/popup/";
+// import Popup from "./components/popup/";
+// import SelectButton from "./components/popup/";
 
 import "./style/index.styl";
 
@@ -55,6 +56,7 @@ export default class AssetManage extends exchangeViewBase {
       return <History controller={this.controller} />;
     };
     return <div className="asset clearfix">
+      {/* <Popup type="popup3"></Popup> */}
         <ul className="nav">
           <li>
             <NavLink activeClassName="active" to={`${match.url}/balance`}>
