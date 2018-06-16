@@ -6,7 +6,8 @@ export default class SelectButton extends Component {
     super(props);
     this.state = {
       show: false,
-      istarget: false
+      istarget: false,
+      title: this.props.title
     };
     this.clickoutside = () => {
       if (this.state.istarget) {
@@ -29,13 +30,14 @@ export default class SelectButton extends Component {
     /*  
   title 按钮文案
   type  默认无, 可选main
+  simple type为main时有效，简化，不显示title
   className 自定义类名方便自定义按钮宽高
   valueArr 选项菜单内容数组
   onSelect  选项click 事件的 handler
 */
-    let { type, title, className, valueArr, onSelect } = this.props;
+    let { type, title, className, valueArr, onSelect, simple } = this.props;
     let { show } = this.state;
-    type ? type : "";
+    !type && (type = "");
     !valueArr && (valueArr = []);
     return (
       <div className="select-button">
@@ -44,26 +46,22 @@ export default class SelectButton extends Component {
             className={`${className ? className : ""} ${show ? "" : "hide"}`}
             onClick={e => {
               this.state.istarget = true;
-              this.setState({
-                show: show ? false : true
-              });
+              this.setState({ show: show ? false : true });
             }}
           >
-            {title}
+            {this.state.title}
           </button>
         ) : (
           <div
             className={`${className ? className : ""} ${
               show ? "" : "hide"
-            } ${type}`}
+            } ${type} ${simple ? "simple" : ""}`}
             onClick={e => {
               this.state.istarget = true;
-              this.setState({
-                show: show ? false : true
-              });
+              this.setState({ show: show ? false : true });
             }}
           >
-            {title}
+              { simple ? '' :this.state.title}
           </div>
         )}
         {valueArr.length > 0 && (
@@ -71,13 +69,12 @@ export default class SelectButton extends Component {
             {valueArr.map((item, index) => {
               return (
                 <li
+                  className={item === this.state.title ? "active" : ""}
                   key={index}
                   onClick={e => {
                     e.nativeEvent.stopImmediatePropagation();
-                    onSelect(item);
-                    this.setState({
-                      show: false
-                    });
+                    onSelect && onSelect(item);
+                    this.setState({ show: false, title: item });
                   }}
                 >
                   {item}

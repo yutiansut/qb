@@ -25,17 +25,17 @@ export default class History extends exchangeViewBase {
         <h3>资产记录</h3>
         <div className="filtrate clearfix">
           <ul className="clearfix">
-            <li>
+            <li className="item">
               <span>币种</span>
-              <SelectButton title="全部" type="main" className="select" />
+              <SelectButton title="BTC" type="main" className="select" valueArr={["全部", "BTC", "LTC", "ETH"]} />
             </li>
-            <li>
+            <li className="item">
               <span>类型</span>
-              <SelectButton title="全部" type="main" className="select" />
+              <SelectButton title="全部" type="main" className="select" valueArr={["全部", "充币", "提币"]} />
             </li>
-            <li>
+            <li className="item">
               <span>状态</span>
-              <SelectButton title="全部" type="main" className="select" />
+              <SelectButton title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />
             </li>
           </ul>
           <p className="datepicker">datePicker</p>
@@ -74,98 +74,93 @@ export default class History extends exchangeViewBase {
               <td className="state passing">审核中</td>
               <td className="fee">—</td>
             </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
-          <tr>
-            <td className="time">2018-01-01</td>
-            <td>BTC</td>
-            <td>充币</td>
-            <td className="cash red">+11.3142</td>
-            <td>3.365165</td>
-            <td className="send">18766554332</td>
-            <td>morXXEXFS3ZjP6qk6V…</td>
-            <td className="confirm">
-              <a>1/5</a>
-            </td>
-            <td className="state passing">审核中</td>
-            <td className="fee">—</td>
-          </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
+            <tr>
+              <td className="time">2018-01-01</td>
+              <td>BTC</td>
+              <td>充币</td>
+              <td className="cash red">+11.3142</td>
+              <td>3.365165</td>
+              <td className="send">18766554332</td>
+              <td>morXXEXFS3ZjP6qk6V…</td>
+              <td className="confirm">
+                <a>1/5</a>
+              </td>
+              <td className="state passing">审核中</td>
+              <td className="fee">—</td>
+            </tr>
           </tbody>
         </table>
-        <Pagination
-          total={120}
-          pageSize={20}
-          showTotal={true}
-          showQuickJumper={true}
-        />
+        <Pagination total={120} pageSize={20} showTotal={true} showQuickJumper={true} />
       </div>;
   }
 }
