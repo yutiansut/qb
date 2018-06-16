@@ -21,19 +21,19 @@ export default class AssetManage extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {}
-    let { controller } = props;
+    this.controller = props.controller;
     //绑定view
-    controller.setView(this)
-    //初始化数据，数据来源即store里面的state
-    this.state = Object.assign(this.state, controller.initState);
-    //绑定方法
-    this.getAssets = controller.getAssets.bind(controller)
-    this.getWallet = controller.getWallet.bind(controller)
+    // this.controller.setView(this);
+    // //初始化数据，数据来源即store里面的state
+    // this.state = Object.assign(this.state, this.controller.initState);
+    // //绑定方法
+    // this.getAssets = controller.getAssets.bind(controller)
+    // this.getWallet = controller.getWallet.bind(controller)
   }
 
   componentWillMount() {
-    this.getAssets()
-    this.getWallet();
+    // this.getAssets()
+    // this.getWallet();
   }
 
   componentDidMount() { }
@@ -43,16 +43,16 @@ export default class AssetManage extends exchangeViewBase {
   render() {
     let match = this.props.match;
     const Bala = ({ match }) => {
-      return <Balance data={this.state} />;
+      return <Balance controller={this.controller} />;
     };
     const Char = ({ match }) => {
-      return <Charge></Charge>;
+      return <Charge controller={this.controller} />;
     };
     const Extr = ({ match }) => {
-      return <Extract></Extract>;
+      return <Extract controller={this.controller} />;
     };
     const Hist = ({ match }) => {
-      return <History></History>
+      return <History controller={this.controller} />;
     };
     return <div className="asset clearfix">
         <ul className="nav">
