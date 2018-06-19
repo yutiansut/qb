@@ -32,7 +32,7 @@ export default class userIntegration extends exchangeViewBase {
     if(!(scoreArr.length > 0)){
       return;
     }
-    if (num > 500000) {
+    if (num > 500000) { // 超过500000会出问题
       index = 6
       start = scoreArr[5]
       end = num
