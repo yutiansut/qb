@@ -27,11 +27,11 @@ export default class SelectButton extends Component {
     window.removeEventListener("click", this.clickoutside);
   }
   render() {
-    /*  
+    /*
   title 按钮文案
   type  默认default, 可选main
   simple type为main时有效，简化，不显示title
-  className 自定义类名方便自定义样式 
+  className 自定义类名方便自定义样式
   valueArr 选项菜单内容数组
   onSelect  选项click 事件的 handler
   children 自定义下拉菜单
@@ -53,7 +53,7 @@ export default class SelectButton extends Component {
         {type === "default" ? (
           <button
             className={`${className ? className : ""} ${
-              show ? "" : "hide"
+              show ? "" : "hidden"
             } ${type}`}
             onClick={e => {
               this.state.istarget = true;
@@ -65,7 +65,7 @@ export default class SelectButton extends Component {
         ) : (
           <div
             className={`${className ? className : ""} ${
-              show ? "" : "hide"
+              show ? "" : "hidden"
             } ${type} ${simple ? "simple" : ""}`}
             onClick={e => {
               this.state.istarget = true;

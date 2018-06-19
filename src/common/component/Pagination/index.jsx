@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "../Button/";
 import "./style.styl";
-/*  
+/*
   currentPage	当前页码，默认为1
   total	数据总条数
   pageSize 每页数据条数
@@ -125,10 +125,10 @@ export default class Pagination extends Component {
               title="跳转"
               type="base"
               onClick={() => {
+                if (this.refs.input.value === '') return;
                 this.setState({
                   currentPage: Number(this.refs.input.value)
                 });
-                this.refs.input.blur();
               }}
             />
           </p>

@@ -1,6 +1,6 @@
 @import "../../../common/css/variable.styl"
 @import "../../../common/css/base.styl"
-.asset  
+.asset
   .extract
     padding 0.32rem 0 0.45rem 0.3rem
     border-left 0.02rem solid $line-light
@@ -20,7 +20,7 @@
       &:hover
         color $main-color-hover
       &:active
-        color $main-color-active 
+        color $main-color-active
     h3
       height 0.2rem
       margin-bottom 0.63rem
@@ -39,6 +39,18 @@
           .input
             height 0.4rem
             margin-bottom 0.09rem
+            .search-list
+              width 100%
+              border 1px solid $line-light
+              &.hide
+                display none
+              li
+                padding-left 0.15rem
+                background-color $normal-white-color
+                cursor pointer
+                &:hover
+                  color $normal-white-color
+                  background-color $main-color
           ul
             width 3.84rem
             li
@@ -185,6 +197,7 @@
       padding 0.44rem 0 0
       table
         float left
+        margin-bottom 0.2rem
         text-align left
         th
           height 0.3rem
@@ -200,9 +213,9 @@
           &.send
             width 1.33rem
           &.receive
-            width 2rem
-          &.confirm, &.remark
-            width 0.76rem
+            width 2.3rem
+          &.state, &.remark
+            width 0.6rem
         td
           height 0.32rem
           line-height 0.32rem
@@ -213,9 +226,12 @@
             text-decoration underline
           span
             color $warn-color-hover
+      .pagina
+        float left
+        width 100%
+        padding-left 1.58rem
       .more
         padding-top 31px
         text-align right
         float right
-    
-            
+

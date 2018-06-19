@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.styl";
-/*  
+/*
   placeholder, 占位文案
   type,  默认default, 可选search1(带搜索按钮),search2(带搜索图标),textarea
   value, input的value值
@@ -8,6 +8,8 @@ import "./style.styl";
   onEnter,  回车事件的 handler
   onInput, input 事件的handler
   onChange, change事件的handler
+  onFocus,focus事件的handler
+  onBlur, blur事件的handler
   disabled, 设置disable状态
   className, 未预设宽高，自定义类名设置宽高，行高,
   children, 类似vue插槽,用作自定义下拉菜单
@@ -16,8 +18,18 @@ export default class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value ? this.props.value : ""
+      value: this.props.value ? this.props.value : "",
+      istarget: false
     };
+
+    this.clickoutside = () => {
+      if (this.state.istarget) {
+        this.state.istarget = false;
+        return;
+      }
+      this.props.clickOutSide && this.props.clickOutSide();
+    };
+
     this.elem = props => {
       let {
         placeholder,
@@ -27,7 +39,9 @@ export default class Input extends React.Component {
         onEnter,
         onInput,
         onChange,
-        onSearch,
+        onFocus,
+        onBlur,
+        clickOutSide,
         disabled,
         className,
         children
@@ -49,11 +63,20 @@ export default class Input extends React.Component {
                 disabled ? "disabled" : ""
                 }`}
               disabled={disabled}
+              onClick={e => {
+                this.state.istarget = true}
+              }
               placeholder={placeholder && placeholder}
               onKeyDown={e => {
                 if (e.nativeEvent.keyCode !== 13) return;
                 this.refs.input.blur();
                 onEnter && onEnter(this.refs.input.value);
+              }}
+              onFocus={()=>{
+                onFocus && onFocus(this.refs.input.value);
+              }}
+              onBlur={()=>{
+                onBlur && onBlur(this.refs.input.value);
               }}
               onInput={() => {
                 this.setState({ value: this.refs.input.value });
@@ -96,14 +119,21 @@ export default class Input extends React.Component {
               }}
             />
           )}
-          {children}
+          {children && children}
         </div>
       );
       return element;
     };
   }
+  componentDidMount() {
+    window.addEventListener("click", this.clickoutside);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.clickoutside);
+  }
 
   render() {
+    this.state.value= this.props.value
     return this.elem(this.props);
   }
 }

@@ -6,13 +6,13 @@ import Wallets from "./balance/Wallets";
 export default class Balance extends exchangeViewBase {
   constructor(props) {
     super(props)
-    //绑定方法
     let { controller } = props;
     this.state = {}
     //绑定view
     controller.setView(this)
+    let {totalAsset, wallet} = controller.initState;
     //初始化数据，数据来源即store里面的state
-    this.state = Object.assign(this.state, controller.initState);
+    this.state = Object.assign(this.state, {totalAsset, wallet});
     //绑定方法
     this.getAssets = controller.getAssets.bind(controller)
     this.getWallet = controller.getWallet.bind(controller)
@@ -25,9 +25,9 @@ export default class Balance extends exchangeViewBase {
 
   render() {
     return <div className="balance">
-      <TotalAsset totalAsset={this.state.totalAsset} />
-      <Wallets wallet={this.state.wallet} />
-    </div>;
+        <TotalAsset totalAsset={this.state.totalAsset} />
+        <Wallets wallet={this.state.wallet} />
+      </div>;
   }
 
 }

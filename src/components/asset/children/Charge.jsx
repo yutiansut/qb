@@ -1,39 +1,112 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from "../../../common/component/Button";
 import Input from "../../../common/component/Input";
-import "../style/charge.styl"
+import Pagination from "../../../common/component/Pagination";
+import "../style/charge.styl";
 export default class Charge extends exchangeViewBase {
   constructor(props) {
-    super(props)
+    super(props);
     //绑定方法
-    // this.getData = controller.getData.bind(controller)
-    // this.state = {
-    // console.log(this.controller)
-    // }
+    let { controller } = props;
+    this.state = { showSearch: false, currency: "BTC", value: "BTC" };
+    //绑定view
+    controller.setView(this);
+    //初始化数据，数据来源即store里面的state
+    let { wallet_dict, wallet_list, charge_history } = controller.initState;
+    this.state = Object.assign(this.state, {
+      wallet_dict,
+      wallet_list,
+      charge_history
+    });
+    //绑定方法
+    this.show = () => {
+      this.setState({ showSearch: true });
+    };
+    this.hide = () => {
+      this.setState({ showSearch: false });
+    };
+    this.setValue = value => {
+      this.setState({ value });
+    };
+    this.setCurrency = currency => {
+      this.setState({ currency });
+    };
+    this.getCharge = controller.getCharge.bind(controller);
+    this.getCurrencyList = controller.getCurrencyList.bind(controller);
+    this.getChargeHistory = controller.getChargeHistory.bind(controller);
   }
+
+  componentWillMount() {
+    this.getCharge();
+    this.getCurrencyList();
+    this.getChargeHistory();
+  }
+
+  componentDidMount() {}
+
+  componentWillUpdate(props, state, next) {}
+
   render() {
+    let { amount, avail, lock, addr, pay_confirms } = this.state.wallet_dict;
+    let { total, cur_page, page_size, list } = this.state.charge_history;
+    let searchArr = this.props.controller.filter(
+      this.state.wallet_list,
+      this.state.value.toLowerCase()
+    );
     return <div className="charge">
-        <h3>充币-BTC</h3>
+        <h3>充币-{this.state.currency}</h3>
         <div className="select">
           <div className="search clearfix">
             <span className="title">选择币种</span>
             <div className="currency-asset">
               <div className="input">
-                <Input type="search1"></Input>
+                <Input type="search1" placeholder="请输入币种关键字" value={this.state.value} onInput={value => {
+                    this.setState({ value: value });
+                  }} onFocus={this.show} onEnter={() => {
+                    this.setValue(searchArr[0].toUpperCase());
+                    this.setCurrency(searchArr[0].toUpperCase());
+                    this.hide();
+                  }} clickOutSide={() => {
+                    this.setValue(searchArr[0].toUpperCase());
+                    this.setCurrency(searchArr[0].toUpperCase());
+                    this.hide();
+                  }}>
+                  {<ul className={`search-list ${this.state.showSearch && searchArr.length ? "" : "hide"}`}>
+                      {searchArr.map((item, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            this.setValue(item.toUpperCase());
+                            this.setCurrency(item.toUpperCase());
+                            this.hide();
+                          }}
+                        >
+                          {item.toUpperCase()}
+                        </li>
+                      ))}
+                    </ul>}
+                </Input>
               </div>
               <ul>
                 <li>
                   <span>总额</span>
-                  <i>2.006 BTC</i>
+                  <i>
+                    {amount} {this.state.currency}
+                  </i>
                 </li>
                 <li>
                   <span>下单冻结</span>
-                  <i>1 BTC</i>
+                  <i>
+                    {lock} {this.state.currency}
+                  </i>
                 </li>
                 <li>
                   <span>可用余额</span>
-                  <i>1.006 BTC</i>
+                  <i>
+                    {avail} {this.state.currency}
+                  </i>
                 </li>
               </ul>
             </div>
@@ -41,11 +114,11 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            注意：禁止向BTC地址充值除BTC之外的资产，任何充入BTC地址的非BTC资产将不可找回。
+            注意：禁止向{this.state.currency}地址充值除{this.state.currency}之外的资产，任何充入{this.state.currency}地址的非{this.state.currency}资产将不可找回。
           </p>
           <div className="currency-address clearfix">
             <span className="title">充值地址</span>
-            <p>sfhghdfjhsa5yrehhjj35ahdhgjhjhtjdrheadhf</p>
+            <p>{addr}</p>
           </div>
           <div className="handel">
             <Button title="展示二维码" type="base" />
@@ -57,10 +130,14 @@ export default class Charge extends exchangeViewBase {
           <span className="title">温馨提示</span>
           <ol>
             <li>
-              使用EOS地址充值需要<a href="#">12</a>个网络确认才能到账
+              使用{this.state.currency}地址充值需要<a href="#">
+                {pay_confirms}
+              </a>个网络确认才能到账
             </li>
             <li>
-              充值完成后，你可以进入 <a href="#">资产记录</a> 页面跟踪进度
+              充值完成后，你可以进入 <NavLink to={`/wallet/dashboard`}>
+                资产记录
+              </NavLink> 页面跟踪进度
             </li>
           </ol>
         </div>
@@ -83,49 +160,32 @@ export default class Charge extends exchangeViewBase {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2018-12-23 09:09:23</td>
-                <td>BTC</td>
-                <td>+0.044</td>
-                <td>18878665623</td>
-                <td>0x046e2222….22227e3543</td>
-                <td>
-                  <a href="#">1/6</a>
-                </td>
-                <td>
-                  <span>审核中</span>
-                </td>
-              </tr>
-              <tr>
-                <td>2018-12-23 09:09:23</td>
-                <td>BTC</td>
-                <td>+0.044</td>
-                <td>18878665623</td>
-                <td>0x046e2222….22227e3543</td>
-                <td>
-                  <a href="#">1/6</a>
-                </td>
-                <td>
-                  <span>审核中</span>
-                </td>
-              </tr>
-              <tr>
-                <td>2018-12-23 09:09:23</td>
-                <td>BTC</td>
-                <td>+0.044</td>
-                <td>18878665623</td>
-                <td>0x046e2222….22227e3543</td>
-                <td>
-                  <a href="#">1/6</a>
-                </td>
-                <td>
-                  <span>审核中</span>
-                </td>
-              </tr>
+              {list.map((item, index) => <tr key={index}>
+                  <td>{item.date}</td>
+                  <td>{item.currency}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.send_address}</td>
+                  <td>{item.receive_address}</td>
+                  <td>
+                    <a href="#">{item.confirm}</a>
+                  </td>
+                  <td>
+                    <span>
+                      {!item.state
+                        ? "通过"
+                        : item.state === 1
+                          ? "审核中"
+                          : "未通过"}
+                    </span>
+                  </td>
+                </tr>)}
             </tbody>
           </table>
+          <div className="pagina">
+            <Pagination total={total} pageSize={page_size} showTotal={true} showQuickJumper={true} currentPage={cur_page} />
+          </div>
           <p className="more">
-            <a href="#">查看全部→</a>
+            <NavLink to={`/wallet/dashboard`}>查看全部→</NavLink>
           </p>
         </div>
       </div>;

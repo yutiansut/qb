@@ -11,7 +11,7 @@
       content ''
       width 13%
       height 100%
-      background url('/static/images/Icon_Search.png') no-repeat center center;
+      background url('/static/images/Icon_Search.png') no-repeat center center
       background-size auto 44%
     input
       padding-right 13%
@@ -23,7 +23,10 @@
       width 84.21%
       height 100%
       border-right 0
+      background $normal-input-color
       border-radius(0.02rem 0 0 0.02rem)
+      &:focus
+        background $normal-white-color
   input, textarea
     padding-left 0.1rem
     padding-right 0.1rem
