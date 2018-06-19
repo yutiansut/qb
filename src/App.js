@@ -29,6 +29,8 @@ import UserInfo from './components/user/UserCenter.jsx'
 import Header from './components/home/children/header.jsx'
 import Home from './components/home/Home.jsx'
 
+
+
 const About = () => (
   <div>
     <ul>
@@ -115,7 +117,7 @@ export default class App extends Component {
 
             <hr/>
 
-            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
             <Route path="/wallet" component={Asset} />

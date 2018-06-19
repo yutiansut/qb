@@ -21,7 +21,7 @@ export default class SetPassPopup extends exchangeViewBase {
             <input type="text" placeholder="请输入邮箱／手机验证码"/>
             <Button className="verify-btn" title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={this.props.getVerify}/>
           </div>
-          <Button title="绑定" className="set-btn"/>
+          <Button title="确认" className="set-btn"/>
         </div>
       </div>
     );

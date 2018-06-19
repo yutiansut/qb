@@ -11,7 +11,7 @@ import NoticeController from "../../class/notice/NoticeController";
 const noticeController = new NoticeController();
 
 
-export default class User extends exchangeViewBase {
+export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
@@ -19,8 +19,8 @@ export default class User extends exchangeViewBase {
   render() {
     return (
       <div className="inner">
-        <HomeBanner controller={noticeController}/>
-        <HomeNotice controller={noticeController}/>
+        {/*<HomeBanner controller={noticeController}/>*/}
+        {/*<HomeNotice controller={noticeController}/>*/}
         <HomeInformation controller={noticeController}/>
       </div>
     );
