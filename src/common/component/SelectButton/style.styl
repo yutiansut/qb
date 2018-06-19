@@ -3,11 +3,15 @@
 .select-button
   position relative
   display inline-block
-  button
+  .default
     display block
+    width 1.2rem
+    height 0.4rem
     position relative
     font-size 0.16rem
     color $normal-black-color
+    background $normal-white-color
+    border none
     letter-spacing 0.0006rem
     text-align justify
     opacity 0.6
@@ -20,7 +24,7 @@
       width .09rem
       height .09rem
       opacity 0.6
-      border .02rem solid $normal-black-color
+      border .002rem solid $normal-black-color
       border-bottom none
       border-right none
       _rotate(45deg)
@@ -48,12 +52,15 @@
     background $bg-dark-color
     border-radius (.02rem)
     cursor pointer
+    &:hover
+      background $main-color
+      color $normal-white-color
     &::after
       position absolute
       content ''
-      bottom .15rem
+      bottom .12rem
       right .1rem
-      border-bottom .06rem solid $dark-font-color
+      border-bottom .06rem solid $normal-gray-color
       border-left .055rem solid transparent
       border-right .055rem solid transparent
       border-top none
@@ -64,7 +71,7 @@
       content ''
       bottom .05rem
       right .1rem
-      border-top .06rem solid $dark-font-color
+      border-top .06rem solid $normal-gray-color
       border-bottom none
       border-left .055rem solid transparent
       border-right .055rem solid transparent

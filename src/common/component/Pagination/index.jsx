@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Button from "../Button/";
 import "./style.styl";
- /*  
+/*  
   currentPage	当前页码，默认为1
   total	数据总条数
   pageSize 每页数据条数
@@ -19,7 +20,7 @@ export default class Pagination extends Component {
   }
   list(totalPage, currentPage) {
     if (totalPage < 7) {
-      return Array.from({ length: totalPage }, (item, index) => index+1);
+      return Array.from({ length: totalPage }, (item, index) => index + 1);
     }
     if (currentPage <= 4) {
       return [1, 2, 3, 4, 5, "...", totalPage];
@@ -53,16 +54,15 @@ export default class Pagination extends Component {
   }
 
   render() {
-    let {
-      total,
-      showTotal,
-      showQuickJumper,
-      pageSize
-    } = this.props;
+    let { total, showTotal, showQuickJumper, pageSize } = this.props;
     let currentPage = this.state.currentPage;
     return (
       <div className="pagination-wrap">
-        {showTotal && <p className="total">共 <span>{total}</span> 条</p>}
+        {showTotal && (
+          <p className="total">
+            共 <span>{total}</span> 条
+          </p>
+        )}
         <ul className="pagination">
           <li
             className={`last ${currentPage === 1 ? "disable" : ""}`}
@@ -70,9 +70,7 @@ export default class Pagination extends Component {
               if (currentPage - 1 < 1) return;
               this.setState({ currentPage: currentPage - 1 });
             }}
-          >
-            {"<"}
-          </li>
+          />
           {this.list(this.totalPage, currentPage).map((item, index) => {
             return (
               <li
@@ -97,9 +95,7 @@ export default class Pagination extends Component {
               if (currentPage + 1 > this.totalPage) return;
               this.setState({ currentPage: currentPage + 1 });
             }}
-          >
-            {">"}
-          </li>
+          />
         </ul>
         {showQuickJumper && (
           <p className="jump">
@@ -116,15 +112,25 @@ export default class Pagination extends Component {
                 }
                 this.refs.input.value = value;
               }}
-              onKeyDown = {(e)=>{
-                if(e.nativeEvent.keyCode === 13){
+              onKeyDown={e => {
+                if (e.nativeEvent.keyCode === 13) {
                   this.setState({
                     currentPage: Number(this.refs.input.value)
                   });
-                  this.refs.input.blur()
+                  this.refs.input.blur();
                 }
               }}
             />页
+            <Button
+              title="跳转"
+              type="base"
+              onClick={() => {
+                this.setState({
+                  currentPage: Number(this.refs.input.value)
+                });
+                this.refs.input.blur();
+              }}
+            />
           </p>
         )}
       </div>

@@ -1,4 +1,5 @@
-@import '../../base.styl'
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
 .wrap
   position fixed
   top 0
@@ -15,82 +16,85 @@
     -moz-transform translateX(-50%) translateY(-50%)
     -webkit-transform translateX(-50%) translateY(-50%)
     -o-transform translateX(-50%) translateY(-50%)
-    background #FFFFFF
-    border 1px solid #D3DCE6;
-    box-shadow 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04)
-    border-radius 2px
+    background $normal-white-color
+    border 0.01rem solid #D3DCE6;
+    box-shadow 0 0.02rem 0.04rem 0 rgba(0,0,0,0.12), 0 0 0.06rem 0 rgba(0,0,0,0.04)
+    border-radius 0.02rem
     &.default, &.confirm, &.custom
-      width 390px
-      padding 20px 20px 16px 20px
+      width 3.9rem
+      padding 0.2rem 0.2rem 0.16rem 0.2rem
     &.default  
-      min-height 172px
+      min-height 1.72rem
       h5
-        margin-bottom 30px
+        margin-bottom 0.3rem
+        img
+          width 0.13rem
+          height 0.13rem
       p
-        min-height 38px
-        color #475669
-        margin-bottom 20px
+        min-height 0.38rem
+        color $normal-black-color
+        margin-bottom 0.2rem
       .button
-        width 74px
-        height 36px
+        width 0.74rem
+        height 0.36rem
     &.confirm, &.custom 
-      min-height 202px
+      min-height 2.02rem
       h5
-        margin-bottom 30px
+        margin-bottom 0.3rem
       p
-        color #475669
-        min-height 62px
-        margin-bottom 20px
-        line-height 40px
+        color $normal-black-color
+        min-height 0.62rem
+        margin-bottom 0.2rem
+        line-height 0.4rem
         img
           float left
-          width 40px
-          height 40px
-          margin-right 14px
+          width 0.4rem
+          height 0.4rem
+          margin-right 0.14rem
       .button
-        width 64px
-        height 36px
+        width 0.64rem
+        height 0.36rem
     &.base
-      width 320px
-      padding 20px
+      width 3.2rem
+      padding 0.2rem
       h5
-        margin-bottom 10px
+        margin-bottom 0.1rem
       p
-        color #8492A6
+        color $dark-font-color
         letter-spacing 0
-        line-height 21px
+        line-height 0.21rem
     &.tip1,&.tip2,&.tip3,&.tip4,
       position relative
-      width 330px
-      padding 20px
-      padding 20px 20px 20px 74px
+      width 0.33rem
+      padding 0.2rem
+      padding 0.2rem 0.2rem 0.2rem 0.74rem
       h5
-        margin-bottom 10px
+        margin-bottom 0.1rem
       .img
         position absolute
-        left 20px
-        top 24px
-        width 40px
-        height 40px
+        left 0.2rem
+        top 0.24rem
+        width 0.4rem
+        height 0.4rem
       p
-        font-size 14px
-        color #8492A6
+        font-size 0.14rem
+        color $dark-font-color
         letter-spacing 0
-        line-height 21px
+        line-height 0.21rem
     h5
-      font-size 16px
-      color #1F2D3D
+      font-size 0.16rem
+      color $normal-black-color
       letter-spacing 0
-      line-height 16px
+      line-height 0.16rem
       img
         float right
-        width 12px
-        height 12px
-        width 40px
-        height 40px
+        width 0.12rem
+        height 0.12rem
+        width 0.4rem
+        height 0.4rem
         cursor pointer
         &.hide
           display none
     .button
       float right
-      margin-left 10px
+      margin-left 0.1rem

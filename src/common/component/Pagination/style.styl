@@ -7,26 +7,30 @@
     height 0.28rem
     line-height 0.28rem
     font-size 0.13rem
-    color #00262D
+    color $normal-black-color
     letter-spacing 0
     &.total
       margin-right 0.1rem
       span
-        color #475669
+        color $normal-black-color
     &.jump
       margin-left 0.1rem
       input
         width 0.34rem
         height 0.28rem
         font-size 0.13rem
-        color #475669
+        color $normal-black-color
         margin 0 0.06rem 0
-        background #FFFFFF
+        background $normal-white-colorFFF
         text-align center
-        border 0.01rem solid #D3DCE6
+        border 0.01rem solid $disale-border-color
         border-radius 0.02rem
         &:focus
-          border 0.01rem solid #0080D0
+          border 0.01rem solid $main-color
+      button
+        width 0.45rem
+        height 0.28rem
+        margin-left 0.1rem
   .pagination
     overflow hidden
     li
@@ -35,35 +39,35 @@
       height 0.28rem
       line-height 0.28rem
       font-size 0.13rem
-      color #475669
+      color $normal-black-color
       letter-spacing 0
-      border 0.01rem solid #D3DCE6
+      border 0.01rem solid $disale-border-color
       border-right none
       text-align center
       cursor pointer
       &.last
-        color #99A9BF
         border-radius 0.02rem 0 0 0.02rem
+        background url('/static/img/calendar/calendar_pre_month.svg') no-repeat center center
+        background-size 0.13rem 0.13rem
         &.disable, &.disable:hover
-          color #D3DCE6
-          background #EFF2F7
+          background-color $disale-bg-color
       &.next
-        color #99A9BF
         border-radius 0 0.02rem 0.02rem 0
+        background url('/static/img/calendar/calendar_next_month.svg') no-repeat center center
+        background-size 0.13rem 0.13rem
         &.disable, &.disable:hover
-          color #D3DCE6
-          background #EFF2F7
+          background-color $disale-bg-color
       &.page-button, &.last, &.next
         padding 0 0.09rem 0 0.09rem
         &:hover
-          color #0080D0
+          color $main-color
         &.active
-          background #0080D0
-          color #FFF
+          background $main-color
+          color $normal-white-color
           border none
         &.omit
-          color #99A9BF
+          color $normal-gray-color
           &:hover
-            color #99A9BF
+            color $normal-gray-color
       &.next
-        border-right 0.01rem solid #D3DCE6
+        border-right 0.01rem solid $disale-border-color

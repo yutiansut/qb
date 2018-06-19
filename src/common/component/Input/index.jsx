@@ -2,7 +2,7 @@ import React from "react";
 import "./style.styl";
 /*  
   placeholder, 占位文案
-  type,  默认default, 可选search1,search2,textarea
+  type,  默认default, 可选search1(带搜索按钮),search2(带搜索图标),textarea
   value, input的value值
   oriType, input类型 默认input
   onEnter,  回车事件的 handler
@@ -10,7 +10,7 @@ import "./style.styl";
   onChange, change事件的handler
   disabled, 设置disable状态
   className, 未预设宽高，自定义类名设置宽高，行高,
-  children, 类似vue插槽
+  children, 类似vue插槽,用作自定义下拉菜单
 */
 export default class Input extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export default class Input extends React.Component {
         <div
           className={`base-input-wrap ${type === "search1" ? type : ""} ${
             type === "search2" ? type : ""
-          }`}
+            }`}
         >
           {["default", "search1", "search2"].includes(type) && (
             <input
@@ -47,7 +47,7 @@ export default class Input extends React.Component {
               type={oriType}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
-              }`}
+                }`}
               disabled={disabled}
               placeholder={placeholder && placeholder}
               onKeyDown={e => {
@@ -71,7 +71,7 @@ export default class Input extends React.Component {
               type={oriType}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
-              }`}
+                }`}
               disabled={disabled}
               placeholder={placeholder && placeholder}
               onKeyDown={e => {

@@ -7,10 +7,28 @@
   text-align center
   border-radius 0.02rem
   cursor pointer
+.export
+  position relative
+  width 1.13rem
+  height 0.28rem
+  font-size 0.12rem
+  padding-right 0.24rem
+  color $normal-gray-color
+  border 0.01rem solid $line-dark
+  border-radius(0.02rem)
+  &::after
+    position absolute
+    content ''
+    right 0.03rem
+    top 0
+    width 0.24rem
+    height 0.28rem
+    background url('/static/images/daochu.png') no-repeat center center 
+    background-size 0.14rem 0.14rem
 .default 
-  border 0.01rem solid #D9E3EE
-  background-color #FFF
-  color #25272D
+  border 0.01rem solid $disale-border-color
+  background-color $normal-white-color
+  color $normal-black-color
   &.main
     color $main-color
     border-color $main-color
@@ -27,8 +45,8 @@
     color $warn-color
     border-color $warn-color
     &:active
-      color #B88A1E;
-      border-color #B88A1E;
+      color $warn-color-active;
+      border-color $warn-color-active;
   &.danger
     color $negative-color
     border-color $negative-color
@@ -37,64 +55,64 @@
       border-color $negative-color-active;
   &.disable
     border-color #E0E6ED;
-    color #C0CCDA
+    color $line-dark
     &:hover, &:active
       border-color #E0E6ED;
-      color #C0CCDA
+      color $line-dark
 .base
-  color #FFF
+  color $normal-white-color
   border none
   &.main
     background-color $main-color
     &:hover
-      color #FFF
+      color $normal-white-color
       background-color $main-color-hover
     &:active
-      color #FFF
+      color $normal-white-color
       background-color $main-color-active
   &.positive
     background-color $positive-color
     &:hover
-      color #FFF
+      color $normal-white-color
       background-color $positive-color-hover
     &:active
-      color #FFF
+      color $normal-white-color
       background-color $positive-color-active
   &.warn
     background-color $warn-color
     &:hover
-      color #FFF
+      color $normal-white-color
       background-color $warn-color-hover
     &:active
-      color #FFF
+      color $normal-white-color
       background-color $warn-color-active
   &.danger
     background-color $negative-color
     &:hover
-      color #FFF
+      color $normal-white-color
       background-color $negative-color-hover
     &:active
-      color #FFF
+      color $normal-white-color
       background-color $negative-color-active
   &.disable
-    background-color #F9FBFE
-    border 0.01rem solid #D9E3EE
-    color #D9E3EE
+    background-color $disale-bg-color
+    border 0.01rem solid $disale-border-color
+    color $disale-border-color
     &:hover, &:active
-      background-color #F9FBFE
-      border 0.01rem solid #D9E3EE
-      color #D9E3EE
+      background-color $disale-bg-color
+      border 0.01rem solid $disale-border-color
+      color $disale-border-color
 .back1
   background-color transparent
-  border 0.01rem solid #1F2D3D
-  color #1F2D3D
+  border 0.01rem solid $exchange-color
+  color $exchange-color
   &:hover
-    background-color #1F2D3D
-    color #FFF
+    background-color $exchange-color
+    color $normal-white-color
 .back2
   background-color transparent
-  border 0.01rem solid #FFF
-  color #FFF
+  border 0.01rem solid $normal-white-color
+  color $normal-white-color
   &:hover
-    background-color #FFF
-    color #1F2D3D
+    background-color $normal-white-color
+    color $exchange-color

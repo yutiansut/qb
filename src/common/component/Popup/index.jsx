@@ -19,7 +19,7 @@ export default class Popup extends React.Component {
     this.iconArr = {
       succeed: "/static/images/succeed.svg",
       warning: "/static/images/warning.svg",
-      wrong:   "/static/images/wrong.svg",
+      wrong: "/static/images/wrong.svg",
       message: "/static/images/message.svg",
     }
   }
@@ -96,7 +96,7 @@ export default class Popup extends React.Component {
             {title}
             {closeButton && (
               <img
-                src=""
+                src="/static/img/guanbi_hei.svg"
                 alt=""
                 onClick={() => {
                   clearTimeout(this.timer);
@@ -112,7 +112,7 @@ export default class Popup extends React.Component {
                   type === "confirm"
                     ? "/static/images/warning.svg"
                     : this.iconArr[icon]
-                }`}
+                  }`}
                 alt=""
               />
             )}
