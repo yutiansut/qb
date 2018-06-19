@@ -1,0 +1,78 @@
+@import "../../common/css/variable.styl"
+
+.login-wrap
+  width 5rem
+  margin 0 auto
+  .hide
+    display none
+  h1
+    padding-bottom .14rem
+    border-bottom 1px solid $line-light
+    margin-bottom .2rem
+    span
+      padding .1rem .15rem
+      color $main-color
+      font-size .16rem
+      cursor pointer
+      &.active
+        color #FFF
+        background $main-color
+        border-radius (.04rem .04rem 0 0)
+  ul
+    margin-bottom .25rem
+    li
+      width 5rem
+      height .5rem
+      margin-bottom .2rem
+      input
+        width 5rem
+        height .5rem
+        border 1px solid $line-light
+      .login-btn
+        width 5rem
+        height .5rem
+        background $main-color
+        color $normal-white-color
+    .verify-li
+      height .35rem
+      background $main-color
+    .send-code-li
+      .base-input-wrap
+        float left
+        input
+          width 3rem
+          border-right none
+          vertical-align top
+          border-radius (.02rem 0 0 .02rem)
+      .send-code-btn
+        float left
+        width 2rem
+        height .5rem
+        background $line-light
+        border none
+        border-radius (0 .02rem .02rem 0)
+    .pass-li
+      position relative
+      .base-input-wrap
+        input
+          padding-right .9rem
+      span
+        position absolute
+        top 50%
+        right .1rem
+        transform translateY(-50%)
+        cursor pointer
+        a
+         color $main-color
+        &:before
+          position absolute
+          top -.08rem
+          left -.1rem
+          width .01rem
+          height .3rem
+          line-height .3rem
+          content ''
+          background-color #999
+
+
+

@@ -18,8 +18,8 @@ export default class Home extends exchangeViewBase {
 
   render() {
     return (
-      <div className="inner">
-        {/*<HomeBanner controller={noticeController}/>*/}
+      <div>
+        <HomeBanner controller={noticeController}/>
         {/*<HomeNotice controller={noticeController}/>*/}
         <HomeInformation controller={noticeController}/>
       </div>

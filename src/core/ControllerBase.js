@@ -51,6 +51,19 @@ export default class ControllerBase {
     this.Loop[key].start()
   }
 
+  /**
+   * 轮播方法
+   */
+  // 　swiper(key, state, view) {
+  //   this.Loop[key].clear()
+  //   this.Loop[key].setDelayTime(1000)
+  //   this.Loop[key].set(async ()=>{
+  //     let obj = {};
+  //     obj[state] = view.state[state]-1;
+  //     view.setState(obj);
+  //   }, 1000);
+  //   this.Loop[key].start()
+  // }
 
   /**
    * 从某一数组中按某一规则进行筛选

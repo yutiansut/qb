@@ -15,19 +15,23 @@ import ConfigController from "./class/config/ConfigController";
 import TestAppController from "./TestAppController";
 import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
+import LoginController from "./class/login/LoginController";
 
 
 const configController = new ConfigController();
 const testAppController = new TestAppController();
 const assetController = new AssetController();
 const userController = new UserController();
+const loginController = new LoginController();
 
 testAppController.configController = configController;
 
 
 import UserInfo from './components/user/UserCenter.jsx'
 import Header from './components/home/children/header.jsx'
+import LoginCon from './components/login/Login.jsx'
 import Home from './components/home/Home.jsx'
+import ForgetPassCon from "./components/login/ForgetPass.jsx";
 
 
 
@@ -91,6 +95,14 @@ const User = ({match}) => {
   return <UserInfo controller={userController} match={match}/>
 };
 
+const Loign = ({match}) => {
+  return <LoginCon controller={loginController} match={match}/>
+};
+
+const ForgetPass = ({match}) => {
+  return <ForgetPassCon controller={loginController} match={match}/>
+};
+
 const navArray = [
   {label: '首页', to: '/home', select: false, linkUser: false},
   // {label:'币币交易页', to:'/home', select: false, linkUser:false},
@@ -114,14 +126,14 @@ export default class App extends Component {
             {/*{navList}*/}
             <Header/>
             {/*</ul>*/}
-
             <hr/>
-
             <Route exact path="/home" component={Home} />
+            <Route path="/login" component={Loign} />
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
             <Route path="/wallet" component={Asset} />
             <Route path="/user" component={User} />
+            <Route path="/findPass" component={ForgetPass} />
           </div>
         </Router>
       </div>

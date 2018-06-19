@@ -152,7 +152,8 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl">
               <li>时区</li>
               <li>
-                <input type="text" placeholder="时区"/>
+                {/*<input type="text" placeholder="时区"/>*/}
+                <Select title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />
                 <Button title="保存" className="time-btn"/>
               </li>
             </ul>

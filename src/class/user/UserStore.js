@@ -23,7 +23,7 @@ export default class UserStore extends ExchangeStoreBase {
         fund_type: 2, // 修改资金密码验证
         notice_type: 2, // 通知设置 1 邮箱 2短信
         first_name: "", // 姓
-        last_name: "", // 名
+        lastame: "", // 名
         id_card_front: null, // 身份证正面照
         id_card_back: null, // 身份证反面照
         id_card_inhand: null, // 身份证手持照
@@ -86,4 +86,30 @@ export default class UserStore extends ExchangeStoreBase {
       }
     }
   }
+}
+
+let a = {
+  recent_info: [ // 近期记录
+    {
+      catalog_name: "登录日志",
+      detail: "Signin",
+      ip: "192.168.113.101",
+      ip_addr: "-",
+      time: 1529047636
+    },
+    {
+      catalog_name: "登录日志",
+      detail: "Signin",
+      ip: "192.168.113.101",
+      ip_addr: "-",
+      time: 1529047636
+    },
+    {
+      catalog_name: "登录日志",
+      detail: "Signin",
+      ip: "192.168.113.101",
+      ip_addr: "-",
+      time: 1529047636
+    }
+  ],
 }

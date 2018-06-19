@@ -18,7 +18,8 @@ const navArray = [
   // {label: '币币交易页', to: '/home', select: false, linkUser: false},
   {label: '用户', to: '/user', select: false, linkUser: false},
   {label: '关于', to: '/about', select: false, linkUser: false},
-  {label: '主题列表', to: '/topics', select: false, linkUser: false}
+  {label: '主题列表', to: '/topics', select: false, linkUser: false},
+  {label: '登录／注册', to: '/login', select: false, linkUser: false},
 ];
 
 

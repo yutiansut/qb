@@ -9,8 +9,15 @@ export default class HomeInformation extends exchangeViewBase {
 
   render() {
     return (
-      <div className="inner">
-        jlkdlkfslfdl
+      <div className="inner information-wrap">
+        <h1>
+          <span>资讯概览</span>
+          <b>查看更多</b>
+        </h1>
+        <ul>
+          <li></li>
+
+        </ul>
       </div>
     );
   }

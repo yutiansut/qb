@@ -23,5 +23,6 @@ export default {
   topCurrencyRoll: {},
   noticeRoll: {},
   countDown: {},
-  verifyCountDown: {}
+  verifyCountDown: {},
+  swiper: {}
 }
