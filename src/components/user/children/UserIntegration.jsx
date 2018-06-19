@@ -20,18 +20,23 @@ export default class userIntegration extends exchangeViewBase {
     let obj = this.checkNum(this.state.user_info.score)
     console.log(3333, this.state, obj)
     this.state = Object.assign(this.state, {
-      scoreEnd: obj.checkEnd,
-      scoreStart: obj.checkStart,
-      scoreIndex: obj.checkIndex
+      scoreEnd: obj && obj.checkEnd,
+      scoreStart: obj && obj.checkStart,
+      scoreIndex: obj && obj.checkIndex
     })
     console.log(6667788787, this.state)
-    this.test = this.test.bind(this)
   }
 
   checkNum(num) {
     let scoreArr = [0, 10000, 50000, 100000, 200000, 500000], sum = 0, index = 0, start = 0, end = 0;
     if(!(scoreArr.length > 0)){
       return;
+    }
+    if (num > 500000) {
+      index = 6
+      start = scoreArr[5]
+      end = num
+      return {checkStart: start, checkEnd: end, checkIndex: index}
     }
     for (let i = 0; i < scoreArr.length; i++) {
       sum += scoreArr[i];
@@ -44,7 +49,7 @@ export default class userIntegration extends exchangeViewBase {
     }
   }
   componentWillMount() {
-
+    // console.log(2222, 1.2 * ${this.state.scoreIndex - 1}rem + ((${this.state.user_info.score} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2)
     // super.componentWillMount();
     // console.log('testApp componentWillMount')
   }
@@ -57,17 +62,6 @@ export default class userIntegration extends exchangeViewBase {
 
   componentWillUpdate(...parmas) {
     // console.log('testApp componentWillUpdate', ...parmas)
-  }
-
-  test() {
-    let obj = this.checkNum(this.state.user_info.score)
-    console.log('test', 3333, this.state, obj)
-    this.setState({
-      scoreEnd: obj.checkEnd,
-      scoreStart: obj.checkStart,
-      scoreIndex: obj.checkIndex
-    })
-    console.log('test', 6667788787, this.state)
   }
 
   render() {
@@ -106,8 +100,8 @@ export default class userIntegration extends exchangeViewBase {
               <li>MVP</li>
             </ul>
             <div className="progress-line">
-              <span onClick={this.test}>{this.state.user_info.score}</span>
-              {/*<p style={{width: `calc(120 * ${this.state.scoreIndex} + (${this.state.scoreEnd} / 120) * (${this.state.user_info.score} - ${this.state.scoreStart})rem`}}></p>*/}
+              <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.user_info.score} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.user_info.score}</span>
+              <p style={{width: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.user_info.score} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
             </div>
           </div>
         </div>

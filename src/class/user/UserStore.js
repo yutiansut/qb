@@ -8,20 +8,20 @@ export default class UserStore extends ExchangeStoreBase {
       user_info: { // 用户信息
         uid: 12345677788,
         name: 'aaaa',
-        phone: 12345678099, // 没有为空
+        phone: '', // 没有为空
         email: '', // 没有为空
         grade: 1, // 用户等级
-        score: 2000, // 等级积分
+        score: 5000, // 等级积分
         password: false, // 是否设置登录密码
         fundpass: false, // 是否设置资金密码
         verify: 0, // 是否认证:0未认证;1认证中;2已通过;3失败
         verify_type: 0, // 认证形式:0 身份证 1 护照 2 未认证
         id_card: "", // 身份证号码
         passport: "", // 护照
-        login_type: 3, // 登录验证 0 谷歌 1 绑定 2 短信 3 无
+        login_type: 3, // 登录验证 0 谷歌 1 邮箱 2 短信 3 无
         cash_type: 2, // 提现验证
         fund_type: 2, // 修改资金密码验证
-        notice_type: 2, // 通知设置
+        notice_type: 2, // 通知设置 1 邮箱 2短信
         first_name: "", // 姓
         last_name: "", // 名
         id_card_front: null, // 身份证正面照

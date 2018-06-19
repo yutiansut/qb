@@ -4,55 +4,45 @@ import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import "../stylus/passPopup.styl"
 
-
+const popupTypeList = [
+  {title: '绑定邮箱', numTitle: '邮箱', numInput: '请输入邮箱账号', verifyTitle: '邮箱', verifyInput: '请输入邮箱验证码'},
+  {title: '绑定手机', numTitle: '手机号码', numInput: '请输入手机号', verifyTitle: '手机号', verifyInput: '请输入手机号验证码'},
+  {title: '设置密码', numTitle: '手机号码', numInput: '请输入手机号', verifyTitle: '手机号', verifyInput: '请输入手机号验证码'},
+  {title: '设置资金密码', numTitle: '新密码', numInput: '请输入新密码', numTitle2: '再次输入密码', numInput2: '请再次输入密码', verifyTitle: '手机验证码', verifyInput: '请输入手机号验证码'},
+]
 
 export default class SetPassPopup extends exchangeViewBase {
   constructor(props) {
     super(props);
-    // const {controller} = props
-    // //绑定view
-    // controller.setView(this)
-    // //初始化数据，数据来源即store里面的state
-    // this.state = controller.initState
-    // this.state = Object.assign(this.state, controller.initState);
-    //绑定方法
-
   }
-  componentWillMount() {
-    // super.componentWillMount();
-    console.log('testApp componentWillMount')
-  }
-
-  componentDidMount() {
-    // super.componentDidMount();
-    console.log('testApp componenDidMount')
-  }
-
-
 
   render() {
     return (
       <div className="pass-wrap" style={{display: this.props.isSet}}>
         <div className="pass-info">
           <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.changeSetPopup('none')}}/>
-          <h1>绑定邮箱</h1>
+          <h1>{this.props.isType && popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>
               <li>
-                <p>邮箱／手机号码</p>
-                <input type="text" placeholder="请输入邮箱／手机号"/>
+                <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle}</p>
+                <input type="text" placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput}/>
+              </li>
+              <li className={this.props.isType === 4 ? '' : 'hide'}>
+                <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle2}</p>
+                <input type="text" placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput2}/>
               </li>
               <li>
                 <p>图形验证码</p>
                 <div>
-                  <input type="text" placeholder="请输入邮箱／手机号"/>
+                  <input type="text" placeholder="请输入右侧图形验证码"/>
                   <Button title="dddd" className="picture-btn btn"/>
                 </div>
               </li>
               <li>
-                <p>邮箱／手机验证码</p>
+                <p>{this.props.isType && popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div>
-                  <input type="text" placeholder="请输入邮箱／手机验证码"/>
+                  <input type="text" placeholder={this.props.isType && popupTypeList[this.props.isType - 1].verifyInput}/>
                   <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={this.props.getVerify}/>
                 </div>
               </li>

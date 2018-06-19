@@ -1,4 +1,4 @@
-export default {
+  export default {
   /**
    * 使用方法
    *  1.在ProxyConfig配置好相关参数

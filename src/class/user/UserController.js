@@ -15,12 +15,12 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async getVerify() {
+    if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
     // console.log(this)
     // console.log(this.store.Proxy)
     // console.log(this.view)
     // console.log(this.view.state.count)
     // let data = await this.store.Proxy.topCurrency()
-    // this.props.data.verifyNum
     this.view.setState({verifyNum: 5})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
     console.log(6789,this.store.state.verifyNum, this.view.state.verifyNum)

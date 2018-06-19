@@ -1,6 +1,8 @@
 @import "../../../common/css/variable.styl"
 
 .identify-wrap
+  .hide
+    display none
   input
     width 2.06rem
     height .4rem
@@ -10,8 +12,13 @@
     border-radius (.02rem)
     vertical-align bottom
   .identify-result
-    padding .16rem 0 .32rem
+    padding .16rem 0 .32rem 1.5rem
     border-bottom 1px solid $line-light
+    img
+      width .44rem
+      height .44rem
+      margin-right .1rem
+      vertical-align middle
   .name-identify
     padding .47rem 0 .44rem
     border-bottom 1px solid $line-light
@@ -25,13 +32,20 @@
       margin 0 .44rem .44rem 0
       li:first-child
         margin-bottom .18rem
-    b
-      display block
-      margin-bottom .32rem
-    p
-      margin-bottom .18rem
-      i
-        margin-right .44rem
+    dl
+      dt
+        margin-bottom .32rem
+      dd
+        float left
+        width 1.05rem
+        margin-bottom .18rem
+        cursor pointer
+        img
+          width 0.14rem
+          height 0.14rem
+          margin-right .1rem
+          vertical-align top
+
     .id-input
       width 4.56rem
 
@@ -47,6 +61,7 @@
       width .12rem
       height .12rem
       margin-right .08rem
+      vertical-align top
     h3
       margin-bottom .24rem
       fz11()
@@ -62,17 +77,48 @@
     dl:nth-of-type(2)
       dd
         float left
-        &:nth-of-type(1)
-          margin-right .44rem
+        width 1.05rem
+        margin-bottom .18rem
+        cursor pointer
+        img
+          width 0.14rem
+          height 0.14rem
+          margin-right .1rem
+          vertical-align top
 
     dl:nth-of-type(3)
       dd
         float left
+        position relative
+        width 1.9rem
+        height 1.3rem
         text-align center
+        cursor pointer
+        &:nth-of-type(2)
+          margin 0 .2rem 0 .2rem
         img
           width 1.9rem
           height 1.3rem
-          margin-bottom .1rem
-        &:nth-of-type(2)
-          margin 0 .2rem 0 .2rem
+          vertical-align middle
+        .add-img
+          position absolute
+          top 50%
+          left 50%
+          transform translateX(-50%) translateY(-50%)
+          width .44rem
+          height .44rem
+          z-index 2
+        p
+          margin-top .1rem
+        div
+          position absolute
+          top 0
+          left 0
+          width 100%
+          height 100%
+          input
+            width 100%
+            height 100%
+            opacity: 1
+
 

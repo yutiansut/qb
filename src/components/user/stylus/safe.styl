@@ -6,8 +6,6 @@
   .model-div
     padding .44rem 0 0
     border-bottom 1px solid $line-light
-    &:last-child
-      border-bottom none
   table
     width 7.79rem
     margin-bottom .2rem
@@ -72,6 +70,7 @@
     padding-bottom .44rem
     color $main-color
     padding-left 1.5rem
+    cursor pointer
 
   .time
     ul
@@ -79,10 +78,18 @@
       li:first-child
         color $normal-black-color
         margin-bottom .18rem
+      input
+        width 4.56rem
+        height .4rem
+        padding-left .1rem
+        margin-right .2rem
+        background $main-bg-active
+        border 1px solid $line-light
+        border-radius (.02rem)
+        vertical-align bottom
     .time-btn
       width .54rem
       height .4rem
-      opacity .5
       background $main-color
       color #FFF
       border-radius (.02rem)
@@ -116,6 +123,7 @@
         width 4.56rem
         height .4rem
         padding-left .1rem
+        margin-right .2rem
         background $main-bg-active
         border 1px solid $line-light
         border-radius (.02rem)
@@ -123,11 +131,9 @@
       .name-btn
         width .54rem
         height .4rem
-        margin-left -.02rem
-        opacity .5
         background $main-color
         color $normal-white-color
-        border-radius (0 .02rem .02rem 0)
+        border-radius (.02rem)
         border none
     span
       display block
@@ -139,10 +145,10 @@
       color $normal-gray-color
       line-height .3rem
 
-  .notify
+  .login-device
     p
       margin-bottom .44rem
-    .notify-btn
+    .login-device-btn
       width 2.5rem
       height .4rem
       background $main-color
@@ -150,3 +156,6 @@
       border-radius (.02rem)
       margin-bottom .44rem
       border none
+
+  .record
+    border-bottom none
