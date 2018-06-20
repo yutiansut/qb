@@ -33,21 +33,35 @@ export default class AssetStore extends ExchangeStoreBase {
           lock: '0.21136',//冻结
           tobtc: '0.21136',//btc估值
           codename: "Bitcoin"//全称
-        }
+        },
+        {
+          currency: "EOS",//币种
+          avail: '0.0',//可用
+          lock: '0.0',//冻结
+          tobtc: '0.0',//btc估值
+          codename: "Bitcoin"//全称
+        },
+        {
+          currency: "BCH",//币种
+          avail: '0.0005',//可用
+          lock: '0.0005',//冻结
+          tobtc: '0.0005',//btc估值
+          codename: "Bitcoin"//全称
+        },
       ],
 
 
       // 充币信息
-      wallet_dict:{
-        curency:'btc', //币种
+      wallet_dict: {
+        curency: 'btc', //币种
         pay_confirms: 6,//所需网络确认个数
-        addr:"mvbwXwdWXKNtvLdc4cseHcQDxKVzWGeAoN",//充值地址
-        amount:'10.643', //总额
-        avail:'5.0', //可用
+        addr: "mvbwXwdWXKNtvLdc4cseHcQDxKVzWGeAoN",//充值地址
+        amount: '10.643', //总额
+        avail: '5.0', //可用
         lock: '5.643'// 冻结
       },
       //币种列表
-      wallet_list:[
+      wallet_list: [
         "usdt",
         "eth",
         "bch",
@@ -55,8 +69,8 @@ export default class AssetStore extends ExchangeStoreBase {
         "btc"
       ],
       //充币记录
-      charge_history:{
-        total:'50',//数据总条数
+      charge_history: {
+        total: '50',//数据总条数
         cur_page: 1, //当前页数，
         page_size: 10,
         list: [
@@ -93,7 +107,7 @@ export default class AssetStore extends ExchangeStoreBase {
 
       //提币信息
       wallet_extract: {
-        extract_addr:[
+        extract_addr: [
           {
             name: '185356621225',
             address: 'adsgfsa233fads56f1asd2a65'

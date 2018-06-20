@@ -23,9 +23,13 @@
           border-radius(0.02rem)
           border 0.01rem solid $normal-gray-color
           cursor pointer
+
           &:hover
+            background-color $bg-dark-color
+          &:hover, &.active
             color $main-color
             border 0.01rem solid $main-color
+          &.active
             i
               border none
               background-color $main-color
@@ -37,16 +41,17 @@
             top 0.1rem
             letter-spacing 0.05px
             border 0.02rem solid $normal-gray-color
-            border-radius(50%)
+            border-radius(60%)
           b
             position absolute
             top 0.08rem
-            // left 0.02rem
-            // width 0.14rem
             height 0.12rem
             line-height 0.12rem
-            // background-color $normal-gray-color
-            // border-radius(50%)
+            &.pop-parent
+              .pop-children
+                left -0.53rem
+                width 1.15rem
+                z-index 99
       table
         width 10.12rem
         thead
@@ -60,6 +65,16 @@
             text-align justify
             line-height 0.3rem
             cursor pointer
+            &.lock
+              .pop-parent
+                top 0.01rem
+                .pop-children
+                  left -0.75rem
+                  // top 0.02rem
+                  width 2.45rem
+                  z-index 99
+                  &::before
+                    left 33%
             &.currency
               padding-left 0.4rem
             &.handle
@@ -68,6 +83,7 @@
             .img
               position relative
               top 0.025rem
+              left 0.025rem
               width 0.15rem
               height 0.15rem
         tbody

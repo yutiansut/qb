@@ -36,7 +36,6 @@ export default class AssetManage extends exchangeViewBase {
     // this.getAssets()
     // this.getWallet();
   }
-
   componentDidMount() { }
 
   componentWillUpdate() { }
