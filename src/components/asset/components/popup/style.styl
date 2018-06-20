@@ -18,7 +18,7 @@
       &:hover
         color $main-color-hover
       &:active
-        color $main-color-active 
+        color $main-color-active
     .asset-popup-content
       position relative
       .close
@@ -58,12 +58,25 @@
           color $normal-black-color
           letter-spacing 0
           span
+            position relative
             float right
+            height 0.2rem
+            padding-left 0.22rem
+            line-height 0.2rem
             font-size 0.15rem
             color $main-color
             letter-spacing 0
             cursor pointer
-        table
+            &::before
+              position absolute
+              width 0.16rem
+              height 0.2rem
+              content ''
+              top 0
+              left 0
+              background url('/static/images/add.png') no-repeat center center
+              background-size 100% 100%
+        table.list
           thead
             font-size 0.13rem
             color $normal-gray-color
@@ -74,7 +87,7 @@
                 height 0.31rem
                 &.name
                   width 1.79rem
-                &.address
+                &.base3-address
                   width 3.8rem
           tbody
             tr
@@ -97,7 +110,7 @@
                     height 0.34rem
                   button:first-child
                     margin-right 0.12rem
-              &.content
+              &.base3-content
                 border-bottom 0.01rem solid $line-light
                 &:last-child
                   border-bottom 0
@@ -112,5 +125,5 @@
                   width 0.54rem
                   height 0.24rem
 
-                    
+
 

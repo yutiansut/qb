@@ -1,5 +1,5 @@
 @import "../../common/css/variable.styl"
-
+@import "../../common/css/base.styl"
 .view-popup-wrap
   position fixed
   top 0
@@ -23,7 +23,11 @@
       height .16rem
       margin-left 4.9rem
       cursor pointer
-    h1
+    h2
+      font-size 0.2rem
+      color $normal-black-color
+      font-weight bold
+      letter-spacing 0
       margin .04rem 0 .44rem
     div
       //width 5.04rem
@@ -33,25 +37,16 @@
         input
           width 3.74rem
           height .4rem
-          padding-left .1rem
+          border-right none
           //background $main-bg-active
           //border 1px solid $line-light
-          border-right none
-          border-radius (.02rem)
-          vertical-align bottom
+          border-radius(0.02rem 0 0 0.02rem)
       .verify-btn
         float left
         width 1.3rem
         height .4rem
-        background $main-color
-        margin-left -.02rem
-        border-radius (0 .02rem .02rem 0)
-        border none
-        color #FFF
+        border-radius(0 .02rem .02rem 0)
     .set-btn
       width 1rem
       height .4rem
-      background $main-color
       margin-left 4rem
-      border none
-      color #FFF

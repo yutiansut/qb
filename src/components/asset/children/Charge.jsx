@@ -10,7 +10,12 @@ export default class Charge extends exchangeViewBase {
     super(props);
     //绑定方法
     let { controller } = props;
-    this.state = { showSearch: false, currency: "BTC", value: "BTC" };
+    this.state = {
+      showSearch: false,
+      currency: "BTC",
+      value: "BTC",
+      showQrcode: false
+    };
     //绑定view
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
@@ -21,6 +26,12 @@ export default class Charge extends exchangeViewBase {
       charge_history
     });
     //绑定方法
+    this.hideQrcode = () => {
+      if (!this.state.showQrcode) return;
+      this.setState({
+        showQrcode: false
+      });
+    };
     this.show = () => {
       this.setState({ showSearch: true });
     };
@@ -44,10 +55,30 @@ export default class Charge extends exchangeViewBase {
     this.getChargeHistory();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    window.addEventListener("click", this.hideQrcode);
+  }
 
   componentWillUpdate(props, state, next) {}
 
+  componentWillUnmount() {
+    window.removeEventListener("click", this.hideQrcode);
+  }
+
+  // 复制到剪贴板
+  copy(el) {
+    el.select(); // 选择对象
+    try {
+      if (document.execCommand("copy", false, null)) {
+        document.execCommand("Copy");
+        alert("已复制好，可贴粘。");
+      } else {
+        alert("复制失败，请手动复制");
+      }
+    } catch (err) {
+      alert("复制失败，请手动复制");
+    }
+  }
   render() {
     let { amount, avail, lock, addr, pay_confirms } = this.state.wallet_dict;
     let { total, cur_page, page_size, list } = this.state.charge_history;
@@ -55,25 +86,39 @@ export default class Charge extends exchangeViewBase {
       this.state.wallet_list,
       this.state.value.toLowerCase()
     );
-    return <div className="charge">
+    return (
+      <div className="charge">
         <h3>充币-{this.state.currency}</h3>
         <div className="select">
           <div className="search clearfix">
             <span className="title">选择币种</span>
             <div className="currency-asset">
               <div className="input">
-                <Input type="search1" placeholder="请输入币种关键字" value={this.state.value} onInput={value => {
+                <Input
+                  type="search1"
+                  placeholder="请输入币种关键字"
+                  value={this.state.value}
+                  onInput={value => {
                     this.setState({ value: value });
-                  }} onFocus={this.show} onEnter={() => {
+                  }}
+                  onFocus={this.show}
+                  onEnter={() => {
                     this.setValue(searchArr[0].toUpperCase());
                     this.setCurrency(searchArr[0].toUpperCase());
                     this.hide();
-                  }} clickOutSide={() => {
+                  }}
+                  clickOutSide={() => {
                     this.setValue(searchArr[0].toUpperCase());
                     this.setCurrency(searchArr[0].toUpperCase());
                     this.hide();
-                  }}>
-                  {<ul className={`search-list ${this.state.showSearch && searchArr.length ? "" : "hide"}`}>
+                  }}
+                >
+                  {
+                    <ul
+                      className={`search-list ${
+                        this.state.showSearch && searchArr.length ? "" : "hide"
+                      }`}
+                    >
                       {searchArr.map((item, index) => (
                         <li
                           key={index}
@@ -86,7 +131,8 @@ export default class Charge extends exchangeViewBase {
                           {item.toUpperCase()}
                         </li>
                       ))}
-                    </ul>}
+                    </ul>
+                  }
                 </Input>
               </div>
               <ul>
@@ -114,16 +160,36 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            注意：禁止向{this.state.currency}地址充值除{this.state.currency}之外的资产，任何充入{this.state.currency}地址的非{this.state.currency}资产将不可找回。
+            注意：禁止向{this.state.currency}地址充值除{this.state.currency}之外的资产，任何充入{
+              this.state.currency
+            }地址的非{this.state.currency}资产将不可找回。
           </p>
           <div className="currency-address clearfix">
             <span className="title">充值地址</span>
-            <p>{addr}</p>
+            <input
+              ref="address"
+              value={addr}
+              readOnly="readonly"
+              onChange={() => {}}
+            />
           </div>
           <div className="handel">
-            <Button title="展示二维码" type="base" />
-            <Button title="复制到剪贴板" type="base" />
-            <div className="qrcode" />
+            <Button
+              title="展示二维码"
+              type="base"
+              onClick={e => {
+                e.nativeEvent.stopImmediatePropagation();
+                this.setState({ showQrcode: true });
+              }}
+            />
+            <Button
+              title="复制到剪贴板"
+              type="base"
+              onClick={() => {
+                this.copy(this.refs.address);
+              }}
+            />
+            <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`} />
           </div>
         </div>
         <div className="tip clearfix">
@@ -135,9 +201,8 @@ export default class Charge extends exchangeViewBase {
               </a>个网络确认才能到账
             </li>
             <li>
-              充值完成后，你可以进入 <NavLink to={`/wallet/dashboard`}>
-                资产记录
-              </NavLink> 页面跟踪进度
+              充值完成后，你可以进入{" "}
+              <NavLink to={`/wallet/dashboard`}>资产记录</NavLink> 页面跟踪进度
             </li>
           </ol>
         </div>
@@ -160,7 +225,8 @@ export default class Charge extends exchangeViewBase {
               </tr>
             </thead>
             <tbody>
-              {list.map((item, index) => <tr key={index}>
+              {list.map((item, index) => (
+                <tr key={index}>
                   <td>{item.date}</td>
                   <td>{item.currency}</td>
                   <td>{item.amount}</td>
@@ -178,16 +244,24 @@ export default class Charge extends exchangeViewBase {
                           : "未通过"}
                     </span>
                   </td>
-                </tr>)}
+                </tr>
+              ))}
             </tbody>
           </table>
           <div className="pagina">
-            <Pagination total={total} pageSize={page_size} showTotal={true} showQuickJumper={true} currentPage={cur_page} />
+            <Pagination
+              total={total}
+              pageSize={page_size}
+              showTotal={true}
+              showQuickJumper={true}
+              currentPage={cur_page}
+            />
           </div>
           <p className="more">
             <NavLink to={`/wallet/dashboard`}>查看全部→</NavLink>
           </p>
         </div>
-      </div>;
+      </div>
+    );
   }
 }

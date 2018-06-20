@@ -114,7 +114,7 @@ export default class AssetStore extends ExchangeStoreBase {
           },
           {
             name: '185356621225',
-            address: 'adsgfsa233fads56f1asd2a65'
+            address: 'adssadffdsfhjbgnrtyugfhjgh65'
           }
         ],//提现地址
         currency: 'btc', //币种
