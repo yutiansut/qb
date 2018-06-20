@@ -30,6 +30,9 @@
           width  1.56rem
         span
           color $main-color
+      .basic-popup
+        cursor pointer
+        color $main-color
 
   .change-pass
     ol, ul
@@ -41,6 +44,7 @@
         &:nth-child(2)
           margin-right .3rem
           color $main-color
+          cursor pointer
         &:nth-child(3)
           color $normal-gray-color
 
@@ -119,16 +123,19 @@
       color $negative-color
     div
       margin-bottom .18rem
-      input
-        width 4.56rem
-        height .4rem
-        padding-left .1rem
-        margin-right .2rem
-        background $main-bg-active
-        border 1px solid $line-light
-        border-radius (.02rem)
-        vertical-align bottom
+      .base-input-wrap
+        float left
+        input
+          width 4.56rem
+          height .4rem
+          padding-left .1rem
+          margin-right .2rem
+          //background $main-bg-active
+          //border 1px solid $line-light
+          border-radius (.02rem)
+          vertical-align bottom
       .name-btn
+        float left
         width .54rem
         height .4rem
         background $main-color

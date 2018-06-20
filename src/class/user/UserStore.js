@@ -12,7 +12,7 @@ export default class UserStore extends ExchangeStoreBase {
         email: '', // 没有为空
         grade: 1, // 用户等级
         score: 50000, // 等级积分
-        password: false, // 是否设置登录密码
+        password: true, // 是否设置登录密码
         fundpass: false, // 是否设置资金密码
         verify: 0, // 是否认证:0未认证;1认证中;2已通过;3失败
         verify_type: 0, // 认证形式:0 身份证 1 护照 2 未认证

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
+import Input from '../../../common/component/Input/index.jsx'
 import "../stylus/identify.styl"
 
 const verifyTypeArr = [
@@ -103,13 +104,15 @@ export default class userIdentity extends exchangeViewBase {
               <ul>
                 <li>姓氏</li>
                 <li>
-                  <input type="text" placeholder="输入姓氏"/>
+                  <Input placeholder="输入姓氏" />
+                  {/*<input type="text" placeholder="输入姓氏"/>*/}
                 </li>
               </ul>
               <ul>
                 <li>名字</li>
                 <li>
-                  <input type="text" placeholder="输入名字"/>
+                  <Input placeholder="输入名字" />
+                  {/*<input type="text" placeholder="输入名字"/>*/}
                 </li>
               </ul>
             </div>
@@ -121,7 +124,8 @@ export default class userIdentity extends exchangeViewBase {
                 <i>{item.name}</i>
               </dd>))}
             </dl>
-            <input type="text" placeholder={`${verifyTypeArr[0].flag ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input"/>
+            <Input placeholder={`${verifyTypeArr[0].flag ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input" />
+            {/*<input type="text" placeholder={`${verifyTypeArr[0].flag ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input"/>*/}
           </div>
         </div>
         <div className="photo-identify clearfix">

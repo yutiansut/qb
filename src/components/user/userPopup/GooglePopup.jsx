@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
+import Input from '../../../common/component/Input/index.jsx'
 import "../stylus/googlePopup.styl"
 
 
@@ -39,8 +40,9 @@ export default class GooglePopup extends exchangeViewBase {
               </li>
               <li>如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。</li>
               <li>请输入显示的验证码，开启验证功能</li>
-              <li>
-                <input type="text" placeholder="IP地址"/>
+              <li className="clearfix">
+                <Input placeholder="IP地址"/>
+                {/*<input type="text" placeholder="IP地址"/>*/}
                 <Button title="添加" className="name-btn" onClick={this.test}/>
               </li>
             </ul>

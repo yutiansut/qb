@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
+import Input from '../../../common/component/Input/index.jsx'
 import Select from '../../../common/component/SelectButton/index.jsx'
 import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
@@ -51,6 +52,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showSet: state,
       type: type
     })
+    console.log('type', this.state.type)
   }
   changeVerifyPopup(state) { // 两步验证显示
     this.setState({
@@ -108,9 +110,9 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>用户ID</li>
             <li>{this.state.user_info.name && this.state.user_info.name || ''}</li>
             <li>电子邮件</li>
-            <li onClick = {state => !this.state.user_info.email && this.changeSetPopup('block', 1)}>{this.state.user_info.email && this.state.user_info.email || '绑定邮箱'}</li>
+            <li className={`${this.state.user_info.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.user_info.email && this.changeSetPopup('block', 1)}>{this.state.user_info.email && this.state.user_info.email || '绑定邮箱'}</li>
             <li>手机号</li>
-            <li onClick = {state => !this.state.user_info.phone && this.changeSetPopup('block', 2)}>{this.state.user_info.phone && this.state.user_info.phone || '绑定手机号'}</li>
+            <li className={`${this.state.user_info.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.user_info.phone && this.changeSetPopup('block', 2)}>{this.state.user_info.phone && this.state.user_info.phone || '绑定手机号'}</li>
             <li>用户等级</li>
             <li>
               <span>VIP{this.state.user_info.grade}</span>(积分：<span>{this.state.user_info.score}</span>)
@@ -122,11 +124,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>登录密码</li>
-              <li onClick = {state => !this.state.user_info.password && this.changeSetPopup('block', 3)}>{this.state.user_info.password && '修改' || '设置'}</li>
+              <li onClick = {state => this.state.user_info.password ? this.changeSetPopup('block', 4) : this.changeSetPopup('block', 3)}>{this.state.user_info.password && '修改' || '设置'}</li>
             </ol>
             <ul className="clearfix">
               <li>资金密码</li>
-              <li onClick = {state => !this.state.user_info.fundpass && this.changeSetPopup('block', 4)}>{this.state.user_info.fundpass && '修改' || '设置'}</li>
+              <li onClick = {state => !this.state.user_info.fundpass && this.changeSetPopup('block', 5)}>{this.state.user_info.fundpass && '修改' || '设置'}</li>
               <li>设置了资金密码后，提币和提现时均需要输入，账户更安全。</li>
             </ul>
           </div>
@@ -152,8 +154,8 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl">
               <li>时区</li>
               <li>
-                {/*<input type="text" placeholder="时区"/>*/}
-                <Select title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />
+                <input type="text" placeholder="时区"/>
+                {/*<Select title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />*/}
                 <Button title="保存" className="time-btn"/>
               </li>
             </ul>
@@ -175,10 +177,10 @@ export default class userSafeCenter extends exchangeViewBase {
             <h2>IP白名单</h2>
             <div className="fl">
               <b>注：请勿添加IP会变动的网络至IP白名单（如：拨号上网）以免影响您的正常使用。</b>
-              <div>
-                <input type="text" placeholder="IP地址"/>
+              <div className="clearfix">
+                <Input placeholder="IP地址"/>
+                {/*<input type="text" placeholder="IP地址"/>*/}
                 <Button title="添加" className="name-btn" onClick={this.test}/>
-                <p>{this.state.testAaA}</p>
               </div>
               <span>例如：216.58.197.238或104.244.42.0/24</span>
               <table>
@@ -251,9 +253,17 @@ export default class userSafeCenter extends exchangeViewBase {
             </tbody>
           </table>
         </div>
-        <VerifyPopup changeVerifyPopup = {state => this.changeVerifyPopup(state)} isVerify = {this.state.showVerify} getVerify = {this.getVerify} verifyNum={this.state.verifyNum}/>
-        <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)} isGoogle = {this.state.showGoogle}/>
-        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)} isSet = {this.state.showSet} isType = {this.state.type} getVerify = {this.getVerify} verifyNum={this.state.verifyNum}/>
+        <VerifyPopup changeVerifyPopup = {state => this.changeVerifyPopup(state)}
+                     isVerify = {this.state.showVerify}
+                     getVerify = {this.getVerify}
+                     verifyNum={this.state.verifyNum}/>
+        <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)}
+                     isGoogle = {this.state.showGoogle}/>
+        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)}
+                   isSet = {this.state.showSet}
+                   isType = {this.state.type}
+                   getVerify = {this.getVerify}
+                   verifyNum = {this.state.verifyNum}/>
       </div>
     );
   }
