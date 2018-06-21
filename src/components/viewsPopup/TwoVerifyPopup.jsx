@@ -16,7 +16,8 @@ export default class TwoVerifyPopup extends exchangeViewBase {
   }
 
   render() {
-    return <div className="view-popup-wrap">
+    return (
+      <div className="view-popup-wrap">
         <div className="view-info">
           <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={this.props.onClose} />
           <h2>两步验证</h2>
@@ -31,6 +32,6 @@ export default class TwoVerifyPopup extends exchangeViewBase {
           </div>
         <Button title="确认" disable={this.state.value === '' && true } type="base" className="set-btn" />
         </div>
-      </div>;
+      </div>)
   }
 }

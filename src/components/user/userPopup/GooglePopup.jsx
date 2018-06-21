@@ -41,9 +41,8 @@ export default class GooglePopup extends exchangeViewBase {
               <li>如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。</li>
               <li>请输入显示的验证码，开启验证功能</li>
               <li className="clearfix">
-                <Input placeholder="IP地址"/>
-                {/*<input type="text" placeholder="IP地址"/>*/}
-                <Button title="添加" className="name-btn" onClick={this.test}/>
+                <Input placeholder="请输入验证码"/>
+                <Button title="确定提交" className="name-btn" onClick={this.test}/>
               </li>
             </ul>
           </div>

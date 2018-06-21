@@ -5,39 +5,43 @@ import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import "../stylus/identify.styl"
 
-const verifyTypeArr = [
-  {name: '身份证', flag: true},
-  {name: '护照', flag: false}
-];
-const photoArr = [
+let photoArr = [
   {photoList: [{imgUrl: '/static/img/user/ID.svg', name: '身份证正面照片'}, {imgUrl: '/static/img/user/ID_2.svg', name: '身份证反面照片'}, {imgUrl: '/static/img/user/ID_3.svg', name: '手持身份证照片'}]},
   {photoList: [{imgUrl: '/static/img/user/passport.svg', name: '护照正面照片'}, {imgUrl: '/static/img/user/passport_2.svg', name: '手持护照照片'}, {imgUrl: '/static/img/user/passport_3.svg', name: '住址证明'}]},
 ];
-const realNameArr = [ // 是否认证:0未认证;1认证中;2已通过;3失败
+let realNameArr = [ // 是否认证:0未认证;1已通过;2认证失败;3认证中
   {imgUrl: '/static/img/user/identity_no.png', content: '未进行证件认证'},
-  {imgUrl: '/static/img/user/identity_progress.png', content: '证件认证中'},
   {imgUrl: '/static/img/user/identity_succ.png', content: '已通过证件认证'},
-  {imgUrl: '/static/img/user/identity_err.png', content: '证件认证失败'}
+  {imgUrl: '/static/img/user/identity_err.png', content: '证件认证失败'},
+  {imgUrl: '/static/img/user/identity_progress.png', content: '证件认证中'}
 ]
 
 export default class userIdentity extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      selectIndex: 0,
-      imgUrlIndex: 0,
-      showPhotoList:['', '', ''] // 存储照片用
+      verifyTypeArr: [ // 选择类型
+        {name: '身份证'},
+        {name: '护照'}
+      ],
+      selectIndex: 0, //  选择身份证护照index
+      imgUrlIndex: 0, // 上传证件照index
+      showPhotoList:['', '', ''], // 存储照片用
+      firstNameValue: '', // 姓氏输入框
+      lastNameValue: '',
+      numberValue: ''
     }
     const {controller} = props
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
+    this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取用户认证信息
     this.selectPhoto = this.selectPhoto.bind(this)
     this.checkPhoto = this.checkPhoto.bind(this)
-    console.log(33333, this.state)
+
   }
-  getObjectURL (file) { //
+  getObjectURL (file) {
     let url = null ;
     if (window.createObjectURL!=undefined) { // basic
       url = window.createObjectURL(file) ;
@@ -69,18 +73,34 @@ export default class userIdentity extends exchangeViewBase {
   }
   selectVerifyType(index, content) { // 单选切换
     this.setState({
-      selectIndex: index,
+      selectIndex: index
     })
-    verifyTypeArr.forEach(v => {v.flag = false})
-    content.flag = true
+
+
+    // verifyTypeArr.forEach(v => {v.flag = false})
+    // content.flag = true
     console.log(123456, index)
+  }
+  firstInput(evt) {
+    this.setState({firstNameValue: evt});
+  }
+  lastInput(evt) {
+    this.setState({lastNameValue: evt});
+  }
+  numberInput(evt) {
+    this.setState({numberValue: evt});
   }
   componentWillMount() {
 
   }
 
-  componentDidMount() {
-
+  async componentDidMount() {
+    await this.getUserAuthData()
+    let verifyArr = [0, 0, 2, 1] // 0 身份证 1 护照 -> 1 身份证 3 护照
+    this.setState({
+      selectIndex: verifyArr[this.state.userAuth.type]
+    })
+    console.log('上传', photoArr[this.state.selectIndex].photoList)
   }
 
   componentWillUpdate(...parmas) {
@@ -89,12 +109,13 @@ export default class userIdentity extends exchangeViewBase {
 
 
   render() {
+    console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
         <h1>身份认证</h1>
         <div className="identify-result">
-          <img src={realNameArr[this.state.user_info.verify].imgUrl} alt="" />
-          <span>{realNameArr[this.state.user_info.verify].content}</span>
+          <img src={realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].imgUrl} alt="" />
+          <span>{realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].content}</span>
         </div>
         <div className="name-identify clearfix">
           <h2>实名认证</h2>
@@ -104,35 +125,34 @@ export default class userIdentity extends exchangeViewBase {
               <ul>
                 <li>姓氏</li>
                 <li>
-                  <Input placeholder="输入姓氏" />
-                  {/*<input type="text" placeholder="输入姓氏"/>*/}
+                  {/*this.state.userAuth.first_name*/}
+                  <Input placeholder="输入姓氏" value={this.state.firstNameValue || ''} onInput={evt => this.firstInput(evt)}/>
                 </li>
               </ul>
               <ul>
                 <li>名字</li>
                 <li>
-                  <Input placeholder="输入名字" />
-                  {/*<input type="text" placeholder="输入名字"/>*/}
+                  <Input placeholder="输入名字" value={this.state.lastNameValue || ''} onInput={evt => this.lastInput(evt)}/>
                 </li>
               </ul>
             </div>
             <dl className="clearfix">
               <dt>实名认证</dt>
-              {verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.selectVerifyType(index, item)}>
-                <img src="/static/img/checked.svg" alt="" className={`${item.flag ? '' : 'hide'}`}/>
-                <img src="/static/img/normal.svg" alt="" className={`${item.flag ? 'hide' : ''}`}/>
+              {this.state.verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.selectVerifyType(index, item)}>
+                <img src="/static/img/checked.svg" alt="" className={`${this.state.selectIndex === index ? '' : 'hide'}`}/>
+                <img src="/static/img/normal.svg" alt="" className={`${this.state.selectIndex === index ? 'hide' : ''}`}/>
                 <i>{item.name}</i>
               </dd>))}
             </dl>
-            <Input placeholder={`${verifyTypeArr[0].flag ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input" />
-            {/*<input type="text" placeholder={`${verifyTypeArr[0].flag ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input"/>*/}
+            {/*.userAuth.number*/}
+            <Input placeholder={`${this.state.selectIndex === 0 ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input"  value={this.state.numberValue || ''} onInput={evt => this.numberInput(evt)}/>
           </div>
         </div>
         <div className="photo-identify clearfix">
           <h2>照片认证</h2>
-          <div className={`${this.state.user_info.verify == 1 ? '' : 'hide'} fl`}><em>认证结果：认证中</em></div>
-          <div className={`${this.state.user_info.verify == 2 ? '' : 'hide'} fl`}><em>认证结果：已通过</em></div>
-          <div className={`${this.state.user_info.verify == 0 || this.state.user_info.verify == 3 ? '' : 'hide'} fl`}>
+          <div className={`${this.state.userAuth.state == 3 ? '' : 'hide'} fl`}><em>认证结果：认证中</em></div>
+          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>认证结果：已通过</em></div>
+          <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 2 ? '' : 'hide'} fl`}>
             <dl>
               <dt>证件要求</dt>
               <dd>1. 身份证照片：请按示例上传身份证正面与反面，脸部及字体必须清晰可见</dd>
@@ -146,7 +166,7 @@ export default class userIdentity extends exchangeViewBase {
             </dl>
             <dl className="clearfix">
               <dt>上传证件照</dt>
-              {photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
+              {photoArr[this.state.selectIndex].photoList && photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
                 <img src="/static/img/user/add.svg" alt="" className="add-img"/>
@@ -157,7 +177,10 @@ export default class userIdentity extends exchangeViewBase {
             <Button title="确认提交" className="identify-btn"/>
           </div>
         </div>
-        <div style={{display: 'none'}}><input type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} /></div>
+        {/*<div style={{display: 'none'}}><input type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} /></div>*/}
+        <form method="post" action="http://192.168.113.141/image/" style={{display: 'none'}} encType="multipart/form-data">
+          <input type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} />
+        </form>
       </div>
     );
   }
