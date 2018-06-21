@@ -91,15 +91,15 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async userInfo(){ // 获取用户信息
-    let userInfo = await this.Proxy.userInfo({"action": "user_info", "data": {"uid": 2}})
-    this.state.userInfo = userInfo.data
+    let userInfo = await this.Proxy.userInfo({"action": "user_info", "data": {"uid": 2}});
+    this.state.userInfo = userInfo.data;
     return userInfo
   }
 
   async userAuth(){ // 获取用户认证信息
-    let userAuth = await this.Proxy.userInfo({"action": "user_auth", "data": {"uid": 2}})
-    console.log("2222用户", userAuth)
-    this.state.userAuth = userAuth.data
+    let userAuth = await this.Proxy.userInfo({"action": "user_auth", "data": {"uid": 2}});
+    console.log("2222用户", userAuth);
+    this.state.userAuth = userAuth.data;
     return userAuth
   }
 }

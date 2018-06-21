@@ -23,9 +23,12 @@ const testAppController = new TestAppController();
 const assetController = new AssetController();
 const userController = new UserController();
 const loginController = new LoginController();
+const noticeController = new NoticeController();
 
 testAppController.configController = configController;
 
+noticeController.configController = configController;
+// console.log(noticeController.configController)
 
 import UserInfo from './components/user/UserCenter.jsx'
 import Header from './components/home/children/header.jsx'
@@ -33,6 +36,7 @@ import LoginCon from './components/login/Login.jsx'
 import Home from './components/home/Home.jsx'
 import Trade from './components/trade/Trade.jsx'
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
+import NoticeInfo from './components/notice/NoticeBulletin.jsx'
 
 
 
@@ -104,6 +108,10 @@ const ForgetPass = ({match}) => {
   return <ForgetPassCon controller={loginController} match={match}/>
 };
 
+const Notice = ({match}) => {
+  return <NoticeInfo controller={noticeController} match={match}/>
+};
+
 const navArray = [
   {label: '首页', to: '/home', select: false, linkUser: false},
   // {label:'币币交易页', to:'/home', select: false, linkUser:false},
@@ -136,6 +144,7 @@ export default class App extends Component {
             <Route path="/wallet" component={Asset} />
             <Route path="/user" component={User} />
             <Route path="/findPass" component={ForgetPass} />
+            <Route path="/notice" component={Notice} />
           </div>
         </Router>
       </div>

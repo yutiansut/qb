@@ -13,13 +13,9 @@ export default class NoticeController extends ExchangeControllerBase {
     return this.store.data
   }
 
-  async bannerSwiper() {
-    // console.log(this)
-    // console.log(this.store.Proxy)
-    // console.log(this.view)
-    // console.log(this.view.state.count)
-    // let data = await this.store.Proxy.topCurrency()
-    // this.swiper('swiper', 'verifyNum', this.view)
-    // console.log('轮播图')
+  get configData() {
+    console.log('ccconfig', this.configController)
+    return this.configController.initState
   }
+
 }

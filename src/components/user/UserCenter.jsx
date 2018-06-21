@@ -14,16 +14,13 @@ import UserIntegration from './children/UserIntegration.jsx' // 我的积分
 import "./stylus/user.styl"
 import exchangeViewBase from "../ExchangeViewBase";
 
-import UserController from "../../class/user/UserController";
-const userController = new UserController();
-
-
 export default class User extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const {controller} = this.props
     let match = this.props.match
     return (
       <div className="clearfix inner">
@@ -35,13 +32,13 @@ export default class User extends exchangeViewBase {
         <div className="user-content fl">
           <Switch>
             <Route path={`${match.url}/safe`} component={({match}) => (
-              <UserSafeCenter controller={userController} />
+              <UserSafeCenter controller={controller} />
               )}/>
             <Route path={`${match.url}/identity`} component={({match}) => (
-              <UserIdentity controller={userController} />
+              <UserIdentity controller={controller} />
             )}/>
             <Route path={`${match.url}/integration`} component={({match}) => (
-              <UserIntegration controller={userController} />
+              <UserIntegration controller={controller} />
             )}/>
             <Redirect to={`${match.url}/safe`} />
           </Switch>

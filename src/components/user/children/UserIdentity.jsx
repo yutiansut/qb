@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
+import UploadUrl from '../../../config/ServerConfig'
 import "../stylus/identify.styl"
 
 let photoArr = [
@@ -29,7 +30,10 @@ export default class userIdentity extends exchangeViewBase {
       showPhotoList:['', '', ''], // 存储照片用
       firstNameValue: '', // 姓氏输入框
       lastNameValue: '',
-      numberValue: ''
+      numberValue: '',
+      image1: '', // 上传照片用于存储ID
+      image2: '', // 上传照片用于存储ID
+      image3: '' // 上传照片用于存储ID
     }
     const {controller} = props
     //绑定view
@@ -39,7 +43,7 @@ export default class userIdentity extends exchangeViewBase {
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取用户认证信息
     this.selectPhoto = this.selectPhoto.bind(this)
     this.checkPhoto = this.checkPhoto.bind(this)
-
+    this.uploadInfo = controller.uploadInfo.bind(controller)
   }
   getObjectURL (file) {
     let url = null ;
@@ -52,18 +56,25 @@ export default class userIdentity extends exchangeViewBase {
     }
     return url ;
   }
-  selectPhoto() {
-    console.log('上传index', this.state.imgUrlIndex)
-    let file = this.refs.files.files[0];
-    console.log('file', file, this.getObjectURL(file))
+  async selectPhoto() { // 上传图片
+    let file = this.refs.files.files[0], uploadImg = new FormData();
     if(!file) return
     if(file && file.size > 10485760) return
     this.state.showPhotoList[this.state.imgUrlIndex] = this.getObjectURL(file);
     this.setState({
       showPhotoList: this.state.showPhotoList.concat([])
     })
-    console.log('图片地址', this.state.showPhotoList[this.state.imgUrlIndex], this.state.showPhotoList)
-
+    uploadImg.append("uploadimage", file);
+    await fetch("http://192.168.113.141/image/", {
+      method: 'Post',
+      body: uploadImg
+    }).then(res => res.json()).then(res => {
+      let imgUrl = `image${this.state.imgUrlIndex + 1}`, obj={}
+      obj[imgUrl] = res.image_id
+      this.setState(obj)
+    }).catch(msg => {
+        console.log('上传图片错误', msg)
+    })
   }
   checkPhoto(i) {
     this.setState({
@@ -75,11 +86,6 @@ export default class userIdentity extends exchangeViewBase {
     this.setState({
       selectIndex: index
     })
-
-
-    // verifyTypeArr.forEach(v => {v.flag = false})
-    // content.flag = true
-    console.log(123456, index)
   }
   firstInput(evt) {
     this.setState({firstNameValue: evt});
@@ -89,6 +95,9 @@ export default class userIdentity extends exchangeViewBase {
   }
   numberInput(evt) {
     this.setState({numberValue: evt});
+  }
+  submitInfo() { // 确认提交
+    this.uploadInfo()
   }
   componentWillMount() {
 
@@ -100,13 +109,11 @@ export default class userIdentity extends exchangeViewBase {
     this.setState({
       selectIndex: verifyArr[this.state.userAuth.type]
     })
-    console.log('上传', photoArr[this.state.selectIndex].photoList)
   }
 
   componentWillUpdate(...parmas) {
 
   }
-
 
   render() {
     console.log('用户信息2', this.state)
@@ -174,13 +181,14 @@ export default class userIdentity extends exchangeViewBase {
               </dd>))}
             </dl>
             <h3><input type="checkbox" />我承认提交的证件信息属于本人所有，不存在冒用、盗用他人证件的行为，因冒用、盗用他人证件造成的一切后果由本人承担</h3>
-            <Button title="确认提交" className="identify-btn"/>
+            <Button title="确认提交" className="identify-btn" onClick={this.submitInfo.bind(this)}/>
           </div>
         </div>
-        {/*<div style={{display: 'none'}}><input type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} /></div>*/}
-        <form method="post" action="http://192.168.113.141/image/" style={{display: 'none'}} encType="multipart/form-data">
-          <input type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} />
-        </form>
+        {/*<form method="post" action="http://192.168.113.141/image/" style={{display: 'none'}} encType="multipart/form-data" target="upImg">*/}
+        <div style={{display: 'none'}}><input name="uploadimage" type='file' ref="files" accept="image/png, image/jpeg" onChange={this.selectPhoto} /></div>
+          {/*<input type="submit" ref="filesUp" value="Upload"/>*/}
+        {/*</form>*/}
+        {/*<iframe name="upImg" frameBorder="0" width="0" height="0"></iframe>*/}
       </div>
     );
   }

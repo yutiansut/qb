@@ -1,0 +1,92 @@
+@import "../../../common/css/variable.styl"
+
+.notice-wrap
+  .notice-nav
+    width 1.58rem
+    li
+      height .6rem
+      margin-right .28rem
+      line-height .6rem
+      a
+        display block
+        width 100%
+        padding-left .24rem
+        color $normal-black-color
+        &.active
+          border-left 0.04rem solid $main-color
+          background $main-bg-active
+          color $main-color
+        &:hover
+          border-left 0.04rem solid $main-color
+          background $main-bg-active
+          color $main-color
+
+  // 资讯公告
+  .notice-content
+    padding-left .3rem
+    border-left 1px solid $line-light
+    h1
+      margin .3rem 0 .45rem
+      color $normal-black-color
+      font-size .2rem
+    .notice-wrap
+      dl
+        margin-bottom .44rem
+        dt
+          padding .16rem 0
+          border-bottom .01rem solid $line-light
+          color $normal-gray-color
+        dd
+          padding .16rem 0
+          border-bottom .01rem solid $line-light
+          &:last-of-type
+            border-bottom none
+        i, em, span
+          display inline-block
+        i
+          width 6.9rem
+          padding-left .1rem
+        em
+          width 1.5rem
+        span
+          padding-right .1rem
+      .information-wrap
+        padding-bottom .3rem
+
+  // 联系我们
+  .contact-wrap
+    ul
+      li
+        margin-bottom .28rem
+        color $main-color
+        &:first-child
+          color $normal-black-color
+
+  //  上币申请
+  .apply-wrap
+    p
+      color $normal-black-color
+      margin-bottom .28rem
+    span
+      display block
+      margin-bottom .44rem
+      color $main-color
+    dl
+      dt
+        margin-bottom .14rem
+        color $normal-black-color
+      dd
+        position relative
+        padding .08rem 0 .08rem .15rem
+        color $normal-black-color
+        &:after
+          position absolute
+          top .12rem
+          left 0
+          width .05rem
+          height .05rem
+          border-radius 50%
+          content ''
+          background $normal-black-color
+
+

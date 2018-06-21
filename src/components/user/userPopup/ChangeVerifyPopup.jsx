@@ -22,7 +22,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
 
   }
   componentWillUpdate(props, state, next) {
-    console.log(77999, this.props.isType, contentArr[this.props.isType])
+    // console.log(77999, this.props.isType, contentArr[this.props.isType])
   }
   render() {
     return (
@@ -37,7 +37,9 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
           </div>
           <div className={`${this.props.isType === 2 ? 'hide' : ''} clearfix  verify-div`}>
             <Input placeholder={this.props.isType !== 0 && contentList[2].inputP || ''}/>
-            <Button className="verify-btn"/>
+            <Button className="verify-btn"
+                    title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum}
+                    onClick={this.props.getVerify}/>
           </div>
           <Button title="确认" className="set-btn"/>
         </div>

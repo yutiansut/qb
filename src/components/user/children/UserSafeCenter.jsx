@@ -31,14 +31,18 @@ export default class userSafeCenter extends exchangeViewBase {
         {title: '登录验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}, {name: '无', flag: false}]},
         {title: '提现验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]},
         {title: '修改资金密码验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]}
-      ]
+      ],
     }
+
     const {controller} = props
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.getVerify = controller.getVerify.bind(controller)
+    this.getVerify = controller.getVerify.bind(controller) // 设置倒计时
+    this.clearVerify = controller.clearVerify.bind(controller) // 清除倒计时
+    this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
+    this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取认证信息
     this.showOther = this.showOther.bind(this)
@@ -51,8 +55,10 @@ export default class userSafeCenter extends exchangeViewBase {
   changeSetPopup(state, type) { // 设置密码显示
     this.setState({
       showSet: state,
-      type: type
+      type: type,
+      verifyNum: '获取验证码'
     })
+    this.clearVerify()
   }
   // changeVerifyPopup(state) { // 两步验证显示
   //   this.setState({
@@ -61,8 +67,10 @@ export default class userSafeCenter extends exchangeViewBase {
   // }
   changeVerifyTypePopup(state) { // 改变两步验证显示
     this.setState({
-      showChange: state
+      showChange: state,
+      verifyNum: '获取验证码'
     })
+    this.clearVerify()
   }
   showOther() { // 打开其他安全设置
     this.setState({
@@ -78,7 +86,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showGoogle: !this.state.userInfo.google_auth && index === 0 ? 'block' : 'none',
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
-      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (!this.state.userInfo.google_auth && index === 0) ? 'none' : 'block'
+      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (!this.state.userInfo.google_auth && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
     })
     // verifyList[i].contentList.forEach(v => {v.flag = false})
     // if (index === 1 && !this.state.user_info.email) {
@@ -290,9 +298,13 @@ export default class userSafeCenter extends exchangeViewBase {
                    isSet = {this.state.showSet}
                    isType = {this.state.type}
                    getVerify = {this.getVerify}
+                   setLoginPass = {this.setLoginPass}
+                   setFundPass = {this.setFundPass}
                    verifyNum = {this.state.verifyNum}/>
         <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
                            isType = {this.state.changeType}
+                           getVerify = {this.getVerify}
+                           verifyNum = {this.state.verifyNum}
                            isChange = {this.state.showChange}/>
         {/*<RemindPopup />*/}
       </div>

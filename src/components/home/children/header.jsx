@@ -21,6 +21,7 @@ const navArray = [
   {label: '关于', to: '/about', select: false, linkUser: false},
   {label: '主题列表', to: '/topics', select: false, linkUser: false},
   {label: '登录／注册', to: '/login', select: false, linkUser: false},
+  {label: '资讯公告', to: '/notice', select: false, linkUser: false},
 ];
 
 

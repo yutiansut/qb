@@ -51,6 +51,10 @@ export default class ControllerBase {
     this.Loop[key].start()
   }
 
+  countDownStop(key){
+    this.Loop[key].clear()
+  }
+
   /**
    * 轮播方法
    */

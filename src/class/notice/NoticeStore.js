@@ -5,26 +5,18 @@ export default class NoticeStore extends ExchangeStoreBase {
     super();
     this.state = {
       informationList: [
-        {
-          img_url: "",
-          time: 1529047636,
-          title: "工信部信软司称将持续推进区块链领域标准研制工作"
-        },
-        {
-          img_url: "",
-          time: 1529047636,
-          title: "工信部信软司称将持续推进区块链领域标准研制工作"
-        },
-        {
-          img_url: "",
-          time: 1529047636,
-          title: "工信部信软司称将持续推进区块链领域标准研制工作"
-        },
-        {
-          img_url: "",
-          time: 1529047636,
-          title: "工信部信软司称将持续推进区块链领域标准研制工作"
-        }
+        {title: '11111', time:46578979099},
+        {title: '11111', time:46578979099},
+        {title: '11111', time:46578979099},
+        {title: '11111', time:46578979099},
+        {title: '11111', time:46578979099}
+      ],
+      newsList: [
+        {title: '22222', time:46578979099},
+        {title: '22222', time:46578979099},
+        {title: '22222', time:46578979099},
+        {title: '22222', time:46578979099},
+        {title: '22222', time:46578979099}
       ]
     }
   }
