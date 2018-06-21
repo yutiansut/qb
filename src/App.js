@@ -16,6 +16,7 @@ import TestAppController from "./TestAppController";
 import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
 import LoginController from "./class/login/LoginController";
+import NoticeController from "./class/notice/NoticeController";
 
 
 const configController = new ConfigController();
@@ -135,7 +136,6 @@ export default class App extends Component {
             {/*{navList}*/}
             <Header/>
             {/*</ul>*/}
-            <hr/>
             <Route exact path="/home" component={Home} />
             <Route path='/trade' component={Trade} />
             <Route path="/login" component={Loign} />

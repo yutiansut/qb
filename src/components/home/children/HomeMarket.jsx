@@ -39,8 +39,8 @@ export default class HomeMarket extends ExchangeViewBase{
           )})}
           <table style={{width:'10rem'}} >
             <thead align="left">
-            {marketTableHead.map((v) => {
-              return(<th onClick={this.pairSort.bind(this,v)}>{v.name}</th>)
+            {marketTableHead.map((v, index) => {
+              return(<tr onClick={this.pairSort.bind(this,v)} key={index}><td>{v.name}</td></tr>)
             })}
             </thead>
             <tbody>
