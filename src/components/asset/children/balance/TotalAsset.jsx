@@ -17,10 +17,10 @@ export default class TotalAsset extends Component {
         <div className="item total clearfix">
           <div className="content">
             <span>总资产约:</span>
-            <b>{totalAsset.btc}</b>
+            <b>{totalAsset.valuationBTC}</b>
             {this.state.unit === "人民币" ? <span>
-                ≈ {totalAsset.cny} CNY
-              </span> : <span>≈ {totalAsset.usd} USD</span>}
+                ≈ {totalAsset.valuationCN} CNY
+              </span> : <span>≈ {totalAsset.valuationEN} USD</span>}
             <div className="select">
               <SelectButton type="main" title={this.state.unit} simple={true} valueArr={["人民币", "美元"]} onSelect={item => {
                   this.setState({ unit: item });
@@ -30,12 +30,12 @@ export default class TotalAsset extends Component {
         </div>
         <div className="item limit">
           <span>24H提币额度:</span>
-          <b>{totalAsset.limit_24H} BTC</b>
+          <b>{totalAsset.totalQuota} BTC</b>
           <NavLink to="/user/identity">提额申请</NavLink>
         </div>
         <div className="item used">
           <span>已用:</span>
-          <b>{totalAsset.limit_used} BTC</b>
+          <b>{totalAsset.availableQuota} BTC</b>
         </div>
       </div>;
   }

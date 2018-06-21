@@ -19,11 +19,17 @@ export default class Charge extends exchangeViewBase {
     //绑定view
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
-    let { wallet_dict, wallet_list, charge_history } = controller.initState;
+    let {
+      walletList,
+      chargeHistory,
+      currencyAmount,
+      coinAddress
+    } = controller.initState;
     this.state = Object.assign(this.state, {
-      wallet_dict,
-      wallet_list,
-      charge_history
+      walletList,
+      chargeHistory,
+      currencyAmount,
+      coinAddress
     });
     //绑定方法
     this.hideQrcode = () => {
@@ -44,15 +50,15 @@ export default class Charge extends exchangeViewBase {
     this.setCurrency = currency => {
       this.setState({ currency });
     };
-    this.getCharge = controller.getCharge.bind(controller);
-    this.getCurrencyList = controller.getCurrencyList.bind(controller);
-    this.getChargeHistory = controller.getChargeHistory.bind(controller);
+    this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
+    this.getCoinAddress = controller.getCoinAddress.bind(controller);
+    this.getHistory = controller.getHistory.bind(controller);
   }
 
   componentWillMount() {
-    this.getCharge();
-    this.getCurrencyList();
-    this.getChargeHistory();
+    this.getCurrencyAmount();
+    this.getCoinAddress();
+    this.getHistory();
   }
 
   componentDidMount() {
@@ -80,12 +86,16 @@ export default class Charge extends exchangeViewBase {
     }
   }
   render() {
-    let { amount, avail, lock, addr, pay_confirms } = this.state.wallet_dict;
-    let { total, cur_page, page_size, list } = this.state.charge_history;
+    let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
+    let { total, page, pageSize, orderList } = this.state.chargeHistory;
     let searchArr = this.props.controller.filter(
-      this.state.wallet_list,
+      this.state.walletList,
       this.state.value.toLowerCase()
     );
+    let address = this.state.coinAddress.filter(
+      item => item.coinName === this.state.currency
+    )[0];
+
     return (
       <div className="charge">
         <h3>充币-{this.state.currency}</h3>
@@ -139,19 +149,19 @@ export default class Charge extends exchangeViewBase {
                 <li>
                   <span>总额</span>
                   <i>
-                    {amount} {this.state.currency}
+                    {totalCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>下单冻结</span>
                   <i>
-                    {lock} {this.state.currency}
+                    {frozenCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>可用余额</span>
                   <i>
-                    {avail} {this.state.currency}
+                    {availableCount} {this.state.currency}
                   </i>
                 </li>
               </ul>
@@ -168,7 +178,7 @@ export default class Charge extends exchangeViewBase {
             <span className="title">充值地址</span>
             <input
               ref="address"
-              value={addr}
+              value={address ? address.coinAddress : ""}
               readOnly="readonly"
               onChange={() => {}}
             />
@@ -196,9 +206,8 @@ export default class Charge extends exchangeViewBase {
           <span className="title">温馨提示</span>
           <ol>
             <li>
-              使用{this.state.currency}地址充值需要<a href="#">
-                {pay_confirms}
-              </a>个网络确认才能到账
+              使用{this.state.currency}地址充值需要{address &&
+                address.verifyNumer}个网络确认才能到账
             </li>
             <li>
               充值完成后，你可以进入{" "}
@@ -225,36 +234,51 @@ export default class Charge extends exchangeViewBase {
               </tr>
             </thead>
             <tbody>
-              {list.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.date}</td>
-                  <td>{item.currency}</td>
-                  <td>{item.amount}</td>
-                  <td>{item.send_address}</td>
-                  <td>{item.receive_address}</td>
-                  <td>
-                    <a href="#">{item.confirm}</a>
-                  </td>
-                  <td>
-                    <span>
-                      {!item.state
-                        ? "通过"
-                        : item.state === 1
-                          ? "审核中"
-                          : "未通过"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
+              {orderList.map(
+                (
+                  {
+                    orderTime,
+                    coinName,
+                    count,
+                    postAddress,
+                    receiveAddress,
+                    verifyCount,
+                    doneCount,
+                    blockSite,
+                    orderStatus
+                  },
+                  index
+                ) => (
+                  <tr key={index}>
+                    <td>{orderTime}</td>
+                    <td>{coinName}</td>
+                    <td>{count}</td>
+                    <td>{postAddress}</td>
+                    <td>{receiveAddress}</td>
+                    <td>
+                      <a href={blockSite}>{`${doneCount}/${verifyCount}`}</a>
+                    </td>
+                    <td>
+                      <span>
+                        {!orderStatus
+                          ? "未通过"
+                          : orderStatus === 1
+                            ? "审核中"
+                            : "通过"}
+                      </span>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
           <div className="pagina">
             <Pagination
-              total={total}
-              pageSize={page_size}
+              total={this.state.chargeHistory.totalCount}
+              pageSize={pageSize}
               showTotal={true}
               showQuickJumper={true}
-              currentPage={cur_page}
+              currentPage={page + 1}
             />
           </div>
           <p className="more">

@@ -71,7 +71,7 @@ export default class Popup extends exchangeViewBase {
             <h3>
               添加地址<span
                 onClick={() => {
-                  this.state.newAddress.push({ name: "", address: "" });
+                  this.state.newAddress.push({ addressName: "", address: "" });
                   this.setState({
                     showInput: true,
                     newAddress: this.state.newAddress
@@ -100,7 +100,7 @@ export default class Popup extends exchangeViewBase {
                             value={item.name}
                             placeholder="输入名称"
                             onInput={value => {
-                              item.name = value;
+                              item.addressName = value;
                               this.setState({
                                 newAddress: this.state.newAddress
                               });
@@ -149,7 +149,7 @@ export default class Popup extends exchangeViewBase {
                   })}
                 {addressArr &&
                   addressArr.map((item, index) => <tr className="base3-content" key={index}>
-                      <td>{item.name}</td>
+                      <td>{item.addressName}</td>
                       <td>{item.address}</td>
                       <td>
                         <Button

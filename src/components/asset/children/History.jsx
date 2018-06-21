@@ -11,25 +11,27 @@ export default class History extends exchangeViewBase {
     this.state = {};
     let { controller } = this.props;
     controller.setView(this);
-    let { all_listed_stocks, asset_history } = controller.initState;
+    let { wallList, assetHistory } = controller.initState;
     this.state = Object.assign(this.state, {
-      all_listed_stocks,
-      asset_history
+      wallList,
+      assetHistory
     });
     //绑定方法
-    // this.getData = controller.getData.bind(controller)
+    this.getHistory = controller.getHistory.bind(controller);
     // this.state = {
     // console.log(this.controller)
     // }
   }
-  componentWillMount() {}
+  componentWillMount() {
+    this.getHistory()
+  }
 
   componentDidMount() {}
 
   componentWillUpdate() {}
 
   render() {
-    let { total, cur_page, page_size, list } = this.state.asset_history;
+    let { total, cur_page, page_size, orderList } = this.state.assetHistory;
     return (
       <div className="hist">
         <h3 className="title">
@@ -89,28 +91,44 @@ export default class History extends exchangeViewBase {
             </tr>
           </thead>
           <tbody>
-            {list.map((item, index) => (
+            {orderList.map(({
+              orderTime,
+              coinName,
+              coinIcon,
+              orderType,
+              count,
+              balance,
+              postAddress,
+              receiveAddress,
+              verifyCount, //确认数
+              doneCount, //已确认数
+              orderStatus,
+              fee
+            }, index) => (
               <tr key={index}>
-                <td className="time">{item.date}</td>
-                <td>{item.currency}</td>
-                <td>{item.type ? '提币' : '充币'}</td>
-                <td className="cash red">{item.amount}</td>
-                <td>{item.balance}</td>
-                <td className="send">{item.send_address}</td>
-                <td>{item.receive_address}</td>
+                  <td className="time">{orderTime}</td>
+                  <td>
+                    <img src={coinIcon} alt=""/>
+                    {coinName}
+                  </td>
+                  <td>{!orderType ? '充币' : (orderType === 1 ? '提币': '转账')}</td>
+                  <td className="cash red">{count}</td>
+                <td>{balance}</td>
+                  <td className="send">{postAddress}</td>
+                  <td>{receiveAddress}</td>
                 <td className="confirm">
-                  <a href="#">{item.confirm}</a>
+                  <a href="#">{`${doneCount}/${verifyCount}`}</a>
                 </td>
                 <td className="state passing">
                   <span>
-                    {!item.state
-                      ? "通过"
-                      : item.state === 1
+                    {!orderStatus
+                      ? "未通过"
+                      : orderStatus === 1
                         ? "审核中"
-                        : "未通过"}
+                        : "通过"}
                   </span>
                 </td>
-                <td className="fee">{item.fee}</td>
+                <td className="fee">{fee}</td>
               </tr>
             ))}
           </tbody>
