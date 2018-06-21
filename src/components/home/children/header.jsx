@@ -6,6 +6,7 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom'
+import '../stylus/header.styl'
 // const Nav = ({label,to}) => (
 //     <Route path={to}  children={({ match }) => (
 //         <li className={match ? 'active' : ''}>
@@ -15,7 +16,7 @@ import {
 // );
 const navArray = [
   {label: '首页', to: '/home', select: false, linkUser: false},
-  // {label: '币币交易页', to: '/home', select: false, linkUser: false},
+  {label: '币币交易', to: '/trade', select: false, linkUser: false},
   {label: '用户', to: '/user', select: false, linkUser: false},
   {label: '关于', to: '/about', select: false, linkUser: false},
   {label: '主题列表', to: '/topics', select: false, linkUser: false},
@@ -27,7 +28,7 @@ export default class Header extends Component {
   constructor() {
     super()
     this.state = {
-      navClass:'tradeNav'
+      navClass:'headerNav'
     }
     this.changeNavClass = this.changeNavClass.bind(this)
     this.matched = '/home'
@@ -40,7 +41,7 @@ export default class Header extends Component {
     }
     this.matched = to
     let navClass = 'headerNav'
-    if(to === '/home'){
+    if(to === '/trade'){
       navClass = 'tradeNav'
     }
     this.setState({navClass})
@@ -49,8 +50,11 @@ export default class Header extends Component {
   render() {
     return (
         <ul className={this.state.navClass}>
+          <li className='nav-logo'>
+            <Link to='/home'></Link>
+          </li>
           {navArray.map((v, index) => (<Route path={v.to} key={index}  children={({match}) => {
-              return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass}/>
+              return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass} select={v.select}/>
             }
           }/>))}
         </ul>)
@@ -71,8 +75,8 @@ class NavChild extends Component {
   
   render(){
     return (
-        <li className={this.props.match ? 'active' : ''}>
-          {this.props.match ? '> ' : ''}<Link to={this.props.to}>{this.props.label}</Link>
+        <li className={`header-nav${this.props.match ? '-active' : ''} ${this.props.select ? 'select-list' : ''}`  }>
+          <Link to={this.props.to}>{this.props.label}</Link>
         </li>
     )
   }

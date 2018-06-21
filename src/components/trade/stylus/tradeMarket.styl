@@ -1,0 +1,44 @@
+@import "../../../common/css/variable.styl"
+.trade-market
+	width 3.1rem
+	height 2.74rem
+	background $exchange-color
+	float left
+	color $normal-white-color
+	.trade-market-list
+		display flex
+		height .33rem
+		width 2.7rem
+		margin 0 auto
+		border-bottom .01rem solid $line-dark
+		div
+			cursor pointer
+			margin-bottom -.01rem
+			margin-right .2rem
+			font-size .12rem
+			color $normal-white-color-a
+		.trade-market-item-active
+			color $normal-white-color
+			border-bottom .02rem solid $normal-white-color
+	.trade-market-table
+		width 100%
+		thead
+			td
+				font-size .11rem
+				color $normal-white-color-a
+				padding .11rem 0
+		tbody
+			tr
+				height .19rem
+				line-height .19rem
+			.pair-items-active
+				background 	$exchange-select-bg
+				td
+					font-size .11rem
+		tr
+			td:nth-child(1)
+				padding-left .18rem
+			td:last-child
+				padding-right .18rem
+
+//

@@ -1,0 +1,57 @@
+@import "../../../common/css/variable.styl"
+.headerNav, .tradeNav
+	display flex
+	align-items center
+	li
+		a
+			display inline-block
+			color $index-gray
+			padding .06rem .02rem
+	.header-nav-active
+		//margin-right .6rem
+		a
+			border-bottom 2px solid $index-blue
+			color $index-blue
+			padding .06rem .02rem
+.headerNav
+	width 12rem
+	height .70rem
+	margin 0 auto
+	li
+		position relative
+		margin-right .6rem
+		border-bottom 2px solid $normal-white-color
+	.select-list:after
+		content:''
+		width .07rem
+		height .04rem
+		background-image $icon-select
+		background-size cover
+		position absolute
+		top:50%
+	.nav-logo
+		margin-right 1.19rem
+		a
+			display inline-block
+			width 1.1rem
+			height .32rem
+			background-size cover
+			background-image $logo-index
+
+.tradeNav
+	width 14.4rem
+	height .5rem
+	background $exchange-color
+	li
+		margin-right .3rem
+		margin-left .28rem
+		a
+			color rgba(255,255,255,.6)
+	.nav-logo
+		margin-right .76rem
+		a
+			display inline-block
+			width .88rem
+			height .26rem
+			background-image  $logo-index
+			background-size cover

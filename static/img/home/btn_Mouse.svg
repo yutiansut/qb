@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="30px" viewBox="0 0 20 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>btn_Mouse</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="王敏1" transform="translate(-710.000000, -1592.000000)">
+            <g id="more" transform="translate(692.000000, 1592.000000)">
+                <g id="Mouse" transform="translate(18.000000, 0.000000)">
+                    <rect stroke="#418BFF" x="0.5" y="0.5" width="18.0909091" height="29" rx="9.04545455"></rect>
+                    <path d="M9.01108263,14.4989117 C8.72400129,14.785993 8.34063319,14.8853428 8.05355185,14.5982614 C7.76647051,14.3111801 7.81313189,13.9676182 8.10021323,13.6805368 L9.78710288,11.9797201 L8.16747397,10.336207 C7.88039263,10.0491257 7.76647051,9.65444678 8.05355185,9.36736544 C8.34063319,9.0802841 8.72400129,9.18790689 9.01108263,9.47498823 L11.020652,11.4845576 C11.3077333,11.771639 11.3077333,12.202261 11.020652,12.4893423 L9.01108263,14.4989117 Z" id="Arrow" fill="#418BFF" transform="translate(9.548059, 11.984345) rotate(-270.000000) translate(-9.548059, -11.984345) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

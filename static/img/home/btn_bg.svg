@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="104px" height="57px" viewBox="0 0 104 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>btn_bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-23.7%" y="-62.1%" width="147.4%" height="224.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="6" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+        <g id="王敏1" transform="translate(-205.000000, -728.000000)" fill="#418BFF">
+            <g id="Group-16" transform="translate(210.000000, 730.000000)">
+                <rect id="btn_bg" filter="url(#filter-1)" x="9" y="12" width="76" height="29" rx="14.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

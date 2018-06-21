@@ -31,6 +31,7 @@ import UserInfo from './components/user/UserCenter.jsx'
 import Header from './components/home/children/header.jsx'
 import LoginCon from './components/login/Login.jsx'
 import Home from './components/home/Home.jsx'
+import Trade from './components/trade/Trade.jsx'
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
 
 
@@ -128,6 +129,7 @@ export default class App extends Component {
             {/*</ul>*/}
             <hr/>
             <Route exact path="/home" component={Home} />
+            <Route path='/trade' component={Trade} />
             <Route path="/login" component={Loign} />
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
