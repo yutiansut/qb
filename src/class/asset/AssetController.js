@@ -66,6 +66,41 @@ export default class AssetController extends ExchangeControllerBase {
   async requestCode() {
 
   }
+  // 账户余额页面筛选
+  filte(wallet, value, hideLittle, hideZero) {
+    let arr1 = this.filter(wallet, item => {
+      return (
+        item.currency.includes(value.toUpperCase()) ||
+        item.codename.includes(value.toUpperCase())
+      );
+    });
+    let arr2 = this.filter(arr1, item => {
+      return !hideLittle || item.tobtc > 0.001
+    })
+    let result = this.filter(arr2, item => {
+      return !hideZero || item.tobtc > 0
+    })
+    return result
+  }
+  // 账户余额页面排序
+  rank(arr, object){
+    let sortValue, type;
+    for (const key in object) {
+      if (object.hasOwnProperty(key)) {
+        if(object[key] !== 2) {
+          sortValue = [key];
+          type = object[key]
+          break;
+        }
+      }
+    }
+    if (!sortValue) {
+      sortValue = ['tobtc'];
+      type = 0;
+    }
+    return this.sort(arr, sortValue, type);
+  }
+
 // 二次验证倒计时
   getVerify() {
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
@@ -80,14 +115,14 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 添加提现地址
   appendAddress({name, address}){
-    this.store.state.wallet_extract.extract_addr.push({ name, address })
+    this.store.appendAddress({ name, address });
     this.view.state.wallet_extract.extract_addr.push({ name, address });
     this.view.setState({ wallet_extract: this.view.state.wallet_extract });
   }
 
   //删除提现地址
   deletAddress({name,address}){
-    this.store.state.wallet_extract.extract_addr = this.store.state.wallet_extract.extract_addr.filter(item => item.address!== address);
+    this.store.deletAddress({ name, address });
     this.view.state.wallet_extract.extract_addr = this.view.state.wallet_extract.extract_addr.filter(item => item.address !== address);
     this.view.setState({ wallet_extract: this.view.state.wallet_extract });
   }

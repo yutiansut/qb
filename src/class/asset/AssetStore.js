@@ -16,35 +16,35 @@ export default class AssetStore extends ExchangeStoreBase {
         {
           currency: "ETH",//币种
           avail: '0.21136',//可用
-          lock: '0.21136',//冻结
+          lock: '0.236',//冻结
           tobtc: '0.21136',//btc估值
           codename: "Bitcoin"//全称
         },
         {
           currency: "BTC",//币种
           avail: '0.21136',//可用
-          lock: '0.21136',//冻结
+          lock: '0.11136',//冻结
           tobtc: '0.21136',//btc估值
           codename: "Bitcoin"//全称
         },
         {
           currency: "LTC",//币种
-          avail: '0.21136',//可用
+          avail: '0.61136',//可用
           lock: '0.21136',//冻结
           tobtc: '0.21136',//btc估值
           codename: "Bitcoin"//全称
         },
         {
           currency: "EOS",//币种
-          avail: '0.0',//可用
-          lock: '0.0',//冻结
+          avail: '2.0',//可用
+          lock: '7.0',//冻结
           tobtc: '0.0',//btc估值
           codename: "Bitcoin"//全称
         },
         {
           currency: "BCH",//币种
-          avail: '0.0005',//可用
-          lock: '0.0005',//冻结
+          avail: '0.0505',//可用
+          lock: '0.5005',//冻结
           tobtc: '0.0005',//btc估值
           codename: "Bitcoin"//全称
         },
@@ -305,5 +305,11 @@ export default class AssetStore extends ExchangeStoreBase {
         ]
       }
     }
+  }
+  appendAddress({ name, address }){
+    this.state.wallet_extract.extract_addr.push({ name, address })
+  }
+  deletAddress({ name, address }){
+    this.state.wallet_extract.extract_addr = this.state.wallet_extract.extract_addr.filter(item => item.address !== address);
   }
 }
