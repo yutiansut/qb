@@ -18,15 +18,22 @@ export default class HomeRecommend extends ExchangeViewBase{
   componentDidMount(){
     // this.recommendDataHandle();
   }
+
   render(){
     return(
-        <div className='home-recommend'>
+      <div className='home-recommend'>
+        <ul className="clearfix">
           {this.state.recommendData.map((v, index) => {return(
-              <div className='home-recommend-pair' key={index}>
-                {v.coin_name}---{v.coin_data.price}----{v.coin_data.rise}
-              </div>
+            <li className='home-recommend-pair' key={index}>
+              <span>{v.coin_name}</span>
+              <p>
+                <b>{v.coin_data.price}</b>
+                <i>{v.coin_data.rise}</i>
+              </p>
+            </li>
           )})}
-        </div>
+        </ul>
+      </div>
     )
   }
 }

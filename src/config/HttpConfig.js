@@ -82,6 +82,8 @@ export default {
     // {name: 'logout', data: {url: '/v1/logout', method: 'post'}}
 
     // 个人中心
-    {name: 'userInfo', data: {url: '/user/', method: 'post'}}, // 用户基本信息
+    {name: 'userInfo', data: {url: '/user/', method: 'post'}},
+    // 资讯详情
+    {name: 'getActivity', data: {url: '/activity/', method: 'post'}}
   ]
 }

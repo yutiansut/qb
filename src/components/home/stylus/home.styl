@@ -1,0 +1,148 @@
+@import "../../../common/css/variable.styl"
+
+@keyframes bgscale {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+.home-wrap
+  .banner-wrap
+    .banner-img
+      position fixed
+      top .7rem
+      background url("/static/img/img_bg.jpg") center center / cover no-repeat
+      width 14.4rem
+      height 4.53rem
+      z-index -1
+      animation: bgscale 10s ease-in-out infinite
+    div
+      width 14.4rem
+      height 5.23rem
+      img
+        position absolute
+        top 1.5rem
+        left 50%
+        transform translateX(-50%)
+        width 9rem
+        height 1.3rem
+        -webkit-filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
+        filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
+      a
+        position absolute
+        top 3.8rem
+        left 50%
+        transform translateX(-50%)
+        background $normal-white-color
+        border-radius 1rem
+        padding .1rem .35rem
+        color $main-color
+        font-size .2rem
+
+  //推荐交易对
+  .home-recommend
+    width 14.4rem
+    padding .64rem 1.2rem .93rem
+    background $normal-white-color
+    ul
+      li
+        position relative
+        float left
+        padding 0 .5rem
+        &:first-child
+          padding-left 0
+        &:last-child
+          padding-right 0
+          &:after
+            position absolute
+            top 0
+            right 0
+            content ''
+            background none
+        &:after
+          position absolute
+          top .1rem
+          right 0
+          width 1px
+          height .23rem
+          content ''
+          background $line-light
+        span
+          color $index-gray
+          font-size .16rem
+          opacity 0.6
+        p
+          padding-top .07rem
+          b
+            margin-right .1rem
+            font-size .2rem
+            color $normal-black-color
+          i
+            &.up-i
+              color $index-blue
+            &.down-i
+              color $index-red
+
+  //市场
+  .home-market
+    background $normal-white-color
+    .market-nav
+      margin-bottom .48rem
+      ul
+        float left
+        transform translateY(50%)
+        li
+          position relative
+          float left
+          padding 0 .5rem
+          font-size .16rem
+          //&.home-market-item-active
+          //  color $normal-white-color
+          //  background $index-blue
+          //  border-radius .100rem
+          //  box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
+          &:first-child
+            padding-left 0
+          &:last-child
+            padding-right 0
+            &:after
+              position absolute
+              top 0
+              right 0
+              content ''
+              background none
+          &:after
+            position absolute
+            top 0
+            right 0
+            content '/'
+            color $normal-gray-color
+      .base-input-wrap
+        float right
+        width 2rem
+        height .36rem
+        input
+          background $normal-white-color
+        button
+          width .44rem
+    table
+      width 100%
+      tr
+        height .45rem
+        line-height .45rem
+      thead
+        tr
+          color $normal-gray-color
+        th:nth-of-type(1)
+          padding-left .3rem
+      tbody
+        tr:nth-child(odd)
+          background $bg-light-color
+        td:first-child
+          padding-left .3rem
+

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 
+import exchangeViewBase from "../ExchangeViewBase";
 import HomeRecommend from './children/HomeRecommend.jsx' //交易盘市场
 import HomeMarket from './children/HomeMarket.jsx' //交易盘市场
-
-import exchangeViewBase from "../ExchangeViewBase";
-
 
 import MarketController from '../../class/market/MarketController'
 const recommendController = new MarketController();
 const marketController = new MarketController();
+
+import "./stylus/home.styl"
 
 
 export default class Home extends exchangeViewBase {
@@ -18,7 +18,14 @@ export default class Home extends exchangeViewBase {
 
   render() {
     return (
-      <div className="inner">
+      <div className="home-wrap">
+        <div className="banner-wrap">
+          <div>
+            <img src="/static/img/banner_title.svg" alt=""/>
+            <a href="javascript:void(0)">立即注册</a>
+          </div>
+          <div alt="" className="banner-img"/>
+        </div>
         <HomeRecommend controller={recommendController}/>
         <HomeMarket controller={marketController}/>
       </div>

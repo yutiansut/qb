@@ -51,6 +51,7 @@ export default class Header extends Component {
 
   render() {
     return (
+      <div className="nav-warp">
         <ul className={this.state.navClass}>
           <li className='nav-logo'>
             <Link to='/home'></Link>
@@ -59,7 +60,9 @@ export default class Header extends Component {
               return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass} select={v.select}/>
             }
           }/>))}
-        </ul>)
+        </ul>
+      </div>
+    )
   }
 }
 

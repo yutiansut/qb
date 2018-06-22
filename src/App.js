@@ -129,7 +129,6 @@ export default class App extends Component {
   render() {
 
     return (
-      <div>
         <Router>
           <div>
             {/*<ul className="headerNav">*/}
@@ -145,9 +144,9 @@ export default class App extends Component {
             <Route path="/user" component={User} />
             <Route path="/findPass" component={ForgetPass} />
             <Route path="/notice" component={Notice} />
+            {/*<div>11111</div>*/}
           </div>
         </Router>
-      </div>
     );
   }
 }
