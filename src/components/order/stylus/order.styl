@@ -1,0 +1,31 @@
+@import "../../../common/css/variable.styl"
+
+.order-manage
+	width 12rem
+	margin 0 auto
+	padding-top: 0.2rem;
+	.order-nav
+		width 1.58rem
+		li
+			height: 0.6rem;
+			margin-right: 0.28rem;
+			line-height: 0.6rem;
+			a
+				display: block;
+				width: 100%;
+				padding-left: 0.24rem;
+				border-left 0.04rem solid $normal-white-color
+				color $normal-black-color
+				&.active
+					border-left 0.04rem solid $main-color
+					background $main-bg-active
+					color $main-color
+				&:hover
+					border-left 0.04rem solid $main-color
+					background $main-bg-active
+					color $main-color
+	.order-content
+		width 10.12rem
+		min-height 7.4rem
+		padding 0 .3rem
+		border-left 1px solid $line-light

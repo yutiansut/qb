@@ -17,6 +17,7 @@ import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
 import LoginController from "./class/login/LoginController";
 import NoticeController from "./class/notice/NoticeController";
+import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController"
 
 
 const configController = new ConfigController();
@@ -97,7 +98,9 @@ const Topic = ({match}) => {
 const Asset = ({match}) => {
   return <AssetManange controller={assetController} match={match}/>;
 };
-
+const Order = ({match}) => {
+  return <OrderManage controller={UserOrderListController} match={match}/>
+};
 const User = ({match}) => {
   return <UserInfo controller={userController} match={match}/>
 };
@@ -143,7 +146,7 @@ export default class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
             <Route path="/wallet" component={Asset} />
-            <Route path="/order" component={OrderManage} />
+            <Route path="/order" component={Order} />
             <Route path="/user" component={User} />
             <Route path="/findPass" component={ForgetPass} />
             <Route path="/notice" component={Notice} />
