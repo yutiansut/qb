@@ -106,8 +106,9 @@ export default class userIdentity extends exchangeViewBase {
   async componentDidMount() {
     await this.getUserAuthData()
     let verifyArr = [0, 0, 2, 1] // 0 身份证 1 护照 -> 1 身份证 3 护照
+    // verifyArr[this.state.userAuth.type]
     this.setState({
-      selectIndex: verifyArr[this.state.userAuth.type]
+      selectIndex: 0
     })
   }
 

@@ -28,7 +28,7 @@ export default class HomeRecommend extends ExchangeViewBase{
               <span>{v.coin_name}</span>
               <p>
                 <b>{v.coin_data.price}</b>
-                <i>{v.coin_data.rise}</i>
+                <i className="">{v.coin_data.rise}</i>
               </p>
             </li>
           )})}

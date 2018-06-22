@@ -77,8 +77,8 @@ export default class MarketController extends ExchangeControllerBase {
     v.sortValue && this.view.setState({
       homeMarketPairData:this.sort(sortArray, v.sortValue,v.type)
     });
-    // v.type =／ !v.type
-    v.type = 1
+    v.clickFlag = true
+    v.type = !v.type
 
   }
   pairDataHandle() {

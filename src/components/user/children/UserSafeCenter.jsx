@@ -79,14 +79,14 @@ export default class userSafeCenter extends exchangeViewBase {
   }
   selectType(content, index, i, type) { // 两步认证单选
     let changeArr = [3, 1, 0, 2]
-    let changeTypeArr = [this.state.userInfo.login_verify, this.state.userInfo.withdraw_verify, this.state.userInfo.fund_pass_verify]
+    let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
       changeType: changeTypeArr[i],
-      showGoogle: !this.state.userInfo.google_auth && index === 0 ? 'block' : 'none',
+      showGoogle: !this.state.userInfo.googleAuth && index === 0 ? 'block' : 'none',
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
-      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (!this.state.userInfo.google_auth && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
+      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (!this.state.userInfo.googleAuth && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
     })
     // verifyList[i].contentList.forEach(v => {v.flag = false})
     // if (index === 1 && !this.state.user_info.email) {
@@ -114,9 +114,9 @@ export default class userSafeCenter extends exchangeViewBase {
 
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
-    verifyList[0].contentList[verifyArr[this.state.userInfo.login_verify]].flag = true //根据后台返回数据进行两步认证数据渲染
-    verifyList[1].contentList[verifyArr[this.state.userInfo.withdraw_verify]].flag = true
-    verifyList[2].contentList[verifyArr[this.state.userInfo.fund_pass_verify]].flag = true
+    verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
+    verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
+    verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
     verifyList.forEach((v, i) => { // 两步验证未绑定邮箱时
       v.contentList[1].name = this.state.userInfo.email ? '邮箱' : '绑定／验证邮箱后开启'
     })
@@ -159,11 +159,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>登录密码</li>
-              <li onClick = {state => this.state.userInfo.login_pwd ? this.changeSetPopup('block', 4) : this.changeSetPopup('block', 3)}>{this.state.userInfo.login_pwd && '修改' || '设置'}</li>
+              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 4) : this.changeSetPopup('block', 3)}>{this.state.userInfo.loginPwd && '修改' || '设置'}</li>
             </ol>
             <ul className="clearfix">
               <li>资金密码</li>
-              <li onClick = {state => this.changeSetPopup('block', 5)}>{!this.state.userInfo.fund_pwd && '修改' || '设置'}</li>
+              <li onClick = {state => this.changeSetPopup('block', 5)}>{!this.state.userInfo.fundPwd && '修改' || '设置'}</li>
               <li>设置了资金密码后，提币和提现时均需要输入，账户更安全。</li>
             </ul>
           </div>

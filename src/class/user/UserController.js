@@ -66,11 +66,11 @@ export default class UserController extends ExchangeControllerBase {
 
   uploadInfo() { // 身份认证确认提交
     let  typeIndexArr = [1, 3]
-    this.store.Proxy.userInfo({"action": "upload_auth",
+    this.store.Proxy.userInfo({"action": "uploadAuth",
       "data": {
         "uid": 1,
-        "first_name": this.view.state.firstNameValue, // 姓氏
-        "last_name": this.view.state.lastNameValue, // 名字
+        "firstName": this.view.state.firstNameValue, // 姓氏
+        "lastName": this.view.state.lastNameValue, // 名字
         "name": `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
         "type": typeIndexArr[this.view.state.selectIndex],  // 0：无 1：身份证 2：军官证 3：护照
         "number": this.view.state.numberValue,  // 证件号
@@ -89,19 +89,19 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setLoginPass(aaa, bbbb) { // 设置登录密码
-    let result = await this.store.Proxy.userInfo({"action": "modify_login_pwd",
+    let result = await this.store.Proxy.userInfo({"action": "modifyLoginPwd",
       "data": {
         "uid": 1,
         "type": 0,// 0:设置密码 （不用传old_pass） 1:修改密码
-        "old_pass": aaa,
-        "new_pass": bbbb
+        "oldPass": aaa,
+        "newPass": bbbb
       }
     })
     console.log('设置密码', result)
   }
 
   async setFundPass(aaa, bbbb) { // 设置资金密码
-    let result = await this.store.Proxy.userInfo({"action": "set_fund_pass",
+    let result = await this.store.Proxy.userInfo({"action": "setFundPass",
       "data": {
         "uid": 1,
         "account": "oynix@foxmail.com", // 用户登录信息
