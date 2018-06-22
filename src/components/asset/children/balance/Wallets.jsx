@@ -128,7 +128,14 @@ export default class Wallets extends Component {
                   this.sort("valuationBTC", valuationBTC + 1);
                 }}
               >
-                BTC估值<img
+                BTC估值
+                <b className="pop-parent">
+                  <img src="/static/images/yiwen.png" alt="" />
+                  <em className="pop-children uppop-children">
+                    此项估值为可用余额估值
+                  </em>
+                </b>
+                <img
                   className="img"
                   src={sortIcon[valuationBTC]}
                   alt=""

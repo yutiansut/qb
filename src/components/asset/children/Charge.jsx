@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../ExchangeViewBase";
+import QRCode from "qrcode.react";
 import Button from "../../../common/component/Button";
-import Input from "../../../common/component/Input";
+import Popup from "../../../common/component/Popup";
 import Pagination from "../../../common/component/Pagination";
+import SearchInput from "../components/SearchInput";
 import "../style/charge.styl";
+
+
 export default class Charge extends exchangeViewBase {
   constructor(props) {
     super(props);
-    //绑定方法
     let { controller } = props;
     this.state = {
-      showSearch: false,
       currency: "BTC",
       value: "BTC",
       showQrcode: false,
+      showPupup: false,
+      copySuccess: true
     };
     //绑定view
     controller.setView(this);
@@ -25,12 +29,14 @@ export default class Charge extends exchangeViewBase {
       currencyAmount,
       coinAddress
     } = controller.initState;
+
     this.state = Object.assign(this.state, {
       walletList,
       chargeHistory,
       currencyAmount,
       coinAddress
     });
+
     //绑定方法
     this.hideQrcode = () => {
       if (!this.state.showQrcode) return;
@@ -38,32 +44,22 @@ export default class Charge extends exchangeViewBase {
         showQrcode: false
       });
     };
-    this.show = () => {
-      this.setState({ showSearch: true });
+    this.copy = el => {
+      controller.copy(el);
     };
-    this.hide = () => {
-      this.setState({ showSearch: false });
-    };
-    this.setValue = value => {
-      this.setState({ value });
-    };
-    this.setCurrency = currency => {
-      this.setState({ currency });
-    };
-    this.copy = (el) => {
-      controller.copy(el)
-    }
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
     this.getCoinAddress = controller.getCoinAddress.bind(controller);
     this.getHistory = controller.getHistory.bind(controller);
   }
 
   componentWillMount() {
-    let currency = this.props.location.query && this.props.location.query.currency;
-    currency && this.setState({
-      currency: currency,
-      value: currency
-    })
+    let currency =
+      this.props.location.query && this.props.location.query.currency;
+    currency &&
+      this.setState({
+        currency: currency,
+        value: currency
+      });
     this.getCurrencyAmount();
     this.getCoinAddress();
     this.getHistory();
@@ -82,10 +78,6 @@ export default class Charge extends exchangeViewBase {
   render() {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, page, pageSize, orderList } = this.state.chargeHistory;
-    let searchArr = this.props.controller.filter(
-      this.state.walletList,
-      this.state.value.toUpperCase()
-    );
     let address = this.state.coinAddress.filter(
       item => item.coinName === this.state.currency
     )[0];
@@ -97,50 +89,17 @@ export default class Charge extends exchangeViewBase {
           <div className="search clearfix">
             <span className="title">选择币种</span>
             <div className="currency-asset">
-              <div className="input">
-                <Input
-                  type="search1"
-                  placeholder="请输入币种关键字"
-                  value={this.state.value}
-                  onInput={value => {
-                    this.setState({ value: value });
-                  }}
-                  onFocus={this.show}
-                  onEnter={() => {
-                    let value = searchArr[0] || "BTC";
-                    this.setValue(value);
-                    this.setCurrency(value);
-                    this.hide();
-                  }}
-                  clickOutSide={() => {
-                    let value = searchArr[0] || 'BTC';
-                    this.setValue(value);
-                    this.setCurrency(value);
-                    this.hide();
-                  }}
-                >
-                  {
-                    <ul
-                      className={`search-list ${
-                        this.state.showSearch && searchArr.length ? "" : "hide"
-                      }`}
-                    >
-                      {searchArr.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={() => {
-                            this.setValue(item);
-                            this.setCurrency(item);
-                            this.hide();
-                          }}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  }
-                </Input>
-              </div>
+              <SearchInput
+                filte={this.props.controller.filter}
+                walletList={this.state.walletList}
+                value={this.state.value}
+                setValue={(value)=>{
+                  this.setState({ value });
+                }}
+                setCurrency={(currency) => {
+                  this.setState({ currency });
+                }}
+              />
               <ul>
                 <li>
                   <span>总额</span>
@@ -195,7 +154,9 @@ export default class Charge extends exchangeViewBase {
                 this.copy(this.refs.address);
               }}
             />
-            <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`} />
+            <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
+              <QRCode value={address.coinAddress} level="M" />
+            </div>
           </div>
         </div>
         <div className="tip clearfix">

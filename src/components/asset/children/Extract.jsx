@@ -4,14 +4,15 @@ import exchangeViewBase from "../../ExchangeViewBase";
 import Button from "../../../common/component/Button";
 import Input from "../../../common/component/Input";
 import Pagination from "../../../common/component/Pagination";
+import SearchInput from "../components/SearchInput";
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
 import "../style/extract.styl";
+
 export default class Extract extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      showSearch: false,
       currency: "BTC",
       value: "BTC",
       showAddressPopup: false,
@@ -23,12 +24,14 @@ export default class Extract extends exchangeViewBase {
     // 绑定视图，初始化数据
     let { controller } = this.props;
     controller.setView(this);
+
     let {
       walletExtract,
       walletList,
       currencyAmount,
       extractHistory
     } = controller.initState;
+
     this.state = Object.assign(this.state, {
       walletExtract,
       walletList,
@@ -37,18 +40,6 @@ export default class Extract extends exchangeViewBase {
     });
 
     //绑定方法
-    this.show = () => {
-      this.setState({ showSearch: true });
-    };
-    this.hide = () => {
-      this.setState({ showSearch: false });
-    };
-    this.setValue = value => {
-      this.setState({ value });
-    };
-    this.setCurrency = currency => {
-      this.setState({ currency });
-    };
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
 
     this.getExtract = controller.getExtract.bind(controller);
@@ -85,10 +76,6 @@ export default class Extract extends exchangeViewBase {
     let currency = this.state.currency;
     let { fee, minerFee, extract_addr, minWithdraw } = this.state.walletExtract;
     let { total, page, pageSize, orderList } = this.state.extractHistory;
-    let searchArr = this.props.controller.filter(
-      this.state.walletList,
-      this.state.value.toUpperCase()
-    );
 
     return (
       <div className="extract">
@@ -97,50 +84,17 @@ export default class Extract extends exchangeViewBase {
           <div className="search clearfix">
             <span className="title">选择币种</span>
             <div className="currency-asset">
-              <div className="input">
-                <Input
-                  type="search1"
-                  placeholder="请输入币种关键字"
-                  value={this.state.value}
-                  onInput={value => {
-                    this.setState({ value: value });
-                  }}
-                  onFocus={this.show}
-                  onEnter={() => {
-                    let value = searchArr[0] || "BTC";
-                    this.setValue(value);
-                    this.setCurrency(value);
-                    this.hide();
-                  }}
-                  clickOutSide={() => {
-                    let value = searchArr[0] || 'BTC';
-                    this.setValue(value);
-                    this.setCurrency(value);
-                    this.hide();
-                  }}
-                >
-                  {
-                    <ul
-                      className={`search-list ${
-                        this.state.showSearch && searchArr.length ? "" : "hide"
-                      }`}
-                    >
-                      {searchArr.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={() => {
-                            this.setValue(item);
-                            this.setCurrency(item);
-                            this.hide();
-                          }}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  }
-                </Input>
-              </div>
+              <SearchInput
+                filte={this.props.controller.filter}
+                walletList={this.state.walletList}
+                value={this.state.value}
+                setValue={(value) => {
+                  this.setState({ value });
+                }}
+                setCurrency={(currency) => {
+                  this.setState({ currency });
+                }}
+              />
               <ul>
                 <li>
                   <span>总额</span>

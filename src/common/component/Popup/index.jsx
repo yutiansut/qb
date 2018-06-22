@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/";
 import "./style.styl";
-/*  
+/*
   title 标题 type为tip1、tip2、tip3、tip4时不生效
   type  默认或不在选择范围内时为default(消息提示), 可选base(基础),confirm(确认消息),custom(自定义),tip1、tip2、tip3、tip4(带有倾向性成功，警告，错误，信息),
   onClose 关闭事件的handler
@@ -9,6 +9,7 @@ import "./style.styl";
   closeButton 布尔值，是否显示关闭按钮，默认false
   autoClose 是否自动关闭（3s）自动关闭是调用onClose，无onClose时不生效
   msg 提示文案
+  className 自定义类名
   icon 默认succeed 可选warning,wrong,message, type为
 */
 export default class Popup extends React.Component {
@@ -63,7 +64,8 @@ export default class Popup extends React.Component {
       closeButton,
       msg,
       autoClose,
-      icon
+      icon,
+      className
     } = this.props;
     console.log(icon);
     (!icon || (!["succeed", "warning", "wrong", "message"].includes(icon))) && (icon = 'succeed');
@@ -84,7 +86,7 @@ export default class Popup extends React.Component {
     return (
       <div className="wrap">
         <div
-          className={`popup ${type}`}
+          className={`popup ${type} ${className ? className: ''}`}
           onClick={e => {
             e.nativeEvent.stopImmediatePropagation();
           }}

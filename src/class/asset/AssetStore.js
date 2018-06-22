@@ -31,7 +31,7 @@ export default class AssetStore extends ExchangeStoreBase {
         valuationBTC: 12324.3432, //总资产
         valuationEN: 213.232, //换算美元
         valuationCN: 222.22, //换算人民币
-        totalQuota: 2, //24小时提现额度
+        totalQuota: 10, //24小时提现额度
         availableQuota: 1.1 //可用额度
       },
       wallet: [

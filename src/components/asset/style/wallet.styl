@@ -67,14 +67,28 @@
             cursor pointer
             &.lock
               .pop-parent
+                position relative
                 top 0.01rem
+                left 0.03rem
                 .pop-children
                   left -0.75rem
                   // top 0.02rem
-                  width 2.45rem
+                  width 2.25rem
                   z-index 99
                   &::before
-                    left 33%
+                    left 35.5%
+            &.tobtc
+              .pop-parent
+                position relative
+                top 0.01rem
+                left 0.03rem
+                .pop-children
+                  left -0.75rem
+                  // top 0.02rem
+                  width 1.6rem
+                  z-index 99
+                  &::before
+                    left 49.5%
             &.currency
               padding-left 0.4rem
             &.handle
