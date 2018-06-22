@@ -43,17 +43,17 @@ export default class AssetManage extends exchangeViewBase {
 
   render() {
     let match = this.props.match;
-    const Bala = ({ match }) => {
-      return <Balance controller={this.controller} />;
+    const Bala = ({ match, location}) => {
+      return <Balance controller={this.controller} location={location} />;
     };
-    const Char = ({ match }) => {
-      return <Charge controller={this.controller} />;
+    const Char = ({ match, location}) => {
+      return <Charge controller={this.controller} location={location} />;
     };
-    const Extr = ({ match }) => {
-      return <Extract controller={this.controller} />;
+    const Extr = ({ match, location}) => {
+      return <Extract controller={this.controller} location={location} />;
     };
-    const Hist = ({ match }) => {
-      return <History controller={this.controller} />;
+    const Hist = ({ match, location}) => {
+      return <History controller={this.controller} location={location} />;
     };
     return <div className="asset clearfix">
         <ChargeMessage></ChargeMessage>

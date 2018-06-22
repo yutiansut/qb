@@ -64,7 +64,7 @@ export default class AssetStore extends ExchangeStoreBase {
           coinId: 0, //币种ID
           availableCount: 1546, //可用余额
           frozenCount: 100, //冻结中金额
-          valuationBTC: 12, //BTC估值
+          valuationBTC: 0.0002, //BTC估值
           valuationCN: 111, //?
           totalCount: 1000 //总额
         },
@@ -75,7 +75,7 @@ export default class AssetStore extends ExchangeStoreBase {
           coinId: 0, //币种ID
           availableCount: 430, //可用余额
           frozenCount: 10, //冻结中金额
-          valuationBTC: 52, //BTC估值
+          valuationBTC: 0, //BTC估值
           valuationCN: 111, //?
           totalCount: 1000 //总额
         },
@@ -103,7 +103,7 @@ export default class AssetStore extends ExchangeStoreBase {
         }
       ],
       //币种列表
-      walletList: ["usdt", "eth", "bch", "lsk", "btc"],
+      walletList: ["USDT", "ETH", "BCH", "LSK", "BTC"],
       currencyAmount: {
         coinName: "BTC",
         availableCount: 100.22, //可用额度

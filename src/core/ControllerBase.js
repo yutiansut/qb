@@ -115,4 +115,23 @@ export default class ControllerBase {
       return second - first;
     })
   }
+
+  /**
+   * 复制到剪贴板
+   * el: input, 或textarea表单元素
+   * return true成功或false
+   */
+  copy(el) {
+    el.select(); // 选择对象
+    try {
+      if (document.execCommand("Copy", false, null)) {
+        document.execCommand("Copy");
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  }
 }

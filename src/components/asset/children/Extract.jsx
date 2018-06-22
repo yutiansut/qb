@@ -12,8 +12,8 @@ export default class Extract extends exchangeViewBase {
     super(props);
     this.state = {
       showSearch: false,
-      currency: "ETH",
-      value: "ETH",
+      currency: "BTC",
+      value: "BTC",
       showAddressPopup: false,
       address: "",
       extractAmount: "", //提现数量
@@ -63,6 +63,8 @@ export default class Extract extends exchangeViewBase {
   }
 
   componentWillMount() {
+    let currency = this.props.location.query && this.props.location.query.currency;
+    currency && this.setState({ currency: currency, value: currency });
     this.getExtract();
     this.getCurrencyList();
     this.getHistory();
@@ -85,8 +87,9 @@ export default class Extract extends exchangeViewBase {
     let { total, page, pageSize, orderList } = this.state.extractHistory;
     let searchArr = this.props.controller.filter(
       this.state.walletList,
-      this.state.value.toLowerCase()
+      this.state.value.toUpperCase()
     );
+
     return (
       <div className="extract">
         <h3>提币-{currency}</h3>
@@ -104,13 +107,15 @@ export default class Extract extends exchangeViewBase {
                   }}
                   onFocus={this.show}
                   onEnter={() => {
-                    this.setValue(searchArr[0].toUpperCase());
-                    this.setCurrency(searchArr[0].toUpperCase());
+                    let value = searchArr[0] || "BTC";
+                    this.setValue(value);
+                    this.setCurrency(value);
                     this.hide();
                   }}
                   clickOutSide={() => {
-                    this.setValue(searchArr[0].toUpperCase());
-                    this.setCurrency(searchArr[0].toUpperCase());
+                    let value = searchArr[0] || 'BTC';
+                    this.setValue(value);
+                    this.setCurrency(value);
                     this.hide();
                   }}
                 >
@@ -124,12 +129,12 @@ export default class Extract extends exchangeViewBase {
                         <li
                           key={index}
                           onClick={() => {
-                            this.setValue(item.toUpperCase());
-                            this.setCurrency(item.toUpperCase());
+                            this.setValue(item);
+                            this.setCurrency(item);
                             this.hide();
                           }}
                         >
-                          {item.toUpperCase()}
+                          {item}
                         </li>
                       ))}
                     </ul>

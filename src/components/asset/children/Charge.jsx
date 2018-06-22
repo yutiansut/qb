@@ -14,7 +14,7 @@ export default class Charge extends exchangeViewBase {
       showSearch: false,
       currency: "BTC",
       value: "BTC",
-      showQrcode: false
+      showQrcode: false,
     };
     //绑定view
     controller.setView(this);
@@ -50,12 +50,20 @@ export default class Charge extends exchangeViewBase {
     this.setCurrency = currency => {
       this.setState({ currency });
     };
+    this.copy = (el) => {
+      controller.copy(el)
+    }
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
     this.getCoinAddress = controller.getCoinAddress.bind(controller);
     this.getHistory = controller.getHistory.bind(controller);
   }
 
   componentWillMount() {
+    let currency = this.props.location.query && this.props.location.query.currency;
+    currency && this.setState({
+      currency: currency,
+      value: currency
+    })
     this.getCurrencyAmount();
     this.getCoinAddress();
     this.getHistory();
@@ -71,26 +79,12 @@ export default class Charge extends exchangeViewBase {
     window.removeEventListener("click", this.hideQrcode);
   }
 
-  // 复制到剪贴板
-  copy(el) {
-    el.select(); // 选择对象
-    try {
-      if (document.execCommand("copy", false, null)) {
-        document.execCommand("Copy");
-        alert("已复制好，可贴粘。");
-      } else {
-        alert("复制失败，请手动复制");
-      }
-    } catch (err) {
-      alert("复制失败，请手动复制");
-    }
-  }
   render() {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, page, pageSize, orderList } = this.state.chargeHistory;
     let searchArr = this.props.controller.filter(
       this.state.walletList,
-      this.state.value.toLowerCase()
+      this.state.value.toUpperCase()
     );
     let address = this.state.coinAddress.filter(
       item => item.coinName === this.state.currency
@@ -113,13 +107,15 @@ export default class Charge extends exchangeViewBase {
                   }}
                   onFocus={this.show}
                   onEnter={() => {
-                    this.setValue(searchArr[0].toUpperCase());
-                    this.setCurrency(searchArr[0].toUpperCase());
+                    let value = searchArr[0] || "BTC";
+                    this.setValue(value);
+                    this.setCurrency(value);
                     this.hide();
                   }}
                   clickOutSide={() => {
-                    this.setValue(searchArr[0].toUpperCase());
-                    this.setCurrency(searchArr[0].toUpperCase());
+                    let value = searchArr[0] || 'BTC';
+                    this.setValue(value);
+                    this.setCurrency(value);
                     this.hide();
                   }}
                 >
@@ -133,12 +129,12 @@ export default class Charge extends exchangeViewBase {
                         <li
                           key={index}
                           onClick={() => {
-                            this.setValue(item.toUpperCase());
-                            this.setCurrency(item.toUpperCase());
+                            this.setValue(item);
+                            this.setCurrency(item);
                             this.hide();
                           }}
                         >
-                          {item.toUpperCase()}
+                          {item}
                         </li>
                       ))}
                     </ul>
