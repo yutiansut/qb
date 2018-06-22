@@ -4,6 +4,28 @@ export default class AssetStore extends ExchangeStoreBase {
   constructor() {
     super();
     this.state = {
+      // 交易对手续费
+      pairFees: [
+        {
+          "tradePairId": 0,
+          "tradePairName": 'ETH/BTC',
+          "makerFee": 0.12,
+          "takerFee": 0.11
+        },
+        {
+          "tradePairId": 1,
+          "tradePairName": 'BCH/BTC',
+          "makerFee": 0.12,
+          "takerFee": 0.01
+        },
+        {
+          "tradePairId": 2,
+          "tradePairName": 'LSK/BTC',
+          "makerFee": 0.19,
+          "takerFee": 0.11
+        }
+      ]
+      ,
       // 总资产
       totalAsset: {
         valuationBTC: 12324.3432, //总资产
