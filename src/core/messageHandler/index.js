@@ -25,9 +25,20 @@
  * 整体也要有一个。
  * 也就是说，要在controllerBase中和ExchangeControllerBase中一不同的方式传入preHandler和afterHandler
  * 在每个里面分别注册专属的proxy
+ *
+ * 对于单个请求，可以再请求前后做操作。
+ * 对于面向一个controller的请求，需要传入preHandler和afterHandler
+ * 对于整个项目多需要进行的操作，在ExchangeController中进行操作，
+ * 对于底层如何处理。(底层不需要)
+ * 所以action的操作，是在Exchange中的
+ *
  */
+let config = {
 
-
+  userController: [
+    {name: 'userInfo', data: {url: '/user/', method: 'post'}},
+  ],
+}
 
 
 /**

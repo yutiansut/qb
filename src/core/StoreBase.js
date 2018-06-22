@@ -18,4 +18,8 @@ export default class StoreBase {
     this.WebSocket = WebSocket
   }
 
+  installProxy(controllerName, preHandler, afterHandler, ){
+
+  }
+
 }
