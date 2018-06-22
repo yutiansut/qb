@@ -7,12 +7,9 @@
       display inline-block
       color $index-gray
       padding .06rem .02rem
-  .header-nav-active
-    //margin-right .6rem
-    a
-      border-bottom 2px solid $index-blue
-      color $index-blue
-      padding .06rem .02rem
+  .select-router
+    position absolute
+    display none
 .nav-warp
   position fixed
   top 0
@@ -26,7 +23,13 @@
     background $normal-white-color
     padding 0 1.2rem
     box-shadow 0 1px 4px 0 rgba(151, 168, 178, .3)
-    li
+    .header-nav-active
+      >a
+        border-bottom 2px solid $index-blue
+        color $index-blue
+        padding .06rem .02rem
+    //.select-router
+    .header-nav-active,.header-nav
       position relative
       margin-right .6rem
       border-bottom 2px solid $normal-white-color
@@ -38,6 +41,9 @@
       background-size cover
       position absolute
       top: 50%
+    .select-list:hover
+      .select-router
+        display block
     .nav-logo
       margin-right 1.19rem
       a
@@ -46,7 +52,6 @@
         height .32rem
         background-size cover
         background-image $logo-index
-
   .tradeNav
     width 14.4rem
     height .5rem

@@ -17,7 +17,7 @@ import '../stylus/header.styl'
 const navArray = [
   {label: '首页', to: '/home', select: false, linkUser: false},
   {label: '币币交易', to: '/trade', select: false, linkUser: false},
-  {label: '资产管理', to: '/wallet', select: true, linkUser: true, childrenList:[{label: '资产管理', to: '/wallet',}, {label: '资产管理', to: '/wallet',}]},
+  {label: '资产管理', to: '/wallet', select: true, linkUser: true, childrenList:[{label: '资产管理', to: '/wallet',}, {label: '订单管理', to: '/order',}]},
   {label: '用户', to: '/user', select: false, linkUser: false},
   {label: '关于', to: '/about', select: false, linkUser: false},
   {label: '主题列表', to: '/topics', select: false, linkUser: false},
@@ -57,7 +57,7 @@ export default class Header extends Component {
             <Link to='/home'></Link>
           </li>
           {navArray.map((v, index) => (<Route path={v.to} key={index}  children={({match}) => {
-              return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass} select={v.select} childRouter={v.childList}/>
+              return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass} select={v.select} childrenList={v.childrenList}/>
             }
           }/>))}
         </ul>
@@ -82,11 +82,17 @@ class NavChild extends Component {
     return (
         <li className={`header-nav${this.props.match ? '-active' : ''} ${this.props.select ? 'select-list' : ''}`  }>
           <Link to={this.props.to}>{this.props.label}</Link>
-          {/*{this.props.select && (*/}
-              {/*<ul>*/}
-                {/*{this.props.chi}*/}
-              {/*</ul>*/}
-          {/*)}*/}
+          {this.props.select && (
+              <ul className='select-router'>
+                {this.props.childrenList.map((v, index) => {
+                  return(
+                      <li key={index}>
+                        <Link to={v.to}>{v.label}</Link>
+                      </li>
+                  )
+                })}
+              </ul>
+          )}
         </li>
     )
   }

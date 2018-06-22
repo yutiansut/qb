@@ -38,6 +38,7 @@ import Home from './components/home/Home.jsx'
 import Trade from './components/trade/Trade.jsx'
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
 import NoticeInfo from './components/notice/NoticeBulletin.jsx'
+import OrderManage from './components/order/OrderManage.jsx'
 
 
 
@@ -142,6 +143,7 @@ export default class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
             <Route path="/wallet" component={Asset} />
+            <Route path="/order" component={OrderManage} />
             <Route path="/user" component={User} />
             <Route path="/findPass" component={ForgetPass} />
             <Route path="/notice" component={Notice} />
