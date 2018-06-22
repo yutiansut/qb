@@ -72,12 +72,14 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.tradePair = tradePair
   }
   //排序功能
-  pairSort(v) {
+  pairSort(v) { // type 1 升序 0 降序
     let sortArray = this.store.state.homeMarketPairData;
     v.sortValue && this.view.setState({
       homeMarketPairData:this.sort(sortArray, v.sortValue,v.type)
     });
-    v.type = !v.type
+    // v.type =／ !v.type
+    v.type = 1
+
   }
   pairDataHandle() {
   

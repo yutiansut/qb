@@ -135,6 +135,7 @@ export default class App extends Component {
             {/*{navList}*/}
             <Header/>
             {/*</ul>*/}
+            <div style={{height: '.5rem'}}></div>
             <Route exact path="/home" component={Home} />
             <Route path='/trade' component={Trade} />
             <Route path="/login" component={Loign} />

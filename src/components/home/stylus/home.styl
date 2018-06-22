@@ -12,18 +12,20 @@
   }
 }
 .home-wrap
+  .hide
+    display none
   .banner-wrap
     .banner-img
       position fixed
-      top .7rem
-      background url("/static/img/img_bg.jpg") center center / cover no-repeat
+      top .5rem
+      background url(/static/img/img_bg.jpg) center center / cover no-repeat
       width 14.4rem
       height 4.53rem
       z-index -1
       animation: bgscale 10s ease-in-out infinite
     div
       width 14.4rem
-      height 5.23rem
+      height 4.53rem
       img
         position absolute
         top 1.5rem
@@ -92,20 +94,26 @@
   .home-market
     background $normal-white-color
     .market-nav
+      height .36rem
+      line-height .36rem
       margin-bottom .48rem
       ul
         float left
-        transform translateY(50%)
+        height .36rem
         li
           position relative
           float left
-          padding 0 .5rem
+          padding  0 .15rem
           font-size .16rem
-          //&.home-market-item-active
-          //  color $normal-white-color
-          //  background $index-blue
-          //  border-radius .100rem
-          //  box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
+          cursor pointer
+          span
+            padding .08rem .15rem
+            &.home-market-item-active
+              color $normal-white-color
+              background $index-blue
+              border-radius .2rem
+              box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
+              margin 0 .14rem
           &:first-child
             padding-left 0
           &:last-child
@@ -118,8 +126,8 @@
               background none
           &:after
             position absolute
-            top 0
-            right 0
+            top 0rem
+            right -.05rem
             content '/'
             color $normal-gray-color
       .base-input-wrap
@@ -140,6 +148,14 @@
           color $normal-gray-color
         th:nth-of-type(1)
           padding-left .3rem
+        .sort-img-li
+          cursor pointer
+          img
+            width .16rem
+            height .16rem
+            position relative
+            top .03rem
+            left .03rem
       tbody
         tr:nth-child(odd)
           background $bg-light-color

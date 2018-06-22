@@ -4,11 +4,12 @@ import Input from '../../../common/component/Input/index.jsx'
 
 let marketTableHead = [
   {name: '交易盘', sortValue: ''},
-  {name: '价格', sortValue:['price'],type:0,sortDefault:'turnover' },
-  {name: '成交额', sortValue:['turnover'],type:0,sortDefault:'turnover' },
-  {name: '成交量', sortValue:['volume'],type:1,sortDefault:'turnover' },
-  {name: '涨跌幅', sortValue:['rise'],type:1,sortDefault:'turnover' },
+  {name: '价格', sortValue:['price'],type:2,sortDefault:'turnover' },
+  {name: '成交额', sortValue:['turnover'],type:2,sortDefault:'turnover' },
+  {name: '成交量', sortValue:['volume'],type:2,sortDefault:'turnover' },
+  {name: '涨跌幅', sortValue:['rise'],type:2,sortDefault:'turnover' },
 ];
+let sortImg =  ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
 
 export default class HomeMarket extends ExchangeViewBase{
   constructor(props){
@@ -40,8 +41,8 @@ export default class HomeMarket extends ExchangeViewBase{
           <ul className="clearfix">
             <li>收藏区</li>
             {this.state.marketDataHandle.map((v, index) => {return(
-              <li className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`} key={index} onClick={this.changeMarket.bind(this,v)}>
-                {v.toUpperCase()}
+              <li key={index} onClick={this.changeMarket.bind(this,v)}>
+                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()}</span>
               </li>
             )})}
           </ul>
@@ -56,8 +57,9 @@ export default class HomeMarket extends ExchangeViewBase{
             <tr>
               <th>收藏</th>
               {marketTableHead.map((v, index) => {
-                return(<th onClick={this.pairSort.bind(this,v)} key={index}>
+                return(<th onClick={this.pairSort.bind(this,v)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                   {v.name}
+                  <img src={ sortImg[v.type]} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
                 </th>)
               })}
             </tr>
