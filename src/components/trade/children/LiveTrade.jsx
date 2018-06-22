@@ -25,7 +25,7 @@ export default class LiveTrade extends ExchangeViewBase{
   changeLiveTitleSelect(v){
     this.setState({
       titleSelect: v.type
-    })
+    });
   }
   render() {
     return(
@@ -49,7 +49,7 @@ export default class LiveTrade extends ExchangeViewBase{
               </tr>
             </thead>
             <tbody>
-            <tr className='no-content' style={{height: `${(12 - this.state.liveSellArray.length)? (12 - this.state.liveSellArray.length) * .21 : 0}rem`}}>
+            <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - this.state.liveSellArray.length)? (12 - this.state.liveSellArray.length) * .21 : 0}rem`}}>
             
             </tr>
             {this.state.titleSelect !== 'buy' && this.state.liveSellArray.length < 12 && this.state.liveSellArray.map((v,index) => {
