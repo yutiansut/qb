@@ -2,10 +2,12 @@
 import AsyncAll from './libs/AsyncAll' //同步多个异步请求
 import Sleep from './libs/Sleep' //同步多个异步请求
 import Loop from './loop' //localStorage交互
-import LoopTaskConfig from '../config/LoopTaskConfig'
 import GlobalUtil from "./libs/GlobalUtil";
 
+import LoopTaskConfig from '../config/LoopTaskConfig'
+
 Loop.install({}, LoopTaskConfig);
+
 
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),

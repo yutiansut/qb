@@ -37,7 +37,7 @@ export default class Header extends Component {
   }
 
   changeNavClass(to) {
-    console.log('aaa',to)
+    // console.log('aaa',to)
     if(this.matched === to){
       return
     }
@@ -70,7 +70,7 @@ export default class Header extends Component {
 class NavChild extends Component {
   constructor(props){
     super(props)
-    console.log(props)
+    // console.log(props)
     props.match && this.props.changeNavClass(props.match.path)
   }
 

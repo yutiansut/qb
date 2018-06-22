@@ -14,6 +14,6 @@
    * size:连接数量，可选，默认为1
    */
   webSocketList: [
-    {name: 'getHomeData', url: '/home'},
+    {name: 'getData', url: '/socket.io/?EIO=3&transport=websocket'},
   ],
 }

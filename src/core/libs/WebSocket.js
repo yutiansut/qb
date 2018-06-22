@@ -9,7 +9,7 @@
  */
 
 export default function () {
-  let pool = {}, //连接吃对象
+  let pool = {}, //连接池对象
     poolSize = 0, //连接池大小
     connects = [], //连接数组
     size, //传入的大小
@@ -27,6 +27,7 @@ export default function () {
     webSocket.onopen = event => onOpen(event)
 
     function onOpen(event) {
+      console.log('webSocket开启', event.target.url)
       connects.push(webSocket)
       poolSize = connects.length
       callBack && connects.length === size && callBack.resolve(true)
@@ -36,7 +37,8 @@ export default function () {
     webSocket.onmessage = event => onMessage(pool, event)
 
     function onMessage(pool, event) {
-      // console.log('webSocket接收信息', JSON.parse(event.data))
+      // console.log('webSocket接收信息', event.data)
+      console.log('webSocket接收信息',  pool.onMessage)
       pool.onMessage && pool.onMessage(event.data)
     }
 
@@ -44,7 +46,8 @@ export default function () {
     webSocket.onclose = onClose
 
     function onClose(event) {
-      // console.log('webSocket断开', event.target.url)
+      console.log('webSocket断开', event.target.url)
+      console.log('webSocket断开', event)
       reConnect(webSocket, callBack)
     }
 
@@ -59,7 +62,7 @@ export default function () {
   }
 
   function reConnect(webSocket, callBack, index) {
-    // console.log('reConnect 重连');
+    console.log('reConnect 重连');
     ((index = connects.indexOf(webSocket)) >= 0) && connects.splice(index, 1);
     !webSocket.hadRemoved && (webSocket.hadRemoved = true) && connects.length < size && pool.reConnectFlag && createConnect(url, callBack)
   }
@@ -82,9 +85,10 @@ export default function () {
    */
   let index = 0;
   pool.send = function (text) {
-    // console.log('send text')
+    console.log('send text')
     if (connects.length === 0)
       throw new Error('==connect is all down!===')
+    console.log(index++ % poolSize, connects[0])
     poolSize && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 

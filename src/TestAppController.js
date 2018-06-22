@@ -23,7 +23,7 @@ export default class TestAppController extends ExchangeControllerBase {
 
 
   get configData() {
-    console.log( this.configController)
+    // console.log( this.configController)
     return this.configController.initState
   }
 
@@ -33,13 +33,26 @@ export default class TestAppController extends ExchangeControllerBase {
     // console.log(this.store.Proxy)
     // console.log(this.view)
     // console.log(this.view.state.count)
-    let data = await this.store.Proxy.topCurrency()
+    // let data = await this.store.Proxy.topCurrency()
+    let websocket = await this.store.WebSocket.getData()
+    if(websocket){
+      console.log(this.store.WebSocket.getData.get())
+      this.store.WebSocket.getData.get().onMessage = data=>{
+        console.log(data)
+      }
+      this.store.WebSocket.getData.get().send('40/websocket,')
+      this.store.WebSocket.getData.get().send('42/websocket, [\"ticker\"]')
+      setInterval(()=>{
+        this.store.WebSocket.getData.get().send('2')
+      }, 2500)
+
+    }
     // console.log(this.countDown)
     // this.countDown('countDown', 'count', this.view)
     // console.log(data)
     // this.orderController && this.orederController.setPair()
     //
-    this.view.setState({testObj: {b: data.data[0].changePercent}})
+    // this.view.setState({testObj: {b: data.data[0].changePercent}})
     // userReques
     //t
   }
