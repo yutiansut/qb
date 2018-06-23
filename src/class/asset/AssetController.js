@@ -12,10 +12,11 @@ export default class AssetController extends ExchangeControllerBase {
     // return this.store.state;
   }
 
-  // 获取交易对手续费
-  async getPairFees() {
-
+  get configData() {
+    return this.configController.initState;
   }
+  // 获取交易对手续费
+  async getPairFees() {}
   // 获取总资产
   async getAssets() {
     //
@@ -35,7 +36,7 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  async getCurrencyList() { }
+  async getCurrencyList() {}
   // 获取充币信息
   async getCurrencyAmount() {
     // let data = await this.store.Proxy.topCurrency();
@@ -58,9 +59,9 @@ export default class AssetController extends ExchangeControllerBase {
     // this.view.setState({ wallet: data});
   }
   // 获取提币信息
-  async getExtract() { }
+  async getExtract() {}
   // 请求验证码
-  async requestCode() { }
+  async requestCode() {}
   // 账户余额页面筛选
   filte(wallet, value, hideLittle, hideZero) {
     let arr1 = this.filter(wallet, item => {
