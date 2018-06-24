@@ -18,9 +18,9 @@ const OrderCurrentController = new OrderListController();
 const OrderHistoryController = new OrderListController();
 const OrderDealController = new OrderListController();
 const orderNavItems = [
-  {name:'当前订单', address:'/current'},
-  {name:'历史订单', address:'/history'},
-  {name:'历史成交', address:'/deal'}
+  {name:'当前订单', address:'/current', type:'orderCurrent'},
+  {name:'历史订单', address:'/history', type:'orderHistory'},
+  {name:'历史成交', address:'/deal', type:'orderDeal'}
 ]
 export default class OrderManage extends exchangeViewBase{
   constructor(){
@@ -50,13 +50,13 @@ export default class OrderManage extends exchangeViewBase{
           <div className='order-content fr'>
             <Switch>
               <Route path={`${match.url}/current`} component={({match}) => (
-                  <OrderCurrent controller={OrderCurrentController} />
+                  <OrderCurrent controller={OrderCurrentController} type='orderCurrent' />
               )}/>
               <Route path={`${match.url}/history`} component={({match}) => (
-                  <OrderHistory controller={OrderHistoryController} />
+                  <OrderCurrent controller={OrderHistoryController} type='orderHistory' />
               )}/>
               <Route path={`${match.url}/deal`} component={({match}) => (
-                  <OrderDeal controller={OrderDealController} />
+                  <OrderCurrent controller={OrderDealController}  type='orderDeal' />
               )}/>
               <Redirect to={`${match.url}/current`} />
             </Switch>

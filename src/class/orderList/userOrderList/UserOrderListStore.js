@@ -137,7 +137,7 @@ export default class UserOrderListStore extends OrderListStore {
         {
           "tradePairId": 2,
           "tradePairName": 1,
-          "orderType": 0,
+          "orderType": 1,
           "priceType": 0,
           "oderId": 0,
           "orderTime": 947586000,
@@ -163,7 +163,7 @@ export default class UserOrderListStore extends OrderListStore {
           "priceType": 0,//价格类型 0限价  1市价
           "oderId": 0,
           "orderTime": 947586000,
-          "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
+          "orderStatus": 1,//订单状态 0已成交 1部分成交  2未成交  3已撤销
           "price": 1.23,
           "count": 2.33,//总量
           "dealDoneCount": 1.99,//已成交的量
@@ -185,7 +185,7 @@ export default class UserOrderListStore extends OrderListStore {
           "priceType": 0,
           "oderId": 0,
           "orderTime": 947586000,
-          "orderStatus": 0,
+          "orderStatus": 3,
           "price": 1.23,
           "count": 2.33,
           "dealDoneCount": 1.99,
@@ -200,7 +200,11 @@ export default class UserOrderListStore extends OrderListStore {
           "turnoverEN": 23232.2,
           "fee": 0.04
         }
-      ]
+      ],
+      orderListArray:[],
+      currentArray:[],
+      historyArray:[],
+      dealArray:[],
     }
   }
 }
