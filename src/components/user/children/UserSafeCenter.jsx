@@ -14,6 +14,7 @@ let noticeList = [
   {name: '邮件通知', flag: true},
   {name: '短信通知', flag: true}
 ];
+let timeAddrList = ['1111', '2222', '3333']
 
 export default class userSafeCenter extends exchangeViewBase {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class userSafeCenter extends exchangeViewBase {
       noticeIndex: 1, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
       changeType: 0, // 更改两步验证弹窗所需参数
+      timeAddr: '', // 时区
       verifyList: [
         {title: '登录验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}, {name: '无', flag: false}]},
         {title: '提现验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]},
@@ -188,9 +190,18 @@ export default class userSafeCenter extends exchangeViewBase {
             <h2>其他设置</h2>
             <ul className="fl">
               <li>时区</li>
-              <li>
-                <input type="text" placeholder="时区"/>
+              <li className="clearfix">
+                {/*<input type="text" placeholder="时区"/>*/}
                 {/*<Select title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />*/}
+                <Input
+                  type="select"
+                  readOnly={true}
+                  valueArr={timeAddrList.map(item => item)}
+                  onSelect={value => {
+                    this.setState({ timeAddr: value });
+                  }}
+                  value={this.state.timeAddr}
+                />
                 <Button title="保存" className="time-btn"/>
               </li>
             </ul>

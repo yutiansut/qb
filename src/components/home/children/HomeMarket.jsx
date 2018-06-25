@@ -4,10 +4,10 @@ import Input from '../../../common/component/Input/index.jsx'
 
 let marketTableHead = [
   {name: '交易盘', sortValue: ''},
-  {name: '价格', sortValue:['price'],type:1,sortDefault:'turnover', clickFlag: false },
-  {name: '成交额', sortValue:['turnover'],type:1,sortDefault:'turnover',clickFlag: false },
-  {name: '成交量', sortValue:['volume'],type:1,sortDefault:'turnover',clickFlag: false },
-  {name: '涨跌幅', sortValue:['rise'],type:1,sortDefault:'turnover',clickFlag: false },
+  {name: '价格', sortValue:['price'],type:1,sortDefault:'turnover'},
+  {name: '成交额', sortValue:['turnover'],type:1,sortDefault:'turnover'},
+  {name: '成交量', sortValue:['volume'],type:1,sortDefault:'turnover'},
+  {name: '涨跌幅', sortValue:['rise'],type:1,sortDefault:'turnover'},
 ];
 let sortImg =  ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
 
@@ -16,7 +16,8 @@ export default class HomeMarket extends ExchangeViewBase{
     super(props);
     this.state = {
       searchValue: '',
-      sortImg: ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
+      sortImg: "/static/images/rank_normal.svg"
+      // sortImg: ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
     };
     const {controller} = this.props;
     //绑定view
@@ -49,6 +50,7 @@ export default class HomeMarket extends ExchangeViewBase{
           </ul>
           <Input
             type="search1"
+            placeholder="请输入交易盘"
             value={this.state.searchValue}
             onInput={value => {this.setState({searchValue: value })}} />
         </div>
@@ -60,7 +62,8 @@ export default class HomeMarket extends ExchangeViewBase{
               {marketTableHead.map((v, index) => {
                 return(<th onClick={this.pairSort.bind(this,v)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                   {v.name}
-                  <img src={`${v.clickFlag ? (v.type === 0 ? this.state.sortImg[0] : this.state.sortImg[1]) : this.state.sortImg[2]}`} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
+                  {/*<img src={`${v.clickFlag ? (v.type === 0 ? this.state.sortImg[0] : this.state.sortImg[1]) : this.state.sortImg[2]}`} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>*/}
+                  <img src={this.state.sortImg} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
                 </th>)
               })}
             </tr>

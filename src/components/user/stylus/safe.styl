@@ -82,16 +82,31 @@
       li:first-child
         color $normal-black-color
         margin-bottom .18rem
-      input
+      .select
+        float left
         width 4.56rem
-        height .4rem
-        padding-left .1rem
-        margin-right .2rem
-        background $main-bg-active
-        border 1px solid $line-light
-        border-radius (.02rem)
-        vertical-align bottom
+        input
+          width 4.56rem
+          height .4rem
+          padding-left .1rem
+          margin-right .2rem
+          background $main-bg-active
+          border 1px solid $line-light
+          border-radius (.02rem)
+          vertical-align bottom
+        &::after
+          position absolute
+          top 0
+          right .1rem
+          content ''
+          width 10.9%
+          height 100%
+          background url(/static/images/xiala_icon.png) no-repeat center center
+          background-size auto 12%
+        .search-list
+          width 4.56rem
     .time-btn
+      float left
       width .54rem
       height .4rem
       background $main-color

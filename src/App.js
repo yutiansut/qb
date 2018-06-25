@@ -2,12 +2,12 @@ import "./common/css/index.styl"
 
 import './common/css/headerNav.styl'
 
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
+// import {browserHistory} from 'react-router'
 import "./test.styl";
 
 import TestApp from "./TestApp.jsx";
-
 
 import "./core/libs/ChangeFontSize";
 
@@ -34,7 +34,8 @@ assetController.configController = configController;
 // console.log(noticeController.configController)
 
 import UserInfo from './components/user/UserCenter.jsx'
-import Header from './components/home/children/header.jsx'
+import Header from './components/headerAndFooter/Header.jsx'
+import Footer from './components/headerAndFooter/footer.jsx'
 import LoginCon from './components/login/Login.jsx'
 import Home from './components/home/Home.jsx'
 import Trade from './components/trade/Trade.jsx'
@@ -120,6 +121,11 @@ const Notice = ({ match }) => {
   return <NoticeInfo controller={noticeController} match={match} />
 };
 
+const tradeFooter = ({match}) => {
+  return <div>tradeFotter</div>
+}
+
+
 const Help = ({ match }) => {
   return <Helper controller={assetController} match={match} />;
 };
@@ -137,28 +143,49 @@ export default class App extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    console.log(111, window.innerHeight)
+  }
+
+  componentDidMount() {
+    console.log(222, window.innerHeight)
+
+  }
+
+  componentWillUpdate(...parmas) {
+    console.log(333, window.innerHeight)
+
+  }
+
   render() {
 
     return (
       <Router>
         <div>
-          {/*<ul className="headerNav">*/}
-          {/*{navList}*/}
-          <Header />
-          {/*</ul>*/}
-          <div style={{ height: '.5rem' }}></div>
-          <Route exact path="/home" component={Home} />
-          <Route path='/trade' component={Trade} />
-          <Route path="/login" component={Loign} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
-          <Route path="/wallet" component={Asset} />
-          <Route path="/order" component={Order} />
-          <Route path="/user" component={User} />
-          <Route path="/findPass" component={ForgetPass} />
-          <Route path="/notice" component={Notice} />
-          <Route path="/help" component={Help} />
-          {/*<div>11111</div>*/}
+          <Header/>
+          <div style={{height: '.5rem'}}></div>
+          <div style={{minHeight: `${window.innerHeight-2.78*100}px`}}>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route path="/home" component={Home}/>
+              <Route path='/trade' component={Trade}/>
+              <Route path="/login" component={Loign}/>
+              {/*<Route path="/about" component={About} />*/}
+              {/*<Route path="/topics" component={Topics} />*/}
+              <Route path="/wallet" component={Asset}/>
+              <Route path="/order" component={Order}/>
+              <Route path="/user" component={User}/>
+              <Route path="/findPass" component={ForgetPass}/>
+              <Route path="/notice" component={Notice}/>
+              <Route path="/help" component={Help} />
+              <Redirect to="/"/>
+            </Switch>
+          </div>
+          {/*<Footer/>*/}
+          <Switch>
+            <Route path="/trade" component={tradeFooter}/>
+            <Route component={Footer}/>
+          </Switch>
         </div>
       </Router>
     );

@@ -288,7 +288,7 @@ export default class MarketStore extends ExchangeStoreBase {
               "price": 1023.22,
               "priceCN": 1022.22,
               "priceEN": 1021.22,
-              "rise": -0.12,
+              "rise": 0.3,
             }
           },
           {

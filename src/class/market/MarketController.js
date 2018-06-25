@@ -73,12 +73,15 @@ export default class MarketController extends ExchangeControllerBase {
   }
   //排序功能
   pairSort(v) { // type 1 升序 0 降序
-    let sortArray = this.store.state.homeMarketPairData;
+
+    let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"], sortArray = this.store.state.homeMarketPairData;
+    console.log('图片1', imgArr[v.type])
     v.sortValue && this.view.setState({
-      homeMarketPairData:this.sort(sortArray, v.sortValue,v.type)
+      homeMarketPairData:this.sort(sortArray, v.sortValue,v.type),
+      sortImg: imgArr[v.type]
     });
-    v.clickFlag = true
     v.type = !v.type
+    console.log('图片2', v.type, imgArr[v.type])
 
   }
   pairDataHandle() {
