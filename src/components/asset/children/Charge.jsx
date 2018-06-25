@@ -8,7 +8,12 @@ import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
 import "../style/charge.styl";
 
-
+const status = {
+  0: "未通过",
+  1: "审核中",
+  2: "通过",
+  3: "撤销"
+};
 export default class Charge extends exchangeViewBase {
   constructor(props) {
     super(props);
@@ -202,7 +207,7 @@ export default class Charge extends exchangeViewBase {
                     verifyCount,
                     doneCount,
                     blockSite,
-                    orderStatus
+                    orderStatus,
                   },
                   index
                 ) => (
@@ -215,15 +220,7 @@ export default class Charge extends exchangeViewBase {
                     <td>
                       <a href={blockSite}>{`${doneCount}/${verifyCount}`}</a>
                     </td>
-                    <td>
-                      <span>
-                        {!orderStatus
-                          ? "未通过"
-                          : orderStatus === 1
-                            ? "审核中"
-                            : "通过"}
-                      </span>
-                    </td>
+                    <td><span>{status[orderStatus]}</span></td>
                   </tr>
                 )
               )}

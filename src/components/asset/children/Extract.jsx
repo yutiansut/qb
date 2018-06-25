@@ -8,6 +8,12 @@ import SearchInput from "../components/SearchInput";
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
 import "../style/extract.styl";
+const status = {
+  0: "未通过",
+  1: "审核中",
+  2: "通过",
+  3: "撤销"
+};
 
 export default class Extract extends exchangeViewBase {
   constructor(props) {
@@ -249,15 +255,7 @@ export default class Extract extends exchangeViewBase {
                       <td>{count}</td>
                       <td>{postAddress}</td>
                       <td>{receiveAddress}</td>
-                    <td>
-                      <span>
-                        {!orderStatus
-                          ? "未通过"
-                          : item.state === 1
-                            ? "审核中"
-                            : "通过"}
-                      </span>
-                    </td>
+                      <td><span>{status[orderStatus]}</span></td>
                       <td>{fee}</td>
                   </tr>
                 )

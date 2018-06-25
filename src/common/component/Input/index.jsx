@@ -23,7 +23,8 @@ export default class Input extends React.Component {
     this.state = {
       value: this.props.value ? this.props.value : "",
       istarget: false,
-      showSelect: false
+      showSelect: false,
+      focus: false
     };
 
     this.clickoutside = () => {
@@ -69,7 +70,7 @@ export default class Input extends React.Component {
       !valueArr && (valueArr = []);
       let element;
       element = (
-        <div className={`base-input-wrap ${type}`} onClick={() => { this.state.istarget = true; this.setState({ showSelect: !this.state.showSelect });}}>
+        <div className={`base-input-wrap ${type} ${this.state.focus ? 'focus' : ''}`} >
           {["default", "search1", "search2", "select"].includes(type) && (
             <input
               ref="input"
@@ -86,9 +87,11 @@ export default class Input extends React.Component {
                 onEnter && onEnter(this.refs.input.value);
               }}
               onFocus={() => {
+                type === 'search2' && this.setState({focus: true})
                 onFocus && onFocus(this.refs.input.value);
               }}
               onBlur={() => {
+                type === 'search2' && this.setState({ focus: false })
                 onBlur && onBlur(this.refs.input.value);
               }}
               onInput={() => {
@@ -99,6 +102,7 @@ export default class Input extends React.Component {
                 onChange && onChange(this.refs.input.value);
               }}
               value={this.state.value}
+              onClick={() => { this.state.istarget = true; this.setState({ showSelect: true })}}
             />
           )}
           {type === "textarea" && (
@@ -137,6 +141,7 @@ export default class Input extends React.Component {
             <ul className="search-list">
               {valueArr.map((item, index) => <li key={index} onClick={()=>{
                   this.setState({value: item});
+                  console.log(99999)
                   this.setState({ showSelect: false})
                   onSelect && onSelect(item)
                 }}>{item}</li>)}

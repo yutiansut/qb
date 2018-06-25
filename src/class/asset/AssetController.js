@@ -15,6 +15,15 @@ export default class AssetController extends ExchangeControllerBase {
   get configData() {
     return this.configController.initState;
   }
+  async wallet() {
+    if(this.store.state.wallet.length === 0 )
+      await this.store.getWallet();
+    return this.store.state.wallet
+  }
+  async walletList() {
+    // this.store.state.walletList.length === 0 && await this.store.getWalletList();
+    return this.store.state.walletList;
+  }
   // 获取交易对手续费
   async getPairFees() {}
   // 获取总资产
@@ -28,6 +37,10 @@ export default class AssetController extends ExchangeControllerBase {
     // this.view.setState({ totalAsset: data});
     // // userReques
     //t
+  }
+  // 获取所有币种
+  async getWalletList(){
+
   }
   // 获取币种资产
   async getWallet() {

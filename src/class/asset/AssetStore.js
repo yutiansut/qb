@@ -420,6 +420,12 @@ export default class AssetStore extends ExchangeStoreBase {
       }
     };
   }
+  async getWallet(){
+    // this.wallet = await getWallet
+  }
+  async getWalletList(){
+    // this.wallet = await getWallet
+  }
   appendAddress({ addressName, address }) {
     this.state.walletExtract.extract_addr.push({ addressName, address });
   }

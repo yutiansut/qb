@@ -38,9 +38,12 @@
       // background url('/static/images/Icon_Search.png') no-repeat center center
       background url('/static/images/search-default.svg') no-repeat center center
       background-size auto 44%
-    &:hover::after, &:focus::after
+    &:hover::after, &.focus::after
       background-image url('/static/images/search-click.svg')
       background-size auto 44%
+    &:hover
+      input
+        border-color $main-color-hover
     input
       padding-right 13%
       background $normal-input-color
