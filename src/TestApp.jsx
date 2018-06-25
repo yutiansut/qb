@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import exchangeViewBase from './components/ExchangeViewBase'
+import LineTrend from "./components/home/children/LineTrend";
 
 export default class testApp extends exchangeViewBase {
 
@@ -57,6 +58,7 @@ export default class testApp extends exchangeViewBase {
         <div>{this.state.testObj.b}</div>
         <button onClick={this.getData}>11111</button>
         {/*<Router>*/}
+        {/*<LineTrend trends={[10,3,5,6,8,2,3]}/>*/}
         <div>
           <Link to="/">
             回退

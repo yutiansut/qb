@@ -20,11 +20,14 @@ export default {
    */
   // httpPreHandler,
   // httpAfterHandler,
-  httpList: [
 
-    // 个人中心
+  user: [
     {name: 'userInfo', data: {url: '/user/', method: 'post'}},
-    // 资讯详情
+  ],
+  notice: [
     {name: 'getActivity', data: {url: '/activity/', method: 'post'}}
+  ],
+  test: [
+    {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
   ]
 }

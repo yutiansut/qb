@@ -14,40 +14,7 @@
  * 12.在调用onMessage方法时，回调字典添加一条记录
  */
 
-/**
- * 处理http相关action操作
- * 一个url对应一些action
- * this.Proxy.urlName.actionName,
- * 对应关系写在哪里action放在proxy里面
- *
- * 每个controller对应单独的请求，每次创建实例的时候注册，
- * preHandler和afterHandler在controller中传入
- * 整体也要有一个。
- * 也就是说，要在controllerBase中和ExchangeControllerBase中一不同的方式传入preHandler和afterHandler
- * 在每个里面分别注册专属的proxy
- *
- * 对于单个请求，可以再请求前后做操作。
- * 对于面向一个controller的请求，需要传入preHandler和afterHandler
- * 对于整个项目多需要进行的操作，在ExchangeController中进行操作，
- * 对于底层如何处理。(底层不需要)
- * 所以action的操作，是在Exchange中的
- *
- */
-let config = {
-
-  userController: [
-    {name: 'userInfo', data: {url: '/user/', method: 'post'}},
-  ],
-}
 
 
-/**
- * 数据显示问题
- * 主要是跟排序有关
- * 如果前端不负责显示，则排序出问题
- *
- * 所以，
- * 前后端同时处理精度问题
- *
- * 此处，也可能会使显示与实际不同
- */
+
+
