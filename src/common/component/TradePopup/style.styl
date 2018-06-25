@@ -1,0 +1,47 @@
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
+.trade-popup
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  font-size 0.14rem
+  color $normal-white-color
+  letter-spacing 0
+  z-index 999
+  .positi
+    color $normal-white-color
+    background-color $exchange-opacity-blue
+  .passive
+    background-color $exchange-opacity-red
+  .default
+    position absolute
+    min-width 2.6rem
+    min-height 0.5rem
+    line-height 0.5rem
+    text-align center
+    border-radius(0.02rem)
+  .ico
+    position absolute
+    min-width 2.74rem
+    min-height 0.53rem
+    line-height 0.53rem
+    padding-left 0.59rem
+    text-align left
+    border-radius(0.08rem)
+    &::before
+      position absolute
+      left 0
+      top 0
+      content ''
+      width 0.59rem
+      height 100%
+    &.positi
+      &::before
+        background url('/static/images/success.png') no-repeat center center
+        background-size 0.42rem auto
+    &.passive
+      &::before
+        background url('/static/images/remind.png') no-repeat center center
+        background-size 0.14rem auto
