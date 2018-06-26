@@ -22,15 +22,15 @@ body
     height 0
     clear both
     content ""
-    
+
 vendor(prop, args)
   -webkit-{prop} args
   -moz-{prop} args
   {prop} args
-  
+
 border-radius()
   vendor('border-radius', arguments)
- 
+
 box-shadow()
   vendor('box-shadow', arguments)
 
@@ -41,6 +41,10 @@ align-item()
 fz11()
   font-size .11rem
   -webkit-transform scale(0.916666666)
+  -webkit-transform-origin 0 0
+fz10()
+  font-size .10rem
+  -webkit-transform scale(0.8333333333)
   -webkit-transform-origin 0 0
 
 // 旋转方法rotate兼容

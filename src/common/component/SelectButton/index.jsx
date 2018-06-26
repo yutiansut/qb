@@ -29,7 +29,7 @@ export default class SelectButton extends Component {
   render() {
     /*
   title 按钮文案
-  type  默认default, 可选main
+  type  默认default, 可选main, trade(币币交易页面计价方式select)
   simple type为main时有效，简化，不显示title
   className 自定义类名方便自定义样式
   valueArr 选项菜单内容数组
@@ -72,12 +72,13 @@ export default class SelectButton extends Component {
               this.setState({ show: show ? false : true });
             }}
           >
-            {simple ? "" : this.state.title}
+            <p>{simple ? "" : this.state.title}</p>
+            {type === 'trade' && <i></i>}
           </div>
         )}
 
         {valueArr.length > 0 && (
-          <ul className={`${show ? "" : "hide"}`}>
+          <ul className={`${ type==='trade' ? 'trade-list' : 'base-list'} ${show ? "" : "hide"}`}>
             {valueArr.map((item, index) => {
               return (
                 <li
@@ -89,7 +90,7 @@ export default class SelectButton extends Component {
                     this.setState({ show: false, title: item });
                   }}
                 >
-                  {item}
+                  <p>{item}</p>
                 </li>
               );
             })}

@@ -32,7 +32,7 @@ export default class Input extends React.Component {
         this.state.istarget = false;
         return;
       }
-      this.setState({ showSelect: false})
+      this.setState({ showSelect: false });
       this.props.clickOutSide && this.props.clickOutSide();
     };
   }
@@ -70,7 +70,16 @@ export default class Input extends React.Component {
       !valueArr && (valueArr = []);
       let element;
       element = (
-        <div className={`base-input-wrap ${type} ${this.state.focus ? 'focus' : ''}`} >
+        <div
+          className={`base-input-wrap ${type} ${
+            this.state.focus ? "focus" : ""
+          }`}
+          onClick={() => {
+            this.refs.input.focus();
+            this.state.istarget = true;
+            this.setState({ showSelect: !this.state.showSelect });
+          }}
+        >
           {["default", "search1", "search2", "select"].includes(type) && (
             <input
               ref="input"
@@ -84,25 +93,24 @@ export default class Input extends React.Component {
               onKeyDown={e => {
                 if (e.nativeEvent.keyCode !== 13) return;
                 this.refs.input.blur();
-                onEnter && onEnter(this.refs.input.value);
+                onEnter && onEnter(this.state.value);
               }}
               onFocus={() => {
-                type === 'search2' && this.setState({focus: true})
-                onFocus && onFocus(this.refs.input.value);
+                type === "search2" && this.setState({ focus: true });
+                onFocus && onFocus(value);
               }}
               onBlur={() => {
-                type === 'search2' && this.setState({ focus: false })
-                onBlur && onBlur(this.refs.input.value);
+                type === "search2" && this.setState({ focus: false });
+                onBlur && onBlur(this.state.value);
               }}
-              onInput={() => {
-                this.setState({ value: this.refs.input.value });
-                onInput && onInput(this.refs.input.value);
+              onInput={e => {
+                this.setState({ value: e.target.value });
+                onInput && onInput(e.target.value);
               }}
-              onChange={() => {
-                onChange && onChange(this.refs.input.value);
+              onChange={e => {
+                onChange && onChange(e.target.value);
               }}
               value={this.state.value}
-              onClick={() => { this.state.istarget = true; this.setState({ showSelect: true })}}
             />
           )}
           {type === "textarea" && (
@@ -118,14 +126,14 @@ export default class Input extends React.Component {
               onKeyDown={e => {
                 if (e.nativeEvent.keyCode !== 13) return;
                 this.refs.input.blur();
-                onEnter && onEnter(this.refs.input.value);
+                onEnter && onEnter(this.state.value);
               }}
-              onInput={() => {
-                this.setState({ value: this.refs.input.value });
-                onInput && onInput(this.refs.input.value);
+              onInput={e => {
+                this.setState({ value: e.target.value });
+                onInput && onInput(e.target.value);
               }}
               onChange={() => {
-                onChange && onChange(this.refs.input.value);
+                onChange && onChange(e.target.value);
               }}
               value={this.state.value}
             />
@@ -133,20 +141,27 @@ export default class Input extends React.Component {
           {type === "search1" && (
             <button
               onClick={() => {
-                onEnter && onEnter(this.refs.input.value);
+                onEnter && onEnter(this.state.value);
               }}
             />
           )}
-          {this.state.showSelect && valueArr.length > 0 && (
-            <ul className="search-list">
-              {valueArr.map((item, index) => <li key={index} onClick={()=>{
-                  this.setState({value: item});
-                  console.log(99999)
-                  this.setState({ showSelect: false})
-                  onSelect && onSelect(item)
-                }}>{item}</li>)}
-            </ul>
-          )}
+          {this.state.showSelect &&
+            valueArr.length > 0 && (
+              <ul className="search-list">
+                {valueArr.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      this.setState({ value: item });
+                      this.setState({ showSelect: false });
+                      onSelect && onSelect(item);
+                    }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
           {children && children}
         </div>
       );

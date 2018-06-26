@@ -141,8 +141,7 @@ function getPricing(nameUsd) {
           op: `首次充值 BTC`,
           score: `+2000`,
           info: `首次充值 BTC 送 2000 积分`
-        },
-
+        }
       ]
     }
   };

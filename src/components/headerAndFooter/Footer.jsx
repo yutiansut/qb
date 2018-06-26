@@ -10,10 +10,10 @@ import './stylus/footer.styl'
 
 const footerArray = [
   {label: '资讯公告', to: '/notice'},
-  {label: '费率标准', to: '/trade'},
+  { label: '费率标准', to: '/help/pricing'},
   {label: '上币标准', to: '/user'},
-  {label: '服务协议', to: '/about'},
-  {label: 'API文档', to: '/topics'}
+  { label: '服务协议', to: '/help/terms'},
+  { label: 'API文档', to: '/help/api'}
 ];
 
 

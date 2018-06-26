@@ -31,7 +31,9 @@ export default class TotalAsset extends Component {
         <div className="item limit">
           <span>24H提币额度:</span>
           <b>{totalAsset.totalQuota} BTC</b>
-          {totalAsset.totalQuota > 2 ? <span className="disable">提额申请</span> : <NavLink to="/user/identity">提额申请</NavLink>}
+          {totalAsset.totalQuota > 2 ? <span className="disable">
+              提额申请
+            </span> : <NavLink to="/user/identity">提额申请</NavLink>}
         </div>
         <div className="item used">
           <span>已用:</span>
