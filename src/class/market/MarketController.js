@@ -107,7 +107,7 @@ export default class MarketController extends ExchangeControllerBase {
             priceEN: tradePairMsg[0].priceEN,
           }
         };
-    this.TradeDealController.setPairMsg(dealMsg)
+    this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg)
   }
   pairDataHandle() {
   
