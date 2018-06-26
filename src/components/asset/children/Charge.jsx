@@ -57,7 +57,7 @@ export default class Charge extends exchangeViewBase {
     this.getHistory = controller.getHistory.bind(controller);
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     let currency =
       this.props.location.query && this.props.location.query.currency;
     currency &&

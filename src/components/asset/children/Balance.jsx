@@ -15,12 +15,10 @@ export default class Balance extends exchangeViewBase {
     this.state = Object.assign(this.state, { totalAsset, wallet });
     //绑定方法
     this.getAssets = controller.getAssets.bind(controller)
-    this.getWallet = controller.getWallet.bind(controller)
   }
 
-  componentWillMount() {
-    this.getAssets()
-    this.getWallet();
+  async componentWillMount() {
+    !this.state.totalAsset && await this.getAssets();
   }
 
   render() {

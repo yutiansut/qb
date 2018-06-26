@@ -1,0 +1,42 @@
+@import "../../css/variable.styl"
+@import "../../css/base.styl"
+.title-input
+  display flex
+  height 0.36rem
+  line-height 0.36rem
+  color $normal-black-color
+  input
+    height 100%
+    padding 0 0.1rem 0 0.1rem
+    border 0.01rem solid $line-dark
+  p
+    height 100%
+    padding 0 0.1rem
+    border 0.01rem solid $line-dark
+    border-left none
+    color $normal-gray-color
+    background-color $normal-input-color
+    border-radius(0 0.02rem 0.02rem 0)
+  p:nth-child(1)
+    height 100%
+    padding 0 0.1rem
+    border 0.01rem solid $line-dark
+    border-right none
+    border-radius(0.02rem 0 0 0.02rem)
+  &.focus, &:hover
+    p,input
+      border-color $main-color
+  &.left
+    input
+      border-radius(0 0.02rem 0.02rem 0)
+  &.right
+    input
+      border-radius(0.02rem 0 0 0.02rem)
+  &.dark
+    background-color transparent
+    p,input
+      color $normal-white-color-a
+      border-color $line-dark-a
+    p
+      background-color $line-dark-a
+

@@ -73,8 +73,12 @@
     &.disabled
       background $disale-bg-color
       border 0.01rem solid $disale-border-color
-      border-radius 0.02rem
+      border-radius(0.02rem)
       placeholder($line-dark, 0.14rem)
+    &.dark, &.dark:hover, &.dark:focus
+      color $normal-white-color-a
+      background transparent
+      border 0.01rem solid $line-dark-a
   textarea
     padding-top 0.1rem
     padding-bottom 0.1rem

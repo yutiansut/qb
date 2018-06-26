@@ -103,6 +103,7 @@ export default class AssetStore extends ExchangeStoreBase {
       ],
       //币种列表
       walletList: ["USDT", "ETH", "BCH", "LSK", "BTC"],
+      // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
         availableCount: 100.22, //可用额度
@@ -243,6 +244,16 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.wallet = coinList;
     !this.state.walletList.length &&
       (this.state.walletList = coinList.map(v => v.coinName));
+  }
+  // 获取单个币种资产信息
+  async getCurrencyAmount() {
+    this.state.currencyAmount = await this.Proxy.balance({
+      data: {
+        userId: 0,
+        coinId: 0,
+        coinName: "BTC"
+      }
+    });
   }
   // 获取充币地址
   async getChargeAddress() {

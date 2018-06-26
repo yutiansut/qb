@@ -38,11 +38,11 @@ export default {
     //24小时提现额度, 查询币种额度，
     { name: 'balance', data: { url: '/property', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes' },
     // 充币地址查询
-    { name: 'chargeAddress', data: { url: '/property', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes' },
+    { name: 'chargeAddress', data: { url: '/common', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes' },
     // 充提记录
     { name: 'history', data: { url: '/property', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes' },
     // 提币信息
-    { name: 'extractInfo', data: { url: '/property', method: 'post' }, action: 'getWithdrawFee', actionBack: 'getWithdrawFeeRes' },
-    { name: 'extractAddress', data: { url: '/address', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes' },
+    { name: 'extractInfo', data: { url: '/common', method: 'post' }, action: 'getWithdrawFee', actionBack: 'getWithdrawFeeRes' },
+    { name: 'extractAddress', data: { url: '/common', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes' },
   ]
 }

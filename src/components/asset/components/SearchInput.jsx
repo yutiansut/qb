@@ -57,7 +57,9 @@ export default class Charge extends exchangeViewBase {
             {searchArr.map((item, index) => (
               <li
                 key={index}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
                   this.setValue(item);
                   this.setCurrency(item);
                   this.hide();

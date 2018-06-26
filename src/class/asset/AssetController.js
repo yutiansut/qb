@@ -24,20 +24,26 @@ export default class AssetController extends ExchangeControllerBase {
     this.store.state.walletList.length === 0 && await this.store.getChargeAddress();
     return this.store.state.walletList;
   }
+
+  // 获取总资产和额度
+  async getAssets() {
+    await this.store.getTotalAsset();
+    this.view.setState({
+      totalAsset: this.store.state.totalAsset,
+      wallet: this.store.state.wallet
+    })
+  }
+
+  // 获取单个币种资产信息
+  async getCurrencyAmount() {
+    await this.store.getCurrencyAmount();
+    this.view.setState({
+      currencyAmount: this.store.state.currencyAmount,
+    });
+  }
+
   // 获取交易对手续费
   async getPairFees() { }
-  // 获取总资产
-  async getAssets() {
-    //
-    // let data = await this.store.Proxy.topCurrency();
-    // console.log(data);
-    // // this.orderController && this.orederController.setPair()
-    // //
-    // this.store.state.totalAsset = data;
-    // this.view.setState({ totalAsset: data});
-    // // userReques
-    //t
-  }
   // 获取所有币种
   async getWalletList() {
 
@@ -50,13 +56,8 @@ export default class AssetController extends ExchangeControllerBase {
     // this.view.setState({ wallet: data});
   }
   async getCurrencyList() { }
-  // 获取充币信息
-  async getCurrencyAmount() {
-    // let data = await this.store.Proxy.topCurrency();
-    // console.log(data);
-    // this.store.state.wallet = data;
-    // this.view.setState({ wallet: data});
-  }
+
+
   // 获取充币地址
   async getCoinAddress() {
     // let data = await this.store.Proxy.topCurrency();

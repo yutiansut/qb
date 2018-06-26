@@ -23,7 +23,7 @@ export default class TotalAsset extends Component {
               </span> : <span>≈ {totalAsset.valuationEN} USD</span>}
             <div className="select">
               <SelectButton type="main" title={this.state.unit} simple={true} valueArr={["人民币", "美元"]} onSelect={item => {
-                  this.setState({ unit: item });
+                  this.setState({ unit: item })
                 }} />
             </div>
           </div>

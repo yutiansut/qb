@@ -3,6 +3,7 @@ import "./style.styl";
 /*
   placeholder, 占位文案
   type,  默认default, 可选search1(带搜索按钮),search2(带搜索图标),textarea, select
+  theme 默认无，可选dark(币币交易主题色)
   value, input的value值
   valueArr, 简单下拉菜单内容
   oriType, input类型 默认input
@@ -49,6 +50,7 @@ export default class Input extends React.Component {
       let {
         placeholder,
         type,
+        theme,
         value,
         valueArr,
         oriType,
@@ -86,7 +88,7 @@ export default class Input extends React.Component {
               type={oriType}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
-              }`}
+                } ${theme === 'dark' ? 'dark' : ''}`}
               disabled={disabled}
               readOnly={readOnly}
               placeholder={placeholder && placeholder}
@@ -119,7 +121,7 @@ export default class Input extends React.Component {
               type={oriType}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
-              }`}
+              } ${theme === 'dark' ? 'dark' : ''}`}
               disabled={disabled}
               readOnly={readOnly}
               placeholder={placeholder && placeholder}
@@ -140,7 +142,9 @@ export default class Input extends React.Component {
           )}
           {type === "search1" && (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
                 onEnter && onEnter(this.state.value);
               }}
             />
