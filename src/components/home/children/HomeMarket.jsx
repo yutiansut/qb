@@ -16,8 +16,12 @@ export default class HomeMarket extends ExchangeViewBase{
     super(props);
     this.state = {
       searchValue: '',
-      sortImg: "/static/images/rank_normal.svg"
-      // sortImg: ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
+      sortIndex: 0,
+      sortImg: "/static/images/rank_normal.svg",
+      searchRealt: [],
+      collectActive: false, // 控制收藏区的active
+      // collectImg: "/static/img/star.svg",
+      // collectType: 0
     };
     const {controller} = this.props;
     //绑定view
@@ -27,9 +31,12 @@ export default class HomeMarket extends ExchangeViewBase{
     console.log(this.state)
     //绑定方法
     this.marketDataHandle = controller.marketDataHandle.bind(controller);
-    this.changeMarket = controller.changeMarket.bind(controller)
+    this.changeMarket = controller.changeMarket.bind(controller) // 点击其他市场
+    this.collectMarket = controller.collectMarket.bind(controller) // 点击收藏
     // this.getData = controller.getData.bind(controller)
-    this.pairSort = controller.pairSort.bind(controller)
+    this.pairSort = controller.pairSort.bind(controller) // 排序
+    this.filte = controller.filte.bind(controller) // 筛选
+    this.addCollect = controller.addCollect.bind(controller) // 添加收藏
   }
   componentDidMount(){
     this.marketDataHandle();
@@ -38,10 +45,11 @@ export default class HomeMarket extends ExchangeViewBase{
     console.log(1234,this.state,this.state.recommendDataHandle)
     return(
       <div className='home-market inner'>
-
         <div className="market-nav clearfix">
           <ul className="clearfix">
-            <li>收藏区</li>
+            <li onClick={this.collectMarket}>
+              <span className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>收藏区</span>
+            </li>
             {this.state.marketDataHandle.map((v, index) => {return(
               <li key={index} onClick={this.changeMarket.bind(this,v)}>
                 <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()}市场</span>
@@ -50,7 +58,7 @@ export default class HomeMarket extends ExchangeViewBase{
           </ul>
           <Input
             type="search1"
-            placeholder="请输入交易盘"
+            onEnter={() => {this.filte(this.state.homeMarketPairData, this.state.searchValue)}}
             value={this.state.searchValue}
             onInput={value => {this.setState({searchValue: value })}} />
         </div>
@@ -60,19 +68,19 @@ export default class HomeMarket extends ExchangeViewBase{
             <tr>
               <th>收藏</th>
               {marketTableHead.map((v, index) => {
-                return(<th onClick={this.pairSort.bind(this,v)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
+                return(<th onClick={this.pairSort.bind(this,v,index)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                   {v.name}
-                  {/*<img src={`${v.clickFlag ? (v.type === 0 ? this.state.sortImg[0] : this.state.sortImg[1]) : this.state.sortImg[2]}`} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>*/}
-                  <img src={this.state.sortImg} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
+                  <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
                 </th>)
               })}
             </tr>
           </thead>
           <tbody>
-          {this.state.homeMarketPairData.map((v, index) => {
+          {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
             return(
               <tr key={index}>
-                <td>1111</td>
+                {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
+                <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td>
                 <td>{v.trade_pair}</td>
                 <td>{v.price}</td>
                 <td>{v.turnover}</td>

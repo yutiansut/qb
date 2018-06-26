@@ -24,7 +24,7 @@ export default class User extends exchangeViewBase {
     const {controller} = this.props
     let match = this.props.match
     return (
-      <div className="clearfix inner notice-wrap">
+      <div className="clearfix notice-wrap">
         <ul className="notice-nav fl">
           <li><NavLink activeClassName="active" to={`${match.url}/content`} >资讯公告</NavLink></li>
           <li><NavLink activeClassName="active" to={`${match.url}/contact`}>联系我们</NavLink></li>

@@ -36,7 +36,7 @@ export default class Footer extends Component {
 
   render() {
     return (
-      <div className="footer-wrap clearfix inner footerClass">
+      <div className="footer-wrap clearfix">
         <div className="fl">
           <Link to='/home' className="home-img"><img src="/static/img/logo-black.svg" alt=""/></Link>
           <ul className="clearfix">

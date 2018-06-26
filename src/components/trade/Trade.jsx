@@ -7,28 +7,32 @@ import CurrentOrder from './children/CurrentOrder.jsx'
 import HistoryOrder from './children/HistoryOrder.jsx'
 import TradePairDeal from './children/TradePairDeal.jsx'
 import TradePlan from './children/TradePlan.jsx'
+import TradeNotice from '../notice/TradeNotice.jsx'
 
 import MarketController from '../../class/market/MarketController'
 import OrderListController from '../../class/orderList/OrderListController'
 import TradeOrderController from '../../class/orderList/tradeOrderList/TradeOrderListController'
 import UserOrderListController from '../../class/orderList/userOrderList/UserOrderListController'
+import NoticeController from "../../class/notice/NoticeController";
 import DealController from '../../class/deal/DealController'
 
 
 import './stylus/trade.styl'
+
 const TradeMarketController = new MarketController();
 const TradeOrderListController = new TradeOrderController();
 // const TradeRecentController = new TradeOrderController();
 const TradeRecentController = new OrderListController();
 const CurrentOrderController = new UserOrderListController();
 const HistoryOrderController = new UserOrderListController();
+const noticeController = new NoticeController();
 const TradeDealController = new DealController();
 const TradePlanController = new DealController();
 
-// TradeDealController.TradeMarketController = TradeMarketController;
 TradeMarketController.TradeDealController = TradeDealController;
-export default class extends exchangeViewBase{
-  constructor(props){
+
+export default class extends exchangeViewBase {
+  constructor(props) {
     super(props)
   }
   render(){
@@ -62,15 +66,14 @@ export default class extends exchangeViewBase{
           </div>
          
           <div className='trade-bottom clearfix'>
-            <div className='trade-notice'></div>
+            <div className='trade-notice'>
+              <TradeNotice controller={noticeController}/>
+            </div>
             <div className='trade-order'>
               <CurrentOrder controller={CurrentOrderController}/>
               <HistoryOrder controller={HistoryOrderController}/>
             </div>
           </div>
-          
-
-
         </div>
     )
   }

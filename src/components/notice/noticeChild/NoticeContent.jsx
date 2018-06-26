@@ -12,8 +12,8 @@ export default class noticeContent extends exchangeViewBase {
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.getInformation = controller.getInformation.bind(controller) // 获取资讯
-    this.getnews = controller.getnews.bind(controller) // 获取新闻
+    // this.getInformation = controller.getInformation.bind(controller) // 获取资讯
+    // this.getnews = controller.getnews.bind(controller) // 获取新闻
     console.log('12244', this.state)
   }
 
@@ -29,8 +29,8 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await this.getInformation()
-    await this.getnews()
+    // await this.getInformation()
+    // await this.getnews()
 
   }
 
@@ -73,7 +73,7 @@ export default class noticeContent extends exchangeViewBase {
         </div>
         <div className="news-wrap" >
           <h1>资讯</h1>
-          <h2 className={this.state.informationList.data ? 'hide' : ''}>暂无资讯</h2>
+          <h2 className={this.state.newsList.data ? 'hide' : ''}>暂无资讯</h2>
           <dl className={this.state.newsList.data ? '' : 'hide'}>
             <dt>
               <i>标题</i>

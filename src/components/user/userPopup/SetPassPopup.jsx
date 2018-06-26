@@ -50,7 +50,7 @@ export default class SetPassPopup extends exchangeViewBase {
       <div className="pass-wrap" style={{display: this.props.isSet}}>
         <div className="pass-info">
           <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.changeSetPopup('none')}}/>
-          <h1>{this.props.isType && popupTypeList[this.props.isType - 1].title}</h1>
+          <h1 className="pop-title">{this.props.isType && popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>
               <li className={this.props.isType === 4 ? 'long-li' : 'hide'}>

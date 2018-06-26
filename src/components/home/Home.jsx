@@ -3,8 +3,10 @@ import React, {Component} from 'react';
 import exchangeViewBase from "../ExchangeViewBase";
 import HomeRecommend from './children/HomeRecommend.jsx' //交易盘市场
 import HomeMarket from './children/HomeMarket.jsx' //交易盘市场
+import HomeNotice from '../notice/HomeNotice.jsx' // 首页公告
 
 import MarketController from '../../class/market/MarketController'
+
 const recommendController = new MarketController();
 const marketController = new MarketController();
 
@@ -26,6 +28,7 @@ export default class Home extends exchangeViewBase {
           </div>
           <div alt="" className="banner-img"/>
         </div>
+        <HomeNotice />
         <HomeRecommend controller={recommendController}/>
         <HomeMarket controller={marketController}/>
       </div>

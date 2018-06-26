@@ -164,7 +164,7 @@ export default class App extends Component {
         <div>
           <Header/>
           <div style={{height: '.5rem'}}></div>
-          <div style={{minHeight: `${window.innerHeight-2.78*100}px`}}>
+          <div style={{minHeight: `${window.innerHeight-2.1*100}px`}}>
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/home" component={Home}/>

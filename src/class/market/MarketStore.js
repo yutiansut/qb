@@ -8,7 +8,7 @@ export default class MarketStore extends ExchangeStoreBase {
         {"market_name": "BTC",
           "market_data": [
             {
-              "trade_pair_id": 1,
+              "tradePairId": 1,
               "rise": -0.22,
               "price": 1023.22,
               "priceCN": 1023.22,
@@ -17,9 +17,9 @@ export default class MarketStore extends ExchangeStoreBase {
               "coin_name": "ETH",
               "market_name": "BTC",
               "trade_pair": "ETH/BTC",
-              "is_favorite": false,
+              "is_favorite": true,
               "is_new_born": false,
-              "turnover": 1111,
+              "turnover": 1111
             },
             {
               "trade_pair_id": 2,
@@ -34,12 +34,12 @@ export default class MarketStore extends ExchangeStoreBase {
               "is_favorite": false,
               "is_new_born": false,
               "turnover": 2222
-            },
+            }
           ]},
         {"market_name": "ETH",
           "market_data": [
             {
-              "trade_pair_id": 3,
+              "tradePairId": 3,
               "rise": -0.22,
               "price": 1023.22,
               "priceCN": 1023.22,
@@ -53,7 +53,7 @@ export default class MarketStore extends ExchangeStoreBase {
               "turnover": 3333
             },
             {
-              "trade_pair_id": 4,
+              "tradePairId": 4,
               "rise": -0.12,
               "price": 1023.22,
               "priceCN": 1022.22,
@@ -70,7 +70,7 @@ export default class MarketStore extends ExchangeStoreBase {
         {"market_name": "USDT",
           "market_data": [
             {
-              "trade_pair_id": 5,
+              "tradePairId": 5,
               "rise": -0.22,
               "price": 1023.22,
               "priceCN": 1023.22,
@@ -84,7 +84,7 @@ export default class MarketStore extends ExchangeStoreBase {
               "turnover": 5555
             },
             {
-              "trade_pair_id": 6,
+              "tradePairId": 6,
               "rise": -0.12,
               "price": 1023.22,
               "priceCN": 1022.22,

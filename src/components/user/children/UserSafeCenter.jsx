@@ -113,7 +113,6 @@ export default class userSafeCenter extends exchangeViewBase {
 
   async componentDidMount() {
     await this.initData()
-
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
@@ -188,7 +187,7 @@ export default class userSafeCenter extends exchangeViewBase {
         <div className={this.state.otherShow ? '' : 'hide'}>
           <div className="time model-div clearfix">
             <h2>其他设置</h2>
-            <ul className="fl">
+            <ul className="fl time-ul">
               <li>时区</li>
               <li className="clearfix">
                 {/*<input type="text" placeholder="时区"/>*/}
