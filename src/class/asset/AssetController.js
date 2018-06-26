@@ -16,16 +16,16 @@ export default class AssetController extends ExchangeControllerBase {
     return this.configController.initState;
   }
   async wallet() {
-    if(this.store.state.wallet.length === 0 )
-      await this.store.getWallet();
+    if (this.store.state.wallet.length === 0)
+      await this.store.getTotalAsset();
     return this.store.state.wallet
   }
   async walletList() {
-    // this.store.state.walletList.length === 0 && await this.store.getWalletList();
+    this.store.state.walletList.length === 0 && await this.store.getChargeAddress();
     return this.store.state.walletList;
   }
   // 获取交易对手续费
-  async getPairFees() {}
+  async getPairFees() { }
   // 获取总资产
   async getAssets() {
     //
@@ -39,7 +39,7 @@ export default class AssetController extends ExchangeControllerBase {
     //t
   }
   // 获取所有币种
-  async getWalletList(){
+  async getWalletList() {
 
   }
   // 获取币种资产
@@ -49,7 +49,7 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  async getCurrencyList() {}
+  async getCurrencyList() { }
   // 获取充币信息
   async getCurrencyAmount() {
     // let data = await this.store.Proxy.topCurrency();
@@ -71,10 +71,10 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  // 获取提币信息
-  async getExtract() {}
+  // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
+  async getExtract() { }
   // 请求验证码
-  async requestCode() {}
+  async requestCode() { }
   // 账户余额页面筛选
   filte(wallet, value, hideLittle, hideZero) {
     let arr1 = this.filter(wallet, item => {
@@ -124,7 +124,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 添加提现地址
   appendAddress({ addressName, address }) {
     this.store.appendAddress({ addressName, address });
-    this.view.state.walletExtract.extract_addr.push({ addressName, address });
+    this.view.state.walletExtract.extractAddr.push({ addressName, address });
     this.view.setState({
       walletExtract: this.view.state.walletExtract
     });
@@ -133,7 +133,7 @@ export default class AssetController extends ExchangeControllerBase {
   //删除提现地址
   deletAddress({ addressName, address }) {
     this.store.deletAddress({ addressName, address });
-    this.view.state.walletExtract.extract_addr = this.view.state.walletExtract.extract_addr.filter(
+    this.view.state.walletExtract.extractAddr = this.view.state.walletExtract.extractAddr.filter(
       item => item.address !== address
     );
     this.view.setState({

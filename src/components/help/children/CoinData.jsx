@@ -25,6 +25,12 @@ export default class CoinData extends exchangeViewBase {
     this.setCurrency = currency => {
       this.setState({ currency });
     };
+    this.search = () => {
+      let value = this.state.value !== '' && this.searchArr[0] || "BTC";
+      this.setValue(value);
+      this.setCurrency(value);
+      this.hide();
+    }
   }
   async componentWillMount() {
     this.setState({
@@ -33,7 +39,7 @@ export default class CoinData extends exchangeViewBase {
   }
   render() {
     let { controller } = this.props;
-    let searchArr = controller.filter(
+    this.searchArr = controller.filter(
       this.state.walletList,
       this.state.value.toUpperCase()
     );
@@ -52,23 +58,13 @@ export default class CoinData extends exchangeViewBase {
                 this.setValue(value);
               }}
               onFocus={this.show}
-              onEnter={() => {
-                let value = searchArr[0] || "BTC";
-                this.setValue(value);
-                this.setCurrency(value);
-                this.hide();
-              }}
-              clickOutSide={() => {
-                let value = searchArr[0] || "BTC";
-                this.setValue(value);
-                this.setCurrency(value);
-                this.hide();
-              }}
+              onEnter={this.search}
+              clickOutSide={this.search}
             >
               {this.state.showSearch &&
-                searchArr.length ? (
+                this.searchArr.length ? (
                   <ul className="search-list">
-                    {searchArr.map((item, index) => (
+                    {this.searchArr.map((item, index) => (
                       <li
                         key={index}
                         onClick={() => {

@@ -30,14 +30,14 @@ export default class Charge extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     let {
       walletList,
-      chargeHistory,
+      assetHistory,
       currencyAmount,
       coinAddress
     } = controller.initState;
 
     this.state = Object.assign(this.state, {
       walletList,
-      chargeHistory,
+      assetHistory,
       currencyAmount,
       coinAddress
     });
@@ -74,7 +74,7 @@ export default class Charge extends exchangeViewBase {
     window.addEventListener("click", this.hideQrcode);
   }
 
-  componentWillUpdate(props, state, next) {}
+  componentWillUpdate(props, state, next) { }
 
   componentWillUnmount() {
     window.removeEventListener("click", this.hideQrcode);
@@ -82,7 +82,7 @@ export default class Charge extends exchangeViewBase {
 
   render() {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
-    let { total, page, pageSize, orderList } = this.state.chargeHistory;
+    let { total, page, pageSize, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress.filter(
       item => item.coinName === this.state.currency
     )[0];
@@ -98,7 +98,7 @@ export default class Charge extends exchangeViewBase {
                 filte={this.props.controller.filter}
                 walletList={this.state.walletList}
                 value={this.state.value}
-                setValue={(value)=>{
+                setValue={(value) => {
                   this.setState({ value });
                 }}
                 setCurrency={(currency) => {
@@ -140,7 +140,7 @@ export default class Charge extends exchangeViewBase {
               ref="address"
               value={address ? address.coinAddress : ""}
               readOnly="readonly"
-              onChange={() => {}}
+              onChange={() => { }}
             />
           </div>
           <div className="handel">
@@ -211,24 +211,24 @@ export default class Charge extends exchangeViewBase {
                   },
                   index
                 ) => (
-                  <tr key={index}>
-                    <td>{orderTime}</td>
-                    <td>{coinName}</td>
-                    <td>{count}</td>
-                    <td>{postAddress}</td>
-                    <td>{receiveAddress}</td>
-                    <td>
-                      <a href={blockSite}>{`${doneCount}/${verifyCount}`}</a>
-                    </td>
-                    <td><span>{status[orderStatus]}</span></td>
-                  </tr>
-                )
+                    <tr key={index}>
+                      <td>{orderTime}</td>
+                      <td>{coinName}</td>
+                      <td>{count}</td>
+                      <td>{postAddress}</td>
+                      <td>{receiveAddress}</td>
+                      <td>
+                        <a href={blockSite}>{`${doneCount}/${verifyCount}`}</a>
+                      </td>
+                      <td><span>{status[orderStatus]}</span></td>
+                    </tr>
+                  )
               )}
             </tbody>
           </table>
           <div className="pagina">
             <Pagination
-              total={this.state.chargeHistory.totalCount}
+              total={this.state.assetHistory.totalCount}
               pageSize={pageSize}
               showTotal={true}
               showQuickJumper={true}

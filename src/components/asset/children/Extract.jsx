@@ -35,13 +35,13 @@ export default class Extract extends exchangeViewBase {
       walletExtract,
       walletList,
       currencyAmount,
-      extractHistory
+      assetHistory
     } = controller.initState;
 
     this.state = Object.assign(this.state, {
       walletExtract,
       walletList,
-      extractHistory,
+      assetHistory,
       currencyAmount
     });
 
@@ -67,9 +67,9 @@ export default class Extract extends exchangeViewBase {
     this.getHistory();
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUpdate(props, state, next) {}
+  componentWillUpdate(props, state, next) { }
 
   render() {
     let {
@@ -80,8 +80,8 @@ export default class Extract extends exchangeViewBase {
       availableQuota
     } = this.state.currencyAmount;
     let currency = this.state.currency;
-    let { fee, minerFee, extract_addr, minWithdraw } = this.state.walletExtract;
-    let { total, page, pageSize, orderList } = this.state.extractHistory;
+    let { fee, minerFee, extractAddr, minWithdraw } = this.state.walletExtract;
+    let { total, page, pageSize, orderList } = this.state.assetHistory;
 
     return (
       <div className="extract">
@@ -137,7 +137,7 @@ export default class Extract extends exchangeViewBase {
                 <Input
                   type="select"
                   readOnly={true}
-                  valueArr={extract_addr.map(item => item.address)}
+                  valueArr={extractAddr.map(item => item.address)}
                   onSelect={value => {
                     this.setState({ address: value });
                   }}
@@ -249,22 +249,22 @@ export default class Extract extends exchangeViewBase {
                   },
                   index
                 ) => (
-                  <tr key={index}>
-                    <td>{orderTime}</td>
+                    <tr key={index}>
+                      <td>{orderTime}</td>
                       <td>{coinName}</td>
                       <td>{count}</td>
                       <td>{postAddress}</td>
                       <td>{receiveAddress}</td>
                       <td><span>{status[orderStatus]}</span></td>
                       <td>{fee}</td>
-                  </tr>
-                )
+                    </tr>
+                  )
               )}
             </tbody>
           </table>
           <div className="pagina">
             <Pagination
-              total={this.state.extractHistory.totalCount}
+              total={this.state.assetHistory.totalCount}
               pageSize={pageSize}
               showTotal={true}
               showQuickJumper={true}
@@ -278,7 +278,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showAddressPopup && (
           <Popup
             type="popup3"
-            addressArr={extract_addr}
+            addressArr={extractAddr}
             onSave={add => {
               this.appendAddress(add);
             }}

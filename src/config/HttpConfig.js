@@ -29,5 +29,20 @@ export default {
   ],
   test: [
     {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
+  ],
+  asset: [
+    // 获取交易对手续费
+    { name: 'getFee', data: { url: '/order', method: 'post' }, action: 'geFee', actionBack: 'getFeeRes' },
+    // 获取总资产(包含各个钱包币种的详细信息)
+    { name: 'totalAsset', data: { url: '/property', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes' },
+    //24小时提现额度, 查询币种额度，
+    { name: 'balance', data: { url: '/property', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes' },
+    // 充币地址查询
+    { name: 'chargeAddress', data: { url: '/property', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes' },
+    // 充提记录
+    { name: 'history', data: { url: '/property', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes' },
+    // 提币信息
+    { name: 'extractInfo', data: { url: '/property', method: 'post' }, action: 'getWithdrawFee', actionBack: 'getWithdrawFeeRes' },
+    { name: 'extractAddress', data: { url: '/address', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes' },
   ]
 }
