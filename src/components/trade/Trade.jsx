@@ -5,11 +5,15 @@ import LiveTrade from './children/LiveTrade.jsx'
 import RecentTrade from './children/RecentTrade.jsx'
 import CurrentOrder from './children/CurrentOrder.jsx'
 import HistoryOrder from './children/HistoryOrder.jsx'
+import TradePairDeal from './children/TradePairDeal.jsx'
+import TradePlan from './children/TradePlan.jsx'
 
 import MarketController from '../../class/market/MarketController'
 import OrderListController from '../../class/orderList/OrderListController'
 import TradeOrderController from '../../class/orderList/tradeOrderList/TradeOrderListController'
 import UserOrderListController from '../../class/orderList/userOrderList/UserOrderListController'
+import DealController from '../../class/deal/DealController'
+
 
 import './stylus/trade.styl'
 const TradeMarketController = new MarketController();
@@ -18,6 +22,11 @@ const TradeOrderListController = new TradeOrderController();
 const TradeRecentController = new OrderListController();
 const CurrentOrderController = new UserOrderListController();
 const HistoryOrderController = new UserOrderListController();
+const TradeDealController = new DealController();
+const TradePlanController = new DealController();
+
+// TradeDealController.TradeMarketController = TradeMarketController;
+TradeMarketController.TradeDealController = TradeDealController;
 export default class extends exchangeViewBase{
   constructor(props){
     super(props)
@@ -29,7 +38,9 @@ export default class extends exchangeViewBase{
             <div className='trade-left'>
               <div className='trade-left-top'>
                 <div className='fl'>
-                  <div className='trade-pair-msg'>交易盘详细信息</div>
+                  <div className='trade-pair-msg'>
+                    <TradePairDeal controller={TradeDealController}/>
+                  </div>
                   <TradeMarket controller={TradeMarketController}/>
                 </div>
                 <div className='trade-chart'>
@@ -41,7 +52,7 @@ export default class extends exchangeViewBase{
                   <RecentTrade controller={TradeRecentController}/>
                 </div>
                 <div className='fr trade-plan'>
-      
+                  <TradePlan controller={TradePlanController}/>
                 </div>
               </div>
             </div>

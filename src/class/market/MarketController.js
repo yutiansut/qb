@@ -46,9 +46,9 @@ export default class MarketController extends ExchangeControllerBase {
       market:v,
       homeMarketPairData
     });
-    this.tradePairSelect(homeMarketPairData);
     this.store.state.market = v;
     this.store.state.homeMarketPairData = homeMarketPairData;
+    this.tradePairSelect(homeMarketPairData);
   }
   // 市场下交易对
   marketDataHandle() {
@@ -59,9 +59,9 @@ export default class MarketController extends ExchangeControllerBase {
       marketDataHandle:homeMarket,
       homeMarketPairData: homeMarketPair,
     });
-    this.tradePairSelect(homeMarketPair);
     this.store.state.marketDataHandle = homeMarket;
     this.store.state.homeMarketPairData = homeMarketPair;
+    this.tradePairSelect(homeMarketPair);
   }
   //交易对的选中
   tradePairSelect(list) {
@@ -69,7 +69,17 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       tradePair,
     });
-    this.store.state.tradePair = tradePair
+    this.store.state.tradePair = tradePair;
+    this.setDealMsg();
+    // console.log('dealMsg', this)
+  }
+  
+  tradePairChange(value) {
+    this.view.setState({
+      tradePair: value
+    });
+    this.store.state.tradePair = value;
+    this.setDealMsg();
   }
   //排序功能
   pairSort(v) { // type 1 升序 0 降序
@@ -83,6 +93,21 @@ export default class MarketController extends ExchangeControllerBase {
     v.type = !v.type
     console.log('图片2', v.type, imgArr[v.type])
 
+  }
+  
+  //为交易模块提供价格以及交易对的信息
+  setDealMsg(){
+    //改变deal模块中的信息
+    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.trade_pair === this.store.state.tradePair),dealMsg = {
+          tradePair: this.store.state.tradePair,
+          coinIcon: tradePairMsg[0].coinIcon,
+          prices:{
+            price: tradePairMsg[0].price,
+            priceCN: tradePairMsg[0].priceCN,
+            priceEN: tradePairMsg[0].priceEN,
+          }
+        };
+    this.TradeDealController.setPairMsg(dealMsg)
   }
   pairDataHandle() {
   

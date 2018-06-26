@@ -21,6 +21,8 @@ export default class TradeMarket extends ExchangeViewBase{
     this.marketDataHandle = controller.marketDataHandle.bind(controller);
     this.changeMarket = controller.changeMarket.bind(controller);
     this.pairSort = controller.pairSort.bind(controller);
+    this.setDealMsg = controller.setDealMsg.bind(controller);
+    this.tradePairChange = controller.tradePairChange.bind(controller)
   }
   componentDidMount(){
     this.marketDataHandle();
@@ -29,9 +31,7 @@ export default class TradeMarket extends ExchangeViewBase{
   
   }
   pairChange(v) {
-    this.setState({
-      tradePair: v.trade_pair
-    })
+    this.tradePairChange(v.trade_pair)
   }
   render(){
     return(
