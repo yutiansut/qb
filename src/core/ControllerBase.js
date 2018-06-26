@@ -40,36 +40,52 @@ export default class ControllerBase {
   countDown(key, state, view) {
     this.Loop[key].clear()
     this.Loop[key].setDelayTime(1000)
-    this.Loop[key].set(async ()=>{
+    this.Loop[key].set(async () => {
       // console.log(state, view.state[state])
-      if(view.state[state] === 0 ){
+      if (view.state[state] === 0) {
         this.Loop[key].stop()
         return
       }
       let obj = {};
-      obj[state] = view.state[state]-1;
+      obj[state] = view.state[state] - 1;
       view.setState(obj);
     }, 1000);
     this.Loop[key].start()
   }
 
-  countDownStop(key){
+  countDownStop(key) {
     this.Loop[key].clear()
   }
 
   /**
    * 轮播方法
    */
-  // 　swiper(key, state, view) {
-  //   this.Loop[key].clear()
-  //   this.Loop[key].setDelayTime(1000)
-  //   this.Loop[key].set(async ()=>{
-  //     let obj = {};
-  //     obj[state] = view.state[state]-1;
-  //     view.setState(obj);
-  //   }, 1000);
-  //   this.Loop[key].start()
-  // }
+  swiper(key, view, state, stateCache, criticalArr, speed, displayTime) {
+    this.Loop[key].clear()
+    this.Loop[key].setDelayTime(displayTime)
+    this.Loop[key].set(async () => {
+      let obj = {};
+      obj[state] = view.state[state] - speed;
+      obj[stateCache] = view.state[stateCache] - speed;
+      view.setState(obj);
+      if(view.state[state] === criticalArr[0]){
+        view.state[stateCache] = criticalArr[criticalArr.length-1]
+      }
+      if(view.state[stateCache] === criticalArr[0]){
+        view.state[state] = criticalArr[criticalArr.length-1]
+      }
+      if(criticalArr.includes(view.state[state]) || criticalArr.includes(view.state[stateCache])){
+        this.Loop[key].stop()
+        await this.Sleep(displayTime)
+        this.Loop[key].start()
+      }
+    }, 100);
+    this.Loop[key].start()
+  }
+
+  swiperStop(key) {
+    this.Loop[key].clear()
+  }
 
   /**
    * 从某一数组中按某一规则进行筛选
@@ -96,7 +112,7 @@ export default class ControllerBase {
    * return 排序后的数组
    */
   sort(arr, sortValue, type, sortDefault) {
-    if(!sortValue)
+    if (!sortValue)
       return
     return this.Util.deepCopy(arr).sort((a, b) => {
       let first = a, second = b;
@@ -104,7 +120,7 @@ export default class ControllerBase {
         first = first[v];
         second = second[v];
       });
-      if(first === second && sortDefault){
+      if (first === second && sortDefault) {
         first = a;
         second = b;
         sortDefault.forEach(v => {
