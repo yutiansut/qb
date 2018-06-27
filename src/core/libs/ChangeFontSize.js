@@ -5,12 +5,15 @@
         console.log('win', window.location.pathname)
         let clientWidth = document.body.clientWidth;
         clientWidth && (clientWidth /= 1440, clientWidth > 2 && (clientWidth = 2), clientWidth < 0.8 && (clientWidth = 0.8), docEl.style.fontSize = 100 * clientWidth + "px");
+        // 字体改变，通知k线图重绘
+        window.redrawKline && window.redrawKline();
       };
   
   if (!doc.addEventListener) return;
   win.addEventListener(resizeEvt, recalc, false);
   doc.addEventListener('DOMContentLoaded', recalc, false);
   win.onload = recalc;
+
  
 })(document, window);
 

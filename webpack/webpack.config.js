@@ -45,7 +45,13 @@ module.exports = {
       //   options: {
       //     name: 'static/[name].[ext]',
       //   },
-      // }
+      // },
+      {
+          test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+          loader: 'url-loader',
+          exclude: /node_modules/,
+      },
+
     ],
   },
   externals: process.env.NODE_ENV === 'production'

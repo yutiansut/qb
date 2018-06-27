@@ -8,6 +8,7 @@ import HistoryOrder from './children/HistoryOrder.jsx'
 import TradePairDeal from './children/TradePairDeal.jsx'
 import TradePlan from './children/TradePlan.jsx'
 import TradeNotice from '../notice/TradeNotice.jsx'
+import ReactKline from './kline'
 
 import MarketController from '../../class/market/MarketController'
 import OrderListController from '../../class/orderList/OrderListController'
@@ -48,7 +49,7 @@ export default class extends exchangeViewBase {
                   <TradeMarket controller={TradeMarketController}/>
                 </div>
                 <div className='trade-chart'>
-      
+                  <ReactKline />
                 </div>
               </div>
               <div className='trade-left-bottom'>
