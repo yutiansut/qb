@@ -88,16 +88,28 @@ export default class UserStore extends ExchangeStoreBase {
         ]
       }
     }
+    this.preHandler.push(this.userPreHandler)
+    this.installProxy("user", this.preHandler, this.afterHandler)
+  }
+
+  userPreHandler(app, req) {
+    // if (app.state.userInfo.loginState) {
+    //   let headers = new Headers();
+    //   headers.set('token', app.state.userInfo.token)
+    //   req.data.headers = headers;
+    // }
+    // req.params = Object.assign({app:0}, req.params)
+    console.log('用户', app, req)
   }
 
   async userInfo(){ // 获取用户信息
-    let userInfo = await this.Proxy.userInfo({"action": "userInfo", "data": {"uid": 2}});
+    let userInfo = await this.Proxy.getUserInfo({"data": {"uid": 2}});
     this.state.userInfo = userInfo.data;
     return userInfo
   }
 
   async userAuth(){ // 获取用户认证信息
-    let userAuth = await this.Proxy.userInfo({"action": "userAuth", "data": {"uid": 2}});
+    let userAuth = await this.Proxy.getUserAuth({"data": {"uid": 2}});
     console.log("2222用户", userAuth);
     this.state.userAuth = userAuth.data;
     return userAuth

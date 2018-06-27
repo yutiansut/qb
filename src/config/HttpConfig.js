@@ -21,8 +21,16 @@ export default {
   // httpPreHandler,
   // httpAfterHandler,
 
-  user: [
-    {name: 'userInfo', data: {url: '/user/', method: 'post'}},
+  user: [ // 用户
+    {name: 'getUserInfo', data: {url: '/user/', method: 'post'}, action: 'userInfo', actionBack: 'userInfoRes' }, // 获取用户信息
+    {name: 'getUserAuth', data: {url: '/user/', method: 'post'}, action: 'userAuth', actionBack: 'userAuthRes' }, // 获取用户认证信息
+    {name: 'uploadUserAuth', data: {url: '/user/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes' }, // 上传用户认证信息
+    {name: 'getLoginPwd', data: {url: '/user/', method: 'post'}, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes' }, // 设置登录密码
+    {name: 'getVerifyCode', data: {url: '/user/', method: 'post'}, action: 'getCode', actionBack: 'getCodeRes' }, // 获取验证码
+    {name: 'setFundPwd', data: {url: '/user/', method: 'post'}, action: 'setFundPass', actionBack: 'setFundPassRes' }, // 设置资金密码
+    {name: 'modifyFundPwd', data: {url: '/user/', method: 'post'}, action: 'modifyFundPass', actionBack: 'modifyFundPassRes' }, // 修改资金密码
+    {name: 'bindUser', data: {url: '/user/', method: 'post'}, action: 'bindAccount', actionBack: 'bindAccountRes' }, // 绑定手机邮箱
+    {name: 'getGoogle', data: {url: '/user/', method: 'post'}, action: 'getGoogleSecret', actionBack: 'getGoogleSecretRes' }, // 获取谷歌验证密钥
   ],
   notice: [
     {name: 'getActivity', data: {url: '/activity/', method: 'post'}}

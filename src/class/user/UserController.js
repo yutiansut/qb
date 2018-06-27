@@ -14,16 +14,16 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   checkNum(num) { // 进度条长度获取
-    let scoreArr = [0, 10000, 50000, 100000, 200000, 500000], sum = 0, index = 0, start = 0, end = 0;
+    let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
     if(!(scoreArr.length > 0)){
       return;
     }
-    if (num > 500000) { // 超过500000会出问题
-      index = 6
-      start = scoreArr[5]
-      end = num
-      return {checkStart: start, checkEnd: end, checkIndex: index}
-    }
+    // if (num > 500000) { // 超过500000会出问题
+    //   index = 6
+    //   start = scoreArr[5]
+    //   end = num
+    //   return {checkStart: start, checkEnd: end, checkIndex: index}
+    // }
     for (let i = 0; i < scoreArr.length; i++) {
       sum += scoreArr[i];
       if(sum >= num){
@@ -55,6 +55,7 @@ export default class UserController extends ExchangeControllerBase {
   }
   async initData() { // 获取用户信息
     let userInfo = await this.store.userInfo();
+    console.log('用户信息controller', userInfo)
     let obj = this.checkNum(userInfo.data.credits)
     this.view.setState({userInfo: userInfo.data, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
   }

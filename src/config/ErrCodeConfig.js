@@ -61,27 +61,27 @@ export default {
   },
 }
 
-PWD_ERROR = 601 //密码错误
-DB_ERROR = 602 // 数据库错误
-PARAM_ERROR = 603 // 请求参数错误
-USER_NO_EXIST = 604 // 无此用户
-USER_SYS_ERROR = 605 // 用户服务系统访问失败
-JSON_ERROR = 606 // json转化错误
-CODE_NOT_EXPIRE = 606 // 已发送，未超时3分钟
-CODE_EXPIRE = 607 // 验证码已过期
-CODE_WRONG = 608 // 验证码错误
-OP_TYPE_ERROR = 609 // 操作类型错误
-PWD_SAME = 610 // 与原密码相同
-
-// 公共错误
-ErrCodeNone = 0    // 正确
-ErrCodeUnknown = 1    // 未知错误
-ErrCodeConnectForbidden = 1001 // 连接被禁止
-ErrCodeConnectTokenInvalid = 1002 // 连接时传入的Token不合法
-
-// 业务逻辑错误
-ErrCodeGoogleAuthFailed = 2001 // 谷歌验证失败
-ErrCodeGoogleAuthDisable = 2002 // 谷歌验证未开启
+// PWD_ERROR = 601 //密码错误
+// DB_ERROR = 602 // 数据库错误
+// PARAM_ERROR = 603 // 请求参数错误
+// USER_NO_EXIST = 604 // 无此用户
+// USER_SYS_ERROR = 605 // 用户服务系统访问失败
+// JSON_ERROR = 606 // json转化错误
+// CODE_NOT_EXPIRE = 606 // 已发送，未超时3分钟
+// CODE_EXPIRE = 607 // 验证码已过期
+// CODE_WRONG = 608 // 验证码错误
+// OP_TYPE_ERROR = 609 // 操作类型错误
+// PWD_SAME = 610 // 与原密码相同
+//
+// // 公共错误
+// ErrCodeNone = 0    // 正确
+// ErrCodeUnknown = 1    // 未知错误
+// ErrCodeConnectForbidden = 1001 // 连接被禁止
+// ErrCodeConnectTokenInvalid = 1002 // 连接时传入的Token不合法
+//
+// // 业务逻辑错误
+// ErrCodeGoogleAuthFailed = 2001 // 谷歌验证失败
+// ErrCodeGoogleAuthDisable = 2002 // 谷歌验证未开启
 
 /**
  * 数据显示问题

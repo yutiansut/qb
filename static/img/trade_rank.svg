@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
-    <title>moren_paixu</title>
+    <title>rank_normal</title>
     <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M0,0 L10,0 L10,10 L0,10 L0,0 Z" id="path-1"></path>
-        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-0.5" y="-0.5" width="11" height="11">
-            <rect x="-0.5" y="-0.5" width="11" height="11" fill="white"></rect>
-            <use xlink:href="#path-1" fill="black"></use>
-        </mask>
-    </defs>
-    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon" transform="translate(-139.000000, -359.000000)">
-            <g id="10*10" transform="translate(60.000000, 349.000000)">
+    <defs></defs>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+        <g id="icon" transform="translate(-139.000000, -500.000000)" fill="#FFFFFF">
+            <g id="10*10" transform="translate(60.000000, 490.000000)">
                 <g id="默认-排序" transform="translate(79.000000, 10.000000)">
-                    <g id="moren_paixu" transform="translate(3.000000, 1.000000)" fill="#FFFFFF" fill-opacity="0.5">
+                    <g id="rank_normal" transform="translate(3.000000, 1.000000)">
                         <path d="M2.17213207,0.0650845298 L4.02510421,3.19818931 C4.08133271,3.29326346 4.04984208,3.41591849 3.95476792,3.47214698 C3.92393747,3.49038065 3.88877599,3.5 3.85295723,3.5 L0.147012945,3.5 C0.0365559952,3.5 -0.0529870549,3.41045695 -0.0529870549,3.3 C-0.0529870549,3.26418124 -0.0433677001,3.22901977 -0.0251340364,3.19818931 L1.82783811,0.0650845298 C1.8840666,-0.0299896229 2.00672163,-0.061480253 2.10179578,-0.00525176117 C2.13079044,0.0118961828 2.15498413,0.0360898655 2.17213207,0.0650845298 Z" id="Triangle"></path>
                         <path d="M2.17213207,5.06508453 L4.02510421,8.19818931 C4.08133271,8.29326346 4.04984208,8.41591849 3.95476792,8.47214698 C3.92393747,8.49038065 3.88877599,8.5 3.85295723,8.5 L0.147012945,8.5 C0.0365559952,8.5 -0.0529870549,8.41045695 -0.0529870549,8.3 C-0.0529870549,8.26418124 -0.0433677001,8.22901977 -0.0251340364,8.19818931 L1.82783811,5.06508453 C1.8840666,4.97001038 2.00672163,4.93851975 2.10179578,4.99474824 C2.13079044,5.01189618 2.15498413,5.03608987 2.17213207,5.06508453 Z" id="Triangle-Copy" transform="translate(2.000000, 6.750000) scale(1, -1) translate(-2.000000, -6.750000) "></path>
                     </g>
-                    <use id="Rectangle-4-Copy-12" stroke="#D9E3EE" mask="url(#mask-2)" stroke-dasharray="2" xlink:href="#path-1"></use>
                 </g>
             </g>
         </g>

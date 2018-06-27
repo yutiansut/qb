@@ -3,28 +3,38 @@
 .calendar-wrap
   position relative
   .input-wrap
+    &.active
+      input
+       border .01rem solid $main-color
+      &:before
+        position absolute
+        top .04rem
+        right .02rem
+        width .2rem
+        height .2rem
+        content ''
+        background url(/static/img/calendar/calendar_lan.svg) no-repeat
+        background-size .2rem .2rem
     &:before
       position absolute
-      top .07rem
-      right .05rem
+      top .04rem
+      right .02rem
       width .2rem
       height .2rem
       content ''
-      background url(/static/img/calendar/calendar_lan.svg) no-repeat
-      background-size 1.25rem 1.25rem
+      background url(/static/img/calendar/calendar_normal.svg) no-repeat
+      background-size .2rem .2rem
     input
       box-sizing()
-      width 0.89rem
+      width 1.06rem
       height .3rem
-      padding-left .1rem
+      padding-left .05rem
       margin-bottom .05rem
       font-size .14rem
       line-height .36rem
       background #FFF
-      border .01rem solid #C0CCDA
+      border .01rem solid $line-dark
       border-radius (.04rem)
-      &.active
-        border .01rem solid #0080D0
       &::-webkit-input-placeholder
         font-size .14rem
       &::-moz-placeholder
@@ -36,8 +46,8 @@
   box-sizing()
   width 2.58rem
   padding .16rem .26rem .18rem
-  background #FFF
-  border .01rem solid #D3DCE6
+  background $normal-white-color
+  border .01rem solid $disale-border-color
   box-shadow 0 .02rem .04rem 0 rgba(0, 0, 0, 0.12), 0 0 .06rem 0 rgba(0, 0, 0, 0.04)
   border-radius (.02rem)
   text-align center
@@ -46,7 +56,7 @@
     margin 0 auto .16rem
     font-size .14rem
     font-weight normal
-    color #475669
+    color $normal-black-color
     img
       position relative
       top 0
@@ -71,30 +81,30 @@
     width 100%
     font-size 0.12rem
     thead
-      color #8492A6
+      color $normal-black-color
     tbody
       td
         width .32rem
         height .28rem
         padding
         &.is-disabled, &.today-disabled
-          color #E1E1E1
+          color $line-light
           pointer-events none
           cursor not-allowed
         &.today-text
-          color #0080D0
+          color $main-color
         &.active-text:hover
           cursor pointer
-          background #E5E9F2
+          background $line-light
         &.active-set:hover
           cursor pointer
-          color #0080D0
+          color $main-color
         &.active
-          color #FFF
-          background #0080D0
+          color $normal-white-color
+          background $main-color
           &:hover
-            color #FFF
-            background #0080D0
+            color $normal-white-color
+            background  $main-color
 
   .calendar-content
     font-size .12rem

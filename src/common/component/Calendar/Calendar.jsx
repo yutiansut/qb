@@ -144,9 +144,8 @@ export default class Calendar extends Component {
   render() {
     return (
       <div className="calendar-wrap">
-        <div className="input-wrap">
+        <div className={`${this.state.calendarActive ? "active" : ""} input-wrap`}>
           <input type="text"
-                 className={this.state.calendarActive ? "active" : ""}
                  placeholder="选择日期"
                  onFocus={this.showCalendar.bind(this)}
                  onBlur={() => {this.setState({calendarActive: false})}}

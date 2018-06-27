@@ -1,4 +1,5 @@
 import StoreBase from '../core/StoreBase'
+import Msg from "../config/ErrCodeConfig";
 
 export default class ExchangeStoreBase extends StoreBase {
   constructor(modelName) {
@@ -10,12 +11,21 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   exchangeStoreBasePreHandler(app, req, config){
-    // await app.Sleep(3000);
+    let paramsObj = {
+      action: config.action,
+      data:req.data.params
+    }
+    req.data.params = paramsObj
+    // console.log(req.data.body)
     console.log('exchangeStoreBasePreHandler', app, req, config)
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config){
-    // await app.Sleep(3000);
+    if (res.result.action !== config.actionBack) {
+      res.result = Msg[1]
+      return
+    }
+    res.result = res.result.ret === 0 ? res.result.data : Msg[res.result.ret]
     console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 

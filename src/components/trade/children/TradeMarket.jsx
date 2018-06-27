@@ -15,7 +15,8 @@ export default class TradeMarket extends ExchangeViewBase {
       searchInput: false,
       searchValue: '',
       sortIndex: -1,
-      tradeSortImg: '/static/img/trade_rank.svg'
+      tradeSortImg: '/static/img/trade_rank.svg',
+      collectActive: false, // 控制收藏区的active
     };
     const {controller} = this.props;
     //绑定view
@@ -28,6 +29,9 @@ export default class TradeMarket extends ExchangeViewBase {
     this.setDealMsg = controller.setDealMsg.bind(controller);
     this.tradePairChange = controller.tradePairChange.bind(controller)
     this.filte = controller.filte.bind(controller) // 筛选
+    this.tradePairSelect = controller.tradePairSelect.bind(controller);
+    this.addCollect = controller.addCollect.bind(controller) // 添加收藏
+    this.collectMarket = controller.collectMarket.bind(controller) // 点击收藏
   }
 
   componentDidMount() {
@@ -46,11 +50,13 @@ export default class TradeMarket extends ExchangeViewBase {
       searchValue: e.target.value
     })
   }
-  onEnter(e) {
+  onEnter(e) { // 搜索回车选中事件
     if (e.nativeEvent.keyCode !== 13) return;
     this.setState({
       searchInput: false
     })
+    let result = this.filte(this.state.homeMarketPairData, this.state.searchValue)
+    this.tradePairSelect(result)
   }
 
   render() {
@@ -58,7 +64,7 @@ export default class TradeMarket extends ExchangeViewBase {
       <div className='trade-market'>
         <div className='trade-market-list'>
           <ul>
-            <li>收藏</li>
+            <li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>收藏</li>
             {this.state.marketDataHandle.map((v, index) => {
               return (
                 <li
@@ -101,7 +107,9 @@ export default class TradeMarket extends ExchangeViewBase {
                 <td>{v.trade_pair}</td>
                 <td>{v.price}</td>
                 <td>{v.rise}</td>
-                <td><img src={v.isFavorite ? "/static/img/trade_star_select.svg" :  "/static/img/trade_star.svg"} alt=""/></td>
+                <td onClick={value => this.addCollect(v, index)} className="img-td">
+                  <img src={v.isFavorite ? "/static/img/trade_star_select.svg" :  "/static/img/trade_star.svg"} alt=""/>
+                </td>
               </tr>
             )
           })}
