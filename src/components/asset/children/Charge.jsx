@@ -8,16 +8,16 @@ import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
 import "../style/charge.styl";
 
-const status = {
-  0: "未通过",
-  1: "审核中",
-  2: "通过",
-  3: "撤销"
-};
 export default class Charge extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = props;
+    this.status = {
+      0: this.intl.get('failed_v1'),
+      1: this.intl.get('pending_v1'),
+      2: this.intl.get('passed_v1'),
+      3: this.intl.get('cancel_v1')
+    };
     this.state = {
       currency: "BTC",
       value: "BTC",
@@ -81,45 +81,41 @@ export default class Charge extends exchangeViewBase {
   }
 
   render() {
+    console.log(this.intl.get('failed'))
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, page, pageSize, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress.filter(
       item => item.coinName === this.state.currency
     )[0];
 
-    return (
-      <div className="charge">
-        <h3>充币-{this.state.currency}</h3>
+    return <div className="charge">
+        <h3>
+          {this.intl.get("deposit_v1")}-{this.state.currency}
+        </h3>
         <div className="select">
           <div className="search clearfix">
-            <span className="title">选择币种</span>
+            <span className="title">{this.intl.get("asset-selectCoin_v1")}</span>
             <div className="currency-asset">
-              <SearchInput
-                filte={this.props.controller.filter}
-                walletList={this.state.walletList}
-                value={this.state.value}
-                setValue={(value) => {
+              <SearchInput filte={this.props.controller.filter} walletList={this.state.walletList} value={this.state.value} setValue={value => {
                   this.setState({ value });
-                }}
-                setCurrency={(currency) => {
+                }} setCurrency={currency => {
                   this.setState({ currency });
-                }}
-              />
+                }} />
               <ul>
                 <li>
-                  <span>总额</span>
+                  <span>{this.intl.get("asset-amount_v1")}</span>
                   <i>
                     {totalCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
-                  <span>下单冻结</span>
+                  <span>{this.intl.get("asset-orderLock_v1")}</span>
                   <i>
                     {frozenCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
-                  <span>可用余额</span>
+                  <span>{this.intl.get("asset-avail_v1")}</span>
                   <i>
                     {availableCount} {this.state.currency}
                   </i>
@@ -130,69 +126,54 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            注意：禁止向{this.state.currency}地址充值除{this.state.currency}之外的资产，任何充入{
-              this.state.currency
-            }地址的非{this.state.currency}资产将不可找回。
+            {this.intl.get('asset-depositTip_v1', {currency: this.state.currency})}
           </p>
           <div className="currency-address clearfix">
-            <span className="title">充值地址</span>
-            <input
-              ref="address"
-              value={address ? address.coinAddress : ""}
-              readOnly="readonly"
-              onChange={() => { }}
-            />
+            <span className="title">{this.intl.get('asset-depositAddress_v1')}</span>
+            <input ref="address" value={address ? address.coinAddress : ""} readOnly="readonly" onChange={() => {}} />
           </div>
           <div className="handel">
-            <Button
-              title="展示二维码"
-              type="base"
-              onClick={e => {
+            <Button title={this.intl.get('asset-showQrcode_v1')} type="base" onClick={e => {
                 e.nativeEvent.stopImmediatePropagation();
                 this.setState({ showQrcode: true });
-              }}
-            />
-            <Button
-              title="复制到剪贴板"
-              type="base"
-              onClick={() => {
+              }} />
+            <Button title={this.intl.get('asset-copy_v1')} type="base" onClick={() => {
                 this.copy(this.refs.address);
-              }}
-            />
+              }} />
             <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
               <QRCode value={address.coinAddress} level="M" />
             </div>
           </div>
         </div>
         <div className="tip clearfix">
-          <span className="title">温馨提示</span>
+          <span className="title">{this.intl.get('asset-reminder_v1')}</span>
           <ol>
             <li>
-              使用{this.state.currency}地址充值需要{address &&
-                address.verifyNumer}个网络确认才能到账
+              {this.intl.get('asset-depositReminder1_v1', {currency: this.state.currency, number: address && address.verifyNumer})}
             </li>
             <li>
-              充值完成后，你可以进入{" "}
-              <NavLink to={`/wallet/dashboard`}>资产记录</NavLink> 页面跟踪进度
+              {this.intl.get('asset-depositReminder2-1_v1')} <NavLink to={`/wallet/dashboard`}>
+                {this.intl.get('asset-records_v1')}
+              </NavLink> {this.intl.get('asset-depositReminder2-2_v1')}
             </li>
           </ol>
         </div>
         <div className="to-trade clearfix">
-          <span className="title">去交易</span>
+          <span className="title">{this.intl.get('asset-toTrade_v1')}</span>
           <Button title="EOS/BTC" type="base" />
         </div>
         <div className="history clearfix">
-          <span className="title">充币记录</span>
+        <span className="title">{this.intl.get('asset-depositHistory_v1')}</span>
           <table>
             <thead>
               <tr>
-                <th className="time">充值时间</th>
-                <th className="currency">币种</th>
-                <th className="amount">充值数量</th>
-                <th className="send">发送地址</th>
-                <th className="receive">接收地址</th>
-                <th className="confirm">确认数</th>
-                <th className="state">状态</th>
+                <th className="time">{this.intl.get('asset-depositTime_v1')}</th>
+                <th className="currency">{this.intl.get('asset-depositTime_v1')}</th>
+                <th className="amount">{this.intl.get('asset-depositAmount_v1')}</th>
+                <th className="send">{this.intl.get('asset-sendAddress_v1')}</th>
+                <th className="receive">{this.intl.get('asset-receiveAddress_v1')}</th>
+                <th className="confirm">{this.intl.get('asset-confirm_v1')}</th>
+                <th className="state">{this.intl.get('state_v1')}</th>
               </tr>
             </thead>
             <tbody>
@@ -207,39 +188,36 @@ export default class Charge extends exchangeViewBase {
                     verifyCount,
                     doneCount,
                     blockSite,
-                    orderStatus,
+                    orderStatus
                   },
                   index
                 ) => (
-                    <tr key={index}>
-                      <td>{orderTime}</td>
-                      <td>{coinName}</td>
-                      <td>{count}</td>
-                      <td>{postAddress}</td>
-                      <td>{receiveAddress}</td>
-                      <td>
-                        <a href={blockSite}>{`${doneCount}/${verifyCount}`}</a>
-                      </td>
-                      <td><span>{status[orderStatus]}</span></td>
-                    </tr>
-                  )
+                  <tr key={index}>
+                    <td>{orderTime}</td>
+                    <td>{coinName}</td>
+                    <td>{count}</td>
+                    <td>{postAddress}</td>
+                    <td>{receiveAddress}</td>
+                    <td>
+                      <a
+                        href={blockSite}
+                      >{`${doneCount}/${verifyCount}`}</a>
+                    </td>
+                    <td>
+                        <span>{this.status[orderStatus]}</span>
+                    </td>
+                  </tr>
+                )
               )}
             </tbody>
           </table>
           <div className="pagina">
-            <Pagination
-              total={this.state.assetHistory.totalCount}
-              pageSize={pageSize}
-              showTotal={true}
-              showQuickJumper={true}
-              currentPage={page + 1}
-            />
+            <Pagination total={this.state.assetHistory.totalCount} pageSize={pageSize} showTotal={true} showQuickJumper={true} currentPage={page + 1} />
           </div>
           <p className="more">
-            <NavLink to={`/wallet/dashboard`}>查看全部→</NavLink>
+            <NavLink to={`/wallet/dashboard`}>{this.intl.get('asset-viewAll_v1')}→</NavLink>
           </p>
         </div>
-      </div>
-    );
+      </div>;
   }
 }

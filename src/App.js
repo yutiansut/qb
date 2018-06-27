@@ -1,3 +1,11 @@
+import intl from "react-intl-universal";
+import en from "./lang/en.js"
+import zh from "./lang/zh.js"
+// locale data
+const locales = {
+  "en-US": en,
+  "zh-CN": zh,
+};
 import "./common/css/index.styl"
 
 import './common/css/headerNav.styl'
@@ -147,6 +155,8 @@ const navArray = [
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.state = { initDone: false }
+
   }
 
   componentWillMount() {
@@ -154,20 +164,33 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    this.loadLocales();
     console.log(222, window.innerHeight)
-
   }
 
   componentWillUpdate(...parmas) {
     console.log(333, window.innerHeight)
 
   }
+  loadLocales() {
+    // init method will load CLDR locale data according to currentLocale
+    // react-intl-universal is singleton, so you should init it only once in your app
+    intl.init({
+      currentLocale: 'en-US', // TODO: determine locale here
+      // currentLocale: 'zh-CN', // TODO: determine locale here
+      locales,
+    })
+      .then(() => {
+        // After loading CLDR locale data, start to render
+        this.setState({ initDone: true });
+      });
+  }
 
   render() {
 
     return (
       <Router>
-        <div>
+        {this.state.initDone && <div>
           <Header/>
           <div style={{height: '.5rem'}}></div>
           <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
@@ -192,7 +215,7 @@ export default class App extends Component {
             <Route path="/trade" component={tradeFooter}/>
             <Route component={Footer}/>
           </Switch>
-        </div>
+        </div>}
       </Router>
     );
   }

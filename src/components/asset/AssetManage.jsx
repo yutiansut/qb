@@ -60,22 +60,22 @@ export default class AssetManage extends exchangeViewBase {
         <ul className="nav">
           <li>
             <NavLink activeClassName="active" to={`${match.url}/balance`}>
-              账户余额
+              {this.intl.get('asset-balance_v1')}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/charge`}>
-              充币
+              {this.intl.get('deposit_v1')}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/extract`}>
-              提币
+            {this.intl.get('asset-withdraw_v1')}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/dashboard`}>
-              资产记录
+              {this.intl.get('asset-records_v1')}
             </NavLink>
           </li>
         </ul>
