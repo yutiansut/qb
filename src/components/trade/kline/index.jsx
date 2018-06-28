@@ -37,8 +37,6 @@ class ReactKline extends React.Component {
         this.state.kline = new Kline(cfg);
         this.state.kline.draw();
         //
-
-        //
         let _kline=this.state.kline;
         window.redrawKline=function () {
             let tradeChart=document.querySelector(".trade-chart");

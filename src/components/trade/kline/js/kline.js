@@ -501,7 +501,7 @@ export default class Kline {
                 ChartManager.instance.redraw('All', false);
             });
 
-            $('body').on('click', '#sizeIcon', function () {
+            $('#sizeIcon').on('click', function () {
                 Kline.instance.isSized = !Kline.instance.isSized;
                 if (Kline.instance.isSized) {
                     $(Kline.instance.element).css({
@@ -514,7 +514,6 @@ export default class Kline {
                         height: '100%',
                         zIndex: '10000'
                     });
-
                     Control.onSize();
                     $('html,body').css({width: '100%', height: '100%', overflow: 'hidden'});
                 } else {
