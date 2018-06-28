@@ -45,22 +45,8 @@ export default class Header extends Component {
       navClass: 'headerNav',
       languageIndex: 0
     }
-    this.changeNavClass = this.changeNavClass.bind(this)
     this.changeLanguage = this.changeLanguage.bind(this) // 改变语言
     this.matched = '/home'
-  }
-
-  changeNavClass(to) {
-    // console.log('aaa',to)
-    if(this.matched === to){
-      return
-    }
-    this.matched = to
-    let navClass = 'headerNav'
-    if (to === '/trade') {
-      navClass = 'tradeNav'
-    }
-    this.setState({navClass})
   }
 
   changeLanguage(index) {
@@ -72,14 +58,26 @@ export default class Header extends Component {
 
   render() {
     return (
-      <div className={`${this.state.navClass} clearfix`}>
+      <div className={`${this.props.navClass} clearfix`}>
         <ul className="clearfix">
           <li className='nav-logo'>
             <Link to='/home'></Link>
           </li>
           {navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
-            return <NavChild to={v.to} label={v.label} match={match} changeNavClass={this.changeNavClass}
-                             select={v.select} childrenList={v.childrenList}/>
+            return <li className={`header-nav${match ? '-active' : ''} ${v.select ? 'select-list' : ''}`}>
+          <Link to={v.to}>{v.label}</Link>
+          {v.select && (
+            <ul className='select-router'>
+              {v.childrenList.map((v, index) => {
+                return (
+                  <li key={index}>
+                    <NavLink activeClassName="children-active" to={v.to}>{v.label}</NavLink>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+          </li>
           }
           }/>))}
         </ul>
@@ -94,16 +92,16 @@ export default class Header extends Component {
               <a href="javascript:void(0)">查看全部</a>
             </div>
           </li>
-          <li className="login-li" onClick={this.changeNavClass}>
+          <li className="login-li">
             <NavLink activeClassName="header-right-active" to="/login">登录/注册</NavLink>
           </li>
           <li className="user-li">
             <p>12345678987</p>
             <ul className="login-ul">
-              <li onClick={this.changeNavClass}>
+              <li>
                 <NavLink to="/user/safe">安全中心</NavLink>
               </li>
-              <li onClick={this.changeNavClass}>
+              <li>
                 <NavLink to="/user/identity">身份认证</NavLink>
               </li>
             </ul>
@@ -122,39 +120,6 @@ export default class Header extends Component {
           </li>
         </ol>
       </div>
-    )
-  }
-}
-
-
-class NavChild extends Component {
-  constructor(props) {
-    super(props)
-    // console.log(props)
-    props.match && this.props.changeNavClass(props.match.path)
-  }
-
-  componentWillUpdate(props) {
-    props.match && this.props.changeNavClass(props.match.path)
-  }
-
-  render() {
-    console.log('navchild render')
-    return (
-      <li className={`header-nav${this.props.match ? '-active' : ''} ${this.props.select ? 'select-list' : ''}`}>
-        <Link to={this.props.to}>{this.props.label}</Link>
-        {this.props.select && (
-          <ul className='select-router'>
-            {this.props.childrenList.map((v, index) => {
-              return (
-                <li key={index}>
-                  <NavLink activeClassName="children-active" to={v.to}>{v.label}</NavLink>
-                </li>
-              )
-            })}
-          </ul>
-        )}
-      </li>
     )
   }
 }

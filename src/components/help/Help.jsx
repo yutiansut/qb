@@ -9,9 +9,9 @@ import MarketController from "../../class/market/MarketController"
 const marketController = new MarketController();
 
 
-import Terms from './children/Terms' // 资讯公告
-import Pricing from './children/Pricing' // 联系我们
-import Api from './children/Api' // 上币申请
+import Terms from './children/Terms' // 服务协议
+import Pricing from './children/Pricing' // 费率标准
+import Api from './children/Api' // API文档
 import CoinData from "./children/CoinData"; // 币种资料
 
 import "./style/index.styl"

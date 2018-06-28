@@ -6,7 +6,7 @@ export default class ExchangeStoreBase extends StoreBase {
     super();
     this.preHandler.push(this.exchangeStoreBasePreHandler);
     this.afterHandler.push(this.exchangeStoreBaseAfterHandler);
-    console.log(modelName)
+    // console.log(modelName)
     modelName && this.installProxy(modelName, this.preHandler, this.afterHandler)
   }
 
@@ -17,7 +17,7 @@ export default class ExchangeStoreBase extends StoreBase {
     }
     req.data.params = paramsObj
     // console.log(req.data.body)
-    console.log('exchangeStoreBasePreHandler', app, req, config)
+    // console.log('exchangeStoreBasePreHandler', app, req, config)
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config){

@@ -115,6 +115,7 @@ export default class userSafeCenter extends exchangeViewBase {
     await this.initData()
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
+    console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
     verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
     verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
@@ -144,7 +145,7 @@ export default class userSafeCenter extends exchangeViewBase {
           <h2>基本资料</h2>
           <ul className="fl clearfix">
             <li>用户ID</li>
-            <li>{this.state.userInfo.uid && this.state.userInfo.uid || ''}</li>
+            <li>{this.state.userInfo.uid || ''}</li>
             <li>电子邮件</li>
             <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup('block', 1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
             <li>手机号</li>

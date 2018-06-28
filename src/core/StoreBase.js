@@ -64,7 +64,7 @@ export default class StoreBase {
         // console.log('0', req)
         if (preHandler && preHandler.length) {
           // preHandler(this, req);
-          console.log(preHandler)
+          // console.log(preHandler)
           for (let i = 0; i < preHandler.length; i++) {
             await preHandler[i](this, req, v)
           }
@@ -76,7 +76,7 @@ export default class StoreBase {
         // console.log(data.url, !result, result.code !== 200, result.msg !== 'ok', result,httpFilter)
         if (afterHandler && afterHandler.length) {
           // afterHandler(this, req, res);
-          console.log(afterHandler)
+          // console.log(afterHandler)
           for (let i = 0; i < afterHandler.length; i++) {
             await afterHandler[i](this, req, res, v)
           }

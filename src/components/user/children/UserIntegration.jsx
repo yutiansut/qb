@@ -23,8 +23,8 @@ export default class userIntegration extends exchangeViewBase {
 
   }
 
-  componentDidMount() {
-    this.initData()
+  async componentDidMount() {
+    await this.initData()
 
   }
 
@@ -33,6 +33,7 @@ export default class userIntegration extends exchangeViewBase {
   }
 
   render() {
+    console.log('用户信息3', this.state)
     return (
       <div className="integration-wrap">
         <h1>我的积分</h1>
@@ -41,7 +42,7 @@ export default class userIntegration extends exchangeViewBase {
           <div className="fl">
             <h3>
               <b>目前等级：VIP{this.state.userInfo.level}（积分：{this.state.userInfo.credits}）</b>
-              <a href="javascript:void(0)">等级说明</a>
+              <Link to="/help/pricing">等级说明</Link>
             </h3>
             <ul className="clearfix">
               <li>VIP0</li>
@@ -76,7 +77,7 @@ export default class userIntegration extends exchangeViewBase {
         <div className="item clearfix">
           <h2>积分详情</h2>
           <div className="fl">
-            <a href="javascript:void(0)">如何获得积分？</a>
+            <Link to="/help/pricing">如何获得积分？</Link>
             <table>
               <thead>
               <tr>

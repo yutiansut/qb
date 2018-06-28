@@ -57,7 +57,7 @@ export default class userIdentity extends exchangeViewBase {
     return url ;
   }
   async selectPhoto() { // 上传图片
-    let file = this.refs.files.files[0], uploadImg = new FormData();
+    let file = this.refs.files.files[0], uploadImg = new FormData(), headers = new Headers();
     if(!file) return
     if(file && file.size > 10485760) return
     this.state.showPhotoList[this.state.imgUrlIndex] = this.getObjectURL(file);
@@ -65,10 +65,15 @@ export default class userIdentity extends exchangeViewBase {
       showPhotoList: this.state.showPhotoList.concat([])
     })
     uploadImg.append("uploadimage", file);
+    headers.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
+    console.log(headers)
+    console.log('uploadImg', uploadImg, file)
     await fetch("http://192.168.113.141/image/", {
       method: 'Post',
-      body: uploadImg
-    }).then(res => res.json()).then(res => {
+      body: uploadImg,
+      headers,
+      // credentials: 'include'
+    }).then(res => res.json(),res=>console.log(res)).then(res => {
       let imgUrl = `image${this.state.imgUrlIndex + 1}`, obj={}
       obj[imgUrl] = res.image_id
       this.setState(obj)

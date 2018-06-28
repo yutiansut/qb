@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import exchangeViewBase from "../ExchangeViewBase";
 import HomeRecommend from './children/HomeRecommend.jsx' //交易盘市场
@@ -24,7 +25,7 @@ export default class Home extends exchangeViewBase {
         <div className="banner-wrap">
           <div>
             <img src="/static/img/banner_title.svg" alt=""/>
-            <a href="javascript:void(0)">立即注册</a>
+            <Link to="/activity/fresh">立即注册</Link>
           </div>
           <div alt="" className="banner-img"/>
         </div>

@@ -9,12 +9,12 @@ export default class ExchangeViewBase extends ViewBase {
 
   componentWillMount() {
     super.componentWillMount();
-    console.log('exchangeViewBase componentWillMount')
+    // console.log('exchangeViewBase componentWillMount')
   }
 
   componentDidMount() {
-    // super.componentDidMount();
-    console.log('exchangeViewBase componenDidMount')
+    super.componentDidMount();
+    // console.log('exchangeViewBase componenDidMount')
   }
 
 }

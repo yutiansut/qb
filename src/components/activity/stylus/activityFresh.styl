@@ -1,0 +1,67 @@
+@import "../../../common/css/variable.styl"
+
+.active-fresh-wrap
+  width 10rem
+  margin .51rem auto 0
+  padding-bottom .74rem
+  .hide
+    display none
+  .banner-img
+    position relative
+    width 10rem
+    height 3.8rem
+    background url("/static/img/img_bg.jpg") no-repeat
+    background-size 100% 100%
+    margin-bottom .44rem
+    img
+      position absolute
+      top 50%
+      left 50%
+      transform translateX(-50%) translateY(-50%)
+      width 9rem
+      height 1.3rem
+
+  h1
+    font-size .28rem
+    color $normal-black-color
+    margin-bottom .44rem
+    a
+      font-size .28rem
+      color $main-color
+      margin-left .2rem
+      &:hover
+        text-decoration underline
+  dl
+    margin-bottom .5rem
+    color $normal-black-color
+    dt
+      font-size .2rem
+      margin-bottom .2rem
+    dd
+      margin-bottom .15rem
+      &:nth-of-type(1)
+        a
+          color $main-color
+          &:hover
+            text-decoration underline
+      &:nth-of-type(2)
+        span
+          color $negative-color
+  ul
+    margin-bottom .44rem
+    li
+      margin-bottom .15rem
+  .record-list
+    p
+      font-size .2rem
+      color $normal-black-color
+      margin-bottom .3rem
+    table
+      width 100%
+      td
+        padding-bottom .18rem
+      thead
+        color $normal-gray-color
+      tbody
+        color $normal-black-color
+

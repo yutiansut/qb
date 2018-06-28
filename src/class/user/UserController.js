@@ -55,14 +55,13 @@ export default class UserController extends ExchangeControllerBase {
   }
   async initData() { // 获取用户信息
     let userInfo = await this.store.userInfo();
-    console.log('用户信息controller', userInfo)
-    let obj = this.checkNum(userInfo.data.credits)
-    this.view.setState({userInfo: userInfo.data, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
+    let obj = this.checkNum(userInfo.credits)
+    this.view.setState({userInfo: userInfo, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
   }
 
   async getUserAuthData() { // 获取用户认证信息
     let userAuth = await this.store.userAuth();
-    this.view.setState({userAuth: userAuth.data})
+    this.view.setState({userAuth: userAuth})
   }
 
   uploadInfo() { // 身份认证确认提交
@@ -113,5 +112,18 @@ export default class UserController extends ExchangeControllerBase {
       }
     })
     console.log('设置密码', result)
+  }
+
+  // 为其他模块提供接口
+  // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码
+  get userVerify() { // 提供两步认证信息
+    let {
+      fundPassVerify, loginVerify, withdrawVerify
+    } = this.store.state.userInfo
+    return {fundPassVerify, loginVerify, withdrawVerify}
+  }
+
+  get userFundPass() { // 提供是否设置资金密码
+
   }
 }

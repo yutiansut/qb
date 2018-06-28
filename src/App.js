@@ -25,6 +25,7 @@ import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
 import LoginController from "./class/login/LoginController";
 import NoticeController from "./class/notice/NoticeController";
+import ActivityController from "./class/activity/ActivityController";
 import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController"
 
 
@@ -34,10 +35,11 @@ const assetController = new AssetController();
 const userController = new UserController();
 const loginController = new LoginController();
 const noticeController = new NoticeController();
+const activityController = new ActivityController();
 
 testAppController.configController = configController;
-
 noticeController.configController = configController;
+activityController.configController = configController;
 assetController.configController = configController;
 // console.log(noticeController.configController)
 
@@ -52,66 +54,15 @@ import NoticeInfo from './components/notice/NoticeBulletin.jsx'
 import OrderManage from './components/order/OrderManage.jsx'
 import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
+import ActivityInfo from "./components/activity/Activity.jsx"
 
 import massageHandler from './core/messageHandler'
 import ServerConfig from './config/ServerConfig'
 import WebSocketConfig from './config/WebSocketConfig'
 
-console.log('massageHandler', massageHandler)
+// console.log('massageHandler', massageHandler)
 WebSocketConfig.useWebSocket && massageHandler.install(ServerConfig, WebSocketConfig.webSocketList)
 
-
-const About = () => (
-  <div>
-    <ul>
-      <li>
-        <Link to="/">首页</Link>
-      </li>
-      <li>
-        <Link to="/about">关于</Link>
-      </li>
-      <li>
-        <Link to="/topics">主题列表</Link>
-      </li>
-      <TestApp
-        className="testAAA"
-        sta="aaaaaaaa"
-        controller={testAppController}
-      />
-    </ul>
-  </div>
-);
-const Topics = ({match}) => (
-  <div>
-    <h2>主题列表</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>使用 React 渲染</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>组件</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>属性 v. 状态</Link>
-      </li>
-      <li>
-        <Link to="/">回退</Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic}/>
-    <Route exact path={match.url} render={() => <h3>请选择一个主题。</h3>}/>
-  </div>
-);
-
-const Topic = ({match}) => {
-  console.log(match);
-  return (
-    <div>
-      <h3>{match.params.topicId}</h3>
-    </div>
-  );
-};
 
 const Asset = ({match}) => {
   return <AssetManange controller={assetController} match={match}/>;
@@ -139,10 +90,22 @@ const tradeFooter = ({match}) => {
   return <div>tradeFotter</div>
 }
 
-
 const Help = ({match}) => {
   return <Helper controller={assetController} match={match}/>;
 };
+
+const Activity = ({match}) => {
+  return <ActivityInfo controller={activityController} match={match}/>;
+}
+
+const header = ({match}) => {
+  return <Header navClass={'headerNav'} match={match}/>;
+}
+
+const tradeHeader = ({match}) => {
+  return <Header navClass={'tradeNav'} match={match}/>;
+}
+
 
 const navArray = [
   {label: '首页', to: '/home', select: false, linkUser: false},
@@ -191,7 +154,11 @@ export default class App extends Component {
     return (
       <Router>
         {this.state.initDone && <div>
-          <Header/>
+          {/*<Header/>*/}
+          <Switch>
+            <Route path="/trade" component={tradeHeader}/>
+            <Route component={header}/>
+          </Switch>
           <div style={{height: '.5rem'}}></div>
           <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
             <Switch>
@@ -199,7 +166,7 @@ export default class App extends Component {
               <Route path="/home" component={Home}/>
               <Route path='/trade' component={Trade}/>
               <Route path="/login" component={Loign}/>
-              {/*<Route path="/about" component={About} />*/}
+              {/*<Route path="/about" component={TestApp} />*/}
               {/*<Route path="/topics" component={Topics} />*/}
               <Route path="/wallet" component={Asset}/>
               <Route path="/order" component={Order}/>
@@ -207,6 +174,7 @@ export default class App extends Component {
               <Route path="/findPass" component={ForgetPass}/>
               <Route path="/notice" component={Notice}/>
               <Route path="/help" component={Help}/>
+              <Route path="/activity" component={Activity}/>
               <Redirect to="/"/>
             </Switch>
           </div>
