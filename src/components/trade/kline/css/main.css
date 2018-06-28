@@ -174,7 +174,7 @@
 
 .chart_container.dark .chart_dropdown_t {
     background-image: url("../img/dropdown_w.png");
-    background-position: right 9px;
+    background-position: right 7px;
     border-color: #191f28;
     color: #e5e5e5
 }
@@ -182,7 +182,7 @@
 .chart_container.dark .chart_dropdown-hover.chart_dropdown_t {
     background-color: #191f28;
     background-image: url("../img/dropup_w.png");
-    background-position: right 8px;
+    background-position: right 7px;
     border-color: #606060;
     color: #fff
 }
@@ -211,7 +211,7 @@
 
 .chart_container.light .chart_dropdown_t {
     background-image: url("../img/dropdown_b.png");
-    background-position: right 10px;
+    background-position: right 7px;
     border-color: #f6f6f6;
     color: #393c40
 }
@@ -219,7 +219,7 @@
 .chart_container.light .chart_dropdown-hover.chart_dropdown_t {
     background-color: #f6f6f6;
     background-image: url("../img/dropup_b.png");
-    background-position: right 9px;
+    background-position: right 7px;
     border-color: #4c4f53;
     color: #393c40
 }
