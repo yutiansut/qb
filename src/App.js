@@ -55,12 +55,6 @@ import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
 
-import massageHandler from './core/messageHandler'
-import ServerConfig from './config/ServerConfig'
-import WebSocketConfig from './config/WebSocketConfig'
-
-// console.log('massageHandler', massageHandler)
-WebSocketConfig.useWebSocket && massageHandler.install(ServerConfig, WebSocketConfig.webSocketList)
 
 
 const Asset = ({match}) => {
@@ -154,7 +148,7 @@ export default class App extends Component {
               <Route path="/home" component={Home}/>
               <Route path='/trade' component={Trade}/>
               <Route path="/login" component={Loign}/>
-              {/*<Route path="/about" component={TestApp} />*/}
+              <Route path="/about" component={About} />
               {/*<Route path="/topics" component={Topics} />*/}
               <Route path="/wallet" component={Asset}/>
               <Route path="/order" component={Order}/>

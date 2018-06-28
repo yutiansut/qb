@@ -9,7 +9,17 @@ import Sleep from './libs/Sleep'
 import ServerConfig from '../config/ServerConfig'
 import HttpConfig from '../config/HttpConfig'
 import WebSocketConfig from '../config/WebSocketConfig'
-import HTTP_PROXY from "./httpProxy";
+// import HTTP_PROXY from "./httpProxy";
+
+import massageHandler from './webSocket'
+// import ServerConfig from './config/ServerConfig'
+// import WebSocketConfig from './config/WebSocketConfig'
+
+// console.log('massageHandler', massageHandler)
+
+
+
+
 
 const host = ServerConfig.host;
 const port = ServerConfig.port;
@@ -40,7 +50,7 @@ const formatParams = req => {
 
 
 // HttpConfig.useHttp && Proxy.install({}, ServerConfig, HttpConfig.httpList)
-WebSocketConfig.useWebSocket && WebSocket.install({}, ServerConfig, WebSocketConfig.webSocketList);
+// WebSocketConfig.useWebSocket && WebSocket.install({}, ServerConfig, WebSocketConfig.webSocketList);
 
 export default class StoreBase {
   constructor() {
@@ -50,7 +60,6 @@ export default class StoreBase {
     this.preHandler = [];
     this.afterHandler = [];
     this.Sleep = Sleep;
-    this.WebSocket = WebSocket
   }
 
   installProxy(modelName, preHandler, afterHandler) {
@@ -95,6 +104,14 @@ export default class StoreBase {
         return res.result;
       };
     })
+  }
+
+  installWebsocket(connectName) {
+    console.log('!massageHandler[connectName]', connectName, massageHandler, !massageHandler[connectName])
+    if((!massageHandler[connectName] || !massageHandler[connectName].hasStart) && WebSocketConfig.useWebSocket ){
+      // await massageHandler.install(ServerConfig, WebSocketConfig.webSocketList)
+    }
+    return massageHandler
   }
 
 }

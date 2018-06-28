@@ -30,11 +30,16 @@ export default class TestAppController extends ExchangeControllerBase {
 
   async getData(a) {
     // console.log(this)
-    console.log(this.store.Proxy)
+    // console.log(this.store.Proxy)
     // console.log(this.view)
     // console.log(this.view.state.count)
-    let data = await this.store.Proxy.topCurrency()
-    console.log('aaaa',data)
+    // let data = await this.store.Proxy.topCurrency()
+    console.log(this.store.WebSocket)
+        this.store.WebSocket.general.emit('testEmit', {test:'test'})
+        this.store.WebSocket.general.on('testEmit', data=>{
+          console.log(data)
+        })
+    // console.log('aaaa',data)
     // let websocket = await this.store.WebSocket.getData()
     // if(websocket){
     //   console.log(this.store.WebSocket.getData.get())

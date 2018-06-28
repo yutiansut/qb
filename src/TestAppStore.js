@@ -2,7 +2,7 @@ import ExchangeStoreBase from './class/ExchangeStoreBase'
 
 export default class TestAppStore extends ExchangeStoreBase {
   constructor() {
-    super('test');
+    super('test', 'general');
     this.state = {count: 20, price:1000 , testObj:{b:1}}
     // this.preHandler.push(this.testPreHandler)
     // console.log(this.preHandler)
@@ -12,4 +12,6 @@ export default class TestAppStore extends ExchangeStoreBase {
   //   await app.Sleep(3000)
   //   console.log(app, req)
   // }
+
+
 }
