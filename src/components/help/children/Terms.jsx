@@ -110,10 +110,10 @@ function getContent(nameUsd) {
       ]
     },
     {
-      title: `五、用户义务`,
+      title: `六、拒绝担保与免责`,
       content: [
         {
-          title: `1. 不得利用本站进行违反用户所在国家法律的行为。`,
+          title: `1. ${nameUsd}作为“网络服务提供者”的第三方平台，不担保网站平台上的信息及服务能充分满足用户的需求`,
         },
         {
           title: `2. 基于互联网的特殊性，${nameUsd}也不担保服务不会受中断，对服务的及时性、安全性都不作担保，不承担非因${nameUsd}导致的责任。`,
@@ -147,7 +147,7 @@ function getContent(nameUsd) {
       ]
     },
     {
-      title: `可分性`,
+      title: `八、可分性`,
       content: [
         {
           title: `如果本协议的任何条款被视为不合法、无效或因任何原因而无法执行，则此等规定应视为可分割，不影响任何其它条款的法律效力。`,
@@ -172,34 +172,32 @@ export default class Terms extends exchangeViewBase {
     // console.log('jsxconfig',controller.configData)
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
   render() {
     const { controller } = this.props;
     let { nameUsd, netUrl } = controller.configData;
     const content = getContent(nameUsd);
     return <div className="help-terms">
-        <h2 className="title">用户协议</h2>
-        <p>
-          {nameUsd}所提供的各项服务的所有权和运作权均归{nameUsd}
-          &nbsp;LTD.所有。{nameUsd}用户使用协议（以下简称“本协议”）由{nameUsd}用户与{nameUsd}就{nameUsd}的各项服务所订立的相关权利义务规范。用户通过访问和/或使用本网站，即表示接受并同意本协议的所有条件和条款。{nameUsd}作为
-          {nameUsd}（{netUrl}）的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。{" "}
+      <h2 className="title">用户协议</h2>
+      <p>
+        {this.intl.get('help-termsFirst_v1')}
+      </p>
+      <p>
+        {nameUsd}有权对本协议条款进行修改，修改后的协议一旦公布即有效代替原来的协议。用户可随时查阅最新协议。
         </p>
-        <p>
-          {nameUsd}有权对本协议条款进行修改，修改后的协议一旦公布即有效代替原来的协议。用户可随时查阅最新协议。
-        </p>
-        {content.map((v,index)=><div key={index}>
-            <h3>{v.title}</h3>
-            <ul>
-              {v.content.map((v, index) => <li key={index}>
-              {v.title}
-              {v.detail && <ol>
-                  {v.detail.map((v, index) => <li key={index}>{v}</li>)}
-                </ol>}
-            </li>)}
-            </ul>
-          </div>)}
-      </div>;
+      {content.map((v, index) => <div key={index}>
+        <h3>{v.title}</h3>
+        <ul>
+          {v.content.map((v, index) => <li key={index}>
+            {v.title}
+            {v.detail && <ol>
+              {v.detail.map((v, index) => <li key={index}>{v}</li>)}
+            </ol>}
+          </li>)}
+        </ul>
+      </div>)}
+    </div>;
   }
 }

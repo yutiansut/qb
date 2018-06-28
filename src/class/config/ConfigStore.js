@@ -20,7 +20,9 @@ export default class UserStore extends ExchangeStoreBase {
       contactEmailUrl: EXCHANGE_CONTACT_EMAIL,
       addr: EXCHANGE_ADDR,
       servicePhone: EXCHANGE_SERVICE_PHONE,
-      serviceQQ: EXCHANGE_SERVICE_QQ
+      serviceQQ: EXCHANGE_SERVICE_QQ,
+      // language: 'zh-CN'
+      language: 'en-US'
     }
   }
 }

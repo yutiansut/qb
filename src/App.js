@@ -1,4 +1,3 @@
-import intl from "react-intl-universal";
 import en from "./lang/en.js"
 import zh from "./lang/zh.js"
 // locale data
@@ -126,8 +125,9 @@ export default class App extends Component {
     console.log(111, window.innerHeight)
   }
 
-  componentDidMount() {
-    this.loadLocales();
+  async componentDidMount() {
+    let flag = await configController.loadLocales();
+    flag && this.setState({ initDone: true });
     console.log(222, window.innerHeight)
   }
 
@@ -135,19 +135,7 @@ export default class App extends Component {
     console.log(333, window.innerHeight)
 
   }
-  loadLocales() {
-    // init method will load CLDR locale data according to currentLocale
-    // react-intl-universal is singleton, so you should init it only once in your app
-    intl.init({
-      currentLocale: 'en-US', // TODO: determine locale here
-      // currentLocale: 'zh-CN', // TODO: determine locale here
-      locales,
-    })
-      .then(() => {
-        // After loading CLDR locale data, start to render
-        this.setState({ initDone: true });
-      });
-  }
+
 
   render() {
 

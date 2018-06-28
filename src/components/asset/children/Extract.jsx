@@ -85,10 +85,10 @@ export default class Extract extends exchangeViewBase {
 
     return (
       <div className="extract">
-        <h3>提币-{currency}</h3>
+        <h3>{this.intl.get('asset-withdraw_v1')}-{currency}</h3>
         <div className="select">
           <div className="search clearfix">
-            <span className="title">选择币种</span>
+            <span className="title">{this.intl.get("asset-selectCoin_v1")}</span>
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
@@ -103,19 +103,19 @@ export default class Extract extends exchangeViewBase {
               />
               <ul>
                 <li>
-                  <span>总额</span>
+                  <span>{this.intl.get("asset-amount_v1")}</span>
                   <i>
                     {totalCount} {currency}
                   </i>
                 </li>
                 <li>
-                  <span>下单冻结</span>
+                  <span>{this.intl.get("asset-orderLock_v1")}</span>
                   <i>
                     {frozenCount} {currency}
                   </i>
                 </li>
                 <li>
-                  <span>可用余额</span>
+                  <span>{this.intl.get("asset-avail_v1")}</span>
                   <i>
                     {availableCount} {currency}
                   </i>
@@ -126,12 +126,10 @@ export default class Extract extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            注意：最小提现数量为{minWithdraw}
-            {currency};请勿直接提现至众筹或ICO地址
-            ，我们不会处理未来代币的发放。
+            {this.intl.get('asset-minWithdraw_v1', { number: minWithdraw, currency: currency })}
           </p>
           <div className="currency-address clearfix">
-            <span className="title">{currency}提现地址</span>
+            <span className="title">{currency}{this.intl.get('asset-withdrawAddress_v1')}</span>
             <div className="content">
               <div className="select-address">
                 <Input
@@ -149,20 +147,20 @@ export default class Extract extends exchangeViewBase {
                   this.setState({ showAddressPopup: true });
                 }}
               >
-                添加地址
+                {this.intl.get('asset-addAddress_v1')}
               </a>
             </div>
           </div>
           <div className="extract-amount clearfix">
-            <span className="title">提现数量</span>
+            <span className="title">{this.intl.get('asset-withdrawAmount_v1')}</span>
             <div className="content">
               <p className="limit">
-                24H提现额度：{availableQuota}/{totalQuota} BTC
-                <NavLink to="/user/identity">提额申请</NavLink>
+                {this.intl.get('asset-24hQuota_v1')}：{availableQuota}/{totalQuota} BTC
+                <NavLink to="/user/identity">{this.intl.get('asset-limitApply_v1')}</NavLink>
               </p>
               <div className="input">
                 <Input
-                  placeholder="提现数量"
+                  placeholder={this.intl.get('asset-withdrawAmount_v1')}
                   value={this.state.extractAmount}
                   onInput={value => {
                     this.setState({ extractAmount: value });
@@ -173,17 +171,17 @@ export default class Extract extends exchangeViewBase {
                     this.setState({ extractAmount: availableCount });
                   }}
                 >
-                  可提现余额: {availableCount}
+                  {this.intl.get('asset-withdrawAvailable_v1')}: {availableCount}
                 </a>
                 <span>ETH</span>
               </div>
               <div className="fee">
                 <p>
-                  手续费：{`${minerFee - 0 + (fee - 0)}`} {currency}
-                  <span>实际到账 0 {currency}</span>
+                  {this.intl.get('fee_v1')}：{`${minerFee - 0 + (fee - 0)}`} {currency}
+                  <span>{this.intl.get('asset-withdrawActual_v1')} 0 {currency}</span>
                 </p>
                 <p className="explain">
-                  手续费=矿工费+平台手续费{`=${minerFee}+${fee}=${minerFee -
+                  {this.intl.get('fee_v1')}={this.intl.get('asset-gasFee_v1')}+平台手续费{`=${minerFee}+${fee}=${minerFee -
                     0 +
                     (fee - 0)}`}
                 </p>
