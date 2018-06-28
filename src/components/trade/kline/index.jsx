@@ -17,10 +17,11 @@ class ReactKline extends React.Component {
     }
 
     componentDidMount(){
+        let tradeChart=document.querySelector(".trade-chart");
         let cfg={
             element: "#kline_container",
-            width: 0,
-            height: 0,
+            width: tradeChart.clientWidth,
+            height: tradeChart.clientHeight,
             theme: 'dark',
             language: 'zh-cn',
             ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
@@ -35,6 +36,8 @@ class ReactKline extends React.Component {
         Object.assign(cfg,this.state.props);
         this.state.kline = new Kline(cfg);
         this.state.kline.draw();
+        //
+
         //
         let _kline=this.state.kline;
         window.redrawKline=function () {

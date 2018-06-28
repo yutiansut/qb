@@ -1,6 +1,7 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, { Component } from "react";
 import Input from '../../../common/component/Input/index.jsx'
+import ReactTrend from './ReactTread'
 
 let marketTableHead = [
   {name: '交易盘', sortValue: ''},
@@ -86,6 +87,9 @@ export default class HomeMarket extends ExchangeViewBase{
                 <td>{v.turnover}</td>
                 <td>{v.volume}</td>
                 <td>{v.rise}</td>
+                <td>
+                    <ReactTrend ratio={3.33} stroke="#333" strokeWidth={1} trends={[43,24,18,22,32,43,37]}/>
+                </td>
               </tr>
             )
           })}

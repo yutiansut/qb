@@ -12,6 +12,7 @@ const recommendController = new MarketController();
 const marketController = new MarketController();
 
 import "./stylus/home.styl"
+import "./stylus/homeMarkt.styl"
 
 
 export default class Home extends exchangeViewBase {
