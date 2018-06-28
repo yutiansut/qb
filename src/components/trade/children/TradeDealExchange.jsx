@@ -79,6 +79,24 @@ export default class TradeDealExchange extends  ExchangeViewBase{
               })}
             </ul>
           </div>
+          <div className='trade-password clearfix'>
+            <div className='trade-password-input'>
+              <span>资金密码:</span>
+              <input type="password"/>
+            </div>
+            <p className='password-msg'>
+              <span>设置资金密码</span>
+              <span>(免输资金密码)</span>
+            </p>
+          </div>
+          <div className='trade-deal-turnover'>
+            <span>交易额:</span>
+            <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
+            <i>{this.props.PriceUnit || this.props.Market}</i>
+          </div>
+          <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`}>
+            {this.props.ControllerProps.dealType ? '卖出' : '买入'}
+          </div>
         </div>
     )
   }

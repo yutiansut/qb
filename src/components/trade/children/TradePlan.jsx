@@ -77,13 +77,16 @@ export default class TradePlan extends ExchangeViewBase {
                   <span key={index} className={this.state.DealEntrustType === v.type ? 'entrust-active' : ''} onClick={this.changeEntrustType.bind(this, v)}>{v.name}</span>
               )
             })}
-            <SelectButton
-                title="数字币计价"
-                type="main"
-                className="select"
-                valueArr={["数字币计价", "CNY计价", "USD计价"]}
-                onSelect={(e) => {this.changeUnit(e)}}
-            />
+            <div style={{float:'right',marginRight:'.1rem'}}>
+              <SelectButton
+                  title="数字币计价"
+                  type="trade"
+                  className="select"
+                  valueArr={["数字币计价", "CNY计价", "USD计价"]}
+                  onSelect={(e) => {this.changeUnit(e)}}
+              />
+            </div>
+            
           </div>
           <div className='trade-deal-exchanged'>
             {ControllerProps.map((v, index) => {
