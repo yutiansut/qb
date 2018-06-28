@@ -51,6 +51,11 @@ class ReactKline extends React.Component {
         }
     }
 
+    componentWillUnmount(){
+        this.state.kline=null;
+        window.redrawKline=null;
+    }
+
     resize(w,h){
         this.state.kline.resize(w, h);
     }
