@@ -74,6 +74,7 @@ export default class HomeMarket extends ExchangeViewBase{
                   <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
                 </th>)
               })}
+              <th>7日涨跌幅</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +89,8 @@ export default class HomeMarket extends ExchangeViewBase{
                 <td>{v.volume}</td>
                 <td>{v.rise}</td>
                 <td>
-                    <ReactTrend ratio={3.33} stroke="#333" strokeWidth={1} trends={[43,24,18,22,32,43,37]}/>
+                    {/* 宽高等样式在homeMakt.styl里设置 */}
+                    <ReactTrend ratio={5} trends={[43,24,18,32,22,45,37]}/>
                 </td>
               </tr>
             )

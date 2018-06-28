@@ -279,8 +279,8 @@ export class Control {
         }
         let dlgSettings = $("#chart_parameter_settings");
         dlgSettings.css({
-            left: (chartWidth - dlgSettings.width()) >> 1,
-            top: (height - dlgSettings.height()) >> 1
+            left: (window.innerWidth - dlgSettings.width()) >> 1,
+            top: (window.innerHeight - dlgSettings.height()) >> 1
         });
         let dlgLoading = $("#chart_loading");
         dlgLoading.css({

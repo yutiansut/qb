@@ -5,11 +5,11 @@ class ReactTrend extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            width: 120,         // 宽度，支持rem
+            width: 100,         // 宽度，支持rem
             height: 30,
-            ratio: 4,           // 宽高比例
+            ratio: 3.33,           // 宽高比例
             trends: [120,345,300,432,253,163,765,324],      // 数据节点
-            stroke: "#ccc",                 // 线颜色
+            stroke: "#333",                 // 线颜色
             strokeWidth: 1,                 // 线宽
         };
         Object.assign(this.state,this.props);
