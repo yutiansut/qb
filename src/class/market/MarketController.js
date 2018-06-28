@@ -111,9 +111,9 @@ export default class MarketController extends ExchangeControllerBase {
   
   tradePairChange(value) {
     this.view.setState({
-      tradePair: value
+      tradePair: value.trade_pair
     });
-    this.store.state.tradePair = value;
+    this.store.state.tradePair = value.trade_pair;
     this.setDealMsg();
   }
 
@@ -175,7 +175,14 @@ export default class MarketController extends ExchangeControllerBase {
             priceEN: tradePairMsg[0].priceEN,
           }
         };
-    this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg)
+    this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
+    this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
+  }
+  
+  setUnitsType(v){
+    this.view.setState({
+      unitsType: v
+    })
   }
   pairDataHandle() {
 

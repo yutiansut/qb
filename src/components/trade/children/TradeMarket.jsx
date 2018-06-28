@@ -43,7 +43,7 @@ export default class TradeMarket extends ExchangeViewBase {
   }
 
   pairChange(v) {
-    this.tradePairChange(v.trade_pair)
+    this.tradePairChange(v)
   }
   onInputValue(e) { // 获取输入框的值
     this.setState({
@@ -105,7 +105,7 @@ export default class TradeMarket extends ExchangeViewBase {
               <tr key={index} className={`pair-items${this.state.tradePair === v.trade_pair ? '-active' : ''}`}
                   onClick={this.pairChange.bind(this, v)}>
                 <td>{v.trade_pair}</td>
-                <td>{v.price}</td>
+                <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                 <td>{v.rise}</td>
                 <td onClick={value => this.addCollect(v, index)} className="img-td">
                   <img src={v.isFavorite ? "/static/img/trade_star_select.svg" :  "/static/img/trade_star.svg"} alt=""/>

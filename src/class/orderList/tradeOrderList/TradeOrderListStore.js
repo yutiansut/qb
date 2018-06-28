@@ -9,8 +9,8 @@ export default class TradeOrderListStore extends OrderListStore{
           {
             id:0,
             "price": 1025.22,
-            "priceCN": 1023.22,
-            "priceEN": 1023.22,
+            "priceCN": 1111.22,
+            "priceEN": 1222.22,
             "currDepth": 123444.34,
             "turnover": 1111
           },       {
@@ -32,9 +32,9 @@ export default class TradeOrderListStore extends OrderListStore{
         sell: [
           {
             id:3,
-            "price": 1025.22,
-            "priceCN": 1023.22,
-            "priceEN": 1023.22,
+            "price": 4,
+            "priceCN": 2,
+            "priceEN": 1,
             "currDepth": 123444.34,
             "turnover": 1111
           },       {

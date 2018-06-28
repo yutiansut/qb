@@ -55,7 +55,7 @@ export default class extends ExchangeViewBase{
               return(
                   <tr key={index}>
                     <td>{v.dealTime}</td>
-                    <td>{v.price}</td>
+                    <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
                     <td>{v.volume}</td>
                   </tr>
               )

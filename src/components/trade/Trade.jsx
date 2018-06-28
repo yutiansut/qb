@@ -31,9 +31,16 @@ const TradeDealController = new DealController();
 const TradePlanController = new DealController();
 
 TradeMarketController.TradeDealController = TradeDealController;
+TradeMarketController.TradePlanController = TradePlanController;
+TradeOrderListController.TradePlanController = TradePlanController;
 
-export default class extends exchangeViewBase {
-  constructor(props) {
+TradePlanController.TradeMarketController = TradeMarketController;
+TradePlanController.TradeRecentController = TradeRecentController;
+TradePlanController.CurrentOrderController = CurrentOrderController;
+TradePlanController.HistoryOrderController = HistoryOrderController;
+TradePlanController.TradeOrderListController = TradeOrderListController;
+export default class extends exchangeViewBase{
+  constructor(props){
     super(props)
   }
   render(){

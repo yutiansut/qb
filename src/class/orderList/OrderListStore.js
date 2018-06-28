@@ -10,6 +10,8 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
           "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 3.178,
           "orderType": 0 //订单类型0买 1卖
         },
@@ -17,7 +19,9 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairId": 1,
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
-          "price": 0.132789,
+          "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 23.178,
           "orderType": 0
         },
@@ -25,7 +29,9 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairId": 1,
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
-          "price": 0.142789,
+          "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 13.178,
           "orderType": 0
         }
@@ -35,7 +41,9 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairId": 1,
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
-          "price": 1.122789,
+          "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 3.178,
           "orderType": 0 //订单类型0买 1卖
         },
@@ -43,7 +51,9 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairId": 1,
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
-          "price": 2.132789,
+          "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 23.178,
           "orderType": 0
         },
@@ -51,13 +61,18 @@ export default class OrderListStore extends ExchangeStoreBase {
           "tradePairId": 1,
           "tradePairName": "ETH/BTC",
           "dealTime": 947586000,
-          "price": 3.142789,
+          "price": 0.122789,
+          "priceCN": 1.122789,
+          "priceEN": 2.122789,
           "volume": 13.178,
           "orderType": 0
         }
       ],
       recentTradeListArr: [],
-      recentItemSelect: 'mineLess'
+      recentItemSelect: 'mineLess',
+      unitsType: '',
+      market:'',
+      coin:''
     }
   }
 }

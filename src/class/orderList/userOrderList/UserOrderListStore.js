@@ -13,18 +13,18 @@ export default class UserOrderListStore extends OrderListStore {
           "orderId": 0,
           "orderTime": 947586000,
           "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
-          "price": 1.23,
+          "price": 11.23,
           "count": 2.33,//总的量
           "dealDoneCount": 1.99,//已完成的量
-          "priceCN": 1.23,
-          "priceEN": 1.23,
+          "priceCN": 21.23,
+          "priceEN": 31.23,
           "avgPrice": 1.22,//平均价格
           "avgPriceCN": 1.11,
           "avgPriceEN": 1.12,
           "undealCount": 0.34,
           "turnover": 2323.2,//成交额
-          "turnoverCN": 22.223,
-          "turnoverEN": 22.22
+          "turnoverCN": 3222.223,
+          "turnoverEN": 3322.22
         },
         {
           "tradePairId": 2,

@@ -10,7 +10,18 @@ export default class OrderListController extends ExchangeControllerBase {
   setView(view) {
     super.setView(view);
   }
+  setUnitsType(v){
+    this.view.setState({
+      unitsType: v
+    })
+  }
   
+  setInitUnit(market,coin){
+    this.view.setState({
+      market,
+      coin
+    })
+  }
   changeRecentItem(v) {
     let recentListArray = this.store.state[v.item];//todo 模拟切换,接口调试需重写
     this.view.setState({

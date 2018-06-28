@@ -18,15 +18,103 @@
 		.deal-asset-charge
 			width .34rem
 			height 100%
-			border .01rem solid red
 			text-align center
 			a
 				font-size .12rem
+		.deal-asset-charge-sell
+			border .01rem solid $exchange-red
+			a
+				color $exchange-red
+		.deal-asset-charge-buy
+			border .01rem solid $exchange-blue
+			a
+				color $exchange-blue
 	.trader-deal-input
 		width 100%
 		height .34rem
 		margin-bottom .1rem
 		border-radius .02rem
-		border .01rem solid $line-dark-a
+		border .01rem solid $exchange-border
+		//border-left none
 		display flex
 		align-items center
+		.deal-input-label
+			width .54rem
+			height .32rem
+			//border-left .01rem solid $exchange-border
+			text-align center
+			line-height .32rem
+			background #2B3038
+			color $normal-white-color-a9
+		input
+			width 2.09rem
+			height 100%
+			color $normal-white-color-a9
+			padding-left .1rem
+		.deal-input-unit
+			color $normal-white-color-a9
+	.deal-number-range
+		width 2.4rem
+		padding-top .05rem
+		margin 0 auto
+		position relative
+		.r-buy
+			-webkit-appearance none
+			width  2.4rem
+			height .01rem
+			&::-webkit-slider-thumb
+				position relative
+				z-index 100
+				-webkit-appearance: none
+				cursor pointer
+				width .08rem
+				height .08rem
+				border-radius 50%
+				background $exchange-blue
+				//background $normal-white-color-a9
+				margin-top -.04rem
+			&::-webkit-slider-runnable-track
+				height .01rem
+				background $exchange-border
+		.r-sell
+			-webkit-appearance none
+			width  2.4rem
+			height .01rem
+			&::-webkit-slider-thumb
+				position relative
+				z-index 100
+				-webkit-appearance: none
+				cursor pointer
+				width .08rem
+				height .08rem
+				border-radius 50%
+				background $exchange-red
+				//background $normal-white-color-a9
+				margin-top -.04rem
+			&::-webkit-slider-runnable-track
+				height .01rem
+				background $exchange-border
+		ul
+			display flex
+			top: 0.135rem;
+			width 2.4rem
+			position: absolute;
+			//width: 2.46rem;
+			justify-content: space-between;
+			z-index: 88;
+			li
+				width .06rem
+				height .06rem
+				border-radius 50%
+				background $exchange-border
+				cursor pointer
+	.deal-number-percent
+		width 2.6rem
+		margin-left .26rem
+		margin-top .08rem
+		//margin 0 auto
+		ul
+			display flex
+			justify-content space-between
+			li
+				font-size .11rem

@@ -6,7 +6,7 @@ const resetHandleItems = [
     {name:'撤销买入', opType:1},{name:'撤销卖出', opType:2},{name:'撤销全部', opType:3},
 ];
 const currentOrderHead = [
-  {name: '时间'},{name: '类型'},{name: '价格'},{name: '数量'},{name: '交易额'},{name: '已成交'},{name: '尚未成交'},{name: '状态'},{name: '操作'},
+  {name: '时间'},{name: '类型'},{name: '价格',unit: 'price'},{name: '数量',unit: 'number'},{name: '交易额',unit: 'price'},{name: '已成交'},{name: '尚未成交'},{name: '状态'},{name: '操作'},
 ];
 const orderStatus = {
   0: '已成交',
@@ -49,7 +49,7 @@ export default class CurrentOrder extends ExchangeViewBase{
               {currentOrderHead.map((v, index) => {
                 return(
                     <td key={index}>
-                      {v.name}
+                      {v.unit && (`${v.name}(${v.unit === 'price' && (this.state.unitsType || this.state.market) || this.state.coin})`) || v.name}
                     </td>
                 )
               })}
@@ -62,9 +62,9 @@ export default class CurrentOrder extends ExchangeViewBase{
                     <td>{v.orderTime}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? '卖出' : '买入'}</td>
                     {/*todo 颜色改类名统一处理*/}
-                    <td>{v.price}</td>
+                    <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                     <td>{v.count}</td>
-                    <td>{v.turnover}</td>
+                    <td>{this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover) }</td>
                     <td>{v.dealDoneCount}</td>
                     <td>{v.undealCount}</td>
                     <td>{orderStatus[v.orderStatus]}</td>

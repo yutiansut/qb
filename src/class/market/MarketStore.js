@@ -10,9 +10,9 @@ export default class MarketStore extends ExchangeStoreBase {
             {
               "tradePairId": 1,
               "rise": -0.22,
-              "price": 1023.22,
-              "priceCN": 1023.22,
-              "priceEN": 1023.22,
+              "price": 1,
+              "priceCN": 2,
+              "priceEN": 4,
               "volume": 123444.34,
               "coin_name": "ETH",
               "market_name": "BTC",
@@ -155,7 +155,9 @@ export default class MarketStore extends ExchangeStoreBase {
       marketDataHandle: [],
       homeMarketPairData:[],
       market:'BTC',
-      tradePair:''
+      coin:'',
+      tradePair:'',
+      unitsType:''
     }
   }
 }
