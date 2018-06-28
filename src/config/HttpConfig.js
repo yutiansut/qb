@@ -47,19 +47,25 @@ export default {
   test: [
     {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
   ],
+  market: [
+    { name: 'coinInfo', data: { url: '/common', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' }
+  ],
   asset: [
     // 获取交易对手续费
-    { name: 'getFee', data: { url: '/order', method: 'post' }, action: 'geFee', actionBack: 'getFeeRes' },
-    // 获取总资产(包含各个钱包币种的详细信息)
-    { name: 'totalAsset', data: { url: '/property', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes' },
+    { name: 'getFee', data: { url: '/order', method: 'post' }, action: 'getFee', actionBack: 'getFeeRes' },
+    // 获取总资产(包含各个钱包币种的详细信息)(pass)
+    { name: 'totalAsset', data: { url: '/rpc/get_user_property', method: 'post' }, action: 'get_user_property', actionBack: 'get_user_property_r' },
     //24小时提现额度, 查询币种额度，
-    { name: 'balance', data: { url: '/property', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes' },
-    // 充币地址查询
-    { name: 'chargeAddress', data: { url: '/common', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes' },
-    // 充提记录
-    { name: 'history', data: { url: '/property', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes' },
-    // 提币信息
-    { name: 'extractInfo', data: { url: '/common', method: 'post' }, action: 'getWithdrawFee', actionBack: 'getWithdrawFeeRes' },
-    { name: 'extractAddress', data: { url: '/common', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes' },
+    { name: 'balance', data: { url: '/rpc/get_withdraw_balance', method: 'post' }, action: 'get_withdraw_balance', actionBack: 'get_withdraw_balance_r' },
+    // 充币地址查询(pass)
+    { name: 'chargeAddress', data: { url: '/rpc/get_deposit_address', method: 'post' }, action: 'get_deposit_address', actionBack: 'get_deposit_address_r' },
+    // 充提记录(pass)
+    { name: 'history', data: { url: '/rpc/get_asset_records', method: 'post' }, action: 'get_asset_records', actionBack: 'get_asset_records_r' },
+    // 提币矿工费
+    { name: 'minerFee', data: { url: '/wallet', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes' },
+    // 提币地址查询(pass)
+    { name: 'extractAddress', data: { url: '/rpc/get_withdraw_addresses', method: 'post' }, action: 'get_withdraw_addresses', actionBack: 'get_withdraw_addresses_r' },
+    //
+    { name: 'addAddress', data: { url: '/rpc/add_withdraw_balance', method: 'post' }, action: 'add_withdraw_balance', actionBack: 'add_withdraw_balance_r' },
   ]
 }

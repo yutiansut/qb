@@ -102,7 +102,7 @@ export default class AssetStore extends ExchangeStoreBase {
         }
       ],
       //币种列表
-      walletList: ["USDT", "ETH", "BCH", "LSK", "BTC"],
+      walletList: {},
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
@@ -114,60 +114,36 @@ export default class AssetStore extends ExchangeStoreBase {
       },
       //提币信息
       walletExtract: {
-        coinName: "BTC",
-        fee: 0.02, //手续费
         minerFee: 0.05, //矿工费
-        minWithdraw: 0.01, //最小提现数量
         extractAddr: [
           {
-            addressId: "xxx",
-            addressName: "usdt-address-1",
-            address: "15sdf1asgf12asg1f3dsg1fds32g1d3fsg"
-          },
-          {
-            addressId: "xxx",
-            addressName: "usdt-address-1",
-            address: "gf8h6fg5jhj1hj2gf1kjk1y1tu32k12uk"
+            coinId: 0,
+            coinName: "btc",
+            minCount: 0.01,
+            addressList: [
+              {
+                addressId: 97,
+                addressName: "111",
+                address: "mm4fqM8nonB6EhnZi2EFMRpPgnbAWvJXr3"
+              }
+            ]
           }
         ] //提现地址
       },
       //充币地址
-      coinAddress: [
-        {
-          coinName: "BTC", //币种
-          coinId: 0, //币种ID
-          verifyNumer: 5, //最大确认数
-          coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
-        },
-        {
-          coinName: "ETH",
-          coinId: 1,
-          verifyNumer: 5, //最大确认数
-          coinAddress: "212dsfg4d2hgdfh542hj1fhg2fhgjgfh5k"
-        },
-        {
-          coinName: "LTC",
-          coinId: 2,
-          verifyNumer: 5, //最大确认数
-          coinAddress: "02sdf5sr5h5gjhj3hk21jkyu512nbvm032"
-        },
-        {
-          coinName: "BCH",
-          coinId: 3,
-          verifyNumer: 5, //最大确认数
-          coinAddress: "626fgds6gd6uyyt3uu3ykjh3kjhkj3lh3"
-        }
-      ],
-
+      coinAddress: {
+        coinName: "BTC", //币种
+        coinId: 0, //币种ID
+        verifyNumer: 5, //最大确认数
+        coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
+      },
       //充币记录
       // chargeHistory: {},
       //提币记录
       // extractHistory: {},
       //资产记录
       assetHistory: {
-        page: 0,
-        pageSize: 10,
-        totalCount: 50,
+        total: 100,
         orderList: [
           {
             orderType: 0, //充0提1转2  注意:交易所内充提显示为转账
@@ -216,7 +192,8 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取交易对手续费
   async getFee() {
     this.state.pairFees = await this.Proxy.getFee({
-      data: { userId: 2, tradePairId: 1 }
+      userId: 2,
+      tradePairId: 1
     });
   }
   // 获取总资产
@@ -226,13 +203,11 @@ export default class AssetStore extends ExchangeStoreBase {
       valuationEN,
       valuationCN,
       coinList
-    } = await this.Proxy.totalAsset({ data: { userId: 2 } });
+    } = await this.Proxy.totalAsset({ userId: 0 });
     let { totalQuota, availableQuota } = await this.Proxy.balance({
-      data: {
-        userId: 5,
-        coinId: 0,
-        coinName: "BTC"
-      }
+      userId: 0,
+      coinId: 1,
+      coinName: "BTC"
     });
     this.state.totalAsset = {
       valuationBTC,
@@ -245,59 +220,65 @@ export default class AssetStore extends ExchangeStoreBase {
     !this.state.walletList.length &&
       (this.state.walletList = coinList.map(v => v.coinName));
   }
+  // 获取walletList
+  async getWalletList() {
+    let { coinList } = await this.Proxy.totalAsset({ userId: 0 });
+    if (!this.state.walletList.length) {
+      let obj = {};
+      coinList.forEach(v => {
+        obj[v.coinName] = obj[v.coinId];
+      });
+      this.state.walletList = obj;
+    }
+  }
   // 获取单个币种资产信息
   async getCurrencyAmount() {
     this.state.currencyAmount = await this.Proxy.balance({
       data: {
         userId: 0,
-        coinId: 0,
+        coinId: 1,
         coinName: "BTC"
       }
     });
   }
   // 获取充币地址
   async getChargeAddress() {
-    let { coinAddress } = await this.Proxy.chargeAddress({
-      data: { userId: 2 }
-    }).coinAddress;
-    this.state.coinAddress = coinAddress;
-    !this.state.walletList.length &&
-      (this.state.walletList = coinAddress.map(v => v.coinName));
+    this.state.coinAddress = await this.Proxy.chargeAddress({
+      userId: 1,
+      coinId: 0
+    });
   }
   // async getWallet() {
   //   // this.wallet = await getWallet
   // }
   // 获取资产记录
-  async getHistory() {
-    this.state.assetHistory = await this.Proxy.history({
-      data: {
-        userId: 5,
-        coinId: 1,
-        coinName: "BTC",
-        orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
-        startTime: 0,
-        endTime: 0,
-        orderStatus: 0, //未通过 审核中1 通过2  撤销3
-        page: 0,
-        pageSize: 10
-      }
+  async getHistory(page, pageSize) {
+    let result = await this.Proxy.history({
+      userId: 0,
+      coinId: 1,
+      coinName: "BTC",
+      orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
+      startTime: 0,
+      endTime: 0,
+      orderStatus: 0, //未通过 审核中1 通过2  撤销3
+      page: 1,
+      pageSize: 10
     });
+    this.state.assetHistory.orderList = result.orderList;
+    page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
+    page === 0 &&
+      result.totalCount &&
+      (this.state.assetHistory.total = result.totalCount);
   }
   // 获取提币手续费和地址
   async getwalletExtract() {
-    this.state.walletExtract = await this.Proxy.extractInfo({
-      data: {
-        userId: 5,
-        coinId: 1,
-        coinAddress: "xxx"
-      }
+    this.state.walletExtract = await this.Proxy.minerFee({
+      coinId: 1
     });
-    this.state.walletExtract.extractAddr = await this.Proxy.extractAddress({
-      data: {
-        userId: 5,
-        coinId: 0
-      }
+    let extractAddr = await this.Proxy.extractAddress({
+      userId: 3
     });
+    this.state.walletExtract.extractAddr = extractAddr.addresses;
   }
   // 删除提现地址
   appendAddress({ addressName, address }) {

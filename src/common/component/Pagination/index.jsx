@@ -7,6 +7,7 @@ import "./style.styl";
   pageSize 每页数据条数
   showTotal 是否显示数据总条数
   showQuickJumper 是否显示快速跳转
+  onChange页码跳转的回调
 */
 
 export default class Pagination extends Component {
@@ -49,9 +50,12 @@ export default class Pagination extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps,nextState){
+    if (nextState.currentPage === this.state.currentPage) return false;
     this.props.onChange && this.props.onChange(nextState.currentPage);
+    return true;
   }
+
 
   render() {
     let { total, showTotal, showQuickJumper, pageSize } = this.props;

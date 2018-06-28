@@ -1,19 +1,18 @@
-import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
-
-import en from "./lang/en.js"
-import zh from "./lang/zh.js"
-// locale data
-const locales = {
-  "en-US": en,
-  "zh-CN": zh,
-};
-
-
-import "./core/libs/ChangeFontSize";
 import "./common/css/index.styl"
 
+import './common/css/headerNav.styl'
+
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
+// import {browserHistory} from 'react-router'
+import "./test.styl";
+
+import TestApp from "./TestApp.jsx";
+
+import "./core/libs/ChangeFontSize";
+
 import ConfigController from "./class/config/ConfigController";
+import TestAppController from "./TestAppController";
 import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
 import LoginController from "./class/login/LoginController";
@@ -21,6 +20,20 @@ import NoticeController from "./class/notice/NoticeController";
 import ActivityController from "./class/activity/ActivityController";
 import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController"
 
+
+const configController = new ConfigController();
+const testAppController = new TestAppController();
+const assetController = new AssetController();
+const userController = new UserController();
+const loginController = new LoginController();
+const noticeController = new NoticeController();
+const activityController = new ActivityController();
+
+testAppController.configController = configController;
+noticeController.configController = configController;
+activityController.configController = configController;
+assetController.configController = configController;
+// console.log(noticeController.configController)
 
 import UserInfo from './components/user/UserCenter.jsx'
 import Header from './components/headerAndFooter/Header.jsx'
@@ -35,13 +48,13 @@ import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
 
-let testAppController,
-  configController,
-  assetController,
-  userController,
-  loginController,
-  noticeController,
-  activityController;
+import massageHandler from './core/messageHandler'
+import ServerConfig from './config/ServerConfig'
+import WebSocketConfig from './config/WebSocketConfig'
+
+// console.log('massageHandler', massageHandler)
+WebSocketConfig.useWebSocket && massageHandler.install(ServerConfig, WebSocketConfig.webSocketList)
+
 
 const Asset = ({match}) => {
   return <AssetManange controller={assetController} match={match}/>;
@@ -85,47 +98,34 @@ const tradeHeader = ({match}) => {
   return <Header navClass={'tradeNav'} match={match}/>;
 }
 
-import TestApp from './TestApp'
-import TestAppController from "./TestAppController";
 
-const about = ({match}) => {
-  return <TestApp controller={testAppController} match={match}/>;
-}
+const navArray = [
+  {label: '首页', to: '/home', select: false, linkUser: false},
+  // {label:'币币交易页', to:'/home', select: false, linkUser:false},
+  {label: '用户', to: '/user', select: false, linkUser: false},
+  {label: '关于', to: '/about', select: false, linkUser: false},
+  {label: '主题列表', to: '/topics', select: false, linkUser: false}
+];
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {initDone: false}
-
-    testAppController = new TestAppController();
-    configController = new ConfigController();
-    assetController = new AssetController();
-    userController = new UserController();
-    loginController = new LoginController();
-    noticeController = new NoticeController();
-    activityController = new ActivityController();
-
-
-    testAppController.configController = configController;
-    noticeController.configController = configController;
-    activityController.configController = configController;
-    assetController.configController = configController;
+    this.state = { initDone: false }
 
   }
 
-
   componentWillMount() {
-    // console.log(111, window.innerHeight)
+    console.log(111, window.innerHeight)
   }
 
   async componentDidMount() {
     let flag = await configController.loadLocales();
-    flag && this.setState({initDone: true});
-    // console.log(222, window.innerHeight)
+    flag && this.setState({ initDone: true });
+    console.log(222, window.innerHeight)
   }
 
   componentWillUpdate(...parmas) {
-    // console.log(333, window.innerHeight)
+    console.log(333, window.innerHeight)
 
   }
 
@@ -147,10 +147,11 @@ export default class App extends Component {
               <Route path="/home" component={Home}/>
               <Route path='/trade' component={Trade}/>
               <Route path="/login" component={Loign}/>
+              {/*<Route path="/about" component={TestApp} />*/}
+              {/*<Route path="/topics" component={Topics} />*/}
               <Route path="/wallet" component={Asset}/>
               <Route path="/order" component={Order}/>
               <Route path="/user" component={User}/>
-              <Route path="/about" component={about}/>
               <Route path="/findPass" component={ForgetPass}/>
               <Route path="/notice" component={Notice}/>
               <Route path="/help" component={Help}/>

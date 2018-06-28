@@ -8,7 +8,9 @@ import "../style/history.styl";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      page: 1
+    };
     let { controller } = this.props;
     controller.setView(this);
     let { wallList, assetHistory } = controller.initState;
@@ -18,12 +20,14 @@ export default class History extends exchangeViewBase {
     });
     //绑定方法
     this.getHistory = controller.getHistory.bind(controller);
+    this.getWalletList = controller.getWalletList.bind(controller);
     // this.state = {
     // console.log(this.controller)
     // }
   }
-  componentWillMount() {
-    this.getHistory()
+  async componentWillMount() {
+    await this.getWalletList()
+    await this.getHistory()
   }
 
   componentDidMount() {}
@@ -31,7 +35,7 @@ export default class History extends exchangeViewBase {
   componentWillUpdate() {}
 
   render() {
-    let { total, cur_page, page_size, orderList } = this.state.assetHistory;
+    let { total, orderList } = this.state.assetHistory;
     return (
       <div className="hist">
         <h3 className="title">
@@ -133,12 +137,7 @@ export default class History extends exchangeViewBase {
             ))}
           </tbody>
         </table>
-        <Pagination
-          total={120}
-          pageSize={20}
-          showTotal={true}
-          showQuickJumper={true}
-        />
+        <Pagination total={this.state.assetHistory.total} pageSize={10} showTotal={true} onChange={(page) => { this.setState({ page }) }} showQuickJumper={true} currentPage={this.state.page} />
       </div>
     );
   }

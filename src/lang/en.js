@@ -49,7 +49,8 @@ export default function en (state){
     pending_v1: "pending",
     passed_v1: "Passed",
     failed_v1: "Failed",
-    fee_v1: "Fee"
+    fee_v1: "Fee",
+    option_v1: "Option"
   };
   const asset = {
     "asset-totalAssets_v1": "Total assets (approx)",

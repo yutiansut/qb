@@ -3,7 +3,7 @@ import MarketStore from './MarketStore'
 
 export default class MarketController extends ExchangeControllerBase {
   constructor() {
-    super();
+    super('market');
     this.store = new MarketStore();
     this.store.setController(this)
   }
@@ -18,6 +18,11 @@ export default class MarketController extends ExchangeControllerBase {
 
   async getPairData() {
 
+  }
+// 获取币种资料
+  async getCoinInfo(currency){
+    await this.store.getCoinInfo(currency);
+    this.view.setState({ coinInfo: this.store.state.coinInfo});
   }
 
   //连接websocket
@@ -114,7 +119,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.setDealMsg();
     // console.log('dealMsg', this)
   }
-  
+
   tradePairChange(value) {
     this.view.setState({
       tradePair: value.trade_pair
@@ -168,7 +173,7 @@ export default class MarketController extends ExchangeControllerBase {
       homeMarketPairData: collectArr
     });
   }
-  
+
   //为交易模块提供价格以及交易对的信息
   setDealMsg(){
     //改变deal模块中的信息

@@ -25,7 +25,8 @@ export default class Extract extends exchangeViewBase {
       address: "",
       extractAmount: "", //提现数量
       showTwoVerify: false,
-      verifyNum: "获取验证码"
+      verifyNum: "获取验证码",
+      page: 1
     };
     // 绑定视图，初始化数据
     let { controller } = this.props;
@@ -59,17 +60,28 @@ export default class Extract extends exchangeViewBase {
     this.getVerify = controller.getVerify.bind(controller);
   }
 
-  componentWillMount() {
-    let currency = this.props.location.query && this.props.location.query.currency;
+  async componentWillMount() {
+    let currency =
+      this.props.location.query && this.props.location.query.currency;
     currency && this.setState({ currency: currency, value: currency });
-    this.getExtract();
-    this.getCurrencyList();
-    this.getHistory();
+    await this.getExtract();
+    await this.getCurrencyList();
+    await this.getHistory();
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUpdate(props, state, next) { }
+
+
+  componentWillUpdate(nextProps, nextState) {
+
+    console.log(nextProps, nextState)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (JSON.stringify(nextState) !== JSON.stringify(this.state)) return true;
+    return false;
+  }
 
   render() {
     let {
@@ -79,25 +91,29 @@ export default class Extract extends exchangeViewBase {
       totalQuota,
       availableQuota
     } = this.state.currencyAmount;
-    let currency = this.state.currency;
-    let { fee, minerFee, extractAddr, minWithdraw } = this.state.walletExtract;
-    let { total, page, pageSize, orderList } = this.state.assetHistory;
-
+    let currency = this.state.currency,
+      { fee, minerFee, extractAddr} = this.state.walletExtract,
+      { total, orderList } = this.state.assetHistory;
+    let curExtract = extractAddr.filter(v=> v.coinName === this.state.currency.toLowerCase())[0];
     return (
       <div className="extract">
-        <h3>{this.intl.get('asset-withdraw_v1')}-{currency}</h3>
+        <h3>
+          {this.intl.get("asset-withdraw_v1")}-{currency}
+        </h3>
         <div className="select">
           <div className="search clearfix">
-            <span className="title">{this.intl.get("asset-selectCoin_v1")}</span>
+            <span className="title">
+              {this.intl.get("asset-selectCoin_v1")}
+            </span>
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
-                walletList={this.state.walletList}
+                walletList={Object.keys(this.state.walletList)}
                 value={this.state.value}
-                setValue={(value) => {
+                setValue={value => {
                   this.setState({ value });
                 }}
-                setCurrency={(currency) => {
+                setCurrency={currency => {
                   this.setState({ currency });
                 }}
               />
@@ -126,16 +142,22 @@ export default class Extract extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            {this.intl.get('asset-minWithdraw_v1', { number: minWithdraw, currency: currency })}
+            {this.intl.get("asset-minWithdraw_v1", {
+              number: curExtract.minCount,
+              currency: currency
+            })}
           </p>
           <div className="currency-address clearfix">
-            <span className="title">{currency}{this.intl.get('asset-withdrawAddress_v1')}</span>
+            <span className="title">
+              {currency}
+              {this.intl.get("asset-withdrawAddress_v1")}
+            </span>
             <div className="content">
               <div className="select-address">
                 <Input
                   type="select"
                   readOnly={true}
-                  valueArr={extractAddr.map(item => item.address)}
+                  valueArr={curExtract.addressList.map(item => item.address)}
                   onSelect={value => {
                     this.setState({ address: value });
                   }}
@@ -147,20 +169,27 @@ export default class Extract extends exchangeViewBase {
                   this.setState({ showAddressPopup: true });
                 }}
               >
-                {this.intl.get('asset-addAddress_v1')}
+                {this.intl.get("asset-addAddress_v1")}
               </a>
             </div>
           </div>
           <div className="extract-amount clearfix">
-            <span className="title">{this.intl.get('asset-withdrawAmount_v1')}</span>
+            <span className="title">
+              {this.intl.get("asset-withdrawAmount_v1")}
+            </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get('asset-24hQuota_v1')}：{availableQuota}/{totalQuota} BTC
-                <NavLink to="/user/identity">{this.intl.get('asset-limitApply_v1')}</NavLink>
+                {this.intl.get("asset-24hQuota_v1")}：{availableQuota}/{
+                  totalQuota
+                }{" "}
+                BTC
+                <NavLink to="/user/identity">
+                  {this.intl.get("asset-limitApply_v1")}
+                </NavLink>
               </p>
               <div className="input">
                 <Input
-                  placeholder={this.intl.get('asset-withdrawAmount_v1')}
+                  placeholder={this.intl.get("asset-withdrawAmount_v1")}
                   value={this.state.extractAmount}
                   onInput={value => {
                     this.setState({ extractAmount: value });
@@ -171,20 +200,24 @@ export default class Extract extends exchangeViewBase {
                     this.setState({ extractAmount: availableCount });
                   }}
                 >
-                  {this.intl.get('asset-withdrawAvailable_v1')}: {availableCount}
+                  {this.intl.get("asset-withdrawAvailable_v1")}:{" "}
+                  {availableCount}
                 </a>
-                <span>ETH</span>
+                <span>{currency}</span>
               </div>
               <div className="fee">
                 <p>
-                  {this.intl.get('fee_v1')}：{`${minerFee - 0 + (fee - 0)}`} {currency}
-                  <span>{this.intl.get('asset-withdrawActual_v1')} 0 {currency}</span>
+                  {this.intl.get("asset-gasFee_v1")}：{minerFee}
+                  {` ${currency}`}
+                  <span>
+                    {this.intl.get("asset-withdrawActual_v1")} {this.state.extractAmount - minerFee } {currency}
+                  </span>
                 </p>
-                <p className="explain">
-                  {this.intl.get('fee_v1')}={this.intl.get('asset-gasFee_v1')}+平台手续费{`=${minerFee}+${fee}=${minerFee -
+                {/* <p className="explain">
+                  {this.intl.get("fee_v1")}={this.intl.get("asset-gasFee_v1")}+平台手续费{`=${minerFee}+${fee}=${minerFee -
                     0 +
                     (fee - 0)}`}
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
@@ -247,26 +280,31 @@ export default class Extract extends exchangeViewBase {
                   },
                   index
                 ) => (
-                    <tr key={index}>
-                      <td>{orderTime}</td>
-                      <td>{coinName}</td>
-                      <td>{count}</td>
-                      <td>{postAddress}</td>
-                      <td>{receiveAddress}</td>
-                      <td><span>{status[orderStatus]}</span></td>
-                      <td>{fee}</td>
-                    </tr>
-                  )
+                  <tr key={index}>
+                    <td>{orderTime}</td>
+                    <td>{coinName}</td>
+                    <td>{count}</td>
+                    <td>{postAddress}</td>
+                    <td>{receiveAddress}</td>
+                    <td>
+                      <span>{status[orderStatus]}</span>
+                    </td>
+                    <td>{fee}</td>
+                  </tr>
+                )
               )}
             </tbody>
           </table>
           <div className="pagina">
             <Pagination
-              total={this.state.assetHistory.totalCount}
-              pageSize={pageSize}
+              total={this.state.assetHistory.total}
+              pageSize={10}
               showTotal={true}
+              onChange={page => {
+                this.setState({ page });
+              }}
               showQuickJumper={true}
-              currentPage={page + 1}
+              currentPage={this.state.page}
             />
           </div>
           <p className="more">

@@ -28,9 +28,10 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
+    console.log(this.store.state.totalAsset, this.store.state.wallet );
     this.view.setState({
       totalAsset: this.store.state.totalAsset,
-      wallet: this.store.state.wallet
+      wallet: this.store.state.wallet || []
     })
   }
 
@@ -46,7 +47,10 @@ export default class AssetController extends ExchangeControllerBase {
   async getPairFees() { }
   // 获取所有币种
   async getWalletList() {
-
+    this.store.state.walletList['BTC'] === undefined && await this.store.getWalletList();
+    this.view.setState({
+      walletList: this.store.state.walletList
+    })
   }
   // 获取币种资产
   async getWallet() {
@@ -55,25 +59,33 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  async getCurrencyList() { }
+  async getCurrencyList() {}
 
 
-  // 获取充币地址
+  // 获取充币地址(over)
   async getCoinAddress() {
-    // let data = await this.store.Proxy.topCurrency();
+    await this.store.getChargeAddress();
+    this.view.setState({
+      coinAddress: this.store.state.coinAddress,
+    });
     // console.log(data);
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
   // 获取充提记录
   async getHistory() {
-    // let data = await this.store.Proxy.topCurrency();
-    // console.log(data);
-    // this.store.state.wallet = data;
-    // this.view.setState({ wallet: data});
+    await this.store.getHistory();
+    this.view.setState({
+      assetHistory: this.store.state.assetHistory || []
+    })
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
-  async getExtract() { }
+  async getExtract() {
+    await this.store.getwalletExtract()
+    this.view.setState({
+      walletExtract: this.store.state.walletExtract
+    });
+  }
   // 请求验证码
   async requestCode() { }
   // 账户余额页面筛选

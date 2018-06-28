@@ -54,7 +54,8 @@ export default function zh(state) {
     pending_v1: "审核中",
     passed_v1: "通过",
     failed_v1: "未通过",
-    fee_v1: "手续费"
+    fee_v1: "手续费",
+    option_v1: "操作"
   };
   const asset = {
     "asset-totalAssets_v1": "总资产约",
