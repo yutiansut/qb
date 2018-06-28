@@ -7,6 +7,7 @@ export default class UserStore extends ExchangeStoreBase {
       verifyNum: '获取验证码',
       userInfo: {},
       userAuth: {},
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0',
       user_info: { // 用户信息
         uid: 12345677788,
         name: 'aaaa',
@@ -103,15 +104,13 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async userInfo(){ // 获取用户信息
-    let userInfo = await this.Proxy.getUserInfo({"uid": 3});
+    let userInfo = await this.Proxy.getUserInfo({"userId": 3, "token": this.state.token});
     this.state.userInfo = userInfo;
-    console.log('userInfo',this.state, userInfo)
     return userInfo
   }
 
   async userAuth(){ // 获取用户认证信息
-    let userAuth = await this.Proxy.getUserAuth({"uid": 3});
-    console.log("2222用户", userAuth);
+    let userAuth = await this.Proxy.getUserAuth({"userId": 3});
     this.state.userAuth = userAuth;
     return userAuth
   }

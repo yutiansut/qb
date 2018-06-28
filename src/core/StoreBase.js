@@ -15,6 +15,7 @@ const host = ServerConfig.host;
 const port = ServerConfig.port;
 
 const formatParams = req => {
+  // console.log(JSON.stringify(req), req.url.path.indexOf(":"))
   if (req.url.path.indexOf(":") > 0) {
     let urlArr = req.url.path.split(":"),
       url = urlArr[0],
@@ -22,16 +23,17 @@ const formatParams = req => {
     req.url.path = `${url}${req.data.params[replaceKey]}`;
     delete req.data.params[replaceKey];
   }
-  // console.log(req)
+  // console.log(JSON.stringify(req), req.url.path)
   req.url.path && (req.url = `http://${req.url.host}:${req.url.port}${req.url.path}`);
+  // console.log(JSON.stringify(req), req.url)
   if (req.data && req.data.method === "post" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.data.body = JSON.stringify(req.data.params));
   if (req.data && req.data.method === "get" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.url += `?`) && Object.keys(req.data.params).forEach((key, index) =>
       (req.url += `${key}=${req.data.params[key]}`) && Object.keys(req.data.params).length - 1 !== index && (req.url += "&"));
 
-  req.data = JSON.parse(JSON.stringify(req.data));
-  // delete req.data.params
+  // req.data = JSON.parse(JSON.stringify(req.data));
+  delete req.data.params
   // console.log(req)
   return req
 }
@@ -44,7 +46,7 @@ export default class StoreBase {
   constructor() {
     // http
     this.Proxy = {};
-    this.Proxy.fetch = async (obj, req) => (req = formatParams(obj)) && await Fetch(req.url, req.data);
+    this.Proxy.fetch = async (url, data) => await Fetch(url, data);
     this.preHandler = [];
     this.afterHandler = [];
     this.Sleep = Sleep;
@@ -71,7 +73,16 @@ export default class StoreBase {
           // await AsyncAll(...preHandler.map(async vv => await vv(this, req, v)))
         }
         req = formatParams(req)
-        // console.log(1, req)
+        // console.log(1, req, JSON.stringify(req))
+
+        // let headers = new Headers()
+        // let req = JSON.parse(JSON.stringify(req))
+        // console.log(reqCache.data.params.data)
+        // let token = 'aaaaa'
+        // // console.log(token)
+        // headers.set('token', token)
+        // // console.log(headers)
+        // req.data.headers = headers;
         res.result = await Fetch(req.url, req.data);
         // console.log(data.url, !result, result.code !== 200, result.msg !== 'ok', result,httpFilter)
         if (afterHandler && afterHandler.length) {

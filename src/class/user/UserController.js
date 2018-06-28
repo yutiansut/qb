@@ -116,14 +116,16 @@ export default class UserController extends ExchangeControllerBase {
 
   // 为其他模块提供接口
   // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码
-  get userVerify() { // 提供两步认证信息
-    let {
-      fundPassVerify, loginVerify, withdrawVerify
+  get userVerify() { // 提供两步认证信息, 是否设置资金密码
+    let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+      fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
-    return {fundPassVerify, loginVerify, withdrawVerify}
+    return {fundPassVerify, loginVerify, withdrawVerify, fundPwd}
   }
 
-  get userFundPass() { // 提供是否设置资金密码
-
+  get userToken() { // 提供用户token
+    let token = this.store.state.token
+    return  token
   }
+
 }

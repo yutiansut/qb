@@ -65,9 +65,10 @@ export default class userIdentity extends exchangeViewBase {
       showPhotoList: this.state.showPhotoList.concat([])
     })
     uploadImg.append("uploadimage", file);
-    headers.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
+    headers.set('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
     console.log(headers)
     console.log('uploadImg', uploadImg, file)
+
     await fetch("http://192.168.113.141/image/", {
       method: 'Post',
       body: uploadImg,
