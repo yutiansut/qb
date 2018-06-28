@@ -40,6 +40,11 @@ class ReactKline extends React.Component {
         window.redrawKline=function () {
             let tradeChart=document.querySelector(".trade-chart");
             _kline.resize(tradeChart.clientWidth,tradeChart.clientHeight);
+            // 自动取消全屏
+            if(_kline.isSized){
+                let sizeIcon=document.querySelector("#sizeIcon");
+                sizeIcon.click();
+            }
         }
     }
 
