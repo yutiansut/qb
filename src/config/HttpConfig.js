@@ -22,8 +22,8 @@ export default {
   // httpAfterHandler,
 
   user: [ // 用户
-    {name: 'getUserInfo', data: {url: '/user/', method: 'post'}, action: 'userInfo', actionBack: 'userInfoRes', needToken: false}, // 获取用户信息
-    {name: 'getUserAuth', data: {url: '/user/', method: 'post'}, action: 'userAuth', actionBack: 'userAuthRes' }, // 获取用户认证信息
+    {name: 'getUserInfo', data: {url: '/user/', method: 'post'}, action: 'userInfo', actionBack: 'userInfoRes'}, // 获取用户信息
+    {name: 'getUserAuth', data: {url: '/user/', method: 'post'}, action: 'userAuth', actionBack: 'userAuthRes'}, // 获取用户认证信息
     // {name: 'uploadUserImg', data: {url: '/image/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true }, // 上传用户认证图片
     {name: 'uploadUserAuth', data: {url: '/user/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes' }, // 上传用户认证信息
     {name: 'getLoginPwd', data: {url: '/user/', method: 'post'}, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes' }, // 设置登录密码
@@ -33,6 +33,12 @@ export default {
     {name: 'bindUser', data: {url: '/user/', method: 'post'}, action: 'bindAccount', actionBack: 'bindAccountRes' }, // 绑定手机邮箱
     {name: 'getGoogle', data: {url: '/user/', method: 'post'}, action: 'getGoogleSecret', actionBack: 'getGoogleSecretRes' }, // 获取谷歌验证密钥
     {name: 'getCurrentLogin', data: {url: '/user/', method: 'post'}, action: 'getCurrentLoginList', actionBack: 'getCurrentLoginListRes' }, // 获取当前登录设备列表
+    {name: 'getLoginList', data: {url: '/user/', method: 'post'}, action: 'getOperateRecord', actionBack: 'getOperateRecordRes' }, // 获取登录日志
+    {name: 'getUserCredits', data: {url: '/user/', method: 'post'}, action: 'getUserCreditsHistory', actionBack: 'getUserCreditsHistoryRes'}, // 获取积分详情
+    {name: 'getIpList', data: {url: '/user/', method: 'post'}, action: 'getIpList', actionBack: 'getIpListRes'}, // 查看ip白名单
+    {name: 'setFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes'}, // 设置资金密码输入间隔
+    {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
+
   ],
   notice: [
     {name: 'getActivity', data: {url: '/activity/', method: 'post'}}

@@ -2,116 +2,77 @@ import ExchangeStoreBase from '../ExchangeStoreBase'
 
 export default class UserStore extends ExchangeStoreBase {
   constructor() {
-    super();
+    super("user");
     this.state = {
       verifyNum: '获取验证码',
-      userInfo: {},
-      userAuth: {},
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0',
-      user_info: { // 用户信息
-        uid: 12345677788,
-        name: 'aaaa',
-        phone: '', // 没有为空
-        email: '123456677@163.com', // 没有为空
-        grade: 1, // 用户等级
-        score: 50000, // 等级积分
-        password: true, // 是否设置登录密码
-        fundpass: false, // 是否设置资金密码
-        verify: 0, // 是否认证:0未认证;1认证中;2已通过;3失败
-        verify_type: 0, // 认证形式:0 身份证 1 护照 2 未认证
-        id_card: "", // 身份证号码
-        passport: "", // 护照
-        googleVerify: true, // 是否开启谷歌验证
-        login_type: 0, // 登录验证 0 谷歌 1 邮箱 2 短信 3 无         2, 谷歌验证  1, 邮件  3, 短信  0,无
-        cash_type: 2, // 提现验证
-        fund_type: 2, // 修改资金密码验证
-        notice_type: 2, // 通知设置 1 邮箱 2短信
-        first_name: "", // 姓
-        lastame: "", // 名
-        id_card_front: null, // 身份证正面照
-        id_card_back: null, // 身份证反面照
-        id_card_inhand: null, // 身份证手持照
-        passport_front: null, // 护照正面照
-        passport_inhand: null, // 护照手持照
-        passport_ad: null, // 住址证明
-        state: [
-          {
-            time: 1529047636,
-            dev: "Mac OS X 10.12.5 / Chrome 66.0.3359",
-            ip: "192.168.113.101",
-            ip_addr: "-", // 没有显示—
-            key: "bliirya9doxnsus2zrijzyrxn4id9xsl"
-          }
-        ],
-        session_key: "bliirya9doxnsus2zrijzyrxn4id9xsl", // 匹配是否为当前设备
-      },
-      recent_info: [ // 近期记录
-        {
-          catalog_name: "登录日志",
-          detail: "Signin",
-          ip: "192.168.113.101",
-          ip_addr: "-",
-          time: 1529047636
-        },
-        {
-          catalog_name: "登录日志",
-          detail: "Signin",
-          ip: "192.168.113.101",
-          ip_addr: "-",
-          time: 1529047636
-        },
-        {
-          catalog_name: "登录日志",
-          detail: "Signin",
-          ip: "192.168.113.101",
-          ip_addr: "-",
-          time: 1529047636
-        }
-      ],
-      score_info: { // 用户积分详情
-        total: 20, // 总条数
-        items: [
-          {
-            time: 1529047636,
-            event: "每日登录",
-            gain: 2
-          },
-          {
-            time: 1529047636,
-            event: "每日登录",
-            gain: 2
-          },
-          {
-            time: 1529047636,
-            event: "每日登录",
-            gain: 2
-          }
-        ]
-      }
+      userInfo: {}, // 用户基本信息
+      userAuth: {}, // 认证信息
+      loginList: [], // 登录日志
+      userCredits: [], // 用户积分列表
+      currentLogin: [], // 当前登录设备
+      ipList: [], // 白名单列表
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
-    this.preHandler.push(this.userPreHandler)
-    this.installProxy("user", this.preHandler, this.afterHandler)
+    // this.preHandlerndler.push(this.userPreHandler)
+    // this.installProxy("user", this.preHandler, this.afterHandler)
   }
 
-  userPreHandler(app, req) {
-    // if (app.state.userInfo.loginState) {
-    //   let headers = new Headers();
-    //   headers.set('token', app.state.userInfo.token)
-    //   req.data.headers = headers;
-    // }
-    // req.params = Object.assign({app:0}, req.params)
-    console.log('用户', app, req)
-  }
+  // userPreHandler(app, req) {
+  //   // if (app.state.userInfo.loginState) {
+  //   //   let headers = new Headers();
+  //   //   headers.set('token', app.state.userInfo.token)
+  //   //   req.data.headers = headers;
+  //   // }
+  //   // req.params = Object.assign({app:0}, req.params)
+  //   console.log('用户', app, req)
+  // }
 
-  async userInfo(){ // 获取用户信息
-    let userInfo = await this.Proxy.getUserInfo({"userId": 3, "token": this.state.token});
+  async userInfo() { // 获取用户信息
+    let userInfo = await this.Proxy.getUserInfo({"userId": 3});
     this.state.userInfo = userInfo;
     return userInfo
   }
 
-  async userAuth(){ // 获取用户认证信息
+  async userAuth() { // 获取用户认证信息
     let userAuth = await this.Proxy.getUserAuth({"userId": 3});
     this.state.userAuth = userAuth;
     return userAuth
+  }
+  async currentLogin() { // 获取当前登录设备列表
+    let currentLogin = await this.Proxy.getCurrentLogin({"userId": 3});
+    if(currentLogin.errCode)
+      currentLogin = []
+    this.state.currentLogin = currentLogin;
+    return currentLogin
+  }
+
+  async loginList() { // 获取登录日志
+    let loginContent = await this.Proxy.getLoginList({"userId": 3, "page":0, "pageSize":10, "src":-1, "catalog":0});
+    let loginlist = loginContent.data;
+    console.log('denglu', loginlist)
+    let catalogArr = ['登录日志', '注册日志', '第三方账号', '实名认证', '两步验证', '邮件验证', '手机号验证', '登录密码设置', '钱包日志', 'API设置', '资金密码设置', '系统日志', 'IP 白名单', '联系人管理']
+    loginlist.forEach(v => {
+      v.catalog = catalogArr[v.catalog]
+    })
+    console.log('denglu', loginlist)
+    this.state.loginList = loginlist;
+    return loginlist
+  }getIpList
+
+  async ipList() { // 获取ip白名单
+    let ipList = await this.Proxy.getIpList({"userId": 3});
+    console.log('白名单', ipList)
+    // if(userCredits.errCode)
+    //   userCredits = []
+    this.state.ipList = ipList;
+    return ipList
+  }
+
+  async userCredits() { // 获取用户积分
+    let userCredits = await this.Proxy.getUserCredits({"userId": 3, "page":0, "pageSize":10});
+    if(userCredits.errCode)
+      userCredits = []
+    this.state.userCredits = userCredits;
+    return userCredits
   }
 }

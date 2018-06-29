@@ -47,6 +47,9 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取认证信息
+    this.getLoginList = controller.getLoginList.bind(controller) // 获取登录日志
+    this.getCurrentLogin = controller.getCurrentLogin.bind(controller) // 获取当前登录设备
+    this.getIpList = controller.getIpList.bind(controller) // 获取ip白名单
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -112,7 +115,10 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await this.initData()
+    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList()])
+    // await this.initData()
+    // await this.getLoginList()
+    // await this.getCurrentLogin()
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
@@ -137,7 +143,7 @@ export default class userSafeCenter extends exchangeViewBase {
 
 
   render() {
-    console.log('用户信息', this.state)
+    console.log('用户信息111', this.state)
     return (
       <div className="safe-content">
         <h1>安全中心</h1>
@@ -145,7 +151,7 @@ export default class userSafeCenter extends exchangeViewBase {
           <h2>基本资料</h2>
           <ul className="fl clearfix">
             <li>用户ID</li>
-            <li>{this.state.userInfo.uid || ''}</li>
+            <li>{this.state.userInfo.userId || ''}</li>
             <li>电子邮件</li>
             <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup('block', 1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
             <li>手机号</li>
@@ -237,14 +243,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>操作</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>216.58.197.238</td>
-                    <td>2018-01-18 10:23:22</td>
-                    <td>删除</td>
-                  </tr>
-                </tbody>
+                {/*<tbody>*/}
+                  {/*{this.state.ipList.map((v, index) => (<tr key={index}>*/}
+                    {/*<td>{v.catalog}</td>*/}
+                    {/*<td>{v.ip}</td>*/}
+                    {/*<td>删除</td>*/}
+                  {/*</tr>))}*/}
+                {/*</tbody>*/}
               </table>
+              <p className={`${this.state.ipList ? 'hide' : ''} nothing-text`}>暂无</p>
               <p>
                 添加IP地址或范围后，你将无法从这个白名单之外的IP地址登录你的账户。出于安全方面的考虑，添加或删除IP地址后，你的账户将在24小时内无法提现。你可以访问mixcoins.com/ip/获得当前IP地址。
               </p>
@@ -265,7 +272,7 @@ export default class userSafeCenter extends exchangeViewBase {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.user_info.state.map((v, index) => (<tr key={index}>
+                  {this.state.currentLogin.map((v, index) => (<tr key={index}>
                     <td>{v.time}</td>
                     <td>{v.dev}</td>
                     <td>{v.ip}</td>
@@ -290,11 +297,11 @@ export default class userSafeCenter extends exchangeViewBase {
             </tr>
             </thead>
             <tbody>
-            {this.state.recent_info.map((v, index) => (<tr key={index}>
-              <td>{v.catalog_name}</td>
+            {this.state.loginList.map((v, index) => (<tr key={index}>
+              <td>{v.catalog}</td>
               <td>{v.ip}</td>
-              <td>{v.ip_addr}</td>
-              <td>{v.time}</td>
+              <td>{v.src}</td>
+              <td>{v.createdTime}</td>
             </tr>))}
             </tbody>
           </table>

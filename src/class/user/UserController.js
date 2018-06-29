@@ -48,11 +48,13 @@ export default class UserController extends ExchangeControllerBase {
       }
     })
     console.log('发送验证码', result )
-
   }
+
   clearVerify() { // 清除短信验证码
     this.countDownStop('verifyCountDown')
   }
+
+  // 接口调用部分
   async initData() { // 获取用户信息
     let userInfo = await this.store.userInfo();
     let obj = this.checkNum(userInfo.credits)
@@ -61,7 +63,27 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserAuthData() { // 获取用户认证信息
     let userAuth = await this.store.userAuth();
-    this.view.setState({userAuth: userAuth})
+    this.view.setState({userAuth})
+  }
+
+  async getCurrentLogin() { // 获取当前登录设备
+    let currentLogin = await this.store.currentLogin();
+    this.view.setState({currentLogin})
+  }
+
+  async getLoginList() { // 获取登录记录
+    let loginList = await this.store.loginList();
+    this.view.setState({loginList})
+  }
+
+  async getIpList() { // 获取ip白名单
+    let ipList = await this.store.ipList();
+    this.view.setState({ipList})
+  }
+
+  async getUserCredits() { //获取用户积分信息
+    let userCredits = await this.store.userCredits();
+    this.view.setState({userCredits})
   }
 
   uploadInfo() { // 身份认证确认提交
@@ -126,6 +148,22 @@ export default class UserController extends ExchangeControllerBase {
   get userToken() { // 提供用户token
     let token = this.store.state.token
     return  token
+  }
+
+  async setFundPwdInterval(type, pwd) { // 设置资金密码输入间隔
+    let result = await this.store.Proxy.setFundPwdSuspend({
+      "userId": 3,
+      "interval": type, // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "fundPass": pwd
+    })
+    console.log('设置资金密码', result)
+  }
+
+  async getFundPwdInterval() { // 查看资金密码输入间隔
+    let result = await this.store.Proxy.setFundPwdSuspend({
+      "userId": 3
+    })
+    console.log('查看资金密码', result)
   }
 
 }

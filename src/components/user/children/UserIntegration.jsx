@@ -17,6 +17,7 @@ export default class userIntegration extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.initData = controller.initData.bind(controller) // 获取用户信息
+    this.getUserCredits = controller.getUserCredits.bind(controller) // 获取用户积分
   }
 
   componentWillMount() {
@@ -24,7 +25,7 @@ export default class userIntegration extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await this.initData()
+    await Promise.all([this.initData(), this.getUserCredits()])
 
   }
 
@@ -86,8 +87,8 @@ export default class userIntegration extends exchangeViewBase {
                 <th>时间</th>
               </tr>
               </thead>
-              <tbody>
-                {this.state.score_info.items.map((v, index) => (<tr key={index}>
+              <tbody className={this.state.userCredits.length ? '' : 'hide'}>
+                {this.state.userCredits.map((v, index) => (<tr key={index}>
                   <td>+{v.gain}</td>
                   <td>{v.event}</td>
                   <td>{v.time}</td>

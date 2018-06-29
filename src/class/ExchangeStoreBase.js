@@ -23,6 +23,7 @@ export default class ExchangeStoreBase extends StoreBase {
     headers.set('token', req.data.params.data.token)
     req.data.headers = headers;
     delete req.data.params.data.token
+    // console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config){
