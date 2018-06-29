@@ -36,7 +36,7 @@ const HTTP_PROXY = {
   },
 
   install(modelName, preHandler, afterHandler) {
-    HttpList[modelName].forEach(v => {
+    HttpList && HttpList[modelName] && HttpList[modelName].forEach(v => {
       this.Proxy[v.name] = async params => {
         let req = {},
           res = {};

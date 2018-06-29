@@ -20,28 +20,39 @@ import DealController from '../../class/deal/DealController'
 
 import './stylus/trade.styl'
 
-const TradeMarketController = new MarketController();
-const TradeOrderListController = new TradeOrderController();
-// const TradeRecentController = new TradeOrderController();
-const TradeRecentController = new OrderListController();
-const CurrentOrderController = new UserOrderListController();
-const HistoryOrderController = new UserOrderListController();
-const noticeController = new NoticeController();
-const TradeDealController = new DealController();
-const TradePlanController = new DealController();
+let TradeMarketController,
+  TradeOrderListController,
+  TradeRecentController,
+  CurrentOrderController,
+  HistoryOrderController,
+  noticeController,
+  TradeDealController,
+  TradePlanController;
 
-TradeMarketController.TradeDealController = TradeDealController;
-TradeMarketController.TradePlanController = TradePlanController;
-TradeOrderListController.TradePlanController = TradePlanController;
 
-TradePlanController.TradeMarketController = TradeMarketController;
-TradePlanController.TradeRecentController = TradeRecentController;
-TradePlanController.CurrentOrderController = CurrentOrderController;
-TradePlanController.HistoryOrderController = HistoryOrderController;
-TradePlanController.TradeOrderListController = TradeOrderListController;
 export default class extends exchangeViewBase{
   constructor(props){
     super(props)
+
+    TradeMarketController = new MarketController();
+    TradeOrderListController = new TradeOrderController();
+// TradeRecentController = new TradeOrderController();
+    TradeRecentController = new OrderListController();
+    CurrentOrderController = new UserOrderListController();
+    HistoryOrderController = new UserOrderListController();
+    noticeController = new NoticeController();
+    TradeDealController = new DealController();
+    TradePlanController = new DealController();
+
+    TradeMarketController.TradeDealController = TradeDealController;
+    TradeMarketController.TradePlanController = TradePlanController;
+    TradeOrderListController.TradePlanController = TradePlanController;
+
+    TradePlanController.TradeMarketController = TradeMarketController;
+    TradePlanController.TradeRecentController = TradeRecentController;
+    TradePlanController.CurrentOrderController = CurrentOrderController;
+    TradePlanController.HistoryOrderController = HistoryOrderController;
+    TradePlanController.TradeOrderListController = TradeOrderListController;
   }
   render(){
     return(

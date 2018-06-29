@@ -8,8 +8,8 @@ import HomeNotice from '../notice/HomeNotice.jsx' // 首页公告
 
 import MarketController from '../../class/market/MarketController'
 
-const recommendController = new MarketController();
-const marketController = new MarketController();
+let recommendController,
+  marketController;
 
 import "./stylus/home.styl"
 import "./stylus/homeMarkt.styl"
@@ -18,6 +18,8 @@ import "./stylus/homeMarkt.styl"
 export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
+    recommendController = new MarketController();
+    marketController = new MarketController();
   }
 
   render() {

@@ -29,7 +29,7 @@ export default class HomeMarket extends ExchangeViewBase{
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    console.log(this.state)
+    // console.log(this.state)
     //绑定方法
     this.marketDataHandle = controller.marketDataHandle.bind(controller);
     this.changeMarket = controller.changeMarket.bind(controller) // 点击其他市场
@@ -43,7 +43,7 @@ export default class HomeMarket extends ExchangeViewBase{
     this.marketDataHandle();
   }
   render(){
-    console.log(1234,this.state,this.state.recommendDataHandle)
+    // console.log(1234,this.state,this.state.recommendDataHandle)
     return(
       <div className='home-market inner'>
         <div className="market-nav clearfix">

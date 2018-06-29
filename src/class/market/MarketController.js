@@ -5,10 +5,10 @@ export default class MarketController extends ExchangeControllerBase {
   constructor() {
     super();
     this.store = new MarketStore();
+    this.store.setController(this)
   }
 
   setView(view) {
-    console.log(this.store.WebSocket)
     super.setView(view);
   }
 
@@ -19,6 +19,9 @@ export default class MarketController extends ExchangeControllerBase {
   async getPairData() {
 
   }
+
+  //连接websocket
+
 
   // 推荐交易对处理
   // recommendDataHandle() {
@@ -41,6 +44,8 @@ export default class MarketController extends ExchangeControllerBase {
   //   })
   //   this.store.state.recommendDataHandle = recommendData
   // }
+
+
   // 切换市场
   changeMarket(v) {
     let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
@@ -77,7 +82,7 @@ export default class MarketController extends ExchangeControllerBase {
       collectIndex: index
     });
     v.isFavorite = !v.isFavorite
-    console.log('收藏', v.isFavorite)
+    // console.log('收藏', v.isFavorite)
   }
 
   // 市场下交易对
@@ -123,7 +128,7 @@ export default class MarketController extends ExchangeControllerBase {
     let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
-    console.log('图片1', imgArr[v.type], v.type)
+    // console.log('图片1', imgArr[v.type], v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
       homeMarketPairData: this.sort(sortArray, v.sortValue, v.type),
@@ -143,7 +148,7 @@ export default class MarketController extends ExchangeControllerBase {
     // this.view.setState({
     //   searchRealt: result
     // });
-    console.log('筛选', result, value)
+    // console.log('筛选', result, value)
     return result;
   }
   // 点击收藏筛选数组

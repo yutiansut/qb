@@ -2,7 +2,7 @@ import ExchangeStoreBase from '../ExchangeStoreBase'
 
 export default class MarketStore extends ExchangeStoreBase {
   constructor() {
-    super();
+    super('market', 'general');
     this.state = {
       allPairData: [
         {"market_name": "BTC",
@@ -159,5 +159,20 @@ export default class MarketStore extends ExchangeStoreBase {
       tradePair:'',
       unitsType:''
     }
+
+    this.getWebSocketData()
   }
+
+  setController(ctl){
+    this.controller = ctl
+  }
+
+  getWebSocketData(){
+    // console.log('getData', this.WebSocket)
+    // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
+    // this.WebSocket.general.on('recommendCurrency', data=>{
+    //   console.log('getWebSocketData', data)
+    // })
+  }
+
 }

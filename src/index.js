@@ -10,7 +10,7 @@ import HttpConfig from './config/HttpConfig'
 const renderDom = async Component => {
   // console.log(Date.now())
   await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig})
-  await Core.Websocket.general()
+  WebSocketConfig.useWebSocket && await Core.Websocket.general()
   // await import('./App')
   // console.log(Date.now())
   render(

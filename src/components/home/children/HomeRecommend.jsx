@@ -10,7 +10,7 @@ export default class HomeRecommend extends ExchangeViewBase{
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    console.log(this.state)
+    // console.log(this.state)
     //绑定方法
     // this.recommendDataHandle = controller.recommendDataHandle.bind(controller);
     // this.getData = controller.getData.bind(controller)

@@ -23,7 +23,7 @@ export default class StoreBase {
   }
 
   installWebsocket(connectName) {
-    console.log('installWebsocket',MassageHandler[connectName].get())
+    // console.log('installWebsocket',MassageHandler[connectName].get())
     return MassageHandler[connectName]
   }
 

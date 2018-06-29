@@ -89,7 +89,7 @@ export default function () {
     console.log('send text')
     if (connects.length === 0)
       throw new Error('==connect is all down!===')
-    console.log(index++ % poolSize, connects[0])
+    console.log('websocket 发送信息', text)
     poolSize && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 

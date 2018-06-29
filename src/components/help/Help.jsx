@@ -6,8 +6,8 @@ import {
   Switch
 } from 'react-router-dom'
 import MarketController from "../../class/market/MarketController"
-const marketController = new MarketController();
 
+let marketController
 
 import Terms from './children/Terms' // 服务协议
 import Pricing from './children/Pricing' // 费率标准
@@ -22,6 +22,8 @@ export default class Help extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.controller = props.controller;
+
+    marketController = new MarketController();
   }
 
   render() {

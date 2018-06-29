@@ -1,6 +1,9 @@
 import StoreBase from '../core/StoreBase'
 import Msg from "../config/ErrCodeConfig";
 
+const WebsocketCallBackList = {}
+let opConfig = {}
+
 export default class ExchangeStoreBase extends StoreBase {
   constructor(modelName, connectName) {
     super();
@@ -40,21 +43,32 @@ export default class ExchangeStoreBase extends StoreBase {
 
   installWebsocket(connectName, modelName) {
     let websocket = super.installWebsocket(connectName)
-    console.log('connectName, modelName', connectName, modelName, websocket)
+    if(!websocket)
+      return
+    let headerConfig = websocket.config.optionList[modelName]
+    headerConfig && Object.keys(headerConfig).forEach(v=>{
+      opConfig[headerConfig[v].op] = v
+    })
+    // console.log('connectName, modelName', connectName, modelName, websocket)
+    websocket.onMessage = data => {
+      let header = websocket.config.optionList[modelName]
+      console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
+      WebsocketCallBackList[opConfig[data.op]](data.data)
+    }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
-      console.log('this.WebSocket[connectName]', websocket[connectName], connectName)
-      let header = websocket.config.optionList[modelName][key]
-      let emitData = Object.assign(header, {data})
-      console.log(emitData, websocket)
+      // console.log('this.WebSocket[connectName]', websocket[connectName], connectName)
+
+      headerConfig.seq = Math.floor(Math.random() * 1000000000)
+      let emitData = Object.assign(headerConfig[key], {data})
+      // console.log(emitData, websocket)
       websocket.send(emitData)
     }
     this.WebSocket[connectName].on = (key, func) => {
       let header = websocket.config.optionList[modelName][key]
-      websocket.onMessage = data => {
-        console.log('installWebsocket(connectName, modelName)', data)
-        func(data)
-      }
+      WebsocketCallBackList[key] = func
+      // console.log(WebsocketCallBackList)
     }
+
   }
 }
