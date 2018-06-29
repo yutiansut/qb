@@ -71,5 +71,12 @@ export default {
     { name: 'delAddress', data: { url: '/common/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
     // 充提记录4.10
     { name: 'history', data: { url: '/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
-  ]
+  ],
+  userOrder:[
+    //当前订单
+    {name: 'currentOrder', data: {url: '/order/', method:'post'}, action: 'getCurrOrders', actionBack: 'getCurrOrdersRes'},
+    //历史订单
+    {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'}
+  ],
+  
 }

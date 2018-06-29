@@ -13,10 +13,13 @@ const orderDetailHead = {
 };
 
 const orderStatus = {
-  0: '已成交',
+  0: '未成交',
   1: '部分成交',
-  2: '未成交',
-  3: '已撤销'
+  2: '全部成交',
+  3: '已撤销',
+  4:  '撤单中',
+  5:  '已结束',
+  6:  '部分成交',
 };
 
 const orderNavItems = {
@@ -41,12 +44,15 @@ export default class OrderCurrent extends ExchangeViewBase{
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.orderListHandle = controller.orderListHandle.bind(controller)
+    this.orderListHandle = controller.orderListHandle.bind(controller);
+    // this.getCurrent = controller.getCurrentOrder.bind(controller)
   }
   componentWillMount(){
   
   }
   componentDidMount(){
+    // this.orderListHandle(this.props.type)
+    // this.props.type === 'orderCurrent' && (this.getCurrent())
     this.orderListHandle(this.props.type)
   }
   hideReset(e){
@@ -57,7 +63,8 @@ export default class OrderCurrent extends ExchangeViewBase{
     })
   }
   render() {
-    const {type} = this.props
+    const {type} = this.props;
+    console.log('zifeng', )
   return(
       <div className='order-detail'>
           <div className='order-title'>
