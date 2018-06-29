@@ -73,15 +73,20 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({ipList})
   }
 
-  async getUserCredits() { //获取用户积分信息
+  async getUserCredits() { // 获取用户积分信息
     let userCredits = await this.store.userCredits();
     this.view.setState({userCredits})
   }
 
+  async getGoogle() { // 获取谷歌密钥
+     let googleSecret = await this.store.googleSecret();
+     this.view.setState({googleSecret})
+  }
+
   uploadInfo() { // 身份认证确认提交
-    let  typeIndexArr = [1, 3]
-    this.store.Proxy.userInfo({
-      "uid": 1,
+    let typeIndexArr = [1, 3]
+    this.store.Proxy.uploadUserAuth({
+      "userId": 1,
       "firstName": this.view.state.firstNameValue, // 姓氏
       "lastName": this.view.state.lastNameValue, // 名字
       "name": `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
@@ -101,8 +106,8 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setLoginPass(aaa, bbbb) { // 设置登录密码
-    let result = await this.store.Proxy.userInfo({
-      "uid": 1,
+    let result = await this.store.Proxy.getLoginPwd({
+      "userId": 1,
       "type": 0,// 0:设置密码 （不用传old_pass） 1:修改密码
       "oldPass": aaa,
       "newPass": bbbb
@@ -111,8 +116,8 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setFundPass(aaa, bbbb) { // 设置资金密码
-    let result = await this.store.Proxy.userInfo({
-      "uid": 1,
+    let result = await this.store.Proxy.setFundPwd({
+      "userId": 1,
       "account": "oynix@foxmail.com", // 用户登录信息
       "mode": 1,// 0:phone 1:email // 用户登录信息
       "code": "343252", // 短信验证码
@@ -120,6 +125,23 @@ export default class UserController extends ExchangeControllerBase {
       "pass": "jsjsjsjsjsj"
     })
     console.log('设置密码', result)
+  }
+
+  async addIp() { // 添加ip白名单
+    let result = await this.store.Proxy.addIp({
+      "userId": 1,
+      "IPAddress":"1.1.1.1"
+    })
+    console.log('添加ip', result)
+  }
+
+  async delIp() { // 删除ip白名单
+    let result = await this.store.Proxy.deletIp({
+      "userId":1,
+      "IPId":0,
+      "IPAddress":10
+    })
+    console.log('删除ip', result)
   }
 
   // 为其他模块提供接口

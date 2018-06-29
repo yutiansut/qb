@@ -26,7 +26,6 @@ export default class userIntegration extends exchangeViewBase {
 
   async componentDidMount() {
     await Promise.all([this.initData(), this.getUserCredits()])
-
   }
 
   componentWillUpdate(...parmas) {
@@ -90,8 +89,8 @@ export default class userIntegration extends exchangeViewBase {
               <tbody className={this.state.userCredits.length ? '' : 'hide'}>
                 {this.state.userCredits.map((v, index) => (<tr key={index}>
                   <td>+{v.gain}</td>
-                  <td>{v.event}</td>
-                  <td>{v.time}</td>
+                  <td>{v.operation}</td>
+                  <td>{v.createdTime}</td>
                 </tr>))}
               </tbody>
             </table>

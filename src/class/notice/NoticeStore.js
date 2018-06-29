@@ -2,8 +2,11 @@ import ExchangeStoreBase from '../ExchangeStoreBase'
 
 export default class NoticeStore extends ExchangeStoreBase {
   constructor() {
-    super();
+    super("notice");
     this.state = {
+      noticeList: {},
+      infoList: {},
+
       informationList: {
         "data": [
           {
@@ -109,24 +112,25 @@ export default class NoticeStore extends ExchangeStoreBase {
     }
   }
 
-  // async informationInfo(){ // 获取公告
-  //   let informationInfo = await this.Proxy.getActivity({"action": "getActivity", "data": {
-  //       "userId": 2,
-  //       "activityType": 0,  //类型 0公告 1新闻 2资讯
-  //       "page": 0,
-  //       "pageSize": 10
-  //   }});
-  //   this.state.informationList = informationInfo.data;
-  //   return informationInfo
-  // }
-  // async newsInfo(){ // 获取资讯
-  //   let newsInfo = await this.Proxy.getActivity({"action": "getActivity", "data": {
-  //       "userId": 2,
-  //       "activityType": 2,
-  //       "page": 0,
-  //       "pageSize": 10
-  //   }});
-  //   this.state.newsList = newsInfo.data;
-  //   return newsInfo
-  // }
+  async noticeCon() { // 获取公告
+    let noticeList = await this.Proxy.getActivityCon({
+        "userId": 2,
+        "activityType": 0,  //类型 0公告 1新闻 2资讯
+        "page": 0,
+        "pageSize": 10
+    });
+    this.state.noticeList = noticeList;
+    return noticeList
+  }
+
+  async infoCon() { // 获取资讯
+    let infoList = await this.Proxy.getActivityCon({
+        "userId": 2,
+        "activityType": 2,
+        "page": 0,
+        "pageSize": 10
+    });
+    this.state.infoList = infoList;
+    return infoList
+  }
 }

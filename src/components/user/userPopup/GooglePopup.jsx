@@ -10,6 +10,9 @@ export default class GooglePopup extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
+  async componentDidMount() {
+
+  }
 
   render() {
     return (
@@ -29,14 +32,14 @@ export default class GooglePopup extends exchangeViewBase {
               <li>2</li>
               <li>在“Google Authenticator (身份验证器)”应用程序中，点击“添加新账户”扫描下方二维码</li>
               <li><img src="" alt=""/></li>
-              <li>如果您无法扫描成功上图的条形码，您可以手动添加账户，输入如下密钥: 3LGZ6QBSEWBHH5BF</li>
+              <li>如果您无法扫描成功上图的条形码，您可以手动添加账户，输入如下密钥: {this.props.googleSecret}</li>
             </ul>
             <ul>
               <li>3</li>
               <li>警告：</li>
               <li>
                 <i>请您务必将密钥记录下来：</i>
-                <em>3LGZ6QBSEWBHH5BF</em>
+                <em>{this.props.googleSecret}</em>
               </li>
               <li>如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。</li>
               <li>请输入显示的验证码，开启验证功能</li>

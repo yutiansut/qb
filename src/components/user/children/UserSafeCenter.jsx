@@ -50,6 +50,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getLoginList = controller.getLoginList.bind(controller) // 获取登录日志
     this.getCurrentLogin = controller.getCurrentLogin.bind(controller) // 获取当前登录设备
     this.getIpList = controller.getIpList.bind(controller) // 获取ip白名单
+    this.getGoogle = controller.getGoogle.bind(controller) // 获取谷歌密钥
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -115,7 +116,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList()])
+    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle()])
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
@@ -243,13 +244,13 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>操作</th>
                   </tr>
                 </thead>
-                {/*<tbody>*/}
-                  {/*{this.state.ipList.map((v, index) => (<tr key={index}>*/}
-                    {/*<td>{v.catalog}</td>*/}
-                    {/*<td>{v.ip}</td>*/}
-                    {/*<td>删除</td>*/}
-                  {/*</tr>))}*/}
-                {/*</tbody>*/}
+                <tbody className={`${this.state.ipList ? '' : 'hide'}`}>
+                  {this.state.ipList && this.state.ipList.map((v, index) => (<tr key={index}>
+                    <td>{v.catalog}</td>
+                    <td>{v.ip}</td>
+                    <td>删除</td>
+                  </tr>))}
+                </tbody>
               </table>
               <p className={`${this.state.ipList ? 'hide' : ''} nothing-text`}>暂无</p>
               <p>
@@ -311,6 +312,7 @@ export default class userSafeCenter extends exchangeViewBase {
                      {/*getVerify = {this.getVerify}*/}
                      {/*verifyNum={this.state.verifyNum}/>*/}
         <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)}
+                     googleSecret = {this.state.googleSecret.secret}
                      isGoogle = {this.state.showGoogle}/>
         <PassPopup changeSetPopup = {state => this.changeSetPopup(state)}
                    isSet = {this.state.showSet}

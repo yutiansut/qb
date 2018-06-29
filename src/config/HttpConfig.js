@@ -35,13 +35,14 @@ export default {
     {name: 'getCurrentLogin', data: {url: '/user/', method: 'post'}, action: 'getCurrentLoginList', actionBack: 'getCurrentLoginListRes' }, // 获取当前登录设备列表
     {name: 'getLoginList', data: {url: '/user/', method: 'post'}, action: 'getOperateRecord', actionBack: 'getOperateRecordRes' }, // 获取登录日志
     {name: 'getUserCredits', data: {url: '/user/', method: 'post'}, action: 'getUserCreditsHistory', actionBack: 'getUserCreditsHistoryRes'}, // 获取积分详情
-    {name: 'getIpList', data: {url: '/user/', method: 'post'}, action: 'getIpList', actionBack: 'getIpListRes'}, // 查看ip白名单
+    {name: 'getIpList', data: {url: '/user/', method: 'post'}, action: 'getIPWhiteList', actionBack: 'getIPWhiteListRes'}, // 查看ip白名单
+    {name: 'addIp', data: {url: '/user/', method: 'post'}, action: 'InsertIP', actionBack: 'InsertIPRes'}, // 添加ip白名单
+    {name: 'deletIp', data: {url: '/user/', method: 'post'}, action: 'DeleteIP', actionBack: 'DeleteIPRes'}, // 删除ip白名单
     {name: 'setFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes'}, // 设置资金密码输入间隔
     {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
-
   ],
   notice: [
-    {name: 'getActivity', data: {url: '/activity/', method: 'post'}}
+    {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes'} // 活动内容
   ],
   test: [
     {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
