@@ -19,12 +19,14 @@ export default class NoticeController extends ExchangeControllerBase {
   }
 
   async getNoticeCon() { // 获取公告
-    let noticeList = await this.store.noticeCon();
+    let token = this.userController.userToken
+    let noticeList = await this.store.noticeCon(token);
     this.view.setState({noticeList})
   }
 
   async getInfoCon() { // 获取资讯
-    let infoList = await this.store.infoCon();
+    let token = this.userController.userToken
+    let infoList = await this.store.infoCon(token);
     this.view.setState({infoList})
   }
 
