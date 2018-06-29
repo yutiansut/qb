@@ -50,7 +50,10 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getLoginList = controller.getLoginList.bind(controller) // 获取登录日志
     this.getCurrentLogin = controller.getCurrentLogin.bind(controller) // 获取当前登录设备
     this.getIpList = controller.getIpList.bind(controller) // 获取ip白名单
+    this.addIp = controller.addIp.bind(controller) // 添加ip白名单
+    this.delIp = controller.delIp.bind(controller) // 删除ip白名单
     this.getGoogle = controller.getGoogle.bind(controller) // 获取谷歌密钥
+    this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -116,13 +119,13 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle()])
+    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
-    console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
+    // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
     verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
     verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
@@ -233,7 +236,7 @@ export default class userSafeCenter extends exchangeViewBase {
               <div className="clearfix">
                 <Input placeholder="IP地址"/>
                 {/*<input type="text" placeholder="IP地址"/>*/}
-                <Button title="添加" className="name-btn" onClick={this.test}/>
+                <Button title="添加" className="name-btn" onClick={this.addIp}/>
               </div>
               <span>例如：216.58.197.238或104.244.42.0/24</span>
               <table>
@@ -320,6 +323,8 @@ export default class userSafeCenter extends exchangeViewBase {
                    getVerify = {this.getVerify}
                    setLoginPass = {this.setLoginPass}
                    setFundPass = {this.setFundPass}
+                   captcha = {this.state.captcha}
+                   captchaId = {this.state.captchaId}
                    verifyNum = {this.state.verifyNum}/>
         <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
                            isType = {this.state.changeType}

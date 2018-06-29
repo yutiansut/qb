@@ -40,6 +40,7 @@ export default {
     {name: 'deletIp', data: {url: '/user/', method: 'post'}, action: 'DeleteIP', actionBack: 'DeleteIPRes'}, // 删除ip白名单
     {name: 'setFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes'}, // 设置资金密码输入间隔
     {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
+    {name: 'getCaptcha', data: {url: '/user/', method: 'post'}, action: 'getCaptcha', actionBack: 'getCaptchaRes'}, // 获取图形验证码
   ],
   notice: [
     {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容

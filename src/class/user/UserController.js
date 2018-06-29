@@ -86,7 +86,7 @@ export default class UserController extends ExchangeControllerBase {
   uploadInfo() { // 身份认证确认提交
     let typeIndexArr = [1, 3]
     this.store.Proxy.uploadUserAuth({
-      "userId": 1,
+      "userId": this.store.state.userId,
       "firstName": this.view.state.firstNameValue, // 姓氏
       "lastName": this.view.state.lastNameValue, // 名字
       "name": `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
@@ -107,7 +107,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async setLoginPass(aaa, bbbb) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
-      "userId": 1,
+      "userId": this.store.state.userId,
       "type": 0,// 0:设置密码 （不用传old_pass） 1:修改密码
       "oldPass": aaa,
       "newPass": bbbb
@@ -117,7 +117,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async setFundPass(aaa, bbbb) { // 设置资金密码
     let result = await this.store.Proxy.setFundPwd({
-      "userId": 1,
+      "userId": this.store.state.userId,
       "account": "oynix@foxmail.com", // 用户登录信息
       "mode": 1,// 0:phone 1:email // 用户登录信息
       "code": "343252", // 短信验证码
@@ -129,7 +129,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async addIp() { // 添加ip白名单
     let result = await this.store.Proxy.addIp({
-      "userId": 1,
+      "userId": this.store.state.userId,
       "IPAddress":"1.1.1.1"
     })
     console.log('添加ip', result)
@@ -137,11 +137,17 @@ export default class UserController extends ExchangeControllerBase {
 
   async delIp() { // 删除ip白名单
     let result = await this.store.Proxy.deletIp({
-      "userId":1,
+      "userId": this.store.state.userId,
       "IPId":0,
       "IPAddress":10
     })
     console.log('删除ip', result)
+  }
+
+  async getCaptchaVerify() { // 获取图形验证码
+    let captcha = await this.getCaptcha()
+    console.log('获取图形验证码', captcha )
+    this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
 
   // 为其他模块提供接口
@@ -154,24 +160,29 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   get userToken() { // 提供用户token
-    let token = this.store.state.token
-    return  token
+    return this.store.state.token
+  }
+
+  get userId() { // 提供用户id
+    return this.store.state.userId
   }
 
   async setFundPwdInterval(type, pwd) { // 设置资金密码输入间隔
     let result = await this.store.Proxy.setFundPwdSuspend({
-      "userId": 3,
+      "userId": this.store.state.userId,
       "interval": type, // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "fundPass": pwd
     })
     console.log('设置资金密码', result)
+    return result
   }
 
-  async getFundPwdInterval(uid) { // 查看资金密码输入间隔
+  async getFundPwdInterval(userId) { // 查看资金密码输入间隔
     let result = await this.store.Proxy.setFundPwdSuspend({
-      "userId": uid
+      "userId": userId
     })
     console.log('查看资金密码', result)
+    return result
   }
 
   async getCode(account, mode, type) { // 获取短信验证码
@@ -182,6 +193,12 @@ export default class UserController extends ExchangeControllerBase {
       "os": 3// 1 android 2 iOS 3 browser
     })
     console.log('发送验证码', result )
+    return result
+  }
+
+  async getCaptcha() { // 获取图形验证码
+    let result = await this.store.Proxy.getCaptcha()
+    return result
   }
 
 }

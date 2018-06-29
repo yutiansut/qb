@@ -64,7 +64,8 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>图形验证码</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder="请输入右侧图形验证码"  value={this.state.popupInput4} onInput={value => this.changeInput4(value)}/>
-                  <Button title="dddd" className="picture-btn btn"/>
+                  {/*<Button title="dddd" className="picture-btn btn"/>*/}
+                  <img src={this.props.captcha || ''} alt="" className="picture-btn btn" />
                 </div>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>

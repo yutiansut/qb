@@ -4,6 +4,7 @@ export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
+      userId: 3,
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -29,18 +30,18 @@ export default class UserStore extends ExchangeStoreBase {
   // }
 
   async userInfo() { // 获取用户信息
-    let userInfo = await this.Proxy.getUserInfo({"userId": 1});
+    let userInfo = await this.Proxy.getUserInfo({"userId": this.state.userId});
     this.state.userInfo = userInfo;
     return userInfo
   }
 
   async userAuth() { // 获取用户认证信息
-    let userAuth = await this.Proxy.getUserAuth({"userId": 1});
+    let userAuth = await this.Proxy.getUserAuth({"userId": this.state.userId});
     this.state.userAuth = userAuth;
     return userAuth
   }
   async currentLogin() { // 获取当前登录设备列表
-    let currentLogin = await this.Proxy.getCurrentLogin({"userId": 1});
+    let currentLogin = await this.Proxy.getCurrentLogin({"userId": this.state.userId});
     if(currentLogin.errCode)
       currentLogin = []
     this.state.currentLogin = currentLogin;
@@ -48,27 +49,27 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async loginList() { // 获取登录日志
-    let loginContent = await this.Proxy.getLoginList({"userId": 3, "page":0, "pageSize":10, "src":-1, "catalog":0});
-    let loginlist = loginContent.data;
-    console.log('denglu', loginlist)
+    let loginContent = await this.Proxy.getLoginList({"userId": this.state.userId, "page":0, "pageSize":10, "src":-1, "catalog":0});
+    let loginlist = loginContent.data ? loginContent.data : [];
+    console.log('denglu', loginContent)
     let catalogArr = ['登录日志', '注册日志', '第三方账号', '实名认证', '两步验证', '邮件验证', '手机号验证', '登录密码设置', '钱包日志', 'API设置', '资金密码设置', '系统日志', 'IP 白名单', '联系人管理']
-    loginlist.forEach(v => {
+    loginlist.length && loginlist.forEach(v => {
       v.catalog = catalogArr[v.catalog]
     })
     console.log('denglu', loginlist)
     this.state.loginList = loginlist;
     return loginlist
-  }getIpList
+  }
 
   async ipList() { // 获取ip白名单
-    let ipList = await this.Proxy.getIpList({"userId": 3});
+    let ipList = await this.Proxy.getIpList({"userId": this.state.userId});
     console.log('白名单', ipList)
     this.state.ipList = ipList;
     return ipList
   }
 
   async userCredits() { // 获取用户积分
-    let userCreditsCon = await this.Proxy.getUserCredits({"userId": 3, "page":0, "pageSize":10});
+    let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.state.userId, "page":0, "pageSize":10});
     let userCredits = userCreditsCon.list
     console.log('积分', userCredits)
     if(userCredits.errCode)
@@ -78,9 +79,8 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async googleSecret() { // 获取谷歌验证密钥
-    let googleSecret = await this.Proxy.getGoogle({"userId": 1})
+    let googleSecret = await this.Proxy.getGoogle({"userId": this.state.userId})
     this.state.googleSecret = googleSecret;
     return googleSecret
   }
-
 }

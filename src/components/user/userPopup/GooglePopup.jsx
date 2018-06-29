@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
-import "../stylus/googlePopup.styl"
+import QRCode from "qrcode.react";
 
+import "../stylus/googlePopup.styl"
 
 export default class GooglePopup extends exchangeViewBase {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class GooglePopup extends exchangeViewBase {
             <ul>
               <li>2</li>
               <li>在“Google Authenticator (身份验证器)”应用程序中，点击“添加新账户”扫描下方二维码</li>
-              <li><img src="" alt=""/></li>
+              <li><QRCode value={this.props.googleSecret || ''} level="M" /></li>
               <li>如果您无法扫描成功上图的条形码，您可以手动添加账户，输入如下密钥: {this.props.googleSecret}</li>
             </ul>
             <ul>
