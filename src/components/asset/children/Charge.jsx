@@ -13,10 +13,10 @@ export default class Charge extends exchangeViewBase {
     super(props);
     let { controller } = props;
     this.status = {
-      0: this.intl.get('failed_v1'),
-      1: this.intl.get('pending_v1'),
-      2: this.intl.get('passed_v1'),
-      3: this.intl.get('cancel_v1')
+      0: this.intl.get("failed_v1"),
+      1: this.intl.get("pending_v1"),
+      2: this.intl.get("passed_v1"),
+      3: this.intl.get("cancel_v1")
     };
     this.state = {
       currency: "BTC",
@@ -77,11 +77,10 @@ export default class Charge extends exchangeViewBase {
 
   componentWillUpdate(props, state, next) { }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     if (JSON.stringify(nextState) !== JSON.stringify(this.state)) return true;
     return false;
   }
-
 
   componentWillUnmount() {
     window.removeEventListener("click", this.hideQrcode);
@@ -151,7 +150,7 @@ export default class Charge extends exchangeViewBase {
                 this.copy(this.refs.address);
               }} />
             <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
-              <QRCode value={address.coinAddress} level="M" />
+              <QRCode value={address && address.coinAddress || ""} level="M" />
             </div>
           </div>
         </div>
@@ -163,7 +162,7 @@ export default class Charge extends exchangeViewBase {
             <li>
               {this.intl.get("asset-depositReminder1_v1", {
                 currency: this.state.currency,
-                number: address.verifyNumber
+                number: address && address.verifyNumber
               })}
             </li>
             <li>
@@ -208,43 +207,44 @@ export default class Charge extends exchangeViewBase {
               </tr>
             </thead>
             <tbody>
-              {orderList.map(
-                (
-                  {
-                    orderTime,
-                    coinName,
-                    count,
-                    postAddress,
-                    receiveAddress,
-                    verifyCount,
-                    doneCount,
-                    blockSite,
-                    orderStatus
-                  },
-                  index
-                ) => (
-                  <tr key={index}>
-                    <td>{orderTime}</td>
-                    <td>{coinName}</td>
-                    <td>{count}</td>
-                    <td>{postAddress}</td>
-                    <td>{receiveAddress}</td>
-                    <td>
-                      <a
-                        href={blockSite}
-                      >{`${doneCount}/${verifyCount}`}</a>
-                    </td>
-                    <td>
-                      <span>{this.status[orderStatus]}</span>
-                    </td>
-                  </tr>
-                )
-              )}
+              {orderList && orderList.map(
+                  (
+                    {
+                      orderTime,
+                      coinName,
+                      count,
+                      postAddress,
+                      receiveAddress,
+                      verifyCount,
+                      doneCount,
+                      blockSite,
+                      orderStatus
+                    },
+                    index
+                  ) => (
+                    <tr key={index}>
+                      <td>{orderTime}</td>
+                      <td>{coinName}</td>
+                      <td>{count}</td>
+                      <td>{postAddress}</td>
+                      <td>{receiveAddress}</td>
+                      <td>
+                        <a
+                          href={blockSite}
+                        >{`${doneCount}/${verifyCount}`}</a>
+                      </td>
+                      <td>
+                        <span>{this.status[orderStatus]}</span>
+                      </td>
+                    </tr>
+                  )
+                )}
             </tbody>
           </table>
           <div className="pagina">
             <Pagination total={this.state.assetHistory.total} pageSize={10} showTotal={true} onChange={page => {
                 this.setState({ page });
+                this.getHistory();
               }} showQuickJumper={true} currentPage={this.state.page} />
           </div>
           <p className="more">

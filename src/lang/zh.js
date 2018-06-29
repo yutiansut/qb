@@ -9,7 +9,14 @@ export default function zh(state) {
   } = state;
   // 公共、主页及不在其他模块的翻译属于common
   const common = {
+    items_v1: '条',
+    inTotal_v1: "共",
+    all_v1: "全部",
+    to_v1: '前往',
+    page_v1: '页',
+    go_v1: '跳转',
     home_v1: "首页",
+    type_v1: "类型",
     exchange_v1: "币币交易",
     assets_v1: "资产管理",
     order_v1: "订单管理",
@@ -38,6 +45,10 @@ export default function zh(state) {
     twoStep_v1: "两步验证",
     save_v1: "保存",
     add_v1: "添加",
+    cance_v1: '取消',
+    delete_v1: '删除',
+    search_v1: "搜索",
+    reset_v1: "重置",
     example_v1: "例如",
     or_v1: "或",
     action_v1: "操作",
@@ -55,7 +66,12 @@ export default function zh(state) {
     passed_v1: "通过",
     failed_v1: "未通过",
     fee_v1: "手续费",
-    option_v1: "操作"
+    option_v1: "操作",
+    setFund_v1: "设置资金密码",
+    fundPass_v1: "资金密码",
+    remark_v1: "备注",
+    name_v1: '名称',
+    address_v1: '地址'
   };
   const asset = {
     "asset-totalAssets_v1": "总资产约",
@@ -94,7 +110,7 @@ export default function zh(state) {
     "asset-depositTime_v1": "充币时间",
     "asset-depositAmount_v1": "充币数量",
     "asset-sendAddress_v1": "发送地址",
-    "asset-receiveAddress_v1": "接受地址",
+    "asset-receiveAddress_v1": "接收地址",
     "asset-confirm_v1": "确认数",
     "asset-viewAll_v1": "查看全部",
     "asset-minWithdraw_v1":
@@ -104,7 +120,19 @@ export default function zh(state) {
     "asset-withdrawAmount_v1": "提现数量",
     "asset-withdrawAvailable_v1": "可提现余额",
     "asset-gasFee_v1": "矿工费",
-    "asset-withdrawActual_v1": "实际到账"
+    "asset-withdrawActual_v1": "实际到账",
+    "asset-inputFundPassword_v1": "请输入您的资金密码",
+    "asset-submit_v1": "确认提交",
+    "asset-withdrawalsHistory_v1": "提币记录",
+    "asset-withdrawalsTime_v1": "提币时间",
+    "asset-withdrawalsAmount_v1": "数量",
+    "asset-inputName_v1": "输入名称",
+    "asset-inputAddress_v1": "输入地址",
+    "asset-export_v1": "导出资产记录",
+    "asset-transfer_v1": "转账",
+    "asset-amount2_v1": "金额数量",
+    "asset-balan_v1": "余额",
+    "asset-chechState_v1": "审核状态",
   };
   const market = {};
   const notice = {};
@@ -112,7 +140,9 @@ export default function zh(state) {
   const deal = {};
   const user = {};
   const login = {};
-  const help = { "help-termsFirst_v1": `${nameUsd}所提供的各项服务的所有权和运作权均归${nameUsd} LTD.所有。${nameUsd}用户使用协议（以下简称“本协议”）由${nameUsd}用户与${nameUsd}就${nameUsd}的各项服务所订立的相关权利义务规范。用户通过访问和/或使用本网站，即表示接受并同意本协议的所有条件和条款。${nameUsd}作为 ${nameUsd}（${netUrl}）的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。` };
+  const help = {
+    "help-termsFirst_v1": `${nameUsd}所提供的各项服务的所有权和运作权均归${nameUsd} LTD.所有。${nameUsd}用户使用协议（以下简称“本协议”）由${nameUsd}用户与${nameUsd}就${nameUsd}的各项服务所订立的相关权利义务规范。用户通过访问和/或使用本网站，即表示接受并同意本协议的所有条件和条款。${nameUsd}作为 ${nameUsd}（${netUrl}）的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。`,
+  };
   return Object.assign(
     {},
     common,

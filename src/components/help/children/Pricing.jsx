@@ -150,11 +150,15 @@ function getPricing(nameUsd) {
 export default class Pricing extends exchangeViewBase {
   constructor(props) {
     super(props);
-    // const {controller} = props
+    const {controller} = props
+    controller.setView(this);
     // console.log('jsxconfig',controller.configData)
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    console.log(this.props.controller);
+    this.props.controller.getPairFees()
+  }
 
   componentDidMount() {}
   render() {

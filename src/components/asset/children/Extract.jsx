@@ -69,13 +69,14 @@ export default class Extract extends exchangeViewBase {
     await this.getHistory();
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
 
 
   componentWillUpdate(nextProps, nextState) {
-
-    console.log(nextProps, nextState)
+    if (nextState.currency !== this.state.currency) {
+      this.getExtract()
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -92,9 +93,9 @@ export default class Extract extends exchangeViewBase {
       availableQuota
     } = this.state.currencyAmount;
     let currency = this.state.currency,
-      { fee, minerFee, extractAddr} = this.state.walletExtract,
+      { fee, minerFee, extractAddr } = this.state.walletExtract,
       { total, orderList } = this.state.assetHistory;
-    let curExtract = extractAddr.filter(v=> v.coinName === this.state.currency.toLowerCase())[0];
+    let curExtract = extractAddr.filter(v => v.coinName === this.state.currency.toLowerCase())[0];
     return (
       <div className="extract">
         <h3>
@@ -143,7 +144,7 @@ export default class Extract extends exchangeViewBase {
         <div className="address">
           <p className="tips">
             {this.intl.get("asset-minWithdraw_v1", {
-              number: curExtract.minCount,
+              number: curExtract && curExtract.minCount,
               currency: currency
             })}
           </p>
@@ -157,7 +158,7 @@ export default class Extract extends exchangeViewBase {
                 <Input
                   type="select"
                   readOnly={true}
-                  valueArr={curExtract.addressList.map(item => item.address)}
+                  valueArr={curExtract && curExtract.addressList.map(item => item.address)}
                   onSelect={value => {
                     this.setState({ address: value });
                   }}
@@ -210,7 +211,7 @@ export default class Extract extends exchangeViewBase {
                   {this.intl.get("asset-gasFee_v1")}：{minerFee}
                   {` ${currency}`}
                   <span>
-                    {this.intl.get("asset-withdrawActual_v1")} {this.state.extractAmount - minerFee } {currency}
+                    {this.intl.get("asset-withdrawActual_v1")} {this.state.extractAmount - minerFee} {currency}
                   </span>
                 </p>
                 {/* <p className="explain">
@@ -222,52 +223,53 @@ export default class Extract extends exchangeViewBase {
             </div>
           </div>
           <div className="password clearfix">
-            <span className="title">资金密码</span>
+            <span className="title">{this.intl.get('setFund_v1')}</span>
             <div className="content">
-              <Input oriType="password" placeholder="请输入您的资金密码" />
+              <Input oriType="password" placeholder={this.intl.get('asset-inputFundPassword_v1')} />
               <div className="set">
-                <NavLink to="/user/safe">设置资金密码</NavLink>
+                <NavLink to="/user/safe">{this.intl.get('fundPass_v1')}</NavLink>
               </div>
             </div>
           </div>
           <div className="handel">
-            <Button title="确认提交" type="base" />
+            <Button title={this.intl.get('asset-submit_v1')} type="base" />
           </div>
         </div>
         <div className="tip clearfix">
-          <span className="title">温馨提示</span>
+          <span className="title">{this.intl.get("asset-reminder_v1")}</span>
           <ol>
             <li>
-              禁止向{currency}地址充值除{currency}之外的资产，任何充入{currency}地址的非{
-                currency
-              }资产将不可找回
+              {this.intl.get('asset-depositTip_v1', {currency})}
             </li>
             <li>
-              提币完成后，你可以进入{" "}
-              <NavLink to={`/wallet/dashboard`}>资产记录</NavLink> 页面跟踪进度
+              {this.intl.get("asset-depositReminder2-1_v1")} <NavLink
+                to={`/wallet/dashboard`}
+              >
+                {this.intl.get("asset-records_v1")}
+              </NavLink> {this.intl.get("asset-depositReminder2-2_v1")}
             </li>
           </ol>
         </div>
         <div className="to-trade clearfix">
-          <span className="title">去交易</span>
+          <span className="title">{this.intl.get('asset-toTrade_v1')}</span>
           <Button title="EOS/BTC" type="base" />
         </div>
         <div className="history clearfix">
-          <span className="title">提币记录</span>
+          <span className="title">{this.intl.get('asset-withdrawalsHistory_v1')}</span>
           <table>
             <thead>
               <tr>
-                <th className="time">提币时间</th>
-                <th className="currency">币种</th>
-                <th className="amount">提币数量</th>
-                <th className="send">发送地址</th>
-                <th className="receive">接收地址</th>
-                <th className="state">状态</th>
-                <th className="remark">备注</th>
+                <th className="time">{this.intl.get('asset-withdrawalsTime_v1')}</th>
+                <th className="currency">{this.intl.get('asset-currency_v1')}</th>
+                <th className="amount">{this.intl.get('asset-withdrawalsAmount_v1')}</th>
+                <th className="send">{this.intl.get('asset-sendAddress_v1')}</th>
+                <th className="receive">{this.intl.get('asset-receiveAddress_v1')}</th>
+                <th className="state">{this.intl.get('state_v1')}</th>
+                <th className="remark">{this.intl.get('remark_v1')}</th>
               </tr>
             </thead>
             <tbody>
-              {orderList.map(
+              {orderList && orderList.map(
                 (
                   {
                     orderTime,
@@ -280,18 +282,18 @@ export default class Extract extends exchangeViewBase {
                   },
                   index
                 ) => (
-                  <tr key={index}>
-                    <td>{orderTime}</td>
-                    <td>{coinName}</td>
-                    <td>{count}</td>
-                    <td>{postAddress}</td>
-                    <td>{receiveAddress}</td>
-                    <td>
-                      <span>{status[orderStatus]}</span>
-                    </td>
-                    <td>{fee}</td>
-                  </tr>
-                )
+                    <tr key={index}>
+                      <td>{orderTime}</td>
+                      <td>{coinName}</td>
+                      <td>{count}</td>
+                      <td>{postAddress}</td>
+                      <td>{receiveAddress}</td>
+                      <td>
+                        <span>{status[orderStatus]}</span>
+                      </td>
+                      <td>{fee}</td>
+                    </tr>
+                  )
               )}
             </tbody>
           </table>
@@ -302,19 +304,20 @@ export default class Extract extends exchangeViewBase {
               showTotal={true}
               onChange={page => {
                 this.setState({ page });
+                this.getHistory()
               }}
               showQuickJumper={true}
               currentPage={this.state.page}
             />
           </div>
           <p className="more">
-            <NavLink to={`/wallet/dashboard`}>查看全部→</NavLink>
+            <NavLink to={`/wallet/dashboard`}>{this.intl.get("asset-viewAll_v1")}→</NavLink>
           </p>
         </div>
         {this.state.showAddressPopup && (
           <Popup
             type="popup3"
-            addressArr={extractAddr}
+            addressArr={curExtract && curExtract.addressList}
             onSave={add => {
               this.appendAddress(add);
             }}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../Button/";
 import "./style.styl";
 /*
@@ -10,7 +11,7 @@ import "./style.styl";
   onChange页码跳转的回调
 */
 
-export default class Pagination extends Component {
+export default class Pagination extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = { currentPage: props.currentPage ? props.currentPage : 1 };
@@ -64,7 +65,7 @@ export default class Pagination extends Component {
       <div className="pagination-wrap">
         {showTotal && (
           <p className="total">
-            共 <span>{total}</span> 条
+            {this.intl.get('inTotal_v1')} <span>{total}</span> {this.intl.get('items_v1')}
           </p>
         )}
         <ul className="pagination">
@@ -103,7 +104,7 @@ export default class Pagination extends Component {
         </ul>
         {showQuickJumper && (
           <p className="jump">
-            前往<input
+            {this.intl.get('to_v1')}<input
               ref="input"
               type="text"
               onInput={() => {
@@ -124,9 +125,9 @@ export default class Pagination extends Component {
                   this.refs.input.blur();
                 }
               }}
-            />页
+            /> {this.intl.get('page_v1')}
             <Button
-              title="跳转"
+              title={this.intl.get('go_v1')}
               type="base"
               onClick={() => {
                 if (this.refs.input.value === '') return;

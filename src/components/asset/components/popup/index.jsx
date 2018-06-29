@@ -69,7 +69,7 @@ export default class Popup extends exchangeViewBase {
               }}
             />
             <h3>
-              添加地址<span
+              {this.intl.get('asset-addAddress_v1')}<span
                 onClick={() => {
                   this.state.newAddress.push({ addressName: "", address: "" });
                   this.setState({
@@ -78,15 +78,15 @@ export default class Popup extends exchangeViewBase {
                   });
                 }}
               >
-                添加
+                {this.intl.get('add_v1')}
               </span>
             </h3>
             <table className="list">
               <thead>
                 <tr>
-                  <th className="name">名称</th>
-                  <th className="base3-address">地址</th>
-                  <th>操作</th>
+                  <th className="name">{this.intl.get('name_v1')}</th>
+                  <th className="base3-address">{this.intl.get('address_v1')}</th>
+                  <th>{this.intl.get('action_v1')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,7 +98,7 @@ export default class Popup extends exchangeViewBase {
                           <Input
                             type="text"
                             value={item.name}
-                            placeholder="输入名称"
+                            placeholder={this.intl.get('asset-inputName_v1')}
                             onInput={value => {
                               item.addressName = value;
                               this.setState({
@@ -111,7 +111,7 @@ export default class Popup extends exchangeViewBase {
                           <Input
                             type="text"
                             value={item.address}
-                            placeholder="输入地址"
+                            placeholder={this.intl.get('asset-inputAddress_v1')}
                             onInput={value => {
                               item.address = value;
                               this.setState({
@@ -123,7 +123,7 @@ export default class Popup extends exchangeViewBase {
                         <td>
                           <Button
                             type="base"
-                            title="保存"
+                            title={this.intl.get('save_v1')}
                             onClick={() => {
                               this.state.newAddress.splice(index, 1);
                               this.setState({
@@ -135,7 +135,7 @@ export default class Popup extends exchangeViewBase {
                             }}
                           />
                           <Button
-                            title="取消"
+                            title={this.intl.get('cance_v1')}
                             onClick={() => {
                               this.state.newAddress.splice(index, 1);
                               this.setState({
@@ -153,7 +153,7 @@ export default class Popup extends exchangeViewBase {
                       <td>{item.address}</td>
                       <td>
                         <Button
-                          title="删除"
+                          title={this.intl.get('delete_v1')}
                           theme="danger"
                           onClick={()=>{onDelete && onDelete(item)}}
                         />

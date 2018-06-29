@@ -46,7 +46,7 @@ export default class Help extends exchangeViewBase {
       <div className="route">
           <Switch>
             <Route path={`${match.url}/terms`} component={terms} />
-            <Route path={`${match.url}/pricing`} component={pricing} />
+            <Route path={`${match.url}/pricing`} controller={this.controller} component={pricing} />
             <Route path={`${match.url}/api`} component={api} />
             <Route path={`${match.url}/currency`} component={coin} />
             <Redirect to={`${match.url}/terms`} />

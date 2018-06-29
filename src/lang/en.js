@@ -4,7 +4,14 @@ export default function en (state){
 
   // 公共、主页及不在其他模块的翻译属于common
   const common = {
+    items_v1: 'items',
+    inTotal_v1: "In total",
+    all_v1: "Total",
+    to_v1: 'To',
+    page_v1: 'Page',
+    go_v1: 'Go',
     home_v1: "home",
+    type_v1: "Type",
     exchange_v1: "exchange",
     assets_v1: "assets",
     order_v1: "order list",
@@ -33,6 +40,10 @@ export default function en (state){
     twoStep_v1: "2-Step Verification",
     save_v1: "Save",
     add_v1: "Add",
+    cance_v1: 'Cancel',
+    delete_v1: 'Delete',
+    search_v1: "Search",
+    reset_v1: "Reset",
     example_v1: "example",
     or_v1: "or",
     action_v1: "Action",
@@ -50,7 +61,12 @@ export default function en (state){
     passed_v1: "Passed",
     failed_v1: "Failed",
     fee_v1: "Fee",
-    option_v1: "Option"
+    option_v1: "Option",
+    setFund_v1: "Funding Password",
+    fundPass_v1: "Funding Password",
+    remark_v1: "Comments",
+    name_v1: 'Name',
+    address_v1: 'Address',
   };
   const asset = {
     "asset-totalAssets_v1": "Total assets (approx)",
@@ -99,7 +115,19 @@ export default function en (state){
     "asset-withdrawAmount_v1": "Amount of Withdrawal",
     "asset-withdrawAvailable_v1": "Available Balance",
     "asset-gasFee_v1": "Gas fee",
-    "asset-withdrawActual_v1": "Actual Deposit Amount"
+    "asset-withdrawActual_v1": "Actual Deposit Amount",
+    "asset-inputFundPassword_v1": "Input Funding Password",
+    "asset-submit_v1": "Submit",
+    "asset-withdrawalsHistory_v1": "withdrawals history",
+    "asset-withdrawalsTime_v1": "Withdraw time",
+    "asset-withdrawalsAmount_v1": "Withdraw quantity",
+    "asset-inputName_v1": "Input name",
+    "asset-inputAddress_v1": "Input address",
+    "asset-export_v1": "Export",
+    "asset-transfer_v1": "Transfer",
+    "asset-amount2_v1": "amount",
+    "asset-balan_v1": "Balance",
+    "asset-chechState_v1": "State",
   };
   const market = {};
   const notice = {};

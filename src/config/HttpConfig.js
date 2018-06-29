@@ -48,24 +48,28 @@ export default {
     {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
   ],
   market: [
-    { name: 'coinInfo', data: { url: '/common', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' }
+    { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' }
   ],
   asset: [
-    // 获取交易对手续费
-    { name: 'getFee', data: { url: '/order', method: 'post' }, action: 'getFee', actionBack: 'getFeeRes' },
-    // 获取总资产(包含各个钱包币种的详细信息)(pass)
-    { name: 'totalAsset', data: { url: '/rpc/get_user_property', method: 'post' }, action: 'get_user_property', actionBack: 'get_user_property_r' },
-    //24小时提现额度, 查询币种额度，
-    { name: 'balance', data: { url: '/rpc/get_withdraw_balance', method: 'post' }, action: 'get_withdraw_balance', actionBack: 'get_withdraw_balance_r' },
-    // 充币地址查询(pass)
-    { name: 'chargeAddress', data: { url: '/rpc/get_deposit_address', method: 'post' }, action: 'get_deposit_address', actionBack: 'get_deposit_address_r' },
-    // 充提记录(pass)
-    { name: 'history', data: { url: '/rpc/get_asset_records', method: 'post' }, action: 'get_asset_records', actionBack: 'get_asset_records_r' },
-    // 提币矿工费
-    { name: 'minerFee', data: { url: '/wallet', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes' },
-    // 提币地址查询(pass)
-    { name: 'extractAddress', data: { url: '/rpc/get_withdraw_addresses', method: 'post' }, action: 'get_withdraw_addresses', actionBack: 'get_withdraw_addresses_r' },
-    //
-    { name: 'addAddress', data: { url: '/rpc/add_withdraw_balance', method: 'post' }, action: 'add_withdraw_balance', actionBack: 'add_withdraw_balance_r' },
+    // 获取交易对手续费5.16（pass）
+    { name: 'getFee', data: { url: '/order/', method: 'post' }, action: 'getFee', actionBack: 'getFeeRes' },
+    // 获取总资产(包含各个钱包币种的详细信息)4.1
+    { name: 'totalAsset', data: { url: '/property/', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes', needToken: true },
+    //24小时提现额度, 查询币种额度，4.2
+    { name: 'balance', data: { url: '/property/', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes', needToken: true },
+    // 充币地址查询4.4（pass）
+    { name: 'chargeAddress', data: { url: '/common/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes',needToken: true  },
+    // 提币矿工费4.5
+    { name: 'minerFee', data: { url: '/wallet/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes' },
+    // 提交提币订单4.6（pass）
+    { name: 'extractOrder', data: { url: '/property/', method: 'post' }, action: 'withdrawCoin', actionBack: 'withdrawCoinRes', needToken: true },
+    // 提币地址查询4.7（pass）
+    { name: 'extractAddress', data: { url: '/common/', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes', needToken: true  },
+    //增加提币地址4.8(需要登录)（pass）
+    { name: 'addAddress', data: { url: '/common/', method: 'post' }, action: 'addWithdrawAddress', actionBack: 'addWithdrawAddressRes', needToken:true },
+    // 删除提币地址4.9(需要登录)（pass）
+    { name: 'delAddress', data: { url: '/common/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
+    // 充提记录4.10
+    { name: 'history', data: { url: '/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
   ]
 }

@@ -6,24 +6,24 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state = {
       // 交易对手续费
       pairFees: [
-        {
-          tradePairId: 0,
-          tradePairName: "ETH/BTC",
-          makerFee: 0.12,
-          takerFee: 0.11
-        },
-        {
-          tradePairId: 1,
-          tradePairName: "BCH/BTC",
-          makerFee: 0.12,
-          takerFee: 0.01
-        },
-        {
-          tradePairId: 2,
-          tradePairName: "LSK/BTC",
-          makerFee: 0.19,
-          takerFee: 0.11
-        }
+        // {
+        //   tradePairId: 0,
+        //   tradePairName: "ETH/BTC",
+        //   makerFee: 0.12,
+        //   takerFee: 0.11
+        // },
+        // {
+        //   tradePairId: 1,
+        //   tradePairName: "BCH/BTC",
+        //   makerFee: 0.12,
+        //   takerFee: 0.01
+        // },
+        // {
+        //   tradePairId: 2,
+        //   tradePairName: "LSK/BTC",
+        //   makerFee: 0.19,
+        //   takerFee: 0.11
+        // }
       ],
       // 总资产
       totalAsset: {
@@ -102,7 +102,7 @@ export default class AssetStore extends ExchangeStoreBase {
         }
       ],
       //币种列表
-      walletList: {},
+      walletList: { BTC: 1, ETH: 2 },
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
@@ -114,20 +114,8 @@ export default class AssetStore extends ExchangeStoreBase {
       },
       //提币信息
       walletExtract: {
-        minerFee: 0.05, //矿工费
+        minerFee: 0, //矿工费
         extractAddr: [
-          {
-            coinId: 0,
-            coinName: "btc",
-            minCount: 0.01,
-            addressList: [
-              {
-                addressId: 97,
-                addressName: "111",
-                address: "mm4fqM8nonB6EhnZi2EFMRpPgnbAWvJXr3"
-              }
-            ]
-          }
         ] //提现地址
       },
       //充币地址
@@ -191,8 +179,42 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取交易对手续费
   async getFee() {
+    // this.Proxy.extractOrder({
+    //   "userId": 0,
+    //   "coinId": 1,
+    //   "coinName": "BTC",
+    //   "coinAddress": "xxxx",
+    //   "withdrawCount": 1000,
+    //   "withdrawPassword": "xxxxx",
+    //   "code": "0000",
+    //   "os": 0,
+    //   "account": "xxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res=>{console.log(res)})
+    // this.Proxy.addAddress({
+    //   userId: 1,
+    //   coinId: 5,
+    //   coinName: "BTC",
+    //   addressName: "usdt-address-1",
+    //   address: "xxxxxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res=>{console.log(res)});
+    // this.Proxy.delAddress({
+    //   userId: 1,
+    //   coinId: 105,
+    //   coinName: "BTC",
+    //   addressId: "xxx",
+    //   addressName: "usdt-address-1",
+    //   address: "xxxxxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res => {
+    //   console.log(res);
+    // });
     this.state.pairFees = await this.Proxy.getFee({
-      userId: 2,
+      userId: 0,
       tradePairId: 1
     });
   }
@@ -203,11 +225,13 @@ export default class AssetStore extends ExchangeStoreBase {
       valuationEN,
       valuationCN,
       coinList
-    } = await this.Proxy.totalAsset({ userId: 0 });
+    } = await this.Proxy.totalAsset({
+      userId: 0, token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0" });
     let { totalQuota, availableQuota } = await this.Proxy.balance({
       userId: 0,
       coinId: 1,
-      coinName: "BTC"
+      coinName: "BTC",
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
     this.state.totalAsset = {
       valuationBTC,
@@ -244,15 +268,18 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取充币地址
   async getChargeAddress() {
     this.state.coinAddress = await this.Proxy.chargeAddress({
-      userId: 1,
-      coinId: 0
+      userId: 3,
+      coinId: 0,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
+    console.log(this.state.coinAddress);
   }
   // async getWallet() {
   //   // this.wallet = await getWallet
   // }
   // 获取资产记录
-  async getHistory(page, pageSize) {
+  async getHistory(page = 1) {
     let result = await this.Proxy.history({
       userId: 0,
       coinId: 1,
@@ -261,10 +288,10 @@ export default class AssetStore extends ExchangeStoreBase {
       startTime: 0,
       endTime: 0,
       orderStatus: 0, //未通过 审核中1 通过2  撤销3
-      page: 1,
+      page: page,
       pageSize: 10
     });
-    this.state.assetHistory.orderList = result.orderList;
+    this.state.assetHistory.orderList = result && result.orderList;
     page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
     page === 0 &&
       result.totalCount &&
@@ -272,13 +299,18 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取提币手续费和地址
   async getwalletExtract() {
-    this.state.walletExtract = await this.Proxy.minerFee({
+    let { minerFee } = await this.Proxy.minerFee({
       coinId: 1
     });
+    this.state.walletExtract.minerFee = minerFee;
+    if (this.state.walletExtract.extractAddr.length) return;
     let extractAddr = await this.Proxy.extractAddress({
-      userId: 3
+      userId: 3,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
     this.state.walletExtract.extractAddr = extractAddr.addresses;
+    console.log(extractAddr.addresses)
   }
   // 删除提现地址
   appendAddress({ addressName, address }) {

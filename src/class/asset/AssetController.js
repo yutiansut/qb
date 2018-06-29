@@ -28,7 +28,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
-    console.log(this.store.state.totalAsset, this.store.state.wallet );
+    console.log(this.store.state.totalAsset, this.store.state.wallet);
     this.view.setState({
       totalAsset: this.store.state.totalAsset,
       wallet: this.store.state.wallet || []
@@ -37,14 +37,17 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount() {
-    await this.store.getCurrencyAmount();
-    this.view.setState({
-      currencyAmount: this.store.state.currencyAmount,
-    });
+    // await this.store.getCurrencyAmount();
+    // this.view.setState({
+    //   currencyAmount: this.store.state.currencyAmount,
+    // });
   }
 
   // 获取交易对手续费
-  async getPairFees() { }
+  async getPairFees() {
+    !this.store.state.pairFees.length && await this.store.getFee();
+    this.view.setState({ pairFees: this.store.state.pairFees });
+  }
   // 获取所有币种
   async getWalletList() {
     this.store.state.walletList['BTC'] === undefined && await this.store.getWalletList();
@@ -59,7 +62,7 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  async getCurrencyList() {}
+  async getCurrencyList() { }
 
 
   // 获取充币地址(over)
@@ -76,7 +79,7 @@ export default class AssetController extends ExchangeControllerBase {
   async getHistory() {
     await this.store.getHistory();
     this.view.setState({
-      assetHistory: this.store.state.assetHistory || []
+      assetHistory: this.store.state.assetHistory
     })
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)

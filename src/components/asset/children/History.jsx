@@ -26,8 +26,8 @@ export default class History extends exchangeViewBase {
     // }
   }
   async componentWillMount() {
-    await this.getWalletList()
-    await this.getHistory()
+    await this.getWalletList();
+    await this.getHistory();
   }
 
   componentDidMount() {}
@@ -39,35 +39,46 @@ export default class History extends exchangeViewBase {
     return (
       <div className="hist">
         <h3 className="title">
-          资产记录 <Button type="export" title="导出资产记录" />
+          {this.intl.get("asset-records_v1")}{" "}
+          <Button type="export" title={this.intl.get("asset-export_v1")} />
         </h3>
         <div className="filtrate clearfix">
           <ul className="clearfix">
             <li className="item">
-              <span>币种</span>
+              <span>{this.intl.get("asset-currency_v1")}</span>
               <SelectButton
-                title="全部"
+                title={this.intl.get("all_v1")}
                 type="main"
                 className="select"
-                valueArr={["全部", "BTC", "LTC", "ETH"]}
+                valueArr={[this.intl.get("all_v1"), "BTC", "LTC", "ETH"]}
               />
             </li>
             <li className="item">
-              <span>类型</span>
+              <span>{this.intl.get("type_v1")}</span>
               <SelectButton
-                title="全部"
+                title={this.intl.get("all_v1")}
                 type="main"
                 className="select"
-                valueArr={["全部", "充币", "提币"]}
+                valueArr={[
+                  this.intl.get("all_v1"),
+                  this.intl.get("deposit_v1"),
+                  this.intl.get("asset-withdraw_v1"),
+                  this.intl.get("asset-transfer_v1")
+                ]}
               />
             </li>
             <li className="item">
-              <span>状态</span>
+              <span>{this.intl.get("state_v1")}</span>
               <SelectButton
-                title="全部"
+                title={this.intl.get("all_v1")}
                 type="main"
                 className="select"
-                valueArr={["全部", "通过", "未通过", "审核中"]}
+                valueArr={[
+                  this.intl.get("all_v1"),
+                  this.intl.get("passed_v1"),
+                  this.intl.get("failed_v1"),
+                  this.intl.get("pending_v1")
+                ]}
               />
             </li>
           </ul>
@@ -75,69 +86,87 @@ export default class History extends exchangeViewBase {
             <DatePicker />
           </div>
           <div className="handel">
-            <Button type="base" title="搜索" className="search" />
-            <Button type="base" title="重置" className="reset" />
+            <Button type="base" title={this.intl.get('search_v1')} className="search" />
+            <Button type="base" title={this.intl.get('reset_v1')} className="reset" />
           </div>
         </div>
         <table className="table">
           <thead>
             <tr>
-              <th className="time">时间</th>
-              <th className="currency">币种</th>
-              <th className="type">类型</th>
-              <th className="cash">金额数量</th>
-              <th className="balan">余额</th>
-              <th className="send">发送地址</th>
-              <th className="receive">接受地址</th>
-              <th className="confirm">确认数</th>
-              <th className="state">审核状态</th>
-              <th className="fee">手续费</th>
+              <th className="time">{this.intl.get('time_v1')}</th>
+              <th className="currency">{this.intl.get('asset-currency_v1')}</th>
+              <th className="type">{this.intl.get('type_v1')}</th>
+              <th className="cash">{this.intl.get('asset-amount2_v1')}</th>
+              <th className="balan">{this.intl.get('asset-balan_v1')}</th>
+              <th className="send">{this.intl.get('asset-sendAddress_v1')}</th>
+              <th className="receive">{this.intl.get('asset-receiveAddress_v1')}</th>
+              <th className="confirm">{this.intl.get('asset-confirm_v1')}</th>
+              <th className="state">{this.intl.get('asset-checkState_v1')}</th>
+              <th className="fee">{this.intl.get('fee_v1')}</th>
             </tr>
           </thead>
           <tbody>
-            {orderList.map(({
-              orderTime,
-              coinName,
-              coinIcon,
-              orderType,
-              count,
-              balance,
-              postAddress,
-              receiveAddress,
-              verifyCount, //确认数
-              doneCount, //已确认数
-              orderStatus,
-              fee
-            }, index) => (
-              <tr key={index}>
-                  <td className="time">{orderTime}</td>
-                  <td>
-                    <img src={coinIcon} alt=""/>
-                    {coinName}
-                  </td>
-                  <td>{!orderType ? '充币' : (orderType === 1 ? '提币': '转账')}</td>
-                  <td className="cash red">{count}</td>
-                <td>{balance}</td>
-                  <td className="send">{postAddress}</td>
-                  <td>{receiveAddress}</td>
-                <td className="confirm">
-                  <a href="#">{`${doneCount}/${verifyCount}`}</a>
-                </td>
-                <td className="state passing">
-                  <span>
-                    {!orderStatus
-                      ? "未通过"
-                      : orderStatus === 1
-                        ? "审核中"
-                        : "通过"}
-                  </span>
-                </td>
-                <td className="fee">{fee}</td>
-              </tr>
-            ))}
+            {orderList &&
+              orderList.map(
+                (
+                  {
+                    orderTime,
+                    coinName,
+                    coinIcon,
+                    orderType,
+                    count,
+                    balance,
+                    postAddress,
+                    receiveAddress,
+                    verifyCount, //确认数
+                    doneCount, //已确认数
+                    orderStatus,
+                    fee
+                  },
+                  index
+                ) => (
+                  <tr key={index}>
+                    <td className="time">{orderTime}</td>
+                    <td>
+                      <img src={coinIcon} alt="" />
+                      {coinName}
+                    </td>
+                    <td>
+                      {!orderType ? "充币" : orderType === 1 ? "提币" : "转账"}
+                    </td>
+                    <td className="cash red">{count}</td>
+                    <td>{balance}</td>
+                    <td className="send">{postAddress}</td>
+                    <td>{receiveAddress}</td>
+                    <td className="confirm">
+                      <a href="#">{`${doneCount}/${verifyCount}`}</a>
+                    </td>
+                    <td className="state passing">
+                      <span>
+                        {!orderStatus
+                          ? "未通过"
+                          : orderStatus === 1
+                            ? "审核中"
+                            : "通过"}
+                      </span>
+                    </td>
+                    <td className="fee">{fee}</td>
+                  </tr>
+                )
+              )}
           </tbody>
         </table>
-        <Pagination total={this.state.assetHistory.total} pageSize={10} showTotal={true} onChange={(page) => { this.setState({ page }) }} showQuickJumper={true} currentPage={this.state.page} />
+        <Pagination
+          total={this.state.assetHistory.total}
+          pageSize={10}
+          showTotal={true}
+          onChange={page => {
+            this.setState({ page });
+            this.getHistory();
+          }}
+          showQuickJumper={true}
+          currentPage={this.state.page}
+        />
       </div>
     );
   }
