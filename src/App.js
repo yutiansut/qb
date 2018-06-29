@@ -19,7 +19,8 @@ import UserController from "./class/user/UserController";
 import LoginController from "./class/login/LoginController";
 import NoticeController from "./class/notice/NoticeController";
 import ActivityController from "./class/activity/ActivityController";
-import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController"
+import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController";
+import MarketController from "./class/market/MarketController"
 
 
 import UserInfo from './components/user/UserCenter.jsx'
@@ -41,7 +42,9 @@ let testAppController,
   userController,
   loginController,
   noticeController,
-  activityController;
+  activityController,
+  marketController
+;
 
 const Asset = ({ match }) => {
   return <AssetManange controller={assetController} match={match} />;
@@ -88,9 +91,12 @@ const tradeHeader = ({ match }) => {
 import TestApp from './TestApp'
 import TestAppController from "./TestAppController";
 
-const about = ({ match }) => {
-  return <TestApp controller={testAppController} match={match} />;
-}
+const about = ({match}) => {
+  return <TestApp controller={testAppController} match={match}/>;
+};
+const HomeComponent = () => {
+  return <Home marketController={marketController} />
+};
 
 export default class App extends Component {
   constructor(props) {
@@ -104,6 +110,7 @@ export default class App extends Component {
     loginController = new LoginController();
     noticeController = new NoticeController();
     activityController = new ActivityController();
+    marketController = new MarketController();
 
 
     testAppController.configController = configController;
@@ -144,19 +151,19 @@ export default class App extends Component {
           <div style={{ height: '.5rem' }}></div>
           <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/home" component={Home} />
-              <Route path='/trade' component={Trade} />
-              <Route path="/login" component={Loign} />
-              <Route path="/wallet" component={Asset} />
-              <Route path="/order" component={Order} />
-              <Route path="/user" component={User} />
-              <Route path="/about" component={about} />
-              <Route path="/findPass" component={ForgetPass} />
-              <Route path="/notice" component={Notice} />
-              <Route path="/help" component={Help} />
-              <Route path="/activity" component={Activity} />
-              <Redirect to="/" />
+              <Route exact path="/" component={HomeComponent}/>
+              <Route path="/home" component={HomeComponent}/>
+              <Route path='/trade' component={Trade}/>
+              <Route path="/login" component={Loign}/>
+              <Route path="/wallet" component={Asset}/>
+              <Route path="/order" component={Order}/>
+              <Route path="/user" component={User}/>
+              <Route path="/about" component={about}/>
+              <Route path="/findPass" component={ForgetPass}/>
+              <Route path="/notice" component={Notice}/>
+              <Route path="/help" component={Help}/>
+              <Route path="/activity" component={Activity}/>
+              <Redirect to="/"/>
             </Switch>
           </div>
           {/*<Footer/>*/}

@@ -19,7 +19,7 @@ export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
     recommendController = new MarketController();
-    marketController = new MarketController();
+    // marketController = new MarketController();
   }
 
   render() {
@@ -34,7 +34,7 @@ export default class Home extends exchangeViewBase {
         </div>
         <HomeNotice />
         <HomeRecommend controller={recommendController}/>
-        <HomeMarket controller={marketController}/>
+        <HomeMarket controller={this.props.marketController}/>
       </div>
     );
   }

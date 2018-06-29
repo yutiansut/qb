@@ -13,10 +13,9 @@ import OrderDeal from './children/OrderDeal'
 
 import './stylus/order.styl'
 
-import OrderListController from '../../class/orderList/userOrderList/UserOrderListController'
-const OrderCurrentController = new OrderListController();
-const OrderHistoryController = new OrderListController();
-const OrderDealController = new OrderListController();
+import OrderListController from '../../class/orderList/userOrderList/UserOrderListController';
+let OrderCurrentController,OrderHistoryController,OrderDealController
+
 const orderNavItems = [
   {name:'当前订单', address:'/current', type:'orderCurrent'},
   {name:'历史订单', address:'/history', type:'orderHistory'},
@@ -24,7 +23,10 @@ const orderNavItems = [
 ]
 export default class OrderManage extends exchangeViewBase{
   constructor(){
-    super()
+    super();
+    OrderCurrentController = new OrderListController();
+    OrderHistoryController = new OrderListController();
+    OrderDealController = new OrderListController();
   }
   componentWillMount(){
   

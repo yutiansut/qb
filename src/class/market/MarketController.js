@@ -195,7 +195,21 @@ export default class MarketController extends ExchangeControllerBase {
       unitsType: v
     })
   }
+  
   pairDataHandle() {
 
+  }
+  
+  getTradePairHandle() {
+    // let preData = this.store.state.allPairData;
+    // let pairArr = [];
+    // let marketArr = [];
+    // preData.map((v) => {
+    //   pairArr.concat(v.marketData);
+    //   marketArr.push(v.marketName);
+    // });
+    // marketArr.map((v) => {
+    //
+    // })
   }
 }
