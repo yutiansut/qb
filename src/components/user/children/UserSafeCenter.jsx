@@ -41,7 +41,7 @@ export default class userSafeCenter extends exchangeViewBase {
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.getVerify = controller.getVerify.bind(controller) // 设置倒计时
+    this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
     this.clearVerify = controller.clearVerify.bind(controller) // 清除倒计时
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
     this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码

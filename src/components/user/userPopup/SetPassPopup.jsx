@@ -25,25 +25,20 @@ export default class SetPassPopup extends exchangeViewBase {
     }
     this.changeInput1 = this.changeInput1.bind(this)
   }
-  changeInput1(evt) {
-    this.setState({popupInput1: evt});
-    console.log('我是谁', evt)
+  changeInput1(value) {
+    this.setState({popupInput1: value});
   }
-  changeInput2(evt) {
-    this.setState({popupInput2: evt});
-    console.log('我是谁', evt)
+  changeInput2(value) {
+    this.setState({popupInput2: value});
   }
-  changeInput3(evt) {
-    this.setState({popupInput3: evt});
-    console.log('我是谁', evt)
+  changeInput3(value) {
+    this.setState({popupInput3: value});
   }
-  changeInput4(evt) {
-    this.setState({popupInput4: evt});
-    console.log('我是谁', evt)
+  changeInput4(value) {
+    this.setState({popupInput4: value});
   }
-  changeInput5(evt) {
-    this.setState({popupInput5: evt});
-    console.log('我是谁', evt)
+  changeInput5(value) {
+    this.setState({popupInput5: value});
   }
   render() {
     return (
@@ -55,28 +50,31 @@ export default class SetPassPopup extends exchangeViewBase {
             <ul>
               <li className={this.props.isType === 4 ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitleNew}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew} value={this.state.popupInput1} onInput={evt => this.props.changeInput1(evt)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew} value={this.state.popupInput1} onInput={value => this.props.changeInput1(value)}/>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput} value={this.state.popupInput2} onInput={evt => this.changeInput2(evt)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput} value={this.state.popupInput2} onInput={value => this.changeInput2(value)}/>
               </li>
               <li className={[3, 4, 5].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle2}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput2} value={this.state.popupInput3} onInput={evt => this.changeInput3(evt)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput2} value={this.state.popupInput3} onInput={value => this.changeInput3(value)}/>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
                 <p>图形验证码</p>
                 <div className="clearfix pass-btn-group">
-                  <Input placeholder="请输入右侧图形验证码"  value={this.state.popupInput4} onInput={evt => this.changeInput4(evt)}/>
+                  <Input placeholder="请输入右侧图形验证码"  value={this.state.popupInput4} onInput={value => this.changeInput4(value)}/>
                   <Button title="dddd" className="picture-btn btn"/>
                 </div>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
-                  <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={evt => this.changeInput5(evt)}/>
-                  <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={this.props.getVerify}/>
+                  <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
+                  {/*<Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(1, 0)}}/>*/}
+                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput1, 1, 3)}}/>}
+                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput1, 0, 3)}}/>}
+                  {this.props.isType === 5 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.email ? this.state.email : this.state.phone, this.state.email ? 1 : 0, 5)}}/>}
                 </div>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
