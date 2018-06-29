@@ -1,17 +1,18 @@
 import React from 'react';
 import {render} from 'react-dom';
 import App from './App'
-import RUNAPP from './core'
+import Core from './core'
 
 import ServerConfig from './config/ServerConfig'
 import WebSocketConfig from './config/WebSocketConfig'
-import HttpConfig from '../config/HttpConfig'
-
+import HttpConfig from './config/HttpConfig'
 
 const renderDom = async Component => {
-  console.log(Date.now())
-  await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig})
-  console.log(Date.now())
+  // console.log(Date.now())
+  await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig})
+  await Core.Websocket.general()
+  // await import('./App')
+  // console.log(Date.now())
   render(
     <Component/>,
     document.getElementById('app')

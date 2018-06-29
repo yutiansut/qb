@@ -5,9 +5,10 @@
  *      注：若需要参数，this.Proxy.XXX（params）
  */
 
-import Fetch from "../libs/Fetch"; //引入Fetch
+import Fetch from "../libs/Fetch";
+// import HttpConfig from "../../config/HttpConfig"; //引入Fetch
 
-let host, port;
+let host, port, HttpList;
 
 const formatParams = req => {
   if (req.url.path.indexOf(":") > 0) {
@@ -17,26 +18,26 @@ const formatParams = req => {
     req.url.path = `${url}${req.data.params[replaceKey]}`;
     delete req.data.params[replaceKey];
   }
-  // console.log(req)
   req.url.path && (req.url = `http://${req.url.host}:${req.url.port}${req.url.path}`);
   if (req.data && req.data.method === "post" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.data.body = JSON.stringify(req.data.params));
   if (req.data && req.data.method === "get" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.url += `?`) && Object.keys(req.data.params).forEach((key, index) =>
       (req.url += `${key}=${req.data.params[key]}`) && Object.keys(req.data.params).length - 1 !== index && (req.url += "&"));
-
-  req.data = JSON.parse(JSON.stringify(req.data));
-  // delete req.data.params
-  // console.log(req)
+  delete req.data.params
   return req
 }
 
 const HTTP_PROXY = {
-  install(app, ServerConfig, httpList, httpPreHandler, httpAfterHandler) {
+  setConfig(HttpConfig, ServerConfig){
+    HttpList = HttpConfig;
     host = ServerConfig.host;
     port = ServerConfig.port;
-    httpList.forEach(v => {
-      HTTP_PROXY[v.name] = async params => {
+  },
+
+  install(modelName, preHandler, afterHandler) {
+    HttpList[modelName].forEach(v => {
+      this.Proxy[v.name] = async params => {
         let req = {},
           res = {};
         req.url = {host, port}
@@ -44,22 +45,23 @@ const HTTP_PROXY = {
         let data = JSON.parse(JSON.stringify(v.data));
         delete data.url
         req.data = Object.assign({params}, data);
-        // console.log('0', req)
-        if (httpPreHandler) {
-          httpPreHandler(app, req);
+        if (preHandler && preHandler.length) {
+          for (let i = 0; i < preHandler.length; i++) {
+            await preHandler[i](this, req, v)
+          }
         }
         req = formatParams(req)
-        // console.log(1, req)
         res.result = await Fetch(req.url, req.data);
-        // console.log(data.url, !result, result.code !== 200, result.msg !== 'ok', result,httpFilter)
-        if (httpAfterHandler) {
-          httpAfterHandler(app, req, res);
+        if (afterHandler && afterHandler.length) {
+          for (let i = 0; i < afterHandler.length; i++) {
+            await afterHandler[i](this, req, res, v)
+          }
         }
         return res.result;
       };
-    });
+    })
   },
-  fetch: async (obj, req) => (req = formatParams(obj)) && await Fetch(req.url, req.data)
+  fetch: async (url, data) => await Fetch(url, data)
 };
 
 export default HTTP_PROXY;

@@ -2,7 +2,7 @@
   let docEl = doc.documentElement,
       resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
       recalc = function () {
-        console.log('win', window.location.pathname)
+        // console.log('win', window.location.pathname)
         let clientWidth = document.body.clientWidth;
         clientWidth && (clientWidth /= 1440, clientWidth > 2 && (clientWidth = 2), clientWidth < 0.8 && (clientWidth = 0.8), docEl.style.fontSize = 100 * clientWidth + "px");
         // 字体改变，通知k线图重绘

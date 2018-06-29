@@ -8,6 +8,7 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   setView(view) {
+    console.log(this.store.WebSocket)
     super.setView(view);
   }
 

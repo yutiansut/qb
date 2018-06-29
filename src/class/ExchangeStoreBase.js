@@ -38,22 +38,20 @@ export default class ExchangeStoreBase extends StoreBase {
     // console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 
-  async installWebsocket(connectName, modelName) {
-    console.log('connectName, modelName', connectName, modelName)
+  installWebsocket(connectName, modelName) {
     let websocket = super.installWebsocket(connectName)
-
-    console.log(websocket)
+    console.log('connectName, modelName', connectName, modelName, websocket)
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
-      console.log(websocket[connectName])
-      let header = websocket[connectName].config.optionList[modelName][key]
+      console.log('this.WebSocket[connectName]', websocket[connectName], connectName)
+      let header = websocket.config.optionList[modelName][key]
       let emitData = Object.assign(header, {data})
-      console.log(emitData, websocket[connectName])
-      websocket[connectName].send(emitData)
+      console.log(emitData, websocket)
+      websocket.send(emitData)
     }
     this.WebSocket[connectName].on = (key, func) => {
-      let header = websocket[connectName].config.optionList[modelName][key]
-      websocket[connectName].onMessage = data => {
+      let header = websocket.config.optionList[modelName][key]
+      websocket.onMessage = data => {
         console.log('installWebsocket(connectName, modelName)', data)
         func(data)
       }

@@ -24,12 +24,13 @@ export default function () {
     let webSocket = new WebSocket(url) // 创建链接
 
     //webSocket连接之后的操作
-    webSocket.onopen = event => onOpen(event)
+    webSocket.onopen = event => onOpen(pool, event)
 
-    function onOpen(event) {
+    function onOpen(pool, event) {
       console.log('webSocket开启', event.target.url)
       connects.push(webSocket)
-      poolSize = connects.length
+      poolSize = connects.length;
+      pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
 
