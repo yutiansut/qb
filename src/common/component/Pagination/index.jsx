@@ -65,7 +65,7 @@ export default class Pagination extends exchangeViewBase {
       <div className="pagination-wrap">
         {showTotal && (
           <p className="total">
-            {this.intl.get('inTotal_v1')} <span>{total}</span> {this.intl.get('items_v1')}
+            {this.intl.get('inTotal')} <span>{total}</span> {this.intl.get('items')}
           </p>
         )}
         <ul className="pagination">
@@ -104,7 +104,7 @@ export default class Pagination extends exchangeViewBase {
         </ul>
         {showQuickJumper && (
           <p className="jump">
-            {this.intl.get('to_v1')}<input
+            {this.intl.get('to')}<input
               ref="input"
               type="text"
               onInput={() => {
@@ -125,9 +125,9 @@ export default class Pagination extends exchangeViewBase {
                   this.refs.input.blur();
                 }
               }}
-            /> {this.intl.get('page_v1')}
+            /> {this.intl.get('page')}
             <Button
-              title={this.intl.get('go_v1')}
+              title={this.intl.get('go')}
               type="base"
               onClick={() => {
                 if (this.refs.input.value === '') return;

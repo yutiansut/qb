@@ -13,9 +13,9 @@ export default class ChargeMessage extends exchangeViewBase {
     return (
       <div className="asset-message">
         <ul className="clearfix">
-          <li className="asset-message-title">消息：</li>
-          <li>【充币】2018-01-01 12:30:22 0.09 BTC 确认中(1/5)</li>
-          <li>【充币】2018-01-01 12:30:22 0.09 BTC 确认中(1/5)</li>
+          <li className="asset-message-title">{this.intl.get('message')}：</li>
+          <li>【{this.intl.get("deposit")}】2018-01-01 12:30:22 0.09 BTC {this.intl.get("asset-confirming")}(1/5)</li>
+          <li>【{this.intl.get("deposit")}】2018-01-01 12:30:22 0.09 BTC {this.intl.get("asset-confirming")}(1/5)</li>
         </ul>
       </div>
     );

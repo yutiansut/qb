@@ -189,17 +189,17 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
   }
-  
+
   setUnitsType(v){
     this.view.setState({
       unitsType: v
     })
   }
-  
+
   pairDataHandle() {
 
   }
-  
+
   getTradePairHandle() {
     // let preData = this.store.state.allPairData;
     // let pairArr = [];

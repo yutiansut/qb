@@ -61,7 +61,7 @@ export default {
     // 充币地址查询4.4（pass）
     { name: 'chargeAddress', data: { url: '/common/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes',needToken: true  },
     // 提币矿工费4.5
-    { name: 'minerFee', data: { url: '/wallet/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes' },
+    { name: 'minerFee', data: { url: '/property/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes', needToken: true },
     // 提交提币订单4.6（pass）
     { name: 'extractOrder', data: { url: '/property/', method: 'post' }, action: 'withdrawCoin', actionBack: 'withdrawCoinRes', needToken: true },
     // 提币地址查询4.7（pass）
@@ -79,5 +79,5 @@ export default {
     //历史订单
     {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'}
   ],
-  
+
 }

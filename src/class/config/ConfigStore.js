@@ -21,8 +21,8 @@ export default class UserStore extends ExchangeStoreBase {
       addr: EXCHANGE_ADDR,
       servicePhone: EXCHANGE_SERVICE_PHONE,
       serviceQQ: EXCHANGE_SERVICE_QQ,
-      // language: 'zh-CN'
-      language: 'en-US'
+      language: 'zh-CN'
+      // language: 'en-US'
     }
   }
 }

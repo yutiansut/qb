@@ -62,17 +62,17 @@ export default class Wallets extends exchangeViewBase {
               this.setState({ hideLittle: !this.state.hideLittle });
             }}>
             <i />
-            {this.intl.get("asset-hideLittle_v1")}
+            {this.intl.get("asset-hideLittle")}
             <b className="pop-parent">
               <img src="/static/images/yiwen.png" alt="" />
-              <em className="pop-children uppop-children">{this.intl.get("asset-tip1_v1")}</em>
+              <em className="pop-children uppop-children">{this.intl.get("asset-tip1")}</em>
             </b>
           </span>
           <span className={`hide-zero ${this.state.hideZero ? "active" : ""}`} onClick={() => {
               this.setState({ hideZero: !this.state.hideZero });
             }}>
             <i />
-            {this.intl.get("asset-hideZero_v1")}
+            {this.intl.get("asset-hideZero")}
           </span>
         </div>
         <table>
@@ -81,22 +81,22 @@ export default class Wallets extends exchangeViewBase {
               <th className="currency" onClick={() => {
                   this.sort("coinName", coinName + 1);
                 }}>
-              {this.intl.get("asset-currency_v1")}<img className="img" src={sortIcon[coinName]} alt="" />
+              {this.intl.get("asset-currency")}<img className="img" src={sortIcon[coinName]} alt="" />
               </th>
-              <th className="fullname">{this.intl.get("asset-fullname_v1")}</th>
+              <th className="fullname">{this.intl.get("asset-fullname")}</th>
               <th className="avail" onClick={() => {
                   this.sort("availableCount", availableCount + 1);
                 }}>
-                {this.intl.get("asset-avail_v1")}<img className="img" src={sortIcon[availableCount]} alt="" />
+                {this.intl.get("asset-avail")}<img className="img" src={sortIcon[availableCount]} alt="" />
               </th>
               <th className="lock" onClick={() => {
                   this.sort("frozenCount", frozenCount + 1);
                 }}>
-                {this.intl.get("asset-lock_v1")}
+                {this.intl.get("asset-lock")}
                 <b className="pop-parent">
                   <img src="/static/images/yiwen.png" alt="" />
                   <em className="pop-children uppop-children">
-                    {this.intl.get("asset-tip2_v1")}
+                    {this.intl.get("asset-tip2")}
                   </em>
                 </b>
                 <img className="img" src={sortIcon[frozenCount]} alt="" />
@@ -104,16 +104,16 @@ export default class Wallets extends exchangeViewBase {
               <th className="tobtc" onClick={() => {
                   this.sort("valuationBTC", valuationBTC + 1);
                 }}>
-                {this.intl.get("asset-tobtc_v1")}
+                {this.intl.get("asset-tobtc")}
                 <b className="pop-parent">
                   <img src="/static/images/yiwen.png" alt="" />
                   <em className="pop-children uppop-children">
-                    {this.intl.get("asset-tip3_v1")}
+                    {this.intl.get("asset-tip3")}
                   </em>
                 </b>
                 <img className="img" src={sortIcon[valuationBTC]} alt="" />
               </th>
-              <th className="handle">{this.intl.get("option_v1")}</th>
+              <th className="handle">{this.intl.get("option")}</th>
             </tr>
           </thead>
           <tbody>
@@ -134,13 +134,13 @@ export default class Wallets extends exchangeViewBase {
                   <td className="tobtc">{item.valuationBTC}</td>
                   <td className="handle">
                     <NavLink to={{ pathname: `/wallet/charge/`, query: { currency: item.coinName } }}>
-                      <Button type="base" theme="main" title={this.intl.get('deposit_v1')} />
+                      <Button type="base" theme="main" title={this.intl.get('deposit')} />
                     </NavLink>
                     <NavLink to={{ pathname: `/wallet/extract/`, query: { currency: item.coinName } }}>
-                      <Button type="base" className="withdraw" theme="main" title={this.intl.get('asset-withdraw_v1')} />
+                      <Button type="base" className="withdraw" theme="main" title={this.intl.get('asset-withdraw')} />
                     </NavLink>
                     <NavLink to={{ pathname: `/trade`, query: { currency: item.coinName } }}>
-                      <Button type="base" theme="main" title={this.intl.get('asset-trade_v1')} />
+                      <Button type="base" theme="main" title={this.intl.get('asset-trade')} />
                     </NavLink>
                   </td>
                 </tr>;

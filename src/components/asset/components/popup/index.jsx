@@ -69,7 +69,7 @@ export default class Popup extends exchangeViewBase {
               }}
             />
             <h3>
-              {this.intl.get('asset-addAddress_v1')}<span
+              {this.intl.get('asset-addAddress')}<span
                 onClick={() => {
                   this.state.newAddress.push({ addressName: "", address: "" });
                   this.setState({
@@ -78,15 +78,15 @@ export default class Popup extends exchangeViewBase {
                   });
                 }}
               >
-                {this.intl.get('add_v1')}
+                {this.intl.get('add')}
               </span>
             </h3>
             <table className="list">
               <thead>
                 <tr>
-                  <th className="name">{this.intl.get('name_v1')}</th>
-                  <th className="base3-address">{this.intl.get('address_v1')}</th>
-                  <th>{this.intl.get('action_v1')}</th>
+                  <th className="name">{this.intl.get('name')}</th>
+                  <th className="base3-address">{this.intl.get('address')}</th>
+                  <th>{this.intl.get('action')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,7 +98,7 @@ export default class Popup extends exchangeViewBase {
                           <Input
                             type="text"
                             value={item.name}
-                            placeholder={this.intl.get('asset-inputName_v1')}
+                            placeholder={this.intl.get('asset-inputName')}
                             onInput={value => {
                               item.addressName = value;
                               this.setState({
@@ -111,7 +111,7 @@ export default class Popup extends exchangeViewBase {
                           <Input
                             type="text"
                             value={item.address}
-                            placeholder={this.intl.get('asset-inputAddress_v1')}
+                            placeholder={this.intl.get('asset-inputAddress')}
                             onInput={value => {
                               item.address = value;
                               this.setState({
@@ -123,7 +123,7 @@ export default class Popup extends exchangeViewBase {
                         <td>
                           <Button
                             type="base"
-                            title={this.intl.get('save_v1')}
+                            title={this.intl.get('save')}
                             onClick={() => {
                               this.state.newAddress.splice(index, 1);
                               this.setState({
@@ -135,7 +135,7 @@ export default class Popup extends exchangeViewBase {
                             }}
                           />
                           <Button
-                            title={this.intl.get('cance_v1')}
+                            title={this.intl.get('cance')}
                             onClick={() => {
                               this.state.newAddress.splice(index, 1);
                               this.setState({
@@ -153,7 +153,7 @@ export default class Popup extends exchangeViewBase {
                       <td>{item.address}</td>
                       <td>
                         <Button
-                          title={this.intl.get('delete_v1')}
+                          title={this.intl.get('delete')}
                           theme="danger"
                           onClick={()=>{onDelete && onDelete(item)}}
                         />

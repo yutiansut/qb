@@ -182,7 +182,7 @@ export default class Terms extends exchangeViewBase {
     return <div className="help-terms">
       <h2 className="title">用户协议</h2>
       <p>
-        {this.intl.get('help-termsFirst_v1')}
+        {this.intl.get('help-termsFirst')}
       </p>
       <p>
         {nameUsd}有权对本协议条款进行修改，修改后的协议一旦公布即有效代替原来的协议。用户可随时查阅最新协议。

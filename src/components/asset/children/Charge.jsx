@@ -13,10 +13,10 @@ export default class Charge extends exchangeViewBase {
     super(props);
     let { controller } = props;
     this.status = {
-      0: this.intl.get("failed_v1"),
-      1: this.intl.get("pending_v1"),
-      2: this.intl.get("passed_v1"),
-      3: this.intl.get("cancel_v1")
+      0: this.intl.get("failed"),
+      1: this.intl.get("pending"),
+      2: this.intl.get("passed"),
+      3: this.intl.get("cancel")
     };
     this.state = {
       currency: "BTC",
@@ -67,7 +67,7 @@ export default class Charge extends exchangeViewBase {
         value: currency
       });
     await this.getCurrencyAmount();
-    await this.getCoinAddress();
+    await this.getCoinAddress(this.state.currency);
     await this.getHistory();
   }
 
@@ -75,7 +75,11 @@ export default class Charge extends exchangeViewBase {
     window.addEventListener("click", this.hideQrcode);
   }
 
-  componentWillUpdate(props, state, next) { }
+  componentWillUpdate(props, state, next) {
+    if(this.state.currency !== state.currency) {
+      this.getCoinAddress(state.currency);
+    }
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (JSON.stringify(nextState) !== JSON.stringify(this.state)) return true;
@@ -90,15 +94,14 @@ export default class Charge extends exchangeViewBase {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress;
-    console.log(address);
     return <div className="charge">
         <h3>
-          {this.intl.get("deposit_v1")}-{this.state.currency}
+          {this.intl.get("deposit")}-{this.state.currency}
         </h3>
         <div className="select">
           <div className="search clearfix">
             <span className="title">
-              {this.intl.get("asset-selectCoin_v1")}
+              {this.intl.get("asset-selectCoin")}
             </span>
             <div className="currency-asset">
               <SearchInput filte={this.props.controller.filter} walletList={Object.keys(this.state.walletList)} value={this.state.value} setValue={value => {
@@ -108,19 +111,19 @@ export default class Charge extends exchangeViewBase {
                 }} />
               <ul>
                 <li>
-                  <span>{this.intl.get("asset-amount_v1")}</span>
+                  <span>{this.intl.get("asset-amount")}</span>
                   <i>
                     {totalCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
-                  <span>{this.intl.get("asset-orderLock_v1")}</span>
+                  <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
                     {frozenCount} {this.state.currency}
                   </i>
                 </li>
                 <li>
-                  <span>{this.intl.get("asset-avail_v1")}</span>
+                  <span>{this.intl.get("asset-avail")}</span>
                   <i>
                     {availableCount} {this.state.currency}
                   </i>
@@ -131,22 +134,22 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            {this.intl.get("asset-depositTip_v1", {
+            {this.intl.get("asset-depositTip", {
               currency: this.state.currency
             })}
           </p>
           <div className="currency-address clearfix">
             <span className="title">
-              {this.intl.get("asset-depositAddress_v1")}
+              {this.intl.get("asset-depositAddress")}
             </span>
             <input ref="address" value={address ? address.coinAddress : ""} readOnly="readonly" onChange={() => {}} />
           </div>
           <div className="handel">
-            <Button title={this.intl.get("asset-showQrcode_v1")} type="base" onClick={e => {
+            <Button title={this.intl.get("asset-showQrcode")} type="base" onClick={e => {
                 e.nativeEvent.stopImmediatePropagation();
                 this.setState({ showQrcode: true });
               }} />
-            <Button title={this.intl.get("asset-copy_v1")} type="base" onClick={() => {
+            <Button title={this.intl.get("asset-copy")} type="base" onClick={() => {
                 this.copy(this.refs.address);
               }} />
             <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
@@ -156,54 +159,54 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="tip clearfix">
           <span className="title">
-            {this.intl.get("asset-reminder_v1")}
+            {this.intl.get("asset-reminder")}
           </span>
           <ol>
             <li>
-              {this.intl.get("asset-depositReminder1_v1", {
+              {this.intl.get("asset-depositReminder1", {
                 currency: this.state.currency,
                 number: address && address.verifyNumber
               })}
             </li>
             <li>
-              {this.intl.get("asset-depositReminder2-1_v1")} <NavLink
+              {this.intl.get("asset-depositReminder2-1")} <NavLink
                 to={`/wallet/dashboard`}
               >
-                {this.intl.get("asset-records_v1")}
-              </NavLink> {this.intl.get("asset-depositReminder2-2_v1")}
+                {this.intl.get("asset-records")}
+              </NavLink> {this.intl.get("asset-depositReminder2-2")}
             </li>
           </ol>
         </div>
         <div className="to-trade clearfix">
-          <span className="title">{this.intl.get("asset-toTrade_v1")}</span>
+          <span className="title">{this.intl.get("asset-toTrade")}</span>
           <Button title="EOS/BTC" type="base" />
         </div>
         <div className="history clearfix">
           <span className="title">
-            {this.intl.get("asset-depositHistory_v1")}
+            {this.intl.get("asset-depositHistory")}
           </span>
           <table>
             <thead>
               <tr>
                 <th className="time">
-                  {this.intl.get("asset-depositTime_v1")}
+                  {this.intl.get("asset-depositTime")}
                 </th>
                 <th className="currency">
-                  {this.intl.get("asset-depositTime_v1")}
+                  {this.intl.get("asset-depositTime")}
                 </th>
                 <th className="amount">
-                  {this.intl.get("asset-depositAmount_v1")}
+                  {this.intl.get("asset-depositAmount")}
                 </th>
                 <th className="send">
-                  {this.intl.get("asset-sendAddress_v1")}
+                  {this.intl.get("asset-sendAddress")}
                 </th>
                 <th className="receive">
-                  {this.intl.get("asset-receiveAddress_v1")}
+                  {this.intl.get("asset-receiveAddress")}
                 </th>
                 <th className="confirm">
-                  {this.intl.get("asset-confirm_v1")}
+                  {this.intl.get("asset-confirm")}
                 </th>
-                <th className="state">{this.intl.get("state_v1")}</th>
+                <th className="state">{this.intl.get("state")}</th>
               </tr>
             </thead>
             <tbody>
@@ -249,7 +252,7 @@ export default class Charge extends exchangeViewBase {
           </div>
           <p className="more">
             <NavLink to={`/wallet/dashboard`}>
-              {this.intl.get("asset-viewAll_v1")}→
+              {this.intl.get("asset-viewAll")}→
             </NavLink>
           </p>
         </div>

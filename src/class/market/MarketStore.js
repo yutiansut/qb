@@ -203,6 +203,18 @@ export default class MarketStore extends ExchangeStoreBase {
         }
       }
     };
+    this.getWebSocketData()
+  }
+  setController(ctl) {
+    this.controller = ctl
+  }
+
+  getWebSocketData() {
+    // console.log('getData', this.WebSocket)
+    // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
+    // this.WebSocket.general.on('recommendCurrency', data=>{
+    //   console.log('getWebSocketData', data)
+    // })
   }
   async getCoinInfo(){
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});

@@ -28,7 +28,6 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
-    console.log(this.store.state.totalAsset, this.store.state.wallet);
     this.view.setState({
       totalAsset: this.store.state.totalAsset,
       wallet: this.store.state.wallet || []
@@ -37,10 +36,10 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount() {
-    // await this.store.getCurrencyAmount();
-    // this.view.setState({
-    //   currencyAmount: this.store.state.currencyAmount,
-    // });
+    await this.store.getCurrencyAmount();
+    this.view.setState({
+      currencyAmount: this.store.state.currencyAmount,
+    });
   }
 
   // 获取交易对手续费
@@ -66,8 +65,8 @@ export default class AssetController extends ExchangeControllerBase {
 
 
   // 获取充币地址(over)
-  async getCoinAddress() {
-    await this.store.getChargeAddress();
+  async getCoinAddress(coin) {
+    await this.store.getChargeAddress(coin);
     this.view.setState({
       coinAddress: this.store.state.coinAddress,
     });

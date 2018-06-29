@@ -39,45 +39,45 @@ export default class History extends exchangeViewBase {
     return (
       <div className="hist">
         <h3 className="title">
-          {this.intl.get("asset-records_v1")}{" "}
-          <Button type="export" title={this.intl.get("asset-export_v1")} />
+          {this.intl.get("asset-records")}{" "}
+          <Button type="export" title={this.intl.get("asset-export")} />
         </h3>
         <div className="filtrate clearfix">
           <ul className="clearfix">
             <li className="item">
-              <span>{this.intl.get("asset-currency_v1")}</span>
+              <span>{this.intl.get("asset-currency")}</span>
               <SelectButton
-                title={this.intl.get("all_v1")}
+                title={this.intl.get("all")}
                 type="main"
                 className="select"
-                valueArr={[this.intl.get("all_v1"), "BTC", "LTC", "ETH"]}
+                valueArr={[this.intl.get("all"), "BTC", "LTC", "ETH"]}
               />
             </li>
             <li className="item">
-              <span>{this.intl.get("type_v1")}</span>
+              <span>{this.intl.get("type")}</span>
               <SelectButton
-                title={this.intl.get("all_v1")}
+                title={this.intl.get("all")}
                 type="main"
                 className="select"
                 valueArr={[
-                  this.intl.get("all_v1"),
-                  this.intl.get("deposit_v1"),
-                  this.intl.get("asset-withdraw_v1"),
-                  this.intl.get("asset-transfer_v1")
+                  this.intl.get("all"),
+                  this.intl.get("deposit"),
+                  this.intl.get("asset-withdraw"),
+                  this.intl.get("asset-transfer")
                 ]}
               />
             </li>
             <li className="item">
-              <span>{this.intl.get("state_v1")}</span>
+              <span>{this.intl.get("state")}</span>
               <SelectButton
-                title={this.intl.get("all_v1")}
+                title={this.intl.get("all")}
                 type="main"
                 className="select"
                 valueArr={[
-                  this.intl.get("all_v1"),
-                  this.intl.get("passed_v1"),
-                  this.intl.get("failed_v1"),
-                  this.intl.get("pending_v1")
+                  this.intl.get("all"),
+                  this.intl.get("passed"),
+                  this.intl.get("failed"),
+                  this.intl.get("pending")
                 ]}
               />
             </li>
@@ -86,23 +86,23 @@ export default class History extends exchangeViewBase {
             <DatePicker />
           </div>
           <div className="handel">
-            <Button type="base" title={this.intl.get('search_v1')} className="search" />
-            <Button type="base" title={this.intl.get('reset_v1')} className="reset" />
+            <Button type="base" title={this.intl.get('search')} className="search" />
+            <Button type="base" title={this.intl.get('reset')} className="reset" />
           </div>
         </div>
         <table className="table">
           <thead>
             <tr>
-              <th className="time">{this.intl.get('time_v1')}</th>
-              <th className="currency">{this.intl.get('asset-currency_v1')}</th>
-              <th className="type">{this.intl.get('type_v1')}</th>
-              <th className="cash">{this.intl.get('asset-amount2_v1')}</th>
-              <th className="balan">{this.intl.get('asset-balan_v1')}</th>
-              <th className="send">{this.intl.get('asset-sendAddress_v1')}</th>
-              <th className="receive">{this.intl.get('asset-receiveAddress_v1')}</th>
-              <th className="confirm">{this.intl.get('asset-confirm_v1')}</th>
-              <th className="state">{this.intl.get('asset-checkState_v1')}</th>
-              <th className="fee">{this.intl.get('fee_v1')}</th>
+              <th className="time">{this.intl.get('time')}</th>
+              <th className="currency">{this.intl.get('asset-currency')}</th>
+              <th className="type">{this.intl.get('type')}</th>
+              <th className="cash">{this.intl.get('asset-amount2')}</th>
+              <th className="balan">{this.intl.get('asset-balan')}</th>
+              <th className="send">{this.intl.get('asset-sendAddress')}</th>
+              <th className="receive">{this.intl.get('asset-receiveAddress')}</th>
+              <th className="confirm">{this.intl.get('asset-confirm')}</th>
+              <th className="state">{this.intl.get('asset-checkState')}</th>
+              <th className="fee">{this.intl.get('fee')}</th>
             </tr>
           </thead>
           <tbody>
