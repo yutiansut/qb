@@ -47,6 +47,7 @@ export default class Extract extends exchangeViewBase {
     });
 
     //绑定方法
+    this.getTradePair = controller.getTradePair.bind(controller);
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
     this.getExtract = controller.getExtract.bind(controller);
     this.getWalletList = controller.getWalletList.bind(controller);
@@ -62,20 +63,20 @@ export default class Extract extends exchangeViewBase {
   async componentWillMount() {
     let currency =
       this.props.location.query && this.props.location.query.currency;
-      currency && this.setState({ currency: currency, value: currency });
+    currency && this.setState({ currency: currency, value: currency });
     await this.getWalletList();
-    await this.getCurrencyAmount()
-    await this.getExtract();
-    await this.getHistory({ page: 0, orderType: 1, pageSize: 10 });
+    this.getTradePair(currency || this.state.currency);
+    this.getCurrencyAmount(currency || this.state.currency);
+    this.getExtract();
+    this.getHistory({ page: 0, orderType: 1, pageSize: 10 });
   }
 
-  componentDidMount() { }
-
-
+  componentDidMount() {}
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      this.getExtract()
+      this.setState({ address : ''})
+      this.getCurrencyAmount(nextState.currency);
     }
   }
 
@@ -95,7 +96,9 @@ export default class Extract extends exchangeViewBase {
     let currency = this.state.currency,
       { fee, minerFee, extractAddr } = this.state.walletExtract,
       { total, orderList } = this.state.assetHistory;
-    let curExtract = extractAddr.filter(v => v.coinName === this.state.currency.toLowerCase())[0];
+    let curExtract = extractAddr.filter(
+      v => v.coinName === this.state.currency.toLowerCase()
+    )[0];
     return (
       <div className="extract">
         <h3>
@@ -103,9 +106,7 @@ export default class Extract extends exchangeViewBase {
         </h3>
         <div className="select">
           <div className="search clearfix">
-            <span className="title">
-              {this.intl.get("asset-selectCoin")}
-            </span>
+            <span className="title">{this.intl.get("asset-selectCoin")}</span>
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
@@ -122,19 +123,19 @@ export default class Extract extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {totalCount} {currency}
+                    {totalCount.format({number:'property'})} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {frozenCount} {currency}
+                    {frozenCount.format({ number: 'property' })} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {availableCount} {currency}
+                    {availableCount.format({ number: 'property' })} {currency}
                   </i>
                 </li>
               </ul>
@@ -158,7 +159,10 @@ export default class Extract extends exchangeViewBase {
                 <Input
                   type="select"
                   readOnly={true}
-                  valueArr={curExtract && curExtract.addressList.map(item => item.address)}
+                  valueArr={
+                    curExtract &&
+                    curExtract.addressList.map(item => item.address)
+                  }
                   onSelect={value => {
                     this.setState({ address: value });
                   }}
@@ -180,10 +184,8 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{availableQuota}/{
-                  totalQuota
-                }{" "}
-                BTC
+                {this.intl.get("asset-24hQuota")}：{availableQuota}/{totalQuota}{" "}
+                {this.state.currency}
                 <NavLink to="/user/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
@@ -201,8 +203,7 @@ export default class Extract extends exchangeViewBase {
                     this.setState({ extractAmount: availableCount });
                   }}
                 >
-                  {this.intl.get("asset-withdrawAvailable")}:{" "}
-                  {availableCount}
+                  {this.intl.get("asset-withdrawAvailable")}: {availableCount}
                 </a>
                 <span>{currency}</span>
               </div>
@@ -211,7 +212,8 @@ export default class Extract extends exchangeViewBase {
                   {this.intl.get("asset-gasFee")}：{minerFee}
                   {` ${currency}`}
                   <span>
-                    {this.intl.get("asset-withdrawActual")} {this.state.extractAmount - minerFee} {currency}
+                    {this.intl.get("asset-withdrawActual")}{" "}
+                    {this.state.extractAmount - minerFee} {currency}
                   </span>
                 </p>
                 {/* <p className="explain">
@@ -223,110 +225,135 @@ export default class Extract extends exchangeViewBase {
             </div>
           </div>
           <div className="password clearfix">
-            <span className="title">{this.intl.get('setFund')}</span>
+            <span className="title">{this.intl.get("setFund")}</span>
             <div className="content">
-              <Input oriType="password" placeholder={this.intl.get('asset-inputFundPassword')} />
+              <Input
+                oriType="password"
+                placeholder={this.intl.get("asset-inputFundPassword")}
+              />
               <div className="set">
-                <NavLink to="/user/safe">{this.intl.get('fundPass')}</NavLink>
+                <NavLink to="/user/safe">
+                  {this.intl.get("asset-setFundPassword")}
+                </NavLink>
               </div>
             </div>
           </div>
           <div className="handel">
-            <Button title={this.intl.get('asset-submit')} type="base" />
+            <Button title={this.intl.get("asset-submit")} type="base" />
           </div>
         </div>
         <div className="tip clearfix">
           <span className="title">{this.intl.get("asset-reminder")}</span>
           <ol>
+            <li>{this.intl.get("asset-depositTip", { currency })}</li>
             <li>
-              {this.intl.get('asset-depositTip', {currency})}
-            </li>
-            <li>
-              {this.intl.get("asset-depositReminder2-1")} <NavLink
-                to={`/wallet/dashboard`}
-              >
+              {this.intl.get("asset-depositReminder2-1")}{" "}
+              <NavLink to={`/wallet/dashboard`}>
                 {this.intl.get("asset-records")}
-              </NavLink> {this.intl.get("asset-depositReminder2-2")}
+              </NavLink>{" "}
+              {this.intl.get("asset-depositReminder2-2")}
             </li>
           </ol>
         </div>
         <div className="to-trade clearfix">
-          <span className="title">{this.intl.get('asset-toTrade')}</span>
+          <span className="title">{this.intl.get("asset-toTrade")}</span>
           <Button title="EOS/BTC" type="base" />
         </div>
         <div className="history clearfix">
-          <span className="title">{this.intl.get('asset-withdrawalsHistory')}</span>
-          <table>
-            <thead>
-              <tr>
-                <th className="time">{this.intl.get('asset-withdrawalsTime')}</th>
-                <th className="currency">{this.intl.get('asset-currency')}</th>
-                <th className="amount">{this.intl.get('asset-withdrawalsAmount')}</th>
-                <th className="send">{this.intl.get('asset-sendAddress')}</th>
-                <th className="receive">{this.intl.get('asset-receiveAddress')}</th>
-                <th className="state">{this.intl.get('state')}</th>
-                <th className="remark">{this.intl.get('remark')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderList && orderList.map(
-                (
-                  {
-                    orderTime,
-                    coinName,
-                    count,
-                    postAddress,
-                    receiveAddress,
-                    orderStatus,
-                    fee
-                  },
-                  index
-                ) => (
-                    <tr key={index}>
-                      <td>{orderTime}</td>
-                      <td>{coinName}</td>
-                      <td>{count}</td>
-                      <td>{postAddress}</td>
-                      <td>{receiveAddress}</td>
-                      <td>
-                        <span>{status[orderStatus]}</span>
-                      </td>
-                      <td>{fee}</td>
-                    </tr>
-                  )
-              )}
-            </tbody>
-          </table>
-          <div className="pagina">
-            <Pagination
-              total={this.state.assetHistory.total}
-              pageSize={10}
-              showTotal={true}
-              onChange={page => {
-                this.setState({
-                  page: page - 1,
-                  orderType: 0,
-                  pageSize: 10
-                });
-                this.getHistory(page);
-              }}
-              showQuickJumper={true}
-              currentPage={this.state.page}
-            />
-          </div>
-          <p className="more">
-            <NavLink to={`/wallet/dashboard`}>{this.intl.get("asset-viewAll")}→</NavLink>
-          </p>
+          <span className="title">
+            {this.intl.get("asset-withdrawalsHistory")}
+          </span>
+
+          {this.state.assetHistory.total ? (
+            <div className="table">
+              <table>
+                <thead>
+                  <tr>
+                    <th className="time">
+                      {this.intl.get("asset-withdrawalsTime")}
+                    </th>
+                    <th className="currency">
+                      {this.intl.get("asset-currency")}
+                    </th>
+                    <th className="amount">
+                      {this.intl.get("asset-withdrawalsAmount")}
+                    </th>
+                    <th className="send">
+                      {this.intl.get("asset-sendAddress")}
+                    </th>
+                    <th className="receive">
+                      {this.intl.get("asset-receiveAddress")}
+                    </th>
+                    <th className="state">{this.intl.get("state")}</th>
+                    <th className="remark">{this.intl.get("remark")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderList &&
+                    orderList.map(
+                      (
+                        {
+                          orderTime,
+                          coinName,
+                          count,
+                          postAddress,
+                          receiveAddress,
+                          orderStatus,
+                          fee
+                        },
+                        index
+                      ) => (
+                        <tr key={index}>
+                          <td>{orderTime}</td>
+                          <td>{coinName}</td>
+                          <td>{count}</td>
+                          <td>{postAddress}</td>
+                          <td>{receiveAddress}</td>
+                          <td>
+                            <span>{status[orderStatus]}</span>
+                          </td>
+                          <td>{fee}</td>
+                        </tr>
+                      )
+                    )}
+                </tbody>
+              </table>
+              <div className="pagina">
+                <Pagination
+                  total={this.state.assetHistory.total}
+                  pageSize={10}
+                  showTotal={true}
+                  onChange={page => {
+                    this.setState({
+                      page: page - 1,
+                      orderType: 0,
+                      pageSize: 10
+                    });
+                    this.getHistory(page);
+                  }}
+                  showQuickJumper={true}
+                  currentPage={this.state.page}
+                />
+              </div>
+              <p className="more">
+                <NavLink to={`/wallet/dashboard`}>
+                  {this.intl.get("asset-viewAll")}→
+                </NavLink>
+              </p>
+            </div>
+          ) : (
+            <div className="kong">暂无记录</div>
+          )}
         </div>
         {this.state.showAddressPopup && (
           <Popup
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
             onSave={add => {
-              this.appendAddress(add);
+              this.appendAddress(Object.assign({coinName:this.state.currency},add));
             }}
-            onDelete={add => {
-              this.deletAddress(add);
+            onDelete={del => {
+              this.deletAddress(Object.assign({ coinName: this.state.currency},del));
             }}
             onClose={() => {
               this.setState({ showAddressPopup: false });

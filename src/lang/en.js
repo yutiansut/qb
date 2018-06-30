@@ -119,6 +119,7 @@ export default function en (state){
     "asset-gasFee": "Gas fee",
     "asset-withdrawActual": "Actual Deposit Amount",
     "asset-inputFundPassword": "Input Funding Password",
+    "asset-setFundPassword": "Funding Password",
     "asset-submit": "Submit",
     "asset-withdrawalsHistory": "withdrawals history",
     "asset-withdrawalsTime": "Withdraw time",

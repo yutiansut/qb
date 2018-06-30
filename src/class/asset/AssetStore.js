@@ -178,6 +178,9 @@ export default class AssetStore extends ExchangeStoreBase {
       }
     };
   }
+  setController(ctrl){
+    this.controller = ctrl;
+  }
   // 获取交易对手续费
   async getFee() {
     // this.Proxy.extractOrder({
@@ -254,11 +257,11 @@ export default class AssetStore extends ExchangeStoreBase {
     }
   }
   // 获取单个币种资产信息
-  async getCurrencyAmount() {
+  async getCurrencyAmount(coin) {
     this.state.currencyAmount = await this.Proxy.balance({
         userId: uid,
-        coinId: 0,
-        coinName: "BTC",
+        coinId: this.state.walletList[coin],
+        coinName: coin,
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
   }
@@ -303,22 +306,56 @@ export default class AssetStore extends ExchangeStoreBase {
     });
     this.state.walletExtract.minerFee = minerFee;
     if (this.state.walletExtract.extractAddr.length) return;
-    let extractAddr = await this.Proxy.extractAddress({
+    let result = await this.Proxy.extractAddress({
       userId: uid,
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
-    this.state.walletExtract.extractAddr = extractAddr.addresses;
-    console.log(extractAddr.addresses)
-  }
-  // 删除提现地址
-  appendAddress({ addressName, address }) {
-    this.state.walletExtract.extractAddr.push({ addressName, address });
+    this.state.walletExtract.extractAddr = result.addresses;
+    console.log(result.addresses);
   }
   // 增加提现地址
-  deletAddress({ addressName, address }) {
-    this.state.walletExtract.extractAddr = this.state.walletExtract.extractAddr.filter(
-      item => item.address !== address
-    );
+  async appendAddress({coinName, addressName, address }) {
+    let result = await this.Proxy.addAddress({
+      userId: uid,
+      coinId: this.state.walletList[coinName],
+      coinName: coinName,
+      addressName: addressName,
+      address: address,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    });
+    this.state.walletExtract.extractAddr.forEach(v=>{
+      v.coinId === this.state.walletList[coinName] && v.addressList.push(
+          {
+            addressName:addressName,
+            address: address,
+            addressId: result.addressId,
+          }
+        );
+    });
+    return this.state.walletExtract;
+  }
+
+  // 删除提现地址
+  async deletAddress({ coinName, addressId, addressName, address }) {
+    console.log(coinName, addressId, addressName, address);
+    let result = await this.Proxy.delAddress({
+      userId: uid,
+      coinId: this.state.walletList[coinName],
+      coinName: coinName,
+      addressId: addressId,
+      addressName: addressName,
+      address: address,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    })
+    console.log(result);
+    // this.state.walletExtract.extractAddr.forEach(v=>{
+    //   v.coinId === this.state.walletList[coinName];
+    // });
+    // this.state.walletExtract.extractAddr = this.state.walletExtract.extractAddr.filter(
+    //   item => item.address !== address
+    // );
   }
 }

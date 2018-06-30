@@ -124,6 +124,7 @@ export default function zh(state) {
     "asset-gasFee": "矿工费",
     "asset-withdrawActual": "实际到账",
     "asset-inputFundPassword": "请输入您的资金密码",
+    "asset-setFundPassword": "设置资金密码",
     "asset-submit": "确认提交",
     "asset-withdrawalsHistory": "提币记录",
     "asset-withdrawalsTime": "提币时间",

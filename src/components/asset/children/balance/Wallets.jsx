@@ -36,6 +36,18 @@ export default class Wallets extends exchangeViewBase {
     let { controller } = this.props;
     this.filter = controller.filte.bind(controller);
     this.rank = controller.rank.bind(controller);
+    // 充值前的身份认证状态验证
+    this.verify = currency => {
+      // let state = controller.userVerif;
+      // if (state === 1) {
+        props.history.push({
+          pathname: `/wallet/charge/`,
+          query: { currency }
+        });
+        // return;
+      // }
+      // this.props.changeVerify(controller.userVerif);
+    };
   }
   render() {
     let { wallet, controller } = this.props;
@@ -133,9 +145,7 @@ export default class Wallets extends exchangeViewBase {
                   <td className="lock">{item.frozenCount}</td>
                   <td className="tobtc">{item.valuationBTC}</td>
                   <td className="handle">
-                    <NavLink to={{ pathname: `/wallet/charge/`, query: { currency: item.coinName } }}>
-                      <Button type="base" theme="main" title={this.intl.get('deposit')} />
-                    </NavLink>
+                    <Button type="base" theme="main" title={this.intl.get('deposit')} onClick={()=>{this.verify(item.name)}}/>
                     <NavLink to={{ pathname: `/wallet/extract/`, query: { currency: item.coinName } }}>
                       <Button type="base" className="withdraw" theme="main" title={this.intl.get('asset-withdraw')} />
                     </NavLink>

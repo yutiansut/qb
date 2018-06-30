@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../ExchangeViewBase";
 import Button from "../../../../common/component/Button";
 import Input from "../../../../common/component/Input";
@@ -21,21 +22,14 @@ export default class Popup extends exchangeViewBase {
     let { type, onClose, addressArr, onSave, onCancel, onDelete } = this.props;
     this.popup = {
       popup1: () => {
-        return (
-          <div className="asset-popup-content base1">
-            <img
-              className="close"
-              src="/static/img/guanbi_hei.svg"
-              alt=""
-              onClick={() => {
+        return <div className="asset-popup-content base1">
+            <img className="close" src="/static/img/guanbi_hei.svg" alt="" onClick={() => {
                 onClose && onClose();
-              }}
-            />
+              }} />
             <p>
-              <a href="#">请先进行身份认证</a>
+              <NavLink to="/user/identity">请先进行身份认证</NavLink>
             </p>
-          </div>
-        );
+          </div>;
       },
       popup2: () => {
         return (
@@ -51,7 +45,7 @@ export default class Popup extends exchangeViewBase {
             <p>
               <span>未进行实名认证的用户,需要进行实名认证方可充值。</span>
               <br />
-              <a href="#">请点击此处进行身份认证</a>
+              <NavLink to="/user/identity">请点击此处进行身份认证</NavLink>
             </p>
           </div>
         );

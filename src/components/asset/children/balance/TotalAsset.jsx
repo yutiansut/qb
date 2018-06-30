@@ -31,8 +31,8 @@ export default class TotalAsset extends exchangeViewBase {
         </div>
         <div className="item limit">
           <span>{this.intl.get("asset-24hQuota")}:</span>
-          <b>{totalAsset.totalQuota} BTC</b>
-          {totalAsset.totalQuota > 2 ? <span className="disable">
+          <b>{this.props.controller.userVerif === 1 ? 10 : 2} BTC</b>
+          {this.props.controller.userVerif === 1 ? <span className="disable">
               {this.intl.get("asset-limitApply")}
             </span> : <NavLink to="/user/identity">
               {this.intl.get("asset-limitApply")}

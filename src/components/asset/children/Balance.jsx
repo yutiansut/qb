@@ -23,8 +23,8 @@ export default class Balance extends exchangeViewBase {
 
   render() {
     return <div className="balance">
-      <TotalAsset totalAsset={this.state.totalAsset} />
-      <Wallets wallet={this.state.wallet} controller={this.props.controller} />
+      <TotalAsset totalAsset={this.state.totalAsset} controller={this.props.controller}/>
+      <Wallets wallet={this.state.wallet} history={this.props.history} controller={this.props.controller} changeVerify={this.props.changeVerify}/>
     </div>;
   }
 

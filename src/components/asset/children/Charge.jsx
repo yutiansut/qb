@@ -72,9 +72,9 @@ export default class Charge extends exchangeViewBase {
         currency: currency,
         value: currency
       });
+      await this.getWalletList()
       this.getTradePair(currency || this.state.currency)
-      this.getWalletList()
-      this.getCurrencyAmount();
+      this.getCurrencyAmount(currency || this.state.currency);
       this.getCoinAddress(currency || this.state.currency);
       this.getHistory({ page: 0, orderType: 0, pageSize: 10 });
   }
@@ -86,6 +86,7 @@ export default class Charge extends exchangeViewBase {
   componentWillUpdate(props, state, next) {
     if (this.state.currency !== state.currency) {
       this.getCoinAddress(state.currency);
+      this.getCurrencyAmount(state.currency);
       this.getTradePair(state.currency);
     }
   }

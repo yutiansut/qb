@@ -5,6 +5,7 @@ export default class AssetController extends ExchangeControllerBase {
   constructor(props) {
     super(props);
     this.store = new AssetStore();
+    this.store.setController(this)
   }
   setView(view) {
     super.setView(view);
@@ -22,6 +23,16 @@ export default class AssetController extends ExchangeControllerBase {
       tradePair: [{ name: "BTC/USDT", id: 1 }]
     });
   }
+  // 获取用户的身份认证状态
+  get userVerif () {
+    //this.userController.verify;
+    return 0;
+    // return 1;// 0：未认证 1：已通过  2：认证失败 3：认证中
+  }
+  get userTwoVerify () {
+    return 0;
+    //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+  }
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
@@ -32,8 +43,9 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 获取单个币种资产信息
-  async getCurrencyAmount() {
-    await this.store.getCurrencyAmount();
+  async getCurrencyAmount(coin) {
+    await this.store.getCurrencyAmount(coin);
+    console.log(this.store.state.currencyAmount);
     this.view.setState({
       currencyAmount: this.store.state.currencyAmount,
     });
@@ -78,7 +90,7 @@ export default class AssetController extends ExchangeControllerBase {
   async getExtract() {
     await this.store.getwalletExtract()
     this.view.setState({
-      walletExtract: this.store.state.walletExtract
+      walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });
   }
   // 请求验证码
@@ -130,22 +142,21 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 添加提现地址
-  appendAddress({ addressName, address }) {
-    this.store.appendAddress({ addressName, address });
-    this.view.state.walletExtract.extractAddr.push({ addressName, address });
-    this.view.setState({
-      walletExtract: this.view.state.walletExtract
-    });
+  async appendAddress(obj) {
+    let result = await this.store.appendAddress(obj);
+    // this.store.appendAddress({ addressName, address });
+    // this.view.state.walletExtract.extractAddr.push({ addressName, address });
+    this.view.setState({ walletExtract: this.Util.deepCopy(result) });
   }
 
   //删除提现地址
-  deletAddress({ addressName, address }) {
-    this.store.deletAddress({ addressName, address });
-    this.view.state.walletExtract.extractAddr = this.view.state.walletExtract.extractAddr.filter(
-      item => item.address !== address
-    );
-    this.view.setState({
-      walletExtract: this.view.state.walletExtract
-    });
+  async deletAddress(obj) {
+    await this.store.deletAddress(obj);
+    // this.view.state.walletExtract.extractAddr = this.view.state.walletExtract.extractAddr.filter(
+    //   item => item.address !== address
+    // );
+    // this.view.setState({
+    //   walletExtract: this.view.state.walletExtract
+    // });
   }
 }

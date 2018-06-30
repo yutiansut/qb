@@ -12,6 +12,7 @@ import Charge from "./children/Charge";
 import Extract from "./children/Extract";
 import History from "./children/History";
 import ChargeMessage from "./children/ChargeMessage";
+import Popup from "./components/popup";
 // import Popup from "./components/popup/";
 // import SelectButton from "./components/popup/";
 
@@ -22,7 +23,9 @@ import "./style/index.styl";
 export default class AssetManage extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      showPopup: 1
+    }
     this.controller = props.controller;
     //绑定view
     // this.controller.setView(this);
@@ -31,6 +34,9 @@ export default class AssetManage extends exchangeViewBase {
     // //绑定方法
     // this.getAssets = controller.getAssets.bind(controller)
     // this.getWallet = controller.getWallet.bind(controller)
+    this.changeVerify = (state)=>{
+      this.setState({ showPopup: state})
+    }
   }
 
   componentWillMount() {
@@ -43,8 +49,8 @@ export default class AssetManage extends exchangeViewBase {
 
   render() {
     let match = this.props.match;
-    const Bala = ({ match, location}) => {
-      return <Balance controller={this.controller} location={location} />;
+    const Bala = ({ match, location, history}) => {
+      return <Balance controller={this.controller} changeVerify={this.changeVerify} location={location} history={history}/>;
     };
     const Char = ({ match, location}) => {
       return <Charge controller={this.controller} location={location} />;
@@ -56,26 +62,26 @@ export default class AssetManage extends exchangeViewBase {
       return <History controller={this.controller} location={location} />;
     };
     return <div className="asset clearfix">
-        <ChargeMessage></ChargeMessage>
+        <ChargeMessage />
         <ul className="nav">
           <li>
             <NavLink activeClassName="active" to={`${match.url}/balance`}>
-              {this.intl.get('asset-balance')}
+              {this.intl.get("asset-balance")}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/charge`}>
-              {this.intl.get('deposit')}
+              {this.intl.get("deposit")}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/extract`}>
-            {this.intl.get('asset-withdraw')}
+              {this.intl.get("asset-withdraw")}
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to={`${match.url}/dashboard`}>
-              {this.intl.get('asset-records')}
+              {this.intl.get("asset-records")}
             </NavLink>
           </li>
         </ul>
@@ -88,6 +94,7 @@ export default class AssetManage extends exchangeViewBase {
             <Redirect to={`${match.url}/balance`} />
           </Switch>
         </div>
+      {this.state.showPopup !== 1 && <Popup type="popup2" onClose={() => { this.setState({ showPopup : 1})}}></Popup>}
       </div>;
   }
 }
