@@ -68,11 +68,8 @@ export default class AssetController extends ExchangeControllerBase {
   async getCoinAddress(coin) {
     await this.store.getChargeAddress(coin);
     this.view.setState({
-      coinAddress: this.store.state.coinAddress,
+      coinAddress: this.Util.deepCopy(this.store.state.coinAddress),
     });
-    // console.log(data);
-    // this.store.state.wallet = data;
-    // this.view.setState({ wallet: data});
   }
   // 获取充提记录
   async getHistory() {

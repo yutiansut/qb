@@ -75,7 +75,7 @@ export default class Charge extends exchangeViewBase {
     window.addEventListener("click", this.hideQrcode);
   }
 
-  componentWillUpdate(props, state, next) {
+  async componentWillUpdate(props, state, next) {
     if(this.state.currency !== state.currency) {
       this.getCoinAddress(state.currency);
     }

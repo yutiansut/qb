@@ -1,5 +1,7 @@
 import ExchangeStoreBase from "../ExchangeStoreBase";
-
+import JsonBig from "json-bigint"
+// uid : 232601699242483712;
+let uid = JsonBig.parse("232601699242483712");
 export default class AssetStore extends ExchangeStoreBase {
   constructor() {
     super("asset");
@@ -179,56 +181,53 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取交易对手续费
   async getFee() {
-    this.Proxy.extractOrder({
-      "userId": 1,
-      "coinId": 0,
-      "coinName": "BTC",
-      "coinAddress": "xxxx",
-      "withdrawCount": 1000,
-      "withdrawPassword": "xxxxx",
-      "code": "0000",
-      "os": 0,
-      "account": "xxx",
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    }).then(res=>{console.log(res)})
-    this.Proxy.addAddress({
-      userId: 1,
-      coinId: 0,
-      coinName: "BTC",
-      addressName: "usdt-address-1",
-      address: "xxxxxx",
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    }).then(res=>{console.log(res)});
-    this.Proxy.delAddress({
-      userId: 1,
-      coinId: 0,
-      coinName: "BTC",
-      addressId: "xxx",
-      addressName: "usdt-address-1",
-      address: "xxxxxx",
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    }).then(res => {
-      console.log(res);
-    });
+    // this.Proxy.extractOrder({
+    //   "userId": 1,
+    //   "coinId": 0,
+    //   "coinName": "BTC",
+    //   "coinAddress": "xxxx",
+    //   "withdrawCount": 1000,
+    //   "withdrawPassword": "xxxxx",
+    //   "code": "0000",
+    //   "os": 0,
+    //   "account": "xxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res=>{console.log(res)})
+    // this.Proxy.addAddress({
+    //   userId: 1,
+    //   coinId: 0,
+    //   coinName: "BTC",
+    //   addressName: "usdt-address-1",
+    //   address: "xxxxxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res=>{console.log(res)});
+    // this.Proxy.delAddress({
+    //   userId: 1,
+    //   coinId: 0,
+    //   coinName: "BTC",
+    //   addressId: "xxx",
+    //   addressName: "usdt-address-1",
+    //   address: "xxxxxx",
+    //   token:
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // }).then(res => {
+    //   console.log(res);
+    // });
     this.state.pairFees = await this.Proxy.getFee({
-      userId: 1,
+      userId: uid,
       tradePairId: 1
     });
+    console.log(this.state.pairFees);
   }
   // 获取总资产
   async getTotalAsset() {
-    let {
-      valuationBTC,
-      valuationEN,
-      valuationCN,
-      coinList
-    } = await this.Proxy.totalAsset({
-      userId: 1, token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0" });
+    let { valuationBTC, valuationEN, valuationCN, coinList } = await this.Proxy.totalAsset({
+      userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    });
     let { totalQuota, availableQuota } = await this.Proxy.balance({
-      userId: 1,
+      userId: uid,
       coinId: 0,
       coinName: "BTC",
       token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
@@ -246,7 +245,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取walletList
   async getWalletList() {
-    let { coinList } = await this.Proxy.totalAsset({ userId: 1 });
+    let { coinList } = await this.Proxy.totalAsset({ userId: uid });
     if (!this.state.walletList.length) {
       let obj = {};
       coinList.forEach(v => {
@@ -257,28 +256,27 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取单个币种资产信息
   async getCurrencyAmount() {
-    let aaa = await this.Proxy.balance({
-        userId: 1,
+    this.state.currencyAmount = await this.Proxy.balance({
+        userId: uid,
         coinId: 0,
         coinName: "BTC",
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
-    console.log(aaa)
   }
   // 获取充币地址
   async getChargeAddress(coin) {
-    let aaa = await this.Proxy.chargeAddress({
-      userId: 1,
+    // let aaa = await this.Proxy.chargeAddress({
+    //   userId: uid,
+    //   coinId: this.state.walletList[coin],
+    //   token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // })
+    this.state.coinAddress = await this.Proxy.chargeAddress({
+      userId: uid,
       coinId: this.state.walletList[coin],
-      token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    })
-    // this.state.coinAddress = await this.Proxy.chargeAddress({
-    //   userId: 1,
-    //   coinId: 4,
-    //   token:
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // });
-    console.log(aaa)
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    });
+    // console.log(aaa)
   }
   // async getWallet() {
   //   // this.wallet = await getWallet
@@ -286,7 +284,7 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取资产记录
   async getHistory(page = 1) {
     let result = await this.Proxy.history({
-      userId: 1,
+      userId: uid,
       coinId: 0,
       coinName: "BTC",
       orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
@@ -297,6 +295,7 @@ export default class AssetStore extends ExchangeStoreBase {
       pageSize: 10,
       token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
+    console.log('hygufghgfyhgfhfgfhg',result)
     this.state.assetHistory.orderList = result && result.orderList;
     page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
     page === 0 &&
@@ -312,7 +311,7 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.walletExtract.minerFee = minerFee;
     if (this.state.walletExtract.extractAddr.length) return;
     let extractAddr = await this.Proxy.extractAddress({
-      userId: 1,
+      userId: uid,
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });

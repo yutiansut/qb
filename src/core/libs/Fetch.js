@@ -5,8 +5,21 @@
  */
 
 export default async (url, params) => {
-    // console.log(url, params)
-    return await fetch(url, params)
-        .then(response => response.json(), (response, obj) => obj = {code: 0, msg: result, data: 'fetch 失败'})
-        .then(results => results, (reject, obj) => obj = {code: 1, msg: 'JSON解析出错', data: reject})
-}
+  // console.log(url, params)
+  try {
+    let response = await fetch(url, params).catch((e, obj) => {
+        obj = { ret: -1, data: e };
+        throw obj;
+      }),
+      result = await response.text().catch((e, obj) => {
+        obj = { ret: -2, data: e };
+        throw obj;
+      });
+    return JSON.parse(result);
+  } catch (e) {
+    console.log(e);
+    if (!e.ret)
+      e = { ret: -3, data: e };
+    return e;
+  }
+};

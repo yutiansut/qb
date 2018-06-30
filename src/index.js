@@ -2,10 +2,10 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './App'
 import Core from './core'
-
 import ServerConfig from './config/ServerConfig'
 import WebSocketConfig from './config/WebSocketConfig'
 import HttpConfig from './config/HttpConfig'
+import './class/lib/Prototype'
 
 const renderDom = async Component => {
   // console.log(Date.now())
@@ -26,4 +26,4 @@ if (module.hot) {
     const App = require('./App').default;
     renderDom(App);
   })
-} 
+}
