@@ -4,7 +4,7 @@ export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: 3,
+      userId: 232602529072947201,
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -62,7 +62,8 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async ipList() { // 获取ip白名单
-    let ipList = await this.Proxy.getIpList({"userId": this.state.userId});
+    let ipListCon = await this.Proxy.getIpList({"userId": this.state.userId});
+    let ipList = ipListCon.data
     console.log('白名单', ipList)
     this.state.ipList = ipList;
     return ipList

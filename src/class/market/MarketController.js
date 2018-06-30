@@ -133,7 +133,7 @@ export default class MarketController extends ExchangeControllerBase {
     let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
-    // console.log('图片1', imgArr[v.type], v.type)
+  
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
       homeMarketPairData: this.sort(sortArray, v.sortValue, v.type),

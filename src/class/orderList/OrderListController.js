@@ -36,4 +36,17 @@ export default class OrderListController extends ExchangeControllerBase {
       recentTradeListArr: this.store.state.recentTradeListMa
     })
   }
+
+  tradeSort(v, index) { // 近期交易排
+    let sortArray = this.store.state.recentTradeListMi,
+        tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"];
+    v.type = v.type === false ? 0 : 1
+    v.sortValue && this.view.setState({
+      recentTradeListArr: this.sort(sortArray, v.sortValue, v.type),
+      sortIndex: index,
+      tradeSortImg: tradeSortImg[v.type]
+    });
+
+    v.type = !v.type
+  }
 }

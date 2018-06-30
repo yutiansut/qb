@@ -33,8 +33,8 @@ export default class homeNotice extends exchangeViewBase {
 
   render() {
     return (
-      <div className="home-notice-wrap clearfix">
-        <div className="home-notice-content">
+      <div className="home-notice-wrap ">
+        <div className="home-notice-content clearfix">
           <p>公告</p>
           <ul>
             <li>1111</li>

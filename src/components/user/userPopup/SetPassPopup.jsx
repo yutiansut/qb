@@ -27,18 +27,23 @@ export default class SetPassPopup extends exchangeViewBase {
   }
   changeInput1(value) {
     this.setState({popupInput1: value});
+    console.log(1, value)
   }
   changeInput2(value) {
     this.setState({popupInput2: value});
+    console.log(2, value)
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
+    console.log(3, value)
   }
   changeInput4(value) {
     this.setState({popupInput4: value});
+    console.log(4, value)
   }
   changeInput5(value) {
     this.setState({popupInput5: value});
+    console.log(5, value)
   }
   render() {
     return (
@@ -65,7 +70,7 @@ export default class SetPassPopup extends exchangeViewBase {
                 <div className="clearfix pass-btn-group">
                   <Input placeholder="请输入右侧图形验证码"  value={this.state.popupInput4} onInput={value => this.changeInput4(value)}/>
                   {/*<Button title="dddd" className="picture-btn btn"/>*/}
-                  <img src={this.props.captcha || ''} alt="" className="picture-btn btn" />
+                  <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
                 </div>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>

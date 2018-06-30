@@ -247,15 +247,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>操作</th>
                   </tr>
                 </thead>
-                <tbody className={`${this.state.ipList ? '' : 'hide'}`}>
-                  {this.state.ipList && this.state.ipList.map((v, index) => (<tr key={index}>
+                <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
+                  {this.state.ipList.map((v, index) => (<tr key={index}>
                     <td>{v.catalog}</td>
                     <td>{v.ip}</td>
                     <td>删除</td>
                   </tr>))}
                 </tbody>
               </table>
-              <p className={`${this.state.ipList ? 'hide' : ''} nothing-text`}>暂无</p>
+              <p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>
               <p>
                 添加IP地址或范围后，你将无法从这个白名单之外的IP地址登录你的账户。出于安全方面的考虑，添加或删除IP地址后，你的账户将在24小时内无法提现。你可以访问mixcoins.com/ip/获得当前IP地址。
               </p>
@@ -325,6 +325,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    setFundPass = {this.setFundPass}
                    captcha = {this.state.captcha}
                    captchaId = {this.state.captchaId}
+                   getCaptcha = {this.getCaptchaVerify}
                    verifyNum = {this.state.verifyNum}/>
         <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
                            isType = {this.state.changeType}

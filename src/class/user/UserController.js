@@ -70,6 +70,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getIpList() { // 获取ip白名单
     let ipList = await this.store.ipList();
+    console.log('ip白名单', ipList)
     this.view.setState({ipList})
   }
 
@@ -105,12 +106,12 @@ export default class UserController extends ExchangeControllerBase {
     });
   }
 
-  async setLoginPass(aaa, bbbb) { // 设置登录密码
+  async setLoginPass(newpwd, againpwd) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.state.userId,
       "type": 0,// 0:设置密码 （不用传old_pass） 1:修改密码
-      "oldPass": aaa,
-      "newPass": bbbb
+      "oldPass": newpwd,
+      "newPass": againpwd
     })
     console.log('设置密码', result)
   }
@@ -146,7 +147,6 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.getCaptcha()
-    console.log('获取图形验证码', captcha )
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
 
