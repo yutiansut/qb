@@ -24,8 +24,8 @@ const renderDom = async Component => {
 renderDom(App);
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
+  module.hot.accept('./App', async () => {
     const App = require('./App').default;
-    renderDom(App);
+    await renderDom(App);
   })
 }

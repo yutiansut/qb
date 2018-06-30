@@ -4,7 +4,7 @@ import en from "../../lang/en.js";
 import zh from "../../lang/zh.js";
 // locale data
 
-console.log('config')
+
 import ConfigStore from './ConfigStore'
 
 export default class ConfigController extends ExchangeControllerBase {

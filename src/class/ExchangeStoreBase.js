@@ -33,7 +33,7 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config){
-    console.log("res.result.ret", res.result.ret);
+    // console.log("res.result.ret", res.result.ret);
 
     if (res.result.ret !== 0){
       res.result =  Msg[res.result.ret]
@@ -59,7 +59,7 @@ export default class ExchangeStoreBase extends StoreBase {
     // console.log('connectName, modelName', connectName, modelName, websocket)
     websocket.onMessage = data => {
       // let header = websocket.config.optionList[modelName]
-      console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
+      // console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
       // if(headerConfig.seq === data.seq)
       opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](data.body)
     }

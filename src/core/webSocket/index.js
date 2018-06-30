@@ -22,11 +22,11 @@ const WEB_SOCKET = {
         if (params) (url += `?`) && Object.keys(params).forEach((key, index) => (url += `${key}=${params[key]}`) && Object.keys(params).length - 1 !== index && (url += '&'))
         let size = v.size || 1
         let webSocketPool = WebSocketPool()
-        webSocketPool.onOpen = event => WEB_SOCKET[v.name].WebSocketHasStart = true
+        // webSocketPool.onOpen = event => WEB_SOCKET[v.name].WebSocketHasStart = true
+        webSocketPool.hasStart = false
         await webSocketPool.start(url, size)
         MessageHandler.install(webSocketPool, v)
       }
-      WEB_SOCKET[v.name].WebSocketHasStart = false//状态检查是否连接启动，如果未连接则查找时返回null
     })
   },
 }

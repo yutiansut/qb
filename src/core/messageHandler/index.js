@@ -52,8 +52,13 @@ async function messageHandler() {
          */
         //op1,3代表握手和心跳，对此不做处理
         // console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
-        if(pool.RECEIVE_QUENE[0].op === 1 || pool.RECEIVE_QUENE[0].op === 3){
-          console.log('无用包')
+        if(pool.RECEIVE_QUENE[0].op === 1){
+          pool.hasStart = true
+          pool.RECEIVE_QUENE.shift()
+          return
+        }
+        if(pool.RECEIVE_QUENE[0].op === 3){
+          // console.log('无用包')
           pool.RECEIVE_QUENE.shift()
           return
         }
@@ -88,7 +93,7 @@ const MESSAGE_HANDLER = {
    * @param webSocketList
    */
   install(pool, config) {
-    console.log('install Websocket to messageHandler')
+    // console.log('install Websocket to messageHandler')
     PoolDic[config.name] = pool;
     pool.EMIT_QUENE = [];
     pool.RECEIVE_QUENE = [];
@@ -103,7 +108,7 @@ const MESSAGE_HANDLER = {
     MESSAGE_HANDLER[config.name].send = data => pool.EMIT_QUENE.push(data)
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
     MESSAGE_HANDLER[config.name].onMessage = data => data && console.log(data)
-    MESSAGE_HANDLER[config.name].get = () => MESSAGE_HANDLER[config.name].WebSocketHasStart && PoolDic[config.name] || null//获取当前链接
+    MESSAGE_HANDLER[config.name].get = () => PoolDic[config.name].hasStart && PoolDic[config.name] || null//获取当前链接
   },
   getAll: () => PoolDic
 }

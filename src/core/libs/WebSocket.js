@@ -27,7 +27,7 @@ export default function () {
     webSocket.onopen = event => onOpen(pool, event)
 
     function onOpen(pool, event) {
-      console.log('webSocket开启', event.target.url)
+      // console.log('webSocket开启', event.target.url)
       connects.push(webSocket)
       poolSize = connects.length;
       pool.onOpen && pool.onOpen(event)

@@ -107,38 +107,38 @@ export default class MarketStore extends ExchangeStoreBase {
       ],
       recommendData: [
         {
-          'coinName': 'BTC',
-          "priceCN": 1022.22,
-          "priceEN": 1021.22,
-          "rise": 0.3,
+          coinName: 'BTC',
+          priceCN: 1022.22,
+          priceEN: 1021.22,
+          rise: 0.3,
 
         },
         {
-          'coinName': 'USD',
-          "priceCN": 1022.22,
-          "priceEN": 1021.22,
-          "rise": -0.12,
+          coinName: 'USD',
+          priceCN: 1022.22,
+          priceEN: 1021.22,
+          rise: -0.12,
 
         },
         {
-          'coinName': 'EYH',
-          "priceCN": 1022.22,
-          "priceEN": 1021.22,
-          "rise": -0.12,
+          coinName: 'EYH',
+          priceCN: 1022.22,
+          priceEN: 1021.22,
+          rise: -0.12,
 
         },
         {
-          'coinName': 'ETH',
-          "priceCN": 1022.22,
-          "priceEN": 1021.22,
-          "rise": -0.12,
+          coinName: 'ETH',
+          priceCN: 1022.22,
+          priceEN: 1021.22,
+          rise: -0.12,
 
         },
         {
-          'coinName': 'USDT',
-          "priceCN": 1022.22,
-          "priceEN": 1021.22,
-          "rise": -0.12,
+          coinName: 'USDT',
+          priceCN: 1022.22,
+          priceEN: 1021.22,
+          rise: -0.12,
         }
       ],
       // recommendData: {
