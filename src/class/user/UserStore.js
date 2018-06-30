@@ -1,10 +1,11 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
+// import JsonBig from "json-bigint"
 
 export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: 232602529072947201,
+      userId: JSON.parse("232602529072947201"),
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -71,10 +72,10 @@ export default class UserStore extends ExchangeStoreBase {
 
   async userCredits() { // 获取用户积分
     let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.state.userId, "page":0, "pageSize":10});
-    let userCredits = userCreditsCon.list
+    let userCredits = userCreditsCon.list ? userCreditsCon.list : []
     console.log('积分', userCredits)
-    if(userCredits.errCode)
-      userCredits = []
+    // if(userCredits.errCode)
+    //   userCredits = []
     this.state.userCredits = userCredits;
     return userCredits
   }

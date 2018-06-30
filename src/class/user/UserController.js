@@ -106,13 +106,14 @@ export default class UserController extends ExchangeControllerBase {
     });
   }
 
-  async setLoginPass(newpwd, againpwd) { // 设置登录密码
+  async setLoginPass(newpwd, againpwd, type) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.state.userId,
-      "type": 0,// 0:设置密码 （不用传old_pass） 1:修改密码
+      "type": type,// 0:设置密码 （不用传old_pass） 1:修改密码
       "oldPass": newpwd,
       "newPass": againpwd
     })
+    this.view.setState({popupInputErr2: result.msg})
     console.log('设置密码', result)
   }
 
@@ -128,20 +129,23 @@ export default class UserController extends ExchangeControllerBase {
     console.log('设置密码', result)
   }
 
-  async addIp() { // 添加ip白名单
+  async addIp(ipAdd) { // 添加ip白名单
+    if (this.view.state.ipValue === '') return
     let result = await this.store.Proxy.addIp({
       "userId": this.store.state.userId,
-      "IPAddress":"1.1.1.1"
+      "IPAddress":ipAdd
     })
+    !result && this.view.setState({remindPopup: true})
     console.log('添加ip', result)
   }
 
-  async delIp() { // 删除ip白名单
+  async delIp(ipId, iPAdd) { // 删除ip白名单
     let result = await this.store.Proxy.deletIp({
       "userId": this.store.state.userId,
-      "IPId":0,
-      "IPAddress":10
+      "IPId": ipId,
+      "IPAddress": iPAdd
     })
+    !result && this.view.setState({remindPopup: true})
     console.log('删除ip', result)
   }
 
@@ -157,6 +161,13 @@ export default class UserController extends ExchangeControllerBase {
       fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
     return {fundPassVerify, loginVerify, withdrawVerify, fundPwd}
+  }
+
+  get userAuthVerify() { // 提供用户是否实名
+    let {  // 0：未认证 1：已通过  2：认证失败 3：认证中
+      state
+    } = this.store.state.userAuth
+    return {state}
   }
 
   get userToken() { // 提供用户token

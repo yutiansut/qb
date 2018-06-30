@@ -21,7 +21,7 @@ export default class SetPassPopup extends exchangeViewBase {
       popupInput2: "",
       popupInput3: "",
       popupInput4: "",
-      popupInput5: ""
+      popupInput5: "",
     }
     this.changeInput1 = this.changeInput1.bind(this)
   }
@@ -32,6 +32,7 @@ export default class SetPassPopup extends exchangeViewBase {
   changeInput2(value) {
     this.setState({popupInput2: value});
     console.log(2, value)
+    this.props.popupInputErr2 && (this.props.clearErr2())
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
@@ -55,11 +56,12 @@ export default class SetPassPopup extends exchangeViewBase {
             <ul>
               <li className={this.props.isType === 4 ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitleNew}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew} value={this.state.popupInput1} onInput={value => this.props.changeInput1(value)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle}</p>
                 <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput} value={this.state.popupInput2} onInput={value => this.changeInput2(value)}/>
+                <em>{this.props.popupInputErr2}</em>
               </li>
               <li className={[3, 4, 5].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle2}</p>
@@ -93,8 +95,8 @@ export default class SetPassPopup extends exchangeViewBase {
                         {/*onClick={() => {(this.props.isType == 3 && this.props.setLoginPass(this.state.popupInput2, this.state.popupInput3)) || (this.props.isType == 5 && this.props.setFundPass(this.state.popupInput1, this.state.popupInput3))}}/>*/}
                 {this.props.isType === 1 && <Button className="set-btn btn" title="绑定"/>}
                 {this.props.isType === 2 && <Button className="set-btn btn" title="绑定"/>}
-                {this.props.isType === 3 && <Button className="set-btn btn" title="设置" onClick={() => this.props.setLoginPass(this.state.popupInput2, this.state.popupInput3)}/>}
-                {this.props.isType === 4 && <Button className="set-btn btn" title="修改"/>}
+                {this.props.isType === 3 && <Button className="set-btn btn" title="设置" onClick={() => this.props.setLoginPass(this.state.popupInput2, '', 0)}/>}
+                {this.props.isType === 4 && <Button className="set-btn btn" title="修改" onClick={() => this.props.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
                 {this.props.isType === 5 && <Button className="set-btn btn" title="保存"/>}
               </li>
             </ul>

@@ -70,7 +70,7 @@ export default class userIntegration extends exchangeViewBase {
             </ul>
             <div className="progress-line">
               <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userInfo.credits} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userInfo.credits}</span>
-              <p style={{width: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userInfo.credits} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
+              <p style={{width: `this.state.userInfo.credits ? 0 : calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userInfo.credits} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
             </div>
           </div>
         </div>

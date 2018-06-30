@@ -8,6 +8,7 @@ import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
 import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
+import JsonBig from "json-bigint";
 // import VerifyPopup from '../../viewsPopup/TwoVerifyPopup.jsx'
 
 let noticeList = [
@@ -34,6 +35,9 @@ export default class userSafeCenter extends exchangeViewBase {
         {title: '提现验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]},
         {title: '修改资金密码验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]}
       ],
+      remindPopup: false,
+      ipValue: '',
+      popupInputErr2:"",
     }
 
     const {controller} = props
@@ -114,6 +118,14 @@ export default class userSafeCenter extends exchangeViewBase {
       showSet: !this.state.userInfo.email && index === 0 ? 'block' : 'none'
     })
   }
+
+  ipInput(value) { // 输入白名单
+    this.setState({
+      ipValue: value
+    })
+    console.log(this.state.ipValue)
+  }
+
   componentWillMount() {
 
   }
@@ -126,9 +138,9 @@ export default class userSafeCenter extends exchangeViewBase {
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
-    verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
-    verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
-    verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
+    // verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
+    // verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
+    // verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
     verifyList.forEach((v, i) => { // 两步验证未绑定邮箱时
       v.contentList[1].name = this.state.userInfo.email ? '邮箱' : '绑定／验证邮箱后开启'
     })
@@ -144,7 +156,11 @@ export default class userSafeCenter extends exchangeViewBase {
   componentWillUpdate(props, state, next) {
 
   }
-
+  clearErr2() {
+    this.setState({
+      popupInputErr2: ''
+    })
+  }
 
   render() {
     console.log('用户信息111', this.state)
@@ -155,7 +171,7 @@ export default class userSafeCenter extends exchangeViewBase {
           <h2>基本资料</h2>
           <ul className="fl clearfix">
             <li>用户ID</li>
-            <li>{this.state.userInfo.userId || ''}</li>
+            <li>{JSON.stringify(this.state.userInfo.userId) || ''}</li>
             <li>电子邮件</li>
             <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup('block', 1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
             <li>手机号</li>
@@ -171,11 +187,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>登录密码</li>
-              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 4) : this.changeSetPopup('block', 3)}>{this.state.userInfo.loginPwd && '修改' || '设置'}</li>
+              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 3) : this.changeSetPopup('block', 4)}>{this.state.userInfo.loginPwd && '设置' || '修改'}</li>
             </ol>
             <ul className="clearfix">
               <li>资金密码</li>
-              <li onClick = {state => this.changeSetPopup('block', 5)}>{!this.state.userInfo.fundPwd && '修改' || '设置'}</li>
+              <li onClick = {state => this.changeSetPopup('block', 5)}>{this.state.userInfo.fundPwd && '设置' || '修改'}</li>
               <li>设置了资金密码后，提币和提现时均需要输入，账户更安全。</li>
             </ul>
           </div>
@@ -201,8 +217,6 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl time-ul">
               <li>时区</li>
               <li className="clearfix">
-                {/*<input type="text" placeholder="时区"/>*/}
-                {/*<Select title="全部" type="main" className="select" valueArr={["全部", "通过", "未通过","审核中"]} />*/}
                 <Input
                   type="select"
                   readOnly={true}
@@ -234,9 +248,8 @@ export default class userSafeCenter extends exchangeViewBase {
             <div className="fl">
               <b>注：请勿添加IP会变动的网络至IP白名单（如：拨号上网）以免影响您的正常使用。</b>
               <div className="clearfix">
-                <Input placeholder="IP地址"/>
-                {/*<input type="text" placeholder="IP地址"/>*/}
-                <Button title="添加" className="name-btn" onClick={this.addIp}/>
+                <Input placeholder="IP地址"  onInput={value => {this.ipInput(value)}}/>
+                <Button title="添加" className="name-btn" onClick={() => this.addIp(this.state.ipValue)}/>
               </div>
               <span>例如：216.58.197.238或104.244.42.0/24</span>
               <table>
@@ -249,9 +262,9 @@ export default class userSafeCenter extends exchangeViewBase {
                 </thead>
                 <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
                   {this.state.ipList.map((v, index) => (<tr key={index}>
-                    <td>{v.catalog}</td>
-                    <td>{v.ip}</td>
-                    <td>删除</td>
+                    <td>{v.IPAddress}</td>
+                    <td>{v.createAt}</td>
+                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>删除</td>
                   </tr>))}
                 </tbody>
               </table>
@@ -326,13 +339,19 @@ export default class userSafeCenter extends exchangeViewBase {
                    captcha = {this.state.captcha}
                    captchaId = {this.state.captchaId}
                    getCaptcha = {this.getCaptchaVerify}
-                   verifyNum = {this.state.verifyNum}/>
+                   verifyNum = {this.state.verifyNum}
+                   clearErr2 = {() => {this.clearErr2()}}
+                   popupInputErr2 = {this.state.popupInputErr2}/>
         <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
                            isType = {this.state.changeType}
                            getVerify = {this.getVerify}
                            verifyNum = {this.state.verifyNum}
                            isChange = {this.state.showChange}/>
-        {/*<RemindPopup />*/}
+        {this.state.remindPopup && <RemindPopup
+                     type="tip1"
+                     msg="添加成功"
+                     autoClose = {true}
+                     onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }
