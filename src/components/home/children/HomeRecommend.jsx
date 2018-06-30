@@ -12,11 +12,11 @@ export default class HomeRecommend extends ExchangeViewBase{
     this.state = Object.assign(this.state, controller.initState);
     // console.log(this.state)
     //绑定方法
-    // this.recommendDataHandle = controller.recommendDataHandle.bind(controller);
+    // this.updateRecommend = controller.updateRecommend.bind(controller);
     // this.getData = controller.getData.bind(controller)
   }
   componentDidMount(){
-    // this.recommendDataHandle();
+
   }
 
   render(){
@@ -25,10 +25,10 @@ export default class HomeRecommend extends ExchangeViewBase{
         <ul className="clearfix">
           {this.state.recommendData.map((v, index) => {return(
             <li className='home-recommend-pair' key={index}>
-              <span>{v.coin_name}</span>
+              <span>{v.coinName}</span>
               <p>
-                <b>{v.coin_data.price}</b>
-                <i className={`${v.coin_data.rise > 0 ? 'up-i' : 'down-i'}`}>{v.coin_data.rise}</i>
+                <b>{v.priceCN.toFixed(2)}</b>
+                <i className={`${v.rise > 0 ? 'up-i' : 'down-i'}`}>{v.rise}</i>
               </p>
             </li>
           )})}

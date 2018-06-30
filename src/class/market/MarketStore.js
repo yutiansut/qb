@@ -1,8 +1,8 @@
 import ExchangeStoreBase from "../ExchangeStoreBase";
 
 export default class MarketStore extends ExchangeStoreBase {
-  constructor() {
-    super('market', 'general');
+  constructor(name) {
+  super('market', 'general');
     this.state = {
       allPairData: [
         {
@@ -107,49 +107,38 @@ export default class MarketStore extends ExchangeStoreBase {
       ],
       recommendData: [
         {
-          coin_name: "BTC",
-          coin_data: {
-            price: 1023.22,
-            priceCN: 1022.22,
-            priceEN: 1021.22,
-            rise: 0.3
-          }
+          'coinName': 'BTC',
+          "priceCN": 1022.22,
+          "priceEN": 1021.22,
+          "rise": 0.3,
+
         },
         {
-          coin_name: "USD",
-          coin_data: {
-            price: 1023.22,
-            priceCN: 1022.22,
-            priceEN: 1021.22,
-            rise: -0.12
-          }
+          'coinName': 'USD',
+          "priceCN": 1022.22,
+          "priceEN": 1021.22,
+          "rise": -0.12,
+
         },
         {
-          coin_name: "EYH",
-          coin_data: {
-            price: 1023.22,
-            priceCN: 1022.22,
-            priceEN: 1021.22,
-            rise: -0.12
-          }
+          'coinName': 'EYH',
+          "priceCN": 1022.22,
+          "priceEN": 1021.22,
+          "rise": -0.12,
+
         },
         {
-          coin_name: "ETH",
-          coin_data: {
-            price: 1023.22,
-            priceCN: 1022.22,
-            priceEN: 1021.22,
-            rise: -0.12
-          }
+          'coinName': 'ETH',
+          "priceCN": 1022.22,
+          "priceEN": 1021.22,
+          "rise": -0.12,
+
         },
         {
-          coin_name: "USDT",
-          coin_data: {
-            price: 1023.22,
-            priceCN: 1022.22,
-            priceEN: 1021.22,
-            rise: -0.12
-          }
+          'coinName': 'USDT',
+          "priceCN": 1022.22,
+          "priceEN": 1021.22,
+          "rise": -0.12,
         }
       ],
       // recommendData: {
@@ -203,18 +192,24 @@ export default class MarketStore extends ExchangeStoreBase {
         }
       }
     };
-    this.getWebSocketData()
+    if(name === 'recommend'){
+      // console.log('bbb', name)
+      this.getWebSocketData()
+    }
   }
+
   setController(ctl) {
     this.controller = ctl
   }
 
   getWebSocketData() {
-    // console.log('getData', this.WebSocket)
+    console.log('getData', this.WebSocket)
     // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
-    // this.WebSocket.general.on('recommendCurrency', data=>{
-    //   console.log('getWebSocketData', data)
-    // })
+    this.WebSocket.general.on('recommendCurrency', data => {
+      console.log('getWebSocketData', data, this.controller)
+      this.controller.updateRecommend(data.data)
+      this.recommendData = data.data
+    })
   }
   async getCoinInfo(){
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});

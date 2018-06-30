@@ -2,9 +2,9 @@ import ExchangeControllerBase from '../ExchangeControllerBase'
 import MarketStore from './MarketStore'
 
 export default class MarketController extends ExchangeControllerBase {
-  constructor() {
+  constructor(name) {
     super('market');
-    this.store = new MarketStore();
+    this.store = new MarketStore(name);
     this.store.setController(this)
   }
 
@@ -25,8 +25,12 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({ coinInfo: this.store.state.coinInfo});
   }
 
-  //连接websocket
-
+  //更新recommend数据
+  updateRecommend(data) {
+    this.view.setState({
+      recommendData: data
+    })
+  }
 
   // 推荐交易对处理
   // recommendDataHandle() {
@@ -67,6 +71,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.homeMarketPairData = homeMarketPairData;
     this.tradePairSelect(homeMarketPairData);
   }
+
   // 点击收藏
   collectMarket() {
     this.view.setState({
@@ -97,7 +102,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.allPairData.map(v => homeMarket.push(v.market_name));
     let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
     homeMarketPair.forEach(v => {
-     let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? true : false}
+      let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? true : false}
       v = Object.assign(v, aaa);
     })
     this.view.setState({
@@ -133,7 +138,7 @@ export default class MarketController extends ExchangeControllerBase {
     let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
-  
+
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
       homeMarketPairData: this.sort(sortArray, v.sortValue, v.type),
@@ -143,6 +148,7 @@ export default class MarketController extends ExchangeControllerBase {
     });
     v.type = !v.type
   }
+
   // 筛选功能
   filte(arr, value) {
     let result = this.filter(arr, item => {
@@ -156,9 +162,10 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log('筛选', result, value)
     return result;
   }
+
   // 点击收藏筛选数组
-  getCollectArr () {
-    let collectIdArr = [1,2,3], concatArr = [], collectArr = [];
+  getCollectArr() {
+    let collectIdArr = [1, 2, 3], concatArr = [], collectArr = [];
     // console.log('收藏数组', this.store.state.allPairData)
     // arr.concat(arr2,arr3)
     this.store.state.allPairData.map(v => {
@@ -175,17 +182,18 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   //为交易模块提供价格以及交易对的信息
-  setDealMsg(){
+  setDealMsg() {
     //改变deal模块中的信息
-    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.trade_pair === this.store.state.tradePair),dealMsg = {
-          tradePair: this.store.state.tradePair,
-          coinIcon: tradePairMsg[0].coinIcon,
-          prices:{
-            price: tradePairMsg[0].price,
-            priceCN: tradePairMsg[0].priceCN,
-            priceEN: tradePairMsg[0].priceEN,
-          }
-        };
+    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.trade_pair === this.store.state.tradePair),
+      dealMsg = {
+        tradePair: this.store.state.tradePair,
+        coinIcon: tradePairMsg[0].coinIcon,
+        prices: {
+          price: tradePairMsg[0].price,
+          priceCN: tradePairMsg[0].priceCN,
+          priceEN: tradePairMsg[0].priceEN,
+        }
+      };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
   }

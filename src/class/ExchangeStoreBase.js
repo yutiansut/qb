@@ -2,7 +2,7 @@ import StoreBase from '../core/StoreBase'
 import Msg from "../config/ErrCodeConfig";
 
 const WebsocketCallBackList = {}
-let opConfig = {}
+
 
 export default class ExchangeStoreBase extends StoreBase {
   constructor(modelName, connectName) {
@@ -52,14 +52,16 @@ export default class ExchangeStoreBase extends StoreBase {
     if(!websocket)
       return
     let headerConfig = websocket.config.optionList[modelName]
+    let opConfig = {}
     headerConfig && Object.keys(headerConfig).forEach(v=>{
       opConfig[headerConfig[v].op] = v
     })
     // console.log('connectName, modelName', connectName, modelName, websocket)
     websocket.onMessage = data => {
-      let header = websocket.config.optionList[modelName]
+      // let header = websocket.config.optionList[modelName]
       console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
-      WebsocketCallBackList[opConfig[data.op]](data.data)
+      // if(headerConfig.seq === data.seq)
+      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](data.body)
     }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
@@ -71,7 +73,6 @@ export default class ExchangeStoreBase extends StoreBase {
       websocket.send(emitData)
     }
     this.WebSocket[connectName].on = (key, func) => {
-      let header = websocket.config.optionList[modelName][key]
       WebsocketCallBackList[key] = func
       // console.log(WebsocketCallBackList)
     }

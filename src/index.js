@@ -7,6 +7,8 @@ import WebSocketConfig from './config/WebSocketConfig'
 import HttpConfig from './config/HttpConfig'
 import './class/lib/Prototype'
 
+
+
 const renderDom = async Component => {
   // console.log(Date.now())
   await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig})
