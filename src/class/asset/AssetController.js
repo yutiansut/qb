@@ -15,16 +15,13 @@ export default class AssetController extends ExchangeControllerBase {
   get configData() {
     return this.configController.initState;
   }
-  async wallet() {
-    if (this.store.state.wallet.length === 0)
-      await this.store.getTotalAsset();
-    return this.store.state.wallet
+  // 获取对应市场下的交易对信息（调用market的api）
+  async getTradePair(coin){
+    // await this.marketController.tradePair(coin);
+    this.view.setState({
+      tradePair: [{ name: "BTC/USDT", id: 1 }]
+    });
   }
-  async walletList() {
-    this.store.state.walletList.length === 0 && await this.store.getChargeAddress();
-    return this.store.state.walletList;
-  }
-
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
@@ -49,6 +46,7 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取所有币种
   async getWalletList() {
+    console.log(this.store.state.walletList["BTC"]);
     this.store.state.walletList['BTC'] === undefined && await this.store.getWalletList();
     this.view.setState({
       walletList: this.store.state.walletList
@@ -61,8 +59,6 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-  async getCurrencyList() { }
-
 
   // 获取充币地址(over)
   async getCoinAddress(coin) {
@@ -72,8 +68,8 @@ export default class AssetController extends ExchangeControllerBase {
     });
   }
   // 获取充提记录
-  async getHistory() {
-    await this.store.getHistory();
+  async getHistory(obj) {
+    await this.store.getHistory(obj);
     this.view.setState({
       assetHistory: this.store.state.assetHistory
     })

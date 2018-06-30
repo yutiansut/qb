@@ -67,7 +67,6 @@ export default class Popup extends React.Component {
       icon,
       className
     } = this.props;
-    console.log(icon);
     (!icon || (!["succeed", "warning", "wrong", "message"].includes(icon))) && (icon = 'succeed');
     (!type ||
       ![
@@ -84,11 +83,12 @@ export default class Popup extends React.Component {
     ["tip1", "tip2", "tip3", "tip4"].includes(type) &&
       (title = this.tipType(type).title);
     return (
-      <div className="wrap">
+      <div className={`wrap ${["tip1", "tip2", "tip3", "tip4"].includes(type) ? 'trans' : ''}`}>
         <div
-          className={`popup ${type} ${className ? className: ''}`}
+          className={`base-popup ${type} ${className ? className: ''}`}
           onClick={e => {
             e.nativeEvent.stopImmediatePropagation();
+            ["tip1", "tip2", "tip3", "tip4"].includes(type) && onClose()
           }}
         >
           {["tip1", "tip2", "tip3", "tip4"].includes(type) && (

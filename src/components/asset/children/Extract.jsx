@@ -48,9 +48,8 @@ export default class Extract extends exchangeViewBase {
 
     //绑定方法
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
-
     this.getExtract = controller.getExtract.bind(controller);
-    this.getCurrencyList = controller.getCurrencyList.bind(controller);
+    this.getWalletList = controller.getWalletList.bind(controller);
     this.getHistory = controller.getHistory.bind(controller);
     this.appendAddress = controller.appendAddress.bind(controller);
     this.deletAddress = controller.deletAddress.bind(controller);
@@ -64,10 +63,10 @@ export default class Extract extends exchangeViewBase {
     let currency =
       this.props.location.query && this.props.location.query.currency;
       currency && this.setState({ currency: currency, value: currency });
-    await this.getCurrencyList();
+    await this.getWalletList();
     await this.getCurrencyAmount()
     await this.getExtract();
-    await this.getHistory();
+    await this.getHistory({ page: 0, orderType: 1, pageSize: 10 });
   }
 
   componentDidMount() { }
@@ -304,8 +303,12 @@ export default class Extract extends exchangeViewBase {
               pageSize={10}
               showTotal={true}
               onChange={page => {
-                this.setState({ page });
-                this.getHistory()
+                this.setState({
+                  page: page - 1,
+                  orderType: 0,
+                  pageSize: 10
+                });
+                this.getHistory(page);
               }}
               showQuickJumper={true}
               currentPage={this.state.page}

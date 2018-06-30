@@ -27,7 +27,7 @@ export default class History extends exchangeViewBase {
   }
   async componentWillMount() {
     await this.getWalletList();
-    await this.getHistory();
+    await this.getHistory({});
   }
 
   componentDidMount() {}
@@ -162,7 +162,7 @@ export default class History extends exchangeViewBase {
           showTotal={true}
           onChange={page => {
             this.setState({ page });
-            this.getHistory();
+            this.getHistory(page);
           }}
           showQuickJumper={true}
           currentPage={this.state.page}

@@ -2,9 +2,15 @@ import JsonBig from 'json-bigint'
 
 JSON.stringify = (...parmas)=>{
   // console.log("修改JSON.stringify", ...parmas);
+<<<<<<< HEAD
   // let res =
   // console.log("修改JSON.stringify结果", res);
   return JsonBig.stringify(...parmas)
+=======
+  let res =  JsonBig.stringify(...parmas)
+  // console.log("修改JSON.stringify结果", res);
+  return res;
+>>>>>>> 提示弹窗样式修改，资产账户余额页，充币页接口调试
 }
 
 JSON.parse = (...parmas)=>{

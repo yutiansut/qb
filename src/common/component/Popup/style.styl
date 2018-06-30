@@ -7,18 +7,18 @@
   width 100%
   height 100%
   background-color $popup-bg-color
-  p
-    text-align center
-  .popup
+  &.trans
+    background-color transparent
+  .base-popup
     box-sizing()
-    position absolute
-    top 50%
-    left 50%
-    transform translateX(-50%) translateY(-50%)
-    -ms-transform translateX(-50%) translateY(-50%)
-    -moz-transform translateX(-50%) translateY(-50%)
-    -webkit-transform translateX(-50%) translateY(-50%)
-    -o-transform translateX(-50%) translateY(-50%)
+    position fixed
+    right 50%
+    bottom 50%
+    transform translateX(50%) translateY(50%)
+    -ms-transform translateX(50%) translateY(50%)
+    -moz-transform translateX(50%) translateY(50%)
+    -webkit-transform translateX(50%) translateY(50%)
+    -o-transform translateX(50%) translateY(50%)
     background $normal-white-color
     border 0.01rem solid #D3DCE6;
     box-shadow 0 0.02rem 0.04rem 0 rgba(0,0,0,0.12), 0 0 0.06rem 0 rgba(0,0,0,0.04)
@@ -66,10 +66,15 @@
         color $dark-font-color
         letter-spacing 0
         line-height 0.21rem
-    &.tip1,&.tip2,&.tip3,&.tip4,
-      position relative
+    &.tip1,&.tip2,&.tip3,&.tip4
+      right 0
+      bottom 0
+      transform translateX(0%) translateY(0%)
+      -ms-transform translateX(0%) translateY(0%)
+      -moz-transform translateX(0%) translateY(0%)
+      -webkit-transform translateX(0%) translateY(0%)
+      -o-transform translateX(0%) translateY(0%)
       width 3.3rem
-      padding 0.2rem
       padding 0.2rem 0.2rem 0.2rem 0.74rem
       h5
         margin-bottom 0.1rem
@@ -81,6 +86,7 @@
         height 0.4rem
       p
         font-size 0.14rem
+        text-align left
         color $dark-font-color
         letter-spacing 0
         line-height 0.21rem
@@ -93,8 +99,6 @@
         float right
         width 0.12rem
         height 0.12rem
-        width 0.4rem
-        height 0.4rem
         cursor pointer
         &.hide
           display none

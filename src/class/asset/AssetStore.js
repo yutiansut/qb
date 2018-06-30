@@ -122,7 +122,6 @@ export default class AssetStore extends ExchangeStoreBase {
       },
       //充币地址
       coinAddress: {
-        coinName: "BTC", //币种
         coinId: 0, //币种ID
         verifyNumer: 5, //最大确认数
         coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
@@ -133,7 +132,7 @@ export default class AssetStore extends ExchangeStoreBase {
       // extractHistory: {},
       //资产记录
       assetHistory: {
-        total: 100,
+        total: 0,
         orderList: [
           {
             orderType: 0, //充0提1转2  注意:交易所内充提显示为转账
@@ -239,13 +238,13 @@ export default class AssetStore extends ExchangeStoreBase {
       totalQuota,
       availableQuota
     };
-    this.state.wallet = coinList;
-    !this.state.walletList.length &&
-      (this.state.walletList = coinList.map(v => v.coinName));
+    this.state.wallet = coinList || [];
+    this.state.walletList['BTC'] === undefined &&
+      (this.state.walletList = this.state.wallet.map(v => v.coinName));
   }
   // 获取walletList
   async getWalletList() {
-    let { coinList } = await this.Proxy.totalAsset({ userId: uid });
+    let { coinList } = await this.Proxy.totalAsset({ userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"});
     if (!this.state.walletList.length) {
       let obj = {};
       coinList.forEach(v => {
@@ -265,42 +264,36 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取充币地址
   async getChargeAddress(coin) {
-    // let aaa = await this.Proxy.chargeAddress({
-    //   userId: uid,
-    //   coinId: this.state.walletList[coin],
-    //   token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // })
-    this.state.coinAddress = await this.Proxy.chargeAddress({
+    let result = await this.Proxy.chargeAddress({
       userId: uid,
       coinId: this.state.walletList[coin],
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     });
-    // console.log(aaa)
+    result.coinAddress ? (this.state.coinAddress = result) : (this.state.coinAddress ={
+        coinId:'', //币种ID
+        verifyNumer: '', //最大确认数
+        coinAddress: "" //地址
+      });
   }
-  // async getWallet() {
-  //   // this.wallet = await getWallet
-  // }
   // 获取资产记录
-  async getHistory(page = 1) {
-    let result = await this.Proxy.history({
-      userId: uid,
-      coinId: 0,
-      coinName: "BTC",
-      orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
-      startTime: 0,
-      endTime: 0,
-      orderStatus: 0, //未通过 审核中1 通过2  撤销3
-      page: page,
-      pageSize: 10,
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    });
-    console.log('hygufghgfyhgfhfgfhg',result)
+  async getHistory(obj) {
+    let result = await this.Proxy.history(Object.assign({ userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0" }, obj))
+    // let result = await this.Proxy.history({
+    //   userId: uid,
+    //   coinId: 0,
+    //   coinName: "BTC",
+    //   orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
+    //   startTime: 0,
+    //   endTime: 0,
+    //   orderStatus: 0, //未通过 审核中1 通过2  撤销3
+    //   page: 0,
+    //   pageSize: 10,
+    //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    // });
     this.state.assetHistory.orderList = result && result.orderList;
-    page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
-    page === 0 &&
-      result.totalCount &&
-      (this.state.assetHistory.total = result.totalCount);
+    obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
+    obj.page === 0 && result.totalCount && (this.state.assetHistory.total = result.totalCount);
   }
   // 获取提币手续费和地址
   async getwalletExtract() {

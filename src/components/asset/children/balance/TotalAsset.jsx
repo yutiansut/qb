@@ -13,49 +13,35 @@ export default class TotalAsset extends exchangeViewBase {
   }
   render() {
     let { totalAsset } = this.props;
-    return (
-      <div className="total-asset clearfix">
+    return <div className="total-asset clearfix">
         <h3>{this.intl.get("asset-balance")}</h3>
         <div className="item total clearfix">
           <div className="content">
             <span>{this.intl.get("asset-totalAssets")}:</span>
             <b>{totalAsset.valuationBTC}BTC</b>
-            {this.state.unit === this.intl.get("cny") ? (
-              <span>≈ {totalAsset.valuationCN} CNY</span>
-            ) : (
-                <span>≈ {totalAsset.valuationEN} USD</span>
-              )}
+            {this.state.unit === this.intl.get("cny") ? <span>
+                ≈ {totalAsset.valuationCN} CNY
+              </span> : <span>≈ {totalAsset.valuationEN} USD</span>}
             <div className="select">
-              <SelectButton
-                type="main"
-                title={this.state.unit}
-                simple={true}
-                valueArr={[this.intl.get("cny"), this.intl.get("usd")]}
-                onSelect={item => {
+              <SelectButton type="main" title={this.state.unit} simple={true} valueArr={[this.intl.get("cny"), this.intl.get("usd")]} onSelect={item => {
                   this.setState({ unit: item });
-                }}
-              />
+                }} />
             </div>
           </div>
         </div>
         <div className="item limit">
           <span>{this.intl.get("asset-24hQuota")}:</span>
           <b>{totalAsset.totalQuota} BTC</b>
-          {totalAsset.totalQuota > 2 ? (
-            <span className="disable">
+          {totalAsset.totalQuota > 2 ? <span className="disable">
               {this.intl.get("asset-limitApply")}
-            </span>
-          ) : (
-              <NavLink to="/user/identity">
-                {this.intl.get("asset-limitApply")}
-              </NavLink>
-            )}
+            </span> : <NavLink to="/user/identity">
+              {this.intl.get("asset-limitApply")}
+            </NavLink>}
         </div>
         <div className="item used">
           <span>{this.intl.get("asset-usedAsset")}:</span>
-          <b>{totalAsset.availableQuota} BTC</b>
+          <b>{totalAsset.totalQuota - totalAsset.availableQuota} BTC</b>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
