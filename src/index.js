@@ -7,7 +7,8 @@ import WebSocketConfig from './config/WebSocketConfig'
 import HttpConfig from './config/HttpConfig'
 import './class/lib/Prototype'
 
-
+// import Crypto from './core/libs/Crypto'
+// Crypto('1234567q',JSON.parse('197102307060486144'))
 
 const renderDom = async Component => {
   // console.log(Date.now())
