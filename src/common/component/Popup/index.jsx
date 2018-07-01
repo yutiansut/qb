@@ -29,7 +29,7 @@ export default class Popup extends React.Component {
     document.addEventListener("click", this.onClose);
     if (!autoClose) return;
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.onClose, 3000);
+    this.timer = setTimeout(this.onClose, 2000);
   }
   componentWillUnmount() {
     document.removeEventListener("click", this.onClose);

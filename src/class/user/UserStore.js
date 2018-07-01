@@ -1,11 +1,11 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
 // import JsonBig from "json-bigint"
-
+// uid : 232601699242483712, 232602529072947201
 export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: JSON.parse("232602529072947201"),
+      userId: JSON.parse("232601699242483712"),
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息

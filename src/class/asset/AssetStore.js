@@ -1,7 +1,5 @@
 import ExchangeStoreBase from "../ExchangeStoreBase";
-import JsonBig from "json-bigint"
-// uid : 232601699242483712;
-let uid = JsonBig.parse("232601699242483712");
+
 export default class AssetStore extends ExchangeStoreBase {
   constructor() {
     super("asset");
@@ -117,8 +115,7 @@ export default class AssetStore extends ExchangeStoreBase {
       //提币信息
       walletExtract: {
         minerFee: 0, //矿工费
-        extractAddr: [
-        ] //提现地址
+        extractAddr: [] //提现地址
       },
       //充币地址
       coinAddress: {
@@ -178,61 +175,34 @@ export default class AssetStore extends ExchangeStoreBase {
       }
     };
   }
-  setController(ctrl){
+  setController(ctrl) {
     this.controller = ctrl;
   }
   // 获取交易对手续费
   async getFee() {
-    // this.Proxy.extractOrder({
-    //   "userId": 1,
-    //   "coinId": 0,
-    //   "coinName": "BTC",
-    //   "coinAddress": "xxxx",
-    //   "withdrawCount": 1000,
-    //   "withdrawPassword": "xxxxx",
-    //   "code": "0000",
-    //   "os": 0,
-    //   "account": "xxx",
-    //   token:
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // }).then(res=>{console.log(res)})
-    // this.Proxy.addAddress({
-    //   userId: 1,
-    //   coinId: 0,
-    //   coinName: "BTC",
-    //   addressName: "usdt-address-1",
-    //   address: "xxxxxx",
-    //   token:
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // }).then(res=>{console.log(res)});
-    // this.Proxy.delAddress({
-    //   userId: 1,
-    //   coinId: 0,
-    //   coinName: "BTC",
-    //   addressId: "xxx",
-    //   addressName: "usdt-address-1",
-    //   address: "xxxxxx",
-    //   token:
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // }).then(res => {
-    //   console.log(res);
-    // });
     this.state.pairFees = await this.Proxy.getFee({
-      userId: uid,
+      userId: this.controller.userId,
       tradePairId: 1
     });
     console.log(this.state.pairFees);
   }
+
   // 获取总资产
   async getTotalAsset() {
-    let { valuationBTC, valuationEN, valuationCN, coinList } = await this.Proxy.totalAsset({
-      userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    let {
+      valuationBTC,
+      valuationEN,
+      valuationCN,
+      coinList
+    } = await this.Proxy.totalAsset({
+      userId: this.controller.userId,
+      token:this.controller.token
     });
     let { totalQuota, availableQuota } = await this.Proxy.balance({
-      userId: uid,
+      userId: this.controller.userId,
       coinId: 0,
       coinName: "BTC",
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      token: this.controller.token
     });
     this.state.totalAsset = {
       valuationBTC,
@@ -242,12 +212,16 @@ export default class AssetStore extends ExchangeStoreBase {
       availableQuota
     };
     this.state.wallet = coinList || [];
-    this.state.walletList['BTC'] === undefined &&
+    this.state.walletList["BTC"] === undefined &&
       (this.state.walletList = this.state.wallet.map(v => v.coinName));
   }
+
   // 获取walletList
   async getWalletList() {
-    let { coinList } = await this.Proxy.totalAsset({ userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"});
+    let { coinList } = await this.Proxy.totalAsset({
+      userId: this.controller.userId,
+      token: this.controller.token
+    });
     if (!this.state.walletList.length) {
       let obj = {};
       coinList.forEach(v => {
@@ -256,34 +230,46 @@ export default class AssetStore extends ExchangeStoreBase {
       this.state.walletList = obj;
     }
   }
+
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
     this.state.currencyAmount = await this.Proxy.balance({
-        userId: uid,
-        coinId: this.state.walletList[coin],
-        coinName: coin,
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      userId: this.controller.userId,
+      coinId: this.state.walletList[coin],
+      coinName: coin,
+      token: this.controller.token
     });
   }
+
   // 获取充币地址
   async getChargeAddress(coin) {
     let result = await this.Proxy.chargeAddress({
-      userId: uid,
+      userId: this.controller.userId,
       coinId: this.state.walletList[coin],
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      token: this.controller.token
     });
-    result.coinAddress ? (this.state.coinAddress = result) : (this.state.coinAddress ={
-        coinId:'', //币种ID
-        verifyNumer: '', //最大确认数
-        coinAddress: "" //地址
-      });
+    result.coinAddress
+      ? (this.state.coinAddress = result)
+      : (this.state.coinAddress = {
+          coinId: "", //币种ID
+          verifyNumer: "", //最大确认数
+          coinAddress: "" //地址
+        });
   }
+
   // 获取资产记录
   async getHistory(obj) {
-    let result = await this.Proxy.history(Object.assign({ userId: uid, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0" }, obj))
+    let result = await this.Proxy.history(
+      Object.assign(
+        {
+          userId: this.controller.userId,
+          token: this.controller.token
+        },
+        obj
+      )
+    );
     // let result = await this.Proxy.history({
-    //   userId: uid,
+    //   userId: this.controller.userId,
     //   coinId: 0,
     //   coinName: "BTC",
     //   orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
@@ -296,64 +282,112 @@ export default class AssetStore extends ExchangeStoreBase {
     // });
     this.state.assetHistory.orderList = result && result.orderList;
     obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
-    obj.page === 0 && result.totalCount && (this.state.assetHistory.total = result.totalCount);
+    obj.page === 0 &&
+      result.totalCount &&
+      (this.state.assetHistory.total = result.totalCount);
   }
+
   // 获取提币手续费和地址
   async getwalletExtract() {
     let { minerFee } = await this.Proxy.minerFee({
       coinId: 0,
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      token: this.controller.token
     });
     this.state.walletExtract.minerFee = minerFee;
     if (this.state.walletExtract.extractAddr.length) return;
     let result = await this.Proxy.extractAddress({
-      userId: uid,
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      userId: this.controller.userId,
+      token: this.controller.token
     });
     this.state.walletExtract.extractAddr = result.addresses;
-    console.log(result.addresses);
+    // console.log(result.addresses);
+  }
+
+  // 提交提币订单
+
+  async extractOrder() {
+    let result = await  this.Proxy.extractOrder({
+      userId: this.controller.userId,
+      token: this.controller.token,
+      coinId: 0,
+      coinName: "BTC",
+      coinAddress: "hggggggg",
+      withdrawCount: 1,
+      withdrawPassword: "000000",
+      code: "123332",
+      os: 0,
+      account: "xxx",
+    })
+    console.log(result)
   }
   // 增加提现地址
-  async appendAddress({coinName, addressName, address }) {
+  async appendAddress({ coinName, addressName, address }) {
     let result = await this.Proxy.addAddress({
-      userId: uid,
+      userId: this.controller.userId,
       coinId: this.state.walletList[coinName],
       coinName: coinName,
       addressName: addressName,
       address: address,
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      token: this.controller.token
     });
-    this.state.walletExtract.extractAddr.forEach(v=>{
-      v.coinId === this.state.walletList[coinName] && v.addressList.push(
-          {
-            addressName:addressName,
-            address: address,
-            addressId: result.addressId,
-          }
-        );
+    if (result.errCode) {
+      return result;
+    }
+    let targetArr = this.state.walletExtract.extractAddr.filter(
+      v => v.coinId === this.state.walletList[coinName]
+    );
+    // console.log(targetArr)
+    //     targetArr.length && targetArr[0].addressList.push({
+    //         addressName: addressName,
+    //         address: address,
+    //         addressId: result.addressId
+    //       });
+    //     !targetArr.length && this.state.walletExtract.extractAddr.push({
+    //       "coinId": 4,
+    //       "coinName": "eth",
+    //       "minCount": 0.1,
+    //       "addressList": [
+    //         {
+    //           addressName: addressName,
+    //           address: address,
+    //           addressId: result.addressId,
+    //         }
+    //       ]
+    //     },
+    // );
+    this.state.walletExtract.extractAddr.forEach(v => {
+      v.coinId === this.state.walletList[coinName] &&
+        v.addressList.push({
+          addressName: addressName,
+          address: address,
+          addressId: result.addressId
+        });
     });
     return this.state.walletExtract;
   }
 
   // 删除提现地址
   async deletAddress({ coinName, addressId, addressName, address }) {
-    console.log(coinName, addressId, addressName, address);
+    // console.log(coinName, addressId, addressName, address);
     let result = await this.Proxy.delAddress({
-      userId: uid,
+      userId: this.controller.userId,
       coinId: this.state.walletList[coinName],
       coinName: coinName,
       addressId: addressId,
       addressName: addressName,
       address: address,
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    })
-    console.log(result);
-    // this.state.walletExtract.extractAddr.forEach(v=>{
-    //   v.coinId === this.state.walletList[coinName];
-    // });
+      token: this.controller.token
+    });
+    if (result && result.errCode) {
+      return result;
+    }
+    this.state.walletExtract.extractAddr.forEach(v => {
+      v.coinId === this.state.walletList[coinName] &&
+        (v.addressList = v.addressList.filter(
+          item => item.addressId !== addressId
+        ));
+    });
+    return this.state.walletExtract;
     // this.state.walletExtract.extractAddr = this.state.walletExtract.extractAddr.filter(
     //   item => item.address !== address
     // );

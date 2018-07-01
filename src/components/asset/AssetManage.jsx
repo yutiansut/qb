@@ -12,7 +12,7 @@ import Charge from "./children/Charge";
 import Extract from "./children/Extract";
 import History from "./children/History";
 import ChargeMessage from "./children/ChargeMessage";
-import Popup from "./components/popup";
+// import Popup from "./components/popup";
 // import Popup from "./components/popup/";
 // import SelectButton from "./components/popup/";
 
@@ -24,7 +24,7 @@ export default class AssetManage extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      showPopup: 1
+      // showPopup: 1
     }
     this.controller = props.controller;
     //绑定view
@@ -34,9 +34,9 @@ export default class AssetManage extends exchangeViewBase {
     // //绑定方法
     // this.getAssets = controller.getAssets.bind(controller)
     // this.getWallet = controller.getWallet.bind(controller)
-    this.changeVerify = (state)=>{
-      this.setState({ showPopup: state})
-    }
+    // this.changeVerify = (state)=>{
+    //   this.setState({ showPopup: state})
+    // }
   }
 
   componentWillMount() {
@@ -94,7 +94,7 @@ export default class AssetManage extends exchangeViewBase {
             <Redirect to={`${match.url}/balance`} />
           </Switch>
         </div>
-      {this.state.showPopup !== 1 && <Popup type="popup2" onClose={() => { this.setState({ showPopup : 1})}}></Popup>}
+      {/* {this.state.showPopup !== 1 && <Popup type="popup2" onClose={() => { this.setState({ showPopup : 1})}}></Popup>} */}
       </div>;
   }
 }

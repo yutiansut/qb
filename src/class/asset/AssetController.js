@@ -23,14 +23,19 @@ export default class AssetController extends ExchangeControllerBase {
       tradePair: [{ name: "BTC/USDT", id: 1 }]
     });
   }
+  get userId () {
+    return this.userController.userId
+  }
+  get token () {
+    return this.userController.userToken;
+  }
   // 获取用户的身份认证状态
   get userVerif () {
-    //this.userController.verify;
-    return 0;
+    return this.userController.userAuthVerify.state;
     // return 1;// 0：未认证 1：已通过  2：认证失败 3：认证中
   }
   get userTwoVerify () {
-    return 0;
+    return this.userController.userVerify;
     //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
   }
   // 获取总资产和额度
@@ -140,18 +145,89 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({ verifyNum: 5 });
     this.countDown("verifyCountDown", "verifyNum", this.view);
   }
+// 提现前前端验证
+beforeExtract(min){
+  let obj = {
+    orderTip: true,
+    orderTipContent: ''
+  }
+  // if (this.userVerif !== 1) {
+  //   obj.orderTipContent = "请先进行身份认证";
+  //   this.view.setState(obj)
+  //   return ;
+  // }
+  // if (this.userTwoVerify.fundPwd) {
+  //   obj.orderTipContent = "未设置资金密码，禁止提现";
+  //   this.view.setState(obj)
+  //   return;
+  // }
+  // if (this.view.state.address === '') {
+  //   obj.orderTipContent = "您未选择提现地址，不允许提交";
+  //   this.view.setState(obj)
+  //   return;
+  // }
+  // if (this.view.state.extractAmount == 0 ) {
+  //   obj.orderTipContent = "提现数量不能为0";
+  //   this.view.setState(obj)
+  //   return;
+  // }
+  // if (this.view.state.password === "") {
+  //   obj.orderTipContent = "请输入您的资金密码";
+  //   this.view.setState(obj);
+  //   return;
+  // }
+  // if (this.view.state.extractAmount < min){
+  //   obj.orderTipContent = `最小提现数量为${min}${this.view.state.currency}`;
+  //   this.view.setState(obj);
+  //   return;
+  // }
+  if (1) {
+    this.view.setState({ showTwoVerify: true });
+    return;
+  }
+  this.extractOrder()
+}
+
+//提交提币订单
+async extractOrder(){
+  let result = await this.store.extractOrder();
+}
 
   // 添加提现地址
   async appendAddress(obj) {
     let result = await this.store.appendAddress(obj);
+    if (result.errCode) {
+      this.view.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: "地址填写有误"
+      });
+      return false;
+    }
     // this.store.appendAddress({ addressName, address });
     // this.view.state.walletExtract.extractAddr.push({ addressName, address });
-    this.view.setState({ walletExtract: this.Util.deepCopy(result) });
+    this.view.setState({
+      walletExtract: this.Util.deepCopy(result),
+      tip: true,
+      tipSuccess: true,
+      tipContent: "添加成功"
+     });
+    return true;
   }
 
   //删除提现地址
   async deletAddress(obj) {
-    await this.store.deletAddress(obj);
+    let result = await this.store.deletAddress(obj);
+    if(result.errCode) {
+      this.view.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: "删除失败"
+      });
+      return false;
+    }
+    this.view.setState({ walletExtract: this.Util.deepCopy(result) });
+    if (this.view.state.address === obj.address) this.view.setState({ address: '' });
     // this.view.state.walletExtract.extractAddr = this.view.state.walletExtract.extractAddr.filter(
     //   item => item.address !== address
     // );

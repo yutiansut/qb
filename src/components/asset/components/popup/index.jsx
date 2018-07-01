@@ -12,6 +12,18 @@ export default class Popup extends exchangeViewBase {
       showInput: false,
       newAddress: []
     };
+    this.add = async (item, index) => {
+      let flag;
+      this.props.onSave && (flag = await this.props.onSave(item));
+      if(flag){
+        this.state.newAddress.splice(index, 1);
+        this.setState({
+          newAddress: this
+            .state
+            .newAddress
+        });
+      }
+     }
     //绑定方法
     // this.getData = controller.getData.bind(controller)
     // this.state = {
@@ -118,15 +130,7 @@ export default class Popup extends exchangeViewBase {
                           <Button
                             type="base"
                             title={this.intl.get('save')}
-                            onClick={() => {
-                              this.state.newAddress.splice(index, 1);
-                              this.setState({
-                                newAddress: this
-                                  .state
-                                  .newAddress
-                              });
-                              onSave && onSave(item);
-                            }}
+                            onClick={()=>{this.add(item,index)}}
                           />
                           <Button
                             title={this.intl.get('cance')}

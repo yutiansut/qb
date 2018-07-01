@@ -128,19 +128,19 @@ export default class Charge extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {totalCount} {this.state.currency}
+                    {totalCount.format({ number: "property" })} {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {frozenCount} {this.state.currency}
+                    {frozenCount.format({ number: "property" })} {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {availableCount} {this.state.currency}
+                    {availableCount.format({ number: "property" })} {this.state.currency}
                   </i>
                 </li>
               </ul>
@@ -176,15 +176,17 @@ export default class Charge extends exchangeViewBase {
               title={this.intl.get("asset-copy")}
               type="base"
               onClick={() => {
-                this.copy(this.refs.address);
+                if(address && address.coinAddress){
+                  this.copy(this.refs.address);
+                }
               }}
             />
-            <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
-              <QRCode
-                value={(address && address.coinAddress) || ""}
+            {address && address.coinAddress && <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
+               <QRCode
+                value={address.coinAddress}
                 level="M"
               />
-            </div>
+            </div>}
           </div>
         </div>
         <div className="tip clearfix">

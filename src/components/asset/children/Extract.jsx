@@ -7,38 +7,44 @@ import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
+import BasePopup from "../../../common/component/Popup";
 import "../style/extract.styl";
-const status = {
-  0: "未通过",
-  1: "审核中",
-  2: "通过",
-  3: "撤销"
-};
-
 export default class Extract extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.status = {
+      0: this.intl.get("failed"),
+      1: this.intl.get("pending"),
+      2: this.intl.get("passed"),
+      3: this.intl.get("cancel")
+    };
     this.state = {
       currency: "BTC",
       value: "BTC",
       showAddressPopup: false,
       address: "",
       extractAmount: "", //提现数量
+      password: '',
       showTwoVerify: false,
       verifyNum: "获取验证码",
-      page: 1
+      tradePair: [],
+      page: 1,
+      noSufficTip: false, // 余额不足提示
+      tip: false,
+      tipSuccess: true,
+      tipContent: "",
+      orderTip: false,
+      orderTipContent: ''
     };
     // 绑定视图，初始化数据
     let { controller } = this.props;
     controller.setView(this);
-
     let {
       walletExtract,
       walletList,
       currencyAmount,
       assetHistory
     } = controller.initState;
-
     this.state = Object.assign(this.state, {
       walletExtract,
       walletList,
@@ -47,13 +53,24 @@ export default class Extract extends exchangeViewBase {
     });
 
     //绑定方法
+    //获取市场下交易对
     this.getTradePair = controller.getTradePair.bind(controller);
+    //获取当前币种资产信息
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
+    // 获取提笔最小数量和地址
     this.getExtract = controller.getExtract.bind(controller);
+    // 获取币种列表
     this.getWalletList = controller.getWalletList.bind(controller);
+    // 获取提币信息
     this.getHistory = controller.getHistory.bind(controller);
+    // 添加提币地址
     this.appendAddress = controller.appendAddress.bind(controller);
+    // 删除提币地址
     this.deletAddress = controller.deletAddress.bind(controller);
+    // 提交提币订单前的验证
+    this.beforeExtract = controller.beforeExtract.bind(controller);
+    // 提交提币订单
+    this.extractOrder = controller.extractOrder.bind(controller);
     // 请求验证码
     this.requestCode = controller.requestCode.bind(controller);
     // 二次验证倒计时
@@ -75,7 +92,7 @@ export default class Extract extends exchangeViewBase {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      this.setState({ address : ''})
+      this.setState({ address: "", extractAmount: "" });
       this.getCurrencyAmount(nextState.currency);
     }
   }
@@ -123,19 +140,19 @@ export default class Extract extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {totalCount.format({number:'property'})} {currency}
+                    {totalCount.format({ number: "property" })} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {frozenCount.format({ number: 'property' })} {currency}
+                    {frozenCount.format({ number: "property" })} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {availableCount.format({ number: 'property' })} {currency}
+                    {availableCount.format({ number: "property" })} {currency}
                   </i>
                 </li>
               </ul>
@@ -184,17 +201,26 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{availableQuota}/{totalQuota}{" "}
-                {this.state.currency}
+                {this.intl.get("asset-24hQuota")}：{totalQuota - availableQuota}/{
+                  totalQuota
+                }{" "}
+                BTC
                 <NavLink to="/user/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
+                {this.state.noSufficTip && <span>您的可用余额不足</span>}
               </p>
               <div className="input">
                 <Input
                   placeholder={this.intl.get("asset-withdrawAmount")}
                   value={this.state.extractAmount}
                   onInput={value => {
+                    availableCount < value &&
+                      !this.state.noSufficTip &&
+                      this.setState({ noSufficTip: true });
+                    availableCount >= value &&
+                      this.state.noSufficTip &&
+                      this.setState({ noSufficTip: false });
                     this.setState({ extractAmount: value });
                   }}
                 />
@@ -216,20 +242,17 @@ export default class Extract extends exchangeViewBase {
                     {this.state.extractAmount - minerFee} {currency}
                   </span>
                 </p>
-                {/* <p className="explain">
-                  {this.intl.get("fee")}={this.intl.get("asset-gasFee")}+平台手续费{`=${minerFee}+${fee}=${minerFee -
-                    0 +
-                    (fee - 0)}`}
-                </p> */}
               </div>
             </div>
           </div>
           <div className="password clearfix">
-            <span className="title">{this.intl.get("setFund")}</span>
+            <span className="title">{this.intl.get("fundPass")}</span>
             <div className="content">
               <Input
                 oriType="password"
+                value={this.state.password}
                 placeholder={this.intl.get("asset-inputFundPassword")}
+                onInput={(value)=>{this.setState({password: value})}}
               />
               <div className="set">
                 <NavLink to="/user/safe">
@@ -239,7 +262,13 @@ export default class Extract extends exchangeViewBase {
             </div>
           </div>
           <div className="handel">
-            <Button title={this.intl.get("asset-submit")} type="base" />
+            <Button
+              title={this.intl.get("asset-submit")}
+              type="base"
+              onClick={() => {
+                this.beforeExtract(curExtract.minCount);
+              }}
+            />
           </div>
         </div>
         <div className="tip clearfix">
@@ -257,7 +286,14 @@ export default class Extract extends exchangeViewBase {
         </div>
         <div className="to-trade clearfix">
           <span className="title">{this.intl.get("asset-toTrade")}</span>
-          <Button title="EOS/BTC" type="base" />
+          {this.state.tradePair.map((v, index) => (
+            <NavLink
+              to={{ pathname: `/trade`, query: { id: v.id } }}
+              key={index}
+            >
+              <Button title={v.name} type="base" key={index} />
+            </NavLink>
+          ))}
         </div>
         <div className="history clearfix">
           <span className="title">
@@ -310,7 +346,7 @@ export default class Extract extends exchangeViewBase {
                           <td>{postAddress}</td>
                           <td>{receiveAddress}</td>
                           <td>
-                            <span>{status[orderStatus]}</span>
+                            <span>{this.status[orderStatus]}</span>
                           </td>
                           <td>{fee}</td>
                         </tr>
@@ -349,11 +385,16 @@ export default class Extract extends exchangeViewBase {
           <Popup
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
-            onSave={add => {
-              this.appendAddress(Object.assign({coinName:this.state.currency},add));
+            onSave={async add => {
+              let result = this.appendAddress(
+                Object.assign({ coinName: this.state.currency }, add)
+              );
+              return result;
             }}
             onDelete={del => {
-              this.deletAddress(Object.assign({ coinName: this.state.currency},del));
+              this.deletAddress(
+                Object.assign({ coinName: this.state.currency }, del)
+              );
             }}
             onClose={() => {
               this.setState({ showAddressPopup: false });
@@ -368,6 +409,29 @@ export default class Extract extends exchangeViewBase {
             onClose={() => {
               this.setState({ showTwoVerify: false });
             }}
+          />
+        )}
+        {this.state.tip && (
+          <BasePopup
+            type={this.state.tipSuccess ? "tip1" : "tip3"}
+            msg={this.state.tipContent}
+            onClose={() => {
+              this.setState({ tip: false });
+            }}
+            autoClose={true}
+          />
+        )}
+        {this.state.orderTip && (
+          <BasePopup
+            type="confirm"
+            msg={this.state.orderTipContent}
+            onClose={() => {
+              this.setState({ orderTip: false });
+            }}
+            onConfirm={() => {
+              this.setState({ orderTip: false });
+            }}
+            autoClose={true}
           />
         )}
       </div>
