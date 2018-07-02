@@ -8,6 +8,25 @@ import "../style/history.styl";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.staticData = {
+      orderType: {
+        0: "充币",
+        1: "转账",
+        2: "提币"
+      },
+      status: {
+        0: this.intl.get("failed"),
+        1: this.intl.get("pending"),
+        2: this.intl.get("passed"),
+        3: this.intl.get("cancel")
+      }
+    };
+    for (const k in this.staticData.orderType) {
+      this.staticData.orderType[this.staticData.orderType[k]] = Number(k);
+    }
+    for (const k in this.staticData.status) {
+      this.staticData.status[this.staticData.status[k]] = Number(k);
+    }
     this.state = {
       page: 1,
       currency: this.intl.get("all"),
@@ -27,7 +46,7 @@ export default class History extends exchangeViewBase {
     this.getHistory = controller.getHistory.bind(controller);
     this.getWalletList = controller.getWalletList.bind(controller);
 
-    this.initSearch = ()=>{
+    this.initSearch = () => {
       this.setState({
         currency: this.intl.get("all"),
         orderType: this.intl.get("all"),
@@ -35,14 +54,29 @@ export default class History extends exchangeViewBase {
         startTime: new Date() - 604800000,
         endTime: new Date() - 0
       });
-    }
+    };
+    this.search = () => {
+      let { currency, orderType, startTime, endTime, status } = this.state;
+      this.getHistory({
+        coinId: this.state.walletList[currency],
+        coinName: currency === this.intl.get("all") ? undefined :  currency.toLowerCase() ,
+        orderType:
+          orderType !== undefined && this.staticData.orderType[orderType], //充0提1转2  注意:交易所内充提显示为转账
+        startTime: startTime,
+        endTime: endTime,
+        orderStatus:
+          status !== undefined && this.staticData.status[status], //未通过 审核中1 通过2  撤销3
+        page: 0,
+        pageSize: 20
+      });
+    };
     // this.state = {
     // console.log(this.controller)
     // }
   }
   async componentWillMount() {
     await this.getWalletList();
-    await this.getHistory({ page: 0, pageSize: 20 });
+    await this.getHistory({ page: 0, pageSize: 20, startTime: this.state.startTime, endTime: this.state.endTime });
   }
 
   componentDidMount() {}
@@ -123,108 +157,106 @@ export default class History extends exchangeViewBase {
               type="base"
               title={this.intl.get("search")}
               className="search"
+              onClick={this.search}
             />
             <Button
               type="base"
               title={this.intl.get("reset")}
               className="reset"
               onClick={() => {
-                this.initSearch()
+                this.initSearch();
                 this.getHistory({ page: 0, pageSize: 20 });
               }}
             />
           </div>
         </div>
-        {this.state.assetHistory.total ? <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th className="time">{this.intl.get("time")}</th>
-                <th className="currency">{this.intl.get("asset-currency")}</th>
-                <th className="type">{this.intl.get("type")}</th>
-                <th className="cash">{this.intl.get("asset-amount2")}</th>
-                <th className="balan">{this.intl.get("asset-balan")}</th>
-                <th className="send">{this.intl.get("asset-sendAddress")}</th>
-                <th className="receive">
-                  {this.intl.get("asset-receiveAddress")}
-                </th>
-                <th className="confirm">{this.intl.get("asset-confirm")}</th>
-                <th className="state">{this.intl.get("asset-checkState")}</th>
-                <th className="fee">{this.intl.get("fee")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderList &&
-                orderList.map(
-                  (
-                    {
-                      orderTime,
-                      coinName,
-                      coinIcon,
-                      orderType,
-                      count,
-                      balance,
-                      postAddress,
-                      receiveAddress,
-                      verifyCount, //确认数
-                      doneCount, //已确认数
-                      orderStatus,
-                      fee
-                    },
-                    index
-                  ) => (
-                    <tr key={index}>
-                      <td className="time">{orderTime}</td>
-                      <td>
-                        <img src={coinIcon} alt="" />
-                        {coinName}
-                      </td>
-                      <td>
-                        {!orderType ? "充币" : orderType === 1 ? "提币" : "转账"}
-                      </td>
-                      <td className="cash red">{count}</td>
-                      <td>{balance}</td>
-                      <td className="send">{postAddress}</td>
-                      <td>{receiveAddress}</td>
-                      <td className="confirm">
-                        <a href="#">{`${doneCount}/${verifyCount}`}</a>
-                      </td>
-                      <td className="state passing">
-                        <span>
-                          {!orderStatus
-                            ? "未通过"
-                            : orderStatus === 1
-                              ? "审核中"
-                              : "通过"}
-                        </span>
-                      </td>
-                      <td className="fee">{fee}</td>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
-          <Pagination
-            total={this.state.assetHistory.total}
-            pageSize={20}
-            showTotal={true}
-            onChange={page => {
-              this.setState({ page });
-              this.getHistory({
-                page: page - 1,
-                orderType: 1,
-                pageSize: 10
-              });
-            }}
-            showQuickJumper={true}
-            currentPage={this.state.page}
-          />
-        </div>
-        :
-          <div className="kong">
-            暂无记录
+        {this.state.assetHistory.total ? (
+          <div>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th className="time">{this.intl.get("time")}</th>
+                  <th className="currency">
+                    {this.intl.get("asset-currency")}
+                  </th>
+                  <th className="type">{this.intl.get("type")}</th>
+                  <th className="cash">{this.intl.get("asset-amount2")}</th>
+                  <th className="balan">{this.intl.get("asset-balan")}</th>
+                  <th className="send">{this.intl.get("asset-sendAddress")}</th>
+                  <th className="receive">
+                    {this.intl.get("asset-receiveAddress")}
+                  </th>
+                  <th className="confirm">{this.intl.get("asset-confirm")}</th>
+                  <th className="state">{this.intl.get("asset-checkState")}</th>
+                  <th className="fee">{this.intl.get("fee")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderList &&
+                  orderList.map(
+                    (
+                      {
+                        orderTime,
+                        coinName,
+                        coinIcon,
+                        orderType,
+                        count,
+                        balance,
+                        postAddress,
+                        receiveAddress,
+                        verifyCount, //确认数
+                        doneCount, //已确认数
+                        orderStatus,
+                        fee
+                      },
+                      index
+                    ) => (
+                      <tr key={index}>
+                        <td className="time">{orderTime}</td>
+                        <td>
+                          <img src={coinIcon} alt="" />
+                          {coinName}
+                        </td>
+                        <td>
+                         {this.staticData.orderType[orderType]}
+                        </td>
+                        <td className="cash red">{count}</td>
+                        <td>{balance}</td>
+                        <td className="send">{postAddress}</td>
+                        <td>{receiveAddress}</td>
+                        <td className="confirm">
+                          <a href="#">{`${doneCount}/${verifyCount}`}</a>
+                        </td>
+                        <td className="state passing">
+                          <span>
+                              {this.staticData.status[orderStatus]}
+                          </span>
+                        </td>
+                        <td className="fee">{fee}</td>
+                      </tr>
+                    )
+                  )}
+              </tbody>
+            </table>
+            <Pagination
+              total={this.state.assetHistory.total}
+              pageSize={20}
+              showTotal={true}
+              onChange={page => {
+                this.setState({ page });
+                this.getHistory({
+                  page: page - 1,
+                  orderType: 1,
+                  pageSize: 10
+                });
+              }}
+              showQuickJumper={true}
+              currentPage={this.state.page}
+            />
           </div>
-        }
+        ) : (
+          <div className="kong">暂无记录</div>
+        )}
       </div>
     );
   }

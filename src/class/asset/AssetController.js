@@ -42,9 +42,9 @@ export default class AssetController extends ExchangeControllerBase {
     // return 1;// 0：未认证 1：已通过  2：认证失败 3：认证中
   }
   get userTwoVerify() {
-    // return this.userController.userVerify;
+    return this.userController.userVerify;
     //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信
-    return { withdrawVerify: 1 };
+    // return { withdrawVerify: 1 };
   }
   // 获取总资产和额度
   async getAssets() {
@@ -89,8 +89,8 @@ export default class AssetController extends ExchangeControllerBase {
     // this.view.setState({ wallet: data});
   }
   // 获取矿工费
-  async getMinerFee(coin) {
-    await this.store.getMinerFee(coin);
+  async getMinerFee(coin, address) {
+    await this.store.getMinerFee(coin, address);
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });
@@ -192,11 +192,6 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj)
       return;
     }
-    if (this.userTwoVerify.fundPwd) {
-      obj.orderTipContent = "未设置资金密码，禁止提现";
-      this.view.setState(obj)
-      return;
-    }
     if (this.view.state.password === "") {
       obj.orderTipContent = "请输入您的资金密码";
       this.view.setState(obj);
@@ -213,7 +208,7 @@ export default class AssetController extends ExchangeControllerBase {
     type === 3 && (obj.mode = 0);
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
-    if (result.errCode) {
+    if (result) {
       this.view.setState({
         orderTip: true,
         orderTipContent: result.msg

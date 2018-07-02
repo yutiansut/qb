@@ -88,7 +88,7 @@ export default class Extract extends exchangeViewBase {
     await this.getWalletList();
     this.getTradePair(currency || this.state.currency);
     this.getCurrencyAmount(currency || this.state.currency);
-    this.getMinerFee(currency || this.state.currency);
+    this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getExtract();
     this.getHistory({ page: 0, orderType: 1, pageSize: 10 });
   }
@@ -98,9 +98,10 @@ export default class Extract extends exchangeViewBase {
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
       this.setState({ address: "", extractAmount: "" });
+      this.getMinerFee(nextState.currency, "");
       this.getCurrencyAmount(nextState.currency);
-      this.getMinerFee(nextState.currency);
     }
+    // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -188,6 +189,7 @@ export default class Extract extends exchangeViewBase {
                   }
                   onSelect={value => {
                     this.setState({ address: value });
+                    this.getMinerFee(this.state.currency, value);
                   }}
                   value={this.state.address}
                 />
@@ -245,7 +247,7 @@ export default class Extract extends exchangeViewBase {
                   {` ${currency}`}
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
-                    {this.state.extractAmount - minerFee} {currency}
+                    {this.state.extractAmount - minerFee > 0 ? this.state.extractAmount - minerFee : 0} {currency}
                   </span>
                 </p>
               </div>

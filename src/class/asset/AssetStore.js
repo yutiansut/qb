@@ -278,12 +278,13 @@ export default class AssetStore extends ExchangeStoreBase {
       result.totalCount &&
       (this.state.assetHistory.total = result.totalCount);
   }
-  async getMinerFee(coin) {
-    let { minerFee } = await this.Proxy.minerFee({
+  async getMinerFee(coin, address) {
+    let result = await this.Proxy.minerFee({
       coinId: this.state.walletList[coin],
+      coinAddr: address,
       token: this.controller.token
     });
-    this.state.walletExtract.minerFee = minerFee;
+    this.state.walletExtract.minerFee = result.minerFee;
   }
   // 获取提币地址信息
   async getwalletExtract() {
@@ -302,12 +303,13 @@ export default class AssetStore extends ExchangeStoreBase {
 
   // 提交提币订单
   async extractOrder(obj) {
-    let result = await this.Proxy.extractOrder(Object.assign({
+    let result = await this.Proxy.extractOrder(Object.assign(obj, {
       userId: this.controller.userId,
       token: this.controller.token,
-      coinId: this.state.walletList[obj.coinName.toLowerCase()],
+      coinId: this.state.walletList[obj.coinName],
+      coinName: obj.coinName.toLowerCase(),
       os: 3
-    }, obj))
+    }))
     return result;
   }
   // 增加提现地址
@@ -315,7 +317,7 @@ export default class AssetStore extends ExchangeStoreBase {
     let result = await this.Proxy.addAddress({
       userId: this.controller.userId,
       coinId: this.state.walletList[coinName],
-      coinName: coinName,
+      coinName: coinName.toLowerCase(),
       addressName: addressName,
       address: address,
       token: this.controller.token
@@ -362,7 +364,7 @@ export default class AssetStore extends ExchangeStoreBase {
     let result = await this.Proxy.delAddress({
       userId: this.controller.userId,
       coinId: this.state.walletList[coinName],
-      coinName: coinName,
+      coinName: coinName.toLowerCase(),
       addressId: addressId,
       addressName: addressName,
       address: address,
@@ -374,7 +376,7 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.walletExtract.extractAddr.forEach(v => {
       v.coinId === this.state.walletList[coinName] &&
         (v.addressList = v.addressList.filter(
-          item => item.addressId !== addressId
+          item => item.address !== address
         ));
     });
     return this.state.walletExtract;

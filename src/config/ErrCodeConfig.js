@@ -55,6 +55,10 @@ export default {
     msg: "与原密码相同",
     errCode: "CODE_NOT_EXPIRE"
   },
+  616: {
+    msg: "未设置密码",
+    errCode: "NO_SET_PASSWORD"
+  },
   617: {
     msg: "用户未实名认证",
     errCode: "NO_VERIFIED"
@@ -86,6 +90,10 @@ export default {
   710: {
     msg: "提币：查询不到to地址",
     errCode: "NO_TO"
+  },
+  712: {
+    msg: "提币地址格式错误",
+    errCode: "ERROR_ADDRESS"
   },
   1001: {
     msg: "连接被禁止",

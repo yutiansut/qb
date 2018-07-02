@@ -16,8 +16,8 @@ export default async (url, params) => {
         obj = { ret: -2, data: e };
         throw obj;
       });
-    // console.log('返回的response2', result, JSON.parse(result))
-    return JSON.parse(result)
+    console.log(result)
+    return JSON.parse(result);
   } catch (e) {
     console.error('error', e);
     if (!e.ret)
