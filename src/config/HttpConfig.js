@@ -53,7 +53,7 @@ export default {
   ],
   asset: [
     // 获取交易对手续费5.16（pass）
-    { name: 'getFee', data: { url: '/order/', method: 'post' }, action: 'getFee', actionBack: 'getFeeRes' },
+    { name: 'getFee', data: { url: '/property/', method: 'post' }, action: 'getAllTradePairFee', actionBack: 'getAllTradePairFeeRes',needToken: true  },
     // 获取总资产(包含各个钱包币种的详细信息)4.1
     { name: 'totalAsset', data: { url: '/property/', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes', needToken: true },
     //24小时提现额度, 查询币种额度，4.2
@@ -63,7 +63,7 @@ export default {
     // 提币矿工费4.5
     { name: 'minerFee', data: { url: '/property/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes', needToken: true },
     // 提交提币订单4.6（pass）
-    { name: 'extractOrder', data: { url: '/property/', method: 'post' }, action: 'withdrawCoin', actionBack: 'withdrawCoinRes', needToken: true },
+    { name: 'extractOrder', data: { url: '/property/', method: 'post' }, action: 'withdraw', actionBack: 'withdrawRes', needToken: true },
     // 提币地址查询4.7（pass）
     { name: 'extractAddress', data: { url: '/common/', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes', needToken: true  },
     //增加提币地址4.8(需要登录)（pass）

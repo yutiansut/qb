@@ -7,31 +7,19 @@ export default class AssetStore extends ExchangeStoreBase {
       // 交易对手续费
       pairFees: [
         // {
-        //   tradePairId: 0,
-        //   tradePairName: "ETH/BTC",
-        //   makerFee: 0.12,
-        //   takerFee: 0.11
+        //   id: 0,
+        //   name: "ETH/BTC",
+        //   maker: 0.12,
+        //   taker: 0.11
         // },
-        // {
-        //   tradePairId: 1,
-        //   tradePairName: "BCH/BTC",
-        //   makerFee: 0.12,
-        //   takerFee: 0.01
-        // },
-        // {
-        //   tradePairId: 2,
-        //   tradePairName: "LSK/BTC",
-        //   makerFee: 0.19,
-        //   takerFee: 0.11
-        // }
       ],
       // 总资产
       totalAsset: {
-        valuationBTC: 12324.3432, //总资产
-        valuationEN: 213.232, //换算美元
-        valuationCN: 222.22, //换算人民币
-        totalQuota: 10, //24小时提现额度
-        availableQuota: 1.1 //可用额度
+        valuationBTC: 0, //总资产
+        valuationEN: 0, //换算美元
+        valuationCN: 0, //换算人民币
+        totalQuota: 0, //24小时提现额度
+        availableQuota: 0 //可用额度
       },
       wallet: [
         {
@@ -182,7 +170,7 @@ export default class AssetStore extends ExchangeStoreBase {
   async getFee() {
     this.state.pairFees = await this.Proxy.getFee({
       userId: this.controller.userId,
-      tradePairId: 1
+      token: this.controller.token,
     });
     console.log(this.state.pairFees);
   }
@@ -196,7 +184,7 @@ export default class AssetStore extends ExchangeStoreBase {
       coinList
     } = await this.Proxy.totalAsset({
       userId: this.controller.userId,
-      token:this.controller.token
+      token: this.controller.token
     });
     let { totalQuota, availableQuota } = await this.Proxy.balance({
       userId: this.controller.userId,
@@ -233,12 +221,13 @@ export default class AssetStore extends ExchangeStoreBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
-    this.state.currencyAmount = await this.Proxy.balance({
-      userId: this.controller.userId,
-      coinId: this.state.walletList[coin],
-      coinName: coin,
-      token: this.controller.token
-    });
+    let obj = { userId: this.controller.userId, coinId: this.state.walletList[coin], coinName: coin, token: this.controller.token };
+    let result = await this.Proxy.balance(obj)
+    if (result && result.errCode) {
+      return result;
+    }
+    this.state.currencyAmount = result;
+    return result;
   }
 
   // 获取充币地址
@@ -251,10 +240,10 @@ export default class AssetStore extends ExchangeStoreBase {
     result.coinAddress
       ? (this.state.coinAddress = result)
       : (this.state.coinAddress = {
-          coinId: "", //币种ID
-          verifyNumer: "", //最大确认数
-          coinAddress: "" //地址
-        });
+        coinId: "", //币种ID
+        verifyNumer: "", //最大确认数
+        coinAddress: "" //地址
+      });
   }
 
   // 获取资产记录
@@ -268,6 +257,9 @@ export default class AssetStore extends ExchangeStoreBase {
         obj
       )
     );
+    if (result && result.errCode) {
+      return result;
+    }
     // let result = await this.Proxy.history({
     //   userId: this.controller.userId,
     //   coinId: 0,
@@ -286,39 +278,37 @@ export default class AssetStore extends ExchangeStoreBase {
       result.totalCount &&
       (this.state.assetHistory.total = result.totalCount);
   }
-
-  // 获取提币手续费和地址
-  async getwalletExtract() {
+  async getMinerFee(coin) {
     let { minerFee } = await this.Proxy.minerFee({
-      coinId: 0,
+      coinId: this.state.walletList[coin],
       token: this.controller.token
     });
     this.state.walletExtract.minerFee = minerFee;
+  }
+  // 获取提币地址信息
+  async getwalletExtract() {
     if (this.state.walletExtract.extractAddr.length) return;
     let result = await this.Proxy.extractAddress({
       userId: this.controller.userId,
       token: this.controller.token
     });
+    if (result && result.errCode) {
+      console.log(result);
+      return result;
+    }
     this.state.walletExtract.extractAddr = result.addresses;
-    // console.log(result.addresses);
+    console.log(result);
   }
 
   // 提交提币订单
-
-  async extractOrder() {
-    let result = await  this.Proxy.extractOrder({
+  async extractOrder(obj) {
+    let result = await this.Proxy.extractOrder(Object.assign({
       userId: this.controller.userId,
       token: this.controller.token,
-      coinId: 0,
-      coinName: "BTC",
-      coinAddress: "hggggggg",
-      withdrawCount: 1,
-      withdrawPassword: "000000",
-      code: "123332",
-      os: 0,
-      account: "xxx",
-    })
-    console.log(result)
+      coinId: this.state.walletList[obj.coinName.toLowerCase()],
+      os: 3
+    }, obj))
+    return result;
   }
   // 增加提现地址
   async appendAddress({ coinName, addressName, address }) {
@@ -330,7 +320,7 @@ export default class AssetStore extends ExchangeStoreBase {
       address: address,
       token: this.controller.token
     });
-    if (result.errCode) {
+    if (result && result.errCode) {
       return result;
     }
     let targetArr = this.state.walletExtract.extractAddr.filter(

@@ -17,26 +17,34 @@ export default class AssetController extends ExchangeControllerBase {
     return this.configController.initState;
   }
   // 获取对应市场下的交易对信息（调用market的api）
-  async getTradePair(coin){
+  async getTradePair(coin) {
     // await this.marketController.tradePair(coin);
     this.view.setState({
       tradePair: [{ name: "BTC/USDT", id: 1 }]
     });
   }
-  get userId () {
+  get userId() {
     return this.userController.userId
   }
-  get token () {
+  get token() {
     return this.userController.userToken;
   }
+  get account() {
+    // return this.userController.account;
+    return {
+      1: 'dsfg3232dfgfdg',
+      3: '3236561646554656'
+    };
+  }
   // 获取用户的身份认证状态
-  get userVerif () {
+  get userVerif() {
     return this.userController.userAuthVerify.state;
     // return 1;// 0：未认证 1：已通过  2：认证失败 3：认证中
   }
-  get userTwoVerify () {
-    return this.userController.userVerify;
-    //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+  get userTwoVerify() {
+    // return this.userController.userVerify;
+    //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信
+    return { withdrawVerify: 1 };
   }
   // 获取总资产和额度
   async getAssets() {
@@ -49,8 +57,12 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
-    await this.store.getCurrencyAmount(coin);
-    console.log(this.store.state.currencyAmount);
+    let result = await this.store.getCurrencyAmount(coin);
+    if (result &&  result.errCode) {
+      // 错误处理
+      return;
+    }
+    // console.log(this.store.state.currencyAmount);
     this.view.setState({
       currencyAmount: this.store.state.currencyAmount,
     });
@@ -76,7 +88,13 @@ export default class AssetController extends ExchangeControllerBase {
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
   }
-
+  // 获取矿工费
+  async getMinerFee(coin) {
+    await this.store.getMinerFee(coin);
+    this.view.setState({
+      walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
+    });
+  }
   // 获取充币地址(over)
   async getCoinAddress(coin) {
     await this.store.getChargeAddress(coin);
@@ -99,7 +117,18 @@ export default class AssetController extends ExchangeControllerBase {
     });
   }
   // 请求验证码
-  async requestCode() { }
+  async requestCode() {
+    let type = this.userTwoVerify.withdrawVerify;
+    let result = await this.userController.getCode( this.account[type], type === 1 ? 1 : 0, 8)
+    if (result && result.errCode) {
+      this.view.setState({ orderTip: true, orderTipContent: result.msg });
+      // 错误处理
+      return false;
+    }
+    this.view.setState({tip: true, tipSuccess: true, tipContent: "发送成功" });
+    return true;
+  }
+
   // 账户余额页面筛选
   filte(wallet, value, hideLittle, hideZero) {
     let arr1 = this.filter(wallet, item => {
@@ -116,6 +145,7 @@ export default class AssetController extends ExchangeControllerBase {
     });
     return result;
   }
+
   // 账户余额页面排序
   rank(arr, object) {
     let sortValue, type;
@@ -136,62 +166,67 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 二次验证倒计时
-  getVerify() {
+  async getVerify() {
     if (
       this.view.state.verifyNum !== "获取验证码" &&
       this.view.state.verifyNum !== 0
     )
       return;
-    this.view.setState({ verifyNum: 5 });
-    this.countDown("verifyCountDown", "verifyNum", this.view);
+    let flag = await this.requestCode();
+    if(flag){
+      this.view.setState({ verifyNum: 60 });
+      this.countDown("verifyCountDown", "verifyNum", this.view);
+    }
   }
-// 提现前前端验证
-beforeExtract(min){
-  let obj = {
-    orderTip: true,
-    orderTipContent: ''
+  clearVerify() { // 清除短信验证码
+    this.countDownStop('verifyCountDown')
   }
-  // if (this.userVerif !== 1) {
-  //   obj.orderTipContent = "请先进行身份认证";
-  //   this.view.setState(obj)
-  //   return ;
-  // }
-  // if (this.userTwoVerify.fundPwd) {
-  //   obj.orderTipContent = "未设置资金密码，禁止提现";
-  //   this.view.setState(obj)
-  //   return;
-  // }
-  // if (this.view.state.address === '') {
-  //   obj.orderTipContent = "您未选择提现地址，不允许提交";
-  //   this.view.setState(obj)
-  //   return;
-  // }
-  // if (this.view.state.extractAmount == 0 ) {
-  //   obj.orderTipContent = "提现数量不能为0";
-  //   this.view.setState(obj)
-  //   return;
-  // }
-  // if (this.view.state.password === "") {
-  //   obj.orderTipContent = "请输入您的资金密码";
-  //   this.view.setState(obj);
-  //   return;
-  // }
-  // if (this.view.state.extractAmount < min){
-  //   obj.orderTipContent = `最小提现数量为${min}${this.view.state.currency}`;
-  //   this.view.setState(obj);
-  //   return;
-  // }
-  if (1) {
-    this.view.setState({ showTwoVerify: true });
-    return;
+  // 提现前前端验证
+  beforeExtract(o) {
+    let obj = {
+      orderTip: true,
+      orderTipContent: ''
+    }
+    if (this.view.state.address === '') {
+      obj.orderTipContent = "您未选择提现地址，不允许提交";
+      this.view.setState(obj)
+      return;
+    }
+    if (this.userTwoVerify.fundPwd) {
+      obj.orderTipContent = "未设置资金密码，禁止提现";
+      this.view.setState(obj)
+      return;
+    }
+    if (this.view.state.password === "") {
+      obj.orderTipContent = "请输入您的资金密码";
+      this.view.setState(obj);
+      return;
+    }
+    this.view.setState({ showTwoVerify: true, verifyNum: '获取验证码' });
   }
-  this.extractOrder()
-}
 
-//提交提币订单
-async extractOrder(){
-  let result = await this.store.extractOrder();
-}
+  //提交提币订单
+  async extractOrder(obj) {
+    let type = this.userTwoVerify.withdrawVerify;
+    (type === 1 || type === 3) && (obj.account = this.account[type]);
+    type === 1 && (obj.mode = 1);
+    type === 3 && (obj.mode = 0);
+    type === 2 && (obj.mode = 2);
+    let result = await this.store.extractOrder(obj);
+    if (result.errCode) {
+      this.view.setState({
+        orderTip: true,
+        orderTipContent: result.msg
+      })
+      // 错误处理
+      return;
+    }
+    this.view.setState({
+      tip: true,
+      tipSuccess: true,
+      tipContent: "操作成功"
+    }, () => { location.reload()})
+  }
 
   // 添加提现地址
   async appendAddress(obj) {
@@ -200,25 +235,23 @@ async extractOrder(){
       this.view.setState({
         tip: true,
         tipSuccess: false,
-        tipContent: "地址填写有误"
+        tipContent: result.msg
       });
       return false;
     }
-    // this.store.appendAddress({ addressName, address });
-    // this.view.state.walletExtract.extractAddr.push({ addressName, address });
     this.view.setState({
       walletExtract: this.Util.deepCopy(result),
       tip: true,
       tipSuccess: true,
       tipContent: "添加成功"
-     });
+    });
     return true;
   }
 
   //删除提现地址
   async deletAddress(obj) {
     let result = await this.store.deletAddress(obj);
-    if(result.errCode) {
+    if (result.errCode) {
       this.view.setState({
         tip: true,
         tipSuccess: false,
@@ -228,11 +261,5 @@ async extractOrder(){
     }
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
     if (this.view.state.address === obj.address) this.view.setState({ address: '' });
-    // this.view.state.walletExtract.extractAddr = this.view.state.walletExtract.extractAddr.filter(
-    //   item => item.address !== address
-    // );
-    // this.view.setState({
-    //   walletExtract: this.view.state.walletExtract
-    // });
   }
 }

@@ -7,7 +7,6 @@ export default class SelectButton extends Component {
     this.state = {
       show: false,
       istarget: false,
-      title: this.props.title
     };
     this.clickoutside = () => {
       if (this.state.istarget) {
@@ -60,7 +59,7 @@ export default class SelectButton extends Component {
               this.setState({ show: show ? false : true });
             }}
           >
-            {this.state.title}
+            {title}
           </button>
         ) : (
           <div
@@ -72,7 +71,7 @@ export default class SelectButton extends Component {
               this.setState({ show: show ? false : true });
             }}
           >
-            <p>{simple ? "" : this.state.title}</p>
+            <p>{simple ? "" : title}</p>
             {type === 'trade' && <i></i>}
           </div>
         )}
@@ -82,12 +81,12 @@ export default class SelectButton extends Component {
             {valueArr.map((item, index) => {
               return (
                 <li
-                  className={item === this.state.title ? "active" : ""}
+                  className={item === title ? "active" : ""}
                   key={index}
                   onClick={e => {
                     e.nativeEvent.stopImmediatePropagation();
                     onSelect && onSelect(item);
-                    this.setState({ show: false, title: item });
+                    this.setState({ show: false});
                   }}
                 >
                   <p>{item}</p>

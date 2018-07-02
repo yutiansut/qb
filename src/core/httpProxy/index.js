@@ -51,6 +51,7 @@ const HTTP_PROXY = {
           }
         }
         req = formatParams(req)
+        console.log(req)
         res.result = await Fetch(req.url, req.data);
         if (afterHandler && afterHandler.length) {
           for (let i = 0; i < afterHandler.length; i++) {

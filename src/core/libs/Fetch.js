@@ -15,6 +15,7 @@ export default async (url, params) => {
         obj = { ret: -2, data: e };
         throw obj;
       });
+    // console.log(result)
     return JSON.parse(result);
   } catch (e) {
     console.log(e);

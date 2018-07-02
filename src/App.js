@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
-import en from "./lang/en.js"
-import zh from "./lang/zh.js"
-// locale data
-const locales = {
-  "en-US": en,
-  "zh-CN": zh,
-};
 
 
 import "./core/libs/ChangeFontSize";
@@ -44,7 +37,7 @@ let testAppController,
   noticeController,
   activityController,
   marketController
-;
+  ;
 
 const Asset = ({ match }) => {
   return <AssetManange controller={assetController} match={match} />;
@@ -91,8 +84,8 @@ const tradeHeader = ({ match }) => {
 import TestApp from './TestApp'
 import TestAppController from "./TestAppController";
 
-const about = ({match}) => {
-  return <TestApp controller={testAppController} match={match}/>;
+const about = ({ match }) => {
+  return <TestApp controller={testAppController} match={match} />;
 };
 const HomeComponent = () => {
   return <Home marketController={marketController} />
@@ -153,19 +146,19 @@ export default class App extends Component {
           <div style={{ height: '.5rem' }}></div>
           <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
             <Switch>
-              <Route exact path="/" component={HomeComponent}/>
-              <Route path="/home" component={HomeComponent}/>
-              <Route path='/trade' component={Trade}/>
-              <Route path="/login" component={Loign}/>
-              <Route path="/wallet" component={Asset}/>
-              <Route path="/order" component={Order}/>
-              <Route path="/user" component={User}/>
-              <Route path="/about" component={about}/>
-              <Route path="/findPass" component={ForgetPass}/>
-              <Route path="/notice" component={Notice}/>
-              <Route path="/help" component={Help}/>
-              <Route path="/activity" component={Activity}/>
-              <Redirect to="/"/>
+              <Route exact path="/" component={HomeComponent} />
+              <Route path="/home" component={HomeComponent} />
+              <Route path='/trade' component={Trade} />
+              <Route path="/login" component={Loign} />
+              <Route path="/wallet" component={Asset} />
+              <Route path="/order" component={Order} />
+              <Route path="/user" component={User} />
+              <Route path="/about" component={about} />
+              <Route path="/findPass" component={ForgetPass} />
+              <Route path="/notice" component={Notice} />
+              <Route path="/help" component={Help} />
+              <Route path="/activity" component={Activity} />
+              <Redirect to="/" />
             </Switch>
           </div>
           {/*<Footer/>*/}

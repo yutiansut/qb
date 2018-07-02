@@ -55,6 +55,38 @@ export default {
     msg: "与原密码相同",
     errCode: "CODE_NOT_EXPIRE"
   },
+  617: {
+    msg: "用户未实名认证",
+    errCode: "NO_VERIFIED"
+  },
+  704: {
+    msg: "24小时内修改过资金密码,存在安全保护墙",
+    errCode: "ALTER_IN_24H"
+  },
+  705: {
+    msg: "可用数量不足",
+    errCode: "NO_ENOUGH"
+  },
+  706: {
+    msg: "小于最小提币限额",
+    errCode: "LESS_MIN_WITHDRAW"
+  },
+  707: {
+    msg: "不支持提币操作",
+    errCode: "NO_SUPPORT_WITHDRAW"
+  },
+  708: {
+    msg: "提币超过当日额度",
+    errCode: "OUT_LIMIT"
+  },
+  709: {
+    msg: "提币：查询不到from地址",
+    errCode: "NO_FROM"
+  },
+  710: {
+    msg: "提币：查询不到to地址",
+    errCode: "NO_TO"
+  },
   1001: {
     msg: "连接被禁止",
     errCode: "CODE_NOT_EXPIRE"
