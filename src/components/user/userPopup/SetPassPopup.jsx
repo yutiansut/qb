@@ -22,12 +22,14 @@ export default class SetPassPopup extends exchangeViewBase {
       popupInput3: "",
       popupInput4: "",
       popupInput5: "",
+      errUser: "",
     }
     this.changeInput1 = this.changeInput1.bind(this)
     this.changeInput2 = this.changeInput2.bind(this)
     this.changeInput3 = this.changeInput3.bind(this)
     this.changeInput4 = this.changeInput4.bind(this)
     this.changeInput5 = this.changeInput5.bind(this)
+    this.checkInput2 = this.checkInput2.bind(this)
   }
   changeInput1(value) {
     this.setState({popupInput1: value});
@@ -36,7 +38,19 @@ export default class SetPassPopup extends exchangeViewBase {
   changeInput2(value) {
     this.setState({popupInput2: value});
     console.log(2, value)
+    // if (this.props.isType === 1) {
+    //   /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/.test(value)
+    // }
     this.props.popupInputErr2 && (this.props.clearErr2())
+  }
+  checkInput2() {
+    if (this.props.isType === 1) {
+      if(/^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/.test(this.state.popupInput2)) {
+        console.log(111)
+      } else {
+        console.log(222)
+      }
+    }
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
@@ -64,7 +78,10 @@ export default class SetPassPopup extends exchangeViewBase {
               </li>
               <li className="long-li">
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput} value={this.state.popupInput2} onInput={value => this.changeInput2(value)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInput}
+                       value={this.state.popupInput2}
+                       onInput={value => this.changeInput2(value)}
+                       onBlur={this.checkInput2}/>
                 <em>{this.props.popupInputErr2}</em>
               </li>
               <li className={[3, 4, 5].includes(this.props.isType) ? 'long-li' : 'hide'}>
@@ -84,8 +101,8 @@ export default class SetPassPopup extends exchangeViewBase {
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
                   {/*<Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(1, 0)}}/>*/}
-                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput1, 1, 3)}}/>}
-                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput1, 0, 3)}}/>}
+                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput2, 1, 3)}}/>}
+                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput2, 0, 3)}}/>}
                   {this.props.isType === 5 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.email ? this.state.email : this.state.phone, this.state.email ? 1 : 0, 5)}}/>}
                 </div>
               </li>

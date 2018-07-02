@@ -28,8 +28,9 @@ export default class userSafeCenter extends exchangeViewBase {
       otherShow: false, // 打开其他安全设置
       noticeIndex: 1, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
-      changeType: 0, // 更改两步验证弹窗所需参数
+      changeType: 0, // 更改两步验证弹窗所需参数 根据后台返回确定每种验证对象
       isTwoVerify: 0, // 确认两步验证类型
+      sureTwoVerify: 0, // 点击更改验证类型
       timeAddr: '', // 时区
       verifyList: [
         {title: '登录验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}, {name: '无', flag: false}]},
@@ -99,6 +100,7 @@ export default class userSafeCenter extends exchangeViewBase {
       type: type,
       changeType: changeTypeArr[i],
       isTwoVerify: i,
+      sureTwoVerify: index,
       showGoogle: !this.state.userInfo.googleAuth && index === 0 ? 'block' : 'none',
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
@@ -349,6 +351,7 @@ export default class userSafeCenter extends exchangeViewBase {
                            phone = {this.state.userInfo.phone}
                            email = {this.state.userInfo.email}
                            isType = {this.state.changeType}
+                           sureTwoVerify = {this.state.sureTwoVerify}
                            isTwoVerify = {this.state.isTwoVerify}
                            getVerify = {this.getVerify}
                            verifyNum = {this.state.verifyNum}

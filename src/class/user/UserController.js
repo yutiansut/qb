@@ -138,18 +138,19 @@ export default class UserController extends ExchangeControllerBase {
     console.log('设置密码', result)
   }
 
-  async setTwoVerify(account, mode, picCode, picId, position, verifyType) { // 修改两步认证
+  async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
     let result = await this.store.Proxy.setTwoVerify({
       "userId": this.store.state.userId,
-      "account": "",
-      "mode": 0, //0手机 1邮箱 2Google
-      "code": "",//验证码
+      account,
+      mode, //0手机 1邮箱 2Google
+      code, //验证码
       "os": 3, // 1:android 2:iOS 3:borwser
-      "picCode":"",//图形验证码
-      "picId":"",//验证码图片的id
-      "position": 1,//修改的位置 1登陆   2提现   3资金密码
-      "verifyType": 1//2谷歌验证 1邮件  3短信  0无
+      picCode,//图形验证码
+      picId,//验证码图片的id
+      position,//修改的位置 1登陆   2提现   3资金密码
+      verifyType//2谷歌验证 1邮件  3短信  0无
     })
+    console.log('修改两步认证1111', account, mode, picCode, picId, position, verifyType)
     console.log('修改两步认证', result)
   }
 

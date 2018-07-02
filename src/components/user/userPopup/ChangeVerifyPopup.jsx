@@ -11,6 +11,7 @@ const contentList = [
   {title: '短信验证', inputP: '请输入短信验证码'}
 ]
 const contentArr = [3, 1, 0, 2]
+const typeArr = [2, 1, 3, 0]
 
 export default class ChangeVerifyPopup extends exchangeViewBase {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
   componentWillUpdate(props, state, next) {
   }
   render() {
-    console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType])
+    console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
     return (
       <div className="change-popup-wrap" style={{display: this.props.isChange}}>
         <div className="change-info">
@@ -59,7 +60,13 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
                     title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum}
                     onClick={()=>{this.props.getVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : ''), this.props.isType === 3 ? 0 : (this.props.isType === 1 ? 1 : ''), 7)}}/>
           </div>
-         <Button className="set-btn" title="确认" onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') , this.props.isType === 3 ? 0 : this.props.isType, this.state.popupInput2, this.state.popupInput3, this.props.captchaId, this.props.isTwoVerify + 1, contentArr[this.props.isType])}/>
+          <Button className="set-btn" title="确认" onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
+                                                                this.props.isType === 3 ? 0 : this.props.isType,
+                                                                this.state.popupInput3,
+                                                                this.state.popupInput2,
+                                                                this.props.captchaId,
+                                                                this.props.isTwoVerify + 1,
+                                                                typeArr[this.props.sureTwoVerify])}/>
         </div>
       </div>
     );

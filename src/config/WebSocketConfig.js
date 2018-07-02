@@ -8,7 +8,7 @@ export default {
    *  4.调用this.WebSocket.getAll返回所有连接
    *  this.emit
    */
-  useWebSocket: false,  // 是否开启websocket
+  useWebSocket: true,  // 是否开启websocket
   /**
    * name:连接标识，名称
    * url:连接路径
