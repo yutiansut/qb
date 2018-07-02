@@ -104,7 +104,7 @@ export default class App extends Component {
     loginController = new LoginController();
     noticeController = new NoticeController();
     activityController = new ActivityController();
-    marketController = new MarketController();
+    marketController = new MarketController('market');
     userOrderController = new UserOrderListController();
 
 

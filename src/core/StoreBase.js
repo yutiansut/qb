@@ -4,6 +4,9 @@ import WebSocket from './webSocket' //websocket交互
 import Fetch from './libs/Fetch'
 import AsyncAll from './libs/AsyncAll'
 import Sleep from './libs/Sleep'
+import Loop from './loop' //localStorage交互
+import GlobalUtil from "./libs/GlobalUtil";
+
 import HttpProxy from "./httpProxy";
 import MassageHandler from './messageHandler'
 
@@ -15,8 +18,17 @@ export default class StoreBase {
     this.preHandler = [];
     this.afterHandler = [];
     this.Sleep = Sleep;
+    this.AsyncAll = AsyncAll;
+    this.Loop = Loop;
+    this.GlobalUtil = GlobalUtil;
     this.WebSocket = WebSocket;
   }
+
+
+  setController(ctl) {
+    this.controller = ctl
+  }
+
 
   installProxy(modelName, preHandler, afterHandler) {
     HttpProxy.install.call(this, modelName, preHandler, afterHandler)

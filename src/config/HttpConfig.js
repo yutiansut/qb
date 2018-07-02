@@ -85,4 +85,8 @@ export default {
     {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'}
   ],
 
+  market:[
+    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack:'changeFavoriteRes'}
+  ]
+
 }

@@ -4,11 +4,6 @@ import Sleep from './libs/Sleep' //同步多个异步请求
 import Loop from './loop' //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
 
-import LoopTaskConfig from '../config/LoopTaskConfig'
-
-Loop.install({}, LoopTaskConfig);
-
-
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),
   number: (arr, num) => arr.filter(v => v === num),

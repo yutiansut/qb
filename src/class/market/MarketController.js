@@ -91,8 +91,9 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       collectIndex: index
     });
-    v.isFavorite = !v.isFavorite
-    // console.log('收藏', v.isFavorite)
+    v.isFavorite = 1-v.isFavorite
+    this.store.changeFavorite(1, JSON.parse('232602516485840896'), v.isFavorite)
+    // console.log('收藏 0', v.isFavorite)
   }
 
   // 市场下交易对
@@ -102,7 +103,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.allPairData.map(v => homeMarket.push(v.market_name));
     let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
     homeMarketPair.forEach(v => {
-      let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? true : false}
+      let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? 1 : 0}
       v = Object.assign(v, aaa);
     })
     this.view.setState({

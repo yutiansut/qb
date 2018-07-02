@@ -51,7 +51,7 @@ export default class ExchangeStoreBase extends StoreBase {
     let websocket = super.installWebsocket(connectName)
     if(!websocket)
       return
-    let headerConfig = websocket.config.optionList[modelName]
+    let headerConfig = Object.assign(websocket.config.optionList['global'], websocket.config.optionList[modelName])
     let opConfig = {}
     headerConfig && Object.keys(headerConfig).forEach(v=>{
       opConfig[headerConfig[v].op] = v
@@ -65,9 +65,9 @@ export default class ExchangeStoreBase extends StoreBase {
     }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
-      // console.log('this.WebSocket[connectName]', websocket[connectName], connectName)
+      // console.log('this.WebSocket[connectName]', websocket)
 
-      headerConfig.seq = Math.floor(Math.random() * 1000000000)
+      headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {data})
       // console.log(emitData, websocket)
       websocket.send(emitData)

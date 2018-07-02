@@ -18,7 +18,7 @@ import "./stylus/homeMarkt.styl"
 export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
-    recommendController = new MarketController();
+    recommendController = new MarketController('recommend');
     // marketController = new MarketController();
   }
 

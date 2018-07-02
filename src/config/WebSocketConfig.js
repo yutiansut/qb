@@ -18,8 +18,11 @@ export default {
     {
       name: 'general', url:'/sub' ,optionList: {
         // test:{testEmit:{var: 1, op: 2}},
-        market:{recommendCurrency:{var: 1, op: 108}},
-        // login:{recommendCurrency:{var: 1, op: 17}}
+        global:{joinRoom:{var:1, op:4, seq:0}},
+        market:{recommendCurrency:{var: 1, op: 108, seq:0},
+                marketPair:{var: 1, op: 108, seq:0}},
+        order:{tradeDepth:{var: 1, op: 108, seq:0}},
+        login:{login:{var: 1, op: 17, seq:0}},
       }
     },
 

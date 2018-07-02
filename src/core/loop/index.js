@@ -82,7 +82,7 @@ async function taskLoop() {
 const TASKS = {}
 // let flag = 0 //控制多次start只启动一次
 const TASK_HANDLER = {
-  install(app, taskConfig) {
+  install(taskConfig) {
     Object.keys(taskConfig).forEach(v => {
       TASKS[v] = taskConfig[v]
       let task = taskConfig[v].task || []

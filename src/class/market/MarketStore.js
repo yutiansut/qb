@@ -146,6 +146,7 @@ export default class MarketStore extends ExchangeStoreBase {
       //   eth: ['BTC/ETH', 'EOS/ETH'],
       //   usdt: ['BTC/USDT']
       // },
+      collectArr:[],
       recommendDataHandle: [],
       marketDataHandle: [],
       homeMarketPairData:[],
@@ -216,16 +217,16 @@ export default class MarketStore extends ExchangeStoreBase {
     };
     if(name === 'recommend'){
       // console.log('bbb', name)
-      this.getWebSocketData()
+      this.getRecommendCurrency()
+    }
+    if(name === 'market'){
+      this.getMarketPair()
     }
   }
 
-  setController(ctl) {
-    this.controller = ctl
-  }
 
-  getWebSocketData() {
-    console.log('getData', this.WebSocket)
+  getRecommendCurrency() {
+    console.log('getData recommendCurrency', this.WebSocket)
     // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
     this.WebSocket.general.on('recommendCurrency', data => {
       console.log('getWebSocketData', data, this.controller)
@@ -233,6 +234,30 @@ export default class MarketStore extends ExchangeStoreBase {
       this.recommendData = data.data
     })
   }
+
+  getMarketPair() {
+    console.log('getData marketPair', this.WebSocket)
+    this.WebSocket.general.emit('joinRoom', {from:'', to:'home'})
+    this.WebSocket.general.on('marketPair', data => {
+      console.log('getWebSocketData', data, this.controller)
+      this.controller.updateRecommend(data.data)
+      this.recommendData = data.data
+    })
+  }
+
+  changeFavorite(tradePairId, userId, operateType) {
+    this.Proxy.changeFavorite({
+      operateType, //0添加 1取消
+      tradePairId,
+      userId
+    });
+    // console.log('收藏 0', tradePairId, userId, operateType)
+  }
+
+  async getMarket(){
+
+  }
+
   async getCoinInfo(){
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});
   }

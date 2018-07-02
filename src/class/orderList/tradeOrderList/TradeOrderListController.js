@@ -5,6 +5,7 @@ export default class TradeOrderListController extends OrderListController {
   constructor() {
     super();
     this.store = new TradeOrderListStore()
+    this.store.setController(this)
   }
   
   setView(view) {
@@ -28,4 +29,6 @@ export default class TradeOrderListController extends OrderListController {
     console.log('llllllllllll',prices)
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
   }
+
+
 }

@@ -5,6 +5,7 @@ import Core from './core'
 import ServerConfig from './config/ServerConfig'
 import WebSocketConfig from './config/WebSocketConfig'
 import HttpConfig from './config/HttpConfig'
+import LoopTaskConfig from './config/LoopTaskConfig'
 import './class/lib/Prototype'
 
 // import Crypto from './core/libs/Crypto'
@@ -12,7 +13,7 @@ import './class/lib/Prototype'
 
 const renderDom = async Component => {
   // console.log(Date.now())
-  await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig})
+  await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig})
   WebSocketConfig.useWebSocket && await Core.Websocket.general()
   // await import('./App')
   // console.log(Date.now())

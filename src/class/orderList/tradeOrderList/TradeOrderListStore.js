@@ -1,8 +1,8 @@
 import OrderListStore from '../OrderListStore'
 
 export default class TradeOrderListStore extends OrderListStore{
-  constructor(props) {
-    super(props);
+  constructor() {
+    super('order', 'general');
     this.state={
       liveTradeList: {
         buy: [
@@ -83,5 +83,20 @@ export default class TradeOrderListStore extends OrderListStore{
         }
       ]
     }
+  }
+
+  getWebSocketData() {
+    console.log('getData', this.WebSocket)
+    this.WebSocket.general.emit('joinRoom', {from:'', to: ''})
+    this.WebSocket.general.on('joinRoom', data => {
+      console.log('joinRoom getWebSocketData', data, this.controller)
+      this.controller.updateRecommend(data.data)
+      this.recommendData = data.data
+    })
+    this.WebSocket.general.on('tradeDepth', data => {
+      console.log('tradeDepth getWebSocketData', data)
+      // this.controller.updateRecommend(data.data)
+      // this.recommendData = data.data
+    })
   }
 }
