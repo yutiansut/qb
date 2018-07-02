@@ -190,7 +190,29 @@ export default class MarketStore extends ExchangeStoreBase {
           btc: 0,
           eth: 0
         }
-      }
+      },
+      "list": [
+        {
+          "tradePairId": 0,
+          "tradePairName": "usd/btc"
+        },
+        {
+          "tradePairId": 1,
+          "tradePairName": "btc/lsk"
+        },
+        {
+          "tradePairId": 2,
+          "tradePairName": "btc/bch"
+        },
+        {
+          "tradePairId": 3,
+          "tradePairName": "btc/eth"
+        },
+        {
+          "tradePairId": 4,
+          "tradePairName": "usd/xas"
+        }]
+  
     };
     if(name === 'recommend'){
       // console.log('bbb', name)
@@ -213,5 +235,12 @@ export default class MarketStore extends ExchangeStoreBase {
   }
   async getCoinInfo(){
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});
+  }
+  async getPairInfo(){
+    let pairInfo = await this.Proxy.pairInfo(
+        {userId:0}
+    );
+    this.store.state.coinInfo = pairInfo.list;
+    return pairInfo.list
   }
 }

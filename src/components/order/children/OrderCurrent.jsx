@@ -21,7 +21,6 @@ const orderStatus = {
   5:  '已结束',
   6:  '部分成交',
 };
-
 const orderNavItems = {
   orderCurrent: {
     title:'当前订单',
@@ -37,7 +36,23 @@ export default class OrderCurrent extends ExchangeViewBase{
   constructor(props){
     super(props);
     this.state = {
-      preArray : []
+      preArray : [],
+      startTime: 1509484067,
+      endTime: 1530088867,
+        // end: new Date().getTime(),
+        // start : (new Date().getTime()) - 7 * 24 *60 * 60
+      coinArray: [],
+      marketArray: [],
+      idArray: [],
+      coinSelect: '全部',
+      marketSelect: '全部',
+      orderType: 2,
+      hideOther: 0,
+      orderStatus: [1,2,3,4,5,6],
+      page: 1,
+      pageSize: 20,
+      detailFlag: false,
+      orderDetail: {}
     };
     const {controller} = this.props;
     //绑定view
@@ -45,26 +60,135 @@ export default class OrderCurrent extends ExchangeViewBase{
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.orderListHandle = controller.orderListHandle.bind(controller);
+    this.checkoutDetail = controller.getOrderDetail.bind(controller)
     // this.getCurrent = controller.getCurrentOrder.bind(controller)
   }
   componentWillMount(){
   
   }
   componentDidMount(){
-    // this.orderListHandle(this.props.type)
-    // this.props.type === 'orderCurrent' && (this.getCurrent())
-    this.orderListHandle(this.props.type)
+    const {pairIdMsg} = this.props;
+    let orderStatus = [];
+    this.props.type === 'orderHistory' && (orderStatus = [1,2,3,4,5,6]) && (this.setState({orderStatus}));
+    this.props.type === 'orderDeal' && (orderStatus = [1,2,5,6]) && (this.setState({orderStatus}));
+    let params = {
+      orderCurrent:{
+        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
+      orderHistory:{
+        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      },
+    };
+    params.orderDeal = params.orderHistory;
+    this.orderListHandle(this.props.type, params[this.props.type]);
+    let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
+    let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
+    marketArray && marketArray.unshift('全部');
+    coinArray && coinArray.unshift('全部');
+    this.setState({
+      coinArray ,
+      marketArray
+    })
   }
   hideReset(e){
-    let renderArr = [...this.state.orderListArray];
-    renderArr = e.target.checked ? renderArr.filter(v => v.orderStatus !== 3) : this.state.preArray;
+    let orderStatus = e.target.checked ? [1,2,4,5,6] : [1,2,3,4,5,6];
+    let params = {
+      orderCurrent:{
+        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
+      orderHistory:{
+        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus: orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      }
+    };
+    this.setState(
+        {orderStatus}
+    );
+    this.orderListHandle(this.props.type, params[this.props.type])
+  }
+  changeCoin(e){
+    const {pairIdMsg} = this.props;
+    let marketArray = [];
+    let coinValue = (e === '全部' || e=== 'all') ? '' : e;
+    let marketValue = (this.state.marketSelect === '全部') ? '' : this.state.marketSelect;
+    let idArray = [];
+    let hideOther = 1;
+    if(coinValue){
+      marketArray = pairIdMsg.pairNameCoin[coinValue];
+      marketArray.unshift('全部');
+      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue]))  || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) ;
+    }
+    else{
+      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) && (marketArray = pairIdMsg.pairNameMarket[marketValue] && (marketArray.unshift('全部'))) || ((idArray = []) &&(hideOther = 0) && (marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket)) && (marketArray.unshift('全部')))
+    }
+    this.setState(
+        {
+          marketArray,
+          idArray,
+          coinSelect: coinValue,
+          hideOther
+        }
+    )
+  }
+  changeMarket(e){
+    const {pairIdMsg} = this.props;
+    let coinArray = [];
+    let marketValue = (e === '全部' || e=== 'all') ? '' : e;
+    let coinValue = (this.state.coinSelect === '全部') ? '' : this.state.coinSelect;
+    let idArray = [];
+    let hideOther = 1;
+    if(marketValue){
+      coinArray = pairIdMsg.pairNameMarket[marketValue];
+      coinArray.unshift('全部');
+      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue]))  || (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) ;
+    }
+    else{
+      coinValue && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) && (coinArray = pairIdMsg.pairNameCoin[coinValue] && (coinArray.unshift('全部'))) || ((idArray = []) && (hideOther = 0) && (coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)) && (coinArray.unshift('全部')))
+    }
+    this.setState(
+        {
+          coinArray,
+          idArray,
+          marketSelect: marketValue,
+          hideOther
+        }
+    )
+  }
+  changeOrderType(e){
+    const typeObj = {
+      '全部': 2,
+      '买入': 0,
+      '卖出': 1,
+    }
+    this.setState(
+        {orderType: typeObj[e]}
+    )
+  }
+  searchFilter(){
+    const params = {
+      orderCurrent:{
+        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
+      orderHistory:{
+        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus: this.state.orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      }
+    };
+       this.props.type === 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type]);
+       this.props.type !== 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type])
+  }
+  startTime(e){
     this.setState({
-      orderListArray : renderArr
+      startTime: e
+    })
+  }
+  endTime(e){
+    this.setState({
+      endTime: e
+    })
+  }
+  checkoutDetail(id){
+    this.setState({
+      orderId: id
     })
   }
   render() {
     const {type} = this.props;
-    console.log('zifeng', )
   return(
       <div className='order-detail'>
           <div className='order-title'>
@@ -82,14 +206,16 @@ export default class OrderCurrent extends ExchangeViewBase{
                 title="全部"
                 type="main"
                 className="select"
-                valueArr={["全部", "BTC", "LSK", "ETH", "BCH", "USDT"]} //todo 币种列表
+                onSelect = {(e) => this.changeCoin(e)}
+                valueArr={this.state.coinArray}
             />
             <em>/</em>
             <SelectButton
                 title="全部"
                 type="main"
                 className="select"
-                valueArr={["全部", "BTC",  "ETH", "USDT"]} //todo 市场列表
+                onSelect = {(e) => this.changeMarket(e)}
+                valueArr={this.state.marketArray}
             />
           </li>
           <li>
@@ -99,13 +225,14 @@ export default class OrderCurrent extends ExchangeViewBase{
                 type="main"
                 className="select"
                 valueArr={["全部", "买入",  "卖出"]}
+                onSelect={(e) => this.changeOrderType(e)}
             />
           </li>
           {type !== 'orderCurrent' && <li className='data-filter'>
-           <DatePicker />
+           <DatePicker onChangeStart={(e) => this.startTime(e)} onChangeEnd={(e) => this.endTime(e)}/>
          </li>}
           <li className='filter-handle'>
-            <Button type="base" title="搜索" className="search" />
+            <Button type="base" title="搜索" className="search" onClick={this.searchFilter.bind(this)}/>
             {type !== 'orderCurrent' && <Button type="base" title="重置" className="reset" />}
           </li>
         </ul>
@@ -140,13 +267,18 @@ export default class OrderCurrent extends ExchangeViewBase{
                   {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
                   {type === 'orderHistory' && <td>{v.avgPrice}</td>}
                   {type !== 'orderDeal' && <td>{orderStatus[v.orderStatus]}</td>}
-                  {type === 'orderCurrent' &&  <td>撤销</td> || type === 'orderHistory' && <td>详情</td>}
+                  {type === 'orderCurrent' &&  <td>撤销</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)}>详情</td>}
                  
                 </tr>
             )
           })}
           </tbody>
         </table>
+        <div className='history-order-detail'>
+          <div className='history-order-detail-content'>
+          
+          </div>
+        </div>
       </div>
   )
   }

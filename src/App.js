@@ -36,15 +36,14 @@ let testAppController,
   loginController,
   noticeController,
   activityController,
-  marketController
-  ;
+  marketController,
+  userOrderController
+;
 
 const Asset = ({ match }) => {
   return <AssetManange controller={assetController} match={match} />;
 };
-const Order = ({ match }) => {
-  return <OrderManage controller={UserOrderListController} match={match} />
-};
+
 const User = ({ match }) => {
   return <UserInfo controller={userController} match={match} />
 };
@@ -90,7 +89,9 @@ const about = ({ match }) => {
 const HomeComponent = () => {
   return <Home marketController={marketController} />
 };
-
+const Order = ({ match }) => {
+  return <OrderManage controller={userOrderController} match={match} />
+};
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -104,6 +105,7 @@ export default class App extends Component {
     noticeController = new NoticeController();
     activityController = new ActivityController();
     marketController = new MarketController();
+    userOrderController = new UserOrderListController();
 
 
     testAppController.configController = configController;
@@ -115,6 +117,7 @@ export default class App extends Component {
     assetController.userController = userController;
     assetController.marketController = marketController;
     loginController.userController = userController;
+    userOrderController.marketController = marketController;
 
   }
 
@@ -126,6 +129,7 @@ export default class App extends Component {
   async componentDidMount() {
     let flag = await configController.loadLocales();
     flag && this.setState({ initDone: true });
+    marketController.getTradePairHandle();
     // console.log(222, window.innerHeight)
   }
 

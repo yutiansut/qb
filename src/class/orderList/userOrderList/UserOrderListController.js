@@ -16,8 +16,8 @@ export default class UserOrderListController extends OrderListController{
   }
   // 数据的请求以及处理
   orderListHandle(type, params){
-    type === 'orderCurrent' && this.getCurrentOrder();
-    type === 'orderHistory' && this.getHistoryOrder();
+    type === 'orderCurrent' && this.getCurrentOrder(type, params);
+    type !== 'orderCurrent' && this.getHistoryOrder(type, params);
     // this.view.setState(
     //   type !== 'orderDeal' &&  {
     //   orderListArray: this.store.state[order[type]]
@@ -29,9 +29,9 @@ export default class UserOrderListController extends OrderListController{
     //     {preArray:  this.store.state[order[type]]}
     // )
   }
-  async getCurrentOrder(trade = false){
-    let currentOrder = await this.store.getCurrentOrder();
-    if(trade){
+  async getCurrentOrder(trade, params){
+    let currentOrder = await this.store.getCurrentOrder(params);
+    if(!trade){
       this.view.setState({
         currentOrder
       });
@@ -41,9 +41,9 @@ export default class UserOrderListController extends OrderListController{
       orderListArray: currentOrder,
     })
   }
-  async getHistoryOrder(trade = false){
-    let historyOrder = await this.store.getHistoryOrder();
-    if(trade){
+  async getHistoryOrder(trade, params){
+    let historyOrder = await this.store.getHistoryOrder(params);
+    if(!trade){
       this.view.setState({
         historyOrder
       });
@@ -51,7 +51,14 @@ export default class UserOrderListController extends OrderListController{
     }
     this.view.setState({
       orderListArray: historyOrder,
-      preArray: historyOrder
     })
+  }
+  async getOrderDetail(id){
+    let orderDetail = await this.store.getOrderDetail(id);
+    this.view.setState({
+      detailFlag: true,
+      orderDetail
+    })
+    console.log('ididi', id, orderDetail)
   }
 }

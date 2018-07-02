@@ -206,37 +206,48 @@ export default class UserOrderListStore extends OrderListStore {
       currentArray:[],
       historyArray:[],
       dealArray:[],
+      orderDetail: {}
     }
     
   }
-  async getCurrentOrder(){
+  async getCurrentOrder(params){
     let currentList = await this.Proxy.currentOrder(
         {
-          "userId": 20001,
-          "tradePairId": 10001,
+          "userId": JSON.parse('232601699242483712'),
+          "tradePairId": params.idArray,
           "tradePairName": "xxx",
-          "orderType": 2,
-          "hideOther": 0
+          "orderType": params.orderType,
+          "hideOther": params.hideOther
         }
     );
-    this.state.currentOrder = currentList.orderList
+    this.state.currentOrder = currentList.orderList;
     return currentList.orderList
   };
-  async getHistoryOrder(){
+  async getHistoryOrder(params){
     let historyList = await this.Proxy.historyOrder(
         {
-          "userId": 20001,
-          "tradePairId": 0,
+          "userId": JSON.parse('232601699242483712'),
+          "tradePairId": params.idArray,
           "tradePairName": "xxx",
-          "orderType": 2,
-          "orderStatus": [0,1,4],
-          "startTime": 1509484067,
-          "endTime": 1690088867,
-          "page":1,
-          "pageSize":20
+          "orderType": params.orderType,
+          "orderStatus": params.orderStatus,
+          "startTime": params.startTime,
+          "endTime": params.endTime,
+          "page":params.page,
+          "pageSize":params.pageSize
         }
     );
     this.state.historyOrder = historyList.orderList;
     return historyList.orderList
+  }
+  async getOrderDetail(id){
+    let orderDetail = await this.Proxy.orderDetail(
+        {
+          "userId": JSON.parse('232601699242483712'),
+          "orderId": id
+        }
+    );
+    this.state.orderDetail = orderDetail;
+    return orderDetail
   }
 }

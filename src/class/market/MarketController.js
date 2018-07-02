@@ -207,17 +207,29 @@ export default class MarketController extends ExchangeControllerBase {
   pairDataHandle() {
 
   }
-
+  // 交易对名称以及id的处理
   getTradePairHandle() {
-    // let preData = this.store.state.allPairData;
-    // let pairArr = [];
-    // let marketArr = [];
-    // preData.map((v) => {
-    //   pairArr.concat(v.marketData);
-    //   marketArr.push(v.marketName);
-    // });
-    // marketArr.map((v) => {
-    //
-    // })
+    // let pairInfo = this.store.getPairInfo();
+    let pairInfo = this.store.state.list;
+    let coinCorrespondingId = {},marketCorrespondingId = {},coinCorrespondingPair = {},marketCorrespondingPair = {};
+    pairInfo.map((v) => {
+     let pair = v.tradePairName.split('/');
+     let coin = pair[0];
+     let market = pair[1];
+      marketCorrespondingId[market] = marketCorrespondingId[market] || {};
+      coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
+      marketCorrespondingId[market][coin] = v.tradePairId;
+      coinCorrespondingId[coin][market] = v.tradePairId;
+      coinCorrespondingPair[coin] = coinCorrespondingPair[coin] || [];
+      marketCorrespondingPair[market] = marketCorrespondingPair[market] || [];
+      coinCorrespondingPair[coin].push(market);
+      marketCorrespondingPair[market].push(coin);
+    });
+    let pairMsg = {};
+    pairMsg.pairIdCoin = coinCorrespondingId;
+    pairMsg.pairIdMarket = marketCorrespondingId;
+    pairMsg.pairNameCoin = coinCorrespondingPair;
+    pairMsg.pairNameMarket = marketCorrespondingPair;
+    return pairMsg
   }
 }

@@ -50,7 +50,9 @@ export default {
     {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
   ],
   market: [
-    { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' }
+    { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
+      // 获取交易对名称以及id
+    {name: 'pairInfo', data: { url: '/order/', method: 'post'}, action: 'getAllTradePair', actionBack: 'getAllTradePairRes'}
   ],
   asset: [
     // 获取交易对手续费5.16（pass）
@@ -78,7 +80,9 @@ export default {
     //当前订单
     {name: 'currentOrder', data: {url: '/order/', method:'post'}, action: 'getCurrOrders', actionBack: 'getCurrOrdersRes'},
     //历史订单
-    {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'}
+    {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'},
+      //订单详情
+    {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'}
   ],
 
 }

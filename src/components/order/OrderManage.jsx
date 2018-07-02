@@ -22,17 +22,30 @@ const orderNavItems = [
   {name:'历史成交', address:'/deal', type:'orderDeal'}
 ]
 export default class OrderManage extends exchangeViewBase{
-  constructor(){
-    super();
-    OrderCurrentController = new OrderListController();
-    OrderHistoryController = new OrderListController();
-    OrderDealController = new OrderListController();
+  constructor(props){
+    super(props);
+    // OrderCurrentController = new OrderListController();
+    // OrderHistoryController = new OrderListController();
+    // OrderDealController = new OrderListController();
+    this.state = {
+    pairIdMsg : {
+    
+    }
+    };
+    // const {controller} = this.props;
+    //绑定view
+    // controller.setView(this);
+    //初始化数据，数据来源即store里面的state
+    // this.state = Object.assign(this.state, controller.initState);
   }
   componentWillMount(){
   
   }
   componentDidMount(){
-  
+    let pairIdMsg = this.props.controller.marketController.getTradePairHandle();
+    this.setState(
+        {pairIdMsg}
+    )
   }
   render(){
     const {match} = this.props;
@@ -52,13 +65,13 @@ export default class OrderManage extends exchangeViewBase{
           <div className='order-content fr'>
             <Switch>
               <Route path={`${match.url}/current`} component={({match}) => (
-                  <OrderCurrent controller={OrderCurrentController} type='orderCurrent' />
+                  <OrderCurrent controller={this.props.controller} type='orderCurrent' pairIdMsg={this.state.pairIdMsg}/>
               )}/>
               <Route path={`${match.url}/history`} component={({match}) => (
-                  <OrderCurrent controller={OrderHistoryController} type='orderHistory' />
+                  <OrderCurrent controller={this.props.controller} type='orderHistory' pairIdMsg={this.state.pairIdMsg}/>
               )}/>
               <Route path={`${match.url}/deal`} component={({match}) => (
-                  <OrderCurrent controller={OrderDealController}  type='orderDeal' />
+                  <OrderCurrent controller={this.props.controller}  type='orderDeal' pairIdMsg={this.state.pairIdMsg}/>
               )}/>
               <Redirect to={`${match.url}/current`} />
             </Switch>
