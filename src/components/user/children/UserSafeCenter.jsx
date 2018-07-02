@@ -29,6 +29,7 @@ export default class userSafeCenter extends exchangeViewBase {
       noticeIndex: 1, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
       changeType: 0, // 更改两步验证弹窗所需参数
+      isTwoVerify: 0, // 确认两步验证类型
       timeAddr: '', // 时区
       verifyList: [
         {title: '登录验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}, {name: '无', flag: false}]},
@@ -58,6 +59,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.delIp = controller.delIp.bind(controller) // 删除ip白名单
     this.getGoogle = controller.getGoogle.bind(controller) // 获取谷歌密钥
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
+    this.setTwoVerify = controller.setTwoVerify.bind(controller) // 修改两步认证
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -91,11 +93,12 @@ export default class userSafeCenter extends exchangeViewBase {
     })
   }
   selectType(content, index, i, type) { // 两步认证单选
-    let changeArr = [3, 1, 0, 2]
+    let changeArr = [3, 1, 0, 2]  // 2 谷歌验证 1 邮件 3 短信 0 无
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
       changeType: changeTypeArr[i],
+      isTwoVerify: i,
       showGoogle: !this.state.userInfo.googleAuth && index === 0 ? 'block' : 'none',
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
@@ -138,9 +141,9 @@ export default class userSafeCenter extends exchangeViewBase {
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
-    // verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
-    // verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
-    // verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
+    verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
+    verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
+    verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
     verifyList.forEach((v, i) => { // 两步验证未绑定邮箱时
       v.contentList[1].name = this.state.userInfo.email ? '邮箱' : '绑定／验证邮箱后开启'
     })
@@ -343,9 +346,16 @@ export default class userSafeCenter extends exchangeViewBase {
                    clearErr2 = {() => {this.clearErr2()}}
                    popupInputErr2 = {this.state.popupInputErr2}/>
         <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
+                           phone = {this.state.userInfo.phone}
+                           email = {this.state.userInfo.email}
                            isType = {this.state.changeType}
+                           isTwoVerify = {this.state.isTwoVerify}
                            getVerify = {this.getVerify}
                            verifyNum = {this.state.verifyNum}
+                           captcha = {this.state.captcha}
+                           captchaId = {this.state.captchaId}
+                           getCaptcha = {this.getCaptchaVerify}
+                           setTwoVerify = {this.setTwoVerify}
                            isChange = {this.state.showChange}/>
         {this.state.remindPopup && <RemindPopup
                      type="tip1"

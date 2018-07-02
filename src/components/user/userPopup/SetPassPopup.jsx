@@ -24,6 +24,10 @@ export default class SetPassPopup extends exchangeViewBase {
       popupInput5: "",
     }
     this.changeInput1 = this.changeInput1.bind(this)
+    this.changeInput2 = this.changeInput2.bind(this)
+    this.changeInput3 = this.changeInput3.bind(this)
+    this.changeInput4 = this.changeInput4.bind(this)
+    this.changeInput5 = this.changeInput5.bind(this)
   }
   changeInput1(value) {
     this.setState({popupInput1: value});

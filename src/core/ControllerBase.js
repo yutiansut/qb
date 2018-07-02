@@ -38,6 +38,7 @@ export default class ControllerBase {
    * 倒计时方法
    */
   countDown(key, state, view) {
+    // console.log(this.Loop[key], view.state[state])
     this.Loop[key].clear()
     this.Loop[key].setDelayTime(1000)
     this.Loop[key].set(async () => {

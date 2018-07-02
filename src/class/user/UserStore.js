@@ -85,4 +85,18 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.googleSecret = googleSecret;
     return googleSecret
   }
+
+  async uploadImg(file){
+    let headers = new Headers(), uploadImg = new FormData();
+    uploadImg.append("uploadimage", file);
+    headers.set('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
+    // console.log(headers)
+    // console.log('uploadImg', uploadImg, file)
+    return await fetch("http://192.168.113.7/image/", {
+      method: 'Post',
+      body: uploadImg,
+      headers,
+      // credentials: 'include'
+    })
+  }
 }

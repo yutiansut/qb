@@ -24,7 +24,7 @@ export default {
   user: [ // 用户
     {name: 'getUserInfo', data: {url: '/user/', method: 'post'}, action: 'userInfo', actionBack: 'userInfoRes'}, // 获取用户信息
     {name: 'getUserAuth', data: {url: '/user/', method: 'post'}, action: 'userAuth', actionBack: 'userAuthRes'}, // 获取用户认证信息
-    // {name: 'uploadUserImg', data: {url: '/image/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true }, // 上传用户认证图片
+    //{name: 'uploadUserImg', data: {url: '/image/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true }, // 上传用户认证图片
     {name: 'uploadUserAuth', data: {url: '/user/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes' }, // 上传用户认证信息
     {name: 'getLoginPwd', data: {url: '/user/', method: 'post'}, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes' }, // 设置登录密码
     {name: 'getVerifyCode', data: {url: '/user/', method: 'post'}, action: 'getCode', actionBack: 'getCodeRes' }, // 获取验证码
@@ -41,6 +41,7 @@ export default {
     {name: 'setFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes'}, // 设置资金密码输入间隔
     {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
     {name: 'getCaptcha', data: {url: '/user/', method: 'post'}, action: 'getCaptcha', actionBack: 'getCaptchaRes'}, // 获取图形验证码
+    {name: 'setTwoVerify', data: {url: '/verify/', method: 'post'}, action: 'setVerifyType', actionBack: 'setVerifyTypeRes'}, // 修改两步认证
   ],
   notice: [
     {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容

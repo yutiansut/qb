@@ -12,10 +12,13 @@ export default class LoginController extends ExchangeControllerBase {
     return this.store.data
   }
 
-  async getVerify() { // 获取验证码
+  async getVerify(account, mode, type) { // 获取验证码
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
-    this.view.setState({verifyNum: 5})
+    this.view.setState({verifyNum: 60})
+    console.log('aaaaa',this.view.state.verifyNum)
     this.countDown('verifyCountDown', 'verifyNum', this.view)
+    console.log('bbbbb',this.view.state.verifyNum)
+    this.userController.getCode(account, mode, type)
   }
 
   async initLoginVerification() { // 获取手势验证

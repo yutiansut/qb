@@ -44,6 +44,7 @@ export default class userIdentity extends exchangeViewBase {
     this.selectPhoto = this.selectPhoto.bind(this)
     this.checkPhoto = this.checkPhoto.bind(this)
     this.uploadInfo = controller.uploadInfo.bind(controller)
+    this.uploadImg = controller.uploadImg.bind(controller)
   }
   getObjectURL (file) {
     let url = null ;
@@ -57,31 +58,33 @@ export default class userIdentity extends exchangeViewBase {
     return url ;
   }
   async selectPhoto() { // 上传图片
-    let file = this.refs.files.files[0], uploadImg = new FormData(), headers = new Headers();
+    let file = this.refs.files.files[0];
     if(!file) return
     if(file && file.size > 10485760) return
     this.state.showPhotoList[this.state.imgUrlIndex] = this.getObjectURL(file);
     this.setState({
       showPhotoList: this.state.showPhotoList.concat([])
     })
-    uploadImg.append("uploadimage", file);
-    headers.set('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
-    console.log(headers)
-    console.log('uploadImg', uploadImg, file)
-
-    await fetch("http://192.168.113.141/image/", {
-      method: 'Post',
-      body: uploadImg,
-      headers,
-      // credentials: 'include'
-    }).then(res => res.json(),res=>console.log(res)).then(res => {
-      let imgUrl = `image${this.state.imgUrlIndex + 1}`, obj={}
-      obj[imgUrl] = res.image_id
-      this.setState(obj)
-    }).catch(msg => {
-        console.log('上传图片错误', msg)
-    })
+    this.uploadImg(file)
+    // uploadImg.append("uploadimage", file);
+    // let headers = new Headers();
+    // headers.set('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');
+    // console.log(headers)
+    // console.log('uploadImg', uploadImg, file)
+    // await fetch("http://192.168.113.7/image/", {
+    //   method: 'Post',
+    //   body: uploadImg,
+    //   headers,
+    //   // credentials: 'include'
+    // }).then(res => res.json(),res=>console.log(res)).then(res => {
+    //   let imgUrl = `image${this.state.imgUrlIndex + 1}`, obj={}
+    //   obj[imgUrl] = res.image_id
+    //   this.setState(obj)
+    // }).catch(msg => {
+    //   console.log('上传图片错误', msg)
+    // })
   }
+
   checkPhoto(i) {
     this.setState({
       imgUrlIndex: i

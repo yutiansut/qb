@@ -109,10 +109,12 @@ export default class App extends Component {
     testAppController.configController = configController;
     noticeController.configController = configController;
     activityController.configController = configController;
+    assetController.configController = configController;
     noticeController.userController = userController;
     assetController.configController = configController;
     assetController.userController = userController;
     assetController.marketController = marketController;
+    loginController.userController = userController;
 
   }
 

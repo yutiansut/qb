@@ -35,7 +35,7 @@ export default class UserController extends ExchangeControllerBase {
     }
   }
 
-  async getVerify(account, type, mode) { // 获取短信验证码
+  async getVerify(account, mode, type) { // 获取短信验证码
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
@@ -84,6 +84,15 @@ export default class UserController extends ExchangeControllerBase {
      this.view.setState({googleSecret})
   }
 
+  async uploadImg(file) { // 上传图片
+    let res = await this.store.uploadImg(file),
+      result = await res.text()
+    // console.log(res, result)
+    let imgUrl = `image${this.view.state.imgUrlIndex + 1}`, obj={}
+    obj[imgUrl] = result
+    this.view.setState(obj)
+  }
+
   uploadInfo() { // 身份认证确认提交
     let typeIndexArr = [1, 3]
     this.store.Proxy.uploadUserAuth({
@@ -129,6 +138,21 @@ export default class UserController extends ExchangeControllerBase {
     console.log('设置密码', result)
   }
 
+  async setTwoVerify(account, mode, picCode, picId, position, verifyType) { // 修改两步认证
+    let result = await this.store.Proxy.setTwoVerify({
+      "userId": this.store.state.userId,
+      "account": "",
+      "mode": 0, //0手机 1邮箱 2Google
+      "code": "",//验证码
+      "os": 3, // 1:android 2:iOS 3:borwser
+      "picCode":"",//图形验证码
+      "picId":"",//验证码图片的id
+      "position": 1,//修改的位置 1登陆   2提现   3资金密码
+      "verifyType": 1//2谷歌验证 1邮件  3短信  0无
+    })
+    console.log('修改两步认证', result)
+  }
+
   async addIp(ipAdd) { // 添加ip白名单
     if (this.view.state.ipValue === '') return
     let result = await this.store.Proxy.addIp({
@@ -161,6 +185,13 @@ export default class UserController extends ExchangeControllerBase {
       fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
     return {fundPassVerify, loginVerify, withdrawVerify, fundPwd}
+  }
+
+  get userInfo() { // 提供用户手机号或者邮箱
+    let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+      email, phone
+    } = this.store.state.userInfo
+    return { email, phone }
   }
 
   get userAuthVerify() { // 提供用户是否实名
@@ -198,12 +229,12 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCode(account, mode, type) { // 获取短信验证码
     let result = await this.store.Proxy.getVerifyCode({
-      account,
+      account, // 手机号或者邮箱
       mode,//0 phone 1 email
-      type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 4 ; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币
+      type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币
       "os": 3// 1 android 2 iOS 3 browser
     })
-    console.log('发送验证码', result )
+    console.log('发送验证码', result, account, mode, type )
     return result
   }
 
