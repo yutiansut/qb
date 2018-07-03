@@ -209,7 +209,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setGoogleVerify(code) { // 验证谷歌验证码
-    let result = await this.store.Proxy.deletIp({
+    let result = await this.store.Proxy.setGoogleVerify({
       "userId": this.store.state.userId,
       code
     })

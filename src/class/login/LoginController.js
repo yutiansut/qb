@@ -19,9 +19,14 @@ export default class LoginController extends ExchangeControllerBase {
     this.userController.getCode(account, mode, type)
   }
 
+  async getCaptchaVerify() { // 获取图形验证码
+    let captcha = await this.userController.getCaptcha()
+    this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+  }
+
   //登录
-  login(account, code, type, mode){
-    let obj = {passCode:code, mode, os:3};
+  login(account, code, type, mode, captchaId, captchaCode){
+    let obj = {passCode:code, mode, captchaId, captchaCode, os:3};
     let keyArr = ['phone','email']
     obj[keyArr[type]] = account
     this.store.login(obj)

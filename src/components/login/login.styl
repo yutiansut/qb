@@ -36,10 +36,10 @@
         height .5rem
         background $main-color
         color $normal-white-color
-    .verify-li
-      height .35rem
-      background $main-color
-    .send-code-li
+    //.verify-li
+      //height .35rem
+      //background $main-color
+    .send-code-li, .verify-li
       .base-input-wrap
         float left
         input
@@ -47,13 +47,19 @@
           border-right none
           vertical-align top
           border-radius (.02rem 0 0 .02rem)
-      .send-code-btn
+      .send-code-btn, .picture-btn
         float left
         width 2rem
         height .5rem
         background $line-light
         border none
         border-radius (0 .02rem .02rem 0)
+      .picture-btn
+        text-align center
+        cursor pointer
+        img
+          width 1.5rem
+          height .5rem
     .pass-li
       position relative
       .base-input-wrap

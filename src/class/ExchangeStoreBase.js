@@ -61,7 +61,7 @@ export default class ExchangeStoreBase extends StoreBase {
       // let header = websocket.config.optionList[modelName]
       // console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
       // if(headerConfig.seq === data.seq)
-      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](data.body)
+      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op - 1]] && WebsocketCallBackList[opConfig[data.op - 1]](data.body)
     }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
