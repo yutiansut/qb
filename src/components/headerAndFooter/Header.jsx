@@ -45,7 +45,7 @@ export default class Header extends Component {
       navClass: 'headerNav',
       languageIndex: 0
     }
-    this.configController = this.props.controller;
+    this.configController = this.props.configController;
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.matched = '/home'
   }

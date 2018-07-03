@@ -73,11 +73,11 @@ const Activity = ({ match }) => {
 }
 
 const header = ({ match }) => {
-  return <Header navClass={"headerNav"} controller={configController} match={match} />;
+  return <Header navClass={"headerNav"} configController={configController} match={match} />;
 }
 
 const tradeHeader = ({ match }) => {
-  return <Header navClass={'tradeNav'} match={match} />;
+  return <Header navClass={'tradeNav'} match={match} configController={configController}/>;
 }
 
 import TestApp from './TestApp'
