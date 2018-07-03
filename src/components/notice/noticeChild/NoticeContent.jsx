@@ -58,11 +58,11 @@ export default class noticeContent extends exchangeViewBase {
               <span>时间</span>
             </dt>
             {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<dd key={index}>
-              {/*onClick={() => {window.location.href = v.source}}*/}
-              <i>{v.subjectCn}</i>
-              <em>公告</em>
-              <span>{v.createdAt}</span>
-
+              <a href={`http://${v.source}`} target="_blank">
+                <i>{v.subjectCn}</i>
+                <em>公告</em>
+                <span>{v.createdAt}</span>
+              </a>
             </dd>))}
           </dl>
           <div className={this.state.noticeList.data ? '' : 'hide'}>
@@ -82,7 +82,7 @@ export default class noticeContent extends exchangeViewBase {
               <span>时间</span>
             </dt>
             {this.state.infoList.data && this.state.infoList.data.map((v, index) => (<dd key={index}>
-              <a href={v.source}>
+              <a href={`http://${v.source}`} target="_blank">
                 <i>{v.subjectCn}</i>
                 <em>资讯</em>
                 <span>{v.createdAt}</span>
@@ -99,5 +99,4 @@ export default class noticeContent extends exchangeViewBase {
       </div>
     );
   }
-
 }
