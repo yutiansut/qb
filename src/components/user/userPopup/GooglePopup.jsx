@@ -10,7 +10,16 @@ import "../stylus/googlePopup.styl"
 export default class GooglePopup extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.state = {
+      codeValue: ''
+    }
   }
+
+  changeInput(value) {
+    this.setState({codeValue: value});
+    console.log(1, value)
+  }
+
   async componentDidMount() {
 
   }
@@ -45,8 +54,8 @@ export default class GooglePopup extends exchangeViewBase {
               <li>如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。</li>
               <li>请输入显示的验证码，开启验证功能</li>
               <li className="clearfix">
-                <Input placeholder="请输入验证码"/>
-                <Button title="确定提交" className="name-btn" onClick={this.test}/>
+                <Input placeholder="请输入验证码"  value={this.state.codeValue} onInput={value => this.changeInput(value)}/>
+                <Button title="确定提交" className="name-btn" onClick={() => {this.props.setGoogleVerify(this.state.codeValue)}}/>
               </li>
             </ul>
           </div>

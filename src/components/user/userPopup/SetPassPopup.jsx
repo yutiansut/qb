@@ -93,7 +93,10 @@ export default class SetPassPopup extends exchangeViewBase {
             <ul>
               <li className={[4, 6].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitleNew}</p>
-                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
+                <Input placeholder={this.props.isType && popupTypeList[this.props.isType - 1].numInputNew}
+                       value={this.state.popupInput1}
+                       oriType={[4, 6].includes(this.props.isType) ? 'password' : 'text'}
+                       onInput={value => this.changeInput1(value)}/>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && popupTypeList[this.props.isType - 1].numTitle}</p>
@@ -136,9 +139,6 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>*出于安全方面的考虑，修改密码后，你的账户将在 24 小时内无法提现</p>
               </li>
               <li>
-                {/*<Button title={this.props.isType && popupTypeList[this.props.isType - 1].btnTitle}*/}
-                        {/*className="set-btn btn"*/}
-                        {/*onClick={() => {(this.props.isType == 3 && this.props.setLoginPass(this.state.popupInput2, this.state.popupInput3)) || (this.props.isType == 5 && this.props.setFundPass(this.state.popupInput1, this.state.popupInput3))}}/>*/}
                 {this.props.isType === 1 && <Button className="set-btn btn" title="绑定"/>}
                 {this.props.isType === 2 && <Button className="set-btn btn" title="绑定"/>}
                 {this.props.isType === 3 && <Button className="set-btn btn" title="设置" onClick={() => this.props.setLoginPass('', this.state.popupInput2, 0)}/>}

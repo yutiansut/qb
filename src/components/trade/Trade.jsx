@@ -16,6 +16,7 @@ import TradeOrderController from '../../class/orderList/tradeOrderList/TradeOrde
 import UserOrderListController from '../../class/orderList/userOrderList/UserOrderListController'
 import NoticeController from "../../class/notice/NoticeController";
 import DealController from '../../class/deal/DealController'
+import UserController from '../../class/user/UserController'
 
 
 import './stylus/trade.styl'
@@ -28,6 +29,7 @@ let TradeMarketController,
   noticeController,
   TradeDealController,
   TradePlanController;
+  // userController;
 
 
 export default class extends exchangeViewBase{
@@ -43,6 +45,7 @@ export default class extends exchangeViewBase{
     noticeController = new NoticeController();
     TradeDealController = new DealController();
     TradePlanController = new DealController();
+    // userController = new UserController()
 
     TradeMarketController.TradeDealController = TradeDealController;
     TradeMarketController.TradePlanController = TradePlanController;
@@ -53,6 +56,8 @@ export default class extends exchangeViewBase{
     TradePlanController.CurrentOrderController = CurrentOrderController;
     TradePlanController.HistoryOrderController = HistoryOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
+
+    // noticeController.userController = userController;
   }
   render(){
     return(

@@ -115,6 +115,18 @@ export default class UserController extends ExchangeControllerBase {
     });
   }
 
+  async bindUser() { // 绑定邮箱／手机号
+    let result = await this.store.Proxy.getLoginPwd({
+      "userId": this.store.state.userId,
+      "account": "13676566779",// 手机号或邮箱
+      "mode": 0,// 0:phone 1:email
+      "code": "722350",
+      "os": 3 // 1:android 2:iOS 3:borwser
+    })
+    this.view.setState({popupInputErr2: result.msg})
+    console.log('绑定手机号／邮箱', result)
+  }
+
   async setLoginPass(oldPwd, newPwd, type) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.state.userId,
@@ -132,6 +144,21 @@ export default class UserController extends ExchangeControllerBase {
       account,
       mode, // 0:phone 1:email
       pass,
+      captchaCode, // 图形验证码，没有就传空
+      captchaId, // 图形验证码id，没有就传空
+      code,
+      "os": 3, // 1:android 2:iOS 3:browser
+    })
+    console.log('设置密码', result)
+  }
+
+  async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
+    let result = await this.store.Proxy.setFundPwd({
+      "userId": this.store.state.userId,
+      account,
+      mode, // 0:phone 1:email 2:google
+      oldPass,
+      newPass,
       captchaCode, // 图形验证码，没有就传空
       captchaId, // 图形验证码id，没有就传空
       code,
@@ -179,6 +206,14 @@ export default class UserController extends ExchangeControllerBase {
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.getCaptcha()
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+  }
+
+  async setGoogleVerify(code) { // 验证谷歌验证码
+    let result = await this.store.Proxy.deletIp({
+      "userId": this.store.state.userId,
+      code
+    })
+    console.log('验证谷歌', result)
   }
 
   // 为其他模块提供接口

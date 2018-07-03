@@ -61,6 +61,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getGoogle = controller.getGoogle.bind(controller) // 获取谷歌密钥
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
     this.setTwoVerify = controller.setTwoVerify.bind(controller) // 修改两步认证
+    this.setGoogleVerify = controller.setGoogleVerify.bind(controller) // 验证谷歌验证码
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -101,10 +102,10 @@ export default class userSafeCenter extends exchangeViewBase {
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
-      showGoogle: !this.state.userInfo.googleAuth && index === 0 ? 'block' : 'none',
+      showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? 'block' : 'none',
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
-      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (!this.state.userInfo.googleAuth && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
+      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
     })
     // verifyList[i].contentList.forEach(v => {v.flag = false})
     // if (index === 1 && !this.state.user_info.email) {
@@ -334,6 +335,7 @@ export default class userSafeCenter extends exchangeViewBase {
                      {/*verifyNum={this.state.verifyNum}/>*/}
         <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)}
                      googleSecret = {this.state.googleSecret.secret}
+                     setGoogleVerify = {this.setGoogleVerify}
                      isGoogle = {this.state.showGoogle}/>
         <PassPopup changeSetPopup = {state => this.changeSetPopup(state)}
                    phone = {this.state.userInfo.phone}

@@ -16,10 +16,10 @@ export default async (url, params) => {
         obj = { ret: -2, data: e };
         throw obj;
       });
-    console.log(result)
+    // console.log(result)
     return JSON.parse(result);
   } catch (e) {
-    console.error('error', e);
+    // console.error('error', e);
     if (!e.ret)
       e = { ret: -3, data: e };
     return e;

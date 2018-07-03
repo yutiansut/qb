@@ -11,6 +11,7 @@ export default class tradeNotice extends exchangeViewBase {
     controller.setView(this)
     // 初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
+    this.getNoticeCon = controller.getNoticeCon.bind(controller) // 获取资讯
     console.log('资讯', this.state)
   }
 
@@ -23,8 +24,8 @@ export default class tradeNotice extends exchangeViewBase {
 
   }
 
-  componentDidMount() {
-
+  async componentDidMount() {
+    await this.getNoticeCon()
   }
 
   componentWillUpdate(...parmas) {
@@ -36,10 +37,10 @@ export default class tradeNotice extends exchangeViewBase {
       <div className="trade-notice-wrap">
         <h3>资讯</h3>
         <ul>
-          {this.state.newsList.data.map((v, index) => (<li key={index}>
-            <p>{v.subjectCN}</p>
-            <span>{v.createdAt}</span>
-          </li>))}
+          {/*{this.state.infoList.data.map((v, index) => (<li key={index}>*/}
+            {/*<p>{v.subjectCN}</p>*/}
+            {/*<span>{v.createdAt}</span>*/}
+          {/*</li>))}*/}
         </ul>
       </div>
     );

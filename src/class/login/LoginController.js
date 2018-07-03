@@ -14,11 +14,8 @@ export default class LoginController extends ExchangeControllerBase {
 
   getVerify(account, mode, type) { // 获取验证码
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
-    console.log('这是什么',this.view.state, this.view)
     this.view.setState({verifyNum: 60})
-    // console.log('aaaaa',this.view.state.verifyNum)
     this.countDown('verifyCountDown', 'verifyNum', this.view)
-    // console.log('bbbbb',this.view.state.verifyNum)
     this.userController.getCode(account, mode, type)
   }
 
@@ -28,6 +25,14 @@ export default class LoginController extends ExchangeControllerBase {
     let keyArr = ['phone','email']
     obj[keyArr[type]] = account
     this.store.login(obj)
+  }
+
+  getUserToken(token) { // 向用户提供token
+    this.userController.userToken = token
+  }
+
+  set getUserToken(token) {
+    token = this.store.token
   }
 
   async initLoginVerification() { // 获取手势验证

@@ -42,6 +42,7 @@ export default {
     {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
     {name: 'getCaptcha', data: {url: '/user/', method: 'post'}, action: 'getCaptcha', actionBack: 'getCaptchaRes'}, // 获取图形验证码
     {name: 'setTwoVerify', data: {url: '/user/', method: 'post'}, action: 'setVerifyType', actionBack: 'setVerifyTypeRes'}, // 修改两步认证
+    {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes'}, // 验证谷歌验证码
   ],
   notice: [
     {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容

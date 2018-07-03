@@ -38,14 +38,6 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   render() {
-    /*
-  currentPage	当前页码，默认为1
-  total	数据总条数
-  pageSize 每页数据条数
-  showTotal 是否显示数据总条数
-  showQuickJumper 是否显示快速跳转
-*/
-
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">
@@ -59,17 +51,17 @@ export default class noticeContent extends exchangeViewBase {
             </dt>
             {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<dd key={index}>
               <a href={`http://${v.source}`} target="_blank">
-                <i>{v.subjectCn}</i>
+                <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
                 <em>公告</em>
                 <span>{v.createdAt}</span>
               </a>
             </dd>))}
           </dl>
           <div className={this.state.noticeList.data ? '' : 'hide'}>
-            <Pagination total={this.state.noticeList.totalCount}
-                        pageSize="10"
+            {this.state.noticeList.totalCount &&<Pagination total={this.state.noticeList.totalCount}
+                        pageSize={10}
                         showTotal={true}
-                        showQuickJumper={true}/>
+                        showQuickJumper={true}/>}
           </div>
         </div>
         <div className="news-wrap" >
@@ -83,17 +75,17 @@ export default class noticeContent extends exchangeViewBase {
             </dt>
             {this.state.infoList.data && this.state.infoList.data.map((v, index) => (<dd key={index}>
               <a href={`http://${v.source}`} target="_blank">
-                <i>{v.subjectCn}</i>
+                <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
                 <em>资讯</em>
                 <span>{v.createdAt}</span>
               </a>
             </dd>))}
           </dl>
           <div className={this.state.infoList.data ? '' : 'hide'}>
-            <Pagination total={this.state.infoList.totalCount}
-                        pageSize="10"
+            {this.state.infoList.totalCount && <Pagination total={this.state.infoList.totalCount}
+                        pageSize={10}
                         showTotal={true}
-                        showQuickJumper={true}/>
+                        showQuickJumper={true}/>}
           </div>
         </div>
       </div>
