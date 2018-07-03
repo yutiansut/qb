@@ -18,11 +18,11 @@ export default {
     {
       name: 'general', url:'/sub' ,optionList: {
         // test:{testEmit:{var: 1, op: 2}},
-        global:{joinRoom:{var:1, op:4, seq:0}},
-        market:{recommendCurrency:{var: 1, op: 108, seq:0},
-                marketPair:{var: 1, op: 108, seq:0}},
-        order:{tradeDepth:{var: 1, op: 108, seq:0}},
-        login:{login:{var: 1, op: 10, seq:0}}, //ysh
+        global:{joinRoom:{var:1, op:4, seq:0, resOp:5}},
+        market:{recommendCurrency:{var: 1, op: 108, seq:0, resOp:108},
+                marketPair:{var: 1, op: 108, seq:0, resOp:108}},
+        order:{tradeDepth:{var: 1, op: 108, seq:0, resOp:108}},
+        login:{login:{var: 1, op: 10, seq:0, resOp:11}}, //ysh
       }
     },
 

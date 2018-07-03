@@ -54,14 +54,14 @@ export default class ExchangeStoreBase extends StoreBase {
     let headerConfig = Object.assign(websocket.config.optionList['global'], websocket.config.optionList[modelName])
     let opConfig = {}
     headerConfig && Object.keys(headerConfig).forEach(v=>{
-      opConfig[headerConfig[v].op] = v
+      opConfig[headerConfig[v].resOp] = v
     })
     // console.log('connectName, modelName', connectName, modelName, websocket)
     websocket.onMessage = data => {
       // let header = websocket.config.optionList[modelName]
-      // console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
+      console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
       // if(headerConfig.seq === data.seq)
-      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op - 1]] && WebsocketCallBackList[opConfig[data.op - 1]](data.body)
+      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](data.body)
     }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {
