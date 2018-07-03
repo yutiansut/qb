@@ -50,21 +50,23 @@ export default class noticeContent extends exchangeViewBase {
       <div className="bulletin-wrap">
         <div className="information-wrap">
           <h1>公告</h1>
-          <h2 className={this.state.informationList.data ? 'hide' : ''}>暂无公告</h2>
-          <dl className={this.state.informationList.data ? '' : 'hide'}>
+          <h2 className={this.state.noticeList.data ? 'hide' : ''}>暂无公告</h2>
+          <dl className={this.state.noticeList.data ? '' : 'hide'}>
             <dt>
               <i>标题</i>
               <em>类型</em>
               <span>时间</span>
             </dt>
-            {this.state.informationList.data && this.state.informationList.data.map((v, index) => (<dd key={index}>
-              <i>{v.subjectCN}</i>
+            {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<dd key={index}>
+              {/*onClick={() => {window.location.href = v.source}}*/}
+              <i>{v.subjectCn}</i>
               <em>公告</em>
               <span>{v.createdAt}</span>
+
             </dd>))}
           </dl>
-          <div className={this.state.newsList.data ? '' : 'hide'}>
-            <Pagination total="5"
+          <div className={this.state.noticeList.data ? '' : 'hide'}>
+            <Pagination total={this.state.noticeList.totalCount}
                         pageSize="10"
                         showTotal={true}
                         showQuickJumper={true}/>
@@ -72,21 +74,23 @@ export default class noticeContent extends exchangeViewBase {
         </div>
         <div className="news-wrap" >
           <h1>资讯</h1>
-          <h2 className={this.state.newsList.data ? 'hide' : ''}>暂无资讯</h2>
-          <dl className={this.state.newsList.data ? '' : 'hide'}>
+          <h2 className={this.state.infoList.data ? 'hide' : ''}>暂无资讯</h2>
+          <dl className={this.state.infoList.data ? '' : 'hide'}>
             <dt>
               <i>标题</i>
               <em>类型</em>
               <span>时间</span>
             </dt>
-            {this.state.newsList.data && this.state.newsList.data.map((v, index) => (<dd key={index}>
-              <i>{v.subjectCN}</i>
-              <em>资讯</em>
-              <span>{v.createdAt}</span>
+            {this.state.infoList.data && this.state.infoList.data.map((v, index) => (<dd key={index}>
+              <a href={v.source}>
+                <i>{v.subjectCn}</i>
+                <em>资讯</em>
+                <span>{v.createdAt}</span>
+              </a>
             </dd>))}
           </dl>
-          <div className={this.state.newsList.data ? '' : 'hide'}>
-            <Pagination total="5"
+          <div className={this.state.infoList.data ? '' : 'hide'}>
+            <Pagination total={this.state.infoList.totalCount}
                         pageSize="10"
                         showTotal={true}
                         showQuickJumper={true}/>

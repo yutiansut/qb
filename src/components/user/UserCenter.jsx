@@ -25,9 +25,9 @@ export default class User extends exchangeViewBase {
     return (
       <div className="clearfix user-wrap">
         <ul className="user-nav fl">
-          <li><NavLink activeClassName="active" to={`${match.url}/safe`} >安全中心</NavLink></li>
-          <li><NavLink activeClassName="active" to={`${match.url}/identity`}>身份认证</NavLink></li>
-          <li><NavLink activeClassName="active" to={`${match.url}/integration`}>我的积分</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/safe`} >{this.intl.get("security")}</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/identity`}>{this.intl.get("idVerify")}</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/integration`}>{this.intl.get("user-score")}</NavLink></li>
         </ul>
         <div className="user-content fl">
           <Switch>

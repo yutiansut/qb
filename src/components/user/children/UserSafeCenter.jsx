@@ -171,40 +171,40 @@ export default class userSafeCenter extends exchangeViewBase {
     console.log('用户信息111', this.state)
     return (
       <div className="safe-content">
-        <h1>安全中心</h1>
+        <h1>{this.intl.get("security")}</h1>
         <div className="basic-data model-div clearfix">
-          <h2>基本资料</h2>
+          <h2>{this.intl.get("user-base")}</h2>
           <ul className="fl clearfix">
-            <li>用户ID</li>
+            <li>{this.intl.get("user-id")}</li>
             <li>{JSON.stringify(this.state.userInfo.userId) || ''}</li>
-            <li>电子邮件</li>
+            <li>{this.intl.get("email")}</li>
             <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup('block', 1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
-            <li>手机号</li>
+            <li>{this.intl.get("phone")}</li>
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup('block', 2)}>{this.state.userInfo.phone && this.state.userInfo.phone || '绑定手机号'}</li>
-            <li>用户等级</li>
+            <li>{this.intl.get("user-level")}</li>
             <li>
-              <span>VIP{this.state.userInfo.level}</span>(积分：<span>{this.state.userInfo.credits}</span>)
+              <span>VIP{this.state.userInfo.level}</span>({this.intl.get("points")}：<span>{this.state.userInfo.credits}</span>)
             </li>
           </ul>
         </div>
         <div className="change-pass model-div clearfix">
-          <h2>修改密码</h2>
+          <h2>{this.intl.get("user-changePwd")}</h2>
           <div className="fl">
             <ol className="clearfix">
-              <li>登录密码</li>
+              <li>{this.intl.get("loginPwd")}</li>
               <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 3) : this.changeSetPopup('block', 4)}>{this.state.userInfo.loginPwd && '设置' || '修改'}</li>
             </ol>
             <ul className="clearfix">
-              <li>资金密码</li>
-              <li onClick = {state => this.changeSetPopup('block', 5)}>{this.state.userInfo.fundPwd && '设置' || '修改'}</li>
-              <li>设置了资金密码后，提币和提现时均需要输入，账户更安全。</li>
+              <li>{this.intl.get("fundPass")}</li>
+              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup('block', 5) : this.changeSetPopup('block', 6)}>{this.state.userInfo.fundPwd && '设置' || '修改'}</li>
+              <li>{this.intl.get("user-setFund")}</li>
             </ul>
           </div>
         </div>
         <div className="verify model-div clearfix">
-          <h2>两步验证</h2>
+          <h2>{this.intl.get("twoStep")}</h2>
           <div className="fl">
-            <p>当您开启两步验证后，在进行登录、修改密码、提币、提现交易等重要操作时，必须输入某个一次性密码才能继续。</p>
+            <p>{this.intl.get("user-twoVerify")}</p>
             {this.state.verifyList.map((v, i) => (<dl className="clearfix" key={i}>
               <dt>{v.title}</dt>
               {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(item, index, i, 1)}>
@@ -218,9 +218,9 @@ export default class userSafeCenter extends exchangeViewBase {
         <div className={`${this.state.otherShow ? 'hide' : ''} other model-div`} onClick={this.showOther}>其他安全设置+</div>
         <div className={this.state.otherShow ? '' : 'hide'}>
           <div className="time model-div clearfix">
-            <h2>其他设置</h2>
+            <h2>{this.intl.get("user-otherSet")}</h2>
             <ul className="fl time-ul">
-              <li>时区</li>
+              <li>{this.intl.get("user-time")}</li>
               <li className="clearfix">
                 <Input
                   type="select"
@@ -231,14 +231,14 @@ export default class userSafeCenter extends exchangeViewBase {
                   }}
                   value={this.state.timeAddr}
                 />
-                <Button title="保存" className="time-btn"/>
+                <Button title={this.intl.get("save")} className="time-btn"/>
               </li>
             </ul>
           </div>
           <div className="notify model-div clearfix">
-            <h2>通知设置</h2>
+            <h2>{this.intl.get("user-noticeSet")}</h2>
             <ul className="fl">
-              <li>登录/充值/提现到账区</li>
+              <li>{this.intl.get("user-noticeRemind")}</li>
               <li>
                 {noticeList.map((v, index) => (<span key={index}  onClick={i => this.selectNotice(index, 1)}>
                   <img src="/static/img/checked.svg" alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
@@ -249,48 +249,48 @@ export default class userSafeCenter extends exchangeViewBase {
             </ul>
           </div>
           <div className="name-list model-div clearfix">
-            <h2>IP白名单</h2>
+            <h2>{this.intl.get("user-ipWhite")}</h2>
             <div className="fl">
-              <b>注：请勿添加IP会变动的网络至IP白名单（如：拨号上网）以免影响您的正常使用。</b>
+              <b>{this.intl.get("user-ipRemind")}</b>
               <div className="clearfix">
-                <Input placeholder="IP地址"  onInput={value => {this.ipInput(value)}}/>
-                <Button title="添加" className="name-btn" onClick={() => this.addIp(this.state.ipValue)}/>
+                <Input placeholder={this.intl.get("user-ipAddr")}  onInput={value => {this.ipInput(value)}}/>
+                <Button title={this.intl.get("add")} className="name-btn" onClick={() => this.addIp(this.state.ipValue)}/>
               </div>
-              <span>例如：216.58.197.238或104.244.42.0/24</span>
+              <span>{this.intl.get("user-ipExample")}</span>
               <table>
                 <thead>
                   <tr>
-                    <th>IP地址</th>
-                    <th>添加时间</th>
-                    <th>操作</th>
+                    <th>{this.intl.get("user-ipAddr")}</th>
+                    <th>{this.intl.get("addTime")}</th>
+                    <th>{this.intl.get("action")}</th>
                   </tr>
                 </thead>
                 <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
                   {this.state.ipList.map((v, index) => (<tr key={index}>
                     <td>{v.IPAddress}</td>
                     <td>{v.createAt}</td>
-                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>删除</td>
+                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>
                   </tr>))}
                 </tbody>
               </table>
               <p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>
               <p>
-                添加IP地址或范围后，你将无法从这个白名单之外的IP地址登录你的账户。出于安全方面的考虑，添加或删除IP地址后，你的账户将在24小时内无法提现。你可以访问mixcoins.com/ip/获得当前IP地址。
+                {this.intl.get("user-ipAddRemind")}
               </p>
             </div>
           </div>
           <div className="login-device model-div clearfix">
-            <h2>登录设备</h2>
+            <h2>{this.intl.get("user-current")}</h2>
             <div className="fl">
-              <p>当前已登录你账户的浏览器或设备</p>
+              <p>{this.intl.get("user-currentTitle")}</p>
               <table>
                 <thead>
                   <tr>
-                    <th>登录时间</th>
-                    <th>设备</th>
-                    <th>IP</th>
-                    <th>地点</th>
-                    <th>是否当前</th>
+                    <th>{this.intl.get("loginTime")}</th>
+                    <th>{this.intl.get("equipment")}</th>
+                    <th>{this.intl.get("ip")}</th>
+                    <th>{this.intl.get("place")}</th>
+                    <th>{this.intl.get("user-isCurrent")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -303,19 +303,19 @@ export default class userSafeCenter extends exchangeViewBase {
                   </tr>))}
                 </tbody>
               </table>
-              <Button title="退出所有其他状态" className="login-device-btn"/>
+              <Button title={this.intl.get("user-out")} className="login-device-btn"/>
             </div>
           </div>
         </div>
         <div className="record model-div clearfix">
-          <h2>最近10条记录</h2>
+          <h2>{this.intl.get("user-records")}</h2>
           <table className="fl">
             <thead>
             <tr>
-              <th>日志类型</th>
-              <th>IP</th>
-              <th>地点</th>
-              <th>时间</th>
+              <th>{this.intl.get("user-recordType")}</th>
+              <th>{this.intl.get("ip")}</th>
+              <th>{this.intl.get("place")}</th>
+              <th>{this.intl.get("time")}</th>
             </tr>
             </thead>
             <tbody>
@@ -336,6 +336,8 @@ export default class userSafeCenter extends exchangeViewBase {
                      googleSecret = {this.state.googleSecret.secret}
                      isGoogle = {this.state.showGoogle}/>
         <PassPopup changeSetPopup = {state => this.changeSetPopup(state)}
+                   phone = {this.state.userInfo.phone}
+                   email = {this.state.userInfo.email}
                    isSet = {this.state.showSet}
                    isType = {this.state.type}
                    getVerify = {this.getVerify}

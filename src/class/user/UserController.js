@@ -115,25 +115,27 @@ export default class UserController extends ExchangeControllerBase {
     });
   }
 
-  async setLoginPass(newpwd, againpwd, type) { // 设置登录密码
+  async setLoginPass(oldPwd, newPwd, type) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.state.userId,
-      "type": type,// 0:设置密码 （不用传old_pass） 1:修改密码
-      "oldPass": newpwd,
-      "newPass": againpwd
+      oldPwd,
+      newPwd,
+      type,// 0:设置密码 （不用传old_pass） 1:修改密码
     })
     this.view.setState({popupInputErr2: result.msg})
     console.log('设置密码', result)
   }
 
-  async setFundPass(aaa, bbbb) { // 设置资金密码
+  async setFundPass(account, mode, pass, captchaCode, captchaId, code) { // 设置资金密码
     let result = await this.store.Proxy.setFundPwd({
       "userId": this.store.state.userId,
-      "account": "oynix@foxmail.com", // 用户登录信息
-      "mode": 1,// 0:phone 1:email // 用户登录信息
-      "code": "343252", // 短信验证码
-      "os": 3,// 1:android 2:iOS 3:browser
-      "pass": "jsjsjsjsjsj"
+      account,
+      mode, // 0:phone 1:email
+      pass,
+      captchaCode, // 图形验证码，没有就传空
+      captchaId, // 图形验证码id，没有就传空
+      code,
+      "os": 3, // 1:android 2:iOS 3:browser
     })
     console.log('设置密码', result)
   }

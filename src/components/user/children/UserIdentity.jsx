@@ -129,32 +129,32 @@ export default class userIdentity extends exchangeViewBase {
     console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
-        <h1>身份认证</h1>
+        <h1>{this.intl.get("idVerify")}</h1>
         <div className="identify-result">
           <img src={realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].imgUrl} alt="" />
           <span>{realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].content}</span>
         </div>
         <div className="name-identify clearfix">
-          <h2>实名认证</h2>
+          <h2>{this.intl.get("user-name")}</h2>
           <div className="fl">
-            <span>*实名信息必须真实可靠，并与充值提现银行账户登记信息保持一致。实名信息一旦确认，不可修改。</span>
+            <span>{this.intl.get("user-nameRemind")}</span>
             <div className="clearfix">
               <ul>
-                <li>姓氏</li>
+                <li>{this.intl.get("user-surname")}</li>
                 <li>
                   {/*this.state.userAuth.first_name*/}
-                  <Input placeholder="输入姓氏" value={this.state.firstNameValue || ''} onInput={evt => this.firstInput(evt)}/>
+                  <Input placeholder={this.intl.get("user-inputSurname")} value={this.state.firstNameValue || ''} onInput={evt => this.firstInput(evt)}/>
                 </li>
               </ul>
               <ul>
-                <li>名字</li>
+                <li>{this.intl.get("user-forename")}</li>
                 <li>
-                  <Input placeholder="输入名字" value={this.state.lastNameValue || ''} onInput={evt => this.lastInput(evt)}/>
+                  <Input placeholder={this.intl.get("user-inputForename")} value={this.state.lastNameValue || ''} onInput={evt => this.lastInput(evt)}/>
                 </li>
               </ul>
             </div>
             <dl className="clearfix">
-              <dt>实名认证</dt>
+              <dt>{this.intl.get("user-name")}</dt>
               {this.state.verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.selectVerifyType(index, item)}>
                 <img src="/static/img/checked.svg" alt="" className={`${this.state.selectIndex === index ? '' : 'hide'}`}/>
                 <img src="/static/img/normal.svg" alt="" className={`${this.state.selectIndex === index ? 'hide' : ''}`}/>
@@ -166,23 +166,23 @@ export default class userIdentity extends exchangeViewBase {
           </div>
         </div>
         <div className="photo-identify clearfix">
-          <h2>照片认证</h2>
-          <div className={`${this.state.userAuth.state == 3 ? '' : 'hide'} fl`}><em>认证结果：认证中</em></div>
-          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>认证结果：已通过</em></div>
+          <h2>{this.intl.get("user-photoVerify")}</h2>
+          <div className={`${this.state.userAuth.state == 3 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authProRes")}</em></div>
+          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authSuccRes")}</em></div>
           <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 2 ? '' : 'hide'} fl`}>
             <dl>
-              <dt>证件要求</dt>
-              <dd>1. 身份证照片：请按示例上传身份证正面与反面，脸部及字体必须清晰可见</dd>
-              <dd>2. 护照：请按示例上传带ID的护照页正面即可，脸部及字体必须清晰可见</dd>
-              <dd>3. 手持证件照：照片中请勿遮挡任何有效信息，照片中必须体现“日期及仅币荣认证使用”的纸条</dd>
-              <dd>4. 图片格式：小于10M, 图片格式可为jpg、jpeg、png</dd>
+              <dt>{this.intl.get("user-idReq")}</dt>
+              <dd>{this.intl.get("user-req1")}</dd>
+              <dd>{this.intl.get("user-req2")}</dd>
+              <dd>{this.intl.get("user-req3")}{this.intl.get("user-req4")}{this.intl.get("user-req5")}</dd>
+              <dd>{this.intl.get("user-req6")}</dd>
             </dl>
             <dl className="clearfix">
               <dt>证件类型</dt>
               <dd>{this.state.selectIndex === 0 ? '身份证' : '护照'}</dd>
             </dl>
             <dl className="clearfix">
-              <dt>上传证件照</dt>
+              <dt>{this.intl.get("upLoad")}{this.intl.get("user-photo")}</dt>
               {photoArr[this.state.selectIndex].photoList && photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
@@ -190,8 +190,8 @@ export default class userIdentity extends exchangeViewBase {
                 <p>{item.name}</p>
               </dd>))}
             </dl>
-            <h3><input type="checkbox" />我承认提交的证件信息属于本人所有，不存在冒用、盗用他人证件的行为，因冒用、盗用他人证件造成的一切后果由本人承担</h3>
-            <Button title="确认提交" className="identify-btn" onClick={this.submitInfo.bind(this)}/>
+            <h3><input type="checkbox" />{this.intl.get("user-photoSure")}</h3>
+            <Button title={this.intl.get("user-submit")} className="identify-btn" onClick={this.submitInfo.bind(this)}/>
           </div>
         </div>
         {/*<form method="post" action="http://192.168.113.141/image/" style={{display: 'none'}} encType="multipart/form-data" target="upImg">*/}

@@ -87,7 +87,7 @@ const about = ({ match }) => {
   return <TestApp controller={testAppController} match={match} />;
 };
 const HomeComponent = () => {
-  return <Home marketController={marketController} />
+  return <Home marketController={marketController} activityController={activityController} noticeController={noticeController}/>
 };
 const Order = ({ match }) => {
   return <OrderManage controller={userOrderController} match={match} />

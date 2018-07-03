@@ -36,13 +36,13 @@ export default class userIntegration extends exchangeViewBase {
     console.log('用户信息3', this.state)
     return (
       <div className="integration-wrap">
-        <h1>我的积分</h1>
+        <h1>{this.intl.get("user-score")}</h1>
         <div className="info clearfix">
-          <h2>积分信息</h2>
+          <h2>{this.intl.get("user-scoreInfo")}</h2>
           <div className="fl">
             <h3>
-              <b>目前等级：VIP{this.state.userInfo.level}（积分：{this.state.userInfo.credits}）</b>
-              <Link to="/help/pricing">等级说明</Link>
+              <b>{this.intl.get("user-scoreLevel")}：VIP{this.state.userInfo.level}（{this.intl.get("points")}：{this.state.userInfo.credits}）</b>
+              <Link to="/help/pricing">{this.intl.get("user-scoreDetail")}</Link>
             </h3>
             <ul className="clearfix">
               <li>VIP0</li>
@@ -75,15 +75,15 @@ export default class userIntegration extends exchangeViewBase {
           </div>
         </div>
         <div className="item clearfix">
-          <h2>积分详情</h2>
+          <h2>{this.intl.get("user-scoreHistory")}</h2>
           <div className="fl">
-            <Link to="/help/pricing">如何获得积分？</Link>
+            <Link to="/help/pricing">{this.intl.get("user-scoreGet")}？</Link>
             <table>
               <thead>
               <tr>
-                <th>获得积分</th>
-                <th>事件</th>
-                <th>时间</th>
+                <th>{this.intl.get("user-scoreHave")}</th>
+                <th>{this.intl.get("user-action")}</th>
+                <th>{this.intl.get("time")}</th>
               </tr>
               </thead>
               <tbody className={this.state.userCredits.length ? '' : 'hide'}>
