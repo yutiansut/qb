@@ -1,6 +1,7 @@
 @import "../../../common/css/variable.styl"
 @import "../../../common/css/base.styl"
 .asset-message
+  overflow hidden
   position absolute
   left 0
   top 0
@@ -10,15 +11,18 @@
   line-height 0.44rem
   background-color $message-bg-color
   ul
+    position absolute
+    float left
+    left 3.5rem
     li
       float left
       margin-right 0.77rem
       font-size 0.13rem
       color $normal-black-color
       letter-spacing 0
-    .asset-message-title
-      position relative
-      padding-left 0.24rem
-      margin-right 0.1rem
-      background url('/static/images/new.png') no-repeat 0 0.12rem
-      background-size 0.2rem 0.2rem
+  .asset-message-title
+    float left
+    padding-left 0.24rem
+    margin-right 0.1rem
+    background url('/static/images/new.png') no-repeat 0 0.12rem
+    background-size 0.2rem 0.2rem

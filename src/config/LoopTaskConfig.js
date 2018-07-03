@@ -24,5 +24,6 @@ export default {
   noticeRoll: {},
   countDown: {},
   verifyCountDown: {},
-  swiper: {}
+  swiper: {},
+  carousel: {},
 }

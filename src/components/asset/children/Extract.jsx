@@ -5,6 +5,7 @@ import Button from "../../../common/component/Button";
 import Input from "../../../common/component/Input";
 import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
+import ToTrade from "../components/ToTrade"
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
 import BasePopup from "../../../common/component/Popup";
@@ -24,17 +25,17 @@ export default class Extract extends exchangeViewBase {
       showAddressPopup: false,
       address: "",
       extractAmount: "", //提现数量
-      password: '',
+      password: "",
       showTwoVerify: false,
       verifyNum: "获取验证码",
-      tradePair: [],
+      tradePair: null,
       page: 1,
       noSufficTip: false, // 余额不足提示
       tip: false,
       tipSuccess: true,
       tipContent: "",
       orderTip: false,
-      orderTipContent: ''
+      orderTipContent: ""
     };
     // 绑定视图，初始化数据
     let { controller } = this.props;
@@ -247,7 +248,10 @@ export default class Extract extends exchangeViewBase {
                   {` ${currency}`}
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
-                    {this.state.extractAmount - minerFee > 0 ? this.state.extractAmount - minerFee : 0} {currency}
+                    {this.state.extractAmount - minerFee > 0
+                      ? this.state.extractAmount - minerFee
+                      : 0}{" "}
+                    {currency}
                   </span>
                 </p>
               </div>
@@ -260,7 +264,9 @@ export default class Extract extends exchangeViewBase {
                 oriType="password"
                 value={this.state.password}
                 placeholder={this.intl.get("asset-inputFundPassword")}
-                onInput={(value) => { this.setState({ password: value }) }}
+                onInput={value => {
+                  this.setState({ password: value });
+                }}
               />
               <div className="set">
                 <NavLink to="/user/safe">
@@ -293,17 +299,10 @@ export default class Extract extends exchangeViewBase {
             </li>
           </ol>
         </div>
-        <div className="to-trade clearfix">
-          <span className="title">{this.intl.get("asset-toTrade")}</span>
-          {this.state.tradePair.map((v, index) => (
-            <NavLink
-              to={{ pathname: `/trade`, query: { id: v.id } }}
-              key={index}
-            >
-              <Button title={v.name} type="base" key={index} />
-            </NavLink>
-          ))}
-        </div>
+        <ToTrade
+          tradePair={this.state.tradePair}
+          currency={this.state.currency}
+        />
         <div className="history clearfix">
           <span className="title">
             {this.intl.get("asset-withdrawalsHistory")}
@@ -419,7 +418,7 @@ export default class Extract extends exchangeViewBase {
               this.setState({ showTwoVerify: false });
             }}
             destroy={this.destroy}
-            onConfirm={(code) => {
+            onConfirm={code => {
               let { currency, address, password, extractAmount } = this.state;
               this.extractOrder({
                 coinName: currency,

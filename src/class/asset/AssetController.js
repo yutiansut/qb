@@ -18,9 +18,10 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair(coin) {
-    // await this.marketController.tradePair(coin);
+    let result = await this.marketController.getTradePairHandle();
+    console.log(result)
     this.view.setState({
-      tradePair: [{ name: "BTC/USDT", id: 1 }]
+      tradePair: result
     });
   }
   get userId() {
@@ -30,10 +31,10 @@ export default class AssetController extends ExchangeControllerBase {
     return this.userController.userToken;
   }
   get account() {
-    // return this.userController.account;
+    let { email, phone } = this.userController.userInfo
     return {
-      1: 'dsfg3232dfgfdg',
-      3: '3236561646554656'
+      1: email,
+      3: phone
     };
   }
   // 获取用户的身份认证状态
@@ -58,7 +59,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
     let result = await this.store.getCurrencyAmount(coin);
-    if (result &&  result.errCode) {
+    if (result && result.errCode) {
       // 错误处理
       return;
     }
@@ -119,13 +120,13 @@ export default class AssetController extends ExchangeControllerBase {
   // 请求验证码
   async requestCode() {
     let type = this.userTwoVerify.withdrawVerify;
-    let result = await this.userController.getCode( this.account[type], type === 1 ? 1 : 0, 8)
+    let result = await this.userController.getCode(this.account[type], type === 1 ? 1 : 0, 8)
     if (result && result.errCode) {
       this.view.setState({ orderTip: true, orderTipContent: result.msg });
       // 错误处理
       return false;
     }
-    this.view.setState({tip: true, tipSuccess: true, tipContent: "发送成功" });
+    this.view.setState({ tip: true, tipSuccess: true, tipContent: "发送成功" });
     return true;
   }
 
@@ -173,7 +174,7 @@ export default class AssetController extends ExchangeControllerBase {
     )
       return;
     let flag = await this.requestCode();
-    if(flag){
+    if (flag) {
       this.view.setState({ verifyNum: 60 });
       this.countDown("verifyCountDown", "verifyNum", this.view);
     }
@@ -220,7 +221,7 @@ export default class AssetController extends ExchangeControllerBase {
       tip: true,
       tipSuccess: true,
       tipContent: "操作成功"
-    }, () => { location.reload()})
+    }, () => { location.reload() })
   }
 
   // 添加提现地址

@@ -90,7 +90,7 @@ export default class AssetStore extends ExchangeStoreBase {
         }
       ],
       //币种列表
-      walletList: { BTC: 0, ETH: 4 },
+      walletList: { BTC: 0, ETH: 4, USD: 1 },
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
