@@ -10,6 +10,7 @@ let Theme={
         scaleFontColor: "#aaa",
         barFill1: "#ffac00",
         barFill2: "#996600",
+        infoFontColor: "#ccc",
     },
     _fonts:"12px Tahoma",
 };

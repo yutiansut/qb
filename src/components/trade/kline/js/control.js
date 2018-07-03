@@ -71,6 +71,7 @@ export class Control {
         })
         */
         //请求参数发生变化
+        Kline.instance.onRequestChangeFunc(Kline.instance.requestParam);
     }
 
     static setData(lines){
@@ -192,8 +193,8 @@ export class Control {
         return {
             symbol : symbol,
             range : range,
-            limit : limit,
-            since : since
+            //limit : limit,
+            //since : since
         }
     }
 

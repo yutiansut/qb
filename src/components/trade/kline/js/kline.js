@@ -21,7 +21,7 @@ export default class Kline {
         this.range = null;
         this.url = "";
         this.limit = 1000;
-        this.intervalTime = 5000;
+        //this.intervalTime = 5000;
         this.debug = true;
         this.language = "zh-cn";
         this.theme = "dark";
@@ -66,7 +66,7 @@ export default class Kline {
         this.onSymbolChange=null;
         this.onThemeChange=null;
         this.onRangeChange=null;
-        //this.onRequestData=null;
+        this.onRequestChange=null;
 
         Object.assign(this, option);
 
@@ -132,19 +132,21 @@ export default class Kline {
         Control.chartSwitchLanguage(lang);
     }
 
+    /*
     setIntervalTime(intervalTime) {
         this.intervalTime = intervalTime;
         if (this.debug) {
             console.log('DEBUG: interval time changed to ' + intervalTime);
         }
     }
+    */
 
     setDepthWidth(width){
         this.depthWidth = width;
         ChartManager.instance.redraw('All', false);
     }
 
-    setData(lines){console.log(lines);
+    setData(lines){
         Control.setData(lines);
     }
 
@@ -185,6 +187,10 @@ export default class Kline {
             console.log("DEBUG: range changed to " + range);
         }
         this.onRangeChange && this.onRangeChange(range);
+    }
+
+    onRequestChangeFunc(param){
+        this.onRequestChange && this.onRequestChange(param);
     }
 
     registerMouseEvent() {

@@ -156,7 +156,6 @@ export default class Plotter {
         ctx.stroke();
 
         //刻度线文本
-
         ctx.fillStyle=Theme._color["scaleFontColor"];
         ctx.font=Theme._fonts;
         for(let i=1;i<=scaleXNum;i++){
@@ -281,7 +280,7 @@ export default class Plotter {
             strY = this.formatFloat(strY, 0);
             let strXW = oCtx.measureText(strX).width;
             let strYW = oCtx.measureText(strY).width;
-            oCtx.fillStyle = "#fff";
+            oCtx.fillStyle = Theme._color["infoFontColor"];
             oCtx.font = Theme._fonts;
             oCtx.fillText(strX, x - strXW / 2, oY + scaleLength + 17);
             oCtx.fillText(strY, oX - scaleLength - strYW - 7, y + 6);
@@ -292,7 +291,7 @@ export default class Plotter {
             let strVol = 0;
             let strAccu = 0;
             if (strX <= this.bids_max[0]) {
-                strInfos = ["price: ", "volume: ", "accumulate volumes: "];
+                strInfos = ["购买价格: ", "购买量: ", "累计购买量: "];
                 for (let i = bids.length - 1; i > 0; i--) {
                     if (Math.abs(bids[i][0] - strX) < ratioStrX) {
                         strPrice = bids[i][0];

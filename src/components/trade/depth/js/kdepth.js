@@ -3,7 +3,6 @@ import Plotter from "./plotter";
 export default class KDepth {
 
     constructor(option) {
-        this.timer=null;
         this.element="#depth_container";
 
         this.width=800;
@@ -15,25 +14,6 @@ export default class KDepth {
         }
 
         return KDepth.instance;
-    }
-
-    static requestData(showLoading) {
-        window.clearTimeout(KDepth.instance.timer);
-        if (showLoading === true) {
-           
-        }
-        KDepth.instance.onRequestDataFunc(KDepth.instance.requestParam,function(res){
-            if(res && res.success){
-                Control.requestSuccessHandler(res);
-            }else{
-                if (KDepth.instance.debug) {
-                    console.log(res);
-                }
-                KDepth.instance.timer = setTimeout(function () {
-                    Control.requestData(true);
-                }, KDepth.instance.intervalTime);
-            }
-        })
     }
 
     /*********************************************
