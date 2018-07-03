@@ -1,7 +1,7 @@
 import {Control} from './control'
 import {ChartManager} from './chart_manager'
 import {ChartSettings} from './chart_settings'
-import $ from 'jquery'
+import $ from "jquery"
 
 export default class Kline {
 
@@ -66,7 +66,7 @@ export default class Kline {
         this.onSymbolChange=null;
         this.onThemeChange=null;
         this.onRangeChange=null;
-        this.onRequestData=null;
+        //this.onRequestData=null;
 
         Object.assign(this, option);
 
@@ -93,7 +93,7 @@ export default class Kline {
             });
         }
 
-        setInterval(Control.refreshFunction, this.intervalTime);
+        //setInterval(Control.refreshFunction, this.intervalTime);
 
         this.registerMouseEvent();
         ChartManager.instance.bindCanvas("main", document.getElementById("chart_mainCanvas"));
@@ -144,6 +144,10 @@ export default class Kline {
         ChartManager.instance.redraw('All', false);
     }
 
+    setData(lines){console.log(lines);
+        Control.setData(lines);
+    }
+
     /*********************************************
      * Events
      *********************************************/
@@ -181,13 +185,6 @@ export default class Kline {
             console.log("DEBUG: range changed to " + range);
         }
         this.onRangeChange && this.onRangeChange(range);
-    }
-
-    onRequestDataFunc(param,callback){
-        if (this.debug) {
-            console.log("DEBUG: request data to " + JSON.stringify(param));
-        }
-        this.onRequestData && this.onRequestData(param,callback);
     }
 
     registerMouseEvent() {
@@ -269,14 +266,6 @@ export default class Kline {
             $("#chart_toolbar_periods_vert ul a").click(function () {
                 Control.switchPeriod($(this).parent().attr('name'));
             });
-            $("#chart_show_depth")
-                .click(function(){
-                    if($(this).hasClass('selected')){
-                        Control.switchDepth("off");
-                    }else{
-                        Control.switchDepth("on");
-                    }
-                });
             $("#chart_show_tools")
                 .click(function () {
                     if ($(this).hasClass('selected')) {

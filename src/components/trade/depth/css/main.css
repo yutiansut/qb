@@ -1,0 +1,14 @@
+
+.depth_container{
+
+}
+
+.depth_container .depth_canvasGroup{
+    position: relative;
+}
+
+.depth_container .depth_canvasGroup .depth_canvas{
+    position: absolute;
+    top:0;
+    left:0;
+}

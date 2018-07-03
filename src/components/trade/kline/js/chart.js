@@ -30,7 +30,6 @@ export class Chart {
         ChartManager.instance.setTitle('frame0.k0', title);
     }
 
-
     setSymbol(symbol) {
         this._symbol = symbol;
         this.updateDataAndDisplay();

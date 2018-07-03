@@ -37,6 +37,7 @@ export class Control {
         }
     }
 
+    /*
     static clearRefreshCounter() {
         window.clearInterval(Control.refreshHandler);
         Control.refreshCounter = 0;
@@ -48,8 +49,10 @@ export class Control {
         }
         Control.refreshHandler = setInterval(Control.refreshFunction, Kline.instance.intervalTime);
     }
+    */
 
     static requestData(showLoading) {
+        /*
         window.clearTimeout(Kline.instance.timer);
         if (showLoading === true) {
             $("#chart_loading").addClass("activated");
@@ -66,39 +69,52 @@ export class Control {
                 }, Kline.instance.intervalTime);
             }
         })
+        */
+        //请求参数发生变化
     }
 
-    static requestSuccessHandler(res) {
+    static setData(lines){
+        this.requestSuccessHandler(lines);
+    }
+
+    static requestSuccessHandler(lines) {
         if (Kline.instance.debug) {
-            console.log(res);
+            console.log(lines);
         }
-        $("#chart_loading").removeClass("activated");
+        //$("#chart_loading").removeClass("activated");
 
-        let chart = ChartManager.instance.getChart();
-        chart.setTitle();
-        Kline.instance.data = eval(res.data);
+        //let chart = ChartManager.instance.getChart();
+        //chart.setTitle();
+        //Kline.instance.data = eval(res.data);
 
-        let updateDataRes = Kline.instance.chartMgr.updateData("frame0.k0", Kline.instance.data.lines);
-        Kline.instance.requestParam = Control.setHttpRequestParam(Kline.instance.symbol, Kline.instance.range, null, Kline.instance.chartMgr.getDataSource("frame0.k0").getLastDate());
+        let updateDataRes = Kline.instance.chartMgr.updateData("frame0.k0",lines);
 
-        let intervalTime = Kline.instance.intervalTime < Kline.instance.range ? Kline.instance.intervalTime : Kline.instance.range;
+        //Kline.instance.requestParam = Control.setHttpRequestParam(Kline.instance.symbol, Kline.instance.range, null, Kline.instance.chartMgr.getDataSource("frame0.k0").getLastDate());
 
+        //let intervalTime = Kline.instance.intervalTime < Kline.instance.range ? Kline.instance.intervalTime : Kline.instance.range;
+
+        /*
         if (!updateDataRes) {
             Kline.instance.timer = setTimeout(Control.requestData, intervalTime);
             return;
         }
+        */
 
+        /*
         let tmp = ChartSettings.get();
         //画深度图
         if (Kline.instance.data.depths && tmp.charts.depthStatus==="open") {
             ChartManager.instance.getChart().updateDepth(Kline.instance.data.depths);
         }
-        Control.clearRefreshCounter();
+        */
 
-        Kline.instance.timer = setTimeout(Control.TwoSecondThread, intervalTime);
+        //Control.clearRefreshCounter();
+
+       // Kline.instance.timer = setTimeout(Control.TwoSecondThread, intervalTime);
         ChartManager.instance.redraw('All', false);
     }
 
+    /*
     static TwoSecondThread() {
         let f = Kline.instance.chartMgr.getDataSource("frame0.k0").getLastDate();
         if (f === -1) {
@@ -108,6 +124,7 @@ export class Control {
         }
         Control.requestData();
     }
+    */
 
     static readCookie() {
         ChartSettings.get();
@@ -161,12 +178,14 @@ export class Control {
         }
         // 语言
         Control.chartSwitchLanguage(tmp.language || "zh-cn");
+        /*
         // 深度图
         if(tmp.charts.depthStatus==="close"){
             Control.switchDepth("off")
         }else if(tmp.charts.depthStatus==="open"){
             Control.switchDepth("on");
         }
+        */
     }
 
     static setHttpRequestParam(symbol, range, limit, since) {
@@ -485,6 +504,7 @@ export class Control {
         ChartSettings.save();
     }
 
+    /*
     static switchDepth(name){
         let tmp = ChartSettings.get();
         if(name==="on"){
@@ -498,6 +518,7 @@ export class Control {
         }
         ChartSettings.save();
     }
+    */
 
     static reset(symbol) {
         Kline.instance.symbol = symbol;
