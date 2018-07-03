@@ -62,7 +62,7 @@ export default class AssetManage extends exchangeViewBase {
       return <History controller={this.controller} location={location} />;
     };
     return <div className="asset clearfix">
-        <ChargeMessage />
+        <ChargeMessage controller={this.controller}/>
         <ul className="nav">
           <li>
             <NavLink activeClassName="active" to={`${match.url}/balance`}>

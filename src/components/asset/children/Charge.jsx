@@ -68,6 +68,7 @@ export default class Charge extends exchangeViewBase {
   async componentWillMount() {
     let currency =
       this.props.location.query && this.props.location.query.currency;
+      console.log(currency)
     currency &&
       this.setState({
         currency: currency,
@@ -80,10 +81,12 @@ export default class Charge extends exchangeViewBase {
     this.getHistory({
       page: 0,
       pageSize: 10,
+      coinId: -1,
+      coinName: -1,
       orderType: 1,
+      orderStatus: -1,
       startTime: -1,
-      endTime: -1,
-      orderStatus: -1
+      endTime: -1
     });
   }
 
@@ -219,10 +222,10 @@ export default class Charge extends exchangeViewBase {
             </li>
           </ol>
         </div>
-        <ToTrade
+        {/* <ToTrade
           tradePair={this.state.tradePair}
           currency={this.state.currency}
-        />
+        /> */}
         <div className="history clearfix">
           <span className="title">{this.intl.get("asset-depositHistory")}</span>
           {this.state.assetHistory.total ? (
@@ -297,10 +300,12 @@ export default class Charge extends exchangeViewBase {
                     this.getHistory({
                       page: page - 1,
                       pageSize: 10,
+                      coinId: -1,
+                      coinName: -1,
                       orderType: 1,
+                      orderStatus: -1,
                       startTime: -1,
-                      endTime: -1,
-                      orderStatus: -1
+                      endTime: -1
                     });
                   }}
                   showQuickJumper={true}

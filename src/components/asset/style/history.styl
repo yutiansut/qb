@@ -12,7 +12,7 @@
       &:active
         color $main-color-active
     .title
-      width 9.52rem
+      width 9.74rem
       height 0.2rem
       margin-bottom 0.63rem
       font-size 0.2rem
@@ -31,7 +31,7 @@
       background url('/static/images/nothing.png') no-repeat center 0.3rem
       background-size auto 1.01rem
     .filtrate
-      width 9.52rem
+      width 9.74rem
       height 0.3rem
       line-height 0.3rem
       margin-bottom 0.327rem
@@ -66,36 +66,37 @@
       thead
         tr
           background-color $bg-light-color
-          th
-            height 0.3rem
-            line-height 0.3rem
-            font-size 0.12rem
-            color $normal-gray-color
-            letter-spacing 0.0005rem
-            text-align justify
-            &.confirm, &.state, &.fee
-              text-align center
-            &.time
-              width 1.13rem
-              padding-left 0.1rem
-            &.currency
-              width 1.03rem
-            &.type
-              width 0.6rem
-            &.cash
-              width 0.88rem
-            &.balan
-              width 0.88rem
-            &.send
-              width 1.28rem
-            &.receive
-              width 1.60rem
-            &.state
-              width 0.7rem
-            &.fee
-              width 0.7rem
-            &.option
-              width 0.61rem
+      th,td
+        height 0.3rem
+        line-height 0.3rem
+        font-size 0.12rem
+        color $normal-gray-color
+        letter-spacing 0.0005rem
+        text-align justify
+        &.confirm, &.state, &.fee
+          text-align center
+        &.time
+          width 1.13rem
+          padding-left 0.1rem
+        &.currency
+          width 1.03rem
+        &.type
+          width 0.62rem
+        &.cash
+          width 0.88rem
+        &.balan
+          width 0.88rem
+        &.send
+          width 1.28rem
+        &.receive
+          width 1.86rem
+        &.state
+          width 0.79rem
+        &.fee
+          width 0.62rem
+        &.option
+          width 0.61rem
+          text-align center
       tbody
         height 0.7rem
         line-height 0.7rem
@@ -104,16 +105,34 @@
           &:hover
             background $bg-dark-color
           td
+            height 0.7rem
+            line-height 0.7rem
             font-size 0.14rem
             color $normal-black-color
             letter-spacing 0.0006rem
             text-align justify
+            i
+              display block
+              height 100%
+              overflow hidden
+              white-space nowrap
+              text-overflow ellipsis
             &.send
-              &::after
-                content ' >'
-                width 0.05rem
-                height 0.05rem
-
+              i
+                position relative
+                width 1.28rem
+                padding-right 0.28rem
+                &::after
+                  position absolute
+                  right 0
+                  top 0
+                  content ' >'
+                  width 0.28rem
+                  height 0.7rem
+                  text-align center
+            &.receive
+              i
+                width 1.6rem
             &.time
               padding-left 0.1rem
             &.cash

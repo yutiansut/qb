@@ -56,6 +56,8 @@ export default {
     {name: 'pairInfo', data: { url: '/order/', method: 'post'}, action: 'getAllTradePair', actionBack: 'getAllTradePairRes'}
   ],
   asset: [
+    // 撤销提币申请
+    { name: 'cancelWithdraw', data: { url: '/property/', method: 'post' }, action: 'cancelWithdraw', actionBack: 'cancelWithdrawRes', needToken: true  },
     // 获取交易对手续费5.16（pass）
     { name: 'getFee', data: { url: '/property/', method: 'post' }, action: 'getAllTradePairFee', actionBack: 'getAllTradePairFeeRes',needToken: true  },
     // 获取总资产(包含各个钱包币种的详细信息)4.1

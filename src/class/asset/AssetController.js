@@ -76,7 +76,6 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取所有币种
   async getWalletList() {
-    console.log(this.store.state.walletList["BTC"]);
     this.store.state.walletList['BTC'] === undefined && await this.store.getWalletList();
     this.view.setState({
       walletList: this.store.state.walletList
@@ -130,42 +129,6 @@ export default class AssetController extends ExchangeControllerBase {
     return true;
   }
 
-  // 账户余额页面筛选
-  filte(wallet, value, hideLittle, hideZero) {
-    let arr1 = this.filter(wallet, item => {
-      return (
-        item.coinName.includes(value.toUpperCase()) ||
-        item.fullname.includes(value.toUpperCase())
-      );
-    });
-    let arr2 = this.filter(arr1, item => {
-      return !hideLittle || item.valuationBTC > 0.001;
-    });
-    let result = this.filter(arr2, item => {
-      return !hideZero || item.valuationBTC > 0;
-    });
-    return result;
-  }
-
-  // 账户余额页面排序
-  rank(arr, object) {
-    let sortValue, type;
-    for (const key in object) {
-      if (object.hasOwnProperty(key)) {
-        if (object[key] !== 2) {
-          sortValue = [key];
-          type = object[key];
-          break;
-        }
-      }
-    }
-    if (!sortValue) {
-      sortValue = ["valuationBTC"];
-      type = 0;
-    }
-    return this.sort(arr, sortValue, type);
-  }
-
   // 二次验证倒计时
   async getVerify() {
     if (
@@ -178,27 +141,6 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState({ verifyNum: 60 });
       this.countDown("verifyCountDown", "verifyNum", this.view);
     }
-  }
-  clearVerify() { // 清除短信验证码
-    this.countDownStop('verifyCountDown')
-  }
-  // 提现前前端验证
-  beforeExtract(o) {
-    let obj = {
-      orderTip: true,
-      orderTipContent: ''
-    }
-    if (this.view.state.address === '') {
-      obj.orderTipContent = "您未选择提现地址，不允许提交";
-      this.view.setState(obj)
-      return;
-    }
-    if (this.view.state.password === "") {
-      obj.orderTipContent = "请输入您的资金密码";
-      this.view.setState(obj);
-      return;
-    }
-    this.view.setState({ showTwoVerify: true, verifyNum: '获取验证码' });
   }
 
   //提交提币订单
@@ -223,7 +165,23 @@ export default class AssetController extends ExchangeControllerBase {
       tipContent: "操作成功"
     }, () => { location.reload() })
   }
-
+// 撤销提币申请
+ async cancelOreder(id){
+   let result = await this.store.cancelOrder(id);
+   if (result && result.errCode) {
+     this.view.setState({
+       tip: true,
+       tipSuccess: false,
+       tipContent: result.msg
+     });
+     return false;
+   }
+   this.view.setState({
+     tip: true,
+     tipSuccess: true,
+     tipContent: "操作成功"
+   })
+ }
   // 添加提现地址
   async appendAddress(obj) {
     let result = await this.store.appendAddress(obj);
@@ -258,4 +216,63 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
     if (this.view.state.address === obj.address) this.view.setState({ address: '' });
   }
+
+  // 账户余额页面筛选
+  filte(wallet, value, hideLittle, hideZero) {
+    console.log(wallet, value, hideLittle, hideZero);
+    let arr1 = this.filter(wallet, item => {
+      return (item.coinName.includes(value.toLowerCase()) ||item.fullName.includes(value.toLowerCase()));
+    });
+    let arr2 = this.filter(arr1, item => {
+      return !hideLittle || item.valuationBTC > 0.001;
+    });
+    let result = this.filter(arr2, item => {
+      return !hideZero || item.valuationBTC > 0;
+    });
+    return result;
+  }
+
+  // 账户余额页面排序
+  rank(arr, object) {
+    let sortValue, type;
+    for (const key in object) {
+      if (object.hasOwnProperty(key)) {
+        if (object[key] !== 2) {
+          sortValue = [key];
+          type = object[key];
+          break;
+        }
+      }
+    }
+    if (!sortValue) {
+      sortValue = ["valuationBTC"];
+      type = 0;
+    }
+    return this.sort(arr, sortValue, type);
+  }
+
+  clearVerify() { // 清除短信验证码
+    this.countDownStop('verifyCountDown')
+  }
+
+  // 提现前前端验证
+  beforeExtract(o) {
+    let obj = {
+      orderTip: true,
+      orderTipContent: ''
+    }
+    if (this.view.state.address === '') {
+      obj.orderTipContent = "您未选择提现地址，不允许提交";
+      this.view.setState(obj)
+      return;
+    }
+    if (this.view.state.password === "") {
+      obj.orderTipContent = "请输入您的资金密码";
+      this.view.setState(obj);
+      return;
+    }
+    this.view.setState({ showTwoVerify: true, verifyNum: '获取验证码' });
+  }
+
 }
+

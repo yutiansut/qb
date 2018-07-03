@@ -18,10 +18,14 @@ export default class TotalAsset extends exchangeViewBase {
         <div className="item total clearfix">
           <div className="content">
             <span>{this.intl.get("asset-totalAssets")}:</span>
-            <b>{totalAsset.valuationBTC}BTC</b>
+            <b>
+              {totalAsset.valuationBTC.format({ number: "property" })}BTC
+            </b>
             {this.state.unit === this.intl.get("cny") ? <span>
-                ≈ {totalAsset.valuationCN} CNY
-              </span> : <span>≈ {totalAsset.valuationEN} USD</span>}
+                ≈ {totalAsset.valuationCN.format({ number: "legal" })} CNY
+              </span> : <span>
+              ≈ {totalAsset.valuationEN.format({ number: "legal" })} USD
+              </span>}
             <div className="select">
               <SelectButton type="main" title={this.state.unit} simple={true} valueArr={[this.intl.get("cny"), this.intl.get("usd")]} onSelect={item => {
                   this.setState({ unit: item });

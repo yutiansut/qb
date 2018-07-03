@@ -21,76 +21,9 @@ export default class AssetStore extends ExchangeStoreBase {
         totalQuota: 0, //24小时提现额度
         availableQuota: 0 //可用额度
       },
-      wallet: [
-        {
-          coinName: "USDT", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 100, //可用余额
-          frozenCount: 1030, //冻结中金额
-          valuationBTC: 122, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        },
-        {
-          coinName: "BTC", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 2100, //可用余额
-          frozenCount: 120, //冻结中金额
-          valuationBTC: 1220, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        },
-        {
-          coinName: "ETH", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 1546, //可用余额
-          frozenCount: 100, //冻结中金额
-          valuationBTC: 0.0002, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        },
-        {
-          coinName: "LTC", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 430, //可用余额
-          frozenCount: 10, //冻结中金额
-          valuationBTC: 0, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        },
-        {
-          coinName: "EOS", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 10, //可用余额
-          frozenCount: 1030, //冻结中金额
-          valuationBTC: 322, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        },
-        {
-          coinName: "BCH", //币种
-          fullname: "BitCoin", //币种全称
-          coinIcon: "http://xxxx.jpg", //币种图片
-          coinId: 0, //币种ID
-          availableCount: 0, //可用余额
-          frozenCount: 100, //冻结中金额
-          valuationBTC: 152, //BTC估值
-          valuationCN: 111, //?
-          totalCount: 1000 //总额
-        }
-      ],
+      wallet: [],
       //币种列表
-      walletList: { BTC: 0, ETH: 4, USD: 1 },
+      walletList: {},
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
@@ -118,48 +51,7 @@ export default class AssetStore extends ExchangeStoreBase {
       //资产记录
       assetHistory: {
         total: 0,
-        orderList: [
-          {
-            orderType: 0, //充0提1转2  注意:交易所内充提显示为转账
-            orderStatus: 0, //待审核0 审核中1 通过2  撤销3
-            fullname: "BitCoin",
-            coinIcon: "http://xxxx.jpg",
-            coinName: "BTC",
-            coinId: "xxxx",
-            count: 1.222,
-            balance: 1.222, //余额
-            postAddress: "xxxx", //发送地址
-            receiveAddress: "xxxxx", //接收地址
-            fee: 0.4, //手续费
-            verifyCount: 5, //确认数
-            doneCount: 1, //已确认数
-            hashAddress: "xxx", //hash地址
-            blockSite: "xxx", //点击查看交易信息的地址
-            orderTime: "2018-12-23",
-            orderStatus: 0,
-            orderId: "xxxxxx"
-          },
-          {
-            orderType: 0, //充0提1转2  注意:交易所内充提显示为转账
-            orderStatus: 0, //未通过0 审核中1 通过2  撤销3
-            fullname: "BitCoin",
-            coinIcon: "http://xxxx.jpg",
-            coinName: "BTC",
-            coinId: "xxxx",
-            count: 1.222,
-            balance: 1.222, //余额
-            postAddress: "xxxx", //发送地址
-            receiveAddress: "xxxxx", //接收地址
-            fee: 0.4, //手续费
-            verifyCount: 5, //确认数
-            doneCount: 1, //已确认数
-            hashAddress: "xxx", //hash地址
-            blockSite: "xxx", //点击查看交易信息的地址
-            orderTime: "2018-12-23",
-            orderStatus: 0,
-            orderId: "xxxxxx"
-          }
-        ]
+        orderList: []
       }
     };
   }
@@ -186,10 +78,18 @@ export default class AssetStore extends ExchangeStoreBase {
       userId: this.controller.userId,
       token: this.controller.token
     });
+    this.state.wallet = coinList || [];
+    if (coinList.length) {
+      let obj = {};
+      this.controller.sort(coinList, ['coinId'], 1).forEach(v => {
+        obj[v.coinName.toUpperCase()] = v.coinId;
+      });
+      this.state.walletList = obj;
+    }
     let { totalQuota, availableQuota } = await this.Proxy.balance({
       userId: this.controller.userId,
-      coinId: 0,
-      coinName: "BTC",
+      coinId: this.state.walletList['BTC'],
+      coinName: "btc",
       token: this.controller.token
     });
     this.state.totalAsset = {
@@ -199,21 +99,18 @@ export default class AssetStore extends ExchangeStoreBase {
       totalQuota,
       availableQuota
     };
-    this.state.wallet = coinList || [];
-    this.state.walletList["BTC"] === undefined &&
-      (this.state.walletList = this.state.wallet.map(v => v.coinName));
   }
-
   // 获取walletList
   async getWalletList() {
     let { coinList } = await this.Proxy.totalAsset({
       userId: this.controller.userId,
       token: this.controller.token
     });
-    if (!this.state.walletList.length) {
+    console.log("coinList", coinList);
+    if (coinList.length) {
       let obj = {};
-      coinList.forEach(v => {
-        obj[v.coinName] = obj[v.coinId];
+      this.controller.sort(coinList, ['coinId'], 1 ).forEach(v => {
+        obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
     }
@@ -260,24 +157,13 @@ export default class AssetStore extends ExchangeStoreBase {
     if (result && result.errCode) {
       return result;
     }
-    // let result = await this.Proxy.history({
-    //   userId: this.controller.userId,
-    //   coinId: 0,
-    //   coinName: "BTC",
-    //   orderType: 1, //充0提1转2  注意:交易所内充提显示为转账
-    //   startTime: 0,
-    //   endTime: 0,
-    //   orderStatus: 0, //未通过 审核中1 通过2  撤销3
-    //   page: 0,
-    //   pageSize: 10,
-    //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
-    // });
     this.state.assetHistory.orderList = result && result.orderList;
     obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
     obj.page === 0 &&
       result.totalCount &&
       (this.state.assetHistory.total = result.totalCount);
   }
+  // 获取矿工费
   async getMinerFee(coin, address) {
     let result = await this.Proxy.minerFee({
       coinId: this.state.walletList[coin],
@@ -310,6 +196,14 @@ export default class AssetStore extends ExchangeStoreBase {
       coinName: obj.coinName.toLowerCase(),
       os: 3
     }))
+    return result;
+  }
+  async cancelOrder(id) {
+    let result = await this.Proxy.cancelWithdraw({
+      userId: this.controller.userId,
+      token: this.controller.token,
+      applyId: id
+    })
     return result;
   }
   // 增加提现地址
