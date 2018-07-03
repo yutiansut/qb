@@ -153,7 +153,20 @@ export default function zh(state) {
   };
   const order = {};
   const deal = {
-
+    "deal-limit":"限价委托",
+    "deal-market":"市价委托",
+    "deal-digital":"数字币计价",
+    "deal-use":"可用",
+    "deal-timeSetting":"时限设置",
+    "deal-every":"每次输入",
+    "deal-2h":"每两小时输入",
+    "deal-never":"不输入",
+    "deal-inputpwdplease":"开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入",
+    "deal-marketbuy":"以市场最优价格买入",
+    "deal-trunover":"交易额",
+    "deal-forgetpwd":"忘记资金密码",
+    "deal-freepwd":"免输资金密码",
+    "deal-inputpwd":"输入资金密码",
   };
   const user = {
     "user-score": "我的积分",

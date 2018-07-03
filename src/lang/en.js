@@ -147,7 +147,22 @@ export default function en (state){
     "activity-regist":"Sign up now"
   };
   const order = {};
-  const deal = {};
+  const deal = {
+    "deal-limit":"Limit price",
+    "deal-market":"Market price",
+    "deal-digital":"Digital currency",
+    "deal-use":"Available",
+    "deal-timeSetting":"Time limit setting",
+    "deal-every":"Enter every time",
+    "deal-2h":"Enter every two hours",
+    "deal-never":"Never enter",
+    "deal-inputpwdplease":"To activate no fund password feature, please input fund password for ID authentication first",
+    "deal-marketbuy":"Buy for market best price",
+    "deal-trunover":"Total",
+    "deal-forgetpwd":"Forget password",
+    "deal-freepwd":"Free password",
+    "deal-inputpwd":"Input fund password",
+  };
   const user = {
     "user-score": "My VIP Status",
     "user-base": "Basic Information",

@@ -31,17 +31,17 @@ export default class TradeDealExchange extends  ExchangeViewBase{
         <div className='trade-deal-exchange'>
           <div className='trade-deal-asset'>
             <div className='deal-asset-wallet'>
-              可用:<span>{this.props.wallet}</span>
+              {`${this.intl.get('deal-use')}`}:<span>{this.props.wallet}</span>
               <i>
               {this.props.ControllerProps.dealType ? this.props.steadUnitN : this.props.steadUnitP}
             </i>
             </div>
             <div className={`deal-asset-charge deal-asset-charge-${this.props.ControllerProps.tradeType}`}>
-              <a href="#">充币</a>
+              <a href="#">{`${this.intl.get('deposit')}`}</a>
             </div>
           </div>
           <div className='trader-deal-input'>
-            <div className='deal-input-label'>价格</div>
+            <div className='deal-input-label'>{`${this.intl.get('price')}`}</div>
             {/*<Input/>*/}
             <input type="text" value={this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)}/>
             <div className='deal-input-unit'>
@@ -49,7 +49,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </div>
           </div>
           <div className='trader-deal-input'>
-            <div className='deal-input-label'>数量</div>
+            <div className='deal-input-label'>{`${this.intl.get('amount')}`}</div>
             {/*<Input/>*/}
             <input type="text" value={this.props.ControllerProps.dealType ? this.props.sellNum : this.props.buyNum} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType)}/>
             <div className='deal-input-unit'>
@@ -81,21 +81,21 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           </div>
           <div className='trade-password clearfix'>
             <div className='trade-password-input'>
-              <span>资金密码:</span>
+              <span>{`${this.intl.get('fundPass')}`}:</span>
               <input type="password"/>
             </div>
             <p className='password-msg'>
-              <span>设置资金密码</span>
-              <span>(免输资金密码)</span>
+              <span>{`${this.intl.get('deal-forgetpwd')}`}</span>
+              <span>{`${this.intl.get('deal-freepwd')}`}</span>
             </p>
           </div>
           <div className='trade-deal-turnover'>
-            <span>交易额:</span>
+            <span>{`${this.intl.get('deal-trunover')}`}:</span>
             <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
             <i>{this.props.PriceUnit || this.props.Market}</i>
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`}>
-            {this.props.ControllerProps.dealType ? '卖出' : '买入'}
+            {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
           </div>
         </div>
     )
