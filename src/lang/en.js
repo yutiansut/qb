@@ -68,7 +68,12 @@ export default function en (state){
     equipment: 'Equipment',
     ip: 'IP adress',
     place: 'Place',
-    upLoad: 'Upload'
+    upLoad: 'Upload',
+    avgPrice: 'Average deal price',
+    pair: 'Exchange Pair',
+    dealed: 'Deal done',
+    marketPrice: 'Market Price',
+    detail: 'Details',
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",
@@ -146,7 +151,28 @@ export default function en (state){
   const notice = {
     "activity-regist":"Sign up now"
   };
-  const order = {};
+  const order = {
+    "order-current": "Current order",
+    "order-history": "Order history",
+    "order-deal": "Deal history",
+    'unDeal': 'Not traded',
+    'partDeal': 'Partially filled',
+    'totalDeal': 'Filled',
+    'reseted': 'Cancelled',
+    'reseting':  'Cancelling',
+    'overed':  'Complete',
+    'hideReset': 'Hide undo',
+    "exportOrderRecord": "export",
+    'orderDetail': 'order details',
+    "order-deal-total": 'total',
+    "order-deal-money": 'USD',
+    "order-buy": 'Taker',
+    "order-sell": 'Maker',
+    "order-deal-time": "Transaction Time",
+    "order-deal-price": "Transaction Price",
+    "order-deal-number": "Processed Amount",
+  
+  };
   const deal = {
     "deal-limit":"Limit price",
     "deal-market":"Market price",

@@ -16,21 +16,18 @@ import './stylus/order.styl'
 import OrderListController from '../../class/orderList/userOrderList/UserOrderListController';
 let OrderCurrentController,OrderHistoryController,OrderDealController
 
-const orderNavItems = [
-  {name:'当前订单', address:'/current', type:'orderCurrent'},
-  {name:'历史订单', address:'/history', type:'orderHistory'},
-  {name:'历史成交', address:'/deal', type:'orderDeal'}
-]
 export default class OrderManage extends exchangeViewBase{
   constructor(props){
     super(props);
-    // OrderCurrentController = new OrderListController();
-    // OrderHistoryController = new OrderListController();
-    // OrderDealController = new OrderListController();
     this.state = {
     pairIdMsg : {
     
-    }
+    },
+      orderNavItems : [
+        {name:this.intl.get("order-current"), address:'/current', type:'orderCurrent'},
+        {name:this.intl.get("order-history"), address:'/history', type:'orderHistory'},
+        {name:this.intl.get("order-history"), address:'/deal', type:'orderDeal'}
+      ]
     };
     // const {controller} = this.props;
     //绑定view
@@ -52,7 +49,7 @@ export default class OrderManage extends exchangeViewBase{
     return(
         <div className='order-manage clearfix'>
           <ul className='order-nav fl'>
-            {orderNavItems.map((v, index) => {
+            {this.state.orderNavItems.map((v, index) => {
               return(
                   <li key={index}>
                     <NavLink activeClassName="active" to={`${match.url}${v.address}`} >

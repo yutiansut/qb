@@ -237,8 +237,8 @@ export default class UserOrderListStore extends OrderListStore {
           "pageSize":params.pageSize
         }
     );
-    this.state.historyOrder = historyList.orderList;
-    return historyList.orderList
+    this.state.historyOrder = historyList;
+    return historyList
   }
   async getOrderDetail(id){
     let orderDetail = await this.Proxy.orderDetail(

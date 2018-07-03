@@ -1,5 +1,5 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
-import React, { Component } from "react";
+import React, {Component} from "react";
 import SelectButton from "../../../common/component/SelectButton";
 import Button from "../../../common/component/Button";
 import DatePicker from "../../../common/component/DatePicker/DatePicker";
@@ -7,9 +7,9 @@ import Pagination from "../../../common/component/Pagination";
 import '../stylus/orderDetail.styl'
 
 const orderDetailHead = {
-  orderCurrent:[{name:'时间'},{name:'交易对'},{name:'类型'},{name:'价格'},{name:'数量'},{name:'交易额'},{name:'尚未成交'},{name:'已成交'},{name:'状态'},{name:'操作'},],
-  orderHistory:[{name:'时间'},{name:'交易对'},{name:'类型'},{name:'价格'},{name:'数量'},{name:'成交额'},{name:'已成交'},{name:'平均成交价'},{name:'状态'},{name:'操作'},],
-  orderDeal:[{name:'时间'},{name:'交易对'},{name:'类型'},{name:'平均成交价'},{name:'成交数量'},{name:'成交额'},{name:'手续费'},],
+  orderCurrent: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '价格'}, {name: '数量'}, {name: '交易额'}, {name: '尚未成交'}, {name: '已成交'}, {name: '状态'}, {name: '操作'},],
+  orderHistory: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '价格'}, {name: '数量'}, {name: '成交额'}, {name: '已成交'}, {name: '平均成交价'}, {name: '状态'}, {name: '操作'},],
+  orderDeal: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '平均成交价'}, {name: '成交数量'}, {name: '成交额'}, {name: '手续费'},],
 };
 
 const orderStatus = {
@@ -17,42 +17,76 @@ const orderStatus = {
   1: '部分成交',
   2: '全部成交',
   3: '已撤销',
-  4:  '撤单中',
-  5:  '已结束',
-  6:  '部分成交',
+  4: '撤单中',
+  5: '已结束',
+  6: '部分成交',
 };
-const orderNavItems = {
-  orderCurrent: {
-    title:'当前订单',
-  },
-  orderHistory: {
-    title:'历史订单'
-  },
-  orderDeal: {
-    title:'历史成交'
-  }
-}
-export default class OrderCurrent extends ExchangeViewBase{
-  constructor(props){
+// const orderNavItems = {
+//   orderCurrent: {
+//     title:this.intl.get("order-current"),
+//   },
+//   orderHistory: {
+//     title:this.intl.get("order-history")
+//   },
+//   orderDeal: {
+//     title:this.intl.get("order-deal")
+//   }
+// };
+//
+const orderInfoHead = [
+  {name: '买方'}, {name: '卖方'}, {name: '成交时间'}, {name: '成交单价'}, {name: '成交数量'}, {name: '成交金额'},
+]
+export default class OrderCurrent extends ExchangeViewBase {
+  constructor(props) {
     super(props);
     this.state = {
-      preArray : [],
+      preArray: [],
       startTime: 1509484067,
       endTime: 1530088867,
-        // end: new Date().getTime(),
-        // start : (new Date().getTime()) - 7 * 24 *60 * 60
+      // end: new Date().getTime(),
+      // start : (new Date().getTime()) - 7 * 24 *60 * 60
       coinArray: [],
       marketArray: [],
       idArray: [],
-      coinSelect: '全部',
-      marketSelect: '全部',
+      coinSelect: this.intl.get('all'),
+      marketSelect: this.intl.get('all'),
+      typeSelect: this.intl.get('all'),
       orderType: 2,
       hideOther: 0,
-      orderStatus: [1,2,3,4,5,6],
+      orderStatus: [1, 2, 3, 4, 5, 6],
       page: 1,
       pageSize: 20,
+      total: 0,
       detailFlag: false,
-      orderDetail: {}
+      orderDetail: {},
+      orderNavItems: {
+        orderCurrent: {
+          title: this.intl.get("order-current"),
+        },
+        orderHistory: {
+          title: this.intl.get("order-history")
+        },
+        orderDeal: {
+          title: this.intl.get("order-deal")
+        }
+      },
+      orderStatusItems : {
+        0: this.intl.get('unDeal'),
+        1: this.intl.get('partDeal'),
+        2: this.intl.get('totalDeal'),
+        3: this.intl.get('reseted'),
+        4: this.intl.get('reseting'),
+        5: this.intl.get('overed'),
+        6: this.intl.get('partDeal'),
+      },
+      orderDetailHead : {
+        orderCurrent: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('unDeal')}, {name: this.intl.get('totalDeal')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
+        orderHistory: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('dealed')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
+        orderDeal: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('fee')},],
+      },
+      orderInfoHead : [
+        {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')}, {name: this.intl.get('order-deal-time')}, {name:  this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
+      ]
     };
     const {controller} = this.props;
     //绑定view
@@ -63,39 +97,50 @@ export default class OrderCurrent extends ExchangeViewBase{
     this.checkoutDetail = controller.getOrderDetail.bind(controller)
     // this.getCurrent = controller.getCurrentOrder.bind(controller)
   }
-  componentWillMount(){
+  
+  componentWillMount() {
   
   }
-  componentDidMount(){
+  
+  componentDidMount() {
     const {pairIdMsg} = this.props;
     let orderStatus = [];
-    this.props.type === 'orderHistory' && (orderStatus = [1,2,3,4,5,6]) && (this.setState({orderStatus}));
-    this.props.type === 'orderDeal' && (orderStatus = [1,2,5,6]) && (this.setState({orderStatus}));
+    this.props.type === 'orderHistory' && (orderStatus = [1, 2, 3, 4, 5, 6]) && (this.setState({orderStatus}));
+    this.props.type === 'orderDeal' && (orderStatus = [1, 2, 5, 6]) && (this.setState({orderStatus}));
     let params = {
-      orderCurrent:{
-        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
-      orderHistory:{
-        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      orderCurrent: {
+        idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
+      },
+      orderHistory: {
+        idArray: this.state.idArray, orderType: this.state.orderType, orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
       },
     };
     params.orderDeal = params.orderHistory;
     this.orderListHandle(this.props.type, params[this.props.type]);
     let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
     let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
-    marketArray && marketArray.unshift('全部');
-    coinArray && coinArray.unshift('全部');
+    marketArray && marketArray.unshift(this.intl.get('all'));
+    coinArray && coinArray.unshift(this.intl.get('all'));
     this.setState({
-      coinArray ,
+      coinArray,
       marketArray
     })
   }
-  hideReset(e){
-    let orderStatus = e.target.checked ? [1,2,4,5,6] : [1,2,3,4,5,6];
+  
+  hideReset(e) {
+    let orderStatus = e.target.checked ? [1, 2, 4, 5, 6] : [1, 2, 3, 4, 5, 6];
     let params = {
-      orderCurrent:{
-        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
-      orderHistory:{
-        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus: orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      orderCurrent: {
+        idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
+      },
+      orderHistory: {
+        idArray: this.state.idArray,
+        orderType: this.state.orderType,
+        orderStatus: orderStatus,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime,
+        page: this.state.page,
+        pageSize: this.state.pageSize
       }
     };
     this.setState(
@@ -103,20 +148,21 @@ export default class OrderCurrent extends ExchangeViewBase{
     );
     this.orderListHandle(this.props.type, params[this.props.type])
   }
-  changeCoin(e){
+  
+  changeCoin(e) {
     const {pairIdMsg} = this.props;
     let marketArray = [];
-    let coinValue = (e === '全部' || e=== 'all') ? '' : e;
-    let marketValue = (this.state.marketSelect === '全部') ? '' : this.state.marketSelect;
+    let coinValue = (e === this.intl.get('all')) ? '' : e;
+    let marketValue = (this.state.marketSelect === this.intl.get('all')) ? '' : this.state.marketSelect;
     let idArray = [];
     let hideOther = 1;
-    if(coinValue){
+    if (coinValue) {
       marketArray = pairIdMsg.pairNameCoin[coinValue];
-      marketArray.unshift('全部');
-      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue]))  || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) ;
+      marketArray.unshift(this.intl.get('all'));
+      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]));
     }
-    else{
-      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) && (marketArray = pairIdMsg.pairNameMarket[marketValue] && (marketArray.unshift('全部'))) || ((idArray = []) &&(hideOther = 0) && (marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket)) && (marketArray.unshift('全部')))
+    else {
+      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) && (marketArray = pairIdMsg.pairNameMarket[marketValue] && (marketArray.unshift(this.intl.get('all')))) || ((idArray = []) && (hideOther = 0) && (marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket)) && (marketArray.unshift(this.intl.get('all'))))
     }
     this.setState(
         {
@@ -127,20 +173,21 @@ export default class OrderCurrent extends ExchangeViewBase{
         }
     )
   }
-  changeMarket(e){
+  
+  changeMarket(e) {
     const {pairIdMsg} = this.props;
     let coinArray = [];
-    let marketValue = (e === '全部' || e=== 'all') ? '' : e;
-    let coinValue = (this.state.coinSelect === '全部') ? '' : this.state.coinSelect;
+    let marketValue = (e === this.intl.get('all')) ? '' : e;
+    let coinValue = (this.state.coinSelect === this.intl.get('all')) ? '' : this.state.coinSelect;
     let idArray = [];
     let hideOther = 1;
-    if(marketValue){
+    if (marketValue) {
       coinArray = pairIdMsg.pairNameMarket[marketValue];
-      coinArray.unshift('全部');
-      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue]))  || (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) ;
+      coinArray.unshift(this.intl.get('all'));
+      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue])) || (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue]));
     }
-    else{
-      coinValue && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) && (coinArray = pairIdMsg.pairNameCoin[coinValue] && (coinArray.unshift('全部'))) || ((idArray = []) && (hideOther = 0) && (coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)) && (coinArray.unshift('全部')))
+    else {
+      coinValue && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) && (coinArray = pairIdMsg.pairNameCoin[coinValue] && (coinArray.unshift(this.intl.get('all')))) || ((idArray = []) && (hideOther = 0) && (coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)) && (coinArray.unshift(this.intl.get('all'))))
     }
     this.setState(
         {
@@ -151,135 +198,204 @@ export default class OrderCurrent extends ExchangeViewBase{
         }
     )
   }
-  changeOrderType(e){
-    const typeObj = {
-      '全部': 2,
-      '买入': 0,
-      '卖出': 1,
-    }
+  
+  changeOrderType(e) {
+    const allKey = this.intl.get('all');
+    const buyKey = this.intl.get('buy');
+    const sellKey = this.intl.get('sell');
+    let typeObj = {
+    };
+    typeObj[this.intl.get('all')] = 2;
+    typeObj[this.intl.get('buy')] = 0;
+    typeObj[this.intl.get('sell')] = 1;
     this.setState(
-        {orderType: typeObj[e]}
+        {orderType: typeObj[e], typeSelect: e}
     )
   }
-  searchFilter(){
+  
+  searchFilter() {
     const params = {
-      orderCurrent:{
-        idArray:this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther},
-      orderHistory:{
-        idArray:this.state.idArray, orderType: this.state.orderType, orderStatus: this.state.orderStatus, startTime: this.state.startTime, endTime: this.state.endTime, page: this.state.page, pageSize: this.state.pageSize
+      orderCurrent: {
+        idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
+      },
+      orderHistory: {
+        idArray: this.state.idArray,
+        orderType: this.state.orderType,
+        orderStatus: this.state.orderStatus,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime,
+        page: this.state.page,
+        pageSize: this.state.pageSize
       }
     };
-       this.props.type === 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type]);
-       this.props.type !== 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type])
+    this.props.type === 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type]);
+    this.props.type !== 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type])
   }
-  startTime(e){
+  
+  startTime(e) {
     this.setState({
       startTime: e
     })
   }
-  endTime(e){
+  
+  endTime(e) {
     this.setState({
       endTime: e
     })
   }
-  checkoutDetail(id){
+  
+  checkoutDetail(id) {
     this.setState({
-      orderId: id
+      orderId: id,
+      detailFlag: true
     })
   }
+  
   render() {
     const {type} = this.props;
-  return(
-      <div className='order-detail'>
+    return (
+        <div className='order-detail'>
           <div className='order-title'>
-            <h3>{orderNavItems[type].title}</h3>
-            {type === 'orderHistory' && <div className='filter-reset'>
-              <input type="checkbox" onClick={this.hideReset.bind(this)}/>
-              <span>隐藏已撤销</span>
-            </div>}
-            {type !== 'orderCurrent' && <Button type="export" title="导出资产记录" className='export-record'/>}
+            <h3>{this.state.orderNavItems[type].title}</h3>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              {type === 'orderHistory' && <div className='filter-reset'>
+                <input type="checkbox" onClick={this.hideReset.bind(this)}/>
+                <span>{this.intl.get('hideReset')}</span>
+              </div>}
+              {type !== 'orderCurrent' && <Button type="export" title={this.intl.get("exportOrderRecord")} className='export-record'/>}
+            </div>
+            
           </div>
-        <ul className='order-filter'>
-          <li className='order-pair'>
-            <span>交易对</span>
-            <SelectButton
-                title="全部"
-                type="main"
-                className="select"
-                onSelect = {(e) => this.changeCoin(e)}
-                valueArr={this.state.coinArray}
-            />
-            <em>/</em>
-            <SelectButton
-                title="全部"
-                type="main"
-                className="select"
-                onSelect = {(e) => this.changeMarket(e)}
-                valueArr={this.state.marketArray}
-            />
-          </li>
-          <li>
-            <span>类型</span>
-            <SelectButton
-                title="全部"
-                type="main"
-                className="select"
-                valueArr={["全部", "买入",  "卖出"]}
-                onSelect={(e) => this.changeOrderType(e)}
-            />
-          </li>
-          {type !== 'orderCurrent' && <li className='data-filter'>
-           <DatePicker onChangeStart={(e) => this.startTime(e)} onChangeEnd={(e) => this.endTime(e)}/>
-         </li>}
-          <li className='filter-handle'>
-            <Button type="base" title="搜索" className="search" onClick={this.searchFilter.bind(this)}/>
-            {type !== 'orderCurrent' && <Button type="base" title="重置" className="reset" />}
-          </li>
-        </ul>
-        <table className='order-detail-table'>
-          <thead>
-          <tr>
-            {orderDetailHead[type].map((v, index) => {
-              return(
-                  <td key={index}>{v.name}</td>
+          <ul className='order-filter'>
+            <li className='order-pair'>
+              <span>{this.intl.get("pair")}</span>
+              <SelectButton
+                  title={this.state.coinSelect}
+                  type="main"
+                  className="select"
+                  onSelect={(e) => this.changeCoin(e)}
+                  valueArr={this.state.coinArray}
+              />
+              <em>/</em>
+              <SelectButton
+                  title={this.state.marketSelect}
+                  type="main"
+                  className="select"
+                  onSelect={(e) => this.changeMarket(e)}
+                  valueArr={this.state.marketArray}
+              />
+            </li>
+            <li>
+              <span>{this.intl.get('type')}</span>
+              <SelectButton
+                  title={this.state.typeSelect}
+                  type="main"
+                  className="select"
+                  valueArr={[this.intl.get('all'), this.intl.get('buy'), this.intl.get('sell')]}
+                  onSelect={(e) => this.changeOrderType(e)}
+              />
+            </li>
+            {type !== 'orderCurrent' && <li className='data-filter'>
+              <DatePicker onChangeStart={(e) => this.startTime(e)} onChangeEnd={(e) => this.endTime(e)}/>
+            </li>}
+            <li className='filter-handle'>
+              <Button type="base" title={this.intl.get('search')} className="search" onClick={this.searchFilter.bind(this)}/>
+              {type !== 'orderCurrent' && <Button type="base" title={this.intl.get('reset')} className="reset"/>}
+            </li>
+          </ul>
+          <table className='order-detail-table'>
+            <thead>
+            <tr>
+              {this.state.orderDetailHead[type].map((v, index) => {
+                return (
+                    <td key={index}>{v.name}</td>
+                )
+              })}
+            </tr>
+            </thead>
+            <tbody>
+            {this.state.orderListArray.map((v, index) => {
+              return (
+                  <tr key={index}>
+                    <td>{v.orderTime}</td>
+                    <td>{v.tradePairName}</td>
+                    <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
+                    {/*todo 颜色改类名统一处理*/}
+                    {/*价格*/}
+                    {type === 'orderCurrent' && <td>{v.price}</td>}
+                    {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : v.price}</td>}
+                    {type === 'orderDeal' && <td>{v.avgPrice}</td>}
+                    {/*数量*/}
+                    {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
+                    
+                    <td>{v.turnover}</td>
+                    {type === 'orderDeal' && <td>{v.fee}</td>}
+                    {type === 'orderCurrent' && <td>{v.undealCount}</td>}
+                    {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
+                    {type === 'orderHistory' && <td>{v.avgPrice}</td>}
+                    {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
+                    {type === 'orderCurrent' && <td>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
+                  
+                  </tr>
               )
             })}
-          </tr>
-          </thead>
-          <tbody>
-          {this.state.orderListArray.map((v, index) => {
-            return(
-                <tr key={index}>
-                  <td>{v.orderTime}</td>
-                  <td>{v.tradePairName}</td>
-                  <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? '卖出' : '买入'}</td>
-                  {/*todo 颜色改类名统一处理*/}
-                  {/*价格*/}
-                  {type === 'orderCurrent' && <td>{v.price}</td>}
-                  {type === 'orderHistory' &&  <td>{v.priceType ? '市价' : v.price}</td>}
-                  {type === 'orderDeal' && <td>{v.avgPrice}</td>}
-                  {/*数量*/}
-                  {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
-                  
-                  <td>{v.turnover}</td>
-                  {type === 'orderDeal' && <td>{v.fee}</td>}
-                  {type === 'orderCurrent' && <td>{v.undealCount}</td>}
-                  {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
-                  {type === 'orderHistory' && <td>{v.avgPrice}</td>}
-                  {type !== 'orderDeal' && <td>{orderStatus[v.orderStatus]}</td>}
-                  {type === 'orderCurrent' &&  <td>撤销</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)}>详情</td>}
-                 
+            </tbody>
+          </table>
+          <div className='order-page'>
+            {(this.props.type !== 'orderCurrent' && this.state.total) && <Pagination total={this.state.total} showTotal={true} pageSize={20}/>}
+          </div>
+          <div className='history-order-detail' style={{display: this.state.detailFlag ? 'block' : 'none'}}>
+            <div className='history-order-detail-content'>
+              <div className='detail-content-title'>
+                <h3>{this.intl.get('orderDetail')}</h3>
+                <i onClick={() => this.setState({detailFlag: false})}></i>
+              </div>
+              <div className='detail-content-info'>
+                <div className='content-info-items'>
+                  <p>{this.state.orderDetail.doneCount}</p>
+                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                </div>
+                <div className='content-info-items'>
+                  <p>{this.state.orderDetail.dealedMoney}</p>
+                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                </div>
+                <div className='content-info-items'>
+                  <p>{this.state.orderDetail.price}</p>
+                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                </div>
+                <div className='content-info-items'>
+                  <p>{this.state.orderDetail.fee}</p>
+                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                </div>
+              </div>
+              <table className='content-info-table'>
+                <thead>
+                <tr>
+                  {this.state.orderInfoHead.map((v, index) => {
+                    return (
+                        <td key={index}>{v.name}</td>
+                    )
+                  })}
                 </tr>
-            )
-          })}
-          </tbody>
-        </table>
-        <div className='history-order-detail'>
-          <div className='history-order-detail-content'>
-          
+                </thead>
+                <tbody>
+                {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
+                  return (
+                      <tr key={index}>
+                        <td>{v.buyer}</td>
+                        <td>{v.seller}</td>
+                        <td>{v.orderTime}</td>
+                        <td>{v.price}</td>
+                        <td>{v.volume}</td>
+                        <td>{v.turnover}</td>
+                      </tr>
+                  )
+                })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-  )
+    )
   }
 }

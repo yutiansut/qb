@@ -45,12 +45,13 @@ export default class UserOrderListController extends OrderListController{
     let historyOrder = await this.store.getHistoryOrder(params);
     if(!trade){
       this.view.setState({
-        historyOrder
+        historyOrder: historyOrder.orderList
       });
       return
     }
     this.view.setState({
-      orderListArray: historyOrder,
+      orderListArray: historyOrder.orderList,
+      total: historyOrder.totalCount
     })
   }
   async getOrderDetail(id){
@@ -59,6 +60,5 @@ export default class UserOrderListController extends OrderListController{
       detailFlag: true,
       orderDetail
     })
-    console.log('ididi', id, orderDetail)
   }
 }

@@ -10,7 +10,7 @@
 		font-size .2rem
 		color $normal-black-color
 	.filter-reset
-		margin-left 6.18rem
+		//margin-left 6.18rem
 		input
 			margin-right .1rem
 			position relative
@@ -22,8 +22,7 @@
 	margin .43rem 0 .4rem 0
 	display flex
 	align-items center
-	li
-		margin-right .35rem
+	justify-content space-between
 	span
 		font-size .16rem
 		color $dark-font-color
@@ -57,3 +56,56 @@
 			height .7rem
 			line-height .7rem
 			border-bottom .01rem solid $line-light
+.order-page
+	justify-content: flex-end;
+	display: flex;
+	margin-top: .2rem;
+.history-order-detail
+	background: rgba(0,0,0,.4);
+	top: 0;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 8888;
+	.history-order-detail-content
+		width 8.5rem
+		position absolute
+		left 3.5rem
+		top 1.62rem
+		background $normal-white-color
+		border-radius .06rem
+		padding .3rem
+		z-index 8889
+		.detail-content-title
+			position relative
+			h3
+				font-size .2rem
+			i
+				cursor pointer
+				position absolute
+				width .16rem
+				height .16rem
+				right 0
+				top 0
+				background-image $close-button
+		.detail-content-info
+			display flex
+			width 100%
+			height 1.02rem
+			justify-content space-around
+			margin-top .44rem
+			background $bg-medium-color
+			.content-info-items
+				height 100%
+				padding .2rem 0
+				p
+					font-size .16rem
+					margin-bottom .24rem
+				span
+					color  $normal-gray-color
+		.content-info-table
+			width 100%
+			margin-top .44rem
+			tr
+				height .5rem

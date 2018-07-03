@@ -24,6 +24,7 @@ export default function zh(state) {
     idVerify: "身份认证",
     logOut: "退出",
     total: "成交额",
+    pair: '交易对',
     infoView: "资讯概览",
     seeMore: "查看更多",
     readMore: "阅读详情",
@@ -74,6 +75,10 @@ export default function zh(state) {
     place: '地点',
     upLoad: '上传',
     volume: "成交量",
+    avgPrice: '平均成交价',
+    dealed: '已成交',
+    marketPrice: '市价',
+    detail: '详情',
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -151,7 +156,27 @@ export default function zh(state) {
   const notice = {
     "activity-regist":"立即注册"
   };
-  const order = {};
+  const order = {
+    "order-current": "当前订单",
+    "order-history": "历史订单",
+    "order-deal": "历史成交",
+    'unDeal': '未成交',
+    'partDeal': '部分成交',
+    'totalDeal': '全部成交',
+    'reseted': '已撤销',
+    'reseting':  '撤单中',
+    'overed':  '已结束',
+    'hideReset': '隐藏已撤销',
+    "exportOrderRecord": "导出资产记录",
+    "orderDetail": '订单详情',
+    "order-deal-total": '成交总量',
+    "order-deal-money": '成交金额',
+    "order-buy": '买方',
+    "order-sell": '卖方',
+    "order-deal-time": "成交时间",
+    "order-deal-price": "成交单价",
+    "order-deal-number": "成交数量",
+  };
   const deal = {
     "deal-limit":"限价委托",
     "deal-market":"市价委托",
