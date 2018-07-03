@@ -69,6 +69,7 @@ async function messageHandler() {
   }
 }
 async function sendHeartBreak(pool) {
+  console.log('sendHeartBreak', pool)
   startFlag = true
   while (1) {
     // console.log('sendHeartBreak', pool)

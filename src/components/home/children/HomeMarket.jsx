@@ -3,13 +3,6 @@ import React, { Component } from "react";
 import Input from '../../../common/component/Input/index.jsx'
 import ReactTrend from './ReactTread'
 
-let marketTableHead = [
-  {name: '交易盘', sortValue: ''},
-  {name: '价格', sortValue:['price'],type:1,sortDefault:'turnover'},
-  {name: '成交额', sortValue:['turnover'],type:1,sortDefault:'turnover'},
-  {name: '成交量', sortValue:['volume'],type:1,sortDefault:'turnover'},
-  {name: '涨跌幅', sortValue:['rise'],type:1,sortDefault:'turnover'},
-];
 let sortImg =  ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
 
 export default class HomeMarket extends ExchangeViewBase{
@@ -23,6 +16,13 @@ export default class HomeMarket extends ExchangeViewBase{
       collectActive: false, // 控制收藏区的active
       // collectImg: "/static/img/star.svg",
       // collectType: 0
+      marketTableHead: [
+        {name: `${this.intl.get('market-markets')}`, sortValue: ''},
+        {name: `${this.intl.get('price')}`, sortValue:['price'],type:1,sortDefault:'turnover'},
+        {name: `${this.intl.get('total')}`, sortValue:['turnover'],type:1,sortDefault:'turnover'},
+        {name: `${this.intl.get('volume')}`, sortValue:['volume'],type:1,sortDefault:'turnover'},
+        {name: `${this.intl.get('market-change')}`, sortValue:['rise'],type:1,sortDefault:'turnover'},
+      ]
     };
     const {controller} = this.props;
     //绑定view
@@ -49,11 +49,11 @@ export default class HomeMarket extends ExchangeViewBase{
         <div className="market-nav clearfix">
           <ul className="clearfix">
             <li onClick={this.collectMarket}>
-              <span className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>收藏区</span>
+              <span className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>{this.intl.get('market-favorites')}</span>
             </li>
             {this.state.marketDataHandle.map((v, index) => {return(
               <li key={index} onClick={this.changeMarket.bind(this,v)}>
-                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()}市场</span>
+                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()}{this.intl.get('market-market')}</span>
               </li>
             )})}
           </ul>
@@ -67,14 +67,14 @@ export default class HomeMarket extends ExchangeViewBase{
         <table>
           <thead align="left">
             <tr>
-              <th>收藏</th>
-              {marketTableHead.map((v, index) => {
+              <th>{this.intl.get('market-favorite')}</th>
+              {this.state.marketTableHead.map((v, index) => {
                 return(<th onClick={this.pairSort.bind(this,v,index)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                   {v.name}
                   <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
                 </th>)
               })}
-              <th>7日涨跌幅</th>
+              <th>{this.intl.get('market-change7D')}</th>
             </tr>
           </thead>
           <tbody>

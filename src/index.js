@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import App from './App'
-import Core from './core'
+import {RUNAPP, Websocket} from './core'
 import ServerConfig from './config/ServerConfig'
 import WebSocketConfig from './config/WebSocketConfig'
 import HttpConfig from './config/HttpConfig'
@@ -13,8 +13,8 @@ import './class/lib/Prototype'
 
 const renderDom = async Component => {
   // console.log(Date.now())
-  await Core.RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig})
-  WebSocketConfig.useWebSocket && await Core.Websocket.general()
+  await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig})
+  WebSocketConfig.useWebSocket && await Websocket.general()
   // await import('./App')
   // console.log(Date.now())
   render(

@@ -24,14 +24,6 @@ export default function zh(state) {
     idVerify: "身份认证",
     logOut: "退出",
     total: "成交额",
-    favorite: "收藏",
-    favorites: "收藏区",
-    market: "市场",
-    markets: "交易盘",
-    lastPrice: "最新成交价",
-    volume: "成交量",
-    change: "涨跌幅",
-    change7D: "7日涨跌幅",
     infoView: "资讯概览",
     seeMore: "查看更多",
     readMore: "阅读详情",
@@ -81,6 +73,7 @@ export default function zh(state) {
     ip: 'IP',
     place: '地点',
     upLoad: '上传',
+    volume: "成交量",
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -145,8 +138,18 @@ export default function zh(state) {
     "asset-balan": "余额",
     "asset-checkState": "审核状态",
   };
-  const market = {};
-  const notice = {};
+  const market = {
+    "market-favorite": "收藏",
+    "market-favorites": "收藏区",
+    "market-market": "市场",
+    "market-markets": "交易盘",
+    "market-lastPrice": "最新成交价",
+    "market-change": "涨跌幅",
+    "market-change7D": "7日涨跌幅",
+  };
+  const notice = {
+    "activity-regist":"立即注册"
+  };
   const order = {};
   const deal = {};
   const user = {

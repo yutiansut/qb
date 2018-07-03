@@ -21,7 +21,8 @@ export default class Login extends exchangeViewBase {
       input1: "",
       input2: "",
       input3: "",
-      userType: 0
+      userType: 0,
+      verifyNum:"获取验证码"
     }
     const {controller} = props
     //绑定view
@@ -29,6 +30,7 @@ export default class Login extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller)
+    this.login = controller.login.bind(controller)
     this.changeTitle = this.changeTitle.bind(this)
     this.changeInput1 = this.changeInput1.bind(this)
     this.changeInput2 = this.changeInput2.bind(this)
@@ -73,7 +75,7 @@ export default class Login extends exchangeViewBase {
   }
 
   render() {
-    console.log('登录', this.state)
+    // console.log('登录', this.state)
     return (
       <div className="login-wrap">
         <h1>
@@ -97,7 +99,7 @@ export default class Login extends exchangeViewBase {
                     onClick={()=>{this.getVerify(this.state.input1, this.state.userType, 0)}}/>
           </li>
           <li>
-            <Button title="登录" className="login-btn"/>
+            <Button title="登录" className="login-btn" onClick={()=>{this.login(this.state.input1, this.state.input3, this.state.userType, 0)}}/>
           </li>
         </ul>
         <p><input type="checkbox" />我已阅读并同意<a href="">用户协议</a></p>

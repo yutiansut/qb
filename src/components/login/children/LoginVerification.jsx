@@ -11,7 +11,7 @@ export default class LoginVerification extends exchangeViewBase {
     }
     const {controller} = props
     //绑定view
-    controller.setView(this)
+    // controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.initLoginVerification = controller.initLoginVerification.bind(controller)

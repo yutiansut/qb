@@ -9,16 +9,25 @@ export default class LoginController extends ExchangeControllerBase {
 
   setView(view){
     super.setView(view);
-    return this.store.data
+    // return this.store.data
   }
 
-  async getVerify(account, mode, type) { // 获取验证码
+  getVerify(account, mode, type) { // 获取验证码
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
+    console.log('这是什么',this.view.state, this.view)
     this.view.setState({verifyNum: 60})
-    console.log('aaaaa',this.view.state.verifyNum)
+    // console.log('aaaaa',this.view.state.verifyNum)
     this.countDown('verifyCountDown', 'verifyNum', this.view)
-    console.log('bbbbb',this.view.state.verifyNum)
+    // console.log('bbbbb',this.view.state.verifyNum)
     this.userController.getCode(account, mode, type)
+  }
+
+  //登录
+  login(account, code, type, mode){
+    let obj = {passCode:code, mode, os:3};
+    let keyArr = ['phone','email']
+    obj[keyArr[type]] = account
+    this.store.login(obj)
   }
 
   async initLoginVerification() { // 获取手势验证

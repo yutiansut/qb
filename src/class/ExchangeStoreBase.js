@@ -68,8 +68,8 @@ export default class ExchangeStoreBase extends StoreBase {
       // console.log('this.WebSocket[connectName]', websocket)
 
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign(headerConfig[key], {data})
-      // console.log(emitData, websocket)
+      let emitData = Object.assign(headerConfig[key], {body: data})
+      console.log(emitData, websocket)
       websocket.send(emitData)
     }
     this.WebSocket[connectName].on = (key, func) => {

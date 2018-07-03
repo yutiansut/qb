@@ -22,7 +22,7 @@ export default {
         market:{recommendCurrency:{var: 1, op: 108, seq:0},
                 marketPair:{var: 1, op: 108, seq:0}},
         order:{tradeDepth:{var: 1, op: 108, seq:0}},
-        login:{login:{var: 1, op: 17, seq:0}},
+        login:{login:{var: 1, op: 10, seq:0}}, //ysh
       }
     },
 

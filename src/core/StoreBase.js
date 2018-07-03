@@ -2,13 +2,14 @@
 import WebSocket from './webSocket' //websocket交互
 // import Storage from './storage' //localStorage交互
 import Fetch from './libs/Fetch'
+import HttpProxy from "./httpProxy";
+import MassageHandler from './messageHandler'
+
 import AsyncAll from './libs/AsyncAll'
 import Sleep from './libs/Sleep'
 import Loop from './loop' //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
 
-import HttpProxy from "./httpProxy";
-import MassageHandler from './messageHandler'
 
 export default class StoreBase {
   constructor() {

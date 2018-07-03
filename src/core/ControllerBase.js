@@ -37,7 +37,7 @@ export default class ControllerBase {
     this.Loop[key].clear()
     this.Loop[key].setDelayTime(1000)
     this.Loop[key].set(async () => {
-      // console.log(state, view.state[state])
+      // console.log(state, view.state[state], view)
       if (view.state[state] === 0) {
         this.Loop[key].stop()
         return

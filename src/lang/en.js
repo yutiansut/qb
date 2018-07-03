@@ -140,8 +140,14 @@ export default function en (state){
     "asset-balan": "Balance",
     "asset-checkState": "State",
   };
-  const market = {};
-  const notice = {};
+  const market = {
+    "market-collection":"收藏区",
+    "market-collect":"收藏",
+    "market-collect":"7日涨跌幅",
+  };
+  const notice = {
+    "activity-regist":"Sign up now"
+  };
   const order = {};
   const deal = {};
   const user = {

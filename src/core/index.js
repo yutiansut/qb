@@ -1,6 +1,7 @@
 import HttpProxy from './httpProxy'
 import Websocket from './webSocket'
 import Loop from "./loop";
+import GlobalUtil from "./libs/GlobalUtil";
 
 
 const RUNAPP = async (config) => {
@@ -13,7 +14,9 @@ const RUNAPP = async (config) => {
   Loop.install(LoopTaskConfig);
 }
 
-export default {
-  RUNAPP,
-  Websocket
+
+module.exports = {
+  GlobalUtil,
+  Websocket,
+  RUNAPP
 }

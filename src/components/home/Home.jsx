@@ -28,7 +28,7 @@ export default class Home extends exchangeViewBase {
         <div className="banner-wrap">
           <div>
             <img src="/static/img/banner_title.svg" alt=""/>
-            <Link to="/activity/fresh">立即注册</Link>
+            <Link to="/activity/fresh">{this.intl.get("activity-regist")}</Link>
           </div>
           <div alt="" className="banner-img"/>
         </div>
