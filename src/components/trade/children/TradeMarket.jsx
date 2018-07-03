@@ -2,11 +2,6 @@ import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
 import '../stylus/tradeMarket.styl'
 
-let marketTableHead = [
-  {name: '交易盘', sortValue: ''},
-  {name: '价格', sortValue: ['price'], type: 1, sortDefault: 'rise'},
-  {name: '涨跌幅', sortValue: ['rise'], type: 1, sortDefault: 'rise'},
-];
 
 export default class TradeMarket extends ExchangeViewBase {
   constructor(props) {
@@ -17,6 +12,11 @@ export default class TradeMarket extends ExchangeViewBase {
       sortIndex: -1,
       tradeSortImg: '/static/img/trade_rank.svg',
       collectActive: false, // 控制收藏区的active
+      marketTableHead : [
+        {name: `${this.intl.get('market-markets')}`, sortValue: ''},
+        {name: `${this.intl.get('market-lastPrice')}`, sortValue: ['price'], type: 1, sortDefault: 'rise'},
+        {name: `${this.intl.get('market-change')}`, sortValue: ['rise'], type: 1, sortDefault: 'rise'},
+      ]
     };
     const {controller} = this.props;
     //绑定view
@@ -64,7 +64,7 @@ export default class TradeMarket extends ExchangeViewBase {
       <div className='trade-market'>
         <div className='trade-market-list'>
           <ul>
-            <li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>收藏</li>
+            <li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>{this.intl.get('market-favorite')}</li>
             {this.state.marketDataHandle.map((v, index) => {
               return (
                 <li
@@ -90,7 +90,7 @@ export default class TradeMarket extends ExchangeViewBase {
         <table className='trade-market-table'>
           <thead>
             <tr>
-              {marketTableHead.map((v, index) => {
+              {this.state.marketTableHead.map((v, index) => {
                 return (<td onClick={this.pairSort.bind(this, v, index)} key={index} className={`${v.sortValue ? 'sort-img-td' : ''}`}>
                   {v.name}
                   <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt=""

@@ -19,14 +19,7 @@ export default function en (state){
     idVerify: "ID verification",
     logOut: "Log out",
     total: "Total",
-    favorite: "Favorites",
-    favorites: "Favourites",
-    market: "Market",
-    markets: "Markets",
-    lastPrice: "Latest price",
     volume: "Volume",
-    change: "Change",
-    change7D: "7D Change",
     infoView: "Info Overview",
     seeMore: "See more",
     readMore: "Read more",
@@ -141,9 +134,14 @@ export default function en (state){
     "asset-checkState": "State",
   };
   const market = {
-    "market-collection":"收藏区",
-    "market-collect":"收藏",
-    "market-collect":"7日涨跌幅",
+    "market-favorite": "Favorites",
+    "market-favorites": "Favourites",
+    "market-market": "Market",
+    "market-markets": "Markets",
+    "market-lastPrice": "Latest price",
+    "market-change": "Change",
+    "market-change7D": "7D Change",
+    "market-currencyInfo": "Currency details",
   };
   const notice = {
     "activity-regist":"Sign up now"

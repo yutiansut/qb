@@ -146,12 +146,15 @@ export default function zh(state) {
     "market-lastPrice": "最新成交价",
     "market-change": "涨跌幅",
     "market-change7D": "7日涨跌幅",
+    "market-currencyInfo": "币种资料",
   };
   const notice = {
     "activity-regist":"立即注册"
   };
   const order = {};
-  const deal = {};
+  const deal = {
+
+  };
   const user = {
     "user-score": "我的积分",
     "user-base": "基本资料",

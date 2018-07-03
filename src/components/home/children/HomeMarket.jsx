@@ -18,7 +18,7 @@ export default class HomeMarket extends ExchangeViewBase{
       // collectType: 0
       marketTableHead: [
         {name: `${this.intl.get('market-markets')}`, sortValue: ''},
-        {name: `${this.intl.get('price')}`, sortValue:['price'],type:1,sortDefault:'turnover'},
+        {name: `${this.intl.get('market-lastPrice')}`, sortValue:['price'],type:1,sortDefault:'turnover'},
         {name: `${this.intl.get('total')}`, sortValue:['turnover'],type:1,sortDefault:'turnover'},
         {name: `${this.intl.get('volume')}`, sortValue:['volume'],type:1,sortDefault:'turnover'},
         {name: `${this.intl.get('market-change')}`, sortValue:['rise'],type:1,sortDefault:'turnover'},
@@ -53,7 +53,7 @@ export default class HomeMarket extends ExchangeViewBase{
             </li>
             {this.state.marketDataHandle.map((v, index) => {return(
               <li key={index} onClick={this.changeMarket.bind(this,v)}>
-                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()}{this.intl.get('market-market')}</span>
+                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
               </li>
             )})}
           </ul>
