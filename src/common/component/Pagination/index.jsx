@@ -62,7 +62,7 @@ export default class Pagination extends exchangeViewBase {
     let { total, showTotal, showQuickJumper, pageSize } = this.props;
     let currentPage = this.state.currentPage;
     return (
-      <div className="pagination-wrap">
+      <div className="pagination-wrap" style={{ display: (total / pageSize) <= 1 ? 'none' : 'flex'}}>
         {showTotal && (
           <p className="total">
             {this.intl.get('inTotal')} <span>{total}</span> {this.intl.get('items')}

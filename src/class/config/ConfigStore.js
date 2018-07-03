@@ -25,4 +25,7 @@ export default class UserStore extends ExchangeStoreBase {
       // language: 'en-US'
     }
   }
+  changeLanguage(lang){
+    this.state.language = lang;
+  }
 }

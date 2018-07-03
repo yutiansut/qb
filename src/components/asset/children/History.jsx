@@ -12,12 +12,12 @@ export default class History extends exchangeViewBase {
       orderType: {
         0: "充币",
         1: "转账",
-        2: "提币"
+        15000: "提币"
       },
       status: {
-        0: this.intl.get("failed"),
-        1: this.intl.get("pending"),
-        2: this.intl.get("passed"),
+        0: this.intl.get("pending"),
+        1: this.intl.get("passed"),
+        2: this.intl.get("failed"),
         3: this.intl.get("cancel")
       }
     };
@@ -59,13 +59,15 @@ export default class History extends exchangeViewBase {
       let { currency, orderType, startTime, endTime, status } = this.state;
       this.getHistory({
         coinId: this.state.walletList[currency],
-        coinName: currency === this.intl.get("all") ? undefined :  currency.toLowerCase() ,
+        coinName:
+          currency === this.intl.get("all")
+            ? undefined
+            : currency.toLowerCase(),
         orderType:
           orderType !== undefined && this.staticData.orderType[orderType], //充0提1转2  注意:交易所内充提显示为转账
         startTime: startTime,
         endTime: endTime,
-        orderStatus:
-          status !== undefined && this.staticData.status[status], //未通过 审核中1 通过2  撤销3
+        orderStatus: status !== undefined && this.staticData.status[status], //未通过 审核中1 通过2  撤销3
         page: 0,
         pageSize: 20
       });
@@ -76,7 +78,14 @@ export default class History extends exchangeViewBase {
   }
   async componentWillMount() {
     await this.getWalletList();
-    await this.getHistory({ page: 0, pageSize: 20, startTime: this.state.startTime, endTime: this.state.endTime });
+    await this.getHistory({
+      page: 0,
+      pageSize: 20,
+      orderType: -1,
+      orderStatus: -1,
+      startTime: -1,
+      endTime: -1
+    });
   }
 
   componentDidMount() {}
@@ -186,9 +195,9 @@ export default class History extends exchangeViewBase {
                   <th className="receive">
                     {this.intl.get("asset-receiveAddress")}
                   </th>
-                  <th className="confirm">{this.intl.get("asset-confirm")}</th>
                   <th className="state">{this.intl.get("asset-checkState")}</th>
                   <th className="fee">{this.intl.get("fee")}</th>
+                  <th className="option">{this.intl.get("option")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -217,22 +226,22 @@ export default class History extends exchangeViewBase {
                           <img src={coinIcon} alt="" />
                           {coinName}
                         </td>
-                        <td>
-                         {this.staticData.orderType[orderType]}
-                        </td>
+                        <td>{this.staticData.orderType[orderType]}</td>
                         <td className="cash red">{count}</td>
-                        <td>{balance}</td>
+                        <td className="balan">{balance}</td>
                         <td className="send">{postAddress}</td>
-                        <td>{receiveAddress}</td>
-                        <td className="confirm">
-                          <a href="#">{`${doneCount}/${verifyCount}`}</a>
-                        </td>
+                        <td className="receive">{receiveAddress}</td>
                         <td className="state passing">
-                          <span>
-                              {this.staticData.status[orderStatus]}
-                          </span>
+                          <span>{this.staticData.status[orderStatus]}</span>
                         </td>
                         <td className="fee">{fee}</td>
+                        <td className="option">
+                          {orderStatus === 0 ? (
+                            <a>{this.intl.get("cancel")}</a>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
                       </tr>
                     )
                   )}

@@ -62,17 +62,17 @@ export default {
     //24小时提现额度, 查询币种额度，4.2
     { name: 'balance', data: { url: '/property/', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes', needToken: true },
     // 充币地址查询4.4（pass）
-    { name: 'chargeAddress', data: { url: '/common/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes',needToken: true  },
+    { name: 'chargeAddress', data: { url: '/property/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes',needToken: true  },
     // 提币矿工费4.5
     { name: 'minerFee', data: { url: '/property/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes', needToken: true },
     // 提交提币订单4.6（pass）
     { name: 'extractOrder', data: { url: '/property/', method: 'post' }, action: 'withdraw', actionBack: 'withdrawRes', needToken: true },
     // 提币地址查询4.7（pass）
-    { name: 'extractAddress', data: { url: '/common/', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes', needToken: true  },
+    { name: 'extractAddress', data: { url: '/property/', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes', needToken: true  },
     //增加提币地址4.8(需要登录)（pass）
-    { name: 'addAddress', data: { url: '/common/', method: 'post' }, action: 'addWithdrawAddress', actionBack: 'addWithdrawAddressRes', needToken:true },
+    { name: 'addAddress', data: { url: '/property/', method: 'post' }, action: 'addWithdrawAddress', actionBack: 'addWithdrawAddressRes', needToken:true },
     // 删除提币地址4.9(需要登录)（pass）
-    { name: 'delAddress', data: { url: '/common/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
+    { name: 'delAddress', data: { url: '/property/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
     // 充提记录4.10
     { name: 'history', data: { url: '/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
   ],

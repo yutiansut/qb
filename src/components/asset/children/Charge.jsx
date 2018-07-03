@@ -14,10 +14,10 @@ export default class Charge extends exchangeViewBase {
     super(props);
     let { controller } = props;
     this.status = {
-      0: this.intl.get("failed"),
-      1: this.intl.get("pending"),
-      2: this.intl.get("passed"),
-      3: this.intl.get("cancel")
+      0: this.intl.get("pending"),
+      1: this.intl.get("passed"),
+      2: this.intl.get("failed"),
+      3: this.intl.get("cancel"),
     };
     this.state = {
       currency: "BTC",
@@ -77,7 +77,14 @@ export default class Charge extends exchangeViewBase {
     this.getTradePair();
     this.getCurrencyAmount(currency || this.state.currency);
     this.getCoinAddress(currency || this.state.currency);
-    this.getHistory({ page: 0, orderType: 0, pageSize: 10 });
+    this.getHistory({
+      page: 0,
+      pageSize: 10,
+      orderType: 1,
+      startTime: -1,
+      endTime: -1,
+      orderStatus: -1
+    });
   }
 
   componentDidMount() {
@@ -289,8 +296,11 @@ export default class Charge extends exchangeViewBase {
                     this.setState({ page });
                     this.getHistory({
                       page: page - 1,
-                      orderType: 0,
-                      pageSize: 10
+                      pageSize: 10,
+                      orderType: 1,
+                      startTime: -1,
+                      endTime: -1,
+                      orderStatus: -1
                     });
                   }}
                   showQuickJumper={true}

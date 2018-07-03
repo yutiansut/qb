@@ -73,7 +73,7 @@ const Activity = ({ match }) => {
 }
 
 const header = ({ match }) => {
-  return <Header navClass={'headerNav'} match={match} />;
+  return <Header navClass={"headerNav"} controller={configController} match={match} />;
 }
 
 const tradeHeader = ({ match }) => {
@@ -119,6 +119,7 @@ export default class App extends Component {
     loginController.userController = userController;
     userOrderController.marketController = marketController;
 
+    configController.setAppView(this);//configController获取app view 以便设置语言后重新渲染
   }
 
 
@@ -126,9 +127,8 @@ export default class App extends Component {
     // console.log(111, window.innerHeight)
   }
 
-  async componentDidMount() {
-    let flag = await configController.loadLocales();
-    flag && this.setState({ initDone: true });
+  componentDidMount() {
+    configController.loadLocales();
     marketController.getTradePairHandle();
     // console.log(222, window.innerHeight)
   }

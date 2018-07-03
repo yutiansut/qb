@@ -12,13 +12,22 @@ export default class ConfigController extends ExchangeControllerBase {
     super()
     this.store = new ConfigStore()
   }
-
+  // 获取app view
+  setAppView(view){
+    this.app = view;
+  }
   get nameCny() {
     return this.store.state.nameCny
   }
-  async getLanguage() {
+  get language() {
     // return "zh-CN";
     return this.store.state.language;
+  }
+  changeLanguage(lang){
+    this.store.changeLanguage(lang);
+    this.app.setState({ initDone: false},()=>{
+      this.loadLocales();
+    })
   }
   async loadLocales() {
     const locales = {
@@ -28,12 +37,12 @@ export default class ConfigController extends ExchangeControllerBase {
 
     // init method will load CLDR locale data according to currentLocale
     // react-intl-universal is singleton, so you should init it only once in your app
-    let lang = await this.getLanguage();
+    let lang = this.language;
     await intl.init({
       currentLocale: lang, // TODO: determine locale here
       locales,
     });
-    return true;
+    this.app.setState({ initDone: true });
   }
 
 }

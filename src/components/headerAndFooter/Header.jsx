@@ -33,26 +33,25 @@ const navArrayLeft = [
 ];
 
 const languageArr = [
-  {imgUrl: '/static/img/home/chinese.svg', content: '简体中文'},
-  {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
-  {imgUrl: '/static/img/home/english.png', content: '英语'}
+  { imgUrl: '/static/img/home/chinese.svg', content: '简体中文', value: "zh-CN"},
+  // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
+  {imgUrl: '/static/img/home/english.png', content: '英语', value: "en-US"}
 ]
 
 export default class Header extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       navClass: 'headerNav',
       languageIndex: 0
     }
-    this.changeLanguage = this.changeLanguage.bind(this) // 改变语言
+    this.configController = this.props.controller;
+    this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.matched = '/home'
   }
-
-  changeLanguage(index) {
-    console.log('语言', index)
-    this.setState({
-      languageIndex: index
+  componentDidMount() {
+    languageArr.forEach((v,index)=>{
+      v.value === this.configController.language && this.setState({ languageIndex : index})
     })
   }
 
@@ -112,7 +111,7 @@ export default class Header extends Component {
               <span>{languageArr[this.state.languageIndex].content}</span>
             </p>
             <ul className="language-ul">
-              {languageArr.map((v, index) => (<li key={index} className={this.state.languageIndex === index ? 'hide' : ''} onClick={i => {this.changeLanguage(index)}}>
+              {languageArr.map((v, index) => (<li key={index} className={this.state.languageIndex === index ? 'hide' : ''} onClick={i => {this.changeLanguage(v.value)}}>
                 <img src={v.imgUrl} alt=""/>
                 <span>{v.content}</span>
               </li>))}

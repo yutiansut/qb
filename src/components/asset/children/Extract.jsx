@@ -5,7 +5,7 @@ import Button from "../../../common/component/Button";
 import Input from "../../../common/component/Input";
 import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
-import ToTrade from "../components/ToTrade"
+import ToTrade from "../components/ToTrade";
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
 import BasePopup from "../../../common/component/Popup";
@@ -14,10 +14,10 @@ export default class Extract extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.status = {
-      0: this.intl.get("failed"),
-      1: this.intl.get("pending"),
-      2: this.intl.get("passed"),
-      3: this.intl.get("cancel")
+      0: this.intl.get("pending"),
+      1: this.intl.get("passed"),
+      2: this.intl.get("failed"),
+      3: this.intl.get("cancel"),
     };
     this.state = {
       currency: "BTC",
@@ -91,10 +91,17 @@ export default class Extract extends exchangeViewBase {
     this.getCurrencyAmount(currency || this.state.currency);
     this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getExtract();
-    this.getHistory({ page: 0, orderType: 1, pageSize: 10 });
+    this.getHistory({
+      page: 0,
+      pageSize: 10,
+      orderType: 15000,
+      startTime: -1,
+      endTime: -1,
+      orderStatus: -1
+    });
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
@@ -347,18 +354,18 @@ export default class Extract extends exchangeViewBase {
                         },
                         index
                       ) => (
-                          <tr key={index}>
-                            <td>{orderTime}</td>
-                            <td>{coinName}</td>
-                            <td>{count}</td>
-                            <td>{postAddress}</td>
-                            <td>{receiveAddress}</td>
-                            <td>
-                              <span>{this.status[orderStatus]}</span>
-                            </td>
-                            <td>{fee}</td>
-                          </tr>
-                        )
+                        <tr key={index}>
+                          <td className="time">{orderTime.toDate()}</td>
+                          <td className="currency">{coinName.toUpperCase()}</td>
+                          <td className="amount"><i>-{count}</i></td>
+                          <td className="send"><i>{postAddress}</i></td>
+                          <td className="receive"><i>{receiveAddress}</i></td>
+                          <td className="state">
+                            <span>{this.status[orderStatus]}</span>
+                          </td>
+                          <td className="remark">{fee}</td>
+                        </tr>
+                      )
                     )}
                 </tbody>
               </table>
@@ -371,8 +378,11 @@ export default class Extract extends exchangeViewBase {
                     this.setState({ page });
                     this.getHistory({
                       page: page - 1,
-                      orderType: 1,
-                      pageSize: 10
+                      pageSize: 10,
+                      orderType: 15000,
+                      startTime: -1,
+                      endTime: -1,
+                      orderStatus: -1
                     });
                   }}
                   showQuickJumper={true}
@@ -386,8 +396,8 @@ export default class Extract extends exchangeViewBase {
               </p>
             </div>
           ) : (
-              <div className="kong">暂无记录</div>
-            )}
+            <div className="kong">暂无记录</div>
+          )}
         </div>
         {this.state.showAddressPopup && (
           <Popup
