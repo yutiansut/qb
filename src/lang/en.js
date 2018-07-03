@@ -10,14 +10,7 @@ export default function en (state){
     to: 'To',
     page: 'Page',
     go: 'Go',
-    home: "home",
     type: "Type",
-    exchange: "exchange",
-    assets: "assets",
-    order: "order list",
-    security: "Security center",
-    idVerify: "ID verification",
-    logOut: "Log out",
     total: "Total",
     volume: "Volume",
     infoView: "Info Overview",
@@ -25,6 +18,7 @@ export default function en (state){
     readMore: "Read more",
     yes: "Yes",
     no: "No",
+    login:'Sing up',
     email: "Email Address",
     phone: "Mobile",
     alter: "Update",
@@ -74,6 +68,16 @@ export default function en (state){
     dealed: 'Deal done',
     marketPrice: 'Market Price',
     detail: 'Details',
+  };
+  const other ={
+    "header-home": "home",
+    "header-exchange": "exchange",
+    "header-assets": "assets",
+    "header-order": "order list",
+    "header-security": "Security center",
+    "header-idVerify": "ID verification",
+    "header-logOut": "Log out",
+    "header-regist":"Sign in"
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",
@@ -274,6 +278,7 @@ export default function en (state){
   return Object.assign(
     {},
     common,
+    other,
     asset,
     market,
     notice,

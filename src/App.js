@@ -80,12 +80,6 @@ const tradeHeader = ({ match }) => {
   return <Header navClass={'tradeNav'} match={match} configController={configController}/>;
 }
 
-import TestApp from './TestApp'
-import TestAppController from "./TestAppController";
-
-const about = ({ match }) => {
-  return <TestApp controller={testAppController} match={match} />;
-};
 const HomeComponent = () => {
   return <Home marketController={marketController} activityController={activityController} noticeController={noticeController}/>
 };
@@ -97,7 +91,6 @@ export default class App extends Component {
     super(props);
     this.state = { initDone: false }
 
-    testAppController = new TestAppController();
     configController = new ConfigController();
     assetController = new AssetController();
     userController = new UserController();
@@ -107,8 +100,6 @@ export default class App extends Component {
     marketController = new MarketController('market');
     userOrderController = new UserOrderListController();
 
-
-    testAppController.configController = configController;
     noticeController.configController = configController;
     activityController.configController = configController;
     assetController.configController = configController;
@@ -159,7 +150,6 @@ export default class App extends Component {
               <Route path="/wallet" component={Asset} />
               <Route path="/order" component={Order} />
               <Route path="/user" component={User} />
-              <Route path="/about" component={about} />
               <Route path="/findPass" component={ForgetPass} />
               <Route path="/notice" component={Notice} />
               <Route path="/help" component={Help} />

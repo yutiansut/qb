@@ -15,15 +15,9 @@ export default function zh(state) {
     to: '前往',
     page: '页',
     go: '跳转',
-    home: "首页",
     type: "类型",
-    exchange: "币币交易",
-    assets: "资产管理",
-    order: "订单管理",
-    security: "安全中心",
-    idVerify: "身份认证",
-    logOut: "退出",
     total: "成交额",
+    login:'登录',
     pair: '交易对',
     infoView: "资讯概览",
     seeMore: "查看更多",
@@ -79,6 +73,16 @@ export default function zh(state) {
     dealed: '已成交',
     marketPrice: '市价',
     detail: '详情',
+  };
+  const other ={
+    "header-home": "首页",
+    "header-exchange": "币币交易",
+    "header-assets": "资产管理",
+    "header-order": "订单管理",
+    "header-security": "安全中心",
+    "header-idVerify": "身份认证",
+    "header-logOut": "退出",
+    "header-regist":"注册"
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -277,6 +281,7 @@ export default function zh(state) {
   return Object.assign(
     {},
     common,
+    other,
     asset,
     market,
     notice,

@@ -8,6 +8,7 @@ import {
   Switch
 } from 'react-router-dom'
 import './stylus/header.styl'
+import ExchangeViewBase from "../ExchangeViewBase";
 // const Nav = ({label,to}) => (
 //     <Route path={to}  children={({ match }) => (
 //         <li className={match ? 'active' : ''}>
@@ -15,35 +16,36 @@ import './stylus/header.styl'
 //         </li>
 //     )}/>
 // );
-const navArrayLeft = [
-  {label: '首页', to: '/home', select: false, linkUser: false},
-  {label: '币币交易', to: '/trade', select: false, linkUser: false},
-  {
-    label: '资产管理',
-    to: '/wallet',
-    select: true,
-    linkUser: true,
-    childrenList: [{label: '资产管理', to: '/wallet',}, {label: '订单管理', to: '/order',}]
-  },
-  // {label: '用户', to: '/user', select: false, linkUser: false},
-  // {label: '关于', to: '/about', select: false, linkUser: false},
-  // {label: '主题列表', to: '/topics', select: false, linkUser: false},
-  // {label: '登录／注册', to: '/login', select: false, linkUser: false},
-  // {label: '资讯公告', to: '/notice', select: false, linkUser: false},
-];
+
 
 const languageArr = [
   { imgUrl: '/static/img/home/chinese.svg', content: '简体中文', value: "zh-CN"},
   // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
-  {imgUrl: '/static/img/home/english.png', content: '英语', value: "en-US"}
+  {imgUrl: '/static/img/home/english.png', content: 'English', value: "en-US"}
 ]
 
-export default class Header extends Component {
+export default class Header extends ExchangeViewBase {
   constructor(props) {
     super(props)
     this.state = {
       navClass: 'headerNav',
-      languageIndex: 0
+      languageIndex: 0,
+      navArrayLeft : [
+        {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false},
+        {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false},
+        {
+          label: `${this.intl.get('header-assets')}`,
+          to: '/wallet',
+          select: true,
+          linkUser: true,
+          childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/order',}]
+        },
+        // {label: '用户', to: '/user', select: false, linkUser: false},
+        // {label: '关于', to: '/about', select: false, linkUser: false},
+        // {label: '主题列表', to: '/topics', select: false, linkUser: false},
+        // {label: '登录／注册', to: '/login', select: false, linkUser: false},
+        // {label: '资讯公告', to: '/notice', select: false, linkUser: false},
+      ]
     }
     this.configController = this.props.configController;
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
@@ -62,7 +64,7 @@ export default class Header extends Component {
           <li className='nav-logo'>
             <Link to='/home'></Link>
           </li>
-          {navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
+          {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
             return <li className={`header-nav${match ? '-active' : ''} ${v.select ? 'select-list' : ''}`}>
           <Link to={v.to}>{v.label}</Link>
           {v.select && (
@@ -92,16 +94,16 @@ export default class Header extends Component {
             </div>
           </li>
           <li className="login-li">
-            <NavLink activeClassName="header-right-active" to="/login">登录/注册</NavLink>
+            <NavLink activeClassName="header-right-active" to="/login">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
           </li>
           <li className="user-li">
             <p>12345678987</p>
             <ul className="login-ul">
               <li>
-                <NavLink to="/user/safe">安全中心</NavLink>
+                <NavLink to="/user/safe">{`${this.intl.get('header-security')}`}</NavLink>
               </li>
               <li>
-                <NavLink to="/user/identity">身份认证</NavLink>
+                <NavLink to="/user/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
             </ul>
           </li>
