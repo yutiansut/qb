@@ -91,7 +91,7 @@ class ReactKline extends React.Component {
 
     render() {
         return (
-            <div id="kline_container" style={this.props.show ? {} : { display: 'none' }}>
+            <div id="kline_container" style={this.props.show ? {} : { left:-9999}}>
                 <div className="chart_container dark">
                     <div id="chart_dom_elem_cache"></div>
                     <div id="chart_toolbar">

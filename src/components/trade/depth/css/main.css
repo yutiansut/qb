@@ -1,6 +1,5 @@
-
 .depth_container{
-
+    position: absolute;
 }
 
 .depth_container .depth_canvasGroup{

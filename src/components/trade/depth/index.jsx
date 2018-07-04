@@ -58,7 +58,7 @@ class ReactKDepth extends React.Component {
 
     render() {
         return (
-            <div id="depth_container" className="depth_container" style={this.props.show ? {} : { display: 'none' }}>
+            <div id="depth_container" className="depth_container" style={this.props.show ? {} : {left: -9999}}>
                 <div className="depth_canvasGroup">
                     <canvas className="depth_canvas" id="depth_canvas"></canvas>
                     <canvas className="depth_canvas" id="depth_canvas2"></canvas>

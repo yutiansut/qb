@@ -1,8 +1,12 @@
+#kline_container{
+    position: absolute;
+}
+
 .chart_container {
+    position: absolute;
     cursor: default;
     font-size: 12px;
     height: 100%;
-    position: relative;
     width: 100%;
     overflow: hidden;
 }
