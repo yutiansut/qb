@@ -16,6 +16,11 @@ export default class LoginStore extends ExchangeStoreBase {
       // this.recommendData = data.data
       this.controller.userLoginInfo(data.data)
       console.log('ccc1', data.data)
+      // if (data.ret === 0) {
+      //   window.location.href = '/'
+      // } else {
+      //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.ret})
+      // }
     })
     this.WebSocket.general.emit('login', obj)
   }

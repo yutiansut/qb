@@ -105,6 +105,7 @@ export default class Header extends ExchangeViewBase {
               <li>
                 <NavLink to="/user/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
+              <li>退出</li>
             </ul>
           </li>
           <li className="language-li">

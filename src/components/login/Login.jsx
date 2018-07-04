@@ -24,7 +24,10 @@ export default class Login extends exchangeViewBase {
       codeInput: "",
       picInput: "",
       userType: 0,
-      verifyNum:"获取验证码"
+      verifyNum:"获取验证码",
+      showPopup: false, // 提示弹窗
+      popType: "tip1",
+      popMsg: "登录成功",
     }
     const {controller} = props
     //绑定view
@@ -116,6 +119,16 @@ export default class Login extends exchangeViewBase {
           </li>
         </ul>
         <p><input type="checkbox" />{this.intl.get("login-read")}<a href="">{this.intl.get("login-readUser")}</a></p>
+        {this.state.showPopup && (
+          <Popup
+            type={this.state.popType}
+            msg={this.state.popMsg}
+            onClose={() => {
+              this.setState({ showPopup: false });
+            }}
+            autoClose={true}
+          />
+        )}
       </div>
     );
   }

@@ -121,7 +121,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
-    let result = await this.store.Proxy.getLoginPwd({
+    let result = await this.store.Proxy.bindUser({
       "userId": this.store.state.userId,
       account,// 手机号或邮箱
       mode,// 0:phone 1:email
@@ -130,7 +130,7 @@ export default class UserController extends ExchangeControllerBase {
       captchaCode, // 图形验证码，没有就传空
       "os": 3, // 1:android 2:iOS 3:borwser
     })
-    this.view.setState({popupInputErr2: result.msg})
+    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('绑定手机号／邮箱', result)
   }
 
@@ -186,7 +186,7 @@ export default class UserController extends ExchangeControllerBase {
       position,//修改的位置 1登陆   2提现   3资金密码
       verifyType//2谷歌验证 1邮件  3短信  0无
     })
-    console.log('修改两步认证1111', account, mode, picCode, picId, position, verifyType)
+    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('修改两步认证', result)
   }
 
@@ -220,6 +220,7 @@ export default class UserController extends ExchangeControllerBase {
       "userId": this.store.state.userId,
       code
     })
+    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('验证谷歌', result)
   }
 

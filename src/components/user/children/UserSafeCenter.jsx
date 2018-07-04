@@ -42,6 +42,8 @@ export default class userSafeCenter extends exchangeViewBase {
         {name: this.intl.get("user-noticePhone"), flag: true}
       ],
       remindPopup: false,
+      popType: 'tip1',
+      popMsg: '验证成功',
       ipValue: '',
       popupInputErr2:"",
     }
@@ -67,6 +69,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
     this.setTwoVerify = controller.setTwoVerify.bind(controller) // 修改两步认证
     this.setGoogleVerify = controller.setGoogleVerify.bind(controller) // 验证谷歌验证码
+    this.bindUser = controller.bindUser.bind(controller)
     this.showOther = this.showOther.bind(this)
   }
   changeGooglePopup(state) { // 谷歌验证码显示
@@ -146,6 +149,7 @@ export default class userSafeCenter extends exchangeViewBase {
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
+    console.log(23762478384287, this.userVerify)
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
@@ -271,15 +275,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>{this.intl.get("action")}</th>
                   </tr>
                 </thead>
-                <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
-                  {this.state.ipList.map((v, index) => (<tr key={index}>
-                    <td>{v.IPAddress}</td>
-                    <td>{v.createAt}</td>
-                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>
-                  </tr>))}
-                </tbody>
+                {/*<tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>*/}
+                  {/*{this.state.ipList.map((v, index) => (<tr key={index}>*/}
+                    {/*<td>{v.IPAddress}</td>*/}
+                    {/*<td>{v.createAt}</td>*/}
+                    {/*<td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>*/}
+                  {/*</tr>))}*/}
+                {/*</tbody>*/}
               </table>
-              <p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>
+              {/*<p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>*/}
               <p>
                 {this.intl.get("user-ipAddRemind")}
               </p>
@@ -344,6 +348,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    isSet = {this.state.showSet}
                    isType = {this.state.type}
                    getVerify = {this.getVerify}
+                   bindUser = {this.bindUser}
                    setLoginPass = {this.setLoginPass}
                    setFundPass = {this.setFundPass}
                    modifyFundPwd = {this.modifyFundPwd}
@@ -368,8 +373,8 @@ export default class userSafeCenter extends exchangeViewBase {
                            setTwoVerify = {this.setTwoVerify}
                            isChange = {this.state.showChange}/>
         {this.state.remindPopup && <RemindPopup
-                     type="tip1"
-                     msg="添加成功"
+                     type={this.state.popType}
+                     msg={this.state.popMsg}
                      autoClose = {true}
                      onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>

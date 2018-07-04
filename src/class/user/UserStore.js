@@ -7,6 +7,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.state = {
       userId: JSON.parse("232602516485840896"),
       // userId: "",
+      // token: "",
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -33,11 +34,13 @@ export default class UserStore extends ExchangeStoreBase {
 
   userLogin(data) {
     console.log('ccc4', data)
-    // this.state.userId = data.uid
-    // this.state.token = data.token
+    this.state.userId = data.uid
+    this.state.token = data.token
+    console.log('loginUser', this.state.userId, this.state.token)
   }
 
   async userInfo() { // 获取用户信息
+    console.log('userInfo', this.state.userId)
     let userInfo = await this.Proxy.getUserInfo({"userId": this.state.userId});
     this.state.userInfo = userInfo;
     return userInfo
