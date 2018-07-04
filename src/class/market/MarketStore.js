@@ -215,13 +215,6 @@ export default class MarketStore extends ExchangeStoreBase {
         }]
   
     };
-    if(name === 'recommend'){
-      // console.log('bbb', name)
-      this.getRecommendCurrency()
-    }
-    if(name === 'market'){
-      this.getMarketPair()
-    }
   }
 
 
@@ -237,12 +230,12 @@ export default class MarketStore extends ExchangeStoreBase {
 
   getMarketPair() {
     console.log('getData marketPair', this.WebSocket)
-    this.WebSocket.general.emit('joinRoom', {from:'', to:'home'})
     this.WebSocket.general.on('marketPair', data => {
       console.log('getWebSocketData', data, this.controller)
-      this.controller.updateRecommend(data.data)
-      this.recommendData = data.data
+      // this.controller.updateRecommend(data.data)
+      // this.recommendData = data.data
     })
+    this.WebSocket.general.emit('joinRoom', {from:'', to:'home'})
   }
 
   changeFavorite(tradePairId, userId, operateType) {
