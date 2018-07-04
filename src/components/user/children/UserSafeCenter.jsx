@@ -21,10 +21,12 @@ export default class userSafeCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      showGoogle: 'none',
-      showSet: 'none',
+      // showGoogle: 'none',
+      // showSet: 'none',
+      showGoogle: false,
+      showSet: false,
       // showVerify: 'none',
-      showChange: 'none',
+      showChange: false,
       otherShow: false, // 打开其他安全设置
       noticeIndex: 1, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
@@ -72,27 +74,19 @@ export default class userSafeCenter extends exchangeViewBase {
     this.bindUser = controller.bindUser.bind(controller)
     this.showOther = this.showOther.bind(this)
   }
-  changeGooglePopup(state) { // 谷歌验证码显示
+
+  changeSetPopup(type) { // 设置密码显示
     this.setState({
-      showGoogle: state
-    })
-  }
-  changeSetPopup(state, type) { // 设置密码显示
-    this.setState({
-      showSet: state,
+      showSet: true,
       type: type,
       verifyNum: '获取验证码'
     })
     this.clearVerify()
   }
-  // changeVerifyPopup(state) { // 两步验证显示
-  //   this.setState({
-  //     showVerify: state
-  //   })
-  // }
-  changeVerifyTypePopup(state) { // 改变两步验证显示
+
+  changeVerifyTypePopup() { // 改变两步验证显示
     this.setState({
-      showChange: state,
+      showChange: true,
       verifyNum: '获取验证码'
     })
     this.clearVerify()
@@ -110,10 +104,10 @@ export default class userSafeCenter extends exchangeViewBase {
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
-      showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? 'block' : 'none',
+      showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
       // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
-      showSet: !this.state.userInfo.email && index === 1 ? 'block' : 'none',
-      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? 'none' : 'block'
+      showSet: !this.state.userInfo.email && index === 1 ? true : false,
+      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
     // verifyList[i].contentList.forEach(v => {v.flag = false})
     // if (index === 1 && !this.state.user_info.email) {
@@ -129,7 +123,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       type: type,
       noticeIndex: !this.state.userInfo.email && index === 0 ? 1 : index,
-      showSet: !this.state.userInfo.email && index === 0 ? 'block' : 'none'
+      showSet: !this.state.userInfo.email && index === 0 ? true : false
     })
   }
 
@@ -149,9 +143,8 @@ export default class userSafeCenter extends exchangeViewBase {
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
-    // console.log(23762478384287, this.userVerify)
-    let verifyArr = [3, 1, 0, 2]
-    let verifyList = this.state.verifyList
+    console.log(23762478384287, this.userVerify)
+    let verifyArr = [3, 1, 0, 2], verifyList = this.state.verifyList, noticeList = this.state.noticeList;
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
     verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
@@ -162,10 +155,10 @@ export default class userSafeCenter extends exchangeViewBase {
     verifyList.forEach((v, i) => { // 两步验证未绑定手机时
       v.contentList[2].name = this.state.userInfo.phone ? '短信' : '绑定／验证手机号后开启'
     })
-    this.state.noticeList[0].name = this.state.userInfo.email ? '邮件通知' : '绑定／验证邮箱后开启' // 通知设置未绑定邮箱时
-    this.state.noticeList[1].name = this.state.userInfo.email ? '短信' : '绑定／验证手机号后开启' // 通知设置未绑定手机号时
-
-    this.setState({verifyList})
+    noticeList[0].name = this.state.userInfo.email ? '邮件通知' : '绑定／验证邮箱后开启' // 通知设置未绑定邮箱时
+    noticeList[1].name = this.state.userInfo.phone ? '短信' : '绑定／验证手机号后开启' // 通知设置未绑定手机号时
+    // this.state.notifyMethod
+    this.setState({verifyList, noticeList})
   }
 
   componentWillUpdate(props, state, next) {
@@ -188,9 +181,9 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>{this.intl.get("user-id")}</li>
             <li>{JSON.stringify(this.state.userInfo.userId) || ''}</li>
             <li>{this.intl.get("email")}</li>
-            <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup('block', 1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
+            <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup(1)}>{this.state.userInfo.email && this.state.userInfo.email || '绑定邮箱'}</li>
             <li>{this.intl.get("phone")}</li>
-            <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup('block', 2)}>{this.state.userInfo.phone && this.state.userInfo.phone || '绑定手机号'}</li>
+            <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>{this.state.userInfo.phone && this.state.userInfo.phone || '绑定手机号'}</li>
             <li>{this.intl.get("user-level")}</li>
             <li>
               <span>VIP{this.state.userInfo.level}</span>({this.intl.get("points")}：<span>{this.state.userInfo.credits}</span>)
@@ -202,11 +195,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>{this.intl.get("loginPwd")}</li>
-              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 3) : this.changeSetPopup('block', 4)}>{this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}</li>
+              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}</li>
             </ol>
             <ul className="clearfix">
               <li>{this.intl.get("fundPass")}</li>
-              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup('block', 5) : this.changeSetPopup('block', 6)}>{this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}</li>
+              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}</li>
               <li>{this.intl.get("user-setFund")}</li>
             </ul>
           </div>
@@ -338,14 +331,13 @@ export default class userSafeCenter extends exchangeViewBase {
             </tbody>
           </table>
         </div>
-        <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)}
-                     googleSecret = {this.state.googleSecret.secret}
+        {/*changeGooglePopup = {state => this.changeGooglePopup(state)}*/}
+        {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret.secret}
                      setGoogleVerify = {this.setGoogleVerify}
-                     isGoogle = {this.state.showGoogle}/>
-        <PassPopup changeSetPopup = {state => this.changeSetPopup(state)}
+                     onClose={() => {this.setState({ showGoogle: false });}}/>}
+        {this.state.showSet && <PassPopup onClose={() => {this.setState({ showSet: false });}}
                    phone = {this.state.userInfo.phone}
                    email = {this.state.userInfo.email}
-                   isSet = {this.state.showSet}
                    isType = {this.state.type}
                    getVerify = {this.getVerify}
                    bindUser = {this.bindUser}
@@ -358,8 +350,8 @@ export default class userSafeCenter extends exchangeViewBase {
                    getCaptcha = {this.getCaptchaVerify}
                    verifyNum = {this.state.verifyNum}
                    clearErr2 = {() => {this.clearErr2()}}
-                   popupInputErr2 = {this.state.popupInputErr2}/>
-        <ChangeVerifyPopup changeVerifyTypePopup = {state => this.changeVerifyTypePopup(state)}
+                   popupInputErr2 = {this.state.popupInputErr2}/>}
+        {this.state.showChange && <ChangeVerifyPopup onClose={() => {this.setState({ showChange: false });}}
                            phone = {this.state.userInfo.phone}
                            email = {this.state.userInfo.email}
                            isType = {this.state.changeType}
@@ -370,8 +362,7 @@ export default class userSafeCenter extends exchangeViewBase {
                            captcha = {this.state.captcha}
                            captchaId = {this.state.captchaId}
                            getCaptcha = {this.getCaptchaVerify}
-                           setTwoVerify = {this.setTwoVerify}
-                           isChange = {this.state.showChange}/>
+                           setTwoVerify = {this.setTwoVerify}/>}
         {this.state.remindPopup && <RemindPopup
                      type={this.state.popType}
                      msg={this.state.popMsg}

@@ -45,9 +45,9 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
   render() {
     // console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
     return (
-      <div className="change-popup-wrap" style={{display: this.props.isChange}}>
+      <div className="change-popup-wrap">
         <div className="change-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.changeVerifyTypePopup('none')}}/>
+          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.props.isType !== 0 && contentList[contentArr[this.props.isType]].title}</h1>
           <Input placeholder="请输入谷歌验证码" className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
           <div className={`${this.props.isType === 3 ? '' : 'hide'} clearfix picture-div`}>

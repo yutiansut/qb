@@ -5,7 +5,7 @@ export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: JSON.parse("232602516485840896"),
+      userId: JSON.parse("232602503877763072"),
       // userId: "",
       // token: "",
       verifyNum: '获取验证码',

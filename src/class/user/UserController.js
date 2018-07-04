@@ -130,7 +130,7 @@ export default class UserController extends ExchangeControllerBase {
       captchaCode, // 图形验证码，没有就传空
       "os": 3, // 1:android 2:iOS 3:borwser
     })
-    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
+    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg ? result.msg : "绑定成功"})
     console.log('绑定手机号／邮箱', result)
   }
 
@@ -141,7 +141,7 @@ export default class UserController extends ExchangeControllerBase {
       newPwd,
       type,// 0:设置密码 （不用传old_pass） 1:修改密码
     })
-    this.view.setState({popupInputErr2: result.msg})
+    this.view.setState({remindPopup: true, popType: result && result.errCode ? 'tip3': 'tip1', popMsg: result && result.msg ? result.msg : "设置成功"})
     console.log('设置密码', result)
   }
 

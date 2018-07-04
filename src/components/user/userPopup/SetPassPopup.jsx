@@ -43,7 +43,7 @@ export default class SetPassPopup extends exchangeViewBase {
   changeInput2(value) {
     this.setState({popupInput2: value});
     console.log(2, value)
-    this.props.popupInputErr2 && (this.props.clearErr2())
+    // this.props.popupInputErr2 && (this.props.clearErr2())
     this.state.errUser && (this.setState({errUser: ""}))
   }
   checkInput2() {
@@ -72,6 +72,7 @@ export default class SetPassPopup extends exchangeViewBase {
         })
       }
     }
+    this.state.errUser2 && (this.setState({errUser2: ""}))
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
@@ -91,9 +92,9 @@ export default class SetPassPopup extends exchangeViewBase {
   }
   render() {
     return (
-      <div className="pass-wrap" style={{display: this.props.isSet}}>
+      <div className="pass-wrap">
         <div className="pass-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.changeSetPopup('none')}}/>
+          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.props.isType && popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>
