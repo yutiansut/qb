@@ -47,15 +47,15 @@ export default {
   notice: [
     {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容
   ],
-  test: [
-    {name: 'topCurrency', data: {url: '/v1/home/topCurrency', method: 'get'}, action: 'test', actionBack: 'testRes'},
-  ],
   market: [
+    //币种资料
     { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
-      // 获取交易对名称以及id
+    // 获取交易对名称以及id
     {name: 'pairInfo', data: { url: '/user/', method: 'post'}, action: 'getAllTradePairList', actionBack: 'getAllTradePairListRes'},
-    
-    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack:'changeFavoriteRes'}
+    // 收藏
+    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack:'changeFavoriteRes'},
+    // 获取交易对
+    {name:'getTradePairRank', data:{url: '/common/', method: 'post'}, action: 'getTradePairRank', actionBack:'getTradePairRankRes'}
   ],
   asset: [
     // 撤销提币申请
@@ -92,6 +92,7 @@ export default {
     {name: 'recentOrder', data: {url: '/order/', method: 'post'}, action: 'getRecentOrder', actionBack: 'getRecentOrderRes'}
   ],
   deal:[
+    //交易接口
     {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
   ]
   // market:[

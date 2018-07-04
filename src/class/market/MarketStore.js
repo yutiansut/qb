@@ -253,9 +253,15 @@ export default class MarketStore extends ExchangeStoreBase {
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});
   }
   async getPairInfo(){
-    let pairInfo = await this.Proxy.pairInfo(
-    );
+    let pairInfo = await this.Proxy.pairInfo();
     this.store.state.coinInfo = pairInfo.list;
     return pairInfo.list
+  }
+
+  async getMarketAll(){
+    let marketAll = await this.Proxy.getTradePairRank();
+    console.log(marketAll)
+    this.state.allPairData = marketAll.marketList
+    return marketAll.marketList
   }
 }

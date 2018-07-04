@@ -100,10 +100,11 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   // 市场下交易对
-  marketDataHandle() {
+  async marketDataHandle() {
     let collectIdArr = [1,2,3]
     let homeMarket = [];
-    this.store.state.allPairData.map(v => homeMarket.push(v.market_name));
+    let allPairData = await this.store.getMarketAll()
+    allPairData.map(v => homeMarket.push(v.market_name));
     let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
     homeMarketPair.forEach(v => {
       let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? 1 : 0}
