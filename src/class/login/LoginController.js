@@ -24,7 +24,7 @@ export default class LoginController extends ExchangeControllerBase {
     let captcha = await this.userController.getCaptcha()
     console.log('aaa 0', captcha)
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
-    console.log('aaa 1', this.view.state)
+    // console.log('aaa 1', this.view.state, )
   }
 
   //登录
@@ -37,7 +37,10 @@ export default class LoginController extends ExchangeControllerBase {
 
   userLoginInfo(data) {
     this.userController.getUserId(data)
-    console.log('ccc2', data)
+    console.log('ccc2', data, this.view.history)
+    // history.push()
+    // this.view.history.push('/home')
+    this.view.history.goBack('/home')
   }
 
   async initLoginVerification() { // 获取手势验证

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
 
 
 import "./core/libs/ChangeFontSize";
@@ -40,60 +39,61 @@ let testAppController,
   userOrderController
 ;
 
-const Asset = ({ match }) => {
-  return <AssetManange controller={assetController} match={match} />;
+const Asset = ({match}) => {
+  return <AssetManange controller={assetController} match={match}/>;
 };
 
-const Trade = ({ match }) => {
-  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} />;
+const Trade = ({match}) => {
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match}/>;
 };
 
-const User = ({ match }) => {
-  return <UserInfo controller={userController} match={match} />
+const User = ({match}) => {
+  return <UserInfo controller={userController} match={match}/>
 };
 
-const Loign = ({ match }) => {
-  return <LoginCon controller={loginController} match={match} />
+const Loign = ({match, history}) => {
+  return <LoginCon controller={loginController} match={match} history={history}/>
 };
 
-const ForgetPass = ({ match }) => {
-  return <ForgetPassCon controller={loginController} match={match} />
+const ForgetPass = ({match}) => {
+  return <ForgetPassCon controller={loginController} match={match}/>
 };
 
-const Notice = ({ match }) => {
-  return <NoticeInfo controller={noticeController} match={match} />
+const Notice = ({match}) => {
+  return <NoticeInfo controller={noticeController} match={match}/>
 };
 
-const tradeFooter = ({ match }) => {
+const tradeFooter = ({match}) => {
   return <div>tradeFotter</div>
 }
 
-const Help = ({ match }) => {
-  return <Helper controller={assetController} match={match} />;
+const Help = ({match}) => {
+  return <Helper controller={assetController} match={match}/>;
 };
 
-const Activity = ({ match }) => {
-  return <ActivityInfo controller={activityController} match={match} />;
+const Activity = ({match}) => {
+  return <ActivityInfo controller={activityController} match={match}/>;
 }
 
-const header = ({ match }) => {
-  return <Header navClass={"headerNav"} configController={configController} match={match} />;
+const header = ({match}) => {
+  return <Header navClass={"headerNav"} configController={configController} match={match}/>;
 }
 
-const tradeHeader = ({ match }) => {
+const tradeHeader = ({match}) => {
   return <Header navClass={'tradeNav'} match={match} configController={configController}/>;
 }
 
 const HomeComponent = () => {
-  return <Home marketController={marketController} activityController={activityController} noticeController={noticeController}/>
+  return <Home marketController={marketController} activityController={activityController}
+               noticeController={noticeController}/>
 };
-const Order = ({ match }) => {
-  return <OrderManage controller={userOrderController} match={match} />
+const Order = ({match}) => {
+  return <OrderManage controller={userOrderController} match={match}/>
 };
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { initDone: false }
+    this.state = {initDone: false}
 
     configController = new ConfigController();
     assetController = new AssetController();
@@ -141,30 +141,30 @@ export default class App extends Component {
         {this.state.initDone && <div>
           {/*<Header/>*/}
           <Switch>
-            <Route path="/trade" component={tradeHeader} />
-            <Route component={header} />
+            <Route path="/trade" component={tradeHeader}/>
+            <Route component={header}/>
           </Switch>
-          <div style={{ height: '.5rem' }}></div>
-          <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
+          <div style={{height: '.5rem'}}></div>
+          <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
             <Switch>
-              <Route exact path="/" component={HomeComponent} />
-              <Route path="/home" component={HomeComponent} />
-              <Route path='/trade' component={Trade} />
-              <Route path="/login" component={Loign} />
-              <Route path="/wallet" component={Asset} />
-              <Route path="/order" component={Order} />
-              <Route path="/user" component={User} />
-              <Route path="/findPass" component={ForgetPass} />
-              <Route path="/notice" component={Notice} />
-              <Route path="/help" component={Help} />
-              <Route path="/activity" component={Activity} />
-              <Redirect to="/" />
+              <Route exact path="/" component={HomeComponent}/>
+              <Route path="/home" component={HomeComponent}/>
+              <Route path='/trade' component={Trade}/>
+              <Route path="/login" component={Loign}/>
+              <Route path="/wallet" component={Asset}/>
+              <Route path="/order" component={Order}/>
+              <Route path="/user" component={User}/>
+              <Route path="/findPass" component={ForgetPass}/>
+              <Route path="/notice" component={Notice}/>
+              <Route path="/help" component={Help}/>
+              <Route path="/activity" component={Activity}/>
+              <Redirect to="/"/>
             </Switch>
           </div>
           {/*<Footer/>*/}
           <Switch>
-            <Route path="/trade" component={tradeFooter} />
-            <Route component={Footer} />
+            <Route path="/trade" component={tradeFooter}/>
+            <Route component={Footer}/>
           </Switch>
         </div>}
       </Router>

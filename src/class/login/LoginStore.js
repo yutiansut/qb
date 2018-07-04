@@ -6,10 +6,6 @@ export default class LoginStore extends ExchangeStoreBase {
     this.state = {
       verifyNum: '获取验证码'
     }
-  }
-
-  login(obj) {
-    console.log('getData', this.WebSocket)
     this.WebSocket.general.on('login', data => {
       console.log('joinRoom getWebSocketData', data, this.controller)
       // this.controller.updateRecommend(data.data)
@@ -22,6 +18,11 @@ export default class LoginStore extends ExchangeStoreBase {
       //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.ret})
       // }
     })
+  }
+
+  login(obj) {
+    console.log('getData', this.WebSocket)
+
     this.WebSocket.general.emit('login', obj)
   }
 }
