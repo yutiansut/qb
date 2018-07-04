@@ -53,7 +53,9 @@ export default {
   market: [
     { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
       // 获取交易对名称以及id
-    {name: 'pairInfo', data: { url: '/order/', method: 'post'}, action: 'getAllTradePair', actionBack: 'getAllTradePairRes'}
+    {name: 'pairInfo', data: { url: '/user/', method: 'post'}, action: 'getAllTradePairList', actionBack: 'getAllTradePairListRes'},
+    
+    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack:'changeFavoriteRes'}
   ],
   asset: [
     // 撤销提币申请
@@ -85,11 +87,15 @@ export default {
     //历史订单
     {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'},
       //订单详情
-    {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'}
+    {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'},
+      //近期交易
+    {name: 'recentOrder', data: {url: '/order/', method: 'post'}, action: 'getRecentOrder', actionBack: 'getRecentOrderRes'}
   ],
-
-  market:[
-    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack:'changeFavoriteRes'}
+  deal:[
+    {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
   ]
+  // market:[
+  //
+  // ]
 
 }

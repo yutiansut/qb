@@ -180,6 +180,9 @@ export default function zh(state) {
     "order-deal-time": "成交时间",
     "order-deal-price": "成交单价",
     "order-deal-number": "成交数量",
+    "order-mine":'我的',
+    "order-market":'市场',
+    "order-recent":'近期交易',
   };
   const deal = {
     "deal-limit":"限价委托",

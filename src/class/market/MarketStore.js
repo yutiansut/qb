@@ -9,7 +9,7 @@ export default class MarketStore extends ExchangeStoreBase {
           market_name: "BTC",
           market_data: [
             {
-              tradePairId: 1,
+              tradePairId: 3,
               rise: -0.22,
               price: 1023.22,
               priceCN: 1023.22,
@@ -254,16 +254,11 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
 
-  async getMarket(){
-
-  }
-
   async getCoinInfo(){
     this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});
   }
   async getPairInfo(){
     let pairInfo = await this.Proxy.pairInfo(
-        {userId:0}
     );
     this.store.state.coinInfo = pairInfo.list;
     return pairInfo.list

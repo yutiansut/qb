@@ -35,8 +35,9 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.prices = prices;
     this.setPriceInit(prices.price);
     // this.TradeMarketController.setUnitsType(market, coin);
-    this.CurrentOrderController.setInitUnit(market, coin);
-    this.HistoryOrderController.setInitUnit(market, coin);
+    // this.CurrentOrderController.setInitUnit(market, coin);
+    // this.HistoryOrderController.setInitUnit(market, coin);
+    this.TradeUserListController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
     this.TradeOrderListController.setInitUnit(market, coin);
     this.store.state.PriceUnit = market;
@@ -60,12 +61,13 @@ export default class DealController extends ExchangeControllerBase {
     this.view.state.sellMax = this.view.state.sellWallet / v;
   }
   
-  changeUnit(unit){
-    const unitObj = {
-      'CNY计价': 'CNY',
-      'USD计价': 'USD',
-      '数字币计价': this.view.state.Market
+  changeUnit(unit,init){
+    let unitObj = {
+      'CNY': 'CNY',
+      'USD': 'USD',
+      // '数字币计价': this.view.state.Market
     };
+    unitObj[init] = this.view.state.Market;
     // console.log('bbbbb',this.store.state.PriceUnit)
     let fromValue = this.store.state.prices[this.store.state.PriceUnit === 'CNY' && 'priceCN' || (this.store.state.PriceUnit === 'USD' && 'priceEN' || 'price')];
     
@@ -80,6 +82,7 @@ export default class DealController extends ExchangeControllerBase {
     let unitSelected = unitObj[unit];
     this.view.setState({
       PriceUnit: unitSelected,
+      UnitSelected: unit
     });
     
     this.changePrice(unitSelected,fromValue);
@@ -124,5 +127,8 @@ export default class DealController extends ExchangeControllerBase {
     // if(this.view.state.sellNumFlag && (t === 1)){
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
     // }
+  }
+  async dealTrade(){
+    await this.store.dealTrade();
   }
 }

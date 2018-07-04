@@ -28,7 +28,8 @@ export default class TradePlan extends ExchangeViewBase {
       sellNumFlag: false,
       buyNumFlag: false,
       DealEntrust: [{name: `${this.intl.get('deal-limit')}`, type: 0}, {name: `${this.intl.get('deal-market')}`, type: 1}],
-      ControllerProps: [{name: `${this.intl.get('buy')}`, tradeType: 'buy', dealType: 0}, {name: `${this.intl.get('sell')}`, tradeType: 'sell', dealType: 1},]
+      ControllerProps: [{name: `${this.intl.get('buy')}`, tradeType: 'buy', dealType: 0}, {name: `${this.intl.get('sell')}`, tradeType: 'sell', dealType: 1},],
+      UnitSelected: this.intl.get('deal-digital')
     };
     const {controller} = this.props;
     //绑定view
@@ -36,6 +37,7 @@ export default class TradePlan extends ExchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.setPriceInit = controller.setPriceInit.bind(controller);
+    this.dealTrade = controller.dealTrade.bind(controller)
     this.changeUnit = controller.changeUnit.bind(controller);
     this.changeMaxNum = controller.changeMaxNum.bind(controller);
   }
@@ -93,12 +95,12 @@ export default class TradePlan extends ExchangeViewBase {
           })}
           <div style={{float: 'right', marginRight: '.1rem'}}>
             <SelectButton
-              title={`${this.intl.get('deal-digital')}`}
+              title={this.state.UnitSelected}
               type="trade"
               className="select"
               valueArr={[`${this.intl.get('deal-digital')}`, "CNY", "USD"]}
               onSelect={(e) => {
-                this.changeUnit(e)
+                this.changeUnit(e,this.intl.get('deal-digital'))
               }}
             />
           </div>
@@ -118,14 +120,15 @@ export default class TradePlan extends ExchangeViewBase {
                                  sellMax={this.state.sellMax}
                                  wallet={index ? this.state.sellWallet : this.state.buyWallet}
                                  priceInput={this.priceInput.bind(this)}
-                                 numInput={this.numInput.bind(this)}/>
+                                 numInput={this.numInput.bind(this)}
+                                 dealTrade={this.dealTrade.bind(this)}
+              />
 
             )
           })}
           {/*<TradeDealExchange PriceUnit ={this.state.PriceUnit} NumUnit ={this.state.NumUnit}/>*/}
         </div>
 
-      </div>
-    )
+      </div>)
   }
 }

@@ -23,20 +23,21 @@ import UserController from '../../class/user/UserController'
 import './stylus/trade.styl'
 
 let TradeMarketController,
-  TradeOrderListController,
-  TradeRecentController,
-  CurrentOrderController,
-  HistoryOrderController,
-  noticeController,
-  TradeDealController,
-  TradePlanController;
-  // userController;
+    TradeOrderListController,
+    TradeRecentController,
+    CurrentOrderController,
+    HistoryOrderController,
+    noticeController,
+    TradeDealController,
+    TradeUserListController,
+    TradePlanController;
+// userController;
 
-
-export default class extends exchangeViewBase{
-  constructor(props){
+// const userOrderItems = []
+export default class extends exchangeViewBase {
+  constructor(props) {
     super(props)
-
+    
     TradeMarketController = new MarketController();
     TradeOrderListController = new TradeOrderController();
 // TradeRecentController = new TradeOrderController();
@@ -46,23 +47,28 @@ export default class extends exchangeViewBase{
     noticeController = new NoticeController();
     TradeDealController = new DealController();
     TradePlanController = new DealController();
+    
+    TradeUserListController = new UserOrderListController();
     // userController = new UserController()
-
+    
     TradeMarketController.TradeDealController = TradeDealController;
     TradeMarketController.TradePlanController = TradePlanController;
+    TradeMarketController.TradeRecentController = TradeRecentController;
     TradeOrderListController.TradePlanController = TradePlanController;
-
+    
     TradePlanController.TradeMarketController = TradeMarketController;
     TradePlanController.TradeRecentController = TradeRecentController;
-    TradePlanController.CurrentOrderController = CurrentOrderController;
-    TradePlanController.HistoryOrderController = HistoryOrderController;
+    TradePlanController.TradeUserListController = TradeUserListController;
+    // TradePlanController.CurrentOrderController = CurrentOrderController;
+    // TradePlanController.HistoryOrderController = HistoryOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
-
+    
     // noticeController.userController = userController;
   }
-  render(){
-    return(
-        <div id='trade' >
+  
+  render() {
+    return (
+        <div id='trade'>
           <div className='clearfix'>
             <div className='trade-left'>
               <div className='trade-left-top'>
@@ -90,14 +96,16 @@ export default class extends exchangeViewBase{
               <LiveTrade controller={TradeOrderListController}/>
             </div>
           </div>
-         
+          
           <div className='trade-bottom clearfix'>
             <div className='trade-notice'>
               <TradeNotice controller={noticeController}/>
             </div>
             <div className='trade-order'>
-              <CurrentOrder controller={CurrentOrderController}/>
-              <HistoryOrder controller={HistoryOrderController}/>
+              {/*<CurrentOrder controller={CurrentOrderController} type={0}/>*/}
+              <CurrentOrder controller={TradeUserListController} type={0}/>
+              <CurrentOrder controller={TradeUserListController} type={1}/>
+              {/*<HistoryOrder controller={HistoryOrderController}/>*/}
             </div>
           </div>
         </div>

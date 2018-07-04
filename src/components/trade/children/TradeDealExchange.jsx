@@ -10,6 +10,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
     this.state = {
     
     }
+   
   }
   componentWillMount() {
   
@@ -94,7 +95,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
             <i>{this.props.PriceUnit || this.props.Market}</i>
           </div>
-          <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`}>
+          <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
           </div>
         </div>

@@ -31,7 +31,10 @@ export default class MarketController extends ExchangeControllerBase {
       recommendData: data
     })
   }
-
+  
+  async getMarket(){
+    await this.store.getMarket();
+  }
   // 推荐交易对处理
   // recommendDataHandle() {
   //   const recommendValues = Object.values(this.store.state.recommendData);
@@ -122,8 +125,8 @@ export default class MarketController extends ExchangeControllerBase {
       tradePair,
     });
     this.store.state.tradePair = tradePair;
+    this.TradeRecentController && this.TradeRecentController.setTradePairId(list[0].tradePairId);
     this.setDealMsg();
-    // console.log('dealMsg', this)
   }
 
   tradePairChange(value) {
@@ -131,6 +134,7 @@ export default class MarketController extends ExchangeControllerBase {
       tradePair: value.trade_pair
     });
     this.store.state.tradePair = value.trade_pair;
+    this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.setDealMsg();
   }
 
@@ -209,7 +213,8 @@ export default class MarketController extends ExchangeControllerBase {
 
   }
   // 交易对名称以及id的处理
-  getTradePairHandle() {
+   getTradePairHandle() {
+    // let a = await this.store.getPairInfo();
     // let pairInfo = this.store.getPairInfo();
     let pairInfo = this.store.state.list;
     let coinCorrespondingId = {},marketCorrespondingId = {},coinCorrespondingPair = {},marketCorrespondingPair = {};

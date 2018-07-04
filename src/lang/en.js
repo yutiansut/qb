@@ -175,6 +175,9 @@ export default function en (state){
     "order-deal-time": "Transaction Time",
     "order-deal-price": "Transaction Price",
     "order-deal-number": "Processed Amount",
+    "order-mine":'Mine',
+    "order-market":'Market',
+    "order-recent":'Recently trading',
   
   };
   const deal = {
