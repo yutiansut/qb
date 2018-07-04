@@ -20,6 +20,7 @@ export default class TradeOrderListController extends OrderListController {
     this.store.state.liveSellArray = liveSellArray;
     this.store.state.liveBuyArray = liveBuyArray;
   }
+
   orderListSelect(v){
     let prices = {
       price: v.price,
@@ -28,6 +29,10 @@ export default class TradeOrderListController extends OrderListController {
     };
     console.log('llllllllllll',prices)
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
+  }
+
+  joinRoom(){
+    this.tr
   }
 
 

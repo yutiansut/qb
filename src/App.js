@@ -21,7 +21,7 @@ import Header from './components/headerAndFooter/Header.jsx'
 import Footer from './components/headerAndFooter/footer.jsx'
 import LoginCon from './components/login/Login.jsx'
 import Home from './components/home/Home.jsx'
-import Trade from './components/trade/Trade.jsx'
+import TradeCon from './components/trade/Trade.jsx'
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
 import NoticeInfo from './components/notice/NoticeBulletin.jsx'
 import OrderManage from './components/order/OrderManage.jsx'
@@ -42,6 +42,10 @@ let testAppController,
 
 const Asset = ({ match }) => {
   return <AssetManange controller={assetController} match={match} />;
+};
+
+const Trade = ({ match }) => {
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} />;
 };
 
 const User = ({ match }) => {

@@ -87,7 +87,7 @@ export default class TradeOrderListStore extends OrderListStore{
 
   getWebSocketData() {
     console.log('getData', this.WebSocket)
-    this.WebSocket.general.emit('joinRoom', {from:'', to: ''})
+    this.WebSocket.general.emit('joinRoom', {from:'', to: 'TradePairName-D6'})
     this.WebSocket.general.on('joinRoom', data => {
       console.log('joinRoom getWebSocketData', data, this.controller)
       this.controller.updateRecommend(data.data)

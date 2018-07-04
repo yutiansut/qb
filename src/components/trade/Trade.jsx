@@ -3,7 +3,7 @@ import exchangeViewBase from "../ExchangeViewBase";
 import TradeMarket from './children/TradeMarket.jsx'
 import LiveTrade from './children/LiveTrade.jsx'
 import RecentTrade from './children/RecentTrade.jsx'
-import CurrentOrder from './children/CurrentOrder.jsx'
+import CurrentOrder from './children/UserOrder.jsx'
 import HistoryOrder from './children/HistoryOrder.jsx'
 import TradePairDeal from './children/TradePairDeal.jsx'
 import TradePlan from './children/TradePlan.jsx'
@@ -21,12 +21,12 @@ import UserController from '../../class/user/UserController'
 
 
 import './stylus/trade.styl'
+import UserOrder from "./children/UserOrder";
 
 let TradeMarketController,
     TradeOrderListController,
     TradeRecentController,
-    CurrentOrderController,
-    HistoryOrderController,
+    userOrderController,
     noticeController,
     TradeDealController,
     TradeUserListController,
@@ -37,33 +37,29 @@ let TradeMarketController,
 export default class extends exchangeViewBase {
   constructor(props) {
     super(props)
-    
-    TradeMarketController = new MarketController();
+
+    TradeMarketController = props.marketController;
     TradeOrderListController = new TradeOrderController();
-// TradeRecentController = new TradeOrderController();
     TradeRecentController = new OrderListController();
-    CurrentOrderController = new UserOrderListController();
-    HistoryOrderController = new UserOrderListController();
+    userOrderController = props.userOrderController;
     noticeController = new NoticeController();
     TradeDealController = new DealController();
     TradePlanController = new DealController();
     
-    TradeUserListController = new UserOrderListController();
+    // TradeUserListController = new UserOrderListController();
     // userController = new UserController()
     
     TradeMarketController.TradeDealController = TradeDealController;
     TradeMarketController.TradePlanController = TradePlanController;
     TradeMarketController.TradeRecentController = TradeRecentController;
+    TradeOrderListController.TradeMarketController = TradeMarketController;
     TradeOrderListController.TradePlanController = TradePlanController;
     
     TradePlanController.TradeMarketController = TradeMarketController;
     TradePlanController.TradeRecentController = TradeRecentController;
-    TradePlanController.TradeUserListController = TradeUserListController;
-    // TradePlanController.CurrentOrderController = CurrentOrderController;
-    // TradePlanController.HistoryOrderController = HistoryOrderController;
+    TradePlanController.userOrderController = userOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
-    
-    // noticeController.userController = userController;
+
   }
   
   render() {
@@ -80,7 +76,7 @@ export default class extends exchangeViewBase {
                 </div>
                 <div className='trade-chart'>
                   <ReactKline/>
-                  <ReactKDepth/>
+                  {/*<ReactKDepth/>*/}
                 </div>
               </div>
               <div className='trade-left-bottom'>
@@ -103,8 +99,8 @@ export default class extends exchangeViewBase {
             </div>
             <div className='trade-order'>
               {/*<CurrentOrder controller={CurrentOrderController} type={0}/>*/}
-              <CurrentOrder controller={TradeUserListController} type={0}/>
-              <CurrentOrder controller={TradeUserListController} type={1}/>
+              <UserOrder controller={userOrderController}/>
+              {/*<CurrentOrder controller={TradeUserListController} type={1}/>*/}
               {/*<HistoryOrder controller={HistoryOrderController}/>*/}
             </div>
           </div>

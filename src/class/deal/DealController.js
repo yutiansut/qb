@@ -37,7 +37,7 @@ export default class DealController extends ExchangeControllerBase {
     // this.TradeMarketController.setUnitsType(market, coin);
     // this.CurrentOrderController.setInitUnit(market, coin);
     // this.HistoryOrderController.setInitUnit(market, coin);
-    this.TradeUserListController.setInitUnit(market, coin);
+    this.userOrderController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
     this.TradeOrderListController.setInitUnit(market, coin);
     this.store.state.PriceUnit = market;
@@ -88,8 +88,8 @@ export default class DealController extends ExchangeControllerBase {
     this.changePrice(unitSelected,fromValue);
     this.store.state.PriceUnit = unitSelected;
     this.TradeMarketController.setUnitsType(unitSelected);
-    this.CurrentOrderController.setUnitsType(unitSelected);
-    this.HistoryOrderController.setUnitsType(unitSelected);
+    // this.CurrentOrderController.setUnitsType(unitSelected);
+    this.userOrderController.setUnitsType(unitSelected);
     this.TradeRecentController.setUnitsType(unitSelected);
     this.TradeOrderListController.setUnitsType(unitSelected);
   }
