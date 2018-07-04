@@ -18,17 +18,17 @@ export default class Plotter {
         this.maxStrXW=0;
         this.maxStrYW=0;
 
-        let chartWidth=this.chartWidth;
-        let chartHeight=this.chartHeight;
-        let oX=this.oX;
-        let oY=this.oY;
-        let ratioStrX=this.ratioStrX;
-        let ratioStrY=this.ratioStrY;
-        let strX0=this.strX0;
-        let strY0=this.strY0;
-        let strX1=this.strX1;
-        let strY1=this.strY1;
-        let scaleLength=this.scaleLength;
+        this.chartWidth=0;
+        this.chartHeight=0;
+        this.scaleLength=0;
+        this.oX=0;
+        this.oY=0;
+        this.ratioStrX=0;
+        this.ratioStrY=0;
+        this.strX0=0;
+        this.strY0=0;
+        this.strX1=0;
+        this.strY1=0;
 
         this.initOverlay=false;
 
