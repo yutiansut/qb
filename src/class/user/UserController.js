@@ -98,26 +98,22 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState(obj)
   }
 
-  uploadInfo() { // 身份认证确认提交
+  async uploadInfo() { // 身份认证确认提交
     let typeIndexArr = [1, 3]
-    this.store.Proxy.uploadUserAuth({
+    let result = await this.store.Proxy.uploadUserAuth({
       "userId": this.store.state.userId,
       "firstName": this.view.state.firstNameValue, // 姓氏
       "lastName": this.view.state.lastNameValue, // 名字
       "name": `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
       "type": typeIndexArr[this.view.state.selectIndex],  // 0：无 1：身份证 2：军官证 3：护照
-      "number": this.view.state.numberValue,  // 证件号
+      "number": this.view.state.numberValue, // 证件号
       "image1": this.view.state.image1, // 正面照
       "image2": this.view.state.image2, // 背面照
       "image3": this.view.state.image3  // 手持照
-    }).then(res => {
-      console.log('提交结果', res)
-      if(res.ret === 101) {
-        this.view.setState({userAuth: {state: 3}})
-      }
-    }).catch(msg => {
-      console.log('提交错误', msg)
-    });
+    })
+    console.log('上传照片', result)
+    this.view.setState({remindPopup: true, popType: result && result.ret === 101 ? 'tip1': 'tip3', popMsg: result && result.ret === 101 ? "上传成功" : result.msg})
+    result.ret === 101 && this.view.setState({userAuth: {state: 3}})
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号

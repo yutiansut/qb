@@ -133,7 +133,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       ipValue: value
     })
-    console.log(this.state.ipValue)
+    // console.log(this.state.ipValue)
   }
 
   componentWillMount() {
@@ -146,7 +146,6 @@ export default class userSafeCenter extends exchangeViewBase {
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
-    console.log(23762478384287, this.userVerify)
     let verifyArr = [3, 1, 0, 2], verifyList = this.state.verifyList, noticeList = this.state.noticeList;
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
@@ -174,7 +173,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    // console.log('用户信息111', this.state)
+    console.log('用户信息111', this.state)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("security")}</h1>

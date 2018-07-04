@@ -15,6 +15,23 @@ export default {
     msg: "未知错误",
     errCode: "ErrCodeUnknown"
   },
+  95: {
+    msg: "参数错误",
+    errCode: "ErrCodeUnknown"
+  },
+  101: {
+    msg: "身份认证进行中",
+    errCode: "ErrCodeUnknown",
+    ret: 101
+  },
+  102: {
+    msg: "身份认证状态不识别",
+    errCode: "ErrCodeUnknown"
+  },
+  103: {
+    msg: "身份认证已通过",
+    errCode: "ErrCodeUnknown"
+  },
   601: {
     msg: "密码错误",
     errCode: "PWD_ERROR",

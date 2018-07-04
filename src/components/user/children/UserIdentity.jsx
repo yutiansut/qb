@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
-import UploadUrl from '../../../config/ServerConfig'
+import RemindPopup from '../../../common/component/Popup/index.jsx'
 import "../stylus/identify.styl"
 
 let photoArr = [
@@ -33,7 +33,8 @@ export default class userIdentity extends exchangeViewBase {
       numberValue: '',
       image1: '', // 上传照片用于存储ID
       image2: '', // 上传照片用于存储ID
-      image3: '' // 上传照片用于存储ID
+      image3: '', // 上传照片用于存储ID
+      remindPopup: false
     }
     const {controller} = props
     //绑定view
@@ -199,6 +200,11 @@ export default class userIdentity extends exchangeViewBase {
           {/*<input type="submit" ref="filesUp" value="Upload"/>*/}
         {/*</form>*/}
         {/*<iframe name="upImg" frameBorder="0" width="0" height="0"></iframe>*/}
+        {this.state.remindPopup && <RemindPopup
+          type={this.state.popType}
+          msg={this.state.popMsg}
+          autoClose = {true}
+          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }

@@ -5,12 +5,13 @@ export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: JSON.parse("232602503877763072"),
+      userId: JSON.parse("232602529072947201"),
       // userId: "",
       // token: "",
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
+      userCredits: {}, // 用户积分
       loginList: [], // 登录日志
       userCredits: [], // 用户积分列表
       currentLogin: [], // 当前登录设备
@@ -51,6 +52,15 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.userAuth = userAuth;
     return userAuth
   }
+
+  //
+  // async userCredits() { // 获取用户积分
+  //   let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.state.userId});
+  //   let userCredits = userCreditsCon.credits;
+  //   this.state.userCredits = userCredits;
+  //   return userCredits
+  // }
+
   async currentLogin() { // 获取当前登录设备列表
     let currentLogin = await this.Proxy.getCurrentLogin({"userId": this.state.userId});
     if(currentLogin.errCode)

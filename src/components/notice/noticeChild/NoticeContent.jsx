@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Redirect,
+  Switch
+} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Pagination from '../../../common/component/Pagination/index.jsx'
+// import NoticeDetail from '/NoticeContentDetail.jsx'
 
 
 export default class noticeContent extends exchangeViewBase {
@@ -49,13 +57,13 @@ export default class noticeContent extends exchangeViewBase {
               <em>类型</em>
               <span>时间</span>
             </dt>
-            {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<dd key={index}>
-              <a href={`http://${v.source}`} target="_blank">
+            {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<NavLink to={`${this.props.match.url}/detail`} key={index}>
+              <dd >
                 <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
                 <em>公告</em>
                 <span>{v.createdAt}</span>
-              </a>
-            </dd>))}
+              </dd>
+            </NavLink>))}
           </dl>
           <div className={this.state.noticeList.data ? '' : 'hide'}>
             {this.state.noticeList.totalCount &&<Pagination total={this.state.noticeList.totalCount}
@@ -64,6 +72,7 @@ export default class noticeContent extends exchangeViewBase {
                         showQuickJumper={true}/>}
           </div>
         </div>
+
         <div className="news-wrap" >
           <h1>资讯</h1>
           <h2 className={this.state.infoList.data ? 'hide' : ''}>暂无资讯</h2>
@@ -88,6 +97,15 @@ export default class noticeContent extends exchangeViewBase {
                         showQuickJumper={true}/>}
           </div>
         </div>
+
+        {/*<div>*/}
+          {/*<Switch>*/}
+            {/*<Route path={`${this.props.match.url}/detail`} component={({match}) => (*/}
+              {/*<NoticeDetail />*/}
+            {/*)}/>*/}
+          {/*</Switch>*/}
+        {/*</div>*/}
+
       </div>
     );
   }

@@ -33,7 +33,7 @@ export default class User extends exchangeViewBase {
         <div className="notice-content fl">
           <Switch>
             <Route path={`${match.url}/content`} component={({match}) => (
-              <NoticeContent controller={controller} />
+              <NoticeContent controller={controller} match={match}/>
             )}/>
             <Route path={`${match.url}/contact`} component={({match}) => (
               <ContactUs controller={controller} />
