@@ -1,8 +1,8 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
 
 export default class OrderListStore extends ExchangeStoreBase {
-  constructor() {
-    super('userOrder')
+  constructor(modelName, connectName) {
+    super(modelName, connectName)
     this.state = {
       recentTradeListArr: [],
       recentItemSelect: 'mineLess',

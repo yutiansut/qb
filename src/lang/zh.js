@@ -77,7 +77,8 @@ export default function zh(state) {
     "deal-use": "可用",
     sendCode: '获取验证码',
     sendAgain: '重新获取',
-    optionSuccess: '操作成功'
+    optionSuccess: '操作成功',
+    close: '关闭'
   };
   const other = {
     "header-home": "首页",
@@ -192,9 +193,12 @@ export default function zh(state) {
     "order-deal-time": "成交时间",
     "order-deal-price": "成交单价",
     "order-deal-number": "成交数量",
-    "order-mine": '我的',
-    "order-market": '市场',
-    "order-recent": '近期交易',
+    "order-mine":'我的',
+    "order-market":'市场',
+    "order-recent":'近期交易',
+    "order-reset-buy": '撤销买入',
+    "order-reset-sell": '撤销卖出',
+    "order-reset-all": '全部撤销',
   };
   const deal = {
     "deal-limit": "限价委托",

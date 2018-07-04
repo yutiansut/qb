@@ -123,18 +123,22 @@ export default class MarketController extends ExchangeControllerBase {
     let tradePair = list[0].trade_pair;
     this.view.setState({
       tradePair,
+      tradePairId:list[0].tradePairId
     });
     this.store.state.tradePair = tradePair;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(list[0].tradePairId);
+    this.userOrderController && this.userOrderController.changeTradePairId(list[0].tradePairId)
     this.setDealMsg();
   }
 
   tradePairChange(value) {
     this.view.setState({
-      tradePair: value.trade_pair
+      tradePair: value.trade_pair,
+      tradePairId: value.tradePairId
     });
     this.store.state.tradePair = value.trade_pair;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
+    this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
   }
 

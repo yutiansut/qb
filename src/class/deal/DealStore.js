@@ -21,7 +21,6 @@ export default class DealStore extends ExchangeStoreBase {
     }
   }
   async dealTrade(){
-    console.log(this.Proxy)
     await this.Proxy.dealExchange(
         {
           "userId": JSON.parse('232601699242483712'),

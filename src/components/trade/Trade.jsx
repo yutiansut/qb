@@ -3,8 +3,6 @@ import exchangeViewBase from "../ExchangeViewBase";
 import TradeMarket from './children/TradeMarket.jsx'
 import LiveTrade from './children/LiveTrade.jsx'
 import RecentTrade from './children/RecentTrade.jsx'
-import CurrentOrder from './children/UserOrder.jsx'
-import HistoryOrder from './children/HistoryOrder.jsx'
 import TradePairDeal from './children/TradePairDeal.jsx'
 import TradePlan from './children/TradePlan.jsx'
 import TradeNotice from '../notice/TradeNotice.jsx'
@@ -39,9 +37,9 @@ export default class extends exchangeViewBase {
     super(props)
 
     TradeMarketController = props.marketController;
-    TradeOrderListController = new TradeOrderController();
-    TradeRecentController = new OrderListController();
-    userOrderController = props.userOrderController;
+    TradeOrderListController = new TradeOrderController();//近期交易
+    TradeRecentController = new OrderListController();//挂单列表
+    userOrderController = props.userOrderController;//用户订单
     noticeController = new NoticeController();
     TradeDealController = new DealController();
     TradePlanController = new DealController();
@@ -52,8 +50,12 @@ export default class extends exchangeViewBase {
     TradeMarketController.TradeDealController = TradeDealController;
     TradeMarketController.TradePlanController = TradePlanController;
     TradeMarketController.TradeRecentController = TradeRecentController;
+    
     TradeOrderListController.TradeMarketController = TradeMarketController;
     TradeOrderListController.TradePlanController = TradePlanController;
+    
+    //id处理的两种方式:
+    TradeMarketController.userOrderController = userOrderController;
     
     TradePlanController.TradeMarketController = TradeMarketController;
     TradePlanController.TradeRecentController = TradeRecentController;
@@ -111,10 +113,7 @@ export default class extends exchangeViewBase {
               <TradeNotice controller={noticeController}/>
             </div>
             <div className='trade-order'>
-              {/*<CurrentOrder controller={CurrentOrderController} type={0}/>*/}
               <UserOrder controller={userOrderController}/>
-              {/*<CurrentOrder controller={TradeUserListController} type={1}/>*/}
-              {/*<HistoryOrder controller={HistoryOrderController}/>*/}
             </div>
           </div>
 

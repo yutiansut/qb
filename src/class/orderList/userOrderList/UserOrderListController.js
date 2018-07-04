@@ -1,21 +1,23 @@
 import OrderListController from '../OrderListController.js'
-import UserOrderListStore from  './UserOrderListStore'
+import UserOrderListStore from './UserOrderListStore'
 
 const order = {
   orderCurrent: 'currentOrder',
   orderHistory: 'historyOrder',
   orderDeal: 'historyOrder',
 }
-export default class UserOrderListController extends OrderListController{
-  constructor(props){
+export default class UserOrderListController extends OrderListController {
+  constructor(props) {
     super(props);
     this.store = new UserOrderListStore()
   }
-  setView(view){
+  
+  setView(view) {
     super.setView(view)
   }
+  
   // 数据的请求以及处理
-  orderListHandle(type, params){
+  orderListHandle(type, params) {
     type === 'orderCurrent' && this.getCurrentOrder(type, params);
     type !== 'orderCurrent' && this.getHistoryOrder(type, params);
     // this.view.setState(
@@ -29,9 +31,32 @@ export default class UserOrderListController extends OrderListController{
     //     {preArray:  this.store.state[order[type]]}
     // )
   }
-  async getCurrentOrder(trade, params){
+  
+  changeTradePairId(value) {
+    let idArray = [];
+    idArray.push(value);
+    let currentParams = {
+      "tradePairId": idArray,
+      "orderType": 2,
+    };
+    let historyParams = {
+      "tradePairId": idArray,
+      "orderType": 2,
+      "orderStatus": [1, 2, 3, 4, 5, 6],
+      startTime: 1509484067,
+      endTime: 1530088867,
+      // "startTime": new Date().getTime() - 7 * 24 * 60 * 60,
+      // "endTime": new Date().getTime(),
+      "page": 1,
+      "pageSize": 10
+    };
+    this.getCurrentOrder(false, currentParams);
+    this.getHistoryOrder(false, historyParams);
+  }
+  
+  async getCurrentOrder(trade, params) {
     let currentOrder = await this.store.getCurrentOrder(params);
-    if(!trade){
+    if (!trade) {
       this.view.setState({
         currentOrder
       });
@@ -41,9 +66,10 @@ export default class UserOrderListController extends OrderListController{
       orderListArray: currentOrder,
     })
   }
-  async getHistoryOrder(trade, params){
+  
+  async getHistoryOrder(trade, params) {
     let historyOrder = await this.store.getHistoryOrder(params);
-    if(!trade){
+    if (!trade) {
       this.view.setState({
         historyOrder: historyOrder.orderList
       });
@@ -54,11 +80,16 @@ export default class UserOrderListController extends OrderListController{
       total: historyOrder.totalCount
     })
   }
-  async getOrderDetail(id){
+  
+  async getOrderDetail(id) {
     let orderDetail = await this.store.getOrderDetail(id);
     this.view.setState({
       detailFlag: true,
       orderDetail
     })
+  }
+  
+  wsOrderList(){
+    this.store.wsOrderList();
   }
 }

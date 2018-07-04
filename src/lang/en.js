@@ -69,6 +69,7 @@ export default function en(state) {
     marketPrice: 'Market Price',
     detail: 'Details',
     noRecords: "No records",
+    close: 'Close',
     "deal-use": "Available",
     sendCode: 'Send the code',
     sendAgain: 'Send again',
@@ -187,10 +188,13 @@ export default function en(state) {
     "order-deal-time": "Transaction Time",
     "order-deal-price": "Transaction Price",
     "order-deal-number": "Processed Amount",
-    "order-mine": 'Mine',
-    "order-market": 'Market',
-    "order-recent": 'Recently trading',
-
+    "order-mine":'Mine',
+    "order-market":'Market',
+    "order-recent":'Recently trading',
+    "order-reset-buy": 'Undo buy',
+    "order-reset-sell": 'Undo sell',
+    "order-reset-all": 'Undo all',
+  
   };
   const deal = {
     "deal-limit": "Limit price",

@@ -2,7 +2,7 @@ import OrderListStore from '../OrderListStore'
 
 export default class UserOrderListStore extends OrderListStore {
   constructor() {
-    super('userOrder');
+    super('userOrder', 'general');
     this.state = {
       // currentOrder: [
       //   {
@@ -112,103 +112,112 @@ export default class UserOrderListStore extends OrderListStore {
       //   }
       // ],
       currentOrder:[],
-      historyOrder: [
-        {
-          "tradePairId": 2,
-          "tradePairName": 1,
-          "orderType": 0,//订单类型 0买  1卖
-          "priceType": 1,//价格类型 0限价  1市价
-          "oderId": 0,
-          "orderTime": 947586000,
-          "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
-          "price": 1.23,
-          "count": 2.33,//总量
-          "dealDoneCount": 1.99,//已成交的量
-          "priceCN": 1.23,
-          "priceEN": 1.23,
-          "avgPrice": 1.22,//均价
-          "avgPriceCN": 1.11,
-          "avgPriceEN": 1.12,
-          "undealCount": 0.34,//未成交的量
-          "turnover": 23232.2,//成交额
-          "turnoverCN": 23232.2,
-          "turnoverEN": 23232.2,
-          "fee": 0.04//手续费
-        },
-        {
-          "tradePairId": 2,
-          "tradePairName": 1,
-          "orderType": 1,
-          "priceType": 0,
-          "oderId": 0,
-          "orderTime": 947586000,
-          "orderStatus": 0,
-          "price": 1.23,
-          "count": 2.33,
-          "dealDoneCount": 1.99,
-          "priceCN": 1.23,
-          "priceEN": 1.23,
-          "avgPrice": 1.22,
-          "avgPriceCN": 1.11,
-          "avgPriceEN": 1.12,
-          "undealCount": 0.34,
-          "turnover": 23232.2,
-          "turnoverCN": 23232.2,
-          "turnoverEN": 23232.2,
-          "fee": 0.04
-        },
-        {
-          "tradePairId": 2,
-          "tradePairName": 1,
-          "orderType": 0,//订单类型 0买  1卖
-          "priceType": 0,//价格类型 0限价  1市价
-          "oderId": 0,
-          "orderTime": 947586000,
-          "orderStatus": 1,//订单状态 0已成交 1部分成交  2未成交  3已撤销
-          "price": 1.23,
-          "count": 2.33,//总量
-          "dealDoneCount": 1.99,//已成交的量
-          "priceCN": 1.23,
-          "priceEN": 1.23,
-          "avgPrice": 1.22,//均价
-          "avgPriceCN": 1.11,
-          "avgPriceEN": 1.12,
-          "undealCount": 0.34,//未成交的量
-          "turnover": 23232.2,//成交额
-          "turnoverCN": 23232.2,
-          "turnoverEN": 23232.2,
-          "fee": 0.04//手续费
-        },
-        {
-          "tradePairId": 2,
-          "tradePairName": 1,
-          "orderType": 0,
-          "priceType": 0,
-          "oderId": 0,
-          "orderTime": 947586000,
-          "orderStatus": 3,
-          "price": 1.23,
-          "count": 2.33,
-          "dealDoneCount": 1.99,
-          "priceCN": 1.23,
-          "priceEN": 1.23,
-          "avgPrice": 1.22,
-          "avgPriceCN": 1.11,
-          "avgPriceEN": 1.12,
-          "undealCount": 0.34,
-          "turnover": 23232.2,
-          "turnoverCN": 23232.2,
-          "turnoverEN": 23232.2,
-          "fee": 0.04
-        }
-      ],
+      // historyOrder: [
+      //   {
+      //     "tradePairId": 2,
+      //     "tradePairName": 1,
+      //     "orderType": 0,//订单类型 0买  1卖
+      //     "priceType": 1,//价格类型 0限价  1市价
+      //     "oderId": 0,
+      //     "orderTime": 947586000,
+      //     "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
+      //     "price": 1.23,
+      //     "count": 2.33,//总量
+      //     "dealDoneCount": 1.99,//已成交的量
+      //     "priceCN": 1.23,
+      //     "priceEN": 1.23,
+      //     "avgPrice": 1.22,//均价
+      //     "avgPriceCN": 1.11,
+      //     "avgPriceEN": 1.12,
+      //     "undealCount": 0.34,//未成交的量
+      //     "turnover": 23232.2,//成交额
+      //     "turnoverCN": 23232.2,
+      //     "turnoverEN": 23232.2,
+      //     "fee": 0.04//手续费
+      //   },
+      //   {
+      //     "tradePairId": 2,
+      //     "tradePairName": 1,
+      //     "orderType": 1,
+      //     "priceType": 0,
+      //     "oderId": 0,
+      //     "orderTime": 947586000,
+      //     "orderStatus": 0,
+      //     "price": 1.23,
+      //     "count": 2.33,
+      //     "dealDoneCount": 1.99,
+      //     "priceCN": 1.23,
+      //     "priceEN": 1.23,
+      //     "avgPrice": 1.22,
+      //     "avgPriceCN": 1.11,
+      //     "avgPriceEN": 1.12,
+      //     "undealCount": 0.34,
+      //     "turnover": 23232.2,
+      //     "turnoverCN": 23232.2,
+      //     "turnoverEN": 23232.2,
+      //     "fee": 0.04
+      //   },
+      //   {
+      //     "tradePairId": 2,
+      //     "tradePairName": 1,
+      //     "orderType": 0,//订单类型 0买  1卖
+      //     "priceType": 0,//价格类型 0限价  1市价
+      //     "oderId": 0,
+      //     "orderTime": 947586000,
+      //     "orderStatus": 1,//订单状态 0已成交 1部分成交  2未成交  3已撤销
+      //     "price": 1.23,
+      //     "count": 2.33,//总量
+      //     "dealDoneCount": 1.99,//已成交的量
+      //     "priceCN": 1.23,
+      //     "priceEN": 1.23,
+      //     "avgPrice": 1.22,//均价
+      //     "avgPriceCN": 1.11,
+      //     "avgPriceEN": 1.12,
+      //     "undealCount": 0.34,//未成交的量
+      //     "turnover": 23232.2,//成交额
+      //     "turnoverCN": 23232.2,
+      //     "turnoverEN": 23232.2,
+      //     "fee": 0.04//手续费
+      //   },
+      //   {
+      //     "tradePairId": 2,
+      //     "tradePairName": 1,
+      //     "orderType": 0,
+      //     "priceType": 0,
+      //     "oderId": 0,
+      //     "orderTime": 947586000,
+      //     "orderStatus": 3,
+      //     "price": 1.23,
+      //     "count": 2.33,
+      //     "dealDoneCount": 1.99,
+      //     "priceCN": 1.23,
+      //     "priceEN": 1.23,
+      //     "avgPrice": 1.22,
+      //     "avgPriceCN": 1.11,
+      //     "avgPriceEN": 1.12,
+      //     "undealCount": 0.34,
+      //     "turnover": 23232.2,
+      //     "turnoverCN": 23232.2,
+      //     "turnoverEN": 23232.2,
+      //     "fee": 0.04
+      //   }
+      // ],
       orderListArray:[],
       currentArray:[],
       historyArray:[],
       dealArray:[],
       orderDetail: {}
-    }
-    
+    };
+    console.log('this.WebSocket',this.WebSocket)
+    this.WebSocket.general.on('userOrderUpdate', data => {
+      console.log('wsOrderList', data)
+    })
+  }
+  wsOrderList(){
+    // this.WebSocket.general.emit('userOrderUpdate')
+    this.WebSocket.general.on('userOrderUpdate', data => {
+      console.log('wsOrderList', data)
+    })
   }
   async getCurrentOrder(params){
     let currentList = await this.Proxy.currentOrder(

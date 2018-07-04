@@ -6,9 +6,10 @@
 	.trade-current-title
 		display flex
 		align-items center
+		justify-content space-between
 		h3
 			color $normal-white-color
-			margin-right 7.2rem
+			//margin-right 7.2rem
 		.reset-handle
 			font-size .12rem
 			margin-right .49rem
@@ -24,3 +25,69 @@
 		tbody
 			td
 				color $normal-white-color-a9
+.trade-order-shadow
+	position fixed
+	top 0
+	left 0
+	bottom 0
+	right 0
+	background $exchange-shadow-color
+	z-index 6665
+	.trade-order-detail
+		position absolute
+		top 50%
+		left 50%
+		transform translate(-50%, -50%)
+		background $normal-white-color
+		width 7.57rem
+		min-height 3.8rem
+		border-radius .02rem
+		z-index 6666
+		h3
+			height .7rem
+			font-size .18rem
+			line-height .7rem
+			text-align center
+			color $normal-black-color
+		.trade-order-content
+			width 6.48rem
+			height 1.01rem
+			margin 0 auto
+			border-radius .02rem
+			background $line-light
+			display flex
+			color $normal-black-color
+			justify-content space-around
+			.trade-order-info
+				height 100%
+				padding .2rem 0
+				p
+					margin-bottom .25rem
+				span
+					color $normal-gray-color
+		.trade-order-table
+			width 7.22rem
+			margin .3rem auto .2rem
+			font-size .14rem
+			border-bottom .01rem solid $line-light
+			thead
+				tr
+					height .30rem
+					color $normal-gray-color
+					td
+						text-align center
+			tbody
+				color $normal-black-color
+				tr
+					height .3rem
+					td
+						text-align center
+		.trade-order-close
+			cursor pointer
+			width 1.6rem
+			margin 0 auto
+			height .35rem
+			color $normal-white-color
+			background $exchange-blue
+			line-height .35rem
+			text-align center

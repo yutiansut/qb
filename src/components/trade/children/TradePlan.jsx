@@ -52,7 +52,7 @@ export default class TradePlan extends ExchangeViewBase {
     //   inputValue:this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')]
     // })
   }
-
+//切换市价委托/限价委托
   changeEntrustType(v) {
     this.setState({
       DealEntrustType: v.type

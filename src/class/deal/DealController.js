@@ -35,8 +35,6 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.prices = prices;
     this.setPriceInit(prices.price);
     // this.TradeMarketController.setUnitsType(market, coin);
-    // this.CurrentOrderController.setInitUnit(market, coin);
-    // this.HistoryOrderController.setInitUnit(market, coin);
     this.userOrderController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
     this.TradeOrderListController.setInitUnit(market, coin);

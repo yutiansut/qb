@@ -4,7 +4,7 @@ import OrderListStore from './OrderListStore'
 export default class OrderListController extends ExchangeControllerBase {
   constructor() {
     super();
-    this.store = new OrderListStore()
+    this.store = new OrderListStore('userOrder', 'general')
   };
   
   setView(view) {
