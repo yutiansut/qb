@@ -22,7 +22,9 @@ export default class LoginController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.userController.getCaptcha()
+    console.log('aaa 0', captcha)
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+    console.log('aaa 1', this.view.state)
   }
 
   //登录

@@ -78,8 +78,8 @@ export default class Login extends exchangeViewBase {
     // this.bannerSwiper()
   }
 
-  async componentDidMount() {
-    await this.getCaptchaVerify()
+  componentDidMount() {
+    this.getCaptchaVerify()
   }
 
   componentWillUpdate(...parmas) {

@@ -62,12 +62,12 @@ export default class UserStore extends ExchangeStoreBase {
   async loginList() { // 获取登录日志
     let loginContent = await this.Proxy.getLoginList({"userId": this.state.userId, "page":0, "pageSize":10, "src":-1, "catalog":0});
     let loginlist = loginContent.data ? loginContent.data : [];
-    console.log('denglu', loginContent)
+    // console.log('denglu', loginContent)
     let catalogArr = ['登录日志', '注册日志', '第三方账号', '实名认证', '两步验证', '邮件验证', '手机号验证', '登录密码设置', '钱包日志', 'API设置', '资金密码设置', '系统日志', 'IP 白名单', '联系人管理']
     loginlist.length && loginlist.forEach(v => {
       v.catalog = catalogArr[v.catalog]
     })
-    console.log('denglu', loginlist)
+    // console.log('denglu', loginlist)
     this.state.loginList = loginlist;
     return loginlist
   }

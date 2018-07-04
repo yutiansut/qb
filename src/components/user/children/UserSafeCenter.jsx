@@ -149,7 +149,7 @@ export default class userSafeCenter extends exchangeViewBase {
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
-    console.log(23762478384287, this.userVerify)
+    // console.log(23762478384287, this.userVerify)
     let verifyArr = [3, 1, 0, 2]
     let verifyList = this.state.verifyList
     // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
@@ -178,7 +178,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息111', this.state)
+    // console.log('用户信息111', this.state)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("security")}</h1>

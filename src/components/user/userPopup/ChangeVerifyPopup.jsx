@@ -43,7 +43,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
   componentWillUpdate(props, state, next) {
   }
   render() {
-    console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
+    // console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
     return (
       <div className="change-popup-wrap" style={{display: this.props.isChange}}>
         <div className="change-info">

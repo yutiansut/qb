@@ -13,8 +13,8 @@ export default class LoginVerification extends exchangeViewBase {
     //绑定view
     // controller.setView(this)
     //初始化数据，数据来源即store里面的state
-    this.state = Object.assign(this.state, controller.initState);
-    this.initLoginVerification = controller.initLoginVerification.bind(controller)
+    // this.state = Object.assign(this.state, controller.initState);
+    // this.initLoginVerification = controller.initLoginVerification.bind(controller)
     // console.log('手势验证', this.state)
   }
 
@@ -23,7 +23,7 @@ export default class LoginVerification extends exchangeViewBase {
   }
 
   componentDidMount() {
-    this.initLoginVerification()
+    // this.initLoginVerification()
   }
 
   componentWillUpdate(...parmas) {
