@@ -53,7 +53,7 @@ class ReactKDepth extends React.Component {
 
     componentWillUnmount(){
         this.state.kdepth.reset();
-        window.redrawKline=null;
+        window.redrawDepth=null;
     }
 
     render() {

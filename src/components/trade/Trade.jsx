@@ -60,13 +60,6 @@ export default class extends exchangeViewBase {
     TradePlanController.userOrderController = userOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
 
-<<<<<<< 3fe87e4e85efeea45155e7254b6d5f3c5276acaf
-  }
-  
-  render() {
-    return (
-        <div id='trade'>
-=======
     // noticeController.userController = userController;
 
     this.state={
@@ -80,8 +73,7 @@ export default class extends exchangeViewBase {
 
   render(){
     return(
-        <div id='trade' >
->>>>>>> k线图，深度图切换
+        <div id='trade'>
           <div className='clearfix'>
             <div className='trade-left'>
               <div className='trade-left-top'>
