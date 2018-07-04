@@ -7,7 +7,6 @@ class ReactKDepth extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            props: props,
             kline: null,
         }
     }
@@ -46,7 +45,7 @@ class ReactKDepth extends React.Component {
         this.setData();
         //
         let _kdepth=this.state.kdepth;
-        window.redrawKline=function () {
+        window.redrawDepth=function () {
             let tradeChart=document.querySelector(".trade-chart");
             _kdepth.resize(tradeChart.clientWidth,tradeChart.clientHeight);
         }
@@ -59,10 +58,7 @@ class ReactKDepth extends React.Component {
 
     render() {
         return (
-            <div id="depth_container" className="depth_container">
-                <div className="">
-
-                </div>
+            <div id="depth_container" className="depth_container" style={this.props.show ? {} : { display: 'none' }}>
                 <div className="depth_canvasGroup">
                     <canvas className="depth_canvas" id="depth_canvas"></canvas>
                     <canvas className="depth_canvas" id="depth_canvas2"></canvas>

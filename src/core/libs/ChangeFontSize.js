@@ -7,6 +7,7 @@
         clientWidth && (clientWidth /= 1440, clientWidth > 2 && (clientWidth = 2), clientWidth < 0.8 && (clientWidth = 0.8), docEl.style.fontSize = 100 * clientWidth + "px");
         // 字体改变，通知k线图重绘
         window.redrawKline && window.redrawKline();
+        window.redrawDepth && window.redrawDepth();
       };
   
   if (!doc.addEventListener) return;

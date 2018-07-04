@@ -89,16 +89,21 @@ export default class Plotter {
 
     draw() {
         let ctx=this._context;
-        let padding=20;
+        let padding={
+            left: 20,
+            right: 20,
+            top: 30,
+            bottom: 20,
+        };
         let verAxisWidth=Math.floor(this.maxStrYW);
         let horAxisHeight=12;
         let scaleLength=5;
-        let chartWidth=KDepth.instance.width-verAxisWidth-padding*2;
-        let chartHeight=KDepth.instance.height-horAxisHeight-padding*2;
+        let chartWidth=KDepth.instance.width-verAxisWidth-(padding.left+padding.right);
+        let chartHeight=KDepth.instance.height-horAxisHeight-(padding.top+padding.bottom);
         let scaleXNum=Math.floor(chartWidth/(this.maxStrXW+40));
         let scaleYNum=Math.floor(chartHeight/50);
-        let oX=padding+verAxisWidth;
-        let oY=padding+chartHeight;
+        let oX=padding.left+verAxisWidth;
+        let oY=padding.top+chartHeight;
 
         let strX0=Math.min(this.asks_min[0],this.bids_min[0]);
         let strX1=Math.max(this.asks_max[0],this.bids_max[0]);

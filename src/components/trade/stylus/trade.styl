@@ -56,3 +56,38 @@
 		.trade-order
 			background $exchange-bg
 			width 11.28rem
+
+// k线图部分样式
+.trade-chart{
+	position: relative;
+	overflow: hidden;
+}
+.trade-chart .k-menu{
+	position: absolute;
+	top: 0;
+	right: 10px;
+	z-index: 1000;
+	height: 28px;
+}
+.trade-chart .k-menu button{
+	border: 1px solid #aaa;
+	color: #aaa;
+	cursor: pointer;
+	height: 24px;
+	margin: 2px 0;
+	width 66px;
+	border-radius: 2px;
+	box-sizing: border-box;
+}
+.trade-chart .k-menu button:first-of-type{
+	margin-right:8px;
+}
+.trade-chart .k-menu button:hover{
+	border-color: #fff;
+	color: #fff;
+}
+.trade-chart .k-menu button.active{
+	background-color: #1BB0E0;
+	border: none;
+	color: #fff;
+}

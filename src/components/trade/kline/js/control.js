@@ -323,7 +323,7 @@ export class Control {
         let showIndicNW = periodsHorzNW + showIndic.offsetWidth + 4;
         let showToolsNW = showIndicNW + showTools.offsetWidth + 4;
         let selectThemeNW = showToolsNW + selectTheme.offsetWidth;
-        let dropDownSettingsW = dropDownSettings.find(".chart_dropdown_t")[0].offsetWidth + 300;
+        let dropDownSettingsW = dropDownSettings.find(".chart_dropdown_t")[0].offsetWidth + 440;
         periodsVertNW += dropDownSettingsW;
         periodsHorzNW += dropDownSettingsW;
         showIndicNW += dropDownSettingsW;

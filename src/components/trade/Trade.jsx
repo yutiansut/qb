@@ -60,11 +60,28 @@ export default class extends exchangeViewBase {
     TradePlanController.userOrderController = userOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
 
+<<<<<<< 3fe87e4e85efeea45155e7254b6d5f3c5276acaf
   }
   
   render() {
     return (
         <div id='trade'>
+=======
+    // noticeController.userController = userController;
+
+    this.state={
+        curChart: "kline",
+    }
+  }
+
+  switchChart(name){
+    this.setState({curChart: name});
+  }
+
+  render(){
+    return(
+        <div id='trade' >
+>>>>>>> k线图，深度图切换
           <div className='clearfix'>
             <div className='trade-left'>
               <div className='trade-left-top'>
@@ -75,8 +92,12 @@ export default class extends exchangeViewBase {
                   <TradeMarket controller={TradeMarketController}/>
                 </div>
                 <div className='trade-chart'>
-                  <ReactKline/>
-                  {/*<ReactKDepth/>*/}
+                  <div className="k-menu">
+                     <button className={this.state.curChart==="kline" ? "active" : ""} onClick={this.switchChart.bind(this,"kline")}>K线图</button>
+                     <button className={this.state.curChart==="depth" ? "active" : ""} onClick={this.switchChart.bind(this,"depth")}>深度图</button>
+                  </div>
+                  <ReactKline show={this.state.curChart==="kline"}/>
+                  <ReactKDepth show={this.state.curChart==="depth"}/>
                 </div>
               </div>
               <div className='trade-left-bottom'>

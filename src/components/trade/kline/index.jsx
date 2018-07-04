@@ -7,7 +7,6 @@ class ReactKline extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            props: props,
             kline: null,
         }
     }
@@ -53,7 +52,6 @@ class ReactKline extends React.Component {
             debug: false,
             onRequestChange:this.onRequestChange,
         };
-        Object.assign(cfg,this.state.props);
         this.state.kline = new Kline(cfg);
         this.state.kline.draw();
         this.setData();
@@ -93,7 +91,7 @@ class ReactKline extends React.Component {
 
     render() {
         return (
-            <div id="kline_container">
+            <div id="kline_container" style={this.props.show ? {} : { display: 'none' }}>
                 <div className="chart_container dark">
                     <div id="chart_dom_elem_cache"></div>
                     <div id="chart_toolbar">

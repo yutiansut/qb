@@ -34,16 +34,20 @@ class ReactTrend extends React.Component {
             trends[i] < min ? min = trends[i] : null;
         }
 
-        let points="";
+        let path="";
         trends.forEach((e,i)=>{
             let x = i * dx;
             let y = viewHeight - (e - min) / (max - min) * viewHeight;
-            points += x + "," + y + " ";
+            if(i<=0){
+                path += "M"+x + "," + y + " ";
+            }else{
+                path += "L"+x + "," + y + " ";
+            }
         });
 
         return (
             <svg className="kline-trend" viewBox={viewBox} preserveAspectRatio="none">
-                <polyline points={points} style={{stroke:this.state.stroke,strokeWidth:this.state.strokeWidth,fill:"none"}}/>
+                <path d={path} style={{stroke:this.state.stroke,strokeWidth:this.state.strokeWidth,fill:"none"}}/>
             </svg>
         );
     }

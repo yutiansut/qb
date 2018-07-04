@@ -433,9 +433,9 @@
 }
 
 .chart_container #chart_updated_time {
-    float: right;
-    padding-top: 6px;
-    margin-right:10px;
+    float: left;
+    padding-top: 5px;
+    margin-left: 10px;
 }
 
 .chart_container.dark #chart_updated_time {
