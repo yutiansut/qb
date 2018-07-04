@@ -213,14 +213,16 @@ export default class MarketStore extends ExchangeStoreBase {
           "tradePairId": 4,
           "tradePairName": "usd/xas"
         }]
-  
+
     };
+    // this.getMarketPair()
   }
+
 
 
   getRecommendCurrency() {
     console.log('getData recommendCurrency', this.WebSocket)
-    this.WebSocket.general.emit('recommendCurrency', {test:'test'})
+    // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
     this.WebSocket.general.on('recommendCurrency', data => {
       console.log('getWebSocketData', data, this.controller)
       this.controller.updateRecommend(data.data)

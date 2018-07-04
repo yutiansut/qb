@@ -2,6 +2,7 @@ import HttpProxy from './httpProxy'
 import Websocket from './webSocket'
 import Loop from "./loop";
 import GlobalUtil from "./libs/GlobalUtil";
+import AsyncAll from "./libs/AsyncAll";
 
 
 const RUNAPP = async (config) => {
@@ -18,5 +19,6 @@ const RUNAPP = async (config) => {
 module.exports = {
   GlobalUtil,
   Websocket,
-  RUNAPP
+  RUNAPP,
+  AsyncAll
 }

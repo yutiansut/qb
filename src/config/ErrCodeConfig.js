@@ -17,7 +17,7 @@ export default {
   },
   601: {
     msg: "密码错误",
-    errCode: "PWD_ERROR"
+    errCode: "PWD_ERROR",
   },
   602: {
     msg: "数据库错误",

@@ -8,7 +8,9 @@ import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
 import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
-import JsonBig from "json-bigint";
+
+import {AsyncAll} from '../../../core'
+// import JsonBig from "json-bigint";
 // import VerifyPopup from '../../viewsPopup/TwoVerifyPopup.jsx'
 
 // let noticeList = [
@@ -139,7 +141,8 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await Promise.all([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
+    // await AsyncAll([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
+    await AsyncAll([this.initData(), this.getLoginList(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
     // await this.initData()
     // await this.getLoginList()
     // await this.getCurrentLogin()
