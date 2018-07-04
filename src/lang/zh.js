@@ -213,6 +213,7 @@ export default function zh(state) {
     "user-bindPhone": "绑定手机号后开启",
     "user-email": "邮件",
     "user-msg": "短信",
+    "user-otherAll": "其他安全设置+",
     "user-otherSet": "其它设置",
     "user-time": "时区",
     "user-noticeSet": "通知设置",
@@ -274,7 +275,17 @@ export default function zh(state) {
     "user-action": "事件"
 
   };
-  const login = {};
+  const login = {
+    "login-verify": "验证登录",
+    "login-pass": "密码登录",
+    "login-code": "验证码",
+    "login-sendCode": "发送验证码",
+    "login-userInput": "手机号/邮箱",
+    "login-passInput": "密码",
+    "login-forget": "忘记密码",
+    "login-read": "我已阅读并同意",
+    "login-readUser": "用户协议",
+  };
   const help = {
     "help-termsFirst": `${nameUsd}所提供的各项服务的所有权和运作权均归${nameUsd} LTD.所有。${nameUsd}用户使用协议（以下简称“本协议”）由${nameUsd}用户与${nameUsd}就${nameUsd}的各项服务所订立的相关权利义务规范。用户通过访问和/或使用本网站，即表示接受并同意本协议的所有条件和条款。${nameUsd}作为 ${nameUsd}（${netUrl}）的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。`,
   };

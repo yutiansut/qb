@@ -14,6 +14,8 @@ export default class LoginStore extends ExchangeStoreBase {
       console.log('joinRoom getWebSocketData', data, this.controller)
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
+      this.controller.userLoginInfo(data.data)
+      console.log('ccc1', data.data)
     })
     this.WebSocket.general.emit('login', obj)
   }

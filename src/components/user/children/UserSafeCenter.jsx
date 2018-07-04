@@ -11,10 +11,10 @@ import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
 import JsonBig from "json-bigint";
 // import VerifyPopup from '../../viewsPopup/TwoVerifyPopup.jsx'
 
-let noticeList = [
-  {name: '邮件通知', flag: true},
-  {name: '短信通知', flag: true}
-];
+// let noticeList = [
+//   {name: '邮件通知', flag: true},
+//   {name: '短信通知', flag: true}
+// ];
 let timeAddrList = ['1111', '2222', '3333']
 
 export default class userSafeCenter extends exchangeViewBase {
@@ -33,9 +33,13 @@ export default class userSafeCenter extends exchangeViewBase {
       sureTwoVerify: 0, // 点击更改验证类型
       timeAddr: '', // 时区
       verifyList: [
-        {title: '登录验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}, {name: '无', flag: false}]},
-        {title: '提现验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]},
-        {title: '修改资金密码验证', contentList: [{name: '谷歌验证', flag: false}, {name: '邮件', flag: false}, {name: '短信', flag: false}]}
+        {title: this.intl.get("user-loginVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}, {name: this.intl.get("none"), flag: false}]},
+        {title: this.intl.get("user-cashVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}]},
+        {title: this.intl.get("user-fundVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}]}
+      ],
+      noticeList: [
+        {name: this.intl.get("user-noticeEmail"), flag: true},
+        {name: this.intl.get("user-noticePhone"), flag: true}
       ],
       remindPopup: false,
       ipValue: '',
@@ -51,6 +55,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.clearVerify = controller.clearVerify.bind(controller) // 清除倒计时
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
     this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
+    this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取认证信息
     this.getLoginList = controller.getLoginList.bind(controller) // 获取登录日志
@@ -153,8 +158,8 @@ export default class userSafeCenter extends exchangeViewBase {
     verifyList.forEach((v, i) => { // 两步验证未绑定手机时
       v.contentList[2].name = this.state.userInfo.phone ? '短信' : '绑定／验证手机号后开启'
     })
-    noticeList[0].name = this.state.userInfo.email ? '邮件通知' : '绑定／验证邮箱后开启' // 通知设置未绑定邮箱时
-    noticeList[1].name = this.state.userInfo.email ? '短信' : '绑定／验证手机号后开启' // 通知设置未绑定手机号时
+    this.state.noticeList[0].name = this.state.userInfo.email ? '邮件通知' : '绑定／验证邮箱后开启' // 通知设置未绑定邮箱时
+    this.state.noticeList[1].name = this.state.userInfo.email ? '短信' : '绑定／验证手机号后开启' // 通知设置未绑定手机号时
 
     this.setState({verifyList})
   }
@@ -193,11 +198,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix">
               <li>{this.intl.get("loginPwd")}</li>
-              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 3) : this.changeSetPopup('block', 4)}>{this.state.userInfo.loginPwd && '设置' || '修改'}</li>
+              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup('block', 3) : this.changeSetPopup('block', 4)}>{this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}</li>
             </ol>
             <ul className="clearfix">
               <li>{this.intl.get("fundPass")}</li>
-              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup('block', 5) : this.changeSetPopup('block', 6)}>{this.state.userInfo.fundPwd && '设置' || '修改'}</li>
+              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup('block', 5) : this.changeSetPopup('block', 6)}>{this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}</li>
               <li>{this.intl.get("user-setFund")}</li>
             </ul>
           </div>
@@ -216,7 +221,7 @@ export default class userSafeCenter extends exchangeViewBase {
             </dl>))}
           </div>
         </div>
-        <div className={`${this.state.otherShow ? 'hide' : ''} other model-div`} onClick={this.showOther}>其他安全设置+</div>
+        <div className={`${this.state.otherShow ? 'hide' : ''} other model-div`} onClick={this.showOther}>{this.intl.get("user-otherAll")}</div>
         <div className={this.state.otherShow ? '' : 'hide'}>
           <div className="time model-div clearfix">
             <h2>{this.intl.get("user-otherSet")}</h2>
@@ -241,7 +246,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl">
               <li>{this.intl.get("user-noticeRemind")}</li>
               <li>
-                {noticeList.map((v, index) => (<span key={index}  onClick={i => this.selectNotice(index, 1)}>
+                {this.state.noticeList.map((v, index) => (<span key={index}  onClick={i => this.selectNotice(index, 1)}>
                   <img src="/static/img/checked.svg" alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
                   <img src="/static/img/normal.svg" alt="" className={`${this.state.noticeIndex === index ? 'hide' : ''}`}/>
                   <b>{v.name}</b>
@@ -329,10 +334,6 @@ export default class userSafeCenter extends exchangeViewBase {
             </tbody>
           </table>
         </div>
-        {/*<VerifyPopup changeVerifyPopup = {state => this.changeVerifyPopup(state)}*/}
-                     {/*isVerify = {this.state.showVerify}*/}
-                     {/*getVerify = {this.getVerify}*/}
-                     {/*verifyNum={this.state.verifyNum}/>*/}
         <GooglePopup changeGooglePopup = {state => this.changeGooglePopup(state)}
                      googleSecret = {this.state.googleSecret.secret}
                      setGoogleVerify = {this.setGoogleVerify}
@@ -345,6 +346,8 @@ export default class userSafeCenter extends exchangeViewBase {
                    getVerify = {this.getVerify}
                    setLoginPass = {this.setLoginPass}
                    setFundPass = {this.setFundPass}
+                   modifyFundPwd = {this.modifyFundPwd}
+                   fundPassType = {this.state.fundPassVerify}
                    captcha = {this.state.captcha}
                    captchaId = {this.state.captchaId}
                    getCaptcha = {this.getCaptchaVerify}

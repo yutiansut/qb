@@ -36,18 +36,18 @@ export default class ForgetPass extends exchangeViewBase {
         <h1>找回密码</h1>
         <ul>
           <li>
-            <p>手机号/邮箱</p>
-            <Input placeholder="手机号／邮箱"/>
+            <p>{this.intl.get("login-userInput")}</p>
+            <Input placeholder={this.intl.get("login-userInput")}/>
           </li>
           <li className="send-verify-li">
-            <p>验证码</p>
+            <p>{this.intl.get("login-code")}</p>
             <div className="clearfix">
               <Input placeholder="请输入邮箱／手机验证码"/>
               <Button className="send-code-btn" title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && '重新获取' || `${this.state.verifyNum}s`) || this.state.verifyNum} onClick={this.getVerify}/>
             </div>
           </li>
           <li className="pass-li">
-            <p>密码</p>
+            <p>{this.intl.get("login-passInput")}</p>
             <Input placeholder="请输入密码"/>
             <span>必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母</span>
           </li>

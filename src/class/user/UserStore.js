@@ -5,7 +5,8 @@ export default class UserStore extends ExchangeStoreBase {
   constructor() {
     super("user");
     this.state = {
-      userId: JSON.parse("232601699242483712"),
+      userId: JSON.parse("232602516485840896"),
+      // userId: "",
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -29,6 +30,12 @@ export default class UserStore extends ExchangeStoreBase {
   //   // req.params = Object.assign({app:0}, req.params)
   //   console.log('用户', app, req)
   // }
+
+  userLogin(data) {
+    console.log('ccc4', data)
+    // this.state.userId = data.uid
+    // this.state.token = data.token
+  }
 
   async userInfo() { // 获取用户信息
     let userInfo = await this.Proxy.getUserInfo({"userId": this.state.userId});
@@ -86,7 +93,7 @@ export default class UserStore extends ExchangeStoreBase {
     return googleSecret
   }
 
-  async uploadImg(file){
+  async uploadImg(file){ // 上传图片
     let headers = new Headers(), uploadImg = new FormData();
     uploadImg.append("uploadimage", file);
     headers.set('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0');

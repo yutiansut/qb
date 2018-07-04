@@ -209,6 +209,7 @@ export default function en (state){
     "user-bindPhone": "Available after binding mobile",
     "user-email": "Email",
     "user-msg": "Message",
+    "user-otherAll": "Other security settings",
     "user-otherSet": "Other settings",
     "user-time": "Timezone",
     "user-noticeSet": "Notification Settings",
@@ -270,7 +271,17 @@ export default function en (state){
     "user-action": "Action"
 
   };
-  const login = {};
+  const login = {
+    "login-verify": "Verified login",
+    "login-pass": "Password login",
+    "login-code": "Verification code",
+    "login-sendCode": "Send verification code",
+    "login-userInput": "Mobile/Email",
+    "login-passInput": "Password",
+    "login-forget": "Forgot password",
+    "login-read": "I have read and accept",
+    "login-readUser": "User Agreement",
+  };
   const help = {
     "help-termsFirst":
       `Ownership and operation of the services offered by ${nameUsd} .com are the property of ${nameUsd} Ltd. (hereinafter referred to as "${nameUsd} .") ${nameUsd} Terms of Service (hereinafter referred to as "Agreement")  defines the rights and obligations of ${nameUsd} users and CoinRising as engaged in various services. Access and/or use of this site constitutes acceptance of and agree to all terms and conditions of this Agreement. ${nameUsd} , as the operator of ${netUrl},  will provide services for users pursuant to this Agreement. Users unwilling to accept the terms of this Agreement shall not access or use this site.`

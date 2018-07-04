@@ -12,11 +12,12 @@ import Input from '../../common/component/Input/index.jsx'
 // import LoginVerification from './children/LoginVerification.jsx'
 
 
-const titleList = ['验证登录', '密码登录']
+// const titleList = ['验证登录', '密码登录']
 export default class Login extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      titleList: [this.intl.get("login-verify"), this.intl.get("login-pass")],
       titleIndex: 0, // 点击下标
       userInput: "",
       passInput: "",
@@ -87,15 +88,15 @@ export default class Login extends exchangeViewBase {
     return (
       <div className="login-wrap">
         <h1>
-          {titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
+          {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
         </h1>
         <ul>
           <li>
-            <Input placeholder="手机号／邮箱" value={this.state.userInput} onInput={value => this.changeUser(value)}/>
+            <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUser(value)}/>
           </li>
           <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
-            <Input placeholder="密码" oriType="password" value={this.state.passInput} onInput={value => this.changePass(value)}/>
-            <span><NavLink to="/findPass">忘记密码</NavLink></span>
+            <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput} onInput={value => this.changePass(value)}/>
+            <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
           </li>
           <li className="verify-li">
             <Input placeholder="请输入图形验证码" value={this.state.picInput} onInput={value => this.changePic(value)}/>
@@ -111,10 +112,10 @@ export default class Login extends exchangeViewBase {
                     onClick={()=>{this.getVerify(this.state.userInput, this.state.userType, 0)}}/>
           </li>
           <li>
-            <Button title="登录" className="login-btn" onClick={()=>{this.login(this.state.userInput, this.state.codeInput, this.state.userType, 0, this.state.captchaId, this.state.picInput)}}/>
+            <Button title={this.intl.get("login")} className="login-btn" onClick={()=>{this.login(this.state.userInput, this.state.codeInput, this.state.userType, 0, this.state.captchaId, this.state.picInput)}}/>
           </li>
         </ul>
-        <p><input type="checkbox" />我已阅读并同意<a href="">用户协议</a></p>
+        <p><input type="checkbox" />{this.intl.get("login-read")}<a href="">{this.intl.get("login-readUser")}</a></p>
       </div>
     );
   }

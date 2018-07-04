@@ -227,7 +227,7 @@ export default class MarketStore extends ExchangeStoreBase {
 
   getRecommendCurrency() {
     console.log('getData recommendCurrency', this.WebSocket)
-    // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
+    this.WebSocket.general.emit('recommendCurrency', {test:'test'})
     this.WebSocket.general.on('recommendCurrency', data => {
       console.log('getWebSocketData', data, this.controller)
       this.controller.updateRecommend(data.data)

@@ -5,6 +5,7 @@ export default class LoginController extends ExchangeControllerBase {
   constructor(props) {
     super(props)
     this.store = new LoginStore()
+    this.store.setController(this)
   }
 
   setView(view){
@@ -32,12 +33,9 @@ export default class LoginController extends ExchangeControllerBase {
     this.store.login(obj)
   }
 
-  getUserToken(token) { // 向用户提供token
-    this.userController.userToken = token
-  }
-
-  set getUserToken(token) {
-    token = this.store.token
+  userLoginInfo(data) {
+    this.userController.getUserId(data)
+    console.log('ccc2', data)
   }
 
   async initLoginVerification() { // 获取手势验证

@@ -63,6 +63,10 @@ export default {
     msg: "用户未实名认证",
     errCode: "NO_VERIFIED"
   },
+  619: {
+    msg: "图形验证码错误",
+    errCode: "NO_PICTURECODE"
+  },
   704: {
     msg: "24小时内修改过资金密码,存在安全保护墙",
     errCode: "ALTER_IN_24H"

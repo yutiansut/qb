@@ -45,6 +45,11 @@ export default class UserController extends ExchangeControllerBase {
   clearVerify() { // 清除短信验证码
     this.countDownStop('verifyCountDown')
   }
+  // 从登录接口获取信息
+  getUserId(data) {
+    this.store.userLogin(data)
+    console.log('ccc3', data)
+  }
 
   // 接口调用部分
   async initData() { // 获取用户信息
@@ -115,13 +120,15 @@ export default class UserController extends ExchangeControllerBase {
     });
   }
 
-  async bindUser() { // 绑定邮箱／手机号
+  async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.state.userId,
-      "account": "13676566779",// 手机号或邮箱
-      "mode": 0,// 0:phone 1:email
-      "code": "722350",
-      "os": 3 // 1:android 2:iOS 3:borwser
+      account,// 手机号或邮箱
+      mode,// 0:phone 1:email
+      code,
+      captchaId, // 图形验证码id，没有就传空
+      captchaCode, // 图形验证码，没有就传空
+      "os": 3, // 1:android 2:iOS 3:borwser
     })
     this.view.setState({popupInputErr2: result.msg})
     console.log('绑定手机号／邮箱', result)
