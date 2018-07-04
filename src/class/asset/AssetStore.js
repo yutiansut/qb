@@ -27,11 +27,11 @@ export default class AssetStore extends ExchangeStoreBase {
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
-        availableCount: 100.22, //可用额度
-        totalCount: 200.22, //总额度
-        frozenCount: 11.11, //冻结额度
-        totalQuota: 2.22, //24H提现额度
-        availableQuota: 2.22 //可用提现额度
+        availableCount: 0, //可用额度
+        totalCount: 0, //总额度
+        frozenCount: 0, //冻结额度
+        totalQuota: 0, //24H提现额度
+        availableQuota: 0 //可用提现额度
       },
       //提币信息
       walletExtract: {
@@ -40,9 +40,9 @@ export default class AssetStore extends ExchangeStoreBase {
       },
       //充币地址
       coinAddress: {
-        coinId: 0, //币种ID
-        verifyNumer: 5, //最大确认数
-        coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
+        // coinId: 0, //币种ID
+        // verifyNumer: 5, //最大确认数
+        // coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
       },
       //充币记录
       // chargeHistory: {},
@@ -62,7 +62,7 @@ export default class AssetStore extends ExchangeStoreBase {
   async getFee() {
     this.state.pairFees = await this.Proxy.getFee({
       userId: this.controller.userId,
-      token: this.controller.token,
+      token: this.controller.token
     });
     console.log(this.state.pairFees);
   }
@@ -81,14 +81,14 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.wallet = coinList || [];
     if (coinList.length) {
       let obj = {};
-      this.controller.sort(coinList, ['coinId'], 1).forEach(v => {
+      this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
     }
     let { totalQuota, availableQuota } = await this.Proxy.balance({
       userId: this.controller.userId,
-      coinId: this.state.walletList['BTC'],
+      coinId: this.state.walletList["BTC"],
       coinName: "btc",
       token: this.controller.token
     });
@@ -109,7 +109,7 @@ export default class AssetStore extends ExchangeStoreBase {
     console.log("coinList", coinList);
     if (coinList.length) {
       let obj = {};
-      this.controller.sort(coinList, ['coinId'], 1 ).forEach(v => {
+      this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
@@ -118,8 +118,13 @@ export default class AssetStore extends ExchangeStoreBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
-    let obj = { userId: this.controller.userId, coinId: this.state.walletList[coin], coinName: coin, token: this.controller.token };
-    let result = await this.Proxy.balance(obj)
+    let obj = {
+      userId: this.controller.userId,
+      coinId: this.state.walletList[coin],
+      coinName: coin.toLowerCase(),
+      token: this.controller.token
+    };
+    let result = await this.Proxy.balance(obj);
     if (result && result.errCode) {
       return result;
     }
@@ -137,10 +142,10 @@ export default class AssetStore extends ExchangeStoreBase {
     result.coinAddress
       ? (this.state.coinAddress = result)
       : (this.state.coinAddress = {
-        coinId: "", //币种ID
-        verifyNumer: "", //最大确认数
-        coinAddress: "" //地址
-      });
+          coinId: "", //币种ID
+          verifyNumer: "", //最大确认数
+          coinAddress: "" //地址
+        });
   }
 
   // 获取资产记录
@@ -189,13 +194,15 @@ export default class AssetStore extends ExchangeStoreBase {
 
   // 提交提币订单
   async extractOrder(obj) {
-    let result = await this.Proxy.extractOrder(Object.assign(obj, {
-      userId: this.controller.userId,
-      token: this.controller.token,
-      coinId: this.state.walletList[obj.coinName],
-      coinName: obj.coinName.toLowerCase(),
-      os: 3
-    }))
+    let result = await this.Proxy.extractOrder(
+      Object.assign(obj, {
+        userId: this.controller.userId,
+        token: this.controller.token,
+        coinId: this.state.walletList[obj.coinName],
+        coinName: obj.coinName.toLowerCase(),
+        os: 3
+      })
+    );
     return result;
   }
   async cancelOrder(id) {
@@ -203,7 +210,7 @@ export default class AssetStore extends ExchangeStoreBase {
       userId: this.controller.userId,
       token: this.controller.token,
       applyId: id
-    })
+    });
     return result;
   }
   // 增加提现地址

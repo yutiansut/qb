@@ -17,11 +17,12 @@ export default class Charge extends exchangeViewBase {
       0: this.intl.get("pending"),
       1: this.intl.get("passed"),
       2: this.intl.get("failed"),
-      3: this.intl.get("cancel"),
+      3: this.intl.get("cancel")
     };
     this.state = {
       currency: "BTC",
       value: "BTC",
+      address: "",
       showQrcode: false,
       showPopup: false,
       copySuccess: false,
@@ -68,7 +69,7 @@ export default class Charge extends exchangeViewBase {
   async componentWillMount() {
     let currency =
       this.props.location.query && this.props.location.query.currency;
-      console.log(currency)
+    console.log(currency);
     currency &&
       this.setState({
         currency: currency,
@@ -114,6 +115,7 @@ export default class Charge extends exchangeViewBase {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress;
+    console.log(address);
     return (
       <div className="charge">
         <h3>
@@ -172,7 +174,8 @@ export default class Charge extends exchangeViewBase {
             </span>
             <input
               ref="address"
-              value={address ? address.coinAddress : ""}
+              type="text"
+              value={this.state.address}
               readOnly="readonly"
             />
           </div>
@@ -194,14 +197,11 @@ export default class Charge extends exchangeViewBase {
                 }
               }}
             />
-            {address &&
-              address.coinAddress && (
-                <div
-                  className={`qrcode ${this.state.showQrcode ? "show" : ""}`}
-                >
-                  <QRCode value={address.coinAddress} level="M" />
-                </div>
-              )}
+            {this.state.address && (
+              <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
+                <QRCode value={this.state.address} level="M" />
+              </div>
+            )}
           </div>
         </div>
         <div className="tip clearfix">
@@ -271,22 +271,22 @@ export default class Charge extends exchangeViewBase {
                         },
                         index
                       ) => (
-                          <tr key={index}>
-                            <td>{orderTime}</td>
-                            <td>{coinName}</td>
-                            <td>{count}</td>
-                            <td>{postAddress}</td>
-                            <td>{receiveAddress}</td>
-                            <td>
-                              <a
-                                href={blockSite}
-                              >{`${doneCount}/${verifyCount}`}</a>
-                            </td>
-                            <td>
-                              <span>{this.status[orderStatus]}</span>
-                            </td>
-                          </tr>
-                        )
+                        <tr key={index}>
+                          <td>{orderTime}</td>
+                          <td>{coinName}</td>
+                          <td>{count}</td>
+                          <td>{postAddress}</td>
+                          <td>{receiveAddress}</td>
+                          <td>
+                            <a
+                              href={blockSite}
+                            >{`${doneCount}/${verifyCount}`}</a>
+                          </td>
+                          <td>
+                            <span>{this.status[orderStatus]}</span>
+                          </td>
+                        </tr>
+                      )
                     )}
                 </tbody>
               </table>
@@ -319,8 +319,8 @@ export default class Charge extends exchangeViewBase {
               </p>
             </div>
           ) : (
-              <div className="kong">暂无记录</div>
-            )}
+            <div className="kong">暂无记录</div>
+          )}
           {this.state.showPopup && (
             <Popup
               type={this.state.copySuccess ? "tip1" : "tip3"}

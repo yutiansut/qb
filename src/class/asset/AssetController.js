@@ -100,6 +100,7 @@ export default class AssetController extends ExchangeControllerBase {
     await this.store.getChargeAddress(coin);
     this.view.setState({
       coinAddress: this.Util.deepCopy(this.store.state.coinAddress),
+      address: this.store.state.coinAddress.coinAddress
     });
   }
   // 获取充提记录
@@ -108,6 +109,34 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({
       assetHistory: this.store.state.assetHistory
     })
+  }
+  // 获取确认中充币信息
+  async getChargeMessage() {
+    let result = await this.store.Proxy.history({
+      userId: this.userId,
+      token: this.token,
+      page: 0,
+      pageSize: 20,
+      coinId: -1,
+      coinName: -1,
+      orderType: 1,
+      orderStatus: -1,
+      startTime: parseInt((new Date() - 604800000) / 1000),
+      endTime: parseInt((new Date() - 0) / 1000)
+    })
+    if (result && !result.errCode) {
+      return result.orderList.filter(v => v.doneCount !== v.verifyCount)
+    }
+    return [];
+    // return [
+    //   {coinName:'btc', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'eth', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'lsk', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'dog', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'bch', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'ltc', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
+    //   {coinName:'btc', orderTime: new Date() - 5555, count: 1.235, doneCount:1, verifyCount:5 },
+    // ]
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
   async getExtract() {
@@ -165,23 +194,23 @@ export default class AssetController extends ExchangeControllerBase {
       tipContent: "操作成功"
     }, () => { location.reload() })
   }
-// 撤销提币申请
- async cancelOreder(id){
-   let result = await this.store.cancelOrder(id);
-   if (result && result.errCode) {
-     this.view.setState({
-       tip: true,
-       tipSuccess: false,
-       tipContent: result.msg
-     });
-     return false;
-   }
-   this.view.setState({
-     tip: true,
-     tipSuccess: true,
-     tipContent: "操作成功"
-   })
- }
+  // 撤销提币申请
+  async cancelOreder(id) {
+    let result = await this.store.cancelOrder(id);
+    if (result && result.errCode) {
+      this.view.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: result.msg
+      });
+      return false;
+    }
+    this.view.setState({
+      tip: true,
+      tipSuccess: true,
+      tipContent: "操作成功"
+    })
+  }
   // 添加提现地址
   async appendAddress(obj) {
     let result = await this.store.appendAddress(obj);
@@ -221,7 +250,7 @@ export default class AssetController extends ExchangeControllerBase {
   filte(wallet, value, hideLittle, hideZero) {
     console.log(wallet, value, hideLittle, hideZero);
     let arr1 = this.filter(wallet, item => {
-      return (item.coinName.includes(value.toLowerCase()) ||item.fullName.includes(value.toLowerCase()));
+      return (item.coinName.includes(value.toLowerCase()) || item.fullName.includes(value.toLowerCase()));
     });
     let arr2 = this.filter(arr1, item => {
       return !hideLittle || item.valuationBTC > 0.001;
@@ -273,6 +302,4 @@ export default class AssetController extends ExchangeControllerBase {
     }
     this.view.setState({ showTwoVerify: true, verifyNum: '获取验证码' });
   }
-
 }
-
