@@ -15,9 +15,9 @@ export default class Simple extends exchangeViewBase {
     // this.getWallet = controller.getWallet.bind(controller);
     this.getPairFees = controller.getPairFees.bind(controller);
   }
-  componentWillMount() {
-    !this.state.pairFees && this.getPairFees();
-    !this.state.totalAsset && this.getAssets();
+  async componentWillMount() {
+    await this.getPairFees();
+    await this.getAssets();
     // !this.state.wallet && this.getWallet();
   }
 
@@ -27,33 +27,31 @@ export default class Simple extends exchangeViewBase {
 
   render() {
     let curPair = this.state.pairFees.filter(
-      item => item.tradePairId === this.props.tradePairId
+      item => item.id === this.props.tradePairId
     )[0];
-    let currencyArr = curPair.tradePairName.split("/");
+    let currencyArr = curPair.name.split("/");
     let avail1 = this.state.wallet.filter(
       item => item.coinName === currencyArr[0]
     )[0].availableCount;
     let avail2 = this.state.wallet.filter(
       item => item.coinName === currencyArr[1]
     )[0].availableCount;
-    return (
-      <div className="simple-asset clearfix">
+    return <div className="simple-asset clearfix">
         <p className="simple-asset-wrap">
           <span className="total">
             总资产约：¥{this.state.totalAsset.valuationCN}{" "}
           </span>
           <img src="/static/images/xianghu.svg" alt="" />
           <span className="avail1">
-            可用{currencyArr[0]}：{avail1}
+            可用{currencyArr[0].toUpperCase()}：{avail1}
           </span>
           <span className="avail2">
-            可用{currencyArr[1]}：{avail2}
+            可用{currencyArr[1].toUpperCase()}：{avail2}
           </span>
           <span>
-            手续费:Maker: {curPair.makerFee}%,Taker: {curPair.takerFee}%
+            手续费:Maker: {curPair.maker}%,Taker: {curPair.taker}%
           </span>
         </p>
-      </div>
-    );
+      </div>;
   }
 }
