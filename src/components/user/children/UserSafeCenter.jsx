@@ -63,6 +63,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
     this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
+    this.getUserCreditsNum = controller.getUserCreditsNum.bind(controller) // 获取用户积分数据
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取认证信息
     this.getLoginList = controller.getLoginList.bind(controller) // 获取登录日志
     this.getCurrentLogin = controller.getCurrentLogin.bind(controller) // 获取当前登录设备
@@ -107,19 +108,9 @@ export default class userSafeCenter extends exchangeViewBase {
       isTwoVerify: i,
       sureTwoVerify: index,
       showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
-      // showVerify: this.state.user_info.email && index === 1 ? 'block' : 'none',
       showSet: !this.state.userInfo.email && index === 1 ? true : false,
       showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
-    // verifyList[i].contentList.forEach(v => {v.flag = false})
-    // if (index === 1 && !this.state.user_info.email) {
-    //   content.flag = false
-    //   i === 0 && (verifyList[0].contentList[this.state.user_info.login_type].flag = true) //根据后台返回数据进行两步认证数据渲染
-    //   i === 1 && (verifyList[1].contentList[this.state.user_info.cash_type].flag = true)
-    //   i === 2 && (verifyList[2].contentList[this.state.user_info.fund_type].flag = true)
-    //   return
-    // }
-    // content.flag = true
   }
   selectNotice(index, type) { // 选择通知
     this.setState({
@@ -141,13 +132,9 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    // await AsyncAll([this.initData(), this.getLoginList(), this.getCurrentLogin(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
-    await AsyncAll([this.initData(), this.getLoginList(), this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
-    // await this.initData()
-    // await this.getLoginList()
-    // await this.getCurrentLogin()
+    // this.getCurrentLogin(),
+    await AsyncAll([this.initData(), this.getUserCreditsNum(), this.getLoginList(),  this.getIpList(), this.getGoogle(), this.getCaptchaVerify()])
     let verifyArr = [3, 1, 0, 2], verifyList = this.state.verifyList, noticeList = this.state.noticeList;
-    // console.log('flag', this.state.userInfo.withdrawVerify, verifyArr[this.state.userInfo.withdrawVerify], verifyList[1].contentList, verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]])
     verifyList[0].contentList[verifyArr[this.state.userInfo.loginVerify]].flag = true //根据后台返回数据进行两步认证数据渲染
     verifyList[1].contentList[verifyArr[this.state.userInfo.withdrawVerify]].flag = true
     verifyList[2].contentList[verifyArr[this.state.userInfo.fundPassVerify]].flag = true
@@ -157,6 +144,7 @@ export default class userSafeCenter extends exchangeViewBase {
     verifyList.forEach((v, i) => { // 两步验证未绑定手机时
       v.contentList[2].name = this.state.userInfo.phone ? '短信' : '绑定／验证手机号后开启'
     })
+
     noticeList[0].name = this.state.userInfo.email ? '邮件通知' : '绑定／验证邮箱后开启' // 通知设置未绑定邮箱时
     noticeList[1].name = this.state.userInfo.phone ? '短信' : '绑定／验证手机号后开启' // 通知设置未绑定手机号时
     // this.state.notifyMethod
@@ -188,7 +176,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>{this.state.userInfo.phone && this.state.userInfo.phone || '绑定手机号'}</li>
             <li>{this.intl.get("user-level")}</li>
             <li>
-              <span>VIP{this.state.userInfo.level}</span>({this.intl.get("points")}：<span>{this.state.userInfo.credits}</span>)
+              <span>VIP{this.state.userInfo.level}</span>({this.intl.get("points")}：<span>{this.state.userCreditsNum}</span>)
             </li>
           </ul>
         </div>
@@ -270,15 +258,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>{this.intl.get("action")}</th>
                   </tr>
                 </thead>
-                {/*<tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>*/}
-                  {/*{this.state.ipList.map((v, index) => (<tr key={index}>*/}
-                    {/*<td>{v.IPAddress}</td>*/}
-                    {/*<td>{v.createAt}</td>*/}
-                    {/*<td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>*/}
-                  {/*</tr>))}*/}
-                {/*</tbody>*/}
+                <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
+                  {this.state.ipList.map((v, index) => (<tr key={index}>
+                    <td>{v.IPAddress}</td>
+                    <td>{v.createAt}</td>
+                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>
+                  </tr>))}
+                </tbody>
               </table>
-              {/*<p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>*/}
+              <p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>
               <p>
                 {this.intl.get("user-ipAddRemind")}
               </p>
@@ -298,15 +286,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>{this.intl.get("user-isCurrent")}</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {this.state.currentLogin.map((v, index) => (<tr key={index}>
-                    <td>{v.time}</td>
-                    <td>{v.dev}</td>
-                    <td>{v.ip}</td>
-                    <td>{v.ip_addr}</td>
-                    <td>{`${v.key === this.state.user_info.session_key ? '是' : '否'}`}</td>
-                  </tr>))}
-                </tbody>
+                {/*<tbody>*/}
+                  {/*{this.state.currentLogin.map((v, index) => (<tr key={index}>*/}
+                    {/*<td>{v.time}</td>*/}
+                    {/*<td>{v.dev}</td>*/}
+                    {/*<td>{v.ip}</td>*/}
+                    {/*<td>{v.ip_addr}</td>*/}
+                    {/*<td>{`${v.key === this.state.user_info.session_key ? '是' : '否'}`}</td>*/}
+                  {/*</tr>))}*/}
+                {/*</tbody>*/}
               </table>
               <Button title={this.intl.get("user-out")} className="login-device-btn"/>
             </div>

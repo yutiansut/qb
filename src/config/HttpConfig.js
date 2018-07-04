@@ -24,9 +24,7 @@ export default {
   user: [ // 用户
     {name: 'getUserInfo', data: {url: '/user/', method: 'post'}, action: 'userInfo', actionBack: 'userInfoRes'}, // 获取用户信息
     {name: 'getUserAuth', data: {url: '/user/', method: 'post'}, action: 'userAuth', actionBack: 'userAuthRes'}, // 获取用户认证信息
-    {name: 'getUserCredits', data: {url: '/user/', method: 'post'}, action: 'getUserCredits', actionBack: 'getUserCreditsRes'}, // 获取用户积分
-
-    //{name: 'uploadUserImg', data: {url: '/image/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true }, // 上传用户认证图片
+    {name: 'getUserCreditsNum', data: {url: '/user/', method: 'post'}, action: 'getUserCredits', actionBack: 'getUserCreditsRes'}, // 获取用户积分
     {name: 'uploadUserAuth', data: {url: '/user/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes' }, // 上传用户认证信息
     {name: 'getLoginPwd', data: {url: '/user/', method: 'post'}, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes' }, // 设置登录密码
     {name: 'getVerifyCode', data: {url: '/user/', method: 'post'}, action: 'getCode', actionBack: 'getCodeRes' }, // 获取验证码

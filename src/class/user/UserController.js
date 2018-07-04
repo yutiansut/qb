@@ -79,7 +79,12 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({ipList})
   }
 
-  async getUserCredits() { // 获取用户积分信息
+  async getUserCreditsNum() { // 获取用户积分信息
+    let userCreditsNum = await this.store.userCreditsNum();
+    this.view.setState({userCreditsNum})
+  }
+
+  async getUserCredits() { // 获取用户积分信息列表
     let userCredits = await this.store.userCredits();
     this.view.setState({userCredits})
   }
@@ -171,6 +176,14 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
+    let twoVerifyArr = ['loginVerify', 'withdrawVerify', 'fundPassVerify'], changeVerifyArr = [3, 1, 0, 2];
+    let twoVerifyState = twoVerifyArr[position-1]
+    let twoVerifyUser = {}
+    twoVerifyUser[twoVerifyState] = verifyType
+    let userInfo = Object.assign(this.view.state.userInfo, twoVerifyUser)
+    let verifyList = this.view.state.verifyList
+    verifyList[position-1].contentList.forEach(v=>v.flag=false)
+    verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
     let result = await this.store.Proxy.setTwoVerify({
       "userId": this.store.state.userId,
       account,
@@ -182,7 +195,14 @@ export default class UserController extends ExchangeControllerBase {
       position,//修改的位置 1登陆   2提现   3资金密码
       verifyType//2谷歌验证 1邮件  3短信  0无
     })
-    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
+    this.view.setState({
+      remindPopup: true,
+      popType: result.errCode ? 'tip3': 'tip1',
+      popMsg: result.errCode ? result.msg : '修改成功',
+      userInfo,
+      showChange: result.errCode ? true : false,
+      verifyList
+    })
     console.log('修改两步认证', result)
   }
 
@@ -274,7 +294,7 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.Proxy.getVerifyCode({
       account, // 手机号或者邮箱
       mode,//0 phone 1 email
-      type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币
+      type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
       "os": 3// 1 android 2 iOS 3 browser
     })
     console.log('发送验证码', result, account, mode, type )

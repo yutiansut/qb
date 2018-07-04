@@ -17,7 +17,7 @@ export default class userIntegration extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.initData = controller.initData.bind(controller) // 获取用户信息
-    this.getUserCredits = controller.getUserCredits.bind(controller) // 获取用户积分
+    this.getUserCredits = controller.getUserCredits.bind(controller) // 获取用户积分列表
   }
 
   componentWillMount() {

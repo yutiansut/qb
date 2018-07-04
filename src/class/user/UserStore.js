@@ -11,7 +11,7 @@ export default class UserStore extends ExchangeStoreBase {
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
-      userCredits: {}, // 用户积分
+      userCreditsNum: "", // 用户积分
       loginList: [], // 登录日志
       userCredits: [], // 用户积分列表
       currentLogin: [], // 当前登录设备
@@ -53,19 +53,21 @@ export default class UserStore extends ExchangeStoreBase {
     return userAuth
   }
 
-  //
-  // async userCredits() { // 获取用户积分
-  //   let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.state.userId});
-  //   let userCredits = userCreditsCon.credits;
-  //   this.state.userCredits = userCredits;
-  //   return userCredits
-  // }
+
+  async userCreditsNum() { // 获取用户积分
+    let userCreditsCon = await this.Proxy.getUserCreditsNum({"userId": this.state.userId});
+    let userCreditsNum = userCreditsCon.credits;
+    this.state.userCreditsNum = userCreditsNum;
+    return userCreditsNum
+  }
 
   async currentLogin() { // 获取当前登录设备列表
-    let currentLogin = await this.Proxy.getCurrentLogin({"userId": this.state.userId});
-    if(currentLogin.errCode)
-      currentLogin = []
-    this.state.currentLogin = currentLogin;
+    let currentLoginCon = await this.Proxy.getCurrentLogin({"userId": this.state.userId});
+    let currentLogin = currentLoginCon ? currentLoginCon.list : []
+    // if(currentLogin.errCode)
+    //   currentLogin = []
+    console.log('当前登录', currentLoginCon)
+    this.state.currentLogin = currentLogin
     return currentLogin
   }
 

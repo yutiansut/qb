@@ -117,6 +117,8 @@ export default class extends exchangeViewBase {
               {/*<HistoryOrder controller={HistoryOrderController}/>*/}
             </div>
           </div>
+
+
         </div>
     )
   }

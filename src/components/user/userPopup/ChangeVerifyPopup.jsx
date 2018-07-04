@@ -49,8 +49,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
         <div className="change-info">
           <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.props.isType !== 0 && contentList[contentArr[this.props.isType]].title}</h1>
-          <Input placeholder="请输入谷歌验证码" className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
-          <div className={`${this.props.isType === 3 ? '' : 'hide'} clearfix picture-div`}>
+          <div className="clearfix picture-div">
             <Input placeholder="请输图形验证码" value={this.state.popupInput2} onInput={value => this.changeInput2(value)}/>
             <p><img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/></p>
           </div>
@@ -58,8 +57,9 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
             <Input placeholder={this.props.isType !== 0 && contentList[contentArr[this.props.isType]].inputP || ''} value={this.state.popupInput3} onInput={value => this.changeInput3(value)}/>
             <Button className="verify-btn"
                     title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && '重新获取' || `${this.props.verifyNum}s`) || this.props.verifyNum}
-                    onClick={()=>{this.props.getVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : ''), this.props.isType === 3 ? 0 : (this.props.isType === 1 ? 1 : ''), 7)}}/>
+                    onClick={()=>{this.props.getVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : ''), this.props.isType === 3 ? 0 : (this.props.isType === 1 ? 1 : ''), 9)}}/>
           </div>
+          <Input placeholder="请输入谷歌验证码" className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
           <Button className="set-btn" title="确认" onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
                                                                 this.props.isType === 3 ? 0 : this.props.isType,
                                                                 this.state.popupInput3,
