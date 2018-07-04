@@ -3,7 +3,7 @@ import {ChartManager} from './chart_manager'
 import {ChartSettings} from './chart_settings'
 import {DefaultTemplate, Template} from './templates'
 import {MEvent} from './mevent'
-import $ from 'jquery'
+import $ from "../lib/jquery.min"
 
 export class Control {
 

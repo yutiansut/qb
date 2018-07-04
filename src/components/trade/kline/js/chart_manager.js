@@ -11,9 +11,9 @@ import * as plotters from './plotters'
 import * as ctools from './ctools'
 import * as areas from './areas'
 import {Util} from './util'
-import $ from 'jquery'
-let a=require('jquery-mousewheel');
-console.log(a);
+import $ from "../lib/jquery.min"
+import mousewheel from '../lib/jquery.mousewheel';
+mousewheel($);
 
 export class ChartManager {
     constructor() {

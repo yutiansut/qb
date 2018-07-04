@@ -1,3 +1,7 @@
+/*
+ * Dom 模拟jquery常用的操作
+ * 用于替换jquery
+ */
 class Dom{
 
     constructor(el){
