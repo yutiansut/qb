@@ -94,6 +94,12 @@ export default {
   deal:[
     //交易接口
     {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
+  ],
+  activity:[
+    // H5活动页，获取qbt活动余量
+    { name: 'getQbtMargin', data: { url: '/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes'},
+    //H5活动页，领取qbt奖励
+    { name: 'getAward', data: { url: '/common/', method: 'post' }, action: 'getAward', actionBack: 'getAwardRes'}
   ]
   // market:[
   //

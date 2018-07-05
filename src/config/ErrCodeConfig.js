@@ -34,7 +34,7 @@ export default {
   },
   601: {
     msg: "密码错误",
-    errCode: "PWD_ERROR",
+    errCode: "PWD_ERROR"
   },
   602: {
     msg: "数据库错误",
@@ -131,6 +131,10 @@ export default {
   2002: {
     msg: "谷歌验证未开启",
     errCode: "CODE_NOT_EXPIRE"
+  },
+  2600: {
+    msg: "你已领取过改活动的奖励",
+    errCode: "AWARD_DRAWED"
   }
 };
 

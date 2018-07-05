@@ -78,11 +78,17 @@ const Activity = ({match}) => {
 }
 
 const header = ({match}) => {
-  return <Header navClass={"headerNav"} userController={userController} configController={configController} match={match}/>;
+  return <div>
+      <Header navClass={"headerNav"} userController={userController} configController={configController} match={match} />
+      <div style={{ height: ".5rem" }} />
+    </div>;
 }
 
 const tradeHeader = ({match}) => {
-  return <Header navClass={'tradeNav'} match={match} userController={userController} configController={configController}/>;
+  return <div>
+      <Header navClass={"tradeNav"} match={match} userController={userController} configController={configController} />
+      <div style={{ height: ".5rem" }} />
+    </div>;
 }
 
 const HomeComponent = () => {
@@ -146,9 +152,9 @@ export default class App extends Component {
             {/*<Header/>*/}
             <Switch>
               <Route path="/trade" component={tradeHeader} />
+              <Route path="/genrealize" component={()=><div/>} />
               <Route component={header} />
             </Switch>
-            <div style={{ height: ".5rem" }} />
             <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
               <Switch>
                 {/*<Route exact path="/" component={HomeComponent}/>*/}
@@ -169,6 +175,7 @@ export default class App extends Component {
             {/*<Footer/>*/}
             <Switch>
               <Route path="/trade" component={tradeFooter} />
+              <Route path="/genrealize" component={()=><div/>} />
               <Route component={Footer} />
             </Switch>
           </div>}

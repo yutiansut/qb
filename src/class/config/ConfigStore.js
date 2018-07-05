@@ -8,7 +8,7 @@ const EXCHANGE_CONTACT_EMAIL = 'support@coinrising.com';
 const EXCHANGE_ADDR = 'Kemp House 152 -160 City Road, London';
 const EXCHANGE_SERVICE_PHONE = '010-53348151'
 const EXCHANGE_SERVICE_QQ = '3310267657';
-const EXCHANGE_COIN = 'CRT';
+const EXCHANGE_COIN = 'QBT';
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {

@@ -26,4 +26,5 @@ export default {
   verifyCountDown: {},
   swiper: {},
   carousel: {},
+  activityH5:{}
 }

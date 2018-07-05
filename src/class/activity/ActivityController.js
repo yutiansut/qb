@@ -2,8 +2,8 @@ import ExchangeControllerBase from '../ExchangeControllerBase'
 import ActivityStore from './ActivityStore'
 
 export default class ActivityController extends ExchangeControllerBase {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super('activity')
     this.store = new ActivityStore()
   }
 
@@ -14,7 +14,48 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   get configData() {
-    console.log('活动ccconfig', this.configController)
     return this.configController.initState
+  }
+  // 轮询qbt余量
+  getQbtMargin(){
+    this.Loop['activityH5'].clear()
+    this.Loop["activityH5"].set(async () => {
+      let result = await this.store.getQbtMargin();
+      if(result.margin!==undefined){
+        this.view.setState({ margin: result.margin})
+      }
+    }, 7000);
+    this.Loop["activityH5"].start();
+  }
+  // 清除轮询qbt任务
+  clearGetQbtMargin(){
+    this.Loop["activityH5"].clear();
+  }
+
+
+  async getAward({uid,account}){
+    //验证手机号是否合法
+    let p1 = /^[1][3,4,5,7,8][0-9]{9}$/,
+    //验证邮箱号是否合法
+    p2 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+    if (!p1.test(account) && !p2.test(account)){
+      alert("请输入正确的手机号或邮箱");
+      return;
+    }
+
+    let result = await this.store.getAward({uid,account});
+    //领取成功，
+    if(result === null) {
+      this.view.setState({
+        showVagueBgView: true,
+        showSuccess: true
+      })
+      return;
+    }
+    // 已领取过
+    if(result && result.errCode === 'AWARD_DRAWED') {
+      this.view.setState({ showVagueBgView: true, showFail: true });
+      return;
+    }
   }
 }
