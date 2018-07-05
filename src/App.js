@@ -81,7 +81,7 @@ const header = ({match}) => {
 }
 
 const tradeHeader = ({match}) => {
-  return <Header navClass={'tradeNav'} match={match} configController={configController}/>;
+  return <Header navClass={'tradeNav'} match={match} userController={userController} configController={configController}/>;
 }
 
 const HomeComponent = () => {

@@ -77,7 +77,8 @@ export default class Header extends ExchangeViewBase {
 
 
   render() {
-    console.log('token', this.userToken)
+    console.log('token', this.props.userController.userToken)
+    console.log('id', this.props.userController.userId)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
@@ -90,7 +91,7 @@ export default class Header extends ExchangeViewBase {
             <Link to='/home'></Link>
           </li>
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
-            console.log(match)
+            // console.log(match)
             return <li className={`header-nav${match ? '-active' : ''} ${v.tokenShow ? 'hide' : ''} ${v.select ? 'select-list' : ''}`} >
                     <Link to={v.to}>{v.label}</Link>
                       {v.select && (

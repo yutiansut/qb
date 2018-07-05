@@ -56,8 +56,8 @@ export default class UserController extends ExchangeControllerBase {
   // 接口调用部分
   async initData() { // 获取用户信息
     let userInfo = await this.store.userInfo();
-    let obj = this.checkNum(userInfo.credits)
-    this.view.setState({userInfo: userInfo, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
+    // let obj = this.checkNum(userInfo.credits)
+    this.view.setState({userInfo})
   }
 
   async getUserAuthData() { // 获取用户认证信息
@@ -83,7 +83,8 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserCreditsNum() { // 获取用户积分信息
     let userCreditsNum = await this.store.userCreditsNum();
-    this.view.setState({userCreditsNum})
+    let obj = this.checkNum(userCreditsNum)
+    this.view.setState({userCreditsNum, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
   }
 
   async getUserCredits() { // 获取用户积分信息列表
@@ -125,7 +126,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
     let result = await this.store.Proxy.bindUser({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       account,// 手机号或邮箱
       mode,// 0:phone 1:email
       code,
@@ -139,7 +140,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async setLoginPass(oldPwd, newPwd, type) { // 设置登录密码
     let result = await this.store.Proxy.getLoginPwd({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       oldPwd,
       newPwd,
       type,// 0:设置密码 （不用传old_pass） 1:修改密码
@@ -155,7 +156,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async setFundPass(account, mode, pass, captchaCode, captchaId, code) { // 设置资金密码
     let result = await this.store.Proxy.setFundPwd({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       account,
       mode, // 0:phone 1:email
       pass,
@@ -169,7 +170,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
     let result = await this.store.Proxy.setFundPwd({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       account,
       mode, // 0:phone 1:email 2:google
       oldPass,
@@ -192,7 +193,7 @@ export default class UserController extends ExchangeControllerBase {
     verifyList[position-1].contentList.forEach(v=>v.flag=false)
     verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
     let result = await this.store.Proxy.setTwoVerify({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       account,
       mode, //0手机 1邮箱 2Google
       code, //验证码
@@ -216,7 +217,7 @@ export default class UserController extends ExchangeControllerBase {
   async addIp(ipAdd) { // 添加ip白名单
     if (this.view.state.ipValue === '') return
     let result = await this.store.Proxy.addIp({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       "IPAddress":ipAdd
     })
     !result && this.view.setState({remindPopup: true})
@@ -225,7 +226,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async delIp(ipId, iPAdd) { // 删除ip白名单
     let result = await this.store.Proxy.deletIp({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       "IPId": ipId,
       "IPAddress": iPAdd
     })
@@ -240,7 +241,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async setGoogleVerify(code) { // 验证谷歌验证码
     let result = await this.store.Proxy.setGoogleVerify({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       code
     })
     this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
@@ -272,20 +273,27 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   get userToken() { // 提供用户token
-    return this.store.state.token
+    // this.Storage.userToken.set(this.store.state.token)
+    // let storage = this.Storage.userToken.get().length === 0 ? '' : this.Storage.userToken.get()
+    // let userToken = storage ? this.Storage.userToken.get() : this.store.state.token
+    // return userToken
+    return this.store.token
   }
 
   get userId() { // 提供用户id
-    return this.store.state.userId
+    return this.store.uid
   }
 
   get userName() { // 提供用户姓名
-    return this.store.state.userName
+    // this.Storage.userName.set(this.store.state.userName)
+    // let storage = this.Storage.userName.get().length === 0 ? '' : this.Storage.userName.get()
+    // let userName = storage ? storage : this.store.state.userName
+    return this.store.name
   }
 
   async setFundPwdInterval(type, pwd) { // 设置资金密码输入间隔
     let result = await this.store.Proxy.setFundPwdSuspend({
-      "userId": this.store.state.userId,
+      "userId": this.store.uid,
       "interval": type, // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "fundPass": pwd
     })
@@ -293,9 +301,9 @@ export default class UserController extends ExchangeControllerBase {
     return result
   }
 
-  async getFundPwdInterval(userId) { // 查看资金密码输入间隔
-    let result = await this.store.Proxy.setFundPwdSuspend({
-      "userId": userId
+  async getFundPwdInterval() { // 查看资金密码输入间隔
+    let result = await this.store.Proxy.getFundPwdSuspend({
+      "userId": this.store.uid
     })
     console.log('查看资金密码', result)
     return result

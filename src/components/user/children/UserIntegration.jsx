@@ -42,7 +42,7 @@ export default class userIntegration extends exchangeViewBase {
           <h2>{this.intl.get("user-scoreInfo")}</h2>
           <div className="fl">
             <h3>
-              <b>{this.intl.get("user-scoreLevel")}：VIP{this.state.userInfo.level}（{this.intl.get("points")}：{this.state.userInfo.credits}）</b>
+              <b>{this.intl.get("user-scoreLevel")}：VIP{this.state.userInfo.level}（{this.intl.get("points")}：{this.state.userCreditsNum}）</b>
               <Link to="/help/pricing">{this.intl.get("user-scoreDetail")}</Link>
             </h3>
             <ul className="clearfix">
@@ -70,8 +70,8 @@ export default class userIntegration extends exchangeViewBase {
               <li>MVP</li>
             </ul>
             <div className="progress-line">
-              <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userInfo.credits} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userInfo.credits}</span>
-              <p style={{width: `this.state.userInfo.credits ? 0 : calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userInfo.credits} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
+              <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userCreditsNum}</span>
+              <p style={{width: `this.state.userCreditsNum ? 0 : calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
             </div>
           </div>
         </div>

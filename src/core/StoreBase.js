@@ -9,6 +9,7 @@ import AsyncAll from './libs/AsyncAll'
 import Sleep from './libs/Sleep'
 import Loop from './loop' //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
+import Storage from "./storage/index"
 
 
 export default class StoreBase {
@@ -23,6 +24,7 @@ export default class StoreBase {
     this.Loop = Loop;
     this.GlobalUtil = GlobalUtil;
     this.WebSocket = WebSocket;
+    this.Storage = Storage
   }
 
 

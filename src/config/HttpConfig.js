@@ -39,7 +39,7 @@ export default {
     {name: 'addIp', data: {url: '/user/', method: 'post'}, action: 'insertIP', actionBack: 'insertIPRes'}, // 添加ip白名单
     {name: 'deletIp', data: {url: '/user/', method: 'post'}, action: 'deleteIP', actionBack: 'deleteIPRes'}, // 删除ip白名单
     {name: 'setFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes'}, // 设置资金密码输入间隔
-    {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getSecretInterval', actionBack: 'getSecretIntervalRes'}, // 查看资金密码输入间隔
+    {name: 'getFundPwdSuspend', data: {url: '/user/', method: 'post'}, action: 'getFundPassSuspend', actionBack: 'getFundPassSuspendRes'}, // 查看资金密码输入间隔
     {name: 'getCaptcha', data: {url: '/user/', method: 'post'}, action: 'getCaptcha', actionBack: 'getCaptchaRes'}, // 获取图形验证码
     {name: 'setTwoVerify', data: {url: '/user/', method: 'post'}, action: 'setVerifyType', actionBack: 'setVerifyTypeRes'}, // 修改两步认证
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes'}, // 验证谷歌验证码

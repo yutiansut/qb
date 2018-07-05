@@ -14,7 +14,7 @@
 import StorageApi from '../libs/Storage' //引入storage
 
 const STORAGE = {
-  install(app, storageList) {
+  install(storageList) {
     storageList.forEach(v => {
       if (v.useDefault) {
         let defaultValue = StorageApi.getStorage(v.name) || v.default;

@@ -3,6 +3,7 @@ import AsyncAll from './libs/AsyncAll' //同步多个异步请求
 import Sleep from './libs/Sleep' //同步多个异步请求
 import Loop from './loop' //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
+import Storage from "./storage/index"
 
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),
@@ -19,6 +20,7 @@ export default class ControllerBase {
     this.Sleep = Sleep;
     this.Loop = Loop;
     this.Util = GlobalUtil;
+    this.Storage = Storage
   }
 
   setView(view) {

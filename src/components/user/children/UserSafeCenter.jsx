@@ -261,15 +261,15 @@ export default class userSafeCenter extends exchangeViewBase {
                     <th>{this.intl.get("action")}</th>
                   </tr>
                 </thead>
-                <tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>
-                  {this.state.ipList.map((v, index) => (<tr key={index}>
-                    <td>{v.IPAddress}</td>
-                    <td>{v.createAt}</td>
-                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>
-                  </tr>))}
-                </tbody>
+                {/*<tbody className={`${this.state.ipList.length ? '' : 'hide'}`}>*/}
+                  {/*{this.state.ipList.map((v, index) => (<tr key={index}>*/}
+                    {/*<td>{v.IPAddress}</td>*/}
+                    {/*<td>{v.createAt}</td>*/}
+                    {/*<td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>*/}
+                  {/*</tr>))}*/}
+                {/*</tbody>*/}
               </table>
-              <p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>
+              {/*<p className={`${this.state.ipList.length ? 'hide' : ''} nothing-text`}>暂无</p>*/}
               <p>
                 {this.intl.get("user-ipAddRemind")}
               </p>
