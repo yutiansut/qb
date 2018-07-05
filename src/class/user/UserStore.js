@@ -45,23 +45,22 @@ export default class UserStore extends ExchangeStoreBase {
   // 提供基础数据
   get uid(){ // 提供用户id
     this.Storage.userId.set(this.state.userId)
-    console.log(2222, this.state.userId)
-    let storage = this.Storage.userId.get().length === 0 ? '' : this.Storage.userId.get()
-    let userId = storage ? storage : this.store.userId
+    let storage = this.Storage.userId.get().length === 0 ? '' : this.Storage.userId.get(),
+        userId = storage ? storage : this.state.userId;
     return userId
   }
 
   get token() { // 提供用户token
     this.Storage.userToken.set(this.state.token)
-    let storage = this.Storage.userToken.get().length === 0 ? '' : this.Storage.userToken.get()
-    let userToken = storage ? this.Storage.userToken.get() : this.state.token
+    let storage = this.Storage.userToken.get().length === 0 ? '' : this.Storage.userToken.get(),
+        userToken = storage ? this.Storage.userToken.get() : this.state.token;
     return userToken
   }
 
   get name() { // 提供用户姓名
     this.Storage.userName.set(this.state.userName)
-    let storage = this.Storage.userName.get().length === 0 ? '' : this.Storage.userName.get()
-    let userName = storage ? storage : this.state.userName
+    let storage = this.Storage.userName.get().length === 0 ? '' : this.Storage.userName.get(),
+        userName = storage ? storage : this.state.userName;
     return userName
   }
 
