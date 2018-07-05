@@ -49,7 +49,7 @@ const Trade = ({match}) => {
 };
 
 const User = ({match}) => {
-  return <UserInfo controller={userController} match={match}/>
+  return <UserInfo controller={userController} match={match} history={history}/>
 };
 
 const Loign = ({match, history}) => {
@@ -77,7 +77,7 @@ const Activity = ({match}) => {
 }
 
 const header = ({match}) => {
-  return <Header navClass={"headerNav"} configController={configController} match={match}/>;
+  return <Header navClass={"headerNav"} userController={userController} configController={configController} match={match}/>;
 }
 
 const tradeHeader = ({match}) => {
@@ -148,8 +148,8 @@ export default class App extends Component {
           <div style={{height: '.5rem'}}></div>
           <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
             <Switch>
-              <Route exact path="/" component={HomeComponent}/>
-              <Route path="/home" component={HomeComponent}/>
+              {/*<Route exact path="/" component={HomeComponent}/>*/}
+              <Route exact path="/home" component={HomeComponent}/>
               <Route path='/trade' component={Trade}/>
               <Route path="/login" component={Loign}/>
               <Route path="/wallet" component={Asset}/>
@@ -159,7 +159,7 @@ export default class App extends Component {
               <Route path="/notice" component={Notice}/>
               <Route path="/help" component={Help}/>
               <Route path="/activity" component={Activity}/>
-              <Redirect to="/"/>
+              <Redirect to="/home"/>
             </Switch>
           </div>
           {/*<Footer/>*/}

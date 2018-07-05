@@ -10,8 +10,9 @@ export default class LoginStore extends ExchangeStoreBase {
       console.log('joinRoom getWebSocketData', data, this.controller)
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
-      this.controller.userLoginInfo(data.data)
       console.log('ccc1', data.data)
+      this.controller.userLoginInfo(data.data)
+
       // if (data.ret === 0) {
       //   window.location.href = '/'
       // } else {

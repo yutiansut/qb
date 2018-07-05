@@ -47,8 +47,10 @@ export default class UserController extends ExchangeControllerBase {
   }
   // 从登录接口获取信息
   getUserId(data) {
-    this.store.userLogin(data)
     console.log('ccc3', data)
+    this.store.userLogin(data)
+    console.log('this.view',this.view)
+    // this.view.history.goBack()
   }
 
   // 接口调用部分
@@ -142,7 +144,12 @@ export default class UserController extends ExchangeControllerBase {
       newPwd,
       type,// 0:设置密码 （不用传old_pass） 1:修改密码
     })
-    this.view.setState({remindPopup: true, popType: result && result.errCode ? 'tip3': 'tip1', popMsg: result && result.msg ? result.msg : "设置成功"})
+    this.view.setState({
+      remindPopup: true,
+      popType: result && result.errCode ? 'tip3': 'tip1',
+      popMsg: result && result.msg ? result.msg : "设置成功",
+      showSet: result && result.errCode ? true : false
+    })
     console.log('设置密码', result)
   }
 

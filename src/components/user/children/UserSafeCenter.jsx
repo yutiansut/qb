@@ -55,6 +55,8 @@ export default class userSafeCenter extends exchangeViewBase {
     const {controller} = props
     //绑定view
     controller.setView(this)
+    // console.log('props', props)
+    // this.history = props.history
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码

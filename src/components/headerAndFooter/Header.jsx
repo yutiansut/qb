@@ -31,13 +31,14 @@ export default class Header extends ExchangeViewBase {
       navClass: 'headerNav',
       languageIndex: 0,
       navArrayLeft : [
-        {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false},
-        {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false},
+        {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false, tokenShow: false},
+        {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false, tokenShow: false},
         {
           label: `${this.intl.get('header-assets')}`,
           to: '/wallet',
           select: true,
           linkUser: true,
+          tokenShow: true,
           childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/order',}]
         },
         // {label: '用户', to: '/user', select: false, linkUser: false},
@@ -48,6 +49,7 @@ export default class Header extends ExchangeViewBase {
       ]
     }
     this.configController = this.props.configController;
+    //
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.matched = '/home'
   }
@@ -55,9 +57,22 @@ export default class Header extends ExchangeViewBase {
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })
+    this.state.navArrayLeft.forEach(v => {
+      this.userToken && (v.tokenShow = false)
+    })
+  }
+
+  componentWillUpdate(...parmas) {
+    console.log('aaaaa')
+
   }
 
   render() {
+    console.log('token', this.userToken)
+    let userToken = this.props.userController.userToken || null
+    this.state.navArrayLeft.forEach(v => {
+      userToken && (v.tokenShow = false)
+    })
     return (
       <div className={`${this.props.navClass} clearfix`}>
         <ul className="clearfix">
@@ -65,22 +80,24 @@ export default class Header extends ExchangeViewBase {
             <Link to='/home'></Link>
           </li>
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
-            return <li className={`header-nav${match ? '-active' : ''} ${v.select ? 'select-list' : ''}`}>
-          <Link to={v.to}>{v.label}</Link>
-          {v.select && (
-            <ul className='select-router'>
-              {v.childrenList.map((v, index) => {
-                return (
-                  <li key={index}>
-                    <NavLink activeClassName="children-active" to={v.to}>{v.label}</NavLink>
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-          </li>
-          }
-          }/>))}
+            console.log(match)
+            return <li className={`header-nav${match ? '-active' : ''} ${v.tokenShow ? 'hide' : ''} ${v.select ? 'select-list' : ''}`} >
+                    <Link to={v.to}>{v.label}</Link>
+                      {v.select && (
+                        <ul className='select-router'>
+                          {v.childrenList.map((v, index) => {
+                            return (
+                              <li key={index}>
+                                <NavLink activeClassName="children-active" to={v.to}>{v.label}</NavLink>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      )}
+                    </li>
+                  }
+                }/>)
+              )}
         </ul>
         <ol className="clearfix">
           <li className="new-li">
@@ -93,10 +110,10 @@ export default class Header extends ExchangeViewBase {
               <a href="javascript:void(0)">查看全部</a>
             </div>
           </li>
-          <li className="login-li">
+          <li className={`${userToken ? 'hide' : 'login-li'}`}>
             <NavLink activeClassName="header-right-active" to="/login">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
           </li>
-          <li className="user-li">
+          <li className={`${userToken ? 'user-li' : 'hide'}`} >
             <p>12345678987</p>
             <ul className="login-ul">
               <li>

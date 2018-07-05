@@ -32,7 +32,7 @@ export default class User extends exchangeViewBase {
         <div className="user-content fl">
           <Switch>
             <Route path={`${match.url}/safe`} component={({match}) => (
-              <UserSafeCenter controller={controller} />
+              <UserSafeCenter controller={controller} history={this.props.history}/>
               )}/>
             <Route path={`${match.url}/identity`} component={({match}) => (
               <UserIdentity controller={controller} />
