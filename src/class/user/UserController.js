@@ -279,6 +279,10 @@ export default class UserController extends ExchangeControllerBase {
     return this.store.state.userId
   }
 
+  get userName() { // 提供用户姓名
+    return this.store.state.userName
+  }
+
   async setFundPwdInterval(type, pwd) { // 设置资金密码输入间隔
     let result = await this.store.Proxy.setFundPwdSuspend({
       "userId": this.store.state.userId,

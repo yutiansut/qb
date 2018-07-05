@@ -79,6 +79,7 @@ export default class Header extends ExchangeViewBase {
   render() {
     console.log('token', this.userToken)
     let userToken = this.props.userController.userToken || null
+    let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
       userToken && (v.tokenShow = false)
     })
@@ -123,7 +124,7 @@ export default class Header extends ExchangeViewBase {
             <NavLink activeClassName="header-right-active" to="/login">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
           </li>
           <li className={`${userToken ? 'user-li' : 'hide'}`} >
-            <p>12345678987</p>
+            <p>{userName}</p>
             <ul className="login-ul">
               <li>
                 <NavLink to="/user/safe">{`${this.intl.get('header-security')}`}</NavLink>

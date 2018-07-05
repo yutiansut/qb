@@ -9,6 +9,7 @@ export default class UserStore extends ExchangeStoreBase {
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0',
       userId: "",
       token: "",
+      userName: "",
       verifyNum: '获取验证码',
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -37,6 +38,7 @@ export default class UserStore extends ExchangeStoreBase {
     console.log('ccc4', data)
     this.state.userId = data.uid
     this.state.token = data.token
+    this.state.userName = data.userName
     console.log('loginUser', this.state.userId, this.state.token)
   }
 
