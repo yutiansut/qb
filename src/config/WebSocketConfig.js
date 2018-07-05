@@ -29,9 +29,12 @@ export default {
           userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
         },
         login: {login: {var: 1, op: 10, seq: 0, resOp: 11}}, //登录
+        asset: {
+          userAssetUpdate: { var: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
+        }
       }
     },
-  
+
   ],
 }
 

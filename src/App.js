@@ -121,13 +121,12 @@ export default class App extends Component {
     noticeController.configController = configController;
 
     activityController.configController = configController;
-
     noticeController.userController = userController;
 
     assetController.configController = configController;
     assetController.userController = userController;
     assetController.marketController = marketController;
-
+    marketController.assetController = assetController;
     loginController.userController = userController;
 
     userOrderController.marketController = marketController;
@@ -184,7 +183,7 @@ export default class App extends Component {
             </div>
             {/*<Footer/>*/}
             <Switch>
-              <Route path="/trade" component={tradeFooter} />
+              <Route path="/trade" component={()=><div/>} />
               <Route path="/genrealize" component={()=><div/>} />
               <Route component={Footer} />
             </Switch>

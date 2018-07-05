@@ -21,37 +21,40 @@ export default class Simple extends exchangeViewBase {
     // !this.state.wallet && this.getWallet();
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUpdate() { }
+  componentWillUpdate() {}
 
   render() {
+    // console.log(this.state.pairFees);
     let curPair = this.state.pairFees.filter(
       item => item.id === this.props.tradePairId
     )[0];
-    let currencyArr = curPair.name.split("/");
+    let currencyArr = curPair && curPair.name.split("/");
     let avail1 = this.state.wallet.filter(
       item => item.coinName === currencyArr[0]
-    )[0].availableCount;
+    )[0];
     let avail2 = this.state.wallet.filter(
       item => item.coinName === currencyArr[1]
-    )[0].availableCount;
+    )[0];
     return <div className="simple-asset clearfix">
-      <p className="simple-asset-wrap">
-        <span className="total">
-          {this.intl.get('asset-totalAssets')}：¥{this.state.totalAsset.valuationCN}{" "}
-        </span>
-        <img src="/static/images/xianghu.svg" alt="" />
-        <span className="avail1">
-          {this.intl.get('deal-use')}{currencyArr[0].toUpperCase()}：{avail1}
-        </span>
-        <span className="avail2">
-          {this.intl.get('deal-use')}{currencyArr[1].toUpperCase()}：{avail2}
-        </span>
-        <span>
-          {this.intl.get('fee')}:Maker: {curPair.maker}%,Taker: {curPair.taker}%
+        <p className="simple-asset-wrap">
+          <span className="total">
+          {this.intl.get("asset-totalAssets")}：¥{this.state.totalAsset.valuationCN.format({ number: "property" })}{" "}
           </span>
-      </p>
-    </div>;
+          <img src="/static/images/xianghu.svg" alt="" />
+          <span className="avail1">
+            {this.intl.get("deal-use")}
+          {currencyArr && currencyArr[0].toUpperCase()}：{avail1 && avail1.availableCount.format({ number: "property" })}
+          </span>
+          <span className="avail2">
+            {this.intl.get("deal-use")}
+          {currencyArr && currencyArr[1].toUpperCase()}：{avail2 && avail2.availableCount.format({ number: "property" })}
+          </span>
+          <span>
+          {this.intl.get("fee")}:Maker: {curPair && curPair.maker}%,Taker: {curPair && curPair.taker}%
+          </span>
+        </p>
+      </div>;
   }
 }

@@ -2,7 +2,7 @@ import ExchangeStoreBase from "../ExchangeStoreBase";
 
 export default class AssetStore extends ExchangeStoreBase {
   constructor() {
-    super("asset");
+    super("asset", 'general');
     this.state = {
       // 交易对手续费
       pairFees: [
@@ -54,17 +54,23 @@ export default class AssetStore extends ExchangeStoreBase {
         orderList: []
       }
     };
+    this.WebSocket.general.on("userAssetUpdate", data => {
+      console.log("getWebSocketData-userAssetUpdate", data, this.controller);
+      // this.controller.userAssetUpdate(data.data)
+      // this.recommendData = data.data
+    });
   }
   setController(ctrl) {
     this.controller = ctrl;
   }
   // 获取交易对手续费
   async getFee() {
-    this.state.pairFees = await this.Proxy.getFee({
+    let result = await this.Proxy.getFee({
       userId: this.controller.userId,
       token: this.controller.token
     });
-    console.log(this.state.pairFees);
+    this.state.pairFees = result;
+    return result;
   }
 
   // 获取总资产

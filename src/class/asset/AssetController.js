@@ -19,7 +19,6 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair(coin) {
     let result = await this.marketController.getTradePairHandle();
-    console.log(result);
     this.view.setState({
       tradePair: result
     });
@@ -71,7 +70,10 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取交易对手续费
   async getPairFees() {
-    !this.store.state.pairFees.length && (await this.store.getFee());
+    let result;
+    if(!this.store.state.pairFees.length){
+      result = await this.store.getFee();
+    }
     this.view.setState({ pairFees: this.store.state.pairFees });
   }
   // 获取所有币种
