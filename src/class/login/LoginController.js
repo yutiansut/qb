@@ -36,10 +36,14 @@ export default class LoginController extends ExchangeControllerBase {
 
   userLoginInfo(data) {
     console.log('ccc2', data, this.view.history)
-    this.userController.getUserId(data)
-    console.log('this.view.history.goBack()', this.userController.store.state.token);
+    this.userController.getUserId(data.data)
+    // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
-    this.view.history.goBack()
+    if (data.ret === 0) {
+      this.view.history.goBack()
+      return
+    }
+    this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
   }
 
   async initLoginVerification() { // 获取手势验证
