@@ -2,109 +2,9 @@ import ExchangeStoreBase from "../ExchangeStoreBase";
 
 export default class MarketStore extends ExchangeStoreBase {
   constructor(name) {
-  super('market', 'general');
+    super('market', 'general');
     this.state = {
-      allPairData: [
-        {
-          market_name: "BTC",
-          market_data: [
-            {
-              tradePairId: 3,
-              rise: -0.22,
-              price: 1023.22,
-              priceCN: 1023.22,
-              priceEN: 1023.22,
-              volume: 123444.34,
-              coin_name: "ETH",
-              market_name: "BTC",
-              trade_pair: "ETH/BTC",
-              is_favorite: true,
-              is_new_born: false,
-              turnover: 1111
-            },
-            {
-              trade_pair_id: 2,
-              rise: -0.12,
-              price: 1023.22,
-              priceCN: 1022.22,
-              priceEN: 1021.22,
-              volume: 133444.34,
-              coin_name: "LSK",
-              market_name: "BTC",
-              trade_pair: "LSK/BTC",
-              is_favorite: false,
-              is_new_born: false,
-              turnover: 2222
-            }
-          ]
-        },
-        {
-          market_name: "ETH",
-          market_data: [
-            {
-              tradePairId: 3,
-              rise: -0.22,
-              price: 1023.22,
-              priceCN: 1023.22,
-              priceEN: 1023.22,
-              volume: 123444.34,
-              coin_name: "BTC",
-              market_name: "ETH",
-              trade_pair: "BTC/ETH",
-              is_favorite: false,
-              is_new_born: false,
-              turnover: 3333
-            },
-            {
-              tradePairId: 4,
-              rise: -0.12,
-              price: 1023.22,
-              priceCN: 1022.22,
-              priceEN: 1021.22,
-              volume: 133444.34,
-              coin_name: "BNB",
-              market_name: "ETH",
-              trade_pair: "BNB/ETH",
-              is_favorite: false,
-              is_new_born: false,
-              turnover: 4444
-            }
-          ]
-        },
-        {
-          market_name: "USDT",
-          market_data: [
-            {
-              tradePairId: 5,
-              rise: -0.22,
-              price: 1023.22,
-              priceCN: 1023.22,
-              priceEN: 1023.22,
-              volume: 123444.34,
-              coin_name: "BTC",
-              market_name: "USDT",
-              trade_pair: "BTC/USDT",
-              is_favorite: false,
-              is_new_born: false,
-              turnover: 5555
-            },
-            {
-              tradePairId: 6,
-              rise: -0.12,
-              price: 1023.22,
-              priceCN: 1022.22,
-              priceEN: 1021.22,
-              volume: 133444.34,
-              coin_name: "BNB",
-              market_name: "USDT",
-              trade_pair: "BNB/USDT",
-              is_favorite: false,
-              is_new_born: false,
-              turnover: 6666
-            }
-          ]
-        }
-      ],
+      allPairData: [],
       recommendData: [
         {
           coinName: 'BTC',
@@ -141,19 +41,17 @@ export default class MarketStore extends ExchangeStoreBase {
           rise: -0.12,
         }
       ],
-      // recommendData: {
-      //   btc: ['BNB/BTC', 'LSK/BTC'],
-      //   eth: ['BTC/ETH', 'EOS/ETH'],
-      //   usdt: ['BTC/USDT']
-      // },
-      collectArr:[],
+      collectArr: [],
+      selecedMarket:'BTC',
       recommendDataHandle: [],
       marketDataHandle: [],
-      homeMarketPairData:[],
-      market:'BTC',
-      coin:'',
-      tradePair:'',
-      unitsType:'',
+      homeMarketPairData: [],
+      market: 'BTC',
+      coin: '',
+      tradePair: '',
+      pairInfo: {},
+      unitsType: '',
+      pairMsg: {},
       coinInfo: {
         fullName: "BitCoin",
         coinName: "BTC",
@@ -218,7 +116,31 @@ export default class MarketStore extends ExchangeStoreBase {
     // this.getMarketPair()
   }
 
+  setSelecedMarket(data) {
+    this.state.selecedMarket = data
+  }
 
+  get selecedMarket() {
+    return this.state.selecedMarket
+  }
+
+  setAllPair(data) {
+    this.state.allPairData = data
+  }
+
+  get allPair() {
+    return this.state.allPairData
+  }
+
+  async selectMarket(){
+    //根据选择市场从pair里拿到id，再从allPairData中取出数据
+    let pairMsg = await this.getPairMsg()
+    console.log(pairMsg)
+    let coinNameList = pairMsg.pairNameMarket[this.state.selecedMarket]
+    return coinNameList.map(v=>this.state.allPairData.find(vv=>vv.tradePairId === pairMsg.pairIdMarket[this.state.selecedMarket][v]))
+
+
+  }
 
   getRecommendCurrency() {
     console.log('getData recommendCurrency', this.WebSocket)
@@ -237,7 +159,7 @@ export default class MarketStore extends ExchangeStoreBase {
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
     })
-    this.WebSocket.general.emit('joinRoom', {from:'', to:'home'})
+    this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
 
   changeFavorite(tradePairId, userId, operateType) {
@@ -249,19 +171,62 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
 
-  async getCoinInfo(){
-    this.store.state.coinInfo = await this.Proxy.coinInfo({userId:3});
+  async getCoinInfo() {
+    this.state.coinInfo = await this.Proxy.coinInfo({userId: JSON.parse('232601699242483712')});
   }
-  async getPairInfo(){
+
+  async getFavoriteList() {
+    this.state.coinInfo = await this.Proxy.coinInfo({userId: JSON.parse('232601699242483712')});
+  }
+
+  async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
-    this.store.state.coinInfo = pairInfo.list;
+    console.log('getPairInfo', pairInfo)
+    this.state.pairInfo = pairInfo.list
+    // this.state.pairMsg = this.formatPairMsg(pairInfo)
     return pairInfo.list
   }
 
-  async getMarketAll(){
-    let marketAll = await this.Proxy.getTradePairRank();
-    console.log(marketAll)
-    this.state.allPairData = marketAll.marketList
-    return marketAll.marketList
+  get pairInfo() {
+    return this.state.pairInfo
+  }
+
+  updateMarketDataHandle(homeMarket, homeMarketPair) {
+    this.state.marketDataHandle = homeMarket;
+    this.state.homeMarketPairData = homeMarketPair;
+  }
+
+  async getMarketAll() {
+    let marketAll = await this.Proxy.getAllChg();
+    // console.log(marketAll)
+    // this.state.allPairData = marketAll.marketList
+    return marketAll.items
+  }
+
+  async getPairMsg() {
+    let coinCorrespondingId = {}, marketCorrespondingId = {}, coinCorrespondingPair = {}, marketCorrespondingPair = {};
+    // console.log(Object.keys(this.state.pairInfo).length)
+    if (!Object.keys(this.state.pairInfo).length) {
+      await this.getPairInfo()
+    }
+    this.state.pairInfo.map((v) => {
+      let pair = v.tradePairName.split('/');
+      let coin = pair[0];
+      let market = pair[1];
+      marketCorrespondingId[market] = marketCorrespondingId[market] || {};
+      coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
+      marketCorrespondingId[market][coin] = v.tradePairId;
+      coinCorrespondingId[coin][market] = v.tradePairId;
+      coinCorrespondingPair[coin] = coinCorrespondingPair[coin] || [];
+      marketCorrespondingPair[market] = marketCorrespondingPair[market] || [];
+      coinCorrespondingPair[coin].push(market);
+      marketCorrespondingPair[market].push(coin);
+    });
+    let pairMsg = {};
+    pairMsg.pairIdCoin = coinCorrespondingId;
+    pairMsg.pairIdMarket = marketCorrespondingId;
+    pairMsg.pairNameCoin = coinCorrespondingPair;
+    pairMsg.pairNameMarket = marketCorrespondingPair;
+    return pairMsg
   }
 }

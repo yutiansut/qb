@@ -13,7 +13,7 @@ export default class HomeActivity extends exchangeViewBase {
     controller.setView(this)
     // 初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    console.log('活动', this.state)
+    // console.log('活动', this.state)
   }
 
   setView(view){

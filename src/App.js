@@ -116,14 +116,20 @@ export default class App extends Component {
     userOrderController = new UserOrderListController();
 
     noticeController.configController = configController;
+
     activityController.configController = configController;
-    assetController.configController = configController;
+
     noticeController.userController = userController;
+
     assetController.configController = configController;
     assetController.userController = userController;
     assetController.marketController = marketController;
+
     loginController.userController = userController;
+
     userOrderController.marketController = marketController;
+
+    marketController.userController = userController;
 
     configController.setAppView(this);//configController获取app view 以便设置语言后重新渲染
   }
@@ -135,7 +141,7 @@ export default class App extends Component {
 
   componentDidMount() {
     configController.loadLocales();
-    marketController.getTradePairHandle();
+    // marketController.getTradePairHandle();
     // console.log(222, window.innerHeight)
   }
 

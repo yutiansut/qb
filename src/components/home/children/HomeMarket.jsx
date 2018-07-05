@@ -83,7 +83,7 @@ export default class HomeMarket extends ExchangeViewBase{
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
                 <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td>
-                <td>{v.trade_pair}</td>
+                <td>{v.tradePairName.toUpperCase()}</td>
                 <td>{v.price}</td>
                 <td>{v.turnover}</td>
                 <td>{v.volume}</td>

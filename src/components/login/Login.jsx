@@ -38,6 +38,7 @@ export default class Login extends exchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller)
     this.login = controller.login.bind(controller)
+    this.countDownStop = controller.countDownStop.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
     this.changeTitle = this.changeTitle.bind(this)
     this.changeUser = this.changeUser.bind(this)
@@ -95,6 +96,10 @@ export default class Login extends exchangeViewBase {
 
   componentWillUpdate(...parmas) {
 
+  }
+
+  componentWillUnMount() {
+    this.countDownStop('verifyNum')
   }
 
   render() {

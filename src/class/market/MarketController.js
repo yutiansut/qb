@@ -100,22 +100,52 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   // 市场下交易对
-  marketDataHandle() {
-    let collectIdArr = [1,2,3]
-    let homeMarket = [];
-    this.store.state.allPairData.map(v => homeMarket.push(v.market_name));
-    let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
-    homeMarketPair.forEach(v => {
-      let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? 1 : 0}
-      v = Object.assign(v, aaa);
-    })
+  async marketDataHandle() {
+    let collectIdArr = []
+    //请求收藏列表
+    if(this.userController.userToken){
+      collectIdArr = await this.store.getFavoriteList({token:this.userController.userToken, uesrId: this.userController.userId})
+    }
+    //更新全部交易对信息
+    await this.getTradePairHandle()
+    //生成市场列表
+    let homeMarket = [...new Set(this.store.pairInfo.map(v=>v.marketName))].sort()
     this.view.setState({
       marketDataHandle: homeMarket,
+    });
+    //默认设置为第一市场
+    this.store.setSelecedMarket(homeMarket[0])
+    //生成交易对池
+    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
+    // console.log(homeMarket, this.store.allPair)
+    //更新交易对池，只在第一次打开时，发送http请求更新
+    await this.store.getMarketAll()
+    //根据市场从交易对池中选择该市场中的交易对
+    let homeMarketPair = await this.store.selectMarket()
+    console.log('homeMarketPair', homeMarketPair)
+    //更新视图层
+    this.updateMarketAll(homeMarketPair)
+
+    // pairMsg[market[0]]
+    // allPairData.map(v => homeMarket.push(v.market_name));
+    // let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
+    // homeMarketPair.forEach(v => {
+    //   let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? 1 : 0}
+    //   v = Object.assign(v, aaa);
+    // })
+    // this.view.setState({
+    //   marketDataHandle: homeMarket,
+    //   homeMarketPairData: homeMarketPair,
+    // });
+    // this.store.state.marketDataHandle = homeMarket;
+    // this.store.state.homeMarketPairData = homeMarketPair;
+    // this.tradePairSelect(homeMarketPair);
+  }
+
+  updateMarketAll(homeMarketPair){
+    this.view.setState({
       homeMarketPairData: homeMarketPair,
     });
-    this.store.state.marketDataHandle = homeMarket;
-    this.store.state.homeMarketPairData = homeMarketPair;
-    this.tradePairSelect(homeMarketPair);
   }
 
   //交易对的选中
@@ -162,7 +192,7 @@ export default class MarketController extends ExchangeControllerBase {
   filte(arr, value) {
     let result = this.filter(arr, item => {
       return (
-        item.coin_name.includes(value.toUpperCase())
+        item.coinName.toUpperCase().includes(value.toUpperCase())
       );
     });
     // this.view.setState({
@@ -217,29 +247,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   }
   // 交易对名称以及id的处理
-   getTradePairHandle() {
-    // let a = await this.store.getPairInfo();
-    // let pairInfo = this.store.getPairInfo();
-    let pairInfo = this.store.state.list;
-    let coinCorrespondingId = {},marketCorrespondingId = {},coinCorrespondingPair = {},marketCorrespondingPair = {};
-    pairInfo.map((v) => {
-     let pair = v.tradePairName.split('/');
-     let coin = pair[0];
-     let market = pair[1];
-      marketCorrespondingId[market] = marketCorrespondingId[market] || {};
-      coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
-      marketCorrespondingId[market][coin] = v.tradePairId;
-      coinCorrespondingId[coin][market] = v.tradePairId;
-      coinCorrespondingPair[coin] = coinCorrespondingPair[coin] || [];
-      marketCorrespondingPair[market] = marketCorrespondingPair[market] || [];
-      coinCorrespondingPair[coin].push(market);
-      marketCorrespondingPair[market].push(coin);
-    });
-    let pairMsg = {};
-    pairMsg.pairIdCoin = coinCorrespondingId;
-    pairMsg.pairIdMarket = marketCorrespondingId;
-    pairMsg.pairNameCoin = coinCorrespondingPair;
-    pairMsg.pairNameMarket = marketCorrespondingPair;
-    return pairMsg
+   async getTradePairHandle() {
+    return await this.store.getPairMsg();
   }
 }

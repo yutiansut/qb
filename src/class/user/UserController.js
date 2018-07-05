@@ -49,7 +49,7 @@ export default class UserController extends ExchangeControllerBase {
   getUserId(data) {
     console.log('ccc3', data)
     this.store.userLogin(data)
-    console.log('this.view',this.view)
+    // console.log('this.view',this.view)
     // this.view.history.goBack()
   }
 
