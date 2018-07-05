@@ -27,12 +27,11 @@ export default class TradeOrderListController extends OrderListController {
       priceCN: v.priceCN,
       priceEN: v.priceEN,
     };
-    console.log('llllllllllll',prices)
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
   }
 
   joinRoom(){
-    this.tr
+    this.store.emitTradeOrderWs();
   }
 
 

@@ -21,6 +21,7 @@ export default class LiveTrade extends ExchangeViewBase{
   
   }
   componentDidMount(){
+    this.props.controller.joinRoom();
     this.liveTradeListHandle()
   }
   changeLiveTitleSelect(v){

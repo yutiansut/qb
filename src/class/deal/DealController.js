@@ -127,6 +127,11 @@ export default class DealController extends ExchangeControllerBase {
     // }
   }
   async dealTrade(){
-    await this.store.dealTrade();
+    // let j = 1
+    // for(var i =1;i<=500;i++){
+    //   j+=0.01;
+      await this.store.dealTrade();
+    // }
+    // await this.store.dealTrade(v);
   }
 }

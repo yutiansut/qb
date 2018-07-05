@@ -83,16 +83,23 @@ export default class TradeOrderListStore extends OrderListStore{
         }
       ]
     }
-  }
-
-  getWebSocketData() {
-    console.log('getData', this.WebSocket)
-    this.WebSocket.general.emit('joinRoom', {from:'', to: 'TradePairName-D6'})
     this.WebSocket.general.on('joinRoom', data => {
       console.log('joinRoom getWebSocketData', data, this.controller)
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
+    });
+    this.WebSocket.general.on('tradeDepth', data => {
+      console.log('tradeDepth getWebSocketData', data)
+      // this.controller.updateRecommend(data.data)
+      // this.recommendData = data.data
     })
+  }
+  
+  emitTradeOrderWs(){
+    this.WebSocket.general.emit('joinRoom', {from:'', to: 'ETH/BTC-D6'});
+  }
+  getWebSocketData() {
+    console.log('getData', this.WebSocket)
     this.WebSocket.general.on('tradeDepth', data => {
       console.log('tradeDepth getWebSocketData', data)
       // this.controller.updateRecommend(data.data)
