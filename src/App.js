@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
 
 
-import "./core/libs/ChangeFontSize";
+// import "./core/libs/ChangeFontSize";
 import "./common/css/index.styl"
 
 import ConfigController from "./class/config/ConfigController";

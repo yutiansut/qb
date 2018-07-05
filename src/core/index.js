@@ -3,6 +3,7 @@ import Websocket from './webSocket'
 import Loop from "./loop";
 import GlobalUtil from "./libs/GlobalUtil";
 import AsyncAll from "./libs/AsyncAll";
+import ChangeFontSize from './libs/ChangeFontSize'
 
 
 const RUNAPP = async (config) => {
@@ -20,5 +21,6 @@ module.exports = {
   GlobalUtil,
   Websocket,
   RUNAPP,
-  AsyncAll
+  AsyncAll,
+  ChangeFontSize
 }

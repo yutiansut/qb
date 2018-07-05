@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import './stylus/header.styl'
 import ExchangeViewBase from "../ExchangeViewBase";
+import {ChangeFontSize} from '../../core'
 // const Nav = ({label,to}) => (
 //     <Route path={to}  children={({ match }) => (
 //         <li className={match ? 'active' : ''}>
@@ -60,12 +61,20 @@ export default class Header extends ExchangeViewBase {
     this.state.navArrayLeft.forEach(v => {
       this.userToken && (v.tokenShow = false)
     })
+    ChangeFontSize(1440*0.8, 1440*1)
   }
 
-  componentWillUpdate(...parmas) {
-    console.log('aaaaa')
 
+  componentWillUpdate(props, state, next) {
+    // ChangeFontSize
+    console.log(props, state, next)
+    if(props.navClass === 'tradeNav'){
+      ChangeFontSize(1440*0.8, 1440*2)
+    }
+
+    // if(props)
   }
+
 
   render() {
     console.log('token', this.userToken)

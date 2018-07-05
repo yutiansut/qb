@@ -156,6 +156,7 @@ export default class userSafeCenter extends exchangeViewBase {
   componentWillUpdate(props, state, next) {
 
   }
+
   clearErr2() {
     this.setState({
       popupInputErr2: ''
