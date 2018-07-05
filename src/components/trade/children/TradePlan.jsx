@@ -9,11 +9,12 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      buyMax: 0,
+      funpass: '',
+      buyMax: 0, // 买入最大数量
       sellMax: 0,
-      buyWallet: 123,
-      sellWallet: 321,
-      DealEntrustType: 0,
+      buyWallet: 123, //买入可用余额
+      sellWallet: 321, //卖出可用余额
+      DealEntrustType: 0,// 委托类型
       PassType: '',
       Market: '',
       Coin: '',
@@ -82,6 +83,12 @@ export default class TradePlan extends ExchangeViewBase {
     })) : (this.setState({inputBuyValue: e.target.value, inputBuyFlag: true, dealType}));
     this.changeMaxNum(dealType, e.target.value)
   }
+  
+  passInput(e) {
+    this.setState(
+        {funpass: e.target.value}
+    )
+  }
 
   render() {
     return (
@@ -118,10 +125,12 @@ export default class TradePlan extends ExchangeViewBase {
                                  buyNum={this.state.inputBuyNum}
                                  buyMax={this.state.buyMax}
                                  sellMax={this.state.sellMax}
+                                 funpass={this.state.funpass}
                                  wallet={index ? this.state.sellWallet : this.state.buyWallet}
                                  priceInput={this.priceInput.bind(this)}
                                  numInput={this.numInput.bind(this)}
                                  dealTrade={this.dealTrade.bind(this)}
+                                 passInput={this.passInput.bind(this)}
               />
 
             )

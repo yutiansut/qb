@@ -28,21 +28,24 @@ let TradeMarketController,
     noticeController,
     TradeDealController,
     TradeUserListController,
-    TradePlanController;
-// userController;
+    TradePlanController,
+    userController;
 
 // const userOrderItems = []
 export default class extends exchangeViewBase {
   constructor(props) {
     super(props)
 
-    TradeMarketController = props.marketController;
+    TradeMarketController = props.marketController; //市场
     TradeOrderListController = new TradeOrderController();//近期交易
     TradeRecentController = new OrderListController();//挂单列表
     userOrderController = props.userOrderController;//用户订单
-    noticeController = new NoticeController();
-    TradeDealController = new DealController();
+    noticeController = new NoticeController(); //资讯
+    TradeDealController = new DealController(); //交易
     TradePlanController = new DealController();
+    userController = props.userController; //用户
+    
+    TradePlanController.userController = userController;
     
     // TradeUserListController = new UserOrderListController();
     // userController = new UserController()

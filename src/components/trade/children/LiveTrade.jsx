@@ -22,7 +22,7 @@ export default class LiveTrade extends ExchangeViewBase{
   }
   componentDidMount(){
     this.props.controller.joinRoom();
-    this.liveTradeListHandle()
+    // this.liveTradeListHandle()
   }
   changeLiveTitleSelect(v){
     this.setState({
@@ -55,7 +55,7 @@ export default class LiveTrade extends ExchangeViewBase{
             <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - this.state.liveSellArray.length)? (12 - this.state.liveSellArray.length) * .21 : 0}rem`}}>
             
             </tr>
-            {((this.state.titleSelect === 'all' && this.state.liveSellArray.length < 12) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length < 24)) && this.state.liveSellArray.map((v,index) => {
+            {((this.state.titleSelect === 'all' && this.state.liveSellArray &&this.state.liveSellArray.length < 12) || (this.state.titleSelect === 'sell' && this.state.liveSellArray && this.state.liveSellArray.length < 24)) && this.state.liveSellArray && this.state.liveSellArray.map((v,index) => {
               return(
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`卖${this.state.liveSellArray.length - index}`}</td>
@@ -71,7 +71,7 @@ export default class LiveTrade extends ExchangeViewBase{
             <tr><td colSpan='4'>最新成交价</td></tr>
           </tbody>
             <tbody>
-            {((this.state.titleSelect === 'all' && this.state.liveBuyArray.length < 12) || (this.state.titleSelect === 'buy' && this.state.liveBuyArray.length < 24)) && this.state.liveBuyArray.map((v,index) => {
+            {((this.state.titleSelect === 'all' && this.state.liveBuyArray.length < 12) || (this.state.titleSelect === 'buy' && this.state.liveBuyArray && this.state.liveBuyArray.length < 24)) && this.state.liveBuyArray.map((v,index) => {
               return(
                   <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`买${index + 1}`}</td>

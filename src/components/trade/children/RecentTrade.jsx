@@ -32,6 +32,7 @@ export default class extends ExchangeViewBase {
   }
   
   componentDidMount() {
+    // this.props.controller.emitRecentOrderWs();
     // this.recentTradeList();
     this.props.controller.getRecentOrder(this.state.isPersonal);
   }

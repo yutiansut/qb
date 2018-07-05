@@ -126,7 +126,22 @@ export default class DealController extends ExchangeControllerBase {
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
     // }
   }
-  async dealTrade(){
+  async dealTrade(orderType){
+    let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
+    let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
+    let params = {
+      userId: this.userController.userId,
+      "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
+      "priceType": this.view.state.DealEntrustType,//0限价  1市价
+      "price": orderType === 'buy' ? buyPriceValue : sellPriceValue ,//价格
+      "count": orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum,//数量
+      "tradePairId": 3,
+      "tradePairName": "ETH/BTC",
+      "funpass": this.view.state.funpass,//资金密码
+      "interval": 2,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "priceUnit": this.view.state.PriceUnit || this.view.state.Market//计价单位  0数字币  1人民币 2美元
+      
+    }
     // let j = 1
     // for(var i =1;i<=500;i++){
     //   j+=0.01;

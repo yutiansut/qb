@@ -20,13 +20,14 @@ export default class DealStore extends ExchangeStoreBase {
      
     }
   }
-  async dealTrade(){
+  async dealTrade(orderType){
     await this.Proxy.dealExchange(
         {
           "userId": JSON.parse('232601699242483712'),
-          "orderType": 0,//0买 1 卖
+          // "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
+          "orderType": 1,//0买 1 卖
           "priceType": 0,//0限价  1市价
-          "price": 1,//价格
+          "price": 10,//价格
           "count": 0.1,//数量
           "tradePairId": 3,
           "tradePairName": "ETH/BTC",

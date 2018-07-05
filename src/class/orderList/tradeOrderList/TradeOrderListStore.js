@@ -2,7 +2,7 @@ import OrderListStore from '../OrderListStore'
 
 export default class TradeOrderListStore extends OrderListStore{
   constructor() {
-    super('order', 'general');
+    super('userOrder', 'general');
     this.state={
       liveTradeList: {
         buy: [
@@ -89,14 +89,15 @@ export default class TradeOrderListStore extends OrderListStore{
       // this.recommendData = data.data
     });
     this.WebSocket.general.on('tradeDepth', data => {
-      console.log('tradeDepth getWebSocketData', data)
+      console.log(this.controller,'tradeDepth getWebSocketData', data);
+      this.controller.liveTradeListHandle(data)
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
     })
   }
   
   emitTradeOrderWs(){
-    this.WebSocket.general.emit('joinRoom', {from:'', to: 'ETH/BTC-D6'});
+    this.WebSocket.general.emit('joinRoom', {from:'', to: 'eth/btc-D6'});
   }
   getWebSocketData() {
     console.log('getData', this.WebSocket)

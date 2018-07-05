@@ -77,8 +77,7 @@ export default class Header extends ExchangeViewBase {
 
 
   render() {
-    console.log('token', this.props.userController.userToken)
-    console.log('id', this.props.userController.userId)
+    // console.log('token', this.userToken)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {

@@ -45,7 +45,7 @@ const Asset = ({match}) => {
 };
 
 const Trade = ({match}) => {
-  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match}/>;
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController}/>;
 };
 
 const User = ({match}) => {

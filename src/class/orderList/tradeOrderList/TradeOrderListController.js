@@ -12,8 +12,9 @@ export default class TradeOrderListController extends OrderListController {
     super.setView(view);
   }
   
-  liveTradeListHandle() {
-    let liveTradeData = this.store.state.liveTradeList;
+  liveTradeListHandle(liveTradeList) {
+    console.log('liveTradeList asdasdasdasd',liveTradeList)
+    let liveTradeData = liveTradeList;
     let liveBuyArray = liveTradeData.buy;
     let liveSellArray = liveTradeData.sell;
     this.view.setState({liveBuyArray, liveSellArray});

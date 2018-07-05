@@ -49,7 +49,9 @@ export default class OrderListController extends ExchangeControllerBase {
       sortIndex: index,
       tradeSortImg: tradeSortImg[v.type]
     });
-
     v.type = !v.type
+  }
+  emitRecentOrderWs() {
+    this.store.emitRecentOrderWs();
   }
 }

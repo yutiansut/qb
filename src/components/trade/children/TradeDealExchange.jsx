@@ -83,7 +83,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trade-password clearfix'>
             <div className='trade-password-input'>
               <span>{`${this.intl.get('fundPass')}`}:</span>
-              <input type="password"/>
+              <input type="password" value={this.props.funpass} onChange={this.props.passInput.bind(this)}/>
             </div>
             <p className='password-msg'>
               <span>{`${this.intl.get('deal-forgetpwd')}`}</span>
@@ -95,7 +95,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
             <i>{this.props.PriceUnit || this.props.Market}</i>
           </div>
-          <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this)}>
+          <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
           </div>
         </div>
