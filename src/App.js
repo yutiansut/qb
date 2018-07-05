@@ -28,6 +28,7 @@ import OrderManage from './components/order/OrderManage.jsx'
 import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
+import Genrealize from "./components/genrealize/Genrealize.jsx";
 
 let testAppController,
   configController,
@@ -91,6 +92,9 @@ const HomeComponent = () => {
 const Order = ({match}) => {
   return <OrderManage controller={userOrderController} match={match}/>
 };
+const Gener = ({ match }) => {
+  return <Genrealize match={match} controller={activityController} />;
+};
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -137,38 +141,37 @@ export default class App extends Component {
 
   render() {
 
-    return (
-      <Router>
+    return <Router>
         {this.state.initDone && <div>
-          {/*<Header/>*/}
-          <Switch>
-            <Route path="/trade" component={tradeHeader}/>
-            <Route component={header}/>
-          </Switch>
-          <div style={{height: '.5rem'}}></div>
-          <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
+            {/*<Header/>*/}
             <Switch>
-              {/*<Route exact path="/" component={HomeComponent}/>*/}
-              <Route exact path="/home" component={HomeComponent}/>
-              <Route path='/trade' component={Trade}/>
-              <Route path="/login" component={Loign}/>
-              <Route path="/wallet" component={Asset}/>
-              <Route path="/order" component={Order}/>
-              <Route path="/user" component={User}/>
-              <Route path="/findPass" component={ForgetPass}/>
-              <Route path="/notice" component={Notice}/>
-              <Route path="/help" component={Help}/>
-              <Route path="/activity" component={Activity}/>
-              <Redirect to="/home"/>
+              <Route path="/trade" component={tradeHeader} />
+              <Route component={header} />
             </Switch>
-          </div>
-          {/*<Footer/>*/}
-          <Switch>
-            <Route path="/trade" component={tradeFooter}/>
-            <Route component={Footer}/>
-          </Switch>
-        </div>}
-      </Router>
-    );
+            <div style={{ height: ".5rem" }} />
+            <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
+              <Switch>
+                {/*<Route exact path="/" component={HomeComponent}/>*/}
+                <Route exact path="/home" component={HomeComponent} />
+                <Route path="/trade" component={Trade} />
+                <Route path="/login" component={Loign} />
+                <Route path="/wallet" component={Asset} />
+                <Route path="/order" component={Order} />
+                <Route path="/user" component={User} />
+                <Route path="/findPass" component={ForgetPass} />
+                <Route path="/notice" component={Notice} />
+                <Route path="/help" component={Help} />
+                <Route path="/activity" component={Activity} />
+                <Route path="/genrealize" component={Gener} />
+                <Redirect to="/home" />
+              </Switch>
+            </div>
+            {/*<Footer/>*/}
+            <Switch>
+              <Route path="/trade" component={tradeFooter} />
+              <Route component={Footer} />
+            </Switch>
+          </div>}
+      </Router>;
   }
 }

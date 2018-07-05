@@ -1,0 +1,185 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.register{
+  text-align: center;
+}
+.register .banner{
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.07*3.84rem;
+  padding-top: 0.48*3.84rem;
+  background:url(/static/images/genrealize/register_bg1.png) no-repeat center center;
+  background-size: 100% auto;
+}
+.register .banner .balance{
+  font-size: 0.2*3.84rem;
+  color: #fff;
+  margin-bottom: 0.36*3.84rem;
+}
+.register .banner .balance span{
+  font-size: 0.4*3.84rem;
+}
+.register .banner .wait{
+  font-size: 0.24*3.84rem;
+  color:#fff;
+  text-indent: 0.1*3.84rem;
+}
+.register .content{
+  padding-top: 0.35*3.84rem;
+}
+.register .content .title{
+  height: 0.61*3.84rem;
+  margin-bottom: 0.25*3.84rem;
+  font-size: 0.21*3.84rem;
+  line-height: 0.5*3.84rem;
+  font-weight: bold;
+  color: #fff;
+  background:url(/static/images/genrealize/register_bg2.png) no-repeat center center;
+  background-size: auto 100%;
+}
+.register .content p{
+  height: 0.28*3.84rem;
+  line-height: 0.28*3.84rem;
+  font-size: 0.18*3.84rem;
+  color: #8b8a89;
+  margin-bottom: 0.5*3.84rem;
+}
+.register .content p span{
+  font-size: 0.28*3.84rem;
+  margin: 0 0.13*3.84rem;
+  font-weight: bold;
+  color:#ff4e41;
+}
+.register .content input{
+  outline: none;
+  display: block;
+  width: 3.22*3.84rem;
+  height: 0.5*3.84rem;
+  margin: 0 auto 0.25*3.84rem;
+  font-size: 0.18*3.84rem;
+  padding-left: 0.18*3.84rem;
+  border: 0.02*3.84rem solid rgba(255,0,0,0.3);
+  border-radius: 0.05*3.84rem;
+}
+.register .content input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(107,105,105,0.4);
+}
+.register .content input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: rgba(107,105,105,0.4);
+}
+.register .content input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: rgba(107,105,105,0.4);
+}
+.register .content input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: rgba(107,105,105,0.4);
+}
+.register .content button{
+  display: block;
+  width: 3.6*3.84rem;
+  height: 0.7*3.84rem;
+  line-height: 0.7*3.84rem;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 0.22*3.84rem;
+  border-radius: 0.05*3.84rem;
+  background:url(/static/images/genrealize/register_bg3.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.register .vagueBgView{
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.76)
+}
+.register .successAlert{
+  display: none;
+  box-sizing:border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding-top:0.32*3.84rem;
+  width: 3.25*3.84rem;
+  height: 2.92*3.84rem;
+  margin-left: -1.625*3.84rem;
+  margin-top: -1.46*3.84rem;
+  background-color: #fff;
+  border-radius: 0.1*3.84rem;
+}
+.register .successAlert p{
+  font-size: 0.21*3.84rem;
+  color: #696767;
+  font-weight: bold;
+  margin-top: 0.07*3.84rem;
+  margin-bottom: 0.27*3.84rem;
+}
+.register .successAlert .asset{
+  height: 0.4*3.84rem;
+  line-height: 0.4*3.84rem;
+  font-size: 0.17*3.84rem;
+  color:rgba(105,103,103,0.7);
+  border-top: 0.01*3.84rem dashed rgba(105,103,103,0.7);
+}
+.register .successAlert .asset span{
+  color:#ff4e41;
+  font-size: 0.24*3.84rem;
+  margin:0 0.05*3.84rem;
+}
+.register .successAlert a{
+  display: block;
+  width: 3*3.84rem;
+  height: 0.6*3.84rem;
+  line-height: 0.55*3.84rem;
+  text-decoration: none;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 0.17*3.84rem;
+  border-radius: 0.05*3.84rem;
+  background:url(/static/images/genrealize/register_bg3.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.register .failureAlert{
+  display: none;
+  box-sizing:border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3.22*3.84rem;
+  height: 2.14*3.84rem;
+  margin-left: -1.61*3.84rem;
+  margin-top: -1.07*3.84rem;
+  background-color: #fff;
+  border-radius: 0.1*3.84rem;
+}
+.register .failureAlert p{
+  height: 0.64*3.84rem;
+  margin-bottom: 0.08*3.84rem;
+  font-size: 0.21*3.84rem;
+  color: #696767;
+  font-weight: bold;
+  line-height: 0.64*3.84rem;
+  border-bottom: 0.01*3.84rem dashed rgba(105,103,103,0.7);
+}
+.register .failureAlert .tip{
+  padding: 0 0.2*3.84rem;
+  margin-bottom: 0.18*3.84rem;
+  text-align: left;
+  line-height: 0.28*3.84rem;
+  font-size: 0.17*3.84rem;
+  color:rgba(105,103,103,0.7);
+}
+.register .failureAlert button{
+  width: 3*3.84rem;
+  height: 0.6*3.84rem;
+  line-height: 0.55*3.84rem;
+  text-decoration: none;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 0.17*3.84rem;
+  border-radius: 0.05*3.84rem;
+  background:url(/static/images/genrealize/register_bg3.png) no-repeat center center;
+  background-size: 100% 100%;
+}

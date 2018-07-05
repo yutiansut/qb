@@ -7,7 +7,8 @@ const EXCHANGE_Apply_EMAIL = 'business@coinrising.com';
 const EXCHANGE_CONTACT_EMAIL = 'support@coinrising.com';
 const EXCHANGE_ADDR = 'Kemp House 152 -160 City Road, London';
 const EXCHANGE_SERVICE_PHONE = '010-53348151'
-const EXCHANGE_SERVICE_QQ = '3310267657'
+const EXCHANGE_SERVICE_QQ = '3310267657';
+const EXCHANGE_COIN = 'CRT';
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
@@ -15,6 +16,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.state = {
       nameCny: EXCHANGE_NAME_CNY,
       nameUsd: EXCHANGE_NAME_USD,
+      coin: EXCHANGE_COIN,
       netUrl: EXCHANGE_URl,
       applyEmailUrl: EXCHANGE_Apply_EMAIL,
       contactEmailUrl: EXCHANGE_CONTACT_EMAIL,
