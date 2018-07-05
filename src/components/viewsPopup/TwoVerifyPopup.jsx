@@ -23,21 +23,21 @@ export default class TwoVerifyPopup extends exchangeViewBase {
     this.props.destroy && this.props.destroy();
   }
   render() {
-    let { onClose, type, getVerify, verifyNum, onConfirm} = this.props;
+    let { onClose, type, getVerify, verifyNum, onConfirm } = this.props;
     return (
       <div className="view-popup-wrap">
         <div className="view-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => { onClose && onClose()}} />
-          <h2>两步验证</h2>
+          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => { onClose && onClose() }} />
+          <h2>{this.intl.get('twoStep')}</h2>
           <div className="clearfix">
             <Input
-              placeholder={type === 1 ? "请输入邮箱／手机验证码" : (type === 3 ? "请输入手机验证码" : '请输入谷歌验证码')}
+              placeholder={this.intl.get('asset-input-twoVerify')}
               value={this.state.value}
               onInput={(value) => { this.setState({ value }) }}
             />
-            <Button type="base" disable={type !== 1 && type !== 3} title={(typeof verifyNum === "number" && ((verifyNum === 0 && "重新获取") || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify()}} />
+            <Button type="base" disable={type !== 1 && type !== 3} title={(typeof verifyNum === "number" && ((verifyNum === 0 && this.intl.get("sendAgain")) || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify() }} />
           </div>
-          <Button title="确认" disable={this.state.value === ''} type="base" className="set-btn" onClick={() => { onConfirm && onConfirm(this.state.value); }} />
+          <Button title={this.intl.get('asset-submit')} disable={this.state.value === ''} type="base" className="set-btn" onClick={() => { onConfirm && onConfirm(this.state.value); }} />
         </div>
       </div>)
   }

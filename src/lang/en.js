@@ -1,4 +1,4 @@
-export default function en (state){
+export default function en(state) {
 
   const { nameCny, nameUsd, netUrl, applyEmailUrl, contactEmailUrl, addr } = state;
 
@@ -18,7 +18,7 @@ export default function en (state){
     readMore: "Read more",
     yes: "Yes",
     no: "No",
-    login:'Sing up',
+    login: 'Sing up',
     email: "Email Address",
     phone: "Mobile",
     alter: "Update",
@@ -68,8 +68,13 @@ export default function en (state){
     dealed: 'Deal done',
     marketPrice: 'Market Price',
     detail: 'Details',
+    noRecords: "No records",
+    "deal-use": "Available",
+    sendCode: 'Send the code',
+    sendAgain: 'Send again',
+    optionSuccess: 'Operation successful',
   };
-  const other ={
+  const other = {
     "header-home": "home",
     "header-exchange": "exchange",
     "header-assets": "assets",
@@ -77,7 +82,7 @@ export default function en (state){
     "header-security": "Security center",
     "header-idVerify": "ID verification",
     "header-logOut": "Log out",
-    "header-regist":"Sign in"
+    "header-regist": "Sign in"
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",
@@ -141,6 +146,13 @@ export default function en (state){
     "asset-amount2": "amount",
     "asset-balan": "Balance",
     "asset-checkState": "State",
+    "asset-copySuccess": "Copy Succeed!",
+    "asset-option-failed": "Operation failed",
+    "asset-not-enough": "Insufficient funds",
+    "asset-input-twoVerify": "Please enter 2-Factor Authentication code",
+    "asset-add-success": 'Successfully added!',
+    "asset-delet-fail": 'Delete failed!',
+    "asset-input-address": 'Please select a withdrawal address'
   };
   const market = {
     "market-favorite": "Favorites",
@@ -153,7 +165,7 @@ export default function en (state){
     "market-currencyInfo": "Currency details",
   };
   const notice = {
-    "activity-regist":"Sign up now"
+    "activity-regist": "Sign up now"
   };
   const order = {
     "order-current": "Current order",
@@ -163,8 +175,8 @@ export default function en (state){
     'partDeal': 'Partially filled',
     'totalDeal': 'Filled',
     'reseted': 'Cancelled',
-    'reseting':  'Cancelling',
-    'overed':  'Complete',
+    'reseting': 'Cancelling',
+    'overed': 'Complete',
     'hideReset': 'Hide undo',
     "exportOrderRecord": "export",
     'orderDetail': 'order details',
@@ -175,26 +187,25 @@ export default function en (state){
     "order-deal-time": "Transaction Time",
     "order-deal-price": "Transaction Price",
     "order-deal-number": "Processed Amount",
-    "order-mine":'Mine',
-    "order-market":'Market',
-    "order-recent":'Recently trading',
-  
+    "order-mine": 'Mine',
+    "order-market": 'Market',
+    "order-recent": 'Recently trading',
+
   };
   const deal = {
-    "deal-limit":"Limit price",
-    "deal-market":"Market price",
-    "deal-digital":"Digital currency",
-    "deal-use":"Available",
-    "deal-timeSetting":"Time limit setting",
-    "deal-every":"Enter every time",
-    "deal-2h":"Enter every two hours",
-    "deal-never":"Never enter",
-    "deal-inputpwdplease":"To activate no fund password feature, please input fund password for ID authentication first",
-    "deal-marketbuy":"Buy for market best price",
-    "deal-trunover":"Total",
-    "deal-forgetpwd":"Forget password",
-    "deal-freepwd":"Free password",
-    "deal-inputpwd":"Input fund password",
+    "deal-limit": "Limit price",
+    "deal-market": "Market price",
+    "deal-digital": "Digital currency",
+    "deal-timeSetting": "Time limit setting",
+    "deal-every": "Enter every time",
+    "deal-2h": "Enter every two hours",
+    "deal-never": "Never enter",
+    "deal-inputpwdplease": "To activate no fund password feature, please input fund password for ID authentication first",
+    "deal-marketbuy": "Buy for market best price",
+    "deal-trunover": "Total",
+    "deal-forgetpwd": "Forget password",
+    "deal-freepwd": "Free password",
+    "deal-inputpwd": "Input fund password",
   };
   const user = {
     "user-score": "My VIP Status",
@@ -246,7 +257,7 @@ export default function en (state){
     "user-inputSurname": "Input surname",
     "user-inputForename": "Input forename",
     "user-idCard": "ID card",
-    "user-passport":  "Passport",
+    "user-passport": "Passport",
     "user-inputCard": "Please fill in ID card/Passport number",
     "user-photoVerify": "Photo verification",
     "user-idReq": "ID requirements",

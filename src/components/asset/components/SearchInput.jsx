@@ -26,51 +26,52 @@ export default class Charge extends exchangeViewBase {
       this.props.walletList,
       this.props.value.toUpperCase()
     );
-    return <div className="input">
-      <Input
-        type="search1"
-        placeholder="请输入币种关键字"
-        value={this.props.value}
-        onInput={value => {
-          this.setValue(value);
-        }}
-        onFocus={this.show}
-        onEnter={() => {
-          let value = searchArr[0] || "BTC";
-          this.setValue(value);
-          this.setCurrency(value);
-          this.hide();
-        }}
-        clickOutSide={() => {
-          let value = searchArr[0] || 'BTC';
-          this.setValue(value);
-          this.setCurrency(value);
-          this.hide();
-        }}
-      >
-        {
-          <ul
-            className={`search-list ${
-              this.state.showSearch && searchArr.length ? "" : "hide"
+    return (
+      <div className="input">
+        <Input
+          type="search1"
+          value={this.props.value}
+          onInput={value => {
+            this.setValue(value);
+          }}
+          onFocus={this.show}
+          onEnter={() => {
+            let value = searchArr[0] || "BTC";
+            this.setValue(value);
+            this.setCurrency(value);
+            this.hide();
+          }}
+          clickOutSide={() => {
+            let value = searchArr[0] || "BTC";
+            this.setValue(value);
+            this.setCurrency(value);
+            this.hide();
+          }}
+        >
+          {
+            <ul
+              className={`search-list ${
+                this.state.showSearch && searchArr.length ? "" : "hide"
               }`}
-          >
-            {searchArr.map((item, index) => (
-              <li
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.nativeEvent.stopImmediatePropagation();
-                  this.setValue(item);
-                  this.setCurrency(item);
-                  this.hide();
-                }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        }
-      </Input>
-    </div>;
+            >
+              {searchArr.map((item, index) => (
+                <li
+                  key={index}
+                  onClick={e => {
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                    this.setValue(item);
+                    this.setCurrency(item);
+                    this.hide();
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          }
+        </Input>
+      </div>
+    );
   }
 }

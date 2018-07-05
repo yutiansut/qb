@@ -84,6 +84,7 @@
   background-size: 100% 100%;
 }
 .register .vagueBgView{
+  display: none;
   position: fixed;
   top:0;
   left:0;
@@ -92,6 +93,7 @@
   background:rgba(0,0,0,0.76)
 }
 .register .successAlert{
+  display: none;
   box-sizing:border-box;
   position: fixed;
   top: 50%;
@@ -101,7 +103,6 @@
   height: 2.92rem;
   margin-left: -1.625rem;
   margin-top: -1.46rem;
-
   background-color: #fff;
   border-radius: 0.1rem;
 }
@@ -126,6 +127,49 @@
 }
 .register .successAlert a{
   display: block;
+  width: 3rem;
+  height: 0.6rem;
+  line-height: 0.55rem;
+  text-decoration: none;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 0.17rem;
+  border-radius: 0.05rem;
+  background:url(../images/register_bg3.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.register .failureAlert{
+  display: none;
+  box-sizing:border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3.22rem;
+  height: 2.14rem;
+  margin-left: -1.61rem;
+  margin-top: -1.07rem;
+  background-color: #fff;
+  border-radius: 0.1rem;
+}
+.register .failureAlert p{
+  height: 0.64rem;
+  margin-bottom: 0.08rem;
+  font-size: 0.21rem;
+  color: #696767;
+  font-weight: bold;
+  line-height: 0.64rem;
+  border-bottom: 0.01rem dashed rgba(105,103,103,0.7);
+}
+.register .failureAlert .tip{
+  padding: 0 0.2rem;
+  margin-bottom: 0.18rem;
+  text-align: left;
+  line-height: 0.28rem;
+  font-size: 0.17rem;
+  color:rgba(105,103,103,0.7);
+}
+.register .failureAlert button{
   width: 3rem;
   height: 0.6rem;
   line-height: 0.55rem;

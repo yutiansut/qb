@@ -10,9 +10,9 @@ export default class History extends exchangeViewBase {
     super(props);
     this.staticData = {
       orderType: {
-        1: "充币",
-        5: "转账",
-        15000: "提币",
+        1: this.intl.get('deposit'),
+        5: this.intl.get('asset-transfer'),
+        15000: this.intl.get('asset-withdraw'),
       },
       status: {
         0: this.intl.get("pending"),
@@ -55,7 +55,7 @@ export default class History extends exchangeViewBase {
         status: this.intl.get("all"),
         startTime: parseInt((new Date() - 604800000) / 1000),
         endTime: parseInt((new Date() - 0) / 1000)
-      }, ()=>{
+      }, () => {
         this.search(0)
       });
     };
@@ -92,14 +92,14 @@ export default class History extends exchangeViewBase {
       coinName: -1,
       orderType: -1,
       orderStatus: -1,
-      startTime: parseInt((new Date() - 604800000)/1000),
-      endTime: parseInt((new Date() - 0)/1000)
+      startTime: parseInt((new Date() - 604800000) / 1000),
+      endTime: parseInt((new Date() - 0) / 1000)
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUpdate() {}
+  componentWillUpdate() { }
 
   render() {
     let { total, orderList } = this.state.assetHistory;
@@ -164,7 +164,7 @@ export default class History extends exchangeViewBase {
               startTime={this.state.startTime}
               EndTime={this.state.EndTime}
               onChangeStart={time => {
-                this.setState({ startTime: parseInt(time/1000) });
+                this.setState({ startTime: parseInt(time / 1000) });
               }}
               onChangeEnd={time => {
                 this.setState({ endTime: parseInt(time / 1000) });
@@ -176,7 +176,7 @@ export default class History extends exchangeViewBase {
               type="base"
               title={this.intl.get("search")}
               className="search"
-              onClick={()=>{this.search(this.state.page - 1)}}
+              onClick={() => { this.search(this.state.page - 1) }}
             />
             <Button
               type="base"
@@ -230,30 +230,30 @@ export default class History extends exchangeViewBase {
                       },
                       index
                     ) => (
-                      <tr key={index}>
-                        <td className="time">{orderTime.toDate('yyyy-MM-dd')}</td>
-                        <td>
-                          <img src={coinIcon} alt="" />
-                          {coinName.toUpperCase()}
-                        </td>
-                        <td>{this.staticData.orderType[orderType]}</td>
+                        <tr key={index}>
+                          <td className="time">{orderTime.toDate('yyyy-MM-dd')}</td>
+                          <td>
+                            <img src={coinIcon} alt="" />
+                            {coinName.toUpperCase()}
+                          </td>
+                          <td>{this.staticData.orderType[orderType]}</td>
                           <td className="cash red">{orderType === 15000 ? '-' : orderType === 0 ? '+' : ''}{count}</td>
-                        <td className="balan"><i>{balance}</i></td>
-                        <td className="send"><i>{postAddress}</i></td>
-                        <td className="receive"><i>{receiveAddress}</i></td>
-                        <td className="state passing">
-                          <span>{this.staticData.status[orderStatus]}</span>
-                        </td>
-                        <td className="fee">{fee}</td>
-                        <td className="option">
-                          {orderStatus === 0 ? (
-                              <a onClick={() => { this.cancelOreder(orderId);}}>{this.intl.get("cancel")}</a>
-                          ) : (
-                            "—"
-                          )}
-                        </td>
-                      </tr>
-                    )
+                          <td className="balan"><i>{balance}</i></td>
+                          <td className="send"><i>{postAddress}</i></td>
+                          <td className="receive"><i>{receiveAddress}</i></td>
+                          <td className="state passing">
+                            <span>{this.staticData.status[orderStatus]}</span>
+                          </td>
+                          <td className="fee">{fee}</td>
+                          <td className="option">
+                            {orderStatus === 0 ? (
+                              <a onClick={() => { this.cancelOreder(orderId); }}>{this.intl.get("cancel")}</a>
+                            ) : (
+                                "—"
+                              )}
+                          </td>
+                        </tr>
+                      )
                   )}
               </tbody>
             </table>
@@ -270,8 +270,8 @@ export default class History extends exchangeViewBase {
             />
           </div>
         ) : (
-          <div className="kong">暂无记录</div>
-        )}
+            <div className="kong">{this.intl.get('noRecords')}</div>
+          )}
       </div>
     );
   }

@@ -17,7 +17,7 @@ export default function zh(state) {
     go: '跳转',
     type: "类型",
     total: "成交额",
-    login:'登录',
+    login: '登录',
     pair: '交易对',
     infoView: "资讯概览",
     seeMore: "查看更多",
@@ -73,8 +73,13 @@ export default function zh(state) {
     dealed: '已成交',
     marketPrice: '市价',
     detail: '详情',
+    noRecords: "暂无记录",
+    "deal-use": "可用",
+    sendCode: '获取验证码',
+    sendAgain: '重新获取',
+    optionSuccess: '操作成功'
   };
-  const other ={
+  const other = {
     "header-home": "首页",
     "header-exchange": "币币交易",
     "header-assets": "资产管理",
@@ -82,7 +87,7 @@ export default function zh(state) {
     "header-security": "安全中心",
     "header-idVerify": "身份认证",
     "header-logOut": "退出",
-    "header-regist":"注册"
+    "header-regist": "注册"
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -146,6 +151,13 @@ export default function zh(state) {
     "asset-amount2": "金额数量",
     "asset-balan": "余额",
     "asset-checkState": "审核状态",
+    "asset-copySuccess": "复制成功",
+    "asset-option-failed": "操作失败",
+    "asset-not-enough": "账户余额不足",
+    "asset-input-twoVerify": "请输入两步验证密码",
+    "asset-add-success": '添加成功！',
+    "asset-delet-fail": '删除失败！',
+    "asset-input-address": '您未选择提现地址，不允许提交'
   };
   const market = {
     "market-favorite": "收藏",
@@ -158,7 +170,7 @@ export default function zh(state) {
     "market-currencyInfo": "币种资料",
   };
   const notice = {
-    "activity-regist":"立即注册"
+    "activity-regist": "立即注册"
   };
   const order = {
     "order-current": "当前订单",
@@ -168,8 +180,8 @@ export default function zh(state) {
     'partDeal': '部分成交',
     'totalDeal': '全部成交',
     'reseted': '已撤销',
-    'reseting':  '撤单中',
-    'overed':  '已结束',
+    'reseting': '撤单中',
+    'overed': '已结束',
     'hideReset': '隐藏已撤销',
     "exportOrderRecord": "导出资产记录",
     "orderDetail": '订单详情',
@@ -180,25 +192,24 @@ export default function zh(state) {
     "order-deal-time": "成交时间",
     "order-deal-price": "成交单价",
     "order-deal-number": "成交数量",
-    "order-mine":'我的',
-    "order-market":'市场',
-    "order-recent":'近期交易',
+    "order-mine": '我的',
+    "order-market": '市场',
+    "order-recent": '近期交易',
   };
   const deal = {
-    "deal-limit":"限价委托",
-    "deal-market":"市价委托",
-    "deal-digital":"数字币计价",
-    "deal-use":"可用",
-    "deal-timeSetting":"时限设置",
-    "deal-every":"每次输入",
-    "deal-2h":"每两小时输入",
-    "deal-never":"不输入",
-    "deal-inputpwdplease":"开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入",
-    "deal-marketbuy":"以市场最优价格买入",
-    "deal-trunover":"交易额",
-    "deal-forgetpwd":"忘记资金密码",
-    "deal-freepwd":"免输资金密码",
-    "deal-inputpwd":"输入资金密码",
+    "deal-limit": "限价委托",
+    "deal-market": "市价委托",
+    "deal-digital": "数字币计价",
+    "deal-timeSetting": "时限设置",
+    "deal-every": "每次输入",
+    "deal-2h": "每两小时输入",
+    "deal-never": "不输入",
+    "deal-inputpwdplease": "开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入",
+    "deal-marketbuy": "以市场最优价格买入",
+    "deal-trunover": "交易额",
+    "deal-forgetpwd": "忘记资金密码",
+    "deal-freepwd": "免输资金密码",
+    "deal-inputpwd": "输入资金密码",
   };
   const user = {
     "user-score": "我的积分",
@@ -250,7 +261,7 @@ export default function zh(state) {
     "user-inputSurname": "输入姓氏",
     "user-inputForename": "输入名字",
     "user-idCard": "身份证",
-    "user-passport":  "护照",
+    "user-passport": "护照",
     "user-inputCard": "请填写身份证号码/护照号",
     "user-photoVerify": "照片认证",
     "user-idReq": "证件要求",

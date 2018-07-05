@@ -21,9 +21,9 @@ export default class Simple extends exchangeViewBase {
     // !this.state.wallet && this.getWallet();
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUpdate() {}
+  componentWillUpdate() { }
 
   render() {
     let curPair = this.state.pairFees.filter(
@@ -37,21 +37,21 @@ export default class Simple extends exchangeViewBase {
       item => item.coinName === currencyArr[1]
     )[0].availableCount;
     return <div className="simple-asset clearfix">
-        <p className="simple-asset-wrap">
-          <span className="total">
-            总资产约：¥{this.state.totalAsset.valuationCN}{" "}
+      <p className="simple-asset-wrap">
+        <span className="total">
+          {this.intl.get('asset-totalAssets')}：¥{this.state.totalAsset.valuationCN}{" "}
+        </span>
+        <img src="/static/images/xianghu.svg" alt="" />
+        <span className="avail1">
+          {this.intl.get('deal-use')}{currencyArr[0].toUpperCase()}：{avail1}
+        </span>
+        <span className="avail2">
+          {this.intl.get('deal-use')}{currencyArr[1].toUpperCase()}：{avail2}
+        </span>
+        <span>
+          {this.intl.get('fee')}:Maker: {curPair.maker}%,Taker: {curPair.taker}%
           </span>
-          <img src="/static/images/xianghu.svg" alt="" />
-          <span className="avail1">
-            可用{currencyArr[0].toUpperCase()}：{avail1}
-          </span>
-          <span className="avail2">
-            可用{currencyArr[1].toUpperCase()}：{avail2}
-          </span>
-          <span>
-            手续费:Maker: {curPair.maker}%,Taker: {curPair.taker}%
-          </span>
-        </p>
-      </div>;
+      </p>
+    </div>;
   }
 }

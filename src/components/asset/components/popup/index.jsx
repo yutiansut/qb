@@ -15,7 +15,7 @@ export default class Popup extends exchangeViewBase {
     this.add = async (item, index) => {
       let flag;
       this.props.onSave && (flag = await this.props.onSave(item));
-      if(flag){
+      if (flag) {
         this.state.newAddress.splice(index, 1);
         this.setState({
           newAddress: this
@@ -23,7 +23,7 @@ export default class Popup extends exchangeViewBase {
             .newAddress
         });
       }
-     }
+    }
     //绑定方法
     // this.getData = controller.getData.bind(controller)
     // this.state = {
@@ -33,35 +33,35 @@ export default class Popup extends exchangeViewBase {
   render() {
     let { type, onClose, addressArr, onSave, onCancel, onDelete } = this.props;
     this.popup = {
-      popup1: () => {
-        return <div className="asset-popup-content base1">
-            <img className="close" src="/static/img/guanbi_hei.svg" alt="" onClick={() => {
-                onClose && onClose();
-              }} />
-            <p>
-              <NavLink to="/user/identity">请先进行身份认证</NavLink>
-            </p>
-          </div>;
-      },
-      popup2: () => {
-        return (
-          <div className="asset-popup-content base2">
-            <img
-              className="close"
-              src="/static/img/guanbi_hei.svg"
-              alt=""
-              onClick={() => {
-                onClose && onClose();
-              }}
-            />
-            <p>
-              <span>未进行实名认证的用户,需要进行实名认证方可充值。</span>
-              <br />
-              <NavLink to="/user/identity">请点击此处进行身份认证</NavLink>
-            </p>
-          </div>
-        );
-      },
+      // popup1: () => {
+      //   return <div className="asset-popup-content base1">
+      //       <img className="close" src="/static/img/guanbi_hei.svg" alt="" onClick={() => {
+      //           onClose && onClose();
+      //         }} />
+      //       <p>
+      //         <NavLink to="/user/identity">请先进行身份认证</NavLink>
+      //       </p>
+      //     </div>;
+      // },
+      // popup2: () => {
+      //   return (
+      //     <div className="asset-popup-content base2">
+      //       <img
+      //         className="close"
+      //         src="/static/img/guanbi_hei.svg"
+      //         alt=""
+      //         onClick={() => {
+      //           onClose && onClose();
+      //         }}
+      //       />
+      //       <p>
+      //         <span>未进行实名认证的用户,需要进行实名认证方可充值。</span>
+      //         <br />
+      //         <NavLink to="/user/identity">请点击此处进行身份认证</NavLink>
+      //       </p>
+      //     </div>
+      //   );
+      // },
       // 添加地址弹窗
       popup3: () => {
         return (
@@ -130,7 +130,7 @@ export default class Popup extends exchangeViewBase {
                           <Button
                             type="base"
                             title={this.intl.get('save')}
-                            onClick={()=>{this.add(item,index)}}
+                            onClick={() => { this.add(item, index) }}
                           />
                           <Button
                             title={this.intl.get('cance')}
@@ -147,16 +147,16 @@ export default class Popup extends exchangeViewBase {
                   })}
                 {addressArr &&
                   addressArr.map((item, index) => <tr className="base3-content" key={index}>
-                      <td>{item.addressName}</td>
-                      <td>{item.address}</td>
-                      <td>
-                        <Button
-                          title={this.intl.get('delete')}
-                          theme="danger"
-                          onClick={()=>{onDelete && onDelete(item)}}
-                        />
-                      </td>
-                    </tr>
+                    <td>{item.addressName}</td>
+                    <td>{item.address}</td>
+                    <td>
+                      <Button
+                        title={this.intl.get('delete')}
+                        theme="danger"
+                        onClick={() => { onDelete && onDelete(item) }}
+                      />
+                    </td>
+                  </tr>
                   )}
               </tbody>
             </table>
