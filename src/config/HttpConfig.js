@@ -52,9 +52,9 @@ export default {
     { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
     // 获取交易对名称以及id
     {name: 'pairInfo', data: { url: '/common/', method: 'post'}, action: 'getAllTradePairList', actionBack: 'getAllTradePairListRes'},
-    // 收藏
-    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack: 'changeFavoriteRes'},
-    // 收藏
+    // 添加收藏
+    {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack: 'changeFavoriteRes',needToken: true},
+    // 获取收藏
     {name:'getFavoriteList', data:{url: '/user/', method: 'post'}, action: 'getFavoriteList', actionBack: 'getFavoriteListRes', needToken: true},
     // 获取交易对
     {name:'getAllChg', data:{url: '/common/', method: 'post'}, action: 'getAllChg', actionBack:'getAllChgRes'}

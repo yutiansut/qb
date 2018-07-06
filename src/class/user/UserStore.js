@@ -38,7 +38,7 @@ export default class UserStore extends ExchangeStoreBase {
 
   userLogin(data) {
     console.log('ccc4', data)
-    this.state.userId = data && data.uid
+    this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName
     console.log('loginUser', this.state.userId, this.state.token)

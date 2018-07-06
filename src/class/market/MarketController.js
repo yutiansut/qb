@@ -97,21 +97,16 @@ export default class MarketController extends ExchangeControllerBase {
       collectIndex: index
     });
     v.isFavorite = 1-v.isFavorite
-    this.store.changeFavorite(1, JSON.parse('232602516485840896'), v.isFavorite)
+    this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
     // console.log('收藏 0', v.isFavorite)
   }
 
   // 市场下交易对
   async marketDataHandle() {
-    let collectIdArr = []
-    //请求收藏列表
-    if(this.userController.userToken){
-      collectIdArr = await this.store.getFavoriteList({token:this.userController.userToken, uesrId: this.userController.userId})
-    }
     //更新全部交易对信息
     await this.getTradePairHandle()
     //生成市场列表
-    let homeMarket = [...new Set(this.store.pairInfo.map(v=>v.marketName.toUpperCase()))].sort()
+    let homeMarket = [...new Set(this.store.pairInfo.map(v=>v.marketName))].sort()
     //默认设置为第一市场
     this.store.setSelecedMarket(homeMarket[0])
     this.view.setState({
@@ -119,16 +114,27 @@ export default class MarketController extends ExchangeControllerBase {
       market: homeMarket[0],
     });
     //生成交易对池
-    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0].toUpperCase(),marketName: v.marketName.toUpperCase(), tradePairName: v.tradePairName.toUpperCase()})))
+    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
     console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
-    await this.store.getMarketAll()
-    //根据市场从交易对池中选择该市场中的交易对
-    let homeMarketPairData = await this.store.selectMarketData()
-    console.log('homeMarketPair', homeMarketPairData)
+    let marketAll = await this.store.getMarketAll()
+    console.log('更新交易对池', JSON.stringify(marketAll))
+    // this.store.updateAllPairListFromData(marketAll)
+    //请求收藏列表
+    let collectIdArr = []
+    if(this.userController.userToken){
+      collectIdArr = await this.store.getFavoriteList(this.userController.userToken, this.userController.userId)
+    }
+    this.store.updateAllPairListFromCollect(collectIdArr)
+
+
+    // console.log('homeMarketPair', homeMarketPairData)
     //更新视图层
-    this.updateMarketAll(homeMarketPairData)
-    this.tradePairChange(homeMarketPairData[0]);
+    this.updateMarketAll([], 2)
+    // this.store.initWebsocket()
+
+
+    // this.
 
     // pairMsg[market[0]]
     // allPairData.map(v => homeMarket.push(v.market_name));
@@ -146,10 +152,16 @@ export default class MarketController extends ExchangeControllerBase {
     // this.tradePairSelect(homeMarketPair);
   }
 
-  updateMarketAll(homeMarketPair){
+  async updateMarketAll(List, type){
+    let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
+    //根据数据更新allPair
+    type < 2 && this.store[arr[type]](List)
+    //根据市场从交易对池中选择该市场中的交易对
+    let homeMarketPairData = await this.store.selectMarketData()
     this.view.setState({
-      homeMarketPairData: homeMarketPair,
+      homeMarketPairData: homeMarketPairData,
     });
+    this.tradePairChange(homeMarketPairData[0]);
   }
 
   //交易对的选中

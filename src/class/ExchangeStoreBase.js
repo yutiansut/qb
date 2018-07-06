@@ -59,14 +59,15 @@ export default class ExchangeStoreBase extends StoreBase {
     // console.log('connectName, modelName', connectName, modelName, websocket)
     websocket.onMessage = data => {
       // let header = websocket.config.optionList[modelName]
-      console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, WebsocketCallBackList[opConfig[data.op]])
+      console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, this.WebSocket[connectName], this.WebSocket[connectName][opConfig[data.op]])
       let dataCache = Msg[data.body.ret || 0] || data.body
       // if(dataCache.ret !== 0) {
       //   dataCache =
       //   // console.log('web报错1', Msg[data.body.rett], data.body)
       //   // return
       // }
-      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](dataCache)
+      // opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](dataCache)
+      opConfig[data.op] && this.WebSocket[connectName][opConfig[data.op]] && this.WebSocket[connectName][opConfig[data.op]].on(dataCache)
     }
     this.WebSocket[connectName] = {}
     this.WebSocket[connectName].emit = (key, data) => {

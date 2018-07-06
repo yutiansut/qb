@@ -43,6 +43,7 @@ export default class Login extends exchangeViewBase {
     this.login = controller.login.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
     this.destroy = controller.clearVerify.bind(controller); // 清除定时器
+    this.countDownStop = controller.countDownStop.bind(controller)
     this.changeTitle = this.changeTitle.bind(this)
     this.changeUser = this.changeUser.bind(this)
     this.changePass = this.changePass.bind(this)
@@ -101,8 +102,9 @@ export default class Login extends exchangeViewBase {
 
   }
 
-  componentWillUnMount() {
-    this.destroy()
+  componentWillUnmount() {
+    // this.destroy()
+    this.countDownStop('verifyCountDown')
   }
 
   render() {

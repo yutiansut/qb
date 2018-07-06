@@ -42,7 +42,7 @@ export default class MarketStore extends ExchangeStoreBase {
         }
       ],
       collectArr: [],
-      selecedMarket:'',
+      selecedMarket: '',
       recommendDataHandle: [],
       marketDataHandle: [],
       homeMarketPairData: [],
@@ -113,7 +113,27 @@ export default class MarketStore extends ExchangeStoreBase {
         }]
 
     };
-    // this.getMarketPair()
+    // 监听收藏
+    // this.WebSocket.general.on('collectArr', data => {
+    //   console.log('getWebSocketData', data, this.controller)
+    //   this.controller.updateMarketAll(data, 1)
+    // })
+    // console.log(this.WebSocket.general)
+    // this.WebSocket.general.collectArr.on = data => {
+    //   console.log('collectArr', data, this.controller)
+    //   this.controller.updateMarketAll(data, 1)
+    // }
+    // 监听推荐币种
+    this.WebSocket.general.on('recommendCurrency', data => {
+      console.log('getWebSocketData', data, this.controller)
+      this.controller.updateRecommend(data.data)
+      this.recommendData = data.data
+    })
+    // 监听市场数据更新
+    this.WebSocket.general.on('marketPair', data => {
+      console.log('getWebSocketData', data, this.controller)
+      this.controller.updateMarketAll(data, 1)
+    })
   }
 
   //设置选择的交易对
@@ -134,41 +154,48 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.allPairData
   }
 
+  //收藏变动更新列表
+  updateAllPairListFromCollect(list) {
+    console.log('updateAllPairListFromCollect 0',this, this.allPair, list)
+    list && list.length && list.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
+    console.log('updateAllPairListFromCollect 1', this.allPair)
+  }
+
+  //数据变动更新列表
+  updateAllPairListFromData(list) {
+    console.log('updateAllPairListFromData 0',this.state.allPairData, list)
+    list && list.length && (this.state.allPairData = this.state.allPairData.map(v=>Object.assign(v, list.find(vv=>vv.tradePairId === v.tradePairId) || {})))
+    console.log('updateAllPairListFromData 1',this.state.allPairData)
+  }
+
   //根据选择的市场筛选出交易对
-  async selectMarketData(){
+  async selectMarketData() {
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
-    console.log(pairMsg)
-    let coinNameList = pairMsg.pairNameMarket[this.state.market]
-    this.state.homeMarketPairData = coinNameList.map(v=>this.state.allPairData.find(vv=>vv.tradePairId === pairMsg.pairIdMarket[this.state.market][v]))
+    console.log(pairMsg, this.selecedMarket)
+    let coinNameList = pairMsg.pairNameMarket[this.selecedMarket]
+    this.state.homeMarketPairData = coinNameList.map(v => this.state.allPairData.find(vv => vv.tradePairId === pairMsg.pairIdMarket[this.selecedMarket][v]))
     return this.state.homeMarketPairData
   }
 
   getRecommendCurrency() {
     console.log('getData recommendCurrency', this.WebSocket)
     // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
-    this.WebSocket.general.on('recommendCurrency', data => {
-      console.log('getWebSocketData', data, this.controller)
-      this.controller.updateRecommend(data.data)
-      this.recommendData = data.data
-    })
+
   }
 
   getMarketPair() {
     console.log('getData marketPair', this.WebSocket)
-    this.WebSocket.general.on('marketPair', data => {
-      console.log('getWebSocketData', data, this.controller)
-      // this.controller.updateRecommend(data.data)
-      // this.recommendData = data.data
-    })
+
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
 
-  changeFavorite(tradePairId, userId, operateType) {
+  changeFavorite(tradePairId, userId, operateType, token) {
     this.Proxy.changeFavorite({
       operateType, //0添加 1取消
       tradePairId,
-      userId
+      userId,
+      token
     });
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
@@ -177,8 +204,12 @@ export default class MarketStore extends ExchangeStoreBase {
     this.state.coinInfo = await this.Proxy.coinInfo({userId: JSON.parse('232601699242483712')});
   }
 
-  async getFavoriteList() {
-    this.state.coinInfo = await this.Proxy.coinInfo({userId: JSON.parse('232601699242483712')});
+  async getFavoriteList(token, userId) {
+    this.state.collectArr = await this.Proxy.getFavoriteList({
+      userId,
+      token
+    });
+    return this.state.collectArr
   }
 
   async getPairInfo() {

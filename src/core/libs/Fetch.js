@@ -5,7 +5,7 @@
  */
 
 export default async (url, params) => {
-  console.log('上传信息', url, params)
+  console.log('sendHttp', url, params)
   try {
     let response = await fetch(url, params).catch((e, obj) => {
         obj = { ret: -1, data: e };
