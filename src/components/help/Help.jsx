@@ -22,8 +22,6 @@ export default class Help extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.controller = props.controller;
-
-    marketController = new MarketController();
   }
 
   render() {
@@ -38,15 +36,14 @@ export default class Help extends exchangeViewBase {
       return <Api controller={this.controller} />;
     };
     const coin = ({location}) => {
-      marketController.assetController = this.controller
-      return <CoinData controller={marketController} location={location} />;
+      return <CoinData controller={this.controller} location={location} />;
     };
 
     return <div className="help-wrap inner">
       <div className="route">
           <Switch>
             <Route path={`${match.url}/terms`} component={terms} />
-            <Route path={`${match.url}/pricing`} controller={this.controller} component={pricing} />
+            <Route path={`${match.url}/pricing`} component={pricing} />
             <Route path={`${match.url}/api`} component={api} />
             <Route path={`${match.url}/currency`} component={coin} />
             <Redirect to={`${match.url}/terms`} />

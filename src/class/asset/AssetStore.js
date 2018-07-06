@@ -56,6 +56,7 @@ export default class AssetStore extends ExchangeStoreBase {
     };
     // websocket监听用户资产更新推送
     this.WebSocket.general.on("userAssetUpdate", data => {
+      console.log('asset-websocket', data)
       let {valuationBTC, valuationEN, valuationCN, coinList} = data;
       this.state.totalAsset.valuationBTC = valuationBTC;//总资产
       this.state.totalAsset.valuationEN = valuationEN; //换算美元
@@ -120,6 +121,7 @@ export default class AssetStore extends ExchangeStoreBase {
     });
     if (coinList.length) {
       let obj = {};
+      console.log(coinList)
       this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
@@ -178,6 +180,7 @@ export default class AssetStore extends ExchangeStoreBase {
     obj.page === 0 &&
       result.totalCount &&
       (this.state.assetHistory.total = result.totalCount);
+    return this.state.assetHistory;
   }
   // 获取矿工费
   async getMinerFee(coin, address) {

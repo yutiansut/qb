@@ -58,6 +58,7 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
+
     let result = await this.store.getCurrencyAmount(coin);
     if (result && result.errCode) {
       return;
@@ -109,10 +110,10 @@ export default class AssetController extends ExchangeControllerBase {
   async getHistory(obj) {
     await this.store.getHistory(obj);
     this.view.setState({
-      assetHistory: this.store.state.assetHistory
+      assetHistory: this.Util.deepCopy(this.store.state.assetHistory)
     });
   }
-  // 获取确认中充币信息
+  // 获取确认中充币信息(顶部轮播)
   async getChargeMessage() {
     let result = await this.store.Proxy.history({
       userId: this.userId,
@@ -199,7 +200,9 @@ export default class AssetController extends ExchangeControllerBase {
         tip: true,
         tipSuccess: true,
         tipContent: this.view.intl.get("optionSuccess"),
-        showTwoVerify: false
+        showTwoVerify: false,
+        extractAmount: "", //提现数量
+        password: "",
       });
       this.getCurrencyAmount(this.view.state.currency);
       // this.getHistory({
@@ -214,6 +217,7 @@ export default class AssetController extends ExchangeControllerBase {
       // });
     }
   }
+
   // 撤销提币申请
   async cancelOreder(id) {
     let result = await this.store.cancelOrder(id);
@@ -225,6 +229,7 @@ export default class AssetController extends ExchangeControllerBase {
       });
       return false;
     }
+    console.log('cancelOrder')
     this.view.setState({
       tip: true,
       tipSuccess: true,
@@ -270,7 +275,6 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 账户余额页面筛选
   filte(wallet, value, hideLittle, hideZero) {
-    console.log(wallet, value, hideLittle, hideZero);
     let arr1 = this.filter(wallet, item => {
       return (
         item.coinName.includes(value.toLowerCase()) ||

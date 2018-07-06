@@ -4,6 +4,7 @@ import SelectButton from "../../../common/component/SelectButton";
 import Button from "../../../common/component/Button";
 import DatePicker from "../../../common/component/DatePicker/DatePicker";
 import Pagination from "../../../common/component/Pagination";
+import BasePopup from "../../../common/component/Popup";
 import "../style/history.styl";
 export default class History extends exchangeViewBase {
   constructor(props) {
@@ -33,6 +34,9 @@ export default class History extends exchangeViewBase {
     this.name = "history";
     this.state = {
       page: 1,
+      tip: false,
+      tipSuccess: true,
+      tipContent: "",
       currency: this.intl.get("all"),
       orderType: this.intl.get("all"),
       status: this.intl.get("all"),
@@ -308,6 +312,16 @@ export default class History extends exchangeViewBase {
           </div>
         ) : (
           <div className="kong">{this.intl.get("noRecords")}</div>
+        )}
+        {this.state.tip && (
+          <BasePopup
+            type={this.state.tipSuccess ? "tip1" : "tip3"}
+            msg={this.state.tipContent}
+            onClose={() => {
+              this.setState({ tip: false });
+            }}
+            autoClose={true}
+          />
         )}
       </div>
     );

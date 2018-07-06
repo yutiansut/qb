@@ -6,6 +6,8 @@ import Button from "../../../common/component/Button";
 export default class CoinData extends exchangeViewBase {
   constructor(props) {
     super(props);
+    props.controller.setView(this);
+    props.controller.marketController.setView(this);
     this.state = {
       showSearch: false,
       currency: "BTC",
@@ -13,6 +15,7 @@ export default class CoinData extends exchangeViewBase {
       value: "",
       walletList: []
     };
+    this.getWalletList = props.controller.getWalletList.bind(props.controller);
     this.show = () => {
       this.setState({ showSearch: true });
     };
@@ -33,9 +36,7 @@ export default class CoinData extends exchangeViewBase {
     }
   }
   async componentWillMount() {
-    this.setState({
-      walletList: await this.props.controller.assetController.walletList()
-    });
+    await this.getWalletList()
   }
   render() {
     let { controller } = this.props;
