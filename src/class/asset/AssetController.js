@@ -247,7 +247,6 @@ export default class AssetController extends ExchangeControllerBase {
       });
       return false;
     }
-    console.log(result);
     this.view.setState({
       walletExtract: this.Util.deepCopy(result),
       tip: true,

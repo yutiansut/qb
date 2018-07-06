@@ -20,8 +20,8 @@ export default class MarketController extends ExchangeControllerBase {
 
   }
 // 获取币种资料
-  async getCoinInfo(currency){
-    await this.store.getCoinInfo(currency);
+  async getCoinInfo(coinId){
+    await this.store.getCoinInfo(coinId);
     this.view.setState({ coinInfo: this.store.state.coinInfo});
   }
 
@@ -31,7 +31,7 @@ export default class MarketController extends ExchangeControllerBase {
       recommendData: data
     })
   }
-  
+
   async getMarket(){
     await this.store.getMarket();
   }
@@ -177,7 +177,7 @@ export default class MarketController extends ExchangeControllerBase {
   //   this.userOrderController && this.userOrderController.changeTradePairId(list[0].tradePairId)
   //   this.setDealMsg();
   // }
-  
+
   //交易对的选中
   tradePairChange(value) {
     this.view.setState({

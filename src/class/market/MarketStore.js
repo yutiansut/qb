@@ -204,8 +204,8 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
 
-  async getCoinInfo() {
-    this.state.coinInfo = await this.Proxy.coinInfo({userId: JSON.parse('232601699242483712')});
+  async getCoinInfo(coinId) {
+    this.state.coinInfo = await this.Proxy.coinInfo({coinId});
   }
 
   async getFavoriteList(token, userId) {

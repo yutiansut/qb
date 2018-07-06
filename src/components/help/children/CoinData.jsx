@@ -10,12 +10,21 @@ export default class CoinData extends exchangeViewBase {
     props.controller.marketController.setView(this);
     this.state = {
       showSearch: false,
-      currency: "BTC",
+      currency: "ETH",
       unit: 0,
       value: "",
-      walletList: []
+      walletList: {}
     };
+    let {
+      coinInfo
+    } = props.controller.marketController.initState;
+
+    this.state = Object.assign(this.state, {
+      coinInfo
+    });
+
     this.getWalletList = props.controller.getWalletList.bind(props.controller);
+    this.getCoinInfo = props.controller.marketController.getCoinInfo.bind(props.controller.marketController)
     this.show = () => {
       this.setState({ showSearch: true });
     };
@@ -36,12 +45,14 @@ export default class CoinData extends exchangeViewBase {
     }
   }
   async componentWillMount() {
-    await this.getWalletList()
+    await this.getWalletList();
+    await this.getCoinInfo(this.state.walletList[this.state.currency])
   }
   render() {
+    let {} = this.state.coinInfo;
     let { controller } = this.props;
     this.searchArr = controller.filter(
-      this.state.walletList,
+      Object.keys(this.state.walletList),
       this.state.value.toUpperCase()
     );
     return (
