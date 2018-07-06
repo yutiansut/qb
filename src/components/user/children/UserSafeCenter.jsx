@@ -340,7 +340,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    setLoginPass = {this.setLoginPass}
                    setFundPass = {this.setFundPass}
                    modifyFundPwd = {this.modifyFundPwd}
-                   fundPassType = {this.state.fundPassVerify}
+                   fundPassType = {this.state.userInfo.fundPassVerify}
                    captcha = {this.state.captcha}
                    captchaId = {this.state.captchaId}
                    getCaptcha = {this.getCaptchaVerify}

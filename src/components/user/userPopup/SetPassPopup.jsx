@@ -77,7 +77,6 @@ export default class SetPassPopup extends exchangeViewBase {
       }
     }
   }
-
   changeInput4(value) {
     this.setState({popupInput4: value});
     console.log(4, value)
@@ -90,7 +89,16 @@ export default class SetPassPopup extends exchangeViewBase {
     this.setState({popupInput6: value});
     console.log(6, value)
   }
+  canClick() {
+    if (this.state.popupInput2 && this.state.popupInput4 && this.state.popupInput5) return true // 绑定
+    if (this.state.popupInput2 && this.state.popupInput3) return true // 设置登录密码
+    if (this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3) return true // 修改登录密码
+    if (this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && this.state.popupInput5) return true // 设置资金密码
+    if (this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && this.state.popupInput5) return true // 修改资金密码
+    return false
+  }
   render() {
+    console.log(222, this.props.isType, this.props.fundPassType)
     return (
       <div className="pass-wrap">
         <div className="pass-info">
@@ -150,12 +158,19 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>*出于安全方面的考虑，修改密码后，你的账户将在 24 小时内无法提现</p>
               </li>
               <li>
-                {this.props.isType === 1 && <Button className={`${this.state.popupInput2 && this.state.popupInput4 && this.state.popupInput5 ? 'canClick' : ''} set-btn btn`} title="绑定" onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
+                {this.props.isType === 1 && <Button className={`${this.state.popupInput2 && this.state.popupInput4 && this.state.popupInput5 ? 'can-click' : ''} set-btn btn`} title="绑定" onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
                 {this.props.isType === 2 && <Button className="set-btn btn" title="绑定" onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
                 {this.props.isType === 3 && <Button className="set-btn btn" title="设置" onClick={() => this.props.setLoginPass('', this.state.popupInput2, 0)}/>}
-                {this.props.isType === 4 && <Button className={`${this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3 ? 'canClick' : ''} set-btn btn`} disable={this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3 ? false : true} title="修改" onClick={() => this.props.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
-                {this.props.isType === 5 && <Button className="set-btn btn" title="保存" onClick={() => this.props.setFundPass(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.state.popupInput2, this.state.popupInput4, this.props.captchaId, this.state.popupInput5)}/>}
-                {this.props.isType === 6 && <Button className="set-btn btn" title="保存" onClick={() => this.props.modifyFundPwd(this.props.phone ? this.props.phone : this.props.email, this.props.phone ? 0 : 1, this.state.popupInput2, this.state.popupInput4, this.props.captchaId, this.state.popupInput5)}/>}
+                {this.props.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title="修改" onClick={() => this.props.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
+                {this.props.isType === 5 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title="保存" onClick={() => this.props.setFundPass(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.state.popupInput2, this.state.popupInput4, this.props.captchaId, this.state.popupInput5)}/>}
+                {this.props.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title="保存"
+                                                    onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ?this.props.email : ''),
+                                                                   this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 0),
+                                                                   this.state.popupInput1,
+                                                                   this.state.popupInput2,
+                                                                   this.props.captchaId,
+                                                                   this.state.popupInput4,
+                                                                   this.props.fundPassType === 2 ? this.state.popupInput6 : this.state.popupInput5)}/>}
               </li>
             </ul>
           </div>

@@ -120,8 +120,12 @@ export default class UserController extends ExchangeControllerBase {
       "image2": this.view.state.image2, // 背面照
       "image3": this.view.state.image3  // 手持照
     })
-    console.log('上传照片', result)
-    this.view.setState({remindPopup: true, popType: result && result.ret === 101 ? 'tip1': 'tip3', popMsg: result && result.ret === 101 ? "上传成功" : result.msg})
+    console.log('上传信息', result)
+    this.view.setState({
+      remindPopup: true,
+      popType: result && result.ret === 101 ? 'tip1': 'tip3',
+      popMsg: result && result.ret === 101 ? "上传成功" : result.msg
+    })
     result.ret === 101 && this.view.setState({userAuth: {state: 3}})
   }
 
@@ -136,7 +140,12 @@ export default class UserController extends ExchangeControllerBase {
       captchaCode, // 图形验证码，没有就传空
       "os": 3, // 1:android 2:iOS 3:borwser
     })
-    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg ? result.msg : "绑定成功"})
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "绑定成功",
+      showSet: result ? true : false
+    })
     console.log('绑定手机号／邮箱', result)
   }
 
@@ -150,9 +159,10 @@ export default class UserController extends ExchangeControllerBase {
     })
     this.view.setState({
       remindPopup: true,
-      popType: result && result.errCode ? 'tip3': 'tip1',
-      popMsg: result && result.msg ? result.msg : "设置成功",
-      showSet: result && result.errCode ? true : false
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "设置成功",
+      showSet: result ? true : false,
+      userInfo: {loginPwd: result ? 1 : 0}
     })
     console.log('设置密码', result)
   }
@@ -170,6 +180,13 @@ export default class UserController extends ExchangeControllerBase {
       "os": 3, // 1:android 2:iOS 3:browser
     })
     console.log('设置密码', result)
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "设置成功",
+      showSet: result ? true : false,
+      userInfo: {fundPwd: result ? 1 : 0}
+    })
   }
 
   async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
@@ -186,6 +203,12 @@ export default class UserController extends ExchangeControllerBase {
       "os": 3, // 1:android 2:iOS 3:browser
     })
     console.log('设置密码', result)
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "设置成功",
+      showSet: result ? true : false
+    })
   }
 
   async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
