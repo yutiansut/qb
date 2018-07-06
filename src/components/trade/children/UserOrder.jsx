@@ -98,7 +98,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)}</td>
                     <td>{v.dealDoneCount}</td>
                     <td>{v.undealCount}</td>
-                    <td>{this.state.orderStatus[v.orderStatus]}</td>
+                    <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                     <td>{this.intl.get('cancel')}</td>
                   </tr>
               )

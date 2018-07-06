@@ -210,23 +210,26 @@ export default class UserOrderListStore extends OrderListStore {
     };
     console.log('this.WebSocket',this.WebSocket)
     this.WebSocket.general.on('userOrderUpdate', data => {
+      this.controller.updateUserOrder(data)
       console.log('wsOrderList userOrderUpdate', data)
     })
   }
   wsOrderList(){
     // this.WebSocket.general.emit('userOrderUpdate')
     this.WebSocket.general.on('userOrderUpdate', data => {
-      console.log('wsOrderList', data)
+      // console.log('wsOrderList', data)
+      
     })
   }
   async getCurrentOrder(params){
+    console.log(321321231,params)
     let currentList = await this.Proxy.currentOrder(
         {
           "userId": JSON.parse(this.controller.userController.userId),
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
-          "hideOther": params.hideOther
+          // "hideOther": params.hideOther
         }
     );
     this.state.currentOrder = currentList.orderList;

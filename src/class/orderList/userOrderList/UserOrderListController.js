@@ -36,20 +36,21 @@ export default class UserOrderListController extends OrderListController {
   changeTradePairId(value) {
     let idArray = [];
     idArray.push(value);
+    console.log(123123123123,idArray)
     let currentParams = {
       // 'userId': JSON.parse(this.userController.userId),
-      "tradePairId": idArray,
+       idArray,
       "orderType": 2,
     };
     let historyParams = {
       // 'userId': JSON.parse(this.userController.userId),
-      "tradePairId": idArray,
+       idArray,
       "orderType": 2,
-      "orderStatus": [1, 2, 3, 4, 5, 6],
-      startTime: 1509484067,
-      endTime: 1530088867,
-      // "startTime": new Date().getTime() - 7 * 24 * 60 * 60,
-      // "endTime": new Date().getTime(),
+      "orderStatus": [2, 3, 4, 5, 6, 7],
+      // startTime: 1509484067,
+      // endTime: 1530088867,
+      "startTime": Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
+      "endTime": Math.floor(new Date().getTime() / 1000),
       "page": 1,
       "pageSize": 10
     };
@@ -94,5 +95,45 @@ export default class UserOrderListController extends OrderListController {
   
   wsOrderList(){
     this.store.wsOrderList();
+  }
+  
+  updateUserOrder(para) {
+    // let para = {
+    //       "tradePairId": 2,
+    //       "tradePairName": 1,
+    //       "orderType": 0,//订单类型 0买  1卖
+    //       "priceType": 1,//价格类型 0限价  1市价
+    //       "oderId": 0,
+    //       "orderTime": 947586000,
+    //       "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
+    //       "price": 1.23,
+    //       "count": 2.33,//总量
+    //       "dealDoneCount": 1.99,//已成交的量
+    //       "priceCN": 1.23,
+    //       "priceEN": 1.23,
+    //       "avgPrice": 1.22,//均价
+    //       "avgPriceCN": 1.11,
+    //       "avgPriceEN": 1.12,
+    //       "undealCount": 0.34,//未成交的量
+    //       "turnover": 23232.2,//成交额
+    //       "turnoverCN": 23232.2,
+    //       "turnoverEN": 23232.2,
+    //       "fee": 0.04//手续费
+    //     }
+    console.log('uupp', para,this.view.state.currentOrder,this.view.state.historyOrder)
+     let currentOrder = this.view.state.currentOrder;
+     let historyOrder = this.view.state.historyOrder;
+     // let changeItem = currentOrder.find(v => v.orderId = para.orderId);
+     let changeIndex = currentOrder.findIndex(v => v.orderId = para.orderId);
+     console.log('changeIndex', changeIndex)
+     if(para.orderStatus === 0 || para.orderStatus === 1) {
+        currentOrder.splice(changeIndex, 1, para);
+        this.view.setState(currentOrder);
+       console.log('currentOrder22', currentOrder)
+        return
+     }
+     historyOrder.unshift(para);
+    console.log('currentOrder33', historyOrder)
+     this.view.setState(historyOrder)
   }
 }

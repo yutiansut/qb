@@ -16,7 +16,7 @@ export default class TradeOrderListController extends OrderListController {
     console.log('liveTradeList asdasdasdasd',liveTradeList)
     let liveTradeData = liveTradeList;
     let liveBuyArray = liveTradeData.buy;
-    let liveSellArray = liveTradeData.sell;
+    let liveSellArray = liveTradeData.sell && liveTradeData.sell.reverse();
     this.view.setState({liveBuyArray, liveSellArray});
     this.store.state.liveSellArray = liveSellArray;
     this.store.state.liveBuyArray = liveBuyArray;
@@ -27,7 +27,7 @@ export default class TradeOrderListController extends OrderListController {
     this.view.setState(
         {
           liveBuyArray: liveTradeData.buy,
-          liveSellArray: liveTradeData.sell
+          liveSellArray: liveTradeData.sell && liveTradeData.sell.reverse()
         }
     )
   }
