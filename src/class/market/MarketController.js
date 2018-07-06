@@ -59,8 +59,10 @@ export default class MarketController extends ExchangeControllerBase {
 
 
   // 切换市场
-  changeMarket(v) {
-    let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
+  async changeMarket(v) {
+    // let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
+    this.store.setSelecedMarket(v);
+    let homeMarketPairData = await this.store.selectMarketData()
     this.view.setState({
       // searchValue: '',
       sortIndex: 0,
@@ -70,8 +72,8 @@ export default class MarketController extends ExchangeControllerBase {
       market: v,
       homeMarketPairData
     });
-    this.store.state.market = v;
-    this.store.state.homeMarketPairData = homeMarketPairData;
+    // this.store.state.market = v;
+    // this.store.state.homeMarketPairData = homeMarketPairData;
     this.tradePairSelect(homeMarketPairData);
   }
 
@@ -121,7 +123,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新交易对池，只在第一次打开时，发送http请求更新
     await this.store.getMarketAll()
     //根据市场从交易对池中选择该市场中的交易对
-    let homeMarketPair = await this.store.selectMarket()
+    let homeMarketPair = await this.store.selectMarketData()
     console.log('homeMarketPair', homeMarketPair)
     //更新视图层
     this.updateMarketAll(homeMarketPair)
@@ -163,10 +165,10 @@ export default class MarketController extends ExchangeControllerBase {
 
   tradePairChange(value) {
     this.view.setState({
-      tradePair: value.trade_pair,
+      tradePair: value.tradePairName,
       tradePairId: value.tradePairId
     });
-    this.store.state.tradePair = value.trade_pair;
+    this.store.state.tradePair = value.tradePairName;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
@@ -208,7 +210,7 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log('收藏数组', this.store.state.allPairData)
     // arr.concat(arr2,arr3)
     this.store.state.allPairData.map(v => {
-      concatArr = concatArr.concat(v.market_data)
+      concatArr = concatArr.concat(v.marketName)
     })
     // console.log('收藏数组2', concatArr)
     collectArr = concatArr.filter(v => {
@@ -223,7 +225,7 @@ export default class MarketController extends ExchangeControllerBase {
   //为交易模块提供价格以及交易对的信息
   setDealMsg() {
     //改变deal模块中的信息
-    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.trade_pair === this.store.state.tradePair),
+    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
       dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].coinIcon,

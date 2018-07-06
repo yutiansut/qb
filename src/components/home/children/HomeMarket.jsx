@@ -53,7 +53,7 @@ export default class HomeMarket extends ExchangeViewBase{
             </li>
             {this.state.marketDataHandle.map((v, index) => {return(
               <li key={index} onClick={this.changeMarket.bind(this,v)}>
-                <span className={`home-market-item${this.state.market === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
+                <span className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
               </li>
             )})}
           </ul>

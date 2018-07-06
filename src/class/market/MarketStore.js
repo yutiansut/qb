@@ -42,7 +42,7 @@ export default class MarketStore extends ExchangeStoreBase {
         }
       ],
       collectArr: [],
-      selecedMarket:'BTC',
+      selecedMarket:'',
       recommendDataHandle: [],
       marketDataHandle: [],
       homeMarketPairData: [],
@@ -116,12 +116,14 @@ export default class MarketStore extends ExchangeStoreBase {
     // this.getMarketPair()
   }
 
+  //设置选择的交易对
   setSelecedMarket(data) {
-    this.state.selecedMarket = data
+    this.state.market = data
   }
 
+  //得到选择的交易对
   get selecedMarket() {
-    return this.state.selecedMarket
+    return this.state.market
   }
 
   setAllPair(data) {
@@ -132,14 +134,14 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.allPairData
   }
 
-  async selectMarket(){
+  //根据选择的市场筛选出交易对
+  async selectMarketData(){
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
     console.log(pairMsg)
-    let coinNameList = pairMsg.pairNameMarket[this.state.selecedMarket]
-    return coinNameList.map(v=>this.state.allPairData.find(vv=>vv.tradePairId === pairMsg.pairIdMarket[this.state.selecedMarket][v]))
-
-
+    let coinNameList = pairMsg.pairNameMarket[this.state.market]
+    this.state.homeMarketPairData = coinNameList.map(v=>this.state.allPairData.find(vv=>vv.tradePairId === pairMsg.pairIdMarket[this.state.market][v]))
+    return this.state.homeMarketPairData
   }
 
   getRecommendCurrency() {
@@ -189,11 +191,6 @@ export default class MarketStore extends ExchangeStoreBase {
 
   get pairInfo() {
     return this.state.pairInfo
-  }
-
-  updateMarketDataHandle(homeMarket, homeMarketPair) {
-    this.state.marketDataHandle = homeMarket;
-    this.state.homeMarketPairData = homeMarketPair;
   }
 
   async getMarketAll() {
