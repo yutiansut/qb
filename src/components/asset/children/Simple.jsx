@@ -5,9 +5,12 @@ import "../style/simple.styl";
 export default class Simple extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.state = {};
     let { controller } = this.props;
     controller.setView(this);
+    this.name = "simple";
+    this.state = {
+      tradePairId: 3 //交易对id
+    };
     let { pairFees, totalAsset, wallet } = controller.initState;
     this.state = Object.assign(this.state, { pairFees, totalAsset, wallet });
     //绑定方法
@@ -26,35 +29,46 @@ export default class Simple extends exchangeViewBase {
   componentWillUpdate() {}
 
   render() {
-    // console.log(this.state.pairFees);
     let curPair = this.state.pairFees.filter(
-      item => item.id === this.props.tradePairId
+      item => item.id === this.state.tradePairId
+    )[0],
+    currencyArr = curPair && curPair.name.split("/"),
+    avail1 = this.state.wallet.filter(
+      item => item.coinName === (currencyArr && currencyArr[0])
+    )[0],
+    avail2 = this.state.wallet.filter(
+      item => item.coinName === (currencyArr && currencyArr[1])
     )[0];
-    let currencyArr = curPair && curPair.name.split("/");
-    let avail1 = this.state.wallet.filter(
-      item => item.coinName === currencyArr[0]
-    )[0];
-    let avail2 = this.state.wallet.filter(
-      item => item.coinName === currencyArr[1]
-    )[0];
-    return <div className="simple-asset clearfix">
+    let lang = this.props.controller.configData.language;
+    // console.log(this.state.totalAsset);
+    let total =
+      lang === "en-US"
+        ? this.state.totalAsset.valuationEN
+        : this.state.totalAsset.valuationCN;
+    return (
+      <div className="simple-asset clearfix">
         <p className="simple-asset-wrap">
           <span className="total">
-          {this.intl.get("asset-totalAssets")}：¥{this.state.totalAsset.valuationCN.format({ number: "property" })}{" "}
+            {this.intl.get("asset-totalAssets")}：{lang === "en-US" ? "$" : "¥"}
+            {total && total.format({ number: "digital" })}{" "}
           </span>
           <img src="/static/images/xianghu.svg" alt="" />
           <span className="avail1">
             {this.intl.get("deal-use")}
-          {currencyArr && currencyArr[0].toUpperCase()}：{avail1 && avail1.availableCount.format({ number: "property" })}
+            {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&
+              avail1.availableCount.format({ number: "property" })}
           </span>
           <span className="avail2">
             {this.intl.get("deal-use")}
-          {currencyArr && currencyArr[1].toUpperCase()}：{avail2 && avail2.availableCount.format({ number: "property" })}
+            {currencyArr && currencyArr[1].toUpperCase()}：{avail2 &&
+              avail2.availableCount.format({ number: "property" })}
           </span>
           <span>
-          {this.intl.get("fee")}:Maker: {curPair && curPair.maker}%,Taker: {curPair && curPair.taker}%
+            {this.intl.get("fee")}:Maker: {curPair && curPair.maker}%,Taker:{" "}
+            {curPair && curPair.taker}%
           </span>
         </p>
-      </div>;
+      </div>
+    );
   }
 }

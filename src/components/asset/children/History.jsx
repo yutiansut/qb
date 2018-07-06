@@ -8,11 +8,14 @@ import "../style/history.styl";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
+    let { controller } = this.props;
+    controller.setView(this);
+    // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
       orderType: {
-        1: this.intl.get('deposit'),
-        5: this.intl.get('asset-transfer'),
-        15000: this.intl.get('asset-withdraw'),
+        1: this.intl.get("deposit"),
+        5: this.intl.get("asset-transfer"),
+        15000: this.intl.get("asset-withdraw")
       },
       status: {
         0: this.intl.get("pending"),
@@ -27,6 +30,7 @@ export default class History extends exchangeViewBase {
     for (const k in this.staticData.status) {
       this.staticData.status[this.staticData.status[k]] = Number(k);
     }
+    this.name = "history";
     this.state = {
       page: 1,
       currency: this.intl.get("all"),
@@ -35,8 +39,7 @@ export default class History extends exchangeViewBase {
       startTime: parseInt((new Date() - 604800000) / 1000),
       endTime: parseInt((new Date() - 0) / 1000)
     };
-    let { controller } = this.props;
-    controller.setView(this);
+
     let { wallList, assetHistory } = controller.initState;
     this.state = Object.assign(this.state, {
       wallList,
@@ -48,21 +51,27 @@ export default class History extends exchangeViewBase {
     this.cancelOreder = controller.cancelOreder.bind(controller);
 
     this.initSearch = () => {
-      this.setState({
-        page: 1,
-        currency: this.intl.get("all"),
-        orderType: this.intl.get("all"),
-        status: this.intl.get("all"),
-        startTime: parseInt((new Date() - 604800000) / 1000),
-        endTime: parseInt((new Date() - 0) / 1000)
-      }, () => {
-        this.search(0)
-      });
+      this.setState(
+        {
+          page: 1,
+          currency: this.intl.get("all"),
+          orderType: this.intl.get("all"),
+          status: this.intl.get("all"),
+          startTime: parseInt((new Date() - 604800000) / 1000),
+          endTime: parseInt((new Date() - 0) / 1000)
+        },
+        () => {
+          this.search(0);
+        }
+      );
     };
-    this.search = (page) => {
+    this.search = page => {
       let { currency, orderType, startTime, endTime, status } = this.state;
       this.getHistory({
-        coinId: currency === this.intl.get("all") ? -1 : this.state.walletList[currency],
+        coinId:
+          currency === this.intl.get("all")
+            ? -1
+            : this.state.walletList[currency],
         coinName:
           currency === this.intl.get("all") ? -1 : currency.toLowerCase(),
         orderType:
@@ -72,9 +81,7 @@ export default class History extends exchangeViewBase {
         startTime: startTime,
         endTime: endTime,
         orderStatus:
-          status === this.intl.get("all")
-            ? -1
-            : this.staticData.status[status], //未通过 审核中1 通过2  撤销3
+          status === this.intl.get("all") ? -1 : this.staticData.status[status], //未通过 审核中1 通过2  撤销3
         page: page,
         pageSize: 20
       });
@@ -97,9 +104,9 @@ export default class History extends exchangeViewBase {
     });
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUpdate() { }
+  componentWillUpdate() {}
 
   render() {
     let { total, orderList } = this.state.assetHistory;
@@ -117,9 +124,16 @@ export default class History extends exchangeViewBase {
                 title={this.state.currency}
                 type="main"
                 className="select"
-                valueArr={this.state.walletList ? [this.intl.get("all"), ...(Object.keys(this.state.walletList))] : []}
+                valueArr={
+                  this.state.walletList
+                    ? [
+                        this.intl.get("all"),
+                        ...Object.keys(this.state.walletList)
+                      ]
+                    : []
+                }
                 onSelect={value => {
-                  console.log(value)
+                  console.log(value);
                   this.setState({ currency: value });
                 }}
               />
@@ -176,7 +190,9 @@ export default class History extends exchangeViewBase {
               type="base"
               title={this.intl.get("search")}
               className="search"
-              onClick={() => { this.search(this.state.page - 1) }}
+              onClick={() => {
+                this.search(this.state.page - 1);
+              }}
             />
             <Button
               type="base"
@@ -230,30 +246,51 @@ export default class History extends exchangeViewBase {
                       },
                       index
                     ) => (
-                        <tr key={index}>
-                          <td className="time">{orderTime.toDate('yyyy-MM-dd')}</td>
-                          <td>
-                            <img src={coinIcon} alt="" />
-                            {coinName.toUpperCase()}
-                          </td>
-                          <td>{this.staticData.orderType[orderType]}</td>
-                          <td className="cash red">{orderType === 15000 ? '-' : orderType === 0 ? '+' : ''}{count}</td>
-                          <td className="balan"><i>{balance}</i></td>
-                          <td className="send"><i>{postAddress}</i></td>
-                          <td className="receive"><i>{receiveAddress}</i></td>
-                          <td className="state passing">
-                            <span>{this.staticData.status[orderStatus]}</span>
-                          </td>
-                          <td className="fee">{fee}</td>
-                          <td className="option">
-                            {orderStatus === 0 ? (
-                              <a onClick={() => { this.cancelOreder(orderId); }}>{this.intl.get("cancel")}</a>
-                            ) : (
-                                "—"
-                              )}
-                          </td>
-                        </tr>
-                      )
+                      <tr key={index}>
+                        <td className="time">
+                          {orderTime.toDate("yyyy-MM-dd")}
+                        </td>
+                        <td>
+                          <img src={coinIcon} alt="" />
+                          {coinName.toUpperCase()}
+                        </td>
+                        <td>{this.staticData.orderType[orderType]}</td>
+                        <td className="cash red">
+                          {orderType === 15000
+                            ? "-"
+                            : orderType === 0
+                              ? "+"
+                              : ""}
+                          {count}
+                        </td>
+                        <td className="balan">
+                          <i>{balance}</i>
+                        </td>
+                        <td className="send">
+                          <i>{postAddress}</i>
+                        </td>
+                        <td className="receive">
+                          <i>{receiveAddress}</i>
+                        </td>
+                        <td className="state passing">
+                          <span>{this.staticData.status[orderStatus]}</span>
+                        </td>
+                        <td className="fee">{fee}</td>
+                        <td className="option">
+                          {orderStatus === 0 ? (
+                            <a
+                              onClick={() => {
+                                this.cancelOreder(orderId);
+                              }}
+                            >
+                              {this.intl.get("cancel")}
+                            </a>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                      </tr>
+                    )
                   )}
               </tbody>
             </table>
@@ -263,15 +300,15 @@ export default class History extends exchangeViewBase {
               showTotal={true}
               onChange={page => {
                 this.setState({ page });
-                this.search(page - 1)
+                this.search(page - 1);
               }}
               showQuickJumper={true}
               currentPage={this.state.page}
             />
           </div>
         ) : (
-            <div className="kong">{this.intl.get('noRecords')}</div>
-          )}
+          <div className="kong">{this.intl.get("noRecords")}</div>
+        )}
       </div>
     );
   }

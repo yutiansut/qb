@@ -16,13 +16,6 @@ export default class AssetController extends ExchangeControllerBase {
   get configData() {
     return this.configController.initState;
   }
-  // 获取对应市场下的交易对信息（调用market的api）
-  async getTradePair(coin) {
-    let result = await this.marketController.getTradePairHandle();
-    this.view.setState({
-      tradePair: result
-    });
-  }
   get userId() {
     return this.userController.userId;
   }
@@ -46,6 +39,14 @@ export default class AssetController extends ExchangeControllerBase {
     //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信
     // return { withdrawVerify: 1 };
   }
+
+  // 获取对应市场下的交易对信息（调用market的api）
+  async getTradePair() {
+    let result = await this.marketController.getTradePairHandle();
+    this.view.setState({
+      tradePair: result
+    });
+  }
   // 获取总资产和额度
   async getAssets() {
     await this.store.getTotalAsset();
@@ -59,7 +60,6 @@ export default class AssetController extends ExchangeControllerBase {
   async getCurrencyAmount(coin) {
     let result = await this.store.getCurrencyAmount(coin);
     if (result && result.errCode) {
-      // 错误处理
       return;
     }
     // console.log(this.store.state.currencyAmount);
@@ -70,9 +70,8 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取交易对手续费
   async getPairFees() {
-    let result;
-    if(!this.store.state.pairFees.length){
-      result = await this.store.getFee();
+    if (!this.store.state.pairFees.length) {
+      await this.store.getFee();
     }
     this.view.setState({ pairFees: this.store.state.pairFees });
   }
@@ -195,16 +194,25 @@ export default class AssetController extends ExchangeControllerBase {
       // 错误处理
       return;
     }
-    this.view.setState(
-      {
+    if (result === null) {
+      this.view.setState({
         tip: true,
         tipSuccess: true,
-        tipContent: this.view.intl.get("optionSuccess")
-      },
-      () => {
-        location.reload();
-      }
-    );
+        tipContent: this.view.intl.get("optionSuccess"),
+        showTwoVerify: false
+      });
+      this.getCurrencyAmount(this.view.state.currency);
+      // this.getHistory({
+      //   page: 0,
+      //   pageSize: 10,
+      //   coinId: -1,
+      //   coinName: -1,
+      //   orderType: 15000,
+      //   orderStatus: -1,
+      //   startTime: -1,
+      //   endTime: -1
+      // });
+    }
   }
   // 撤销提币申请
   async cancelOreder(id) {
@@ -234,11 +242,12 @@ export default class AssetController extends ExchangeControllerBase {
       });
       return false;
     }
+    console.log(result);
     this.view.setState({
       walletExtract: this.Util.deepCopy(result),
       tip: true,
       tipSuccess: true,
-      tipContent: this.intl.get("asset-add-success")
+      tipContent: this.view.intl.get("asset-add-success")
     });
     return true;
   }
@@ -322,4 +331,62 @@ export default class AssetController extends ExchangeControllerBase {
       verifyNum: this.view.intl.get("sendCode")
     });
   }
+  // 为market提供获得币种可用余额的api
+  async getCoinAvailable(coin) {
+    if (!this.store.state.wallet.length) {
+      await this.store.getTotalAsset();
+    }
+    return this.store.state.wallet.filter(v => v.coinName === coin)[0];
+  }
+  // 更新币币交易页委托币种可用
+  updataMarketAvaile() {
+    let curPair = this.view.state.pairFees.filter(
+        item => item.id === this.view.state.tradePairId
+      )[0],
+      currencyArr = curPair.name.split("/"),
+      avail1 = this.view.state.wallet.filter(
+        item => item.coinName === currencyArr[0]
+      )[0],
+      avail2 = this.view.wallet.filter(
+        item => item.coinName === currencyArr[1]
+      )[0];
+    // this.marketController.sdfgadsf(avail1, avail2);
+  }
+
+  // 设置simple的tradePairId交易对id  暴露给market使用
+  setSimpleAsset(o) {
+    this.view.setState(o);
+  }
+
+  // websocke更新
+  userAssetUpdate(obj) {
+    if (name === "simple") {
+      this.setSimpleAsset({
+        totalAsset: totalAsset,
+        wallet: wallet
+      });
+      this.updataMarketAvaile();
+    }
+  }
+
+  // // view为balance时更新
+  // updateBalance(){
+  //   let {totalAsset, wallet} = this.store.state;
+  //   this.view.setState({
+  //     totalAsset: totalAsset,
+  //     wallet: wallet
+  //   });
+  // }
+
+  // updateCharge() {
+  //   let { availableCount, frozenCount } = this.store.state.wallet.filter(
+  //     v => this.view.state.currency === v.coinName.UpperCase()
+  //   )[0];
+  //   this.view.state.currencyAmount.availableCount = availableCount;
+  //   this.view.state.currencyAmount.frozenCount = frozenCount;
+  //   this.view.state.currencyAmount.totalCount = availableCount + frozenCount;
+  //   this.view.setState({
+  //     currencyAmount: this.view.state.currencyAmount
+  //   });
+  // }
 }

@@ -13,6 +13,10 @@ import "../style/extract.styl";
 export default class Extract extends exchangeViewBase {
   constructor(props) {
     super(props);
+    // 绑定视图，初始化数据
+    let { controller } = this.props;
+    controller.setView(this);
+    this.name = 'extract';
     this.status = {
       0: this.intl.get("pending"),
       1: this.intl.get("passed"),
@@ -37,9 +41,7 @@ export default class Extract extends exchangeViewBase {
       orderTip: false,
       orderTipContent: ""
     };
-    // 绑定视图，初始化数据
-    let { controller } = this.props;
-    controller.setView(this);
+
     let {
       walletExtract,
       walletList,
@@ -103,7 +105,7 @@ export default class Extract extends exchangeViewBase {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
@@ -220,7 +222,7 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{totalQuota - availableQuota}/{
+                {this.intl.get("asset-24hQuota")}：{(totalQuota*100000000 - availableQuota*100000000)/100000000}/{
                   totalQuota
                 }{" "}
                 BTC
@@ -359,24 +361,24 @@ export default class Extract extends exchangeViewBase {
                         },
                         index
                       ) => (
-                        <tr key={index}>
-                          <td className="time">{orderTime.toDate()}</td>
-                          <td className="currency">{coinName.toUpperCase()}</td>
-                          <td className="amount">
-                            <i>-{count}</i>
-                          </td>
-                          <td className="send">
-                            <i>{postAddress}</i>
-                          </td>
-                          <td className="receive">
-                            <i>{receiveAddress}</i>
-                          </td>
-                          <td className="state">
-                            <span>{this.status[orderStatus]}</span>
-                          </td>
-                          <td className="remark">{fee}</td>
-                        </tr>
-                      )
+                          <tr key={index}>
+                            <td className="time">{orderTime.toDate()}</td>
+                            <td className="currency">{coinName.toUpperCase()}</td>
+                            <td className="amount">
+                              <i>-{count}</i>
+                            </td>
+                            <td className="send">
+                              <i>{postAddress}</i>
+                            </td>
+                            <td className="receive">
+                              <i>{receiveAddress}</i>
+                            </td>
+                            <td className="state">
+                              <span>{this.status[orderStatus]}</span>
+                            </td>
+                            <td className="remark">{fee}</td>
+                          </tr>
+                        )
                     )}
                 </tbody>
               </table>
@@ -409,8 +411,8 @@ export default class Extract extends exchangeViewBase {
               </p>
             </div>
           ) : (
-            <div className="kong">{this.intl.get("noRecords")}</div>
-          )}
+              <div className="kong">{this.intl.get("noRecords")}</div>
+            )}
         </div>
         {this.state.showAddressPopup && (
           <Popup

@@ -63,7 +63,7 @@ export default {
     // 撤销提币申请
     { name: 'cancelWithdraw', data: { url: '/property/', method: 'post' }, action: 'cancelWithdraw', actionBack: 'cancelWithdrawRes', needToken: true  },
     // 获取交易对手续费5.16（pass）
-    { name: 'getFee', data: { url: '/property/', method: 'post' }, action: 'getAllTradePairFee', actionBack: 'getAllTradePairFeeRes',needToken: true  },
+    { name: 'getFee', data: { url: '/common/', method: 'post' }, action: 'getAllTradePairFee', actionBack: 'getAllTradePairFeeRes'},
     // 获取总资产(包含各个钱包币种的详细信息)4.1
     { name: 'totalAsset', data: { url: '/property/', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes', needToken: true },
     //24小时提现额度, 查询币种额度，4.2

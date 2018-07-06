@@ -54,9 +54,14 @@ export default class AssetStore extends ExchangeStoreBase {
         orderList: []
       }
     };
+    // websocket监听用户资产更新推送
     this.WebSocket.general.on("userAssetUpdate", data => {
-      console.log("getWebSocketData-userAssetUpdate", data, this.controller);
-      // this.controller.userAssetUpdate(data.data)
+      let {valuationBTC, valuationEN, valuationCN, coinList} = data;
+      this.state.totalAsset.valuationBTC = valuationBTC;//总资产
+      this.state.totalAsset.valuationEN = valuationEN; //换算美元
+      this.state.totalAsset.valuationCN = valuationCN; //换算人民币
+      this.state.wallet = coinList;
+      this.controller.userAssetUpdate(data)
       // this.recommendData = data.data
     });
   }
@@ -66,9 +71,10 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取交易对手续费
   async getFee() {
     let result = await this.Proxy.getFee({
-      userId: this.controller.userId,
       token: this.controller.token
     });
+    console.log('getFee')
+    // console.log(result)
     this.state.pairFees = result;
     return result;
   }
@@ -112,7 +118,6 @@ export default class AssetStore extends ExchangeStoreBase {
       userId: this.controller.userId,
       token: this.controller.token
     });
-    console.log("coinList", coinList);
     if (coinList.length) {
       let obj = {};
       this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
@@ -148,10 +153,10 @@ export default class AssetStore extends ExchangeStoreBase {
     result.coinAddress
       ? (this.state.coinAddress = result)
       : (this.state.coinAddress = {
-          coinId: "", //币种ID
-          verifyNumer: "", //最大确认数
-          coinAddress: "" //地址
-        });
+        coinId: "", //币种ID
+        verifyNumer: "", //最大确认数
+        coinAddress: "" //地址
+      });
   }
 
   // 获取资产记录
@@ -232,28 +237,7 @@ export default class AssetStore extends ExchangeStoreBase {
     if (result && result.errCode) {
       return result;
     }
-    let targetArr = this.state.walletExtract.extractAddr.filter(
-      v => v.coinId === this.state.walletList[coinName]
-    );
-    // console.log(targetArr)
-    //     targetArr.length && targetArr[0].addressList.push({
-    //         addressName: addressName,
-    //         address: address,
-    //         addressId: result.addressId
-    //       });
-    //     !targetArr.length && this.state.walletExtract.extractAddr.push({
-    //       "coinId": 4,
-    //       "coinName": "eth",
-    //       "minCount": 0.1,
-    //       "addressList": [
-    //         {
-    //           addressName: addressName,
-    //           address: address,
-    //           addressId: result.addressId,
-    //         }
-    //       ]
-    //     },
-    // );
+
     this.state.walletExtract.extractAddr.forEach(v => {
       v.coinId === this.state.walletList[coinName] &&
         v.addressList.push({

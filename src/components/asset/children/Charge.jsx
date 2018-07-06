@@ -12,6 +12,7 @@ import "../style/charge.styl";
 export default class Charge extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = "charge";
     let { controller } = props;
     this.status = {
       0: this.intl.get("pending"),
@@ -271,22 +272,22 @@ export default class Charge extends exchangeViewBase {
                         },
                         index
                       ) => (
-                          <tr key={index}>
-                            <td>{orderTime}</td>
-                            <td>{coinName}</td>
-                            <td>{count}</td>
-                            <td>{postAddress}</td>
-                            <td>{receiveAddress}</td>
-                            <td>
-                              <a
-                                href={blockSite}
-                              >{`${doneCount}/${verifyCount}`}</a>
-                            </td>
-                            <td>
-                              <span>{this.status[orderStatus]}</span>
-                            </td>
-                          </tr>
-                        )
+                        <tr key={index}>
+                          <td>{orderTime}</td>
+                          <td>{coinName}</td>
+                          <td>{count}</td>
+                          <td>{postAddress}</td>
+                          <td>{receiveAddress}</td>
+                          <td>
+                            <a
+                              href={blockSite}
+                            >{`${doneCount}/${verifyCount}`}</a>
+                          </td>
+                          <td>
+                            <span>{this.status[orderStatus]}</span>
+                          </td>
+                        </tr>
+                      )
                     )}
                 </tbody>
               </table>
@@ -319,12 +320,16 @@ export default class Charge extends exchangeViewBase {
               </p>
             </div>
           ) : (
-              <div className="kong">{this.intl.get('noRecords')}</div>
-            )}
+            <div className="kong">{this.intl.get("noRecords")}</div>
+          )}
           {this.state.showPopup && (
             <Popup
               type={this.state.copySuccess ? "tip1" : "tip3"}
-              msg={this.state.copySuccess ? this.intl.get('asset-copySuccess') : this.intl.get('asset-option-failed')}
+              msg={
+                this.state.copySuccess
+                  ? this.intl.get("asset-copySuccess")
+                  : this.intl.get("asset-option-failed")
+              }
               onClose={() => {
                 this.setState({ showPopup: false });
               }}

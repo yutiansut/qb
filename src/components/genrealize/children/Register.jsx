@@ -13,7 +13,7 @@ export default class Register extends exchangeViewBase {
       uid: JSON.parse(
         queryString.parse(this.props.location.search.substring(1)).uid
       ),
-      margin: 1000000,
+      margin: 0,
       showVagueBgView: false,
       showSuccess: false,
       showFail: false

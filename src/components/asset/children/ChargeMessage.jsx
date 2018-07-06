@@ -13,9 +13,7 @@ export default class ChargeMessage extends exchangeViewBase {
       content: []
     };
 
-    this.getChargeMessage = this.controller.getChargeMessage.bind(
-      this.controller
-    );
+    this.getChargeMessage = this.controller.getChargeMessage.bind(this.controller);
   }
   async componentWillMount() {
     let result = await this.controller.getChargeMessage();
@@ -43,8 +41,7 @@ export default class ChargeMessage extends exchangeViewBase {
       );
     }
   }
-  componentDidMount() {
-  }
+  componentDidMount() { }
   componentWillUnmount() {
     this.controller.swiperStop("carousel");
   }
