@@ -9,7 +9,8 @@ const order = {
 export default class UserOrderListController extends OrderListController {
   constructor(props) {
     super(props);
-    this.store = new UserOrderListStore()
+    this.store = new UserOrderListStore();
+    this.store.setController(this)
   }
   
   setView(view) {
@@ -36,10 +37,12 @@ export default class UserOrderListController extends OrderListController {
     let idArray = [];
     idArray.push(value);
     let currentParams = {
+      // 'userId': JSON.parse(this.userController.userId),
       "tradePairId": idArray,
       "orderType": 2,
     };
     let historyParams = {
+      // 'userId': JSON.parse(this.userController.userId),
       "tradePairId": idArray,
       "orderType": 2,
       "orderStatus": [1, 2, 3, 4, 5, 6],

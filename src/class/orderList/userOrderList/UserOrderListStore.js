@@ -210,7 +210,7 @@ export default class UserOrderListStore extends OrderListStore {
     };
     console.log('this.WebSocket',this.WebSocket)
     this.WebSocket.general.on('userOrderUpdate', data => {
-      console.log('wsOrderList', data)
+      console.log('wsOrderList userOrderUpdate', data)
     })
   }
   wsOrderList(){
@@ -222,7 +222,7 @@ export default class UserOrderListStore extends OrderListStore {
   async getCurrentOrder(params){
     let currentList = await this.Proxy.currentOrder(
         {
-          "userId": JSON.parse('232601699242483712'),
+          "userId": JSON.parse(this.controller.userController.userId),
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
@@ -235,7 +235,7 @@ export default class UserOrderListStore extends OrderListStore {
   async getHistoryOrder(params){
     let historyList = await this.Proxy.historyOrder(
         {
-          "userId": JSON.parse('232601699242483712'),
+          "userId": JSON.parse(this.controller.userController.userId),
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
@@ -252,7 +252,7 @@ export default class UserOrderListStore extends OrderListStore {
   async getOrderDetail(id){
     let orderDetail = await this.Proxy.orderDetail(
         {
-          "userId": JSON.parse('232601699242483712'),
+          "userId": JSON.parse(this.controller.userController.userId),
           "orderId": id
         }
     );

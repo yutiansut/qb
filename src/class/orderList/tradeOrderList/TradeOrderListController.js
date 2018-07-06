@@ -21,6 +21,16 @@ export default class TradeOrderListController extends OrderListController {
     this.store.state.liveSellArray = liveSellArray;
     this.store.state.liveBuyArray = liveBuyArray;
   }
+  
+  async getDepth(){
+    let liveTradeData = await this.store.getDepth();
+    this.view.setState(
+        {
+          liveBuyArray: liveTradeData.buy,
+          liveSellArray: liveTradeData.sell
+        }
+    )
+  }
 
   orderListSelect(v){
     let prices = {

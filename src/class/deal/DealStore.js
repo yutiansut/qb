@@ -20,22 +20,23 @@ export default class DealStore extends ExchangeStoreBase {
      
     }
   }
-  async dealTrade(orderType){
+  async dealTrade(params){
     await this.Proxy.dealExchange(
-        {
-          "userId": JSON.parse('232601699242483712'),
-          // "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
-          "orderType": 1,//0买 1 卖
-          "priceType": 0,//0限价  1市价
-          "price": 10,//价格
-          "count": 0.1,//数量
-          "tradePairId": 3,
-          "tradePairName": "ETH/BTC",
-          "funpass": "123456",//资金密码
-          "interval": 2,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
-          "priceUnit": 0//计价单位  0数字币  1人民币 2美元
-  
-        }
+        params
+        // {
+        //   "userId": JSON.parse('232601699242483712'),
+        //   // "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
+        //   "orderType": 1,//0买 1 卖
+        //   "priceType": 0,//0限价  1市价
+        //   "price": 10,//价格
+        //   "count": 0.1,//数量
+        //   "tradePairId": 3,
+        //   "tradePairName": "ETH/BTC",
+        //   "funpass": "123456",//资金密码
+        //   "interval": 2,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+        //   "priceUnit": 0//计价单位  0数字币  1人民币 2美元
+        //
+        // }
     )
   }
   

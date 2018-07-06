@@ -22,6 +22,7 @@ export default class LiveTrade extends ExchangeViewBase{
   }
   componentDidMount(){
     this.props.controller.joinRoom();
+    this.props.controller.getDepth();
     // this.liveTradeListHandle()
   }
   changeLiveTitleSelect(v){
@@ -52,35 +53,34 @@ export default class LiveTrade extends ExchangeViewBase{
               </tr>
             </thead>
             <tbody>
-            <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - this.state.liveSellArray.length)? (12 - this.state.liveSellArray.length) * .21 : 0}rem`}}>
-            
+            <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0))? (12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)) * .21 : 0}rem`}}>
             </tr>
-            {((this.state.titleSelect === 'all' && this.state.liveSellArray &&this.state.liveSellArray.length < 12) || (this.state.titleSelect === 'sell' && this.state.liveSellArray && this.state.liveSellArray.length < 24)) && this.state.liveSellArray && this.state.liveSellArray.map((v,index) => {
-              return(
+            {this.state.liveSellArray && this.state.liveSellArray.map((v,index) =>
+                ((this.state.titleSelect === 'all' && index < 12) || (this.state.titleSelect === 'sell' && index < 24)) && (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`卖${this.state.liveSellArray.length - index}`}</td>
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
-                    <td>{v.currDepth}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover) }</td>
+                    <td>{v.amount}</td>
+                    <td>{this.state.unitsType === 'CNY' && (v.priceCN * v.amount) || (this.state.unitsType === 'USD' && (v.priceEN * v.amount) || (v.price * v.amount)) }</td>
                   </tr>
               )
-            })}
+            )}
             </tbody>
 
           <tbody className='live-deal'>
             <tr><td colSpan='4'>最新成交价</td></tr>
           </tbody>
             <tbody>
-            {((this.state.titleSelect === 'all' && this.state.liveBuyArray.length < 12) || (this.state.titleSelect === 'buy' && this.state.liveBuyArray && this.state.liveBuyArray.length < 24)) && this.state.liveBuyArray.map((v,index) => {
-              return(
+            {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>
+                ((this.state.titleSelect === 'all' && index < 12) || (this.state.titleSelect === 'buy' && index < 24)) && (
                   <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`买${index + 1}`}</td>
-                    <td>{v.price}</td>
-                    <td>{v.currDepth}</td>
-                    <td>{v.turnover}</td>
+                    <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
+                    <td>{v.amount}</td>
+                    <td>{this.state.unitsType === 'CNY' && (v.priceCN * v.amount) || (this.state.unitsType === 'USD' && (v.priceEN * v.amount) || (v.price * v.amount)) }</td>
                   </tr>
               )
-            })}
+            )}
             </tbody>
             
           </table>

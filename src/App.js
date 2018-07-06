@@ -114,6 +114,8 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController('market');
     userOrderController = new UserOrderListController();
+  
+    userOrderController.userController = userController; //订单管理获取用户id
 
     noticeController.configController = configController;
 

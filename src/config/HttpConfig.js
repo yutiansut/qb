@@ -91,7 +91,9 @@ export default {
       //订单详情
     {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'},
       //近期交易
-    {name: 'recentOrder', data: {url: '/order/', method: 'post'}, action: 'getRecentOrder', actionBack: 'getRecentOrderRes'}
+    {name: 'recentOrder', data: {url: '/order/', method: 'post'}, action: 'getRecentOrder', actionBack: 'getRecentOrderRes'},
+      //挂单列表
+    {name: 'getDepth', data: {url: '/common/', method: 'post'}, action: 'getDepth', actionBack: 'getDepthRes'}
   ],
   deal:[
     //交易接口
