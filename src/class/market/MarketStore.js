@@ -46,7 +46,7 @@ export default class MarketStore extends ExchangeStoreBase {
       recommendDataHandle: [],
       marketDataHandle: [],
       homeMarketPairData: [],
-      market: 'BTC',
+      market: '',
       coin: '',
       tradePair: '',
       pairInfo: {},

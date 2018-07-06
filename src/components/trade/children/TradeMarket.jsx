@@ -29,7 +29,7 @@ export default class TradeMarket extends ExchangeViewBase {
     this.setDealMsg = controller.setDealMsg.bind(controller);
     this.tradePairChange = controller.tradePairChange.bind(controller)
     this.filte = controller.filte.bind(controller) // 筛选
-    this.tradePairSelect = controller.tradePairSelect.bind(controller);
+    // this.tradePairSelect = controller.tradePairSelect.bind(controller);
     this.addCollect = controller.addCollect.bind(controller) // 添加收藏
     this.collectMarket = controller.collectMarket.bind(controller) // 点击收藏
   }
@@ -102,9 +102,9 @@ export default class TradeMarket extends ExchangeViewBase {
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
             return (
-              <tr key={index} className={`pair-items${this.state.tradePair === v.trade_pair ? '-active' : ''}`}
+              <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''}`}
                   onClick={this.pairChange.bind(this, v)}>
-                <td>{v.trade_pair}</td>
+                <td>{v.tradePairName}</td>
                 <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                 <td>{v.rise}</td>
                 <td onClick={value => this.addCollect(v, index)} className="img-td">
