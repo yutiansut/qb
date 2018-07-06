@@ -14,19 +14,16 @@ export default class NoticeController extends ExchangeControllerBase {
   }
 
   get configData() {
-    console.log('ccconfig', this.configController)
     return this.configController.initState
   }
 
-  async getNoticeCon() { // 获取公告
-    let token = this.userController.userToken, userId = this.userController.userId
-    let noticeList = await this.store.noticeCon(token, userId);
+  async getNoticeCon(activityId, contentType, page) { // 获取公告
+    let noticeList = await this.store.noticeCon(activityId, contentType, page);
     this.view.setState({noticeList})
   }
 
-  async getInfoCon() { // 获取资讯
-    let token = this.userController.userToken, userId = this.userController.userId
-    let infoList = await this.store.infoCon(token, userId);
+  async getInfoCon(activityId, contentType, page) { // 获取资讯
+    let infoList = await this.store.infoCon(activityId, contentType, page);
     this.view.setState({infoList})
   }
 }

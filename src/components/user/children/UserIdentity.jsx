@@ -144,13 +144,19 @@ export default class userIdentity extends exchangeViewBase {
                 <li>{this.intl.get("user-surname")}</li>
                 <li>
                   {/*this.state.userAuth.first_name*/}
-                  <Input placeholder={this.intl.get("user-inputSurname")} value={this.state.firstNameValue || ''} onInput={evt => this.firstInput(evt)}/>
+                  <Input placeholder={this.intl.get("user-inputSurname")}
+                         value={this.state.userAuth.firstName ? this.state.userAuth.firstName : this.state.firstNameValue}
+                         disabled ={this.state.userAuth.firstName ? true : false}
+                         onInput={evt => this.firstInput(evt)}/>
                 </li>
               </ul>
               <ul>
                 <li>{this.intl.get("user-forename")}</li>
                 <li>
-                  <Input placeholder={this.intl.get("user-inputForename")} value={this.state.lastNameValue || ''} onInput={evt => this.lastInput(evt)}/>
+                  <Input placeholder={this.intl.get("user-inputForename")}
+                         value={this.state.userAuth.lastName ? this.state.userAuth.lastName : this.state.lastNameValue}
+                         disabled ={this.state.userAuth.lastName ? true : false}
+                         onInput={evt => this.lastInput(evt)}/>
                 </li>
               </ul>
             </div>
@@ -163,7 +169,11 @@ export default class userIdentity extends exchangeViewBase {
               </dd>))}
             </dl>
             {/*.userAuth.number*/}
-            <Input placeholder={`${this.state.selectIndex === 0 ? '请填写身份证号码' : '请填写护照号码'}`} className="id-input"  value={this.state.numberValue || ''} onInput={evt => this.numberInput(evt)}/>
+            <Input placeholder={`${this.state.selectIndex === 0 ? '请填写身份证号码' : '请填写护照号码'}`}
+                   className="id-input"
+                   value={this.state.userAuth.number ? this.state.userAuth.number : this.state.numberValue}
+                   disabled ={this.state.userAuth.number ? true : false}
+                   onInput={evt => this.numberInput(evt)}/>
           </div>
         </div>
         <div className="photo-identify clearfix">

@@ -10,6 +10,7 @@ import exchangeViewBase from "../ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
+import TwoVerifyPopup from  '../viewsPopup/TwoVerifyPopup.jsx'
 // import LoginVerification from './children/LoginVerification.jsx'
 
 
@@ -29,6 +30,8 @@ export default class Login extends exchangeViewBase {
       showPopup: false, // 提示弹窗
       popType: "tip1",
       popMsg: "登录成功",
+      showTwoVerify: false,
+      verifyType: "" // 密码登录两步认证弹窗
     }
     const {controller} = props
     //绑定view
@@ -38,13 +41,14 @@ export default class Login extends exchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller)
     this.login = controller.login.bind(controller)
-    this.countDownStop = controller.countDownStop.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
+    this.destroy = controller.clearVerify.bind(controller); // 清除定时器
     this.changeTitle = this.changeTitle.bind(this)
     this.changeUser = this.changeUser.bind(this)
     this.changePass = this.changePass.bind(this)
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
+
   }
 
   changeTitle(i) { // 登录切换
@@ -64,7 +68,6 @@ export default class Login extends exchangeViewBase {
     } else {
       this.setState({userType: 0})
     }
-
   }
   changePass(value) {
     this.setState({passInput: value});
@@ -99,11 +102,16 @@ export default class Login extends exchangeViewBase {
   }
 
   componentWillUnMount() {
-    this.countDownStop('verifyNum')
+    this.destroy()
   }
 
   render() {
     // console.log('登录', this.state)
+    let verifyTypeObj = {
+      2008: 2,
+      2009: 1,
+      2010: 3
+    }
     return (
       <div>
         <div className="login-wrap">
@@ -150,6 +158,11 @@ export default class Login extends exchangeViewBase {
             autoClose = {true}
           />
         )}
+        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.userInput, this.state.userType, 7)}} onClose={() => {
+          this.setState({ showTwoVerify: false });
+        }} destroy={this.destroy} onConfirm={code => {
+          this.login(this.state.userInput, code, this.state.userType, this.state.verifyType === 2009 ? 2 : 0, this.state.captchaId, this.state.picInput);
+        }} />}
       </div>
     );
   }

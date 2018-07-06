@@ -29,6 +29,7 @@ import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
 import Genrealize from "./components/genrealize/Genrealize.jsx";
+import NoticeDetail from './components/notice/noticeChild/NoticeContentDetail.jsx'
 
 let testAppController,
   configController,
@@ -173,6 +174,7 @@ export default class App extends Component {
                 <Route path="/order" component={Order} />
                 <Route path="/user" component={User} />
                 <Route path="/findPass" component={ForgetPass} />
+                <Route path="/notice/content/detail" component={NoticeDetail} />
                 <Route path="/notice" component={Notice} />
                 <Route path="/help" component={Help} />
                 <Route path="/activity" component={Activity} />

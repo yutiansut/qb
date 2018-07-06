@@ -2,14 +2,12 @@ import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
+  Link,
   Redirect,
   Switch
 } from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Pagination from '../../../common/component/Pagination/index.jsx'
-// import NoticeDetail from '/NoticeContentDetail.jsx'
-
 
 export default class noticeContent extends exchangeViewBase {
   constructor(props) {
@@ -37,7 +35,7 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await Promise.all([this.getNoticeCon(), this.getInfoCon()])
+    await Promise.all([this.getNoticeCon(0, 0, 0), this.getInfoCon(0, 0, 0)])
 
   }
 
@@ -46,6 +44,7 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   render() {
+    console.log('内容', this.state)
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">
@@ -57,13 +56,13 @@ export default class noticeContent extends exchangeViewBase {
               <em>类型</em>
               <span>时间</span>
             </dt>
-            {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<NavLink to={`${this.props.match.url}/detail`} key={index}>
+            {this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>
               <dd >
                 <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
                 <em>公告</em>
                 <span>{v.createdAt}</span>
               </dd>
-            </NavLink>))}
+            </Link>))}
           </dl>
           <div className={this.state.noticeList.data ? '' : 'hide'}>
             {this.state.noticeList.totalCount &&<Pagination total={this.state.noticeList.totalCount}
@@ -97,14 +96,6 @@ export default class noticeContent extends exchangeViewBase {
                         showQuickJumper={true}/>}
           </div>
         </div>
-
-        {/*<div>*/}
-          {/*<Switch>*/}
-            {/*<Route path={`${this.props.match.url}/detail`} component={({match}) => (*/}
-              {/*<NoticeDetail />*/}
-            {/*)}/>*/}
-          {/*</Switch>*/}
-        {/*</div>*/}
 
       </div>
     );

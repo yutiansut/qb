@@ -45,7 +45,7 @@ export default {
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true}, // 验证谷歌验证码
   ],
   notice: [
-    {name: 'getActivityCon', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容
+    {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容
   ],
   market: [
     //币种资料
@@ -104,9 +104,8 @@ export default {
     { name: 'getQbtMargin', data: { url: '/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes'},
     //H5活动页，领取qbt奖励
     { name: 'getAward', data: { url: '/common/', method: 'post' }, action: 'getAward', actionBack: 'getAwardRes'}
+  ],
+  login:[
+    {name: 'forgetLoginPass', data: {url: '/user/', method: 'post'}, action: 'forgetLoginPass', actionBack: 'forgetLoginPassRes', needToken: true}, // 找回密码
   ]
-  // market:[
-  //
-  // ]
-
 }

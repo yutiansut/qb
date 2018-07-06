@@ -9,29 +9,27 @@ export default class NoticeStore extends ExchangeStoreBase {
     }
   }
 
-  async noticeCon(token, userId) { // 获取公告
-    let noticeList = await this.Proxy.getActivityCon({
-        "userId": userId,
-        "activityType": 0,  //类型 0公告 1新闻 2资讯
-        "page": 0,
-        "pageSize": 10,
-        "token": token
+  async noticeCon(activityId, contentType, page) { // 获取公告
+    let noticeList = await this.Proxy.getActivity({
+      activityId,
+      "activityType": 0,  //类型 0公告 1新闻 2资讯
+      contentType, //内容类型 0则不返回content 1则返回全部数据
+      page,
+      "pageSize": 10
     });
     this.state.noticeList = noticeList;
-    console.log('获取公告', noticeList)
     return noticeList
   }
 
-  async infoCon(token, userId) { // 获取资讯
-    let infoList = await this.Proxy.getActivityCon({
-        "userId": userId,
-        "activityType": 2,
-        "page": 0,
-        "pageSize": 10,
-        "token": token
+  async infoCon(activityId, contentType, page) { // 获取资讯
+    let infoList = await this.Proxy.getActivity({
+      activityId,
+      "activityType": 2,
+      contentType,
+      page,
+      "pageSize": 10
     });
     this.state.infoList = infoList;
-    console.log('获取资讯', infoList)
     return infoList
   }
 }

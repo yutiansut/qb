@@ -109,7 +109,7 @@ export default class UserController extends ExchangeControllerBase {
   async uploadInfo() { // 身份认证确认提交
     let typeIndexArr = [1, 3]
     let result = await this.store.Proxy.uploadUserAuth({
-      "userId": this.store.uid,
+      "uid": this.store.uid,
       "token": this.store.token,
       "firstName": this.view.state.firstNameValue, // 姓氏
       "lastName": this.view.state.lastNameValue, // 名字
@@ -253,7 +253,7 @@ export default class UserController extends ExchangeControllerBase {
       "token": this.store.token,
       code
     })
-    this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
+    // this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('验证谷歌', result)
   }
 

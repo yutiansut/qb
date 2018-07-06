@@ -136,15 +136,16 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async uploadImg(file){ // 上传图片
-    let headers = new Headers(), uploadImg = new FormData();
+    let uploadImg = new FormData();
     uploadImg.append("uploadimage", file);
-    headers.set('Token', this.token);
+    // headers = new Headers(),
+    // headers.set('Token', this.token);
     // console.log(headers)
     // console.log('uploadImg', uploadImg, file)
-    return await fetch("http://192.168.113.141/usimage/", {
+    return await fetch("http://192.168.113.7/usupload/", {
       method: 'Post',
       body: uploadImg,
-      headers,
+      // headers,
       // credentials: 'include'
     })
   }

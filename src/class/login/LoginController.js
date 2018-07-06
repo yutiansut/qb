@@ -20,6 +20,10 @@ export default class LoginController extends ExchangeControllerBase {
     this.userController.getCode(account, mode, type)
   }
 
+  clearVerify() { // 清除定时器
+    this.countDownStop("verifyCountDown");
+  }
+
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.userController.getCaptcha()
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
@@ -43,7 +47,26 @@ export default class LoginController extends ExchangeControllerBase {
       this.view.history.goBack()
       return
     }
+    if ([2008, 2009, 2010].includes(data.ret)) {
+      this.view.setState({showTwoVerify: true, verifyType: data.ret})
+      return
+    }
     this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
+  }
+
+  // 找回密码
+  async forgetLoginPass(account, mode, code, newPass, captchaId, captchaCode) { // 找回密码
+    let result = await this.store.Proxy.forgetLoginPass({
+      account,
+      mode, // 0 phone 1 email
+      code,
+      newPass,
+      captchaId,
+      captchaCode,
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+    })
+    console.log('忘记密码', result)
+    this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : "修改成功"})
   }
 
   async initLoginVerification() { // 获取手势验证

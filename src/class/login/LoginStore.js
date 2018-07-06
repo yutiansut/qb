@@ -14,9 +14,9 @@ export default class LoginStore extends ExchangeStoreBase {
     })
   }
 
-  login(obj) {
+  login(obj) { // 登陆接口
     console.log('getData', this.WebSocket)
-
     this.WebSocket.general.emit('login', obj)
   }
+
 }

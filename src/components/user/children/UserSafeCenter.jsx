@@ -102,7 +102,7 @@ export default class userSafeCenter extends exchangeViewBase {
     })
   }
   selectType(content, index, i, type) { // 两步认证单选
-    let changeArr = [3, 1, 0, 2]  // 2 谷歌验证 1 邮件 3 短信 0 无
+    let changeArr = [3, 1, 0, 2], typeArr = [2, 1, 3, 0]  // 2 谷歌验证 1 邮件 3 短信 0 无
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
@@ -113,6 +113,9 @@ export default class userSafeCenter extends exchangeViewBase {
       showSet: !this.state.userInfo.email && index === 1 ? true : false,
       showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
+    if (this.state.userInfo.loginVerify === 0) {
+      this.setTwoVerify("", 0, "", "", "", 1, typeArr[this.state.sureTwoVerify])
+    }
   }
   selectNotice(index, type) { // 选择通知
     this.setState({
