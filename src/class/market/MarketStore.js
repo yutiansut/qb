@@ -6,42 +6,7 @@ export default class MarketStore extends ExchangeStoreBase {
     console.log('MarketStore constructor')
     this.state = {
       allPairData: [],
-      recommendData: [
-        {
-          coinName: 'BTC',
-          priceCN: 1022.22,
-          priceEN: 1021.22,
-          rise: 0.3,
-
-        },
-        {
-          coinName: 'USD',
-          priceCN: 1022.22,
-          priceEN: 1021.22,
-          rise: -0.12,
-
-        },
-        {
-          coinName: 'EYH',
-          priceCN: 1022.22,
-          priceEN: 1021.22,
-          rise: -0.12,
-
-        },
-        {
-          coinName: 'ETH',
-          priceCN: 1022.22,
-          priceEN: 1021.22,
-          rise: -0.12,
-
-        },
-        {
-          coinName: 'USDT',
-          priceCN: 1022.22,
-          priceEN: 1021.22,
-          rise: -0.12,
-        }
-      ],
+      recommendData: [],
       collectArr: [],
       selecedMarket: '',
       recommendDataHandle: [],
@@ -101,12 +66,12 @@ export default class MarketStore extends ExchangeStoreBase {
     if (name === 'market') {
       // 监听收藏
       this.WebSocket.general.on('collectArr', data => {
-        console.log('getWebSocketData', data, this.controller, name)
+        // console.log('getWebSocketData collectArr', data, this.controller, name)
         this.controller.updateMarketAll(data, 0)
       })
       // 监听市场数据更新
       this.WebSocket.general.on('marketPair', data => {
-        console.log('getWebSocketData', data, this.controller)
+        // console.log('getWebSocketData marketPair', data, this.controller)
         this.controller.updateMarketAll(data, 1)
       })
     }
@@ -114,7 +79,7 @@ export default class MarketStore extends ExchangeStoreBase {
     if (name === 'recommend') {
       // 监听推荐币种
       this.WebSocket.general.on('recommendCurrency', data => {
-        console.log('getWebSocketData', data, this.controller)
+        // console.log('getWebSocketData', data, this.controller)
         this.controller.updateRecommend(data.data)
         this.recommendData = data.data
       })
@@ -142,6 +107,12 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.allPairData
   }
 
+  //从交易对池中拿到收藏数据
+  get collectData() {
+    // console.log('this.state.allPairData', this, this.state.allPairData)
+    return this.state.allPairData.filter(v => v.isFavorite)
+  }
+
   //收藏变动更新列表
   updateAllPairListFromCollect(list) {
     // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
@@ -152,9 +123,16 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //数据变动更新列表
   updateAllPairListFromData(list) {
-    console.log('updateAllPairListFromData 0', this.state.allPairData, list)
+    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
     list && list.length && (this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.find(vv => vv.tradePairId === v.tradePairId) || {})))
-    console.log('updateAllPairListFromData 1', this.state.allPairData)
+    // console.log('updateAllPairListFromData 1', this.state.allPairData)
+  }
+
+  //数据变动更新推荐币种
+  updateRecListFromData(list) {
+    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
+    list && list.length && (this.state.recommendData = this.state.recommendData.map(v => Object.assign(v, list.find(vv => vv.coinId === v.coinId) || {})))
+    // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //根据选择的市场筛选出交易对
@@ -173,12 +151,12 @@ export default class MarketStore extends ExchangeStoreBase {
 
   }
 
-  getMarketPair() {
-    // console.log('getData marketPair', this.WebSocket)
-
+  //加入房间
+  joinHome() {
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
 
+  //收藏接口
   async changeFavorite(tradePairId, userId, operateType, token) {
     await this.Proxy.changeFavorite({
       operateType, //0添加 1取消
@@ -189,10 +167,22 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
 
+  async getRecommendCoins(){
+    // console.log('getRecommendCoins', this.state.recommendData.length)
+    if(!this.state.recommendData.length){
+      let result = await this.Proxy.getRecommendCoins()
+      // console.log('this.state.recommendData', result)
+      this.state.recommendData = result.data
+    }
+    return this.state.recommendData
+  }
+
+  //币种资料
   async getCoinInfo(coinId) {
     this.state.coinInfo = await this.Proxy.coinInfo({coinId});
   }
 
+  //收藏列表
   async getFavoriteList(token, userId) {
     this.state.collectArr = await this.Proxy.getFavoriteList({
       userId,
@@ -201,6 +191,7 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.collectArr
   }
 
+  //全部交易对
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
     console.log('getPairInfo', pairInfo)
@@ -220,6 +211,7 @@ export default class MarketStore extends ExchangeStoreBase {
     return marketAll.items
   }
 
+  //或区域交易对信息
   async getPairMsg() {
     let coinCorrespondingId = {}, marketCorrespondingId = {}, coinCorrespondingPair = {}, marketCorrespondingPair = {};
     // console.log(Object.keys(this.state.pairInfo).length)

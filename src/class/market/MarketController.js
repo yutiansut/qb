@@ -19,22 +19,26 @@ export default class MarketController extends ExchangeControllerBase {
   async getPairData() {
 
   }
+
 // 获取币种资料
-  async getCoinInfo(coinId){
+  async getCoinInfo(coinId) {
     await this.store.getCoinInfo(coinId);
-    this.view.setState({ coinInfo: this.store.state.coinInfo});
+    this.view.setState({coinInfo: this.store.state.coinInfo});
   }
 
-  //更新recommend数据
-  updateRecommend(data) {
+  async getMarket() {
+    await this.store.getMarket();
+  }
+
+  //获取getRecommendCoins
+  async getRecommendCoins(){
+    let recommendData = await this.store.getRecommendCoins()
+    console.log(recommendData)
     this.view.setState({
-      recommendData: data
+      recommendData
     })
   }
 
-  async getMarket(){
-    await this.store.getMarket();
-  }
   // 推荐交易对处理
   // recommendDataHandle() {
   //   const recommendValues = Object.values(this.store.state.recommendData);
@@ -79,16 +83,17 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 点击收藏
   collectMarket() {
+    let homeMarketPairData = this.getCollectArr()
+    // console.log('collectMarket', homeMarketPairData)
     this.view.setState({
       searchValue: '',
       sortIndex: 0,
       sortImg: "/static/images/rank_normal.svg",
       searchRealt: [],
       collectActive: true,
-      collectIndex: -1,
-      market: ''
+      market: '',
+      homeMarketPairData
     });
-    this.getCollectArr()
   }
 
   // 添加/取消收藏
@@ -104,7 +109,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新全部交易对信息
     await this.getTradePairHandle()
     //生成市场列表
-    let homeMarket = [...new Set(this.store.pairInfo.map(v=>v.marketName))].sort()
+    let homeMarket = [...new Set(this.store.pairInfo.map(v => v.marketName))].sort()
     //默认设置为第一市场
     this.store.setSelecedMarket(homeMarket[0])
     this.view.setState({
@@ -112,7 +117,17 @@ export default class MarketController extends ExchangeControllerBase {
       market: homeMarket[0],
     });
     //生成交易对池
-    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,isFavorite:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
+    this.store.setAllPair(this.store.pairInfo.map(v => Object.assign(v, {
+      rise: 0,
+      price: 0,
+      priceCN: 0,
+      priceEN: 0,
+      volume: 0,
+      isFavorite: 0,
+      turnover: 0,
+      points: [1, 1, 1, 1, 1, 1, 1],
+      coinName: v.tradePairName.split('/')[0]
+    })))
     // console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
@@ -121,7 +136,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.updateAllPairListFromData(marketAll)
     //请求收藏列表
     let collectIdArr = []
-    if(this.userController.userToken){
+    if (this.userController.userToken) {
       collectIdArr = await this.store.getFavoriteList(this.userController.userToken, this.userController.userId)
     }
     this.store.updateAllPairListFromCollect(collectIdArr)
@@ -151,7 +166,8 @@ export default class MarketController extends ExchangeControllerBase {
     // this.tradePairSelect(homeMarketPair);
   }
 
-  async updateMarketAll(List, type){
+  //更新MarketAll数据
+  async updateMarketAll(List, type) {
     let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
     // console.log('updateMarketAll', this.store, this.store.state)
     //根据数据更新allPair
@@ -159,9 +175,15 @@ export default class MarketController extends ExchangeControllerBase {
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData()
     this.view.setState({
-      homeMarketPairData: homeMarketPairData,
+      homeMarketPairData,
     });
     this.tradePairChange(homeMarketPairData[0]);
+  }
+
+  //更新recommend数据
+  updateRecommend(data) {
+    this.store.updateRecListFromData(data)
+    this.getRecommendCoins()
   }
 
   //交易对的选中
@@ -207,40 +229,25 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 筛选功能
   filte(arr, value) {
-    let result = this.filter(arr, item => {
-      return (
-        item.coinName.toUpperCase().includes(value.toUpperCase())
-      );
-    });
-    // this.view.setState({
-    //   searchRealt: result
-    // });
-    // console.log('筛选', result, value)
+    let result = this.filter(arr, item => item.coinName.toUpperCase().includes(value.toUpperCase()));
     return result;
   }
 
   // 点击收藏筛选数组
   getCollectArr() {
-    let collectIdArr = [1, 2, 3], concatArr = [], collectArr = [];
-    // console.log('收藏数组', this.store.state.allPairData)
-    // arr.concat(arr2,arr3)
-    this.store.state.allPairData.map(v => {
-      concatArr = concatArr.concat(v.marketName)
-    })
-    // console.log('收藏数组2', concatArr)
-    collectArr = concatArr.filter(v => {
-      return collectIdArr.indexOf(v.tradePairId) > -1
-    })
-    // console.log('收藏数组3', collectArr)
-    this.view.setState({
-      homeMarketPairData: collectArr
-    });
+    // console.log('this.store.allPair', this.store.allPair)
+    return this.store.collectData
   }
+
+  joinHome() {
+    this.store.joinHome()
+  }
+
 
   //为交易模块提供价格以及交易对的信息
   setDealMsg() {
     //改变deal模块中的信息
-    console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData)
+    // console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData)
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
       dealMsg = {
         tradePair: this.store.state.tradePair,
@@ -255,7 +262,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
   }
 
-  setUnitsType(v){
+  setUnitsType(v) {
     this.view.setState({
       unitsType: v
     })
@@ -264,8 +271,9 @@ export default class MarketController extends ExchangeControllerBase {
   pairDataHandle() {
 
   }
+
   // 交易对名称以及id的处理
-   async getTradePairHandle() {
+  async getTradePairHandle() {
     return await this.store.getPairMsg();
   }
 }

@@ -52,6 +52,7 @@ export default {
     { name: 'coinInfo', data: { url: '/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
     // 获取交易对名称以及id
     {name: 'pairInfo', data: { url: '/common/', method: 'post'}, action: 'getAllTradePairList', actionBack: 'getAllTradePairListRes'},
+    {name: 'getRecommendCoins', data: { url: '/common/', method: 'post'}, action: 'getRecommendCoins', actionBack: 'getRecommendCoinsRes'},
     // 添加收藏
     {name:'changeFavorite', data:{url: '/user/', method: 'post'}, action: 'changeFavorite', actionBack: 'changeFavoriteRes',needToken: true},
     // 获取收藏

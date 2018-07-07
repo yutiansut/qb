@@ -21,7 +21,7 @@ export default {
         global: {joinRoom: {var: 1, op: 4, seq: 0, resOp: 5}},//加入房间
         market: {
           recommendCurrency: {var: 1, op: 108, seq: 0, resOp: 108},//推荐币种
-          marketPair: {var: 1, op: 106, seq: 0, resOp: 106},//涨跌幅数据更新
+          marketPair: {var: 1, op: 107, seq: 0, resOp: 107},//涨跌幅数据更新
           collectArr: {var: 1, op: 109, seq: 0, resOp: 109}//收藏
         },
         userOrder: {

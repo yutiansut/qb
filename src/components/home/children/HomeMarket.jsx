@@ -38,9 +38,13 @@ export default class HomeMarket extends ExchangeViewBase{
     this.pairSort = controller.pairSort.bind(controller) // 排序
     this.filte = controller.filte.bind(controller) // 筛选
     this.addCollect = controller.addCollect.bind(controller) // 添加收藏
+    this.joinHome = controller.joinHome.bind(controller) // 添加收藏
   }
   componentDidMount(){
+    //注册http数据
     this.marketDataHandle();
+    //进入home
+    this.joinHome();
   }
   render(){
     // console.log(1234,this.state,this.state.recommendDataHandle)
@@ -87,7 +91,7 @@ export default class HomeMarket extends ExchangeViewBase{
                 <td>{Number(v.price).format({number:'digital'}) || 0}</td>
                 <td>{Number(v.turnover).format({number:'property'}) || 0}</td>
                 <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>
-                <td>{Number(v.rise).toPercent()}</td>
+                <td className={`home-updown ${v.rise > 0 ? 'up-i' : 'down-i'}`}>{Number(v.rise).toPercent()}</td>
                 <td>
                     {/* 宽高等样式在homeMakt.styl里设置 */}
                     <ReactTrend ratio={5} trends={[43,24,18,32,22,45,37]}/>

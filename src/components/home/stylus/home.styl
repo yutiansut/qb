@@ -12,6 +12,33 @@
   }
 }
 .home-wrap
+  .home-updown
+    position relative
+    padding-left .15rem
+    &.up-i
+      color $index-blue
+      &:before
+        position absolute
+        top 50%
+        transform translate(0, -50%)
+        left 0
+        content ''
+        width .12rem
+        height .12rem
+        background url('/static/img/shangzhang.svg') no-repeat center center
+        background-size .12rem .12rem
+    &.down-i
+      color $index-red
+      &:before
+        position absolute
+        top 50%
+        transform translate(0, -50%)
+        left 0
+        content ''
+        width .12rem
+        height .12rem
+        background url('/static/img/xiadie.svg') no-repeat center center
+        background-size .12rem .12rem
   .hide
     display none
   //推荐交易对
@@ -59,31 +86,6 @@
             margin-right .1rem
             font-size .2rem
             color $normal-black-color
-          i
-            position relative
-            padding-left .15rem
-            &.up-i
-              color $index-blue
-              &:before
-                position absolute
-                top .03rem
-                left 0
-                content ''
-                width .12rem
-                height .12rem
-                background url('/static/img/shangzhang.svg') no-repeat center center
-                background-size .12rem .12rem
-            &.down-i
-              color $index-red
-              &:before
-                position absolute
-                top .05rem
-                left 0
-                content ''
-                width .12rem
-                height .12rem
-                background url('/static/img/xiadie.svg') no-repeat center center
-                background-size .12rem .12rem
 
 
 
