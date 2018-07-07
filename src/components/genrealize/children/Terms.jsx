@@ -16,7 +16,7 @@ export default class Terms extends exchangeViewBase {
           <li>{nameUsd}所提供的各项服务的所有权和运作权均归{nameUsd} LTD.（以下简称“{nameUsd}”）所有。</li>
           <li>{nameUsd}用户使用协议（以下简称“本协议”）由 {nameUsd}用户与{nameUsd}就{nameUsd}的各项服务所订立的相关权利义务规范。</li>
           <li>用户通过访问和/或使用本网站，即表示接受并同意本协议的所有条件和条款。</li>
-          <li>{nameUsd}作为{nameUsd}（{netUrl}）的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。</li>
+          <li>{nameUsd}作为{nameUsd}({netUrl})的运营者依据本协议为用户提供服务。不愿接受本协议条款的，不得访问或使用本网站。</li>
           <li>{nameUsd}有权对本协议条款进行修改，修改后的协议一旦公布即有效代替原来的协议。用户可随时查阅最新协议。</li>
         </ul>
       </div>

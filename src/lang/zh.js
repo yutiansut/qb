@@ -359,7 +359,7 @@ export default function zh(state) {
     "help-terms-3-1-1": `(1) 用户注册${nameUsd}会员或申请${nameUsd}的服务时，向${nameUsd}提供的个人信息。`,
     "help-terms-3-1-2": `(2) 用户在使用${nameUsd}服务、参加网站活动或访问网站网页时，${nameUsd}自动接收并记录的用户浏览器端或手机客户端数据，包括但不限于IP地址、网站Cookie中的资料及用户要求取用的网页记录。`,
     "help-terms-3-1-3": `(3) ${nameUsd}从商业伙伴处合法获取的用户个人信息。`,
-    "help-terms-3-1-4": `(3) ${nameUsd}从商业伙伴处合法获取的用户个人信息。`,
+    "help-terms-3-1-4": `(4) 其它${nameUsd}通过合法途径获取的用户个人信息。`,
     "help-terms-3-2": `2. ${nameUsd}承诺：非经法定原因或用户事先许可，${nameUsd}不会向任何第三方透露用户的密码、姓名、手机号码等非公开信息。`,
     "help-terms-3-3": `3. 在下述法定情况下，用户的个人信息将会被部分或全部披露：`,
     "help-terms-3-3-1": `(1) 经用户同意向用户本人或其他第三方披露。`,
@@ -378,6 +378,48 @@ export default function zh(state) {
     "help-terms-4-5": `5. 用户有权参加${nameUsd}组织提供的各项线上、线下活动。`,
     "help-terms-4-6": `6. 用户有权根据${nameUsd}网站规定，享受${nameUsd}提供的其它各类服务。`,
 
+    "help-terms-5": `五、用户义务`,
+    "help-terms-5-1": `1. 不得利用本站进行违反用户所在国家法律的行为。`,
+    "help-terms-5-2": `2. 用户不得通过任何手段恶意注册${nameUsd}网站帐号，包括但不限于以牟利、炒作、套现、获奖等为目的多个账号注册。用户亦不得盗用其他用户帐号。如用户违反上述规定，则${nameUsd}有权直接采取一切必要的措施，包括但不限于删除用户发布的内容、取消用户在网站获得的积分、奖励以及虚拟财富，暂停或查封用户帐号，取消因违规所获利益等。`,
+    "help-terms-5-3": `3. 禁止用户将${nameUsd}以任何形式作为从事各种非法活动的场所、平台或媒介。如用户违反上述规定，则${nameUsd}有权直接采取一切必要的措施，包括但不限于删除用户发布的内容、取消用户在网站获得的积分、奖励以及虚拟财富，暂停或查封用户帐号，取消因违规所获利益等。`,
+
+    "help-terms-6": `六、拒绝担保与免责`,
+    "help-terms-6-1": `1. ${nameUsd}作为“网络服务提供者”的第三方平台，不担保网站平台上的信息及服务能充分满足用户的需求。`,
+    "help-terms-6-2": `2. 基于互联网的特殊性，${nameUsd}也不担保服务不会受中断，对服务的及时性、安全性都不作担保，不承担非因${nameUsd}导致的责任。`,
+    "help-terms-6-3": `3. ${nameUsd}不对用户所发布信息的保存、修改、删除或储存失败负责。`,
+    "help-terms-6-4": `4. ${nameUsd}内所有用户所发表的用户评论，仅代表用户个人观点，并不表示本网站赞同其观点或证实其描述，本网站不承担用户评论引发的任何法律责任。`,
+    "help-terms-6-5": `5. ${nameUsd}有权删除${nameUsd}内各类不符合法律或协议规定的信息，而保留不通知用户的权利。`,
+    "help-terms-6-6": `6. 所有发给用户的通告，${nameUsd}都将通过正式的页面公告、站内信、电子邮件、客服电话、手机短信或常规的信件送达。任何非经${nameUsd}正规渠道获得的中奖、优惠等活动或信息，${nameUsd}不承担法律责任。`,
+    "help-terms-6-7": `7. ${nameUsd}有权根据市场情况调整充值、提现、交易等手续费费率，有权决定免费推广期的终止。`,
+
+    "help-terms-7": `七、适用法律和裁判地点`,
+    "help-terms-7-1": `1. 因用户使用${nameUsd}站而引起或与之相关的一切争议、权利主张或其它事项，均受公司注册地（英国）法律管辖。`,
+    "help-terms-7-2": `2. 用户和${nameUsd}发生争议的，应首先本着诚信原则通过协商加以解决。如果协商不成，则应向${nameUsd}注册地（英国）法院提起诉讼。`,
+
+    "help-terms-8": `八、可分性`,
+    "help-terms-8-1": `如果本协议的任何条款被视为不合法、无效或因任何原因而无法执行，则此等规定应视为可分割，不影响任何其它条款的法律效力。`,
+
+    "help-terms-9": `九、冲突选择`,
+    "help-terms-9-1": `本协议是${nameUsd}与用户注册成为${nameUsd}用户，使用${nameUsd}服务之间的重要法律文件，${nameUsd}或者用户的任何其他书面或者口头意思表示与本协议不一致的，均应当以本协议为准。`,
+
+    "help-api-title": 'API 文档',
+    "help-api-overview": '概述',
+    "help-api-overview-1": '1. 公共 API 包括 <span>ticker</span>, <span>trades</span>, <span>depth</span>',
+    "help-api-overview-2": '2. 用户 API 每次请求还需要一个额外的 POST 参数：nonce（必须是自增的正整数）',
+    "help-api-overview-3": `3. API 起始地址为：https://${netUrl}/api/v1`,
+    "help-api-overview-4": '4. 公共 API 使用 HTTP GET 请求；用户 API 使用 POST 请求',
+    "help-api-overview-5": '5. 服务器响应为 JSON 格式，数据结构为：',
+    "help-api-overview-error": '请求正常时，status 为 200, result 为返回内容；请求有误时，status 为非 200，message 为具体出错信息',
+
+    "help-api-list": "API 列表",
+    "help-api-list-auth": "需要身份验证",
+    "help-api-list-func": "	功能",
+    "help-api-list-1": "获取最新行情",
+    "help-api-list-2": "获取最新成交列表",
+    "help-api-list-3": "获取最新深度",
+    "help-api-list-1-2": "2. 支持参数：",
+    "help-api-list-1-2-1": "市场，可选:",
+    "help-api-list-1-3": "3. 返回示例：",
   };
   return Object.assign(
     {},

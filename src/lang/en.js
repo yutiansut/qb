@@ -393,7 +393,50 @@ export default function en(state) {
     "help-terms-4-3": `Users have the right to participate in the ${nameUsd} .community and, in accordance with national laws and ${nameUsd}.community standards, publish articles and opinions.`,
     "help-terms-4-4": `In accordance with ${nameUsd} stipulations, users have the right to win prizes offered by CoinRising (VIP points, bonus earnings rate, etc.)`,
     "help-terms-4-5": `Users have the right to participate in online and offline activities organized by ${nameUsd}.`,
-    "help-terms-4-6": `In accordance with ${netUrl} stipulations, users have the right to enjoy other various services offered by ${nameUsd}.`
+    "help-terms-4-6": `In accordance with ${netUrl} stipulations, users have the right to enjoy other various services offered by ${nameUsd}.`,
+
+    "help-terms-5": `V. User Obligations`,
+    "help-terms-5-1": `Users may not use CoinRising.com to carry out any actions which violate the laws of their country.`,
+    "help-terms-5-2": `Users may not register with ${netUrl} for malicious purposes, including but not limited to, registering multiple accounts in order to exploit, fraudulently drive prices up or down, seek profit through repetitious exchanging of currency, or win multiple prizes.`,
+    "help-terms-5-3": `Users may not use ${nameUsd} as a place, platform, medium, or any other form to engage in any illegal activities. If a user violates any of the above provisions, ${nameUsd} has the right to immediately adopt all necessary measures, including but not limited to deleting information published by the user; removing user VIP points, awards, or digital assets; temporarily or permanently closing the user's account; and canceling out any unlawful gains of the user.`,
+
+    "help-terms-6": `VI. Disclaimer`,
+    "help-terms-6-1": `${nameUsd} as an "online service provider" third-party platform, does not guarantee ${netUrl} information and customer service will completely satisfy all user demands.`,
+    "help-terms-6-2": `In view of the particularity of the internet, ${nameUsd} does not guarantee service will be uninterrupted. In regards to timeliness and security, ${nameUsd} does not guarantee nor assume responsibility for negative consequences that are not a direct result of ${nameUsd}' actions.`,
+    "help-terms-6-3": `${nameUsd} is not responsible for information published by users, nor the saving, editing, deleting, or storage of such information.`,
+    "help-terms-6-4": `All comments and opinions posted within ${netUrl} by users only express the personal opinions of users. These opinions in no way express the view of ${nameUsd} nor receive any endorsement from ${nameUsd}. ${nameUsd} assumes no responsibility for any legal liabilities brought about by users speech.`,
+    "help-terms-6-5": `${nameUsd} has the right to delete various kinds of information from ${netUrl} that is in violation of the law or stipulations of the Agreement. ${nameUsd} reserves the right to do so without notifying users.`,
+    "help-terms-6-6": `All CoinRising public announcements are posted on the official website, ${netUrl}, and officially communicates with users through the CoinRising message service, e-mail, customer service phone number, cell phone SMS, or conventional mail. ${nameUsd} assumes no liability for any awards, discounts, promotions, or information offered through channels outside of these regular ${nameUsd} channels of communication.`,
+    "help-terms-6-7": `${nameUsd} has the right, due to market conditions, to adjust deposit, withdrawal, and trading fees; and has the right to end the no trading fee promotional period.`,
+
+    "help-terms-7": `VII. Legal Jurisdiction`,
+    "help-terms-7-1": `Any and all disputes users may have with ${nameUsd} are under the jurisdiction of CoinRising' place of registration: England.`,
+    "help-terms-7-2": `Any and all disputes between users and ${nameUsd} should first be handled through good faith negotiations. If negotiations are unsuccessful, users can file suit in England, ${nameUsd} ' place of registration.`,
+
+    "help-terms-8": `VIII. Separability`,
+    "help-terms-8-1": `If any clause in this agreement is found to be illegal, void, or for any reason unenforceable, then such provision shall be deemed severable, and does not affect the legal validity of any other provision.`,
+
+    "help-terms-9": `IX. Primacy of the Agreement`,
+    "help-terms-9-1": `This Agreement is an important legal document by which users register to become ${nameUsd} users and use ${nameUsd} services. When there are discrepancies between the expressed wishes of ${nameUsd} or users, in writing or verbally, this Agreement shall prevail.`,
+
+    "help-api-title": 'API Documentation',
+    "help-api-overview": 'Overview',
+    "help-api-overview-1": '1. Public API include <span>ticker</span>, <span>trades</span>, <span>depth</span>',
+    "help-api-overview-2": '2. Each User API request requires an additional POST parameter: nonce (must be a positive integer)',
+    "help-api-overview-3": `3. API initiation address:https://${netUrl}/api/v1`,
+    "help-api-overview-4": '4. Public API uses HTTP GET requests. User API uses POST requests.',
+    "help-api-overview-5": '5. Server responses use the JSON format, and the data structure is as follows:',
+    "help-api-overview-error": 'During a normal request, status is 200 and result returns the content. When there is a request error, status is not 200, message will return a specific error message',
+
+    "help-api-list": "API List",
+    "help-api-list-auth": "Identity Verification Required",
+    "help-api-list-func": "Function",
+    "help-api-list-1": "Get the latest quotes",
+    "help-api-list-2": "Get the latest transaction list",
+    "help-api-list-3": "Get the latest depth",
+    "help-api-list-1-2": "2. Supported parameters:",
+    "help-api-list-1-2-1": "Market, optional: ",
+    "help-api-list-1-3": "3. Examples：",
   };
   return Object.assign(
     {},
