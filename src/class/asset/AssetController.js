@@ -347,12 +347,13 @@ export default class AssetController extends ExchangeControllerBase {
         item => item.id === this.view.state.tradePairId
       )[0],
       currencyArr = curPair.name.split("/"),
-      avail1 = this.view.state.wallet.filter(
+      avail1 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[0]
       )[0],
-      avail2 = this.view.wallet.filter(
+      avail2 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[1]
       )[0];
+      // console.log(avail1, avail2)
     // this.marketController.sdfgadsf(avail1, avail2);
   }
 
@@ -363,10 +364,12 @@ export default class AssetController extends ExchangeControllerBase {
 
   // websocke更新
   userAssetUpdate(obj) {
-    if (name === "simple") {
+    // console.log('执行。。。。。。。。。。')
+    if (this.view.name === "simple") {
+      // console.log("进入。。。。。。。。。。。。。");
       this.setSimpleAsset({
-        totalAsset: totalAsset,
-        wallet: wallet
+        totalAsset: this.store.state.totalAsset,
+        wallet: this.store.state.wallet
       });
       this.updataMarketAvaile();
     }

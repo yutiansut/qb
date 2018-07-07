@@ -29,6 +29,7 @@ export default class Simple extends exchangeViewBase {
   componentWillUpdate() {}
 
   render() {
+    // console.log('simple.............', this.state.pairFees);
     let curPair = this.state.pairFees.filter(
       item => item.id === this.state.tradePairId
     )[0],
