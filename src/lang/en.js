@@ -1,15 +1,21 @@
 export default function en(state) {
-
-  const { nameCny, nameUsd, netUrl, applyEmailUrl, contactEmailUrl, addr } = state;
+  const {
+    nameCny,
+    nameUsd,
+    netUrl,
+    applyEmailUrl,
+    contactEmailUrl,
+    addr
+  } = state;
 
   // 公共、主页及不在其他模块的翻译属于common
   const common = {
-    items: 'items',
+    items: "items",
     inTotal: "In total",
     all: "Total",
-    to: 'To',
-    page: 'Page',
-    go: 'Go',
+    to: "To",
+    page: "Page",
+    go: "Go",
     type: "Type",
     total: "Total",
     volume: "Volume",
@@ -18,7 +24,8 @@ export default function en(state) {
     readMore: "Read more",
     yes: "Yes",
     no: "No",
-    login: 'Sing up',
+    login: "Sing up",
+    charge: "Deposit",
     email: "Email Address",
     phone: "Mobile",
     alter: "Update",
@@ -27,8 +34,8 @@ export default function en(state) {
     twoStep: "2-Step Verification",
     save: "Save",
     add: "Add",
-    cance: 'Cancel',
-    delete: 'Delete',
+    cance: "Cancel",
+    delete: "Delete",
     search: "Search",
     reset: "Reset",
     example: "example",
@@ -51,29 +58,30 @@ export default function en(state) {
     option: "Option",
     setFund: "Funding Password",
     remark: "Comments",
-    name: 'Name',
-    address: 'Address',
-    message: 'Message',
-    points: 'Points',
-    loginPwd: 'Login password',
-    none: 'None',
-    addTime: 'Added at',
-    loginTime: 'Signed In time',
-    equipment: 'Equipment',
-    ip: 'IP adress',
-    place: 'Place',
-    upLoad: 'Upload',
-    avgPrice: 'Average deal price',
-    pair: 'Exchange Pair',
-    dealed: 'Deal done',
-    marketPrice: 'Market Price',
-    detail: 'Details',
+    name: "Name",
+    address: "Address",
+    message: "Message",
+    points: "Points",
+    explanation: "Explanation",
+    loginPwd: "Login password",
+    none: "None",
+    addTime: "Added at",
+    loginTime: "Signed In time",
+    equipment: "Equipment",
+    ip: "IP adress",
+    place: "Place",
+    upLoad: "Upload",
+    avgPrice: "Average deal price",
+    pair: "Exchange Pair",
+    dealed: "Deal done",
+    marketPrice: "Market Price",
+    detail: "Details",
     noRecords: "No records",
-    close: 'Close',
+    close: "Close",
     "deal-use": "Available",
-    sendCode: 'Send the code',
-    sendAgain: 'Send again',
-    optionSuccess: 'Operation successful',
+    sendCode: "Send the code",
+    sendAgain: "Send again",
+    optionSuccess: "Operation successful"
   };
   const other = {
     "header-home": "home",
@@ -151,9 +159,9 @@ export default function en(state) {
     "asset-option-failed": "Operation failed",
     "asset-not-enough": "Insufficient funds",
     "asset-input-twoVerify": "Please enter 2-Factor Authentication code",
-    "asset-add-success": 'Successfully added!',
-    "asset-delet-fail": 'Delete failed!',
-    "asset-input-address": 'Please select a withdrawal address'
+    "asset-add-success": "Successfully added!",
+    "asset-delet-fail": "Delete failed!",
+    "asset-input-address": "Please select a withdrawal address"
   };
   const market = {
     "market-favorite": "Favorites",
@@ -163,7 +171,7 @@ export default function en(state) {
     "market-lastPrice": "Latest price",
     "market-change": "Change",
     "market-change7D": "7D Change",
-    "market-currencyInfo": "Currency details",
+    "market-currencyInfo": "Currency details"
   };
   const notice = {
     "activity-regist": "Sign up now"
@@ -172,29 +180,28 @@ export default function en(state) {
     "order-current": "Current order",
     "order-history": "Order history",
     "order-deal": "Deal history",
-    'unDeal': 'Not traded',
-    'partDeal': 'Partially filled',
-    'totalDeal': 'Filled',
-    'reseted': 'Cancelled',
-    'reseting': 'Cancelling',
-    'overed': 'Complete',
-    'hideReset': 'Hide undo',
-    "exportOrderRecord": "export",
-    'orderDetail': 'order details',
-    "order-deal-total": 'total',
-    "order-deal-money": 'USD',
-    "order-buy": 'Taker',
-    "order-sell": 'Maker',
+    unDeal: "Not traded",
+    partDeal: "Partially filled",
+    totalDeal: "Filled",
+    reseted: "Cancelled",
+    reseting: "Cancelling",
+    overed: "Complete",
+    hideReset: "Hide undo",
+    exportOrderRecord: "export",
+    orderDetail: "order details",
+    "order-deal-total": "total",
+    "order-deal-money": "USD",
+    "order-buy": "Taker",
+    "order-sell": "Maker",
     "order-deal-time": "Transaction Time",
     "order-deal-price": "Transaction Price",
     "order-deal-number": "Processed Amount",
-    "order-mine":'Mine',
-    "order-market":'Market',
-    "order-recent":'Recently trading',
-    "order-reset-buy": 'Undo buy',
-    "order-reset-sell": 'Undo sell',
-    "order-reset-all": 'Undo all',
-  
+    "order-mine": "Mine",
+    "order-market": "Market",
+    "order-recent": "Recently trading",
+    "order-reset-buy": "Undo buy",
+    "order-reset-sell": "Undo sell",
+    "order-reset-all": "Undo all"
   };
   const deal = {
     "deal-limit": "Limit price",
@@ -204,12 +211,13 @@ export default function en(state) {
     "deal-every": "Enter every time",
     "deal-2h": "Enter every two hours",
     "deal-never": "Never enter",
-    "deal-inputpwdplease": "To activate no fund password feature, please input fund password for ID authentication first",
+    "deal-inputpwdplease":
+      "To activate no fund password feature, please input fund password for ID authentication first",
     "deal-marketbuy": "Buy for market best price",
     "deal-trunover": "Total",
     "deal-forgetpwd": "Forget password",
     "deal-freepwd": "Free password",
-    "deal-inputpwd": "Input fund password",
+    "deal-inputpwd": "Input fund password"
   };
   const user = {
     "user-score": "My VIP Status",
@@ -217,8 +225,10 @@ export default function en(state) {
     "user-id": "User ID",
     "user-level": "VIP Level",
     "user-changePwd": "Change password",
-    "user-setFund": "After setting up a funding password any fund withdrawals will require password entry.",
-    "user-twoVerify": "Once you activate two-step authentication, the following actions will require using a one-time password to accomplish: logins, password changes, withdrawals, trades, and other important actions",
+    "user-setFund":
+      "After setting up a funding password any fund withdrawals will require password entry.",
+    "user-twoVerify":
+      "Once you activate two-step authentication, the following actions will require using a one-time password to accomplish: logins, password changes, withdrawals, trades, and other important actions",
     "user-loginVerify": "Login Verification",
     "user-cashVerify": "Withdrawal Verification",
     "user-fundVerify": "Recover Funding Password Verification",
@@ -234,15 +244,19 @@ export default function en(state) {
     "user-noticeRemind": "Login in/Deposit/Withdraw",
     "user-noticeEmail": "E-mail Notification",
     "user-noticePhone": "SMS Notification",
-    "user-noticeBindPhone": "Link your mobile number and start SMS notification",
+    "user-noticeBindPhone":
+      "Link your mobile number and start SMS notification",
     "user-ipWhite": "IP Whitelist",
-    "user-ipRemind": "OBS! For you convenience and safety, do not add unstable IP address to this white-list (e.g Dial-up Internet access) ",
+    "user-ipRemind":
+      "OBS! For you convenience and safety, do not add unstable IP address to this white-list (e.g Dial-up Internet access) ",
     "user-ipAddr": "IP address",
     "user-ipExample": "example：216.58.197.238 or 104.244.42.0/24",
-    "user-ipAddRemind": "After adding an IP address or range, you will not be able to log in to your account from an IP address outside of this white list.For security reasons, after adding or removing IP addresses, your account will not be able to withdraw cash within 24 hours.You can access",
+    "user-ipAddRemind":
+      "After adding an IP address or range, you will not be able to log in to your account from an IP address outside of this white list.For security reasons, after adding or removing IP addresses, your account will not be able to withdraw cash within 24 hours.You can access",
     "user-ipAddRemind2": "Get current IP Address",
     "user-current": "Active Sessions",
-    "user-currentTitle": "These sessions are currently signed in to your account.",
+    "user-currentTitle":
+      "These sessions are currently signed in to your account.",
     "user-isCurrent": "If Current",
     "user-out": "Sign out all other sessions",
     "user-records": "Newly 10 records",
@@ -255,7 +269,8 @@ export default function en(state) {
     "user-authErrRes": "Identity verification failed, please try again",
     "user-authProRes": "Verification state: In processing",
     "user-name": "Real-name verification",
-    "user-nameRemind": "The information you submit for real name verification must be true and reliable. It must also match the name on your bank account. Once your information is verified it cannot be changed.",
+    "user-nameRemind":
+      "The information you submit for real name verification must be true and reliable. It must also match the name on your bank account. Once your information is verified it cannot be changed.",
     "user-surname": "Surname",
     "user-forename": "Forename",
     "user-inputSurname": "Input surname",
@@ -265,14 +280,18 @@ export default function en(state) {
     "user-inputCard": "Please fill in ID card/Passport number",
     "user-photoVerify": "Photo verification",
     "user-idReq": "ID requirements",
-    "user-req1": "Id photo: according to the sample, please upload the negative and positive id, face and the font should be clearly visible",
-    "user-req2": "Passport: according to the sample, please upload ID passport pages can be positive, face and the font should be clearly visible",
-    "user-req3": "Holding a certificate as: according to the sample, please upload photos in hand, please do not block any effective information in the photo. Face and font must be clearly visible,Paper must show ",
+    "user-req1":
+      "Id photo: according to the sample, please upload the negative and positive id, face and the font should be clearly visible",
+    "user-req2":
+      "Passport: according to the sample, please upload ID passport pages can be positive, face and the font should be clearly visible",
+    "user-req3":
+      "Holding a certificate as: according to the sample, please upload photos in hand, please do not block any effective information in the photo. Face and font must be clearly visible,Paper must show ",
     "user-req4": "Paper must show “Just for QB and date",
     "user-req5": "",
     "user-req6": "Image format: less than 10M,  jpg or png format",
     "user-photo": "ID photo",
-    "user-photoSure": "I admit to submit certificate information belong to himself, there is no fake and pirated > others documents, for all the consequences resulting from the fake, file documents are to be borne by himself",
+    "user-photoSure":
+      "I admit to submit certificate information belong to himself, there is no fake and pirated > others documents, for all the consequences resulting from the fake, file documents are to be borne by himself",
     "user-submit": "Submit",
     "user-idFront": "front of ID Card",
     "user-idBack": "back of ID Card",
@@ -287,7 +306,6 @@ export default function en(state) {
     "user-scoreGet": "How to make more points",
     "user-scoreHave": "Points Earned",
     "user-action": "Action"
-
   };
   const login = {
     "login-verify": "Verified login",
@@ -298,11 +316,84 @@ export default function en(state) {
     "login-passInput": "Password",
     "login-forget": "Forgot password",
     "login-read": "I have read and accept",
-    "login-readUser": "User Agreement",
+    "login-readUser": "User Agreement"
   };
   const help = {
-    "help-termsFirst":
-      `Ownership and operation of the services offered by ${nameUsd} .com are the property of ${nameUsd} Ltd. (hereinafter referred to as "${nameUsd} .") ${nameUsd} Terms of Service (hereinafter referred to as "Agreement")  defines the rights and obligations of ${nameUsd} users and CoinRising as engaged in various services. Access and/or use of this site constitutes acceptance of and agree to all terms and conditions of this Agreement. ${nameUsd} , as the operator of ${netUrl},  will provide services for users pursuant to this Agreement. Users unwilling to accept the terms of this Agreement shall not access or use this site.`
+    "help-fees": "Fees",
+    "help-level": "VIP Level",
+    "help-require-points": "Required Points",
+    "help-trade-fee": "Transaction Fee",
+    "help-quick-withdrawal": "Quick BTC Withdrawal",
+    "help-see-below": "See below",
+    "help-fee-services": "Fee Services",
+    "help-vip-forver": "· VIP level is permanent valuable",
+    "help-points-accumulation":
+      "· Members are upgraded automatically when they have sufficient points for the next level",
+    "help-adjust": `· Based on operational requirements, ${nameUsd} may make adjustments to the VIP policy`,
+    "help-usd-withdrawal":
+      "· Each USD withdrawal is subject to a bank processing fee of ~$20",
+    "help-tradefee-intro1":
+      "Every trade occurs between two parties: the maker, whose order exists on the order book prior to the trade, and the taker, who places the order that matches (or \"takes\") the maker's order. Makers are so named because their orders make the liquidity in a market. Takers are the ones who remove this liquidity by matching makers' orders with their own.",
+    "help-tradefee-intro2":
+      "The maker-taker model encourages market liquidity by rewarding the makers of that liquidity with a fee discount. It also results in a tighter market spread due to the increased incentive for makers to outbid each other. The higher fee that the taker pays is usually offset by the better prices this tighter spread provides.",
+    "help-trade-type": "Trade Type",
+    "help-earn-points": "How to Earn Points",
+    "help-per-day": "Limit once per day",
+    "help-improv": "Site Improvements suggestions",
+    "help-idea-accepted": "100 credits per idea accepted",
+    "help-usd-equivalent": "USD equivalent",
+    "help-rounded-up": "Receive 1% of each deposit amount rounded up",
+    "help-verification": "Register and real-name verificatio",
+    "help-real-name": "Registration and real-name verification",
+    "help-email-auth": "Email authentication",
+    "help-email-verify": "Email Verification",
+    "help-google-auth": "Add Google authentication",
+    "help-google-verify": "Activate Google Authentication",
+    "help-phone-bind": "Link Cell Phone",
+    "help-phone-award": "Tether cell phone number 1000 points",
+    "help-chargebtc-first": "First time BTC deposit",
+    "help-chargebtc-award": "First BTC Deposit",
+    // 用户协议
+    "help-terms": "Terms of Service",
+    "help-termsFirst": `Ownership and operation of the services offered by ${nameUsd} .com are the property of ${nameUsd} Ltd. (hereinafter referred to as "${nameUsd} .") ${nameUsd} Terms of Service (hereinafter referred to as "Agreement")  defines the rights and obligations of ${nameUsd} users and CoinRising as engaged in various services. Access and/or use of this site constitutes acceptance of and agree to all terms and conditions of this Agreement. ${nameUsd} , as the operator of ${netUrl},  will provide services for users pursuant to this Agreement. Users unwilling to accept the terms of this Agreement shall not access or use this site.`,
+    "help-termsSecond": `${nameUsd} reserves the right to modify this Agreement. Once the revised Agreement is publicly released, it is immediately effective and replaces the previous agreement. Users can access the latest agreement at any time.`,
+    "help-terms-1": `I. Service Content`,
+    "help-terms-1-1": `${nameUsd} operates its own system, and through the internet and other formats offers Bitcoin trading and application services.`,
+    "help-terms-1-2": `Users must provide legitimate, true, accurate, and complete personal information; if this information changes, users must update their information immediately. If the registration information provided by the user is illegitimate, untrue, inaccurate, or incomplete, the user then assumes the corresponding responsibility and consequences thereof. ${nameUsd} reserves the right to terminate service provided to users who do not abide by this clause.`,
+
+    "help-terms-2": `II. Provision, Modification, and Termination of Services`,
+    "help-terms-2-1": `When users accept various ${nameUsd} services, they simultaneously agree to accept all information services offered by ${nameUsd} . Users hereto authorize ${nameUsd} to contact them via e-mail, SMS, mail, etc.`,
+    "help-terms-2-2": `${nameUsd} reserves the right to modify or suspend service at any time.`,
+    "help-terms-2-3": `${nameUsd} has the right to recall rewards given to users including, but not limited to VIP points and bonus earnings rates. ${nameUsd} also reserves the right to modify the content of these rewards.`,
+    "help-terms-2-4": `Fund products not redeemed in whole by users before 4:00 PM Pacific Standard Time will automatically rollover to the next day.`,
+    "help-terms-2-5": `${nameUsd} and users both have the right to terminate Fund services and redeem the investment at any time.`,
+    "help-terms-2-6": `Users with objections to modifications of the Agreement, or who are unsatisfied with ${nameUsd} service can exercise the following rights:`,
+    "help-terms-2-6-1": `Stop using ${nameUsd} services.`,
+    "help-terms-2-6-2": `Through ${nameUsd} customer service or other channels, notify CoinRising to stop offering service to said user. Upon service termination said user's rights to use ${nameUsd} services end immediately. In this situation, ${nameUsd} has no duty to send any pending information or perform any further services for the user or any third-party not directly related to the Agreement.`,
+
+    "help-terms-3": `III. User Information Confidentiality`,
+    "help-terms-3-1": `${nameUsd} user information referred to in this Agreement is collected and held in accordance with relevant laws and regulations as well as the following information:`,
+    "help-terms-3-1-1": `When users apply for ${nameUsd} membership or request ${nameUsd} services they will provide personal information to ${nameUsd} .`,
+    "help-terms-3-1-2": `When users use ${nameUsd} services, participate in online promotions, or visit the ${nameUsd} website, ${nameUsd} automatically receives and records browser and cell phone data, including but not limited to IP address, cookies, and user website history.`,
+    "help-terms-3-1-3": `${nameUsd} , as engaged in commercial partnerships, legally obtains user information.`,
+    "help-terms-3-1-4": `${nameUsd} also obtains user information through other legal channels.`,
+    "help-terms-3-2": `${nameUsd} promises, except for legal requirements and statutory reasons or with prior permission from the user, ${nameUsd} will not reveal a user's name, password, cell phone number, or other non-public information to any third party.`,
+    "help-terms-3-3": `In the following legal situations, partial or complete user information will be disclosed.`,
+    "help-terms-3-3-1": `The user requests their own information or consents to their information being disclosed to a third party.`,
+    "help-terms-3-3-2": `In accordance with the legal requirements of the user's national laws, relevant regulations, or administrative body requirements, CoinRising will disclose user information to the administrative body, judiciary, or other legal or regulatory third party.`,
+    "help-terms-3-3-3": `${nameUsd} may also be required to reveal user information for legal reasons not mentioned above.`,
+
+    "help-terms-4": `IV. User Rights`,
+    "help-terms-4-1": `Users' user name, password, and security`,
+    "help-terms-4-1-1": `Once a user successfully registers, they become a ${nameUsd} member, and receive a username (user e-mail address) and password. Thereupon, after a user uses their username and password to log-in to CoinRising.com all actions and events are their sole responsibility; the user voluntarily takes sole responsibility for any and all legal responsibilities and consequences as a result of the speech, actions, etc. of the user.`,
+    "help-terms-4-1-2": `Users have a duty to safeguard their ${nameUsd} account, username and password, SMS authentication code, Google 2-Factor authentication code. Users are fully responsible for the security of their username, password, and Google 2-Factor authentication code. If a user's username, password, or Google 2-Factor authentication code are lost or leaked due to the user or user negligence of safeguarding measures, all legal consequences are borne by the user. If any of this information is leaked due to the user or user negligence of safeguarding measures and results in financial loss, ${nameUsd} is in no way responsible. Since ${netUrl} is a trading website, the user's login password, withdrawal password, trading password, SMS password, Google password must not be the same, or else there are high security risks, and the relevant responsibility will be fully borne by the user.`,
+    "help-terms-4-1-3": `If a user forgets their password they can reset their password through the e-mail they used to register. Users who registered using their cell phone number can have their original password sent to their cell phone. If users discover their username is being used illegally, or they discover any security vulnerabilities they must immediately notify ${nameUsd} .`,
+    "help-terms-4-1-4": `${nameUsd} will not demand a user reveal their password, nor will ${nameUsd} ask users to deposit bitcoin to an account outside the ${netUrl} system. ${nameUsd} assumes no responsibility for financial losses due to users sending money or bitcoins to an account not provided by ${nameUsd} .`,
+    "help-terms-4-2": `In accordance with the relevant stipulations of ${netUrl}, users have the right to receive rewards from ${nameUsd} due to sharing CoinRising.com, etc.`,
+    "help-terms-4-3": `Users have the right to participate in the ${nameUsd} .community and, in accordance with national laws and ${nameUsd}.community standards, publish articles and opinions.`,
+    "help-terms-4-4": `In accordance with ${nameUsd} stipulations, users have the right to win prizes offered by CoinRising (VIP points, bonus earnings rate, etc.)`,
+    "help-terms-4-5": `Users have the right to participate in online and offline activities organized by ${nameUsd}.`,
+    "help-terms-4-6": `In accordance with ${netUrl} stipulations, users have the right to enjoy other various services offered by ${nameUsd}.`
   };
   return Object.assign(
     {},

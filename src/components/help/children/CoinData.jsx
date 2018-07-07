@@ -49,7 +49,7 @@ export default class CoinData extends exchangeViewBase {
     await this.getCoinInfo(this.state.walletList[this.state.currency])
   }
   render() {
-    let {} = this.state.coinInfo;
+    let {name, enName, icoPriceCN, icoPriceEN, logo_url, releaseTime, totalValueCN, totalValueEN, totalVolume, } = this.state.coinInfo;
     let { controller } = this.props;
     this.searchArr = controller.filter(
       Object.keys(this.state.walletList),
