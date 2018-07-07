@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Input from "../../../common/component/Input";
 import Button from "../../../common/component/Button";
@@ -6,25 +7,33 @@ import Button from "../../../common/component/Button";
 export default class CoinData extends exchangeViewBase {
   constructor(props) {
     super(props);
-    props.controller.setView(this);
-    props.controller.marketController.setView(this);
+    const { controller } = props;
+    controller.setView(this);
+    controller.marketController.setView(this);
     this.state = {
       showSearch: false,
       currency: "ETH",
-      unit: 0,
-      value: "",
-      walletList: {}
+      unit: controller.configData.language === "zh-CN" ? 1 : 0,
+      value: "ETH",
+      walletList: {},
+      tradePair: null
     };
-    let {
-      coinInfo
-    } = props.controller.marketController.initState;
+    let { coinInfo } = controller.marketController.initState;
 
     this.state = Object.assign(this.state, {
       coinInfo
     });
 
-    this.getWalletList = props.controller.getWalletList.bind(props.controller);
-    this.getCoinInfo = props.controller.marketController.getCoinInfo.bind(props.controller.marketController)
+    this.getWalletList = controller.getWalletList.bind(controller);
+
+    this.getCoinInfo = controller.marketController.getCoinInfo.bind(
+      controller.marketController
+    );
+    // 获取币种对应交易对
+    this.getTradePair = controller.getTradePair.bind(controller);
+    // 处理出币种对应的交易对数组
+    this.getCoinPair = controller.getCoinPair.bind(controller);
+
     this.show = () => {
       this.setState({ showSearch: true });
     };
@@ -38,18 +47,52 @@ export default class CoinData extends exchangeViewBase {
       this.setState({ currency });
     };
     this.search = () => {
-      let value = this.state.value !== '' && this.searchArr[0] || "BTC";
+      let value = (this.state.value !== "" && this.searchArr[0]) || "ETH";
       this.setValue(value);
       this.setCurrency(value);
       this.hide();
-    }
+    };
   }
   async componentWillMount() {
     await this.getWalletList();
-    await this.getCoinInfo(this.state.walletList[this.state.currency])
+    let currency =
+      this.props.location.query && this.props.location.query.currency.toUpperCase();
+    currency && this.setState({ currency: currency, value: currency });
+
+    (!currency || currency === this.state.currency) && await this.getCoinInfo(this.state.walletList[currency || this.state.currency]);
+
+    this.getTradePair();
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.currency !== this.state.currency) {
+      console.log('updateing',nextState.currency, this.state.currency);
+      this.getCoinInfo(this.state.walletList[nextState.currency]);
+    }
+    if (JSON.stringify(nextState) === JSON.stringify(this.state)) return false;
+    return true;
+  }
+
   render() {
-    let {name, enName, icoPriceCN, icoPriceEN, logo_url, releaseTime, totalValueCN, totalValueEN, totalVolume, } = this.state.coinInfo;
+    console.log(this.state.coinInfo);
+    let {
+      name,
+      enName,
+      icoPriceCN,
+      icoPriceEN,
+      priceCN,
+      priceEN,
+      logo_url,
+      releaseTime,
+      totalValueCN,
+      totalValueEN,
+      totalVolume,
+      circulationVolume,
+      description,
+      webSite,
+      blockSites,
+      whitePaper
+    } = this.state.coinInfo;
     let { controller } = this.props;
     this.searchArr = controller.filter(
       Object.keys(this.state.walletList),
@@ -73,25 +116,26 @@ export default class CoinData extends exchangeViewBase {
               onEnter={this.search}
               clickOutSide={this.search}
             >
-              {this.state.showSearch &&
-                this.searchArr.length ? (
-                  <ul className="search-list">
-                    {this.searchArr.map((item, index) => (
-                      <li
-                        key={index}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.nativeEvent.stopImmediatePropagation();
-                          this.setValue(item);
-                          this.setCurrency(item);
-                          this.hide();
-                        }}
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : ''}
+              {this.state.showSearch && this.searchArr.length ? (
+                <ul className="search-list">
+                  {this.searchArr.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={e => {
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        this.setValue(item);
+                        this.setCurrency(item);
+                        this.hide();
+                      }}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                ""
+              )}
             </Input>
           </div>
           <button
@@ -112,40 +156,78 @@ export default class CoinData extends exchangeViewBase {
           </button>
         </div>
         <div className="content">
-          <img src="" alt="" />
+          <img src={logo_url} alt="" />
           <div className="info clearfix">
             <div className="left">
-              <p>BTC(Bitcoin)</p>
-              <p>$66665.020</p>
-              <a>去充值</a>
+              <p>
+                {name.toUpperCase()}({enName})
+              </p>
+              <p>
+                {this.state.unit
+                  ? `¥${Number(priceCN).format({ number: "legal" })}`
+                  : `$${Number(priceEN).format({ number: "legal" })}`}
+              </p>
+              <NavLink
+                to={{
+                  pathname: "/wallet/charge",
+                  query: { currency: this.state.currency }
+                }}
+              >
+                去充值
+              </NavLink>
             </div>
             <div className="right">
               <p>
-                <span>市值：$21000000</span>
-                <span>发行总量：21000000</span>
-                <span>流通量：21,000,000</span>
+                <span>
+                  市值：{this.state.unit
+                    ? `¥${Number(totalValueCN).format({ number: "legal" })}`
+                    : `$${Number(totalValueEN).format({
+                        number: "legal"
+                      })}`}
+                </span>
+                <span>
+                  发行总量：{totalVolume.format({ number: "general" })}
+                </span>
+                <span>
+                  流通量：{circulationVolume.format({ number: "general" })}
+                </span>
               </p>
               <p>
-                <span>发行价格：$21000000</span>
-                <span>发行日期：2009-01-09</span>
+                <span>
+                  发行价格：{this.state.unit
+                    ? `¥${Number(priceCN).format({ number: "legal" })}`
+                    : `$${Number(priceEN).format({ number: "legal" })}`}
+                </span>
+                <span>发行日期：{releaseTime.toDate("yyyy-MM-dd")}</span>
               </p>
               <p>
                 <span>去交易：</span>
-                <a>BTC/USDT</a>
-                <a>BTC/ETH</a>
+                {this.getCoinPair(
+                  this.state.tradePair,
+                  this.state.currency
+                ).map((v, index) => (
+                  <NavLink
+                    to={{
+                      pathname: `/trade`,
+                      query: { id: v.id }
+                    }}
+                    key={index}
+                  >
+                    {v.name}
+                  </NavLink>
+                ))}
               </p>
             </div>
           </div>
           <div className="detail">
             <p>
               介绍:<br />
-              比特币是目前使用最为广泛的一种数字货币。它诞生于2009年1月3日，是一种点对点（P2P）传输的数字加密货币，总量2100万枚。比特币网络每10分钟释放出一定数量币，预计在2140年达到极限。比特币涨幅曾接近460万倍，被投资者称为“数字黄金”。截止目前比特币总市值突破3748亿人民币。比特币因去中心化、全球流通、低交易费用
-              、匿名流通等特点，备受科技爱好者青睐。近来华尔街、多国央行等传统金融机构开始研究比特币区块链技术，中国人民银行也公布研发数字货币的计划。日本政府正式承认比特币为法定支付方式，越来越多的日本商家接受了比特币支付。
+              {description}
             </p>
             <div className="button">
-              <Button type="base" title="官网" href="#" target={true} />
-              <Button type="base" title="区块浏览器" href="#" target={true} />
-              <Button type="base" title="白皮书" href="#" target={true} />
+              <Button type="base" title="官网" href={webSite && webSite[0]} target={true} />
+              <Button type="base" title="区块浏览器" href={blockSites && blockSites[0]} target={true} />
+              <Button type="base" title="白皮书" href={whitePaper && whitePaper[0]} target={true} />
             </div>
           </div>
         </div>

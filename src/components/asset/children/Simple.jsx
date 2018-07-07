@@ -31,15 +31,15 @@ export default class Simple extends exchangeViewBase {
   render() {
     // console.log('simple.............', this.state.pairFees);
     let curPair = this.state.pairFees.filter(
-      item => item.id === this.state.tradePairId
-    )[0],
-    currencyArr = curPair && curPair.name.split("/"),
-    avail1 = this.state.wallet.filter(
-      item => item.coinName === (currencyArr && currencyArr[0])
-    )[0],
-    avail2 = this.state.wallet.filter(
-      item => item.coinName === (currencyArr && currencyArr[1])
-    )[0];
+        item => item.id === this.state.tradePairId
+      )[0],
+      currencyArr = curPair && curPair.name.split("/"),
+      avail1 = this.state.wallet.filter(
+        item => item.coinName === (currencyArr && currencyArr[0])
+      )[0],
+      avail2 = this.state.wallet.filter(
+        item => item.coinName === (currencyArr && currencyArr[1])
+      )[0];
     let lang = this.props.controller.configData.language;
     // console.log(this.state.totalAsset);
     let total =
@@ -51,18 +51,18 @@ export default class Simple extends exchangeViewBase {
         <p className="simple-asset-wrap">
           <span className="total">
             {this.intl.get("asset-totalAssets")}：{lang === "en-US" ? "$" : "¥"}
-            {total && total.format({ number: "digital" })}{" "}
+            {total && Number(total).format({ number: "legal" })}{" "}
           </span>
           <img src="/static/images/xianghu.svg" alt="" />
           <span className="avail1">
             {this.intl.get("deal-use")}
             {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&
-              avail1.availableCount.format({ number: "property" })}
+              Number(avail1.availableCount).format({ number: "property" })}
           </span>
           <span className="avail2">
             {this.intl.get("deal-use")}
             {currencyArr && currencyArr[1].toUpperCase()}：{avail2 &&
-              avail2.availableCount.format({ number: "property" })}
+              Number(avail2.availableCount).format({ number: "property" })}
           </span>
           <span>
             {this.intl.get("fee")}:Maker: {curPair && curPair.maker}%,Taker:{" "}

@@ -112,6 +112,10 @@ export default {
     msg: "提币：查询不到to地址",
     errCode: "NO_TO"
   },
+  711: {
+    msg: "cws错误",
+    errCode: "NO_TO"
+  },
   712: {
     msg: "提币地址格式错误",
     errCode: "ERROR_ADDRESS"

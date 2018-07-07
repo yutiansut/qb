@@ -58,6 +58,8 @@ export default class Extract extends exchangeViewBase {
     //绑定方法
     //获取市场下交易对
     this.getTradePair = controller.getTradePair.bind(controller);
+    // 处理出币种对应的交易对数组
+    this.getCoinPair = controller.getCoinPair.bind(controller);
     //获取当前币种资产信息
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
     // 获取提笔最小数量和地址
@@ -122,7 +124,7 @@ export default class Extract extends exchangeViewBase {
   }
 
   render() {
-    console.log(this.props.controller.userTwoVerify);
+    // console.log(this.props.controller.userTwoVerify);
     let {
       totalCount,
       frozenCount,
@@ -312,10 +314,9 @@ export default class Extract extends exchangeViewBase {
             </li>
           </ol>
         </div>
-        {/* <ToTrade
-          tradePair={this.state.tradePair}
-          currency={this.state.currency}
-        /> */}
+        <ToTrade
+          pairArr={this.getCoinPair(this.state.tradePair, this.state.currency)}
+        />
         <div className="history clearfix">
           <span className="title">
             {this.intl.get("asset-withdrawalsHistory")}
@@ -437,7 +438,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={3}
+            type={3}//短信验证码
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });

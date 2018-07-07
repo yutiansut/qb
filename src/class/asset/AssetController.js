@@ -187,6 +187,7 @@ export default class AssetController extends ExchangeControllerBase {
     type === 3 && (obj.mode = 0);
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
+    console.log('提交订单', result)
     if (result) {
       this.view.setState({
         orderTip: true,
@@ -270,6 +271,27 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
     if (this.view.state.address === obj.address)
       this.view.setState({ address: "" });
+  }
+
+  // 处理出币种对应的交易对数组
+  getCoinPair(o, coin) {
+    if (!o) return [];
+    if (coin !== 'USDT') {
+      return o.pairNameCoin[coin.toLowerCase()].map(v => {
+        return {
+          name: `${coin}/${v.toUpperCase()}`,
+          id: o.pairIdCoin[coin.toLowerCase()][v]
+        }
+      })
+    }
+    if (coin === 'USDT') {
+      return o.pairNameMarke[coin.toLowerCase()].map(v => {
+        return {
+          name: `${v.toUpperCase()}/USDT`,
+          id: o.pairIdMarket[coin.toLowerCase()][v]
+        }
+      })
+    }
   }
 
   // 账户余额页面筛选

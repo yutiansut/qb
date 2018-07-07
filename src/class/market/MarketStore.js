@@ -54,42 +54,26 @@ export default class MarketStore extends ExchangeStoreBase {
       unitsType: '',
       pairMsg: {},
       coinInfo: {
-        fullName: "BitCoin",
-        coinName: "BTC",
-        createdTime: 947586000,
-        totalCount: 21000000,
-        marketCount: 11000000,
-        crowdfunding: 1.1,
-        website: "www.baidu.com",
-        blockSite: "www.baidu.com",
-        introduction: "wwwwwww",
-        enName: "string",
-        logo: "url",
-        webSite: "url",
-        whitePaper: "url",
-        blockSites: "url",
-        description: "string",
-        releaseTime: "string",
-        price: {
-          cny: 42744.613840365026,
-          usd: 6603.502018124614,
-          btc: 1.0088212447399139,
-          eth: 12.734116540105735
-        },
-        totalVolume: 21000000,
-        circulationVolume: 21000000,
-        totalValue: {
-          cny: 897636890647.6655,
-          usd: 138673542380.61688,
-          btc: 21185246.13953819,
-          eth: 267416447.34222043
-        },
-        icoPrice: {
-          cny: 0,
-          usd: 0,
-          btc: 0,
-          eth: 0
-        }
+        "id": 4,            // 币种id
+        "name": "eth",      // 币种名
+        "enName": "Ethereum",   // 币种英文全称
+        "cnName": "以太坊",  // 币种中文名
+        "icon": "",        // 币种符号
+        "logo_url": "",//币种logo
+        "webSite": [],
+        "whitePaper": [],
+        "blockSites": [],
+        "description": "",  //币种简介
+        "releaseTime": 0,  // 发行时间
+        "totalVolume": 0,   // 总发行量
+        "circulationVolume": 0,  // 流通量
+        "priceCN": 0,  // 人民币价格
+        "priceEN": 0,  // 美元价格
+        "totalValueCN": 0,   // 人民币总市值
+        "totalValueEN": 0, // 美元总市值
+        "icoPriceCN": 0,              // 人民币ico价格
+        "icoPriceEN": 0  // 美元ico价格
+
       },
       "list": [
         {

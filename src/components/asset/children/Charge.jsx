@@ -61,16 +61,21 @@ export default class Charge extends exchangeViewBase {
       });
     };
     this.getWalletList = controller.getWalletList.bind(controller);
-    this.getTradePair = controller.getTradePair.bind(controller);
+
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
+
     this.getCoinAddress = controller.getCoinAddress.bind(controller);
+
     this.getHistory = controller.getHistory.bind(controller);
+
+    this.getTradePair = controller.getTradePair.bind(controller);
+    // 处理出币种对应的交易对数组
+    this.getCoinPair = controller.getCoinPair.bind(controller);
   }
 
   async componentWillMount() {
     let currency =
       this.props.location.query && this.props.location.query.currency;
-    console.log(currency);
     currency &&
       this.setState({
         currency: currency,
@@ -116,7 +121,7 @@ export default class Charge extends exchangeViewBase {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress;
-    console.log(address);
+    // console.log(address);
     return (
       <div className="charge">
         <h3>
@@ -223,10 +228,9 @@ export default class Charge extends exchangeViewBase {
             </li>
           </ol>
         </div>
-        {/* <ToTrade
-          tradePair={this.state.tradePair}
-          currency={this.state.currency}
-        /> */}
+        <ToTrade
+          pairArr={this.getCoinPair(this.state.tradePair, this.state.currency)}
+        />
         <div className="history clearfix">
           <span className="title">{this.intl.get("asset-depositHistory")}</span>
           {this.state.assetHistory.total ? (
