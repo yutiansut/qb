@@ -7,15 +7,15 @@ export default class LoginStore extends ExchangeStoreBase {
       verifyNum: '获取验证码'
     }
     this.WebSocket.general.on('login', data => {
-      console.log('joinRoom getWebSocketData', data, this.controller)
-      console.log('ccc1', data.data)
+      // console.log('joinRoom getWebSocketData', data, this.controller)
+      // console.log('ccc1', data.data)
       this.controller.userLoginInfo(data)
 
     })
   }
 
   login(obj) { // 登陆接口
-    console.log('getData', this.WebSocket)
+    // console.log('getData', this.WebSocket)
     this.WebSocket.general.emit('login', obj)
   }
 

@@ -17,13 +17,18 @@ export default class NoticeController extends ExchangeControllerBase {
     return this.configController.initState
   }
 
-  async getNoticeCon(activityId, contentType, page) { // 获取公告
-    let noticeList = await this.store.noticeCon(activityId, contentType, page);
+  async getNoticeCon(page, pageSize) { // 获取公告
+    let noticeList = await this.store.noticeCon(page, pageSize);
     this.view.setState({noticeList})
   }
 
-  async getInfoCon(activityId, contentType, page) { // 获取资讯
-    let infoList = await this.store.infoCon(activityId, contentType, page);
+  async getInfoCon(page, pageSize) { // 获取资讯
+    let infoList = await this.store.infoCon(page, pageSize);
     this.view.setState({infoList})
+  }
+
+  async activityCon(activityId, activityType) { // 获取详情
+    let activityList = await this.store.activityCon(activityId, activityType);
+    this.view.setState({activityList})
   }
 }

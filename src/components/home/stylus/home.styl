@@ -18,12 +18,19 @@
   .home-recommend
     width 100%
     padding .64rem 1.2rem .93rem
-    background $normal-white-colorgit
+    background $normal-white-color
     ul
+      min-width 1200px
       li
         position relative
         float left
-        padding 0 .5rem
+        padding 0 1rem
+        @media screen and (max-width: 1950px)
+          padding 0 .8rem
+        @media screen and (max-width: 1700px)
+          padding 0 .6rem
+        @media screen and (max-width: 1550px)
+          padding 0 .5rem
         //&:first-child
           //padding-left 0
         &:last-child
@@ -77,6 +84,8 @@
                 height .12rem
                 background url('/static/img/xiadie.svg') no-repeat center center
                 background-size .12rem .12rem
+
+
 
   //市场
   .home-market

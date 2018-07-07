@@ -132,6 +132,10 @@ export default {
     msg: "谷歌验证未开启",
     errCode: "CODE_NOT_EXPIRE"
   },
+  2200: {
+    msg: "找不到活动",
+    errCode: "CODE_NOT_ACTIVE"
+  },
   2600: {
     msg: "你已领取过改活动的奖励",
     errCode: "AWARD_DRAWED"

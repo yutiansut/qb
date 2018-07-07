@@ -29,7 +29,7 @@ import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
 import Genrealize from "./components/genrealize/Genrealize.jsx";
-import NoticeDetail from './components/notice/noticeChild/NoticeContentDetail.jsx'
+import NoticeDetailCon from './components/notice/noticeChild/NoticeContentDetail.jsx'
 
 import SimpleAsset from "./components/asset/children/Simple"
 
@@ -68,7 +68,11 @@ const Notice = ({ match }) => {
   return <NoticeInfo controller={noticeController} match={match} />
 };
 
-const tradeFooter = ({ match }) => {
+const NoticeDetail = ({match, location}) => {
+  return <NoticeDetailCon controller={noticeController} match={match} location={location}/>
+};
+
+const tradeFooter = ({match}) => {
   return <SimpleAsset controller={assetController}></SimpleAsset>
 }
 
@@ -139,7 +143,7 @@ export default class App extends Component {
 
 
   componentWillMount() {
-    // console.log(111, window.innerHeight)
+
   }
 
   componentDidMount() {
@@ -174,7 +178,7 @@ export default class App extends Component {
                 <Route path="/order" component={Order} />
                 <Route path="/user" component={User} />
                 <Route path="/findPass" component={ForgetPass} />
-                <Route path="/notice/content/detail" component={NoticeDetail} />
+                <Route path="/notice/content/detail" component={NoticeDetail}/>
                 <Route path="/notice" component={Notice} />
                 <Route path="/help" component={Help} />
                 <Route path="/activity" component={Activity} />

@@ -74,7 +74,7 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async userAuth() { // 获取用户认证信息
-    let userAuth = await this.Proxy.getUserAuth({"userId": this.uid, "token": this.token});
+    let userAuth = await this.Proxy.getUserAuth({"uid": this.uid, "token": this.token});
     this.state.userAuth = userAuth;
     return userAuth
   }
