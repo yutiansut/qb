@@ -115,10 +115,10 @@ export default class MarketController extends ExchangeControllerBase {
     });
     //生成交易对池
     this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
-    console.log(homeMarket, this.store.allPair, homeMarket[0])
+    // console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
-    // console.log('更新交易对池', JSON.stringify(marketAll))
+    console.log('更新交易对池', JSON.stringify(marketAll))
     // this.store.updateAllPairListFromData(marketAll)
     //请求收藏列表
     let collectIdArr = []

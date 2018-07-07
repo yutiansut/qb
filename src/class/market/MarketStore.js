@@ -183,7 +183,7 @@ export default class MarketStore extends ExchangeStoreBase {
   }
 
   getRecommendCurrency() {
-    console.log('getData recommendCurrency', this.WebSocket)
+    // console.log('getData recommendCurrency', this.WebSocket)
     // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
 
   }
