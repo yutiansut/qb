@@ -136,9 +136,13 @@ export default {
     msg: "找不到活动",
     errCode: "CODE_NOT_ACTIVE"
   },
-  2600: {
-    msg: "你已领取过改活动的奖励",
+  2201: {
+    msg: "您已经被邀请过",
     errCode: "AWARD_DRAWED"
+  },
+  2601: {
+    msg: "奖励已经领取完毕，敬请期待下次活动",
+    errCode: "ERROR_ACTIVIY_OVER"
   }
 };
 

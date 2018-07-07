@@ -33,19 +33,19 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
 
-  async getAward({uid,account}){
+  async getAward({ inviter, inviterAccount, invited}){
     //验证手机号是否合法
     let p1 = /^[1][3,4,5,7,8][0-9]{9}$/,
     //验证邮箱号是否合法
     p2 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
-    if (!p1.test(account) && !p2.test(account)){
+    if (!p1.test(invited) && !p2.test(invited)){
       alert("请输入正确的手机号或邮箱");
       return;
     }
 
-    let result = await this.store.getAward({uid,account});
+    let result = await this.store.getAward({ inviter, inviterAccount, invited});
     //领取成功，
-    if(result === null) {
+    if (result.award === 100) {
       this.view.setState({
         showVagueBgView: true,
         showSuccess: true
@@ -55,6 +55,11 @@ export default class ActivityController extends ExchangeControllerBase {
     // 已领取过
     if(result && result.errCode === 'AWARD_DRAWED') {
       this.view.setState({ showVagueBgView: true, showFail: true });
+      return;
+    }
+    // 活动结束
+    if(result && result.errCode === 'ERROR_ACTIVIY_OVER') {
+      this.view.setState({ showVagueBgView: true, showFail: true, activityOver: true, tip: result.msg });
       return;
     }
   }

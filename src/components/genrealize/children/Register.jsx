@@ -8,15 +8,18 @@ export default class Register extends exchangeViewBase {
     super(props);
     const { controller } = this.props;
     controller.setView(this);
+    let query = queryString.parse(this.props.location.search.substring(1));
+    console.log(query)
     this.state = {
       account: "",
-      uid: JSON.parse(
-        queryString.parse(this.props.location.search.substring(1)).uid
-      ),
+      uid: JSON.parse(query.uid),
+      account1: query.account,
       margin: 0,
       showVagueBgView: false,
       showSuccess: false,
-      showFail: false
+      showFail: false,
+      activityOver: false,
+      tip:''
     };
     // 轮询qbt余量
     this.getQbtMargin = controller.getQbtMargin.bind(controller);
@@ -29,16 +32,13 @@ export default class Register extends exchangeViewBase {
       this.setState({
         showVagueBgView: false,
         showSuccess: false,
-        showFail: false
+        showFail: false,
+        activityOver: false
       });
     };
   }
   componentWillMount() {
     this.getQbtMargin();
-    // this.getAward({
-    //   uid: JSON.parse('232601699242483712'),
-    //   account:'17634029450@139.com'
-    // })
   }
   componentWillUnmount() {
     //清除轮询qbt余量任务
@@ -81,8 +81,9 @@ export default class Register extends exchangeViewBase {
           <button
             onClick={() => {
               this.getAward({
-                uid: this.state.uid,
-                account: this.state.account
+                inviter: this.state.uid,
+                inviterAccount: this.state.account1,
+                invited: this.state.account,
               });
             }}
           >
@@ -110,7 +111,7 @@ export default class Register extends exchangeViewBase {
         >
           <p>温馨提示</p>
           <div className="tip">
-            亲，你已经是{nameUsd}的用户了，马上下载{nameUsd}app, 每天还能领{coin}哦~
+            {this.state.activityOver ? this.state.tip : `亲，你已经是${nameUsd}的用户了，马上下载${nameUsd}app, 每天还能领${coin}哦~`}
           </div>
           <button onClick={this.clickOut}>知道了</button>
         </div>
