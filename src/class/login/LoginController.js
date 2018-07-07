@@ -44,7 +44,7 @@ export default class LoginController extends ExchangeControllerBase {
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.ret === 0) { // 登陆成功
-      this.view.history.goBack()
+      this.view && this.view.history.goBack()
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证

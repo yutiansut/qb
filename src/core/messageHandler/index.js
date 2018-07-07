@@ -41,7 +41,7 @@ async function messageHandler() {
          * 加帧数
          * 具体发送根据不同的项目不同
          */
-        // console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
+        console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
         pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
@@ -69,22 +69,6 @@ async function messageHandler() {
   }
 }
 
-async function sendHeartBreak(pool) {
-  // console.log('sendHeartBreak', pool)
-  startFlag = true
-  while (1) {
-    // console.log('sendHeartBreak', pool)
-    let data = {
-      var: 1,
-      op: 2,
-      seq: 0
-    }
-    pool.EMIT_QUENE.push(data)
-    await Sleep(5000)
-  }
-}
-
-
 !startFlag && messageHandler()
 
 
@@ -104,12 +88,14 @@ const MESSAGE_HANDLER = {
       pool.RECEIVE_QUENE.push(data)
       // console.log(pool.RECEIVE_QUENE)
     }
-    // pool.send({var:1, op:0, seq:0})
-    // sendHeartBreak(pool)
+
     MESSAGE_HANDLER[config.name] = {}
     MESSAGE_HANDLER[config.name].send = data => pool.EMIT_QUENE.push(data)
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
     MESSAGE_HANDLER[config.name].onMessage = data => data && console.log(data)
+    MESSAGE_HANDLER[config.name].onClose = func => pool.onClose = func
+    MESSAGE_HANDLER[config.name].onError = func => pool.onError = func
+    MESSAGE_HANDLER[config.name].onOpen = func => pool.onOpen = func
     MESSAGE_HANDLER[config.name].get = () => PoolDic[config.name].hasStart && PoolDic[config.name] || null//获取当前链接
   },
   getAll: () => PoolDic

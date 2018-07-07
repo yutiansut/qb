@@ -19,8 +19,8 @@ export default {
       name: 'general', url: '/sub', optionList: {
         // test:{testEmit:{var: 1, op: 2}},
         global: {
-          conect: {var: 1, op: 0, seq: 0, resOp: 1},//握手
-          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3},//心跳
+          conect: {var: 1, op: 0, seq: 0, resOp: 1, historyPass:true},//握手
+          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3, historyPass:true},//心跳
           joinRoom: {var: 1, op: 4, seq: 0, resOp: 5},//加入房间
         },
         market: {
@@ -33,7 +33,7 @@ export default {
           orderUpdate: {var: 1, op: 103, seq: 0, resOp: 103},//订单跟新
           userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
         },
-        login: {login: {var: 1, op: 10, seq: 0, resOp: 11}}, //登录
+        login: {login: {var: 1, op: 10, seq: 0, resOp: 11, historyPass:true}}, //登录
         asset: {
           userAssetUpdate: { var: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
         }

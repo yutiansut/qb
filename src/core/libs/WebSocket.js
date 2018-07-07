@@ -49,6 +49,7 @@ export default function () {
     function onClose(event) {
       // console.log('webSocket断开', event.target.url)
       // console.log('webSocket断开', event)
+      pool.onClose && pool.onClose(event)
       reConnect(webSocket, callBack)
     }
 

@@ -10,8 +10,9 @@ export default class LoginStore extends ExchangeStoreBase {
       // console.log('joinRoom getWebSocketData', data, this.controller)
       // console.log('ccc1', data.data)
       this.controller.userLoginInfo(data)
-
     })
+    console.log()
+    this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
   }
 
   login(obj) { // 登陆接口

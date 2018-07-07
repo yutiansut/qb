@@ -18,9 +18,9 @@ export default {
    * expiryTime:到期时间
    */
   storageList: [
-    {name: 'userToken', duration: 0, expiryTime: 0, default: [], useDefault: true},//自选
-    {name: 'userId', duration: 0, expiryTime: 0, default: [], useDefault: true},//自选
-    {name: 'userName', duration: 0, expiryTime: 0, default: [], useDefault: true},//自选
+    {name: 'userToken', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
+    {name: 'userId', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
+    {name: 'userName', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
     // {name: 'token', duration: 0, expiryTime: 0,default: 'asdasda',useDefault: false},//token
     // {name: 'userMsg', duration: 0, expiryTime: 0}, // 用户信息
     // {name: 'marketList', duration: 0, expiryTime: 0}, //首页交易所列表排序

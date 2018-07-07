@@ -1,7 +1,7 @@
 import StoreBase from '../core/StoreBase'
 import Msg from "../config/ErrCodeConfig";
 
-const WebsocketCallBackList = {}
+const WebsocketCallBackList = {}, websocketHistory = []
 let srartFlag = false
 
 
@@ -48,6 +48,17 @@ export default class ExchangeStoreBase extends StoreBase {
     // console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 
+  // if(pool.RECEIVE_QUENE[0].op === 1){
+  //   pool.hasStart = true
+  //   pool.RECEIVE_QUENE.shift()
+  //   return
+  // }
+  // if(pool.RECEIVE_QUENE[0].op === 3){
+  //   // console.log('无用包')
+  //   pool.RECEIVE_QUENE.shift()
+  //   return
+  // }
+
   startWebsocket(websocket) {
     // websocket.send()
     console.log('开启11', websocket)
@@ -68,6 +79,7 @@ export default class ExchangeStoreBase extends StoreBase {
     if (!websocket)
       return
     if (!srartFlag) {
+      console.log('aaaaaaa')
       websocket.needStart = true;
       srartFlag = true
     }
@@ -78,6 +90,7 @@ export default class ExchangeStoreBase extends StoreBase {
     })
     // console.log('connectName, modelName', connectName, modelName, websocket)
     websocket.onMessage = data => {
+      // data.op === 1 && (websocket.needStart = false)
       // let header = websocket.config.optionList[modelName]
       // console.log('installWebsocket(connectName, modelName)', data, data.op, opConfig, this.WebSocket[connectName], this.WebSocket[connectName][opConfig[data.op]])
       let dataCache = Msg[data.body.ret || 0] || data.body
@@ -89,16 +102,43 @@ export default class ExchangeStoreBase extends StoreBase {
       opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](dataCache)
       // opConfig[data.op] && this.WebSocket[connectName][opConfig[data.op]] && this.WebSocket[connectName][opConfig[data.op]].on(dataCache)
     }
+
+    websocket.onClose(data => {
+      console.log('websocket.onClose ', data)
+      this.Loop.websocketHeartBreak.stop()
+      this.Loop.websocketHeartBreak.clear()
+      // websocket.needStart = true;
+      websocket.onOpen(data => {
+        // console.log('websocket.onOpen', data)
+        this.startWebsocket(websocket)
+        websocketHistory.forEach(v=>websocket.send(v))
+      })
+    })
+
+    websocket.onError(data => {
+      console.log('websocket.onError ', data)
+      this.Loop.websocketHeartBreak.stop()
+      this.Loop.websocketHeartBreak.clear()
+      // websocket.needStart = true;
+      websocket.onOpen(data => {
+        // console.log('websocket.onOpen', data)
+        this.startWebsocket(websocket)
+        websocketHistory.forEach(v=>websocket.send(v))
+      })
+    })
+
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = (key, data) => {
-      console.log('webSocketThis', this)
+      // console.log('webSocketThis', this)
       websocket.needStart && this.startWebsocket(websocket)
       // console.log('this.WebSocket[connectName]', websocket)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: data})
       console.log(emitData, websocket)
       websocket.send(emitData)
+      !headerConfig[key].historyPass && websocketHistory.push(emitData)
+      // console.log('websocketHistory',websocketHistory)
     }
     this.WebSocket[connectName].on = (key, func) => {
       WebsocketCallBackList[key] = func

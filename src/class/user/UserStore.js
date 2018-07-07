@@ -20,6 +20,7 @@ export default class UserStore extends ExchangeStoreBase {
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
+
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
     // this.preHandlerndler.push(this.userPreHandler)
@@ -47,23 +48,17 @@ export default class UserStore extends ExchangeStoreBase {
   // 提供基础数据
   get uid(){ // 提供用户id
     this.Storage.userId.set(this.state.userId)
-    let storage = this.Storage.userId.get().length === 0 ? '' : this.Storage.userId.get(),
-        userId = storage ? storage : this.state.userId;
-    return userId
+    return this.Storage.userId.get() || this.state.userId;
   }
 
   get token() { // 提供用户token
     this.Storage.userToken.set(this.state.token)
-    let storage = this.Storage.userToken.get().length === 0 ? '' : this.Storage.userToken.get(),
-        userToken = storage ? this.Storage.userToken.get() : this.state.token;
-    return userToken
+    return this.Storage.userToken.get() || this.state.token;
   }
 
   get name() { // 提供用户姓名
     this.Storage.userName.set(this.state.userName)
-    let storage = this.Storage.userName.get().length === 0 ? '' : this.Storage.userName.get(),
-        userName = storage ? storage : this.state.userName;
-    return userName
+    return this.Storage.userName.get() || this.state.userName;
   }
 
   async userInfo() { // 获取用户信息
