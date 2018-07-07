@@ -16,7 +16,7 @@ export default async (url, params) => {
         obj = { ret: -2, data: e };
         throw obj;
       });
-    // console.log(result)
+    console.log('reciveHttp', JSON.parse(result))
     return JSON.parse(result);
   } catch (e) {
     // console.error('error', e);

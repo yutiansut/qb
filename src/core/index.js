@@ -5,6 +5,7 @@ import GlobalUtil from "./libs/GlobalUtil";
 import AsyncAll from "./libs/AsyncAll";
 import ChangeFontSize from './libs/ChangeFontSize'
 import Storage from './storage/index'
+import './libs/Prototype'
 
 
 const RUNAPP = async (config) => {

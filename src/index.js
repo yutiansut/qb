@@ -9,6 +9,8 @@ import LoopTaskConfig from './config/LoopTaskConfig'
 import StorageConfig from './config/StorageConfig'
 import './class/lib/Prototype'
 
+
+// console.log(Number(JSON.parse('1111111.11111111')).format({number:'legal',style:{name:'usd'}}))
 // import Crypto from './core/libs/Crypto'
 // Crypto('1234567q',JSON.parse('197102307060486144'))
 

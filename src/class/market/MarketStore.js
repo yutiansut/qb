@@ -161,7 +161,8 @@ export default class MarketStore extends ExchangeStoreBase {
   //收藏变动更新列表
   updateAllPairListFromCollect(list) {
     // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
-    list && list.length && list.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
+    // list && list.length && list.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
+    list && list.length && (this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {isFavorite: 1} || {isFavorite: 0})))
     // console.log('updateAllPairListFromCollect 1', this.allPair)
   }
 
@@ -194,8 +195,8 @@ export default class MarketStore extends ExchangeStoreBase {
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
 
-  changeFavorite(tradePairId, userId, operateType, token) {
-    this.Proxy.changeFavorite({
+  async changeFavorite(tradePairId, userId, operateType, token) {
+    await this.Proxy.changeFavorite({
       operateType, //0添加 1取消
       tradePairId,
       userId,

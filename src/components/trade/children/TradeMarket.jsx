@@ -104,7 +104,7 @@ export default class TradeMarket extends ExchangeViewBase {
             return (
               <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''}`}
                   onClick={this.pairChange.bind(this, v)}>
-                <td>{v.tradePairName}</td>
+                <td>{v.tradePairName.toUpperCase()}</td>
                 <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                 <td>{v.rise}</td>
                 <td onClick={value => this.addCollect(v, index)} className="img-td">

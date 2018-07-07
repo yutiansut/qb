@@ -34,7 +34,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             <div className='deal-asset-wallet'>
               {`${this.intl.get('deal-use')}`}:<span>{this.props.wallet}</span>
               <i>
-              {this.props.ControllerProps.dealType ? this.props.steadUnitN : this.props.steadUnitP}
+              {this.props.ControllerProps.dealType ? this.props.steadUnitN.toUpperCase() : this.props.steadUnitP.toUpperCase()}
             </i>
             </div>
             <div className={`deal-asset-charge deal-asset-charge-${this.props.ControllerProps.tradeType}`}>
@@ -46,7 +46,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             {/*<Input/>*/}
             <input type="text" value={this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)}/>
             <div className='deal-input-unit'>
-              {this.props.PriceUnit || this.props.Market}
+              {this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase()}
             </div>
           </div>
           <div className='trader-deal-input'>
@@ -54,7 +54,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             {/*<Input/>*/}
             <input type="text" value={this.props.ControllerProps.dealType ? this.props.sellNum : this.props.buyNum} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType)}/>
             <div className='deal-input-unit'>
-              {this.props.NumUnit}
+              {this.props.NumUnit.toUpperCase()}
             </div>
           </div>
           <div className='deal-number-range'>
@@ -93,7 +93,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trade-deal-turnover'>
             <span>{`${this.intl.get('deal-trunover')}`}:</span>
             <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
-            <i>{this.props.PriceUnit || this.props.Market}</i>
+            <i>{this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase()}</i>
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}

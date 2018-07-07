@@ -92,13 +92,11 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   // 添加/取消收藏
-  addCollect(v, index) {
-    this.view.setState({
-      collectIndex: index
-    });
-    v.isFavorite = 1-v.isFavorite
-    this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
-    // console.log('收藏 0', v.isFavorite)
+  async addCollect(v, index) {
+    // v.isFavorite = 1 - v.isFavorite
+    // console.log('收藏 0', v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
+    await this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
+    // console.log('收藏 1', res)
   }
 
   // 市场下交易对
@@ -114,11 +112,12 @@ export default class MarketController extends ExchangeControllerBase {
       market: homeMarket[0],
     });
     //生成交易对池
-    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
+    this.store.setAllPair(this.store.pairInfo.map(v=>Object.assign(v, {rise:0,price:0,priceCN:0,priceEN:0,volume:0,isFavorite:0,turnover:0,points:[1,1,1,1,1,1,1],coinName:v.tradePairName.split('/')[0]})))
     // console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
-    console.log('更新交易对池', JSON.stringify(marketAll))
+    console.log('更新交易对池 0', JSON.stringify(marketAll))
+    // console.log('更新交易对池 1', marketAll)
     // this.store.updateAllPairListFromData(marketAll)
     //请求收藏列表
     let collectIdArr = []
