@@ -3,6 +3,7 @@ import ExchangeStoreBase from "../ExchangeStoreBase";
 export default class MarketStore extends ExchangeStoreBase {
   constructor(name) {
     super('market', 'general');
+    console.log('MarketStore constructor')
     this.state = {
       allPairData: [],
       recommendData: [
@@ -113,27 +114,28 @@ export default class MarketStore extends ExchangeStoreBase {
         }]
 
     };
-    // 监听收藏
-    // this.WebSocket.general.on('collectArr', data => {
-    //   console.log('getWebSocketData', data, this.controller)
-    //   this.controller.updateMarketAll(data, 1)
-    // })
-    // console.log(this.WebSocket.general)
-    // this.WebSocket.general.collectArr.on = data => {
-    //   console.log('collectArr', data, this.controller)
-    //   this.controller.updateMarketAll(data, 1)
-    // }
-    // 监听推荐币种
-    this.WebSocket.general.on('recommendCurrency', data => {
-      console.log('getWebSocketData', data, this.controller)
-      this.controller.updateRecommend(data.data)
-      this.recommendData = data.data
-    })
-    // 监听市场数据更新
-    this.WebSocket.general.on('marketPair', data => {
-      console.log('getWebSocketData', data, this.controller)
-      this.controller.updateMarketAll(data, 1)
-    })
+    if (name === 'market') {
+      // 监听收藏
+      this.WebSocket.general.on('collectArr', data => {
+        console.log('getWebSocketData', data, this.controller, name)
+        this.controller.updateMarketAll(data, 0)
+      })
+      // 监听市场数据更新
+      this.WebSocket.general.on('marketPair', data => {
+        console.log('getWebSocketData', data, this.controller)
+        this.controller.updateMarketAll(data, 1)
+      })
+    }
+
+    if (name === 'recommend') {
+      // 监听推荐币种
+      this.WebSocket.general.on('recommendCurrency', data => {
+        console.log('getWebSocketData', data, this.controller)
+        this.controller.updateRecommend(data.data)
+        this.recommendData = data.data
+      })
+    }
+
   }
 
   //设置选择的交易对
@@ -147,7 +149,9 @@ export default class MarketStore extends ExchangeStoreBase {
   }
 
   setAllPair(data) {
+    // console.log('setAllPair 0', data)
     this.state.allPairData = data
+    // console.log('setAllPair 1', this.state.allPairData)
   }
 
   get allPair() {
@@ -156,23 +160,23 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //收藏变动更新列表
   updateAllPairListFromCollect(list) {
-    console.log('updateAllPairListFromCollect 0',this, this.allPair, list)
+    // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
     list && list.length && list.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
-    console.log('updateAllPairListFromCollect 1', this.allPair)
+    // console.log('updateAllPairListFromCollect 1', this.allPair)
   }
 
   //数据变动更新列表
   updateAllPairListFromData(list) {
-    console.log('updateAllPairListFromData 0',this.state.allPairData, list)
-    list && list.length && (this.state.allPairData = this.state.allPairData.map(v=>Object.assign(v, list.find(vv=>vv.tradePairId === v.tradePairId) || {})))
-    console.log('updateAllPairListFromData 1',this.state.allPairData)
+    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
+    list && list.length && (this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.find(vv => vv.tradePairId === v.tradePairId) || {})))
+    // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //根据选择的市场筛选出交易对
   async selectMarketData() {
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
-    console.log(pairMsg, this.selecedMarket)
+    // console.log(pairMsg, this.selecedMarket)
     let coinNameList = pairMsg.pairNameMarket[this.selecedMarket]
     this.state.homeMarketPairData = coinNameList.map(v => this.state.allPairData.find(vv => vv.tradePairId === pairMsg.pairIdMarket[this.selecedMarket][v]))
     return this.state.homeMarketPairData
@@ -185,7 +189,7 @@ export default class MarketStore extends ExchangeStoreBase {
   }
 
   getMarketPair() {
-    console.log('getData marketPair', this.WebSocket)
+    // console.log('getData marketPair', this.WebSocket)
 
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
