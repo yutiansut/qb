@@ -50,8 +50,9 @@ export default class Header extends ExchangeViewBase {
       ]
     }
     this.configController = this.props.configController;
-    //
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
+    this.clearLoginInfo = this.props.loginController.clearLoginInfo.bind(this.props.loginController) // 退出登录
+    this.loginOut = this.loginOut.bind(this)
     this.matched = '/home'
   }
   componentDidMount() {
@@ -71,10 +72,13 @@ export default class Header extends ExchangeViewBase {
     if(props.navClass === 'tradeNav'){
       ChangeFontSize(1440*0.8, 1440*2)
     }
-
-    // if(props)
   }
 
+  loginOut() {
+    // console.log(222, this)
+    this.clearLoginInfo()
+    // this.props.history.push('/home')
+  }
 
   render() {
     // console.log('token', this.userToken)
@@ -132,7 +136,7 @@ export default class Header extends ExchangeViewBase {
               <li>
                 <NavLink to="/user/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
-              <li>退出</li>
+              <li onClick={this.loginOut}>退出</li>
             </ul>
           </li>
           <li className="language-li">

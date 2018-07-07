@@ -20,7 +20,7 @@ export default class NoticeStore extends ExchangeStoreBase {
     });
     noticeList = noticeList.msg ? [] : noticeList.data
     this.state.noticeList = noticeList;
-    console.log('获取公告', noticeList)
+    // console.log('获取公告', noticeList)
     return noticeList
   }
 

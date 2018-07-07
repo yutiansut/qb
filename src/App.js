@@ -86,14 +86,14 @@ const Activity = ({ match }) => {
 
 const header = ({ match }) => {
   return <div>
-    <Header navClass={"headerNav"} userController={userController} configController={configController} match={match} />
+    <Header navClass={"headerNav"} userController={userController} configController={configController} loginController={loginController} match={match} history={history}/>
     <div style={{ height: ".5rem" }} />
   </div>;
 }
 
 const tradeHeader = ({ match }) => {
   return <div>
-    <Header navClass={"tradeNav"} match={match} userController={userController} configController={configController} />
+    <Header navClass={"tradeNav"} userController={userController} configController={configController} loginController={loginController} match={match} history={history}/>
     <div style={{ height: ".5rem" }} />
   </div>;
 }

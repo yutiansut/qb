@@ -4,20 +4,23 @@
   width 100%
   padding-top .7rem
   background $normal-white-color
-
+  .hide
+    display none
   .home-notice-content
-    position absolute
-    left 50%
-    transform translateX(-50%)
+    transform translateX(50%)
     height .22rem
+    line-height .22rem
     overflow hidden
     p
       float left
-
     ul
-      float left
       position absolute
+      float left
+      width 100%
       left .6rem
       li
         height .22rem
+        cursor pointer
+        &:hover
+          text-decoration underline
 

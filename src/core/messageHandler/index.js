@@ -68,6 +68,7 @@ async function messageHandler() {
     await Sleep(8)
   }
 }
+
 async function sendHeartBreak(pool) {
   // console.log('sendHeartBreak', pool)
   startFlag = true
@@ -103,8 +104,8 @@ const MESSAGE_HANDLER = {
       pool.RECEIVE_QUENE.push(data)
       // console.log(pool.RECEIVE_QUENE)
     }
-    pool.send({var:1, op:0, seq:0})
-    sendHeartBreak(pool)
+    // pool.send({var:1, op:0, seq:0})
+    // sendHeartBreak(pool)
     MESSAGE_HANDLER[config.name] = {}
     MESSAGE_HANDLER[config.name].send = data => pool.EMIT_QUENE.push(data)
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))

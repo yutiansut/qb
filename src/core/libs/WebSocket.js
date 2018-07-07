@@ -27,7 +27,7 @@ export default function () {
     webSocket.onopen = event => onOpen(pool, event)
 
     function onOpen(pool, event) {
-      // console.log('webSocket开启', event.target.url)
+      console.log('webSocket开启', event.target.url)
       connects.push(webSocket)
       poolSize = connects.length;
       pool.onOpen && pool.onOpen(event)
@@ -38,7 +38,7 @@ export default function () {
     webSocket.onmessage = event => onMessage(pool, event)
 
     function onMessage(pool, event) {
-      // console.log('webSocket接收信息', event.data)
+      console.log('webSocket接收信息', event.data)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
       pool.onMessage && pool.onMessage(JSON.parse(event.data))
     }
@@ -89,7 +89,7 @@ export default function () {
     // console.log('send text')
     if (connects.length === 0)
       throw new Error('==connect is all down!===')
-    // console.log('websocket 发送信息', text, connects[index++ % poolSize])
+    console.log('websocket 发送信息', text, connects[index++ % poolSize])
     poolSize && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 

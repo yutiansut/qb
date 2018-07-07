@@ -18,10 +18,7 @@
 // },
 
 export default {
-  symbolsRefresh: {},
-  topCurrency: {},
-  topCurrencyRoll: {},
-  noticeRoll: {},
+  websocketHeartBreak:{},
   countDown: {},
   verifyCountDown: {},
   swiper: {},

@@ -20,6 +20,7 @@ import UserController from '../../class/user/UserController'
 
 import './stylus/trade.styl'
 import UserOrder from "./children/UserOrder";
+import ConfigController from "../../class/config/ConfigController";
 
 let TradeMarketController,
   TradeOrderListController,
@@ -29,7 +30,8 @@ let TradeMarketController,
   TradeDealController,
   TradeUserListController,
   TradePlanController,
-  userController;
+  userController,
+  configController
 
 // const userOrderItems = []
 export default class extends exchangeViewBase {
@@ -44,6 +46,7 @@ export default class extends exchangeViewBase {
     TradeDealController = new DealController(); //交易
     TradePlanController = new DealController();
     userController = props.userController; //用户
+    configController = new ConfigController(); // 基础设置
 
     TradePlanController.userController = userController;
 
@@ -64,6 +67,8 @@ export default class extends exchangeViewBase {
     TradePlanController.TradeRecentController = TradeRecentController;
     TradePlanController.userOrderController = userOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
+
+    noticeController.configController = configController
 
     // noticeController.userController = userController;
 

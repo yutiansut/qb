@@ -25,16 +25,13 @@ export default class homeNotice extends exchangeViewBase {
   // }
   componentWillMount() {
     // let ActionId = this.props.location.query.noticeId;
-    let url = window.location.href, str1, str2, str3;
-    if (url.indexOf('?') !== -1) {
-      str1 = url.substr(1)
-      str2 = str1.split('?')
-      str3 = str2[1].split('=')
-      this.setState({
-        queryType: str3[0] === 'noticeId' ? 0 : 2,
-        queryId: str3[1] * 1
-      })
-    }
+    let url = window.location.search, str1, str2;
+    str1 = url.split('?')
+    str2 = str1[1].split('=')
+    this.setState({
+      queryType: str2[0] === 'noticeId' ? 0 : 2,
+      queryId: str2[1] * 1
+    })
   }
 
   async componentDidMount() {
@@ -50,11 +47,11 @@ export default class homeNotice extends exchangeViewBase {
     return (
       <div className="notice-detail-wrap ">
         <h1>
-          <Link to="/home">首页</Link>
-          <Link to="/notice">资讯概览</Link>
+          <Link to="/home">首页</Link>&gt;
+          <Link to="/notice">资讯概览</Link>&gt;
           <Link to="/notice/content/detail">资讯详情</Link>
         </h1>
-        <h2>
+        <h2 className="clearfix">
           <span>{this.props.controller.configData.language === 'zh-CN' ? activityInfo.subjectCn : activityInfo.subjectEn}</span>
           <b>{activityInfo.createdAt}</b>
         </h2>
@@ -64,7 +61,7 @@ export default class homeNotice extends exchangeViewBase {
         <h4>
           作者
         </h4>
-        <div>
+        <div className="content">
           {this.props.controller.configData.language === 'zh-CN' ? activityInfo.contentCn : activityInfo.contentEn}
           <img src={activityInfo.titleImage} alt=""/>
         </div>

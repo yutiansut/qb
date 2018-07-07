@@ -18,7 +18,11 @@ export default {
     {
       name: 'general', url: '/sub', optionList: {
         // test:{testEmit:{var: 1, op: 2}},
-        global: {joinRoom: {var: 1, op: 4, seq: 0, resOp: 5}},//加入房间
+        global: {
+          conect: {var: 1, op: 0, seq: 0, resOp: 1},//握手
+          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3},//心跳
+          joinRoom: {var: 1, op: 4, seq: 0, resOp: 5},//加入房间
+        },
         market: {
           recommendCurrency: {var: 1, op: 108, seq: 0, resOp: 108},//推荐币种
           marketPair: {var: 1, op: 107, seq: 0, resOp: 107},//涨跌幅数据更新
