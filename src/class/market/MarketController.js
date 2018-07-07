@@ -116,9 +116,9 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
-    console.log('更新交易对池 0', JSON.stringify(marketAll))
+    // console.log('更新交易对池 0', JSON.stringify(marketAll))
     // console.log('更新交易对池 1', marketAll)
-    // this.store.updateAllPairListFromData(marketAll)
+    this.store.updateAllPairListFromData(marketAll)
     //请求收藏列表
     let collectIdArr = []
     if(this.userController.userToken){
@@ -153,7 +153,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   async updateMarketAll(List, type){
     let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
-    console.log('updateMarketAll', this.store, this.store.state)
+    // console.log('updateMarketAll', this.store, this.store.state)
     //根据数据更新allPair
     type < 2 && this.store[arr[type]](List)
     //根据市场从交易对池中选择该市场中的交易对

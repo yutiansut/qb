@@ -181,11 +181,11 @@ Number.prototype.format = function (para) {
 
 //百分比
 Number.prototype.toPercent = function (type = true){
-  if(type && this === 0)
-    return this.toFixed(2)
-  if(type && this > 0)
-    return `+${this.toFixed(2)}%`
-  return `${this.toFixed(2)}%`
+  if(type && (this*100) === 0)
+    return (this*100).toFixed(2)
+  if(type && (this*100) > 0)
+    return `+${(this*100).toFixed(2)}%`
+  return `${(this*100).toFixed(2)}%`
 }
 
 //时间戳转换

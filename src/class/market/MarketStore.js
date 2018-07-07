@@ -168,9 +168,9 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //数据变动更新列表
   updateAllPairListFromData(list) {
-    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
+    console.log('updateAllPairListFromData 0', this.state.allPairData, list)
     list && list.length && (this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.find(vv => vv.tradePairId === v.tradePairId) || {})))
-    // console.log('updateAllPairListFromData 1', this.state.allPairData)
+    console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //根据选择的市场筛选出交易对

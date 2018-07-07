@@ -62,7 +62,7 @@ export default class homeNotice extends exchangeViewBase {
   }
 
   render() {
-    console.log('首页公告', this.state)
+    // console.log('首页公告', this.state)
     return (
       <div className="home-notice-wrap">
         {this.state.noticeList.length && <div className="home-notice-content clearfix">

@@ -84,10 +84,10 @@ export default class HomeMarket extends ExchangeViewBase{
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
                 <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td>
                 <td>{v.tradePairName.toUpperCase()}</td>
-                <td>{v.price}</td>
-                <td>{v.turnover}</td>
-                <td>{v.volume}</td>
-                <td>{v.rise}</td>
+                <td>{Number(v.price).format({number:'digital'}) || 0}</td>
+                <td>{Number(v.turnover).format({number:'property'}) || 0}</td>
+                <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>
+                <td>{Number(v.rise).toPercent()}</td>
                 <td>
                     {/* 宽高等样式在homeMakt.styl里设置 */}
                     <ReactTrend ratio={5} trends={[43,24,18,32,22,45,37]}/>

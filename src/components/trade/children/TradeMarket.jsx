@@ -105,8 +105,8 @@ export default class TradeMarket extends ExchangeViewBase {
               <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''}`}
                   onClick={this.pairChange.bind(this, v)}>
                 <td>{v.tradePairName.toUpperCase()}</td>
-                <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
-                <td>{v.rise}</td>
+                <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+                <td>{Number(v.rise).toPercent()}</td>
                 <td onClick={value => this.addCollect(v, index)} className="img-td">
                   <img src={v.isFavorite ? "/static/img/trade_star_select.svg" :  "/static/img/trade_star.svg"} alt=""/>
                 </td>
