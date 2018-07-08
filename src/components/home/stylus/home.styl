@@ -11,6 +11,7 @@
     transform: scale(1.05);
   }
 }
+
 .home-wrap
   .home-updown
     position relative
@@ -57,9 +58,8 @@
         @media screen and (max-width: 1700px)
           padding 0 .6rem
         @media screen and (max-width: 1550px)
-          padding 0 .5rem
-        //&:first-child
-          //padding-left 0
+          padding 0 .5rem //&:first-child
+        //padding-left 0
         &:last-child
           //padding-right 0
           &:after
@@ -87,8 +87,6 @@
             font-size .2rem
             color $normal-black-color
 
-
-
   //市场
   .home-market
     background $normal-white-color
@@ -102,7 +100,7 @@
         li
           position relative
           float left
-          padding  0 .15rem
+          padding 0 .15rem
           font-size .16rem
           cursor pointer
           span
@@ -160,6 +158,11 @@
           background $bg-light-color
         td:first-child
           padding-left .3rem
+        td
+          .market-up
+            color $index-blue
+          .market-down
+            color $index-red
         img
           position relative
           top .03rem

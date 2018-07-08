@@ -89,7 +89,7 @@ export default class HomeMarket extends ExchangeViewBase{
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
                 <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td>
                 <td>{v.tradePairName.toUpperCase()}</td>
-                <td><span>{Number(v.price).format({number:'digital'}) || 0}</span>/<span>
+                <td><span className={`${v.updown && (v.updown>0 && "market-up" || "market-down")}`}>{Number(v.price).format({number:'digital'}) || 0}</span>/<span>
                   {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) || Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span></td>
                 <td>{Number(v.turnover).format({number:'property'}) || 0}</td>
                 <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>

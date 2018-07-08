@@ -123,12 +123,19 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //数据变动更新列表
   updateAllPairListFromData(list, type = 1) {
-    //除第一次外需要计算增长值改变字体颜色
-    if(type){
 
-    }
     // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
-    list && list.length && (this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.find(vv => vv.tradePairId === v.tradePairId) || {})))
+    list && list.length && (this.state.allPairData = this.state.allPairData.map(v => {
+      let res = list.find(vv => vv.tradePairId === v.tradePairId)
+      if(!res){
+        return v
+      }
+      //除第一次外需要计算增长值改变字体颜色
+      if(type){
+        res.updown = res.price > v.price
+      }
+      return Object.assign(v, res)
+    }))
     // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
