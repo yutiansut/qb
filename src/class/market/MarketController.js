@@ -210,9 +210,17 @@ export default class MarketController extends ExchangeControllerBase {
       tradePairId: value.tradePairId
     });
     this.store.state.tradePair = value.tradePairName;
+    this.store.state.tradePairId = value.tradePairId;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
+  }
+  
+  get tradePair(){
+    return {
+      tradePairId: this.store.state.tradePairId,
+      tradePairName: this.store.state.tradePairName
+    }
   }
 
   //排序功能
@@ -264,6 +272,7 @@ export default class MarketController extends ExchangeControllerBase {
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
+    this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg.prices)
   }
 
   setUnitsType(v) {

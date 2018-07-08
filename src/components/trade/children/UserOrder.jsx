@@ -34,7 +34,9 @@ export default class userOrder extends ExchangeViewBase {
         {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')}, {name: this.intl.get('order-deal-time')}, {name: this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
       ],
       detailFlag: false,
-      orderDetail: []
+      orderDetail: [],
+      currentOrder: [],
+      historyOrder: []
     };
     const {controller} = this.props;
     //绑定view
@@ -43,6 +45,15 @@ export default class userOrder extends ExchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
   }
   
+  cancelOrder(cancelType, v = 0){
+    let orderId, opType, dealType;
+    orderId = cancelType ? 0 : JSON.parse(JSON.stringify(v.orderId)) ;
+    opType = cancelType;
+    dealType =cancelType ? 0 : v.orderType;
+    // dealType =v && v.orderType || 0;
+    // console.log('cancelop',orderId, opType, dealType)
+    this.props.controller.cancelOrder(orderId, opType, dealType)
+  }
   componentWillMount() {
   
   }
@@ -61,6 +72,7 @@ export default class userOrder extends ExchangeViewBase {
     
   }
   renderCurrentOrder() {
+    console.log('this.state.currentOrder', this.state.currentOrder)
     return (
         <div className='trade-current-order'>
           <div className='trade-current-title'>
@@ -68,7 +80,7 @@ export default class userOrder extends ExchangeViewBase {
             <div style={{display: 'flex'}}>
               {this.state.resetHandleItems.map((v, index) => {
                 return (
-                    <div className='reset-handle' key={index}>{v.name}</div>
+                    <div className='reset-handle' key={index} onClick={this.cancelOrder.bind(this,index + 1)}>{v.name}</div>
                 )
               })}
             </div>
@@ -98,7 +110,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.dealDoneCount}</td>
                     <td>{v.undealCount || (v.count - v.dealDoneCount)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
-                    <td>{this.intl.get('cancel')}</td>
+                    <td onClick={this.cancelOrder.bind(this, 0, v)}>{this.intl.get('cancel')}</td>
                   </tr>
               )
             })}
@@ -110,6 +122,7 @@ export default class userOrder extends ExchangeViewBase {
   }
   
   renderHistoryOrder() {
+    console.log('this.state.historyOrder', this.state.historyOrder)
     return (
         <div className='trade-current-order'>
           <div className='trade-current-title'>
@@ -137,7 +150,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)}</td>
+                    <td>{(this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)) || (v.price * v.dealDoneCount)}</td>
                     <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPriceCN)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>

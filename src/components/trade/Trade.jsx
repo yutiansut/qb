@@ -39,8 +39,8 @@ export default class extends exchangeViewBase {
     super(props)
 
     TradeMarketController = props.marketController; //市场
-    TradeOrderListController = new TradeOrderController();//近期交易
-    TradeRecentController = new OrderListController();//挂单列表
+    TradeOrderListController = new TradeOrderController();//挂单列表
+    TradeRecentController = new OrderListController();//近期交易
     userOrderController = props.userOrderController;//用户订单
     noticeController = new NoticeController(); //资讯
     TradeDealController = new DealController(); //交易
@@ -56,12 +56,15 @@ export default class extends exchangeViewBase {
     TradeMarketController.TradeDealController = TradeDealController;
     TradeMarketController.TradePlanController = TradePlanController;
     TradeMarketController.TradeRecentController = TradeRecentController;
+    TradeMarketController.TradeOrderListController = TradeOrderListController;
 
     TradeOrderListController.TradeMarketController = TradeMarketController;
     TradeOrderListController.TradePlanController = TradePlanController;
 
     //id处理的两种方式:
     TradeMarketController.userOrderController = userOrderController;
+    userOrderController.TradeMarketController = TradeMarketController;
+    
 
     TradePlanController.TradeMarketController = TradeMarketController;
     TradePlanController.TradeRecentController = TradeRecentController;

@@ -4,7 +4,8 @@ import OrderListStore from './OrderListStore'
 export default class OrderListController extends ExchangeControllerBase {
   constructor() {
     super();
-    this.store = new OrderListStore('userOrder', 'general')
+    this.store = new OrderListStore('userOrder', 'general');
+    this.store.setController(this);
   };
   
   setView(view) {
@@ -53,5 +54,12 @@ export default class OrderListController extends ExchangeControllerBase {
   }
   emitRecentOrderWs() {
     this.store.emitRecentOrderWs();
+  }
+  updateRecentOrder(data){
+    // this.view.setState(
+    //     {
+    //       recentTradeListArr: data
+    //     }
+    // )
   }
 }

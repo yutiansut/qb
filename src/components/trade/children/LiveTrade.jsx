@@ -7,7 +7,9 @@ export default class LiveTrade extends ExchangeViewBase{
   constructor(props){
     super(props);
     this.state = {
-      titleSelect: 'all'
+      titleSelect: 'all',
+      newPrice: 0,
+      prices:{}
     };
     const {controller} = this.props;
     //绑定view
@@ -16,6 +18,7 @@ export default class LiveTrade extends ExchangeViewBase{
     this.state = Object.assign(this.state, controller.initState);
     this.liveTradeListHandle = controller.liveTradeListHandle.bind(controller);
     this.orderListSelect = controller.orderListSelect.bind(controller);
+    // this.getNewPrice = controller.getNewPrice.bind(controller)
   }
   componentWillMount(){
   
@@ -30,6 +33,9 @@ export default class LiveTrade extends ExchangeViewBase{
       titleSelect: v.type
     });
   }
+  // getNewPrice(v){
+  //
+  // }
   render() {
     console.log(this.state.unitsType)
     return(
@@ -68,7 +74,7 @@ export default class LiveTrade extends ExchangeViewBase{
             </tbody>
 
           <tbody className='live-deal'>
-            <tr><td colSpan='4'>最新成交价</td></tr>
+            <tr><td colSpan='4'>{this.state.unitsType === 'CNY' && this.state.prices.priceCN || (this.state.unitsType === 'USD' && this.state.prices.priceEN || this.state.prices.price)}</td></tr>
           </tbody>
             <tbody>
             {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>

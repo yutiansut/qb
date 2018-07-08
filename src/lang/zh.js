@@ -216,6 +216,12 @@ export default function zh(state) {
     "deal-forgetpwd": "忘记资金密码",
     "deal-freepwd": "免输资金密码",
     "deal-inputpwd": "输入资金密码",
+    'deal-setpwd': '设置资金密码',
+    "deal-market-buy":'以市场最优价格买入',
+    "deal-market-sell":'以市场最优价格卖出',
+    'deal-market-msg': '市价交易,无固定金额',
+    'deal-identify': '身份验证'
+    
   };
   const user = {
     "user-score": "我的积分",

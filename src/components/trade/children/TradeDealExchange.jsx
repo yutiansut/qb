@@ -44,7 +44,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trader-deal-input'>
             <div className='deal-input-label'>{`${this.intl.get('price')}`}</div>
             {/*<Input/>*/}
-            <input type="text" value={this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)}/>
+            <input type="text" value={this.props.DealEntrustType ? (this.props.ControllerProps.dealType ? this.intl.get('deal-market-sell') : this.intl.get('deal-market-buy')):(this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue)} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)} readOnly={this.props.DealEntrustType ? true : false}/>
             <div className='deal-input-unit'>
               {this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase()}
             </div>
@@ -80,24 +80,25 @@ export default class TradeDealExchange extends  ExchangeViewBase{
               })}
             </ul>
           </div>
-          <div className='trade-password clearfix'>
+          <div className='trade-password clearfix' style={{marginBottom: this.props.fundPassVerif && '.2rem'}}>
             <div className='trade-password-input'>
               <span>{`${this.intl.get('fundPass')}`}:</span>
-              <input type="password" value={this.props.funpass} onChange={this.props.passInput.bind(this)}/>
+              {!this.props.fundPassVerify && <input type="password" value={this.props.funpass} onChange={this.props.passInput.bind(this)}/> || <em><a href="/user/safe">{this.intl.get('deal-setpwd')}</a></em>}
             </div>
-            <p className='password-msg'>
+            {this.props.fundPassVerify  || <p className='password-msg'>
               <span>{`${this.intl.get('deal-forgetpwd')}`}</span>
-              <span>{`${this.intl.get('deal-freepwd')}`}</span>
-            </p>
+              <span onClick={this.props.freePwd.bind(this)}>{`${this.intl.get('deal-freepwd')}`}</span>
+            </p>}
           </div>
           <div className='trade-deal-turnover'>
             <span>{`${this.intl.get('deal-trunover')}`}:</span>
-            <em>{this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue}</em>
-            <i>{this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase()}</i>
+            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue)}</em>
+            <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
           </div>
+         
         </div>
     )
   }

@@ -120,20 +120,28 @@ export default class UserOrderListController extends OrderListController {
     //       "turnoverEN": 23232.2,
     //       "fee": 0.04//手续费
     //     }
-    console.log('uupp', para,this.view.state.currentOrder,this.view.state.historyOrder)
+    // console.log('uupp', para,this.view.state.currentOrder,this.view.state.historyOrder)
      let currentOrder = this.view.state.currentOrder;
      let historyOrder = this.view.state.historyOrder;
      // let changeItem = currentOrder.find(v => v.orderId = para.orderId);
-     let changeIndex = currentOrder.findIndex(v => v.orderId = para.orderId);
+     let changeIndex = currentOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId));
      console.log('changeIndex', changeIndex)
      if(para.orderStatus === 0 || para.orderStatus === 1) {
-        currentOrder.splice(changeIndex, 1, para);
+       changeIndex !== -1 && currentOrder.splice(changeIndex, 1, para) || currentOrder.unshift(para);
         this.view.setState(currentOrder);
-       console.log('currentOrder22', currentOrder)
+       // console.log('currentOrder22', currentOrder)
         return
      }
+     currentOrder.splice(changeIndex, 1);
      historyOrder.unshift(para);
-    console.log('currentOrder33', historyOrder)
-     this.view.setState(historyOrder)
+    // console.log('currentOrder33', historyOrder)
+     this.view.setState({
+       historyOrder,
+       currentOrder
+     })
+  }
+  
+  async cancelOrder(orderId, opType, dealType) {
+    let msg = await this.store.cancelOrder(orderId, opType, dealType);
   }
 }

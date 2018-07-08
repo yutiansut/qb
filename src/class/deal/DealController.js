@@ -135,11 +135,11 @@ export default class DealController extends ExchangeControllerBase {
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
       "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue) ,//价格
       "count": Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum),//数量
-      "tradePairId": 3,
-      "tradePairName": "ETH/BTC",
+      "tradePairId": this.TradeMarketController.tradePair.tradePairId,
+      "tradePairName": this.TradeMarketController.tradePair.tradePairName,
       "funpass": this.view.state.funpass,//资金密码
-      "interval": 2,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
-      "priceUnit": 0//计价单位  0数字币  1人民币 2美元
+      "interval": this.view.state.fundPwdInterval,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     }
     // let j = 1
@@ -148,5 +148,11 @@ export default class DealController extends ExchangeControllerBase {
       await this.store.dealTrade(params);
     // }
     // await this.store.dealTrade(v);
+  }
+  async getFundPwdInterval(){
+    let fundPwdInterval = await this.userController.getFundPwdInterval();
+    this.view.setState({
+      fundPwdInterval: fundPwdInterval.mode
+    })
   }
 }

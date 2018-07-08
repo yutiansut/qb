@@ -22,3 +22,68 @@
 		width 100%
 		display flex
 		justify-content space-between
+	.deal-set-pwd
+		position fixed
+		top 0
+		left 0
+		bottom 0
+		right 0
+		background $exchange-shadow-color
+		z-index 6665
+		.deal-pwd-detail
+			position absolute
+			top 50%
+			left 50%
+			transform translate(-50%, -50%)
+			background $exchange-blue
+			width 3.84rem
+			padding-bottom .02rem
+			.deal-pwd-title
+				height .3rem
+			
+				width 100%
+				padding 0 .2rem
+				line-height .3rem
+				color $normal-white-color
+				display flex
+				align-items center
+				justify-content space-between
+				em
+					width .12rem
+					height .12rem
+					background $exchange-close-button
+			.deal-pwd-content
+				width 3.8rem
+				margin 0 auto
+				background $normal-white-color
+				display flex
+				align-items center
+				min-height .7rem
+				justify-content space-around
+				color $normal-black-color
+				.set-pwd-msg
+					width 100%
+					padding .1rem .2rem
+					font-size .12rem
+					line-height .22rem
+				.set-pwd-input
+					width 100%
+					height .55rem
+					padding  0 .35rem .33rem
+					display flex
+					align-items center
+					justify-content space-between
+					span
+						color $exchange-blue
+						font-size .12rem
+					.set-pwd
+						border-radius .02rem
+						border .01rem solid $line-dark
+					.set-pwd-sub
+						font-size .12rem
+						color $normal-white-color
+						background $exchange-blue
+						border-radius .02rem
+						padding 0 .04rem
+						height 100%
+						

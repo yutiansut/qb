@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>quxiao_bai</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+        <g id="icon" transform="translate(-366.000000, -308.000000)" fill="#FFFFFF">
+            <g id="12*12" transform="translate(60.000000, 299.000000)">
+                <g id="取消" transform="translate(306.000000, 9.000000)">
+                    <path d="M5.3890873,6.09619408 L0.792893219,1.5 L1.5,0.792893219 L6.09619408,5.3890873 L10.6923882,0.792893219 L11.3994949,1.5 L6.80330086,6.09619408 L11.3994949,10.6923882 L10.6923882,11.3994949 L6.09619408,6.80330086 L1.5,11.3994949 L0.792893219,10.6923882 L5.3890873,6.09619408 Z" id="quxiao_bai"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

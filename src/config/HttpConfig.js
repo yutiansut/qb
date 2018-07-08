@@ -96,7 +96,7 @@ export default {
       //挂单列表
     {name: 'getDepth', data: {url: '/common/', method: 'post'}, action: 'getDepth', actionBack: 'getDepthRes'},
       //撤单操作
-    {name: 'cancelOrder', data: {url: '/order', method: 'post'}, action: 'cancelOrder', actionBack: 'cancelOrder'}
+    {name: 'cancelOrder', data: {url: '/order/', method: 'post'}, action: 'cancelOrder', actionBack: 'cancelOrderRes'}
   ],
   deal:[
     //交易接口

@@ -264,14 +264,17 @@ export default class UserOrderListStore extends OrderListStore {
   }
   
   //撤单操作
-  async cancelOrder(orderId, opType){
+  async cancelOrder(orderId, opType, dealType){
+    console.log('receivePara', this.controller.userController.userId,this.controller.TradeMarketController.tradePair.tradePairId ,orderId)
     let msg = await this.Proxy.cancelOrder(
         {
           "userId": this.controller.userController.userId,
-          "tradePairId": 3,
+          "tradePairId": this.controller.TradeMarketController.tradePair.tradePairId,
           'orderId': orderId,
-          "opType": opType
+          "opType": opType, //0默认 1买单全部  2卖单全部  3所有
+          "dealType":dealType
         }
     )
+    console.log('receiveMSG', msg)
   }
 }

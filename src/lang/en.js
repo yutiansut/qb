@@ -217,7 +217,12 @@ export default function en(state) {
     "deal-trunover": "Total",
     "deal-forgetpwd": "Forget password",
     "deal-freepwd": "Free password",
-    "deal-inputpwd": "Input fund password"
+    "deal-inputpwd": "Input fund password",
+    'deal-setpwd': 'Set fund password',
+    "deal-market-buy":'Buy for market best price',
+    "deal-market-sell":'Sell for market best price',
+    'deal-market-msg': 'Market price, no stationary money',
+    'deal-identify': 'ID verification'
   };
   const user = {
     "user-score": "My VIP Status",

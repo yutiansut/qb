@@ -44,6 +44,13 @@ export default class TradeOrderListController extends OrderListController {
   joinRoom(){
     this.store.emitTradeOrderWs();
   }
-
+  
+  getNewPrice(v){
+    this.view.setState(
+        {
+         prices:v
+        }
+    )
+  }
 
 }

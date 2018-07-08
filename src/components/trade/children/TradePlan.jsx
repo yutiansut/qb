@@ -9,6 +9,9 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      fundPwdIntervalClick:0,
+      fundPwdIntervalShow: 0,
+      fundPwdInterval: '',
       funpass: '',
       buyMax: 0, // 买入最大数量
       sellMax: 0,
@@ -30,7 +33,11 @@ export default class TradePlan extends ExchangeViewBase {
       buyNumFlag: false,
       DealEntrust: [{name: `${this.intl.get('deal-limit')}`, type: 0}, {name: `${this.intl.get('deal-market')}`, type: 1}],
       ControllerProps: [{name: `${this.intl.get('buy')}`, tradeType: 'buy', dealType: 0}, {name: `${this.intl.get('sell')}`, tradeType: 'sell', dealType: 1},],
-      UnitSelected: this.intl.get('deal-digital')
+      UnitSelected: this.intl.get('deal-digital'),
+      fundPwdIntervalWindow: [{id: 'pwd_e', value: 0, label:this.intl.get('deal-every')}, {id: 'pwd_2', value: 1, label:this.intl.get('deal-2h')}, {id: 'pwd_n', value: 2, label:this.intl.get('deal-never')}],
+      fundPwdIntervalWindowFlag: false,
+      fundPwdIntervalSetFlag: false,
+      setPass: ''
     };
     const {controller} = this.props;
     //绑定view
@@ -48,7 +55,7 @@ export default class TradePlan extends ExchangeViewBase {
   }
 
   componentDidMount() {
-
+    this.props.controller.getFundPwdInterval()
     // this.setState({
     //   inputValue:this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')]
     // })
@@ -89,7 +96,36 @@ export default class TradePlan extends ExchangeViewBase {
         {funpass: e.target.value}
     )
   }
-
+  setFunPwdIntervalShow(v){
+    if(v.value !== 0){
+      this.setState(
+          {fundPwdIntervalSetFlag: true,
+           fundPwdIntervalClick: v.value
+          }
+      )
+    }
+  }
+  changeSetPass(e){
+    this.setState(
+        {
+          setPass: e.target.value
+        }
+    )
+  }
+  freePwd(){
+    this.setState({
+      fundPwdIntervalWindowFlag: true
+    })
+  }
+  async setPassSubmit(){
+    let type, pwd;
+    type = this.state.fundPwdIntervalClick;
+    pwd = this.state.setPass;
+    let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
+    result === null && this.setState(
+        {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false}
+    )
+  }
   render() {
     return (
       <div className='trade-plan-deal'>
@@ -131,13 +167,44 @@ export default class TradePlan extends ExchangeViewBase {
                                  numInput={this.numInput.bind(this)}
                                  dealTrade={this.dealTrade.bind(this)}
                                  passInput={this.passInput.bind(this)}
+                                 fundPwdInterval={this.state.fundPwdInterval}
+                                 fundPassVerify={this.props.controller.userController.userVerify.fundPassVerify}
+                                 DealEntrustType={this.state.DealEntrustType}
+                                 freePwd={this.freePwd.bind(this)}
               />
 
             )
           })}
           {/*<TradeDealExchange PriceUnit ={this.state.PriceUnit} NumUnit ={this.state.NumUnit}/>*/}
         </div>
-
+        <div className='deal-set-pwd' style={{display: this.state.fundPwdIntervalWindowFlag ? 'block' : 'none'}}>
+          <div className='deal-pwd-detail'>
+            <div className='deal-pwd-title'>
+              {this.state.fundPwdIntervalSetFlag && this.intl.get('deal-identify')||this.intl.get('deal-timeSetting')}
+              <em onClick={() => this.setState({fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false})}></em>
+            </div>
+            <div className='deal-pwd-content'>
+                {this.state.fundPwdIntervalSetFlag && (
+                    <div>
+                      <div className='set-pwd-msg'>
+                        {this.intl.get('deal-inputpwdplease')}
+                      </div>
+                      <p className='set-pwd-input'>
+                        <span>{this.intl.get('fundPass')}:</span>
+                        <input type="password" className='set-pwd' onChange={this.changeSetPass.bind(this)} value={this.state.setPass}/>
+                        <input type="button" value={this.intl.get('user-submit')} className='set-pwd-sub' onClick={this.setPassSubmit.bind(this)}/>
+                      </p>
+                    </div>
+                ) || this.state.fundPwdIntervalWindow.map((v, index) => {
+                  return(
+                      <div key={index}>
+                        <input type="radio" className='pwd-radio' name='pwd-Radio' value={v.value} id={v.id} checked={this.state.fundPwdInterval === v.value ? true : false} onChange={this.setFunPwdIntervalShow.bind(this,v)}/><label htmlFor={v.id}>{v.label}</label>
+                      </div>
+                  )
+                })}
+            </div>
+          </div>
+        </div>
       </div>)
   }
 }
