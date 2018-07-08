@@ -1,5 +1,6 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import LoginStore from './LoginStore'
+import Sleep from "../../core/libs/Sleep";
 
 export default class LoginController extends ExchangeControllerBase {
   constructor(props) {
@@ -53,12 +54,10 @@ export default class LoginController extends ExchangeControllerBase {
     }
     this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
   }
-  clearLoginInfo() { // 退出登陆
-    // console.log(111, this.Storage.userId.get())
-    this.Storage.userId.removeAll()
-    this.Storage.userToken.removeAll()
-    this.Storage.userName.removeAll()
-    window.location.href = '/home'
+  async clearLoginInfo() { // 退出登陆
+    // this.store.loginOutRemind()
+    this.userController.clearUserInfo()
+    // window.location.href = '/home'
   }
 
   // 找回密码

@@ -33,7 +33,10 @@ export default {
           orderUpdate: {var: 1, op: 103, seq: 0, resOp: 103},//订单跟新
           userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
         },
-        login: {login: {var: 1, op: 10, seq: 0, resOp: 11, historyPass:true}}, //登录
+        login: {
+          login: {var: 1, op: 10, seq: 0, resOp: 11, historyPass:true},//登录
+          loginOut: {var: 1, op: 12, seq: 0, resOp: 13}//退出登录
+          },
         asset: {
           userAssetUpdate: { var: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
         }

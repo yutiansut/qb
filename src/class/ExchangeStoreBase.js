@@ -71,7 +71,7 @@ export default class ExchangeStoreBase extends StoreBase {
       await this.Sleep(5000)
     })
     this.Loop.websocketHeartBreak.start()
-    websocket.needStart = false
+    // websocket.needStart = false
   }
 
   installWebsocket(connectName, modelName) {
@@ -79,8 +79,8 @@ export default class ExchangeStoreBase extends StoreBase {
     if (!websocket)
       return
     if (!srartFlag) {
-      console.log('aaaaaaa')
-      websocket.needStart = true;
+      // console.log('aaaaaaa')
+      this.startWebsocket(websocket)
       srartFlag = true
     }
     let headerConfig = Object.assign(websocket.config.optionList['global'], websocket.config.optionList[modelName])
@@ -112,6 +112,7 @@ export default class ExchangeStoreBase extends StoreBase {
         // console.log('websocket.onOpen', data)
         this.startWebsocket(websocket)
         websocketHistory.forEach(v=>websocket.send(v))
+
       })
     })
 
@@ -131,7 +132,6 @@ export default class ExchangeStoreBase extends StoreBase {
 
     this.WebSocket[connectName].emit = (key, data) => {
       // console.log('webSocketThis', this)
-      websocket.needStart && this.startWebsocket(websocket)
       // console.log('this.WebSocket[connectName]', websocket)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: data})
@@ -144,6 +144,10 @@ export default class ExchangeStoreBase extends StoreBase {
       WebsocketCallBackList[key] = func
       // console.log(WebsocketCallBackList)
     }
-
+    this.WebSocket[connectName].pushWebsocketHistoryArr = (key, value) => {
+      headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
+      let emitData = Object.assign(headerConfig[key], {body: value})
+      websocketHistory.push(emitData)
+    }
   }
 }

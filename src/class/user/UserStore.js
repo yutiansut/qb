@@ -1,4 +1,5 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
+import Sleep from "../../core/libs/Sleep";
 // import JsonBig from "json-bigint"
 // uid : 232601699242483712, 232602529072947201
 export default class UserStore extends ExchangeStoreBase {
@@ -43,6 +44,23 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.token = data && data.token
     this.state.userName = data && data.userName
     console.log('loginUser', this.state.userId, this.state.token)
+  }
+
+  //清除用户信息
+  clearUserInfo() {
+    console.log(111, this.Storage.userId.get())
+    this.Storage.userId.removeAll()
+    // await Sleep(100)
+    console.log(222, this.Storage.userId.get(), this.Storage.userToken.get())
+    this.Storage.userToken.removeAll()
+    // await Sleep(100)
+    console.log(333, this.Storage.userToken.get(), this.Storage.userName.get())
+    this.Storage.userName.removeAll()
+    // await Sleep(100)
+    console.log(444, this.Storage.userName.get())
+    this.state.userId = ''
+    this.state.token = ''
+    this.state.userName = ''
   }
 
   // 提供基础数据

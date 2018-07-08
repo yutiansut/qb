@@ -93,7 +93,7 @@ export default class HomeMarket extends ExchangeViewBase{
                   {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) || Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span></td>
                 <td>{Number(v.turnover).format({number:'property'}) || 0}</td>
                 <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>
-                <td className={`home-updown ${v.rise > 0 ? 'up-i' : 'down-i'}`}>{Number(v.rise).toPercent()}</td>
+                <td className={`home-updown ${v.rise < 0 ? 'down-i' : 'up-i'}`}>{Number(v.rise).toPercent()}</td>
                 <td>
                     {/* 宽高等样式在homeMakt.styl里设置 */}
                     <ReactTrend ratio={5} trends={[43,24,18,32,22,45,37]}/>

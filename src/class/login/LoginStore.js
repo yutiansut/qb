@@ -9,9 +9,11 @@ export default class LoginStore extends ExchangeStoreBase {
     this.WebSocket.general.on('login', data => {
       // console.log('joinRoom getWebSocketData', data, this.controller)
       // console.log('ccc1', data.data)
+      console.log('登录', data)
       this.controller.userLoginInfo(data)
+      data.ret === 0 && this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
     })
-    console.log()
+
     this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
   }
 
@@ -20,4 +22,7 @@ export default class LoginStore extends ExchangeStoreBase {
     this.WebSocket.general.emit('login', obj)
   }
 
+  // loginOutRemind() { // 退出登陆
+  //   this.WebSocket.general.emit('loginOu obj)
+  // }
 }

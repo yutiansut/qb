@@ -13,6 +13,11 @@ export default class UserController extends ExchangeControllerBase {
     return this.store.data
   }
 
+  //清除用户信息
+  clearUserInfo(){
+    this.store.clearUserInfo()
+  }
+
   checkNum(num) { // 进度条长度获取
     let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
     if(!(scoreArr.length > 0)){

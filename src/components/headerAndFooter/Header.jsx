@@ -50,8 +50,9 @@ export default class Header extends ExchangeViewBase {
       ]
     }
     this.configController = this.props.configController;
+    this.loginController = this.props.loginController;
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
-    this.clearLoginInfo = this.props.loginController.clearLoginInfo.bind(this.props.loginController) // 退出登录
+    this.clearLoginInfo = this.loginController.clearLoginInfo.bind(this.loginController) // 退出登录
     this.loginOut = this.loginOut.bind(this)
     this.matched = '/home'
   }
@@ -77,7 +78,8 @@ export default class Header extends ExchangeViewBase {
   loginOut() {
     // console.log(222, this)
     this.clearLoginInfo()
-    // this.props.history.push('/home')
+    this.props.history.push('/home')
+    this.setState({})
   }
 
   render() {
