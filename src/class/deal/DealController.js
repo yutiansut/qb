@@ -130,7 +130,7 @@ export default class DealController extends ExchangeControllerBase {
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let params = {
-      userId: JSON.parse(this.userController.userId),
+      userId: this.userController.userId,
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
       "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue) ,//价格

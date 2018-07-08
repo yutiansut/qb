@@ -52,7 +52,6 @@ export default class userOrder extends ExchangeViewBase {
     // this.props.controller.getCurrentOrder(false, )
   }
   tradeOrderDetail(v){
-    console.log('v.status', v.orderStatus)
     if(v.orderStatus === 1 || v.orderStatus === 2){
       this.setState({
         detailFlag: true
@@ -87,7 +86,7 @@ export default class userOrder extends ExchangeViewBase {
             </tr>
             </thead>
             <tbody>
-            {this.state.currentOrder.map((v, index) => {
+            {this.state.currentOrder && this.state.currentOrder.map((v, index) => {
               return (
                   <tr key={index}>
                     <td>{v.orderTime}</td>
@@ -95,9 +94,9 @@ export default class userOrder extends ExchangeViewBase {
                     {/*todo 颜色改类名统一处理*/}
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
                     <td>{v.count}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)}</td>
+                    <td>{(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)) * v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{v.undealCount}</td>
+                    <td>{v.undealCount || (v.count - v.dealDoneCount)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                     <td>{this.intl.get('cancel')}</td>
                   </tr>

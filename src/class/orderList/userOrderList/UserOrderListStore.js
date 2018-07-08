@@ -225,7 +225,7 @@ export default class UserOrderListStore extends OrderListStore {
     console.log(321321231,params)
     let currentList = await this.Proxy.currentOrder(
         {
-          "userId": JSON.parse(this.controller.userController.userId),
+          "userId": this.controller.userController.userId,
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
@@ -238,7 +238,7 @@ export default class UserOrderListStore extends OrderListStore {
   async getHistoryOrder(params){
     let historyList = await this.Proxy.historyOrder(
         {
-          "userId": JSON.parse(this.controller.userController.userId),
+          "userId": this.controller.userController.userId,
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
@@ -255,11 +255,23 @@ export default class UserOrderListStore extends OrderListStore {
   async getOrderDetail(id){
     let orderDetail = await this.Proxy.orderDetail(
         {
-          "userId": JSON.parse(this.controller.userController.userId),
+          "userId": this.controller.userController.userId,
           "orderId": id
         }
     );
     this.state.orderDetail = orderDetail;
     return orderDetail
+  }
+  
+  //撤单操作
+  async cancelOrder(orderId, opType){
+    let msg = await this.Proxy.cancelOrder(
+        {
+          "userId": this.controller.userController.userId,
+          "tradePairId": 3,
+          'orderId': orderId,
+          "opType": opType
+        }
+    )
   }
 }
