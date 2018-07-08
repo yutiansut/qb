@@ -104,6 +104,10 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log('收藏 1', res)
   }
 
+  get language() {
+    return this.configController.language
+  }
+
   // 市场下交易对
   async marketDataHandle() {
     //更新全部交易对信息
@@ -133,7 +137,7 @@ export default class MarketController extends ExchangeControllerBase {
     let marketAll = await this.store.getMarketAll()
     // console.log('更新交易对池 0', JSON.stringify(marketAll))
     // console.log('更新交易对池 1', marketAll)
-    this.store.updateAllPairListFromData(marketAll)
+    this.store.updateAllPairListFromData(marketAll, 0)
     //请求收藏列表
     let collectIdArr = []
     if (this.userController.userToken) {

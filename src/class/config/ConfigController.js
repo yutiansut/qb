@@ -21,7 +21,7 @@ export default class ConfigController extends ExchangeControllerBase {
   }
   get language() {
     // return "zh-CN";
-    return this.store.state.language;
+    return this.store.language;
   }
   changeLanguage(lang){
     this.store.changeLanguage(lang);

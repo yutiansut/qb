@@ -137,6 +137,7 @@ export default class App extends Component {
     userOrderController.marketController = marketController;
 
     marketController.userController = userController;
+    marketController.configController = configController;
 
     configController.setAppView(this);//configController获取app view 以便设置语言后重新渲染
   }
