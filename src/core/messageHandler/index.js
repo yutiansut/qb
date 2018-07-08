@@ -41,7 +41,7 @@ async function messageHandler() {
          * 加帧数
          * 具体发送根据不同的项目不同
          */
-        console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
+        // console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
         pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {

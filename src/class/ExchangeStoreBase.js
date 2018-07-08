@@ -61,12 +61,12 @@ export default class ExchangeStoreBase extends StoreBase {
 
   startWebsocket(websocket) {
     // websocket.send()
-    console.log('开启11', websocket)
+    // console.log('开启11', websocket)
     websocket.send(websocket.config.optionList.global.conect)
     this.Loop.websocketHeartBreak.clear()
     this.Loop.websocketHeartBreak.setDelayTime(1)
     this.Loop.websocketHeartBreak.set(async () => {
-      console.log(websocket, '发心跳')
+      // console.log(websocket, '发心跳')
       websocket.send(websocket.config.optionList.global.heartBreak)
       await this.Sleep(5000)
     })

@@ -24,6 +24,7 @@ export default class UserStore extends ExchangeStoreBase {
 
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
+    this.userInfo()
     // this.preHandlerndler.push(this.userPreHandler)
     // this.installProxy("user", this.preHandler, this.afterHandler)
   }
@@ -38,26 +39,23 @@ export default class UserStore extends ExchangeStoreBase {
   //   console.log('用户', app, req)
   // }
 
-  userLogin(data) {
+  userLogin(data) { // 获取登录信息
     console.log('ccc4', data)
     this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName
-    console.log('loginUser', this.state.userId, this.state.token)
+    data && this.userInfo()
+    console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 
   //清除用户信息
   clearUserInfo() {
-    console.log(111, this.Storage.userId.get())
     this.Storage.userId.removeAll()
     // await Sleep(100)
-    console.log(222, this.Storage.userId.get(), this.Storage.userToken.get())
     this.Storage.userToken.removeAll()
     // await Sleep(100)
-    console.log(333, this.Storage.userToken.get(), this.Storage.userName.get())
     this.Storage.userName.removeAll()
     // await Sleep(100)
-    console.log(444, this.Storage.userName.get())
     this.state.userId = ''
     this.state.token = ''
     this.state.userName = ''
@@ -80,7 +78,6 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async userInfo() { // 获取用户信息
-    console.log('userInfo', this.state.userId)
     let userInfo = await this.Proxy.getUserInfo({"userId": this.uid, "token": this.token});
     this.state.userInfo = userInfo;
     return userInfo

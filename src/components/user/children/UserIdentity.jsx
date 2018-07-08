@@ -6,24 +6,13 @@ import Input from '../../../common/component/Input/index.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 import "../stylus/identify.styl"
 
-let photoArr = [
-  {photoList: [{imgUrl: '/static/img/user/ID.svg', name: '身份证正面照片'}, {imgUrl: '/static/img/user/ID_2.svg', name: '身份证反面照片'}, {imgUrl: '/static/img/user/ID_3.svg', name: '手持身份证照片'}]},
-  {photoList: [{imgUrl: '/static/img/user/passport.svg', name: '护照正面照片'}, {imgUrl: '/static/img/user/passport_2.svg', name: '手持护照照片'}, {imgUrl: '/static/img/user/passport_3.svg', name: '住址证明'}]},
-];
-let realNameArr = [ // 是否认证:0未认证;1已通过;2认证失败;3认证中
-  {imgUrl: '/static/img/user/identity_no.png', content: '未进行证件认证'},
-  {imgUrl: '/static/img/user/identity_succ.png', content: '已通过证件认证'},
-  {imgUrl: '/static/img/user/identity_err.png', content: '证件认证失败'},
-  {imgUrl: '/static/img/user/identity_progress.png', content: '证件认证中'}
-]
-
 export default class userIdentity extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
       verifyTypeArr: [ // 选择类型
-        {name: '身份证'},
-        {name: '护照'}
+        {name: this.intl.get("user-idCard")},
+        {name: this.intl.get("user-passport")}
       ],
       selectIndex: 0, //  选择身份证护照index
       imgUrlIndex: 0, // 上传证件照index
@@ -34,7 +23,29 @@ export default class userIdentity extends exchangeViewBase {
       image1: '', // 上传照片用于存储ID
       image2: '', // 上传照片用于存储ID
       image3: '', // 上传照片用于存储ID
-      remindPopup: false
+      remindPopup: false,
+      photoArr: [
+        {
+          photoList: [
+            {imgUrl: '/static/img/user/ID.svg', name: this.intl.get("user-idFront")},
+            {imgUrl: '/static/img/user/ID_2.svg', name: this.intl.get("user-idBack")},
+            {imgUrl: '/static/img/user/ID_3.svg', name: this.intl.get("user-idHand")}
+          ]
+        },
+        {
+          photoList: [
+            {imgUrl: '/static/img/user/passport.svg', name: this.intl.get("user-passFront")},
+            {imgUrl: '/static/img/user/passport_2.svg', name: this.intl.get("user-passHand")},
+            {imgUrl: '/static/img/user/passport_3.svg', name: this.intl.get("user-addr")}
+          ]
+        },
+      ],
+      realNameArr: [ // 是否认证:0未认证;1已通过;2认证失败;3认证中
+        {imgUrl: '/static/img/user/identity_no.png', content: this.intl.get("user-authNo")},
+        {imgUrl: '/static/img/user/identity_succ.png', content: this.intl.get("user-authSucc")},
+        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
+        {imgUrl: '/static/img/user/identity_progress.png', content: this.intl.get("user-authProcess")}
+      ]
     }
     const {controller} = props
     //绑定view
@@ -118,7 +129,23 @@ export default class userIdentity extends exchangeViewBase {
     let verifyArr = [0, 0, 2, 1] // 0 身份证 1 护照 -> 1 身份证 3 护照
     // verifyArr[this.state.userAuth.type]
     this.setState({
-      selectIndex: 0
+      selectIndex: 0,
+      photoArr: [
+        {
+          photoList: [
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
+          ]
+        },
+        {
+          photoList: [
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
+            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
+          ]
+        }
+      ]
     })
   }
 
@@ -132,8 +159,8 @@ export default class userIdentity extends exchangeViewBase {
       <div className="identify-wrap">
         <h1>{this.intl.get("idVerify")}</h1>
         <div className="identify-result">
-          <img src={realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].imgUrl} alt="" />
-          <span>{realNameArr[this.state.userAuth.state] && realNameArr[this.state.userAuth.state].content}</span>
+          <img src={this.state.realNameArr[this.state.userAuth.state] && this.state.realNameArr[this.state.userAuth.state].imgUrl} alt="" />
+          <span>{this.state.realNameArr[this.state.userAuth.state] && this.state.realNameArr[this.state.userAuth.state].content}</span>
         </div>
         <div className="name-identify clearfix">
           <h2>{this.intl.get("user-name")}</h2>
@@ -190,11 +217,11 @@ export default class userIdentity extends exchangeViewBase {
             </dl>
             <dl className="clearfix">
               <dt>证件类型</dt>
-              <dd>{this.state.selectIndex === 0 ? '身份证' : '护照'}</dd>
+              <dd>{this.state.selectIndex === 0 ? this.intl.get("user-idCard") : this.intl.get("user-passport")}</dd>
             </dl>
             <dl className="clearfix">
               <dt>{this.intl.get("upLoad")}{this.intl.get("user-photo")}</dt>
-              {photoArr[this.state.selectIndex].photoList && photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
+              {this.state.photoArr[this.state.selectIndex].photoList && this.state.photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
                 <img src="/static/img/user/add.svg" alt="" className="add-img"/>

@@ -49,11 +49,16 @@
     .login-li
       margin 0 .3rem 0 .35rem
     .user-li
+      position relative
       //width 1rem
       p
         text-align center
       ul
+        position absolute
+        left 50%
+        transform translateX(-50%)
         display none
+        width 1rem
         li
           height .4rem
           padding 0 .05rem
@@ -188,11 +193,15 @@
         ul
           background $normal-white-color
           li
+            color $index-gray
+            border-bottom 1px solid $line-light
+            &:hover
+              color $main-color
+            &:last-child
+              border-bottom none
             a
               &:hover
                 color $main-color
-            &:nth-of-type(1)
-              border-bottom 1px solid $line-light
       &.new-li
         .new-li-content
           background $normal-white-color
