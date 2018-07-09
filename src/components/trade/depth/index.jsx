@@ -45,7 +45,7 @@ class ReactKDepth extends React.Component {
         this.setData();
         //
         let _kdepth=this.state.kdepth;
-        window.redrawDepth=function () {
+        window.redrawDepth=function(){
             let tradeChart=document.querySelector(".trade-chart");
             _kdepth.resize(tradeChart.clientWidth,tradeChart.clientHeight);
         }
