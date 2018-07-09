@@ -130,6 +130,7 @@ export default class DealController extends ExchangeControllerBase {
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let params = {
+      token: this.userController.userToken,
       userId: this.userController.userId,
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
@@ -141,7 +142,7 @@ export default class DealController extends ExchangeControllerBase {
       "interval": this.view.state.fundPwdInterval,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
-    }
+    };
     // let j = 1
     // for(var i =1;i<=500;i++){
     //   j+=0.01;

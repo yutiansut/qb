@@ -22,16 +22,16 @@ export default class OrderListStore extends ExchangeStoreBase {
   emitRecentOrderWs(){
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'eth/btc-D6'})
   }
-  async getRecentOrder(isPersonal){
+  async getRecentOrder(isPersonal, id){
     let recentTradeListArr = await this.Proxy.recentOrder(
         {
-          "userId": JSON.parse('232601699242483712'),
-          "tradePairId": this.state.tradePairId,
+          "userId": this.controller.userController.userId,
+          "tradePairId": id,
           isPersonal,
           "count": 10
         }
     );
-    this.state.recentTradeListArr = recentTradeListArr.orders;
-    return recentTradeListArr.orders
+    this.state.recentTradeListArr = recentTradeListArr && recentTradeListArr.orders || [];
+    return recentTradeListArr && recentTradeListArr.orders || []
   }
 }

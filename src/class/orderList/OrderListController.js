@@ -23,8 +23,8 @@ export default class OrderListController extends ExchangeControllerBase {
       coin
     })
   }
-  async getRecentOrder(isPersonal){
-    let recentTradeListArr = await this.store.getRecentOrder(isPersonal);
+  async getRecentOrder(isPersonal, id){
+    let recentTradeListArr = await this.store.getRecentOrder(isPersonal, id);
     this.view.setState({
       recentTradeListArr
     })
@@ -39,7 +39,7 @@ export default class OrderListController extends ExchangeControllerBase {
   };
   setTradePairId(id){
     this.store.state.tradePairId = id;
-    this.getRecentOrder(this.view.state.isPersonal)
+    this.getRecentOrder(this.view.state.isPersonal, id)
   }
   tradeSort(v, index) { // 近期交易排
     let sortArray = this.store.state.recentTradeListArr,

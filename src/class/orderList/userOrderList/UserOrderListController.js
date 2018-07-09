@@ -75,7 +75,7 @@ export default class UserOrderListController extends OrderListController {
     let historyOrder = await this.store.getHistoryOrder(params);
     if (!trade) {
       this.view.setState({
-        historyOrder: historyOrder.orderList
+        historyOrder: historyOrder && historyOrder.orderList || []
       });
       return
     }

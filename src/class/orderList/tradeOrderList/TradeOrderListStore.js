@@ -99,10 +99,10 @@ export default class TradeOrderListStore extends OrderListStore{
   emitTradeOrderWs(){
     this.WebSocket.general.emit('joinRoom', {from:'', to: 'eth/btc-D0'});
   }
-  async getDepth() {
+  async getDepth(tradePairName) {
     let orderListArray = await this.Proxy.getDepth(
         {
-          "tradePairName": "eth/btc",
+          'tradePairName': tradePairName,
           "level":0 //深度 可传6,5,4,3
         }
     );

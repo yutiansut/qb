@@ -15,7 +15,7 @@ export default class TradeOrderListController extends OrderListController {
   liveTradeListHandle(liveTradeList) {
     console.log('liveTradeList asdasdasdasd',liveTradeList)
     let liveTradeData = liveTradeList;
-    let liveBuyArray = liveTradeData.buy;
+    let liveBuyArray = liveTradeData && liveTradeData.buy || [];
     let liveSellArray = liveTradeData.sell && liveTradeData.sell.reverse();
     this.view.setState({liveBuyArray, liveSellArray});
     this.store.state.liveSellArray = liveSellArray;
@@ -23,11 +23,11 @@ export default class TradeOrderListController extends OrderListController {
   }
   
   async getDepth(){
-    let liveTradeData = await this.store.getDepth();
+    let liveTradeData = await this.store.getDepth(this.TradeMarketController.tradePair.tradePairName);
     this.view.setState(
         {
-          liveBuyArray: liveTradeData.buy,
-          liveSellArray: liveTradeData.sell && liveTradeData.sell.reverse()
+          liveBuyArray: liveTradeData && liveTradeData.buy || [],
+          liveSellArray: liveTradeData && liveTradeData.sell && liveTradeData.sell.reverse()
         }
     )
   }

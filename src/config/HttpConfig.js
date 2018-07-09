@@ -101,7 +101,7 @@ export default {
   ],
   deal:[
     //交易接口
-    {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
+    {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
   ],
   activity:[
     // H5活动页，获取qbt活动余量

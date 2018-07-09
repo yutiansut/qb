@@ -232,8 +232,8 @@ export default class UserOrderListStore extends OrderListStore {
           // "hideOther": params.hideOther
         }
     );
-    this.state.currentOrder = currentList.orderList;
-    return currentList.orderList
+    this.state.currentOrder = currentList && currentList.orderList || [];
+    return currentList && currentList.orderList || []
   };
   async getHistoryOrder(params){
     let historyList = await this.Proxy.historyOrder(
