@@ -11,10 +11,10 @@ export default class extends ExchangeViewBase {
       recentTradeListArr: [],
       recentItem:
           [
-            {name: this.intl.get('order-market'), type: 'mineLess', isPersonal: 1},
-            {name: this.intl.get('order-mine'), type: 'mine', isPersonal: 0}
+            {name: this.intl.get('order-market'), type: 'mineLess', isPersonal: 0},
+            {name: this.intl.get('order-mine'), type: 'mine', isPersonal: 1}
           ],
-      isPersonal: 1,
+      isPersonal: 0,
       recentTableHead : [
         {name: this.intl.get('time'), sortValue: ''},
         {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
@@ -32,9 +32,9 @@ export default class extends ExchangeViewBase {
   }
   
   componentDidMount() {
-    // this.props.controller.emitRecentOrderWs();
+    this.props.controller.emitRecentOrderWs();
     // this.recentTradeList();
-    this.props.controller.getRecentOrder(this.state.isPersonal);
+    // this.props.controller.getRecentOrder(this.state.isPersonal);
   }
   
   componentWillMount() {

@@ -22,8 +22,9 @@ export default class TradeOrderListController extends OrderListController {
     this.store.state.liveBuyArray = liveBuyArray;
   }
   
-  async getDepth(){
-    let liveTradeData = await this.store.getDepth(this.TradeMarketController.tradePair.tradePairName);
+  async getDepth(tradePairName){
+    console.log('this.TradeMarketController.tradePair.tradePairName',this.TradeMarketController.tradePair.tradePairName)
+    let liveTradeData = await this.store.getDepth(tradePairName);
     this.view.setState(
         {
           liveBuyArray: liveTradeData && liveTradeData.buy || [],
@@ -48,9 +49,10 @@ export default class TradeOrderListController extends OrderListController {
   getNewPrice(v){
     this.view.setState(
         {
-         prices:v
+         prices:v.prices
         }
     )
+    this.getDepth(v.tradePair)
   }
 
 }

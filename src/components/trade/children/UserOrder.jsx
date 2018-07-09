@@ -151,7 +151,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
                     <td>{(this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)) || (v.price * v.dealDoneCount)}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPriceCN)}</td>
+                    <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPrice)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )

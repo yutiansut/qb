@@ -91,8 +91,10 @@ export default {
     {name:'historyOrder', data: {url: '/order/', method: 'post'}, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes'},
       //订单详情
     {name:'orderDetail', data: {url: '/order/', method: 'post'}, action: 'orderDetail', actionBack: 'orderDetailRes'},
-      //近期交易
-    {name: 'recentOrder', data: {url: '/order/', method: 'post'}, action: 'getRecentOrder', actionBack: 'getRecentOrderRes'},
+      //近期交易市场
+    {name: 'recentOrderMarket', data: {url: '/common/', method: 'post'}, action: 'getRecentOrderOfMarket', actionBack: 'getRecentOrderOfMarketRes'},
+      //近期交易个人
+    {name: 'recentOrderUser', data: {url: '/order/', method: 'post'}, action: 'getRecentOrderOfUser', actionBack: 'getRecentOrderOfUserRes'},
       //挂单列表
     {name: 'getDepth', data: {url: '/common/', method: 'post'}, action: 'getDepth', actionBack: 'getDepthRes'},
       //撤单操作
@@ -100,7 +102,8 @@ export default {
   ],
   deal:[
     //交易接口
-    {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
+    // {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
+    {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
   ],
   activity:[
     {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getHomeBanner', actionBack: 'getHomeBannerRes'}, // 活动内容

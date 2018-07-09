@@ -219,7 +219,7 @@ export default class MarketController extends ExchangeControllerBase {
   get tradePair(){
     return {
       tradePairId: this.store.state.tradePairId,
-      tradePairName: this.store.state.tradePairName
+      tradePairName: this.store.state.tradePair
     }
   }
 
@@ -272,7 +272,7 @@ export default class MarketController extends ExchangeControllerBase {
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices);
-    this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg.prices)
+    this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg)
   }
 
   setUnitsType(v) {

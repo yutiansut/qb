@@ -11,27 +11,41 @@ export default class OrderListStore extends ExchangeStoreBase {
       coin:'',
       tradePairId: 3
     }
-    // this.WebSocket.general.on('joinRoom', data => {
-    //   console.log('joinRoom getWebSocketData Recent', data, this.controller)
-    // })
+    this.WebSocket.general.on('joinRoom', data => {
+      console.log('joinRoom getWebSocketData Recent', data, this.controller)
+    })
     this.WebSocket.general.on('orderUpdate', data => {
       console.log(this.controller,'orderUpdate getWebSocketData', data);
       this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(data)
     })
   }
   emitRecentOrderWs(){
-    this.WebSocket.general.emit('joinRoom', {from: '', to: 'eth/btc-D6'})
+    this.WebSocket.general.emit('joinRoom', {from: '', to: 'eth/btc'})
   }
   async getRecentOrder(isPersonal, id){
-    let recentTradeListArr = await this.Proxy.recentOrder(
+    let recentTradeListArr = isPersonal ? await this.Proxy.recentOrderUser(
         {
           "userId": this.controller.userController.userId,
           "tradePairId": id,
-          isPersonal,
+          "count": 10
+        }
+    ): await this.Proxy.recentOrderMarket(
+        {
+          "tradePairId": id,
           "count": 10
         }
     );
     this.state.recentTradeListArr = recentTradeListArr && recentTradeListArr.orders || [];
     return recentTradeListArr && recentTradeListArr.orders || []
   }
+  // async getRecentOrderMarket(id){
+  //   let recentTradeListArr = await this.Proxy.recentOrderMarket(
+  //       {
+  //         "tradePairId": id,
+  //         "count": 10
+  //       }
+  //   );
+  //   this.state.recentTradeListArr = recentTradeListArr && recentTradeListArr.orders || [];
+  //   return recentTradeListArr && recentTradeListArr.orders || []
+  // }
 }

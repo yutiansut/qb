@@ -30,7 +30,7 @@ export default class OrderListController extends ExchangeControllerBase {
     })
   }
   changeRecentItem(v) {
-    this.getRecentOrder(v.isPersonal);
+    this.getRecentOrder(v.isPersonal, this.store.state.tradePairId);
     this.view.setState({
       recentItemSelect: v.type,
       isPersonal: v.isPersonal
@@ -38,6 +38,7 @@ export default class OrderListController extends ExchangeControllerBase {
     this.store.state.recentItemSelect = v.type;
   };
   setTradePairId(id){
+    console.log('setTradePairId', id )
     this.store.state.tradePairId = id;
     this.getRecentOrder(this.view.state.isPersonal, id)
   }

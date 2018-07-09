@@ -62,6 +62,7 @@ export default class extends exchangeViewBase {
     TradeOrderListController.TradePlanController = TradePlanController;
     
     TradeRecentController.userController = userController;
+    TradeRecentController.TradeMarketController = TradeMarketController
 
     //id处理的两种方式:
     TradeMarketController.userOrderController = userOrderController;

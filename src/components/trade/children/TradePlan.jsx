@@ -168,7 +168,7 @@ export default class TradePlan extends ExchangeViewBase {
                                  dealTrade={this.dealTrade.bind(this)}
                                  passInput={this.passInput.bind(this)}
                                  fundPwdInterval={this.state.fundPwdInterval}
-                                 fundPassVerify={this.props.controller.userController.userVerify.fundPassVerify}
+                                 fundPassVerify={this.props.controller.userController.userVerify.fundPwd}
                                  DealEntrustType={this.state.DealEntrustType}
                                  freePwd={this.freePwd.bind(this)}
               />
