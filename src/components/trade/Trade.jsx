@@ -16,7 +16,8 @@ import UserOrderListController from '../../class/orderList/userOrderList/UserOrd
 import NoticeController from "../../class/notice/NoticeController";
 import DealController from '../../class/deal/DealController'
 import UserController from '../../class/user/UserController'
-
+import KlineController from '../../class/kline/KlineController'
+// import KdepthController from '../../class/kdepth/KdepthController'
 
 import './stylus/trade.styl'
 import UserOrder from "./children/UserOrder";
@@ -31,7 +32,9 @@ let TradeMarketController,
   TradeUserListController,
   TradePlanController,
   userController,
-  configController
+  configController,
+  klineController
+  // kdepthController
 
 // const userOrderItems = []
 export default class extends exchangeViewBase {
@@ -47,7 +50,10 @@ export default class extends exchangeViewBase {
     TradePlanController = new DealController();
     userController = props.userController; //用户
     configController = new ConfigController(); // 基础设置
+    klineController = new KlineController();
+    // kdepthController = new KdepthController();
 
+    TradeMarketController.klineController = klineController;
     TradePlanController.userController = userController;
 
     // TradeUserListController = new UserOrderListController();
@@ -64,10 +70,11 @@ export default class extends exchangeViewBase {
     TradeRecentController.userController = userController;
     TradeRecentController.TradeMarketController = TradeMarketController
 
+
     //id处理的两种方式:
     TradeMarketController.userOrderController = userOrderController;
     userOrderController.TradeMarketController = TradeMarketController;
-    
+
 
     TradePlanController.TradeMarketController = TradeMarketController;
     TradePlanController.TradeRecentController = TradeRecentController;
@@ -89,49 +96,49 @@ export default class extends exchangeViewBase {
 
   render() {
     return <div id="trade">
-      <div className="clearfix">
-        <div className="trade-left">
-          <div className="trade-left-top">
-            <div className="fl">
-              <div className="trade-pair-msg">
-                <TradePairDeal controller={TradeDealController} />
+        <div className="clearfix">
+          <div className="trade-left">
+            <div className="trade-left-top">
+              <div className="fl">
+                <div className="trade-pair-msg">
+                  <TradePairDeal controller={TradeDealController} />
+                </div>
+                <TradeMarket controller={TradeMarketController} />
               </div>
-              <TradeMarket controller={TradeMarketController} />
+              <div className="trade-chart">
+                <div className="k-menu">
+                  <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
+                    K线图
+                  </button>
+                  <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
+                    深度图
+                  </button>
+                </div>
+                <ReactKline show={this.state.curChart === "kline"} controller={klineController} />
+                <ReactKDepth show={this.state.curChart === "depth"}/>
+              </div>
             </div>
-            <div className="trade-chart">
-              <div className="k-menu">
-                <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
-                  K线图
-                  </button>
-                <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
-                  深度图
-                  </button>
+            <div className="trade-left-bottom">
+              <div className="fl trade-recent">
+                <RecentTrade controller={TradeRecentController} />
               </div>
-              <ReactKline show={this.state.curChart === "kline"} />
-              <ReactKDepth show={this.state.curChart === "depth"} />
+              <div className="fr trade-plan">
+                <TradePlan controller={TradePlanController} />
+              </div>
             </div>
           </div>
-          <div className="trade-left-bottom">
-            <div className="fl trade-recent">
-              <RecentTrade controller={TradeRecentController} />
-            </div>
-            <div className="fr trade-plan">
-              <TradePlan controller={TradePlanController} />
-            </div>
+          <div className="trade-right">
+            <LiveTrade controller={TradeOrderListController} />
           </div>
         </div>
-        <div className="trade-right">
-          <LiveTrade controller={TradeOrderListController} />
+        <div className="trade-bottom clearfix">
+          <div className="trade-notice">
+            <TradeNotice controller={noticeController} />
+          </div>
+          <div className="trade-order">
+            <UserOrder controller={userOrderController} />
+          </div>
         </div>
-      </div>
-      <div className="trade-bottom clearfix">
-        <div className="trade-notice">
-          <TradeNotice controller={noticeController} />
-        </div>
-        <div className="trade-order">
-          <UserOrder controller={userOrderController} />
-        </div>
-      </div>
-    </div>;
+      </div>;
   }
 }

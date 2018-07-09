@@ -214,8 +214,10 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
+    // 为K线图设置交易对
+    this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
   }
-  
+
   get tradePair(){
     return {
       tradePairId: this.store.state.tradePairId,

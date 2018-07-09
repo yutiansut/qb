@@ -30,60 +30,58 @@ export default class extends ExchangeViewBase {
     // this.recentTradeList = controller.recentTradeList.bind(controller)
     this.tradeSort = controller.tradeSort.bind(controller) // 近期交易排序
   }
-  
+
   componentDidMount() {
     this.props.controller.emitRecentOrderWs();
     // this.recentTradeList();
     // this.props.controller.getRecentOrder(this.state.isPersonal);
   }
-  
+
   componentWillMount() {
-  
+
   }
-  
+
   render() {
-    return (
-        <div>
-          <div className='trade-recent-title'>
-            <h3>{this.intl.get('order-recent')}</h3>
-            <div style={{display: 'flex'}}>
-              {this.state.recentItem.map((v, index) => {
-                return (
-                    <div className={`recent-item recent-item-${this.state.recentItemSelect === v.type ? 'active' : ''}`}
-                         key={index} onClick={this.changeRecentItem.bind(this, v)}>
-                      {v.name}
-                    </div>
-                )
-              })}
-            </div>
+    return <div>
+        <div className="trade-recent-title">
+          <h3>{this.intl.get("order-recent")}</h3>
+          <div style={{ display: "flex" }}>
+            {this.state.recentItem.map((v, index) => {
+              return <div className={`recent-item recent-item-${this.state.recentItemSelect === v.type ? "active" : ""}`} key={index} onClick={this.changeRecentItem.bind(this, v)}>
+                  {v.name}
+                </div>;
+            })}
           </div>
-          <table className='trade-recent-table'>
-            <thead>
+        </div>
+        <table className="trade-recent-table">
+          <thead>
             <tr>
               {this.state.recentTableHead.map((v, index) => {
-                return (
-                    <td key={index} onClick={this.tradeSort.bind(this, v, index)}>
-                      {v.name}
-                      <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt=""
-                           className={`${v.sortValue ? '' : 'hide'}`}/>
-                    </td>
-                )
+                return <td key={index} onClick={this.tradeSort.bind(this, v, index)}>
+                    {v.name}
+                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt="" className={`${v.sortValue ? "" : "hide"}`} />
+                  </td>;
               })}
             </tr>
-            </thead>
-            <tbody>
-            {this.state.recentTradeListArr.map((v, index) => {
-              return (
+          </thead>
+          <tbody>
+            {this.state.recentTradeListArr && this.state.recentTradeListArr.map(
+              (v, index) => {
+                return (
                   <tr key={index}>
                     <td>{v.dealTime}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
+                    <td>
+                      {(this.state.unitsType === "CNY" && v.priceCN) ||
+                        ((this.state.unitsType === "USD" && v.priceEN) ||
+                          v.price)}
+                    </td>
                     <td>{v.volume}</td>
                   </tr>
-              )
-            })}
-            </tbody>
-          </table>
-        </div>
-    )
+                );
+              }
+            )}
+          </tbody>
+        </table>
+      </div>;
   }
 }

@@ -29,6 +29,7 @@ export default {
           collectArr: {var: 1, op: 109, seq: 0, resOp: 109}//收藏
         },
         userOrder: {
+          tradeKline: { var: 1, op: 104, seq: 0, resOp: 104 }, //K线更新
           tradeDepth: {var: 1, op: 105, seq: 0, resOp: 105},//深度更新
           orderUpdate: {var: 1, op: 103, seq: 0, resOp: 103},//订单跟新
           userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新

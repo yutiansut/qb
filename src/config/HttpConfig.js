@@ -58,7 +58,7 @@ export default {
     // 获取收藏
     {name:'getFavoriteList', data:{url: '/user/', method: 'post'}, action: 'getFavoriteList', actionBack: 'getFavoriteListRes', needToken: true},
     // 获取交易对
-    {name:'getAllChg', data:{url: '/common/', method: 'post'}, action: 'getAllChg', actionBack:'getAllChgRes'}
+    {name:'getAllChg', data:{url: '/common/', method: 'post'}, action: 'getAllChg', actionBack:'getAllChgRes'},
   ],
   asset: [
     // 撤销提币申请
@@ -98,7 +98,10 @@ export default {
       //挂单列表
     {name: 'getDepth', data: {url: '/common/', method: 'post'}, action: 'getDepth', actionBack: 'getDepthRes'},
       //撤单操作
-    {name: 'cancelOrder', data: {url: '/order/', method: 'post'}, action: 'cancelOrder', actionBack: 'cancelOrderRes'}
+    {name: 'cancelOrder', data: {url: '/order/', method: 'post'}, action: 'cancelOrder', actionBack: 'cancelOrderRes'},
+    // 获取k线数据
+    { name: 'getKline', data: { url: '/common/', method: 'post' }, action: 'getKLine', actionBack: 'getKLineRes' }
+
   ],
   deal:[
     //交易接口

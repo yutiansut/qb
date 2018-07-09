@@ -582,6 +582,7 @@ export class MainInfoPlotter extends Plotter {
         let minute = Util.formatTime(time.getMinutes());
         let lang = mgr.getLanguage();
         if (lang === "zh-cn") {
+            // console.log('dddddddddddddddddddddddddddddddd', data.close)
             // if (!Plotter.drawString(context, '时间: ' +
             //         year + '-' + month + '-' + date + '  ' + hour + ':' + minute, rect))
             //     return;

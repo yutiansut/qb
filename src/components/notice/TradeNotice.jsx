@@ -34,16 +34,20 @@ export default class tradeNotice extends exchangeViewBase {
 
   render() {
     console.log('资讯', this.state)
-    return (
-      <div className="trade-notice-wrap">
+    return <div className="trade-notice-wrap">
         <h3>资讯</h3>
-        {this.state.infoList && this.state.infoList.length ? (<ul>
-          {this.state.infoList.map((v, index) => (<li key={index}>
-            <p><Link to={`notice/content/detail?infoId=${v.activityId}`}>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</Link></p>
-            <span>{v.createdAt}</span>
-          </li>))}
-        </ul>) : (<div>暂无资讯</div>)}
-      </div>
-    );
+        {this.state.infoList && this.state.infoList.length ? <ul>
+            {this.state.infoList.map((v, index) => <li key={index}>
+                <p>
+                  <Link to={`notice/content/detail?infoId=${v.activityId}`}>
+                    {this.props.controller.configData.language === "zh-CN"
+                      ? v.subjectCn
+                      : v.subjectEn}
+                  </Link>
+                </p>
+                <span>{v.createdAt}</span>
+              </li>)}
+          </ul> : <div>暂无资讯</div>}
+      </div>;
   }
 }
