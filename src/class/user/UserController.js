@@ -17,28 +17,28 @@ export default class UserController extends ExchangeControllerBase {
   clearUserInfo(){
     this.store.clearUserInfo()
   }
-
-  checkNum(num) { // 进度条长度获取
-    let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
-    if(!(scoreArr.length > 0)){
-      return;
-    }
-    // if (num > 500000) { // 超过500000会出问题
-    //   index = 6
-    //   start = scoreArr[5]
-    //   end = num
-    //   return {checkStart: start, checkEnd: end, checkIndex: index}
-    // }
-    for (let i = 0; i < scoreArr.length; i++) {
-      sum += scoreArr[i];
-      if(sum >= num){
-        index = i
-        start = scoreArr[i-1]
-        end = scoreArr[i]
-        return {checkStart: start, checkEnd: end, checkIndex: index}
-      }
-    }
-  }
+  //
+  // checkNum(num) { // 进度条长度获取
+  //   let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
+  //   // if(!(scoreArr.length > 0)){
+  //   //   return;
+  //   // }
+  //   // if (num > 500000) { // 超过500000会出问题
+  //   //   index = 6
+  //   //   start = scoreArr[5]
+  //   //   end = num
+  //   //   return {checkStart: start, checkEnd: end, checkIndex: index}
+  //   // }
+  //   for (let i = 0; i < scoreArr.length; i++) {
+  //     sum += scoreArr[i];
+  //     if(sum >= num){
+  //       index = i
+  //       start = scoreArr[i-1]
+  //       end = scoreArr[i]
+  //       return {checkStart: start, checkEnd: end, checkIndex: index}
+  //     }
+  //   }
+  // }
 
   async getVerify(account, mode, type) { // 获取短信验证码
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
@@ -88,8 +88,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserCreditsNum() { // 获取用户积分信息
     let userCreditsNum = await this.store.userCreditsNum();
-    let obj = this.checkNum(userCreditsNum)
-    this.view.setState({userCreditsNum, scoreEnd: obj.checkEnd, scoreStart: obj.checkStart,  scoreIndex: obj.checkIndex})
+    this.view.setState({userCreditsNum})
   }
 
   async getUserCredits() { // 获取用户积分信息列表

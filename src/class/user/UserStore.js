@@ -24,7 +24,7 @@ export default class UserStore extends ExchangeStoreBase {
 
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
-    this.userInfo()
+    this.state.token && this.userInfo()
     // this.preHandlerndler.push(this.userPreHandler)
     // this.installProxy("user", this.preHandler, this.afterHandler)
   }

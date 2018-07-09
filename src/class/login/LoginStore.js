@@ -21,7 +21,7 @@ export default class LoginStore extends ExchangeStoreBase {
     this.WebSocket.general.emit('login', obj)
   }
 
-  // loginOutRemind() { // 退出登陆
-  //   this.WebSocket.general.emit('loginOu obj)
-  // }
+  loginOutRemind() { // 退出登陆
+    this.WebSocket.general.emit('loginOut')
+  }
 }

@@ -360,7 +360,12 @@ export default function en(state) {
     "user-scoreHistory": "History",
     "user-scoreGet": "How to make more points",
     "user-scoreHave": "Points Earned",
-    "user-action": "Action"
+    "user-action": "Action",
+    "user-popBindEmail": "Link your email",
+    "user-popSetLoginPwd": "Reset login password",
+    "user-popRecoverLoginPwd": "Recover login password",
+    "user-popSetFundPwd": "Funding Password",
+    "user-popRecoverFundPwd": "Recover funding password"
   };
   const login = {
     "login-verify": "Verified login",

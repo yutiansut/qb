@@ -79,7 +79,9 @@ export default class Header extends ExchangeViewBase {
     // console.log(222, this)
     this.clearLoginInfo()
     this.props.history.push('/home')
-    this.setState({})
+    let navArrayLeft = this.state.navArrayLeft
+    navArrayLeft[2].tokenShow = true
+    this.setState({navArrayLeft})
   }
 
   render() {
@@ -116,7 +118,7 @@ export default class Header extends ExchangeViewBase {
               )}
         </ul>
         <ol className="clearfix">
-          <li className="new-li">
+          <li className={`${userToken ? 'new-li' : 'hide'}`}>
             <div className="new-li-img">
               <img src="/static/img/home/new_hei.svg" alt=""/>
             </div>

@@ -348,7 +348,12 @@ export default function zh(state) {
     "user-scoreHistory": "积分详情",
     "user-scoreGet": "如何获得积分",
     "user-scoreHave": "获得积分",
-    "user-action": "事件"
+    "user-action": "事件",
+    "user-popBindEmail": "绑定邮箱",
+    "user-popSetLoginPwd": "设置登录密码",
+    "user-popRecoverLoginPwd": "修改登录密码",
+    "user-popSetFundPwd": "设置资金密码",
+    "user-popRecoverFundPwd": "修改登录密码"
 
   };
   const login = {

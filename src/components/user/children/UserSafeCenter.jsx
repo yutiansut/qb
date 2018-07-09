@@ -216,24 +216,24 @@ export default class userSafeCenter extends exchangeViewBase {
         </div>
         <div className={`${this.state.otherShow ? 'hide' : ''} other model-div`} onClick={this.showOther}>{this.intl.get("user-otherAll")}</div>
         <div className={this.state.otherShow ? '' : 'hide'}>
-          <div className="time model-div clearfix">
-            <h2>{this.intl.get("user-otherSet")}</h2>
-            <ul className="fl time-ul">
-              <li>{this.intl.get("user-time")}</li>
-              <li className="clearfix">
-                <Input
-                  type="select"
-                  readOnly={true}
-                  valueArr={timeAddrList.map(item => item)}
-                  onSelect={value => {
-                    this.setState({ timeAddr: value });
-                  }}
-                  value={this.state.timeAddr}
-                />
-                <Button title={this.intl.get("save")} className="time-btn"/>
-              </li>
-            </ul>
-          </div>
+          {/*<div className="time model-div clearfix">*/}
+            {/*<h2>{this.intl.get("user-otherSet")}</h2>*/}
+            {/*<ul className="fl time-ul">*/}
+              {/*<li>{this.intl.get("user-time")}</li>*/}
+              {/*<li className="clearfix">*/}
+                {/*<Input*/}
+                  {/*type="select"*/}
+                  {/*readOnly={true}*/}
+                  {/*valueArr={timeAddrList.map(item => item)}*/}
+                  {/*onSelect={value => {*/}
+                    {/*this.setState({ timeAddr: value });*/}
+                  {/*}}*/}
+                  {/*value={this.state.timeAddr}*/}
+                {/*/>*/}
+                {/*<Button title={this.intl.get("save")} className="time-btn"/>*/}
+              {/*</li>*/}
+            {/*</ul>*/}
+          {/*</div>*/}
           <div className="notify model-div clearfix">
             <h2>{this.intl.get("user-noticeSet")}</h2>
             <ul className="fl">

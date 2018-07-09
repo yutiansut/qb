@@ -31,7 +31,8 @@ export default class Login extends exchangeViewBase {
       popType: "tip1",
       popMsg: "登录成功",
       showTwoVerify: false,
-      verifyType: "" // 密码登录两步认证弹窗
+      verifyType: "", // 密码登录两步认证弹窗
+      checkState: true // checkbox判断
     }
     const {controller} = props
     //绑定view
@@ -48,6 +49,7 @@ export default class Login extends exchangeViewBase {
     this.changePass = this.changePass.bind(this)
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
+    this.checkUser = this.checkUser.bind(this)
 
   }
 
@@ -84,11 +86,16 @@ export default class Login extends exchangeViewBase {
   }
 
   canClick() {
-    if (this.state.userInput && this.state.codeInput && this.state.picInput) return true
-    if (this.state.userInput && this.state.passInput && this.state.picInput) return true
+    if (this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
+    if (this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false
   }
 
+  checkUser(event) {
+    this.setState({
+      checkState: event.target.checked
+    });
+  }
   componentWillMount() {
     // this.bannerSwiper()
   }
@@ -146,7 +153,7 @@ export default class Login extends exchangeViewBase {
                       onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput)}}/>
             </li>
           </ul>
-          <p><input type="checkbox" />{this.intl.get("login-read")}<a href="">{this.intl.get("login-readUser")}</a></p>
+          <p><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}<a href="">{this.intl.get("login-readUser")}</a></p>
         </div>
         {this.state.showPopup && (
           <Popup

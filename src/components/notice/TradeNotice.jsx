@@ -37,7 +37,7 @@ export default class tradeNotice extends exchangeViewBase {
     return (
       <div className="trade-notice-wrap">
         <h3>资讯</h3>
-        {this.state.infoList.length ? (<ul>
+        {this.state.infoList && this.state.infoList.length ? (<ul>
           {this.state.infoList.map((v, index) => (<li key={index}>
             <p><Link to={`notice/content/detail?infoId=${v.activityId}`}>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</Link></p>
             <span>{v.createdAt}</span>

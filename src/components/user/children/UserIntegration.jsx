@@ -21,12 +21,40 @@ export default class userIntegration extends exchangeViewBase {
     this.getUserCreditsNum = controller.getUserCreditsNum.bind(controller) // 获取用户积分数据
   }
 
+  checkNum(num) { // 进度条长度获取
+    let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
+    if(!(scoreArr.length > 0)){
+      return;
+    }
+    // if (num > 500000) { // 超过500000会出问题
+    //   index = 6
+    //   start = scoreArr[5]
+    //   end = num
+    //   return {checkStart: start, checkEnd: end, checkIndex: index}
+    // }
+    for (let i = 0; i < scoreArr.length; i++) {
+      sum += scoreArr[i];
+      if(sum >= num){
+        index = i
+        start = scoreArr[i-1]
+        end = scoreArr[i]
+        return {checkStart: start, checkEnd: end, checkIndex: index}
+      }
+    }
+  }
+
   componentWillMount() {
 
   }
 
   async componentDidMount() {
-    await Promise.all([this.initData(), this.getUserCredits()])
+    await Promise.all([this.initData(), this.getUserCredits(), this.getUserCreditsNum()])
+    let obj = this.checkNum(this.state.userCreditsNum)
+    this.setState({
+      scoreEnd: obj.checkEnd,
+      scoreStart: obj.checkStart,
+      scoreIndex: obj.checkIndex
+    })
   }
 
   componentWillUpdate(...parmas) {
@@ -71,7 +99,7 @@ export default class userIntegration extends exchangeViewBase {
             </ul>
             <div className="progress-line">
               <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userCreditsNum}</span>
-              <p style={{width: `this.state.userCreditsNum ? 0 : calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
+              <p style={{width: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
             </div>
           </div>
         </div>

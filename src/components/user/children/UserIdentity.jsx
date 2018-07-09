@@ -24,6 +24,8 @@ export default class userIdentity extends exchangeViewBase {
       image2: '', // 上传照片用于存储ID
       image3: '', // 上传照片用于存储ID
       remindPopup: false,
+      checkVerifyArr: true, // 单选是否能够点击
+      checkState: true, // 单选框按钮
       photoArr: [
         {
           photoList: [
@@ -40,11 +42,11 @@ export default class userIdentity extends exchangeViewBase {
           ]
         },
       ],
-      realNameArr: [ // 是否认证:0未认证;1已通过;2认证失败;3认证中
+      realNameArr: [ // 是否认证:0未认证;1审核中;2已审核;3未通过;4恶意上传失败封锁3天;5永久禁止
         {imgUrl: '/static/img/user/identity_no.png', content: this.intl.get("user-authNo")},
+        {imgUrl: '/static/img/user/identity_progress.png', content: this.intl.get("user-authProcess")},
         {imgUrl: '/static/img/user/identity_succ.png', content: this.intl.get("user-authSucc")},
         {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
-        {imgUrl: '/static/img/user/identity_progress.png', content: this.intl.get("user-authProcess")}
       ]
     }
     const {controller} = props
@@ -57,6 +59,7 @@ export default class userIdentity extends exchangeViewBase {
     this.checkPhoto = this.checkPhoto.bind(this)
     this.uploadInfo = controller.uploadInfo.bind(controller)
     this.uploadImg = controller.uploadImg.bind(controller)
+    this.canClick = this.canClick.bind(this)
   }
   getObjectURL (file) {
     let url = null ;
@@ -117,6 +120,10 @@ export default class userIdentity extends exchangeViewBase {
   numberInput(evt) {
     this.setState({numberValue: evt});
   }
+  canClick() {
+    if (this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue) return true
+    return false
+  }
   submitInfo() { // 确认提交
     this.uploadInfo()
   }
@@ -129,24 +136,33 @@ export default class userIdentity extends exchangeViewBase {
     let verifyArr = [0, 0, 2, 1] // 0 身份证 1 护照 -> 1 身份证 3 护照
     // verifyArr[this.state.userAuth.type]
     this.setState({
-      selectIndex: 0,
-      photoArr: [
-        {
-          photoList: [
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
-          ]
-        },
-        {
-          photoList: [
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
-            {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
-          ]
-        }
-      ]
+      selectIndex: 0
     })
+    this.state.userAuth.state === 3 && (
+      this.setState({
+        photoArr: [
+          {
+            photoList: [
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
+            ]
+          },
+          {
+            photoList: [
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
+              {imgUrl: `http://192.168.113.7/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
+            ]
+          }
+        ]
+      })
+    )
+    this.state.userAuth.state !== 0 && (
+      this.setState({
+        checkVerifyArr: false
+      })
+    )
   }
 
   componentWillUpdate(...parmas) {
@@ -189,7 +205,7 @@ export default class userIdentity extends exchangeViewBase {
             </div>
             <dl className="clearfix">
               <dt>{this.intl.get("user-name")}</dt>
-              {this.state.verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.selectVerifyType(index, item)}>
+              {this.state.verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.state.checkVerifyArr && this.selectVerifyType(index, item)}>
                 <img src="/static/img/checked.svg" alt="" className={`${this.state.selectIndex === index ? '' : 'hide'}`}/>
                 <img src="/static/img/normal.svg" alt="" className={`${this.state.selectIndex === index ? 'hide' : ''}`}/>
                 <i>{item.name}</i>
@@ -205,9 +221,9 @@ export default class userIdentity extends exchangeViewBase {
         </div>
         <div className="photo-identify clearfix">
           <h2>{this.intl.get("user-photoVerify")}</h2>
-          <div className={`${this.state.userAuth.state == 3 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authProRes")}</em></div>
-          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authSuccRes")}</em></div>
-          <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 2 ? '' : 'hide'} fl`}>
+          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authProRes")}</em></div>
+          <div className={`${this.state.userAuth.state == 2 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authSuccRes")}</em></div>
+          <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 3 ? '' : 'hide'} fl`}>
             <dl>
               <dt>{this.intl.get("user-idReq")}</dt>
               <dd>{this.intl.get("user-req1")}</dd>
@@ -228,8 +244,12 @@ export default class userIdentity extends exchangeViewBase {
                 <p>{item.name}</p>
               </dd>))}
             </dl>
-            <h3><input type="checkbox" />{this.intl.get("user-photoSure")}</h3>
-            <Button title={this.intl.get("user-submit")} className="identify-btn" onClick={this.submitInfo.bind(this)}/>
+            <h3><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("user-photoSure")}</h3>
+            <Button
+              title={this.intl.get("user-submit")}
+              className={`${this.canClick() ? 'identify-btn-active' : ''} identify-btn`}
+              disable={this.canClick() ? false : true}
+              onClick={this.submitInfo.bind(this)}/>
           </div>
         </div>
         {/*<form method="post" action="http://192.168.113.141/image/" style={{display: 'none'}} encType="multipart/form-data" target="upImg">*/}
