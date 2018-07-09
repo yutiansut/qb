@@ -32,7 +32,7 @@ export default class homeNotice extends exchangeViewBase {
   async componentDidMount() {
     await this.getNoticeCon(0, 5);
     let result = this.state.noticeList
-    if (this.state.noticeList.length) {
+    if (this.state.noticeList && this.state.noticeList.length) {
       this.setState(
         {
           top2: Math.ceil(result.length / 2) * 100,
@@ -66,8 +66,8 @@ export default class homeNotice extends exchangeViewBase {
   render() {
     // console.log('首页公告', this.state)
     return (
-      <div className={`${this.state.noticeList.length ? '' : 'hide'} home-notice-wrap`}>
-        {this.state.noticeList.length && <div className="home-notice-content clearfix">
+      <div className={`${this.state.noticeList && this.state.noticeList.length ? '' : 'hide'} home-notice-wrap`}>
+        {this.state.noticeList && this.state.noticeList.length && <div className="home-notice-content clearfix">
             <p>公告</p>
             <ul style={{ top: this.state.top1 + "%" }}>
               {this.state.noticeList.map((v, index) => (<li key={index}>
