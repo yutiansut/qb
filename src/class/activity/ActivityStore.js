@@ -9,21 +9,30 @@ export default class NoticeStore extends ExchangeStoreBase {
         {coin: '1111', amount: '22222'},
         {coin: '1111', amount: '22222'},
         {coin: '1111', amount: '22222'},
-      ]
+      ],
+      bannerImgUrl:''
     }
   }
 
   async getQbtMargin(){
-    let result = await this.Proxy.getQbtMargin();
-    return result;
+    // let result =
+    return await this.Proxy.getQbtMargin();
   }
 
   async getAward(obj){
-    let result = await this.Proxy.getAward(obj);
-    return result;
+    // let result =
+    return await this.Proxy.getAward(obj);
   }
 
-  async getHomeBanner(){
-
+  async getHomeBanner(activityStatus, activityPosition) {
+    let result = await this.Proxy.getHomeBanner({
+      os: 3,
+      activityStatus,
+      activityPosition
+    });
+    // console.log('getHomeBanner 0',result)
+    this.state.bannerImgUrl = result.activityList[0].homeBannerCN;
+    // console.log('getHomeBanner 0',this.state.bannerImgUrl)
+    return this.state.bannerImgUrl
   }
 }

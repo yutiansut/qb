@@ -10,12 +10,14 @@ export default class ActivityController extends ExchangeControllerBase {
   setView(view){
     super.setView(view);
     // view.setState({count: this.store.count})
-    return this.store.data
+    // return this.store.data
   }
 
   get configData() {
     return this.configController.initState
   }
+
+
   // 轮询qbt余量
   getQbtMargin(){
     this.Loop['activityH5'].clear()
@@ -30,6 +32,15 @@ export default class ActivityController extends ExchangeControllerBase {
   // 清除轮询qbt任务
   clearGetQbtMargin(){
     this.Loop["activityH5"].clear();
+  }
+
+  async getHomeBanner(activityStatus, activityPosition){
+    let bannerImgUrl = await this.store.getHomeBanner(activityStatus, activityPosition)
+    // console.log('getHomeBanner 1',bannerImgUrl,this.view)
+    // return result
+    this.view.setState({
+      bannerImgUrl
+    })
   }
 
 

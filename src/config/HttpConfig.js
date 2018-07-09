@@ -46,7 +46,6 @@ export default {
   ],
   notice: [
     {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true}, // 活动内容
-    {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getHomeBannerRes'} // 活动内容
   ],
   market: [
     //币种资料
@@ -104,6 +103,7 @@ export default {
     {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
   ],
   activity:[
+    {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getHomeBanner', actionBack: 'getHomeBannerRes'}, // 活动内容
     // H5活动页，获取qbt活动余量
     { name: 'getQbtMargin', data: { url: '/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes'},
     //H5活动页，领取qbt奖励
