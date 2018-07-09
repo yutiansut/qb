@@ -16,11 +16,6 @@ export default class HomeActivity extends exchangeViewBase {
     // console.log('活动', this.state)
   }
 
-  setView(view){
-    super.setView(view);
-    return this.store.data
-  }
-
   componentWillMount() {
 
   }

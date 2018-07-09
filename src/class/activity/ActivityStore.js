@@ -22,4 +22,8 @@ export default class NoticeStore extends ExchangeStoreBase {
     let result = await this.Proxy.getAward(obj);
     return result;
   }
+
+  async getHomeBanner(){
+
+  }
 }

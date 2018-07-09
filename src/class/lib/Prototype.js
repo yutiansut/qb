@@ -163,6 +163,7 @@ Number.prototype.formatFixNumberForAmount = function (price) {
 
 //数字format
 //number根据什么类型格式化number
+//format({number:'legal',style:{name:'cny'}})
 //style根据什么类型加前缀和后缀
 // TODO: 因现在没有添加后缀的需求，所以可以直接根据类型补零，必须修改
 Number.prototype.format = function (para) {

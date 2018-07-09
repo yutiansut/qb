@@ -45,7 +45,8 @@ export default {
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true}, // 验证谷歌验证码
   ],
   notice: [
-    {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true} // 活动内容
+    {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes', needToken: true}, // 活动内容
+    {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getHomeBannerRes'} // 活动内容
   ],
   market: [
     //币种资料
