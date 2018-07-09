@@ -190,7 +190,8 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //币种资料
   async getCoinInfo(coinId) {
-    this.state.coinInfo = await this.Proxy.coinInfo({coinId});
+    let result = await this.Proxy.coinInfo({ coinId });
+    result.name && (this.state.coinInfo = result);
   }
 
   //收藏列表

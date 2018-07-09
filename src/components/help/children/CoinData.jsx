@@ -66,7 +66,7 @@ export default class CoinData extends exchangeViewBase {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      console.log('updateing',nextState.currency, this.state.currency);
+      console.log('updateing', nextState.currency, this.state.currency);
       this.getCoinInfo(this.state.walletList[nextState.currency]);
     }
     if (JSON.stringify(nextState) === JSON.stringify(this.state)) return false;
@@ -101,13 +101,13 @@ export default class CoinData extends exchangeViewBase {
     return (
       <div className="help-coin">
         <h2 className="title">
-          币币交易> 币种资料> <a>{this.state.currency}</a>
+          {this.intl.get('header-exchange')}> {this.intl.get('market-currencyInfo')}> <a>{this.state.currency}</a>
         </h2>
         <div className="search clearfix">
           <div className="input">
             <Input
               type="search2"
-              placeholder="搜索币种（按首字母排列）"
+              placeholder={this.intl.get('helo-coin-search')}
               value={this.state.value}
               onInput={value => {
                 this.setValue(value);
@@ -134,8 +134,8 @@ export default class CoinData extends exchangeViewBase {
                   ))}
                 </ul>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </Input>
           </div>
           <button
@@ -173,35 +173,35 @@ export default class CoinData extends exchangeViewBase {
                   query: { currency: this.state.currency }
                 }}
               >
-                去充值
+                {this.intl.get('helo-coin-deposit')}
               </NavLink>
             </div>
             <div className="right">
               <p>
                 <span>
-                  市值：{this.state.unit
+                  {this.intl.get('helo-coin-market')}：{this.state.unit
                     ? `¥${Number(totalValueCN).format({ number: "legal" })}`
                     : `$${Number(totalValueEN).format({
-                        number: "legal"
-                      })}`}
+                      number: "legal"
+                    })}`}
                 </span>
                 <span>
-                  发行总量：{totalVolume.format({ number: "general" })}
+                  {this.intl.get('helo-coin-total')}：{totalVolume.format({ number: "general" })}
                 </span>
                 <span>
-                  流通量：{circulationVolume.format({ number: "general" })}
+                  {this.intl.get('helo-coin-liquidity')}：{circulationVolume.format({ number: "general" })}
                 </span>
               </p>
               <p>
                 <span>
-                  发行价格：{this.state.unit
+                  {this.intl.get('helo-coin-price')}：{this.state.unit
                     ? `¥${Number(priceCN).format({ number: "legal" })}`
                     : `$${Number(priceEN).format({ number: "legal" })}`}
                 </span>
-                <span>发行日期：{releaseTime.toDate("yyyy-MM-dd")}</span>
+                <span>{this.intl.get('helo-coin-date')}：{releaseTime.toDate("yyyy-MM-dd")}</span>
               </p>
               <p>
-                <span>去交易：</span>
+                <span>{this.intl.get('helo-coin-trade')}：</span>
                 {this.getCoinPair(
                   this.state.tradePair,
                   this.state.currency
@@ -221,13 +221,13 @@ export default class CoinData extends exchangeViewBase {
           </div>
           <div className="detail">
             <p>
-              介绍:<br />
-              {description}
+              {this.intl.get('helo-coin-introduction')}<br />
+              {description && this.intl.get(description) ? this.intl.get(description) : description}
             </p>
             <div className="button">
-              <Button type="base" title="官网" href={webSite && webSite[0]} target={true} />
-              <Button type="base" title="区块浏览器" href={blockSites && blockSites[0]} target={true} />
-              <Button type="base" title="白皮书" href={whitePaper && whitePaper[0]} target={true} />
+              <Button type="base" title={this.intl.get('helo-coin-website')} href={webSite && webSite[0]} target={true} />
+              <Button type="base" title={this.intl.get('helo-coin-browser')} href={blockSites && blockSites[0]} target={true} />
+              <Button type="base" title={this.intl.get('helo-coin-white')} href={whitePaper && whitePaper[0]} target={true} />
             </div>
           </div>
         </div>

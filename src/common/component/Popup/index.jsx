@@ -1,5 +1,5 @@
-import React from "react";
-import Button from "../Button/";
+import React, { Component } from "react";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import "./style.styl";
 /*
   title 标题 type为tip1、tip2、tip3、tip4时不生效
@@ -12,7 +12,7 @@ import "./style.styl";
   className 自定义类名
   icon 默认succeed 可选warning,wrong,message, type为
 */
-export default class Popup extends React.Component {
+export default class Popup extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.timer = null;
@@ -38,19 +38,19 @@ export default class Popup extends React.Component {
   tipType(type) {
     let obj = {};
     if (type === "tip1") {
-      obj.title = "成功";
+      obj.title = this.intl.get('tip-success');
       obj.icon = this.iconArr.succeed;
     }
     if (type === "tip2") {
-      obj.title = "警告";
+      obj.title = this.intl.get('tip-warn');
       obj.icon = this.iconArr.warning;
     }
     if (type === "tip3") {
-      obj.title = "错误";
+      obj.title = this.intl.get('tip-error');
       obj.icon = this.iconArr.wrong;
     }
     if (type === "tip4") {
-      obj.title = "信息";
+      obj.title = this.intl.get('tip-message');
       obj.icon = this.iconArr.message;
     }
     return obj;
@@ -85,7 +85,7 @@ export default class Popup extends React.Component {
     return (
       <div className={`wrap ${["tip1", "tip2", "tip3", "tip4"].includes(type) ? 'trans' : ''}`}>
         <div
-          className={`base-popup ${type} ${className ? className: ''}`}
+          className={`base-popup ${type} ${className ? className : ''}`}
           onClick={e => {
             e.nativeEvent.stopImmediatePropagation();
             ["tip1", "tip2", "tip3", "tip4"].includes(type) && onClose()
@@ -122,7 +122,7 @@ export default class Popup extends React.Component {
           </p>
           {type === "default" && (
             <Button
-              title="知道了"
+              title={this.intl.get('tip-know')}
               type="base"
               className="button"
               onClick={() => {
@@ -133,7 +133,7 @@ export default class Popup extends React.Component {
           )}
           {["confirm", "custom"].includes(type) && (
             <Button
-              title="确 定"
+              title={this.intl.get('tip-confirm')}
               type="base"
               className="button"
               onClick={() => {
@@ -144,7 +144,7 @@ export default class Popup extends React.Component {
           )}
           {["confirm", "custom"].includes(type) && (
             <Button
-              title="取 消"
+              title={this.intl.get('tip-cancel')}
               className="button"
               onClick={() => {
                 clearTimeout(this.timer);

@@ -76,7 +76,7 @@ class ReactKline extends React.Component {
     resize(w,h){
         this.state.kline.resize(w, h);
     }
-
+// 设置币种交易对
     setSymbol(symbol,symbolName){
         this.state.kline.setSymbol(symbol,symbolName);
     }
@@ -84,7 +84,7 @@ class ReactKline extends React.Component {
     setTheme(style){
         this.state.kline.setTheme(style);
     }
-
+// 设置语言
     setLanguage(lang){
         this.state.kline.setLanguage(lang);
     }
