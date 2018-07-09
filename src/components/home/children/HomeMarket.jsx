@@ -46,6 +46,7 @@ export default class HomeMarket extends ExchangeViewBase{
     //进入home
     this.joinHome();
   }
+
   render(){
     const {controller} = this.props;
     // console.log(1234,this.state,this.state.recommendDataHandle)
@@ -53,9 +54,9 @@ export default class HomeMarket extends ExchangeViewBase{
       <div className='home-market inner'>
         <div className="market-nav clearfix">
           <ul className="clearfix">
-            <li onClick={this.collectMarket}>
+            {controller.token && <li onClick={this.collectMarket}>
               <span className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>{this.intl.get('market-favorites')}</span>
-            </li>
+            </li> || null}
             {this.state.marketDataHandle.map((v, index) => {return(
               <li key={index} onClick={this.changeMarket.bind(this,v)}>
                 <span className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
@@ -72,7 +73,7 @@ export default class HomeMarket extends ExchangeViewBase{
         <table>
           <thead align="left">
             <tr>
-              <th>{this.intl.get('market-favorite')}</th>
+              {controller.token && <th>{this.intl.get('market-favorite')}</th> || null}
               {this.state.marketTableHead.map((v, index) => {
                 return(<th onClick={this.pairSort.bind(this,v,index)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                   {v.name}
@@ -87,7 +88,7 @@ export default class HomeMarket extends ExchangeViewBase{
             return(
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
-                <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td>
+                {controller.token && <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td> || null}
                 <td>{v.tradePairName.toUpperCase()}</td>
                 <td><span className={`${v.updown && (v.updown>0 && "market-up" || "market-down")}`}>{Number(v.price).format({number:'digital'}) || 0}</span>/<span>
                   {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) || Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span></td>

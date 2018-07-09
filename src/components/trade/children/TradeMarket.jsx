@@ -60,11 +60,12 @@ export default class TradeMarket extends ExchangeViewBase {
   }
 
   render() {
+    const {controller} = this.props;
     return (
       <div className='trade-market'>
         <div className='trade-market-list'>
           <ul>
-            <li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>{this.intl.get('market-favorite')}</li>
+            {controller.token && (<li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>{this.intl.get('market-favorite')}</li>) || null}
             {this.state.marketDataHandle.map((v, index) => {
               return (
                 <li
@@ -107,9 +108,9 @@ export default class TradeMarket extends ExchangeViewBase {
                 <td>{v.tradePairName.toUpperCase()}</td>
                 <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
                 <td>{Number(v.rise).toPercent()}</td>
-                <td onClick={value => this.addCollect(v, index)} className="img-td">
-                  <img src={v.isFavorite ? "/static/img/trade_star_select.svg" :  "/static/img/trade_star.svg"} alt=""/>
-                </td>
+                {controller.token && (<td onClick={value => this.addCollect(v, index)} className="img-td">
+                  <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>
+                </td>) || null}
               </tr>
             )
           })}

@@ -31,7 +31,7 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   //获取getRecommendCoins
-  async getRecommendCoins(){
+  async getRecommendCoins() {
     let recommendData = await this.store.getRecommendCoins()
     console.log(recommendData)
     this.view.setState({
@@ -106,6 +106,10 @@ export default class MarketController extends ExchangeControllerBase {
 
   get language() {
     return this.configController.language
+  }
+
+  get token() {
+    return this.userController.userToken
   }
 
   // 市场下交易对
@@ -218,7 +222,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
   }
 
-  get tradePair(){
+  get tradePair() {
     return {
       tradePairId: this.store.state.tradePairId,
       tradePairName: this.store.state.tradePair
