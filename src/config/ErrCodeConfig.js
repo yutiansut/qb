@@ -148,6 +148,20 @@ export default {
     },
     errCode: "NO_PICTURECODE"
   },
+  620: {
+    // msg: "与资金密码相同",
+    get msg() {
+      return intl.get(620);
+    },
+    errCode: "NO_PICTURECODE"
+  },
+  621: {
+    // msg: "与登陆密码相同",
+    get msg() {
+      return intl.get(621);
+    },
+    errCode: "NO_PICTURECODE"
+  },
   704: {
     // msg: "24小时内修改过资金密码,存在安全保护墙",
     get msg() {

@@ -286,7 +286,7 @@ export default class userSafeCenter extends exchangeViewBase {
               <table>
                 <thead>
                   <tr>
-                    {/*<th>{this.intl.get("loginTime")}</th>*/}
+                    {/*<th>{this.intl.get("ti ")}</th>*/}
                     <th>{this.intl.get("equipment")}</th>
                     <th>{this.intl.get("ip")}</th>
                     <th>{this.intl.get("place")}</th>

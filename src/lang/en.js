@@ -107,6 +107,8 @@ export default function en(state) {
     616: "Password is not set",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
+    620: "与资金密码相同",
+    621: "与登陆密码相同",
     704: "The fund password was changed within 24 hours and there was a security wall",
     705: "Insufficient quantity available",
     706: "Less than the minimum withdrawal limit",

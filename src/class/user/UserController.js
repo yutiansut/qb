@@ -154,7 +154,10 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
     })
-    result === null && this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})})
+    if (result === null) {
+      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})})
+      this.store.state.userInfo.loginPwd = 0
+    }
     console.log('设置密码', result)
   }
 
@@ -177,8 +180,12 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
     })
-    result === null && this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
-    console.log('设置密码', result)
+    if (result === null) {
+      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
+      this.store.state.userInfo.fundPwd = 0
+
+    }
+    console.log('设置密码', result, this.store.state.userInfo.fundPwd)
   }
 
   async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
