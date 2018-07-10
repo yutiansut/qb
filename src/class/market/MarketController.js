@@ -133,7 +133,7 @@ export default class MarketController extends ExchangeControllerBase {
       volume: 0,
       isFavorite: 0,
       turnover: 0,
-      points: [1, 1, 1, 1, 1, 1, 1],
+      points: [],
       coinName: v.tradePairName.split('/')[0]
     })))
     // console.log(homeMarket, this.store.allPair, homeMarket[0])
@@ -219,7 +219,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
     // 为K线图设置交易对
-    this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
+    this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
   }
 
   get tradePair() {

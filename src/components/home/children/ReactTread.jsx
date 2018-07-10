@@ -12,6 +12,7 @@ class ReactTrend extends React.Component {
             stroke: "#333",                 // 线颜色
             strokeWidth: 1,                 // 线宽
         };
+        console.log(this.props)
         Object.assign(this.state,this.props);
     }
 
@@ -19,7 +20,7 @@ class ReactTrend extends React.Component {
 
         let trends=this.state.trends;
         if(trends.length<2) return (
-            <span>trends长度不小于2</span>
+            <span></span>
         );
 
         let ratio = this.state.ratio;
@@ -37,13 +38,21 @@ class ReactTrend extends React.Component {
         let path="";
         trends.forEach((e,i)=>{
             let x = i * dx;
-            let y = viewHeight - (e - min) / (max - min) * viewHeight;
+
+            let y;
+            if(max===min){
+                y=max;
+            }else{
+              y = viewHeight - (e - min) / (max - min) * viewHeight;
+            }
+
             if(i<=0){
                 path += "M"+x + "," + y + " ";
             }else{
                 path += "L"+x + "," + y + " ";
             }
         });
+        console.log('path', path)
 
         return (
             <svg className="kline-trend" viewBox={viewBox} preserveAspectRatio="none">
