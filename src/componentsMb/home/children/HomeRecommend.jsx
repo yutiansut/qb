@@ -15,31 +15,52 @@ export default class HomeRecommend extends ExchangeViewBase{
   }
 
   componentDidMount(){
-    this.getRecommendCoins()
+    this.getRecommendCoins();
 
     //推荐列表左右滑动
+      /*
     let $ul=this.refs.recomendUl;
-    
+    let dragX=-1;
+    $ul.addEventListener("mousedown",(event)=>{
+      dragX=event.clientX;
+    });
+    document.addEventListener("mousemove",(event)=>{
+      if(dragX<0) return;
+      let dX=event.clientX-dragX;
+      if(dX>0){
+
+      }else{
+
+      }
+      dragX=event.clientX;
+    });
+
+    document.addEventListener("mouseup",()=>{
+      dragX=-1;
+    });
+    */
 
   }
 
   render(){
     return(
       <div className='home-recommend'>
-        <ul className="clearfix" ref="recomendUl">
-          {this.state.recommendData.map((v, index) => {return(
-            <li className='home-recommend-pair' key={index}>
-              <p className="p1">
-                <span>{v.coinName.toUpperCase()}</span>
-                <img src={v.rise>0 ? "/static/mobile/icon_shangzhang@2x.png" : "/static/mobile/icon_xiadie@2x.png"}/>
-              </p>
-              <p className="p2">
-                <b>{Number(v.priceCN).format({number:'legal', style:{name:'cny'}})}</b>
-                <i>{Number(v.rise).toPercent()}</i>
-              </p>
-            </li>
-          )})}
-        </ul>
+        <div className="ul-wrap">
+          <ul className="clearfix" ref="recomendUl">
+              {this.state.recommendData.map((v, index) => {return(
+                  <li className='home-recommend-pair' key={index}>
+                      <p className="p1">
+                          <span>{v.coinName.toUpperCase()}</span>
+                          <img src={v.rise>0 ? "/static/mobile/icon_shangzhang@2x.png" : "/static/mobile/icon_xiadie@2x.png"}/>
+                      </p>
+                      <p className="p2">
+                          <b>{Number(v.priceCN).format({number:'legal', style:{name:'cny'}})}</b>
+                          <i>{Number(v.rise).toPercent()}</i>
+                      </p>
+                  </li>
+              )})}
+          </ul>
+        </div>
       </div>
     )
   }

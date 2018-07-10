@@ -46,37 +46,43 @@
   .home-recommend
     width 100%
     background $normal-white-color
-    ul
+    .ul-wrap
+      overflow auto
       width 100%
-      padding .13rem
-      white-space nowrap
-      overflow hidden
-      li
-        display inline-block
-        margin 0.06rem
-        padding 0.1rem
-        background $normal-white-color
-        min-width 1.48rem
-        box-shadow 2px 2px 10px #ddd
-        .p1
-          span
-            color $normal-black-color
-            font-size .16rem
-          img
-            float right
-            height 0.16rem
-        .p2
-          margin-top 0.1rem
-          b
-            margin-right .05rem
-            font-size .15rem
-            color $exchange-blue;
-          i
-            line-height 0.15rem
-            font-size 0.12rem
-            color $exchange-blue;
-            float right
-
+      position relative
+      padding .15rem
+      height 0.9rem
+      ul
+        position absolute
+        white-space nowrap
+        height 0.6rem
+        left 0
+        li
+          display inline-block
+          padding 0.1rem
+          margin 0 0.03rem
+          height 100%
+          background $normal-white-color
+          min-width 1.48rem
+          box-shadow 2px 2px 10px #ddd
+          .p1
+            span
+              color $normal-black-color
+              font-size .16rem
+            img
+              float right
+              height 0.16rem
+          .p2
+            margin-top 0.1rem
+            b
+              margin-right .05rem
+              font-size .15rem
+              color $exchange-blue;
+            i
+              line-height 0.15rem
+              font-size 0.12rem
+              color $exchange-blue;
+              float right
   //市场
   .home-market
     background $normal-white-color
