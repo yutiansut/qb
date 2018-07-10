@@ -39,7 +39,7 @@ export default class KlineController extends ExchangeControllerBase {
     console.log('this.store.state.tradePairName',JSON.stringify(this.store.state.tradePairName))
     !this.store.state.tradePairName && this.store.update("tradePairName", symbolName);
     this.store.state.tradePairName && this.update("tradePairName", symbolName);
-    this.view.setSymbol(symbol, symbolName.toUpperCase());
+    this.view && this.view.setSymbol(symbol, symbolName.toUpperCase());
     // await this.getKlineData()
   }
   // setK线数据

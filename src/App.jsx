@@ -51,7 +51,7 @@ const Asset = ({ match }) => {
 };
 
 const Trade = ({ match }) => {
-  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController} assetController={assetController} />;
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController} assetController={assetController} klineController={klineController} />;
 };
 
 const User = ({ match }) => {
@@ -142,7 +142,7 @@ export default class App extends Component {
     marketController.userController = userController;
     marketController.configController = configController;
     marketController.assetController = assetController;
-    marketController.klineController = klineController;
+
 
     configController.setAppView(this);//configController获取app view 以便设置语言后重新渲染
   }

@@ -54,6 +54,7 @@ export default class extends exchangeViewBase {
     configController = new ConfigController(); // 基础设置
     // klineController = new KlineController();
     kdepthController = new KdepthController();
+    TradeMarketController.klineController = props.klineController;
 
     // TradeMarketController.klineController = klineController;
     TradePlanController.userController = userController;
@@ -97,6 +98,10 @@ export default class extends exchangeViewBase {
   switchChart(name) {
     this.setState({ curChart: name });
   }
+  componentWillUnmount() {
+    TradeMarketController.klineController = null;
+  }
+
 
   render() {
     return <div id="trade">
