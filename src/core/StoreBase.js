@@ -22,7 +22,7 @@ export default class StoreBase {
     this.Sleep = Sleep;
     this.AsyncAll = AsyncAll;
     this.Loop = Loop;
-    this.GlobalUtil = GlobalUtil;
+    this.Util = GlobalUtil;
     this.WebSocket = WebSocket;
     this.Storage = Storage
   }

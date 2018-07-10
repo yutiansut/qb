@@ -33,7 +33,7 @@ export default class MarketController extends ExchangeControllerBase {
   //获取getRecommendCoins
   async getRecommendCoins() {
     let recommendData = await this.store.getRecommendCoins()
-    console.log(recommendData)
+    // console.log(recommendData)
     this.view.setState({
       recommendData
     })
@@ -218,7 +218,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.setDealMsg();
-    console.log('setTradePair....................................', value )
+    // console.log('setTradePair....................................', value )
     // 为K线图设置交易对
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
   }

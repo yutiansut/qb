@@ -40,13 +40,13 @@ export default class UserStore extends ExchangeStoreBase {
   // }
 
   userLogin(data) { // 获取登录信息
-    console.log('ccc4', data)
+    // console.log('ccc4', data)
     this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName
     data && this.userInfo()
     data && this.userAuth();
-    console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
+    // console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 
   //清除用户信息

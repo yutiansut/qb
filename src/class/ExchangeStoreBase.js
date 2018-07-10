@@ -136,8 +136,8 @@ export default class ExchangeStoreBase extends StoreBase {
       // console.log('this.WebSocket[connectName]', websocket)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: data})
-      console.log('emitData.console....................', emitData, websocket)
-      websocket.send(emitData)
+      console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
+      websocket.send(this.Util.deepCopy(emitData))
       !headerConfig[key].historyPass && websocketHistory.push(emitData)
       // console.log('websocketHistory',websocketHistory)
     }
@@ -146,7 +146,7 @@ export default class ExchangeStoreBase extends StoreBase {
       // console.log(WebsocketCallBackList)
     }
     this.WebSocket[connectName].pushWebsocketHistoryArr = (key, value) => {
-      console.log('pushWebsocketHistoryArr', key, value, websocketHistory)
+      // console.log('pushWebsocketHistoryArr', key, value, websocketHistory)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: value})
       websocketHistory.push(emitData)

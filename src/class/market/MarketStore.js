@@ -206,7 +206,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //全部交易对
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
-    console.log('getPairInfo', pairInfo)
+    // console.log('getPairInfo', pairInfo)
     this.state.pairInfo = pairInfo.list
     // this.state.pairMsg = this.formatPairMsg(pairInfo)
     return pairInfo.list
