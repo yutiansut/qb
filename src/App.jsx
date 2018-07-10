@@ -30,6 +30,7 @@ import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
 import Genrealize from "./components/genrealize/Genrealize.jsx";
 import NoticeDetailCon from './components/notice/noticeChild/NoticeContentDetail.jsx'
+import KlineController from "./class/kline/KlineController";
 
 import SimpleAsset from "./components/asset/children/Simple"
 
@@ -41,7 +42,8 @@ let testAppController,
   noticeController,
   activityController,
   marketController,
-  userOrderController
+  userOrderController,
+  klineController
   ;
 
 const Asset = ({ match }) => {
@@ -121,6 +123,7 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController('market');
     userOrderController = new UserOrderListController();
+    klineController = new KlineController();
 
     userOrderController.userController = userController; //订单管理获取用户id
 
@@ -139,6 +142,7 @@ export default class App extends Component {
     marketController.userController = userController;
     marketController.configController = configController;
     marketController.assetController = assetController;
+    marketController.klineController = klineController;
 
     configController.setAppView(this);//configController获取app view 以便设置语言后重新渲染
   }

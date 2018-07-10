@@ -1,8 +1,9 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
 
-export default class DealStore extends ExchangeStoreBase {
+export default class KlineStore extends ExchangeStoreBase {
   constructor() {
     super('userOrder', 'general');
+    this.name = new Date()-0
     this.state = {
       duration: '',
       tradePairName: '',
@@ -45,8 +46,10 @@ export default class DealStore extends ExchangeStoreBase {
 
   //websockt加入房间
   joinRoom(fromRoom, toRoom) {
-    if (toRoom === '') {
-      console.log('leaveroom................................', fromRoom, toRoom);
+    if (toRoom === ''){
+      this.state.duration = '',
+      this.state.tradePairName = '',
+      this.state.kline = [];
     }
     this.WebSocket.general.emit("joinRoom", { from: fromRoom, to: toRoom });
   }

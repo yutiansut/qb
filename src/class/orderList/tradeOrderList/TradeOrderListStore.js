@@ -92,11 +92,12 @@ export default class TradeOrderListStore extends OrderListStore{
     this.WebSocket.general.on('tradeDepth', data => {
       console.log(this.controller,'tradeDepth getWebSocketData', data);
       this.controller.liveTradeListHandle(data)
+      this.controller.kdepthController && this.controller.kdepthController.setData(data);
       // this.controller.updateRecommend(data.data)
       // this.recommendData = data.data
     })
   }
-  
+
   emitTradeOrderWs(from , to){
     this.WebSocket.general.emit('joinRoom', {from, to});
   }
@@ -108,6 +109,7 @@ export default class TradeOrderListStore extends OrderListStore{
         }
     );
     this.state.liveTrade = orderListArray;
+    this.controller.kdepthController && this.controller.kdepthController.setData(orderListArray);
     return orderListArray
   }
   getWebSocketData() {

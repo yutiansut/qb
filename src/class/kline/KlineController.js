@@ -53,10 +53,8 @@ export default class KlineController extends ExchangeControllerBase {
   }
   // 更新tradePair
   update(k, v) {
-
     let tradePairName = this.store.state.tradePairName,
       duration = this.store.state.duration;
-    console.log('coltroller update', k, v, tradePairName, JSON.stringify(this.store.state), duration)
     if (k === 'tradePairName' && v !== tradePairName) {
       // console.log('update...............................', duration, k, v);
       if (duration === "") return;

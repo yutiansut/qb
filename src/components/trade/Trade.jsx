@@ -16,8 +16,8 @@ import UserOrderListController from '../../class/orderList/userOrderList/UserOrd
 import NoticeController from "../../class/notice/NoticeController";
 import DealController from '../../class/deal/DealController'
 import UserController from '../../class/user/UserController'
-import KlineController from '../../class/kline/KlineController'
-// import KdepthController from '../../class/kdepth/KdepthController'
+// import KlineController from '../../class/kline/KlineController'
+import KdepthController from '../../class/kdepth/KdepthController'
 
 import './stylus/trade.styl'
 import UserOrder from "./children/UserOrder";
@@ -33,9 +33,8 @@ let TradeMarketController,
   TradePlanController,
   userController,
   configController,
-  klineController,
-  assetController
-  // kdepthController
+  // klineController,
+  kdepthController
 
 // const userOrderItems = []
 export default class extends exchangeViewBase {
@@ -52,10 +51,10 @@ export default class extends exchangeViewBase {
     userController = props.userController; //用户
     assetController = props.assetController; //用户
     configController = new ConfigController(); // 基础设置
-    klineController = new KlineController();
-    // kdepthController = new KdepthController();
+    // klineController = new KlineController();
+    kdepthController = new KdepthController();
 
-    TradeMarketController.klineController = klineController;
+    // TradeMarketController.klineController = klineController;
     TradePlanController.userController = userController;
 
     // TradeUserListController = new UserOrderListController();
@@ -68,7 +67,8 @@ export default class extends exchangeViewBase {
 
     TradeOrderListController.TradeMarketController = TradeMarketController;
     TradeOrderListController.TradePlanController = TradePlanController;
-    
+    TradeOrderListController.kdepthController = kdepthController;
+
     TradeRecentController.userController = userController;
     TradeRecentController.TradeMarketController = TradeMarketController
 
@@ -117,8 +117,8 @@ export default class extends exchangeViewBase {
                     深度图
                   </button>
                 </div>
-                <ReactKline show={this.state.curChart === "kline"} controller={klineController} />
-                <ReactKDepth show={this.state.curChart === "depth"}/>
+                <ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />
+                <ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>
               </div>
             </div>
             <div className="trade-left-bottom">

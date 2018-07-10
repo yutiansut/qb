@@ -88,6 +88,7 @@ export default class Plotter {
     }
 
     draw() {
+        if (this.asks.length < 2 || this.bids < 2) return;
         let ctx=this._context;
         let padding={
             left: 20,
