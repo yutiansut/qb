@@ -32,8 +32,8 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   //登录
-  login(account, code, type, mode, captchaId, captchaCode){
-    let obj = {passCode:code, mode, captchaId, captchaCode, os:3};
+  login(account, code, type, mode, captchaId, captchaCode, deviceFlag1, deviceFlag2){
+    let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
     let keyArr = ['phone','email']
     obj[keyArr[type]] = account
     this.store.login(obj)

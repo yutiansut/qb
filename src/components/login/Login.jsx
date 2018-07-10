@@ -12,6 +12,9 @@ import Button from '../../common/component/Button/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import TwoVerifyPopup from  '../viewsPopup/TwoVerifyPopup.jsx'
+
+import DetectOS from '../../class/lib/Os'
+import Browser from '../../class/lib/Browser'
 // import LoginVerification from './children/LoginVerification.jsx'
 
 
@@ -151,7 +154,7 @@ export default class Login extends exchangeViewBase {
               <Button title={this.intl.get("login")}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
-                      onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput)}}/>
+                      onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())}}/>
             </li>
           </ul>
           <p><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}

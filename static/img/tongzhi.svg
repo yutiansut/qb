@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>tongzhi</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="1.-首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1-屏大图版-" transform="translate(-570.000000, -829.000000)">
+            <g id="公告" transform="translate(571.000000, 828.000000)">
+                <g id="tongzhi" transform="translate(0.000000, 3.000000)">
+                    <polygon id="Path-4" stroke="#DE4A01" stroke-width="2" points="0.0187988281 3.01574707 0.0187988281 13.0201649 1.0592041 13.0201649 3.0456543 12.0302734 10.0241699 15.6102295 10.0241699 0.498413086 3.0456543 4.0802002 1.0592041 3.01574707"></polygon>
+                    <rect id="Rectangle-2" fill="#DE4A01" transform="translate(14.621457, 2.253093) rotate(55.000000) translate(-14.621457, -2.253093) " x="13.6214565" y="-0.246906865" width="2" height="5"></rect>
+                    <rect id="Rectangle-2" fill="#DE4A01" transform="translate(14.621457, 13.253093) scale(1, -1) rotate(55.000000) translate(-14.621457, -13.253093) " x="13.6214565" y="10.7530931" width="2" height="5"></rect>
+                    <rect id="Rectangle-2" fill="#DE4A01" transform="translate(14.500000, 8.000000) scale(1, -1) rotate(90.000000) translate(-14.500000, -8.000000) " x="13.5" y="5.5" width="2" height="5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

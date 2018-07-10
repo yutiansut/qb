@@ -82,20 +82,14 @@ export default class userSafeCenter extends exchangeViewBase {
     this.bindUser = controller.bindUser.bind(controller)
     this.outOther = controller.outOther.bind(controller) // 退出其他设备
     this.showOther = this.showOther.bind(this)
+    // this.selectNotice = this.selectNotice.bind(this) // 绑定通知
+    this.setUserNotify = controller.setUserNotify.bind(controller) //  修改通知方式
   }
 
   changeSetPopup(type) { // 设置密码显示
     this.setState({
       showSet: true,
       type: type,
-      verifyNum: this.intl.get("sendCode")
-    })
-    this.clearVerify()
-  }
-
-  changeVerifyTypePopup() { // 改变两步验证显示
-    this.setState({
-      showChange: true,
       verifyNum: this.intl.get("sendCode")
     })
     this.clearVerify()
@@ -115,19 +109,22 @@ export default class userSafeCenter extends exchangeViewBase {
       sureTwoVerify: index,
       showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
       showSet: !this.state.userInfo.email && index === 1 ? true : false,
-      showChange: changeArr[changeTypeArr[i]] === index || changeTypeArr[i] === 0 || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
+      showChange: (changeArr[changeTypeArr[i]] === index) || (changeTypeArr[i] === 0) || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
-    if (this.state.userInfo.loginVerify === 0) {
-      this.setTwoVerify("", 0, "", "", "", 1, typeArr[this.state.sureTwoVerify])
+    if (this.state.userInfo.loginVerify === 0 && ((this.state.userInfo.googleAuth === 0 && index === 0) || (this.state.userInfo.email && index === 1) || (this.state.userInfo.phone && index === 2))) { // 登录为无
+      this.setState({
+        showChange: false
+      })
+      this.setTwoVerify("", 0, "", "", "", 1, typeArr[index])
     }
   }
-  selectNotice(index, type) { // 选择通知
-    this.setState({
-      type: type,
-      noticeIndex: !this.state.userInfo.email && index === 0 ? 1 : index,
-      showSet: !this.state.userInfo.email && index === 0 ? true : false
-    })
-  }
+  // selectNotice(index, type) { // 选择通知
+  //   this.setState({
+  //     type: type,
+  //     noticeIndex: !this.state.userInfo.email && index === 0 ? 1 : index,
+  //     showSet: !this.state.userInfo.email && index === 0 ? true : false
+  //   })
+  // }
 
   ipInput(value) { // 输入白名单
     this.setState({
@@ -174,7 +171,7 @@ export default class userSafeCenter extends exchangeViewBase {
     console.log('用户信息111', this.state)
     return (
       <div className="safe-content">
-        <h1>{this.intl.get("security")}</h1>
+        <h1>{this.intl.get("header-security")}</h1>
         <div className="basic-data model-div clearfix">
           <h2>{this.intl.get("user-base")}</h2>
           <ul className="fl clearfix">
@@ -243,7 +240,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <ul className="fl">
               <li>{this.intl.get("user-noticeRemind")}</li>
               <li>
-                {this.state.noticeList.map((v, index) => (<span key={index}  onClick={i => this.selectNotice(index, 1)}>
+                {this.state.noticeList.map((v, index) => (<span key={index}  onClick={i => this.setUserNotify(index)}>
                   <img src="/static/img/checked.svg" alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
                   <img src="/static/img/normal.svg" alt="" className={`${this.state.noticeIndex === index ? 'hide' : ''}`}/>
                   <b>{v.name}</b>
@@ -269,7 +266,7 @@ export default class userSafeCenter extends exchangeViewBase {
                   </tr>
                 </thead>
                 <tbody className={`${this.state.ipList && this.state.ipList.length ? '' : 'hide'}`}>
-                  {this.state.ipList.map((v, index) => (<tr key={index}>
+                  {this.state.ipList && this.state.ipList.map((v, index) => (<tr key={index}>
                     <td>{v.IPAddress}</td>
                     <td>{v.createAt.toDate('yyyy-MM-dd')}</td>
                     <td onClick={() => this.delIp(v.IPId, v.IPAddress, index)} className="delIp">{this.intl.get("delete")}</td>

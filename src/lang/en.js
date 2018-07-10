@@ -82,7 +82,8 @@ export default function en(state) {
     sendCode: "Send the code",
     sendAgain: "Send again",
     optionSuccess: "Operation successful",
-    sure: "Subscription Period"
+    sure: "Subscription Period",
+    notice: "Announcement"
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -119,6 +120,10 @@ export default function en(state) {
     1002: "The Token passed in during connection is invalid",
     2001: "Google validation failed",
     2002: "Google validation is not enabled",
+    2011: "The verification method can not be empty",
+    2012: "Email unbound",
+    2013: "Phone unbound",
+    2014: "Google unbound",
     2200: "No activity",
     2201: "You've been invited",
     2601: "The reward has been received. Please look forward to the next activity",

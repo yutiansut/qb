@@ -232,12 +232,36 @@ export default {
     },
     errCode: "CODE_NOT_EXPIRE"
   },
+  // ErrVerifyCanNotBeNull    = 2011 //验证方式不能为空
+  // ErrEmailNotBind          = 2012 //邮箱未绑定
+  // ErrPhoneNotBind          = 2013 //手机未绑定
+  // ErrGoogleNotBind         = 2014 //Google验证未绑定
   2002: {
     // msg: "谷歌验证未开启",
     get msg() {
       return intl.get(2002);
     },
     errCode: "CODE_NOT_EXPIRE"
+  },
+  2011: {
+    // msg: "//验证方式不能为空",
+    msg: intl.get(2011),
+    errCode: "ErrVerifyCanNotBeNull"
+  },
+  2012: {
+    // msg: "邮箱未绑定",
+    msg: intl.get(2012),
+    errCode: "ErrEmailNotBind"
+  },
+  2013: {
+    // msg: "手机未绑定",
+    msg: intl.get(2013),
+    errCode: "ErrPhoneNotBind"
+  },
+  2014: {
+    // msg: "Google验证未绑定",
+    msg: intl.get(2014),
+    errCode: "ErrGoogleNotBind"
   },
   2200: {
     // msg: "找不到活动",

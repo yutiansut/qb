@@ -81,7 +81,8 @@ export default function zh(state) {
     sendAgain: '重新获取',
     optionSuccess: '操作成功',
     close: '关闭',
-    sure: "确认"
+    sure: "确认",
+    notice: "公告"
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -118,6 +119,10 @@ export default function zh(state) {
     1002: "连接时传入的Token不合法",
     2001: "谷歌验证失败",
     2002: "谷歌验证未开启",
+    2011: "验证方式不能为空",
+    2012: "邮箱未绑定",
+    2013: "手机未绑定",
+    2014: "Google验证未绑定",
     2200: "找不到活动",
     2201: "您已经被邀请过",
     2601: "奖励已经领取完毕，敬请期待下次活动",
@@ -224,7 +229,7 @@ export default function zh(state) {
     "market-currencyInfo": "币种资料",
   };
   const notice = {
-    "activity-regist": "立即注册"
+    "activity-regist": "立即注册",
   };
   const order = {
     "order-current": "当前订单",

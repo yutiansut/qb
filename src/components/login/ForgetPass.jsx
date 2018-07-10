@@ -20,8 +20,9 @@ export default class ForgetPass extends exchangeViewBase {
       popType: "tip1",
       popMsg: "成功",
       captcha: "",
-      captchaId: ""
-
+      captchaId: "",
+      errPass: "",
+      errPassAgain: ""
     }
     //绑定view
     controller.setView(this)
@@ -30,6 +31,8 @@ export default class ForgetPass extends exchangeViewBase {
     this.getVerify = controller.getVerify.bind(controller) // 短信验证码
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 图形验证码
     this.forgetLoginPass = controller.forgetLoginPass.bind(controller) // 图形验证码
+    this.checkPassInput = this.checkPassInput.bind(this) // 检验密码
+    this.checkAgainInput = this.checkAgainInput.bind(this) // 检验密码
   }
 
   changeUserInput(value) {
@@ -50,11 +53,13 @@ export default class ForgetPass extends exchangeViewBase {
 
   changePassInput(value) {
     this.setState({passInput: value});
+    this.state.errPass && (this.setState({errPass: ""}))
     console.log(3, value)
   }
 
   changeAgainInput(value) {
     this.setState({againInput: value});
+    this.state.errPassAgain && (this.setState({errPassAgain: ""}))
     console.log(4, value)
   }
 
@@ -63,7 +68,30 @@ export default class ForgetPass extends exchangeViewBase {
     console.log(5, value)
   }
 
+  checkPassInput() {
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
+    if(!reg.test(this.state.passInput)) {
+      this.setState({
+        errPass: '请输入正确格式的密码'
+      })
+    }
+    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+      this.setState({
+        errPassAgain: '两次密码不一致, 请重新输入'
+      })
+    }
+  }
+
+  checkAgainInput() {
+    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+      this.setState({
+        errPassAgain: '两次密码不一致, 请重新输入'
+      })
+    }
+  }
+
   canClick() { // 能否点击
+    if (this.state.errPassAgain || this.state.errPass) return false
     if (this.state.userInput && this.state.verifyInput && this.state.passInput && this.state.againInput && this.state.picInput) return true
     return false
   }
@@ -101,12 +129,22 @@ export default class ForgetPass extends exchangeViewBase {
             </li>
             <li className="pass-li">
               <p>{this.intl.get("login-passInput")}</p>
-              <Input placeholder="请输入密码" oriType="password" value={this.state.passInput} onInput={value => this.changePassInput(value)}/>
+              <Input placeholder="请输入密码"
+                     oriType="password"
+                     value={this.state.passInput}
+                     onBlur={this.checkPassInput}
+                     onInput={value => this.changePassInput(value)}/>
+              <em>{this.state.errPass}</em>
               <span>必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母</span>
             </li>
             <li>
               <p>再输一遍</p>
-              <Input placeholder="请再输入一遍密码" oriType="password" value={this.state.againInput} onInput={value => this.changeAgainInput(value)}/>
+              <Input placeholder="请再输入一遍密码"
+                     oriType="password"
+                     value={this.state.againInput}
+                     onBlur={this.checkAgainInput}
+                     onInput={value => this.changeAgainInput(value)}/>
+              <em>{this.state.errPassAgain}</em>
             </li>
             <li className="send-picture-li">
               <p>图形验证码</p>

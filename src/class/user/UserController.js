@@ -223,14 +223,17 @@ export default class UserController extends ExchangeControllerBase {
       position,//修改的位置 1登陆   2提现   3资金密码
       verifyType//2谷歌验证 1邮件  3短信  0无
     })
-    this.view.setState({
-      remindPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : '修改成功',
-      userInfo,
-      showChange: result ? true : false,
-      verifyList
-    })
+    if (mode || account){
+      this.view.setState({
+        remindPopup: true,
+        popType: result ? 'tip3': 'tip1',
+        popMsg: result ? result.msg : '修改成功',
+        userInfo,
+        showChange: result ? true : false,
+        verifyList
+      })
+    }
+
     console.log('修改两步认证', result)
   }
 
@@ -290,6 +293,27 @@ export default class UserController extends ExchangeControllerBase {
     })
     // this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('验证谷歌', result)
+  }
+  async setUserNotify(index) { // 修改通知方式
+    this.view.setState({
+      type: index + 1,
+      noticeIndex: (!this.view.state.userInfo.email && index === 0 ? 1 : index) || (!this.view.state.userInfo.phone && index === 1 ? 0 : index),
+      showSet: (!this.view.state.userInfo.email && index === 0 ? true : false) || (!this.view.state.userInfo.phone && index === 1 ? true : false),
+    })
+
+    if (this.view.state.userInfo.email && index === 0 || this.view.state.userInfo.phone && index === 1) { // 两步认证修改
+      let result = await this.store.Proxy.setUserNotify({
+        "userId": this.store.uid,
+        "token": this.store.token,
+        "type": index === 0 ? 1 : 0 // 0:phone 1:email
+      })
+      this.view.setState({
+        remindPopup: true,
+        popType: result ? 'tip3': 'tip1',
+        popMsg: result ? result.msg : "修改成功"
+      })
+      console.log('改变通知', result, index)
+    }
   }
 
   async outOther(flag1, flag2) { // 退出其他设备
