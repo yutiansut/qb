@@ -14,7 +14,7 @@ export default class DealStore extends ExchangeStoreBase {
 
     }
     this.WebSocket.general.on("tradeKline", data => {
-      this.state.kline = result.kline.map(v => {
+      this.state.kline = data.kline.map(v => {
         let arr = [];
         arr.push(v.startTime * 1000);
         arr.push(v.openPrice);
@@ -23,7 +23,11 @@ export default class DealStore extends ExchangeStoreBase {
         arr.push(v.closePrice);
         return arr;
       });
+      this.controller.setKline(this.state.kline)
     });
+  }
+  setController(ctrl) {
+    this.controller = ctrl;
   }
   async getData() {
     let result = await this.Proxy.getKline({
@@ -31,7 +35,7 @@ export default class DealStore extends ExchangeStoreBase {
       "duration": this.state.duration // k线时间段秒数
     })
     if (result.tradePairName) {
-      if (!result.kline) {this.state.kline = []; return};
+      if (!result.kline) { this.state.kline = []; return };
       this.state.kline = result.kline.map(v => {
         let arr = [];
         arr.push(v.startTime * 1000);
@@ -45,11 +49,11 @@ export default class DealStore extends ExchangeStoreBase {
   }
 
   //websockt加入房间
-  joinRoom(fromRoom,toRoom) {
-    this.WebSocket.general.emit("joinRoom", { from: fromRoom , to: fromRoom });
+  joinRoom(fromRoom, toRoom) {
+    this.WebSocket.general.emit("joinRoom", { from: fromRoom, to: fromRoom });
   }
 
-  update(k,v){
+  update(k, v) {
     this.state[k] = v;
   }
 }

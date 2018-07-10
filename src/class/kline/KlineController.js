@@ -5,6 +5,7 @@ export default class KlineController extends ExchangeControllerBase {
   constructor() {
     super();
     this.store = new KlineStore();
+    this.store.setController(this)
     this.rooms = {
       604800: "K1w",
       86400: "K1d",
@@ -22,8 +23,8 @@ export default class KlineController extends ExchangeControllerBase {
   setView(view) {
     super.setView(view);
   }
-  get roomId(){
-    if (this.store.state.tradePairName === '') return '';
+  get roomId() {
+    if (this.store.state.tradePairName === "" || this.store.state.duration === "") return "";
     return `${this.store.state.tradePairName}-${this.rooms[this.store.state.duration]}`;
   }
   // 获取K线数据
@@ -50,14 +51,14 @@ export default class KlineController extends ExchangeControllerBase {
   // 更新tradePair
   update(k, v) {
     let tradePairName = this.store.state.tradePairName,
-        duration = this.store.state.duration;
+      duration = this.store.state.duration;
 
     //
-    if (k === 'tradePairName' && v !== tradePairName){
+    if (k === 'tradePairName' && v !== tradePairName) {
       if (duration === "") return;
       this.joinRoom(`${v}-${this.rooms[duration]}`)
     }
-    if (k === "duration" && v !== this.store.state.duration){
+    if (k === "duration" && v !== this.store.state.duration) {
       if (tradePairName === '') return;
       this.joinRoom(`${tradePairName}-${this.rooms[v]}`);
     }
