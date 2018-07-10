@@ -33,7 +33,7 @@ export default class tradeNotice extends exchangeViewBase {
   }
 
   render() {
-    console.log('资讯', this.state)
+    // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
         <h3>资讯</h3>
         {this.state.infoList && this.state.infoList.length ? <ul>

@@ -34,7 +34,7 @@ export default class NoticeStore extends ExchangeStoreBase {
     });
     infoList = infoList.msg ? [] : infoList.data
     this.state.infoList = infoList
-    console.log('获取资讯', infoList)
+    // console.log('获取资讯', infoList)
     return infoList
   }
 

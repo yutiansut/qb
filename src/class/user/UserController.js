@@ -336,7 +336,7 @@ export default class UserController extends ExchangeControllerBase {
     let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
       fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
-    console.log(this.store.state)
+    // console.log(this.store.state)
     return {fundPassVerify, loginVerify, withdrawVerify, fundPwd}
   }
 

@@ -74,7 +74,7 @@ export default class AssetStore extends ExchangeStoreBase {
     let result = await this.Proxy.getFee({
       token: this.controller.token
     });
-    console.log('getFee')
+    // console.log('getFee')
     // console.log(result)
     this.state.pairFees = result;
     return result;
