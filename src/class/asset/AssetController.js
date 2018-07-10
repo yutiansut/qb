@@ -285,7 +285,7 @@ export default class AssetController extends ExchangeControllerBase {
       })
     }
     if (coin === 'USDT') {
-      return o.pairNameMarke[coin.toLowerCase()].map(v => {
+      return o.pairNameMarket[coin.toLowerCase()].map(v => {
         return {
           name: `${v.toUpperCase()}/USDT`,
           id: o.pairIdMarket[coin.toLowerCase()][v]

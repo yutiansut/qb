@@ -94,7 +94,7 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.wallet = coinList || [];
     if (this.state.wallet.length) {
       let obj = {};
-      this.controller.sort(this.state.wallet, ["coinId"], 1).forEach(v => {
+      this.controller.sort(this.state.wallet, ["coinName"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
@@ -121,7 +121,7 @@ export default class AssetStore extends ExchangeStoreBase {
     });
     if (coinList.length) {
       let obj = {};
-      this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
+      this.controller.sort(coinList, ["coinName"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
@@ -154,7 +154,7 @@ export default class AssetStore extends ExchangeStoreBase {
     result.coinAddress
       ? (this.state.coinAddress = result)
       : (this.state.coinAddress = {
-        coinId: "", //币种ID
+        coinId: this.state.walletList[coin], //币种ID
         verifyNumer: "", //最大确认数
         coinAddress: "" //地址
       });

@@ -12,10 +12,10 @@ export default class OrderListStore extends ExchangeStoreBase {
       tradePairId: 3
     }
     this.WebSocket.general.on('joinRoom', data => {
-      console.log('joinRoom getWebSocketData Recent', data, this.controller)
+      // console.log('joinRoom getWebSocketData Recent', data, this.controller)
     })
     this.WebSocket.general.on('orderUpdate', data => {
-      console.log(this.controller,'orderUpdate getWebSocketData', data);
+      // console.log(this.controller,'orderUpdate getWebSocketData', data);
       this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(data)
     })
   }

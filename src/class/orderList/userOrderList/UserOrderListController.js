@@ -12,11 +12,11 @@ export default class UserOrderListController extends OrderListController {
     this.store = new UserOrderListStore();
     this.store.setController(this)
   }
-  
+
   setView(view) {
     super.setView(view)
   }
-  
+
   // 数据的请求以及处理
   orderListHandle(type, params) {
     type === 'orderCurrent' && this.getCurrentOrder(type, params);
@@ -32,11 +32,11 @@ export default class UserOrderListController extends OrderListController {
     //     {preArray:  this.store.state[order[type]]}
     // )
   }
-  
+
   changeTradePairId(value) {
     let idArray = [];
     idArray.push(value);
-    console.log(123123123123,idArray)
+    // console.log(123123123123,idArray)
     let currentParams = {
       // 'userId': JSON.parse(this.userController.userId),
        idArray,
@@ -57,7 +57,7 @@ export default class UserOrderListController extends OrderListController {
     this.getCurrentOrder(false, currentParams);
     this.getHistoryOrder(false, historyParams);
   }
-  
+
   async getCurrentOrder(trade, params) {
     let currentOrder = await this.store.getCurrentOrder(params);
     if (!trade) {
@@ -70,7 +70,7 @@ export default class UserOrderListController extends OrderListController {
       orderListArray: currentOrder,
     })
   }
-  
+
   async getHistoryOrder(trade, params) {
     let historyOrder = await this.store.getHistoryOrder(params);
     if (!trade) {
@@ -84,7 +84,7 @@ export default class UserOrderListController extends OrderListController {
       total: historyOrder.totalCount
     })
   }
-  
+
   async getOrderDetail(id) {
     let orderDetail = await this.store.getOrderDetail(id);
     this.view.setState({
@@ -92,11 +92,11 @@ export default class UserOrderListController extends OrderListController {
       orderDetail
     })
   }
-  
+
   wsOrderList(){
     this.store.wsOrderList();
   }
-  
+
   updateUserOrder(para) {
     // let para = {
     //       "tradePairId": 2,
@@ -140,7 +140,7 @@ export default class UserOrderListController extends OrderListController {
        currentOrder
      })
   }
-  
+
   async cancelOrder(orderId, opType, dealType) {
     let msg = await this.store.cancelOrder(orderId, opType, dealType);
   }

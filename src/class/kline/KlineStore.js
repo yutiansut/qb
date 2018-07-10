@@ -45,7 +45,10 @@ export default class DealStore extends ExchangeStoreBase {
 
   //websockt加入房间
   joinRoom(fromRoom, toRoom) {
-    this.WebSocket.general.emit("joinRoom", { from: fromRoom, to: fromRoom });
+    if (toRoom === '') {
+      console.log('leaveroom................................', fromRoom, toRoom);
+    }
+    this.WebSocket.general.emit("joinRoom", { from: fromRoom, to: toRoom });
   }
 
   update(k, v) {

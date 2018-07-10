@@ -128,9 +128,16 @@ export default class ControllerBase {
           second = second[v];
         });
       }
-      if (type)
-        return first - second;
-      return second - first;
+      if (type){
+        if(first > second) return 1;
+        if (first <= second) return -1;
+      }
+      if(!type){
+        if (first >= second) return -1;
+        if (first < second) return 1;
+      }
+      //   return first - second;
+      // return second - first;
     })
   }
 

@@ -12,7 +12,7 @@ class ReactTrend extends React.Component {
             stroke: "#333",                 // 线颜色
             strokeWidth: 1,                 // 线宽
         };
-        console.log(this.props)
+        // console.log(this.props)
         Object.assign(this.state,this.props);
     }
 

@@ -208,21 +208,21 @@ export default class UserOrderListStore extends OrderListStore {
       dealArray:[],
       orderDetail: {}
     };
-    console.log('this.WebSocket',this.WebSocket)
+    // console.log('this.WebSocket',this.WebSocket)
     this.WebSocket.general.on('userOrderUpdate', data => {
       this.controller.updateUserOrder(data)
-      console.log('wsOrderList userOrderUpdate', data)
+      // console.log('wsOrderList userOrderUpdate', data)
     })
   }
   wsOrderList(){
     // this.WebSocket.general.emit('userOrderUpdate')
     this.WebSocket.general.on('userOrderUpdate', data => {
       // console.log('wsOrderList', data)
-      
+
     })
   }
   async getCurrentOrder(params){
-    console.log(321321231,params)
+    // console.log(321321231,params)
     let currentList = await this.Proxy.currentOrder(
         {
           "userId": this.controller.userController.userId,
@@ -262,7 +262,7 @@ export default class UserOrderListStore extends OrderListStore {
     this.state.orderDetail = orderDetail;
     return orderDetail
   }
-  
+
   //撤单操作
   async cancelOrder(orderId, opType, dealType){
     console.log('receivePara', this.controller.userController.userId,this.controller.TradeMarketController.tradePair.tradePairId ,orderId)

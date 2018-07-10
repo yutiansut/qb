@@ -131,11 +131,12 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = (key, data) => {
+
       // console.log('webSocketThis', this)
       // console.log('this.WebSocket[connectName]', websocket)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: data})
-      console.log(emitData, websocket)
+      console.log('emitData.console....................', emitData, websocket)
       websocket.send(emitData)
       !headerConfig[key].historyPass && websocketHistory.push(emitData)
       // console.log('websocketHistory',websocketHistory)

@@ -8,7 +8,7 @@ class ReactKline extends exchangeViewBase {
     super(props);
     const { controller } = props;
     controller.setView(this)
-    console.log('klinecontroller.................', controller)
+    // console.log('klinecontroller.................', controller)
     // 绑定view
     // controller.setView(this);
     this.state = {
@@ -41,7 +41,7 @@ class ReactKline extends exchangeViewBase {
      * ]
      */
   setData(lines) {
-      console.log(lines)
+      // console.log(lines)
     //this.state.kline.setData(lines);
 
     // let data = [
@@ -1046,7 +1046,6 @@ class ReactKline extends exchangeViewBase {
     //   [151220508e4, 100.91, 100.92, 100.9, 100.92, 557.18],
     //   [151220514e4, 100.92, 101.15, 100.92, 101.15, 564.82]
     // ];
-    console.log(lines)
     this.state.kline.setData(lines);
   }
 
@@ -1081,6 +1080,7 @@ class ReactKline extends exchangeViewBase {
   }
 
   componentWillUnmount() {
+    console.log('willUnmount................................')
     this.joinRoom('')
     this.state.kline = null;
     window.redrawKline = null;

@@ -7,7 +7,7 @@ export default class OrderListController extends ExchangeControllerBase {
     this.store = new OrderListStore('userOrder', 'general');
     this.store.setController(this);
   };
-  
+
   setView(view) {
     super.setView(view);
   }
@@ -16,7 +16,7 @@ export default class OrderListController extends ExchangeControllerBase {
       unitsType: v
     })
   }
-  
+
   setInitUnit(market,coin){
     this.view.setState({
       market,
@@ -38,7 +38,7 @@ export default class OrderListController extends ExchangeControllerBase {
     this.store.state.recentItemSelect = v.type;
   };
   setTradePairId(id){
-    console.log('setTradePairId', id )
+    // console.log('setTradePairId', id )
     this.store.state.tradePairId = id;
     this.getRecentOrder(this.view.state.isPersonal, id)
   }

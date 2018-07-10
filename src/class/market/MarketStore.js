@@ -3,7 +3,7 @@ import ExchangeStoreBase from "../ExchangeStoreBase";
 export default class MarketStore extends ExchangeStoreBase {
   constructor(name) {
     super('market', 'general');
-    console.log('MarketStore constructor')
+    // console.log('MarketStore constructor')
     this.state = {
       allPairData: [],
       recommendData: [],
