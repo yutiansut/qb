@@ -47,7 +47,7 @@ export default class ChargeMessage extends exchangeViewBase {
   }
   render() {
     return (
-      <div className="asset-message">
+      <div className="asset-message" style={{ display: this.state.content.length ? 'block' : 'none'}}>
         <p className="asset-message-title">{this.intl.get("message")}：</p>
         <ul className="clearfix" style={{ top: this.state.top1 + "%" }}>
           {this.state.content.map((v, i) => (

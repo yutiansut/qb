@@ -92,9 +92,9 @@ export default class AssetStore extends ExchangeStoreBase {
       token: this.controller.token
     });
     this.state.wallet = coinList || [];
-    if (coinList.length) {
+    if (this.state.wallet.length) {
       let obj = {};
-      this.controller.sort(coinList, ["coinId"], 1).forEach(v => {
+      this.controller.sort(this.state.wallet, ["coinId"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;

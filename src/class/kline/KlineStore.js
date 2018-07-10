@@ -7,11 +7,6 @@ export default class DealStore extends ExchangeStoreBase {
       duration: '',
       tradePairName: '',
       kline: []
-      // UnitObject: {
-      //   'cny计价': 'CNY',
-      //   'usd计价': 'USD'
-      // }
-
     }
     this.WebSocket.general.on("tradeKline", data => {
       this.state.kline = data.kline.map(v => {

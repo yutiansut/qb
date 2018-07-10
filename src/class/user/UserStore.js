@@ -45,6 +45,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.token = data && data.token
     this.state.userName = data && data.userName
     data && this.userInfo()
+    data && this.userAuth();
     console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 

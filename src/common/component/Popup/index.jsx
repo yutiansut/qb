@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
+import Button from "../Button/";
 import "./style.styl";
 /*
   title 标题 type为tip1、tip2、tip3、tip4时不生效

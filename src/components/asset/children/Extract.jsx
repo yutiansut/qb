@@ -124,7 +124,6 @@ export default class Extract extends exchangeViewBase {
   }
 
   render() {
-    // console.log(this.props.controller.userTwoVerify);
     let {
       totalCount,
       frozenCount,
@@ -438,7 +437,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={3}//短信验证码
+            type={this.props.controller.userTwoVerify}//短信验证码
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });

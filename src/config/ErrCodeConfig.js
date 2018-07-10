@@ -2,188 +2,262 @@ import intl from "react-intl-universal";
 export default {
   "-1": {
     // msg: "FETCH错误",
-    msg: intl.get("-1"),
+    get msg() {
+      return intl.get("-1");
+    },
     errCode: "FETCH_ERROR"
   },
   "-2": {
     // msg: "RESPONES解析错误",
-    msg: intl.get("-2"),
+    get msg() {
+      return intl.get("-2");
+    },
     errCode: "RESPONES_TEXT_ERROR"
   },
   "-3": {
     // msg: "JSON解析错误",
-    msg: intl.get("-3"),
+    get msg() {
+      return intl.get("-3");
+    },
     errCode: "JSON_PARSE_ERROR"
   },
   1: {
     // msg: "未知错误",
-    msg: intl.get(1),
+    get msg() {
+      return intl.get(1);
+    },
     errCode: "ErrCodeUnknown"
   },
   95: {
     // msg: "参数错误",
-    msg: intl.get(95),
+    get msg() {
+      return intl.get(95);
+    },
     errCode: "ErrCodeUnknown"
   },
   101: {
     // msg: "身份认证进行中",
-    msg: intl.get(101),
+    get msg() {
+      return intl.get(101);
+    },
     errCode: "ErrCodeUnknown",
     ret: 101
   },
   102: {
     // msg: "身份认证状态不识别",
-    msg: intl.get(102),
+    get msg() {
+      return intl.get(102);
+    },
     errCode: "ErrCodeUnknown"
   },
   103: {
     // msg: "身份认证已通过",
-    msg: intl.get(103),
+    get msg() {
+      return intl.get(103);
+    },
     errCode: "ErrCodeUnknown"
   },
   601: {
     // msg: "密码错误",
-    msg: intl.get(601),
+    get msg() {
+      return intl.get(601);
+    },
     errCode: "PWD_ERROR"
   },
   602: {
     // msg: "数据库错误",
-    msg: intl.get(602),
+    get msg() {
+      return intl.get(602);
+    },
     errCode: "DB_ERROR"
   },
   603: {
     // msg: "请求参数错误",
-    msg: intl.get(603),
+    get msg() {
+      return intl.get(603);
+    },
     errCode: "PARAM_ERROR"
   },
   604: {
     // msg: "无此用户",
-    msg: intl.get(604),
+    get msg() {
+      return intl.get(604);
+    },
     errCode: "USER_NO_EXIST"
   },
   605: {
     // msg: "用户服务系统访问失败",
-    msg: intl.get(605),
+    get msg() {
+      return intl.get(605);
+    },
     errCode: "USER_SYS_ERROR"
   },
   606: {
     // msg: "已发送，未超时3分钟",
-    msg: intl.get(606),
+    get msg() {
+      return intl.get(606);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   607: {
     // msg: "验证码已过期",
-    msg: intl.get(607),
+    get msg() {
+      return intl.get(607);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   608: {
     // msg: "验证码错误",
-    msg: intl.get(608),
+    get msg() {
+      return intl.get(608);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   609: {
     // msg: "操作类型错误",
-    msg: intl.get(609),
+    get msg() {
+      return intl.get(609);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   610: {
     // msg: "与原密码相同",
-    msg: intl.get(610),
+    get msg() {
+      return intl.get(610);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   616: {
     // msg: "未设置密码",
-    msg: intl.get(616),
+    get msg() {
+      return intl.get(616);
+    },
     errCode: "NO_SET_PASSWORD"
   },
   617: {
     // msg: "用户未实名认证",
-    msg: intl.get(617),
+    get msg() {
+      return intl.get(617);
+    },
     errCode: "NO_VERIFIED"
   },
   619: {
     // msg: "图形验证码错误",
-    msg: intl.get(619),
+    get msg() {
+      return intl.get(619);
+    },
     errCode: "NO_PICTURECODE"
   },
   704: {
     // msg: "24小时内修改过资金密码,存在安全保护墙",
-    msg: intl.get(704),
+    get msg() {
+      return intl.get(704);
+    },
     errCode: "ALTER_IN_24H"
   },
   705: {
     // msg: "可用数量不足",
-    msg: intl.get(705),
+    get msg() {
+      return intl.get(705);
+    },
     errCode: "NO_ENOUGH"
   },
   706: {
     // msg: "小于最小提币限额",
-    msg: intl.get(706),
+    get msg() {
+      return intl.get(706);
+    },
     errCode: "LESS_MIN_WITHDRAW"
   },
   707: {
     // msg: "不支持提币操作",
-    msg: intl.get(707),
+    get msg() {
+      return intl.get(707);
+    },
     errCode: "NO_SUPPORT_WITHDRAW"
   },
   708: {
     // msg: "提币超过当日额度",
-    msg: intl.get(708),
+    get msg() {
+      return intl.get(708);
+    },
     errCode: "OUT_LIMIT"
   },
   709: {
     // msg: "提币：查询不到from地址",
-    msg: intl.get(709),
+    get msg() {
+      return intl.get(709);
+    },
     errCode: "NO_FROM"
   },
   710: {
     // msg: "提币：查询不到to地址",
-    msg: intl.get(710),
+    get msg() {
+      return intl.get(710);
+    },
     errCode: "NO_TO"
   },
   711: {
     // msg: "cws错误",
-    msg: intl.get(711),
+    get msg() {
+      return intl.get(711);
+    },
     errCode: "NO_TO"
   },
   712: {
     // msg: "提币地址格式错误",
-    msg: intl.get(712),
+    get msg() {
+      return intl.get(712);
+    },
     errCode: "ERROR_ADDRESS"
   },
   1001: {
     // msg: "连接被禁止",
-    msg: intl.get(1001),
+    get msg() {
+      return intl.get(1001);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   1002: {
     // msg: "连接时传入的Token不合法",
-    msg: intl.get(1002),
+    get msg() {
+      return intl.get(1002);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   2001: {
     // msg: "谷歌验证失败",
-    msg: intl.get(2001),
+    get msg() {
+      return intl.get(2001);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   2002: {
     // msg: "谷歌验证未开启",
-    msg: intl.get(2002),
+    get msg() {
+      return intl.get(2002);
+    },
     errCode: "CODE_NOT_EXPIRE"
   },
   2200: {
     // msg: "找不到活动",
-    msg: intl.get(2200),
+    get msg() {
+      return intl.get(2200);
+    },
     errCode: "CODE_NOT_ACTIVE"
   },
   2201: {
     // msg: "您已经被邀请过",
-    msg: intl.get(2201),
+    get msg() {
+      return intl.get(2201);
+    },
     errCode: "AWARD_DRAWED"
   },
   2601: {
     // msg: "奖励已经领取完毕，敬请期待下次活动",
-    msg: intl.get(2601),
+    get msg() {
+      return intl.get(2601);
+    },
     errCode: "ERROR_ACTIVIY_OVER"
   }
 };

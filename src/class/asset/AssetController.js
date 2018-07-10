@@ -342,7 +342,7 @@ export default class AssetController extends ExchangeControllerBase {
       orderTipContent: ""
     };
     if (this.view.state.address === "") {
-      obj.orderTipContent = this.intl.get("asset-input-address");
+      obj.orderTipContent = this.view.intl.get("asset-input-address");
       this.view.setState(obj);
       return;
     }

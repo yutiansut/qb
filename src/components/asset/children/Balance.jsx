@@ -28,5 +28,4 @@ export default class Balance extends exchangeViewBase {
       <Wallets wallet={this.state.wallet} history={this.props.history} controller={this.props.controller} />
     </div>;
   }
-
 }
