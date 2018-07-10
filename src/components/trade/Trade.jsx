@@ -33,6 +33,7 @@ let TradeMarketController,
   TradePlanController,
   userController,
   configController,
+  assetController,
   // klineController,
   kdepthController
 
