@@ -10,6 +10,9 @@ import PassPopup from '../userPopup/SetPassPopup.jsx'
 import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
 
 import {AsyncAll} from '../../../core'
+import DetectOS from '../../../class/lib/Os'
+import Browser from '../../../class/lib/Browser'
+
 // import JsonBig from "json-bigint";
 // import VerifyPopup from '../../viewsPopup/TwoVerifyPopup.jsx'
 
@@ -77,6 +80,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setTwoVerify = controller.setTwoVerify.bind(controller) // 修改两步认证
     this.setGoogleVerify = controller.setGoogleVerify.bind(controller) // 验证谷歌验证码
     this.bindUser = controller.bindUser.bind(controller)
+    this.outOther = controller.outOther.bind(controller) // 退出其他设备
     this.showOther = this.showOther.bind(this)
   }
 
@@ -267,8 +271,8 @@ export default class userSafeCenter extends exchangeViewBase {
                 <tbody className={`${this.state.ipList && this.state.ipList.length ? '' : 'hide'}`}>
                   {this.state.ipList.map((v, index) => (<tr key={index}>
                     <td>{v.IPAddress}</td>
-                    <td>{v.createAt}</td>
-                    <td onClick={() => this.delIp(v.IPId, v.IPAddress)}>{this.intl.get("delete")}</td>
+                    <td>{v.createAt.toDate('yyyy-MM-dd')}</td>
+                    <td onClick={() => this.delIp(v.IPId, v.IPAddress, index)} className="delIp">{this.intl.get("delete")}</td>
                   </tr>))}
                 </tbody>
               </table>
@@ -303,7 +307,7 @@ export default class userSafeCenter extends exchangeViewBase {
                 </tbody>
               </table>
               <p className={`${this.state.currentLogin && this.state.currentLogin.length ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-              <Button title={this.intl.get("user-out")} className="login-device-btn"/>
+              <Button title={this.intl.get("user-out")} className="login-device-btn" onClick={() => this.outOther(DetectOS(), Browser())}/>
             </div>
           </div>
         </div>

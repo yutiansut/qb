@@ -356,6 +356,7 @@ export default function zh(state) {
     "user-popRecoverLoginPwd": "修改登录密码",
     "user-popSetFundPwd": "设置资金密码",
     "user-popRecoverFundPwd": "修改登录密码",
+    "user-none": "暂无",
     "user-fillId": "请填写身份证号码",
     "user-fillPassport": "请填写护照号码",
     "user-popEmail": "邮箱",
@@ -375,6 +376,7 @@ export default function zh(state) {
     "user-googleRemind1": "请您务必将密钥记录下来：",
     "user-googleRemind2": "如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。",
     "user-googleInput": "请输入显示的验证码，开启验证功能"
+
   };
   const login = {
     "login-verify": "验证登录",

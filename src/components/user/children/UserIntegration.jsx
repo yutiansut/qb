@@ -67,8 +67,8 @@ export default class userIntegration extends exchangeViewBase {
       <div className="integration-wrap">
         <h1>{this.intl.get("user-score")}</h1>
         <div className="info clearfix">
-          <h2>{this.intl.get("user-scoreInfo")}</h2>
-          <div className="fl">
+          <h2 className="integration-title">{this.intl.get("user-scoreInfo")}</h2>
+          <div className="fl progress-con">
             <h3>
               <b>{this.intl.get("user-scoreLevel")}：VIP{this.state.userInfo.level}（{this.intl.get("points")}：{this.state.userCreditsNum}）</b>
               <Link to="/help/pricing">{this.intl.get("user-scoreDetail")}</Link>

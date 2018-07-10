@@ -145,6 +145,7 @@ export default class ExchangeStoreBase extends StoreBase {
       // console.log(WebsocketCallBackList)
     }
     this.WebSocket[connectName].pushWebsocketHistoryArr = (key, value) => {
+      console.log('pushWebsocketHistoryArr', key, value, websocketHistory)
       headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
       let emitData = Object.assign(headerConfig[key], {body: value})
       websocketHistory.push(emitData)

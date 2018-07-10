@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   Route,
   NavLink,
+  Link,
   Redirect,
   Switch
 } from 'react-router-dom'
@@ -153,7 +154,9 @@ export default class Login extends exchangeViewBase {
                       onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput)}}/>
             </li>
           </ul>
-          <p><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}<a href="">{this.intl.get("login-readUser")}</a></p>
+          <p><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}
+              <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
+          </p>
         </div>
         {this.state.showPopup && (
           <Popup

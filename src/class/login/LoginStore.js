@@ -1,5 +1,7 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
 
+let pushHistoryFlag = true
+
 export default class LoginStore extends ExchangeStoreBase {
   constructor() {
     super('login', 'general');
@@ -11,7 +13,10 @@ export default class LoginStore extends ExchangeStoreBase {
       // console.log('ccc1', data.data)
       // console.log('登录', data)
       this.controller.userLoginInfo(data)
-      data.ret === 0 && this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
+      if(data.ret === 0 && pushHistoryFlag ){
+        this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
+        pushHistoryFlag = false
+      }
     })
     this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
   }

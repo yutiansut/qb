@@ -1,5 +1,7 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import UserStore from './UserStore'
+import Browser from "../lib/Browser";
+import DetectOS from "../lib/Os";
 
 export default class UserController extends ExchangeControllerBase {
   constructor(props) {
@@ -17,28 +19,6 @@ export default class UserController extends ExchangeControllerBase {
   clearUserInfo(){
     this.store.clearUserInfo()
   }
-  //
-  // checkNum(num) { // 进度条长度获取
-  //   let scoreArr = [0, 10000, 50000, 100000, 200000, 500000, 500000000000000000], sum = 0, index = 0, start = 0, end = 0;
-  //   // if(!(scoreArr.length > 0)){
-  //   //   return;
-  //   // }
-  //   // if (num > 500000) { // 超过500000会出问题
-  //   //   index = 6
-  //   //   start = scoreArr[5]
-  //   //   end = num
-  //   //   return {checkStart: start, checkEnd: end, checkIndex: index}
-  //   // }
-  //   for (let i = 0; i < scoreArr.length; i++) {
-  //     sum += scoreArr[i];
-  //     if(sum >= num){
-  //       index = i
-  //       start = scoreArr[i-1]
-  //       end = scoreArr[i]
-  //       return {checkStart: start, checkEnd: end, checkIndex: index}
-  //     }
-  //   }
-  // }
 
   async getVerify(account, mode, type) { // 获取短信验证码
     if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
@@ -130,7 +110,7 @@ export default class UserController extends ExchangeControllerBase {
       popType: result && result.ret === 101 ? 'tip1': 'tip3',
       popMsg: result && result.ret === 101 ? "上传成功" : result.msg
     })
-    result.ret === 101 && this.view.setState({userAuth: {state: 3}})
+    result.ret === 101 && this.view.setState({userAuth: {state: 1}})
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
@@ -150,6 +130,13 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : "绑定成功",
       showSet: result ? true : false
     })
+    if (result === null && mode === 0) {
+      this.view.setState({userInfo: {phone: account}})
+      return
+    }
+    if (result === null && mode === 1) {
+      this.view.setState({userInfo: {email: account}})
+    }
     console.log('绑定手机号／邮箱', result)
   }
 
@@ -166,8 +153,8 @@ export default class UserController extends ExchangeControllerBase {
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
-      userInfo: {loginPwd: result ? 1 : 0}
     })
+    result === null && this.view.setState({userInfo: {loginPwd: 0}})
     console.log('设置密码', result)
   }
 
@@ -189,8 +176,8 @@ export default class UserController extends ExchangeControllerBase {
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
-      userInfo: {fundPwd: result ? 1 : 0}
     })
+    result === null && this.view.setState({userInfo: {fundPwd: 0}})
   }
 
   async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
@@ -238,34 +225,55 @@ export default class UserController extends ExchangeControllerBase {
     })
     this.view.setState({
       remindPopup: true,
-      popType: result.errCode ? 'tip3': 'tip1',
-      popMsg: result.errCode ? result.msg : '修改成功',
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : '修改成功',
       userInfo,
-      showChange: result.errCode ? true : false,
+      showChange: result ? true : false,
       verifyList
     })
     console.log('修改两步认证', result)
   }
 
   async addIp(ipAdd) { // 添加ip白名单
+    let ipList = this.view.state.ipList, time = new Date().getTime()
     if (this.view.state.ipValue === '') return
     let result = await this.store.Proxy.addIp({
       "userId": this.store.uid,
       "token": this.store.token,
       "IPAddress":ipAdd
     })
-    !result && this.view.setState({remindPopup: true})
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "添加成功",
+    })
+
+    if (result === null) {
+      ipList.push({IPAddress: ipAdd, createAt: time})
+      this.view.setState({ipList})
+    }
     console.log('添加ip', result)
   }
 
-  async delIp(ipId, iPAdd) { // 删除ip白名单
+  async delIp(ipId, iPAdd, index) { // 删除ip白名单
+    let ipList = this.view.state.ipList
     let result = await this.store.Proxy.deletIp({
       "userId": this.store.uid,
       "token": this.store.token,
       "IPId": ipId,
       "IPAddress": iPAdd
     })
-    !result && this.view.setState({remindPopup: true})
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : "删除成功",
+    })
+
+    if (result === null) {
+      ipList.splice(index, 1)
+      this.view.setState({ipList})
+    }
+
     console.log('删除ip', result)
   }
 
@@ -282,6 +290,20 @@ export default class UserController extends ExchangeControllerBase {
     })
     // this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
     console.log('验证谷歌', result)
+  }
+
+  async outOther(flag1, flag2) { // 退出其他设备
+    let result = await this.store.Proxy.outOther({
+      "userId": this.store.uid,
+      "token": this.store.token,
+      "imei": `${flag1}/${flag2}`
+    })
+    this.view.setState({
+      remindPopup: true,
+      popType: result && result.errCode ? 'tip3': 'tip1',
+      popMsg: result && result.errCode ? result.msg : '退出成功',
+    })
+    console.log('退出其他设备', result)
   }
 
   // 为其他模块提供接口
@@ -302,7 +324,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   get userAuthVerify() { // 提供用户是否实名
-    let {  // 0：未认证 1：已通过  2：认证失败 3：认证中
+    let {  // 0未认证;1审核中;2已审核;3未通过;4恶意上传失败封锁3天;5永久禁止
       state
     } = this.store.state.userAuth
     return {state}

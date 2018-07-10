@@ -43,6 +43,7 @@ export default {
     {name: 'getCaptcha', data: {url: '/common/', method: 'post'}, action: 'getCaptcha', actionBack: 'getCaptchaRes'}, // 获取图形验证码
     {name: 'setTwoVerify', data: {url: '/user/', method: 'post'}, action: 'setVerifyType', actionBack: 'setVerifyTypeRes', needToken: true}, // 修改两步认证
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true}, // 验证谷歌验证码
+    {name: 'outOther', data: {url: '/user/', method: 'post'}, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true}, // 退出其他设备
   ],
   notice: [
     {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes'} // 活动内容
