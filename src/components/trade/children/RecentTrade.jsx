@@ -29,16 +29,21 @@ export default class extends ExchangeViewBase {
     this.changeRecentItem = controller.changeRecentItem.bind(controller);
     // this.recentTradeList = controller.recentTradeList.bind(controller)
     this.tradeSort = controller.tradeSort.bind(controller) // 近期交易排序
+    this.clearRoom = controller.clearRoom.bind(controller)
   }
 
   componentDidMount() {
-    this.props.controller.emitRecentOrderWs();
+    // this.props.controller.emitRecentOrderWs();
     // this.recentTradeList();
     // this.props.controller.getRecentOrder(this.state.isPersonal);
   }
 
   componentWillMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.clearRoom()
   }
 
   render() {

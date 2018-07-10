@@ -4,6 +4,7 @@ export default class TradeOrderListStore extends OrderListStore{
   constructor() {
     super('userOrder', 'general');
     this.state={
+      room: '',
       liveTradeList: {
         buy: [
           {
@@ -96,8 +97,8 @@ export default class TradeOrderListStore extends OrderListStore{
     })
   }
   
-  emitTradeOrderWs(){
-    this.WebSocket.general.emit('joinRoom', {from:'', to: 'eth/btc-D0'});
+  emitTradeOrderWs(from , to){
+    this.WebSocket.general.emit('joinRoom', {from, to});
   }
   async getDepth(tradePairName) {
     let orderListArray = await this.Proxy.getDepth(

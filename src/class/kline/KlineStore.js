@@ -52,6 +52,7 @@ export default class DealStore extends ExchangeStoreBase {
   }
 
   update(k, v) {
+    console.log('store update', k, v, JSON.stringify(this.state))
     this.state[k] = v;
   }
 }

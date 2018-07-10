@@ -122,7 +122,7 @@ export default class userOrder extends ExchangeViewBase {
   }
   
   renderHistoryOrder() {
-    console.log('this.state.historyOrder', this.state.historyOrder)
+    // console.log('this.state.historyOrder', this.state.historyOrder)
     return (
         <div className='trade-current-order'>
           <div className='trade-current-title'>

@@ -42,8 +42,11 @@ export default class TradeOrderListController extends OrderListController {
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
   }
 
-  joinRoom(){
-    this.store.emitTradeOrderWs();
+  joinRoom(tradePairName){
+    // console.log(this.store.room)
+    let room = `${tradePairName}-D0`
+    this.emitRecentOrderWs(this.store.room, room)
+    this.store.setRoom(room)
   }
   
   getNewPrice(v){

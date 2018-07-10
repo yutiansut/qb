@@ -131,11 +131,11 @@ export default class UserController extends ExchangeControllerBase {
       showSet: result ? true : false
     })
     if (result === null && mode === 0) {
-      this.view.setState({userInfo: {phone: account}})
+      this.view.setState({userInfo: Object.assign(this.state.userInfo, {phone: account})})
       return
     }
     if (result === null && mode === 1) {
-      this.view.setState({userInfo: {email: account}})
+      this.view.setState({userInfo: Object.assign(this.state.userInfo, {email: account})})
     }
     console.log('绑定手机号／邮箱', result)
   }
@@ -154,7 +154,7 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
     })
-    result === null && this.view.setState({userInfo: {loginPwd: 0}})
+    result === null && this.view.setState({userInfo: Object.assign(this.state.userInfo, {loginPwd: 0})})
     console.log('设置密码', result)
   }
 
@@ -177,7 +177,8 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : "设置成功",
       showSet: result ? true : false,
     })
-    result === null && this.view.setState({userInfo: {fundPwd: 0}})
+    result === null && this.view.setState({userInfo: Object.assign(this.state.userInfo, {fundPwd: 0})})
+    console.log('设置密码', result)
   }
 
   async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
@@ -389,7 +390,7 @@ export default class UserController extends ExchangeControllerBase {
       "userId": this.store.uid,
       "token": this.store.token,
     })
-    console.log('查看资金密码', result)
+    // console.log('查看资金密码', result)
     return result
   }
 

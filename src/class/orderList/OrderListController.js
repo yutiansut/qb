@@ -23,12 +23,14 @@ export default class OrderListController extends ExchangeControllerBase {
       coin
     })
   }
+
   async getRecentOrder(isPersonal, id){
     let recentTradeListArr = await this.store.getRecentOrder(isPersonal, id);
     this.view.setState({
       recentTradeListArr
     })
   }
+
   changeRecentItem(v) {
     this.getRecentOrder(v.isPersonal, this.store.state.tradePairId);
     this.view.setState({
@@ -37,11 +39,20 @@ export default class OrderListController extends ExchangeControllerBase {
     });
     this.store.state.recentItemSelect = v.type;
   };
-  setTradePairId(id){
-    // console.log('setTradePairId', id )
+
+  setTradePairId(id, tradePairName){
+    console.log('setTradePairId', id ,this.store.room)
     this.store.state.tradePairId = id;
     this.getRecentOrder(this.view.state.isPersonal, id)
+    this.emitRecentOrderWs(this.store.room, tradePairName)
+    this.store.setRoom(tradePairName)
   }
+
+  //清除房间
+  clearRoom(){
+    this.emitRecentOrderWs(this.store.room, '')
+  }
+
   tradeSort(v, index) { // 近期交易排
     let sortArray = this.store.state.recentTradeListArr,
         tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"];
@@ -53,8 +64,10 @@ export default class OrderListController extends ExchangeControllerBase {
     });
     v.type = !v.type
   }
-  emitRecentOrderWs() {
-    this.store.emitRecentOrderWs();
+
+  emitRecentOrderWs(from, to) {
+    this.store.emitRecentOrderWs(from, to);
+    //
   }
   updateRecentOrder(data){
     // this.view.setState(

@@ -9,6 +9,7 @@ export default class OrderListStore extends ExchangeStoreBase {
       unitsType: '',
       market:'',
       coin:'',
+      room:'',
       tradePairId: 3
     }
     this.WebSocket.general.on('joinRoom', data => {
@@ -19,8 +20,18 @@ export default class OrderListStore extends ExchangeStoreBase {
       this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(data)
     })
   }
-  emitRecentOrderWs(){
-    this.WebSocket.general.emit('joinRoom', {from: '', to: 'eth/btc'})
+
+  get room() {
+    return this.state.room
+  }
+
+  setRoom(room) {
+    this.state.room = room
+  }
+
+
+  emitRecentOrderWs(from, to){
+    this.WebSocket.general.emit('joinRoom', {from, to})
   }
   async getRecentOrder(isPersonal, id){
     let recentTradeListArr = isPersonal ? await this.Proxy.recentOrderUser(

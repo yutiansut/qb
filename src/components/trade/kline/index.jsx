@@ -1046,7 +1046,7 @@ class ReactKline extends exchangeViewBase {
     //   [151220508e4, 100.91, 100.92, 100.9, 100.92, 557.18],
     //   [151220514e4, 100.92, 101.15, 100.92, 101.15, 564.82]
     // ];
-    this.state.kline.setData(lines);
+    this.state.kline && this.state.kline.setData(lines);
   }
 
   componentDidMount() {

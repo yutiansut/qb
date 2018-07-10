@@ -49,7 +49,7 @@ const Asset = ({ match }) => {
 };
 
 const Trade = ({ match }) => {
-  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController} />;
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController} assetController={assetController} />;
 };
 
 const User = ({ match }) => {
@@ -161,8 +161,7 @@ export default class App extends Component {
 
   render() {
 
-
-    return <Router basename='/qb'>
+    return <Router>
         {this.state.initDone && <div>
             {/*<Header/>*/}
             <Switch>

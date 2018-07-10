@@ -36,6 +36,7 @@ export default class KlineController extends ExchangeControllerBase {
 
   // 设置币种交易对
   async setPair(symbol, symbolName) {
+    console.log('this.store.state.tradePairName',JSON.stringify(this.store.state.tradePairName))
     !this.store.state.tradePairName && this.store.update("tradePairName", symbolName);
     this.store.state.tradePairName && this.update("tradePairName", symbolName);
     this.view.setSymbol(symbol, symbolName.toUpperCase());
@@ -52,16 +53,17 @@ export default class KlineController extends ExchangeControllerBase {
   }
   // 更新tradePair
   update(k, v) {
+
     let tradePairName = this.store.state.tradePairName,
       duration = this.store.state.duration;
-    //
+    console.log('coltroller update', k, v, tradePairName, JSON.stringify(this.store.state), duration)
     if (k === 'tradePairName' && v !== tradePairName) {
-      console.log('update...............................', duration, k, v);
+      // console.log('update...............................', duration, k, v);
       if (duration === "") return;
       this.joinRoom(`${v}-${this.rooms[duration]}`)
     }
     if (k === "duration" && v !== this.store.state.duration) {
-      console.log('update...............................', tradePairName, k, v);
+      // console.log('update...............................', tradePairName, k, v);
       if (tradePairName === '') return;
       this.joinRoom(`${tradePairName}-${this.rooms[v]}`);
     }

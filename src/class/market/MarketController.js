@@ -215,13 +215,19 @@ export default class MarketController extends ExchangeControllerBase {
     });
     this.store.state.tradePair = value.tradePairName;
     this.store.state.tradePairId = value.tradePairId;
-    this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
+    this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId, value.tradePairName);
+    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
+    this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
     this.setDealMsg();
     // console.log('setTradePair....................................', value )
     // 为K线图设置交易对
-    this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
+
+  }
+
+  clearRoom(){
+    this.store.clearRoom()
   }
 
   get tradePair() {

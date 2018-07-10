@@ -54,6 +54,9 @@ export default class AssetController extends ExchangeControllerBase {
       totalAsset: this.store.state.totalAsset,
       wallet: this.store.state.wallet || []
     });
+    if (this.view.name === "simple") {
+      this.updataMarketAvaile()
+    }
   }
 
   // 获取单个币种资产信息
@@ -363,9 +366,11 @@ export default class AssetController extends ExchangeControllerBase {
     }
     return this.store.state.wallet.filter(v => v.coinName === coin)[0];
   }
+
+
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
-    let curPair = this.view.state.pairFees.filter(
+    let curPair = this.view.state.pairFees && this.view.state.pairFees.filter(
         item => item.id === this.view.state.tradePairId
       )[0],
       currencyArr = curPair.name.split("/"),
@@ -375,13 +380,14 @@ export default class AssetController extends ExchangeControllerBase {
       avail2 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[1]
       )[0];
-      // console.log(avail1, avail2)
+      // console.log('updataMarketAvaile', avail1, avail2)
+    this.TradePlanController && this.TradePlanController.setWallet(avail1.availableCount, avail2.availableCount)
     // this.marketController.sdfgadsf(avail1, avail2);
   }
 
   // 设置simple的tradePairId交易对id  暴露给market使用
   setSimpleAsset(o) {
-    this.view.setState(o);
+    this.view && this.view.setState(o);
   }
 
   // websocke更新
@@ -394,6 +400,7 @@ export default class AssetController extends ExchangeControllerBase {
         wallet: this.store.state.wallet
       });
       this.updataMarketAvaile();
+
     }
   }
 

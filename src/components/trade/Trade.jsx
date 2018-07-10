@@ -33,7 +33,8 @@ let TradeMarketController,
   TradePlanController,
   userController,
   configController,
-  klineController
+  klineController,
+  assetController
   // kdepthController
 
 // const userOrderItems = []
@@ -47,8 +48,9 @@ export default class extends exchangeViewBase {
     userOrderController = props.userOrderController;//用户订单
     noticeController = new NoticeController(); //资讯
     TradeDealController = new DealController(); //交易
-    TradePlanController = new DealController();
+    TradePlanController = new DealController();//市场上交易价格
     userController = props.userController; //用户
+    assetController = props.assetController; //用户
     configController = new ConfigController(); // 基础设置
     klineController = new KlineController();
     // kdepthController = new KdepthController();
@@ -84,6 +86,7 @@ export default class extends exchangeViewBase {
     noticeController.configController = configController
 
     // noticeController.userController = userController;
+    assetController.TradePlanController = TradePlanController
 
     this.state = {
       curChart: "kline",

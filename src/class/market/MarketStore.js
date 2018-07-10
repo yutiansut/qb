@@ -113,6 +113,7 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.allPairData.filter(v => v.isFavorite)
   }
 
+
   //收藏变动更新列表
   updateAllPairListFromCollect(list = []) {
     // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
@@ -166,6 +167,11 @@ export default class MarketStore extends ExchangeStoreBase {
   joinHome() {
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
+  //退出房间
+  clearRoom(){
+    this.WebSocket.general.emit('joinRoom', {from: 'home', to: ''})
+  }
+
 
   //收藏接口
   async changeFavorite(tradePairId, userId, operateType, token) {

@@ -39,5 +39,10 @@ export default class DealStore extends ExchangeStoreBase {
         // }
     )
   }
-  
+
+  //设置可用额度
+  setWallet(buyWallet, sellWallet){
+    this.state.buyWallet = buyWallet
+    this.state.sellWallet = sellWallet
+  }
 }

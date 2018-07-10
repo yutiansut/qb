@@ -2,35 +2,36 @@ import ExchangeControllerBase from '../ExchangeControllerBase'
 import DealStore from './DealStore'
 
 export default class DealController extends ExchangeControllerBase {
-  constructor(){
+  constructor() {
     super();
     this.store = new DealStore();
   }
-  
+
   setView(view) {
     super.setView(view)
   }
-  
-  setPairMsg(value){
+
+  setPairMsg(value) {
     this.view.setState({
       tradePairMsg: value
     });
   }
-  tradePairHandle(pair,prices){
+
+  tradePairHandle(pair, prices) {
     let pairArr = pair.split('/'),
-        coin = pairArr[0],
-        market = pairArr[1];
+      coin = pairArr[0],
+      market = pairArr[1];
     this.view.setState(
-        {
-          // PriceUnit: market,
-          NumUnit: coin,
-          Market: market,
-          Coin: coin,
-          // prices,
-          priceBank:prices,
-          inputBuyFlag:false,
-          inputSellFlag:false,
-        }
+      {
+        // PriceUnit: market,
+        NumUnit: coin,
+        Market: market,
+        Coin: coin,
+        // prices,
+        priceBank: prices,
+        inputBuyFlag: false,
+        inputSellFlag: false,
+      }
     );
     this.store.state.prices = prices;
     this.setPriceInit(prices.price);
@@ -42,24 +43,26 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.NumUnit = coin;
     // this.view.state.Market = market;
   }
-  orderHandle(prices){
+
+  orderHandle(prices) {
     this.view.setState({
       prices,
-      inputBuyFlag:false,
-      inputSellFlag:false,
-      priceBank:prices
+      inputBuyFlag: false,
+      inputSellFlag: false,
+      priceBank: prices
     });
     this.store.state.prices = prices;
     this.setPriceInit(prices.price);
   }
+
   // 数字币计价 初始值获取
-  setPriceInit(v){
+  setPriceInit(v) {
     this.view.state.priceInit = v;
     this.view.state.buyMax = this.view.state.buyWallet / v;
     this.view.state.sellMax = this.view.state.sellWallet / v;
   }
-  
-  changeUnit(unit,init){
+
+  changeUnit(unit, init) {
     let unitObj = {
       'CNY': 'CNY',
       'USD': 'USD',
@@ -68,7 +71,7 @@ export default class DealController extends ExchangeControllerBase {
     unitObj[init] = this.view.state.Market;
     // console.log('bbbbb',this.store.state.PriceUnit)
     let fromValue = this.store.state.prices[this.store.state.PriceUnit === 'CNY' && 'priceCN' || (this.store.state.PriceUnit === 'USD' && 'priceEN' || 'price')];
-    
+
     // const unitArr = [
     //   {name:'CNY计价', type:'CNY'},
     //   {name:'USD计价', type:'USD'},
@@ -82,8 +85,8 @@ export default class DealController extends ExchangeControllerBase {
       PriceUnit: unitSelected,
       UnitSelected: unit
     });
-    
-    this.changePrice(unitSelected,fromValue);
+
+    this.changePrice(unitSelected, fromValue);
     this.store.state.PriceUnit = unitSelected;
     this.TradeMarketController.setUnitsType(unitSelected);
     // this.CurrentOrderController.setUnitsType(unitSelected);
@@ -91,42 +94,45 @@ export default class DealController extends ExchangeControllerBase {
     this.TradeRecentController.setUnitsType(unitSelected);
     this.TradeOrderListController.setUnitsType(unitSelected);
   }
-  changePrice(v,fromValue){
+
+  changePrice(v, fromValue) {
     let initPrice = this.view.state.priceInit,
-        prices = this.store.state.prices,
-        priceBank = {
-          CNY: initPrice / prices.price * prices.priceCN,
-          USD: initPrice / prices.price * prices.priceEN,
-        }
+      prices = this.store.state.prices,
+      priceBank = {
+        CNY: initPrice / prices.price * prices.priceCN,
+        USD: initPrice / prices.price * prices.priceEN,
+      }
     ;
     this.view.setState({
       priceBank
       // inputValue: priceBank[v] || initPrice
     })
-    if(this.view.state.inputSellFlag || this.view.state.inputBuyFlag){
+    if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
       let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
-          inputSellValue,inputBuyValue ;
-      this.view.state.inputSellFlag && (inputSellValue =  this.view.state.inputSellValue / fromValue * toValue);
-      this.view.state.inputBuyFlag && (inputBuyValue =  this.view.state.inputBuyValue / fromValue * toValue);
-      console.log('inputSellValue',inputSellValue,inputBuyValue)
-      this.view.statehandleValue= this.view.state.inputValue / fromValue * toValue
+        inputSellValue, inputBuyValue;
+      this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
+      this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
+      console.log('inputSellValue', inputSellValue, inputBuyValue)
+      this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue
       this.view.setState({
         inputSellValue,
         inputBuyValue
       });
     }
   }
-  changeMaxNum(t,v){
-       (t === 1) && (this.view.setState({sellMax : this.view.state.sellWallet}));
-       (t === 0) && (this.view.setState({buyMax : this.view.state.buyWallet / v}))
-    if(this.view.state.buyNumFlag && (t ===0 )){
-        this.view.setState({inputBuyNum: this.view.state.buyWallet / v})
+
+  changeMaxNum(t, v) {
+    (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
+    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / v}))
+    if (this.view.state.buyNumFlag && (t === 0)) {
+      this.view.setState({inputBuyNum: this.view.state.buyWallet / v})
     }
     // if(this.view.state.sellNumFlag && (t === 1)){
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
     // }
   }
-  async dealTrade(orderType){
+
+  async dealTrade(orderType) {
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let params = {
@@ -134,7 +140,7 @@ export default class DealController extends ExchangeControllerBase {
       userId: this.userController.userId,
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
-      "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue) ,//价格
+      "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格
       "count": Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum),//数量
       "tradePairId": this.TradeMarketController.tradePair.tradePairId,
       "tradePairName": this.TradeMarketController.tradePair.tradePairName,
@@ -146,14 +152,25 @@ export default class DealController extends ExchangeControllerBase {
     // let j = 1
     // for(var i =1;i<=500;i++){
     //   j+=0.01;
-      await this.store.dealTrade(params);
+    await this.store.dealTrade(params);
     // }
     // await this.store.dealTrade(v);
   }
-  async getFundPwdInterval(){
+
+  async getFundPwdInterval() {
     let fundPwdInterval = await this.userController.getFundPwdInterval();
     this.view.setState({
       fundPwdInterval: fundPwdInterval.mode
+    })
+  }
+
+  //设置可用额度
+  setWallet(buyWallet, sellWallet) {
+    // console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
+    this.store.setWallet(buyWallet, sellWallet)
+    this.view.setState({
+      sellWallet,
+      buyWallet
     })
   }
 }

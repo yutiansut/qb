@@ -38,13 +38,18 @@ export default class HomeMarket extends ExchangeViewBase{
     this.pairSort = controller.pairSort.bind(controller) // 排序
     this.filte = controller.filte.bind(controller) // 筛选
     this.addCollect = controller.addCollect.bind(controller) // 添加收藏
-    this.joinHome = controller.joinHome.bind(controller) // 添加收藏
+    this.joinHome = controller.joinHome.bind(controller) // 加入房间
+    this.clearRoom = controller.clearRoom.bind(controller) //推出房间
   }
   componentDidMount(){
     //注册http数据
     this.marketDataHandle();
     //进入home
     this.joinHome();
+  }
+
+  componentWillUnmount() {
+    this.clearRoom()
   }
 
   render(){
