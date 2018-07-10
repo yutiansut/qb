@@ -7,22 +7,26 @@ export default class HomeRecommend extends ExchangeViewBase{
     this.state = {};
     const {controller} = this.props;
     //绑定view
-    controller.setView(this)
+    controller.setView(this);
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    // console.log(this.state)
     //绑定方法
-    // this.updateRecommend = controller.updateRecommend.bind(controller);
     this.getRecommendCoins = controller.getRecommendCoins.bind(controller)
   }
+
   componentDidMount(){
     this.getRecommendCoins()
+
+    //推荐列表左右滑动
+    let $ul=this.refs.recomendUl;
+    
+
   }
 
   render(){
     return(
       <div className='home-recommend'>
-        <ul className="clearfix">
+        <ul className="clearfix" ref="recomendUl">
           {this.state.recommendData.map((v, index) => {return(
             <li className='home-recommend-pair' key={index}>
               <p className="p1">

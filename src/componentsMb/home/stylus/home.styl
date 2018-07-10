@@ -50,6 +50,7 @@
       width 100%
       padding .13rem
       white-space nowrap
+      overflow hidden
       li
         display inline-block
         margin 0.06rem
@@ -83,10 +84,10 @@
     .market-nav
       height .36rem
       line-height .36rem
-      margin-bottom .08rem
+      margin-bottom .14rem
       ul
-        height .36rem
         white-space nowrap
+        margin-bottom 0.2em
         li
           position relative
           display inline-block
@@ -120,11 +121,50 @@
       width 100%
       thead
         tr
+          height .3rem
+          line-height .3rem
           color $normal-gray-color
-      tr
-        height .45rem
-        line-height .45rem
-     
+      tbody
+        tr
+          line-height 0.24rem
+          height 0.62rem
+          td
+            vertical-align middle
+            span
+              font-size 0.12rem
+              color $normal-gray-color
+            h3
+              font-size 0.14rem
+              color $normal-black-color
+              small
+                font-size 0.12rem
+                color $normal-gray-color
+            b
+              font-size 0.14rem
+              color $exchange-blue
+              display block
+              &.up
+                color $exchange-blue
+              &.down
+                color $exchange-red
+            a
+              font-size 0.15rem
+              color $normal-white-color
+              background $exchange-red
+              padding 0.05rem
+              border-radius 1px
+              display inline-block
+              min-width 0.8rem
+              text-align center
+
+
+
+
+
+
+
+
+
 
 
 

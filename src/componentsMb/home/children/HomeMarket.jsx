@@ -63,7 +63,7 @@ export default class HomeMarket extends ExchangeViewBase{
 
   render(){
     const {controller} = this.props;
-    // console.log(1234,this.state,this.state.recommendDataHandle)
+      console.log(this.state.homeMarketPairData);
     return(
       <div className='home-market'>
         <div className="market-nav clearfix">
@@ -87,21 +87,23 @@ export default class HomeMarket extends ExchangeViewBase{
             </tr>
           </thead>
           <tbody>
-          {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
+          {this.state.homeMarketPairData.map((v, index) => {
             return(
 
               <tr key={index}>
-                <p className="item p1">
-                  <h2>GRS<small>BTC</small></h2>
-                  <span>24h量 123,359</span>
-                </p>
-                <p className="item p2">
-                  <b>0.0000177794</b>
-                  <span>¥89090.99</span>
-                </p>
-                <p className="item p3">
-                  +90.90%
-                </p>
+                <td>
+                  <h3>{v.coinName.toUpperCase()}<small>/{v.marketName.toUpperCase()}</small></h3>
+                  <span>24h量 {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
+                </td>
+                <td>
+                  <b className={v.rise<0 ? 'down':'up'}>{Number(v.price).format({number:'digital'}) || 0}</b>
+                  <span>{controller.language === 'zh-CN' ?
+                      Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) :
+                      Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span>
+                </td>
+                <td>
+                  <a>{Number(v.rise).toPercent()}</a>
+                </td>
               </tr>
 
             )
