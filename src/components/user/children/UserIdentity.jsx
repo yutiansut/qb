@@ -25,7 +25,7 @@ export default class userIdentity extends exchangeViewBase {
       image3: '', // 上传照片用于存储ID
       remindPopup: false,
       checkVerifyArr: true, // 单选是否能够点击
-      checkState: true, // 单选框按钮
+      checkState: true, // 同意协议单选框按钮
       photoArr: [
         {
           photoList: [
@@ -60,6 +60,7 @@ export default class userIdentity extends exchangeViewBase {
     this.uploadInfo = controller.uploadInfo.bind(controller)
     this.uploadImg = controller.uploadImg.bind(controller)
     this.canClick = this.canClick.bind(this)
+    this.checkAgree = this.checkAgree.bind(this)
   }
   getObjectURL (file) {
     let url = null ;
@@ -121,8 +122,13 @@ export default class userIdentity extends exchangeViewBase {
     this.setState({numberValue: evt});
   }
   canClick() {
-    if (this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue) return true
+    if (this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image) return true
     return false
+  }
+  checkAgree(event) {
+    this.setState({
+      checkState: event.target.checked
+    });
   }
   submitInfo() { // 确认提交
     this.uploadInfo()
@@ -173,7 +179,7 @@ export default class userIdentity extends exchangeViewBase {
     console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
-        <h1>{this.intl.get("idVerify")}</h1>
+        <h1>{this.intl.get("header-idVerify")}</h1>
         <div className="identify-result">
           <img src={this.state.realNameArr[this.state.userAuth.state] && this.state.realNameArr[this.state.userAuth.state].imgUrl} alt="" />
           <span>{this.state.realNameArr[this.state.userAuth.state] && this.state.realNameArr[this.state.userAuth.state].content}</span>
@@ -212,7 +218,7 @@ export default class userIdentity extends exchangeViewBase {
               </dd>))}
             </dl>
             {/*.userAuth.number*/}
-            <Input placeholder={`${this.state.selectIndex === 0 ? '请填写身份证号码' : '请填写护照号码'}`}
+            <Input placeholder={`${this.state.selectIndex === 0 ? this.intl.get("user-fillId") : this.intl.get("user-fillPassport")}`}
                    className="id-input"
                    value={this.state.userAuth.number ? this.state.userAuth.number : this.state.numberValue}
                    disabled ={this.state.userAuth.number ? true : false}
@@ -232,7 +238,7 @@ export default class userIdentity extends exchangeViewBase {
               <dd>{this.intl.get("user-req6")}</dd>
             </dl>
             <dl className="clearfix">
-              <dt>证件类型</dt>
+              <dt>{this.intl.get("user-type")}</dt>
               <dd>{this.state.selectIndex === 0 ? this.intl.get("user-idCard") : this.intl.get("user-passport")}</dd>
             </dl>
             <dl className="clearfix">
@@ -244,7 +250,7 @@ export default class userIdentity extends exchangeViewBase {
                 <p>{item.name}</p>
               </dd>))}
             </dl>
-            <h3><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("user-photoSure")}</h3>
+            <h3><input type="checkbox" checked={this.state.checkState} onChange={this.checkAgree}/>{this.intl.get("user-photoSure")}</h3>
             <Button
               title={this.intl.get("user-submit")}
               className={`${this.canClick() ? 'identify-btn-active' : ''} identify-btn`}

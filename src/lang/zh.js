@@ -80,7 +80,8 @@ export default function zh(state) {
     sendCode: '获取验证码',
     sendAgain: '重新获取',
     optionSuccess: '操作成功',
-    close: '关闭'
+    close: '关闭',
+    sure: "确认"
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -334,6 +335,7 @@ export default function zh(state) {
     "user-req5": "的纸条",
     "user-req6": "图片格式：小于10M, 图片格式可为jpg、jpeg、png",
     "user-photo": "证件照",
+    "user-type": "证件类型",
     "user-photoSure": "我承认提交的证件信息属于本人所有，不存在冒用、盗用他人证件的行为，因冒用、盗用他人证件造成的一切后果由本人承担",
     "user-submit": "确认提交",
     "user-idFront": "身份证正面照片",
@@ -353,8 +355,26 @@ export default function zh(state) {
     "user-popSetLoginPwd": "设置登录密码",
     "user-popRecoverLoginPwd": "修改登录密码",
     "user-popSetFundPwd": "设置资金密码",
-    "user-popRecoverFundPwd": "修改登录密码"
-
+    "user-popRecoverFundPwd": "修改登录密码",
+    "user-fillId": "请填写身份证号码",
+    "user-fillPassport": "请填写护照号码",
+    "user-popEmail": "邮箱",
+    "user-newPwd": "新密码",
+    "user-currentPwd": "当前密码",
+    "user-popBind": "绑定",
+    "user-popPwdRule": "*新密码必须是 6 位以上英文字母、数字或符号，不能纯数字或纯字母",
+    "user-popFundRule": "*出于安全方面的考虑，修改密码后，你的账户将在 24 小时内无法提现",
+    "user-popGoole": "谷歌验证码",
+    "user-popPicture": "图形验证码",
+    "user-popPicturePlaceholder": "请填写图形验证码",
+    "user-googleStart": "开启谷歌验证",
+    "user-googleInstall": "安装双重验证程序",
+    "user-googleExplain1": "在“Google Authenticator (身份验证器)”应用程序中，点击“添加新账户”扫描下方二维码",
+    "user-googleExplain2": "如果您无法扫描成功上图的条形码，您可以手动添加账户，输入如下密钥: ",
+    "user-googleWarnings": "警告",
+    "user-googleRemind1": "请您务必将密钥记录下来：",
+    "user-googleRemind2": "如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。",
+    "user-googleInput": "请输入显示的验证码，开启验证功能"
   };
   const login = {
     "login-verify": "验证登录",

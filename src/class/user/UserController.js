@@ -41,7 +41,7 @@ export default class UserController extends ExchangeControllerBase {
   // }
 
   async getVerify(account, mode, type) { // 获取短信验证码
-    if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
+    if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
     this.getCode(account, mode, type)

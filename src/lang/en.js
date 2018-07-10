@@ -81,7 +81,8 @@ export default function en(state) {
     "deal-use": "Available",
     sendCode: "Send the code",
     sendAgain: "Send again",
-    optionSuccess: "Operation successful"
+    optionSuccess: "Operation successful",
+    sure: "Subscription Period"
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -345,6 +346,7 @@ export default function en(state) {
     "user-req5": "",
     "user-req6": "Image format: less than 10M,  jpg or png format",
     "user-photo": "ID photo",
+    "user-type": "ID type",
     "user-photoSure":
       "I admit to submit certificate information belong to himself, there is no fake and pirated > others documents, for all the consequences resulting from the fake, file documents are to be borne by himself",
     "user-submit": "Submit",
@@ -365,7 +367,28 @@ export default function en(state) {
     "user-popSetLoginPwd": "Reset login password",
     "user-popRecoverLoginPwd": "Recover login password",
     "user-popSetFundPwd": "Funding Password",
-    "user-popRecoverFundPwd": "Recover funding password"
+    "user-popRecoverFundPwd": "Recover funding password",
+    "user-none": "none",
+    "user-fillId": "Please fill in ID card",
+    "user-fillPassport": "Please fill in Passport number",
+    "user-popEmail": "Email",
+    "user-newPwd": "New password",
+    "user-currentPwd": "Current Password",
+    "user-popBind": "Bind",
+    "user-popPwdRule": "*New passwords must have at least 6 letters, numbers or special characters, and cannot be only letters or only numbers",
+    "user-popFundRule": "*Upon password change, withdrawals on your account will be blocked for 24 hours for security reasons.",
+    "user-popGoole": "Google Verification Code",
+    "user-popPicture": "CAPTCHA Code",
+    "user-popPicturePlaceholder": "Please fill in the CAPTCHA code",
+    "user-googleStart": "Activate Google Verification",
+    "user-googleInstall": "Install double verification software",
+    "user-googleExplain1": "Click ‘add a new account’ and scan the QR code below in the Google Authenticator App",
+    "user-googleExplain2": "If you cannot scan the QR code above, you can manually add your account and type in security keys below",
+    "user-googleWarnings": "Warnings",
+    "user-googleRemind1": "Please make sure you save these security keys：",
+    "user-googleRemind2": "If you accidentally delete your account or change your cell phone, these security keys are the only way to help you restore your account.",
+    "user-googleInput": "Please fill in the verification code on the screen"
+
   };
   const login = {
     "login-verify": "Verified login",
