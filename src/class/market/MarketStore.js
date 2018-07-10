@@ -149,6 +149,10 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //根据选择的市场筛选出交易对
   async selectMarketData() {
+    // console.log('this.selecedMarket', this.selecedMarket)
+    if(this.selecedMarket === '收藏区'){
+      return this.collectData
+    }
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
     // console.log(pairMsg, this.selecedMarket)

@@ -85,6 +85,7 @@ export default class MarketController extends ExchangeControllerBase {
   collectMarket() {
     let homeMarketPairData = this.getCollectArr()
     // console.log('collectMarket', homeMarketPairData)
+    this.store.setSelecedMarket('收藏区');
     this.view.setState({
       searchValue: '',
       sortIndex: 0,
@@ -94,6 +95,7 @@ export default class MarketController extends ExchangeControllerBase {
       market: '',
       homeMarketPairData
     });
+    this.tradePairChange(homeMarketPairData[0]);
   }
 
   // 添加/取消收藏
@@ -209,6 +211,10 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
+    // console.log('tradePairChange',value)
+    if(!value){
+      return
+    }
     this.view.setState({
       tradePair: value.tradePairName,
       tradePairId: value.tradePairId

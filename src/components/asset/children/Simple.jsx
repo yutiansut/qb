@@ -42,6 +42,7 @@ export default class Simple extends exchangeViewBase {
       )[0];
     let lang = this.props.controller.configData.language;
     // console.log(this.state.totalAsset);
+    avail1 &&  this.props.controller.updataMarketAvaile();
     let total =
       lang === "en-US"
         ? this.state.totalAsset.valuationEN

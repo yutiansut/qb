@@ -165,8 +165,8 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   //设置可用额度
-  setWallet(buyWallet, sellWallet) {
-    // console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
+  setWallet(sellWallet, buyWallet) {
+    console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
     this.store.setWallet(buyWallet, sellWallet)
     this.view.setState({
       sellWallet,

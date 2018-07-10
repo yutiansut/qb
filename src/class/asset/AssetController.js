@@ -380,8 +380,9 @@ export default class AssetController extends ExchangeControllerBase {
       avail2 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[1]
       )[0];
-      // console.log('updataMarketAvaile', avail1, avail2)
+      console.log('updataMarketAvaile', avail1, avail2)
     this.TradePlanController && this.TradePlanController.setWallet(avail1.availableCount, avail2.availableCount)
+    return {avail1, avail2}
     // this.marketController.sdfgadsf(avail1, avail2);
   }
 
