@@ -162,7 +162,7 @@ export default class App extends Component {
 
   render() {
 
-    return <Router>
+    return <Router basename='/qb'>
         {this.state.initDone && <div>
             {/*<Header/>*/}
             <Switch>

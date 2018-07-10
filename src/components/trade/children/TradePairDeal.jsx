@@ -25,7 +25,7 @@ export default class TradePairDeal extends ExchangeViewBase{
         <div style={{overflow: 'hidden'}}>
           <div className='trade-pair-deal-title'>
             <img src={this.state.tradePairMsg.coinIcon} alt=""/>
-            <h2>{this.state.tradePairMsg.tradePair}</h2>
+            <h2>{this.state.tradePairMsg.tradePair && this.state.tradePairMsg.tradePair.toUpperCase()}</h2>
             <span><a href="#">{this.intl.get('market-currencyInfo')}</a></span>
           </div>
           <div className='trade-pair-deal-price'>
