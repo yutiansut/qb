@@ -155,7 +155,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )
-            })}
+            }) || null}
             </tbody>
           </table>
         

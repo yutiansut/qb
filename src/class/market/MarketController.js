@@ -217,6 +217,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.tradePairId = value.tradePairId;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId);
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
+    this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.setDealMsg();
     // console.log('setTradePair....................................', value )
     // 为K线图设置交易对
