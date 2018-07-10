@@ -159,8 +159,8 @@ export default class App extends Component {
 
   }
 
-
   render() {
+
 
     return <Router basename='/qb'>
         {this.state.initDone && <div>
@@ -171,29 +171,29 @@ export default class App extends Component {
               <Route component={header} />
             </Switch>
             <div style={{ minHeight: `${window.innerHeight - 2.1 * 100}px` }}>
+                <Switch>
+                    {/*<Route exact path="/" component={HomeComponent}/>*/}
+                    <Route exact path="/home" component={HomeComponent} />
+                    <Route path="/trade" component={Trade} />
+                    <Route path="/login" component={Loign} />
+                    <Route path="/wallet" component={Asset} />
+                    <Route path="/order" component={Order} />
+                    <Route path="/user" component={User} />
+                    <Route path="/findPass" component={ForgetPass} />
+                    <Route path="/notice/content/detail" component={NoticeDetail}/>
+                    <Route path="/notice" component={Notice} />
+                    <Route path="/help" component={Help} />
+                    <Route path="/activity" component={Activity} />
+                    <Route path="/genrealize" component={Gener} />
+                    <Redirect to="/home" />
+                </Switch>
+              </div>
+              {/*<Footer/>*/}
               <Switch>
-                {/*<Route exact path="/" component={HomeComponent}/>*/}
-                <Route exact path="/home" component={HomeComponent} />
-                <Route path="/trade" component={Trade} />
-                <Route path="/login" component={Loign} />
-                <Route path="/wallet" component={Asset} />
-                <Route path="/order" component={Order} />
-                <Route path="/user" component={User} />
-                <Route path="/findPass" component={ForgetPass} />
-                <Route path="/notice/content/detail" component={NoticeDetail}/>
-                <Route path="/notice" component={Notice} />
-                <Route path="/help" component={Help} />
-                <Route path="/activity" component={Activity} />
-                <Route path="/genrealize" component={Gener} />
-                <Redirect to="/home" />
+                  <Route path="/trade" component={tradeFooter} />
+                  <Route path="/genrealize" component={() => <div />} />
+                  <Route component={Footer} />
               </Switch>
-            </div>
-            {/*<Footer/>*/}
-            <Switch>
-              <Route path="/trade" component={tradeFooter} />
-              <Route path="/genrealize" component={() => <div />} />
-              <Route component={Footer} />
-            </Switch>
           </div>}
       </Router>;
   }
