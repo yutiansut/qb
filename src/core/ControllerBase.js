@@ -112,8 +112,8 @@ export default class ControllerBase {
    * return 排序后的数组
    */
   sort(arr, sortValue, type, sortDefault) {
-    if (!sortValue)
-      return
+    if (!sortValue.length)
+      return arr
     return this.Util.deepCopy(arr).sort((a, b) => {
       let first = a, second = b;
       sortValue.forEach(v => {

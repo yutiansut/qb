@@ -52,7 +52,7 @@ class ReactTrend extends React.Component {
                 path += "L"+x + "," + y + " ";
             }
         });
-        console.log('path', path)
+        // console.log('path', path)
 
         return (
             <svg className="kline-trend" viewBox={viewBox} preserveAspectRatio="none">

@@ -66,6 +66,7 @@ export default class MarketController extends ExchangeControllerBase {
   async changeMarket(v) {
     // let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
     this.store.setSelecedMarket(v);
+    this.store.setSort([], 0)
     let homeMarketPairData = await this.store.selectMarketData()
     this.view.setState({
       // searchValue: '',
@@ -86,6 +87,7 @@ export default class MarketController extends ExchangeControllerBase {
     let homeMarketPairData = this.getCollectArr()
     // console.log('collectMarket', homeMarketPairData)
     this.store.setSelecedMarket('收藏区');
+    this.store.setSort([], 0)
     this.view.setState({
       searchValue: '',
       sortIndex: 0,
@@ -185,7 +187,7 @@ export default class MarketController extends ExchangeControllerBase {
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData()
     this.view.setState({
-      homeMarketPairData,
+      homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     });
     this.tradePairChange(homeMarketPairData[0]);
   }
@@ -243,12 +245,14 @@ export default class MarketController extends ExchangeControllerBase {
     }
   }
 
+
   //排序功能
   pairSort(v, index) { // type 1 升序 0 降序
     let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
 
+    this.store.setSort(v.sortValue, v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
       homeMarketPairData: this.sort(sortArray, v.sortValue, v.type),
@@ -267,7 +271,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 点击收藏筛选数组
   getCollectArr() {
-    // console.log('this.store.allPair', this.store.allPair)
+    console.log('this.store.collectData', this.store.collectData)
     return this.store.collectData
   }
 

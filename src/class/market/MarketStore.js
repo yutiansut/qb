@@ -5,15 +5,17 @@ export default class MarketStore extends ExchangeStoreBase {
     super('market', 'general');
     // console.log('MarketStore constructor')
     this.state = {
-      allPairData: [],
-      recommendData: [],
-      collectArr: [],
-      selecedMarket: '',
+      allPairData: [],//全部交易对池
+      recommendData: [],//推荐数据
+      collectArr: [],//收藏数组
+      selecedMarket: '',//选择市场 todo 和market有重复
+      market: '',//选择市场
       recommendDataHandle: [],
       marketDataHandle: [],
       homeMarketPairData: [],
-      market: '',
       coin: '',
+      sortValue:[],//排序值
+      ascending:0,//是否升序， 0 否 1 是
       tradePair: '',
       pairInfo: {},
       unitsType: '',
@@ -103,6 +105,20 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('setAllPair 1', this.state.allPairData)
   }
 
+  setSort(sortValue, ascending){
+    this.state.sortValue = sortValue
+    this.state.ascending = ascending
+  }
+
+  get sortValue(){
+    return this.state.sortValue
+  }
+
+  get ascending(){
+    return this.state.ascending
+  }
+
+
   get allPair() {
     return this.state.allPairData
   }
@@ -110,7 +126,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //从交易对池中拿到收藏数据
   get collectData() {
     // console.log('this.state.allPairData', this, this.state.allPairData)
-    return this.state.allPairData.filter(v => v.isFavorite)
+    return this.state.allPairData.filter(v => v.isFavorite).sort((a,b)=>a.collectIndex-b.collectIndex)
   }
 
 
@@ -118,7 +134,7 @@ export default class MarketStore extends ExchangeStoreBase {
   updateAllPairListFromCollect(list = []) {
     // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
     // list && list.length && list.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
-    this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {isFavorite: 1} || {isFavorite: 0}))
+    this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {isFavorite: 1, collectIndex: list.indexOf(v.tradePairId)} || {isFavorite: 0}))
     // console.log('updateAllPairListFromCollect 1', this.allPair)
   }
 
@@ -128,11 +144,11 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
     list && list.length && (this.state.allPairData = this.state.allPairData.map(v => {
       let res = list.find(vv => vv.tradePairId === v.tradePairId)
-      if(!res){
+      if (!res) {
         return v
       }
       //除第一次外需要计算增长值改变字体颜色
-      if(type){
+      if (type) {
         res.updown = res.price > v.price
       }
       return Object.assign(v, res)
@@ -150,7 +166,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //根据选择的市场筛选出交易对
   async selectMarketData() {
     // console.log('this.selecedMarket', this.selecedMarket)
-    if(this.selecedMarket === '收藏区'){
+    if (this.selecedMarket === '收藏区') {
       return this.collectData
     }
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
@@ -171,8 +187,9 @@ export default class MarketStore extends ExchangeStoreBase {
   joinHome() {
     this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
   }
+
   //退出房间
-  clearRoom(){
+  clearRoom() {
     this.WebSocket.general.emit('joinRoom', {from: 'home', to: ''})
   }
 
@@ -188,9 +205,9 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('收藏 0', tradePairId, userId, operateType)
   }
 
-  async getRecommendCoins(){
+  async getRecommendCoins() {
     // console.log('getRecommendCoins', this.state.recommendData.length)
-    if(!this.state.recommendData.length){
+    if (!this.state.recommendData.length) {
       let result = await this.Proxy.getRecommendCoins()
       // console.log('this.state.recommendData', result)
       this.state.recommendData = result.data
