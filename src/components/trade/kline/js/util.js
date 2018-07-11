@@ -2,6 +2,7 @@ export class Util {
 
     static fromFloat(v, fractionDigits) {
         let text = v.toFixed(fractionDigits);
+        if (fractionDigits <= 0) return text;
         for (let i = text.length - 1; i >= 0; i--) {
             if (text[i] === '.')
                 return text.substring(0, i);
