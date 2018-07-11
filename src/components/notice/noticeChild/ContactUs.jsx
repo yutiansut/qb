@@ -26,11 +26,11 @@ export default class contactUs extends exchangeViewBase {
     const {controller} = this.props
     return (
       <div className="contact-wrap">
-        <h1>联系我们</h1>
+        <h1>{this.intl.get("notice-contact")}</h1>
         <ul>
-          <li>{`地址：${controller.configData.addr}`}</li>
-          <li>{`邮件：${controller.configData.contactEmailUrl}`}</li>
-          <li>{`网址：${controller.configData.netUrl}`}</li>
+          <li>{`${this.intl.get("notice-addr")}：${controller.configData.addr}`}</li>
+          <li>{`${this.intl.get("user-email")}：${controller.configData.contactEmailUrl}`}</li>
+          <li>{`${this.intl.get("notice-web")}：${controller.configData.netUrl}`}</li>
         </ul>
       </div>
     );

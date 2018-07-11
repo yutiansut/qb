@@ -47,21 +47,21 @@ export default class noticeContent extends exchangeViewBase {
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">
-          <h1>公告</h1>
-          <h2 className={this.state.noticeList.length ? 'hide' : ''}>暂无公告</h2>
+          <h1>{this.intl.get("notice")}</h1>
+          <h2 className={this.state.noticeList.length ? 'hide' : ''}>{this.intl.get("user-none")}</h2>
           <dl className={this.state.noticeList.length ? '' : 'hide'}>
             <dt>
-              <i>标题</i>
-              <em>类型</em>
-              <span>时间</span>
+              <i>{this.intl.get("notice-title")}</i>
+              <em>{this.intl.get("notice-type")}</em>
+              <span>{this.intl.get("time")}</span>
             </dt>
             {/*<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>*/}
             {this.state.noticeList.length && this.state.noticeList.map((v, index) => (
             <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
               <dd >
                 <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                <em>公告</em>
-                <span>{v.createdAt}</span>
+                <em>{this.intl.get("notice")}</em>
+                <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
               </dd>
             </Link>))}
           </dl>
@@ -74,20 +74,20 @@ export default class noticeContent extends exchangeViewBase {
         </div>
 
         <div className="news-wrap" >
-          <h1>资讯</h1>
+          <h1>{this.intl.get("information")}</h1>
           <h2 className={this.state.infoList.length ? 'hide' : ''}>暂无资讯</h2>
           <dl className={this.state.infoList.length ? '' : 'hide'}>
             <dt>
-              <i>标题</i>
-              <em>类型</em>
-              <span>时间</span>
+              <i>{this.intl.get("notice-title")}</i>
+              <em>{this.intl.get("notice-type")}</em>
+              <span>{this.intl.get("time")}</span>
             </dt>
             {this.state.infoList.length && this.state.infoList.map((v, index) => (<Link to={{pathname: `${this.props.match.url}/detail`, query: { infoId: v.activityId }}} key={index}>
               <dd>
               {/*<a href={`http://${v.source}`} target="_blank">*/}
                 <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                <em>资讯</em>
-                <span>{v.createdAt}</span>
+                <em>{this.intl.get("information")}</em>
+                <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
               {/*</a>*/}
               </dd>
             </Link>))}

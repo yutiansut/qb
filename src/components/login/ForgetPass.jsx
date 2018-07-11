@@ -72,12 +72,12 @@ export default class ForgetPass extends exchangeViewBase {
     let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
     if(!reg.test(this.state.passInput)) {
       this.setState({
-        errPass: '请输入正确格式的密码'
+        errPass: this.intl.get("user-checkNewPwd")
       })
     }
     if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
       this.setState({
-        errPassAgain: '两次密码不一致, 请重新输入'
+        errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
   }
@@ -85,7 +85,7 @@ export default class ForgetPass extends exchangeViewBase {
   checkAgainInput() {
     if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
       this.setState({
-        errPassAgain: '两次密码不一致, 请重新输入'
+        errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
   }
@@ -112,7 +112,7 @@ export default class ForgetPass extends exchangeViewBase {
     return (
       <div>
         <div className="find-pass-wrap">
-          <h1>找回密码</h1>
+          <h1>{this.intl.get("login-findPass")}</h1>
           <ul>
             <li>
               <p>{this.intl.get("login-userInput")}</p>
@@ -121,25 +121,25 @@ export default class ForgetPass extends exchangeViewBase {
             <li className="send-verify-li">
               <p>{this.intl.get("login-code")}</p>
               <div className="clearfix">
-                <Input placeholder="请输入邮箱／手机验证码" value={this.state.verifyInput} onInput={value => this.changeVerifyInput(value)}/>
+                <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.verifyInput} onInput={value => this.changeVerifyInput(value)}/>
                 <Button className="send-code-btn"
-                        title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && '重新获取' || `${this.state.verifyNum}s`) || this.state.verifyNum}
+                        title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
                         onClick={() => {this.getVerify(this.state.userInput, this.state.userType, 1)}}/>
               </div>
             </li>
             <li className="pass-li">
               <p>{this.intl.get("login-passInput")}</p>
-              <Input placeholder="请输入密码"
+              <Input placeholder={this.intl.get("user-inputNewPwd")}
                      oriType="password"
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
               <em>{this.state.errPass}</em>
-              <span>必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母</span>
+              <span>{this.intl.get("login-passRule")}</span>
             </li>
             <li>
-              <p>再输一遍</p>
-              <Input placeholder="请再输入一遍密码"
+              <p>{this.intl.get("login-passAgain")}</p>
+              <Input placeholder={this.intl.get("login-passAgainPlaceholder")}
                      oriType="password"
                      value={this.state.againInput}
                      onBlur={this.checkAgainInput}
@@ -147,14 +147,14 @@ export default class ForgetPass extends exchangeViewBase {
               <em>{this.state.errPassAgain}</em>
             </li>
             <li className="send-picture-li">
-              <p>图形验证码</p>
+              <p>{this.intl.get("user-popPicture")}</p>
               <div className="clearfix">
-                <Input placeholder="请输入图形验证码" value={this.state.picInput} onInput={value => this.changePicInput(value)}/>
+                <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePicInput(value)}/>
                 <img src={this.state.captcha || ''} alt="" className="picture-btn btn" onClick={this.getCaptchaVerify} />
               </div>
             </li>
             <li>
-              <Button title="确定"
+              <Button title={this.intl.get("sure")}
                       className={` ${this.canClick() ? 'can-click' : ''} pass-btn`}
                       disable={this.canClick() ? false : true}
                       onClick={() => {this.forgetLoginPass(this.state.userInput, this.state.userType, this.state.verifyInput, this.state.passInput, this.state.captchaId, this.state.picInput)}}/>

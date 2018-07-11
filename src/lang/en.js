@@ -83,7 +83,8 @@ export default function en(state) {
     sendAgain: "Send again",
     optionSuccess: "Operation successful",
     sure: "Subscription Period",
-    notice: "Announcement"
+    notice: "Announcement",
+    information: "News&Information"
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -232,7 +233,27 @@ export default function en(state) {
     "market-currencyInfo": "Currency details"
   };
   const notice = {
-    "activity-regist": "Sign up now"
+    "activity-regist": "Sign up now",
+    "notice-contact": "Contact Us",
+    "notice-detail": "Information details",
+    "notice-link": "Link",
+    "notice-recommend": "Recommend",
+    "notice-title": "Title",
+    "notice-type": "Type",
+    "notice-addr": "Address",
+    "notice-web": "网址",
+    "notice-appleTitle": "Listing Application and Specifications",
+    "notice-appleState1": "To protect the interests of our clients,",
+    "notice-appleState2": "will review and evaluate every trading product listed on our platform. Please provide following information and send it over to our email: ",
+    "notice-appleDetailTile": "Information should include but not limited to:",
+    "notice-appleContent1": "Contact Email，Name and title of contact person",
+    "notice-appleContent2": "Token information，name、abbr and logo etc.,",
+    "notice-appleContent3": "Issue date and amount, other exchange platforms you have listed",
+    "notice-appleContent4": "Project information, main features and official website",
+    "notice-appleContent5": "Core members and their backgrounds, Linkedin accounts' links (if applicable)'",
+    "notice-appleContent6": "ICO information, issue data and amount, raising coin/token types and percentage etc.,",
+    "notice-appleContent7": "Customer information, number of registered/active users, community addresses(if applicable)",
+    "notice-appleContent8": "White papers or other materials",
   };
   const order = {
     "order-current": "Current order",
@@ -394,8 +415,29 @@ export default function en(state) {
     "user-googleWarnings": "Warnings",
     "user-googleRemind1": "Please make sure you save these security keys：",
     "user-googleRemind2": "If you accidentally delete your account or change your cell phone, these security keys are the only way to help you restore your account.",
-    "user-googleInput": "Please fill in the verification code on the screen"
-
+    "user-googleInput": "Please fill in the verification code on the screen",
+    "user-inputEmail": "请输入邮箱账号",
+    "user-inputPhone": "请输入手机号",
+    "user-inputNewPwd": "请输入新密码",
+    "user-inputNowPwd": "请输入当前密码",
+    "user-inputAgainPwd": "再次输入密码",
+    "user-inputVerifyPhone": "请输入手机号验证码",
+    "user-inputVerifyEmail": "请输入邮箱验证码",
+    "user-inputVerifyGoogle": "请输入谷歌验证码",
+    "user-inputVerify": "请输入验证码",
+    "user-verifyEmail": "Email Verification Code",
+    "user-verifyPhone": "Cellphone Verification Code",
+    "user-checkAgainPwd": "Please ensure that both password entries match",
+    "user-checkNewPwd": "Code length must be 6~18 digits",
+    "user-checkEmail": "Invalid email address format",
+    "user-checkPhone": "Cellphone number incorrect",
+    "user-photoSucc": "上传成功",
+    "user-bindSucc": "Binding successful",
+    "user-setSucc": "Operation successful",
+    "user-modifiedSucc": "Modified successfully",
+    "user-addSucc": "Successfully added",
+    "user-delSucc": "Successfully deleted",
+    "user-outSucc": "退出成功"
   };
   const login = {
     "login-verify": "Verified login",
@@ -406,7 +448,12 @@ export default function en(state) {
     "login-passInput": "Password",
     "login-forget": "Forgot password",
     "login-read": "I have read and accept",
-    "login-readUser": "User Agreement"
+    "login-readUser": "User Agreement",
+    "login-placeholderPhoneAndEmail": "Cellphone number/ Email address",
+    "login-passRule": "New passwords must have at least 6 letters, numbers or special characters and cannot be only letters or only numbers",
+    "login-passAgain": "Confirm Password",
+    "login-passAgainPlaceholder": "请再输入一遍密码",
+    "login-findPass": "Retrieve password"
   };
   const help = {
     "help-fees": "Fees",

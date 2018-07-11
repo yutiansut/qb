@@ -30,7 +30,7 @@ export default class Login extends exchangeViewBase {
       codeInput: "",
       picInput: "",
       userType: 0, //0 phone 1email
-      verifyNum:"获取验证码",
+      verifyNum: this.intl.get("sendCode"),
       showPopup: false, // 提示弹窗
       popType: "tip1",
       popMsg: "登录成功",
@@ -138,16 +138,16 @@ export default class Login extends exchangeViewBase {
               <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
             </li>
             <li className="verify-li">
-              <Input placeholder="请输入图形验证码" value={this.state.picInput} onInput={value => this.changePic(value)}/>
+              <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePic(value)}/>
               <div className="picture-btn" >
                 <img src={this.state.captcha || ''} alt="" onClick={this.getCaptchaVerify}/>
               </div>
               {/*<LoginVerification controller={this.props.controller}/>*/}
             </li>
             <li className={`${this.state.titleIndex === 0 ? '' : 'hide'} send-code-li clearfix`}>
-              <Input placeholder="请输入邮箱／手机验证码" value={this.state.codeInput} onInput={value => this.changeCode(value)}/>
+              <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput} onInput={value => this.changeCode(value)}/>
               <Button className="send-code-btn"
-                      title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && '重新获取' || `${this.state.verifyNum}s`) || this.state.verifyNum}
+                      title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
                       onClick={()=>{this.getVerify(this.state.userInput, this.state.userType, 0)}}/>
             </li>
             <li>

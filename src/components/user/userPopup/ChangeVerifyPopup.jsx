@@ -21,9 +21,9 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
       popupInput2: "",
       popupInput3: "",
       contentList: [
-        {title: '谷歌验证', inputP: '请输入谷歌验证码'},
-        {title: '邮件验证', inputP: '请输入邮件验证码'},
-        {title: '短信验证', inputP: '请输入短信验证码'}
+        {title: this.intl.get("user-googleVerify"), inputP: this.intl.get("user-inputVerifyGoogle")},
+        {title: this.intl.get("user-verifyEmailTitle"), inputP: this.intl.get("user-inputVerifyEmail")},
+        {title: this.intl.get("user-verifyPhoneTitle"), inputP: this.intl.get("user-inputVerifyPhone")}
       ]
     }
     this.changeInput1 = this.changeInput1.bind(this)
@@ -64,7 +64,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
                     title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum}
                     onClick={()=>{this.props.getVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : ''), this.props.isType === 3 ? 0 : (this.props.isType === 1 ? 1 : ''), 9)}}/>
           </div>
-          <Input placeholder="请输入谷歌验证码" className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
+          <Input placeholder={this.intl.get("user-inputVerifyGoogle")} className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
           <Button className="set-btn" title={this.intl.get("sure")} onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
                                                                 this.props.isType === 3 ? 0 : this.props.isType,
                                                                 this.state.popupInput3,

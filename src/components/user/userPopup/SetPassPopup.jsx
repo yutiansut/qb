@@ -28,12 +28,61 @@ export default class SetPassPopup extends exchangeViewBase {
       errUser2: "", // 再次输入密码
       errUser3: "", // 修改密码
       popupTypeList: [
-        {title: this.intl.get("user-popBindEmail"), numTitle: this.intl.get("user-popEmail"), numInput: '请输入邮箱账号', verifyTitle: '邮箱验证码', verifyInput: '请输入邮箱验证码', btnTitle: this.intl.get("user-popBind")},
-        {title: this.intl.get("help-phone-bind"), numTitle: this.intl.get("phone"), numInput: '请输入手机号', verifyTitle: '手机号验证码', verifyInput: '请输入手机号验证码', btnTitle: this.intl.get("user-popBind")},
-        {title: this.intl.get("user-popSetLoginPwd"), numTitle: this.intl.get("user-newPwd"), numInput: '请输入新密码', numTitle2: '再次输入新密码', numInput2: '请再次输入新密码', btnTitle: this.intl.get("set")},
-        {title: this.intl.get("user-popRecoverLoginPwd"), numTitleNew: this.intl.get("user-currentPwd"), numInputNew: '请输入当前登录密码', numTitle: this.intl.get("user-newPwd"), numInput: '请输入新密码', numTitle2: '再次输入新密码', numInput2: '请再次输入新密码', btnTitle: this.intl.get("alter")},
-        {title: this.intl.get("user-popSetFundPwd"), numTitle: this.intl.get("user-newPwd"), numInput: '请输入新密码', numTitle2: '再次输入密码', numInput2: '请再次输入密码', verifyTitle: '手机验证码', verifyInput: '请输入手机号验证码', btnTitle: this.intl.get("save")},
-        {title: this.intl.get("user-popRecoverFundPwd"), numTitleNew: this.intl.get("user-currentPwd"), numInputNew: '请输入当前登录密码', numTitle: this.intl.get("user-newPwd"), numInput: '请输入新密码', numTitle2: '再次输入密码', numInput2: '请再次输入密码', verifyTitle: '手机验证码', verifyInput: '请输入手机号验证码', btnTitle: this.intl.get("save")},
+        {
+          title: this.intl.get("user-popBindEmail"),
+          numTitle: this.intl.get("user-popEmail"),
+          numInput: this.intl.get("user-inputEmail"),
+          verifyTitle: this.intl.get("user-verifyEmail"),
+          verifyInput: '请输入邮箱验证码',
+          btnTitle: this.intl.get("user-popBind")
+        },
+        {
+          title: this.intl.get("help-phone-bind"),
+          numTitle: this.intl.get("phone"),
+          numInput: this.intl.get("user-inputPhone"),
+          verifyTitle: this.intl.get("user-verifyPhone"),
+          verifyInput: '请输入手机号验证码',
+          btnTitle: this.intl.get("user-popBind")
+        },
+        {
+          title: this.intl.get("user-popSetLoginPwd"),
+          numTitle: this.intl.get("user-newPwd"),
+          numInput: this.intl.get("user-inputNewPwd"),
+          numTitle2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("user-inputAgainPwd"),
+          btnTitle: this.intl.get("set")
+        },
+        {
+          title: this.intl.get("user-popRecoverLoginPwd"),
+          numTitleNew: this.intl.get("user-currentPwd"),
+          numInputNew: this.intl.get("user-inputNowPwd"),
+          numTitle: this.intl.get("user-newPwd"),
+          numInput: this.intl.get("user-inputNewPwd"),
+          numTitle2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("user-inputAgainPwd"),
+          btnTitle: this.intl.get("alter")
+        },
+        {
+          title: this.intl.get("user-popSetFundPwd"),
+          numTitle: this.intl.get("user-newPwd"),
+          numInput: this.intl.get("user-inputNewPwd"),
+          numTitle2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("user-inputAgainPwd"),
+          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : '邮箱验证码',
+          verifyInput: this.props.fundPassType === 3 ? '请输入手机号验证码' : '请输入邮箱验证码',
+          btnTitle: this.intl.get("save")},
+        {
+          title: this.intl.get("user-popRecoverFundPwd"),
+          numTitleNew: this.intl.get("user-currentPwd"),
+          numInputNew: this.intl.get("user-inputNowPwd"),
+          numTitle: this.intl.get("user-newPwd"),
+          numInput: this.intl.get("user-inputNewPwd"),
+          numTitle2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("user-inputAgainPwd"),
+          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : (this.props.fundPassType === 1 ?' 邮箱验证码' : '谷歌验证码'),
+          verifyInput: this.props.fundPassType === 3 ? '请输入手机验证码' : (this.props.fundPassType === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+          btnTitle: this.intl.get("save")
+        },
       ]
     }
     this.changeInput1 = this.changeInput1.bind(this)
@@ -82,7 +131,7 @@ export default class SetPassPopup extends exchangeViewBase {
     if (this.props.isType === 4) { // 验证密码
       if(!reg2.test(this.state.popupInput1)) {
         this.setState({
-          errUser3: '请输入正确格式的密码'
+          errUser3: this.intl.get("user-checkNewPwd")
         })
       }
     }
@@ -94,14 +143,14 @@ export default class SetPassPopup extends exchangeViewBase {
     if (this.props.isType === 1) { // 验证邮箱
       if(!reg1.test(this.state.popupInput2)) {
         this.setState({
-          errUser: '请输入正确的邮箱'
+          errUser: this.intl.get("user-checkEmail")
         })
       }
     }
     if ([3, 4, 5].includes(this.props.isType)) { // 验证密码
       if(!reg2.test(this.state.popupInput2)) {
         this.setState({
-          errUser: '请输入正确格式的密码'
+          errUser: this.intl.get("user-checkNewPwd")
         })
       }
     }
@@ -111,7 +160,7 @@ export default class SetPassPopup extends exchangeViewBase {
     if ([3, 4, 5].includes(this.props.isType)) { // 再次输入密码
       if(this.state.popupInput3 && (this.state.popupInput3 !== this.state.popupInput2)) {
         this.setState({
-          errUser2: '两次密码不一致, 请重新输入'
+          errUser2: this.intl.get("user-checkAgainPwd")
         })
       }
     }
@@ -181,7 +230,7 @@ export default class SetPassPopup extends exchangeViewBase {
               </li>
               <li className={this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
                 <p>{this.intl.get("user-popGoole")}</p>
-                <Input placeholder= "请输入谷歌验证码"
+                <Input placeholder= {this.intl.get("user-inputVerifyGoogle")}
                        value={this.state.popupInput6}
                        onInput={value => this.changeInput6(value)}/>
               </li>

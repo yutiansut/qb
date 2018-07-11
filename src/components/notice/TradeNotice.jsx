@@ -35,7 +35,7 @@ export default class tradeNotice extends exchangeViewBase {
   render() {
     // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
-        <h3>资讯</h3>
+        <h3>{this.intl.get("information")}</h3>
         {this.state.infoList && this.state.infoList.length ? <ul>
             {this.state.infoList.map((v, index) => <li key={index}>
                 <p>
@@ -47,7 +47,7 @@ export default class tradeNotice extends exchangeViewBase {
                 </p>
                 <span>{v.createdAt}</span>
               </li>)}
-          </ul> : <div>暂无资讯</div>}
+          </ul> : <div>{this.intl.get("user-none")}</div>}
       </div>;
   }
 }

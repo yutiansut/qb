@@ -26,9 +26,9 @@ export default class User extends exchangeViewBase {
     return (
       <div className="clearfix notice-wrap">
         <ul className="notice-nav fl">
-          <li><NavLink activeClassName="active" to={`${match.url}/content`} >资讯公告</NavLink></li>
-          <li><NavLink activeClassName="active" to={`${match.url}/contact`}>联系我们</NavLink></li>
-          <li><NavLink activeClassName="active" to={`${match.url}/apply`}>上币申请</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/content`} >{this.intl.get("footer-info")}</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/contact`}>{this.intl.get("notice-contact")}</NavLink></li>
+          <li><NavLink activeClassName="active" to={`${match.url}/apply`}>{this.intl.get("footer-request")}</NavLink></li>
         </ul>
         <div className="notice-content fl">
           <Switch>

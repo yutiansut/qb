@@ -47,9 +47,9 @@ export default class homeNotice extends exchangeViewBase {
     return (
       <div className="notice-detail-wrap ">
         <h1>
-          <Link to="/home">首页</Link>&gt;
-          <Link to="/notice">资讯概览</Link>&gt;
-          <Link to="/notice/content/detail">资讯详情</Link>
+          <Link to="/home">{this.intl.get("header-home")}</Link>&gt;
+          <Link to="/notice">{this.intl.get("infoView")}</Link>&gt;
+          <Link to="/notice/content/detail">{this.intl.get("notice-detail")}</Link>
         </h1>
         <h2 className="clearfix">
           <span>{this.props.controller.configData.language === 'zh-CN' ? activityInfo.subjectCn : activityInfo.subjectEn}</span>
@@ -66,11 +66,11 @@ export default class homeNotice extends exchangeViewBase {
           <img src={activityInfo.titleImage} alt=""/>
         </div>
         <h5>
-          <span>链接：</span>
+          <span>{this.intl.get("notice-link")}：</span>
           <a href={`http://${activityInfo.source}`} target="_blank">{`http://${activityInfo.source}`}</a>
         </h5>
         <h6>
-          <span>推荐：</span>
+          <span>{this.intl.get("notice-recommend")}：</span>
           <a href={activityInfo.recommendLink} target="_blank">{this.props.controller.configData.language === 'zh-CN' ? activityInfo.recommendCn : activityInfo.recommendEn}</a>
         </h6>
       </div>

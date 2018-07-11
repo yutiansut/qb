@@ -82,7 +82,8 @@ export default function zh(state) {
     optionSuccess: '操作成功',
     close: '关闭',
     sure: "确认",
-    notice: "公告"
+    notice: "公告",
+    information: "资讯"
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -232,6 +233,27 @@ export default function zh(state) {
   };
   const notice = {
     "activity-regist": "立即注册",
+    "notice-contact": "联系我们",
+    "notice-detail": "资讯详情",
+    "notice-link": "链接",
+    "notice-recommend": "推荐",
+    "notice-title": "标题",
+    "notice-type": "类型",
+    "notice-addr": "地址",
+    "notice-web": "网址",
+    "notice-appleTitle": "上币申请信息及说明",
+    "notice-appleState1": "为了保护投资者的利益,",
+    "notice-appleState2": "会对所有上线交易品种进行审核与评估，请申请人/机构提供相关信息并发送至邮箱：",
+    "notice-appleDetailTile": "所提供信息需包含但不仅限于：",
+    "notice-appleContent1": "联系邮箱及联系人姓名",
+    "notice-appleContent2": "币种信息，名称、缩写及logo等",
+    "notice-appleContent3": "币种发行日期及发行量，已上交易平台（若有）",
+    "notice-appleContent4": "项目信息、核心价值及官方网站",
+    "notice-appleContent5": "团队主要成员及其背景，团队成员Linkdelin链接（若有）",
+    "notice-appleContent6": "ICO信息，发行时间、数量、兑换比例等信息",
+    "notice-appleContent7": "用户及社区信息，现有注册、活跃用户数量及社区链接",
+    "notice-appleContent8": "白皮书或其他补充说明材料",
+
   };
   const order = {
     "order-current": "当前订单",
@@ -382,8 +404,31 @@ export default function zh(state) {
     "user-googleWarnings": "警告",
     "user-googleRemind1": "请您务必将密钥记录下来：",
     "user-googleRemind2": "如果误删或是更换手机，手动输入密钥是您唯一恢复的方式。",
-    "user-googleInput": "请输入显示的验证码，开启验证功能"
-
+    "user-googleInput": "请输入显示的验证码，开启验证功能",
+    "user-inputEmail": "请输入邮箱账号",
+    "user-inputPhone": "请输入手机号",
+    "user-inputNewPwd": "请输入新密码",
+    "user-inputNowPwd": "请输入当前密码",
+    "user-inputAgainPwd": "再次输入密码",
+    "user-inputVerifyPhone": "请输入手机号验证码",
+    "user-inputVerifyEmail": "请输入邮箱验证码",
+    "user-inputVerifyGoogle": "请输入谷歌验证码",
+    "user-inputVerify": "请输入验证码",
+    "user-verifyEmail": "邮箱验证码",
+    "user-verifyPhone": "手机号验证码",
+    "user-verifyEmailTitle": "邮箱验证",
+    "user-verifyPhoneTitle": "短信验证",
+    "user-checkAgainPwd": "请保证两次输入的新密码一致",
+    "user-checkNewPwd": "登录密码长度必须在6-18位之间",
+    "user-checkEmail": "邮箱格式不正确",
+    "user-checkPhone": "手机号有误",
+    "user-photoSucc": "上传成功",
+    "user-bindSucc": "绑定成功",
+    "user-setSucc": "设置成功",
+    "user-modifiedSucc": "修改成功",
+    "user-addSucc": "添加成功",
+    "user-delSucc": "删除成功",
+    "user-outSucc": "退出成功"
   };
   const login = {
     "login-verify": "验证登录",
@@ -395,6 +440,11 @@ export default function zh(state) {
     "login-forget": "忘记密码",
     "login-read": "我已阅读并同意",
     "login-readUser": "用户协议",
+    "login-placeholderPhoneAndEmail": "请输入邮箱／手机验证码",
+    "login-passRule": "必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母",
+    "login-passAgain": "再输一遍",
+    "login-passAgainPlaceholder": "请再输入一遍密码",
+    "login-findPass": "找回密码"
   };
   const help = {
     "help-fees": "费率标准",

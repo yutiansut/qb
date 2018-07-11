@@ -108,7 +108,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result && result.ret === 101 ? 'tip1': 'tip3',
-      popMsg: result && result.ret === 101 ? "上传成功" : result.msg
+      popMsg: result && result.ret === 101 ? this.view.intl.get("user-photoSucc") : result.msg // 上传成功
     })
     result.ret === 101 && this.view.setState({userAuth: {state: 1}})
   }
@@ -127,7 +127,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "绑定成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-bindSucc"),
       showSet: result ? true : false
     })
     if (result === null && mode === 0) {
@@ -151,7 +151,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "设置成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
       showSet: result ? true : false,
     })
     if (result === null) {
@@ -177,7 +177,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "设置成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
       showSet: result ? true : false,
     })
     if (result === null) {
@@ -205,7 +205,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "设置成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
       showSet: result ? true : false
     })
   }
@@ -235,7 +235,7 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         remindPopup: true,
         popType: result ? 'tip3': 'tip1',
-        popMsg: result ? result.msg : '修改成功',
+        popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc"),
         userInfo,
         showChange: result ? true : false,
         verifyList
@@ -256,7 +256,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "添加成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-addSucc"),
     })
 
     if (result === null) {
@@ -277,7 +277,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : "删除成功",
+      popMsg: result ? result.msg : this.view.intl.get("user-delSucc"),
     })
 
     if (result === null) {
@@ -318,7 +318,7 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         remindPopup: true,
         popType: result ? 'tip3': 'tip1',
-        popMsg: result ? result.msg : "修改成功"
+        popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
       })
       console.log('改变通知', result, index)
     }
@@ -333,7 +333,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result && result.errCode ? 'tip3': 'tip1',
-      popMsg: result && result.errCode ? result.msg : '退出成功',
+      popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-outSucc"),
     })
     console.log('退出其他设备', result)
   }
