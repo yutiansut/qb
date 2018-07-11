@@ -16,18 +16,33 @@ import StorageApi from '../libs/Storage' //引入storage
 const STORAGE = {
   install(storageList) {
     storageList.forEach(v => {
+
+      STORAGE[v.name] = {}
+
+      //仅适用sessionStorage
+      if(v.onlySession){
+        // 存SessionStorage
+        STORAGE[v.name].set = value => StorageApi.setSession(v.name, value)
+
+        // getSessionStorage
+        STORAGE[v.name].get = () => StorageApi.getSession(v.name)
+
+        // 删除SessionStorage
+        STORAGE[v.name].remove = () => StorageApi.removeSession(v.name)
+
+        return
+      }
+
       if (v.useDefault) {
         let defaultValue = StorageApi.getStorage(v.name) || v.default;
         StorageApi.setStorage(v.name, defaultValue, v.duration, v.expiryTime)
       }
 
-      STORAGE[v.name] = {}
-
       STORAGE[v.name].handler = (...params) => params.pop() ? StorageApi.addStorage(v.name, ...params) : StorageApi.delStorage(v.name, ...params)
-
 
       // 存Storage
       STORAGE[v.name].set = (value, duration = v.duration, expiryTime = v.expiryTime, ...params) => StorageApi.setStorage(v.name, value, duration, expiryTime, ...params)
+
 
       // 添加一项
       STORAGE[v.name].add = (value, index, arrPath = v.arrPath, duration = v.duration, ...params) => StorageApi.addStorage(v.name, value, index, arrPath, duration, ...params)

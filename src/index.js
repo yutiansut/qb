@@ -27,6 +27,7 @@ const renderDom = async Component => {
   await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig, StorageConfig})
   WebSocketConfig.useWebSocket && await Websocket.general()
 
+
   // await import('./App')
   // console.log(Date.now())
   // console.log(111222333)

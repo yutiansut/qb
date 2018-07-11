@@ -87,6 +87,7 @@ export default class MarketController extends ExchangeControllerBase {
     let homeMarketPairData = this.getCollectArr()
     // console.log('collectMarket', homeMarketPairData)
     this.store.setSelecedMarket('收藏区');
+    this.store.setHomeMarketPairData(homeMarketPairData);
     this.store.setSort([], 0)
     this.view.setState({
       searchValue: '',
@@ -283,7 +284,7 @@ export default class MarketController extends ExchangeControllerBase {
   //为交易模块提供价格以及交易对的信息
   setDealMsg() {
     //改变deal模块中的信息
-    // console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData)
+    console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData, this.store.state.tradePair)
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
       dealMsg = {
         tradePair: this.store.state.tradePair,
