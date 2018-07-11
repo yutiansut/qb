@@ -437,7 +437,11 @@ export default function en(state) {
     "user-modifiedSucc": "Modified successfully",
     "user-addSucc": "Successfully added",
     "user-delSucc": "Successfully deleted",
-    "user-outSucc": "退出成功"
+    "user-outSucc": "退出成功",
+    "user-bigPicture": "picture is too big, must be less than 10M",
+    "user-uploadPicture": "请上传图片",
+    "user-nonePicture": "信息不完整",
+
   };
   const login = {
     "login-verify": "Verified login",
@@ -453,7 +457,8 @@ export default function en(state) {
     "login-passRule": "New passwords must have at least 6 letters, numbers or special characters and cannot be only letters or only numbers",
     "login-passAgain": "Confirm Password",
     "login-passAgainPlaceholder": "请再输入一遍密码",
-    "login-findPass": "Retrieve password"
+    "login-findPass": "Retrieve password",
+    "login-inputVerifyPhoneAndEmail": "Please fill in correct mobile phone number"
   };
   const help = {
     "help-fees": "Fees",

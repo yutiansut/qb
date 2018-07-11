@@ -36,7 +36,9 @@ export default class Login extends exchangeViewBase {
       popMsg: "登录成功",
       showTwoVerify: false,
       verifyType: "", // 密码登录两步认证弹窗
-      checkState: true // checkbox判断
+      checkState: true, // checkbox判断
+      userErr: "", // 手机号/邮箱错误
+      pwdErr: "" // 密码错误
     }
     const {controller} = props
     //绑定view
@@ -54,6 +56,8 @@ export default class Login extends exchangeViewBase {
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
     this.checkUser = this.checkUser.bind(this)
+    this.checkUserInput = this.checkUserInput.bind(this)
+    this.checkPassInput = this.checkPassInput.bind(this)
 
   }
 
@@ -62,6 +66,10 @@ export default class Login extends exchangeViewBase {
       titleIndex: i,
       userInput: "",
       picInput: "",
+      codeInput: "",
+      passInput: "",
+      userErr: "", // 手机号/邮箱错误
+      pwdErr: "" // 密码错误
     })
     this.getCaptchaVerify()
   }
@@ -74,11 +82,12 @@ export default class Login extends exchangeViewBase {
     } else {
       this.setState({userType: 0})
     }
+    this.state.userErr && (this.setState({userErr: ""}))
   }
   changePass(value) {
     this.setState({passInput: value});
     console.log(2, value)
-
+    this.state.pwdErr && (this.setState({pwdErr: ""}))
   }
   changeCode(value) {
     this.setState({codeInput: value});
@@ -90,8 +99,10 @@ export default class Login extends exchangeViewBase {
   }
 
   canClick() {
-    if (this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
-    if (this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
+    if (this.state.titleIndex === 0 && this.state.userErr) return false
+    if (this.state.titleIndex === 1 && this.state.userErr && this.state.pwdErr) return false
+    if (this.state.titleIndex === 0 && this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
+    if (this.state.titleIndex === 1 && this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false
   }
 
@@ -100,6 +111,29 @@ export default class Login extends exchangeViewBase {
       checkState: event.target.checked
     });
   }
+
+  checkUserInput() { // 手机号／邮箱
+    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
+        reg2 = /^1[3578]\d{9}$/;
+
+    if(!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
+      this.setState({
+        userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
+      })
+    }
+  }
+
+  checkPassInput() { // 密码
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/
+    if(!reg.test(this.state.passInput)) {
+      this.setState({
+        pwdErr: this.intl.get("user-checkNewPwd")
+      })
+    }
+  }
+
+
+
   componentWillMount() {
     // this.bannerSwiper()
   }
@@ -131,11 +165,20 @@ export default class Login extends exchangeViewBase {
           </h1>
           <ul>
             <li>
-              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUser(value)}/>
+              <Input placeholder={this.intl.get("login-userInput")}
+                     value={this.state.userInput}
+                     onInput={value => this.changeUser(value)}
+                     onBlur={this.checkUserInput}/>
+              <em>{this.state.userErr}</em>
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
-              <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput} onInput={value => this.changePass(value)}/>
+              <Input placeholder={this.intl.get("login-passInput")}
+                     oriType="password"
+                     value={this.state.passInput}
+                     onInput={value => this.changePass(value)}
+                     onBlur={this.checkPassInput}/>
               <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
+              <em>{this.state.pwdErr}</em>
             </li>
             <li className="verify-li">
               <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePic(value)}/>

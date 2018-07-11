@@ -161,40 +161,40 @@ export default class UserController extends ExchangeControllerBase {
     console.log('设置密码', result)
   }
 
-  async setFundPass(account, mode, pass, captchaCode, captchaId, code) { // 设置资金密码
-    let result = await this.store.Proxy.setFundPwd({
-      "userId": this.store.uid,
-      "token": this.store.token,
-      account,
-      mode, // 0:phone 1:email
-      pass,
-      captchaCode, // 图形验证码，没有就传空
-      captchaId, // 图形验证码id，没有就传空
-      code,
-      "os": 3, // 1:android 2:iOS 3:browser
-    })
-    console.log('设置密码', result)
-    this.view.setState({
-      remindPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
-      showSet: result ? true : false,
-    })
-    if (result === null) {
-      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
-      this.store.state.userInfo.fundPwd = 0
+  // async setFundPass(account, mode, pass, captchaCode, captchaId, code) { // 设置资金密码
+  //   let result = await this.store.Proxy.setFundPwd({
+  //     "userId": this.store.uid,
+  //     "token": this.store.token,
+  //     account,
+  //     mode, // 0:phone 1:email
+  //     pass,
+  //     captchaCode, // 图形验证码，没有就传空
+  //     captchaId, // 图形验证码id，没有就传空
+  //     code,
+  //     "os": 3, // 1:android 2:iOS 3:browser
+  //   })
+  //   console.log('设置密码', result)
+  //   this.view.setState({
+  //     remindPopup: true,
+  //     popType: result ? 'tip3': 'tip1',
+  //     popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
+  //     showSet: result ? true : false,
+  //   })
+  //   if (result === null) {
+  //     this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
+  //     this.store.state.userInfo.fundPwd = 0
+  //
+  //   }
+  //   console.log('设置密码', result, this.store.state.userInfo.fundPwd)
+  // }
 
-    }
-    console.log('设置密码', result, this.store.state.userInfo.fundPwd)
-  }
-
-  async modifyFundPwd(account, mode, oldPass, newPass, captchaCode, captchaId, code) { // 修改资金密码
-    let result = await this.store.Proxy.setFundPwd({
+  async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 修改资金密码
+    let result = await this.store.Proxy.modifyFundPwd({
       "userId": this.store.uid,
       "token": this.store.token,
       account,
       mode, // 0:phone 1:email 2:google
-      oldPass,
+      opType, // 0:设置资金密码 1:修改资金密码
       newPass,
       captchaCode, // 图形验证码，没有就传空
       captchaId, // 图形验证码id，没有就传空

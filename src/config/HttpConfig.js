@@ -28,7 +28,7 @@ export default {
     {name: 'uploadUserAuth', data: {url: '/user/', method: 'post'}, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true}, // 上传用户认证信息
     {name: 'getLoginPwd', data: {url: '/user/', method: 'post'}, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes', needToken: true}, // 设置登录密码
     {name: 'getVerifyCode', data: {url: '/common/', method: 'post'}, action: 'getCode', actionBack: 'getCodeRes'}, // 获取验证码
-    {name: 'setFundPwd', data: {url: '/user/', method: 'post'}, action: 'setFundPass', actionBack: 'setFundPassRes', needToken: true}, // 设置资金密码
+    // {name: 'setFundPwd', data: {url: '/user/', method: 'post'}, action: 'setFundPass', actionBack: 'setFundPassRes', needToken: true}, // 设置资金密码
     {name: 'modifyFundPwd', data: {url: '/user/', method: 'post'}, action: 'modifyFundPass', actionBack: 'modifyFundPassRes', needToken: true}, // 修改资金密码
     {name: 'bindUser', data: {url: '/user/', method: 'post'}, action: 'bindAccount', actionBack: 'bindAccountRes', needToken: true}, // 绑定手机邮箱
     {name: 'getGoogle', data: {url: '/user/', method: 'post'}, action: 'getGoogleSecret', actionBack: 'getGoogleSecretRes', needToken: true}, // 获取谷歌验证密钥

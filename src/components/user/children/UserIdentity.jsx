@@ -24,6 +24,8 @@ export default class userIdentity extends exchangeViewBase {
       image2: '', // 上传照片用于存储ID
       image3: '', // 上传照片用于存储ID
       remindPopup: false,
+      popType:"",
+      popType:"",
       checkVerifyArr: true, // 单选是否能够点击
       checkState: true, // 同意协议单选框按钮
       photoArr: [
@@ -75,8 +77,22 @@ export default class userIdentity extends exchangeViewBase {
   }
   async selectPhoto() { // 上传图片
     let file = this.refs.files.files[0];
-    if(!file) return
-    if(file && file.size > 10485760) return
+    if(!file) {
+      this.setState({
+        remindPopup: true,
+        popType: "tip3",
+        popMsg: this.intl.get("user-uploadPicture"),
+      })
+      return
+    }
+    if(file && file.size > 10485760) {
+      this.setState({
+        remindPopup: true,
+        popType: "tip3",
+        popMsg: this.intl.get("user-bigPicture"),
+      })
+      return
+    }
     this.state.showPhotoList[this.state.imgUrlIndex] = this.getObjectURL(file);
     this.setState({
       showPhotoList: this.state.showPhotoList.concat([])
@@ -122,7 +138,7 @@ export default class userIdentity extends exchangeViewBase {
     this.setState({numberValue: evt});
   }
   canClick() {
-    if (this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image) return true
+    if (this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image3) return true
     return false
   }
   checkAgree(event) {

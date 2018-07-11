@@ -60,7 +60,7 @@ export default class homeNotice extends exchangeViewBase {
 
   }
 
-  componentWillunmount() {
+  componentWillUnmount() {
     this.props.controller.swiperStop("carousel");
   }
 
@@ -77,11 +77,11 @@ export default class homeNotice extends exchangeViewBase {
           </li>)}
         </ul>
         <ul style={{top: this.state.top2 + "%"}}>
-          {this.state.noticeList.map((v, index) => (
-            <li key={index}>
+          {this.state.noticeList.map((v, index) => <li key={index}>
+            <Link to={`notice/content/detail?noticeId=${v.activityId}`}>
               {this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}
-            </li>
-          ))}
+            </Link>
+          </li>)}
         </ul>
       </div>}
     </div>;

@@ -15,6 +15,8 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   getVerify(account, mode, type) { // 获取验证码
+    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3578]\d{9}$/;
+    if(!reg1.test(this.view.state.userInput) && !reg2.test(this.view.state.userInput)) return
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
@@ -33,9 +35,19 @@ export default class LoginController extends ExchangeControllerBase {
 
   //登录
   login(account, code, type, mode, captchaId, captchaCode, deviceFlag1, deviceFlag2){
+    console.log(112, account, type)
     let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
-    let keyArr = ['phone','email']
+    let keyArr = ['phone','email'];
+    // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3578]\d{9}$/;
     obj[keyArr[type]] = account
+    // if (type === 0 && !reg2.test(account)) { // 手机
+    //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: this.view.intl.get("user-checkPhone")})
+    //   return
+    // }
+    // if (type === 1 && !reg1.test(account)) { // 邮箱
+    //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: this.view.intl.get("user-checkEmail")})
+    //   return
+    // }
     this.store.login(obj)
   }
 
@@ -72,7 +84,7 @@ export default class LoginController extends ExchangeControllerBase {
       token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
     })
     console.log('忘记密码', result)
-    this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : "修改成功"})
+    this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")})
   }
 
   async initLoginVerification() { // 获取手势验证

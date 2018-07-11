@@ -65,8 +65,8 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
     this.clearVerify = controller.clearVerify.bind(controller) // 清除倒计时
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
-    this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
-    this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置资金密码
+    // this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
+    this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置修改资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getUserCreditsNum = controller.getUserCreditsNum.bind(controller) // 获取用户积分数据
     this.getUserAuthData = controller.getUserAuthData.bind(controller) // 获取认证信息
@@ -340,7 +340,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    getVerify = {this.getVerify}
                    bindUser = {this.bindUser}
                    setLoginPass = {this.setLoginPass}
-                   setFundPass = {this.setFundPass}
+                   // setFundPass = {this.setFundPass}
                    modifyFundPwd = {this.modifyFundPwd}
                    fundPassType = {this.state.userInfo.fundPassVerify}
                    captcha = {this.state.captcha}

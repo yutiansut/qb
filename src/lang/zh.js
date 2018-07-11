@@ -428,7 +428,10 @@ export default function zh(state) {
     "user-modifiedSucc": "修改成功",
     "user-addSucc": "添加成功",
     "user-delSucc": "删除成功",
-    "user-outSucc": "退出成功"
+    "user-outSucc": "退出成功",
+    "user-bigPicture": "文件太大，请不要超过10M",
+    "user-uploadPicture": "请上传图片",
+    "user-nonePicture": "信息不完整",
   };
   const login = {
     "login-verify": "验证登录",
@@ -444,7 +447,8 @@ export default function zh(state) {
     "login-passRule": "必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母",
     "login-passAgain": "再输一遍",
     "login-passAgainPlaceholder": "请再输入一遍密码",
-    "login-findPass": "找回密码"
+    "login-findPass": "找回密码",
+    "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱"
   };
   const help = {
     "help-fees": "费率标准",
