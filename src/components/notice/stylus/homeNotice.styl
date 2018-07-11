@@ -3,39 +3,41 @@
 .home-notice-wrap
   width 100%
   padding-top .7rem
+  position relative
   background $normal-white-color
   .hide
     display none
   .home-notice-content
     //position relative
     //margin-left 50%
-    transform translateX(50%)
-    margin-left -5%
+    //transform translateX(-50%)
+    //margin-left -5%
     position relative
+    width 100%
+    //left 50%
     height .22rem
     line-height .22rem
     overflow hidden
-    p
-      float left
-      position relative
-      padding-left .2rem
-      &:before
-        position absolute
-        top .05rem
-        left 0
-        width .15rem
-        height .15rem
-        content ''
-        background url(/static/img/tongzhi.svg) no-repeat
-        background-size .15rem .15rem
+
     ul
       position absolute
-      float left
       width 100%
-      left .6rem
       li
         height .22rem
         cursor pointer
+        text-align center
+        i
+          position relative
+          padding-left .2rem
+          &:before
+            position absolute
+            top .05rem
+            left 0
+            width .15rem
+            height .15rem
+            content ''
+            background url(/static/img/tongzhi.svg) no-repeat
+            background-size .15rem .15rem
         &:hover
           text-decoration underline
 
