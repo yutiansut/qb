@@ -141,9 +141,9 @@ export default class Wallets extends exchangeViewBase {
                     {item.coinName.toUpperCase()}
                   </td>
                   <td className="fullname"><NavLink to={{pathname: `/help/currency/`, query: { currency: item.coinName }}}>{item.fullName}</NavLink></td>
-                <td className="avail">{Number(item.availableCount).format({ number: "property" })}</td>
-                <td className="lock">{Number(item.frozenCount).format({ number: "property" })}</td>
-                  <td className="tobtc">{(Number(item.valuationBTC)).format({ number: "property" })}</td>
+                <td className="avail">{Number(item.availableCount).format({number: "property" })}</td>
+                <td className="lock">{Number(item.frozenCount).format({number: "property" })}</td>
+                  <td className="tobtc">{(Number(item.valuationBTC)).format({number: "property" })}</td>
                   <td className="handle">
                     <Button type="base" theme="main" title={this.intl.get('deposit')} onClick={()=>{this.verify(item.coinName)}}/>
                     <NavLink to={{ pathname: `/wallet/extract/`, query: { currency: item.coinName } }}>
