@@ -208,6 +208,10 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
       showSet: result ? true : false
     })
+    if (result === null && opType === 0) {
+      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
+      this.store.state.userInfo.fundPwd = 0
+    }
   }
 
   async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
