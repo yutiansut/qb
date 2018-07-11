@@ -127,7 +127,7 @@ export default class TradePlan extends ExchangeViewBase {
     )
   }
   render() {
-    console.log('设置密码', this.props.controller.userController.userVerify)
+    // console.log('设置密码', this.props.controller.userController.userVerify.fundPwd)
     return (
       <div className='trade-plan-deal'>
         <div className='deal-entrust'>
