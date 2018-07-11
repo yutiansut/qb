@@ -276,4 +276,13 @@ export default class AssetStore extends ExchangeStoreBase {
     //   item => item.address !== address
     // );
   }
+  // 验证资金密码
+  async verifyPass(fundPass){
+    let result = await this.Proxy.verifyFundPass({
+      userId: this.controller.userId,
+      token: this.controller.token,
+      fundPass: fundPass
+    });
+    return result;
+  }
 }

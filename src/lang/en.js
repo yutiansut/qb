@@ -105,6 +105,7 @@ export default function en(state) {
     608: "Wrong verification code",
     609: "Wrong operation type",
     610: "Same as the original password",
+    612: 'Password wrong, your account has been frozen, try after 30mins！',
     616: "Password is not set",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
@@ -119,6 +120,7 @@ export default function en(state) {
     710: "Withdrawal: cannot find the to address",
     711: "cws error",
     712: "The withdrawal address format is wrong",
+    713: 'This address already exists',
     1001: "Connection banned",
     1002: "The Token passed in during connection is invalid",
     2001: "Google validation failed",
@@ -224,7 +226,10 @@ export default function en(state) {
     "asset-incomplete": "Information incomplete!",
     "asset-add-success": "Successfully added!",
     "asset-delet-fail": "Delete failed!",
-    "asset-input-address": "Please select a withdrawal address"
+    "asset-input-address": "Please select a withdrawal address",
+    "asset-password-unset": "You haven't created a funding password, cannot withdraw!",
+
+
   };
   const market = {
     "market-favorite": "Favorites",

@@ -95,10 +95,10 @@ export default class Extract extends exchangeViewBase {
       this.props.location.query && this.props.location.query.currency;
     currency && this.setState({ currency: currency, value: currency });
     await this.getWalletList();
+    await this.getExtract();
+    this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getTradePair(currency || this.state.currency);
     this.getCurrencyAmount(currency || this.state.currency);
-    this.getMinerFee(currency || this.state.currency, this.state.address);
-    this.getExtract();
     this.getUserInfo();
     this.getHistory({
       page: 0,
@@ -116,8 +116,18 @@ export default class Extract extends exchangeViewBase {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      this.setState({ address: "", extractAmount: "" });
-      this.getMinerFee(nextState.currency, "");
+      // 切换币种后，重新set address，之后根据address和currency请求矿工费
+      let curExtract = this.state.walletExtract.extractAddr.filter(v => v.coinName === nextState.currency.toLowerCase())[0];
+      this.setState({
+        address:
+          (curExtract &&
+            curExtract.addressList[0] &&
+            curExtract.addressList[0].address) ||
+          "",
+        extractAmount: ""
+      },()=>{
+        this.getMinerFee(nextState.currency, this.state.address);
+      });
       this.getCurrencyAmount(nextState.currency);
     }
     // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
@@ -142,7 +152,7 @@ export default class Extract extends exchangeViewBase {
     let curExtract = extractAddr.filter(
       v => v.coinName === this.state.currency.toLowerCase()
     )[0];
-    // console.log(this.state.userTwoVerify);
+    console.log(curExtract);
     return (
       <div className="extract">
         <h3>
@@ -303,7 +313,7 @@ export default class Extract extends exchangeViewBase {
               type="base"
               onClick={() => {
                 let { currency, address, password, extractAmount } = this.state;
-                this.beforeExtract(curExtract.minCount);
+                this.beforeExtract(curExtract.minCount, this.state.password);
               }}
             />
           </div>

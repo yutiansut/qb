@@ -160,6 +160,11 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });
+    let curExtract = this.store.state.walletExtract.extractAddr.filter(v => v.coinName === this.view.state.currency.toLowerCase())[0];
+    this.view.setState({
+      address:
+        curExtract && curExtract.addressList[0] && curExtract.addressList[0].address || ''
+    });
   }
   // 请求验证码
   async requestCode() {
@@ -357,7 +362,8 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 提现前前端验证
-  beforeExtract(minCount) {
+  async beforeExtract(minCount, password) {
+
     let obj = {
       orderTip: true,
       orderTipContent: ""
@@ -374,11 +380,20 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
+    // 校验是否设置资金密码
+    if (this.userTwoVerify.fundPwd === 1) {
+      obj.orderTipContent = this.view.intl.get("asset-password-unset");
+      this.view.setState(obj);
+      return;
+    }
+    // 校验是否输入密码
     if (this.view.state.password === "") {
       obj.orderTipContent = this.view.intl.get("asset-inputFundPassword");
       this.view.setState(obj);
       return;
     }
+    // let result = await this.store.verifyPass(password);
+    // console.log(result.msg)
     this.view.setState({
       showTwoVerify: true,
       verifyNum: this.view.intl.get("sendCode")

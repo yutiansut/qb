@@ -104,6 +104,7 @@ export default function zh(state) {
     608: "验证码错误",
     609: "操作类型错误",
     610: "与原密码相同",
+    612: '密码错误5次已锁定, 请30分钟后再试',
     616: "未设置密码",
     617: "用户未实名认证",
     619: "图形验证码错误",
@@ -118,6 +119,7 @@ export default function zh(state) {
     710: "提币：查询不到to地址",
     711: "cws错误",
     712: "提币地址格式错误",
+    713: '此地址已存在',
     1001: "连接被禁止",
     1002: "连接时传入的Token不合法",
     2001: "谷歌验证失败",
@@ -223,7 +225,10 @@ export default function zh(state) {
     "asset-incomplete": "请填写完整",
     "asset-add-success": '添加成功！',
     "asset-delet-fail": '删除失败！',
-    "asset-input-address": '您未选择提现地址，不允许提交'
+    "asset-input-address": '您未选择提现地址，不允许提交',
+    "asset-password-unset": '你还未设置资金密码，不能提现',
+
+
   };
   const market = {
     "market-favorite": "收藏",

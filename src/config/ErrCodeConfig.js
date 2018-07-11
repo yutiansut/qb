@@ -127,6 +127,13 @@ export default {
     },
     errCode: "CODE_NOT_EXPIRE"
   },
+  612: {
+    // msg: "与原密码相同",
+    get msg() {
+      return intl.get(612);
+    },
+    errCode: "WRONG_PASSWORD"
+  },
   616: {
     // msg: "未设置密码",
     get msg() {
@@ -224,6 +231,13 @@ export default {
       return intl.get(712);
     },
     errCode: "ERROR_ADDRESS"
+  },
+  713: {
+    // msg: "提币地址地址已存在",
+    get msg() {
+      return intl.get(713);
+    },
+    errCode: "ERROR_ADDRESS_EXIST"
   },
   1001: {
     // msg: "连接被禁止",

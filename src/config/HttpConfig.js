@@ -85,6 +85,8 @@ export default {
     { name: 'delAddress', data: { url: '/property/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
     // 充提记录4.10
     { name: 'history', data: { url: '/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
+    // 验证资金密码
+    { name: 'verifyFundPass', data: { url: '/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
   ],
   userOrder:[
     //当前订单
