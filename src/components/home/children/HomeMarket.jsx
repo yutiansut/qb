@@ -1,12 +1,13 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
-import React, { Component } from "react";
+import React, {Component} from "react";
+import {NavLink} from 'react-router-dom'
 import Input from '../../../common/component/Input/index.jsx'
 import ReactTrend from './ReactTread'
 
-let sortImg =  ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
+let sortImg = ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
 
-export default class HomeMarket extends ExchangeViewBase{
-  constructor(props){
+export default class HomeMarket extends ExchangeViewBase {
+  constructor(props) {
     super(props);
     this.state = {
       searchValue: '',
@@ -18,10 +19,10 @@ export default class HomeMarket extends ExchangeViewBase{
       // collectType: 0
       marketTableHead: [
         {name: `${this.intl.get('market-markets')}`, sortValue: ''},
-        {name: `${this.intl.get('market-lastPrice')}`, sortValue:['price'],type:1,sortDefault:'turnover'},
-        {name: `${this.intl.get('total')}`, sortValue:['turnover'],type:1,sortDefault:'turnover'},
-        {name: `${this.intl.get('volume')}`, sortValue:['volume'],type:1,sortDefault:'turnover'},
-        {name: `${this.intl.get('market-change')}`, sortValue:['rise'],type:1,sortDefault:'turnover'},
+        {name: `${this.intl.get('market-lastPrice')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
+        {name: `${this.intl.get('total')}`, sortValue: ['turnover'], type: 1, sortDefault: 'turnover'},
+        {name: `${this.intl.get('volume')}`, sortValue: ['volume'], type: 1, sortDefault: 'turnover'},
+        {name: `${this.intl.get('market-change')}`, sortValue: ['rise'], type: 1, sortDefault: 'turnover'},
       ]
     };
     const {controller} = this.props;
@@ -41,7 +42,8 @@ export default class HomeMarket extends ExchangeViewBase{
     this.joinHome = controller.joinHome.bind(controller) // 加入房间
     this.clearRoom = controller.clearRoom.bind(controller) //推出房间
   }
-  componentDidMount(){
+
+  componentDidMount() {
     //注册http数据
     this.marketDataHandle();
     //进入home
@@ -52,57 +54,77 @@ export default class HomeMarket extends ExchangeViewBase{
     this.clearRoom()
   }
 
-  render(){
+  render() {
     const {controller} = this.props;
     // console.log(1234,this.state,this.state.recommendDataHandle)
-    return(
+    return (
       <div className='home-market inner'>
         <div className="market-nav clearfix">
           <ul className="clearfix">
             {controller.token && <li onClick={this.collectMarket}>
-              <span className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>{this.intl.get('market-favorites')}</span>
+              <span
+                className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>{this.intl.get('market-favorites')}</span>
             </li> || null}
-            {this.state.marketDataHandle.map((v, index) => {return(
-              <li key={index} onClick={this.changeMarket.bind(this,v)}>
-                <span className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active': ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
-              </li>
-            )})}
+            {this.state.marketDataHandle.map((v, index) => {
+              return (
+                <li key={index} onClick={this.changeMarket.bind(this, v)}>
+                  <span
+                    className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active' : ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
+                </li>
+              )
+            })}
           </ul>
           <Input
             type="search1"
-            onEnter={() => {this.filte(this.state.homeMarketPairData, this.state.searchValue)}}
+            onEnter={() => {
+              this.filte(this.state.homeMarketPairData, this.state.searchValue)
+            }}
             value={this.state.searchValue}
-            onInput={value => {this.setState({searchValue: value })}} />
+            onInput={value => {
+              this.setState({searchValue: value})
+            }}/>
         </div>
 
         <table>
           <thead align="left">
-            <tr>
-              {controller.token && <th>{this.intl.get('market-favorite')}</th> || null}
-              {this.state.marketTableHead.map((v, index) => {
-                return(<th onClick={this.pairSort.bind(this,v,index)} key={index} className={`${v.sortValue ? 'sort-img-li' : ''}`}>
-                  {v.name}
-                  <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt="" className={`${v.sortValue ? '' : 'hide'}`}/>
-                </th>)
-              })}
-              <th>{this.intl.get('market-change7D')}</th>
-            </tr>
+          <tr>
+            {controller.token && <th>{this.intl.get('market-favorite')}</th> || null}
+            {this.state.marketTableHead.map((v, index) => {
+              return (<th onClick={this.pairSort.bind(this, v, index)} key={index}
+                          className={`${v.sortValue ? 'sort-img-li' : ''}`}>
+                {v.name}
+                <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt=""
+                     className={`${v.sortValue ? '' : 'hide'}`}/>
+              </th>)
+            })}
+            <th>{this.intl.get('market-change7D')}</th>
+          </tr>
           </thead>
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            return(
+            return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
-                {controller.token && <td onClick={value => this.addCollect(v, index)}><img src={v.isFavorite ? "/static/img/star_select.svg" :  "/static/img/star.svg"} alt=""/></td> || null}
-                <td>{v.tradePairName.toUpperCase()}</td>
-                <td><span className={`${v.updown && (v.updown>0 && "market-up" || "market-down")}`}>{Number(v.price).format({number:'digital'}) || 0}</span>/<span>
-                  {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) || Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span></td>
-                <td>{Number(v.turnover).format({number:'property'}) || 0}</td>
+                {controller.token && <td onClick={value => this.addCollect(v, index)}><img
+                  src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"} alt=""/></td> || null}
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                >{v.tradePairName.toUpperCase()}</NavLink></td>
+                <td><span
+                  className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span>
+                  {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({
+                    number: 'legal',
+                    style: {name: 'cny'}
+                  }) || Number(v.priceEN || 0).format({number: 'legal', style: {name: 'usd'}})}</span></td>
+                <td>{Number(v.turnover).format({number: 'property'}) || 0}</td>
                 <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>
                 <td className={`home-updown ${v.rise < 0 ? 'down-i' : 'up-i'}`}>{Number(v.rise).toPercent()}</td>
                 <td>
-                    {/* 宽高等样式在homeMakt.styl里设置 */}
-                    <ReactTrend ratio={5} trends={v.points}/>
+                  {/* 宽高等样式在homeMakt.styl里设置 */}
+                  <ReactTrend ratio={5} trends={v.points}/>
                 </td>
               </tr>
             )
