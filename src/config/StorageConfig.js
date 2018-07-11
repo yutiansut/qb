@@ -16,13 +16,14 @@ export default {
    * name:标识，名称
    * duration:失效间隔
    * expiryTime:到期时间
+   * onlySession:只用session
    */
   storageList: [
     {name: 'userToken', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
     {name: 'userId', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
     {name: 'userName', duration: 0, expiryTime: 0, default: null, useDefault: true},//自选
     // {name: 'token', duration: 0, expiryTime: 0,default: 'asdasda',useDefault: false},//token
-    {name: 'userMsg', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
+    // {name: 'userMsg', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     // {name: 'marketList', duration: 0, expiryTime: 0}, //首页交易所列表排序
     // {name: 'filterItems', duration: 0, expiryTime: 0}//首页时间和币种维度筛选
   ]

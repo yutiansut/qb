@@ -288,7 +288,7 @@ export default class MarketController extends ExchangeControllerBase {
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
       dealMsg = {
         tradePair: this.store.state.tradePair,
-        coinIcon: tradePairMsg[0].coinIcon,
+        coinIcon: tradePairMsg[0].icon,
         prices: {
           price: tradePairMsg[0].price,
           priceCN: tradePairMsg[0].priceCN,
