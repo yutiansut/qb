@@ -32,7 +32,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
         <div className='trade-deal-exchange'>
           <div className='trade-deal-asset'>
             <div className='deal-asset-wallet'>
-              {`${this.intl.get('deal-use')}`}:<span>{this.props.wallet}</span>
+              {`${this.intl.get('deal-use')}`}:<span>{Number(this.props.wallet).format({number:'property'})}</span>
               <i>
               {this.props.ControllerProps.dealType ? this.props.steadUnitN.toUpperCase() : this.props.steadUnitP.toUpperCase()}
             </i>
@@ -87,7 +87,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </div>
             {!this.props.fundPassVerify && <p className='password-msg'>
               <span>{`${this.intl.get('deal-forgetpwd')}`}</span>
-              <span onClick={this.props.freePwd.bind(this)}>{`${this.intl.get('deal-freepwd')}`}</span>
+              <span onClick={this.props.freePwd.bind(this)} style={{cursor: 'pointer'}}>{`${this.intl.get('deal-freepwd')}`}</span>
             </p> || null }
           </div>
           <div className='trade-deal-turnover'>

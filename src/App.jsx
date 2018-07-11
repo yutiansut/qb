@@ -50,10 +50,8 @@ const Asset = ({match}) => {
   return <AssetManange controller={assetController} match={match}/>;
 };
 
-const Trade = ({match}) => {
-  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match}
-                   userController={userController} assetController={assetController}
-                   klineController={klineController}/>;
+const Trade = ({ match , location}) => {
+  return <TradeCon marketController={marketController} userOrderController={userOrderController} match={match} userController={userController} assetController={assetController} klineController={klineController} location={location} />;
 };
 
 const User = ({match, history}) => {

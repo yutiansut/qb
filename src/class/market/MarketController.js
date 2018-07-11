@@ -314,4 +314,15 @@ export default class MarketController extends ExchangeControllerBase {
   async getTradePairHandle() {
     return await this.store.getPairMsg();
   }
+  // 跳转选取交易对,location.query
+  async querySelectPair(data){
+    let pairMsg = await this.getTradePairHandle();
+    let pairItems = data.split('/'),id;
+    if(pairItems.length > 1){
+      id = pairMsg.pairIdCoin[pairItems[0]][pairItems[1]];
+      this.tradePairChange({tradePairId:id,tradePairName:data})
+      return
+    }
+    
+  }
 }

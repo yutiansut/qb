@@ -210,7 +210,8 @@ export default class UserOrderListStore extends OrderListStore {
     };
     // console.log('this.WebSocket',this.WebSocket)
     this.WebSocket.general.on('userOrderUpdate', data => {
-      this.controller.updateUserOrder(data)
+      this.controller.updateUserOrder(data);
+      this.controller.updateRecentOrderUser(data)
       // console.log('wsOrderList userOrderUpdate', data)
     })
   }

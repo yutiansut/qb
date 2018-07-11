@@ -112,7 +112,7 @@ export default class extends exchangeViewBase {
                 <div className="trade-pair-msg">
                   <TradePairDeal controller={TradeDealController} />
                 </div>
-                <TradeMarket controller={TradeMarketController} />
+                <TradeMarket controller={TradeMarketController} location={this.props.location}/>
               </div>
               <div className="trade-chart">
                 <div className="k-menu">

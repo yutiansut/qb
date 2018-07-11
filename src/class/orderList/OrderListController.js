@@ -69,11 +69,29 @@ export default class OrderListController extends ExchangeControllerBase {
     this.store.emitRecentOrderWs(from, to);
     //
   }
+  //ws更新市场成交列表
   updateRecentOrder(data){
-    // this.view.setState(
-    //     {
-    //       recentTradeListArr: data
-    //     }
-    // )
+    let recentTradeListArr = this.view.state.recentTradeListArr;
+    data.orders.map((v, index) => {
+      recentTradeListArr.unshift(v)
+    })
+    this.view.setState(
+        {
+          recentTradeListArr
+        }
+    )
+  }
+  //ws更新用户成交列表
+  updateRecentOrderUser(data){
+    if(this.view.state.recentItemSelect === 'mineLess' || data.orderStatus === 0){
+      return
+    }
+    let recentTradeListArr = this.view.state.recentTradeListArr;
+    recentTradeListArr.unshift(data);
+    this.view.setState(
+        {
+          recentTradeListArr
+        }
+    )
   }
 }

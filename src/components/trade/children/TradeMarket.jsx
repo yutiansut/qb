@@ -36,6 +36,9 @@ export default class TradeMarket extends ExchangeViewBase {
 
   componentDidMount() {
     this.marketDataHandle();
+    if(this.props.location.query){
+      console.log(111111111111111111111111111,this.props.location.query)
+    }
   }
 
   componentWillMount() {
