@@ -190,7 +190,7 @@ export default class AssetController extends ExchangeControllerBase {
     type === 3 && (obj.mode = 0);
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
-    console.log('提交订单', result)
+    // console.log('提交订单', result)
     if (result) {
       this.view.setState({
         orderTip: true,

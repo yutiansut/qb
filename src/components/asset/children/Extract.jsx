@@ -138,6 +138,7 @@ export default class Extract extends exchangeViewBase {
     let curExtract = extractAddr.filter(
       v => v.coinName === this.state.currency.toLowerCase()
     )[0];
+    console.log(this.props.controller.userTwoVerify);
     return (
       <div className="extract">
         <h3>
@@ -438,7 +439,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={this.props.controller.userTwoVerify}//短信验证码
+            type={this.props.controller.userTwoVerify.withdrawVerify}//短信验证码
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });

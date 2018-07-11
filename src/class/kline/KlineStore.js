@@ -12,11 +12,12 @@ export default class KlineStore extends ExchangeStoreBase {
     this.WebSocket.general.on("tradeKline", data => {
       this.state.kline = data.kline.map(v => {
         let arr = [];
-        arr.push(v.startTime * 1000);
+        arr.push(v.endTime * 1000);
         arr.push(v.openPrice);
         arr.push(v.highPrice);
         arr.push(v.lowPrice);
         arr.push(v.closePrice);
+        arr.push(v.volume);
         return arr;
       });
       this.controller.setKline(this.state.kline)
@@ -30,17 +31,20 @@ export default class KlineStore extends ExchangeStoreBase {
       "tradePairName": this.state.tradePairName,
       "duration": this.state.duration // k线时间段秒数
     })
+    console.log(result);
     if (result.tradePairName) {
       if (!result.kline) { this.state.kline = []; return };
       this.state.kline = result.kline.map(v => {
         let arr = [];
-        arr.push(v.startTime * 1000);
+        arr.push(v.endTime * 1000);
         arr.push(v.openPrice);
         arr.push(v.highPrice);
         arr.push(v.lowPrice);
         arr.push(v.closePrice);
+        arr.push(v.volume);
         return arr;
       });
+      console.log(this.state.kline);
     }
   }
 

@@ -140,7 +140,7 @@ export default class Wallets extends exchangeViewBase {
                     <img src={item.coinIcon} alt="" />
                     {item.coinName.toUpperCase()}
                   </td>
-                  <td className="fullname">{item.fullName}</td>
+                  <td className="fullname"><NavLink to={{ pathname: `/help/currency/`, query: { currency: item.coinName }}}>{item.fullName}</NavLink></td>
                   <td className="avail">{item.availableCount.format({ number: "property" })}</td>
                   <td className="lock">{item.frozenCount.format({ number: "property" })}</td>
                   <td className="tobtc">{item.valuationBTC.format({ number: "property" })}</td>

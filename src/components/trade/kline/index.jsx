@@ -1064,7 +1064,7 @@ class ReactKline extends exchangeViewBase {
       debug: false,
       onRequestChange: this.onRequestChange
     };
-    console.log(JSON.stringify(cfg))
+    // console.log(JSON.stringify(cfg))
     this.state.kline = new Kline(cfg);
     this.state.kline.draw();
     this.state.kline.setLanguage(this.props.controller.language);

@@ -39,7 +39,6 @@ export default class KlineController extends ExchangeControllerBase {
 
   // 设置币种交易对
   async setPair(symbol, symbolName) {
-    console.log('this.store.state.tradePairName', JSON.stringify(this.store.state.tradePairName))
     !this.store.state.tradePairName && this.store.update("tradePairName", symbolName);
     this.store.state.tradePairName && this.update("tradePairName", symbolName);
     this.view && this.view.setSymbol(symbol, symbolName.toUpperCase());
