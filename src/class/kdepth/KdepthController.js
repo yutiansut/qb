@@ -14,7 +14,6 @@ export default class KdepthController extends ExchangeControllerBase {
     if (!data) {
       return;
     }
-    console.log(data)
     let result = {};
     result.bids = data.buy
       ? data.buy.map(v => {
@@ -32,7 +31,6 @@ export default class KdepthController extends ExchangeControllerBase {
           return arr;
         })
       : [];
-    console.log("深度数据.........................deal", result);
     this.view.setData(result);
   }
 }

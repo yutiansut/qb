@@ -20,11 +20,11 @@ class ReactKline extends exchangeViewBase {
     /*
        * 筛选条件【时间段，币种】改变时触发
        */
-    this.onRequestChange=(param)=>{
+    this.onRequestChange = (param) => {
       // symbol-币种，range-时间区间(毫秒)
-      let { symbol,symbolName, range } = param;
+      let { symbol, symbolName, range } = param;
       this.update('duration', range / 1000)
-      this.getData(range/1000)
+      this.getData(range / 1000)
     }
   }
 
@@ -41,7 +41,7 @@ class ReactKline extends exchangeViewBase {
      * ]
      */
   setData(lines) {
-      // console.log(lines)
+    // console.log(lines)
     //this.state.kline.setData(lines);
 
     // let data = [
@@ -1050,25 +1050,28 @@ class ReactKline extends exchangeViewBase {
   }
 
   componentDidMount() {
+    console.log('this.props.controller.language.........................,m', this.props.controller.language === 'en-us')
     let tradeChart = document.querySelector(".trade-chart");
     let cfg = {
       element: "#kline_container",
       width: tradeChart.clientWidth,
       height: tradeChart.clientHeight,
       theme: "dark",
-      language: "zh-cn",
+      language: 'zh-cn',
       ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
       symbol: "",
       symbolName: "",
       debug: false,
       onRequestChange: this.onRequestChange
     };
+    console.log(JSON.stringify(cfg))
     this.state.kline = new Kline(cfg);
     this.state.kline.draw();
-    this.setData();
+    this.state.kline.setLanguage(this.props.controller.language);
+    // this.setData();
     //
     let _kline = this.state.kline;
-    window.redrawKline = function() {
+    window.redrawKline = function () {
       let tradeChart = document.querySelector(".trade-chart");
       _kline.resize(tradeChart.clientWidth, tradeChart.clientHeight);
       // 自动取消全屏

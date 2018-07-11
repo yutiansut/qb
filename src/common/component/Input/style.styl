@@ -13,7 +13,7 @@
       content ''
       width 10.9%
       height 100%
-      background url('/static/images/xiala_icon.png') no-repeat center center
+      background $icon-xiala no-repeat center center
       background-size auto 12%
     .search-list
       position relative
@@ -36,10 +36,10 @@
       width 13%
       height 100%
       // background url('/static/images/Icon_Search.png') no-repeat center center
-      background url('/static/images/search-default.svg') no-repeat center center
+      background $search-default no-repeat center center
       background-size auto 44%
     &:hover::after, &.focus::after
-      background-image url('/static/images/search-click.svg')
+      background-image $search-click
       background-size auto 44%
     &:hover
       input
@@ -91,7 +91,7 @@
     height 100%
     cursor pointer
     border-radius(0 0.02rem 0.02rem 0)
-    background url('/static/images/search_bai.svg') no-repeat center center $main-color
+    background $search-bai no-repeat center center $main-color
     background-size 0.2rem 0.2rem
     &:hover
       background-color $main-color-hover

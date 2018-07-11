@@ -128,6 +128,7 @@ export default class App extends Component {
     userOrderController.userController = userController; //订单管理获取用户id
 
     noticeController.configController = configController;
+    klineController.configController = configController;
 
     activityController.configController = configController;
     noticeController.userController = userController;
