@@ -14,6 +14,7 @@ import MarketController from "./class/market/MarketController"
 
 import Header from './componentsMb/header/Header.jsx'
 import Home from './componentsMb/home/Home.jsx'
+import Login from './componentsMb/login/Login.jsx'
 
 
 let testAppController,
@@ -29,6 +30,10 @@ let testAppController,
 
 const header = ({ match, history}) => {
     return <Header/>;
+};
+
+const LoginComponent = ({ match, history }) => {
+    return <Login controller={loginController} match={match} history={history} />
 };
 
 const HomeCompoment = () => {
@@ -90,6 +95,7 @@ export default class App extends Component {
               <div>
                   <Switch>
                       <Route exact path="/home" component={HomeCompoment} />
+                      <Route exact path="/login" component={LoginComponent} />
                       <Redirect to="/home" />
                   </Switch>
               </div>

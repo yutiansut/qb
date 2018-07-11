@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import ExchangeViewBase from "../ExchangeViewBase";
 import {ChangeFontSize} from '../../core'
+import {
+    Link,
+    NavLink,
+} from 'react-router-dom'
 
+import "./stylus/header.styl"
 
 export default class Header extends ExchangeViewBase {
   constructor(props) {
@@ -20,7 +25,14 @@ export default class Header extends ExchangeViewBase {
 
   render() {
     return (
-      <div></div>
+      <div className="header-nav-mb">
+        <Link to='/home' className="logo">
+            <img src="/static/img/home/logo.svg"/>
+        </Link>
+        <div className="nav-right">
+            <NavLink to="/login" className="login">登录</NavLink>
+        </div>
+      </div>
     )
   }
 }

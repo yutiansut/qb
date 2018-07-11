@@ -3,7 +3,7 @@
 .banner-wrap-mb
   .banner-img
     position fixed
-    top 0
+    top .3rem
     width 100%
     height 1.59rem
     z-index -1
@@ -13,9 +13,21 @@
     height 1.59rem
     img
       position absolute
-      top .5rem
+      top .8rem
       left 50%
       transform translateX(-50%)
       width 3rem
       -webkit-filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
       filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
+
+@keyframes bgscale {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}

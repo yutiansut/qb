@@ -1,17 +1,5 @@
 @import "../../../common/css/variable.styl"
 
-@keyframes bgscale {
-  0% {
-    transform: scale(1.05);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-
 .home-wrap-mb
   .home-updown
     position relative
@@ -46,12 +34,15 @@
   .home-recommend
     width 100%
     background $normal-white-color
+    .noscroll
+      overflow hidden
+      height .9rem;
     .ul-wrap
       overflow auto
       width 100%
       position relative
-      padding .15rem
-      height 0.9rem
+      padding .15rem 0 .3rem 0
+      height 1.05rem
       ul
         position absolute
         white-space nowrap
@@ -83,14 +74,19 @@
               font-size 0.12rem
               color $exchange-blue;
               float right
+        li:first-child
+          margin-left 0.1rem
+        li:last-child
+          margin-right 0.1rem
   //市场
   .home-market
     background $normal-white-color
-    padding 0 0.1rem
+    padding 0 0.2rem
     .market-nav
       height .36rem
       line-height .36rem
       margin-bottom .14rem
+      text-align center
       ul
         white-space nowrap
         margin-bottom 0.2em
@@ -159,13 +155,8 @@
               background $exchange-red
               padding 0.05rem
               border-radius 1px
-              display inline-block
-              min-width 0.8rem
-              text-align center
-
-
-
-
+      th:last-child, td:last-child
+        text-align right
 
 
 
