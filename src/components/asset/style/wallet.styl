@@ -74,7 +74,11 @@
             letter-spacing 0.0005rem
             text-align justify
             line-height 0.3rem
-            cursor pointer
+            &.currency, &.avail, &.lock, &.tobtc
+              cursor pointer
+              &:hover
+                color $main-color
+                text-decoration underline
             &.lock
               .pop-parent
                 position relative

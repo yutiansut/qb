@@ -40,7 +40,8 @@ export default class Extract extends exchangeViewBase {
       tipSuccess: true,
       tipContent: "",
       orderTip: false,
-      orderTipContent: ""
+      orderTipContent: "",
+      userTwoVerify: {withdrawVerify: -1 , fundPwd: -1 }
     };
 
     let {
@@ -85,6 +86,8 @@ export default class Extract extends exchangeViewBase {
     this.getVerify = controller.getVerify.bind(controller);
     // 清除定时器
     this.destroy = controller.clearVerify.bind(controller);
+    // 获取资金密码设置状态和两步验证方式
+    this.getUserInfo = controller.getUserInfo.bind(controller);
   }
 
   async componentWillMount() {
@@ -96,6 +99,7 @@ export default class Extract extends exchangeViewBase {
     this.getCurrencyAmount(currency || this.state.currency);
     this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getExtract();
+    this.getUserInfo();
     this.getHistory({
       page: 0,
       pageSize: 10,
@@ -138,7 +142,7 @@ export default class Extract extends exchangeViewBase {
     let curExtract = extractAddr.filter(
       v => v.coinName === this.state.currency.toLowerCase()
     )[0];
-    console.log(this.props.controller.userTwoVerify);
+    // console.log(this.state.userTwoVerify);
     return (
       <div className="extract">
         <h3>
@@ -163,19 +167,19 @@ export default class Extract extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {totalCount.format({ number: "property" })} {currency}
+                    {Number(totalCount).format({ number: "property" })} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {frozenCount.format({ number: "property" })} {currency}
+                    {Number(frozenCount).format({ number: "property" })} {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {availableCount.format({ number: "property" })} {currency}
+                    {Number(availableCount).format({ number: "property" })} {currency}
                   </i>
                 </li>
               </ul>
@@ -227,7 +231,7 @@ export default class Extract extends exchangeViewBase {
               <p className="limit">
                 {this.intl.get("asset-24hQuota")}：{(totalQuota * 100000000 -
                   availableQuota * 100000000) /
-                  100000000}/{totalQuota} BTC
+                  100000000}/{Number(totalQuota)} BTC
                 <NavLink to="/user/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
@@ -265,7 +269,7 @@ export default class Extract extends exchangeViewBase {
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
                     {this.state.extractAmount - minerFee > 0
-                      ? this.state.extractAmount - minerFee
+                      ? (this.state.extractAmount * 100000000 - minerFee * 100000000)/100000000
                       : 0}{" "}
                     {currency}
                   </span>
@@ -285,9 +289,11 @@ export default class Extract extends exchangeViewBase {
                 }}
               />
               <div className="set">
-                <NavLink to="/user/safe">
+                {this.state.userTwoVerify.fundPwd === 1 ? <NavLink to="/user/safe" target="_blank">
                   {this.intl.get("asset-setFundPassword")}
-                </NavLink>
+                </NavLink> : this.state.userTwoVerify.fundPwd === 0 ? <NavLink to="/user/safe" target="_blank">
+                    {this.intl.get("login-forget")}
+                </NavLink> : ''}
               </div>
             </div>
           </div>
@@ -297,7 +303,7 @@ export default class Extract extends exchangeViewBase {
               type="base"
               onClick={() => {
                 let { currency, address, password, extractAmount } = this.state;
-                this.beforeExtract();
+                this.beforeExtract(curExtract.minCount);
               }}
             />
           </div>
@@ -439,7 +445,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={this.props.controller.userTwoVerify.withdrawVerify}//短信验证码
+            type={this.state.userTwoVerify.withdrawVerify}//短信验证码
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });

@@ -90,7 +90,7 @@ export default class TradePlan extends ExchangeViewBase {
     })) : (this.setState({inputBuyValue: e.target.value, inputBuyFlag: true, dealType}));
     this.changeMaxNum(dealType, e.target.value)
   }
-  
+
   passInput(e) {
     this.setState(
         {funpass: e.target.value}
@@ -127,7 +127,7 @@ export default class TradePlan extends ExchangeViewBase {
     )
   }
   render() {
-    console.log('设置密码', this.props.controller.userController.userVerify.fundPwd)
+    console.log('设置密码', this.props.controller.userController.userVerify)
     return (
       <div className='trade-plan-deal'>
         <div className='deal-entrust'>

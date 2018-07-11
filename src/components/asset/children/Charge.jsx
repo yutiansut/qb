@@ -146,21 +146,21 @@ export default class Charge extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {totalCount.format({ number: "property" })}{" "}
+                    {Number(totalCount).format({ number: "property" })}{" "}
                     {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {frozenCount.format({ number: "property" })}{" "}
+                    {Number(frozenCount).format({ number: "property" })}{" "}
                     {this.state.currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {availableCount.format({ number: "property" })}{" "}
+                    {Number(availableCount).format({ number: "property" })}{" "}
                     {this.state.currency}
                   </i>
                 </li>

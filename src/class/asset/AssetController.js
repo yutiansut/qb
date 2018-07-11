@@ -40,6 +40,16 @@ export default class AssetController extends ExchangeControllerBase {
     // return { withdrawVerify: 1 };
   }
 
+  async getUserInfo() {
+    if (this.userTwoVerify.fundPwd === undefined){
+      let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+        withdrawVerify, fundPwd
+      } = await this.userController.initData();
+      this.view.setState({ userTwoVerify: {withdrawVerify, fundPwd}})
+    }else{
+      this.view.setState({ userTwoVerify: this.userTwoVerify });
+    }
+  }
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair() {
     let result = await this.marketController.getTradePairHandle();
@@ -242,6 +252,14 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 添加提现地址
   async appendAddress(obj) {
+    if (obj.addressName === '' || obj.address === ''){
+      this.view.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: this.view.intl.get("asset-incomplete")
+      });
+      return false;
+    }
     let result = await this.store.appendAddress(obj);
     if (result.errCode) {
       this.view.setState({
@@ -279,7 +297,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
     if (!o) return [];
-    if (coin !== 'USDT') {
+    if (coin.toUpperCase() !== 'USDT') {
       return o.pairNameCoin[coin.toLowerCase()].map(v => {
         return {
           name: `${coin}/${v.toUpperCase()}`,
@@ -287,7 +305,7 @@ export default class AssetController extends ExchangeControllerBase {
         }
       })
     }
-    if (coin === 'USDT') {
+    if (coin.toUpperCase() === 'USDT') {
       return o.pairNameMarket[coin.toLowerCase()].map(v => {
         return {
           name: `${v.toUpperCase()}/USDT`,
@@ -339,13 +357,20 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 提现前前端验证
-  beforeExtract(o) {
+  beforeExtract(minCount) {
     let obj = {
       orderTip: true,
       orderTipContent: ""
     };
+    // 校验地址不为空
     if (this.view.state.address === "") {
       obj.orderTipContent = this.view.intl.get("asset-input-address");
+      this.view.setState(obj);
+      return;
+    }
+    // 校验数量大于最小提现数量
+    if (this.view.state.extractAmount < minCount) {
+      obj.orderTipContent = this.view.intl.get("asset-input-extractAmount");
       this.view.setState(obj);
       return;
     }

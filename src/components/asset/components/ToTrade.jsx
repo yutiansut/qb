@@ -15,7 +15,7 @@ export default class ToTrade extends exchangeViewBase {
         <NavLink
           to={{
             pathname: `/trade`,
-            query: { id: v.id }
+            query: { pairName: v.name.toLowerCase() }
           }}
           key={index}
         >

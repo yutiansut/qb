@@ -198,11 +198,10 @@ export default class AssetStore extends ExchangeStoreBase {
       token: this.controller.token
     });
     if (result && result.errCode) {
-      console.log(result);
+      // console.log(result);
       return result;
     }
     this.state.walletExtract.extractAddr = result.addresses;
-    console.log(result);
   }
 
   // 提交提币订单

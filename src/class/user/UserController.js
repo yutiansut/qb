@@ -42,7 +42,8 @@ export default class UserController extends ExchangeControllerBase {
   async initData() { // 获取用户信息
     let userInfo = await this.store.userInfo();
     // let obj = this.checkNum(userInfo.credits)
-    this.view.setState({userInfo})
+    this.view && this.view.setState({ userInfo });
+    return userInfo;
   }
 
   async getUserAuthData() { // 获取用户认证信息

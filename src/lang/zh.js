@@ -208,6 +208,7 @@ export default function zh(state) {
     "asset-withdrawalsAmount": "数量",
     "asset-inputName": "输入名称",
     "asset-inputAddress": "输入地址",
+    'asset-input-extractAmount': '提交失败，请检查提现数量大于最小提现数量',
     "asset-export": "导出资产记录",
     "asset-transfer": "转账",
     "asset-amount2": "金额数量",
@@ -216,7 +217,10 @@ export default function zh(state) {
     "asset-copySuccess": "复制成功",
     "asset-option-failed": "操作失败",
     "asset-not-enough": "账户余额不足",
-    "asset-input-twoVerify": "请输入两步验证密码",
+    "asset-input-twoVerify1": "请输入邮箱验证密码",
+    "asset-input-twoVerify2": "请输入谷歌验证密码",
+    "asset-input-twoVerify3": "请输入短信验证密码",
+    "asset-incomplete": "请填写完整",
     "asset-add-success": '添加成功！',
     "asset-delet-fail": '删除失败！',
     "asset-input-address": '您未选择提现地址，不允许提交'
@@ -301,7 +305,7 @@ export default function zh(state) {
     "deal-market-sell":'以市场最优价格卖出',
     'deal-market-msg': '市价交易,无固定金额',
     'deal-identify': '身份验证'
-    
+
   };
   const user = {
     "user-score": "我的积分",
