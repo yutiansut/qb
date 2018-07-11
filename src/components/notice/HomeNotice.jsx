@@ -35,9 +35,10 @@ export default class homeNotice extends exchangeViewBase {
     if (this.state.noticeList && this.state.noticeList.length) {
       this.setState(
         {
-          top2: Math.ceil(result.length / 2) * 100,
+          top2: Math.ceil(result.length) * 100,
+
           criticalArr: Array.from(
-            {length: Math.ceil(result.length / 2 + 1)},
+            {length: Math.ceil(result.length + 1)},
             (item, index) => index * 100
           )
         },
