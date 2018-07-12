@@ -147,8 +147,8 @@ export default class Popup extends exchangeViewBase {
                   })}
                 {addressArr &&
                   addressArr.map((item, index) => <tr className="base3-content" key={index}>
-                    <td>{item.addressName}</td>
-                    <td>{item.address}</td>
+                    <td className="address-list-name"><p>{item.addressName}</p></td>
+                    <td className="address-list-address"><p>{item.address}</p></td>
                     <td>
                       <Button
                         title={this.intl.get('delete')}

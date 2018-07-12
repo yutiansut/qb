@@ -90,10 +90,23 @@
                 &.base3-address
                   width 3.7rem
           tbody
+            td
+              &.address-list-name, &.address-list-address
+                p
+                  overflow hidden
+                  white-space nowrap
+                  text-overflow ellipsis
+              &.address-list-name
+                p
+                  width 1.79rem
+              &.address-list-address
+                p
+                  width 3.7rem
             tr
               &.input
                 td
                   height 0.4rem
+
                 td:first-child
                   input
                     width 1.56rem

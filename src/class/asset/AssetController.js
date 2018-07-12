@@ -106,7 +106,7 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
-    await this.store.getMinerFee(coin, address);
+    await this.store.getMinerFee(coin, address.address);
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });
@@ -163,7 +163,7 @@ export default class AssetController extends ExchangeControllerBase {
     let curExtract = this.store.state.walletExtract.extractAddr.filter(v => v.coinName === this.view.state.currency.toLowerCase())[0];
     this.view.setState({
       address:
-        curExtract && curExtract.addressList[0] && curExtract.addressList[0].address || ''
+        curExtract && curExtract.addressList[0] && curExtract.addressList[0] || ''
     });
   }
   // 请求验证码
@@ -295,8 +295,8 @@ export default class AssetController extends ExchangeControllerBase {
       return false;
     }
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
-    if (this.view.state.address === obj.address)
-      this.view.setState({ address: "" });
+    // if (this.view.state.address.address === obj.address)
+    //   this.view.setState({ address: "" });
   }
 
   // 处理出币种对应的交易对数组
