@@ -17,5 +17,8 @@ export default class ViewBase extends React.Component {
   componentDidMount() {
     // console.log('ViewBase componenDidMount')
   }
+  componentWillUpdate() {
+    // console.log('ViewBase componenDidMount')
+  }
 
 }
