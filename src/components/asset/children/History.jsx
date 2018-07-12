@@ -278,7 +278,7 @@ export default class History extends exchangeViewBase {
                           <i>{balance}</i>
                         </td>
                         <td className="send">
-                          <i>{postAddress === '' ? '\n' : postAddress}</i>
+                          <i>{postAddress}</i>
                         </td>
                         <td className="receive">
                           <i title={receiveAddress}>{receiveAddress}</i>

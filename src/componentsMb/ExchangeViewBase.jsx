@@ -6,7 +6,7 @@ export default class ExchangeViewBase extends ViewBase {
     super(props)
     // this.history = props.history;
     // this.match = props.match;
-    this.intl = intl
+    this.intl = intl;
   }
 
   componentWillMount() {
@@ -16,6 +16,11 @@ export default class ExchangeViewBase extends ViewBase {
 
   componentDidMount() {
     super.componentDidMount();
+
+    // console.log('exchangeViewBase componenDidMount')
+  }
+  componentWillUpdate() {
+    super.componentWillUpdate();
     // console.log('exchangeViewBase componenDidMount')
   }
 

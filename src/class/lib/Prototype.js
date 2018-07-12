@@ -237,7 +237,7 @@ Number.prototype.minus = function(num) {
 };
 // 乘
 Number.prototype.multi = function(num) {
-  return new BigNumber(this).multipliedBy(num);
+  return (new BigNumber(this)).multipliedBy(num);
 };
 // 除
 Number.prototype.div = function(num) {
