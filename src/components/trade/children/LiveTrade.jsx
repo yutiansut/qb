@@ -42,7 +42,7 @@ export default class LiveTrade extends ExchangeViewBase{
   }
 
   render() {
-    // console.log(this.state.unitsType)
+    console.log('nummmmmmmmmmmmm',(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)),)
     return(
         <div className='live-trade'>
           <div className='trade-live-title'>
@@ -64,10 +64,10 @@ export default class LiveTrade extends ExchangeViewBase{
               </tr>
             </thead>
             <tbody>
-            <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0))? (12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)) * .21 : 0}rem`}}>
+            <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)) > 0 ? (12 - (this.state.liveSellArray && this.state.liveSellArray.length ) || 0) * .21 : 0}rem`}}>
             </tr>
             {this.state.liveSellArray && this.state.liveSellArray.map((v,index) =>
-                ((this.state.titleSelect === 'all' && index < 12) || (this.state.titleSelect === 'sell' && index < 24)) && (
+                ((this.state.titleSelect === 'all' && this.state.liveSellArray.length - 12 <= index) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length - 24 <= index)) && (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`卖${this.state.liveSellArray.length - index}`}</td>
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>

@@ -101,7 +101,7 @@ export default class userOrder extends ExchangeViewBase {
             {this.state.currentOrder && this.state.currentOrder.map((v, index) => {
               return (
                   <tr key={index}>
-                    <td>{v.orderTime}</td>
+                    <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
@@ -143,7 +143,7 @@ export default class userOrder extends ExchangeViewBase {
             {this.state.historyOrder && this.state.historyOrder.length && this.state.historyOrder.map((v, index) => {
               return (
                   <tr key={index}>
-                    <td>{v.orderTime}</td>
+                    <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? '卖出' : '买入'}</td>
                     {/*todo 颜色改类名统一处理*/}
                     <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price))}</td>
