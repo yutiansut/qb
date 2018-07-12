@@ -139,11 +139,19 @@ export default class SetPassPopup extends exchangeViewBase {
 
   checkInput2() { // 离开
     let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, // 邮箱
-        reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
+        reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/, // 密码
+        reg3 = /^1[3578]\d{9}$/ // 手机
     if (this.props.isType === 1) { // 验证邮箱
       if(!reg1.test(this.state.popupInput2)) {
         this.setState({
           errUser: this.intl.get("user-checkEmail")
+        })
+      }
+    }
+    if (this.props.isType === 2) { // 验证手机
+      if(!reg3.test(this.state.popupInput2)) {
+        this.setState({
+          errUser: this.intl.get("user-checkPhone")
         })
       }
     }

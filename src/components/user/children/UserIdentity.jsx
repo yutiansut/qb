@@ -25,9 +25,10 @@ export default class userIdentity extends exchangeViewBase {
       image3: '', // 上传照片用于存储ID
       remindPopup: false,
       popType:"",
-      popType:"",
+      popMsg: "",
       checkVerifyArr: true, // 单选是否能够点击
       checkState: true, // 同意协议单选框按钮
+      errNum: "",
       photoArr: [
         {
           photoList: [
@@ -49,6 +50,8 @@ export default class userIdentity extends exchangeViewBase {
         {imgUrl: '/static/img/user/identity_progress.png', content: this.intl.get("user-authProcess")},
         {imgUrl: '/static/img/user/identity_succ.png', content: this.intl.get("user-authSucc")},
         {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
+        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
+        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
       ]
     }
     const {controller} = props
@@ -63,6 +66,7 @@ export default class userIdentity extends exchangeViewBase {
     this.uploadImg = controller.uploadImg.bind(controller)
     this.canClick = this.canClick.bind(this)
     this.checkAgree = this.checkAgree.bind(this)
+    this.checkNumber = this.checkNumber.bind(this)
   }
   getObjectURL (file) {
     let url = null ;
@@ -125,20 +129,46 @@ export default class userIdentity extends exchangeViewBase {
   }
   selectVerifyType(index, content) { // 单选切换
     this.setState({
-      selectIndex: index
+      selectIndex: index,
+      numberValue: "",
+      errNum: ""
     })
   }
-  firstInput(evt) {
-    this.setState({firstNameValue: evt});
+  firstInput(value) {
+    value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
+    this.setState({firstNameValue: value.trim()});
   }
-  lastInput(evt) {
-    this.setState({lastNameValue: evt});
+  lastInput(value) {
+    value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
+    this.setState({lastNameValue: value.trim()});
   }
-  numberInput(evt) {
-    this.setState({numberValue: evt});
+  numberInput(value) {
+    this.setState({numberValue: value.trim()});
+    this.state.errNum && (this.setState({errNum: ""}))
+  }
+  checkNumber() { // 验证身份证 ／ 护照
+    let reg1 = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+        reg2 = /^[a-zA-Z]{5,17}$/,
+        reg3 = /^[a-zA-Z0-9]{5,17}$/;
+    if (this.state.selectIndex === 0) { // 身份证
+      if(!reg1.test(this.state.numberValue)) {
+        this.setState({
+          errNum: this.intl.get("user-idErr")
+        })
+      }
+    }
+    if (this.state.selectIndex === 1) { // 护照
+      if(!reg2.test(this.state.numberValue) && !reg3.test(this.state.numberValue)) {
+        this.setState({
+          errNum: this.intl.get("user-passportErr")
+        })
+      }
+    }
   }
   canClick() {
+    if (this.state.errNum) return false
     if (this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image3) return true
+    if ((this.state.userAuth.state == 3 || this.state.userAuth.state == 4 || this.state.userAuth.state == 5) &&  this.state.checkState && this.state.image1 && this.state.image2 && this.state.image3) return true
     return false
   }
   checkAgree(event) {
@@ -212,7 +242,7 @@ export default class userIdentity extends exchangeViewBase {
                   <Input placeholder={this.intl.get("user-inputSurname")}
                          value={this.state.userAuth.firstName ? this.state.userAuth.firstName : this.state.firstNameValue}
                          disabled ={this.state.userAuth.firstName ? true : false}
-                         onInput={evt => this.firstInput(evt)}/>
+                         onInput={value => this.firstInput(value)}/>
                 </li>
               </ul>
               <ul>
@@ -221,7 +251,7 @@ export default class userIdentity extends exchangeViewBase {
                   <Input placeholder={this.intl.get("user-inputForename")}
                          value={this.state.userAuth.lastName ? this.state.userAuth.lastName : this.state.lastNameValue}
                          disabled ={this.state.userAuth.lastName ? true : false}
-                         onInput={evt => this.lastInput(evt)}/>
+                         onInput={value => this.lastInput(value)}/>
                 </li>
               </ul>
             </div>
@@ -238,7 +268,9 @@ export default class userIdentity extends exchangeViewBase {
                    className="id-input"
                    value={this.state.userAuth.number ? this.state.userAuth.number : this.state.numberValue}
                    disabled ={this.state.userAuth.number ? true : false}
-                   onInput={evt => this.numberInput(evt)}/>
+                   onInput={value => this.numberInput(value)}
+                   onBlur={this.checkNumber}/>
+            <em className="number-err">{this.state.errNum}</em>
           </div>
         </div>
         <div className="photo-identify clearfix">

@@ -47,9 +47,9 @@ export default class homeNotice extends exchangeViewBase {
     return (
       <div className="notice-detail-wrap ">
         <h1>
-          <Link to="/home">{this.intl.get("header-home")}</Link>&gt;
-          <Link to="/notice">{this.intl.get("infoView")}</Link>&gt;
-          <Link to="/notice/content/detail">{this.intl.get("notice-detail")}</Link>
+          <Link to="/whome">{this.intl.get("header-home")}</Link>&gt;
+          <Link to="/wnotice">{this.intl.get("infoView")}</Link>&gt;
+          <Link to="/wnotice/content/detail">{this.intl.get("notice-detail")}</Link>
         </h1>
         <h2 className="clearfix">
           <span>{this.props.controller.configData.language === 'zh-CN' ? activityInfo.subjectCn : activityInfo.subjectEn}</span>

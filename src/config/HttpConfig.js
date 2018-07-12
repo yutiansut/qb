@@ -45,6 +45,8 @@ export default {
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true}, // 验证谷歌验证码
     {name: 'setUserNotify', data: {url: '/user/', method: 'post'}, action: 'setUserNotifyType', actionBack: 'setUserNotifyTypeRes', needToken: true}, // 修改登录方式
     {name: 'outOther', data: {url: '/user/', method: 'post'}, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true}, // 退出其他设备
+    {name: 'getUserNocticeList', data: {url: '/user/', method: 'post'}, action: 'GetUserNotificationList', actionBack: 'GetUserNotificationListRes', needToken: true}, // 获取通知列表
+    {name: 'upDateUserNocticeList', data: {url: '/user/', method: 'post'}, action: 'updateUserNotificationStatus', actionBack: 'updateUserNotificationStatusRes', needToken: true}, // 读取通知时间
   ],
   notice: [
     {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes'} // 活动内容
@@ -120,6 +122,6 @@ export default {
     { name: 'getAward', data: { url: '/common/', method: 'post' }, action: 'invite', actionBack: 'inviteRes'}
   ],
   login:[
-    {name: 'forgetLoginPass', data: {url: '/user/', method: 'post'}, action: 'forgetLoginPass', actionBack: 'forgetLoginPassRes', needToken: true}, // 找回密码
+    {name: 'forgetLoginPass', data: {url: '/common/', method: 'post'}, action: 'forgetLoginPass', actionBack: 'forgetLoginPassRes'}, // 找回密码
   ]
 }

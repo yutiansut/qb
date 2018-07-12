@@ -32,7 +32,7 @@ export default class Header extends ExchangeViewBase {
       navClass: 'headerNav',
       languageIndex: 0,
       navArrayLeft : [
-        {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false, tokenShow: false},
+        {label: `${this.intl.get('header-home')}`, to: '/whome', select: false, linkUser: false, tokenShow: false},
         {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false, tokenShow: false},
         {
           label: `${this.intl.get('header-assets')}`,
@@ -54,7 +54,7 @@ export default class Header extends ExchangeViewBase {
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.clearLoginInfo = this.loginController.clearLoginInfo.bind(this.loginController) // 退出登录
     this.loginOut = this.loginOut.bind(this)
-    this.matched = '/home'
+    this.matched = '/whome'
   }
   componentDidMount() {
     languageArr.forEach((v,index)=>{
@@ -78,7 +78,7 @@ export default class Header extends ExchangeViewBase {
   loginOut() {
     // console.log(222, this)
     this.clearLoginInfo()
-    this.props.history.push('/home')
+    this.props.history.push('/whome')
     let navArrayLeft = this.state.navArrayLeft
     navArrayLeft[2].tokenShow = true
     this.setState({navArrayLeft})
@@ -95,7 +95,7 @@ export default class Header extends ExchangeViewBase {
       <div className={`${this.props.navClass} clearfix`}>
         <ul className="clearfix">
           <li className='nav-logo'>
-            <Link to='/home'></Link>
+            <Link to='/whome'></Link>
           </li>
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
             // console.log(match)
@@ -125,20 +125,20 @@ export default class Header extends ExchangeViewBase {
             <div className="new-li-content">
               <p>通知</p>
               <div>没有新通知</div>
-              <a href="javascript:void(0)">查看全部</a>
+              <Link to="/wuserNotice">查看全部</Link>
             </div>
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
-            <NavLink activeClassName="header-right-active" to="/login">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
+            <NavLink activeClassName="header-right-active" to="/wlogin">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
           </li>
           <li className={`${userToken ? 'user-li' : 'hide'}`} >
             <p>{userName}</p>
             <ul className="login-ul">
               <li>
-                <NavLink to="/user/safe">{`${this.intl.get('header-security')}`}</NavLink>
+                <NavLink to="/wuser/safe">{`${this.intl.get('header-security')}`}</NavLink>
               </li>
               <li>
-                <NavLink to="/user/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
+                <NavLink to="/wuser/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
               <li onClick={this.loginOut}>退出</li>
             </ul>

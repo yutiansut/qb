@@ -441,6 +441,8 @@ export default function zh(state) {
     "user-bigPicture": "文件太大，请不要超过10M",
     "user-uploadPicture": "请上传图片",
     "user-nonePicture": "信息不完整",
+    "user-idErr": "身份证填写有误",
+    "user-passportErr": "护照填写有误"
   };
   const login = {
     "login-verify": "验证登录",

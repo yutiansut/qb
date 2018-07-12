@@ -27,6 +27,7 @@ export default class ForgetPass extends exchangeViewBase {
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
+    this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller) // 短信验证码
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 图形验证码

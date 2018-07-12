@@ -177,7 +177,7 @@ export default class Login extends exchangeViewBase {
                      value={this.state.passInput}
                      onInput={value => this.changePass(value)}
                      onBlur={this.checkPassInput}/>
-              <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
+              <span><NavLink to="/wfindPass">{this.intl.get("login-forget")}</NavLink></span>
               <em>{this.state.pwdErr}</em>
             </li>
             <li className="verify-li">

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
@@ -33,7 +34,7 @@ export default class userSafeCenter extends exchangeViewBase {
       // showVerify: 'none',
       showChange: false,
       otherShow: false, // 打开其他安全设置
-      noticeIndex: 1, // 选择通知设置
+      noticeIndex: 0, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
       changeType: 0, // 更改两步验证弹窗所需参数 根据后台返回确定每种验证对象
       isTwoVerify: 0, // 确认两步验证类型
@@ -150,11 +151,10 @@ export default class userSafeCenter extends exchangeViewBase {
     verifyList.forEach((v, i) => { // 两步验证未绑定手机时
       v.contentList[2].name = this.state.userInfo.phone ? this.intl.get("user-msg") : this.intl.get("user-bindPhone")
     })
-
     noticeList[0].name = this.state.userInfo.email ? this.intl.get("user-noticeEmail") : this.intl.get("user-bindEmail") // 通知设置未绑定邮箱时
     noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-msg") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
     // this.state.notifyMethod
-    this.setState({verifyList, noticeList})
+    this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
   }
 
   componentWillUpdate(props, state, next) {
@@ -183,7 +183,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>{this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}</li>
             <li>{this.intl.get("user-level")}</li>
             <li>
-              <span>VIP{this.state.userInfo.level}</span>({this.intl.get("points")}：<span>{this.state.userCreditsNum}</span>)
+              <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/wuser/integration">{this.state.userCreditsNum}</Link>)
             </li>
           </ul>
         </div>

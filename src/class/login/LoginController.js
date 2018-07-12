@@ -57,13 +57,14 @@ export default class LoginController extends ExchangeControllerBase {
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.ret === 0) { // 登陆成功
-      this.view && this.view.history.push('/home')
+      this.view && this.view.history.push('/whome')
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证
       this.view.setState({showTwoVerify: true, verifyType: data.ret})
       return
     }
+    if (data.ret !== 0) {this.getCaptchaVerify()}
     this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
   }
   async clearLoginInfo() { // 退出登陆
@@ -81,10 +82,12 @@ export default class LoginController extends ExchangeControllerBase {
       newPass,
       captchaId,
       captchaCode,
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0"
+      os: 3
     })
     console.log('忘记密码', result)
     this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")})
+    if (result === null) {this.view && this.view.history.push('/wlogin')}
+    if (result !== null) {this.getCaptchaVerify()}
   }
 
   async initLoginVerification() { // 获取手势验证

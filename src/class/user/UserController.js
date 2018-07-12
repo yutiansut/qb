@@ -92,7 +92,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async uploadInfo() { // 身份认证确认提交
-    let typeIndexArr = [1, 3]
+    let typeIndexArr = [1, 3], succObj = {}
     let result = await this.store.Proxy.uploadUserAuth({
       "uid": this.store.uid,
       "token": this.store.token,
@@ -111,7 +111,14 @@ export default class UserController extends ExchangeControllerBase {
       popType: result && result.ret === 101 ? 'tip1': 'tip3',
       popMsg: result && result.ret === 101 ? this.view.intl.get("user-photoSucc") : result.msg // 上传成功
     })
-    result.ret === 101 && this.view.setState({userAuth: {state: 1}})
+    succObj = {
+      state: 1,
+      firstName: this.view.state.firstNameValue,
+      lastName: this.view.state.lastNameValue,
+      number: this.view.state.numberValue
+    }
+    // this.state.userAuth.firstName
+    result.ret === 101 && this.view.setState({userAuth: Object.assign(this.view.state.userAuth, succObj), checkVerifyArr: false})
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
@@ -137,6 +144,9 @@ export default class UserController extends ExchangeControllerBase {
     }
     if (result === null && mode === 1) {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {email: account})})
+    }
+    if (result !== null) {
+      this.getCaptchaVerify()
     }
     console.log('绑定手机号／邮箱', result)
   }
@@ -213,6 +223,9 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
       this.store.state.userInfo.fundPwd = 0
     }
+    if (result !== null) {
+      this.getCaptchaVerify()
+    }
   }
 
   async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
@@ -246,7 +259,9 @@ export default class UserController extends ExchangeControllerBase {
         verifyList
       })
     }
-
+    if (result !== null) {
+      this.getCaptchaVerify()
+    }
     console.log('修改两步认证', result)
   }
 
@@ -310,10 +325,15 @@ export default class UserController extends ExchangeControllerBase {
   async setUserNotify(index) { // 修改通知方式
     this.view.setState({
       type: index + 1,
-      noticeIndex: (!this.view.state.userInfo.email && index === 0 ? 1 : index) || (!this.view.state.userInfo.phone && index === 1 ? 0 : index),
-      showSet: (!this.view.state.userInfo.email && index === 0 ? true : false) || (!this.view.state.userInfo.phone && index === 1 ? true : false),
     })
-
+    this.view.state.userInfo.notifyMethod === 0 && this.view.setState({ // 默认手机
+      noticeIndex: !this.view.state.userInfo.email && index === 0 ? 1 : index,
+      showSet: !this.view.state.userInfo.email && index === 0 ? true : false
+    })
+    this.view.state.userInfo.notifyMethod === 1 &&  this.view.setState({ // 默认邮箱
+      noticeIndex: !this.view.state.userInfo.phone && index === 1 ? 0 : index,
+      showSet: !this.view.state.userInfo.phone && index === 1 ? true : false
+    })
     if (this.view.state.userInfo.email && index === 0 || this.view.state.userInfo.phone && index === 1) { // 两步认证修改
       let result = await this.store.Proxy.setUserNotify({
         "userId": this.store.uid,
@@ -341,6 +361,11 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-outSucc"),
     })
     console.log('退出其他设备', result)
+  }
+
+  async getUserNocticeList() { // 获取通知列表
+    let userNocticeList = await this.store.userNocticeList();
+    this.view.setState({userNocticeList})
   }
 
   // 为其他模块提供接口

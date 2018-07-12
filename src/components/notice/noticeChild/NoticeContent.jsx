@@ -57,13 +57,13 @@ export default class noticeContent extends exchangeViewBase {
             </dt>
             {/*<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>*/}
             {this.state.noticeList.length && this.state.noticeList.map((v, index) => (
-            <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
-              <dd >
-                <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                <em>{this.intl.get("notice")}</em>
-                <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
-              </dd>
-            </Link>))}
+              <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
+                <dd >
+                  <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                  <em>{this.intl.get("notice")}</em>
+                  <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
+                </dd>
+              </Link>))}
           </dl>
           <div className={this.state.noticeList.length ? '' : 'hide'}>
             {this.state.noticeList.totalCount &&<Pagination total={this.state.noticeList.totalCount}
@@ -82,14 +82,15 @@ export default class noticeContent extends exchangeViewBase {
               <em>{this.intl.get("notice-type")}</em>
               <span>{this.intl.get("time")}</span>
             </dt>
-            {this.state.infoList.length && this.state.infoList.map((v, index) => (<Link to={{pathname: `${this.props.match.url}/detail`, query: { infoId: v.activityId }}} key={index}>
-              <dd>
-              {/*<a href={`http://${v.source}`} target="_blank">*/}
-                <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                <em>{this.intl.get("information")}</em>
-                <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
-              {/*</a>*/}
-              </dd>
+            {this.state.infoList.length && this.state.infoList.map((v, index) => (
+              <Link to={{pathname: `${this.props.match.url}/detail`, query: { infoId: v.activityId }}} key={index}>
+                <dd>
+                {/*<a href={`http://${v.source}`} target="_blank">*/}
+                  <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                  <em>{this.intl.get("information")}</em>
+                  <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
+                {/*</a>*/}
+                </dd>
             </Link>))}
           </dl>
           <div className={this.state.infoList.length ? '' : 'hide'}>

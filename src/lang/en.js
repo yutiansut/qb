@@ -450,6 +450,8 @@ export default function en(state) {
     "user-bigPicture": "picture is too big, must be less than 10M",
     "user-uploadPicture": "请上传图片",
     "user-nonePicture": "信息不完整",
+    "user-idErr": "There was an error. Check the ID box.",
+    "user-passportErr": "There was an error. Check the Passport box."
 
   };
   const login = {

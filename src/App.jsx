@@ -23,6 +23,7 @@ import Home from './components/home/Home.jsx'
 import TradeCon from './components/trade/Trade.jsx'
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
 import NoticeInfo from './components/notice/NoticeBulletin.jsx'
+import UserNoticeInfo from './components/notice/UserNotice.jsx' // 用户通知
 import OrderManage from './components/order/OrderManage.jsx'
 import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
@@ -55,7 +56,7 @@ const Trade = ({match}) => {
                    klineController={klineController}/>;
 };
 
-const User = ({match}) => {
+const User = ({match, history}) => {
   return <UserInfo controller={userController} match={match} history={history}/>
 };
 
@@ -63,13 +64,18 @@ const Loign = ({match, history}) => {
   return <LoginCon controller={loginController} match={match} history={history}/>
 };
 
-const ForgetPass = ({match}) => {
-  return <ForgetPassCon controller={loginController} match={match}/>
+const ForgetPass = ({match, history}) => {
+  return <ForgetPassCon controller={loginController} match={match} history={history}/>
 };
 
 const Notice = ({match}) => {
   return <NoticeInfo controller={noticeController} match={match}/>
 };
+
+const UserNotice = ({match}) => {
+  return <UserNoticeInfo controller={userController} match={match}></UserNoticeInfo>
+}
+
 
 const NoticeDetail = ({match, location}) => {
   return <NoticeDetailCon controller={noticeController} match={match} location={location}/>
@@ -180,19 +186,20 @@ export default class App extends Component {
         <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`, width: "100%"}}>
           <Switch>
             {/*<Route exact path="/" component={HomeComponent}/>*/}
-            <Route exact path="/home" component={HomeComponent}/>
+            <Route exact path="/whome" component={HomeComponent}/>
             <Route path="/trade" component={Trade}/>
-            <Route path="/login" component={Loign}/>
+            <Route path="/wlogin" component={Loign}/>
             <Route path="/wallet" component={Asset}/>
             <Route path="/order" component={Order}/>
-            <Route path="/user" component={User}/>
-            <Route path="/findPass" component={ForgetPass}/>
-            <Route path="/notice/content/detail" component={NoticeDetail}/>
-            <Route path="/notice" component={Notice}/>
+            <Route path="/wuser" component={User}/>
+            <Route path="/wfindPass" component={ForgetPass}/>
+            <Route path="/wnotice/content/detail" component={NoticeDetail}/>
+            <Route path="/wnotice" component={Notice}/>
             <Route path="/help" component={Help}/>
             <Route path="/activity" component={Activity}/>
             <Route path="/genrealize" component={Gener}/>
-            <Redirect to="/home"/>
+            <Route path="/wuserNotice" component={UserNotice}/>
+            <Redirect to="/whome"/>
           </Switch>
         </div>
         {/*<Footer/>*/}
