@@ -109,7 +109,7 @@ export default class Extract extends exchangeViewBase {
       pageSize: 10,
       coinId: -1,
       coinName: -1,
-      orderType: 15000,
+      orderType: 2,
       orderStatus: -1,
       startTime: -1,
       endTime: -1
@@ -180,7 +180,6 @@ export default class Extract extends exchangeViewBase {
     let curExtract = extractAddr.filter(
       v => v.coinName === this.state.currency.toLowerCase()
     )[0];
-    console.log(curExtract);
     return (
       <div className="extract">
         <h3>
@@ -294,9 +293,7 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{(totalQuota * 10000 -
-                  availableQuota * 10000) /
-                  10000}/{Number(totalQuota)} BTC
+                {this.intl.get("asset-24hQuota")}：{Number(totalQuota.minus(availableQuota))}/{totalQuota} BTC
                 <NavLink to="/wuser/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
@@ -333,10 +330,8 @@ export default class Extract extends exchangeViewBase {
                   {` ${currency}`}
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
-                    {this.state.extractAmount - minerFee > 0
-                      ? (this.state.extractAmount * 100000000 -
-                        minerFee * 100000000) /
-                      100000000
+                    {Number(Number(this.state.extractAmount).minus(minerFee)) > 0
+                      ? Number(Number(this.state.extractAmount).minus(minerFee))
                       : 0}{" "}
                     {currency}
                   </span>
@@ -475,7 +470,7 @@ export default class Extract extends exchangeViewBase {
                       pageSize: 10,
                       coinId: -1,
                       coinName: -1,
-                      orderType: 15000,
+                      orderType: 2,
                       orderStatus: -1,
                       startTime: -1,
                       endTime: -1

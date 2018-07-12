@@ -174,7 +174,11 @@ export default class AssetStore extends ExchangeStoreBase {
     if (result && result.errCode) {
       return result;
     }
-    this.state.assetHistory.orderList = result && result.orderList;
+    this.state.assetHistory.orderList = result && result.orderList.map(v=>{
+      v.orderType === 15000 && (v.orderType = 2);
+      v.orderType === 5 && (v.orderType = 4);
+      return v;
+    });
     obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
     obj.page === 0 &&
       result.totalCount &&

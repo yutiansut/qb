@@ -14,12 +14,12 @@ export default class History extends exchangeViewBase {
     // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
       orderType: {
-        // 1: this.intl.get("deposit"),
-        // 2: this.intl.get("asset-transfer"),
-        // 4: this.intl.get("asset-withdraw"),
         1: this.intl.get("deposit"),
-        5: this.intl.get("asset-transfer"),
-        15000: this.intl.get("asset-withdraw")
+        2: this.intl.get("asset-withdraw"),
+        4: this.intl.get("asset-transfer")
+        // 1: this.intl.get("deposit"),
+        // 15000: this.intl.get("asset-withdraw")
+        // 5: this.intl.get("asset-transfer"),
       },
       status: {
         0: this.intl.get("pending"),
@@ -111,9 +111,9 @@ export default class History extends exchangeViewBase {
     });
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUpdate() { }
+  componentWillUpdate() {}
 
   render() {
     let { total, orderList } = this.state.assetHistory;
@@ -134,9 +134,9 @@ export default class History extends exchangeViewBase {
                 valueArr={
                   this.state.walletList
                     ? [
-                      this.intl.get("all"),
-                      ...Object.keys(this.state.walletList)
-                    ]
+                        this.intl.get("all"),
+                        ...Object.keys(this.state.walletList)
+                      ]
                     : []
                 }
                 onSelect={value => {
@@ -253,53 +253,55 @@ export default class History extends exchangeViewBase {
                       },
                       index
                     ) => (
-                        <tr key={index}>
-                          <td className="time">
-                            {orderTime.toDate("yyyy-MM-dd")}
-                          </td>
-                          <td>
-                            <img src={coinIcon} alt="" />
-                            {coinName.toUpperCase()}
-                          </td>
-                          <td>{this.staticData.orderType[orderType]}</td>
-                          <td className="cash red">
-                            {orderType === 15000
-                              ? "-"
-                              : orderType === 0
-                                ? "+"
-                                : ""}
-                            {count}
-                          </td>
-                          <td className="balan">
-                            <i>{balance}</i>
-                          </td>
-                          <td className="send">
-                            <i>
-                              {postAddress}
-                            </i>
-                          </td>
-                          <td className="receive">
-                            <i title={receiveAddress}>{receiveAddress}</i>
-                          </td>
-                          <td className="state passing">
-                            <span>{this.staticData.status[orderStatus]}</span>
-                          </td>
-                          <td className="fee">{fee}</td>
-                          <td className="option">
-                            {orderStatus === 0 ? (
-                              <a
-                                onClick={() => {
-                                  this.cancelOreder(orderId);
-                                }}
-                              >
-                                {this.intl.get("cancel")}
-                              </a>
-                            ) : (
-                                "—"
-                              )}
-                          </td>
-                        </tr>
-                      )
+                      <tr key={index}>
+                        <td className="time">
+                          {orderTime.toDate("yyyy-MM-dd")}
+                        </td>
+                        <td>
+                          <img src={coinIcon} alt="" />
+                          {coinName.toUpperCase()}
+                        </td>
+                        <td>{this.staticData.orderType[orderType]}</td>
+                        <td
+                          className={`cash ${
+                            orderType === 2
+                              ? "red"
+                              : orderType === 1
+                                ? "green"
+                                : ""
+                          }`}
+                        >
+                          {orderType === 2 ? "-" : orderType === 1 ? "+" : ""}
+                          {count}
+                        </td>
+                        <td className="balan">
+                          <i>{balance}</i>
+                        </td>
+                        <td className="send">
+                          <i>{postAddress === '' ? '\n' : postAddress}</i>
+                        </td>
+                        <td className="receive">
+                          <i title={receiveAddress}>{receiveAddress}</i>
+                        </td>
+                        <td className="state passing">
+                          <span>{this.staticData.status[orderStatus]}</span>
+                        </td>
+                        <td className="fee">{fee}</td>
+                        <td className="option">
+                          {orderStatus === 0 ? (
+                            <a
+                              onClick={() => {
+                                this.cancelOreder(orderId);
+                              }}
+                            >
+                              {this.intl.get("cancel")}
+                            </a>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                      </tr>
+                    )
                   )}
               </tbody>
             </table>
@@ -316,8 +318,8 @@ export default class History extends exchangeViewBase {
             />
           </div>
         ) : (
-            <div className="kong">{this.intl.get("noRecords")}</div>
-          )}
+          <div className="kong">{this.intl.get("noRecords")}</div>
+        )}
         {this.state.tip && (
           <BasePopup
             type={this.state.tipSuccess ? "tip1" : "tip3"}

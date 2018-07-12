@@ -1,4 +1,5 @@
 import JsonBig from 'json-bigint'
+import { BigNumber } from "bignumber.js";
 
 JSON.stringify = (...parmas)=>{
   // console.log("修改JSON.stringify", ...parmas);
@@ -223,4 +224,22 @@ Date.prototype.dateHandle = function (fmt) {
     });
   }
   return fmt;
+};
+
+//  js Number加减乘除 计算 (依赖bignumber.js) 为了保留精度
+//加
+Number.prototype.plus = function(num){
+  return( new BigNumber(this)).plus(num)
+}
+// 减
+Number.prototype.minus = function(num) {
+  return (new BigNumber(this)).minus(num);
+};
+// 乘
+Number.prototype.multi = function(num) {
+  return new BigNumber(this).multipliedBy(num);
+};
+// 除
+Number.prototype.div = function(num) {
+  return (new BigNumber(this)).dividedBy(num);
 };

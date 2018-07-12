@@ -49,27 +49,29 @@ export default class Simple extends exchangeViewBase {
         : this.state.totalAsset.valuationCN;
     return (
       <div className="simple-asset clearfix">
-        <p className="simple-asset-wrap">
-          <span className="total">
-            {this.intl.get("asset-totalAssets")}：{lang === "en-US" ? "$" : "¥"}
-            {total && Number(total).format({ number: "legal" })}{" "}
-          </span>
-          <img src="/static/images/xianghu.svg" alt="" />
-          <span className="avail1">
-            {this.intl.get("deal-use")}
-            {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&
-              Number(avail1.availableCount).format({ number: "property" })}
-          </span>
-          <span className="avail2">
-            {this.intl.get("deal-use")}
-            {currencyArr && currencyArr[1].toUpperCase()}：{avail2 &&
-              Number(avail2.availableCount).format({ number: "property" })}
-          </span>
+        <div className="simple-asset-wrap">
+          {this.props.controller.token && <p>
+            <span className="total">
+              {this.intl.get("asset-totalAssets")}：{lang === "en-US" ? "$" : "¥"}
+              {total && Number(total).format({ number: "legal" })}{" "}
+            </span>
+            <img src="/static/images/xianghu.svg" alt="" />
+            <span className="avail1">
+              {this.intl.get("deal-use")}
+              {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&
+                Number(avail1.availableCount).format({ number: "property" })}
+            </span>
+            <span className="avail2">
+              {this.intl.get("deal-use")}
+              {currencyArr && currencyArr[1].toUpperCase()}：{avail2 &&
+                Number(avail2.availableCount).format({ number: "property" })}
+            </span>
+          </p>}
           <span>
-            {this.intl.get("fee")}:Maker: {curPair && curPair.maker}%,Taker:{" "}
-            {curPair && curPair.taker}%
+            {this.intl.get("fee")}:Maker: {curPair && curPair.maker*100}%,Taker:{" "}
+            {curPair && curPair.taker*100}%
           </span>
-        </p>
+        </div>
       </div>
     );
   }
