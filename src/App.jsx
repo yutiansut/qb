@@ -174,7 +174,7 @@ export default class App extends Component {
   render() {
 
     return <Router>
-      {this.state.initDone && <div id="app">
+      {this.state.initDone && <div>
         {/*<Header/>*/}
         <Switch>
           <Route path="/trade" component={tradeHeader}/>

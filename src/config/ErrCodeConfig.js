@@ -239,13 +239,6 @@ export default {
     },
     errCode: "ERROR_ADDRESS_EXIST"
   },
-  714: {
-    // msg: "自我提币",
-    get msg() {
-      return intl.get(714);
-    },
-    errCode: "ERROR_TO_SELF"
-  },
   1001: {
     // msg: "连接被禁止",
     get msg() {

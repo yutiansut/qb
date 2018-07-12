@@ -85,68 +85,9 @@
             border-radius(0.02rem)
             background $normal-input-color
             border-radius 0.02rem
-            .search-list
-              position absolute
-              left 0
-              top 0.4rem
-              width 100%
-              background $normal-white-color
-              box-shadow: 6px 0 6px 0 rgba(0,0,0,0.06), 0 6px 6px 0 rgba(0,0,0,0.06);
-              z-index 99
-              li
-                overflow hidden
-                padding 0 0.1rem
-                cursor pointer
-                &:hover
-                  background-color $bg-dark-color
-                span
-                  overflow hidden
-                  float left
-                  white-space nowrap
-                  text-overflow ellipsis
-                span:nth-child(1)
-                  width 0.7rem
-                span:nth-child(2)
-                  width 0.05rem
-                  height 0.4rem
-                span:nth-child(3)
-                  width 3.2rem
-            .select-input
-              position relative
+            input
               width 100%
               height 0.4rem
-              line-height 0.4rem
-              padding 0 10% 0 0.1rem
-              border-radius(0.02rem)
-              border 0.01rem solid $line-dark
-              background $normal-white-color
-              &::after
-                position absolute
-                top 0
-                right 0
-                content ''
-                width 10.9%
-                height 100%
-                background: url(/static/images/xiala_icon.png) no-repeat center center
-                background-size: auto 12%;
-              &:hover
-                border-color $main-color
-              p
-                width 100%
-                height 100%
-                overflow hidden
-                span
-                  overflow hidden
-                  float left
-                  white-space nowrap
-                  text-overflow ellipsis
-                span:nth-child(1)
-                  width 0.7rem
-                span:nth-child(2)
-                  width 0.05rem
-                  height 100%
-                span:nth-child(3)
-                  width 3.2rem
           a
             float left
             height 0.4rem

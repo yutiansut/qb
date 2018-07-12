@@ -6,7 +6,6 @@ export default class ExchangeViewBase extends ViewBase {
     super(props)
     // this.history = props.history;
     // this.match = props.match;
-    // this.location = props.location;
     this.intl = intl
     this.images = {}
   }
@@ -18,21 +17,7 @@ export default class ExchangeViewBase extends ViewBase {
 
   componentDidMount() {
     super.componentDidMount();
-    this.location = window.location.href;
-    // console.log("exchangeViewBase componentDidMount");
-    document.getElementById("app").scrollIntoView(true);
     // console.log('exchangeViewBase componenDidMount')
   }
-  componentWillUpdate(state, next) {
-    super.componentWillUpdate();
-    if(this.location !== window.location.href){
-      document.getElementById("app").scrollIntoView(true);
-      this.location = window.location.href;
-    }
-    // console.log(this.location);
-    // document.getElementById("app").scrollIntoView(true);
-    // console.log("exchangeViewBase componentWillUpdate");
-  }
-
 
 }

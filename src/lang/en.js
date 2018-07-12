@@ -121,7 +121,6 @@ export default function en(state) {
     711: "cws error",
     712: "The withdrawal address format is wrong",
     713: 'This address already exists',
-    714: 'You can not make a transfer to yourself',
     1001: "Connection banned",
     1002: "The Token passed in during connection is invalid",
     2001: "Google validation failed",
