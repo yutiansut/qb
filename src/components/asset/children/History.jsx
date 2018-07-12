@@ -56,6 +56,7 @@ export default class History extends exchangeViewBase {
     this.getHistory = controller.getHistory.bind(controller);
     this.getWalletList = controller.getWalletList.bind(controller);
     this.cancelOreder = controller.cancelOreder.bind(controller);
+    this.exportHistory = controller.exportHistory.bind(controller);
 
     this.initSearch = () => {
       this.setState(
@@ -121,7 +122,7 @@ export default class History extends exchangeViewBase {
       <div className="hist">
         <h3 className="title">
           {this.intl.get("asset-records")}{" "}
-          <Button type="export" title={this.intl.get("asset-export")} />
+          <Button type="export" title={this.intl.get("asset-export")} onClick={this.exportHistory}/>
         </h3>
         <div className="filtrate clearfix">
           <ul className="clearfix">

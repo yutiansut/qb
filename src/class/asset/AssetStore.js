@@ -2,7 +2,7 @@ import ExchangeStoreBase from "../ExchangeStoreBase";
 
 export default class AssetStore extends ExchangeStoreBase {
   constructor() {
-    super("asset", 'general');
+    super("asset", "general");
     this.state = {
       // 交易对手续费
       pairFees: [
@@ -56,9 +56,9 @@ export default class AssetStore extends ExchangeStoreBase {
     };
     // websocket监听用户资产更新推送
     this.WebSocket.general.on("userAssetUpdate", data => {
-      console.log('asset-websocket', data)
-      let {valuationBTC, valuationEN, valuationCN, coinList} = data;
-      this.state.totalAsset.valuationBTC = valuationBTC;//总资产
+      console.log("asset-websocket", data);
+      let { valuationBTC, valuationEN, valuationCN, coinList } = data;
+      this.state.totalAsset.valuationBTC = valuationBTC; //总资产
       this.state.totalAsset.valuationEN = valuationEN; //换算美元
       this.state.totalAsset.valuationCN = valuationCN; //换算人民币
       this.state.wallet = coinList;
@@ -154,10 +154,10 @@ export default class AssetStore extends ExchangeStoreBase {
     result.coinAddress
       ? (this.state.coinAddress = result)
       : (this.state.coinAddress = {
-        coinId: this.state.walletList[coin], //币种ID
-        verifyNumer: "", //最大确认数
-        coinAddress: "" //地址
-      });
+          coinId: this.state.walletList[coin], //币种ID
+          verifyNumer: "", //最大确认数
+          coinAddress: "" //地址
+        });
   }
 
   // 获取资产记录
@@ -174,16 +174,37 @@ export default class AssetStore extends ExchangeStoreBase {
     if (result && result.errCode) {
       return result;
     }
-    this.state.assetHistory.orderList = result && result.orderList.map(v=>{
-      v.orderType === 15000 && (v.orderType = 2);
-      v.orderType === 5 && (v.orderType = 4);
-      return v;
-    });
+    this.state.assetHistory.orderList =
+      result &&
+      result.orderList.map(v => {
+        v.orderType === 15000 && (v.orderType = 2);
+        v.orderType === 5 && (v.orderType = 4);
+        return v;
+      });
     obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
     obj.page === 0 &&
       result.totalCount &&
       (this.state.assetHistory.total = result.totalCount);
     return this.state.assetHistory;
+  }
+  // 导出资产记录
+  async exportHistory() {
+    let result = await this.Proxy.history({
+      userId: this.controller.userId,
+      token: this.controller.token,
+      coinId: -1, //如果不设定 传-1
+      coinName: -1,
+      orderType: -1, //充1提2转4  注意:交易所内提币收方显示为转账  所有状态传-1，如果需要两种状态则将需要的状态相与（|）
+      startTime: -1, //不设定传-1 都传Unix秒
+      endTime: -1, //不设定传-1 都传Unix秒
+      orderStatus: -1, //所有状态传-1
+      page: 0,
+      pageSize: 999999999999
+    });
+    if (result && result.errCode) {
+      return [];
+    }
+    return result.orderList;
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
@@ -221,12 +242,19 @@ export default class AssetStore extends ExchangeStoreBase {
     );
     return result;
   }
+  // 撤销提币申请
   async cancelOrder(id) {
     let result = await this.Proxy.cancelWithdraw({
       userId: this.controller.userId,
       token: this.controller.token,
       applyId: id
     });
+    if (result === null) {
+      this.state.assetHistory.orderList.forEach(v => {
+        if (v.orderId === id) v.orderStatus = 3;
+      });
+      return this.state.assetHistory;
+    }
     return result;
   }
   // 增加提现地址
@@ -281,7 +309,7 @@ export default class AssetStore extends ExchangeStoreBase {
     // );
   }
   // 验证资金密码
-  async verifyPass(fundPass){
+  async verifyPass(fundPass) {
     let result = await this.Proxy.verifyFundPass({
       userId: this.controller.userId,
       token: this.controller.token,

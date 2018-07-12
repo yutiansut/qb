@@ -196,7 +196,8 @@ export default function en(state) {
     "asset-confirming": "Subscription Period",
     "asset-viewAll": "View all",
     "asset-minWithdraw":
-      "OBS：Minimal withdraw amount is{number}{currency};do not withdraw to ICO address,We would not deal with the token in the future.",
+      "OBS：Minimal withdraw amount is {number}{currency};do not withdraw to ICO address,We would not deal with the token in the future.",
+    "asset-minWithdraw-tip": 'Minimal withdraw amount is {number}{currency}',
     "asset-withdrawAddress": "withdraw address",
     "asset-addAddress": "add address",
     "asset-withdrawAmount": "Amount of Withdrawal",

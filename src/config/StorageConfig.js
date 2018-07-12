@@ -26,5 +26,8 @@ export default {
     // {name: 'userMsg', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     // {name: 'marketList', duration: 0, expiryTime: 0}, //首页交易所列表排序
     // {name: 'filterItems', duration: 0, expiryTime: 0}//首页时间和币种维度筛选
+    {name: 'chargeCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
+    {name: 'extractCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
+    {name: 'coinCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
   ]
 }

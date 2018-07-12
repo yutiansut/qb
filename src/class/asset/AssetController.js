@@ -1,11 +1,18 @@
 import ExchangeControllerBase from "../ExchangeControllerBase";
 import AssetStore from "./AssetStore";
+import FileSaver from "file-saver";
 
 export default class AssetController extends ExchangeControllerBase {
   constructor(props) {
     super(props);
     this.store = new AssetStore();
     this.store.setController(this);
+    this.orderStatus = {
+      0: "审核中",
+      1: "通过",
+      2: "未通过",
+      3: "撤销"
+    };
   }
   setView(view) {
     super.setView(view);
@@ -41,12 +48,14 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   async getUserInfo() {
-    if (this.userTwoVerify.fundPwd === undefined){
-      let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
-        withdrawVerify, fundPwd
+    if (this.userTwoVerify.fundPwd === undefined) {
+      let {
+        //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+        withdrawVerify,
+        fundPwd
       } = await this.userController.initData();
-      this.view.setState({ userTwoVerify: {withdrawVerify, fundPwd}})
-    }else{
+      this.view.setState({ userTwoVerify: { withdrawVerify, fundPwd } });
+    } else {
       this.view.setState({ userTwoVerify: this.userTwoVerify });
     }
   }
@@ -65,13 +74,12 @@ export default class AssetController extends ExchangeControllerBase {
       wallet: this.store.state.wallet || []
     });
     if (this.view.name === "simple") {
-      this.updataMarketAvaile()
+      this.updataMarketAvaile();
     }
   }
 
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
-
     let result = await this.store.getCurrencyAmount(coin);
     if (result && result.errCode) {
       return;
@@ -126,6 +134,69 @@ export default class AssetController extends ExchangeControllerBase {
       assetHistory: this.Util.deepCopy(this.store.state.assetHistory)
     });
   }
+
+  async exportHistory() {
+    let result = await this.store.exportHistory();
+    console.log(result);
+    // let result = [
+    //   {
+    //     "orderType": 1,
+    //     "orderStatus": 2,
+    //     "fullname": "BitCoin",
+    //     "coinIcon": "http://xxxx.jpg",
+    //     "coinName": "BTC",
+    //     "coinId": 1111,
+    //     "count": 1.222,
+    //     "balance": 1.222,//余额
+    //     "postAddress": "xxxx",//发送地址
+    //     "receiveAddress": "xxxxx",//接收地址
+    //     "fee": 0.4,//手续费
+    //     "verifyCount": 5,//确认数
+    //     "doneCount": 1,//已确认数
+    //     "hashAddress": "xxx",//hash地址
+    //     "blockSite": "xxx",//点击查看交易信息的地址
+    //     "orderTime": 947586000,
+    //     "orderStatus": 0,
+    //     "orderId": "xxxxxx"
+    //   }]
+
+    let str =
+      "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
+    result.forEach(v => {
+      str +=
+        "\n" +
+          v.orderTime.toDate("yyyy-MM-dd") +
+          "," +
+          v.coinName +
+          "," +
+          (v.orderType ===
+        1
+          ? "充币"
+          : v.orderType === 15000
+            ? "提币"
+            : v.orderType === 5
+              ? "转账"
+              : " ") +
+                "," +
+                v.count +
+                "," +
+                v.postAddress +
+                "," +
+                v.receiveAddress +
+                "," +
+                `${v.doneCount}/${v.verifyCount}` +
+                "," +
+                this.orderStatus[v.orderStatus] +
+                "," +
+                v.fee
+    });
+    let exportContent = "\uFEFF";
+    let blob = new Blob([exportContent + str], {
+      type: "text/plain;charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "资产记录.xls"); //定义要保存的文件类型和文件名称
+  }
+
   // 获取确认中充币信息(顶部轮播)
   async getChargeMessage() {
     let result = await this.store.Proxy.history({
@@ -144,15 +215,6 @@ export default class AssetController extends ExchangeControllerBase {
       return result.orderList.filter(v => v.doneCount !== v.verifyCount);
     }
     return [];
-    // return [
-    //   {coinName:'btc', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'eth', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'lsk', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'dog', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'bch', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'ltc', orderTime: new Date() - 0, count: 1.235, doneCount:1, verifyCount:5 },
-    //   {coinName:'btc', orderTime: new Date() - 5555, count: 1.235, doneCount:1, verifyCount:5 },
-    // ]
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
   async getExtract() {
@@ -160,12 +222,18 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });
-    let curExtract = this.store.state.walletExtract.extractAddr.filter(v => v.coinName === this.view.state.currency.toLowerCase())[0];
+    let curExtract = this.store.state.walletExtract.extractAddr.filter(
+      v => v.coinName === this.view.state.currency.toLowerCase()
+    )[0];
     this.view.setState({
       address:
-        curExtract && curExtract.addressList[0] && curExtract.addressList[0].address || ''
+        (curExtract &&
+          curExtract.addressList[0] &&
+          curExtract.addressList[0].address) ||
+        ""
     });
   }
+
   // 请求验证码
   async requestCode() {
     let type = this.userTwoVerify.withdrawVerify;
@@ -221,19 +289,9 @@ export default class AssetController extends ExchangeControllerBase {
         tipContent: this.view.intl.get("optionSuccess"),
         showTwoVerify: false,
         extractAmount: "", //提现数量
-        password: "",
+        password: ""
       });
       this.getCurrencyAmount(this.view.state.currency);
-      // this.getHistory({
-      //   page: 0,
-      //   pageSize: 10,
-      //   coinId: -1,
-      //   coinName: -1,
-      //   orderType: 15000,
-      //   orderStatus: -1,
-      //   startTime: -1,
-      //   endTime: -1
-      // });
     }
   }
 
@@ -241,37 +299,21 @@ export default class AssetController extends ExchangeControllerBase {
   async cancelOreder(id) {
     let result = await this.store.cancelOrder(id);
     if (result && result.errCode) {
-      this.view.setState({
-        tip: true,
-        tipSuccess: false,
-        tipContent: result.msg
-      });
+      this.setViewTip(false, result.msg);
       return false;
     }
-    console.log('cancelOrder')
-    this.view.setState({
-      tip: true,
-      tipSuccess: true,
-      tipContent: this.view.intl.get("optionSuccess")
-    });
+    this.setViewTip(true, this.view.intl.get("optionSuccess"));
+    this.view.setState({ assetHistory: this.Util.deepCopy(result) });
   }
   // 添加提现地址
   async appendAddress(obj) {
-    if (obj.addressName === '' || obj.address === ''){
-      this.view.setState({
-        tip: true,
-        tipSuccess: false,
-        tipContent: this.view.intl.get("asset-incomplete")
-      });
+    if (obj.addressName === "" || obj.address === "") {
+      this.setViewTip(false, this.view.intl.get("asset-incomplete"));
       return false;
     }
     let result = await this.store.appendAddress(obj);
     if (result.errCode) {
-      this.view.setState({
-        tip: true,
-        tipSuccess: false,
-        tipContent: result.msg
-      });
+      this.setViewTip(false, result.msg);
       return false;
     }
     this.view.setState({
@@ -287,11 +329,7 @@ export default class AssetController extends ExchangeControllerBase {
   async deletAddress(obj) {
     let result = await this.store.deletAddress(obj);
     if (result.errCode) {
-      this.view.setState({
-        tip: true,
-        tipSuccess: false,
-        tipContent: this.view.intl.get("asset-delet-fail")
-      });
+      this.setViewTip(false, this.view.intl.get("asset-delet-fail"));
       return false;
     }
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
@@ -302,21 +340,21 @@ export default class AssetController extends ExchangeControllerBase {
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
     if (!o) return [];
-    if (coin.toUpperCase() !== 'USDT') {
+    if (coin.toUpperCase() !== "USDT") {
       return o.pairNameCoin[coin.toLowerCase()].map(v => {
         return {
           name: `${coin}/${v.toUpperCase()}`,
           id: o.pairIdCoin[coin.toLowerCase()][v]
-        }
-      })
+        };
+      });
     }
-    if (coin.toUpperCase() === 'USDT') {
+    if (coin.toUpperCase() === "USDT") {
       return o.pairNameMarket[coin.toLowerCase()].map(v => {
         return {
           name: `${v.toUpperCase()}/USDT`,
           id: o.pairIdMarket[coin.toLowerCase()][v]
-        }
-      })
+        };
+      });
     }
   }
 
@@ -363,7 +401,6 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 提现前前端验证
   async beforeExtract(minCount, password) {
-
     let obj = {
       orderTip: true,
       orderTipContent: ""
@@ -412,12 +449,13 @@ export default class AssetController extends ExchangeControllerBase {
     return this.store.state.wallet.filter(v => v.coinName === coin)[0];
   }
 
-
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
-    let curPair = this.view.state.pairFees && this.view.state.pairFees.filter(
-        item => item.id === this.view.state.tradePairId
-      )[0],
+    let curPair =
+        this.view.state.pairFees &&
+        this.view.state.pairFees.filter(
+          item => item.id === this.view.state.tradePairId
+        )[0],
       currencyArr = curPair.name.split("/"),
       avail1 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[0]
@@ -425,9 +463,13 @@ export default class AssetController extends ExchangeControllerBase {
       avail2 = this.store.state.wallet.filter(
         item => item.coinName === currencyArr[1]
       )[0];
-      console.log('updataMarketAvaile', avail1, avail2)
-    this.TradePlanController && this.TradePlanController.setWallet(avail1.availableCount, avail2.availableCount)
-    return {avail1, avail2}
+    console.log("updataMarketAvaile", avail1, avail2);
+    this.TradePlanController &&
+      this.TradePlanController.setWallet(
+        avail1.availableCount,
+        avail2.availableCount
+      );
+    return { avail1, avail2 };
     // this.marketController.sdfgadsf(avail1, avail2);
   }
 
@@ -446,8 +488,15 @@ export default class AssetController extends ExchangeControllerBase {
         wallet: this.store.state.wallet
       });
       this.updataMarketAvaile();
-
     }
+  }
+
+  setViewTip(type, str) {
+    this.view.setState({
+      tip: true,
+      tipSuccess: type,
+      tipContent: str
+    });
   }
 
   // // view为balance时更新

@@ -35,6 +35,7 @@ export default class Extract extends exchangeViewBase {
       tradePair: null,
       page: 1,
       noSufficTip: false, // 余额不足提示
+      quotaTip: false,
       tip: false,
       tipSuccess: true,
       tipContent: "",
@@ -90,8 +91,8 @@ export default class Extract extends exchangeViewBase {
     this.getUserInfo = controller.getUserInfo.bind(controller);
 
     this.hideSelect = () => {
-      this.setState({ showSelect: false })
-    }
+      this.setState({ showSelect: false });
+    };
   }
 
   async componentWillMount() {
@@ -124,8 +125,13 @@ export default class Extract extends exchangeViewBase {
   }
   componentWillUpdate(nextProps, nextState) {
     // 切换地址后重新请求矿工费
-    if (JSON.stringify(nextState.walletExtract) !== JSON.stringify(this.state.walletExtract)) {
-      let curExtract = nextState.walletExtract.extractAddr.filter(v => v.coinName === nextState.currency.toLowerCase())[0];
+    if (
+      JSON.stringify(nextState.walletExtract) !==
+      JSON.stringify(this.state.walletExtract)
+    ) {
+      let curExtract = nextState.walletExtract.extractAddr.filter(
+        v => v.coinName === nextState.currency.toLowerCase()
+      )[0];
       this.setState(
         {
           address:
@@ -142,7 +148,9 @@ export default class Extract extends exchangeViewBase {
     }
     if (nextState.currency !== this.state.currency) {
       // 切换币种后，重新set address，之后根据address和currency请求矿工费
-      let curExtract = this.state.walletExtract.extractAddr.filter(v => v.coinName === nextState.currency.toLowerCase())[0];
+      let curExtract = this.state.walletExtract.extractAddr.filter(
+        v => v.coinName === nextState.currency.toLowerCase()
+      )[0];
       this.setState(
         {
           address:
@@ -242,7 +250,7 @@ export default class Extract extends exchangeViewBase {
               <div className="select-address">
                 <div
                   className="select-input"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     e.nativeEvent.stopImmediatePropagation();
                     this.setState({ showSelect: true });
@@ -257,18 +265,21 @@ export default class Extract extends exchangeViewBase {
                     <ul className="search-list">
                       {curExtract &&
                         curExtract.addressList.map((v, i) => (
-                          <li key={i} onClick={e => {
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            this.setState({
-                              showSelect: false,
-                              address: {
-                                address: v.address,
-                                addressName: v.addressName
-                              }
-                            });
-                            this.getMinerFee(this.state.currency, v);
-                          }}>
+                          <li
+                            key={i}
+                            onClick={e => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopImmediatePropagation();
+                              this.setState({
+                                showSelect: false,
+                                address: {
+                                  address: v.address,
+                                  addressName: v.addressName
+                                }
+                              });
+                              this.getMinerFee(this.state.currency, v);
+                            }}
+                          >
                             <span>{v.addressName}</span>
                             <span />
                             <span>{v.address}</span>
@@ -293,10 +304,20 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{Number(totalQuota.minus(availableQuota))}/{totalQuota} BTC
+                {this.intl.get("asset-24hQuota")}：{Number(
+                  totalQuota.minus(availableQuota)
+                )}/{totalQuota} BTC
                 <NavLink to="/wuser/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
+                {this.state.quotaTip && (
+                  <span>
+                    {this.intl.get("asset-minWithdraw-tip", {
+                      number: curExtract && curExtract.minCount,
+                      currency: currency
+                    })}
+                  </span>
+                )}
                 {this.state.noSufficTip && (
                   <span>{this.intl.get("asset-not-enough")}</span>
                 )}
@@ -306,13 +327,29 @@ export default class Extract extends exchangeViewBase {
                   placeholder={this.intl.get("asset-withdrawAmount")}
                   value={this.state.extractAmount}
                   onInput={value => {
-                    availableCount < value &&
+                    value = value.replace(/[^\d.]/g, "");
+                    if (!/^[0-9]+\.?[0-9]{0,8}$/.test(value) && value !== "")
+                      return;
+                    this.setState({ extractAmount: value });
+                  }}
+                  onFocus={() => {
+                    this.setState({
+                      quotaTip: false,
+                      noSufficTip: false
+                    });
+                  }}
+                  onBlur={() => {
+                    if (
+                      Number(this.state.extractAmount) < curExtract.minCount
+                    ) {
+                      this.setState({
+                        quotaTip: true
+                      });
+                      return;
+                    }
+                    availableCount < Number(this.state.extractAmount) &&
                       !this.state.noSufficTip &&
                       this.setState({ noSufficTip: true });
-                    availableCount >= value &&
-                      this.state.noSufficTip &&
-                      this.setState({ noSufficTip: false });
-                    this.setState({ extractAmount: value });
                   }}
                 />
                 <a
@@ -330,7 +367,8 @@ export default class Extract extends exchangeViewBase {
                   {` ${currency}`}
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
-                    {Number(Number(this.state.extractAmount).minus(minerFee)) > 0
+                    {Number(Number(this.state.extractAmount).minus(minerFee)) >
+                      0 && Number(this.state.extractAmount) <= availableCount && Number(this.state.extractAmount) >= curExtract.minCount
                       ? Number(Number(this.state.extractAmount).minus(minerFee))
                       : 0}{" "}
                     {currency}
@@ -360,8 +398,8 @@ export default class Extract extends exchangeViewBase {
                     {this.intl.get("login-forget")}
                   </NavLink>
                 ) : (
-                      ""
-                    )}
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -370,6 +408,7 @@ export default class Extract extends exchangeViewBase {
               title={this.intl.get("asset-submit")}
               type="base"
               onClick={() => {
+                if(this.state.quotaTip || this.state.noSufficTip) return;
                 let { currency, address, password, extractAmount } = this.state;
                 this.beforeExtract(curExtract.minCount, this.state.password);
               }}
@@ -436,24 +475,24 @@ export default class Extract extends exchangeViewBase {
                         },
                         index
                       ) => (
-                          <tr key={index}>
-                            <td className="time">{orderTime.toDate()}</td>
-                            <td className="currency">{coinName.toUpperCase()}</td>
-                            <td className="amount">
-                              <i>-{count}</i>
-                            </td>
-                            <td className="send">
-                              <i>{postAddress}</i>
-                            </td>
-                            <td className="receive">
-                              <i>{receiveAddress}</i>
-                            </td>
-                            <td className="state">
-                              <span>{this.status[orderStatus]}</span>
-                            </td>
-                            <td className="remark">{fee}</td>
-                          </tr>
-                        )
+                        <tr key={index}>
+                          <td className="time">{orderTime.toDate()}</td>
+                          <td className="currency">{coinName.toUpperCase()}</td>
+                          <td className="amount">
+                            <i>-{count}</i>
+                          </td>
+                          <td className="send">
+                            <i>{postAddress}</i>
+                          </td>
+                          <td className="receive">
+                            <i>{receiveAddress}</i>
+                          </td>
+                          <td className="state">
+                            <span>{this.status[orderStatus]}</span>
+                          </td>
+                          <td className="remark">{fee}</td>
+                        </tr>
+                      )
                     )}
                 </tbody>
               </table>
@@ -487,8 +526,8 @@ export default class Extract extends exchangeViewBase {
               </p>
             </div>
           ) : (
-              <div className="kong">{this.intl.get("noRecords")}</div>
-            )}
+            <div className="kong">{this.intl.get("noRecords")}</div>
+          )}
         </div>
         {this.state.showAddressPopup && (
           <Popup

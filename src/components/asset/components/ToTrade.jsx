@@ -11,21 +11,23 @@ export default class ToTrade extends exchangeViewBase {
     let { pairArr } = this.props;
     return (<div className="to-trade clearfix">
       <span className="title">{this.intl.get("asset-toTrade")}</span>
-      {pairArr.map((v, index) => (
-        <NavLink
-          to={{
-            pathname: `/trade`,
-            query: { pairName: v.name.toLowerCase() }
-          }}
-          key={index}
-        >
-          <Button
-            title={v.name}
-            type="base"
+      <div className="bts">
+        {pairArr.map((v, index) => (
+          <NavLink
+            to={{
+              pathname: `/trade`,
+              query: { pairName: v.name.toLowerCase() }
+            }}
             key={index}
-          />
-        </NavLink>
-      ))}
+          >
+            <Button
+              title={v.name}
+              type="base"
+              key={index}
+            />
+          </NavLink>
+        ))}
+      </div>
     </div>)
   }
 }
