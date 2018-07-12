@@ -15,6 +15,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket = {}
     // console.log(modelName , connectName)
     modelName && connectName && this.installWebsocket(connectName, modelName)
+    // this.WebSocket.on('')
   }
 
   exchangeStoreBasePreHandler(app, req, config) {
@@ -139,7 +140,7 @@ export default class ExchangeStoreBase extends StoreBase {
       let emitData = Object.assign(headerConfig[key], {body: data})
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
       websocket.send(this.Util.deepCopy(emitData))
-      !headerConfig[key].historyPass && websocketHistory.push(emitData)
+      // !headerConfig[key].historyPass && websocketHistory.push(emitData)
       // console.log('websocketHistory',websocketHistory)
     }
     this.WebSocket[connectName].on = (key, func) => {
