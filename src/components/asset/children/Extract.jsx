@@ -301,7 +301,7 @@ export default class Extract extends exchangeViewBase {
               <div className="set">
                 {this.state.userTwoVerify.fundPwd === 1 ? <NavLink to="/user/safe" target="_blank">
                   {this.intl.get("asset-setFundPassword")}
-                </NavLink> : this.state.userTwoVerify.fundPwd === 0 ? <NavLink to="/user/safe" target="_blank">
+                </NavLink> : this.state.userTwoVerify.fundPwd === 0 ? <NavLink to="/wuser/safe" target="_blank">
                     {this.intl.get("login-forget")}
                 </NavLink> : ''}
               </div>

@@ -7,6 +7,7 @@ export default class ExchangeViewBase extends ViewBase {
     // this.history = props.history;
     // this.match = props.match;
     this.intl = intl
+    this.images = {}
   }
 
   componentWillMount() {
