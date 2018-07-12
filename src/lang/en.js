@@ -131,6 +131,7 @@ export default function en(state) {
     2014: "Google unbound",
     2200: "No activity",
     2201: "You've been invited",
+    2401: "ip未找到",
     2601: "The reward has been received. Please look forward to the next activity",
   }
   const other = {
@@ -440,7 +441,8 @@ export default function en(state) {
     "user-verifyEmail": "Email Verification Code",
     "user-verifyPhone": "Cellphone Verification Code",
     "user-checkAgainPwd": "Please ensure that both password entries match",
-    "user-checkNewPwd": "Code length must be 6~18 digits",
+    // "user-checkNewPwd": "Code length must be 6~18 digits",
+    "user-checkNewPwd": "Must be 6-18 combinations of letters, numbers or symbols in English",
     "user-checkEmail": "Invalid email address format",
     "user-checkPhone": "Cellphone number incorrect",
     "user-photoSucc": "上传成功",

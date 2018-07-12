@@ -29,7 +29,7 @@ export default class LoginController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.userController.getCaptcha()
-    this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+    this.view && this.view.setState({captcha: captcha.data, captchaId: captcha.id})
     // console.log('aaa 1', this.view.state, )
   }
 
@@ -56,7 +56,7 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if (data.ret !== 0) {this.getCaptchaVerify()}
-    this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
+    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
   }
   async clearLoginInfo() { // 退出登陆
     this.store.loginOutRemind()
@@ -77,7 +77,10 @@ export default class LoginController extends ExchangeControllerBase {
     })
     console.log('忘记密码', result)
     this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")})
-    if (result === null) {this.view && this.view.history.push('/wlogin')}
+    if (result === null) {
+      this.view && this.view.history.push('/wlogin')
+      this.view.setState({titleIndex: 1})
+    }
     if (result !== null) {this.getCaptchaVerify()}
   }
 

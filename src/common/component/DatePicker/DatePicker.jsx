@@ -1,6 +1,8 @@
 /*
   onChangeStart 绑定获取开始时间
   onChangeEnd 绑定获取结束时间
+  startTime 开始时间
+  endTime 结束时间
  */
 
 import React, { Component } from "react";
@@ -35,10 +37,10 @@ export default class DateInterval extends Component {
     return (
       <div className="date-interval clearfix">
         <div className="start-time fl">
-          <Calendar onChange={(state) => this.seletTimeStart(state)} endTime={this.state.endTime}/>
+          <Calendar onChange={(state) => this.seletTimeStart(state)} endTime={this.state.endTime} startInputTime = {this.props.startTime}/>
         </div>
         <div className="end-time fl">
-          <Calendar onChange={(state) => this.seletTimeEnd(state)} startTime={this.state.startTime}/>
+          <Calendar onChange={(state) => this.seletTimeEnd(state)} startTime={this.state.startTime} endInputTime = {this.props.endTime}/>
         </div>
       </div>
     );

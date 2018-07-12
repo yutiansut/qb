@@ -14,7 +14,20 @@ export default class Pricing extends exchangeViewBase {
     // this.props.controller.getPairFees()
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    document.body.scrollTop = document.documentElement.scrollTop = 500
+    console.log(1221, document.body.scrollTop)
+    // console.log(32424, window.location.hash)
+    // let anchor = window.location.hash.split('#')[1]
+    // let anchorElement = document.getElementById(anchor);
+    // console.log(232, anchorElement,  anchorElement.offsetTop)
+    // if (anchorElement) {
+    //   console.log(1221, document.body.scrollTop)
+    //   document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop;
+    //   console.log(122, document.body.scrollTop)
+    // }
+    // console.log(343535, document.body.scrollTop)
+  }
   render() {
     // const { controller } = this.props;
     // let { nameUsd, netUrl } = controller.configData;
@@ -61,7 +74,7 @@ export default class Pricing extends exchangeViewBase {
           </tbody>
         </table>
       </div>
-      <h2 className="title">{this.intl.get('help-earn-points')}</h2>
+      <h2 className="title" id="earn_points">{this.intl.get('help-earn-points')}</h2>
       <div className="score-grow">
         <table>
           <thead>

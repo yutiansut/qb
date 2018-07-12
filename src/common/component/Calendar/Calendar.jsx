@@ -31,7 +31,15 @@ export default class Calendar extends Component {
   }
 
   componentDidMount(){
+    console.log(111, typeof this.props.startInputTime)
+    let statTime = new Date(this.props.startInputTime * 1000), endTime = new Date(this.props.endInputTime * 1000)
     document.addEventListener('click', this.hide)
+    this.props.startInputTime && this.setState({
+      inputValue: `${statTime.getFullYear()}-${statTime.getMonth() + 1}-${statTime.getDate()}`
+    })
+    this.props.endInputTime && this.setState({
+      inputValue: `${endTime.getFullYear()}-${endTime.getMonth() + 1}-${endTime.getDate()}`
+    })
   }
   componentWillUnmount() {
     document.removeEventListener('click', this.hide)
@@ -150,6 +158,7 @@ export default class Calendar extends Component {
                  onFocus={this.showCalendar.bind(this)}
                  onBlur={() => {this.setState({calendarActive: false})}}
                  value={this.state.inputValue}/>
+                 {/*value="dddd"/>*/}
         </div>
         <div className="calendar" style={{display: this.state.showCalendar}}>
           {this.state.view == "month" ? (

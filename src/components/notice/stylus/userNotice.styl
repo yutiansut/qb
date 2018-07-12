@@ -3,32 +3,40 @@
 .user-notice-wrap
   width 12rem
   margin 0 auto
+  .hide
+    display none
   h1
     margin .3rem 0 .45rem
     color $normal-black-color
     font-size .2rem
-  dl
+  table
+    width 100%
     margin-bottom .44rem
-    dt
+    thead
+      th
+        padding .16rem 0
+        border-bottom .01rem solid $line-light
+        color $normal-gray-color
+    tbody
       padding .16rem 0
-      border-bottom .01rem solid $line-light
-      color $normal-gray-color
-    a
-      display block
-      border-bottom .01rem solid $line-light
-      &:last-of-type
-        border-bottom none
-    dd
-      padding .16rem 0
-    i, em, span
-      display inline-block
-    i
-      width 6.9rem
-      padding-left .1rem
-    em
-      width 1.5rem
-    span
-      padding-right .1rem
+      tr
+        height .5rem
+        line-height .5rem
+        text-align center
+        border-bottom .01rem solid $line-light
+        &:last-of-type
+          border-bottom none
+      td
+        .read-flag
+          display inline-block
+          width .1rem
+          height .1rem
+          background $main-color
+          border-radius 50%
+          margin-right .1rem
+          &.no-read
+            display none
+
 
 
 

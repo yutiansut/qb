@@ -186,6 +186,7 @@ export default class SetPassPopup extends exchangeViewBase {
 
   render() {
     console.log(222, this.props.isType, this.props.fundPassType)
+    let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">
         <div className="pass-info">
@@ -231,8 +232,8 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
-                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput2, 1, 3)}}/>}
-                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.state.popupInput2, 0, 3)}}/>}
+                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regEmail.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 1, 3)}}/>}
+                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regPhone.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 0, 3)}}/>}
                   {[5, 6].includes(this.props.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.props.isType)}}/>}
                 </div>
               </li>

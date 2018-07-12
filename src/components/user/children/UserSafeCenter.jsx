@@ -168,7 +168,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息111', this.state)
+    console.log('用户信息111', this.state, this.props.controller)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("header-security")}</h1>
@@ -275,7 +275,7 @@ export default class userSafeCenter extends exchangeViewBase {
               </table>
               <p className={`${this.state.ipList && this.state.ipList.length ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
               <p>
-                {this.intl.get("user-ipAddRemind")}
+                {this.intl.get("user-ipAddRemind")}{this.props.controller.configController.initState.netUrl}{this.intl.get("user-ipAddRemind2")}
               </p>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default class userSafeCenter extends exchangeViewBase {
               <table>
                 <thead>
                   <tr>
-                    {/*<th>{this.intl.get("ti ")}</th>*/}
+                    {/*<th>{this.intl.get("time ")}</th>*/}
                     <th>{this.intl.get("equipment")}</th>
                     <th>{this.intl.get("ip")}</th>
                     <th>{this.intl.get("place")}</th>
@@ -294,7 +294,7 @@ export default class userSafeCenter extends exchangeViewBase {
                   </tr>
                 </thead>
                 <tbody className={`${this.state.currentLogin && this.state.currentLogin.length ? '' : 'hide'}`}>
-                  {this.state.currentLogin.map((v, index) => (<tr key={index}>
+                  {this.state.currentLogin && this.state.currentLogin.map((v, index) => (<tr key={index}>
                     {/*<td>{v.date}</td>*/}
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
@@ -323,7 +323,7 @@ export default class userSafeCenter extends exchangeViewBase {
             {this.state.loginList.map((v, index) => (<tr key={index}>
               <td>{v.catalog}</td>
               <td>{v.ip}</td>
-              <td>{v.src}</td>
+              <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
               <td>{v.createdTime}</td>
             </tr>))}
             </tbody>

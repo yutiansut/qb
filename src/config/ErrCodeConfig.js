@@ -273,22 +273,30 @@ export default {
   },
   2011: {
     // msg: "//验证方式不能为空",
-    msg: intl.get(2011),
+    get msg() {
+      return intl.get(2011);
+    },
     errCode: "ErrVerifyCanNotBeNull"
   },
   2012: {
     // msg: "邮箱未绑定",
-    msg: intl.get(2012),
+    get msg() {
+      return intl.get(2012);
+    },
     errCode: "ErrEmailNotBind"
   },
   2013: {
     // msg: "手机未绑定",
-    msg: intl.get(2013),
+    get msg() {
+      return intl.get(2013);
+    },
     errCode: "ErrPhoneNotBind"
   },
   2014: {
     // msg: "Google验证未绑定",
-    msg: intl.get(2014),
+    get msg() {
+      return intl.get(2014);
+    },
     errCode: "ErrGoogleNotBind"
   },
   2200: {
@@ -302,6 +310,12 @@ export default {
     // msg: "您已经被邀请过",
     get msg() {
       return intl.get(2201);
+    },
+    errCode: "AWARD_DRAWED"
+  },
+  2401: {
+    get msg() {
+      return intl.get(2401);
     },
     errCode: "AWARD_DRAWED"
   },

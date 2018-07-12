@@ -266,7 +266,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async addIp(ipAdd) { // 添加ip白名单
-    let ipList = this.view.state.ipList, time = new Date().getTime()
+    let ipList = this.view.state.ipList, time = new Date().getTime() / 1000
     if (this.view.state.ipValue === '') return
     let result = await this.store.Proxy.addIp({
       "userId": this.store.uid,
@@ -282,11 +282,12 @@ export default class UserController extends ExchangeControllerBase {
     if (result === null) {
       ipList.push({IPAddress: ipAdd, createAt: time})
       this.view.setState({ipList})
+      console.log('添加ip', this.view.state.ipList)
     }
-    console.log('添加ip', result)
   }
 
   async delIp(ipId, iPAdd, index) { // 删除ip白名单
+    console.log('删除ip白名单', this.view.state.ipList)
     let ipList = this.view.state.ipList
     let result = await this.store.Proxy.deletIp({
       "userId": this.store.uid,
@@ -305,7 +306,6 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({ipList})
     }
 
-    console.log('删除ip', result)
   }
 
   async getCaptchaVerify() { // 获取图形验证码
@@ -319,7 +319,14 @@ export default class UserController extends ExchangeControllerBase {
       "token": this.store.token,
       code
     })
-    // this.view.setState({remindPopup: true, popType: result.errCode ? 'tip3': 'tip1', popMsg: result.msg})
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : '谷歌验证设置成功',
+      showGoogle: result ? true : false,
+      userInfo: Object.assign(this.view.state.userInfo, {googleAuth: 0})
+    })
+    // if (result === null) {this.view.setState({showGoogle: false})}
     console.log('验证谷歌', result)
   }
   async setUserNotify(index) { // 修改通知方式

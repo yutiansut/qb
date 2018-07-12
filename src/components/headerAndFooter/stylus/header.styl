@@ -16,6 +16,7 @@
         .new-li-content
           display block
       .new-li-img
+        position relative
         text-align center
         img
           position relative
@@ -23,6 +24,19 @@
           width .2rem
           height .2rem
           vertical-align middle
+        i
+          position absolute
+          right -.06rem
+          top .25rem
+          display inline-block
+          min-width .12rem
+          height .12rem
+          padding .02rem
+          background $negative-color
+          color $normal-white-color
+          border-radius 50%
+          line-height .12rem
+          font-size .12rem
       .new-li-content
         display none
         position absolute

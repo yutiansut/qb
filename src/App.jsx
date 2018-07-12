@@ -93,7 +93,9 @@ const Activity = ({match}) => {
 
 const header = ({match, history}) => {
   return <div>
-    <Header navClass={"headerNav"} userController={userController} configController={configController}
+    <Header navClass={"headerNav"}
+            userController={userController}
+            configController={configController}
             loginController={loginController} match={match} history={history}/>
     <div style={{height: ".5rem"}}/>
   </div>;
@@ -136,8 +138,9 @@ export default class App extends Component {
 
     noticeController.configController = configController;
     klineController.configController = configController;
-
+    userController.configController = configController;
     activityController.configController = configController;
+
     noticeController.userController = userController;
 
     assetController.configController = configController;

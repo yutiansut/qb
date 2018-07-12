@@ -130,6 +130,7 @@ export default function zh(state) {
     2014: "Google验证未绑定",
     2200: "找不到活动",
     2201: "您已经被邀请过",
+    2401: "ip未找到",
     2601: "奖励已经领取完毕，敬请期待下次活动",
   }
   const other = {
@@ -431,7 +432,8 @@ export default function zh(state) {
     "user-verifyEmailTitle": "邮箱验证",
     "user-verifyPhoneTitle": "短信验证",
     "user-checkAgainPwd": "请保证两次输入的新密码一致",
-    "user-checkNewPwd": "登录密码长度必须在6-18位之间",
+    // "user-checkNewPwd": "登录密码长度必须在6-18位之间",
+    "user-checkNewPwd": "必须是 6-18 位英文字母、数字或符号组合",
     "user-checkEmail": "邮箱格式不正确",
     "user-checkPhone": "手机号有误",
     "user-photoSucc": "上传成功",

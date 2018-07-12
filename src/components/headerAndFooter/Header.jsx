@@ -41,22 +41,26 @@ export default class Header extends ExchangeViewBase {
           linkUser: true,
           tokenShow: true,
           childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/order',}]
-        },
-        // {label: '用户', to: '/user', select: false, linkUser: false},
-        // {label: '关于', to: '/about', select: false, linkUser: false},
-        // {label: '主题列表', to: '/topics', select: false, linkUser: false},
-        // {label: '登录／注册', to: '/login', select: false, linkUser: false},
-        // {label: '资讯公告', to: '/notice', select: false, linkUser: false},
+        }
       ]
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
+    this.userController = this.props.userController;
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.clearLoginInfo = this.loginController.clearLoginInfo.bind(this.loginController) // 退出登录
+    this.getUserNocticeList = this.userController.getUserNocticeList.bind(this.userController) // 获取通知列表
     this.loginOut = this.loginOut.bind(this)
+    //绑定view
+    this.userController.setView(this)
+    //初始化数据，数据来源即store里面的state
+    this.state = Object.assign(this.state, this.userController.view.state.userNocticeList);
     this.matched = '/whome'
   }
-  componentDidMount() {
+  async componentDidMount() {
+    await this.getUserNocticeList()
+    //let userNocticeList = this.state.userNocticeList
+    //userNocticeList = userNocticeList && userNocticeList.filter(v => {return v.isRead === 0}) // 筛选未读信息
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })
@@ -64,8 +68,8 @@ export default class Header extends ExchangeViewBase {
       this.userToken && (v.tokenShow = false)
     })
     ChangeFontSize(1440*0.8, 1440*1)
+    //this.setState({userNocticeList})
   }
-
 
   componentWillUpdate(props, state, next) {
     // ChangeFontSize
@@ -85,7 +89,7 @@ export default class Header extends ExchangeViewBase {
   }
 
   render() {
-    // console.log('token', this.userToken)
+    console.log('头部', this.state)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
@@ -121,10 +125,11 @@ export default class Header extends ExchangeViewBase {
           <li className={`${userToken ? 'new-li' : 'hide'}`}>
             <div className="new-li-img">
               <img src="/static/img/home/new_hei.svg" alt=""/>
+              {this.state.userNocticeList && <i>{this.state.userNocticeList.length}</i>}
             </div>
             <div className="new-li-content">
               <p>通知</p>
-              <div>没有新通知</div>
+              {this.state.userNocticeList ? (<ul>{this.state.userNocticeList.map((v, index) => (<li key={index}>{}</li>))}</ul>) : (<div>没有新通知</div>)}
               <Link to="/wuserNotice">查看全部</Link>
             </div>
           </li>
