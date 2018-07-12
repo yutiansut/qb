@@ -15,6 +15,8 @@ import MarketController from "./class/market/MarketController"
 import Header from './componentsMb/header/Header.jsx'
 import Home from './componentsMb/home/Home.jsx'
 import Login from './componentsMb/login/Login.jsx'
+import Help from './componentsMb/help/Help.jsx'
+import ForgetPass from './componentsMb/login/ForgetPass.jsx'
 
 
 let testAppController,
@@ -38,6 +40,14 @@ const LoginComponent = ({ match, history }) => {
 
 const HomeCompoment = () => {
   return <Home activityController={activityController} marketController={marketController}/>
+};
+
+const HelpComponent = ({match}) => {
+    return <Help controller={assetController} match={match}/>;
+};
+
+const ForgetPassComponent = ({match, history}) => {
+    return <ForgetPass controller={loginController} match={match} history={history}/>
 };
 
 export default class App extends Component {
@@ -94,9 +104,11 @@ export default class App extends Component {
               </Switch>
               <div>
                   <Switch>
-                      <Route exact path="/home" component={HomeCompoment} />
-                      <Route exact path="/login" component={LoginComponent} />
-                      <Redirect to="/home" />
+                      <Route exact path="/mhome" component={HomeCompoment} />
+                      <Route exact path="/mlogin" component={LoginComponent} />
+                      <Route path="/mfindPass" component={ForgetPassComponent}/>
+                      <Route path="/mhelp" component={HelpComponent}/>
+                      <Redirect to="/mhome" />
                   </Switch>
               </div>
           </div>}
