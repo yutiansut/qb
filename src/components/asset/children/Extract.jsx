@@ -294,9 +294,9 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{(totalQuota * 100000000 -
-                  availableQuota * 100000000) /
-                  100000000}/{Number(totalQuota)} BTC
+                {this.intl.get("asset-24hQuota")}：{(totalQuota * 10000 -
+                  availableQuota * 10000) /
+                  10000}/{Number(totalQuota)} BTC
                 <NavLink to="/wuser/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>

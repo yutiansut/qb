@@ -46,7 +46,8 @@ export default class KlineController extends ExchangeControllerBase {
   }
   // setK线数据
   setKline(data) {
-    this.view.setData(data);
+    // data.reverse();
+    this.view.setData(data.reverse());
   }
   // websocket切换房间
   joinRoom(to) {

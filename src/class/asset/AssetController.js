@@ -106,7 +106,7 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
-    await this.store.getMinerFee(coin, address);
+    await this.store.getMinerFee(coin, address.address);
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
     });

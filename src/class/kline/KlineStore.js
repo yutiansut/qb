@@ -31,7 +31,6 @@ export default class KlineStore extends ExchangeStoreBase {
       "tradePairName": this.state.tradePairName,
       "duration": this.state.duration // k线时间段秒数
     })
-    console.log(result);
     if (result.tradePairName) {
       if (!result.kline) { this.state.kline = []; return };
       this.state.kline = result.kline.map(v => {
@@ -44,7 +43,7 @@ export default class KlineStore extends ExchangeStoreBase {
         arr.push(v.volume);
         return arr;
       });
-      console.log(this.state.kline);
+      // console.log(this.state.kline);
     }
   }
 
@@ -59,7 +58,7 @@ export default class KlineStore extends ExchangeStoreBase {
   }
 
   update(k, v) {
-    console.log('store update', k, v, JSON.stringify(this.state))
+    // console.log('store update', k, v, JSON.stringify(this.state))
     this.state[k] = v;
   }
 }
