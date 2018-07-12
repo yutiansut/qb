@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import exchangeViewBase from '../../components/ExchangeViewBase'
 import Pagination from '../../common/component/Pagination/index.jsx'
-import "./stylus/tradeNotice.styl"
+import "./stylus/userNotice.styl"
 
 export default class userNotice extends exchangeViewBase {
   constructor(props) {

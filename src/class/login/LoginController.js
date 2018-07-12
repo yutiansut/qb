@@ -38,16 +38,7 @@ export default class LoginController extends ExchangeControllerBase {
     console.log(112, account, type)
     let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
     let keyArr = ['phone','email'];
-    // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3578]\d{9}$/;
     obj[keyArr[type]] = account
-    // if (type === 0 && !reg2.test(account)) { // 手机
-    //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: this.view.intl.get("user-checkPhone")})
-    //   return
-    // }
-    // if (type === 1 && !reg1.test(account)) { // 邮箱
-    //   this.view.setState({showPopup: true, popType: 'tip3', popMsg: this.view.intl.get("user-checkEmail")})
-    //   return
-    // }
     this.store.login(obj)
   }
 
