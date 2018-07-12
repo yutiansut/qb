@@ -242,7 +242,7 @@ export default class Extract extends exchangeViewBase {
                 {this.intl.get("asset-24hQuota")}：{(totalQuota * 100000000 -
                   availableQuota * 100000000) /
                   100000000}/{Number(totalQuota)} BTC
-                <NavLink to="/user/identity">
+                <NavLink to="/wuser/identity">
                   {this.intl.get("asset-limitApply")}
                 </NavLink>
                 {this.state.noSufficTip && (
@@ -299,7 +299,7 @@ export default class Extract extends exchangeViewBase {
                 }}
               />
               <div className="set">
-                {this.state.userTwoVerify.fundPwd === 1 ? <NavLink to="/user/safe" target="_blank">
+                {this.state.userTwoVerify.fundPwd === 1 ? <NavLink to="/wuser/safe" target="_blank">
                   {this.intl.get("asset-setFundPassword")}
                 </NavLink> : this.state.userTwoVerify.fundPwd === 0 ? <NavLink to="/wuser/safe" target="_blank">
                     {this.intl.get("login-forget")}
