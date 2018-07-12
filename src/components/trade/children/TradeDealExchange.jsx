@@ -1,5 +1,6 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
+import { NavLink } from 'react-router-dom'
 import Input from "../../../common/component/Input";
 import '../stylus/tradeDealExchange.styl'
 
@@ -8,16 +9,16 @@ export default class TradeDealExchange extends  ExchangeViewBase{
   constructor(props) {
     super(props);
     this.state = {
-    
+
     }
-   
+
   }
   componentWillMount() {
-  
+
   }
-  
+
   componentDidMount() {
- 
+
   }
   get priceValue(){
     return this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')] || 0
@@ -38,7 +39,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </i>
             </div>
             <div className={`deal-asset-charge deal-asset-charge-${this.props.ControllerProps.tradeType}`}>
-              <a href="#">{`${this.intl.get('deposit')}`}</a>
+            <NavLink to={{ pathname: '/wallet/charge', query: {currency: this.props.ControllerProps.dealType ? this.props.steadUnitN.toLowerCase() : this.props.steadUnitP.toLowerCase()}}}>{`${this.intl.get('deposit')}`}</NavLink>
             </div>
           </div>
           <div className='trader-deal-input'>
@@ -98,7 +99,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
           </div>
-         
+
         </div>
     )
   }

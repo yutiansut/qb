@@ -392,8 +392,13 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
-    // let result = await this.store.verifyPass(password);
-    // console.log(result.msg)
+    // 校验密码是否正确（5次错误后会冻结一段时间）
+    let result = await this.store.verifyPass(password);
+    if (result && result.msg) {
+      obj.orderTipContent = result.msg;
+      this.view.setState(obj);
+      return;
+    }
     this.view.setState({
       showTwoVerify: true,
       verifyNum: this.view.intl.get("sendCode")

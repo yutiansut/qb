@@ -130,9 +130,9 @@ export default {
   612: {
     // msg: "与原密码相同",
     get msg() {
-      return intl.get(612);
+      return intl.get(612, { number: this.frozenTime % 60 ? parseInt(this.frozenTime / 60) + 1 : parseInt(this.frozenTime / 60)});
     },
-    errCode: "WRONG_PASSWORD"
+    errCode: "FREEZE_PASSWORD"
   },
   616: {
     // msg: "未设置密码",
