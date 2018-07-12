@@ -17,7 +17,13 @@ export default class ExchangeViewBase extends ViewBase {
 
   componentDidMount() {
     super.componentDidMount();
+    // console.log("exchangeViewBase componentDidMount");
+    document.getElementById("app").scrollIntoView(true);
     // console.log('exchangeViewBase componenDidMount')
+  }
+  componentWillUpdate(){
+    document.getElementById("app").scrollIntoView(true);
+    // console.log("exchangeViewBase componentWillUpdate");
   }
 
 }
