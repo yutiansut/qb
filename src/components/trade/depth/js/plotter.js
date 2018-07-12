@@ -297,7 +297,13 @@ export default class Plotter {
             let strVol = 0;
             let strAccu = 0;
             if (strX <= this.bids_max[0]) {
-                strInfos = ["购买价格: ", "购买量: ", "累计购买量: "];
+                if(KDepth.instance.lang==="zh-cn"){
+                    strInfos = ["购买价格: ", "购买量: ", "累计购买量: "];
+                }else if(KDepth.instance.lang==="en-us"){
+                    strInfos = ["Buy Price: ", "Buy Volume: ", "Accumulative Buy Volume: "];
+                }else if(KDepth.instance.lang==="zh-tw"){
+                    strInfos = ["購買價格: ", "購買量: ", "累計購買量: "];
+                }
                 for (let i = bids.length - 1; i > 0; i--) {
                     if (Math.abs(bids[i][0] - strX) < ratioStrX) {
                         strPrice = bids[i][0];
@@ -308,7 +314,13 @@ export default class Plotter {
                     }
                 }
             } else {
-                strInfos = ["出售价格：", "出售量：", "累计出售量："];
+                if(KDepth.instance.lang==="zh-cn"){
+                    strInfos = ["出售价格: ", "出售量: ", "累计出售量: "];
+                }else if(KDepth.instance.lang==="en-us"){
+                    strInfos = ["Sell Price: ", "Sell Volume: ", "Accumulative Sell Volume: "];
+                }else if(KDepth.instance.lang==="zh-tw"){
+                    strInfos = ["出售價格: ", "出售量: ", "累計出售量: "];
+                }
                 for (let i = 0; i < asks.length; i++) {
                     if (Math.abs(asks[i][0] - strX) < ratioStrX) {
                         strPrice = asks[i][0];

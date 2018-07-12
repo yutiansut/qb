@@ -7,6 +7,7 @@ export default class KDepth {
 
         this.width=800;
         this.height=400;
+        this.lang = "zh-cn";
 
         Object.assign(this,option);
         if(!KDepth.instance){
@@ -29,6 +30,10 @@ export default class KDepth {
 
     setData(data){
         Plotter.instance.setData(data);
+    }
+
+    setLanguage(lang){
+        this.lang=lang;
     }
 
     resize(w,h){
