@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../ExchangeViewBase";
@@ -41,7 +40,8 @@ export default class Extract extends exchangeViewBase {
       tipContent: "",
       orderTip: false,
       orderTipContent: "",
-      userTwoVerify: {withdrawVerify: -1 , fundPwd: -1 }
+      userTwoVerify: { withdrawVerify: -1, fundPwd: -1 },
+      showSelect: false
     };
 
     let {
@@ -88,6 +88,10 @@ export default class Extract extends exchangeViewBase {
     this.destroy = controller.clearVerify.bind(controller);
     // 获取资金密码设置状态和两步验证方式
     this.getUserInfo = controller.getUserInfo.bind(controller);
+
+    this.hideSelect = () => {
+      this.setState({ showSelect: false })
+    }
   }
 
   async componentWillMount() {
@@ -112,22 +116,46 @@ export default class Extract extends exchangeViewBase {
     });
   }
 
-  componentDidMount() {}
-
+  componentDidMount() {
+    window.addEventListener("click", this.hideSelect);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.hideSelect);
+  }
   componentWillUpdate(nextProps, nextState) {
+    // 切换地址后重新请求矿工费
+    if (JSON.stringify(nextState.walletExtract) !== JSON.stringify(this.state.walletExtract)) {
+      let curExtract = nextState.walletExtract.extractAddr.filter(v => v.coinName === nextState.currency.toLowerCase())[0];
+      this.setState(
+        {
+          address:
+            (curExtract &&
+              curExtract.addressList[0] &&
+              curExtract.addressList[0]) ||
+            "",
+          extractAmount: ""
+        },
+        () => {
+          this.getMinerFee(nextState.currency, this.state.address);
+        }
+      );
+    }
     if (nextState.currency !== this.state.currency) {
       // 切换币种后，重新set address，之后根据address和currency请求矿工费
       let curExtract = this.state.walletExtract.extractAddr.filter(v => v.coinName === nextState.currency.toLowerCase())[0];
-      this.setState({
-        address:
-          (curExtract &&
-            curExtract.addressList[0] &&
-            curExtract.addressList[0].address) ||
-          "",
-        extractAmount: ""
-      },()=>{
-        this.getMinerFee(nextState.currency, this.state.address);
-      });
+      this.setState(
+        {
+          address:
+            (curExtract &&
+              curExtract.addressList[0] &&
+              curExtract.addressList[0]) ||
+            "",
+          extractAmount: ""
+        },
+        () => {
+          this.getMinerFee(nextState.currency, this.state.address);
+        }
+      );
       this.getCurrencyAmount(nextState.currency);
     }
     // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
@@ -177,19 +205,22 @@ export default class Extract extends exchangeViewBase {
                 <li>
                   <span>{this.intl.get("asset-amount")}</span>
                   <i>
-                    {Number(totalCount).format({ number: "property" })} {currency}
+                    {Number(totalCount).format({ number: "property" })}{" "}
+                    {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-orderLock")}</span>
                   <i>
-                    {Number(frozenCount).format({ number: "property" })} {currency}
+                    {Number(frozenCount).format({ number: "property" })}{" "}
+                    {currency}
                   </i>
                 </li>
                 <li>
                   <span>{this.intl.get("asset-avail")}</span>
                   <i>
-                    {Number(availableCount).format({ number: "property" })} {currency}
+                    {Number(availableCount).format({ number: "property" })}{" "}
+                    {currency}
                   </i>
                 </li>
               </ul>
@@ -210,19 +241,43 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <div className="select-address">
-                <Input
-                  type="select"
-                  readOnly={true}
-                  valueArr={
-                    curExtract &&
-                    curExtract.addressList.map(item => item.address)
-                  }
-                  onSelect={value => {
-                    this.setState({ address: value });
-                    this.getMinerFee(this.state.currency, value);
+                <div
+                  className="select-input"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                    this.setState({ showSelect: true });
                   }}
-                  value={this.state.address}
-                />
+                >
+                  <p>
+                    <span>{this.state.address.addressName}</span>
+                    <span />
+                    <span>{this.state.address.address}</span>
+                  </p>
+                  {this.state.showSelect && (
+                    <ul className="search-list">
+                      {curExtract &&
+                        curExtract.addressList.map((v, i) => (
+                          <li key={i} onClick={e => {
+                            e.stopPropagation();
+                            e.nativeEvent.stopImmediatePropagation();
+                            this.setState({
+                              showSelect: false,
+                              address: {
+                                address: v.address,
+                                addressName: v.addressName
+                              }
+                            });
+                            this.getMinerFee(this.state.currency, v);
+                          }}>
+                            <span>{v.addressName}</span>
+                            <span />
+                            <span>{v.address}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
               </div>
               <a
                 onClick={() => {
@@ -279,7 +334,9 @@ export default class Extract extends exchangeViewBase {
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
                     {this.state.extractAmount - minerFee > 0
-                      ? (this.state.extractAmount * 100000000 - minerFee * 100000000)/100000000
+                      ? (this.state.extractAmount * 100000000 -
+                        minerFee * 100000000) /
+                      100000000
                       : 0}{" "}
                     {currency}
                   </span>
@@ -299,11 +356,17 @@ export default class Extract extends exchangeViewBase {
                 }}
               />
               <div className="set">
-                {this.state.userTwoVerify.fundPwd === 1 ? <NavLink to="/wuser/safe" target="_blank">
-                  {this.intl.get("asset-setFundPassword")}
-                </NavLink> : this.state.userTwoVerify.fundPwd === 0 ? <NavLink to="/wuser/safe" target="_blank">
+                {this.state.userTwoVerify.fundPwd === 1 ? (
+                  <NavLink to="/wuser/safe" target="_blank">
+                    {this.intl.get("asset-setFundPassword")}
+                  </NavLink>
+                ) : this.state.userTwoVerify.fundPwd === 0 ? (
+                  <NavLink to="/wuser/safe" target="_blank">
                     {this.intl.get("login-forget")}
-                </NavLink> : ''}
+                  </NavLink>
+                ) : (
+                      ""
+                    )}
               </div>
             </div>
           </div>
@@ -378,24 +441,24 @@ export default class Extract extends exchangeViewBase {
                         },
                         index
                       ) => (
-                        <tr key={index}>
-                          <td className="time">{orderTime.toDate()}</td>
-                          <td className="currency">{coinName.toUpperCase()}</td>
-                          <td className="amount">
-                            <i>-{count}</i>
-                          </td>
-                          <td className="send">
-                            <i>{postAddress}</i>
-                          </td>
-                          <td className="receive">
-                            <i>{receiveAddress}</i>
-                          </td>
-                          <td className="state">
-                            <span>{this.status[orderStatus]}</span>
-                          </td>
-                          <td className="remark">{fee}</td>
-                        </tr>
-                      )
+                          <tr key={index}>
+                            <td className="time">{orderTime.toDate()}</td>
+                            <td className="currency">{coinName.toUpperCase()}</td>
+                            <td className="amount">
+                              <i>-{count}</i>
+                            </td>
+                            <td className="send">
+                              <i>{postAddress}</i>
+                            </td>
+                            <td className="receive">
+                              <i>{receiveAddress}</i>
+                            </td>
+                            <td className="state">
+                              <span>{this.status[orderStatus]}</span>
+                            </td>
+                            <td className="remark">{fee}</td>
+                          </tr>
+                        )
                     )}
                 </tbody>
               </table>
@@ -429,8 +492,8 @@ export default class Extract extends exchangeViewBase {
               </p>
             </div>
           ) : (
-            <div className="kong">{this.intl.get("noRecords")}</div>
-          )}
+              <div className="kong">{this.intl.get("noRecords")}</div>
+            )}
         </div>
         {this.state.showAddressPopup && (
           <Popup
@@ -455,7 +518,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={this.state.userTwoVerify.withdrawVerify}//短信验证码
+            type={this.state.userTwoVerify.withdrawVerify} //短信验证码
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });
@@ -465,7 +528,7 @@ export default class Extract extends exchangeViewBase {
               let { currency, address, password, extractAmount } = this.state;
               this.extractOrder({
                 coinName: currency,
-                toAddr: address,
+                toAddr: address.address,
                 amount: Number(extractAmount),
                 fundPass: password,
                 code: code
