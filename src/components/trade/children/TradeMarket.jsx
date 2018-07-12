@@ -7,6 +7,7 @@ export default class TradeMarket extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      query:'',
       searchInput: false,
       searchValue: '',
       sortIndex: -1,
@@ -37,7 +38,8 @@ export default class TradeMarket extends ExchangeViewBase {
   componentDidMount() {
     this.marketDataHandle();
     if(this.props.location.query){
-      console.log(111111111111111111111111111,this.props.location.query)
+      this.setState({query:this.props.location.query.pairName})
+      // this.props.controller.querySelectPair(this.props.location.query.pairName)
     }
   }
 

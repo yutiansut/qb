@@ -149,7 +149,7 @@ export default class Wallets extends exchangeViewBase {
                     <NavLink to={{ pathname: `/wallet/extract/`, query: { currency: item.coinName } }}>
                       <Button type="base" className="withdraw" theme="main" title={this.intl.get('asset-withdraw')} />
                     </NavLink>
-                    <NavLink to={{ pathname: `/trade`, query: { currency: item.coinName } }}>
+                    <NavLink to={{ pathname: `/trade`, query: { pairName: item.coinName } }}>
                       <Button type="base" theme="main" title={this.intl.get('asset-trade')} />
                     </NavLink>
                   </td>

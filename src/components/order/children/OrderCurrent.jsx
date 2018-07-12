@@ -250,7 +250,13 @@ export default class OrderCurrent extends ExchangeViewBase {
       detailFlag: true
     })
   }
-  
+  cancelOrder(v){
+    let orderId, opType, dealType;
+    orderId = JSON.parse(JSON.stringify(v.orderId)) ;
+    opType = 0;
+    dealType =v.orderType;
+    this.props.controller.cancelOrder(orderId, opType, dealType)
+  }
   render() {
     const {type} = this.props;
     return (
@@ -317,7 +323,7 @@ export default class OrderCurrent extends ExchangeViewBase {
             {this.state.orderListArray.map((v, index) => {
               return (
                   <tr key={index}>
-                    <td>{v.orderTime}</td>
+                    <td>{Number(v.orderTime).toDate()}</td>
                     <td>{v.tradePairName}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
@@ -328,13 +334,13 @@ export default class OrderCurrent extends ExchangeViewBase {
                     {/*数量*/}
                     {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
                     
-                    <td>{v.turnover}</td>
+                    <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
                     {type === 'orderDeal' && <td>{v.fee}</td>}
                     {type === 'orderCurrent' && <td>{v.undealCount}</td>}
                     {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
                     {type === 'orderHistory' && <td>{v.avgPrice}</td>}
                     {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
-                    {type === 'orderCurrent' && <td>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
+                    {type === 'orderCurrent' && <td style={{color:'#0080D0', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
                   
                   </tr>
               )

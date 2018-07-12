@@ -79,7 +79,12 @@ export default class MarketController extends ExchangeControllerBase {
     });
     // this.store.state.market = v;
     // this.store.state.homeMarketPairData = homeMarketPairData;
+    if(this.view.state.query) {
+      this.querySelectPair(this.view.state.query)
+      return
+    }
     this.tradePairChange(homeMarketPairData[0]);
+     // this.tradePairChange(homeMarketPairData[0]);
   }
 
   // 点击收藏
@@ -190,6 +195,16 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     });
+    if(this.view.state.query) {
+      let pairMsg = await this.getTradePairHandle();
+      let queryValue = this.view.state.query;
+      if(queryValue.split('/').length === 1){
+        this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue][0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue][0]}`);
+        this.view.setState({query:queryValue})
+      }
+      this.changeMarket(queryValue.split('/')[1]);
+      return
+    }
     this.tradePairChange(homeMarketPairData[0]);
   }
 
@@ -230,6 +245,9 @@ export default class MarketController extends ExchangeControllerBase {
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
     this.setDealMsg();
+    this.view.setState({
+      query:''
+    })
     // console.log('setTradePair....................................', value )
     // 为K线图设置交易对
 
@@ -320,7 +338,8 @@ export default class MarketController extends ExchangeControllerBase {
     let pairItems = data.split('/'),id;
     if(pairItems.length > 1){
       id = pairMsg.pairIdCoin[pairItems[0]][pairItems[1]];
-      this.tradePairChange({tradePairId:id,tradePairName:data})
+      // this.changeMarket(pairItems[1]);
+      this.tradePairChange({tradePairId:id,tradePairName:data});
       return
     }
     
