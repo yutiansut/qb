@@ -107,7 +107,10 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   // 添加/取消收藏
-  async addCollect(v, index) {
+  async addCollect(v, index, e) {
+    // console.log(e)
+    e.preventDefault();
+    e.stopPropagation();
     // v.isFavorite = 1 - v.isFavorite
     // console.log('收藏 0', v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
     await this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
@@ -205,7 +208,7 @@ export default class MarketController extends ExchangeControllerBase {
       this.changeMarket(queryValue.split('/')[1]);
       return
     }
-    this.tradePairChange(homeMarketPairData[0]);
+    type > 1 && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据
