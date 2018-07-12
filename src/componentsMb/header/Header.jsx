@@ -30,6 +30,7 @@ export default class Header extends ExchangeViewBase {
             <img src="/static/img/home/logo.svg"/>
         </Link>
         <div className="nav-right">
+            <NavLink to="/mwallet" className="login">资产</NavLink>
             <NavLink to="/mlogin" className="login">登录</NavLink>
         </div>
       </div>

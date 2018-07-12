@@ -1,0 +1,86 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+
+.asset-mb
+  .balance
+    .total-asset
+      padding .2rem
+      .item
+        height .3rem
+        line-height .3rem
+        display flex
+        label,span
+          font-size 0.14rem
+          color $normal-gray-color
+          white-space nowrap
+        b
+          font-size 0.18rem
+          color $main-color
+        label
+          flex-shrink 0
+          text-align right
+          padding-right .15rem
+      .total
+        span
+          margin-left .1rem
+      .limit
+        a
+          margin-left .3rem
+    .menu-ul
+      line-height .4rem
+      border 1px solid $line-light
+      border-left none
+      border-right none
+      li
+        display inline-block
+        width 33%
+        text-align center
+        position relative
+        color $main-color
+        &:not(:last-of-type)::after
+          position absolute
+          right 0
+          content ""
+          width .01rem
+          background $line-light
+          height .2rem
+          top .1rem
+
+
+    .asset-wallet
+      margin-bottom .4rem
+      table
+        width 100%
+        margin-top .2rem
+        th,td
+          vertical-align middle
+          text-align center
+          white-space nowrap
+        th:first-of-type
+          padding-left .4rem
+          text-align left
+        td:first-of-type
+          padding-left .2rem
+          text-align left
+        th:last-of-type
+          padding-right .4rem
+          text-align right
+        td:last-of-type
+          padding-right .2rem
+          text-align right
+        thead
+          tr
+            line-height .3rem
+            background $bg-light-color
+            color $normal-gray-color
+            th
+              font-size .12rem
+        tbody
+          tr
+            height .6rem
+            border-bottom 0.01rem solid $line-light
+            img
+              width .2rem
+              vertical-align -.04rem
+              margin-right .08rem
+

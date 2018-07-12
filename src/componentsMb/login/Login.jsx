@@ -125,7 +125,6 @@ export default class Login extends exchangeViewBase {
     return (
       <div>
         <div className="login-wrap-mb">
-          <h1>{this.intl.get("login")}</h1>
           <div class="tab-ul">
             {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
           </div>

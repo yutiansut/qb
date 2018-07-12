@@ -1,0 +1,278 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.asset
+  .extract
+    padding 0.32rem 0 0.45rem 0.3rem
+    border-left 0.01rem solid $line-light
+    .title
+      float left
+      width 1.38rem
+      font-size 0.15rem
+      color $normal-black-color
+      letter-spacing 0
+    .content
+      float left
+      position relative
+      width 4.56rem
+    a
+      color $main-color
+      cursor pointer
+      &:hover
+        color $main-color-hover
+      &:active
+        color $main-color-active
+    h3
+      height 0.2rem
+      margin-bottom 0.63rem
+      font-size 0.2rem
+      color $normal-black-color
+      letter-spacing 0.0008rem
+      text-align justify
+    .select
+      margin-bottom 0.4rem
+      .title
+        width 1.58rem
+      .search
+        .currency-asset
+          float left
+          width 4.56rem
+          .input
+            height 0.4rem
+            margin-bottom 0.09rem
+            .search-list
+              width 100%
+              border 1px solid $line-light
+              background-color $normal-white-color
+              &.hide
+                display none
+              li
+                padding-left 0.15rem
+                background-color $normal-white-color
+                cursor pointer
+                &:hover
+                  color $normal-white-color
+                  background-color $main-color
+          ul
+            width 3.84rem
+            li
+              width 100%
+              height 0.32rem
+              line-height 0.32rem
+              span
+                float left
+              i
+                float right
+    .address
+      width 9.52rem
+      padding .24rem 0 0.49rem .2rem
+      margin-bottom 0.45rem
+      background-color $bg-medium-color
+      .tips
+        margin-bottom 0.32rem
+        fz11()
+        color $negative-color
+        letter-spacing 0
+      .currency-address
+        margin-bottom 0.46rem
+        .content
+          width 7rem
+          .select-address
+            float left
+            width 4.56rem
+            height 0.4rem
+            line-height 0.4rem
+            margin-right 0.2rem
+            border-radius(0.02rem)
+            background $normal-input-color
+            border-radius 0.02rem
+            input
+              width 100%
+              height 0.4rem
+          a
+            float left
+            height 0.4rem
+            line-height 0.6rem
+            &:hover
+              text-decoration underline
+      .extract-amount
+        margin-bottom 0.45rem
+        .content
+          .limit
+            margin-bottom .14rem
+            font-size 0.13rem
+            color $normal-gray-color
+            letter-spacing 0
+            span
+              float right
+              margin-right 0.1rem
+              color $negative-color
+            a
+              float right
+          .input
+            position relative
+            margin-bottom 0.14rem
+            input
+              width 100%
+              height 0.4rem
+              padding 0 2rem 0 0.1rem
+              font-size 0.14rem
+            a
+              position absolute
+              top 0.14rem
+              right 0.2rem
+              font-size 0.13rem
+              text-decoration underline
+            span
+              position absolute
+              right -0.54rem
+              top .13rem
+              font-size 0.16rem
+              color $normal-black-color
+              letter-spacing 0
+          .fee
+            p
+              font-size 0.13rem
+              color $normal-black-color
+              letter-spacing 0
+              margin-bottom 0.14rem
+              span
+                float right
+                color $normal-black-color
+                font-size 0.13rem
+                letter-spacing 0
+              &.explain
+                margin-bottom 0
+                font-size 0.12rem
+                color $normal-gray-color
+                letter-spacing 0
+      .password
+        margin-bottom 0.44rem
+        .content
+          input
+            width 100%
+            height 0.4rem
+            padding 0 0.1rem 0 0.1rem
+            font-size 0.14rem
+            letter-spacing 0
+          .set
+            position absolute
+            width 0.84rem
+            bottom 0
+            right -1rem
+            font-size 0.14rem
+      .handel
+        position relative
+        margin-left 1.39rem
+        button
+          width 1.5rem
+          height 0.4rem
+          line-height 0.4rem
+          margin-right 0.44rem
+        .qrcode
+          display none
+          position absolute
+          top -0.55rem
+          left 0
+          width 1.5rem
+          height 1.5rem
+          border 0.01rem solid $line-light;
+          background $normal-white-color
+          &.show
+            display block
+    .tip
+      width 9.52rem
+      padding-bottom 0.44rem
+      border-bottom 0.01rem solid $line-light
+      .title
+        width 1.78rem
+      ol
+        float left
+        width 6rem
+        li
+          list-style-type disc
+          font-size 0.14rem
+          line-height 0.14rem
+          margin-bottom 0.14rem
+          color #25272D
+          letter-spacing 0
+          a
+            font-size 0.14rem
+    .to-trade
+      width 9.52rem
+      padding 0.44rem 0
+      border-bottom 0.01rem solid $line-light
+      .title
+        width 1.58rem
+      button
+        float left
+        width 1rem
+        height 0.34rem
+        margin-right 0.2rem
+    .history
+      width 9.52rem
+      padding 0.44rem 0 0
+      .title
+        width 1.58rem
+      .kong
+        float left
+        width 7.5rem
+        height 1rem
+        line-height 1rem
+        text-align center
+        font-size 0.16rem
+        color $normal-gray-color
+        letter-spacing 0
+      table
+        float left
+        margin-bottom 0.2rem
+        text-align left
+        th,td
+          height 0.3rem
+          font-size 0.13rem
+          color $normal-gray-color
+          letter-spacing 0
+          &.time
+            width 1.63rem
+          &.currency
+            width 0.73rem
+          &.amount
+            width 0.89rem
+          &.send
+            width 1.3rem
+          &.receive
+            width 2rem
+          &.state, &.remark
+            width 0.66rem
+        td
+          height 0.32rem
+          line-height 0.32rem
+          font-size 0.14rem
+          color $normal-black-color
+          letter-spacing 0
+          i
+            display block
+            height 100%
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
+          &.send
+            i
+              width 1.3rem
+          &.receive
+            i
+              width 2rem
+          &.amount
+            i
+              width 0.89rem
+          a
+            text-decoration underline
+          span
+            color $warn-color-hover
+      .pagina
+        float left
+        width 100%
+        padding-left 1.58rem
+      .more
+        padding-top 31px
+        text-align right
+        float right

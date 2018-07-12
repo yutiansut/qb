@@ -1,0 +1,168 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.asset-mb
+  .balance
+    .menu-ul
+      display flex
+      li
+        width 33%
+        line-height .4rem
+        font-size .16rem
+        color $normal-black-color
+    .asset-wallet
+      a
+        color $main-color
+        cursor pointer
+        &:hover
+          color $main-color-hover
+        &:active
+          color $main-color-active
+      .input-wrap
+        .input
+          display inline-block
+          margin 0 3.2rem 0.2rem 0.3rem
+          input
+            width 3.8rem
+            height 0.3rem
+        span
+          position relative
+          display inline-block
+          min-width 110px
+          height 0.3rem
+          padding 0 0.22rem
+          margin-right 0.2rem
+          font-size 0.12rem
+          color $normal-gray-color
+          line-height 0.3rem
+          border-radius(0.02rem)
+          border 0.01rem solid $normal-gray-color
+          cursor pointer
+          &:hover
+            background-color $bg-dark-color
+          &:hover, &.active
+            color $main-color
+            border 0.01rem solid $main-color
+          &.active
+            i
+              border none
+              background-color $main-color
+          i
+            position absolute
+            width 0.1rem
+            height 0.1rem
+            left 0.06rem
+            top 0.1rem
+            letter-spacing 0.05px
+            border 0.02rem solid $normal-gray-color
+            border-radius(60%)
+          b
+            position absolute
+            top 0.08rem
+            height 0.12rem
+            line-height 0.12rem
+            &.pop-parent
+              .pop-children
+                left -0.45rem
+                min-width 136px
+                width 1.36rem
+                z-index 99
+                &::before
+                  left 0.51rem
+      table
+        width 10.12rem
+        thead
+          background $bg-light-color
+          th
+            min-width 120px
+            width 1.35rem
+            height 0.3rem
+            font-size 0.12rem
+            color $normal-gray-color
+            letter-spacing 0.0005rem
+            text-align justify
+            line-height 0.3rem
+            &.currency, &.avail, &.lock, &.tobtc
+              cursor pointer
+              &:hover
+                color $main-color
+                text-decoration underline
+            &.lock
+              .pop-parent
+                position relative
+                top 0.01rem
+                left 0.03rem
+                .pop-children
+                  left -0.75rem
+                  // top 0.02rem
+                  min-width 217px
+                  width 2.25rem
+                  z-index 99
+                  &::before
+                    left 0.8rem
+            &.tobtc
+              .pop-parent
+                position relative
+                top 0.01rem
+                left 0.03rem
+                .pop-children
+                  left -0.75rem
+                  // top 0.02rem
+                  min-width 184px
+                  width 1.9rem
+                  z-index 99
+                  &::before
+                    left 0.81rem
+            &.currency
+              padding-left 0.4rem
+            &.handle
+              min-width 250px
+              width 2.6rem
+              text-align center
+            .img
+              position relative
+              top 0.025rem
+              left 0.025rem
+              width 0.15rem
+              height 0.15rem
+        tbody
+          tr
+            position relative
+            border-bottom 0.01rem solid $line-light
+            &:hover
+             background-color $bg-dark-color
+          td
+            height 0.7rem
+            line-height 0.7rem
+            font-size 0.14rem
+            color $normal-black-color
+            letter-spacing 0.0006rem
+            text-align justify
+            // border-bottom 0.01rem solid $line-light
+            img
+              position relative
+              top 0.02rem
+              width 0.16rem
+              height 0.16rem
+              margin-right 0.05rem
+            &.currency
+              padding-left 0.3rem
+              span
+                width 0.16rem
+                height 0.16rem
+                background $bg-light-color
+            &.handle
+              padding-left 0.2rem
+              button
+                width 0.66rem
+                height 0.3rem
+                margin-right 0.20rem
+                background-color $bg-light-color
+                color $main-color
+                &:hover
+                  background-color $main-color
+                  color $normal-white-color
+                &:active
+                  background-color $main-color-active
+                  color $normal-white-color
+                &.withdraw
+                  width 0.7rem
