@@ -16,7 +16,7 @@ export default class History extends exchangeViewBase {
       orderType: {
         1: this.intl.get("deposit"),
         2: this.intl.get("asset-withdraw"),
-        4: this.intl.get("asset-transfer"),
+        4: this.intl.get("asset-transfer")
         // 1: this.intl.get("deposit"),
         // 15000: this.intl.get("asset-withdraw")
         // 5: this.intl.get("asset-transfer"),
@@ -25,9 +25,9 @@ export default class History extends exchangeViewBase {
         0: this.intl.get("pending"),
         1: this.intl.get("passed"),
         2: this.intl.get("failed"),
-        3: this.intl.get("cancel"),
-        4: this.intl.get('dealing'),
-        5: this.intl.get('dealing')
+        3: this.intl.get("canceled"),
+        4: this.intl.get("dealing"),
+        5: this.intl.get("dealing")
       }
     };
     for (const k in this.staticData.orderType) {
@@ -39,13 +39,17 @@ export default class History extends exchangeViewBase {
     this.name = "history";
     this.dealTime = () => {
       let now = new Date();
-      let start = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - 604800000;
-      let end = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - 0 + 86399999;
+      let start =
+        new Date(now.getFullYear(), now.getMonth(), now.getDate()) - 604800000;
+      let end =
+        new Date(now.getFullYear(), now.getMonth(), now.getDate()) -
+        0 +
+        86399999;
       return {
         start: parseInt(start / 1000),
         end: parseInt(end / 1000)
-      }
-    }
+      };
+    };
     this.state = {
       page: 1,
       tip: false,
@@ -132,7 +136,11 @@ export default class History extends exchangeViewBase {
       <div className="hist">
         <h3 className="title">
           {this.intl.get("asset-records")}{" "}
-          <Button type="export" title={this.intl.get("asset-export")} onClick={this.exportHistory}/>
+          <Button
+            type="export"
+            title={this.intl.get("asset-export")}
+            onClick={this.exportHistory}
+          />
         </h3>
         <div className="filtrate clearfix">
           <ul className="clearfix">
@@ -264,8 +272,11 @@ export default class History extends exchangeViewBase {
                       index
                     ) => (
                       <tr key={index}>
-                        <td className="time">
+                        <td className="time pop-parent">
                           {orderTime.toDate("yyyy-MM-dd")}
+                          <b className="pop-children uppop-children">
+                              {orderTime.toDate("yyyy-MM-dd HH:mm:ss")}
+                          </b>
                         </td>
                         <td>
                           <img src={coinIcon} alt="" />
@@ -281,19 +292,27 @@ export default class History extends exchangeViewBase {
                                 : ""
                           }`}
                         >
-                          {orderType === 2 ? "-" : orderType === 1 ? "+" : ""}
-                          {count}
+                          <i>
+                            {orderType === 2 ? "-" : orderType === 1 ? "+" : ""}
+                            {Number(count)}
+                          </i>
                         </td>
                         <td className="balan">
-                          <i>{balance}</i>
+                            <i>{Number(balance).format({number: 'property'})}</i>
                         </td>
-                        <td className="send">
+                        <td className="send pop-parent">
                           <i>{postAddress}</i>
+                            <b className="pop-children uppop-children">
+                              {postAddress}
+                            </b>
                         </td>
-                        <td className="receive">
-                          <i title={receiveAddress}>{receiveAddress}</i>
+                        <td className="receive pop-parent">
+                          <i>{receiveAddress}</i>
+                            <b className="pop-children uppop-children">
+                              {receiveAddress}
+                            </b>
                         </td>
-                        <td className="state passing">
+                          <td className={`state ${!orderStatus ? 'pending' : orderStatus === 2 ? 'failed':''}`}>
                           <span>{this.staticData.status[orderStatus]}</span>
                         </td>
                         <td className="fee">{fee}</td>

@@ -51,6 +51,7 @@ export default function en(state) {
     state: "Status",
     time: "Time",
     cancel: "Cancel",
+    canceled: 'Cancelled',
     pending: "pending",
     passed: "Passed",
     failed: "Failed",

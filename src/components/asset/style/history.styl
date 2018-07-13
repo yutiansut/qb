@@ -127,6 +127,15 @@
               overflow hidden
               white-space nowrap
               text-overflow ellipsis
+            &.send, &.receive
+              b
+                top -0.05rem
+                left 50%
+                transform translateX(-56%)
+                -ms-transform translateX(-56%)
+                -moz-transform translateX(-56%)
+                -webkit-transform translateX(-56%)
+                -o-transform translateX(-56%)
             &.send
               i
                 position relative
@@ -142,17 +151,31 @@
                   text-align center
             &.receive
               i
-                width 1.6rem
+                width 1.86rem
+               b
+                top -0.05rem
+                left 50%
+                transform translateX(-56%)
+                -ms-transform translateX(-56%)
+                -moz-transform translateX(-56%)
+                -webkit-transform translateX(-56%)
+                -o-transform translateX(-56%)
             &.time
               padding-left 0.1rem
+              b
+                top -0.05rem
+                left -0.2rem
+                min-width 155px
             &.cash
               &.red
                 color $up-red-color
               &.green
                 color $up-green-color
              &.state
-              &.passing
+              &.pending
                 color $warn-color-hover
+              &.failed
+                color $normal-gray-color
               &.unpassed
                 color $normal-gray-color
             &.confirm, &.state, &.fee

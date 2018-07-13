@@ -51,6 +51,7 @@ export default function zh(state) {
     state: "状态",
     time: "时间",
     cancel: "撤销",
+    canceled: '已撤销',
     pending: "审核中",
     passed: "通过",
     failed: "未通过",
