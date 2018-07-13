@@ -31,7 +31,7 @@ export default class NoticeStore extends ExchangeStoreBase {
       activityPosition
     });
     // console.log('getHomeBanner 0',result)
-    this.state.bannerImgUrl = result.activityList[0].homeBannerCN;
+    this.state.bannerImgUrl = result.activityList && result.activityList[0].homeBannerCN;
     // console.log('getHomeBanner 0',this.state.bannerImgUrl)
     return this.state.bannerImgUrl
   }

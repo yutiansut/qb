@@ -81,7 +81,7 @@ export default class HomeMarket extends ExchangeViewBase {
             }}
             value={this.state.searchValue}
             onInput={value => {
-              this.setState({searchValue: value})
+              (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
             }}/>
         </div>
 
@@ -102,6 +102,7 @@ export default class HomeMarket extends ExchangeViewBase {
           </thead>
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
+            // console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
             return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
@@ -124,7 +125,7 @@ export default class HomeMarket extends ExchangeViewBase {
                 <td className={`home-updown ${v.rise < 0 ? 'down-i' : 'up-i'}`}>{Number(v.rise).toPercent()}</td>
                 <td>
                   {/* 宽高等样式在homeMakt.styl里设置 */}
-                  <ReactTrend ratio={5} trends={v.points}/>
+                  <ReactTrend ratio={5} trends={v.points || []}/>
                 </td>
               </tr>
             )

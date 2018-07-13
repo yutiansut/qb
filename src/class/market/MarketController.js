@@ -290,6 +290,7 @@ export default class MarketController extends ExchangeControllerBase {
   // 筛选功能
   filte(arr, value) {
     let result = this.filter(arr, item => item.coinName.toUpperCase().includes(value.toUpperCase()));
+    // console.log(result)
     return result;
   }
 
