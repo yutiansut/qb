@@ -137,29 +137,6 @@ export default class AssetController extends ExchangeControllerBase {
 
   async exportHistory() {
     let result = await this.store.exportHistory();
-    console.log(result);
-    // let result = [
-    //   {
-    //     "orderType": 1,
-    //     "orderStatus": 2,
-    //     "fullname": "BitCoin",
-    //     "coinIcon": "http://xxxx.jpg",
-    //     "coinName": "BTC",
-    //     "coinId": 1111,
-    //     "count": 1.222,
-    //     "balance": 1.222,//余额
-    //     "postAddress": "xxxx",//发送地址
-    //     "receiveAddress": "xxxxx",//接收地址
-    //     "fee": 0.4,//手续费
-    //     "verifyCount": 5,//确认数
-    //     "doneCount": 1,//已确认数
-    //     "hashAddress": "xxx",//hash地址
-    //     "blockSite": "xxx",//点击查看交易信息的地址
-    //     "orderTime": 947586000,
-    //     "orderStatus": 0,
-    //     "orderId": "xxxxxx"
-    //   }]
-
     let str =
       "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
     result.forEach(v => {
@@ -184,7 +161,7 @@ export default class AssetController extends ExchangeControllerBase {
                 "," +
                 v.receiveAddress +
                 "," +
-                `${v.doneCount}/${v.verifyCount}` +
+                (v.orderType === 1 ? `${v.doneCount}/${v.verifyCount}`: '-') +
                 "," +
                 this.orderStatus[v.orderStatus] +
                 "," +
@@ -277,7 +254,7 @@ export default class AssetController extends ExchangeControllerBase {
     if (result) {
       this.view.setState({
         orderTip: true,
-        orderTipContent: result.msg
+        orderTipContent: result.errCode === 'CWS_ERROR' ? this.view.intl.get('asset-withdrawal-failed') : result.msg
       });
       // 错误处理
       return;
@@ -429,13 +406,13 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
-    // 校验密码是否正确（5次错误后会冻结一段时间）
-    let result = await this.store.verifyPass(password);
-    if (result && result.msg) {
-      obj.orderTipContent = result.msg;
-      this.view.setState(obj);
-      return;
-    }
+    // // 校验密码是否正确（5次错误后会冻结一段时间）
+    // let result = await this.store.verifyPass(password);
+    // if (result && result.msg) {
+    //   obj.orderTipContent = result.msg;
+    //   this.view.setState(obj);
+    //   return;
+    // }
     this.view.setState({
       showTwoVerify: true,
       verifyNum: this.view.intl.get("sendCode")

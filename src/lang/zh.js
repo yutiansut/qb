@@ -230,8 +230,7 @@ export default function zh(state) {
     "asset-delet-fail": '删除失败！',
     "asset-input-address": '您未选择提现地址，不允许提交',
     "asset-password-unset": '你还未设置资金密码，不能提现',
-
-
+    "asset-withdrawal-failed": '提币失败'
   };
   const market = {
     "market-favorite": "收藏",

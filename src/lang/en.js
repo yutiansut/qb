@@ -231,8 +231,7 @@ export default function en(state) {
     "asset-delet-fail": "Delete failed!",
     "asset-input-address": "Please select a withdrawal address",
     "asset-password-unset": "You haven't created a funding password, cannot withdraw!",
-
-
+    "asset-withdrawal-failed": 'Withdrawal failed'
   };
   const market = {
     "market-favorite": "Favorites",

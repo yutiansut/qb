@@ -223,7 +223,7 @@ export default {
     get msg() {
       return intl.get(711);
     },
-    errCode: "NO_TO"
+    errCode: "CWS_ERROR"
   },
   712: {
     // msg: "提币地址格式错误",
@@ -236,6 +236,13 @@ export default {
     // msg: "提币地址地址已存在",
     get msg() {
       return intl.get(713);
+    },
+    errCode: "ERROR_ADDRESS_EXIST"
+  },
+  714: {
+    // msg: "自我提币",
+    get msg() {
+      return intl.get(714);
     },
     errCode: "ERROR_ADDRESS_EXIST"
   },

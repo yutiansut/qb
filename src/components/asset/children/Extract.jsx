@@ -158,7 +158,10 @@ export default class Extract extends exchangeViewBase {
               curExtract.addressList[0] &&
               curExtract.addressList[0]) ||
             "",
-          extractAmount: ""
+          extractAmount: "",
+          password: '',
+          noSufficTip: false, // 余额不足提示
+          quotaTip: false,
         },
         () => {
           this.getMinerFee(nextState.currency, this.state.address);
