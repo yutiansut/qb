@@ -84,7 +84,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trade-password clearfix' style={{marginBottom: this.props.fundPassVerif && '.2rem'}}>
             <div className='trade-password-input'>
               <span>{`${this.intl.get('fundPass')}`}:</span>
-              {!this.props.fundPassVerify && <input type="password" value={this.props.ControllerProps.dealType ? this.props.funpassSell : this.props.funpassBuy} onChange={this.props.passInput.bind(this,this.props.ControllerProps.dealType)}/> || <em><a href="/user/safe">{this.intl.get('deal-setpwd')}</a></em>}
+              {!this.props.fundPassVerify && <input type="password" value={this.props.fundPwdInterval ? 'wfywfywfy' : (this.props.ControllerProps.dealType ? this.props.funpassSell : this.props.funpassBuy)} onChange={this.props.passInput.bind(this,this.props.ControllerProps.dealType)} readOnly={this.props.fundPwdInterval ? true : false}/> || <em><a href="/wuser/safe">{this.intl.get('deal-setpwd')}</a></em>}
             </div>
             {!this.props.fundPassVerify && <p className='password-msg'>
               <span>{`${this.intl.get('deal-forgetpwd')}`}</span>

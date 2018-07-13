@@ -168,6 +168,14 @@ export default class DealController extends ExchangeControllerBase {
           }
       );
     }
+    if(!this.view.state.fundPwdInterval){
+      this.view.setState(
+          {
+            funpassBuy:'',
+            funpassSell:'',
+          }
+      )
+    }
     // }
     // await this.store.dealTrade(v);
   }

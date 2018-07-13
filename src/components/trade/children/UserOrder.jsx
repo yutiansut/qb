@@ -109,7 +109,7 @@ export default class userOrder extends ExchangeViewBase {
                     {/*todo 颜色改类名统一处理*/}
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
                     <td>{v.count}</td>
-                    <td>{(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)) * v.count}</td>
+                    <td>{Number(Number(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)).multi(v.count)).format({number:'digital'})}</td>
                     <td>{v.dealDoneCount}</td>
                     <td>{v.undealCount || (v.count - v.dealDoneCount)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>

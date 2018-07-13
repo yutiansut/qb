@@ -82,19 +82,43 @@ export default class TradePlan extends ExchangeViewBase {
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax'}];
     // let wallet = this.state[diffArr[dealType].wallet];
     // let price =  dealType ?  this.state.inputSellFlag ? ( this.state.inputSellValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit) :this.state.inputBuyFlag ? ( this.state.inputBuyValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+  
     let maxNum = this.state[diffArr[dealType].max];
     let numValue = e.target.value >= maxNum ? maxNum : e.target.value;
+    console.log('dealType, edealType, edealType, e',dealType, e.target.value,maxNum)
+  
     dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
     dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
   }
 
   priceInput(dealType, e) {
-    dealType ? (this.setState({
-      inputSellValue: e.target.value,
-      inputSellFlag: true,
-      dealType
-    })) : (this.setState({inputBuyValue: e.target.value, inputBuyFlag: true, dealType}));
-    this.changeMaxNum(dealType, e.target.value)
+    let value = e.target.value;
+    let arr = value.split('.');
+    console.log('ChangePrice 0.3', arr, arr.length)
+    if (arr.length > 2)
+      return
+    arr[1] = arr[1] || ''
+    console.log('ChangePrice 0.6', !((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1] || '')))
+    if (!((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1])))
+      return
+    console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
+    let flag = (Number(value) > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
+        || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
+            || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
+            || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
+    console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
+    if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
+      flag = (/^[0-9]{0,2}$/).test(arr[1])
+    }
+    if(flag){
+      dealType ? (this.setState({
+        inputSellValue: value,
+        inputSellFlag: true,
+        dealType
+      })) : (this.setState({inputBuyValue: value, inputBuyFlag: true, dealType}));
+      this.changeMaxNum(dealType, value)
+    }
+    
   }
 
   passInput(v,e) {
@@ -131,7 +155,6 @@ export default class TradePlan extends ExchangeViewBase {
     type = this.state.fundPwdIntervalClick;
     pwd = this.state.setPass;
     let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
-    console.log('shezhi111111111111111111111', result, this)
     result === null && this.setState(
         {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false}
     );
@@ -144,7 +167,6 @@ export default class TradePlan extends ExchangeViewBase {
     )
   }
   render() {
-    // console.log('设置密码', this.props.controller.userController.userVerify.fundPwd)
     return (
       <div className='trade-plan-deal'>
         <div className='deal-entrust'>
