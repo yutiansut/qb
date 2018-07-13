@@ -19,6 +19,8 @@ import Help from './componentsMb/help/Help.jsx'
 import ForgetPass from './componentsMb/login/ForgetPass.jsx'
 import AssetManange from "./componentsMb/asset/AssetManage";
 import Genrealize from "./componentsMb/genrealize/Genrealize.jsx";
+import OrderManage from './componentsMb/order/OrderManage.jsx';
+import UserCenter from "./componentsMb/user/UserCenter.jsx"
 
 
 let testAppController,
@@ -55,6 +57,12 @@ const ForgetPassComponent = ({match, history}) => {
 const AssetComponent = ({match}) => {
     return <AssetManange controller={assetController} match={match}/>;
 };
+const OrderManageCompoment = ({ match }) => {
+  return <OrderManage controller={userOrderController} match={match}/>
+};
+const UserCenterComponent = ({match}) => {
+    return <UserCenter match={match}/>
+}
 
 const Gener = ({match}) => {
   return <Genrealize match={match} controller={activityController}/>;
@@ -70,7 +78,8 @@ export default class App extends Component {
       loginController = new LoginController();
       noticeController = new NoticeController();
       activityController = new ActivityController();
-      marketController = new MarketController('market');
+			marketController = new MarketController('market');
+			userOrderController = new UserOrderListController();
 
       noticeController.configController = configController;
 
@@ -84,7 +93,10 @@ export default class App extends Component {
 
       marketController.userController = userController;
       marketController.configController = configController;
-      marketController.assetController = assetController;
+			marketController.assetController = assetController;
+			
+			userOrderController.userController = userController;
+      userOrderController.marketController = marketController;
 
       configController.setAppView(this);
   }
@@ -117,6 +129,8 @@ export default class App extends Component {
                       <Route path="/mhelp" component={HelpComponent}/>
                       <Route path="/mwallet" component={AssetComponent}/>
                       <Route path="/mgenrealize" component={Gener}/>
+					  <Route path="/morder" component={OrderManageCompoment}/>
+                      <Route path="/muser" component={UserCenterComponent} />
                       <Redirect to="/mhome" />
                   </Switch>
               </div>

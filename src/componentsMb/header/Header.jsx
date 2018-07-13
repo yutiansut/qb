@@ -32,6 +32,7 @@ export default class Header extends ExchangeViewBase {
         <div className="nav-right">
             <NavLink to="/mwallet" className="login">资产</NavLink>
             <NavLink to="/mlogin" className="login">登录</NavLink>
+            <NavLink to="/morder" className="login">订单</NavLink>
         </div>
       </div>
     )
