@@ -342,6 +342,7 @@ export default class Extract extends exchangeViewBase {
                     });
                   }}
                   onBlur={() => {
+                    if (this.state.extractAmount === '') return;
                     if (
                       Number(this.state.extractAmount) < curExtract.minCount
                     ) {
