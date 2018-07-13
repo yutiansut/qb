@@ -58,17 +58,17 @@ export default class Header extends ExchangeViewBase {
     this.matched = '/whome'
   }
   async componentDidMount() {
+    ChangeFontSize(1440*0.8, 1440*1)
     await this.getUserNocticeList()
-    //let userNocticeList = this.state.userNocticeList
-    //userNocticeList = userNocticeList && userNocticeList.filter(v => {return v.isRead === 0}) // 筛选未读信息
+    let userNocticeList = this.state.userNocticeList
+    userNocticeList = userNocticeList && userNocticeList.filter(v => {return v.isRead === 0}) // 筛选未读信息
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })
     this.state.navArrayLeft.forEach(v => {
       this.userToken && (v.tokenShow = false)
     })
-    ChangeFontSize(1440*0.8, 1440*1)
-    //this.setState({userNocticeList})
+    this.setState({userNocticeList})
   }
 
   componentWillUpdate(props, state, next) {

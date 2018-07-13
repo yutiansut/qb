@@ -106,7 +106,8 @@ export default class userIntegration extends exchangeViewBase {
         <div className="item clearfix">
           <h2>{this.intl.get("user-scoreHistory")}</h2>
           <div className="fl">
-            <a href="/help/pricing#earn_points">{this.intl.get("user-scoreGet")}？</a>
+            {/*<a href="/help/pricing#earn_points">{this.intl.get("user-scoreGet")}？</a>*/}
+            <Link to={{pathname: `/help/pricing#earn_points`, query: {user: 'earn_points'}}}>{this.intl.get("user-scoreGet")}？</Link>
             <table>
               <thead>
               <tr>

@@ -286,20 +286,20 @@ export default class userSafeCenter extends exchangeViewBase {
               <table>
                 <thead>
                   <tr>
-                    {/*<th>{this.intl.get("time ")}</th>*/}
+                    <th>{this.intl.get("time")}</th>
                     <th>{this.intl.get("equipment")}</th>
                     <th>{this.intl.get("ip")}</th>
                     <th>{this.intl.get("place")}</th>
-                    {/*<th>{this.intl.get("user-isCurrent")}</th>*/}
+                    <th>{this.intl.get("user-isCurrent")}</th>
                   </tr>
                 </thead>
                 <tbody className={`${this.state.currentLogin && this.state.currentLogin.length ? '' : 'hide'}`}>
                   {this.state.currentLogin && this.state.currentLogin.map((v, index) => (<tr key={index}>
-                    {/*<td>{v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>*/}
+                    <td>{v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
                     <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
-                    {/*<td>{`${v.isMe ? '是' : '否'}`}</td>*/}
+                    <td>{`${v.isMe ? '是' : '否'}`}</td>
                   </tr>))}
                 </tbody>
               </table>

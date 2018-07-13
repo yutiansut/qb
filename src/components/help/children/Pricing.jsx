@@ -4,6 +4,7 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 export default class Pricing extends exchangeViewBase {
   constructor(props) {
     super(props);
+
     // const {controller} = props
     // controller.setView(this);
     // console.log('jsxconfig',controller.configData)
@@ -14,20 +15,14 @@ export default class Pricing extends exchangeViewBase {
     // this.props.controller.getPairFees()
   }
 
-  componentDidMount() {
-    // document.body.scrollTop = document.documentElement.scrollTop = 500
-    // console.log(1221, document.body.scrollTop)
-    // console.log(32424, window.location.hash)
-    // let anchor = window.location.hash.split('#')[1]
-    let anchorElement = document.getElementById('earn_points');
-    // console.log(232, anchorElement,  anchorElement.offsetTop)
-    // if (anchorElement) {
-      anchorElement.scrollIntoView(true)
-      // console.log(1221, document.body.scrollTop)
-      // document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop;
-      // console.log(122, document.body.scrollTop)
-    // }
-    console.log(343535, document.body.scrollTop)
+  componentDidMount(evt) {
+    // console.log(this.props.location.query)
+    window.onload = () => {
+      let anchor = window.location.hash.split('#')[1]
+      let anchorElement = document.getElementById(anchor);
+      // console.log(232, anchorElement,  anchorElement.offsetTop)
+      anchor && (document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop)
+    }
   }
   render() {
     // const { controller } = this.props;
