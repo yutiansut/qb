@@ -9,7 +9,7 @@ export default class Register extends exchangeViewBase {
     const { controller } = this.props;
     controller.setView(this);
     let query = queryString.parse(this.props.location.search.substring(1));
-    console.log(query)
+
     this.state = {
       account: "",
       uid: JSON.parse(query.uid),

@@ -89,6 +89,8 @@ export default {
     { name: 'history', data: { url: '/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
     // 验证资金密码
     { name: 'verifyFundPass', data: { url: '/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
+    // 获取全部币种列表
+    { name: 'getAllCoinList', data: { url: '/common/', method: 'post' }, action: 'getAllCoinList', actionBack: 'getAllCoinListRes'},
   ],
   userOrder:[
     //当前订单
