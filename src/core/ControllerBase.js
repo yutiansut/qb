@@ -1,18 +1,28 @@
 // import StoreBase from './StoreBase'
-import AsyncAll from './libs/AsyncAll' //同步多个异步请求
-import Sleep from './libs/Sleep' //同步多个异步请求
-import Loop from './loop' //localStorage交互
+import AsyncAll from "./libs/AsyncAll"; //同步多个异步请求
+import Sleep from "./libs/Sleep"; //同步多个异步请求
+import Loop from "./loop"; //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
-import Storage from "./storage/index"
+import Storage from "./storage/index";
 
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),
   number: (arr, num) => arr.filter(v => v === num),
   undefined: arr => arr,
-  string: (arr, str) => arr.filter(v => typeof v === 'string' && v.indexOf(str) > -1),
-  object: (arr, obj) => arr.filter(v => typeof v === 'object' && Object.keys(obj).filter(vv => v[vv] !== 'undefined' && FILTERFUNC[typeof obj[vv]]([v[vv]], obj[vv]).length).length === Object.keys(obj).length),
-  boolean: (arr, bool) => bool && arr.filter(v => v) || arr.filter(v => !v)
-}
+  string: (arr, str) =>
+    arr.filter(v => typeof v === "string" && v.indexOf(str) > -1),
+  object: (arr, obj) =>
+    arr.filter(
+      v =>
+        typeof v === "object" &&
+        Object.keys(obj).filter(
+          vv =>
+            v[vv] !== "undefined" &&
+            FILTERFUNC[typeof obj[vv]]([v[vv]], obj[vv]).length
+        ).length === Object.keys(obj).length
+    ),
+  boolean: (arr, bool) => (bool && arr.filter(v => v)) || arr.filter(v => !v)
+};
 
 export default class ControllerBase {
   constructor() {
@@ -20,15 +30,15 @@ export default class ControllerBase {
     this.Sleep = Sleep;
     this.Loop = Loop;
     this.Util = GlobalUtil;
-    this.Storage = Storage
+    this.Storage = Storage;
   }
 
   setView(view) {
-    this.view = view
+    this.view = view;
   }
 
   get initState() {
-    return this.store && this.Util.deepCopy(this.store.state) || {}
+    return (this.store && this.Util.deepCopy(this.store.state)) || {};
   }
 
   /**
@@ -36,55 +46,58 @@ export default class ControllerBase {
    */
   countDown(key, state, view) {
     // console.log(this.Loop[key], view.state[state])
-    this.Loop[key].clear()
-    this.Loop[key].setDelayTime(1000)
+    this.Loop[key].clear();
+    this.Loop[key].setDelayTime(1000);
     this.Loop[key].set(async () => {
       // console.log('倒计时',state, view.state[state], view)
       if (view.state[state] === 0) {
-        this.Loop[key].stop()
-        return
+        this.Loop[key].stop();
+        return;
       }
       let obj = {};
       obj[state] = view.state[state] - 1;
       view.setState(obj);
     }, 1000);
-    this.Loop[key].start()
+    this.Loop[key].start();
   }
 
   countDownStop(key) {
     // console.log('清除倒计时', key)
-    this.Loop[key].stop()
-    this.Loop[key].clear()
+    this.Loop[key].stop();
+    this.Loop[key].clear();
   }
 
   /**
    * 轮播方法
    */
   swiper(key, view, state, stateCache, criticalArr, speed, displayTime) {
-    this.Loop[key].clear()
-    this.Loop[key].setDelayTime(displayTime)
+    this.Loop[key].clear();
+    this.Loop[key].setDelayTime(displayTime);
     this.Loop[key].set(async () => {
       let obj = {};
       obj[state] = view.state[state] - speed;
       obj[stateCache] = view.state[stateCache] - speed;
       view.setState(obj);
-      if(view.state[state] === criticalArr[0]){
-        view.state[stateCache] = criticalArr[criticalArr.length-1]
+      if (view.state[state] === criticalArr[0]) {
+        view.state[stateCache] = criticalArr[criticalArr.length - 1];
       }
-      if(view.state[stateCache] === criticalArr[0]){
-        view.state[state] = criticalArr[criticalArr.length-1]
+      if (view.state[stateCache] === criticalArr[0]) {
+        view.state[state] = criticalArr[criticalArr.length - 1];
       }
-      if(criticalArr.includes(view.state[state]) || criticalArr.includes(view.state[stateCache])){
-        this.Loop[key].stop()
-        await this.Sleep(displayTime)
-        this.Loop[key].start()
+      if (
+        criticalArr.includes(view.state[state]) ||
+        criticalArr.includes(view.state[stateCache])
+      ) {
+        this.Loop[key].stop();
+        await this.Sleep(displayTime);
+        this.Loop[key].start();
       }
     }, 100);
-    this.Loop[key].start()
+    this.Loop[key].start();
   }
 
   swiperStop(key) {
-    this.Loop[key].clear()
+    this.Loop[key].clear();
   }
 
   /**
@@ -100,7 +113,9 @@ export default class ControllerBase {
    */
   filter(arr, rule) {
     // console.log('aaaa', arr, rule)
-    return FILTERFUNC[typeof rule] && FILTERFUNC[typeof rule](arr, rule) || arr;
+    return (
+      (FILTERFUNC[typeof rule] && FILTERFUNC[typeof rule](arr, rule)) || arr
+    );
   }
 
   /**
@@ -112,10 +127,10 @@ export default class ControllerBase {
    * return 排序后的数组
    */
   sort(arr, sortValue, type, sortDefault) {
-    if (!sortValue.length)
-      return arr
+    if (!sortValue.length) return arr;
     return this.Util.deepCopy(arr).sort((a, b) => {
-      let first = a, second = b;
+      let first = a,
+        second = b;
       sortValue.forEach(v => {
         first = first[v];
         second = second[v];
@@ -128,17 +143,17 @@ export default class ControllerBase {
           second = second[v];
         });
       }
-      if (type){
-        if(first > second) return 1;
+      if (type) {
+        if (first > second) return 1;
         if (first <= second) return -1;
       }
-      if(!type){
+      if (!type) {
         if (first >= second) return -1;
         if (first < second) return 1;
       }
       //   return first - second;
       // return second - first;
-    })
+    });
   }
 
   /**
@@ -158,5 +173,24 @@ export default class ControllerBase {
     } catch (err) {
       return false;
     }
+  }
+  // html5 的History 改变url不刷新页面
+  changeUrl(k, v) {
+    let state = {
+      title: "",
+      url: window.location.origin + window.location.pathname
+    };
+    history.replaceState(
+      state,
+      "",
+      `${window.location.origin + window.location.pathname}?${k}=${v}`
+    );
+  }
+// 获取url中的query
+  getQuery(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1]);
   }
 }

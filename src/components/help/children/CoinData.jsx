@@ -12,9 +12,9 @@ export default class CoinData extends exchangeViewBase {
     controller.marketController.setView(this);
     this.state = {
       showSearch: false,
-      currency: "ETH",
+      currency: "BTC",
       unit: controller.configData.language === "zh-CN" ? 1 : 0,
-      value: "ETH",
+      value: "BTC",
       walletList: {},
       tradePair: null
     };
@@ -52,13 +52,17 @@ export default class CoinData extends exchangeViewBase {
       this.setCurrency(value);
       this.hide();
     };
+    // this.repl = (coin) =>{
+    //   let state = { title: '', url: window.location.href };
+    //   console.log(window.location)
+    //   coin && history.replaceState(state, "", `${window.location.href}?currency=${coin.toLowerCase()}`);
+    // }
   }
   async componentWillMount() {
+    // console.log('mounting..................',this.props.controller.getQuery)
     await this.getWalletList();
-    let currency =
-      this.props.location.query && this.props.location.query.currency.toUpperCase();
+    let currency = this.props.controller.getQuery('currency').toUpperCase() || this.props.location.query && this.props.location.query.currency.toUpperCase();
     currency && this.setState({ currency: currency, value: currency });
-
     (!currency || currency === this.state.currency) && await this.getCoinInfo(this.state.walletList[currency || this.state.currency]);
 
     this.getTradePair();
@@ -66,7 +70,7 @@ export default class CoinData extends exchangeViewBase {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      console.log('updateing', nextState.currency, this.state.currency);
+      this.props.controller.changeUrl("currency", nextState.currency.toLowerCase());
       this.getCoinInfo(this.state.walletList[nextState.currency]);
     }
     if (JSON.stringify(nextState) === JSON.stringify(this.state)) return false;
@@ -74,7 +78,7 @@ export default class CoinData extends exchangeViewBase {
   }
 
   render() {
-    console.log(this.state.coinInfo);
+    // console.log(this.state.coinInfo);
     let {
       name,
       enName,

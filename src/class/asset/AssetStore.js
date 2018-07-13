@@ -115,10 +115,10 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取walletList
   async getWalletList() {
-    let { list } = await this.Proxy.getAllCoinList();
-    if (list && list.length) {
+    let result = await this.Proxy.getAllCoinList();
+    if (result && result.list && result.list.length) {
       let obj = {};
-      this.controller.sort(list, ["coinName"], 1).forEach(v => {
+      this.controller.sort(result.list, ["coinName"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
       });
       this.state.walletList = obj;
