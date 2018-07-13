@@ -9,12 +9,15 @@ export default class UserController extends ExchangeControllerBase {
     this.store = new UserStore()
   }
 
-  setView(view){
-    super.setView(view);
-    // view.setState({count: this.store.count})
-    return this.store.data
-  }
+  // setView(view){
+  //   super.setView(view);
+  //   // view.setState({count: this.store.count})
+  //   // return this.store.data
+  // }
 
+  setHeaderView(view) {
+    this.noticeHeaderView = view
+  }
   //清除用户信息
   clearUserInfo(){
     this.store.clearUserInfo()
@@ -370,7 +373,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserNocticeList() { // 获取通知列表
     let userNocticeList = await this.store.userNocticeList();
-    this.view.setState({userNocticeList})
+    this.noticeHeaderView.setState({userNocticeList})
   }
 
   // 为其他模块提供接口

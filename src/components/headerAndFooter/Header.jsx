@@ -52,9 +52,9 @@ export default class Header extends ExchangeViewBase {
     this.getUserNocticeList = this.userController.getUserNocticeList.bind(this.userController) // 获取通知列表
     this.loginOut = this.loginOut.bind(this)
     //绑定view
-    this.userController.setView(this)
+    this.userController.setHeaderView(this)
     //初始化数据，数据来源即store里面的state
-    this.state = Object.assign(this.state, this.userController.view.state.userNocticeList);
+    this.state = Object.assign(this.state, this.userController.store.state.userNocticeList);
     this.matched = '/whome'
   }
   async componentDidMount() {
@@ -145,7 +145,7 @@ export default class Header extends ExchangeViewBase {
               <li>
                 <NavLink to="/wuser/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
-              <li onClick={this.loginOut}>退出</li>
+              <li className="login-out" onClick={this.loginOut}>退出</li>
             </ul>
           </li>
           <li className="language-li">

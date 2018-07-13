@@ -29,8 +29,8 @@ export default class Help extends exchangeViewBase {
     const terms = () => {
       return <Terms controller={this.controller} />;
     };
-    const pricing = () => {
-      return <Pricing controller={this.controller} />;
+    const pricing = ({location}) => {
+      return <Pricing controller={this.controller} location={location}/>;
     };
     const api = () => {
       return <Api controller={this.controller} />;
