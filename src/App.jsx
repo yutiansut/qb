@@ -28,7 +28,6 @@ import OrderManage from './components/order/OrderManage.jsx'
 import AssetManange from "./components/asset/AssetManage";
 import Helper from "./components/help/Help";
 import ActivityInfo from "./components/activity/Activity.jsx"
-import Genrealize from "./components/genrealize/Genrealize.jsx";
 import NoticeDetailCon from './components/notice/noticeChild/NoticeContentDetail.jsx'
 import KlineController from "./class/kline/KlineController";
 
@@ -116,9 +115,7 @@ const HomeComponent = () => {
 const Order = ({match}) => {
   return <OrderManage controller={userOrderController} match={match}/>
 };
-const Gener = ({match}) => {
-  return <Genrealize match={match} controller={activityController}/>;
-};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -181,7 +178,6 @@ export default class App extends Component {
         {/*<Header/>*/}
         <Switch>
           <Route path="/trade" component={tradeHeader}/>
-          <Route path="/genrealize" component={() => <div/>}/>
           <Route component={header}/>
         </Switch>
         <div style={{minHeight: `${window.innerHeight - 2.1 * 100}px`, width: "100%"}}>
@@ -198,7 +194,7 @@ export default class App extends Component {
             <Route path="/wnotice" component={Notice}/>
             <Route path="/help" component={Help}/>
             <Route path="/activity" component={Activity}/>
-            <Route path="/genrealize" component={Gener}/>
+            {/* <Route path="/genrealize" component={Gener}/> */}
             <Route path="/wuserNotice" component={UserNotice}/>
             <Redirect to="/whome"/>
           </Switch>
@@ -206,7 +202,6 @@ export default class App extends Component {
         {/*<Footer/>*/}
         <Switch>
           <Route path="/trade" component={tradeFooter}/>
-          <Route path="/genrealize" component={() => <div/>}/>
           <Route component={Footer}/>
         </Switch>
       </div>}

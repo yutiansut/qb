@@ -1,0 +1,205 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+.minvite{
+  padding: 0.2rem 0.12rem 0 0.12rem;
+  margin-bottom: 0.12rem;
+}
+/* 文案部分 */
+.minvite h3{
+  font-size: 0.16rem;
+  color: $normal-black-color;
+  line-height: 0.16rem;
+  margin-bottom: 0.16rem;
+}
+.minvite dl dt, .minvite dl dd p{
+  height: 0.13rem;
+  font-size: 13px;
+  color: #46566A;
+  line-height: 13px;
+  margin-bottom: 0.16rem;
+}
+.minvite dl dd h4, .minvite .welfare{
+  font-size: 15px;
+  color: $normal-black-color;
+  line-height: 15px;
+  margin-bottom: 0.12rem;
+}
+.minvite .welfare{
+  font-weight: bold;
+  margin-bottom: 0.16rem;
+}
+.minvite .welfare span{
+  margin: 0 0.07rem;
+  color: #069AF7;
+}
+/* 海报部分 */
+.minvite .poster{
+  text-align: center;
+}
+.minvite .poster .up{
+  height: 5.00rem;
+  padding-top: 0.24rem;
+  background: url(/static/images/genrealize/invite_bg1.png) no-repeat 0 0;
+  background-size: 100% 100%;
+}
+.minvite .poster .down{
+  height: 5.9rem;
+  background: url(/static/images/genrealize/invite_bg2.png) no-repeat 0 0;
+  background-size: 100% 100%;
+}
+.minvite .poster .up .header{
+  height: 0.55rem;
+  line-height: 0.4rem;
+  font-size: 0.2rem;
+  color: #ff5142;
+  margin-bottom: 0.12rem;
+  font-weight: bold;
+  background: url(/static/images/genrealize/invite_header_bg.png) no-repeat center center;
+  background-size: auto 100%;
+}
+.minvite .poster .up .wait{
+  height: 1.53rem;
+  margin-bottom: 0.20rem;
+  background: url(/static/images/genrealize/invite_wait.png) no-repeat center center;
+  background-size: auto 100%;
+}
+.minvite .poster .up .code-text{
+  line-height: 0.26rem;
+  margin-bottom: 0.16rem;
+  color: $normal-white-color;
+  font-size: 0.18rem;
+}
+.minvite .poster .up .code-text span{
+  margin: 0 0.07rem;
+  color: #fbf288;
+  font-size: 0.23rem;
+}
+.minvite .poster .up .qrcode{
+  position: relative;
+  height: 1.36rem;
+}
+.minvite .poster .up .qrcode .qrcode-wrap{
+  position: absolute;
+  left: 50%;
+  margin-left: -0.68rem;
+  width: 1.28rem;
+  height: 1.28rem;
+  border: 0.04rem solid $normal-white-color;
+  border-radius: 0.1rem
+}
+.minvite .poster .up .qrcode .qrcode-wrap canvas {
+  display block
+  position absolute
+  left 7.5%
+  top 7.5%
+  width 85% !important
+  height 85% !important
+  border 0.05rem solid $normal-white-color
+}
+.minvite .poster .down .crt-intro-header{
+  height: 0.55rem;
+  line-height: 0.4rem;
+  font-size: 0.25rem;
+  color: #7380f0;
+  margin-bottom: 0.16rem;
+  font-weight: bold;
+  background: url(/static/images/genrealize/invite_crt_bg.png) no-repeat center center;
+  background-size: auto 100%;
+}
+.minvite .poster .down .crt-intro-text1{
+  padding:  0 0.12rem;
+  text-align: left;
+  font-size: 0.15rem;
+  color: $normal-white-color;
+  line-height: 0.24rem;
+}
+.minvite .poster .down .crt-intro-text2{
+  padding:  0 0.12rem;
+  text-align: left;
+  font-size: 0.16rem;
+  font-weight: bold;
+  letter-spacing: -0.01rem;
+  color: #fbf288;
+  margin-bottom: 0.36rem;
+}
+.minvite .poster .down .crt-func-header{
+  height: 0.55rem;
+  line-height: 0.4rem;
+  font-size: 0.25rem;
+  color: #7380f0;
+  margin-bottom: 0.24rem;
+  font-weight: bold;
+  background: url(/static/images/genrealize/invite_crt_func.png) no-repeat center center;
+  background-size: auto 100%;
+}
+.minvite .poster .down .crt-func-intro{
+  text-align: left;
+  padding: 0 0.12rem;
+  color: $normal-white-color;
+  font-size: 0.16rem;
+  margin-bottom: 0.15rem;
+}
+.minvite .poster .down .crt-func{
+  width: 3.24rem;
+  margin-left: 0.13rem;
+  margin-bottom: 0.28rem;
+}
+.minvite .poster .down .crt-func h5{
+  margin-bottom:0.05rem
+}
+.minvite .poster .down .crt-func li{
+  box-sizing: border-box;
+  float: left;
+  width: 1.62rem;
+  height: 0.7rem;
+  background: url(/static/images/genrealize/value.png) no-repeat 0.1rem center $normal-white-color;
+  background-size: 0.4rem auto;
+  padding: 0.18rem 0 0 0.55rem;
+}
+.minvite .poster .down .crt-func li h5{
+  font-size: 0.16rem;
+  font-weight: bold;
+  text-align: left;
+  color: #636262;
+}
+.minvite .poster .down .crt-func li p{
+  font-size: 0.12rem;
+  color: #80807f;
+  text-align: left;
+}
+.minvite .poster .down .crt-func .value,.minvite .poster .down .crt-func .usage{
+  border-right: 0.01rem solid rgba(255,0,0,0.2);
+  border-bottom: 0.01rem solid rgba(255,0,0,0.2)
+}
+.minvite .poster .down .crt-func .cost,.minvite .poster .down .crt-func .welfa{
+  background-image: url(/static/images/genrealize/welfa.png);
+  border-bottom: 0.01rem solid rgba(255,0,0,0.2)
+}
+.minvite .poster .down .crt-func .usage{
+  background-image: url(/static/images/genrealize/usage.png);
+}
+.minvite .poster .down .crt-func .interesting{
+  border-right: 0.01rem solid rgba(255,0,0,0.2);
+}
+.minvite .poster .down .crt-func .value {
+  border-radius: 0.1rem 0 0 0;
+}
+.minvite .poster .down .crt-func .cost{
+  background-image: url(/static/images/genrealize/cost.png);
+  border-radius: 0 0.1rem 0 0;
+}
+.minvite .poster .down .crt-func .interesting{
+  background-image: url(/static/images/genrealize/interesting.png);
+  border-radius: 0 0 0 0.1rem;
+}
+.minvite .poster .down .crt-func .more{
+  background-image: url(/static/images/genrealize/more.png);
+  border-radius: 0 0 0.1rem 0;
+}
+
+.minvite .poster .down .coming-soon{
+  font-size: 0.16rem;
+  height: 0.16rem;
+  line-height: 0.16rem;
+  color: rgba(255,255,255,0.6)
+}

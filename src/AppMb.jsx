@@ -18,6 +18,7 @@ import Login from './componentsMb/login/Login.jsx'
 import Help from './componentsMb/help/Help.jsx'
 import ForgetPass from './componentsMb/login/ForgetPass.jsx'
 import AssetManange from "./componentsMb/asset/AssetManage";
+import Genrealize from "./componentsMb/genrealize/Genrealize.jsx";
 
 
 let testAppController,
@@ -55,6 +56,9 @@ const AssetComponent = ({match}) => {
     return <AssetManange controller={assetController} match={match}/>;
 };
 
+const Gener = ({match}) => {
+  return <Genrealize match={match} controller={activityController}/>;
+};
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -112,6 +116,7 @@ export default class App extends Component {
                       <Route path="/mfindPass" component={ForgetPassComponent}/>
                       <Route path="/mhelp" component={HelpComponent}/>
                       <Route path="/mwallet" component={AssetComponent}/>
+                      <Route path="/mgenrealize" component={Gener}/>
                       <Redirect to="/mhome" />
                   </Switch>
               </div>

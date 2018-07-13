@@ -13,7 +13,7 @@ export default class Terms extends exchangeViewBase {
     const controller = this.props.controller;
     // console.log(`${serverConfig.host}/genrealize/register/${this.props.location.search}`);
     let { nameUsd, netUrl, coin } = controller.configData;
-    return <div className="invite">
+    return <div className="minvite">
         <h3>邀请有礼：</h3>
         <dl>
           <dt>每邀请一位好友注册{netUrl}完成：</dt>

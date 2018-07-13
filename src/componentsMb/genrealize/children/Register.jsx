@@ -50,7 +50,7 @@ export default class Register extends exchangeViewBase {
     // console.log(`${serverConfig.host}/genrealize/register/${this.props.location.search}`);
     let { nameUsd, coin } = controller.configData;
     return (
-      <div className="register">
+      <div className="mregister">
         <div
           className="vagueBgView"
           style={{ display: showVagueBgView ? "block" : "none" }}
