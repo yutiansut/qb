@@ -21,8 +21,8 @@ export default class TradePlan extends ExchangeViewBase {
       funpassSell:'',
       buyMax: 0, // 买入最大数量
       sellMax: 0,
-      buyWallet: 123, //买入可用余额
-      sellWallet: 321, //卖出可用余额
+      buyWallet: 0, //买入可用余额
+      sellWallet: 0, //卖出可用余额
       DealEntrustType: 0,// 委托类型
       PassType: '',
       Market: '',

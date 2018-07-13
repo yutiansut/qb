@@ -93,7 +93,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           </div>
           <div className='trade-deal-turnover'>
             <span>{`${this.intl.get('deal-trunover')}`}:</span>
-            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? this.props.sellNum * this.props.avalue : this.props.buyNum * this.props.bvalue)}</em>
+            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue)) : Number(Number(this.props.buyNum).multi(this.props.bvalue)))}</em>
             <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>

@@ -72,7 +72,7 @@ export default class LiveTrade extends ExchangeViewBase{
                     <td>{`卖${this.state.liveSellArray.length - index}`}</td>
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                     <td>{v.amount}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN * v.amount).format({number:'property'}) || (this.state.unitsType === 'USD' && Number(v.priceEN * v.amount).format({number:'property'}) || Number(v.price * v.amount).format({number:'property'})) }</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN.multi(v.amount)).format({number:'property'}) || (this.state.unitsType === 'USD' && Number(v.priceEN.multi(v.amount)).format({number:'property'}) || Number(v.price.multi(v.amount)).format({number:'property'})) }</td>
                   </tr>
               )
             )}
@@ -88,7 +88,7 @@ export default class LiveTrade extends ExchangeViewBase{
                     <td>{`买${index + 1}`}</td>
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price) }</td>
                     <td>{v.amount}</td>
-                    <td>{this.state.unitsType === 'CNY' && (v.priceCN * v.amount) || (this.state.unitsType === 'USD' && (v.priceEN * v.amount) || (v.price * v.amount)) }</td>
+                    <td>{this.state.unitsType === 'CNY' && (Number(v.priceCN.multi(v.amount)).format({number:'property'})) || (this.state.unitsType === 'USD' && (Number(v.priceEN.multi(v.amount)).format({number:'property'})) || (Number(v.price.multi(v.amount)).format({number:'property'}))) }</td>
                   </tr>
               )
             )}
