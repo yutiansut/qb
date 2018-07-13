@@ -14,13 +14,13 @@ export default class Balance extends exchangeViewBase {
     this.name = "balance";
     let { controller } = props;
     //绑定view
-    controller.setView(this)
-    this.state = {}
+    controller.setView(this);
+    this.state = {};
     let { totalAsset, wallet } = controller.initState;
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, { totalAsset, wallet });
     //绑定方法
-    this.getAssets = controller.getAssets.bind(controller)
+    this.getAssets = controller.getAssets.bind(controller);
   }
 
   async componentWillMount() {
@@ -31,9 +31,9 @@ export default class Balance extends exchangeViewBase {
     return <div className="balance">
       <TotalAsset totalAsset={this.state.totalAsset} controller={this.props.controller} />
       <ul className="menu-ul">
-        <li><Link to="">充币</Link></li>
-        <li><Link to="">提币</Link></li>
-        <li><Link to="">资产记录</Link></li>
+        <li><a>充币</a></li>
+        <li><a>提币</a></li>
+        <li><Link to="/mwallet/dashboard">资产记录</Link></li>
       </ul>
       <Wallets wallet={this.state.wallet} history={this.props.history} controller={this.props.controller} />
     </div>

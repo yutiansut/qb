@@ -1,0 +1,95 @@
+@import "../../../common/css/variable.styl"
+@import "../../../common/css/base.styl"
+
+.asset-mb
+  .balance-detail
+    background $bg-light-color
+    font-family PingFangSC-Medium
+    .d1
+      height .5rem
+      margin-top .16rem
+      padding .05rem .12rem
+      background $normal-white-color
+      img
+        width .4rem
+        height .4rem
+        border-radius 50%
+        float left
+      b
+        display block
+        margin-left .55rem
+        font-size .24rem
+        line-height .2rem
+        color $h5-color-weight
+        margin-bottom .03rem
+      span
+        display block
+        margin-left .55rem
+        font-size .12rem
+        color $h5-color-light
+        line-height .2rem
+    .d2
+      padding .2rem .12rem
+      background $normal-white-color
+      border-bottom .01rem solid $h5-border-light
+      p
+        display inline-block
+        vertical-align top
+        width 50%
+        span
+          display block
+          font-size .12rem
+          color $h5-color-light
+          line-height .16rem
+        i
+          font-size .14rem
+          color $h5-color-normal
+          line-height .2rem
+          margin-top .05rem
+          display block
+    .d3
+      background $normal-white-color
+      padding .1rem .12rem
+      p
+        line-height .3rem
+        span
+          font-size .14rem
+          color $h5-color-normal
+        i
+          font-size .14rem
+          color $h5-color-weight
+          float right
+
+    .coin-info
+      display block
+      position fixed
+      bottom .4rem
+      line-height .4rem
+      width 100%
+      padding 0 .12rem
+      background $normal-white-color
+      box-shadow: 0 -.2rem .4rem 0 $h5-shadow-light
+      color $h5-active-blue
+      font-size .15rem
+      img
+        float right
+        height .16rem
+        margin-top .12rem
+    .footer
+      background $normal-white-color
+      position fixed
+      bottom 0
+      width 100%
+      height .4rem
+      border-top .01rem solid $h5-border-light
+      color $h5-active-blue
+      a
+        width 50%
+        text-align center
+        display inline-block
+        font-size .18rem
+        line-height .4rem
+        &.active
+          background $h5-active-blue
+          color $normal-white-color
+

@@ -55,8 +55,10 @@ export default class HomeMarket extends ExchangeViewBase{
           {this.state.homeMarketPairData.map((v, index) => {
             return(
               <tr key={index}>
-                <td>
-                  <h3>{v.coinName.toUpperCase()}<small>/{v.marketName.toUpperCase()}</small></h3>
+                <td onClick={value => this.addCollect(v, index)}>
+                  <h3><img src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"}/>
+                      {v.coinName.toUpperCase()}
+                      <small>/{v.marketName.toUpperCase()}</small></h3>
                   <span>24h量 {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
                 </td>
                 <td>

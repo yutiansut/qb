@@ -3,34 +3,33 @@
 
 .asset-mb
   .balance
+    background $bg-light-color
+    font-family PingFangSC-Medium
     .total-asset
-      padding .2rem
-      .item
-        height .3rem
-        line-height .3rem
-        display flex
-        label,span
-          font-size 0.14rem
-          color $normal-gray-color
-          white-space nowrap
-        b
-          font-size 0.18rem
-          color $main-color
-        label
-          flex-shrink 0
-          text-align right
-          padding-right .15rem
+      background $normal-white-color
+      padding .15rem
       .total
+        label
+          display block
+          line-height .2rem
+          font-size .18rem
+          opacity .8
+          margin-bottom .04rem
+        b
+          line-height .4rem
+          font-size .25rem
+      .total-cny
         span
-          margin-left .1rem
-      .limit
-        a
-          margin-left .3rem
+          font-size .14rem
+          opacity .8
+          margin-top .08rem
+          display block
     .menu-ul
-      line-height .4rem
+      line-height .45rem
       border 1px solid $line-light
       border-left none
       border-right none
+      background $normal-white-color
       li
         display inline-block
         width 33%
@@ -43,44 +42,82 @@
           content ""
           width .01rem
           background $line-light
-          height .2rem
+          height .25rem
           top .1rem
-
-
+        a
+          font-weight bold
     .asset-wallet
-      margin-bottom .4rem
-      table
-        width 100%
-        margin-top .2rem
-        th,td
-          vertical-align middle
-          text-align center
-          white-space nowrap
-        th:first-of-type
-          padding-left .4rem
-          text-align left
-        td:first-of-type
-          padding-left .2rem
-          text-align left
-        th:last-of-type
-          padding-right .4rem
-          text-align right
-        td:last-of-type
-          padding-right .2rem
-          text-align right
-        thead
-          tr
-            line-height .3rem
-            background $bg-light-color
-            color $normal-gray-color
-            th
-              font-size .12rem
-        tbody
-          tr
-            height .6rem
-            border-bottom 0.01rem solid $line-light
+      padding-bottom .4rem
+      .filter
+        line-height .45rem
+        height .45rem
+        background $normal-white-color
+        padding 0 .2rem
+        box-shadow .2rem .2rem .2rem $bg-light-color
+        img
+          height .2rem
+          margin-right .1rem
+          vertical-align -.05rem
+        span
+          font-weight bold
+        .toggle-btn
+          display inline-block
+          width .48rem
+          height .24rem
+          float right
+          margin-top .1rem
+          border-radius  .24rem
+          background $bg-dark-color
+          position relative
+          border .02rem solid $bg-dark-color
+          i
+            display inline-block
+            height .2rem
+            width .2rem
+            background $normal-white-color
+            border-radius 50%
+            position absolute
+            top 0
+          &.active
+            background $main-color
+            border-color $main-color
+            i
+              right 0
+      .wallet-li
+        background $normal-white-color
+        margin-top .12rem
+        padding .08rem .12rem
+        box-shadow .2rem .2rem  .2rem  $bg-light-color
+        .d1
+          padding-bottom .08rem
+          border-bottom 1px solid $line-light
+          line-height .2rem
+          label
+            font-size .14rem
+            color $main-color
             img
-              width .2rem
-              vertical-align -.04rem
-              margin-right .08rem
+              height .2rem
+              margin-right .06rem
+              vertical-align -.05rem
+          a
+            float right
+            color $normal-gray-color
+            font-size .12rem
+        .d2
+          padding .08rem 0 .05rem 0
+          p
+            display inline-block
+            vertical-align top
+            width 50%
+            span
+              color $normal-gray-color
+              font-size .12rem
+              display block
+              line-height .16rem
+              margin-bottom .08rem
+            i
+              font-size .14rem
+
+
+
 

@@ -17,7 +17,7 @@ import Home from './componentsMb/home/Home.jsx'
 import Login from './componentsMb/login/Login.jsx'
 import Help from './componentsMb/help/Help.jsx'
 import ForgetPass from './componentsMb/login/ForgetPass.jsx'
-// import AssetManange from "./componentsMb/asset/AssetManage";
+import AssetManange from "./componentsMb/asset/AssetManage";
 
 
 let testAppController,
@@ -51,9 +51,9 @@ const ForgetPassComponent = ({match, history}) => {
     return <ForgetPass controller={loginController} match={match} history={history}/>
 };
 
-// const AssetComponent = ({match}) => {
-//     return <AssetManange controller={assetController} match={match}/>;
-// };
+const AssetComponent = ({match}) => {
+    return <AssetManange controller={assetController} match={match}/>;
+};
 
 export default class App extends Component {
   constructor(props) {
@@ -92,11 +92,9 @@ export default class App extends Component {
 
   componentDidMount() {
     configController.loadLocales();
-
   }
 
   componentWillUpdate(...parmas) {
-
 
   }
 
@@ -113,7 +111,7 @@ export default class App extends Component {
                       <Route exact path="/mlogin" component={LoginComponent} />
                       <Route path="/mfindPass" component={ForgetPassComponent}/>
                       <Route path="/mhelp" component={HelpComponent}/>
-                      {/* <Route path="/mwallet" component={AssetComponent}/> */}
+                      <Route path="/mwallet" component={AssetComponent}/>
                       <Redirect to="/mhome" />
                   </Switch>
               </div>

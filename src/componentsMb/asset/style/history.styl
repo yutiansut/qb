@@ -1,152 +1,79 @@
 @import "../../../common/css/variable.styl"
 @import "../../../common/css/base.styl"
-.asset
+
+.asset-mb
   .hist
-    padding 0.32rem 0 0.45rem 0.3rem
-    border-left 0.01rem solid $line-light
-    a
-      color $main-color
-      cursor pointer
-      &:hover
-        color $main-color-hover
-      &:active
-        color $main-color-active
-    .title
-      width 9.74rem
-      height 0.2rem
-      margin-bottom 0.63rem
-      font-size 0.2rem
-      color $normal-black-color
-      letter-spacing 0.0008rem
-      text-align justify
-      button
-        float right
+    font-family PingFangSC-Medium
+    background $bg-light-color
+    .tab-ul
+      display flex
+      background $normal-white-color
+      li
+        width 100%
+        line-height .38rem
+        text-align center
+        font-size .16rem
+        margin 0 .4rem
+        border-bottom .02rem solid transparent
+        &.active
+          color $h5-active-blue
+          border-color $h5-active-blue
+    .hist-li
+      background $normal-white-color
+      margin .12rem
+      padding .12rem
+      border-radius .02rem
+      box-shadow: 0 .01rem .03rem 0 $h5-shadow-light
+      .d1
+        line-height .2rem
+        padding-bottom .07rem
+        border-bottom .01rem solid $h5-border-light
+        label
+          font-size .14rem
+          color $h5-color-weight
+          img
+            height .2rem
+            margin-right .06rem
+            vertical-align -.05rem
+        span
+          font-size .14rem
+          float right
+          &.success
+            color $h5-active-blue
+          &.fail
+            color $h5-active-yellow
+      .d2
+        margin-top .1rem
+        display flex
+        p
+          display inline-block
+          vertical-align top
+          flex-grow 1
+          span
+            display block
+            color $h5-color-light
+            line-height .2rem
+            margin-bottom .08rem
+          i
+            color $h5-color-normal
+            font-size .14rem
+        p:last-of-type
+          text-align right
+          flex-grow 0
     .kong
-      height 2.5rem
-      line-height 3rem
+      margin-top .2rem
+      height 4rem
       text-align center
-      font-size 0.16rem
+      font-size .14rem
       color $normal-gray-color
       letter-spacing 0
-      background $icon-nothing no-repeat center 0.3rem
-      background-size auto 1.01rem
-    .filtrate
-      width 9.74rem
-      height 0.3rem
-      line-height 0.3rem
-      margin-bottom 0.327rem
-      ul
-        float left
-        margin-right 0.54rem
-        li.item
-          float left
-          width 1.63rem
-          span
-            margin-right 0.1rem
-            font-size 0.16rem
-            color $dark-font-color
-            letter-spacing 0.0006rem
-            text-align justify
-          .select
-            width 0.8rem
-            height 0.3rem
-            line-height 0.3rem
-      .datepicker
-        float left
-        width 2.5rem
-      .handel
-        float right
-        button
-          width 0.64rem
-          height 0.3rem
-          line-height 0.3rem
-          margin-left 0.1rem
-    .table
-      margin-bottom 0.44rem
-      thead
-        tr
-          background-color $bg-light-color
-      th,td
-        height 0.3rem
-        line-height 0.3rem
-        font-size 0.12rem
-        color $normal-gray-color
-        letter-spacing 0.0005rem
-        text-align justify
-        &.confirm, &.state, &.fee
-          text-align center
-        &.time
-          width 1.13rem
-          padding-left 0.1rem
-        &.currency
-          width 1.03rem
-        &.type
-          width 0.62rem
-        &.cash
-          width 0.88rem
-        &.balan
-          width 0.88rem
-        &.send
-          width 1.28rem
-        &.receive
-          width 1.86rem
-        &.state
-          width 0.79rem
-        &.fee
-          width 0.62rem
-        &.option
-          width 0.61rem
-          text-align center
-      tbody
-        height 0.7rem
-        line-height 0.7rem
-        tr
-          border-bottom 0.01rem solid $line-light
-          &:hover
-            background $bg-dark-color
-          td
-            height 0.7rem
-            line-height 0.7rem
-            font-size 0.14rem
-            color $normal-black-color
-            letter-spacing 0.0006rem
-            text-align justify
-            img
-              width 0.16rem
-              height 0.16rem
-            i
-              display block
-              height 100%
-              overflow hidden
-              white-space nowrap
-              text-overflow ellipsis
-            &.send
-              i
-                position relative
-                width 1.28rem
-                padding-right 0.28rem
-                &::after
-                  position absolute
-                  right 0
-                  top 0
-                  content ' >'
-                  width 0.28rem
-                  height 0.7rem
-                  text-align center
-            &.receive
-              i
-                width 1.6rem
-            &.time
-              padding-left 0.1rem
-            &.cash
-              &.red
-                color $up-red-color
-              &.green
-                color $up-green-color
-             &.state
-              &.passing
-                color $warn-color-hover
-              &.unpassed
-                color $normal-gray-color
-            &.confirm, &.state, &.fee
-              text-align center
+      background $icon-nothing no-repeat center 1rem
+      background-size auto 1rem
+      background-color $normal-white-color
+      padding-top 2.2rem
+
+
+    .pagination-wrap
+      margin .2rem 0 .4rem 0
+
+

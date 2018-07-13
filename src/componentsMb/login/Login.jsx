@@ -15,10 +15,7 @@ import TwoVerifyPopup from  '../viewsPopup/TwoVerifyPopup.jsx'
 
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
-// import LoginVerification from './children/LoginVerification.jsx'
 
-
-// const titleList = ['验证登录', '密码登录']
 export default class Login extends exchangeViewBase {
   constructor(props) {
     super(props);
