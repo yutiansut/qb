@@ -55,7 +55,7 @@ export default class HomeMarket extends ExchangeViewBase{
           {this.state.homeMarketPairData.map((v, index) => {
             return(
               <tr key={index}>
-                <td onClick={value => this.addCollect(v, index)}>
+                <td onClick={e => this.addCollect(v, index, e)}>
                   <h3><img src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"}/>
                       {v.coinName.toUpperCase()}
                       <small>/{v.marketName.toUpperCase()}</small></h3>
