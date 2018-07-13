@@ -14,13 +14,6 @@ import {AsyncAll} from '../../../core'
 import DetectOS from '../../../class/lib/Os'
 import Browser from '../../../class/lib/Browser'
 
-// import JsonBig from "json-bigint";
-// import VerifyPopup from '../../viewsPopup/TwoVerifyPopup.jsx'
-
-// let noticeList = [
-//   {name: '邮件通知', flag: true},
-//   {name: '短信通知', flag: true}
-// ];
 let timeAddrList = ['1111', '2222', '3333']
 
 export default class userSafeCenter extends exchangeViewBase {
@@ -85,6 +78,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.showOther = this.showOther.bind(this)
     // this.selectNotice = this.selectNotice.bind(this) // 绑定通知
     this.setUserNotify = controller.setUserNotify.bind(controller) //  修改通知方式
+    this.destroy = controller.clearVerify.bind(controller); // 清除定时器
   }
 
   changeSetPopup(type) { // 设置密码显示
@@ -138,6 +132,7 @@ export default class userSafeCenter extends exchangeViewBase {
 
   }
 
+
   async componentDidMount() {
     // this.getCurrentLogin(),
     await AsyncAll([this.initData(), this.getUserCreditsNum(), this.getLoginList(),  this.getIpList(), this.getGoogle(), this.getCaptchaVerify(), this.getCurrentLogin()])
@@ -159,6 +154,10 @@ export default class userSafeCenter extends exchangeViewBase {
 
   componentWillUpdate(props, state, next) {
 
+  }
+
+  componentWillUnmount() {
+    this.destroy()
   }
 
   clearErr2() {
@@ -348,6 +347,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    getCaptcha = {this.getCaptchaVerify}
                    verifyNum = {this.state.verifyNum}
                    clearErr2 = {() => {this.clearErr2()}}
+                   destroy={this.destroy}
                    popupInputErr2 = {this.state.popupInputErr2}/>}
         {this.state.showChange && <ChangeVerifyPopup onClose={() => {this.setState({ showChange: false });}}
                            phone = {this.state.userInfo.phone}
@@ -360,6 +360,7 @@ export default class userSafeCenter extends exchangeViewBase {
                            captcha = {this.state.captcha}
                            captchaId = {this.state.captchaId}
                            getCaptcha = {this.getCaptchaVerify}
+                           destroy={this.destroy}
                            setTwoVerify = {this.setTwoVerify}/>}
         {this.state.remindPopup && <RemindPopup
                      type={this.state.popType}

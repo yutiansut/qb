@@ -52,11 +52,12 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证
-      this.view.setState({showTwoVerify: true, verifyType: data.ret})
+      this.view.setState({showTwoVerify: true, verifyType: data.ret, twoVerifyUser: data.data.account})
+      console.log('二次登录', this.view.state)
       return
     }
     if (data.ret !== 0) {this.getCaptchaVerify()}
-    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg})
+    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || '登录失败'})
   }
   async clearLoginInfo() { // 退出登陆
     this.store.loginOutRemind()

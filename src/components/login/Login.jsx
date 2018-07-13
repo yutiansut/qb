@@ -38,7 +38,8 @@ export default class Login extends exchangeViewBase {
       verifyType: "", // 密码登录两步认证弹窗
       checkState: true, // checkbox判断
       userErr: "", // 手机号/邮箱错误
-      pwdErr: "" // 密码错误
+      pwdErr: "", // 密码错误
+      twoVerifyUser: "" // 两步认证用户信息
     }
     const {controller} = props
     //绑定view
@@ -214,10 +215,10 @@ export default class Login extends exchangeViewBase {
             autoClose = {true}
           />
         )}
-        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.userInput, this.state.userType, 0)}} onClose={() => {
+        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.userType, 0)}} onClose={() => {
           this.setState({ showTwoVerify: false });
         }} destroy={this.destroy} onConfirm={code => {
-          this.login(this.state.userInput, code, this.state.userType, this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput);
+          this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput);
         }} />}
       </div>
     );

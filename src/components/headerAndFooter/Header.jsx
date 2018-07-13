@@ -129,7 +129,7 @@ export default class Header extends ExchangeViewBase {
             </div>
             <div className="new-li-content">
               <p>通知</p>
-              {this.state.userNocticeList && this.state.userNocticeList.length ? (<ul>{this.state.userNocticeList.map((v, index) => (<li key={index}>{ddddd}</li>))}</ul>) : (<div>没有新通知</div>)}
+              {this.state.userNocticeList && this.state.userNocticeList.length ? (<ul>{this.state.userNocticeList.map((v, index) => (<li key={index}></li>))}</ul>) : (<div>没有新通知</div>)}
               <Link to="/wuserNotice">查看全部</Link>
             </div>
           </li>

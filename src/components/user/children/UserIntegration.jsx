@@ -120,7 +120,7 @@ export default class userIntegration extends exchangeViewBase {
                 {this.state.userCredits.map((v, index) => (<tr key={index}>
                   <td>+{v.gain}</td>
                   <td>{v.operation}</td>
-                  <td>{v.createdTime}</td>
+                  <td>{v.createdTime.toDate('yyyy-MM-dd HH:mm:SS')}</td>
                 </tr>))}
               </tbody>
             </table>

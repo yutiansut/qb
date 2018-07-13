@@ -47,6 +47,9 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
   }
   componentWillUpdate(props, state, next) {
   }
+  componentWillUnmount() {
+    this.props.destroy && this.props.destroy();
+  }
   render() {
     // console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
     return (

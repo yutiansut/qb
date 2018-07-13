@@ -23,6 +23,10 @@ export default class UserController extends ExchangeControllerBase {
     this.store.clearUserInfo()
   }
 
+  clearVerify() { // 清除定时器
+    this.countDownStop("verifyCountDown");
+  }
+
   async getVerify(account, mode, type) { // 获取短信验证码
     if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
@@ -95,7 +99,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async uploadInfo() { // 身份认证确认提交
-    let typeIndexArr = [1, 3], succObj = {}
+    let typeIndexArr = [1, 3], userAuth = this.view.state.userAuth, succObj = {}
     let result = await this.store.Proxy.uploadUserAuth({
       "uid": this.store.uid,
       "token": this.store.token,
@@ -109,22 +113,31 @@ export default class UserController extends ExchangeControllerBase {
       "image3": this.view.state.image3  // 手持照
     })
     console.log('上传信息', result)
-    this.view.setState({
-      remindPopup: true,
-      popType: result && result.ret === 101 ? 'tip1': 'tip3',
-      popMsg: result && result.ret === 101 ? this.view.intl.get("user-photoSucc") : result.msg // 上传成功
-    })
     succObj = {
       state: 1,
       firstName: this.view.state.firstNameValue,
       lastName: this.view.state.lastNameValue,
       number: this.view.state.numberValue
     }
-    // this.state.userAuth.firstName
-    result.ret === 101 && this.view.setState({userAuth: Object.assign(this.view.state.userAuth, succObj), checkVerifyArr: false})
+    if (result === null) {
+      userAuth = Object.assign(userAuth, succObj)
+    }
+
+    this.view.setState({
+      remindPopup: true,
+      // popType: result && result.ret === 101 ? 'tip1': 'tip3',
+      // popMsg: result && result.ret === 101 ? this.view.intl.get("user-photoSucc") : result.msg // 上传成功
+      popType: result ? 'tip3' : 'tip1',
+      popMsg: result ? result.msg : this.view.intl.get("user-photoSucc"), // 上传成功
+      userAuth,
+      checkVerifyArr: result ? true : false
+    })
+
+    // result.ret === 101 && this.view.setState({userAuth: Object.assign(this.view.state.userAuth, succObj), checkVerifyArr: false})
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
+    let noticeArr = [1, 0], noticeList = this.view.state.noticeList
     let result = await this.store.Proxy.bindUser({
       "userId": this.store.uid,
       "token": this.store.token,
@@ -141,17 +154,38 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : this.view.intl.get("user-bindSucc"),
       showSet: result ? true : false
     })
+    // if (result === null && mode === 0) {
+    //   noticeList[noticeArr[mode]].name = '短信'
+    //   this.view.setState({
+    //     userInfo: Object.assign(this.view.state.userInfo, {phone: account}),
+    //
+    //   )}
+    //   return
+    // }
+
     if (result === null && mode === 0) {
-      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {phone: account})})
+      noticeList[noticeArr[mode]].name = '短信'
+      this.view.setState({
+        userInfo: Object.assign(this.view.state.userInfo, {phone: account}),
+        noticeList
+      })
+      // console.log('绑定成功', this.view.state)
       return
     }
+
     if (result === null && mode === 1) {
-      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {email: account})})
+      noticeList[noticeArr[mode]].name = '邮件通知'
+      this.view.setState({
+        userInfo: Object.assign(this.view.state.userInfo, {email: account}),
+        noticeList
+      })
+      // console.log('绑定成功', this.view.state)
     }
+
     if (result !== null) {
       this.getCaptchaVerify()
     }
-    console.log('绑定手机号／邮箱', result)
+    // console.log('绑定手机号／邮箱', result)
   }
 
   async setLoginPass(oldPwd, newPwd, type) { // 设置登录密码
@@ -276,18 +310,15 @@ export default class UserController extends ExchangeControllerBase {
       "token": this.store.token,
       "IPAddress":ipAdd
     })
+    if (result && result.IPId) {
+      ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.IPId})
+    }
     this.view.setState({
       remindPopup: true,
       popType: result && result.IPId ?  'tip1' : 'tip3',
       popMsg: result && result.IPId ?  this.view.intl.get("user-addSucc") : result.msg,
+      ipList
     })
-
-    if (result && result.IPId) {
-      ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.IPId})
-      this.view.setState({ipList})
-      // console.log('添加ip', this.view.state.ipList)
-    }
-    // console.log('添加', result)
   }
 
   async delIp(ipId, iPAdd, index) { // 删除ip白名单
@@ -298,15 +329,16 @@ export default class UserController extends ExchangeControllerBase {
       "IPId": ipId,
       "IPAddress": iPAdd
     })
+    if (result === null) {
+      ipList.splice(index, 1)
+    }
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-delSucc"),
+      ipList
     })
-    if (result === null) {
-      ipList.splice(index, 1)
-      this.view.setState({ipList})
-    }
+
   }
 
   async getCaptchaVerify() { // 获取图形验证码
