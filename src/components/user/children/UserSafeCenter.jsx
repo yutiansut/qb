@@ -79,6 +79,8 @@ export default class userSafeCenter extends exchangeViewBase {
     // this.selectNotice = this.selectNotice.bind(this) // 绑定通知
     this.setUserNotify = controller.setUserNotify.bind(controller) //  修改通知方式
     this.destroy = controller.clearVerify.bind(controller); // 清除定时器
+    this.closeChange = this.closeChange.bind(this)
+    this.closeSet = this.closeSet.bind(this)
   }
 
   changeSetPopup(type) { // 设置密码显示
@@ -104,7 +106,6 @@ export default class userSafeCenter extends exchangeViewBase {
       isTwoVerify: i,
       sureTwoVerify: index,
       showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
-      // showSet: !this.state.userInfo.email && index === 1 ? true : false,
       showChange: (changeArr[changeTypeArr[i]] === index) || (changeTypeArr[i] === 0) || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
     if (this.state.userInfo.loginVerify === 0 && ((this.state.userInfo.googleAuth === 0 && index === 0) || (this.state.userInfo.email && index === 1) || (this.state.userInfo.phone && index === 2))) { // 登录为无
@@ -138,6 +139,20 @@ export default class userSafeCenter extends exchangeViewBase {
       ipValue: value
     })
     // console.log(this.state.ipValue)
+  }
+
+  closeChange() {
+    this.setState({
+      showChange: false
+    })
+    this.getCaptchaVerify()
+  }
+
+  closeSet() {
+    this.setState({
+      showSet: false
+    })
+    this.getCaptchaVerify()
   }
 
   componentWillMount() {
@@ -344,7 +359,7 @@ export default class userSafeCenter extends exchangeViewBase {
         {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret.secret}
                      setGoogleVerify = {this.setGoogleVerify}
                      onClose={() => {this.setState({ showGoogle: false });}}/>}
-        {this.state.showSet && <PassPopup onClose={() => {this.setState({ showSet: false });}}
+        {this.state.showSet && <PassPopup onClose={this.closeSet()}
                    phone = {this.state.userInfo.phone}
                    email = {this.state.userInfo.email}
                    isType = {this.state.type}
@@ -361,7 +376,7 @@ export default class userSafeCenter extends exchangeViewBase {
                    clearErr2 = {() => {this.clearErr2()}}
                    destroy={this.destroy}
                    popupInputErr2 = {this.state.popupInputErr2}/>}
-        {this.state.showChange && <ChangeVerifyPopup onClose={() => {this.setState({ showChange: false });}}
+        {this.state.showChange && <ChangeVerifyPopup onClose={this.closeChange}
                            phone = {this.state.userInfo.phone}
                            email = {this.state.userInfo.email}
                            isType = {this.state.changeType}

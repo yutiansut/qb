@@ -36,6 +36,7 @@ export default class UserController extends ExchangeControllerBase {
 
   clearVerify() { // 清除短信验证码
     this.countDownStop('verifyCountDown')
+    this.view.setState({verifyNum: '获取验证码'})
   }
   // 从登录接口获取信息
   getUserId(data) {

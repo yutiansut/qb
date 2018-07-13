@@ -42,16 +42,21 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
     this.setState({popupInput3: value});
     console.log(3, value)
   }
+  componentDidMount() {
+
+  }
+
   componentWillMount() {
 
   }
   componentWillUpdate(props, state, next) {
+
   }
   componentWillUnmount() {
     this.props.destroy && this.props.destroy();
   }
   render() {
-    // console.log(77999, this.props.isType, this.props.isTwoVerify, contentArr[this.props.isType], this.props.sureTwoVerify)
+    console.log(77999, this.props.isType)
     return (
       <div className="change-popup-wrap">
         <div className="change-info">
@@ -70,7 +75,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
           <Input placeholder={this.intl.get("user-inputVerifyGoogle")} className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
           <Button className="set-btn" title={this.intl.get("sure")} onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
                                                                 this.props.isType === 3 ? 0 : this.props.isType,
-                                                                this.state.popupInput3,
+                                                                this.props.isType === 2 ? this.state.popupInput1 : this.state.popupInput3,
                                                                 this.state.popupInput2,
                                                                 this.props.captchaId,
                                                                 this.props.isTwoVerify + 1,
