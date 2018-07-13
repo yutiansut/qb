@@ -42,7 +42,7 @@ export default class LiveTrade extends ExchangeViewBase{
   }
 
   render() {
-    console.log('nummmmmmmmmmmmm',(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)),)
+    // console.log('nummmmmmmmmmmmm',(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)),)
     return(
         <div className='live-trade'>
           <div className='trade-live-title'>

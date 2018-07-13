@@ -105,7 +105,7 @@ export default class HomeMarket extends ExchangeViewBase {
             return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
-                {controller.token && <td onClick={value => this.addCollect(v, index)}><img
+                {controller.token && <td onClick={e => this.addCollect(v, index, e)}><img
                   src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"} alt=""/></td> || null}
                 <td><NavLink
                   to={{

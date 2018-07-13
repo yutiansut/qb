@@ -41,7 +41,7 @@ export default class OrderListController extends ExchangeControllerBase {
   };
 
   setTradePairId(id, tradePairName){
-    console.log('setTradePairId', id ,this.store.room)
+    // console.log('setTradePairId', id ,this.store.room)
     this.store.state.tradePairId = id;
     this.getRecentOrder(this.view.state.isPersonal, id)
     this.emitRecentOrderWs(this.store.room, tradePairName)

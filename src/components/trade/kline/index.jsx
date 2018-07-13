@@ -1050,7 +1050,7 @@ class ReactKline extends exchangeViewBase {
   }
 
   componentDidMount() {
-    console.log('this.props.controller.language.........................,m', this.props.controller.language === 'en-us')
+    // console.log('this.props.controller.language.........................,m', this.props.controller.language === 'en-us')
     let tradeChart = document.querySelector(".trade-chart");
     let cfg = {
       element: "#kline_container",
