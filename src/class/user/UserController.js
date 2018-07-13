@@ -137,7 +137,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
-    let noticeArr = [1, 0], noticeList = this.view.state.noticeList
+    let noticeArr = [1, 0], noticeList = this.view.state.noticeList, verifyList = this.view.state.verifyList
     let result = await this.store.Proxy.bindUser({
       "userId": this.store.uid,
       "token": this.store.token,
@@ -154,20 +154,14 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : this.view.intl.get("user-bindSucc"),
       showSet: result ? true : false
     })
-    // if (result === null && mode === 0) {
-    //   noticeList[noticeArr[mode]].name = '短信'
-    //   this.view.setState({
-    //     userInfo: Object.assign(this.view.state.userInfo, {phone: account}),
-    //
-    //   )}
-    //   return
-    // }
 
     if (result === null && mode === 0) {
       noticeList[noticeArr[mode]].name = '短信'
+      verifyList.forEach(v => { v.contentList[2].name = '短信' })
       this.view.setState({
         userInfo: Object.assign(this.view.state.userInfo, {phone: account}),
-        noticeList
+        noticeList,
+        verifyList
       })
       // console.log('绑定成功', this.view.state)
       return
@@ -175,9 +169,11 @@ export default class UserController extends ExchangeControllerBase {
 
     if (result === null && mode === 1) {
       noticeList[noticeArr[mode]].name = '邮件通知'
+      verifyList.forEach(v => { v.contentList[1].name = '邮件通知' })
       this.view.setState({
         userInfo: Object.assign(this.view.state.userInfo, {email: account}),
-        noticeList
+        noticeList,
+        verifyList
       })
       // console.log('绑定成功', this.view.state)
     }
@@ -405,6 +401,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserNocticeList() { // 获取通知列表
     let userNocticeList = await this.store.userNocticeList();
+    console.log('通知列表', userNocticeList)
     this.noticeHeaderView.setState({userNocticeList})
   }
 

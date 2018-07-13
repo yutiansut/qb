@@ -149,11 +149,11 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? '卖出' : '买入'}</td>
                     {/*todo 颜色改类名统一处理*/}
-                    <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price))}</td>
+                    <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal'}) || Number(v.price).format({number:'digital'})))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN || Number(v.dealDoneCount.multi(v.priceCN))) || (this.state.unitsType === 'USD' && (v.turnoverEN || Number(v.dealDoneCount.multi(v.priceEN))) || (v.turnover || Number(v.dealDoneCount.multi(v.price)))))}</td>
-                    <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPrice)}</td>
+                    <td>{(this.state.unitsType === 'CNY' && (Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN))) || (this.state.unitsType === 'USD' && (Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN))) || (Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price)))))}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal'})) || Number(v.avgPrice).format({number:'digital'})}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )
