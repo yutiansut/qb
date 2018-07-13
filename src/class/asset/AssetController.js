@@ -283,11 +283,22 @@ export default class AssetController extends ExchangeControllerBase {
     this.view.setState({ assetHistory: this.Util.deepCopy(result) });
   }
   // 添加提现地址
-  async appendAddress(obj) {
+  async appendAddress(obj, curExtract) {
+    // 验证名称地址不为空
     if (obj.addressName === "" || obj.address === "") {
       this.setViewTip(false, this.view.intl.get("asset-incomplete"));
       return false;
     }
+    // 验证地址是否存在
+    let flag = false;
+    curExtract && curExtract.addressList && curExtract.addressList.forEach(v => {
+        v.address === obj.address && (flag = true);
+      });
+    if (flag) {
+      this.setViewTip(false, this.view.intl.get(713));
+      return false;
+    }
+    // 发送添加地址请求交由后台校验
     let result = await this.store.appendAddress(obj);
     if (result.errCode) {
       this.setViewTip(false, result.msg);
@@ -406,13 +417,13 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
-    // // 校验密码是否正确（5次错误后会冻结一段时间）
-    // let result = await this.store.verifyPass(password);
-    // if (result && result.msg) {
-    //   obj.orderTipContent = result.msg;
-    //   this.view.setState(obj);
-    //   return;
-    // }
+    // 校验密码是否正确（5次错误后会冻结一段时间）
+    let result = await this.store.verifyPass(password);
+    if (result && result.msg) {
+      obj.orderTipContent = result.msg;
+      this.view.setState(obj);
+      return;
+    }
     this.view.setState({
       showTwoVerify: true,
       verifyNum: this.view.intl.get("sendCode")

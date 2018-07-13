@@ -537,8 +537,8 @@ export default class Extract extends exchangeViewBase {
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
             onSave={async add => {
-              let result = this.appendAddress(
-                Object.assign({ coinName: this.state.currency }, add)
+              let result =await this.appendAddress(
+                Object.assign({ coinName: this.state.currency }, add), curExtract
               );
               return result;
             }}

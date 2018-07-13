@@ -31,7 +31,7 @@ export default class DateInterval extends Component {
     this.setState({
       endTime: endTime
     });
-    this.props.onChangeEnd(endTime)
+    this.props.onChangeEnd(endTime + 86390000)
   }
   render() {
     return (
@@ -40,7 +40,7 @@ export default class DateInterval extends Component {
           <Calendar onChange={(state) => this.seletTimeStart(state)} endTime={this.state.endTime} startInputTime = {this.props.startTime}/>
         </div>
         <div className="end-time fl">
-          <Calendar onChange={(state) => this.seletTimeEnd(state)} startTime={this.state.startTime} endInputTime = {this.props.endTime}/>
+          <Calendar onChange={(state) =>{this.seletTimeEnd(state)}} startTime={this.state.startTime} endInputTime = {this.props.endTime}/>
         </div>
       </div>
     );

@@ -41,6 +41,20 @@ export default class Calendar extends Component {
       inputValue: `${endTime.getFullYear()}-${endTime.getMonth() + 1}-${endTime.getDate()}`
     })
   }
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.startInputTime === this.props.startInputTime && nextProps.endInputTime === this.props.endInputTime ) return;
+    let statTime = new Date(nextProps.startInputTime * 1000),
+      endTime = new Date(nextProps.endInputTime * 1000);
+    nextProps.startInputTime && this.setState({
+        inputValue: `${statTime.getFullYear()}-${statTime.getMonth() +
+          1}-${statTime.getDate()}`
+      });
+    nextProps.endInputTime && this.setState({
+        inputValue: `${endTime.getFullYear()}-${endTime.getMonth() +
+          1}-${endTime.getDate()}`
+      });
+  }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.hide)
   }

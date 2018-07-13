@@ -16,7 +16,7 @@ export default class History extends exchangeViewBase {
       orderType: {
         1: this.intl.get("deposit"),
         2: this.intl.get("asset-withdraw"),
-        4: this.intl.get("asset-transfer")
+        4: this.intl.get("asset-transfer"),
         // 1: this.intl.get("deposit"),
         // 15000: this.intl.get("asset-withdraw")
         // 5: this.intl.get("asset-transfer"),
@@ -25,7 +25,9 @@ export default class History extends exchangeViewBase {
         0: this.intl.get("pending"),
         1: this.intl.get("passed"),
         2: this.intl.get("failed"),
-        3: this.intl.get("cancel")
+        3: this.intl.get("cancel"),
+        4: this.intl.get('dealing'),
+        5: this.intl.get('dealing')
       }
     };
     for (const k in this.staticData.orderType) {
@@ -35,6 +37,15 @@ export default class History extends exchangeViewBase {
       this.staticData.status[this.staticData.status[k]] = Number(k);
     }
     this.name = "history";
+    this.dealTime = () => {
+      let now = new Date();
+      let start = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - 604800000;
+      let end = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - 0 + 86399999;
+      return {
+        start: parseInt(start / 1000),
+        end: parseInt(end / 1000)
+      }
+    }
     this.state = {
       page: 1,
       tip: false,
@@ -43,8 +54,8 @@ export default class History extends exchangeViewBase {
       currency: this.intl.get("all"),
       orderType: this.intl.get("all"),
       status: this.intl.get("all"),
-      startTime: parseInt((new Date() - 604800000) / 1000),
-      endTime: parseInt((new Date() - 0) / 1000)
+      startTime: this.dealTime().start,
+      endTime: this.dealTime().end
     };
 
     let { wallList, assetHistory } = controller.initState;
@@ -57,7 +68,6 @@ export default class History extends exchangeViewBase {
     this.getWalletList = controller.getWalletList.bind(controller);
     this.cancelOreder = controller.cancelOreder.bind(controller);
     this.exportHistory = controller.exportHistory.bind(controller);
-
     this.initSearch = () => {
       this.setState(
         {
@@ -65,8 +75,8 @@ export default class History extends exchangeViewBase {
           currency: this.intl.get("all"),
           orderType: this.intl.get("all"),
           status: this.intl.get("all"),
-          startTime: parseInt((new Date() - 604800000) / 1000),
-          endTime: parseInt((new Date() - 0) / 1000)
+          startTime: this.dealTime().start,
+          endTime: this.dealTime().end
         },
         () => {
           this.search(0);
@@ -107,8 +117,8 @@ export default class History extends exchangeViewBase {
       coinName: -1,
       orderType: -1,
       orderStatus: -1,
-      startTime: parseInt((new Date() - 604800000) / 1000),
-      endTime: parseInt((new Date() - 0) / 1000)
+      startTime: this.dealTime().start,
+      endTime: this.dealTime().end
     });
   }
 
@@ -141,7 +151,6 @@ export default class History extends exchangeViewBase {
                     : []
                 }
                 onSelect={value => {
-                  console.log(value);
                   this.setState({ currency: value });
                 }}
               />
@@ -184,7 +193,7 @@ export default class History extends exchangeViewBase {
           <div className="datepicker">
             <DatePicker
               startTime={this.state.startTime}
-              EndTime={this.state.EndTime}
+              endTime={this.state.endTime}
               onChangeStart={time => {
                 this.setState({ startTime: parseInt(time / 1000) });
               }}

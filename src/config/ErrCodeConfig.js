@@ -240,7 +240,7 @@ export default {
     errCode: "ERROR_ADDRESS_EXIST"
   },
   714: {
-    // msg: "自我提币",
+    // msg: "不能转账给自己",
     get msg() {
       return intl.get(714);
     },

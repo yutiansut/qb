@@ -119,7 +119,7 @@ export default class AssetStore extends ExchangeStoreBase {
       userId: this.controller.userId,
       token: this.controller.token
     });
-    if (coinList.length) {
+    if (coinList && coinList.length) {
       let obj = {};
       this.controller.sort(coinList, ["coinName"], 1).forEach(v => {
         obj[v.coinName.toUpperCase()] = v.coinId;
