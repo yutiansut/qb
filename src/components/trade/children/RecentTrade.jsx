@@ -18,8 +18,8 @@ export default class extends ExchangeViewBase {
       recentTableHead : [
         {name: this.intl.get('time'), sortValue: ''},
         {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
-        {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'price'},]
-      // recentItemSelect: 'mineLess'
+        {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'price'},],
+      recentItemSelect: 'mineLess'
     };
     const {controller} = this.props;
     //绑定view
@@ -74,7 +74,7 @@ export default class extends ExchangeViewBase {
               (v, index) => {
                 return (
                   <tr key={index}>
-                    <td>{v.dealTime}</td>
+                    <td>{Number(v.dealTime).toDate('HH:mm:ss')}</td>
                     <td>
                       {(this.state.unitsType === "CNY" && v.priceCN) ||
                         ((this.state.unitsType === "USD" && v.priceEN) ||

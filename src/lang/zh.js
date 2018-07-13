@@ -269,6 +269,7 @@ export default function zh(state) {
     "order-current": "当前订单",
     "order-history": "历史订单",
     "order-deal": "历史成交",
+    'order-unDeal':'尚未成交',
     'unDeal': '未成交',
     'partDeal': '部分成交',
     'totalDeal': '全部成交',
@@ -276,7 +277,7 @@ export default function zh(state) {
     'reseting': '撤单中',
     'overed': '已结束',
     'hideReset': '隐藏已撤销',
-    "exportOrderRecord": "导出资产记录",
+    "exportOrderRecord": "导出订单记录",
     "orderDetail": '订单详情',
     "order-deal-total": '成交总量',
     "order-deal-money": '成交金额',
@@ -291,6 +292,7 @@ export default function zh(state) {
     "order-reset-buy": '撤销买入',
     "order-reset-sell": '撤销卖出',
     "order-reset-all": '全部撤销',
+    "order-export": '导出订单记录'
   };
   const deal = {
     "deal-limit": "限价委托",

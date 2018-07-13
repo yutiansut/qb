@@ -33,6 +33,8 @@ export default class TradeMarket extends ExchangeViewBase {
     // this.tradePairSelect = controller.tradePairSelect.bind(controller);
     this.addCollect = controller.addCollect.bind(controller) // 添加收藏
     this.collectMarket = controller.collectMarket.bind(controller) // 点击收藏
+    this.joinHome = controller.joinHome.bind(controller) // 加入房间
+    this.clearRoom = controller.clearRoom.bind(controller) //推出房间
   }
 
   componentDidMount() {
@@ -41,10 +43,11 @@ export default class TradeMarket extends ExchangeViewBase {
       this.setState({query:this.props.location.query.pairName})
       // this.props.controller.querySelectPair(this.props.location.query.pairName)
     }
+    this.joinHome();
   }
-
-  componentWillMount() {
-
+  
+  componentWillUnmount() {
+    this.clearRoom()
   }
 
   pairChange(v, e) {

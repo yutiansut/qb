@@ -149,7 +149,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{(this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover)) || (v.price * v.dealDoneCount)}</td>
+                    <td>{(this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover))}</td>
                     <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPrice)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>

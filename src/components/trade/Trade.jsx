@@ -85,10 +85,12 @@ export default class extends exchangeViewBase {
     TradePlanController.userOrderController = userOrderController;
     TradePlanController.TradeOrderListController = TradeOrderListController;
 
-    noticeController.configController = configController
+    noticeController.configController = configController;
 
     // noticeController.userController = userController;
-    assetController.TradePlanController = TradePlanController
+    assetController.TradePlanController = TradePlanController;
+    // 父子实例
+    userOrderController.TradeRecentController = TradeRecentController;
 
     this.state = {
       curChart: "kline",

@@ -74,7 +74,7 @@ export default class MarketStore extends ExchangeStoreBase {
       // 监听市场数据更新
       this.WebSocket.general.on('marketPair', data => {
         // console.log('getWebSocketData marketPair', data, this.controller)
-        this.controller.updateMarketAll(data, 1)
+        this.controller.updateMarketAll(data.items, 1)
       })
     }
 
@@ -176,9 +176,10 @@ export default class MarketStore extends ExchangeStoreBase {
     }
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
-    // console.log(pairMsg, this.selecedMarket)
+    // console.log('selectMarketData 0 ', JSON.stringify(this.state.allPairData))
     let coinNameList = pairMsg.pairNameMarket[this.selecedMarket]
     this.state.homeMarketPairData = coinNameList.map(v => this.state.allPairData.find(vv => vv.tradePairId === pairMsg.pairIdMarket[this.selecedMarket][v]))
+    // console.log('selectMarketData 1 ', coinNameList, JSON.stringify(this.state.homeMarketPairData))
     return this.state.homeMarketPairData
   }
 
@@ -232,6 +233,9 @@ export default class MarketStore extends ExchangeStoreBase {
       userId,
       token
     });
+    if(!(this.state.collectArr instanceof Array)){
+      this.state.collectArr = [];
+    }
     return this.state.collectArr
   }
 

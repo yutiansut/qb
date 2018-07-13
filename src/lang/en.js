@@ -269,6 +269,7 @@ export default function en(state) {
     "order-current": "Current order",
     "order-history": "Order history",
     "order-deal": "Deal history",
+    'order-unDeal':'Not traded',
     unDeal: "Not traded",
     partDeal: "Partially filled",
     totalDeal: "Filled",
@@ -290,7 +291,8 @@ export default function en(state) {
     "order-recent": "Recently trading",
     "order-reset-buy": "Undo buy",
     "order-reset-sell": "Undo sell",
-    "order-reset-all": "Undo all"
+    "order-reset-all": "Undo all",
+    "order-export": 'Export'
   };
   const deal = {
     "deal-limit": "Limit price",

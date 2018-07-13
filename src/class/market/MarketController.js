@@ -167,7 +167,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新视图层
     this.updateMarketAll([], 2)
     // this.store.initWebsocket()
-
+    
 
     // this.
 
@@ -190,11 +190,13 @@ export default class MarketController extends ExchangeControllerBase {
   //更新MarketAll数据
   async updateMarketAll(List, type) {
     let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
-    // console.log('updateMarketAll', this.store, this.store.state)
+    // console.log('updateMarketAll 0', List, this.store.state, this.view)
     //根据数据更新allPair
     type < 2 && this.store[arr[type]](List)
+    // console.log('updateMarketAll 1', this.store.state)
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData()
+    // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     });
@@ -305,7 +307,7 @@ export default class MarketController extends ExchangeControllerBase {
   //为交易模块提供价格以及交易对的信息
   setDealMsg() {
     //改变deal模块中的信息
-    console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData, this.store.state.tradePair)
+    // console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData, this.store.state.tradePair)
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
       dealMsg = {
         tradePair: this.store.state.tradePair,

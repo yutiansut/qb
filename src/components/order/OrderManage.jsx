@@ -26,7 +26,7 @@ export default class OrderManage extends exchangeViewBase{
       orderNavItems : [
         {name:this.intl.get("order-current"), address:'/current', type:'orderCurrent'},
         {name:this.intl.get("order-history"), address:'/history', type:'orderHistory'},
-        {name:this.intl.get("order-history"), address:'/deal', type:'orderDeal'}
+        {name:this.intl.get("order-deal"), address:'/deal', type:'orderDeal'}
       ]
     };
     // const {controller} = this.props;
@@ -38,8 +38,8 @@ export default class OrderManage extends exchangeViewBase{
   componentWillMount(){
   
   }
-  componentDidMount(){
-    let pairIdMsg = this.props.controller.marketController.getTradePairHandle();
+  async componentDidMount(){
+    let pairIdMsg =await this.props.controller.marketController.store.getPairMsg();
     this.setState(
         {pairIdMsg}
     )

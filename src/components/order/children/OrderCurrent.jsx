@@ -41,10 +41,10 @@ export default class OrderCurrent extends ExchangeViewBase {
     super(props);
     this.state = {
       preArray: [],
-      startTime: 1509484067,
-      endTime: 1530088867,
-      // end: new Date().getTime(),
-      // start : (new Date().getTime()) - 7 * 24 *60 * 60
+      // startTime: 1509484067,
+      // endTime: 1530088867,
+      "startTime": Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
+      "endTime": Math.floor(new Date().getTime() / 1000),
       coinArray: [],
       marketArray: [],
       idArray: [],
@@ -53,7 +53,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       typeSelect: this.intl.get('all'),
       orderType: 2,
       hideOther: 0,
-      orderStatus: [1, 2, 3, 4, 5, 6],
+      orderStatus: [1, 2, 3, 4, 5, 6, 7],
       page: 1,
       pageSize: 20,
       total: 0,
@@ -80,12 +80,13 @@ export default class OrderCurrent extends ExchangeViewBase {
         6: this.intl.get('partDeal'),
       },
       orderDetailHead : {
-        orderCurrent: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('unDeal')}, {name: this.intl.get('totalDeal')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
+        orderCurrent: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('amount')}, {name: this.intl.get('deal-trunover')}, {name: this.intl.get('order-unDeal')}, {name: this.intl.get('dealed')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
         orderHistory: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('dealed')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
         orderDeal: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('fee')},],
       },
       orderInfoHead : [
-        {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')}, {name: this.intl.get('order-deal-time')}, {name:  this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
+        // {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')},
+        {name: this.intl.get('order-deal-time')}, {name:  this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
       ]
     };
     const {controller} = this.props;
@@ -105,8 +106,8 @@ export default class OrderCurrent extends ExchangeViewBase {
   componentDidMount() {
     const {pairIdMsg} = this.props;
     let orderStatus = [];
-    this.props.type === 'orderHistory' && (orderStatus = [1, 2, 3, 4, 5, 6]) && (this.setState({orderStatus}));
-    this.props.type === 'orderDeal' && (orderStatus = [1, 2, 5, 6]) && (this.setState({orderStatus}));
+    this.props.type === 'orderHistory' && (orderStatus = [2, 3, 4, 5, 6, 7]) && (this.setState({orderStatus}));
+    this.props.type === 'orderDeal' && (orderStatus = [ 2, 5, 6, 7]) && (this.setState({orderStatus}));
     let params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
@@ -128,7 +129,7 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
   
   hideReset(e) {
-    let orderStatus = e.target.checked ? [1, 2, 4, 5, 6] : [1, 2, 3, 4, 5, 6];
+    let orderStatus = e.target.checked ? [ 2, 4, 5, 6, 7] : [2, 3, 4, 5, 6, 7];
     let params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
@@ -320,7 +321,7 @@ export default class OrderCurrent extends ExchangeViewBase {
             </tr>
             </thead>
             <tbody>
-            {this.state.orderListArray.map((v, index) => {
+            {this.state.orderListArray && this.state.orderListArray.map((v, index) => {
               return (
                   <tr key={index}>
                     <td>{Number(v.orderTime).toDate()}</td>
@@ -388,9 +389,9 @@ export default class OrderCurrent extends ExchangeViewBase {
                 {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
                   return (
                       <tr key={index}>
-                        <td>{v.buyer}</td>
-                        <td>{v.seller}</td>
-                        <td>{v.orderTime}</td>
+                        {/*<td>{v.buyer}</td>*/}
+                        {/*<td>{v.seller}</td>*/}
+                        <td>{Number(v.orderTime).toDate()}</td>
                         <td>{v.price}</td>
                         <td>{v.volume}</td>
                         <td>{v.turnover}</td>

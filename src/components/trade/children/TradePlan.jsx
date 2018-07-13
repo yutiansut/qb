@@ -1,7 +1,8 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
 import SelectButton from "../../../common/component/SelectButton";
-import TradeDealExchange from './TradeDealExchange.jsx'
+import TradeDealExchange from './TradeDealExchange.jsx';
+import TradePopup from '../../../common/component/TradePopup/index.jsx'
 import '../stylus/tradePlan.styl'
 
 
@@ -9,10 +10,15 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      dealPopMsg:'',
+      dealPassType:'positi',// 弹窗类型倾向
+      dealPass:false,// 下单弹窗
       fundPwdIntervalClick:0,
       fundPwdIntervalShow: 0,
       fundPwdInterval: '',
       funpass: '',
+      funpassBuy:'',
+      funpassSell:'',
       buyMax: 0, // 买入最大数量
       sellMax: 0,
       buyWallet: 123, //买入可用余额
@@ -91,19 +97,22 @@ export default class TradePlan extends ExchangeViewBase {
     this.changeMaxNum(dealType, e.target.value)
   }
 
-  passInput(e) {
-    this.setState(
-        {funpass: e.target.value}
-    )
+  passInput(v,e) {
+    if(!v){
+      this.setState({funpassBuy: e.target.value})
+      return
+    }
+    this.setState({funpassSell: e.target.value})
   }
+  
   setFunPwdIntervalShow(v){
-    if(v.value !== 0){
+    
       this.setState(
           {fundPwdIntervalSetFlag: true,
            fundPwdIntervalClick: v.value
           }
       )
-    }
+    
   }
   changeSetPass(e){
     this.setState(
@@ -122,8 +131,16 @@ export default class TradePlan extends ExchangeViewBase {
     type = this.state.fundPwdIntervalClick;
     pwd = this.state.setPass;
     let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
+    console.log('shezhi111111111111111111111', result, this)
     result === null && this.setState(
         {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false}
+    );
+    result && result.errCode === 'PWD_ERROR' && this.setState(
+        {
+          dealPopMsg:'资金密码错误',
+          dealPassType:'passive',// 弹窗类型倾向
+          dealPass:true,// 下单弹窗
+        }
     )
   }
   render() {
@@ -162,7 +179,9 @@ export default class TradePlan extends ExchangeViewBase {
                                  buyNum={this.state.inputBuyNum}
                                  buyMax={this.state.buyMax}
                                  sellMax={this.state.sellMax}
-                                 funpass={this.state.funpass}
+                                 // funpass={this.state.funpass}
+                                 funpassBuy={this.state.funpassBuy}
+                                 funpassSell={this.state.funpassSell}
                                  wallet={index ? this.state.sellWallet : this.state.buyWallet}
                                  priceInput={this.priceInput.bind(this)}
                                  numInput={this.numInput.bind(this)}
@@ -182,7 +201,7 @@ export default class TradePlan extends ExchangeViewBase {
           <div className='deal-pwd-detail'>
             <div className='deal-pwd-title'>
               {this.state.fundPwdIntervalSetFlag && this.intl.get('deal-identify')||this.intl.get('deal-timeSetting')}
-              <em onClick={() => this.setState({fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false})}></em>
+              <em onClick={() => this.setState({fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false})} style={{cursor: 'pointer'}}></em>
             </div>
             <div className='deal-pwd-content'>
                 {this.state.fundPwdIntervalSetFlag && (
@@ -205,6 +224,11 @@ export default class TradePlan extends ExchangeViewBase {
                 })}
             </div>
           </div>
+        </div>
+        <div className='deal-pop'>
+          {this.state.dealPass && <TradePopup theme={this.state.dealPassType} msg={this.state.dealPopMsg} onClose={() => {
+            this.setState({ dealPass: false });
+          }} className='deal-pop-location'/>}
         </div>
       </div>)
   }

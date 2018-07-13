@@ -66,30 +66,17 @@ export default class DealController extends ExchangeControllerBase {
     let unitObj = {
       'CNY': 'CNY',
       'USD': 'USD',
-      // '数字币计价': this.view.state.Market
     };
     unitObj[init] = this.view.state.Market;
-    // console.log('bbbbb',this.store.state.PriceUnit)
     let fromValue = this.store.state.prices[this.store.state.PriceUnit === 'CNY' && 'priceCN' || (this.store.state.PriceUnit === 'USD' && 'priceEN' || 'price')];
-
-    // const unitArr = [
-    //   {name:'CNY计价', type:'CNY'},
-    //   {name:'USD计价', type:'USD'},
-    //   {name:'数字币计价', type: this.store.state.Market},
-    // ];
-    // let unitSelected = unitArr.filter(v => v.name === unit)
-    // let fromValue = this.store.state.prices[type === 'CNY' && 'priceCN' || (type === 'USD' && 'priceEN' || 'price')],
-    //     toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')];
     let unitSelected = unitObj[unit];
     this.view.setState({
       PriceUnit: unitSelected,
       UnitSelected: unit
     });
-
     this.changePrice(unitSelected, fromValue);
     this.store.state.PriceUnit = unitSelected;
     this.TradeMarketController.setUnitsType(unitSelected);
-    // this.CurrentOrderController.setUnitsType(unitSelected);
     this.userOrderController.setUnitsType(unitSelected);
     this.TradeRecentController.setUnitsType(unitSelected);
     this.TradeOrderListController.setUnitsType(unitSelected);
@@ -144,7 +131,7 @@ export default class DealController extends ExchangeControllerBase {
       "count": Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum),//数量
       "tradePairId": this.TradeMarketController.tradePair.tradePairId,
       "tradePairName": this.TradeMarketController.tradePair.tradePairName,
-      "funpass": this.view.state.funpass,//资金密码
+      "funpass": orderType === 'buy' ? this.view.state.funpassBuy : this.view.state.funpassSell,//资金密码
       "interval": this.view.state.fundPwdInterval,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
@@ -152,7 +139,35 @@ export default class DealController extends ExchangeControllerBase {
     // let j = 1
     // for(var i =1;i<=500;i++){
     //   j+=0.01;
-    await this.store.dealTrade(params);
+    let result = await this.store.dealTrade(params);
+    console.log('下单返回结果', result)
+    if(result === null){
+      this.view.setState(
+          {
+            dealPopMsg:'下单成功',
+            dealPassType:'positi',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+    }
+    if(result && result.wrongTime < 5){
+      this.view.setState(
+          {
+            dealPopMsg:'资金密码错误',
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+    }
+    if(result && result.wrongTime >=5){
+      this.view.setState(
+          {
+            dealPopMsg:'资金密码错误超过5次,已锁定',
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+    }
     // }
     // await this.store.dealTrade(v);
   }
@@ -166,7 +181,7 @@ export default class DealController extends ExchangeControllerBase {
 
   //设置可用额度
   setWallet(sellWallet, buyWallet) {
-    console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
+    // console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
     this.store.setWallet(buyWallet, sellWallet)
     this.view.setState({
       sellWallet,
