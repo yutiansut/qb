@@ -293,7 +293,8 @@ export default function en(state) {
     "order-reset-buy": "Undo buy",
     "order-reset-sell": "Undo sell",
     "order-reset-all": "Undo all",
-    "order-export": 'Export'
+    "order-export": 'Export',
+    "cancel-successful": 'Cancellation failed'
   };
   const deal = {
     "deal-limit": "Limit price",

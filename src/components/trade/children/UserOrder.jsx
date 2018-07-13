@@ -1,5 +1,6 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
+import TradePopup from '../../../common/component/TradePopup/index.jsx'
 import '../stylus/tradeOrder.styl'
 
 export default class userOrder extends ExchangeViewBase {
@@ -37,7 +38,8 @@ export default class userOrder extends ExchangeViewBase {
       detailFlag: false,
       orderDetail: [],
       currentOrder: [],
-      historyOrder: []
+      historyOrder: [],
+      resetPopFlag: false
     };
     const {controller} = this.props;
     //绑定view
@@ -53,7 +55,7 @@ export default class userOrder extends ExchangeViewBase {
     dealType =cancelType ? 0 : v.orderType;
     // dealType =v && v.orderType || 0;
     // console.log('cancelop',orderId, opType, dealType)
-    this.props.controller.cancelOrder(orderId, opType, dealType)
+    this.props.controller.cancelOrder(orderId, opType, dealType, 0)
   }
   componentWillMount() {
   
@@ -217,7 +219,9 @@ export default class userOrder extends ExchangeViewBase {
               <div className='trade-order-close' onClick={()=> this.setState({detailFlag: false})}>{this.intl.get('close')}</div>
             </div>
           </div>
-        
+          <div className='reset-pop'>
+            {this.state.resetPopFlag && <TradePopup  msg={this.intl.get('cancel-successful')} onClose={() => {this.setState({ resetPopFlag: false })}} className='reset-pop-location'/>}
+          </div>
         </div>
     )
   }

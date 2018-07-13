@@ -141,7 +141,12 @@ export default class UserOrderListController extends OrderListController {
      })
   }
 
-  async cancelOrder(orderId, opType, dealType) {
+  async cancelOrder(orderId, opType, dealType, v = 1) {
     let msg = await this.store.cancelOrder(orderId, opType, dealType);
+    console.log('xiadan', msg)
+    if(!v){
+      this.view.setState({resetPopFlag:true}// 下单弹窗}
+      );
+    }
   }
 }

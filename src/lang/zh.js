@@ -293,7 +293,8 @@ export default function zh(state) {
     "order-reset-buy": '撤销买入',
     "order-reset-sell": '撤销卖出',
     "order-reset-all": '全部撤销',
-    "order-export": '导出订单记录'
+    "order-export": '导出订单记录',
+    "cancel-successful": '撤销成功'
   };
   const deal = {
     "deal-limit": "限价委托",
