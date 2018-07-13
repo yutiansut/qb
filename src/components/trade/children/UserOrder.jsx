@@ -31,7 +31,8 @@ export default class userOrder extends ExchangeViewBase {
         6: this.intl.get('partDeal'),
       },
       orderInfoHead: [
-        {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')}, {name: this.intl.get('order-deal-time')}, {name: this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
+        // {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')},
+        {name: this.intl.get('order-deal-time')}, {name: this.intl.get('order-deal-price')}, {name: this.intl.get('order-deal-number')}, {name: this.intl.get('order-deal-money')},
       ],
       detailFlag: false,
       orderDetail: [],
@@ -109,8 +110,8 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)) * v.count}</td>
                     <td>{v.dealDoneCount}</td>
                     <td>{v.undealCount || (v.count - v.dealDoneCount)}</td>
-                    <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
-                    <td onClick={this.cancelOrder.bind(this, 0, v)}>{this.intl.get('cancel')}</td>
+                    <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
+                    <td onClick={this.cancelOrder.bind(this, 0, v)} style={{cursor: 'pointer'}}>{this.intl.get('cancel')}</td>
                   </tr>
               )
             })}
@@ -149,9 +150,9 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{(this.state.unitsType === 'CNY' && v.turnoverCN || (this.state.unitsType === 'USD' && v.turnoverEN || v.turnover))}</td>
+                    <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN || Number(v.dealDoneCount.multi(v.priceCN))) || (this.state.unitsType === 'USD' && (v.turnoverEN || Number(v.dealDoneCount.multi(v.priceEN))) || (v.turnover || Number(v.dealDoneCount.multi(v.price)))))}</td>
                     <td>{this.state.unitsType === 'CNY' && v.avgPriceCN || (this.state.unitsType === 'USD' && v.avgPriceEN || v.avgPrice)}</td>
-                    <td onClick={this.tradeOrderDetail.bind(this, v)}>{this.state.orderStatus[v.orderStatus]}</td>
+                    <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )
             }) || null}
@@ -202,9 +203,9 @@ export default class userOrder extends ExchangeViewBase {
                 {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
                   return (
                       <tr key={index}>
-                        <td>{v.buyer}</td>
-                        <td>{v.seller}</td>
-                        <td>{v.orderTime}</td>
+                        {/*<td>{v.buyer}</td>*/}
+                        {/*<td>{v.seller}</td>*/}
+                        <td>{Number(v.orderTime).toDate()}</td>
                         <td>{v.price}</td>
                         <td>{v.volume}</td>
                         <td>{v.turnover}</td>
