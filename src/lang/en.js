@@ -131,6 +131,7 @@ export default function en(state) {
     2014: "Google unbound",
     2200: "No activity",
     2201: "You've been invited",
+    2400: "ip已存在",
     2401: "ip未找到",
     2601: "The reward has been received. Please look forward to the next activity",
   }

@@ -217,7 +217,7 @@ export default class Login extends exchangeViewBase {
         {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.userInput, this.state.userType, 0)}} onClose={() => {
           this.setState({ showTwoVerify: false });
         }} destroy={this.destroy} onConfirm={code => {
-          this.login(this.state.userInput, code, this.state.userType, this.state.verifyType === 2008 ? 2 : 0, this.state.captchaId, this.state.picInput);
+          this.login(this.state.userInput, code, this.state.userType, this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput);
         }} />}
       </div>
     );

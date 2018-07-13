@@ -177,7 +177,7 @@ export default class App extends Component {
   render() {
 
     return <Router>
-      {this.state.initDone && <div id="app">
+      {this.state.initDone && <div id="app" className="web-wrap">
         {/*<Header/>*/}
         <Switch>
           <Route path="/trade" component={tradeHeader}/>
@@ -191,7 +191,7 @@ export default class App extends Component {
             <Route path="/trade" component={Trade}/>
             <Route path="/wlogin" component={Loign}/>
             <Route path="/wallet" component={Asset}/>
-            <Route path="/order" component={Order}/>
+            <Route path="/worder" component={Order}/>
             <Route path="/wuser" component={User}/>
             <Route path="/wfindPass" component={ForgetPass}/>
             <Route path="/wnotice/content/detail" component={NoticeDetail}/>

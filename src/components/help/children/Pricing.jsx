@@ -15,18 +15,19 @@ export default class Pricing extends exchangeViewBase {
   }
 
   componentDidMount() {
-    document.body.scrollTop = document.documentElement.scrollTop = 500
-    console.log(1221, document.body.scrollTop)
+    // document.body.scrollTop = document.documentElement.scrollTop = 500
+    // console.log(1221, document.body.scrollTop)
     // console.log(32424, window.location.hash)
     // let anchor = window.location.hash.split('#')[1]
-    // let anchorElement = document.getElementById(anchor);
+    let anchorElement = document.getElementById('earn_points');
     // console.log(232, anchorElement,  anchorElement.offsetTop)
     // if (anchorElement) {
-    //   console.log(1221, document.body.scrollTop)
-    //   document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop;
-    //   console.log(122, document.body.scrollTop)
+      anchorElement.scrollIntoView(true)
+      // console.log(1221, document.body.scrollTop)
+      // document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop;
+      // console.log(122, document.body.scrollTop)
     // }
-    // console.log(343535, document.body.scrollTop)
+    console.log(343535, document.body.scrollTop)
   }
   render() {
     // const { controller } = this.props;

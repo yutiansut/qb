@@ -275,19 +275,19 @@ export default class UserController extends ExchangeControllerBase {
     })
     this.view.setState({
       remindPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : this.view.intl.get("user-addSucc"),
+      popType: result && result.IPId ?  'tip1' : 'tip3',
+      popMsg: result && result.IPId ?  this.view.intl.get("user-addSucc") : result.msg,
     })
 
-    if (result === null) {
-      ipList.push({IPAddress: ipAdd, createAt: time})
+    if (result && result.IPId) {
+      ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.IPId})
       this.view.setState({ipList})
-      console.log('添加ip', this.view.state.ipList)
+      // console.log('添加ip', this.view.state.ipList)
     }
+    // console.log('添加', result)
   }
 
   async delIp(ipId, iPAdd, index) { // 删除ip白名单
-    console.log('删除ip白名单', this.view.state.ipList)
     let ipList = this.view.state.ipList
     let result = await this.store.Proxy.deletIp({
       "userId": this.store.uid,
@@ -300,12 +300,10 @@ export default class UserController extends ExchangeControllerBase {
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-delSucc"),
     })
-
     if (result === null) {
       ipList.splice(index, 1)
       this.view.setState({ipList})
     }
-
   }
 
   async getCaptchaVerify() { // 获取图形验证码

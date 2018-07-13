@@ -313,6 +313,12 @@ export default {
     },
     errCode: "AWARD_DRAWED"
   },
+  2400: {
+    get msg() {
+      return intl.get(2400);
+    },
+    errCode: "AWARD_DRAWED"
+  },
   2401: {
     get msg() {
       return intl.get(2401);

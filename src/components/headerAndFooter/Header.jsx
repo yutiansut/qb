@@ -40,7 +40,7 @@ export default class Header extends ExchangeViewBase {
           select: true,
           linkUser: true,
           tokenShow: true,
-          childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/order',}]
+          childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/worder',}]
         }
       ]
     }
@@ -125,11 +125,11 @@ export default class Header extends ExchangeViewBase {
           <li className={`${userToken ? 'new-li' : 'hide'}`}>
             <div className="new-li-img">
               <img src="/static/img/home/new_hei.svg" alt=""/>
-              {this.state.userNocticeList && <i>{this.state.userNocticeList.length}</i>}
+              <i className={this.state.userNocticeList && this.state.userNocticeList.length ? '' : 'hide'}>{this.state.userNocticeList && this.state.userNocticeList.length}</i>
             </div>
             <div className="new-li-content">
               <p>通知</p>
-              {this.state.userNocticeList ? (<ul>{this.state.userNocticeList.map((v, index) => (<li key={index}>{}</li>))}</ul>) : (<div>没有新通知</div>)}
+              {this.state.userNocticeList && this.state.userNocticeList.length ? (<ul>{this.state.userNocticeList.map((v, index) => (<li key={index}>{ddddd}</li>))}</ul>) : (<div>没有新通知</div>)}
               <Link to="/wuserNotice">查看全部</Link>
             </div>
           </li>

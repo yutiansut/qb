@@ -295,11 +295,11 @@ export default class userSafeCenter extends exchangeViewBase {
                 </thead>
                 <tbody className={`${this.state.currentLogin && this.state.currentLogin.length ? '' : 'hide'}`}>
                   {this.state.currentLogin && this.state.currentLogin.map((v, index) => (<tr key={index}>
-                    {/*<td>{v.date}</td>*/}
+                    {/*<td>{v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>*/}
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
-                    <td>{v.country}</td>
-                    {/*<td>{`${v.isCurrent === this.state.user_info.session_key ? '是' : '否'}`}</td>*/}
+                    <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
+                    {/*<td>{`${v.isMe ? '是' : '否'}`}</td>*/}
                   </tr>))}
                 </tbody>
               </table>
@@ -324,7 +324,7 @@ export default class userSafeCenter extends exchangeViewBase {
               <td>{v.catalog}</td>
               <td>{v.ip}</td>
               <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
-              <td>{v.createdTime}</td>
+              <td>{v.createdTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
             </tr>))}
             </tbody>
           </table>
