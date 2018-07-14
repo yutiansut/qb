@@ -39,13 +39,14 @@ export default class UserStore extends ExchangeStoreBase {
   //   console.log('用户', app, req)
   // }
 
-  userLogin(data) { // 获取登录信息
-    // console.log('ccc4', data)
+  async userLogin(data) { // 获取登录信息
+    console.log('ccc4', data)
     this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName
-    data && this.userInfo()
-    data && this.userAuth();
+    data && await this.userInfo()
+    data && await this.userAuth()
+    data && data.isNew && this.getAward()
     // console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 
@@ -160,4 +161,17 @@ export default class UserStore extends ExchangeStoreBase {
       // credentials: 'include'
     })
   }
+
+  async getAward(){
+
+    let account = this.state.userInfo.phone || this.state.userInfo.email
+    console.log('getAward 0', account)
+    let result = await this.Proxy.getAward({
+      token:this.token,
+      account
+    })
+    console.log('getAward 1', result)
+    return result
+  }
+
 }

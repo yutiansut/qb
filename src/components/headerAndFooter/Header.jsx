@@ -98,7 +98,7 @@ export default class Header extends ExchangeViewBase {
   }
 
   render() {
-    console.log('头部', this.state, this.state.userNoticeHeader)
+    // console.log('头部', this.state, this.state.userNoticeHeader)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
@@ -134,7 +134,7 @@ export default class Header extends ExchangeViewBase {
           <li className={`${userToken ? 'new-li' : 'hide'}`}>
             <div className="new-li-img">
               <img src="/static/img/home/new_hei.svg" alt=""/>
-              <i className={Object.keys(this.state.userNoticeHeader).length ? '' : 'hide'}>{Object.keys(this.state.userNoticeHeader).length && this.state.userNoticeHeader.list.length}</i>
+              <i className={Object.keys(this.state.userNoticeHeader || {}).length ? '' : 'hide'}>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length}</i>
             </div>
             <div className="new-li-content">
               <p className="clearfix">
@@ -142,7 +142,7 @@ export default class Header extends ExchangeViewBase {
                 <em onClick={this.checkAll}>✓︎</em>
               </p>
               {Object.keys(this.state.userNoticeHeader).length ? (
-                <ul>{Object.keys(this.state.userNoticeHeader).length && this.state.userNoticeHeader.list.map((v, index) => (
+                <ul>{Object.keys(this.state.userNoticeHeader).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.map((v, index) => (
                   <li key={index}>
                     <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link>
                   </li>

@@ -35,6 +35,7 @@ export default class TradeMarket extends ExchangeViewBase {
     this.collectMarket = controller.collectMarket.bind(controller) // 点击收藏
     this.joinHome = controller.joinHome.bind(controller) // 加入房间
     this.clearRoom = controller.clearRoom.bind(controller) //推出房间
+    this.clearHistory = controller.clearHistory.bind(controller) //推出房间
   }
 
   componentDidMount() {
@@ -43,6 +44,8 @@ export default class TradeMarket extends ExchangeViewBase {
       this.setState({query:this.props.location.query.pairName})
       // this.props.controller.querySelectPair(this.props.location.query.pairName)
     }
+    //清除websocket历史
+    this.clearHistory()
     this.joinHome();
   }
   

@@ -44,10 +44,10 @@ export default class LoginController extends ExchangeControllerBase {
 
   userLoginInfo(data) { // 登陆返回信息
     // console.log('ccc2', data, this.view.history)
-    this.userController.getUserId(data.data)
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.ret === 0 &&  data.data) { // 登陆成功
+      this.userController.getUserId(data.data)
       this.view && this.view.history.push('/whome')
       return
     }
@@ -59,6 +59,7 @@ export default class LoginController extends ExchangeControllerBase {
     if (data.ret !== 0 || data.data === null) {this.getCaptchaVerify()}
     this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || '登录失败'})
   }
+
   async clearLoginInfo() { // 退出登陆
     this.store.loginOutRemind()
     this.userController.clearUserInfo()
@@ -114,5 +115,30 @@ export default class LoginController extends ExchangeControllerBase {
       obj = vaptcha_obj;
       obj.init();
     });
+  }
+
+  async getAward(obj){
+    console.log('getAward',obj)
+    let result = await this.store.getAward(obj);
+    console.log('getAward', result)
+    if (result.award === 100) {
+      // this.view.setState({
+      //   showVagueBgView: true,
+      //   showSuccess: true
+      // })
+      return true
+    }
+    // 已领取过
+    if (result && result.errCode === 'AWARD_DRAWED') {
+      this.view.setState({showVagueBgView: true, showFail: true});
+      return false;
+    }
+    // 活动结束
+    if (result && result.errCode === 'ERROR_ACTIVIY_OVER') {
+      this.view.setState({showVagueBgView: true, showFail: true, activityOver: true, tip: result.msg});
+      return false;
+    }
+    // console.log('getInvited', result)
+    return false
   }
 }

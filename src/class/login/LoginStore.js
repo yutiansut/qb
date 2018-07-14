@@ -15,7 +15,6 @@ export default class LoginStore extends ExchangeStoreBase {
       this.controller.userLoginInfo(data)
       if(data.ret === 0 && pushHistoryFlag ){
         this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
-        pushHistoryFlag = false
       }
     })
     this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
@@ -29,4 +28,10 @@ export default class LoginStore extends ExchangeStoreBase {
   loginOutRemind() { // 退出登陆
     this.WebSocket.general.emit('loginOut')
   }
+
+  async getAward(obj){
+    // let result =
+    return await this.Proxy.getAward(obj);
+  }
+
 }

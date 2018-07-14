@@ -52,16 +52,16 @@ async function messageHandler() {
          */
         //op1,3代表握手和心跳，对此不做处理
         // console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
-        if(pool.RECEIVE_QUENE[0].op === 1){
-          pool.hasStart = true
-          pool.RECEIVE_QUENE.shift()
-          return
-        }
-        if(pool.RECEIVE_QUENE[0].op === 3){
-          // console.log('无用包')
-          pool.RECEIVE_QUENE.shift()
-          return
-        }
+        // if(pool.RECEIVE_QUENE[0].op === 1){
+        //   pool.hasStart = true
+        //   pool.RECEIVE_QUENE.shift()
+        //   return
+        // }
+        // if(pool.RECEIVE_QUENE[0].op === 3){
+        //   // console.log('无用包')
+        //   pool.RECEIVE_QUENE.shift()
+        //   return
+        // }
         MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })

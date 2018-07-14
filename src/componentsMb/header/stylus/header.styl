@@ -6,6 +6,8 @@
   padding 0 .2rem 0 0.1rem
   box-shadow: 0 1px 4px 0 rgba(151,168,178,0.3)
   background $normal-white-color
+  display flex
+  justify-content space-between
   .logo
     display inline-block
     height 100%
@@ -13,9 +15,35 @@
     >img
       height .2rem
   .nav-right
-    float right
+    //float right
     line-height .5rem
     a
       margin 0 .1rem
     .login
       color $index-gray
+  .nav-hidden
+    position: fixed;
+    z-index: 100001;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 37.5%;
+    overflow: auto;
+    background $normal-white-color
+    .login
+      height .8rem
+      background red
+    a
+      height .5rem
+      display block;
+
+
+  .nav-shadow
+    position: fixed;
+    z-index: 100000;
+    background-color: rgba(0,0,0,.3);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+

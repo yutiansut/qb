@@ -1,7 +1,7 @@
 @import "../../../common/css/variable.styl"
 
 .active-fresh-wrap
-  width 10rem
+  width 12rem
   margin .51rem auto 0
   padding-bottom .74rem
   .hide
@@ -24,18 +24,46 @@
   h1
     font-size .28rem
     color $normal-black-color
+    line-height .28rem
     margin-bottom .44rem
+    span
+      font-size .36rem
     a
       font-size .28rem
+      line-height .28rem
       color $main-color
-      margin-left .2rem
+      margin-left .1rem
       &:hover
         text-decoration underline
+  .active-clip
+    display flex
+    justify-content flex-start
+    align-items center
+    .active-clip-input-active
+      width 7rem
+      height .5rem
+      border .01rem solid $disale-border-color
+      background $disale-bg-color
+      color $normal-gray-color
+      padding .18rem 0 .18rem .1rem
+    //.active-clip-input-hidden
+    //  width .01px
+    //  //visibility hidden
+    //  position absolute
+    //  height .01px
+    button
+      width 2rem
+      height .5rem
+      margin-left .2rem
+      background $main-color
+      color $normal-white-color
   dl
-    margin-bottom .5rem
+    margin .5rem 0
     color $normal-black-color
     dt
       font-size .2rem
+      letter-spacing 1.43px;
+      text-align justify;
       margin-bottom .2rem
     dd
       margin-bottom .15rem
@@ -52,16 +80,29 @@
     li
       margin-bottom .15rem
   .record-list
+    margin-top .3rem
     p
       font-size .2rem
       color $normal-black-color
       margin-bottom .3rem
     table
-      width 100%
+      width 5rem
       td
         padding-bottom .18rem
+        &:nth-of-type(odd)
+          text-align left
+        &:nth-of-type(even)
+          text-align right
       thead
         color $normal-gray-color
       tbody
         color $normal-black-color
+        .record-list-no-data
+          padding .5rem 0
+          text-align center
+
+
+
+
+
 

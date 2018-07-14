@@ -199,6 +199,11 @@ export default class MarketStore extends ExchangeStoreBase {
     this.WebSocket.general.emit('joinRoom', {from: 'home', to: ''})
   }
 
+  //清除websocket历史记录
+  clearHistory() {
+    this.WebSocket.general.clearWebsocketHistoryArr('joinRoom')
+  }
+
 
   //收藏接口
   async changeFavorite(tradePairId, userId, operateType, token) {

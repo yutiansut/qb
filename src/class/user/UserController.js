@@ -379,7 +379,8 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   get userInfo() { // 提供用户手机号或者邮箱
-    let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+    console.log('userInfo', this.store.state.userInfo)
+    let {
       email, phone
     } = this.store.state.userInfo
     return { email, phone }

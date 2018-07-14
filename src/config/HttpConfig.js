@@ -45,6 +45,7 @@ export default {
     {name: 'setGoogleVerify', data: {url: '/user/', method: 'post'}, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true}, // 验证谷歌验证码
     {name: 'setUserNotify', data: {url: '/user/', method: 'post'}, action: 'setUserNotifyType', actionBack: 'setUserNotifyTypeRes', needToken: true}, // 修改登录方式
     {name: 'outOther', data: {url: '/user/', method: 'post'}, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true}, // 退出其他设备
+    {name: 'getAward', data: {url: '/user/', method: 'post'}, action: 'getAward', actionBack: 'getAwardRes', needToken: true}, // 领取奖励
   ],
   notice: [
     {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes'}, // 资讯公告内容
@@ -117,7 +118,10 @@ export default {
     {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes'}
   ],
   activity:[
-    {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getHomeBanner', actionBack: 'getHomeBannerRes'}, // 活动内容
+    // 获取邀请列表
+    { name: 'getInvited', data: { url: '/user/', method: 'post' }, action: 'getInvited', actionBack: 'getInvitedRes', needToken: true},
+    // 活动内容
+    {name: 'getHomeBanner', data: {url: '/common/', method: 'post'}, action: 'getHomeBanner', actionBack: 'getHomeBannerRes'},
     // H5活动页，获取qbt活动余量
     { name: 'getQbtMargin', data: { url: '/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes'},
     //H5活动页，领取qbt奖励
@@ -125,5 +129,7 @@ export default {
   ],
   login:[
     {name: 'forgetLoginPass', data: {url: '/common/', method: 'post'}, action: 'forgetLoginPass', actionBack: 'forgetLoginPassRes'}, // 找回密码
+    //H5活动页，领取qbt奖励
+    { name: 'getAward', data: { url: '/common/', method: 'post' }, action: 'invite', actionBack: 'inviteRes'}
   ]
 }

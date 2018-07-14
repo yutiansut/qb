@@ -11,10 +11,11 @@ import exchangeViewBase from "../ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
-import TwoVerifyPopup from  '../viewsPopup/TwoVerifyPopup.jsx'
+import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
 
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
+import queryString from "querystring";
 // import LoginVerification from './children/LoginVerification.jsx'
 
 
@@ -41,12 +42,16 @@ export default class Login extends exchangeViewBase {
       pwdErr: "", // 密码错误
       twoVerifyUser: "" // 两步认证用户信息
     }
-    const {controller} = props
+    const {controller, location} = props
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
+    let query = location.search && queryString.parse(location.search.substring(1)) || null;
+    this.state.query = query
+    console.log('query', query)
+    this.getAward = controller.getAward.bind(controller)
     this.getVerify = controller.getVerify.bind(controller)
     this.login = controller.login.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
@@ -78,22 +83,25 @@ export default class Login extends exchangeViewBase {
   changeUser(value) {
     this.setState({userInput: value});
     let reg = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/
-    if (reg.test(value)){
+    if (reg.test(value)) {
       this.setState({userType: 1})
     } else {
       this.setState({userType: 0})
     }
     this.state.userErr && (this.setState({userErr: ""}))
   }
+
   changePass(value) {
     this.setState({passInput: value});
     console.log(2, value)
     this.state.pwdErr && (this.setState({pwdErr: ""}))
   }
+
   changeCode(value) {
     this.setState({codeInput: value});
     console.log(3, value)
   }
+
   changePic(value) {
     this.setState({picInput: value});
     console.log(4, value)
@@ -115,9 +123,9 @@ export default class Login extends exchangeViewBase {
 
   checkUserInput() { // 手机号／邮箱
     let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
-        reg2 = /^1[3578]\d{9}$/;
+      reg2 = /^1[3578]\d{9}$/;
 
-    if(!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
+    if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
       this.setState({
         userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
       })
@@ -126,13 +134,12 @@ export default class Login extends exchangeViewBase {
 
   checkPassInput() { // 密码
     let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/
-    if(!reg.test(this.state.passInput)) {
+    if (!reg.test(this.state.passInput)) {
       this.setState({
         pwdErr: this.intl.get("user-checkNewPwd")
       })
     }
   }
-
 
 
   componentWillMount() {
@@ -162,7 +169,9 @@ export default class Login extends exchangeViewBase {
       <div>
         <div className="login-wrap">
           <h1>
-            {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
+            {this.state.titleList.map((v, index) => (
+              <span key={index} className={this.state.titleIndex === index ? 'active' : ''}
+                    onClick={i => this.changeTitle(index)}>{v}</span>))}
           </h1>
           <ul>
             <li>
@@ -182,27 +191,41 @@ export default class Login extends exchangeViewBase {
               <em>{this.state.pwdErr}</em>
             </li>
             <li className="verify-li">
-              <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePic(value)}/>
-              <div className="picture-btn" >
+              <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput}
+                     onInput={value => this.changePic(value)}/>
+              <div className="picture-btn">
                 <img src={this.state.captcha || ''} alt="" onClick={this.getCaptchaVerify}/>
               </div>
               {/*<LoginVerification controller={this.props.controller}/>*/}
             </li>
             <li className={`${this.state.titleIndex === 0 ? '' : 'hide'} send-code-li clearfix`}>
-              <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput} onInput={value => this.changeCode(value)}/>
+              <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput}
+                     onInput={value => this.changeCode(value)}/>
               <Button className="send-code-btn"
                       title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
-                      onClick={()=>{this.getVerify(this.state.userInput, this.state.userType, 0)}}/>
+                      onClick={() => {
+                        this.getVerify(this.state.userInput, this.state.userType, 0)
+                      }}/>
             </li>
             <li>
               <Button title={this.intl.get("login")}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
-                      onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())}}/>
+                      onClick={async () => {
+                        let res = this.state.query && await this.getAward({
+                          inviter: JSON.parse(this.state.query.userId),
+                          inviterAccount: this.state.query.account,
+                          invited: this.state.userInput
+                        }) || true
+                        if(!res)
+                          return
+                        this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
+                      }}/>
             </li>
           </ul>
-          <p><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}
-              <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
+          <p><input type="checkbox" checked={this.state.checkState}
+                    onChange={this.checkUser}/>{this.intl.get("login-read")}
+            <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
           </p>
         </div>
         {this.state.showPopup && (
@@ -210,9 +233,9 @@ export default class Login extends exchangeViewBase {
             type={this.state.popType}
             msg={this.state.popMsg}
             onClose={() => {
-              this.setState({ showPopup: false });
+              this.setState({showPopup: false});
             }}
-            autoClose = {true}
+            autoClose={true}
           />
         )}
         {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0,  0)}} onClose={() => {

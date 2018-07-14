@@ -19,9 +19,9 @@ export default {
       name: 'general', url: '/sub', optionList: {
         // test:{testEmit:{var: 1, op: 2}},
         global: {
-          conect: {var: 1, op: 0, seq: 0, resOp: 1, historyPass:true},//握手
-          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3, historyPass:true},//心跳
-          joinRoom: {var: 1, op: 4, seq: 0, resOp: 5},//加入房间
+          connect: {var: 1, op: 0, seq: 0, resOp: 1},//握手
+          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3},//心跳
+          joinRoom: {var: 1, op: 4, seq: 0, resOp: 5, history:true},//加入房间
         },
         market: {
           recommendCurrency: {var: 1, op: 108, seq: 0, resOp: 108},//推荐币种
@@ -35,7 +35,7 @@ export default {
           userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
         },
         login: {
-          login: {var: 1, op: 10, seq: 0, resOp: 11, historyPass:true},//登录
+          login: {var: 1, op: 10, seq: 0, resOp: 11},//登录
           loginOut: {var: 1, op: 12, seq: 0, resOp: 13}//退出登录
           },
         asset: {

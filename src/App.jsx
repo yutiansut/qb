@@ -57,8 +57,8 @@ const User = ({match, history}) => {
   return <UserInfo controller={userController} match={match} history={history}/>
 };
 
-const Loign = ({match, history}) => {
-  return <LoginCon controller={loginController} match={match} history={history}/>
+const Loign = ({match, history, location}) => {
+  return <LoginCon controller={loginController} match={match} history={history} location={location}/>
 };
 
 const ForgetPass = ({match, history}) => {
@@ -138,15 +138,20 @@ export default class App extends Component {
     userOrderController.userController = userController; //订单管理获取用户id
 
     noticeController.configController = configController;
-    klineController.configController = configController;
-    userController.configController = configController;
-    activityController.configController = configController;
-
     noticeController.userController = userController;
+
+    klineController.configController = configController;
+
+    userController.configController = configController;
+
+
+    activityController.configController = configController;
+    activityController.userController = userController;
 
     assetController.configController = configController;
     assetController.userController = userController;
     assetController.marketController = marketController;
+
     loginController.userController = userController;
 
     userOrderController.marketController = marketController;

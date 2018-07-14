@@ -19,6 +19,11 @@ export default class ConfigController extends ExchangeControllerBase {
   get nameCny() {
     return this.store.state.nameCny
   }
+
+  get currentUrl() {
+    return this.store.state.currentUrl
+  }
+
   get language() {
     // return "zh-CN";
     return this.store.language;

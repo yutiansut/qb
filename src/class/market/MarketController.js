@@ -125,6 +125,10 @@ export default class MarketController extends ExchangeControllerBase {
     return this.userController.userToken
   }
 
+  clearHistory(){
+    this.store.clearHistory()
+  }
+
   // 市场下交易对
   async marketDataHandle() {
     //更新全部交易对信息
