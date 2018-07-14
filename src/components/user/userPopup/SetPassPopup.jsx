@@ -175,9 +175,9 @@ export default class SetPassPopup extends exchangeViewBase {
     return false
   }
 
-  // componentWillUnmount() {
-  //   this.props.destroy && this.props.destroy();
-  // }
+  componentWillUnmount() {
+    this.props.destroy && this.props.destroy();
+  }
 
   render() {
     // console.log(222, this.props.isType, this.props.fundPassType)

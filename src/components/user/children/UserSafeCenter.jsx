@@ -46,6 +46,7 @@ export default class userSafeCenter extends exchangeViewBase {
       popType: 'tip1',
       popMsg: '验证成功',
       ipValue: '',
+      errIp: '',
       popupInputErr2:"",
     }
 
@@ -80,10 +81,10 @@ export default class userSafeCenter extends exchangeViewBase {
     this.destroy = controller.clearVerify.bind(controller); // 清除定时器
     this.closeChange = this.closeChange.bind(this)
     this.closeSet = this.closeSet.bind(this)
+    this.checkIp = this.checkIp.bind(this)
   }
 
   changeSetPopup(type) { // 设置密码显示
-    console.log(1111)
     this.setState({
       showSet: true,
       type: type,
@@ -137,7 +138,20 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       ipValue: value
     })
+    this.state.errIp && (this.setState({errIp: ""}))
+
     // console.log(this.state.ipValue)
+  }
+
+  checkIp() {
+    console.log(3434)
+    let reg =  /^\d+\.\d+\.\d+.\d+$/
+    if(!reg.test(this.state.ipValue)) {
+      this.setState({
+        errIp: "请输入正确的IP"
+          // this.intl.get("user-checkNewPwd")
+      })
+    }
   }
 
   closeChange() {
@@ -190,7 +204,6 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息111', this.state, this.props.controller)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("header-security")}</h1>
@@ -274,10 +287,16 @@ export default class userSafeCenter extends exchangeViewBase {
             <h2>{this.intl.get("user-ipWhite")}</h2>
             <div className="fl">
               <b>{this.intl.get("user-ipRemind")}</b>
-              <div className="clearfix">
-                <Input placeholder={this.intl.get("user-ipAddr")}  onInput={value => {this.ipInput(value)}}/>
-                <Button title={this.intl.get("add")} className="name-btn" onClick={() => this.addIp(this.state.ipValue)}/>
+              <div className="check-ip-wrap">
+                <div className="clearfix">
+                  <Input placeholder={this.intl.get("user-ipAddr")}  onInput={value => {this.ipInput(value)}} onBlur={this.checkIp}/>
+                  <Button title={this.intl.get("add")} className="name-btn" onClick={() => !this.state.errIp && this.addIp(this.state.ipValue)}/>
+                </div>
+                <em className="check-ip">{this.state.errIp}</em>
               </div>
+
+              {/*<em>2222</em>*/}
+
               <span>{this.intl.get("user-ipExample")}</span>
               <table>
                 <thead>

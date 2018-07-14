@@ -69,8 +69,8 @@ const Notice = ({match}) => {
   return <NoticeInfo controller={noticeController} match={match}/>
 };
 
-const UserNotice = ({match}) => {
-  return <UserNoticeInfo controller={noticeController} match={match}></UserNoticeInfo>
+const UserNotice = ({match, location}) => {
+  return <UserNoticeInfo controller={noticeController} match={match} location={location}></UserNoticeInfo>
 }
 
 

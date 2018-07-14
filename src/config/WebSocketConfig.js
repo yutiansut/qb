@@ -40,6 +40,9 @@ export default {
           },
         asset: {
           userAssetUpdate: { var: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
+        },
+        notice: {
+          userNoticeUpdata: {var: 1, op: 111, seq: 0, resOp: 111} // 用户通知消息更新
         }
       }
     },

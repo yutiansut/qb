@@ -52,10 +52,22 @@
           height .4rem
           line-height .4rem
           padding 0 .1rem
+          span
+            float left
+          em
+            float right
+        ul
+          max-height 1.5rem
+          padding .1rem
+          overflow-y auto
+          li
+            height .3rem
+            line-height .3rem
+            cursor pointer
         div
           padding .3rem 0
           text-align center
-        a
+        .check-all
           display block
           height .36rem
           line-height .36rem
@@ -241,7 +253,7 @@
             content ''
           p
             border-bottom 1px solid $line-light
-          a
+          .check-all
             color $normal-black-color
             background $line-dark
             text-align center

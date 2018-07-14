@@ -43,12 +43,44 @@ export default class NoticeController extends ExchangeControllerBase {
   async getUserNotice( unRead, page, pageSize) { // 获取用户通知列表
     let userNotice = await this.store.userNotice( unRead, page, pageSize);
     console.log('通知列表', userNotice)
-    // this.noticeHeaderView.setState({userNotice})
     this.view && this.view.setState({userNotice})
+  }
+
+  async getUserNoticeHeader( unRead, page, pageSize) { // 获取用户通知列表
+    let userNoticeHeader = await this.store.userNotice( unRead, page, pageSize);
+    console.log('通知列表头部', userNoticeHeader)
+    this.noticeHeaderView.setState({userNoticeHeader})
+  }
+
+  async upDateUserNoctice(notiId) { // 改变未读状态
+    let result = await this.store.Proxy.upDateUserNocticeList({
+      "userId": this.userId,
+      "token": this.token,
+      notiId
+    })
+    console.log('未读', result)
   }
 
   async activityCon(activityId, activityType) { // 获取详情
     let activityList = await this.store.activityCon(activityId, activityType);
     this.view.setState({activityList})
+  }
+
+  // websocke更新
+  userNoticeUpdata(obj) {
+    console.log('试图', obj)
+    let userNoticeHeader = this.noticeHeaderView.state.userNoticeHeader,
+        userNotice = this.view.state.userNotice,
+        noticeObj = {};
+    noticeObj = {
+      id: obj.id,
+      isRead: 0,
+      content: obj.content,
+      createAt: new Date().getTime() / 1000
+    }
+    userNoticeHeader.list.push(noticeObj)
+    userNotice.list.push(noticeObj)
+    this.noticeHeaderView.setState({userNotice})
+    this.view && this.view.setState({userNotice})
   }
 }

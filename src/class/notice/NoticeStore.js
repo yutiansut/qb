@@ -2,13 +2,19 @@ import ExchangeStoreBase from '../ExchangeStoreBase'
 
 export default class NoticeStore extends ExchangeStoreBase {
   constructor() {
-    super("notice");
+    super("notice", "general");
     this.state = {
       noticeList: {},
       infoList: {},
       activityList: {},
       userNotice: {}, // 用户通知列表
+      userNoticeHeader:{}
     }
+    // websocket监听用户资产更新推送
+    this.WebSocket.general.on("userNoticeUpdata", data => {
+      console.log("userNoticeUpdata-websocket", data);
+      this.controller.userNoticeUpdata(data);
+    });
   }
 
   async noticeCon(page, pageSize) { // 获取公告
@@ -48,8 +54,14 @@ export default class NoticeStore extends ExchangeStoreBase {
       page,
       pageSize
     })
+    if(userNotice.errCode)
+      userNotice = {}
     console.log(1111, userNotice)
+    if (unRead) {
+      this.state.userNoticeHeader = userNotice
+    }
     this.state.userNotice = userNotice;
+
     // console.log('通知列表', this.state.userNocticeList)
     return userNotice
   }
