@@ -84,7 +84,7 @@ export default class OrderHistory extends exchangeViewBase{
     const displayType = this.state.displayType;
     return(displayType ==="list" ? (
       <div className='order-history'>
-        <OrderHeader type="history" changeFilter={this.changeFilter}/>
+        <OrderHeader type="history" changeFilter={this.changeFilter} history={this.props.history}/>
         {this.state.filterShow && <OrderFilter type="history" pairIdMsg={this.state.pairIdMsg} orderSelect={this.orderSelect}/>}
         <div className="order-list">
           {this.state.orderListArray.map((order, index) => {

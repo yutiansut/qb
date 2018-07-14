@@ -30,12 +30,24 @@ export default class OrderItem extends exchangeViewBase{
   constructor(props){
     super(props);
     this.controller = this.props.controller;
+
+    this.goDetailDisplay = this.goDetailDisplay.bind(this);
   }
   componentWillMount(){
   
   }
   componentDidMount(){
     
+  }
+  goDetailDisplay() {
+    if (this.props.type === "current") {
+      this.props.setDetailsDisplay(this.props.index);
+    } else {
+      const orderStatus = this.props.orderInfo.orderStatus;
+      if (orderStatus === 2 || orderStatus === 4) {
+        this.props.setDetailsDisplay(this.props.index);
+      }
+    }
   }
   render(){
     const {type, orderInfo, index} = this.props;
@@ -50,18 +62,18 @@ export default class OrderItem extends exchangeViewBase{
             </div>
             {type === "current" && <div className="time-current fl">{orderInfo.orderTime}</div>}
             {type === "current" ? (
-              <div className="cancel-current fr">
+              <div className="cancel-current fr" onClick={() => {this.props.cancelOrder(index)}}>
                 <img src="../../../../static/img/order/btn_chexiaoheibg@3x.png"/>
-                <span className="">撤销</span>
+                <span>撤销</span>
               </div>
             ) : (
-              <div className="info-history fr" onClick={() => {this.props.setDetailsDisplay(index)}}>
+              <div className="info-history fr" onClick={this.goDetailDisplay}>
                 <span className={orderStatusClass[orderInfo.orderStatus]}>{orderStatus[orderInfo.orderStatus]}</span>
                 {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6) && <img src="../../../../static/img/order/icon_qianjb@3x.png"/>}
               </div>
             )}
           </div>
-          <div className="order-item-content clearfix" onClick={() => {this.props.setDetailsDisplay(index)}}>
+          <div className="order-item-content clearfix" onClick={this.goDetailDisplay}>
             <div className="fl">
               <div>{type === "current" ? "价格" : "时间"}{type === "current" ? ` (${tradePairArr[1]})` : ""}</div>
               <div>{type==="current" ? orderInfo.price : orderInfo.orderTime}</div>

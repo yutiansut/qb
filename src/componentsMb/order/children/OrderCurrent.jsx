@@ -6,19 +6,19 @@ import OrderFilter from './OrderFilter.jsx';
 import OrderItem from './OrderItem.jsx';
 import OrderDetails from './OrderDetails.jsx';
 
-export default class OrderHistory extends exchangeViewBase{
+export default class OrderCurrent extends exchangeViewBase{
   constructor(props){
     super(props);
     this.state = {
-      idArray: [],
-      orderType: 2,
-      filterShow: false,
       displayType: 'list',
+      idArray: [],  // 交易对
+      orderType: 2, // 订单状态
+      filterShow: false,
       viewIndex: 0,
-      pairIdMsg : {},
+      pairIdMsg : {}
     };
     const {controller} = props;
-    controller.setView(this)
+    controller.setView(this);
     this.state = Object.assign(this.state, controller.initState);
 
     this.getOrderList = this.getOrderList.bind(this);
@@ -26,9 +26,10 @@ export default class OrderHistory extends exchangeViewBase{
     this.orderSelect = this.orderSelect.bind(this);
     this.setListDisplay = this.setListDisplay.bind(this);
     this.setDetailsDisplay = this.setDetailsDisplay.bind(this);
+    this.cancelOrder = this.cancelOrder.bind(this);
   }
   componentWillMount(){
-    this.getOrderList()
+    this.getOrderList();
   }
   async componentDidMount(){
     let pairIdMsg = await this.props.controller.marketController.getTradePairHandle();
@@ -58,7 +59,7 @@ export default class OrderHistory extends exchangeViewBase{
   orderSelect(filterPramas) {
     this.setState(filterPramas);
     this.setState({filterShow: false});
-    setTimeout(() => {
+    setTimeout(() => {      // xmzxgd
       this.getOrderList();
     }, 0);
   }
@@ -71,16 +72,25 @@ export default class OrderHistory extends exchangeViewBase{
     this.setState({viewIndex: index});
     this.setState({displayType: 'details'})
   }
+  // 取消订单
+  cancelOrder(index) {
+    let v = this.state.orderListArray[index];
+    let orderId, opType, dealType;
+    orderId = JSON.parse(JSON.stringify(v.orderId)) ;
+    opType = 0;
+    dealType =v.orderType;
+    this.props.controller.cancelOrder(orderId, opType, dealType)
+  }
   render(){
     return (this.state.displayType === 'list' ? 
     (
       <div className='order-current'>
-        <OrderHeader type="current" changeFilter={this.changeFilter}/>
+        <OrderHeader type="current" changeFilter={this.changeFilter} history={this.props.history}/>
         {this.state.filterShow && <OrderFilter type="current" pairIdMsg={this.state.pairIdMsg} orderSelect={this.orderSelect}/>}
         <div className="order-list">
           {this.state.orderListArray.map((order, index) => {
             return (
-              <OrderItem type="current" index={index} key={index} orderInfo={order} setDetailsDisplay={this.setDetailsDisplay}/>
+              <OrderItem type="current" index={index} key={index} orderInfo={order} cancelOrder={this.cancelOrder} setDetailsDisplay={this.setDetailsDisplay}/>
             )
           })}
         </div>

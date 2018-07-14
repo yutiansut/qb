@@ -57,7 +57,7 @@ const ForgetPassComponent = ({match, history}) => {
 const AssetComponent = ({match}) => {
     return <AssetManange controller={assetController} match={match}/>;
 };
-const OrderManageCompoment = ({ match }) => {
+const OrderManageCompoment = ({ match}) => {
   return <OrderManage controller={userOrderController} match={match}/>
 };
 const UserCenterComponent = ({match}) => {
