@@ -1,53 +1,53 @@
 @import "../../../common/css/variable.styl"
 
 .order-history-filter
-  position: fixed
-  top: .44rem;
-  left: 0;
-  width: 100%
-  height: calc(100vh - 0.44rem)
-  background-color: rgba(0, 0, 0, 0.5)
+  position fixed
+  top .44rem;
+  left 0;
+  width 100%
+  height calc(100vh - 0.44rem)
+  background-color rgba(0, 0, 0, 0.5)
   .filter-container
-    padding: .12rem .12rem 0 .12rem
-    background-color: #ffffff
-    border-bottom: .01rem solid #7f7f7f
+    padding .12rem .12rem 0 .12rem
+    background-color $normal-white-color
+    border-bottom .01rem solid $h5-filter-button
     h1
-      font-size: .14rem
-      line-height: .2rem
-    .choose-button
-      padding: .06rem .24rem
-      border-radius: .02rem
-      margin-right: .12rem
-      font-size: .15rem
+      font-size .14rem
       line-height .2rem
-      color #6b7e9c
-      background-color: #f6f8fb
+    .choose-button
+      padding .06rem .24rem
+      border-radius .02rem
+      margin-right .12rem
+      font-size .15rem
+      line-height .2rem
+      color $h5-orderlist-th
+      background-color #f6f8fb
     .select-section
-      padding: .08rem 0 .12rem 0
+      padding .08rem 0 .12rem 0
     .selected
       position relative
-      background-color: #e6f4ff
-      color #069af7
+      background-color #e6f4ff
+      color $h5-color-blue
     .selected:after
-      position: absolute
-      bottom: 0
+      position absolute
+      bottom 0
       right 0
-      content: ''
-      display: block
-      width: .28rem
-      height: .23rem
+      content ''
+      display block
+      width .28rem
+      height .23rem
       background: url("../../../../static/img/order/btn_xuanzhong_sel@3x.png") center center no-repeat
-      background-size: contain
+      background-size contain
     .select
-      width: 10.8em
+      width 10.8em
   .filter-operate
-    padding: .08rem 0
-    background-color: #ffffff
+    padding .08rem 0
+    background-color $normal-white-color
     button
-      width: 50%
-      font-size: .18rem
-      line-height: .25rem
-      color: #069AF7
+      width 50%
+      font-size .18rem
+      line-height .25rem
+      color $h5-color-blue
     button:first-child
-      box-sizing: border-box
-      border-right: .01rem solid #7f7f7f
+      box-sizing border-box
+      border-right .01rem solid $h5-filter-button

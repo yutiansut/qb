@@ -1,13 +1,14 @@
+@import "../../../common/css/variable.styl"
 .order-item
   padding 0 .12rem
   margin-bottom .12rem
   border-radius .02rem
   font-size .14rem
-  line-height: .2rem
-  background-color #ffffff
+  line-height .2rem
+  background-color $normal-white-color
   .order-item-head
     padding .08rem 0
-    border-bottom .02rem solid #D8DAE1
+    border-bottom .02rem solid $h5-border-light
     span
       vertical-align middle
     .way
@@ -16,30 +17,30 @@
       padding-right .02rem
     .sell
       color #eb5b5b
-      margin-right: .4rem
+      margin-right .4rem
     .buy
-      color #069af7
-      margin-right: .4rem
+      color $h5-color-blue
+      margin-right .4rem
     .time-current
-      color: #98A9C0
+      color $h5-undeal-gray
     .cancel-current
       img
-        height: .14rem
-        margin-right: .05rem
-        vertical-align: middle
+        height .14rem
+        margin-right .05rem
+        vertical-align middle
       span
-        color: #45566B
+        color #45566B
     .info-history
       img
-        height: .14rem
-        margin-left: .05rem
-        vertical-align: middle
+        height .14rem
+        margin-left .05rem
+        vertical-align middle
       .deal
-        color #069af7
+        color $h5-color-blue
       .partdeal
         color #f8b900
       .end
-        color #98a9c0
+        color $h5-undeal-gray
       .cancel
         color #eb5b5b
 
@@ -52,11 +53,11 @@
         margin-bottom .08rem
         font-size .12rem
         line-height .17rem
-        color #98a9c0
+        color $h5-undeal-gray
       div:nth-child(2)
         font-size .15rem
         line-height .21rem
         color #45566b
     .fr
       div:nth-child(2)
-        text-align: right
+        text-align right

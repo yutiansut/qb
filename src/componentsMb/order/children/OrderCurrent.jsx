@@ -15,6 +15,7 @@ export default class OrderCurrent extends exchangeViewBase{
       orderType: 2, // 订单状态
       filterShow: false,
       viewIndex: 0,
+      orderId: undefined,
       pairIdMsg : {}
     };
     const {controller} = props;

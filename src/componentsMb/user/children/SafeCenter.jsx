@@ -19,7 +19,7 @@ export default class UserCenterIndex extends exchangeViewBase {
       <div className="user-safe-center">
         <div className="safe-center-header">
           <div className="back" onClick={() => {this.props.setListDisplay()}}>
-            <img src="../../../../static/mobile/user/icon_qianjb@3x.png"/>
+            <img src="../../../../static/mobile/user/Back@3x.png"/>
             <span>返回</span>
           </div>
           <div className="name">安全中心</div>

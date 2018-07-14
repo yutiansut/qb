@@ -4,8 +4,6 @@ import exchangeViewBase from '../ExchangeViewBase.jsx';
 
 import UserCenterIndex from './children/UserCenterIndex.jsx';
 import SafeCenter from './children/SafeCenter.jsx';
-import SetPassword from './children/SetPassword.jsx';
-import AboutUs from './children/AboutUs.jsx';
 
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
@@ -24,12 +22,6 @@ export default class UserCenter extends exchangeViewBase {
         )}/>
         <Route exact path={`${match.url}/safe`} component={() => (
             <SafeCenter match={match}/>
-        )}/>
-        <Route path={`${match.url}/safe/password`} component={() => (
-            <SetPassword match={match}/>
-        )}/>
-        <Route exact path={`${match.url}/safe/aboutus`} component={() => (
-            <AboutUs/>
         )}/>
         <Redirect to={`${match.url}`} />
       </Switch>

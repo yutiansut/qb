@@ -1,11 +1,4 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import React from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
 
 import "../stylus/orderItem.styl"
@@ -60,7 +53,7 @@ export default class OrderItem extends exchangeViewBase{
               <span className="way">{orderInfo.orderType === 0 ? "买入" : "卖出"}</span>
               <span>{tradePairName}</span>
             </div>
-            {type === "current" && <div className="time-current fl">{orderInfo.orderTime}</div>}
+            {type === "current" && <div className="time-current fl">{Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>}
             {type === "current" ? (
               <div className="cancel-current fr" onClick={() => {this.props.cancelOrder(index)}}>
                 <img src="../../../../static/img/order/btn_chexiaoheibg@3x.png"/>
@@ -75,8 +68,8 @@ export default class OrderItem extends exchangeViewBase{
           </div>
           <div className="order-item-content clearfix" onClick={this.goDetailDisplay}>
             <div className="fl">
-              <div>{type === "current" ? "价格" : "时间"}{type === "current" ? ` (${tradePairArr[1]})` : ""}</div>
-              <div>{type==="current" ? orderInfo.price : orderInfo.orderTime}</div>
+              <div>{type === "current" ? "价格" : "时间"}{type === "current" && ` (${tradePairArr[1]})`}</div>
+              <div>{type==="current" ? orderInfo.price : Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>
             </div>
             <div className="fl">
               <div>{type === "current" ? "数量" : "成交价"}{type === "current" ? ` (${tradePairArr[0]})` : ` (${tradePairArr[1]})`}</div>

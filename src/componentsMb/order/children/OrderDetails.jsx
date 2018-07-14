@@ -1,50 +1,43 @@
-import React, { Component } from "react";
-import exchangeViewBase from "../../ExchangeViewBase";
+import React from 'react';
+import exchangeViewBase from '../../ExchangeViewBase';
 
-import "../stylus/orderDetails.styl"
-import { userInfo } from "os";
+import '../stylus/orderDetails.styl';
 
 const orderStatus = {
-  0: '未成交',
-  1: '部分成交',
-  2: '已成交',
-  3: '已撤销',
-  4: '撤单中',
-  5: '已结束',
-  6: '部分成交',
+  0: '未成交',    // 当前订单——未成交
+  1: '部分成交',  // 当前订单——部分成交
+  2: '已成交',    // 历史订单——已成交
+  6: '部分成交',  // 历史订单——部分成交
 };
 const orderStatusClass = {
-  0: 'end',
-  1: 'partdeal',
-  2: 'deal',
-  3: '已撤销',
-  4: '撤单中',
-  5: '已结束',
-  6: 'partdeal',
+  0: 'end',       // 当前订单——未成交
+  1: 'partdeal',  // 当前订单——部分成交
+  2: 'deal',      // 历史订单——已成交
+  6: 'partdeal',  // 历史订单——部分成交
 };
 
-export default class orderDetails extends exchangeViewBase{
+export default class OrderDetails extends exchangeViewBase {
   constructor(props){
     super(props);
     this.state = {};
-    const {orderInfo, controller} = this.props
-    controller.setView(this)
+
+    const {orderInfo, controller} = this.props;
+    controller.setView(this);
     this.state = Object.assign(this.state, controller.initState);
-    
     controller.getOrderDetail(orderInfo.orderId);
-    setTimeout(() => {
-      console.log("9999999999",this.state.orderDetail);
-    }, 5000);
   }
   componentWillMount(){
+
   }
   componentDidMount(){
+
   }
   render(){
     const orderDetail = this.state.orderDetail;
     const type = this.props.type;
     const tradePairName = this.props.orderInfo.tradePairName.toUpperCase();
     const tradePairArr = tradePairName.split('/');
+
     return(
       <div className="order-details">
         <div className="order-details-header">
@@ -55,29 +48,29 @@ export default class orderDetails extends exchangeViewBase{
           <div className="name">成交明细</div>
         </div>
         <div className="order-details-info">
-          <h1>{orderDetail.orderType === 0 ? "买入" : "卖出"}{tradePairName}</h1>
+          <h1>{orderDetail.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")}{tradePairName}</h1>
           <h2 className={orderStatusClass[orderDetail.orderStatus]}>{orderStatus[orderDetail.orderStatus]}</h2>
           <div className="info-item clearfix">
             <span className="fl">订单类型</span>
-            <span className="fr">{type === "current" ? "当前订单" : "历史订单"}</span>
+            <span className="fr">{type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? "价格" : "成交均价"}</span>
+            <span className="fl">{type === "current" ? this.intl.get("price") : "成交均价"}</span>
             <span className="fl">({tradePairArr[1]})</span>
             <span className="fr">{orderDetail.price}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? "数量" : "成交量"}</span>
+            <span className="fl">{type === "current" ? this.intl.get("amount") : this.intl.get("volume")}</span>
             <span className="fl">({tradePairArr[0]})</span>
-            <span className="fr">{orderDetail.doneCount}</span>
+            <span className="fr">{type === "current" ? orderDetail.count : orderDetail.doneCount}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? "成交金额" : "成交总额"}</span>
+            <span className="fl">{type === "current" ? this.intl.get("order-deal-money") : "成交总额"}</span>
             <span className="fl">({tradePairArr[1]})</span>
             <span className="fr">{orderDetail.dealedMoney}</span>
           </div>
           {orderDetail.orderStatus !== 0 && <div className="info-item clearfix">
-            <span className="fl">手续费</span>
+            <span className="fl">{this.intl.get("fee")}</span>
             <span className="fl">({tradePairArr[0]})</span>
             <span className="fr">{orderDetail.fee}</span>
           </div>}
@@ -103,7 +96,7 @@ export default class orderDetails extends exchangeViewBase{
             {orderDetail.orderList && orderDetail.orderList.map((order, index) => {
               return (
                 <tr className="clearfix" key={index}>
-                  <td className="fl set-width">{order.orderTime}</td>
+                  <td className="fl set-width">{Number(order.orderTime).toDate('HH:mm MM/dd')}</td>
                   <td className="fl">{order.price}</td>
                   <td className="fr">{order.turnover}</td>
                 </tr>

@@ -136,7 +136,7 @@ export default class orderFilter extends exchangeViewBase{
         <div className='order-history-filter'>
           {this.props.type === "current" ? (
             <div className="filter-container">
-            <h1>交易对</h1>
+            <h1>{this.intl.get("pair")}</h1>
               <div className="select-section">
               <SelectButton
                   title={this.state.coinSelect}
@@ -154,14 +154,14 @@ export default class orderFilter extends exchangeViewBase{
                   valueArr={this.state.marketArray}
               />
               </div>
-              <h1>类型</h1>
+              <h1>{this.intl.get("type")}</h1>
               <div className="select-section">
                 <button 
                   className={`${this.state.orderType === 0 ? "selected" : ""} choose-button`} 
-                  onClick={() => {this.setState({orderType : 0})}}>买入</button>
+                  onClick={() => {this.setState({orderType : 0})}}>{this.intl.get("buy")}</button>
                 <button 
                   className={`${this.state.orderType === 1 ? "selected" : ""} choose-button`} 
-                  onClick={() => {this.setState({orderType : 1})}}>卖出</button>
+                  onClick={() => {this.setState({orderType : 1})}}>{this.intl.get("sell")}</button>
               </div>
             </div>
           ) : (
@@ -198,7 +198,7 @@ export default class orderFilter extends exchangeViewBase{
                 style={{marginRight: 0}}
               >全部</button>
             </div>
-            <h1>交易对</h1>
+            <h1>{this.intl.get("pair")}</h1>
             <div className="select-section">
             <SelectButton
                   title={this.state.coinSelect}
@@ -216,17 +216,17 @@ export default class orderFilter extends exchangeViewBase{
                   valueArr={this.state.marketArray}
               />
             </div>
-            <h1>类型</h1>
+            <h1>{this.intl.get("type")}</h1>
             <div className="select-section">
               <button 
                 className={`${this.state.orderType === 2 ? "selected" : ""} choose-button`} 
-                onClick={() => {this.setState({orderType : 2})}}>买入/卖出</button>
+                onClick={() => {this.setState({orderType : 2})}}>{this.intl.get("buy")}/{this.intl.get("sell")}</button>
               <button 
                 className={`${this.state.orderType === 0 ? "selected" : ""} choose-button`} 
-                onClick={() => {this.setState({orderType : 0})}}>买入</button>
+                onClick={() => {this.setState({orderType : 0})}}>{this.intl.get("buy")}</button>
               <button 
                 className={`${this.state.orderType === 1 ? "selected" : ""} choose-button`} 
-                onClick={() => {this.setState({orderType : 1})}}>卖出</button>
+                onClick={() => {this.setState({orderType : 1})}}>{this.intl.get("sell")}</button>
             </div>
             <h1>订单状态</h1>
             <div className="select-section">
@@ -235,24 +235,24 @@ export default class orderFilter extends exchangeViewBase{
                 onClick={() => {
                   let orderStatusBool = this.state.totalDeal
                   this.setState({totalDeal : !orderStatusBool})
-                }}>已成交</button>
+                }}>{this.intl.get("dealed")}</button>
               <button 
                 className={`${this.state.reseted ? "selected" : ""} choose-button`} 
                 onClick={() => {
                   let orderStatusBool = this.state.reseted
                   this.setState({reseted : !orderStatusBool})
-                }}>已撤销</button>
+                }}>{this.intl.get("reseted")}</button>
               <button 
                 className={`${this.state.partDeal ? "selected" : ""} choose-button`} 
                 onClick={() => {
                   let orderStatusBool = this.state.partDeal
                   this.setState({partDeal : !orderStatusBool})
-                }}>部分成交</button>
+                }}>{this.intl.get("partDeal")}</button>
             </div>
           </div>
           )}
           <div className="filter-operate">
-            <button onClick={this.selectReset}>重置</button>
+            <button onClick={this.selectReset}>{this.intl.get("reset")}</button>
             <button onClick={this.orderSelect}>确定</button>
           </div>
         </div>
