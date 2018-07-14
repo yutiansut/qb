@@ -70,7 +70,7 @@ const Notice = ({match}) => {
 };
 
 const UserNotice = ({match}) => {
-  return <UserNoticeInfo controller={userController} match={match}></UserNoticeInfo>
+  return <UserNoticeInfo controller={noticeController} match={match}></UserNoticeInfo>
 }
 
 
@@ -95,6 +95,7 @@ const header = ({match, history}) => {
     <Header navClass={"headerNav"}
             userController={userController}
             configController={configController}
+            noticeController={noticeController}
             loginController={loginController} match={match} history={history}/>
     <div style={{height: ".5rem"}}/>
   </div>;
@@ -102,7 +103,10 @@ const header = ({match, history}) => {
 
 const tradeHeader = ({match, history}) => {
   return <div>
-    <Header navClass={"tradeNav"} userController={userController} configController={configController}
+    <Header navClass={"tradeNav"}
+            userController={userController}
+            noticeController={noticeController}
+            configController={configController}
             loginController={loginController} match={match} history={history}/>
     <div style={{height: ".5rem"}}/>
   </div>;

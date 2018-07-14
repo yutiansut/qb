@@ -47,28 +47,29 @@ export default class Header extends ExchangeViewBase {
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
     this.userController = this.props.userController;
+    this.noticeController = this.props.noticeController;
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.clearLoginInfo = this.loginController.clearLoginInfo.bind(this.loginController) // 退出登录
-    this.getUserNocticeList = this.userController.getUserNocticeList.bind(this.userController) // 获取通知列表
+    this.getUserNotice = this.noticeController.getUserNotice.bind(this.noticeController) // 获取通知列表
     this.loginOut = this.loginOut.bind(this)
     //绑定view
-    this.userController.setHeaderView(this)
+    this.noticeController.setHeaderView(this)
     //初始化数据，数据来源即store里面的state
-    this.state = Object.assign(this.state, this.userController.store.state.userNocticeList);
+    this.state = Object.assign(this.state, this.noticeController.store.state.userNocticeList);
     this.matched = '/whome'
   }
   async componentDidMount() {
     ChangeFontSize(1440*0.8, 1440*1)
-    await this.getUserNocticeList()
-    let userNocticeList = this.state.userNocticeList
-    userNocticeList = userNocticeList && userNocticeList.filter(v => {return v.isRead === 0}) // 筛选未读信息
+    await this.getUserNotice(0, 0, 10)
+    // let getUserNotice = this.state.getUserNotice
+    // userNocticeList = userNocticeList && userNocticeList.filter(v => {return v.isRead === 0}) // 筛选未读信息
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })
     this.state.navArrayLeft.forEach(v => {
       this.userToken && (v.tokenShow = false)
     })
-    this.setState({userNocticeList})
+    // this.setState({userNocticeList})
   }
 
   componentWillUpdate(props, state, next) {

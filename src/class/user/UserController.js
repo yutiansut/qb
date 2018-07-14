@@ -15,16 +15,10 @@ export default class UserController extends ExchangeControllerBase {
   //   // return this.store.data
   // }
 
-  setHeaderView(view) {
-    this.noticeHeaderView = view
-  }
+
   //清除用户信息
   clearUserInfo(){
     this.store.clearUserInfo()
-  }
-
-  clearVerify() { // 清除定时器
-    this.countDownStop("verifyCountDown");
   }
 
   async getVerify(account, mode, type) { // 获取短信验证码
@@ -206,33 +200,6 @@ export default class UserController extends ExchangeControllerBase {
     console.log('设置密码', result)
   }
 
-  // async setFundPass(account, mode, pass, captchaCode, captchaId, code) { // 设置资金密码
-  //   let result = await this.store.Proxy.setFundPwd({
-  //     "userId": this.store.uid,
-  //     "token": this.store.token,
-  //     account,
-  //     mode, // 0:phone 1:email
-  //     pass,
-  //     captchaCode, // 图形验证码，没有就传空
-  //     captchaId, // 图形验证码id，没有就传空
-  //     code,
-  //     "os": 3, // 1:android 2:iOS 3:browser
-  //   })
-  //   console.log('设置密码', result)
-  //   this.view.setState({
-  //     remindPopup: true,
-  //     popType: result ? 'tip3': 'tip1',
-  //     popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
-  //     showSet: result ? true : false,
-  //   })
-  //   if (result === null) {
-  //     this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
-  //     this.store.state.userInfo.fundPwd = 0
-  //
-  //   }
-  //   console.log('设置密码', result, this.store.state.userInfo.fundPwd)
-  // }
-
   async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 修改资金密码
     let result = await this.store.Proxy.modifyFundPwd({
       "userId": this.store.uid,
@@ -400,11 +367,6 @@ export default class UserController extends ExchangeControllerBase {
     console.log('退出其他设备', result)
   }
 
-  async getUserNocticeList() { // 获取通知列表
-    let userNocticeList = await this.store.userNocticeList();
-    console.log('通知列表', userNocticeList)
-    this.noticeHeaderView.setState({userNocticeList})
-  }
 
   // 为其他模块提供接口
   // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码

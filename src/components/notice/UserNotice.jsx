@@ -1,11 +1,4 @@
 import React, {Component} from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  Switch
-} from 'react-router-dom'
 import exchangeViewBase from '../../components/ExchangeViewBase'
 import Pagination from '../../common/component/Pagination/index.jsx'
 import "./stylus/userNotice.styl"
@@ -19,7 +12,7 @@ export default class userNotice extends exchangeViewBase {
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.getUserNocticeList = controller.getUserNocticeList.bind(controller) // 获取通知列表
+    this.getUserNotice = controller.getUserNotice.bind(controller) // 获取通知列表
   }
 
   setView(view){
@@ -34,7 +27,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await this.getUserNocticeList()
+    await this.getUserNotice(0, 0, 10)
 
   }
 
@@ -43,7 +36,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   render() {
-    console.log('内容', this.state)
+    console.log('内容', this.state.userNotice)
     return (
       <div className="user-notice-wrap">
         <h1>通知</h1>
@@ -54,20 +47,20 @@ export default class userNotice extends exchangeViewBase {
               <th>{this.intl.get("time")}</th>
             </tr>
           </thead>
-          <tbody className={`${this.state.userNocticeList && this.state.userNocticeList.length ? '' : 'hide'}`}>
-          {this.state.userNocticeList && this.state.userNocticeList.map((v, index) => (
-            <tr key={index}>
-              <td>
-                <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
-                {v.content}
-              </td>
-              <td>{v.createAt}</td>
-            </tr>))
-            }
-          </tbody>
+          {/*<tbody className={`${Object.keys(this.state.userNotice).length ? '' : 'hide'}`}>*/}
+          {/*{Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (*/}
+            {/*<tr key={index}>*/}
+              {/*<td>*/}
+                {/*<b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>*/}
+                {/*{v.content}*/}
+              {/*</td>*/}
+              {/*<td>{v.createAt}</td>*/}
+            {/*</tr>))*/}
+            {/*}*/}
+          {/*</tbody>*/}
         </table>
-        <p className={this.state.userNocticeList && this.state.userNocticeList.length ? 'hide' : ''}>{this.intl.get("user-none")}</p>
-        <div className={this.state.userNocticeList.length ? '' : 'hide'}>
+        <p className={Object.keys(this.state.userNotice).length ? 'hide' : ''}>{this.intl.get("user-none")}</p>
+        <div className={Object.keys(this.state.userNotice).length ? '' : 'hide'}>
           {/*{this.state.noticeList.totalCount && <Pagination total={this.state.noticeList.totalCount}*/}
             {/*pageSize={10}*/}
             {/*showTotal={true}*/}            {/*showQuickJumper={true}/>}*/}

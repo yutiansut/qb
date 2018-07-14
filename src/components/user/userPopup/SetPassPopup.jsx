@@ -5,15 +5,6 @@ import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import "../stylus/passPopup.styl"
 
-// const popupTypeList = [
-//   {title: '绑定邮箱', numTitle: '邮箱', numInput: '请输入邮箱账号', verifyTitle: '邮箱验证码', verifyInput: '请输入邮箱验证码', btnTitle: '绑定'},
-//   {title: '绑定手机', numTitle: '手机号码', numInput: '请输入手机号', verifyTitle: '手机号验证码', verifyInput: '请输入手机号验证码', btnTitle: '绑定'},
-//   {title: '设置登录密码', numTitle: '新密码', numInput: '请输入新密码', numTitle2: '再次输入新密码', numInput2: '请再次输入新密码', btnTitle: '设置'},
-//   {title: '修改登录密码', numTitleNew: '当前密码', numInputNew: '请输入当前登录密码', numTitle: '新密码', numInput: '请输入新密码', numTitle2: '再次输入新密码', numInput2: '请再次输入新密码', btnTitle: '修改'},
-//   {title: '设置资金密码', numTitle: '新密码', numInput: '请输入新密码', numTitle2: '再次输入密码', numInput2: '请再次输入密码', verifyTitle: '手机验证码', verifyInput: '请输入手机号验证码', btnTitle: '保存'},
-//   {title: '修改资金密码', numTitleNew: '当前密码', numInputNew: '请输入当前登录密码', numTitle: '新密码', numInput: '请输入新密码', numTitle2: '再次输入密码', numInput2: '请再次输入密码', verifyTitle: '手机验证码', verifyInput: '请输入手机号验证码', btnTitle: '保存'},
-// ]
-
 export default class SetPassPopup extends exchangeViewBase {
   constructor(props) {
     super(props);
@@ -184,12 +175,12 @@ export default class SetPassPopup extends exchangeViewBase {
     return false
   }
 
-  componentWillUnmount() {
-    this.props.destroy && this.props.destroy();
-  }
+  // componentWillUnmount() {
+  //   this.props.destroy && this.props.destroy();
+  // }
 
   render() {
-    console.log(222, this.props.isType, this.props.fundPassType)
+    // console.log(222, this.props.isType, this.props.fundPassType)
     let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">

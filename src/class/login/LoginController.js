@@ -47,7 +47,7 @@ export default class LoginController extends ExchangeControllerBase {
     this.userController.getUserId(data.data)
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
-    if (data.ret === 0) { // 登陆成功
+    if (data.ret === 0 &&  data.data) { // 登陆成功
       this.view && this.view.history.push('/whome')
       return
     }
@@ -56,7 +56,7 @@ export default class LoginController extends ExchangeControllerBase {
       console.log('二次登录', this.view.state)
       return
     }
-    if (data.ret !== 0) {this.getCaptchaVerify()}
+    if (data.ret !== 0 || data.data === null) {this.getCaptchaVerify()}
     this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || '登录失败'})
   }
   async clearLoginInfo() { // 退出登陆

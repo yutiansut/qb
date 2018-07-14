@@ -6,7 +6,8 @@ export default class NoticeStore extends ExchangeStoreBase {
     this.state = {
       noticeList: {},
       infoList: {},
-      activityList: {}
+      activityList: {},
+      userNotice: {}, // 用户通知列表
     }
   }
 
@@ -36,6 +37,21 @@ export default class NoticeStore extends ExchangeStoreBase {
     this.state.infoList = infoList
     // console.log('获取资讯', infoList)
     return infoList
+  }
+
+  async userNotice(unRead, page, pageSize) { // 获取用户通知列表
+    // unRead 0 全部 1未读, page, pageSize 0 全部
+    let userNotice = await this.Proxy.getUserNocticeList({
+      "userId": this.controller.userId,
+      "token": this.controller.token,
+      unRead,
+      page,
+      pageSize
+    })
+    console.log(1111, userNotice)
+    this.state.userNotice = userNotice;
+    // console.log('通知列表', this.state.userNocticeList)
+    return userNotice
   }
 
   async activityCon(activityId, activityType) { // 活动详情

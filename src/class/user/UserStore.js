@@ -21,7 +21,6 @@ export default class UserStore extends ExchangeStoreBase {
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
-      userNocticeList: [], // 用户通知列表
 
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
@@ -145,14 +144,6 @@ export default class UserStore extends ExchangeStoreBase {
     let googleSecret = await this.Proxy.getGoogle({"userId": this.uid, "token": this.token})
     this.state.googleSecret = googleSecret;
     return googleSecret
-  }
-
-  async userNocticeList() { // 获取通知列表
-    let userNocticeList = await this.Proxy.getUserNocticeList({"userId": this.uid, "token": this.token, "page": 0, "pageSize": 10})
-    userNocticeList = userNocticeList.list ? userNocticeList.list : []
-    this.state.userNocticeList = userNocticeList;
-    // console.log('通知列表', this.state.userNocticeList)
-    return userNocticeList
   }
 
   async uploadImg(file){ // 上传图片

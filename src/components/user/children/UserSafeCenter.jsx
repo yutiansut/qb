@@ -57,7 +57,6 @@ export default class userSafeCenter extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
-    this.clearVerify = controller.clearVerify.bind(controller) // 清除倒计时
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
     // this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
     this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置修改资金密码
@@ -84,12 +83,12 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   changeSetPopup(type) { // 设置密码显示
+    console.log(1111)
     this.setState({
       showSet: true,
       type: type,
       verifyNum: this.intl.get("sendCode")
     })
-    this.clearVerify()
   }
   showOther() { // 打开其他安全设置
     this.setState({
@@ -97,7 +96,7 @@ export default class userSafeCenter extends exchangeViewBase {
     })
   }
   selectType(content, index, i, type) { // 两步认证单选
-    console.log(1111)
+
     let changeArr = [3, 1, 0, 2], typeArr = [2, 1, 3, 0]  // 2 谷歌验证 1 邮件 3 短信 0 无
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
@@ -183,9 +182,6 @@ export default class userSafeCenter extends exchangeViewBase {
 
   }
 
-  componentWillUnmount() {
-    this.destroy()
-  }
 
   clearErr2() {
     this.setState({
@@ -359,7 +355,7 @@ export default class userSafeCenter extends exchangeViewBase {
         {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret.secret}
                      setGoogleVerify = {this.setGoogleVerify}
                      onClose={() => {this.setState({ showGoogle: false });}}/>}
-        {this.state.showSet && <PassPopup onClose={this.closeSet()}
+        {this.state.showSet && <PassPopup onClose={this.closeSet}
                    phone = {this.state.userInfo.phone}
                    email = {this.state.userInfo.email}
                    isType = {this.state.type}
