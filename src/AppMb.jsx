@@ -60,13 +60,15 @@ const AssetComponent = ({match}) => {
 const OrderManageCompoment = ({ match}) => {
   return <OrderManage controller={userOrderController} match={match}/>
 };
-const UserCenterComponent = ({match}) => {
-    return <UserCenter match={match}/>
+
+const UserCenterComponent = ({match, history}) => {
+    return <UserCenter match={match} controller={userController} history={history}/>
 }
 
 const Gener = ({match}) => {
   return <Genrealize match={match} controller={activityController}/>;
 };
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -129,7 +131,7 @@ export default class App extends Component {
                       <Route path="/mhelp" component={HelpComponent}/>
                       <Route path="/mwallet" component={AssetComponent}/>
                       <Route path="/mgenrealize" component={Gener}/>
-					  <Route path="/morder" component={OrderManageCompoment}/>
+					            <Route path="/morder" component={OrderManageCompoment}/>
                       <Route path="/muser" component={UserCenterComponent} />
                       <Redirect to="/mhome" />
                   </Switch>

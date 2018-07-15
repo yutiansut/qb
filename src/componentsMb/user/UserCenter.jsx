@@ -4,26 +4,33 @@ import exchangeViewBase from '../ExchangeViewBase.jsx';
 
 import UserCenterIndex from './children/UserCenterIndex.jsx';
 import SafeCenter from './children/SafeCenter.jsx';
+import AboutUs from './children/AboutUs.jsx';
 
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
+
   componentWillMount() {
   }
+
   componentDidMount() {
   }
+
   render() {
-    const {match} = this.props;
+    const {match, controller, history} = this.props;
     return (
       <Switch>
         <Route exact path={`${match.url}`} component={() => (
-            <UserCenterIndex/>
+          <UserCenterIndex url={`${match.url}`}/>
         )}/>
         <Route exact path={`${match.url}/safe`} component={() => (
-            <SafeCenter match={match}/>
+          <SafeCenter match={match}/>
         )}/>
-        <Redirect to={`${match.url}`} />
+        <Route exact path={`${match.url}/aboutUs`} component={() => (
+          <AboutUs match={match} controller={controller} history={history}/>
+        )}/>
+        <Redirect to={`${match.url}`}/>
       </Switch>
     );
   }

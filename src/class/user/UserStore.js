@@ -174,4 +174,8 @@ export default class UserStore extends ExchangeStoreBase {
     return result
   }
 
+  async getQbtTrade(){
+    return this.Proxy.getQbtTrade()
+  }
+
 }

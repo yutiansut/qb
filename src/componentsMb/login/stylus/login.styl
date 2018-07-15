@@ -53,17 +53,25 @@
       display flex
       .base-input-wrap
         flex-grow 1
+        &:hover+.picture-btn, &:active+.picture-btn, &:focus+.picture-btn
+          border 1px solid $main-color
+          border-left none
         input
           border-right none
           vertical-align top
           border-radius (.02rem 0 0 .02rem)
-      .send-code-btn, .picture-btn
+      .send-code-btn
         background $main-color
         color $normal-white-color
         border-radius (0 .02rem .02rem 0)
         overflow hidden
       .picture-btn
         width 1rem
+        border-radius (0 .02rem .02rem 0)
+        border 1px solid $line-light
+        border-left none
+        background $line-light
+        overflow hidden
         img
           width 100%
           height 100%

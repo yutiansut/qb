@@ -12,7 +12,7 @@ export default class Header extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      navHidden: false
+      navHidden: true
     };
   }
 
@@ -36,9 +36,27 @@ export default class Header extends ExchangeViewBase {
           <div>
             <div className="nav-shadow" onClick={e => this.setState({navHidden: true})}></div>
             <div className="nav-hidden">
-              <NavLink to="/mlogin" className="login">登录</NavLink>
-              {userController.userToken && (<div><NavLink to="/mwallet" className="wallet">资产</NavLink>
-                <NavLink to="/morder" className="order">订单</NavLink></div>)}
+              {userController.userToken &&
+              (<NavLink to="/muser"
+                        className="nav-login"
+                        onClick={e => this.setState({navHidden: true})}>{userController.userName}</NavLink>)
+              || (<NavLink to="/mlogin"
+                           className="nav-login"
+                           onClick={e => this.setState({navHidden: true})}>
+                登录/注册</NavLink>)}
+              <NavLink to="/mhome" className="nav-home"
+                       onClick={e => this.setState({navHidden: true})}>首页</NavLink>
+              {userController.userToken &&
+              (<div><NavLink to="/mwallet"
+                             className="nav-wallet"
+                             onClick={e => this.setState({navHidden: true})}>资产管理</NavLink>
+                <NavLink to="/morder"
+                         className="nav-order"
+                         onClick={e => this.setState({navHidden: true})}>订单管理</NavLink>
+                <NavLink to="/muser"
+                         className="nav-order"
+                         onClick={e => this.setState({navHidden: true})}>个人中心</NavLink>
+              </div>) || null}
             </div>
           </div>) || null}
       </div>

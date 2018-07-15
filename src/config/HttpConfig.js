@@ -46,6 +46,7 @@ export default {
     {name: 'setUserNotify', data: {url: '/user/', method: 'post'}, action: 'setUserNotifyType', actionBack: 'setUserNotifyTypeRes', needToken: true}, // 修改登录方式
     {name: 'outOther', data: {url: '/user/', method: 'post'}, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true}, // 退出其他设备
     {name: 'getAward', data: {url: '/user/', method: 'post'}, action: 'getAward', actionBack: 'getAwardRes', needToken: true}, // 领取奖励
+    {name: 'getQbtTrade', data: {url: '/common/', method: 'post'}, action: 'qbtTrade', actionBack: 'qbtTradeRes'}, //活动图片
   ],
   notice: [
     {name: 'getActivity', data: {url: '/common/', method: 'post'}, action: 'getActivity', actionBack: 'getActivityRes'}, // 资讯公告内容

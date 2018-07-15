@@ -11,7 +11,7 @@ export default class Terms extends exchangeViewBase {
 
   render() {
     const controller = this.props.controller;
-    // console.log(`${serverConfig.host}/genrealize/register/${this.props.location.search}`);
+    console.log(`${serverConfig.host}/mgenrealize/register/${this.props.location.search}`);
     let { nameUsd, netUrl, coin } = controller.configData;
     return <div className="minvite">
         <h3>邀请有礼：</h3>
@@ -40,7 +40,7 @@ export default class Terms extends exchangeViewBase {
             </p>
             <div className="qrcode">
               <div className="qrcode-wrap">
-              <QRCode value={`${serverConfig.host}/genrealize/register/${this.props.location.search}`} level="M" bgColor="rgba(0,0,0,0)" fgColor="#FFF"/>
+              <QRCode value={`${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="rgba(0,0,0,0)" fgColor="#FFF"/>
               </div>
             </div>
           </div>

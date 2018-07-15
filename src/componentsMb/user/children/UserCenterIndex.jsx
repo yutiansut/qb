@@ -1,5 +1,6 @@
 import React from 'react';
 import exchangeViewBase from '../../ExchangeViewBase.jsx';
+import {NavLink} from 'react-router-dom'
 
 import '../stylus/userCenterIndex.styl'
 
@@ -7,11 +8,15 @@ export default class UserCenterIndex extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
+
   componentWillMount() {
   }
+
   componentDidMount() {
   }
+
   render() {
+    const {url} = this.props
     return (
       <div className="user-center-index">
         <div className="user-center-header">
@@ -34,24 +39,28 @@ export default class UserCenterIndex extends exchangeViewBase {
               </div>
             </li>
             <li className="list-item clearfix">
-              <div className="fl">
-                <img src="../../../static/mobile/user/icon_wd_aqzx@3x.png"/>
-                <span>安全中心</span>
-              </div>
-              <div className="fr">
-                <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
-              </div>
+              <NavLink to={`${url}/safe`}>
+                <div className="fl">
+                  <img src="../../../static/mobile/user/icon_wd_aqzx@3x.png"/>
+                  <span>安全中心</span>
+                </div>
+                <div className="fr">
+                  <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
+                </div>
+              </NavLink>
             </li>
           </ul>
           <ul className="list-section">
             <li className="list-item clearfix">
-              <div className="fl">
-                <img src="../../../static/mobile/user/icon_wd_gywm@3x.png"/>
-                <span>关于我们</span>
-              </div>
-              <div className="fr">
-                <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
-              </div>
+              <NavLink to={`${url}/aboutUs`}>
+                <div className="fl">
+                  <img src="../../../static/mobile/user/icon_wd_gywm@3x.png"/>
+                  <span>关于我们</span>
+                </div>
+                <div className="fr">
+                  <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
+                </div>
+              </NavLink>
             </li>
           </ul>
         </div>
