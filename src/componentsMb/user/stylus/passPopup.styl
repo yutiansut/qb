@@ -1,0 +1,78 @@
+@import "../../../common/css/variable.styl"
+
+.pass-wrap
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .7)
+  z-index 5
+  em
+    position absolute
+    top .68rem
+    font-size .12rem
+    color $negative-color
+    transform scale(.9)
+  .hide
+    display none
+  .pass-info
+    position absolute
+    left 50%
+    top 50%
+    width 5.64rem
+    //height 5.55rem
+    padding .24rem .3rem 0
+    background $normal-white-color
+    border-radius (.06rem)
+    transform translateX(-50%) translateY(-50%)
+    .close-popup
+      width .16rem
+      height .16rem
+      margin-left 4.9rem
+      cursor pointer
+    .pop-title
+      margin .04rem 0 .3rem
+    ul
+      li
+        position relative
+        //margin-bottom .44rem
+        margin-bottom .25rem
+        p
+          margin-bottom .1rem
+        input
+          width 3.8rem
+          height .4rem
+          margin-right .2rem
+          padding-left .1rem
+          //background $main-bg-active
+          //border 1px solid $line-light
+          border-radius (.02rem)
+          vertical-align bottom
+        .btn
+          width 1rem
+          height .4rem
+          font-size .13rem
+          color $normal-white-color
+          background $main-color
+          border-radius (.02rem)
+          border none
+        .picture-btn
+          background $normal-gray-color
+        .set-btn
+          width 1rem
+          margin-left 4.05rem
+          opacity .5
+        .can-click
+          opacity 1
+        .pass-btn-group
+          .base-input-wrap
+            float left
+          .btn
+            float left
+      .long-li
+        input
+          width 5.04rem
+      .remind-pass-li
+        fz11()
+        color $negative-color

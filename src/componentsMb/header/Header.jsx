@@ -39,7 +39,7 @@ export default class Header extends ExchangeViewBase {
               {userController.userToken &&
               (<NavLink to="/muser"
                         className="nav-login"
-                        onClick={e => this.setState({navHidden: true})}>{userController.userName}</NavLink>)
+                        onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/user/icon_wd_head@3x.png" alt=""/><span>{userController.userName}</span></NavLink>)
               || (<NavLink to="/mlogin"
                            className="nav-login"
                            onClick={e => this.setState({navHidden: true})}>

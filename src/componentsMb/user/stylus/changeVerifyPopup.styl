@@ -1,0 +1,62 @@
+@import "../../../common/css/variable.styl"
+
+.change-popup-wrap
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .7)
+  z-index 5
+  .hide
+    display none
+  .change-info
+    position absolute
+    left 50%
+    top 50%
+    width 5.64rem
+    padding .24rem .3rem .44rem
+    background $normal-white-color
+    border-radius (.06rem)
+    transform translateX(-50%) translateY(-50%)
+    .close-popup
+      width .16rem
+      height .16rem
+      margin-left 4.9rem
+      cursor pointer
+    .pop-title
+      margin .04rem 0 .44rem
+    input
+      width 5.04rem
+      height .4rem
+      margin-bottom .25rem
+    .picture-div, .verify-div
+      .base-input-wrap
+        float left
+        input
+          width 3.7rem
+          border-radius (.02rem 0 0 .02rem)
+          margin-right .2rem
+      .verify-btn, p
+        float left
+        width 1.1rem
+        height .4rem
+        border-radius (.02rem .02rem)
+        color $normal-white-color
+      .verify-btn
+        background $main-color
+      p
+        border 0.01rem solid $line-dark
+        text-align center
+        cursor pointer
+        img
+          width 1.1rem
+          height .4rem
+    .set-btn
+      width 1rem
+      height .4rem
+      background $main-color
+      margin-left 4rem
+      border none
+      color #FFF
+

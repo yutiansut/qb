@@ -20,9 +20,9 @@ export default class UserCenterIndex extends exchangeViewBase {
     return (
       <div className="user-center-index">
         <div className="user-center-header">
-          <h1>我的</h1>
+          {/*<h1>我的</h1>*/}
           <div>
-            <img src="../../../static/mobile/user/touxiang.jpg"/>
+            <img src="/static/mobile/user/icon_wd_head@3x.png"/>
             <span>13611363456</span>
           </div>
         </div>
@@ -38,8 +38,8 @@ export default class UserCenterIndex extends exchangeViewBase {
                 <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
               </div>
             </li>
-            <li className="list-item clearfix">
-              <NavLink to={`${url}/safe`}>
+            <NavLink to={`${url}/safe`}>
+              <li className="list-item clearfix">
                 <div className="fl">
                   <img src="../../../static/mobile/user/icon_wd_aqzx@3x.png"/>
                   <span>安全中心</span>
@@ -47,12 +47,12 @@ export default class UserCenterIndex extends exchangeViewBase {
                 <div className="fr">
                   <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
                 </div>
-              </NavLink>
-            </li>
+              </li>
+            </NavLink>
           </ul>
           <ul className="list-section">
-            <li className="list-item clearfix">
-              <NavLink to={`${url}/aboutUs`}>
+            <NavLink to={`${url}/aboutUs`}>
+              <li className="list-item clearfix">
                 <div className="fl">
                   <img src="../../../static/mobile/user/icon_wd_gywm@3x.png"/>
                   <span>关于我们</span>
@@ -60,8 +60,8 @@ export default class UserCenterIndex extends exchangeViewBase {
                 <div className="fr">
                   <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
                 </div>
-              </NavLink>
-            </li>
+              </li>
+            </NavLink>
           </ul>
         </div>
       </div>
