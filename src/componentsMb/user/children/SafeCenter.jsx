@@ -10,8 +10,9 @@ export default class UserCenterIndex extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      setFundPass : false,
-      showSet:false
+      setFundPass: false,
+      showSet: false,
+      fundPassArr : ['每次', '2小时', '不输入', '取消']
     }
     const {controller} = props
     //绑定view
@@ -29,8 +30,10 @@ export default class UserCenterIndex extends exchangeViewBase {
     this.bindUser = controller.bindUser.bind(controller)
     this.closeSet = this.closeSet.bind(this)
   }
+
   componentWillMount() {
   }
+
   async componentDidMount() {
     await AsyncAll([this.initData(), this.getCaptchaVerify()])
   }
@@ -65,18 +68,20 @@ export default class UserCenterIndex extends exchangeViewBase {
         </div>
         <ul className="safe-center-container">
           <li className="item clearfix">
-            <span className="fl" onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>
+            <span className="fl"
+                  onClick={state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
           </li>
           <li className="item clearfix">
-            <span className="fl" onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>
+            <span className="fl"
+                  onClick={state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
           </li>
-          <li className="item clearfix">
+          <li className="item clearfix" onClick={e => this.setState({setFundPass: true})}>
             <span className="fl">需要资金密码</span>
             <div className="fr">
               <span>每次</span>
@@ -90,36 +95,39 @@ export default class UserCenterIndex extends exchangeViewBase {
             </div>
           </li>
         </ul>
-        {this.state.setFundPass && <div className="need-fund-pass">
+        {this.state.setFundPass && <div className="need-fund-pass" onClick={e => this.setState({setFundPass: false})}>
           <div className="select-section">
-            <button>每次</button>
-            <button>2小时</button>
-            <button>不输入</button>
-            <button>取消</button>
+            {this.state.fundPassArr.map((v, index) =>
+              <button key={index} onClick={}>{v}</button>
+            )}
           </div>
         </div>}
         {this.state.showSet && <PassPopup onClose={this.closeSet}
-                                          phone = {this.state.userInfo.phone}
-                                          email = {this.state.userInfo.email}
-                                          isType = {this.state.type}
-                                          getVerify = {this.getVerify}
-                                          bindUser = {this.bindUser}
-                                          setLoginPass = {this.setLoginPass}
-                                          // setFundPass = {this.setFundPass}
-                                          modifyFundPwd = {this.modifyFundPwd}
-                                          fundPassType = {this.state.userInfo.fundPassVerify}
-                                          captcha = {this.state.captcha}
-                                          captchaId = {this.state.captchaId}
-                                          getCaptcha = {this.getCaptchaVerify}
-                                          verifyNum = {this.state.verifyNum}
-                                          clearErr2 = {() => {this.clearErr2()}}
+                                          phone={this.state.userInfo.phone}
+                                          email={this.state.userInfo.email}
+                                          isType={this.state.type}
+                                          getVerify={this.getVerify}
+                                          bindUser={this.bindUser}
+                                          setLoginPass={this.setLoginPass}
+          // setFundPass = {this.setFundPass}
+                                          modifyFundPwd={this.modifyFundPwd}
+                                          fundPassType={this.state.userInfo.fundPassVerify}
+                                          captcha={this.state.captcha}
+                                          captchaId={this.state.captchaId}
+                                          getCaptcha={this.getCaptchaVerify}
+                                          verifyNum={this.state.verifyNum}
+                                          clearErr2={() => {
+                                            this.clearErr2()
+                                          }}
                                           destroy={this.destroy}
-                                          popupInputErr2 = {this.state.popupInputErr2}/>}
+                                          popupInputErr2={this.state.popupInputErr2}/>}
         {this.state.remindPopup && <RemindPopup
           type={this.state.popType}
           msg={this.state.popMsg}
-          autoClose = {true}
-          onClose={() => {this.setState({ remindPopup: false });}}/>}
+          autoClose={true}
+          onClose={() => {
+            this.setState({remindPopup: false});
+          }}/>}
       </div>
     );
   }
