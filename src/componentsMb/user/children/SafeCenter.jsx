@@ -3,6 +3,8 @@ import exchangeViewBase from '../../ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
 import '../stylus/userSafeCenter.styl'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
+import RemindPopup from '../../../common/component/Popup/index.jsx'
+import {AsyncAll} from "../../../core";
 
 export default class UserCenterIndex extends exchangeViewBase {
   constructor(props) {
@@ -29,8 +31,8 @@ export default class UserCenterIndex extends exchangeViewBase {
   }
   componentWillMount() {
   }
-  componentDidMount() {
-    this.initData()
+  async componentDidMount() {
+    await AsyncAll([this.initData(), this.getCaptchaVerify()])
   }
 
   changeSetPopup(type) { // 设置密码显示
@@ -51,7 +53,7 @@ export default class UserCenterIndex extends exchangeViewBase {
 
   render() {
     const {controller, url} = this.props
-    console.log('this.state', this.state)
+    // console.log('this.state', this.state)
     return (
       <div className="user-safe-center">
         <div className="safe-center-header">
@@ -63,13 +65,13 @@ export default class UserCenterIndex extends exchangeViewBase {
         </div>
         <ul className="safe-center-container">
           <li className="item clearfix">
-            <span className="fl" onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>
+            <span className="fl" onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
           </li>
           <li className="item clearfix">
-            <span className="fl" onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>
+            <span className="fl" onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
@@ -113,6 +115,11 @@ export default class UserCenterIndex extends exchangeViewBase {
                                           clearErr2 = {() => {this.clearErr2()}}
                                           destroy={this.destroy}
                                           popupInputErr2 = {this.state.popupInputErr2}/>}
+        {this.state.remindPopup && <RemindPopup
+          type={this.state.popType}
+          msg={this.state.popMsg}
+          autoClose = {true}
+          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }
