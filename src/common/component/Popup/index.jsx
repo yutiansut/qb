@@ -11,6 +11,7 @@ import "./style.styl";
   autoClose 是否自动关闭（3s）自动关闭是调用onClose，无onClose时不生效
   msg 提示文案
   className 自定义类名
+  h5 布尔值，是否移动端
   icon 默认succeed 可选warning,wrong,message, type为
 */
 export default class Popup extends exchangeViewBase {
@@ -66,6 +67,7 @@ export default class Popup extends exchangeViewBase {
       msg,
       autoClose,
       icon,
+      h5,
       className
     } = this.props;
     (!icon || (!["succeed", "warning", "wrong", "message"].includes(icon))) && (icon = 'succeed');
@@ -86,7 +88,7 @@ export default class Popup extends exchangeViewBase {
     return (
       <div className={`wrap ${["tip1", "tip2", "tip3", "tip4"].includes(type) ? 'trans' : ''}`}>
         <div
-          className={`base-popup ${type} ${className ? className : ''}`}
+          className={`base-popup ${type} ${className ? className : ''} ${h5 ? 'h5':''}`}
           onClick={e => {
             e.nativeEvent.stopImmediatePropagation();
             ["tip1", "tip2", "tip3", "tip4"].includes(type) && onClose()

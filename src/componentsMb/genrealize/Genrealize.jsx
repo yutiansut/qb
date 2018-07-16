@@ -7,7 +7,7 @@ import {
   Switch
 } from "react-router-dom";
 import exchangeViewBase from "../ExchangeViewBase";
-import Terms from "./children/Terms";
+// import Terms from "./children/Terms";
 import Invite from "./children/Invite";
 import Register from "./children/Register";
 
@@ -34,7 +34,7 @@ export default class Genrealize extends exchangeViewBase {
           {/* <Route path={`${match.url}/terms`} component={Term} /> */}
           <Route path={`${match.url}/invite`} component={Invit} />
           <Route path={`${match.url}/register`} component={Regist} />
-          {/* <Redirect to={`${match.url}/terms`} /> */}
+          <Redirect to={`${match.url}/invite`} />
         </Switch>
       </div>
     );

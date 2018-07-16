@@ -142,7 +142,7 @@ export default class AssetController extends ExchangeControllerBase {
     result.forEach(v => {
       str +=
         "\n" +
-          v.orderTime.toDate("yyyy-MM-dd") +
+          v.orderTime.toDate("yyyy-MM-dd HH:mm:ss") +
           "," +
           v.coinName +
           "," +

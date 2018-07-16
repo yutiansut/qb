@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
-import queryString from "querystring";
 import "../style/register.styl";
 
 export default class Register extends exchangeViewBase {
@@ -8,11 +7,11 @@ export default class Register extends exchangeViewBase {
     super(props);
     const { controller } = this.props;
     controller.setView(this);
-    let query = queryString.parse(this.props.location.search.substring(1));
+    let uid = this.props.location.search.substring(1).split('=')[1];
 
     this.state = {
       account: "",
-      uid: JSON.parse(query.uid),
+      uid: JSON.parse(uid),
       margin: 0,
       showVagueBgView: false,
       showSuccess: false,
@@ -66,7 +65,7 @@ export default class Register extends exchangeViewBase {
           <div className="title">新人奖励</div>
           <p>
             注册即领取
-            <span>100</span>
+            <span>20</span>
             {coin}
           </p>
           <input
@@ -94,11 +93,11 @@ export default class Register extends exchangeViewBase {
         >
           <img src="/static/images/genrealize/success.png" alt="" />
           <p>领取成功</p>
-          <div className="register-asset">
+          <div className="mregister-asset">
             您当前的资产
-            <span>100</span>/{coin}
+            <span>20</span>/{coin}
           </div>
-          <a href="http://192.168.113.3/Share/" target="_blank">
+          <a href="http://www.cointalks.com/res/com.mix.coinrising_v1.1_debug.apk" target="_blank">
             下载{nameUsd}app,登录即查看资产~
           </a>
         </div>

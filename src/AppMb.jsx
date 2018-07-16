@@ -96,7 +96,7 @@ export default class App extends Component {
       marketController.userController = userController;
       marketController.configController = configController;
 			marketController.assetController = assetController;
-			
+
 			userOrderController.userController = userController;
       userOrderController.marketController = marketController;
 
@@ -131,7 +131,7 @@ export default class App extends Component {
                       <Route path="/mhelp" component={HelpComponent}/>
                       <Route path="/mwallet" component={AssetComponent}/>
                       <Route path="/mgenrealize" component={Gener}/>
-					            <Route path="/morder" component={OrderManageCompoment}/>
+					  <Route path="/morder" component={OrderManageCompoment}/>
                       <Route path="/muser" component={UserCenterComponent} />
                       <Redirect to="/mhome" />
                   </Switch>

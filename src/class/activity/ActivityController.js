@@ -26,7 +26,6 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   get account() {
-    console.log(this.userController.userInfo)
     return this.userController.userInfo.phone || this.userController.userInfo.email
   }
 
@@ -80,7 +79,9 @@ export default class ActivityController extends ExchangeControllerBase {
 
     let result = await this.store.getAward({inviter, invited});
     //领取成功，
-    if (result.award === 100) {
+    if (result.award!==undefined) {
+      this.clearGetQbtMargin();
+      this.getQbtMargin();
       this.view.setState({
         showVagueBgView: true,
         showSuccess: true
