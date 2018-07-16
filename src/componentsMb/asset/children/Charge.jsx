@@ -12,6 +12,7 @@ export default class Charge extends exchangeViewBase {
         let { controller } = props;
         this.state = {
             currency: "BTC",
+            address: "",
 
             showPopup: false,
             popMsg: "",
@@ -65,13 +66,15 @@ export default class Charge extends exchangeViewBase {
                     <h3>充币</h3>
                     <a className="right">充币记录</a>
                 </div>
-                <div className="filter">
+                <div className="filter" onClick={()=>{
+                    this.setState({showSelect:true});
+                }}>
                     <label>选择币种</label>
-                    <b>BTC</b>
+                    <b>{this.state.currency}</b>
                     <i>&gt;</i>
                 </div>
                 <div className="info">
-                    <QRCode value={address} level="M" size="160" className="qrcode"/>
+                    <QRCode value={address} level="M" size={160} className="qrcode"/>
                     {/* <a className="save-qrcode">保存二维码</a>*/}
                     <input type="text" ref="addr" value={address} disabled="disabled"/>
                     <a className="copy-addr"
@@ -95,21 +98,22 @@ export default class Charge extends exchangeViewBase {
                         autoClose = {true}
                     />
                 )}
-                {/*选中币种*/}
+                {/*选择币种*/}
                 {this.state.showSelect && <div className="select">
                     <div className="nav sl-head">
-                        <a className="left">&lt; 返回</a>
-                        <h3>选中币种</h3>
+                        <a className="left" onClick={()=>{
+                            this.setState({showSelect:false});
+                        }}>&lt; 返回</a>
+                        <h3>选择币种</h3>
                     </div>
                     <ul>
-                        <li>BTC</li>
-                        <li>EOS</li>
-                        <li>USDT</li>
-                        <li>USDT</li>
-                        <li>USDT</li>
-                        <li>USDT</li>
-                        <li>USDT</li>
-                        <li>USDT</li>
+                        {walletList && walletList.map((item,index)=>{
+                            return <li key={index} onClick={()=>{
+                                this.setState({currency:item,showSelect:false},()=>{
+                                    this.getCoinAddress(this.state.currency);
+                                })
+                            }}>{item.toUpperCase()}</li>
+                        })}
                     </ul>
                 </div>}
             </div>
