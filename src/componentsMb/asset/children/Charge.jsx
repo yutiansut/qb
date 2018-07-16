@@ -9,22 +9,15 @@ import "../style/charge.styl";
 export default class Charge extends exchangeViewBase {
     constructor(props) {
         super(props);
-        this.name = "charge";
         let { controller } = props;
-        this.status = {
-            0: this.intl.get("pending"),
-            1: this.intl.get("passed"),
-            2: this.intl.get("failed"),
-            3: this.intl.get("cancel")
-        };
         this.state = {
             currency: "BTC",
-            value: "BTC",
-            address: "",
 
             showPopup: false,
             popMsg: "",
             popType: "",
+
+            showSelect: false
 
         };
         //绑定view
@@ -32,15 +25,11 @@ export default class Charge extends exchangeViewBase {
         //初始化数据，数据来源即store里面的state
         let {
             walletList,
-            assetHistory,
-            currencyAmount,
             coinAddress
         } = controller.initState;
 
         this.state = Object.assign(this.state, {
             walletList,
-            assetHistory,
-            currencyAmount,
             coinAddress
         });
 
@@ -54,81 +43,27 @@ export default class Charge extends exchangeViewBase {
         };
 
         this.getWalletList = controller.getWalletList.bind(controller);
-
-        this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
-
         this.getCoinAddress = controller.getCoinAddress.bind(controller);
-
-        this.getHistory = controller.getHistory.bind(controller);
-
-        this.getTradePair = controller.getTradePair.bind(controller);
-        // 处理出币种对应的交易对数组
-        this.getCoinPair = controller.getCoinPair.bind(controller);
     }
 
     async componentWillMount() {
-        let currency =
-            this.props.location.query && this.props.location.query.currency;
-        currency &&
-        this.setState({
-            currency: currency,
-            value: currency
-        });
+        let currency = this.props.location.query && this.props.location.query.currency;
+        currency && this.setState({currency: currency});
         await this.getWalletList();
-        this.getTradePair();
-        this.getCurrencyAmount(currency || this.state.currency);
         this.getCoinAddress(currency || this.state.currency);
-        this.getHistory({
-            page: 0,
-            pageSize: 10,
-            coinId: -1,
-            coinName: -1,
-            orderType: 1,
-            orderStatus: -1,
-            startTime: -1,
-            endTime: -1
-        });
     }
 
-    componentDidMount() {
-        window.addEventListener("click", this.hideQrcode);
-    }
-
-    componentWillUpdate(props, state, next) {
-        if (this.state.currency !== state.currency) {
-            this.getCoinAddress(state.currency);
-            this.getCurrencyAmount(state.currency);
-        }
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (JSON.stringify(nextState) !== JSON.stringify(this.state)) return true;
-        return false;
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("click", this.hideQrcode);
-    }
-
-    copy(el){
-        if(this.props.controller.copy(el)){
-
-        }else{
-
-        }
-    };
+    componentDidMount() {}
 
     render() {
-        let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
-        let { total, orderList } = this.state.assetHistory;
-        let address = this.state.coinAddress;
-
+        let address = this.state.coinAddress.coinAddress || "-";
+        let walletList=Object.keys(this.state.walletList);
         return (
             <div className="charge">
                 <div className="nav">
-                    <a>&lt; 返回</a>
+                    <a className="left">&lt; 返回</a>
                     <h3>充币</h3>
-                    <a>充币记录</a>
+                    <a className="right">充币记录</a>
                 </div>
                 <div className="filter">
                     <label>选择币种</label>
@@ -136,9 +71,9 @@ export default class Charge extends exchangeViewBase {
                     <i>&gt;</i>
                 </div>
                 <div className="info">
-                    <QRCode value={this.state.address} level="M" size="160" className="qrcode"/>
+                    <QRCode value={address} level="M" size="160" className="qrcode"/>
                     {/* <a className="save-qrcode">保存二维码</a>*/}
-                    <input type="text" ref="addr">1HzAeTtq1MvjcrzU7RtgMb1y4Lps3tg67r</input>
+                    <input type="text" ref="addr" value={address} disabled="disabled"/>
                     <a className="copy-addr"
                        onClick={()=>{
                            this.copy(this.refs.addr);
@@ -160,6 +95,23 @@ export default class Charge extends exchangeViewBase {
                         autoClose = {true}
                     />
                 )}
+                {/*选中币种*/}
+                {this.state.showSelect && <div className="select">
+                    <div className="nav sl-head">
+                        <a className="left">&lt; 返回</a>
+                        <h3>选中币种</h3>
+                    </div>
+                    <ul>
+                        <li>BTC</li>
+                        <li>EOS</li>
+                        <li>USDT</li>
+                        <li>USDT</li>
+                        <li>USDT</li>
+                        <li>USDT</li>
+                        <li>USDT</li>
+                        <li>USDT</li>
+                    </ul>
+                </div>}
             </div>
         );
     }

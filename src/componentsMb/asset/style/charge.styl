@@ -5,21 +5,28 @@
   .charge
     background $bg-light-color
     font-family PingFangSC-Medium
+    position relative
     .nav
-      display flex
       height .4rem
       line-height .4rem
-      padding 0 .12rem
       background $normal-white-color
       border-bottom .01rem solid $h5-border-light
+      position relative
       h3
-        flex-grow 1
         text-align center
         font-weight bold
         font-size .18rem
+        position absolute
+        width 100%
       a
         font-size .14rem
         color $h5-color-blue
+        &.left
+          float left
+          margin-left .12rem
+        &.right
+          float right
+          margin-right .12rem
     .filter
       padding 0 .12rem
       line-height .4rem
@@ -29,11 +36,11 @@
         width .6rem
         color $h5-color-normal
         display inline-block
-        font-size .14rem
+        font-size .15rem
       b
         color $h5-color-weight
         margin-left .3rem
-        font-size .14rem
+        font-size .15rem
       i
         color $h5-color-light
         font-size .18rem
@@ -57,9 +64,11 @@
         color $h5-color-blue
       input
         color $h5-color-weight
-        font-size .14rem
+        font-size .15rem
         line-height .2rem
         border 0
+        width 100%
+        text-align center
       .copy-addr
         color $h5-color-blue
         font-size .16rem
@@ -69,6 +78,21 @@
         line-height .2rem
         margin .02rem 0
         text-align justify
+
+
+    .select
+      position absolute
+      top 0
+      bottom 0
+      width 100%
+      background $normal-white-color
+      ul
+        li
+          line-height .4rem
+          border-bottom .01rem solid $h5-border-light
+          padding 0 .12rem
+          color $h5-color-normal
+          font-size .15rem
 
 
 
