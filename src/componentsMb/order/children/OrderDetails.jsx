@@ -42,7 +42,7 @@ export default class OrderDetails extends exchangeViewBase {
       <div className="order-details">
         <div className="order-details-header">
           <div className="back" onClick={() => {this.props.setListDisplay()}}>
-            <img src="../../../../static/img/order/Back Copy@3x.png"/>
+            <img src="../../../../static/mobile/order/Back Copy@3x.png"/>
             <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.intl.get("orderDetail")}</div>

@@ -56,13 +56,13 @@ export default class OrderItem extends exchangeViewBase{
             {type === "current" && <div className="time-current fl">{Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>}
             {type === "current" ? (
               <div className="cancel-current fr" onClick={() => {this.props.cancelOrder(index)}}>
-                <img src="../../../../static/img/order/btn_chexiaoheibg@3x.png"/>
+                <img src="../../../../static/mobile/order/btn_chexiaoheibg@3x.png"/>
                 <span>{this.intl.get("cancel")}</span>
               </div>
             ) : (
               <div className="info-history fr" onClick={this.goDetailDisplay}>
                 <span className={orderStatusClass[orderInfo.orderStatus]}>{orderStatus[orderInfo.orderStatus]}</span>
-                {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6) && <img src="../../../../static/img/order/icon_qianjb@3x.png"/>}
+                {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6) && <img src="../../../../static/mobile/order/icon_qianjb@3x.png"/>}
               </div>
             )}
           </div>
