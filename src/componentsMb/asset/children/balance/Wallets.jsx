@@ -21,7 +21,7 @@ export default class Wallets extends exchangeViewBase {
     return <div className="asset-wallet">
         <div className="filter">
           <img src="/static/mobile/icon_zc_yclyezc@2x.png"/>
-          <span>隐藏0余额资产</span>
+          <span>{this.intl.get("asset-hideZero")}</span>
           <span className={this.state.hideZero ? "toggle-btn active" : "toggle-btn"}
                  onClick={()=>{
                    this.setState({hideZero:!this.state.hideZero});
@@ -32,14 +32,14 @@ export default class Wallets extends exchangeViewBase {
             return <div className="wallet-li"  key={index}>
                 <div className="d1">
                     <label><img src={item.coinIcon}/>{item.coinName.toUpperCase()}</label>
-                    <NavLink to={{pathname: `/mwallet/detail/`, query: { currency: item.coinName }}}>资产详情 ></NavLink>
+                    <NavLink to={{pathname: `/mwallet/detail/`, query: { currency: item.coinName }}}>{this.intl.get("asset-detail")} ></NavLink>
                 </div>
                 <div className="d2">
                     <p>
-                        <span>可用</span><i>{Number(item.availableCount).format({number: "property" })}</i>
+                        <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({number: "property" })}</i>
                     </p>
                     <p>
-                        <span>冻结</span>
+                        <span>{this.insl.get("asset-lock")}</span>
                         <i>{Number(item.frozenCount).format({number: "property" })}</i>
                     </p>
                 </div>

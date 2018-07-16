@@ -181,6 +181,7 @@ export default function zh(state) {
     "asset-usedAsset": "已用",
     "asset-hideLittle": "隐藏小额资产",
     "asset-hideZero": "隐藏0余额币种",
+    "asset-charge": "充币",
     "asset-withdraw": "提币",
     "asset-trade": "交易",
     "asset-currency": "币种",
@@ -188,6 +189,7 @@ export default function zh(state) {
     "asset-avail": "可用余额",
     "asset-lock": "冻结中金额",
     "asset-tobtc": "BTC估值",
+    "asset-valuation": "估值",
     "asset-tip1": "小于0.001btc",
     "asset-tip2": "交易未匹配完成,处于挂单环节的金额",
     "asset-tip3": "此项估值为可用余额估值",
@@ -248,7 +250,8 @@ export default function zh(state) {
     "asset-delet-fail": '删除失败！',
     "asset-input-address": '您未选择提现地址，不允许提交',
     "asset-password-unset": '你还未设置资金密码，不能提现',
-    "asset-withdrawal-failed": '提币失败'
+    "asset-withdrawal-failed": '提币失败',
+    "asset-detail": '资产详情',
   };
   const market = {
     "market-favorite": "收藏",
@@ -626,6 +629,6 @@ export default function zh(state) {
     deal,
     user,
     login,
-    help
+    help,
   );
 }

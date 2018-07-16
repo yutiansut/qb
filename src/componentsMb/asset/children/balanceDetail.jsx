@@ -34,20 +34,12 @@ export default class BalanceDetail extends exchangeViewBase {
             item.coinName.toUpperCase()===coin.toUpperCase() && (i=index);
         });
         let result=this.state.wallet[i];
-        !result && (result={
-                coinName: "BTC",
-                coinIcon: "http://www.cointalks.com/res/btc.png",
-                fullName: "Bitcoin",
-                valuationBTC: 0,
-                valuationCN: 0,
-                availableCount: 0,
-                frozenCount: 0,
-            });
+        !result && (result={});
         //
         return <div className="balance-detail">
             <div className="nav">
-                <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
-                <h3>资产详情</h3>
+                <NavLink to="/mwallet" className="left">&lt; {this.intl.get("back")}</NavLink>
+                <h3>{this.intl.get("asset-detail")}</h3>
             </div>
             <div className="d1">
                 <img src={result.coinIcon}/>
@@ -55,19 +47,19 @@ export default class BalanceDetail extends exchangeViewBase {
                 <span>{result.fullName}</span>
             </div>
             <div className="d2">
-                <p><span>估值 (BTC)</span><i>{result.valuationBTC}</i></p>
-                <p><span>估值 (CNY)</span><i>{result.valuationCN}</i></p>
+                <p><span>{this.intl.get("asset-valuation")} (BTC)</span><i>{result.valuationBTC}</i></p>
+                <p><span>{this.intl.get("asset-valuation")} (CNY)</span><i>{result.valuationCN}</i></p>
             </div>
             <div className="d3">
-                <p><span>可用余额</span><i>{result.availableCount}</i></p>
-                <p><span>下单冻结</span><i>{result.frozenCount}</i></p>
+                <p><span>{this.intl.get("asset-avail")}</span><i>{result.availableCount}</i></p>
+                <p><span>{this.intl.get("asset-orderLock")}</span><i>{result.frozenCount}</i></p>
             </div>
             <Link className="coin-info" to={{pathname: `/mhelp/currency/`, query: {currency: result.coinName}}}>
-                币种简介<img src="/static/mobile/btn_jy_dqddzk.png"/>
+                {this.intl.get("market-currencyInfo")}<img src="/static/mobile/btn_jy_dqddzk.png"/>
             </Link>
             <div className="footer">
-                <NavLink to={{pathname: "/mwallet/charge", query: {currency:result.coinName}}} className="active">充币</NavLink>
-                <a>提币</a>
+                <NavLink to={{pathname: "/mwallet/charge", query: {currency:result.coinName}}} className="active">{this.intl.get("asset-charge")}</NavLink>
+                <a>{this.intl.get("asset-withdraw")}</a>
             </div>
         </div>
     }

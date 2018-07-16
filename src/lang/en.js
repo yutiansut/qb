@@ -182,6 +182,7 @@ export default function en(state) {
     "asset-usedAsset": "Already in used",
     "asset-hideLittle": "Hide small balance",
     "asset-hideZero": "Hide 0 balances",
+    "asset-charge": "Charge",
     "asset-withdraw": "Withdraw",
     "asset-trade": "Trade",
     "asset-currency": "Currency",
@@ -189,6 +190,7 @@ export default function en(state) {
     "asset-avail": "Available Balance",
     "asset-lock": "Frozen balance",
     "asset-tobtc": "BTC Valuation",
+    "asset-valuation": "Valuation",
     "asset-tip1": "Less than0.001BTC",
     "asset-tip2": "No trading has been matched",
     "asset-tip3": "Available balance valuation",
@@ -249,7 +251,8 @@ export default function en(state) {
     "asset-delet-fail": "Delete failed!",
     "asset-input-address": "Please select a withdrawal address",
     "asset-password-unset": "You haven't created a funding password, cannot withdraw!",
-    "asset-withdrawal-failed": 'Withdrawal failed'
+    "asset-withdrawal-failed": 'Withdrawal failed',
+    "asset-detail": 'Asset Detail',
   };
   const market = {
     "market-favorite": "Favorites",
@@ -683,6 +686,6 @@ export default function en(state) {
     deal,
     user,
     login,
-    help
+    help,
   );
 }

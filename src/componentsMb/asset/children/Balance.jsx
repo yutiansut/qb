@@ -31,9 +31,9 @@ export default class Balance extends exchangeViewBase {
     return <div className="balance">
       <TotalAsset totalAsset={this.state.totalAsset} controller={this.props.controller} />
       <ul className="menu-ul">
-        <li><Link to="/mwallet/charge">充币</Link></li>
-        <li><a>提币</a></li>
-        <li><Link to="/mwallet/dashboard">资产记录</Link></li>
+        <li><Link to="/mwallet/charge">{this.intl.get("asset-charge")}</Link></li>
+        <li><a>{this.intl.get("asset-withdraw")}</a></li>
+        <li><Link to="/mwallet/dashboard">{this.intl.get("asset-records")}</Link></li>
       </ul>
       <Wallets wallet={this.state.wallet} history={this.props.history} controller={this.props.controller} />
     </div>
