@@ -196,7 +196,7 @@ export default class AssetStore extends ExchangeStoreBase {
       endTime: -1, //不设定传-1 都传Unix秒
       orderStatus: -1, //所有状态传-1
       page: 0,
-      pageSize: 999999999999
+      pageSize: 0
     });
     if (result && result.errCode) {
       return [];

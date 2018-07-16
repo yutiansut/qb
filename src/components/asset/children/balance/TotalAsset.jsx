@@ -46,7 +46,7 @@ export default class TotalAsset extends exchangeViewBase {
         </div>
         <div className="item used">
           <span>{this.intl.get("asset-usedAsset")}:</span>
-          <b>{(totalAsset.totalQuota*100000000 - totalAsset.availableQuota*100000000)/100000000} BTC</b>
+          <b>{Number(totalAsset.totalQuota.minus(totalAsset.availableQuota))} BTC</b>
         </div>
       </div>;
   }

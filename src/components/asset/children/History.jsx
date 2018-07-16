@@ -245,9 +245,10 @@ export default class History extends exchangeViewBase {
                   <th className="receive">
                     {this.intl.get("asset-receiveAddress")}
                   </th>
+                  <th className="confirm">{this.intl.get("asset-confirm")}</th>
                   <th className="state">{this.intl.get("asset-checkState")}</th>
                   <th className="fee">{this.intl.get("fee")}</th>
-                  <th className="option">{this.intl.get("option")}</th>
+                  {/* <th className="option">{this.intl.get("option")}</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -262,6 +263,7 @@ export default class History extends exchangeViewBase {
                         orderType,
                         count,
                         balance,
+                        blockSite,
                         postAddress,
                         receiveAddress,
                         verifyCount, //确认数
@@ -275,7 +277,7 @@ export default class History extends exchangeViewBase {
                         <td className="time pop-parent">
                           {orderTime.toDate("yyyy-MM-dd")}
                           <b className="pop-children uppop-children">
-                              {orderTime.toDate("yyyy-MM-dd HH:mm:ss")}
+                            {orderTime.toDate("yyyy-MM-dd HH:mm:ss")}
                           </b>
                         </td>
                         <td>
@@ -298,25 +300,45 @@ export default class History extends exchangeViewBase {
                           </i>
                         </td>
                         <td className="balan">
-                            <i>{Number(balance).format({number: 'property'})}</i>
+                          <i>
+                            {Number(balance).format({ number: "property" })}
+                          </i>
                         </td>
                         <td className="send pop-parent">
                           <i>{postAddress}</i>
-                            <b className="pop-children uppop-children">
-                              {postAddress}
-                            </b>
+                          <b className="pop-children uppop-children">
+                            {postAddress}
+                          </b>
                         </td>
                         <td className="receive pop-parent">
                           <i>{receiveAddress}</i>
-                            <b className="pop-children uppop-children">
-                              {receiveAddress}
-                            </b>
+                          <b className="pop-children uppop-children">
+                            {receiveAddress}
+                          </b>
                         </td>
-                          <td className={`state ${!orderStatus ? 'pending' : orderStatus === 2 ? 'failed':''}`}>
+                        <td className="confirm">
+                          {orderType === 1 ? (
+                            <a
+                              href={blockSite}
+                              target="_blank"
+                            >{`${doneCount}/${verifyCount}`}</a>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                        <td
+                          className={`state ${
+                            !orderStatus
+                              ? "pending"
+                              : orderStatus === 2
+                                ? "failed"
+                                : ""
+                          }`}
+                        >
                           <span>{this.staticData.status[orderStatus]}</span>
                         </td>
-                        <td className="fee">{fee}</td>
-                        <td className="option">
+                        <td className="fee">{fee || "—"}</td>
+                        {/* <td className="option">
                           {orderStatus === 0 ? (
                             <a
                               onClick={() => {
@@ -328,7 +350,7 @@ export default class History extends exchangeViewBase {
                           ) : (
                             "—"
                           )}
-                        </td>
+                        </td> */}
                       </tr>
                     )
                   )}

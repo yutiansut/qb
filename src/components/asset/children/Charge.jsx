@@ -287,6 +287,7 @@ export default class Charge extends exchangeViewBase {
                           <td>
                             <a
                               href={blockSite}
+                              target="_blank"
                             >{`${doneCount}/${verifyCount}`}</a>
                           </td>
                           <td>
