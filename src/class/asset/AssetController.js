@@ -406,11 +406,11 @@ export default class AssetController extends ExchangeControllerBase {
       return;
     }
     // 校验是否设置资金密码
-    if (this.userTwoVerify.fundPwd === 1) {
-      obj.orderTipContent = this.view.intl.get("asset-password-unset");
-      this.view.setState(obj);
-      return;
-    }
+    // if (this.userTwoVerify.fundPwd === 1) {
+    //   obj.orderTipContent = this.view.intl.get("asset-password-unset");
+    //   this.view.setState(obj);
+    //   return;
+    // }
     // 校验是否输入密码
     if (this.view.state.password === "") {
       obj.orderTipContent = this.view.intl.get("asset-inputFundPassword");
