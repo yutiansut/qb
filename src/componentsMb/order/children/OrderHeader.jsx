@@ -17,7 +17,7 @@ export default class OrderHeader extends exchangeViewBase{
         <div className='order-header clearfix'>
           <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
             <img src="../../../../static/img/order/Back@3x.png"/>
-            <span>返回</span>
+            <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.props.type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</div>
           {this.props.type === "current" && <div className="history fr">

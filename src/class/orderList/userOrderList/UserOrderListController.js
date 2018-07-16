@@ -80,8 +80,9 @@ export default class UserOrderListController extends OrderListController {
       return
     }
     this.view.setState({
-      orderListArray: historyOrder.orderList,
-      total: historyOrder.totalCount
+      // 若orderList为undefined，则默认为空数组
+      orderListArray: historyOrder && historyOrder.orderList || [],
+      total: historyOrder && historyOrder.totalCount || 0
     })
   }
 

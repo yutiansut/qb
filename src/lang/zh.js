@@ -85,7 +85,19 @@ export default function zh(state) {
     close: '关闭',
     sure: "确认",
     notice: "公告",
-    information: "资讯"
+    information: "资讯",
+    back: "返回",
+    orderType: "订单类型",
+    orderStatus: "订单状态",
+    date: "日期",
+    oneDay: "一天",
+    oneWeek: "一周",
+    oneMonth: "一月",
+    ok: "确定",
+    dealPrice: "成交价",
+    daelAmount: "实际成交",
+    avgDealPrice: "成交均价",
+    dealTurnover: "成交总额",
   };
   const errMessage = {
     "-1": "FETCH错误",

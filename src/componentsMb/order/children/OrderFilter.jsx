@@ -166,7 +166,7 @@ export default class orderFilter extends exchangeViewBase{
             </div>
           ) : (
             <div className="filter-container">
-            <h1>日期</h1>
+            <h1>{this.intl.get("date")}</h1>
             <div className="select-section">
               <button 
                 className={`${this.state.startTimeType === "day" ? "selected" : ""} choose-button`} 
@@ -174,21 +174,21 @@ export default class orderFilter extends exchangeViewBase{
                   this.setState({startTime: Math.floor(new Date().getTime() / 1000) - 24 * 60 * 60})
                   this.setState({startTimeType: 'day'})
                 }}
-              >一天</button>
+              >{this.intl.get("oneDay")}</button>
               <button 
                 className={`${this.state.startTimeType === "week" ? "selected" : ""} choose-button`} 
                 onClick={() => {
                   this.setState({startTime: Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60})
                   this.setState({startTimeType: 'week'})
                 }}
-              >一周</button>
+              >{this.intl.get("oneWeek")}</button>
               <button 
                 className={`${this.state.startTimeType === "month" ? "selected" : ""} choose-button`} 
                 onClick={() => {
                   this.setState({startTime: Math.floor(new Date().getTime() / 1000) - 24 * 60 * 60})
                   this.setState({startTimeType: 'month'})
                 }}
-              >一月</button>
+              >{this.intl.get("oneMonth")}</button>
               <button 
                 className={`${this.state.startTimeType === "all" ? "selected" : ""} choose-button`} 
                 onClick={() => {
@@ -196,7 +196,7 @@ export default class orderFilter extends exchangeViewBase{
                   this.setState({startTimeType: 'all'})
                 }} 
                 style={{marginRight: 0}}
-              >全部</button>
+              >{this.intl.get("all")}</button>
             </div>
             <h1>{this.intl.get("pair")}</h1>
             <div className="select-section">
@@ -228,7 +228,7 @@ export default class orderFilter extends exchangeViewBase{
                 className={`${this.state.orderType === 1 ? "selected" : ""} choose-button`} 
                 onClick={() => {this.setState({orderType : 1})}}>{this.intl.get("sell")}</button>
             </div>
-            <h1>订单状态</h1>
+            <h1>{this.intl.get("orderStatus")}</h1>
             <div className="select-section">
               <button 
                 className={`${this.state.totalDeal ? "selected" : ""} choose-button`} 
@@ -253,7 +253,7 @@ export default class orderFilter extends exchangeViewBase{
           )}
           <div className="filter-operate">
             <button onClick={this.selectReset}>{this.intl.get("reset")}</button>
-            <button onClick={this.orderSelect}>确定</button>
+            <button onClick={this.orderSelect}>{this.intl.get("ok")}</button>
           </div>
         </div>
     )

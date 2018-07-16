@@ -43,19 +43,19 @@ export default class OrderDetails extends exchangeViewBase {
         <div className="order-details-header">
           <div className="back" onClick={() => {this.props.setListDisplay()}}>
             <img src="../../../../static/img/order/Back Copy@3x.png"/>
-            <span>返回</span>
+            <span>{this.intl.get("back")}</span>
           </div>
-          <div className="name">成交明细</div>
+          <div className="name">{this.intl.get("orderDetail")}</div>
         </div>
         <div className="order-details-info">
           <h1>{orderDetail.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")}{tradePairName}</h1>
           <h2 className={orderStatusClass[orderDetail.orderStatus]}>{orderStatus[orderDetail.orderStatus]}</h2>
           <div className="info-item clearfix">
-            <span className="fl">订单类型</span>
+            <span className="fl">{this.intl.get("orderType")}</span>
             <span className="fr">{type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? this.intl.get("price") : "成交均价"}</span>
+            <span className="fl">{type === "current" ? this.intl.get("price") : this.intl.get("avgDealPrice")}</span>
             <span className="fl">({tradePairArr[1]})</span>
             <span className="fr">{orderDetail.price}</span>
           </div>
@@ -65,7 +65,7 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fr">{type === "current" ? orderDetail.count : orderDetail.doneCount}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? this.intl.get("order-deal-money") : "成交总额"}</span>
+            <span className="fl">{type === "current" ? this.intl.get("order-deal-money") : this.intl.get("dealTurnover")}</span>
             <span className="fl">({tradePairArr[1]})</span>
             <span className="fr">{orderDetail.dealedMoney}</span>
           </div>
@@ -75,23 +75,23 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fr">{orderDetail.fee}</span>
           </div>}
           {type === "current" && <div className="info-item clearfix">
-            <span className="fl">已成交</span>
+            <span className="fl">{this.intl.get("dealed")}</span>
             <span className="fl">({tradePairArr[0]})</span>
             <span className="fr">{orderDetail.doneCount}</span>
           </div>}
           {type === "current" && <div className="info-item clearfix">
-            <span className="fl">尚未成交</span>
+            <span className="fl">{this.intl.get("order-unDeal")}</span>
             <span className="fl">({tradePairArr[0]})</span>
             <span className="fr">{orderDetail.undoneCount}</span>
           </div>}
         </div>
         {type === "history" && <div className="order-deal-info">
-          <h3>成交详情</h3>
+          <h3>{this.intl.get("orderDetail")}</h3>
           <table>
             <tr className="clearfix">
-              <th className="fl set-width">日期</th>
-              <th className="fl">成交价</th>
-              <th className="fr">成交量</th>
+              <th className="fl set-width">{this.intl.get("date")}</th>
+              <th className="fl">{this.intl.get("dealPrice")}</th>
+              <th className="fr">{this.intl.get("volume")}</th>
             </tr>
             {orderDetail.orderList && orderDetail.orderList.map((order, index) => {
               return (

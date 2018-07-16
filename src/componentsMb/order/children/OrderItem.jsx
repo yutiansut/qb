@@ -50,14 +50,14 @@ export default class OrderItem extends exchangeViewBase{
         <div className='order-item'>
           <div className="order-item-head clearfix">
             <div className={`${orderInfo.orderType === 0 ? "buy" : "sell"} fl`}>
-              <span className="way">{orderInfo.orderType === 0 ? "买入" : "卖出"}</span>
+              <span className="way">{orderInfo.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")}</span>
               <span>{tradePairName}</span>
             </div>
             {type === "current" && <div className="time-current fl">{Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>}
             {type === "current" ? (
               <div className="cancel-current fr" onClick={() => {this.props.cancelOrder(index)}}>
                 <img src="../../../../static/img/order/btn_chexiaoheibg@3x.png"/>
-                <span>撤销</span>
+                <span>{this.intl.get("cancel")}</span>
               </div>
             ) : (
               <div className="info-history fr" onClick={this.goDetailDisplay}>
@@ -68,15 +68,15 @@ export default class OrderItem extends exchangeViewBase{
           </div>
           <div className="order-item-content clearfix" onClick={this.goDetailDisplay}>
             <div className="fl">
-              <div>{type === "current" ? "价格" : "时间"}{type === "current" && ` (${tradePairArr[1]})`}</div>
+              <div>{type === "current" ? this.intl.get("price") : this.intl.get("time")}{type === "current" && ` (${tradePairArr[1]})`}</div>
               <div>{type==="current" ? orderInfo.price : Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>
             </div>
             <div className="fl">
-              <div>{type === "current" ? "数量" : "成交价"}{type === "current" ? ` (${tradePairArr[0]})` : ` (${tradePairArr[1]})`}</div>
+              <div>{type === "current" ? this.intl.get("amount") : this.intl.get("dealPrice")}{type === "current" ? ` (${tradePairArr[0]})` : ` (${tradePairArr[1]})`}</div>
               <div>{type==="current" ? orderInfo.count : orderInfo.price}</div>
             </div>
             <div className="fr">
-              <div>{type === "current" ? "实际成交" : "数量"}{` (${tradePairArr[0]})`}</div>
+              <div>{type === "current" ? this.intl.get("daelAmount") : this.intl.get("amount")}{` (${tradePairArr[0]})`}</div>
               <div>{type==="current" ? orderInfo.dealDoneCount : orderInfo.count}</div>
             </div>
           </div>

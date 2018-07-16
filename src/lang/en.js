@@ -86,7 +86,19 @@ export default function en(state) {
     optionSuccess: "Operation successful",
     sure: "Subscription Period",
     notice: "Announcement",
-    information: "News&Information"
+    information: "News&Information",
+    back: "Back",
+    orderType: "Order Type",
+    orderStatus: "Order Status",
+    date: "Date",
+    oneDay: "One Day",
+    oneWeek: "One Week",
+    oneMonth: "One Month",
+    ok: "OK",
+    dealPrice: "Deal Price",
+    daelAmount: "Deal Amount",
+    avgDealPrice: "Average Deal Price",
+    dealTurnover: "Total Turnover",
   };
   const errMessage = {
     "-1": "FETCH ERROR",
