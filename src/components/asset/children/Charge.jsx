@@ -104,7 +104,7 @@ export default class Charge extends exchangeViewBase {
 
   componentWillUpdate(props, state, next) {
     if (this.state.currency !== state.currency) {
-      this.props.controller.changeUrl("currency", nextState.currency.toLowerCase());
+      this.props.controller.changeUrl("currency", state.currency.toLowerCase());
       this.getCoinAddress(state.currency);
       this.getCurrencyAmount(state.currency);
     }

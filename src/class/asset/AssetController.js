@@ -106,12 +106,12 @@ export default class AssetController extends ExchangeControllerBase {
     });
   }
   // 获取币种资产
-  async getWallet() {
+  // async getWallet() {
     // let data = await this.store.Proxy.topCurrency();
     // console.log(data);
     // this.store.state.wallet = data;
     // this.view.setState({ wallet: data});
-  }
+  // }
   // 获取矿工费
   async getMinerFee(coin, address) {
     await this.store.getMinerFee(coin, address.address);

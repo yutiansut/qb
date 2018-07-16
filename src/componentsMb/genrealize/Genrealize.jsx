@@ -34,7 +34,7 @@ export default class Genrealize extends exchangeViewBase {
           {/* <Route path={`${match.url}/terms`} component={Term} /> */}
           <Route path={`${match.url}/invite`} component={Invit} />
           <Route path={`${match.url}/register`} component={Regist} />
-          <Redirect to={`${match.url}/terms`} />
+          {/* <Redirect to={`${match.url}/terms`} /> */}
         </Switch>
       </div>
     );
