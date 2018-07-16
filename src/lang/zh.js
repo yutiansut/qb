@@ -135,6 +135,7 @@ export default function zh(state) {
     2201: "您已经被邀请过",
     2400: "ip已存在",
     2401: "ip未找到",
+    2402: "ip地址错误",
     2601: "奖励已经领取完毕，敬请期待下次活动",
   }
   const other = {

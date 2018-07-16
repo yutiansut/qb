@@ -332,6 +332,12 @@ export default {
     },
     errCode: "AWARD_DRAWED"
   },
+  2402: {
+    get msg() {
+      return intl.get(2402);
+    },
+    errCode: "AWARD_DRAWED"
+  },
   2601: {
     // msg: "奖励已经领取完毕，敬请期待下次活动",
     get msg() {
