@@ -50,7 +50,7 @@ export default class HomeRecommend extends ExchangeViewBase{
         <div className="noscroll">
             <div className="ul-wrap">
                 <ul className="clearfix" ref="recomendUl">
-                    {this.state.recommendData.map((v, index) => {return(
+                    {this.state.recommendData && this.state.recommendData.map((v, index) => {return(
                         <li className='home-recommend-pair' key={index}>
                             <p className="p1">
                                 <span>{v.coinName.toUpperCase()}</span>
@@ -61,7 +61,7 @@ export default class HomeRecommend extends ExchangeViewBase{
                                 <i>{Number(v.rise).toPercent()}</i>
                             </p>
                         </li>
-                    )})}
+                    )}) || null}
                 </ul>
             </div>
         </div>
