@@ -13,7 +13,6 @@ export default class Register extends exchangeViewBase {
     this.state = {
       account: "",
       uid: JSON.parse(query.uid),
-      account1: query.account,
       margin: 0,
       showVagueBgView: false,
       showSuccess: false,
@@ -82,7 +81,6 @@ export default class Register extends exchangeViewBase {
             onClick={() => {
               this.getAward({
                 inviter: this.state.uid,
-                inviterAccount: this.state.account1,
                 invited: this.state.account,
               });
             }}

@@ -48,7 +48,7 @@ export default class LoginController extends ExchangeControllerBase {
     // history.push()
     if (data.ret === 0 &&  data.data) { // 登陆成功
       this.userController.getUserId(data.data)
-      this.view && this.view.history.push('/whome')
+      this.view && this.view.history.push(this.view.state.from)
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证

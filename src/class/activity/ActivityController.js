@@ -68,7 +68,7 @@ export default class ActivityController extends ExchangeControllerBase {
     })
   }
 
-  async getAward({inviter, inviterAccount, invited}) {
+  async getAward({inviter, invited}) {
     //验证手机号是否合法
     let p1 = /^[1][3,4,5,7,8][0-9]{9}$/,
       //验证邮箱号是否合法
@@ -78,7 +78,7 @@ export default class ActivityController extends ExchangeControllerBase {
       return;
     }
 
-    let result = await this.store.getAward({inviter, inviterAccount, invited});
+    let result = await this.store.getAward({inviter, invited});
     //领取成功，
     if (result.award === 100) {
       this.view.setState({

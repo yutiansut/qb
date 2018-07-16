@@ -23,6 +23,7 @@ import queryString from "querystring";
 export default class Login extends exchangeViewBase {
   constructor(props) {
     super(props);
+    console.log('loginProps.......................',props)
     this.state = {
       titleList: [this.intl.get("login-verify"), this.intl.get("login-pass")],
       titleIndex: 0, // 点击下标
@@ -40,7 +41,8 @@ export default class Login extends exchangeViewBase {
       checkState: true, // checkbox判断
       userErr: "", // 手机号/邮箱错误
       pwdErr: "", // 密码错误
-      twoVerifyUser: "" // 两步认证用户信息
+      twoVerifyUser: "", // 两步认证用户信息
+      from: props.location.state && props.location.state.from.pathname || '/whome'
     }
     const {controller, location} = props
     //绑定view
