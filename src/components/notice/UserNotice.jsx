@@ -20,6 +20,7 @@ export default class userNotice extends exchangeViewBase {
     this.getUserNotice = controller.getUserNotice.bind(controller) // 获取通知列表
     this.upDateUserNoctice = controller.upDateUserNoctice.bind(controller)
     this.showContent = this.showContent.bind(this)
+    this.changeHeaderNotice = controller.changeHeaderNotice.bind(controller) // 改变头部信息
   }
 
   setView(view){
@@ -38,6 +39,7 @@ export default class userNotice extends exchangeViewBase {
     })
     console.log(111, v, i)
     this.upDateUserNoctice(v.id)
+    this.changeHeaderNotice(v)
   }
 
   componentWillMount() {
@@ -49,18 +51,17 @@ export default class userNotice extends exchangeViewBase {
     let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
         fromId = this.props.location.query && this.props.location.query.newsCon.id,
         userNotice = this.state.userNotice,
-        aaa = [],
-        bbb = 0;
+        idArr = [],
+        selectId = 0;
 
     console.log(111, userNotice.list)
     if (fromCon) {
       console.log(222, userNotice.list)
       userNotice.list.forEach(v => {
-        aaa.push(v.id)
-        bbb = aaa.indexOf(fromId)
+        idArr.push(v.id)
       })
-      userNotice.list[bbb].isRead = 1
-      console.log(3434, bbb)
+      selectId = idArr.indexOf(fromId)
+      userNotice.list[selectId].isRead = 1
       this.setState({
         userNoticePop: true,
         userContent: fromCon,
@@ -88,7 +89,7 @@ export default class userNotice extends exchangeViewBase {
               <th>{this.intl.get("time")}</th>
             </tr>
           </thead>
-          <tbody className={`${Object.keys(this.state.userNotice).length ? '' : 'hide'}`}>
+          <tbody className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>
           {Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (
             <tr key={index} onClick={value => this.showContent(v, index)}>
               <td >
@@ -100,7 +101,7 @@ export default class userNotice extends exchangeViewBase {
             }
           </tbody>
         </table>
-        <p className={Object.keys(this.state.userNotice).length ? 'hide' : ''}>{this.intl.get("user-none")}</p>
+        <p className={Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''}>{this.intl.get("user-none")}</p>
         {/*<div className={Object.keys(this.state.userNotice).length ? '' : 'hide'}>*/}
           {/*{Object.keys(this.state.userNotice).length && <Pagination total={this.state.userNotice.totalCount}*/}
             {/*pageSize={10}*/}

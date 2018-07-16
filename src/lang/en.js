@@ -148,7 +148,7 @@ export default function en(state) {
     2201: "You've been invited",
     2400: "ip已存在",
     2401: "ip未找到",
-    2402: "ip地址错误",
+    2402: "ip不在白名单",
     2601: "The reward has been received. Please look forward to the next activity",
   }
   const other = {
