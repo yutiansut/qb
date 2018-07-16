@@ -430,12 +430,12 @@ export default class AssetController extends ExchangeControllerBase {
     });
   }
   // 为market提供获得币种可用余额的api
-  async getCoinAvailable(coin) {
-    if (!this.store.state.wallet.length) {
-      await this.store.getTotalAsset();
-    }
-    return this.store.state.wallet.filter(v => v.coinName === coin)[0];
-  }
+  // async getCoinAvailable(coin) {
+  //   if (!this.store.state.wallet.length) {
+  //     await this.store.getTotalAsset();
+  //   }
+  //   return this.store.state.wallet.filter(v => v.coinName === coin)[0];
+  // }
 
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
@@ -444,21 +444,20 @@ export default class AssetController extends ExchangeControllerBase {
         this.view.state.pairFees.filter(
           item => item.id === this.view.state.tradePairId
         )[0],
-      currencyArr = curPair.name.split("/"),
+      currencyArr = curPair && curPair.name.split("/"),
       avail1 = this.store.state.wallet.filter(
-        item => item.coinName === currencyArr[0]
+        item => item.coinName === (currencyArr && currencyArr[0])
       )[0],
       avail2 = this.store.state.wallet.filter(
-        item => item.coinName === currencyArr[1]
+        item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
     // console.log("updataMarketAvaile", avail1, avail2);
-    this.TradePlanController &&
+    avail1 && this.TradePlanController &&
       this.TradePlanController.setWallet(
         avail1.availableCount,
         avail2.availableCount
       );
-    return { avail1, avail2 };
-    // this.marketController.sdfgadsf(avail1, avail2);
+    return { avail1, avail2, currencyArr, curPair };
   }
 
   // 设置simple的tradePairId交易对id  暴露给market使用

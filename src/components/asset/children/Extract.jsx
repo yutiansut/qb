@@ -96,8 +96,9 @@ export default class Extract extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let currency =
-      this.props.location.query && this.props.location.query.currency;
+    let currency = this.props.controller
+        .getQuery("currency")
+        .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
     currency && this.setState({ currency: currency, value: currency });
     await this.getWalletList();
     await this.getExtract();
@@ -147,6 +148,7 @@ export default class Extract extends exchangeViewBase {
       );
     }
     if (nextState.currency !== this.state.currency) {
+      this.props.controller.changeUrl("currency", nextState.currency.toLowerCase());
       // 切换币种后，重新set address，之后根据address和currency请求矿工费
       let curExtract = this.state.walletExtract.extractAddr.filter(
         v => v.coinName === nextState.currency.toLowerCase()
@@ -414,7 +416,7 @@ export default class Extract extends exchangeViewBase {
               onClick={() => {
                 if(this.state.quotaTip || this.state.noSufficTip) return;
                 let { currency, address, password, extractAmount } = this.state;
-                this.beforeExtract(curExtract.minCount, this.state.password);
+                this.beforeExtract(curExtract && curExtract.minCount, this.state.password);
               }}
             />
           </div>

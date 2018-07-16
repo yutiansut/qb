@@ -60,9 +60,9 @@ export default class CoinData extends exchangeViewBase {
   }
   async componentWillMount() {
     // console.log('mounting..................',this.props.controller.getQuery)
-    await this.getWalletList();
     let currency = this.props.controller.getQuery('currency').toUpperCase() || this.props.location.query && this.props.location.query.currency.toUpperCase();
     currency && this.setState({ currency: currency, value: currency });
+    await this.getWalletList();
     (!currency || currency === this.state.currency) && await this.getCoinInfo(this.state.walletList[currency || this.state.currency]);
 
     this.getTradePair();

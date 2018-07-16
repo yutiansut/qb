@@ -7,8 +7,20 @@ export default class ExchangeViewBase extends ViewBase {
     // this.history = props.history;
     // this.match = props.match;
     this.intl = intl
-    this.images = {}
     this.location = '';
+    // img标签引用图片路径统一管理
+    this.$imagesMap = {
+      $guanbi_hei: '/static/img/guanbi_hei.svg',
+      $warning: "/static/images/warning.svg",
+      $succeed: "/static/images/succeed.svg",
+      $wrong: "/static/images/wrong.svg",
+      $message: "/static/images/message.svg",
+      $yiwen: "/static/images/yiwen.png",
+      $rank_down: "/static/images/rank_down.svg",
+      $rank_up: "/static/images/rank_up.svg",
+      $rank_normal: "/static/images/rank_normal.svg",
+      $xianghu: "/static/images/xianghu.svg"
+    }
   }
 
   componentWillMount() {

@@ -16,9 +16,9 @@ export default class Wallets extends exchangeViewBase {
       frozenCount: 2,
       valuationBTC: 2,
       sortIcon: [
-        "/static/images/rank_down.svg",
-        "/static/images/rank_up.svg",
-        "/static/images/rank_normal.svg"
+        this.$imagesMap.$rank_down,
+        this.$imagesMap.$rank_up,
+        this.$imagesMap.$rank_normal
       ]
     };
     this.sort = (k, v) => {
@@ -76,7 +76,7 @@ export default class Wallets extends exchangeViewBase {
             <i />
             {this.intl.get("asset-hideLittle")}
             <b className="pop-parent">
-              <img src="/static/images/yiwen.png" alt="" />
+              <img src={this.$imagesMap.$yiwen} alt="" />
               <em className="pop-children uppop-children">{this.intl.get("asset-tip1")}</em>
             </b>
           </span>
@@ -106,7 +106,7 @@ export default class Wallets extends exchangeViewBase {
                 }}>
                 {this.intl.get("asset-lock")}
                 <b className="pop-parent">
-                  <img src="/static/images/yiwen.png" alt="" />
+                  <img src={this.$imagesMap.$yiwen} alt="" />
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip2")}
                   </em>
@@ -118,7 +118,7 @@ export default class Wallets extends exchangeViewBase {
                 }}>
                 {this.intl.get("asset-tobtc")}
                 <b className="pop-parent">
-                  <img src="/static/images/yiwen.png" alt="" />
+                  <img src={this.$imagesMap.$yiwen} alt="" />
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip3")}
                   </em>

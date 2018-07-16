@@ -19,10 +19,10 @@ export default class Popup extends exchangeViewBase {
     this.timer = null;
     this.onClose = props.onClose;
     this.iconArr = {
-      succeed: "/static/images/succeed.svg",
-      warning: "/static/images/warning.svg",
-      wrong: "/static/images/wrong.svg",
-      message: "/static/images/message.svg",
+      succeed: this.$imagesMap.$succeed,
+      warning: this.$imagesMap.$warning,
+      wrong: this.$imagesMap.$wrong,
+      message: this.$imagesMap.$message,
     }
   }
   componentDidMount() {
@@ -99,7 +99,7 @@ export default class Popup extends exchangeViewBase {
             {title}
             {closeButton && (
               <img
-                src="/static/img/guanbi_hei.svg"
+                src={this.$imagesMap.$guanbi_hei}
                 alt=""
                 onClick={() => {
                   clearTimeout(this.timer);
@@ -113,7 +113,7 @@ export default class Popup extends exchangeViewBase {
               <img
                 src={`${
                   type === "confirm"
-                    ? "/static/images/warning.svg"
+                    ? this.iconArr['warning']
                     : this.iconArr[icon]
                   }`}
                 alt=""

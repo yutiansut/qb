@@ -74,8 +74,9 @@ export default class Charge extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let currency =
-      this.props.location.query && this.props.location.query.currency;
+    let currency = this.props.controller
+        .getQuery("currency")
+        .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
     currency &&
       this.setState({
         currency: currency,
@@ -103,6 +104,7 @@ export default class Charge extends exchangeViewBase {
 
   componentWillUpdate(props, state, next) {
     if (this.state.currency !== state.currency) {
+      this.props.controller.changeUrl("currency", nextState.currency.toLowerCase());
       this.getCoinAddress(state.currency);
       this.getCurrencyAmount(state.currency);
     }

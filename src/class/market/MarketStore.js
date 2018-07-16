@@ -22,9 +22,9 @@ export default class MarketStore extends ExchangeStoreBase {
       pairMsg: {},
       coinInfo: {
         "id": 0,            // 币种id
-        "name": "btc",      // 币种名
-        "enName": "Bitcoin",   // 币种英文全称
-        "cnName": "比特币",  // 币种中文名
+        "name": "",      // 币种名
+        "enName": "",   // 币种英文全称
+        "cnName": "",  // 币种中文名
         "icon": "",        // 币种符号
         "logo_url": "",//币种logo
         "webSite": [],

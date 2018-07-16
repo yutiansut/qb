@@ -68,7 +68,7 @@ export default class Popup extends exchangeViewBase {
           <div className="asset-popup-content base3">
             <img
               className="close"
-              src="/static/img/guanbi_hei.svg"
+              src={this.$imagesMap.$guanbi_hei}
               alt=""
               onClick={() => {
                 onClose && onClose();

@@ -30,19 +30,19 @@ export default class Simple extends exchangeViewBase {
 
   render() {
     // console.log('simple.............', this.state.pairFees);
-    let curPair = this.state.pairFees.filter(
-        item => item.id === this.state.tradePairId
-      )[0],
-      currencyArr = curPair && curPair.name.split("/"),
-      avail1 = this.state.wallet.filter(
-        item => item.coinName === (currencyArr && currencyArr[0])
-      )[0],
-      avail2 = this.state.wallet.filter(
-        item => item.coinName === (currencyArr && currencyArr[1])
-      )[0];
+    // let curPair = this.state.pairFees.filter(
+    //     item => item.id === this.state.tradePairId
+    //   )[0],
+    //   currencyArr = curPair && curPair.name.split("/"),
+    //   avail1 = this.state.wallet.filter(
+    //     item => item.coinName === (currencyArr && currencyArr[0])
+    //   )[0],
+    //   avail2 = this.state.wallet.filter(
+    //     item => item.coinName === (currencyArr && currencyArr[1])
+    //   )[0];
     let lang = this.props.controller.configData.language;
     // console.log(this.state.totalAsset);
-    avail1 &&  this.props.controller.updataMarketAvaile();
+    let { avail1, avail2, currencyArr, curPair } = this.props.controller.updataMarketAvaile();
     let total =
       lang === "en-US"
         ? this.state.totalAsset.valuationEN
