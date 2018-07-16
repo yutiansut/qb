@@ -31,7 +31,7 @@ export default class Balance extends exchangeViewBase {
     return <div className="balance">
       <TotalAsset totalAsset={this.state.totalAsset} controller={this.props.controller} />
       <ul className="menu-ul">
-        <li><a>充币</a></li>
+        <li><Link to="/mwallet/charge">充币</Link></li>
         <li><a>提币</a></li>
         <li><Link to="/mwallet/dashboard">资产记录</Link></li>
       </ul>
