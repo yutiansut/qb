@@ -15,7 +15,7 @@ import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
 
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
-import queryString from "querystring";
+// import queryString from "querystring";
 // import LoginVerification from './children/LoginVerification.jsx'
 
 
@@ -44,13 +44,13 @@ export default class Login extends exchangeViewBase {
       twoVerifyUser: "", // 两步认证用户信息
       from: props.location.state && props.location.state.from.pathname || '/whome'
     }
-    const {controller, location} = props
+    const {controller, match} = props
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
     this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
-    let query = location.search && queryString.parse(location.search.substring(1)) || null;
+    let query = match.params && match.params.uid || null;
     this.state.query = query
     console.log('query', query)
     this.getAward = controller.getAward.bind(controller)
@@ -215,8 +215,7 @@ export default class Login extends exchangeViewBase {
                       disable={this.canClick() ? false : true}
                       onClick={async () => {
                         let res = this.state.query && await this.getAward({
-                          inviter: JSON.parse(this.state.query.userId),
-                          inviterAccount: this.state.query.account,
+                          inviter: JSON.parse(this.state.query),
                           invited: this.state.userInput
                         }) || true
                         if(!res)
