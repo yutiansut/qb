@@ -11,6 +11,7 @@ export default class KdepthController extends ExchangeControllerBase {
   }
   // set深度数据
   setData(data) {
+    // console.log('set深度数据.............', data)
     if (!data) {
       return;
     }

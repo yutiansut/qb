@@ -35,7 +35,8 @@ export default class Login extends exchangeViewBase {
 
       showTwoVerify: false,
       verifyType: "", // 密码登录两步认证弹窗
-      checkState: true // checkbox判断
+      checkState: true, // checkbox判断
+      from: props.location.state && props.location.state.from.pathname || '/whome'
     }
     const {controller} = props
     //绑定view
@@ -165,6 +166,7 @@ export default class Login extends exchangeViewBase {
             onClose={() => {
               this.setState({ showPopup: false });
             }}
+            h5={true}
             autoClose = {true}
           />
         )}

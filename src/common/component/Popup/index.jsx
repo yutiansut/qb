@@ -86,7 +86,7 @@ export default class Popup extends exchangeViewBase {
     ["tip1", "tip2", "tip3", "tip4"].includes(type) &&
       (title = this.tipType(type).title);
     return (
-      <div className={`wrap ${["tip1", "tip2", "tip3", "tip4"].includes(type) ? 'trans' : ''}`}>
+      <div className={`wrap ${h5 ? 'h5' : ''} ${["tip1", "tip2", "tip3", "tip4"].includes(type) ? 'trans' : '' }`}>
         <div
           className={`base-popup ${type} ${className ? className : ''} ${h5 ? 'h5':''}`}
           onClick={e => {

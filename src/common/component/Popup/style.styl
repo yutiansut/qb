@@ -8,6 +8,9 @@
   height 100%
   background-color $popup-bg-color
   z-index 999
+  &.h5
+    &.trans
+      background-color $popup-bg-color
   &.trans
     background-color transparent
   .base-popup
@@ -77,6 +80,14 @@
       -o-transform translateX(0%) translateY(0%)
       width 3.3rem
       padding 0.2rem 0.2rem 0.2rem 0.74rem
+      &.h5
+        right 50%
+        bottom 50%
+        transform translateX(50%) translateY(50%)
+        -ms-transform translateX(50%) translateY(50%)
+        -moz-transform translateX(50%) translateY(50%)
+        -webkit-transform translateX(50%) translateY(50%)
+        -o-transform translateX(50%) translateY(50%)
       h5
         margin-bottom 0.1rem
       .img
