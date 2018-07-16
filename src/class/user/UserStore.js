@@ -154,7 +154,7 @@ export default class UserStore extends ExchangeStoreBase {
     // headers.set('Token', this.token);
     // console.log(headers)
     // console.log('uploadImg', uploadImg, file)
-    return await fetch("http://192.168.55.105/usupload/", {
+    return await fetch("http://192.168.55.105/v1/usupload/", {
       method: 'Post',
       body: uploadImg,
       // headers,

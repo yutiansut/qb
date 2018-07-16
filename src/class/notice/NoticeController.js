@@ -61,18 +61,23 @@ export default class NoticeController extends ExchangeControllerBase {
     console.log('未读', result)
   }
 
-  changeHeaderNotice(value) { // 点击列表页改变头部信息
+  async readAllUserNotifications() {
+    let result = await this.store.Proxy.readAllUserNotifications({
+      "token": this.token
+    })
+    console.log('删除全部', result)
+  }
+
+  changeHeaderNotice(v) { // 点击列表页改变头部信息
     let userNoticeHeader = this.noticeHeaderView.state.userNoticeHeader,
         idArr = [],
-        selectId = 0;
-    console.log('点击列表页改变头部信息', value, this.noticeHeaderView.state.userNoticeHeader)
-
+        selectIndex = 0;
     if (v.isRead === 0){
       userNoticeHeader.list.forEach(v => {
         idArr.push(v.id)
       })
-      selectId = idArr.indexOf(v.id)
-      userNoticeHeader.list.splice(selectId, 1)
+      selectIndex = idArr.indexOf(v.id)
+      userNoticeHeader.list.splice(selectIndex, 1)
       this.noticeHeaderView.setState({userNoticeHeader})
     }
   }

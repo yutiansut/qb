@@ -1,0 +1,86 @@
+@import "../../../common/css/variable.styl"
+.set-pass-wrap
+  width 100%
+  height 100vh
+  background-color #f6f8fa
+  .safe-center-header
+    position relative3
+    width 100%
+    padding .12rem .12rem
+    background-color #009af6
+    .back
+      position relative
+      a
+        color $normal-white-color
+        font-size .14rem
+        line-height .2rem
+        vertical-align middle
+      img
+        height .16rem
+        margin-right .05rem
+        vertical-align middle
+      span
+        position absolute
+        left 50%
+        transform translateX(-50%)
+        font-size .14rem
+        line-height .2rem
+        color #FFFFFF
+        vertical-align middle
+  .hide
+    display none
+  .pass-info
+    width 100%
+    //height 5.55rem
+    padding .24rem .3rem 0
+    //background $normal-white-color
+    margin-top .2rem
+    ul
+      li
+        width 100%
+        position relative
+        //margin-bottom .44rem
+        margin-bottom .25rem
+        p
+          margin-bottom .1rem
+        input
+          width 100%
+          height .4rem
+          //margin-right .2rem
+          padding-left .1rem
+          //background $main-bg-active
+          //border 1px solid $line-light
+          border-radius (.02rem 0 0 .02rem)
+          vertical-align bottom
+        .btn
+          width 35%
+          height .4rem
+          font-size .13rem
+          color $normal-white-color
+          background $main-color
+          border-radius (0 .02rem .02rem 0)
+          border none
+        .picture-btn
+          background $normal-gray-color
+        .set-btn
+          width 1rem
+          margin-left 2rem
+          opacity .5
+          border-radius (.02rem)
+        .can-click
+          opacity 1
+        .pass-btn-group
+          .base-input-wrap
+            width 65%
+            float left
+          .btn
+            float left
+
+      .long-li
+        input
+          width 100%
+          border-radius (.02rem)
+      .remind-pass-li
+        fz11()
+        color $negative-color
+

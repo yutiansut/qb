@@ -61,8 +61,8 @@ const OrderManageCompoment = ({ match}) => {
   return <OrderManage controller={userOrderController} match={match}/>
 };
 
-const UserCenterComponent = ({match, history}) => {
-    return <UserCenter match={match} controller={userController} history={history}/>
+const UserCenterComponent = ({match, history, location}) => {
+    return <UserCenter match={match} controller={userController} history={history} location={location}/>
 }
 
 const Gener = ({match}) => {

@@ -20,7 +20,6 @@ export default class UserCenterIndex extends exchangeViewBase {
     return (
       <div className="user-center-index">
         <div className="user-center-header">
-          {/*<h1>我的</h1>*/}
           <div>
             <img src="/static/mobile/user/icon_wd_head@3x.png"/>
             <span>13611363456</span>

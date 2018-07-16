@@ -5,6 +5,7 @@ import exchangeViewBase from '../ExchangeViewBase.jsx';
 import UserCenterIndex from './children/UserCenterIndex.jsx';
 import SafeCenter from './children/SafeCenter.jsx';
 import AboutUs from './children/AboutUs.jsx';
+import SetPwd from './children/SetPwd.jsx';
 
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
@@ -18,17 +19,20 @@ export default class UserCenter extends exchangeViewBase {
   }
 
   render() {
-    const {match, controller, history} = this.props;
+    const {match, controller, history, location} = this.props;
     return (
       <Switch>
         <Route exact path={`${match.url}`} component={() => (
           <UserCenterIndex url={`${match.url}`}/>
         )}/>
         <Route exact path={`${match.url}/safe`} component={() => (
-          <SafeCenter match={match} url={`${match.url}`} controller={controller} />
+          <SafeCenter match={match} location={location} url={`${match.url}`} controller={controller} />
         )}/>
         <Route exact path={`${match.url}/aboutUs`} component={() => (
           <AboutUs match={match} controller={controller} history={history}/>
+        )}/>
+        <Route exact path={`${match.url}/setPwd`} component={() => (
+          <SetPwd match={match} location={location} controller={controller} history={history}/>
         )}/>
         <Redirect to={`${match.url}`}/>
       </Switch>

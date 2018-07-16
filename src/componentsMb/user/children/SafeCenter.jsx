@@ -23,7 +23,6 @@ export default class UserCenterIndex extends exchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
-    // this.setFundPass = controller.setFundPass.bind(controller) // 设置资金密码
     this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置修改资金密码
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
@@ -56,7 +55,7 @@ export default class UserCenterIndex extends exchangeViewBase {
 
   render() {
     const {controller, url} = this.props
-    // console.log('this.state', this.state)
+    console.log('安全中心', this.state)
     return (
       <div className="user-safe-center">
         <div className="safe-center-header">
@@ -68,15 +67,19 @@ export default class UserCenterIndex extends exchangeViewBase {
         </div>
         <ul className="safe-center-container">
           <li className="item clearfix">
-            <span className="fl"
-                  onClick={state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>
+            {/*<NavLink to={`${url}/setPwd` }>dfasdfasd</NavLink>*/}
+            {/*<NavLink to={{pathname: `${url}/setPwd`, query: {type: this.state.userInfo.loginPwd ? 3 : 4}}}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</NavLink>*/}
+            <NavLink className="fl" to={`${url}/setPwd?type=${this.state.userInfo.loginPwd ? 3 : 4}`}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</NavLink>
+            {/*<span className="fl"*/}
+                  {/*onClick={state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{`${this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}登录密码`}</span>*/}
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
           </li>
           <li className="item clearfix">
-            <span className="fl"
-                  onClick={state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>
+            <NavLink className="fl" to={`${url}/setPwd?type=${this.state.userInfo.fundPwd ? 5 : 6}`}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</NavLink>
+            {/*<span className="fl"*/}
+                  {/*onClick={state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{`${this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}资金密码`}</span>*/}
             <div className="fr">
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>

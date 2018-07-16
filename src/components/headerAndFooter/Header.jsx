@@ -10,6 +10,7 @@ import {
 import './stylus/header.styl'
 import ExchangeViewBase from "../ExchangeViewBase";
 import {ChangeFontSize} from '../../core'
+import UserNoticeContent from '../notice/noticeChild/UserNoticePop.jsx'
 // const Nav = ({label,to}) => (
 //     <Route path={to}  children={({ match }) => (
 //         <li className={match ? 'active' : ''}>
@@ -43,7 +44,9 @@ export default class Header extends ExchangeViewBase {
           childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/worder',}]
         }
       ],
-      userNoticeHeader: {}
+      userNoticeHeader: {},
+      userNoticePop: false, // 弹窗信息
+      userContent: "" // 弹窗信息
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
@@ -52,8 +55,11 @@ export default class Header extends ExchangeViewBase {
     this.changeLanguage = this.configController.changeLanguage.bind(this.configController); // 改变语言
     this.clearLoginInfo = this.loginController.clearLoginInfo.bind(this.loginController) // 退出登录
     this.getUserNoticeHeader = this.noticeController.getUserNoticeHeader.bind(this.noticeController) // 获取通知列表
+    this.readAllUserNotifications = this.noticeController.readAllUserNotifications.bind(this.noticeController) //  全部已读
     this.checkAll = this.checkAll.bind(this) // 查看全部
     this.loginOut = this.loginOut.bind(this)
+    this.changeHeaderNotice = this.changeHeaderNotice.bind(this) // 改变头部消息数量
+    this.upDateUserNoctice = this.noticeController.upDateUserNoctice.bind(this.noticeController) // 消息变成已读
     //绑定view
     this.noticeController.setHeaderView(this)
     //初始化数据，数据来源即store里面的state
@@ -89,12 +95,24 @@ export default class Header extends ExchangeViewBase {
     this.setState({navArrayLeft})
   }
 
-  checkAll() { // 查看详细信息
-    let  userNoticeHeader = this.state.userNoticeHeader
+  checkAll() { // 全部已读
+    let userNoticeHeader = this.state.userNoticeHeader
     userNoticeHeader = {}
     this.setState({
       userNoticeHeader
     })
+    this.readAllUserNotifications()
+  }
+
+  changeHeaderNotice(v, index) {
+    let userNoticeHeader = this.state.userNoticeHeader
+    userNoticeHeader.list.length && userNoticeHeader.list.splice(index, 1)
+    this.setState({
+      userContent: v.content,
+      userNoticePop: true,
+      userNoticeHeader
+    })
+    this.upDateUserNoctice(v.id)
   }
 
   render() {
@@ -134,17 +152,17 @@ export default class Header extends ExchangeViewBase {
           <li className={`${userToken ? 'new-li' : 'hide'}`}>
             <div className="new-li-img">
               <img src="/static/img/home/new_hei.svg" alt=""/>
-              <i className={Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list ? '' : 'hide'}>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length}</i>
+              <i className={Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length ? '' : 'hide'}>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length}</i>
             </div>
             <div className="new-li-content">
               <p className="clearfix">
                 <span>通知</span>
                 <em onClick={this.checkAll}>✓︎</em>
               </p>
-              {Object.keys(this.state.userNoticeHeader).length && this.state.userNoticeHeader.list ? (
+              {Object.keys(this.state.userNoticeHeader).length &&  this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length ? (
                 <ul>{Object.keys(this.state.userNoticeHeader).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.map((v, index) => (
-                  <li key={index}>
-                    <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link>
+                  <li key={index} onClick={value => this.changeHeaderNotice(v, index)}>{v.content}
+                    {/*<Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link>*/}
                   </li>
                 ))}</ul>
               ) : (
@@ -181,6 +199,9 @@ export default class Header extends ExchangeViewBase {
             </ul>
           </li>
         </ol>
+        {this.state.userNoticePop && <UserNoticeContent
+          onClose={() => {this.setState({ userNoticePop: false });}}
+          content={this.state.userContent}/>}
       </div>
     )
   }

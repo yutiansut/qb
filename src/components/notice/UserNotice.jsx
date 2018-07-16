@@ -10,7 +10,9 @@ export default class userNotice extends exchangeViewBase {
     this.state = {
       userNoticePop: false,
       userContent: "",
-      userNotice: {}
+      userNotice: {},
+      page: 1,
+      totalPage: 0
     }
     const {controller} = props
     //绑定view
@@ -21,6 +23,7 @@ export default class userNotice extends exchangeViewBase {
     this.upDateUserNoctice = controller.upDateUserNoctice.bind(controller)
     this.showContent = this.showContent.bind(this)
     this.changeHeaderNotice = controller.changeHeaderNotice.bind(controller) // 改变头部信息
+    this.changePage = this.changePage.bind(this)
   }
 
   setView(view){
@@ -31,15 +34,20 @@ export default class userNotice extends exchangeViewBase {
 
   showContent(v, i) {
     let userNotice = this.state.userNotice
-    userNotice.list[i].isRead === 0 && (userNotice.list[i].isRead = 1)
+    if (userNotice.list[i].isRead === 0){
+      this.changeHeaderNotice(v)
+      userNotice.list[i].isRead = 1
+      this.upDateUserNoctice(v.id)
+    }
     this.setState({
       userNoticePop: true,
       userContent: v.content,
       userNotice
     })
-    console.log(111, v, i)
-    this.upDateUserNoctice(v.id)
-    this.changeHeaderNotice(v)
+  }
+
+  changePage() { // 切换分页
+
   }
 
   componentWillMount() {
@@ -48,29 +56,31 @@ export default class userNotice extends exchangeViewBase {
 
   async componentDidMount() {
     console.log('this.props.location', this.props.location.query)
-    let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
-        fromId = this.props.location.query && this.props.location.query.newsCon.id,
-        userNotice = this.state.userNotice,
-        idArr = [],
-        selectId = 0;
-
-    console.log(111, userNotice.list)
-    if (fromCon) {
-      console.log(222, userNotice.list)
-      userNotice.list.forEach(v => {
-        idArr.push(v.id)
-      })
-      selectId = idArr.indexOf(fromId)
-      userNotice.list[selectId].isRead = 1
-      this.setState({
-        userNoticePop: true,
-        userContent: fromCon,
-        userNotice
-      })
-      this.upDateUserNoctice(fromId)
-    }
+    // let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
+    //     fromId = this.props.location.query && this.props.location.query.newsCon.id,
+    //     userNotice = this.state.userNotice,
+    //     idArr = [],
+    //     selectId = 0;
+    //
+    // console.log(111, userNotice.list)
+    // if (fromCon) {
+    //   console.log(222, userNotice.list)
+    //   userNotice.list.forEach(v => {
+    //     idArr.push(v.id)
+    //   })
+    //   selectId = idArr.indexOf(fromId)
+    //   userNotice.list[selectId].isRead = 1
+    //   this.setState({
+    //     userNoticePop: true,
+    //     userContent: fromCon,
+    //     userNotice
+    //   })
+    //   this.upDateUserNoctice(fromId)
+    // }
     await this.getUserNotice(0, 0, 10)
-
+    this.setState({
+      totalPage: this.state.userNotice.totalCount
+    })
   }
 
   componentWillUpdate(...parmas) {
@@ -102,12 +112,17 @@ export default class userNotice extends exchangeViewBase {
           </tbody>
         </table>
         <p className={Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''}>{this.intl.get("user-none")}</p>
-        {/*<div className={Object.keys(this.state.userNotice).length ? '' : 'hide'}>*/}
-          {/*{Object.keys(this.state.userNotice).length && <Pagination total={this.state.userNotice.totalCount}*/}
-            {/*pageSize={10}*/}
-            {/*showTotal={true}*/}
-            {/*showQuickJumper={true}/>}*/}
-        {/*</div>*/}
+        <div className={Object.keys(this.state.userNotice).length ? '' : 'hide'}>
+          {Object.keys(this.state.userNotice).length && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
+            pageSize={10}
+            showTotal={true}
+            onChange={page => {
+              this.setState({ page });
+              this.getUserNotice(0, page-1, 10)
+            }}
+            currentPage={this.state.page}
+            showQuickJumper={true}/>}
+        </div>
         {this.state.userNoticePop && <UserNoticeContent
           onClose={() => {this.setState({ userNoticePop: false });}}
           content={this.state.userContent}/>}

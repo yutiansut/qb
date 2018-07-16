@@ -371,7 +371,7 @@ export default class UserController extends ExchangeControllerBase {
   // 为其他模块提供接口
   // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码
   get userVerify() { // 提供两步认证信息, 是否设置资金密码
-    let {  //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+    let {  //0: 已设置资金密码 1: 未设置资金密码; d
       fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
     // console.log(this.store.state)
@@ -384,6 +384,13 @@ export default class UserController extends ExchangeControllerBase {
       email, phone
     } = this.store.state.userInfo
     return { email, phone }
+  }
+
+  async getUserInfo () { // 请求用户信息
+    if (!Object.keys(this.store.state.userInfo).length){
+       await this.initData()
+    }
+    return this.store.state.userInfo;
   }
 
   get userAuthVerify() { // 提供用户是否实名
