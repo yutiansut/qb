@@ -98,7 +98,7 @@ export default class UserCenterIndex extends exchangeViewBase {
         {this.state.setFundPass && <div className="need-fund-pass" onClick={e => this.setState({setFundPass: false})}>
           <div className="select-section">
             {this.state.fundPassArr.map((v, index) =>
-              <button key={index} onClick={}>{v}</button>
+              <button key={index}>{v}</button>
             )}
           </div>
         </div>}
