@@ -94,7 +94,7 @@ export default class userOrder extends ExchangeViewBase {
               {this.state.currentOrderHead.map((v, index) => {
                 return (
                     <td key={index}>
-                      {v.unit && (`${v.name}(${v.unit === 'price' && (this.state.unitsType || this.state.market) || this.state.coin})`) || v.name}
+                      {v.unit && (`${v.name && v.name.toUpperCase()}(${v.unit === 'price' && (this.state.unitsType && this.state.unitsType.toUpperCase() || this.state.market && this.state.market.toUpperCase()) || this.state.coin && this.state.coin.toUpperCase()})`) || v.name && v.name.toUpperCase()}
                     </td>
                 )
               })}
@@ -136,7 +136,7 @@ export default class userOrder extends ExchangeViewBase {
               {this.state.historyOrderHead.map((v, index) => {
                 return (
                     <td key={index}>
-                      {v.unit && (`${v.name}(${v.unit === 'price' && (this.state.unitsType || this.state.market) || this.state.coin})`) || v.name}
+                      {v.unit && (`${v.name && v.name.toUpperCase()}(${v.unit === 'price' && (this.state.unitsType && this.state.unitsType.toUpperCase() || this.state.market && this.state.market.toUpperCase()) || this.state.coin && this.state.coin.toUpperCase()})`) || v.name && v.name.toUpperCase()}
                     </td>
                 )
               })}

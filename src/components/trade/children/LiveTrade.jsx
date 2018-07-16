@@ -58,9 +58,9 @@ export default class LiveTrade extends ExchangeViewBase{
             <thead>
               <tr>
                 <td> </td>
-                <td>{`价格(${this.state.unitsType || this.state.market})`}</td>
-                <td>{`数量(${this.state.coin})`}</td>
-                <td>{`成交额(${this.state.unitsType || this.state.market})`}</td>
+                <td>{`价格(${(this.state.unitsType && this.state.unitsType.toUpperCase()) || (this.state.market && this.state.market.toUpperCase())})`}</td>
+                <td>{`数量(${(this.state.coin && this.state.coin.toUpperCase())})`}</td>
+                <td>{`成交额(${(this.state.unitsType && this.state.unitsType.toUpperCase()) || (this.state.market && this.state.market.toUpperCase())})`}</td>
               </tr>
             </thead>
             <tbody>
