@@ -112,19 +112,12 @@ export default class OrderHistory extends exchangeViewBase{
   }
   // 筛选项重置
   choiceReset() {
-    const {pairIdMsg} = this.props;
-    let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
-    let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
-    marketArray && marketArray.unshift(this.intl.get('all'));
-    coinArray && coinArray.unshift(this.intl.get('all'));
     this.setState({
       startTime: Math.floor(new Date().getTime() / 1000) - 1000 * 24 * 60 * 60,
       startTimeType: 'all',
       idArray: [],
       coinSelect: this.intl.get('all'),
       marketSelect: this.intl.get('all'),
-      coinArray,
-      marketArray,
       orderType: 2,
       totalDeal: true,
       reseted: true,
@@ -141,24 +134,33 @@ export default class OrderHistory extends exchangeViewBase{
       orderStatus,
       filterShow: false
     });
-    this.getOrderList();
+    setTimeout(() => {
+      this.getOrderList();
+    }, 0);
   }
   // 选择币种
   changeCoin(e) {
     const {pairIdMsg} = this.props;
     let marketArray = [];
+    if(e === this.state.coinSelect){
+      return
+    }
     let coinValue = (e === this.intl.get('all')) ? '' : e;
     let marketValue = (this.state.marketSelect === this.intl.get('all')) ? '' : this.state.marketSelect;
     let idArray = [];
     let hideOther = 1;
     if (coinValue) {
       marketArray = pairIdMsg.pairNameCoin[coinValue];
-      marketArray.unshift(this.intl.get('all'));
+      // marketArray.unshift(this.intl.get('all'));
       marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]));
     }
     else {
-      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) && (marketArray = pairIdMsg.pairNameMarket[marketValue] && (marketArray.unshift(this.intl.get('all')))) || ((idArray = []) && (hideOther = 0) && (marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket)) && (marketArray.unshift(this.intl.get('all'))))
+      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) || (idArray = []);
+    // && (marketArray = pairIdMsg.pairNameMarket[marketValue])
+      marketArray = Object.keys(pairIdMsg.pairIdMarket)
+      coinValue = this.intl.get('all');
     }
+    marketArray.indexOf(this.intl.get('all')) === -1 && marketArray.unshift(this.intl.get('all'));
     this.setState(
         {
           marketArray,
@@ -172,18 +174,23 @@ export default class OrderHistory extends exchangeViewBase{
   changeMarket(e) {
     const {pairIdMsg} = this.props;
     let coinArray = [];
+    if(e === this.state.marketSelect){
+      return
+    }
     let marketValue = (e === this.intl.get('all')) ? '' : e;
     let coinValue = (this.state.coinSelect === this.intl.get('all')) ? '' : this.state.coinSelect;
     let idArray = [];
     let hideOther = 1;
     if (marketValue) {
       coinArray = pairIdMsg.pairNameMarket[marketValue];
-      coinArray.unshift(this.intl.get('all'));
-      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue])) || (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue]));
+      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue])) || (idArray = Object.values(pairIdMsg.pairIdMarket && pairIdMsg.pairIdMarket[marketValue]));
     }
     else {
-      coinValue && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue])) && (coinArray = pairIdMsg.pairNameCoin[coinValue] && (coinArray.unshift(this.intl.get('all')))) || ((idArray = []) && (hideOther = 0) && (coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)) && (coinArray.unshift(this.intl.get('all'))))
+      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue]) || (idArray = []);
+      coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)
+      marketValue = this.intl.get('all')
     }
+    coinArray.indexOf(this.intl.get('all')) === -1 && coinArray.unshift(this.intl.get('all'));
     this.setState(
         {
           coinArray,
