@@ -40,7 +40,7 @@ export default class Terms extends exchangeViewBase {
             </p>
             <div className="qrcode">
               <div className="qrcode-wrap">
-              <QRCode value={`${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="rgba(0,0,0,0)" fgColor="#FFF"/>
+              <QRCode value={`http://${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="rgb(255,255,255)" fgColor="#000"/>
               </div>
             </div>
           </div>

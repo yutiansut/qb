@@ -26,7 +26,7 @@ export default class AboutUs extends exchangeViewBase {
     return (
       <div className={`about-us`}>
         {this.state.qbtTrade.map((v,index) =>
-          <img key={index} src={v.url} onClick={e => v.status && history.push(`/mgenrealize/invite/?uid=${controller.userId}&account=${controller.userInfo.phone || controller.userInfo.email}`)}/>
+          <img key={index} src={v.url} onClick={e => v.status && history.push(`/mgenrealize/invite/?uid=${controller.userId}`)}/>
           )}
       </div>
     );
