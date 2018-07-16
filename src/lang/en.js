@@ -156,10 +156,12 @@ export default function en(state) {
     "header-exchange": "exchange",
     "header-assets": "assets",
     "header-order": "order list",
+    "header-user": "Personal Center",
     "header-security": "Security center",
     "header-idVerify": "ID verification",
     "header-logOut": "Log out",
-    "header-regist": "Sign in",
+    "header-login": "Sign in",
+    "header-regist": "Sign up",
     "footer-risk": "HIGH risk should be considered for all trading",
     "footer-protocol": "Service Protocol",
     "footer-info": "Info&Announcement",
@@ -257,7 +259,8 @@ export default function en(state) {
     "market-lastPrice": "Latest price",
     "market-change": "Change",
     "market-change7D": "7D Change",
-    "market-currencyInfo": "Currency details"
+    "market-currencyInfo": "Currency details",
+    "market-volume": "24h Volume"
   };
   const notice = {
     "activity-regist": "Sign up now",

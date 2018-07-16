@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
-import SelectButton from "../../../common/component/SelectButton";
-import Button from "../../../common/component/Button";
-import DatePicker from "../../../common/component/DatePicker/DatePicker";
 import Pagination from "../../../common/component/Pagination";
-import BasePopup from "../../../common/component/Popup";
+import { NavLink } from "react-router-dom";
 
 import "../style/history.styl";
 
@@ -30,7 +27,7 @@ export default class History extends exchangeViewBase {
     this.name = "history";
     this.state = {
       page: 1,
-      orderType: 1,    // 充1 提15000
+      orderType: 1,    // 充1 2
     };
 
     let { wallList, assetHistory } = controller.initState;
@@ -43,6 +40,12 @@ export default class History extends exchangeViewBase {
   }
 
   async componentWillMount() {
+    //路由参数
+    let type = this.props.location.query && this.props.location.query.type;
+    if(type===1 || type===2){
+        this.setState({orderType: type});
+    }
+    //
     await this.getHistory({
       page: 0,
       pageSize: 20,
@@ -69,15 +72,14 @@ export default class History extends exchangeViewBase {
     });
   }
 
-  componentDidMount() {}
-
-  componentWillUpdate() {}
-
   render() {
     let {total, orderList} = this.state.assetHistory;
-    console.log("==================",orderList)
     return (
       <div className="hist">
+          <div className="nav">
+              <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
+              <h3>资产记录</h3>
+          </div>
           <ul className="tab-ul">
             <li className={this.state.orderType===1 ? "active" : ""}
                 onClick={()=>{

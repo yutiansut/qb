@@ -2,37 +2,8 @@
 
 .home-wrap-mb
   font-family PingFangSC-Medium
-  .home-updown
-    position relative
-    padding-left .15rem
-    &.up-i
-      color $index-blue
-      &:before
-        position absolute
-        top 50%
-        transform translate(0, -50%)
-        left 0
-        content ''
-        width .12rem
-        height .12rem
-        background url('/static/img/shangzhang.svg') no-repeat center center
-        background-size .12rem .12rem
-    &.down-i
-      color $index-red
-      &:before
-        position absolute
-        top 50%
-        transform translate(0, -50%)
-        left 0
-        content ''
-        width .12rem
-        height .12rem
-        background url('/static/img/xiadie.svg') no-repeat center center
-        background-size .12rem .12rem
-  .hide
-    display none
   //推荐交易对
-  .home-recommend
+  .recommend
     width 100%
     background $normal-white-color
     .noscroll
@@ -67,7 +38,7 @@
           .p2
             margin-top 0.1rem
             b
-              margin-right .05rem
+              margin-right .15rem
               font-size .15rem
               color $exchange-blue;
             i
@@ -80,53 +51,34 @@
         li:last-child
           margin-right 0.1rem
   //市场
-  .home-market
+  .market
     background $normal-white-color
-    padding 0 0.15rem
-    .market-nav
-      height .36rem
-      line-height .36rem
+    padding 0 0.12rem
+    margin .12rem 0
+    ul
+      display flex
+      justify-content center
+      height .4rem
+      line-height .3rem
+      padding .05rem 0
       margin-bottom .14rem
-      text-align center
-      ul
-        white-space nowrap
-        margin-bottom 0.2em
-        li
-          position relative
-          display inline-block
-          cursor pointer
-          padding 0 0.08rem
-          span
-            font-size .12rem
-            padding .08rem
-            &.home-market-item-active
-              color $normal-white-color
-              background $index-blue
-              border-radius .2rem
-              box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
-          &:first-child
-            padding-left 0
-          &:last-child
-            padding-right 0
-            &:after
-              position absolute
-              top 0
-              right 0
-              content ''
-              background none
-          &:after
-            position absolute
-            top 0
-            right -0.03rem
-            content '|'
-            color $normal-gray-color
+      li
+        position relative
+        font-size .13rem
+        padding 0 .1rem
+        color $h5-color-blue
+        &.active
+          color $normal-white-color
+          background $index-blue
+          box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
+          border-radius .2rem
     table
       width 100%
       thead
         tr
           height .3rem
           line-height .3rem
-          color $normal-gray-color
+          color $h5-color-light
       tbody
         tr
           line-height 0.24rem
@@ -139,16 +91,18 @@
               margin-right .04rem
             span
               font-size 0.12rem
-              color $normal-gray-color
+              color $h5-color-light
             h3
               font-size 0.14rem
-              color $normal-black-color
+              color $h5-color-weight
               small
                 font-size 0.12rem
-                color $normal-gray-color
+                color $h5-color-light
+                margin-left .02rem
+                vertical-align .01rem
             b
               font-size 0.14rem
-              color $exchange-blue
+              color $h5-color-normal
               display block
               &.up
                 color $exchange-blue
@@ -160,8 +114,15 @@
               background $exchange-red
               padding 0.05rem
               border-radius 1px
+              min-width .8rem
+              display inline-block
+              text-align center
       th:last-child, td:last-child
         text-align right
+      th:first-child
+        padding-left .12rem
+      th:last-child
+        padding-right .12rem
 
 
 

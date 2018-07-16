@@ -18,25 +18,16 @@ export default class HomeActivity extends exchangeViewBase {
     this.getHomeBanner = controller.getHomeBanner.bind(controller);
   }
 
-  componentWillMount() {
-
-  }
-
   componentDidMount() {
     this.getHomeBanner(1,0)
-  }
-
-  componentWillUpdate(...parmas) {
-
   }
 
   render() {
     return (
       <div className="banner-wrap-mb">
-        <div>
           <img src="/static/img/banner_title.svg" alt=""/>
-        </div>
-        <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
+          <div alt="" className="banner-img"
+               style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
       </div>
     );
   }

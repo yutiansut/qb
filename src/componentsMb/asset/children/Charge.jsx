@@ -62,9 +62,9 @@ export default class Charge extends exchangeViewBase {
         return (
             <div className="charge">
                 <div className="nav">
-                    <a className="left">&lt; 返回</a>
+                    <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
                     <h3>充币</h3>
-                    <a className="right">充币记录</a>
+                    <NavLink to={{pathname: "/mwallet/dashboard", query: {type:1}}} className="right">充币记录</NavLink>
                 </div>
                 <div className="filter" onClick={()=>{
                     this.setState({showSelect:true});

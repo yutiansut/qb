@@ -12,9 +12,6 @@ let recommendController,
     marketController;
 
 import "./stylus/home.styl"
-import "./stylus/homeMarkt.styl"
-
-
 
 export default class Home extends exchangeViewBase {
   constructor(props) {

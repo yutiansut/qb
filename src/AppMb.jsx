@@ -35,7 +35,7 @@ let testAppController,
 ;
 
 const header = ({ match, history}) => {
-    return <Header userController={userController}/>;
+    return <Header userController={userController} loginController={loginController} history={history}/>;
 };
 
 const LoginComponent = ({ match, history }) => {

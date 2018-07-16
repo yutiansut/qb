@@ -5,75 +5,97 @@
   .hist
     font-family PingFangSC-Medium
     background $bg-light-color
-    .tab-ul
-      display flex
-      background $normal-white-color
-      li
-        width 100%
-        line-height .38rem
-        text-align center
-        font-size .16rem
-        margin 0 .4rem
-        border-bottom .02rem solid transparent
-        &.active
-          color $h5-active-blue
-          border-color $h5-active-blue
-    .hist-li
-      background $normal-white-color
-      margin .12rem
-      padding .12rem
-      border-radius .02rem
-      box-shadow: 0 .01rem .03rem 0 $h5-shadow-light
-      .d1
-        line-height .2rem
-        padding-bottom .07rem
-        border-bottom .01rem solid $h5-border-light
-        label
-          font-size .14rem
-          color $h5-color-weight
-          img
-            height .2rem
-            margin-right .06rem
-            vertical-align -.05rem
-        span
-          font-size .14rem
-          float right
-          &.success
-            color $h5-active-blue
-          &.fail
-            color $h5-active-yellow
-      .d2
-        margin-top .1rem
-        display flex
-        p
-          display inline-block
-          vertical-align top
-          flex-grow 1
-          span
-            display block
-            color $h5-color-light
-            line-height .2rem
-            margin-bottom .08rem
-          i
-            color $h5-color-normal
-            font-size .14rem
-        p:last-of-type
-          text-align right
-          flex-grow 0
-    .kong
-      margin-top .2rem
-      height 4rem
+  .nav
+    height .4rem
+    line-height .4rem
+    background $normal-white-color
+    border-bottom .01rem solid $h5-border-light
+    position relative
+    h3
       text-align center
+      font-weight bold
+      font-size .18rem
+      position absolute
+      width 100%
+      pointer-events none
+    a
       font-size .14rem
-      color $normal-gray-color
-      letter-spacing 0
-      background $icon-nothing no-repeat center 1rem
-      background-size auto 1rem
-      background-color $normal-white-color
-      padding-top 2.2rem
+      color $h5-color-blue
+      &.left
+        float left
+        margin-left .12rem
+      &.right
+        float right
+        margin-right .12rem
+  .tab-ul
+    display flex
+    background $normal-white-color
+    li
+      width 100%
+      line-height .38rem
+      text-align center
+      font-size .16rem
+      margin 0 .4rem
+      border-bottom .02rem solid transparent
+      &.active
+        color $h5-active-blue
+        border-color $h5-active-blue
+  .hist-li
+    background $normal-white-color
+    margin .12rem
+    padding .12rem
+    border-radius .02rem
+    box-shadow: 0 .01rem .03rem 0 $h5-shadow-light
+    .d1
+      line-height .2rem
+      padding-bottom .07rem
+      border-bottom .01rem solid $h5-border-light
+      label
+        font-size .14rem
+        color $h5-color-weight
+        img
+          height .2rem
+          margin-right .06rem
+          vertical-align -.05rem
+      span
+        font-size .14rem
+        float right
+        &.success
+          color $h5-active-blue
+        &.fail
+          color $h5-active-yellow
+    .d2
+      margin-top .1rem
+      display flex
+      p
+        display inline-block
+        vertical-align top
+        flex-grow 1
+        span
+          display block
+          color $h5-color-light
+          line-height .2rem
+          margin-bottom .08rem
+        i
+          color $h5-color-normal
+          font-size .14rem
+      p:last-of-type
+        text-align right
+        flex-grow 0
+  .kong
+    margin-top .2rem
+    height 4rem
+    text-align center
+    font-size .14rem
+    color $normal-gray-color
+    letter-spacing 0
+    background $icon-nothing no-repeat center 1rem
+    background-size auto 1rem
+    background-color $normal-white-color
+    padding-top 2.2rem
 
 
-    .pagination-wrap
-      margin .2rem 0 .4rem 0
+  .pagination-wrap
+    margin .2rem 0 .4rem 0
 
 

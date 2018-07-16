@@ -1,24 +1,25 @@
 @import "../../../common/css/variable.styl"
 
 .banner-wrap-mb
+  width 100%
+  height 1.6rem
+  position relative
+  overflow hidden
   .banner-img
-    position fixed
-    top .5rem
+    position absolute
+    top 0
     width 100%
-    height 1.59rem
+    height 1.6rem
     z-index -1
     animation: bgscale 10s ease-in-out infinite
-  div
-    width 100%
-    height 1.59rem
-    img
-      position absolute
-      top .8rem
-      left 50%
-      transform translateX(-50%)
-      width 3rem
-      -webkit-filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
-      filter: drop-shadow(rgba(35, 118, 193, 0.3) 0px 7px 5px)
+  img
+    position absolute
+    top .5rem
+    left 50%
+    margin-left -1.5rem
+    height .6rem
+    width 3rem
+    filter contrast(80%)
 
 @keyframes bgscale {
   0% {

@@ -155,9 +155,11 @@ export default function zh(state) {
     "header-exchange": "币币交易",
     "header-assets": "资产管理",
     "header-order": "订单管理",
+    "header-user": "个人中心",
     "header-security": "安全中心",
     "header-idVerify": "身份认证",
     "header-logOut": "退出",
+    "header-login": "登录",
     "header-regist": "注册",
     "footer-risk": "市场有风险 投资需谨慎",
     "footer-protocol": "服务协议",
@@ -257,6 +259,7 @@ export default function zh(state) {
     "market-change": "涨跌幅",
     "market-change7D": "7日涨跌幅",
     "market-currencyInfo": "币种资料",
+    "market-volume": "24h量"
   };
   const notice = {
     "activity-regist": "立即注册",

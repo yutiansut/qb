@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import exchangeViewBase from "../../ExchangeViewBase";
 import {
-    Link
+    Link,
+    NavLink
 } from "react-router-dom";
 
 import "../style/balanceDetail.styl"
@@ -44,9 +45,13 @@ export default class BalanceDetail extends exchangeViewBase {
             });
         //
         return <div className="balance-detail">
+            <div className="nav">
+                <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
+                <h3>资产详情</h3>
+            </div>
             <div className="d1">
                 <img src={result.coinIcon}/>
-                <b>{result.coinName}</b>
+                <b>{result.coinName.toUpperCase()}</b>
                 <span>{result.fullName}</span>
             </div>
             <div className="d2">
@@ -61,7 +66,7 @@ export default class BalanceDetail extends exchangeViewBase {
                 币种简介<img src="/static/mobile/btn_jy_dqddzk.png"/>
             </Link>
             <div className="footer">
-                <a className="active">充币</a>
+                <NavLink to={{pathname: "/mwallet/charge", query: {currency:result.coinName}}} className="active">充币</NavLink>
                 <a>提币</a>
             </div>
         </div>

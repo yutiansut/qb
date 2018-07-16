@@ -28,9 +28,11 @@ export default class Login extends exchangeViewBase {
       picInput: "",
       userType: 0, //0 phone 1email
       verifyNum: this.intl.get("sendCode"),
+
       showPopup: false, // 提示弹窗
       popType: "tip1",
       popMsg: "登录成功",
+
       showTwoVerify: false,
       verifyType: "", // 密码登录两步认证弹窗
       checkState: true // checkbox判断
@@ -122,7 +124,7 @@ export default class Login extends exchangeViewBase {
     return (
       <div>
         <div className="login-wrap-mb">
-          <div class="tab-ul">
+          <div className="tab-ul">
             {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
           </div>
           <ul>
