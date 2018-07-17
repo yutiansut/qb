@@ -19,7 +19,17 @@ const orderStatusClass = {
 export default class OrderDetails extends exchangeViewBase {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      orderStatus: {
+        0: this.intl.get("unDeal"),
+        1: this.intl.get("partDeal"),
+        2: this.intl.get("dealed"),
+        3: this.intl.get("reseted"),
+        4: this.intl.get("reseting"),
+        5: this.intl.get("overed"),
+        6: this.intl.get("partDeal")
+      }
+    };
 
     const {orderInfo, controller} = this.props;
     controller.setView(this);
@@ -49,7 +59,7 @@ export default class OrderDetails extends exchangeViewBase {
         </div>
         <div className="order-details-info">
           <h1>{orderDetail.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")}{tradePairName}</h1>
-          <h2 className={orderStatusClass[orderDetail.orderStatus]}>{orderStatus[orderDetail.orderStatus]}</h2>
+          <h2 className={orderStatusClass[orderDetail.orderStatus]}>{this.state.orderStatus[orderDetail.orderStatus]}</h2>
           <div className="info-item clearfix">
             <span className="fl">{this.intl.get("orderType")}</span>
             <span className="fr">{type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</span>
@@ -74,11 +84,11 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fl">({tradePairArr[0]})</span>
             <span className="fr">{orderDetail.fee}</span>
           </div>}
-          {type === "current" && <div className="info-item clearfix">
+          <div className="info-item clearfix">
             <span className="fl">{this.intl.get("dealed")}</span>
             <span className="fl">({tradePairArr[0]})</span>
             <span className="fr">{orderDetail.doneCount}</span>
-          </div>}
+          </div>
           {type === "current" && <div className="info-item clearfix">
             <span className="fl">{this.intl.get("order-unDeal")}</span>
             <span className="fl">({tradePairArr[0]})</span>

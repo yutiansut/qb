@@ -207,12 +207,12 @@ export default class OrderHistory extends exchangeViewBase{
       <div className='order-history'>
         <div className='order-history-header clearfix'>
           <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
-            <img src="../../../../static/mobile/order/Back@3x.png"/>
+            <img src={this.$imagesMap.$back_white}/>
             <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.intl.get("order-history")}</div>
           <div className="filter fr" onClick={this.changeFilter}>
-            <img src="../../../../static/mobile/order/nav_shaixuan@3x.png"/>
+            <img src={this.$imagesMap.$order_filter}/>
           </div>
         </div>
         {this.state.filterShow &&

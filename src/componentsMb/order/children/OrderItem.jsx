@@ -3,15 +3,6 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 
 import "../stylus/orderItem.styl"
 
-const orderStatus = {
-  0: '未成交',
-  1: '部分成交',
-  2: '已成交',
-  3: '已撤销',
-  4: '撤单中',
-  5: '已结束',
-  6: '部分成交',
-};
 const orderStatusClass = {
   2: 'deal',
   3: 'cancel',
@@ -22,6 +13,18 @@ const orderStatusClass = {
 export default class OrderItem extends exchangeViewBase{
   constructor(props){
     super(props);
+    this.state = {
+      orderStatus: {
+          0: this.intl.get("unDeal"),
+          1: this.intl.get("partDeal"),
+          2: this.intl.get("dealed"),
+          3: this.intl.get("reseted"),
+          4: this.intl.get("reseting"),
+          5: this.intl.get("overed"),
+          6: this.intl.get("partDeal")
+      }
+    }
+
     this.controller = this.props.controller;
 
     this.goDetailDisplay = this.goDetailDisplay.bind(this);
@@ -61,7 +64,7 @@ export default class OrderItem extends exchangeViewBase{
               </div>
             ) : (
               <div className="info-history fr" onClick={this.goDetailDisplay}>
-                <span className={orderStatusClass[orderInfo.orderStatus]}>{orderStatus[orderInfo.orderStatus]}</span>
+                <span className={orderStatusClass[orderInfo.orderStatus]}>{this.state.orderStatus[orderInfo.orderStatus]}</span>
                 {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6) && <img src="../../../../static/mobile/order/icon_qianjb@3x.png"/>}
               </div>
             )}

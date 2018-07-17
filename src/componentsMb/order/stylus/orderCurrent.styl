@@ -34,12 +34,45 @@
       margin-left: .24rem
     .filter
       cursor pointer
+  .order-current-hide
+    width 100%
+    position absolute
+    top .44rem
+    left 0
+    padding .06rem .12rem
+    border-bottom .02rem solid $h5-order-filter-button
+    .toggle-btn
+      display inline-block
+      width .48rem
+      height .24rem
+      border-radius  .24rem
+      background $bg-dark-color
+      position relative
+      border .02rem solid $bg-dark-color
+      i
+        display inline-block
+        height .2rem
+        width .2rem
+        background $normal-white-color
+        border-radius 50%
+        position absolute
+        top 0
+      &.active
+        background $main-color
+        border-color $main-color
+        i
+          right 0
+    .hide-pair
+      margin-left: .08rem
+      font-size .14rem
+      line-height .24rem
+      color $h5-orderlist-th
   .order-current-filter
     position: absolute
-    top: 44px
+    top: .44rem
     left 0
     width: 100%
-    height: calc(100% - 44px)
+    height: calc(100% - .44rem)
     background-color $popup-bg-color
     .filter-container
       padding .12rem .12rem 0 .12rem
@@ -68,7 +101,7 @@
         display block
         width .28rem
         height .23rem
-        background: url("../../../../static/mobile/order/btn_xuanzhong_sel.png") center center no-repeat
+        background: $h5-order-filter-select center center no-repeat
         background-size contain
       .choose-section
         padding .08rem 0 .12rem 0

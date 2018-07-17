@@ -24,6 +24,7 @@ export default class OrderCurrent extends exchangeViewBase{
       coinArray: [],    // SelectButton币种数组
       marketArray: [],  // SelectButton市场数组
       hideOther: 0,     // SelectButton隐藏
+      hideZero: false,
     };
     const {controller} = props;
     controller.setView(this);
@@ -173,20 +174,27 @@ export default class OrderCurrent extends exchangeViewBase{
 
         <div className='order-current-header clearfix'>
           <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
-            <img src="../../../../static/mobile/order/Back@3x.png"/>
+            <img src={this.$imagesMap.$back_white}/>
             <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.intl.get("order-current")}</div>
           <NavLink to={`${match.url}/history`}>
           <div className="history fr">
-            <img src="../../../../static/mobile/order/nav_lishidingdan@3x.png"/>
+            <img src={this.$imagesMap.$order_history}/>
           </div>
           </NavLink>
           <div className="filter fr" onClick={this.changeFilter}>
-            <img src="../../../../static/mobile/order/nav_shaixuan@3x.png"/>
+            <img src={this.$imagesMap.$order_filter}/>
           </div>
         </div>
-        {this.state.filterShow &&
+        {/* <div className="order-current-hide">
+          <span className={this.state.hideZero ? "toggle-btn active" : "toggle-btn"}
+            onClick={()=>{
+              this.setState({hideZero:!this.state.hideZero});
+            }}><i/></span>
+          <span className="hide-pair">隐藏其他交易对</span>
+        </div> */}
+        {this.state.filterShow && 
         <div className='order-current-filter'>
           <div className="filter-container">
             <h1>{this.intl.get("pair")}</h1>
