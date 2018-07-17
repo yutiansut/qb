@@ -254,6 +254,7 @@ export default function zh(state) {
     "asset-withdrawal-failed": '提币失败',
     "asset-detail": '资产详情',
     "asset-charge-h5-tip3": '请务必确认电脑及浏览器安全，防止信息被篡改或泄露。',
+    "asset-auth-tip":'您的24小时提现额度不足，请进行实名认证',
   };
   const market = {
     "market-favorite": "收藏",

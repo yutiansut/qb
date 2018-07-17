@@ -247,10 +247,12 @@ export default class AssetController extends ExchangeControllerBase {
     let result = await this.store.extractOrder(obj);
     // console.log('提交订单', result)
     if (result) {
-      this.view.setState({
+      let o = {
         orderTip: true,
         orderTipContent: result.errCode === 'CWS_ERROR' ? this.view.intl.get('asset-withdrawal-failed') : result.msg
-      });
+      }
+      if (result.errCode === 'NO_VERIFIED') o.orderTipContent = this.view.intl.get("asset-auth-tip");
+      this.view.setState(o);
       // 错误处理
       return;
     }

@@ -256,6 +256,7 @@ export default function en(state) {
     "asset-withdrawal-failed": 'Withdrawal failed',
     "asset-detail": 'Asset Detail',
     "asset-charge-h5-tip3": 'Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.',
+    "asset-auth-tip": 'Insufficient 24H withdrawal limit, please finish the real-name verification',
   };
   const market = {
     "market-favorite": "Favorites",

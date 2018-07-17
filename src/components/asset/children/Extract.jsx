@@ -594,9 +594,14 @@ export default class Extract extends exchangeViewBase {
               this.setState({ orderTip: false });
             }}
             onConfirm={() => {
+              if(this.state.orderTipContent === this.intl.get('asset-auth-tip')) {
+                this.props.history.push({
+                  pathname: `/wuser/identity/`,
+                });
+              }
               this.setState({ orderTip: false });
             }}
-            autoClose={true}
+            autoClose={this.state.orderTipContent !== this.intl.get('asset-auth-tip')}
           />
         )}
       </div>
