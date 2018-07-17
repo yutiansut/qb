@@ -3,6 +3,7 @@ export default function en(state) {
     nameCny,
     nameUsd,
     netUrl,
+    coin,
     applyEmailUrl,
     contactEmailUrl,
     addr
@@ -483,6 +484,18 @@ export default function en(state) {
     "user-passportErr": "There was an error. Check the Passport box."
 
   };
+
+  const activity = {
+    "activity-rule-1": "Start now, every new registered user can claim 20 tokens.",
+    "activity-rule-2": "Invite friends to register and claim 5 more for each successful registry.",
+    "activity-rule-3": "Please use your own invitation code.",
+    "activity-rule-4": "Total 5,000,000 will be distributed.",
+    "activity-rule-5": "New registered user can login web or app to check the tokens on “assets”.",
+    "activity-rule-6": "Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
+    "activity-rule-7": `${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
+    "activity-rule-8": `All rights reserved by ${nameUsd}.`,
+  };
+
   const login = {
     "login-verify": "Verified login",
     "login-pass": "Password login",
@@ -686,6 +699,7 @@ export default function en(state) {
     order,
     deal,
     user,
+    activity,
     login,
     help,
   );

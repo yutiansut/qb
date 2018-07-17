@@ -43,7 +43,7 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   userLoginInfo(data) { // 登陆返回信息
-    // console.log('ccc2', data, this.view.history)
+    // console.log('ccc2', data, this.view.state.from)
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.ret === 0 &&  data.data) { // 登陆成功
