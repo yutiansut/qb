@@ -25,13 +25,14 @@ export default class UserStore extends ExchangeStoreBase {
       servicePhone: EXCHANGE_SERVICE_PHONE,
       serviceQQ: EXCHANGE_SERVICE_QQ,
       currentUrl: CURRENT_URL,
-      //language: 'zh-CN'
-       language: 'en-US'
+      // language: 'zh-CN',
+      language: this.Storage.language.get() || 'en-US'
     }
   }
 
   changeLanguage(lang){
     this.state.language = lang;
+    this.Storage.language.set(lang);
   }
 
   get language(){

@@ -55,7 +55,7 @@ export default class Simple extends exchangeViewBase {
               {this.intl.get("asset-totalAssets")}：{lang === "en-US" ? "$" : "¥"}
               {total && Number(total).format({ number: "legal" })}{" "}
             </span>
-            <img src="/static/images/xianghu.svg" alt="" />
+            <img src={this.$imagesMap.$xianghu} alt="" />
             <span className="avail1">
               {this.intl.get("deal-use")}
               {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&

@@ -29,5 +29,6 @@ export default {
     {name: 'chargeCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     {name: 'extractCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     {name: 'coinCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
+    { name: 'language', duration: 0, expiryTime: 0 },//语言设置
   ]
 }

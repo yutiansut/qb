@@ -12,10 +12,10 @@ export default class KdepthController extends ExchangeControllerBase {
   // set深度数据
   setData(data) {
     // console.log('set深度数据.............', data)
-    if (!data) {
-      return;
-    }
     let result = {};
+    if (!data) {
+      result = { bids: [], asks: [] };
+    }
     result.bids = data.buy
       ? data.buy.map(v => {
           let arr = [];

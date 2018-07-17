@@ -71,7 +71,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       // searchValue: '',
       sortIndex: 0,
-      sortImg: "/static/images/rank_normal.svg",
+      sortImg: this.view.$imagesMap.$rank_normal,
       searchRealt: [],
       collectActive: false,
       market: v,
@@ -97,7 +97,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       searchValue: '',
       sortIndex: 0,
-      sortImg: "/static/images/rank_normal.svg",
+      sortImg: this.view.$imagesMap.$rank_normal,
       searchRealt: [],
       collectActive: true,
       market: '',
@@ -171,7 +171,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新视图层
     this.updateMarketAll([], 2)
     // this.store.initWebsocket()
-    
+
 
     // this.
 
@@ -276,7 +276,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   //排序功能
   pairSort(v, index) { // type 1 升序 0 降序
-    let imgArr = ["/static/images/rank_down.svg", "/static/images/rank_up.svg"],
+    let imgArr = [this.view.$imagesMap.$rank_down, this.view.$imagesMap.$rank_up],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
 
@@ -352,6 +352,6 @@ export default class MarketController extends ExchangeControllerBase {
       this.tradePairChange({tradePairId:id,tradePairName:data});
       return
     }
-    
+
   }
 }

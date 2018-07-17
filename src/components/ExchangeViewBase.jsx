@@ -19,7 +19,8 @@ export default class ExchangeViewBase extends ViewBase {
       $rank_down: "/static/images/rank_down.svg",
       $rank_up: "/static/images/rank_up.svg",
       $rank_normal: "/static/images/rank_normal.svg",
-      $xianghu: "/static/images/xianghu.svg"
+      $xianghu: "/static/images/xianghu.svg",
+      $award_success: "/static/images/genrealize/success.png"
     }
   }
 

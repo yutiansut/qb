@@ -37,8 +37,8 @@ export default class ExchangeStoreBase extends StoreBase {
     // console.log("res.result.ret", res.result.ret);
 
     if (res.result.ret !== 0) {
-      res.result = Msg[res.result.ret]
-      // res.result = Object.assign(res.result.data, Msg[res.result.ret])
+      // res.result = Msg[res.result.ret]
+      res.result = res.result.data ? Object.assign(Msg[res.result.ret], res.result.data) : Msg[res.result.ret];
       return
     }
     if (res.result.action !== config.actionBack) {

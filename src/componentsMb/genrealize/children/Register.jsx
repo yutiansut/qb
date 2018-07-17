@@ -91,7 +91,7 @@ export default class Register extends exchangeViewBase {
           className="successAlert"
           style={{ display: showSuccess ? "block" : "none" }}
         >
-          <img src="/static/images/genrealize/success.png" alt="" />
+          <img src={this.$imagesMap.$award_success} alt="" />
           <p>领取成功</p>
           <div className="mregister-asset">
             您当前的资产

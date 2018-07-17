@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom'
 import Input from '../../../common/component/Input/index.jsx'
 import ReactTrend from './ReactTread'
 
-let sortImg = ["/static/images/rank_down.svg", "/static/images/rank_up.svg", "/static/images/rank_normal.svg"]
 
 export default class HomeMarket extends ExchangeViewBase {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class HomeMarket extends ExchangeViewBase {
     this.state = {
       searchValue: '',
       sortIndex: 0,
-      sortImg: "/static/images/rank_normal.svg",
+      sortImg: this.$imagesMap.$rank_normal,
       searchRealt: [],
       collectActive: false, // 控制收藏区的active
       // collectImg: "/static/img/star.svg",
@@ -96,7 +95,7 @@ export default class HomeMarket extends ExchangeViewBase {
               return (<th onClick={this.pairSort.bind(this, v, index)} key={index}
                           className={`${v.sortValue ? 'sort-img-li' : ''}`}>
                 {v.name}
-                <img src={this.state.sortIndex === index ? this.state.sortImg : "/static/images/rank_normal.svg"} alt=""
+                <img src={this.state.sortIndex === index ? this.state.sortImg : this.$imagesMap.$rank_normal} alt=""
                      className={`${v.sortValue ? '' : 'hide'}`}/>
               </th>)
             })}
