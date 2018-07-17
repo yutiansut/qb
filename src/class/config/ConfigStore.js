@@ -13,6 +13,7 @@ const CURRENT_URL = 'http://127.0.0.1:8080'
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
+
     super();
     this.state = {
       nameCny: EXCHANGE_NAME_CNY,
