@@ -59,10 +59,10 @@ a.default, button.default
       color $negative-color-active;
       border-color $negative-color-active;
   &.disable
-    border-color #E0E6ED;
+    border-color $disale-border-color;
     color $line-dark
     &:hover, &:active
-      border-color #E0E6ED;
+      border-color $disale-border-color;
       color $line-dark
 a.base, button.base
   color $normal-white-color
@@ -100,13 +100,14 @@ a.base, button.base
       color $normal-white-color
       background-color $negative-color-active
   &.disable
-    background-color $disale-bg-color
+    opacity 0.5
+    background-color $main-color
     border 0.01rem solid $disale-border-color
-    color $disale-border-color
+    color $normal-white-color
     &:hover, &:active
-      background-color $disale-bg-color
+      background-color $main-color
       border 0.01rem solid $disale-border-color
-      color $disale-border-color
+      color $normal-white-color
 a.back1, button.back1
   background-color transparent
   border 0.01rem solid $exchange-color

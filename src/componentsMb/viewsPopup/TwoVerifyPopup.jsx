@@ -25,7 +25,7 @@ export default class TwoVerifyPopup extends exchangeViewBase {
   render() {
     let { onClose, type, getVerify, verifyNum, onConfirm } = this.props;
     return (
-      <div className="view-popup-wrap">
+      <div className="h5-view-popup-wrap">
         <div className="view-info">
           <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => { onClose && onClose() }} />
           <h2>{this.intl.get('twoStep')}</h2>

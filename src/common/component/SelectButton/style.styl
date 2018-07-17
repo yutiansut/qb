@@ -9,7 +9,7 @@
     height 0.4rem
     position relative
     font-size 0.16rem
-    color $normal-black-color
+    color $normal-font-color
     background $normal-white-color
     border none
     letter-spacing 0.0006rem
@@ -77,6 +77,9 @@
       border-right .055rem solid transparent
       height .06rem
       opacity 0.7
+    &.simple
+      min-width 56px
+      background $normal-black-color
     &.simple::after
       right 50%
       margin-right -0.055rem
@@ -128,9 +131,10 @@
         background-size 45% auto
   .base-list
     position absolute
+    overflow hidden
     width 100%
-    background $normal-white-color
-    border 0.01rem solid $line-light
+    background $line-dark
+    // border 0.01rem solid $line-light
     border-radius(0.02rem)
     z-index 99
     &.hide
@@ -141,15 +145,14 @@
       padding 0 .1rem 0 .1rem
       font-size .14rem
       text-align center
-      color $normal-black-color
-      border-bottom 0.01rem solid $line-light
+      color $normal-font-color
       letter-spacing 0
       line-height .4rem
       cursor pointer
       &:hover
-        background $bg-dark-color
+        color $main-color
       &.active
-        color $normal-white-color
+        color $normal-black-color
         background $main-color
   .trade-list
     position absolute

@@ -7,11 +7,6 @@ export default class ExchangeViewBase extends ViewBase {
     // this.history = props.history;
     // this.match = props.match;
     this.intl = intl;
-    this.$imagesMap = {
-      $back_white: '/static/mobile/order/Back@3x.png',
-      $order_history: '/static/mobile/order/nav_lishidingdan@3x.png',
-      $order_filter: '/static/mobile/order/nav_shaixuan@3x.png',
-    }
   }
 
   componentWillMount() {
