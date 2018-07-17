@@ -268,6 +268,7 @@ export default function zh(state) {
     "market-volume": "24h量"
   };
   const notice = {
+    "notice-about": "关于我们",
     "activity-regist": "立即注册",
     "notice-contact": "联系我们",
     "notice-detail": "资讯详情",
@@ -289,7 +290,6 @@ export default function zh(state) {
     "notice-appleContent6": "ICO信息，发行时间、数量、兑换比例等信息",
     "notice-appleContent7": "用户及社区信息，现有注册、活跃用户数量及社区链接",
     "notice-appleContent8": "白皮书或其他补充说明材料",
-
   };
   const order = {
     "order-current": "当前订单",
@@ -425,6 +425,7 @@ export default function zh(state) {
     "user-popRecoverLoginPwd": "修改登录密码",
     "user-popSetFundPwd": "设置资金密码",
     "user-popRecoverFundPwd": "修改资金密码",
+    "user-needFundPwd": "询问资金密码",
     "user-none": "暂无",
     "user-fillId": "请填写身份证号码",
     "user-fillPassport": "请填写护照号码",
@@ -474,7 +475,15 @@ export default function zh(state) {
     "user-uploadPicture": "请上传图片",
     "user-nonePicture": "信息不完整",
     "user-idErr": "身份证填写有误",
-    "user-passportErr": "护照填写有误"
+    "user-passportErr": "护照填写有误",
+    // h5
+    "user-verify-state0": "未认证",
+    "user-verify-state1": "审核中",
+    "user-verify-state2": "已审核",
+    "user-verify-state3": "未通过",
+    "user-verify-state4": "恶意上传",
+    "user-verify-state5": "永久禁止",
+
   };
   const login = {
     "login-verify": "验证登录",
@@ -621,6 +630,16 @@ export default function zh(state) {
     "helo-coin-browser": "区块浏览器",
     "helo-coin-white": "白皮书",
   };
+  const activity = {
+      "activity-rule-1": "即日起，新用户完成注册后，可领取20枚QB。",
+      "activity-rule-2": "用户邀请好友注册后，即可领取5枚QB，多邀多得，上不封顶。",
+      "activity-rule-3": "请使用您的专属邀请链接或邀请码进行邀请。",
+      "activity-rule-4": "本次活动共发放5,000,000 枚QB，送完即止。",
+      "activity-rule-5": "新注册用户需要登录后在资产页面查看奖励，或下载App并登录查看奖励。",
+      "activity-rule-6": "如果奖励未到账，请您先刷新页面查看，如果依然未到账，请您与客服联系。",
+      "activity-rule-7": `一经发现作弊行为，${nameUsd}有权收回给您的奖励，并对账号进行相应处理。`,
+      "activity-rule-8": `该活动最终解释权归${nameUsd}所有。`,
+  };
   return Object.assign(
     {},
     common,
@@ -634,5 +653,6 @@ export default function zh(state) {
     user,
     login,
     help,
+    activity,
   );
 }

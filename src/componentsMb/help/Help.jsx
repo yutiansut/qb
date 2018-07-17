@@ -21,22 +21,23 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 export default class Help extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.controller = props.controller;
+    this.assetController = props.assetController;
+    this.activityController = props.activityController;
   }
 
   render() {
     let match = this.props.match;
     const terms = () => {
-      return <Terms controller={this.controller} />;
+      return <Terms controller={this.activityController} />;
     };
     const pricing = () => {
-      return <Pricing controller={this.controller} />;
+      return <Pricing controller={this.assetController} />;
     };
     const api = () => {
-      return <Api controller={this.controller} />;
+      return <Api controller={this.assetController} />;
     };
     const coin = ({location}) => {
-      return <CoinData controller={this.controller} location={location} />;
+      return <CoinData controller={this.assetController} location={location} />;
     };
 
     return <div className="help-wrap-mb">

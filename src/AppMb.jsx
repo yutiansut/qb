@@ -43,6 +43,7 @@ const header = ({ match, history }) => {
     <Header
       userController={userController}
       loginController={loginController}
+      configController={configController}
       history={history}
     />
   );
@@ -69,7 +70,7 @@ const HomeCompoment = () => {
 };
 
 const HelpComponent = ({ match }) => {
-  return <Help controller={assetController} match={match} />;
+  return <Help assetController={assetController} activityController={activityController} match={match} />;
 };
 
 const ForgetPassComponent = ({ match, history }) => {
@@ -158,7 +159,7 @@ export default class App extends Component {
     return (
       <Router>
         {this.state.initDone && (
-          <div>
+          <div className="route-mb">
             {/*<Header/>*/}
             <Switch>
               <Route component={header} />

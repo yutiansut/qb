@@ -10,6 +10,9 @@ export default class Terms extends exchangeViewBase {
     // console.log('jsxconfig',controller.configData)
   }
   render() {
+    const controller = this.props.controller;
+    let { nameUsd, netUrl } = controller.configData;
+    
     const content = this.getContent();
     return <div className="help-terms">
       <h2 className="title">{this.intl.get('help-terms')}</h2>
@@ -33,6 +36,9 @@ export default class Terms extends exchangeViewBase {
     </div>;
   }
   getContent() {
+    const controller = this.props.controller;
+    let { nameUsd, netUrl } = controller.configData;
+
     return [
       {
         title: this.intl.get('help-terms-1'),

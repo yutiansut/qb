@@ -7,15 +7,19 @@ import {
 } from 'react-router-dom'
 
 import "./stylus/header.styl"
+import zh from "../../lang/zh";
+import en from "../../lang/en";
 
 export default class Header extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      navHidden: true
+      showLangDrop: false,
+      navHidden: true,
     };
-    let {loginController,userController} = this.props;
-    this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController) // 退出登录
+    let {loginController,userController,configController} = this.props;
+    this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
+    this.changeLanguage = configController.changeLanguage.bind(configController); // 改变语言
   }
 
   componentDidMount() {
@@ -31,42 +35,54 @@ export default class Header extends ExchangeViewBase {
     this.props.history.push("/mhome");
   }
 
+  changeLang(lang){
+    this.setState({lang:lang},()=>{
+      this.changeLanguage(lang);
+    })
+  }
+
   render() {
-    const {userController} = this.props;
+    const {userController,configController} = this.props;
+    let lang = configController.language;
     let isLogin = !!userController.userToken;
     return (
       <div className="header-nav-mb">
         <Link to='/home' className="logo">
           <img src="/static/img/home/logo.svg"/>
         </Link>
-        {!isLogin ?
-            <NavLink to="/mlogin" className="nav-right">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
-            <img className="nav-img" src="/static/mobile/user/icon_wd_head@3x.png" alt=""
-                 onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
+        <div className="nav-menu">
+          <a href="javascript:void(0)" className="drop-menu"
+             onBlur={()=>{this.setState({showLangDrop:false})}}>
+            <img src={lang==="zh-CN" ? "/static/img/home/chinese.svg":"/static/img/home/english.png"}
+                 onClick={()=>{this.setState({showLangDrop:!this.state.showLangDrop})}}/>
+            {this.state.showLangDrop && <ul>
+                <li onClick={this.changeLang.bind(this,"zh-CN")}><img src="/static/img/home/chinese.svg"/>简体中文</li>
+                <li onClick={this.changeLang.bind(this,"en-US")}><img src="/static/img/home/english.png"/>English</li>
+            </ul>}
+          </a>
+         {!isLogin ?
+             <NavLink to="/mlogin">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
+             <img src="/static/mobile/user/icon_wd_head@3x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
+        </div>
         {(isLogin && !this.state.navHidden) && <div>
             <div className="nav-shadow" onClick={e => this.setState({navHidden: true})}></div>
             <div className="nav-hidden">
               <a className="nav-login">
                   <img src="/static/mobile/user/icon_wd_head@3x.png" alt=""/>
                   <span>{userController.userName}</span></a>
-              <NavLink to="/mhome" className="nav-home"
+              <NavLink to="/mhome"
                        onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-home")}</NavLink>
-              <div>
-                <NavLink to="/mwallet"
-                        className="nav-wallet"
-                        onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-assets")}</NavLink>
-                <NavLink to="/morder"
-                         className="nav-order"
-                         onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-order")}</NavLink>
-                <NavLink to="/muser"
-                         className="nav-order"
-                         onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-user")}</NavLink>
-                  <a onClick={e=>{
-                      this.setState({navHidden: true},()=>{
-                        this.logout();
-                      });
-                  }}>{this.intl.get("header-logOut")}</a>
-              </div>
+              <NavLink to="/mwallet"
+                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-assets")}</NavLink>
+              <NavLink to="/morder"
+                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-order")}</NavLink>
+              <NavLink to="/muser"
+                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-user")}</NavLink>
+              <a onClick={e=>{
+                  this.setState({navHidden: true},()=>{
+                    this.logout();
+                  });
+              }}>{this.intl.get("header-logOut")}</a>
             </div>
           </div>}
       </div>

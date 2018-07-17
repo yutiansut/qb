@@ -270,6 +270,7 @@ export default function en(state) {
     "market-volume": "24h Volume"
   };
   const notice = {
+    "notice-about": "About Us",
     "activity-regist": "Sign up now",
     "notice-contact": "Contact Us",
     "notice-detail": "Information details",
@@ -437,6 +438,7 @@ export default function en(state) {
     "user-popRecoverLoginPwd": "Recover login password",
     "user-popSetFundPwd": "Funding Password",
     "user-popRecoverFundPwd": "Recover funding password",
+    "user-needFundPwd": "Query funding password",
     "user-none": "none",
     "user-fillId": "Please fill in ID card",
     "user-fillPassport": "Please fill in Passport number",
@@ -484,8 +486,14 @@ export default function en(state) {
     "user-uploadPicture": "请上传图片",
     "user-nonePicture": "信息不完整",
     "user-idErr": "There was an error. Check the ID box.",
-    "user-passportErr": "There was an error. Check the Passport box."
-
+    "user-passportErr": "There was an error. Check the Passport box.",
+    // h5
+    "user-verify-state0": "Uncertified",
+    "user-verify-state1": "Checking",
+    "user-verify-state2": "Checked",
+    "user-verify-state3": "Failed",
+    "user-verify-state4": "Malicious",
+    "user-verify-state5": "Prohibit",
   };
 
   const activity = {
@@ -691,6 +699,7 @@ export default function en(state) {
     "2014年11月下旬，注册地为马恩岛和香港的公司Realcoin改名为Tether。2015年2月发布时就抱上了一条粗腿，当时比特币期货交易量最大交易平台：bitfinex宣布支持泰达币（下称USDT）交易。随后竞争币交易平台Poloniex交易所也支持USDT。P网凭着以太币强势崛起，在竞争币交易平台中隐有龙头之势，也顺带提携了USDT的交易量。USDT的发行和交易使用的是Omni（原Mastercoin）协议，而Omni币可以说是市面上的第一个基于比特币区块链的2.0币种。所以USDT的交易确认等参数是与比特币一致的。根据Tether的CTO及联合创始人Craig Sellars 称，用户可以通过SWIFT电汇美元至Tether公司提供的银行帐户，或通过Bitfinex交易所换取USDT。赎回美元时，反向操作即可。用户也可在上述两个网站用比特币换取USDT。其网站宣称严格遵守1：1的准备金保证，即每发行1枚USDT代币，其银行帐户都会有1美元的资金保障。在合规方面，所有涉及到法币的操作，都要求用户完成KYC认证。当被问及用户如何验证银行帐户保证金时，Craig称法币由Tether Liminted公司保管，并有定期审计，但目前用户还不能直接查询保证金。目前USDT的交易量在所有稳定虚拟货币中的交易量是最大的。": "Tether is a cryptocurrency token claimed by its creators to be backed by one dollar for each token issued, though Tether Limited has not issued a promised audit of their currency reserves. Subpoenas from the U.S. Commodity Futures Trading Commission were sent to Tether on December 6, 2017.A spokesperson for Bitfinex and Tether has said that the CEO of both firms is Jan Ludovicus van der Velde.Tether was issued on the Bitcoin blockchain through the Omni Layer Protocol. Tether says that each unit of Tether is backed by one United States dollar held in reserve by Tether Limited, and may be redeemed through the Tether Platform. The primary objective is to facilitate transactions between cryptocurrency exchanges with a rate fixed to the United States dollar allowing traders to take advantage of high speed arbitrage opportunities without resorting to slow bank wires. As of February 2018, Tether is ranked around the 15th highest market cap cryptocurrency in the world, with a market cap around $2 billion United States dollars as of 5 February 2018.Tether tokens are issued by Tether Limited.",
     "CRT是CoinRising公司发行的代币，CoinRising通过CRT与全体支持者共享平台成长利益。CRT总量10亿枚，定期回购销毁，永不增发。CRT的价值与用途:CoinRising币荣将通过CRT与全球支持者实现利益共享，方式包括但不限于：1.     平台将定期回购CRT进行销毁，以保证您持有的CRT价值提升2.     满足条件CRT持有者将获得平台交易手续费减免，以降低您的交易成本3.     您可自由将CRT兑换其他数字货币，以保证您资产的灵活性4.     持有CRT代表拥有平台的投票权，您将有权利决定上线哪些交易品类，提议开发某个新功能，您将成为平台的建设者5.     CRT持有者将优先获得平台各种价值信息与优质投资产品与服务，协助您成为更聪明的投资者6.     您可使用CRT参与平台各种趣味活动，让您充分享受交易的乐趣": "CRT (CoinRising Token) is a token published by CoinRising.com which is a professional crypto currency exchange platform. CoinRising.com would share the growing profit with whole token holders. The total amount of CRT is 1 billion and would never be increased, token would be repurchased and destroyed periodically. The value and usage of CRT would be shared with CRT holders all over the world, include but not limited to:1. CoinRising.com would repurchase and destroy CRT periodically to insure the value of CRT will increase continuously.2. The commission fee of trading will be decreased for CRT holders according to the specific requirements, for the matter of decreasing your trading costs.3. The CRT holders could exchange CRT to other digital currencies, for a convenient and smooth trading experience.4. The CRT holders own the voting rights, you have the rights of deciding which currency would be listed. Besides, you can also have the rights to decide what function would be processed, it means that you are defiantly one of the platform builders.5. The CRT holders would receive all kinds of valuable information, excellent investments recommendations and other service in advance, you would totally benefit from these services for becoming a smarter investor.6. Holders can use CRT to participate various of activities on platform, to enjoy a fully fantastic trading experience.",
   };
+
   return Object.assign(
     {},
     common,

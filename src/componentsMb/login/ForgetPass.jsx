@@ -135,7 +135,6 @@ export default class ForgetPass extends exchangeViewBase {
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
               <em>{this.state.errPass}</em>
-              <span>{this.intl.get("login-passRule")}</span>
             </li>
             <li>
               <p>{this.intl.get("login-passAgain")}</p>

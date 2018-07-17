@@ -1,24 +1,55 @@
 @import "../../../common/css/variable.styl"
 
+.route-mb
+  padding-top .5rem
 .header-nav-mb
+  position fixed
+  width 100%
+  top 0
+  z-index 9999999
   font-family PingFangSC-Medium
   height .5rem
   padding 0 .2rem 0 0.1rem
   background $normal-white-color
+  box-shadow 0 0.02rem .02rem $h5-shadow-light
   display flex
-  justify-content space-between
   .logo
     display inline-block
     height 100%
     padding .15rem 0
     >img
       height .2rem
-  .nav-right
-    line-height .5rem
-    color $h5-color-blue
-  .nav-img
-    height .3rem
-    margin-top .1rem
+  .nav-menu
+    flex-grow 1
+    display flex
+    justify-content flex-end
+    align-items center
+    >a
+      color $h5-color-blue
+      margin-left .15rem
+    >img
+      height .3rem
+      margin-left .15rem
+    .drop-menu
+      position relative
+      img
+        height .14rem
+        margin-right .05rem
+        vertical-align -.02rem
+      ul
+        position absolute
+        right 0
+        margin-top .1rem
+        background $normal-white-color
+        box-shadow 0 0 0.05rem $h5-shadow-weight
+        border-radius .02rem
+        overflow hidden
+        li
+          line-height .3rem
+          padding 0 .1rem
+          white-space nowrap
+          color $h5-color-normal
+          font-size .13rem
   .nav-hidden
     position: fixed
     z-index: 100001
@@ -27,7 +58,8 @@
     right 0
     left 37.5%;
     overflow auto
-    background $main-color
+    background $h5-main-color
+    box-shadow 0.02rem 0 .05rem $h5-shadow-light
     .nav-login
       height .7rem
       line-height .7rem
@@ -49,7 +81,7 @@
   .nav-shadow
     position: fixed;
     z-index: 100000;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.5);
     top: 0;
     bottom: 0;
     left: 0;

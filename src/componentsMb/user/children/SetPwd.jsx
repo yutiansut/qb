@@ -32,7 +32,7 @@ export default class SetPwd extends exchangeViewBase {
           numTitle: this.intl.get("user-popEmail"),
           numInput: this.intl.get("user-inputEmail"),
           verifyTitle: this.intl.get("user-verifyEmail"),
-          verifyInput: '请输入邮箱验证码',
+          verifyInput: this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("user-popBind")
         },
         {
@@ -40,7 +40,7 @@ export default class SetPwd extends exchangeViewBase {
           numTitle: this.intl.get("phone"),
           numInput: this.intl.get("user-inputPhone"),
           verifyTitle: this.intl.get("user-verifyPhone"),
-          verifyInput: '请输入手机号验证码',
+          verifyInput: this.intl.set("user-inputVerifyPhone"),
           btnTitle: this.intl.get("user-popBind")
         },
         {
@@ -226,7 +226,6 @@ export default class SetPwd extends exchangeViewBase {
   }
 
   render() {
-    console.log('来源', this.state)
     const {url} = this.props
     let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
@@ -234,7 +233,7 @@ export default class SetPwd extends exchangeViewBase {
         <div className="safe-center-header">
           <div className="back">
             <img src="../../../../static/mobile/user/Back@3x.png"/>
-            <NavLink to={`${url}/safe`}>返回</NavLink>
+            <NavLink to="/muser/safe">{this.intl.get("back")}</NavLink>
             <span>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].title}</span>
           </div>
         </div>
