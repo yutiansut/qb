@@ -3,7 +3,6 @@
 
 .asset-mb
   .balance
-    background $bg-light-color
     font-family PingFangSC-Medium
     .total-asset
       background $normal-white-color
@@ -26,7 +25,7 @@
           display block
     .menu-ul
       line-height .4rem
-      border 1px solid $line-light
+      border 1px solid $h5-border-light
       border-left none
       border-right none
       background $normal-white-color
@@ -35,13 +34,13 @@
         width 33%
         text-align center
         position relative
-        color $main-color
+        color $h5-color-blue
         &:not(:last-of-type)::after
           position absolute
           right 0
           content ""
           width .01rem
-          background $line-light
+          background $h5-border-light
           height .3rem
           top .05rem
         a
@@ -53,7 +52,6 @@
         height .45rem
         background $normal-white-color
         padding 0 .2rem
-        box-shadow .2rem .2rem .2rem $bg-light-color
         img
           height .2rem
           width .2rem
@@ -66,9 +64,9 @@
           float right
           margin-top .1rem
           border-radius  .24rem
-          background $bg-dark-color
+          background $h5-color-light
           position relative
-          border .02rem solid $bg-dark-color
+          border .02rem solid $h5-color-light
           i
             display inline-block
             height .2rem
@@ -78,22 +76,21 @@
             position absolute
             top 0
           &.active
-            background $main-color
-            border-color $main-color
+            background $h5-color-blue
+            border-color $h5-color-blue
             i
               right 0
       .wallet-li
         background $normal-white-color
         margin-top .12rem
         padding .08rem .12rem
-        box-shadow .2rem .2rem  .2rem  $bg-light-color
         .d1
           padding-bottom .08rem
-          border-bottom 1px solid $line-light
+          border-bottom 1px solid $h5-border-light
           line-height .2rem
           label
             font-size .14rem
-            color $main-color
+            color $h5-color-blue
             img
               height .2rem
               width .2rem
@@ -101,7 +98,7 @@
               vertical-align -.05rem
           a
             float right
-            color $normal-gray-color
+            color $h5-color-light
             font-size .12rem
         .d2
           padding .08rem 0 .05rem 0
@@ -110,7 +107,7 @@
             vertical-align top
             width 50%
             span
-              color $normal-gray-color
+              color $h5-color-light
               font-size .12rem
               display block
               line-height .16rem

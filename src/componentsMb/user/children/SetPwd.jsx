@@ -40,7 +40,7 @@ export default class SetPwd extends exchangeViewBase {
           numTitle: this.intl.get("phone"),
           numInput: this.intl.get("user-inputPhone"),
           verifyTitle: this.intl.get("user-verifyPhone"),
-          verifyInput: this.intl.set("user-inputVerifyPhone"),
+          verifyInput: this.intl.get("user-inputVerifyPhone"),
           btnTitle: this.intl.get("user-popBind")
         },
         {
