@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./stylus/forgetPass.styl"
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../components/ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'

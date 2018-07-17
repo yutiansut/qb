@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import exchangeViewBase from "../../ExchangeViewBase";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
 import Popup from '../../../common/component/Popup'
 

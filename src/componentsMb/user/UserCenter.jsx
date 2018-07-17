@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Redirect, Switch} from 'react-router-dom';
-import exchangeViewBase from '../ExchangeViewBase.jsx';
+import exchangeViewBase from '../../components/ExchangeViewBase.jsx';
 
 import UserCenterIndex from './children/UserCenterIndex.jsx';
 import SafeCenter from './children/SafeCenter.jsx';

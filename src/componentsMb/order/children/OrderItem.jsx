@@ -1,5 +1,5 @@
 import React from "react";
-import exchangeViewBase from "../../ExchangeViewBase";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 
 import "../stylus/orderItem.styl"
 
@@ -27,10 +27,10 @@ export default class OrderItem extends exchangeViewBase{
     this.goDetailDisplay = this.goDetailDisplay.bind(this);
   }
   componentWillMount(){
-  
+
   }
   componentDidMount(){
-    
+
   }
   goDetailDisplay() {
     if (this.props.type === "current") {

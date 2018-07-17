@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../ExchangeViewBase";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 
 import OrderItem from "./OrderItem.jsx"
 import OrderDetails from "./OrderDetails.jsx"
@@ -76,7 +76,7 @@ export default class OrderHistory extends exchangeViewBase{
       console.log(this.state.orderListArray)
     }, 5000);
   }
-  
+
   setListDisplay() {
     this.setState({displayType: "list"})
   }
@@ -215,7 +215,7 @@ export default class OrderHistory extends exchangeViewBase{
             <img src="../../../../static/mobile/order/nav_shaixuan@3x.png"/>
           </div>
         </div>
-        {this.state.filterShow && 
+        {this.state.filterShow &&
         <div className='order-history-filter'>
           <div className="filter-container">
             <h1>{this.intl.get("date")}</h1>
@@ -251,20 +251,20 @@ export default class OrderHistory extends exchangeViewBase{
             </div>
             <h1>{this.intl.get("orderStatus")}</h1>
             <div className="choose-section">
-              <button 
-                className={`${this.state.totalDeal && "chosen"} choose-button`} 
+              <button
+                className={`${this.state.totalDeal && "chosen"} choose-button`}
                 onClick={() => {
                   let orderStatusBool = this.state.totalDeal
                   this.setState({totalDeal : !orderStatusBool})
                 }}>{this.intl.get("dealed")}</button>
-              <button 
-                className={`${this.state.reseted && "chosen"} choose-button`} 
+              <button
+                className={`${this.state.reseted && "chosen"} choose-button`}
                 onClick={() => {
                   let orderStatusBool = this.state.reseted
                   this.setState({reseted : !orderStatusBool})
                 }}>{this.intl.get("reseted")}</button>
-              <button 
-                className={`${this.state.partDeal && "chosen"} choose-button`} 
+              <button
+                className={`${this.state.partDeal && "chosen"} choose-button`}
                 onClick={() => {
                   let orderStatusBool = this.state.partDeal
                   this.setState({partDeal : !orderStatusBool})

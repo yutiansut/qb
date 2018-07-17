@@ -1,5 +1,5 @@
 import React from 'react';
-import exchangeViewBase from '../../ExchangeViewBase';
+import exchangeViewBase from '../../../components/ExchangeViewBase';
 import {NavLink} from 'react-router-dom';
 
 import OrderItem from './OrderItem.jsx';
@@ -53,7 +53,7 @@ export default class OrderCurrent extends exchangeViewBase{
       marketArray
     })
   }
-  
+
   // 获取当前订单数据
   getOrderList() {
     const {controller} = this.props;
@@ -72,7 +72,7 @@ export default class OrderCurrent extends exchangeViewBase{
     dealType =v.orderType;
     this.props.controller.cancelOrder(orderId, opType, dealType)
   }
-  
+
   // 返回列表模式
   setListDisplay() {
     this.setState({displayType: 'list'});
@@ -167,7 +167,7 @@ export default class OrderCurrent extends exchangeViewBase{
   }
   render(){
     const {match} = this.props;
-    return (this.state.displayType === 'list' ? 
+    return (this.state.displayType === 'list' ?
     (
       <div className='order-current'>
 
@@ -186,7 +186,7 @@ export default class OrderCurrent extends exchangeViewBase{
             <img src="../../../../static/mobile/order/nav_shaixuan@3x.png"/>
           </div>
         </div>
-        {this.state.filterShow && 
+        {this.state.filterShow &&
         <div className='order-current-filter'>
           <div className="filter-container">
             <h1>{this.intl.get("pair")}</h1>

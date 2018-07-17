@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ExchangeViewBase from "../ExchangeViewBase";
+import ExchangeViewBase from "../../components/ExchangeViewBase";
 import {ChangeFontSize} from '../../core'
 import {
   Link,

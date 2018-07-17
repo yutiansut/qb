@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase";
+import exchangeViewBase from "../../../components/../components/ExchangeViewBase";
 
 export default class Pricing extends exchangeViewBase {
   constructor(props) {

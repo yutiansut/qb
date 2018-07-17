@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../components/ExchangeViewBase";
 import HomeActivity from '../activity/HomeActivity.jsx'
 import HomeRecommend from './children/HomeRecommend.jsx'
 import HomeMarket from './children/HomeMarket.jsx'

@@ -4,7 +4,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../components/ExchangeViewBase";
 import Balance from "./children/Balance";
 import History from "./children/History";
 import BalanceDetail from "./children/balanceDetail";

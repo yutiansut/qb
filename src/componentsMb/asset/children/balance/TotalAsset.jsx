@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../../ExchangeViewBase";
+import exchangeViewBase from "../../../../components/ExchangeViewBase";
 
 export default class TotalAsset extends exchangeViewBase {
   constructor(props) {

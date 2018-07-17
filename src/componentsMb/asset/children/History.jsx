@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../ExchangeViewBase";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Pagination from "../../../common/component/Pagination";
 import { NavLink } from "react-router-dom";
 

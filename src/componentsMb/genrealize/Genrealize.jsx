@@ -6,7 +6,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../components/ExchangeViewBase";
 import Terms from "./children/Terms";
 import Invite from "./children/Invite";
 import Register from "./children/Register";

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import exchangeViewBase from '../../components/ExchangeViewBase'
+import exchangeViewBase from '../../components/../components/ExchangeViewBase'
 import "./stylus/homeActivity.styl"
 
 export default class HomeActivity extends exchangeViewBase {

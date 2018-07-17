@@ -1,4 +1,4 @@
-import ExchangeViewBase from '../../ExchangeViewBase'
+import ExchangeViewBase from '../../../components/ExchangeViewBase'
 import React, { Component } from "react";
 
 export default class HomeMarket extends ExchangeViewBase{

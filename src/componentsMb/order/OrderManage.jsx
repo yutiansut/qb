@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
-import exchangeViewBase from '../ExchangeViewBase';
+import exchangeViewBase from '../../components/ExchangeViewBase';
 
 import OrderHistory from './children/OrderHistory.jsx';
 import OrderCurrent from './children/OrderCurrent.jsx';

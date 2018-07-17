@@ -1,5 +1,5 @@
 import React from 'react';
-import exchangeViewBase from '../../ExchangeViewBase.jsx';
+import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
 
 import '../stylus/userCenterIndex.styl'

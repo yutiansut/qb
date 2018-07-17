@@ -1,5 +1,5 @@
 import React from 'react';
-import exchangeViewBase from '../../ExchangeViewBase';
+import exchangeViewBase from '../../../components/ExchangeViewBase';
 
 import '../stylus/orderDetails.styl';
 

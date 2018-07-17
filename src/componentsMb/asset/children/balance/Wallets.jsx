@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../../ExchangeViewBase";
+import exchangeViewBase from "../../../../components/ExchangeViewBase";
 import { NavLink } from "react-router-dom";
 
 export default class Wallets extends exchangeViewBase {
@@ -39,7 +39,7 @@ export default class Wallets extends exchangeViewBase {
                         <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({number: "property" })}</i>
                     </p>
                     <p>
-                        <span>{this.insl.get("asset-lock")}</span>
+                        <span>{this.intl.get("asset-lock")}</span>
                         <i>{Number(item.frozenCount).format({number: "property" })}</i>
                     </p>
                 </div>

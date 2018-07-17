@@ -16,7 +16,7 @@ import CoinData from "./children/CoinData"; // 币种资料
 
 import "./style/index.styl"
 
-import exchangeViewBase from "../ExchangeViewBase";
+import exchangeViewBase from "../../components/ExchangeViewBase";
 
 export default class Help extends exchangeViewBase {
   constructor(props) {
