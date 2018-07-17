@@ -96,13 +96,15 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
     this.orderListHandle = controller.orderListHandle.bind(controller);
     this.checkoutDetail = controller.getOrderDetail.bind(controller)
+    // console.log(controller)
+    this.exportHistory = controller.exportHistory.bind(controller);
     // this.getCurrent = controller.getCurrentOrder.bind(controller)
   }
-  
+
   componentWillMount() {
-  
+
   }
-  
+
   componentDidMount() {
     const {pairIdMsg} = this.props;
     let orderStatus = [];
@@ -127,7 +129,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       marketArray
     })
   }
-  
+
   hideReset(e) {
     let orderStatus = e.target.checked ? [ 2, 4, 5, 6, 7] : [2, 3, 4, 5, 6, 7];
     let params = {
@@ -149,7 +151,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     );
     this.orderListHandle(this.props.type, params[this.props.type])
   }
-  
+
   changeCoin(e) {
     const {pairIdMsg} = this.props;
     let marketArray = [];
@@ -181,7 +183,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         }
     )
   }
-  
+
   changeMarket(e) {
     const {pairIdMsg} = this.props;
     let coinArray = [];
@@ -212,7 +214,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         }
     )
   }
-  
+
   changeOrderType(e) {
     const allKey = this.intl.get('all');
     const buyKey = this.intl.get('buy');
@@ -226,7 +228,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         {orderType: typeObj[e], typeSelect: e}
     )
   }
-  
+
   searchFilter() {
     const params = {
       orderCurrent: {
@@ -245,19 +247,19 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.props.type === 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type]);
     this.props.type !== 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type])
   }
-  
+
   startTime(e) {
     this.setState({
       startTime: e
     })
   }
-  
+
   endTime(e) {
     this.setState({
       endTime: e
     })
   }
-  
+
   checkoutDetail(id) {
     this.setState({
       orderId: id,
@@ -282,9 +284,9 @@ export default class OrderCurrent extends ExchangeViewBase {
                 <input type="checkbox" onClick={this.hideReset.bind(this)}/>
                 <span>{this.intl.get('hideReset')}</span>
               </div>}
-              {type !== 'orderCurrent' && <Button type="export" title={this.intl.get("exportOrderRecord")} className='export-record'/>}
+            {type !== 'orderCurrent' && <Button type="export" onClick={() => { this.exportHistory(type) }} title={type === 'orderHistory' ? this.intl.get("exportOrderRecord") : this.intl.get("exportDealRecord")} className='export-record'/>}
             </div>
-            
+
           </div>
           <ul className='order-filter'>
             <li className='order-pair'>
@@ -347,7 +349,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                     {type === 'orderDeal' && <td>{v.avgPrice}</td>}
                     {/*数量*/}
                     {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
-                    
+
                     <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
                     {type === 'orderDeal' && <td>{v.fee}</td>}
                     {type === 'orderCurrent' && <td>{v.undealCount}</td>}
@@ -355,7 +357,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                     {type === 'orderHistory' && <td>{v.avgPrice}</td>}
                     {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
                     {type === 'orderCurrent' && <td style={{color:'#0080D0', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
-                  
+
                   </tr>
               )
             })}

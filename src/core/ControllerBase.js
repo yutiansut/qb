@@ -4,6 +4,7 @@ import Sleep from "./libs/Sleep"; //同步多个异步请求
 import Loop from "./loop"; //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
 import Storage from "./storage/index";
+import FileSaver from "file-saver";
 
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),
@@ -192,5 +193,13 @@ export default class ControllerBase {
     let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
       results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1]);
+  }
+  // 导出excel
+  exportExcel(str,fileName){
+    let exportContent = "\uFEFF";
+    let blob = new Blob([exportContent + str], {
+      type: "text/plain;charset=utf-8"
+    });
+    FileSaver.saveAs(blob, fileName);
   }
 }

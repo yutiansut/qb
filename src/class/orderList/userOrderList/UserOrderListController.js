@@ -85,7 +85,67 @@ export default class UserOrderListController extends OrderListController {
       total: historyOrder && historyOrder.totalCount || 0
     })
   }
-
+  async exportHistory(type){
+    console.log(this.configController)
+    let result = await this.store.getHistoryOrder({
+      "tradePairId": [],
+      "tradePairName": "xxx",
+      "orderType": 2,
+      "orderStatus": [2,3,4,5,6,7],
+      "startTime": 0,
+      "endTime": Math.floor(new Date().getTime() / 1000),
+      "page": 0,
+      "pageSize": 0
+    });
+    if (!result || !result.orderList || !result.orderList) return;
+    let str;
+    if (type === 'orderHistory'){
+      str = "时间,交易对,类型,价格,成交量,成交额,已成交,平均成交价,状态";
+      result.orderList.forEach(v => {
+        str +=
+          "\n" +
+          v.orderTime.toDate("yyyy-MM-dd HH:mm:ss") +
+          "," +
+          v.tradePairName +
+          "," +
+          (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
+          "," +
+          (v.priceType ? this.view.intl.get('marketPrice') : v.price) +
+          "," +
+          v.count +
+          "," +
+          v.turnover +
+          "," +
+          v.dealDoneCount +
+          "," +
+          v.avgPrice +
+          "," +
+          this.view.state.orderStatusItems[v.orderStatus]
+      });
+      this.exportExcel(str, "历史订单.xls");
+      return;
+    }
+    str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";
+      result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)).forEach(v => {
+        str +=
+          "\n" +
+          v.orderTime.toDate("yyyy-MM-dd HH:mm:ss") +
+          "," +
+          v.tradePairName +
+          "," +
+          (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
+          "," +
+          v.avgPrice +
+          "," +
+          v.count +
+          "," +
+          v.turnover +
+          "," +
+          v.fee
+      });
+      this.exportExcel(str, "历史成交.xls");
+      return;
+  }
   async getOrderDetail(id) {
     let orderDetail = await this.store.getOrderDetail(id);
     this.view.setState({

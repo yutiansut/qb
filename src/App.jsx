@@ -247,7 +247,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(userController.Storage.userToken.get());
     return (
       <Router>
         {this.state.initDone && (

@@ -1,6 +1,5 @@
 import ExchangeControllerBase from "../ExchangeControllerBase";
 import AssetStore from "./AssetStore";
-import FileSaver from "file-saver";
 
 export default class AssetController extends ExchangeControllerBase {
   constructor(props) {
@@ -167,11 +166,7 @@ export default class AssetController extends ExchangeControllerBase {
                 "," +
                 v.fee
     });
-    let exportContent = "\uFEFF";
-    let blob = new Blob([exportContent + str], {
-      type: "text/plain;charset=utf-8"
-    });
-    FileSaver.saveAs(blob, "资产记录.xls"); //定义要保存的文件类型和文件名称
+    this.exportExcel(str, "资产记录.xls");
   }
 
   // 获取确认中充币信息(顶部轮播)
