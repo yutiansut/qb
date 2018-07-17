@@ -7,36 +7,38 @@
     font-family PingFangSC-Medium
     position relative
     .nav
-      height .4rem
-      line-height .4rem
+      height .45rem
+      line-height .45rem
       background $normal-white-color
       border-bottom .01rem solid $h5-border-light
       position relative
+      background $h5-color-blue
+      color $normal-white-color
       h3
         text-align center
-        font-weight bold
         font-size .18rem
         position absolute
         width 100%
         pointer-events none
       a
         font-size .14rem
-        color $h5-color-blue
+        color $normal-white-color
         &.left
           float left
           margin-left .12rem
         &.right
           float right
           margin-right .12rem
+          img
+            height .2rem
+            vertical-align -.04rem
     .filter
       padding 0 .12rem
       line-height .4rem
       height .4rem
       background $normal-white-color
       label
-        width .6rem
         color $h5-color-normal
-        display inline-block
         font-size .15rem
       b
         color $h5-color-weight
@@ -78,9 +80,9 @@
       p
         color $h5-color-light
         line-height .2rem
-        margin .02rem 0
+        margin .05rem 0
         text-align justify
-
+        align-self: flex-start;
 
     .select
       position absolute

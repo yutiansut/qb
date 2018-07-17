@@ -15,20 +15,19 @@ export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
     super();
     this.state = {
-      nameCny: EXCHANGE_NAME_CNY,
-      nameUsd: EXCHANGE_NAME_USD,
-      coin: EXCHANGE_COIN,
-      netUrl: EXCHANGE_URl,
-      applyEmailUrl: EXCHANGE_Apply_EMAIL,
-      contactEmailUrl: EXCHANGE_CONTACT_EMAIL,
-      addr: EXCHANGE_ADDR,
-      servicePhone: EXCHANGE_SERVICE_PHONE,
-      serviceQQ: EXCHANGE_SERVICE_QQ,
-      currentUrl: CURRENT_URL,
-      // language: 'zh-CN',
-      language: this.Storage.language.get() || 'en-US'
+        nameCny: EXCHANGE_NAME_CNY,
+        nameUsd: EXCHANGE_NAME_USD,
+        coin: EXCHANGE_COIN,
+        netUrl: EXCHANGE_URl,
+        applyEmailUrl: EXCHANGE_Apply_EMAIL,
+        contactEmailUrl: EXCHANGE_CONTACT_EMAIL,
+        addr: EXCHANGE_ADDR,
+        servicePhone: EXCHANGE_SERVICE_PHONE,
+        serviceQQ: EXCHANGE_SERVICE_QQ,
+        currentUrl: CURRENT_URL,
+        // language: 'zh-CN',
+        language: this.Storage.language.get() || 'en-US',
     }
-  }
 
   changeLanguage(lang){
     this.state.language = lang;

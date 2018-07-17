@@ -46,12 +46,9 @@ export default class Header extends ExchangeViewBase {
         {(isLogin && !this.state.navHidden) && <div>
             <div className="nav-shadow" onClick={e => this.setState({navHidden: true})}></div>
             <div className="nav-hidden">
-              <NavLink to="/muser"
-                        className="nav-login"
-                        onClick={e => this.setState({navHidden: true})}>
+              <a className="nav-login">
                   <img src="/static/mobile/user/icon_wd_head@3x.png" alt=""/>
-                  <span>{userController.userName}</span>
-              </NavLink>
+                  <span>{userController.userName}</span></a>
               <NavLink to="/mhome" className="nav-home"
                        onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-home")}</NavLink>
               <div>

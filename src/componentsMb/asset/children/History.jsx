@@ -74,27 +74,28 @@ export default class History extends exchangeViewBase {
 
   render() {
     let {total, orderList} = this.state.assetHistory;
+    let orderType=this.state.orderType;
     return (
       <div className="hist">
           <div className="nav">
-              <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
-              <h3>资产记录</h3>
+              <NavLink to="/mwallet" className="left">&lt; {this.intl.get("back")}</NavLink>
+              <h3>{this.intl.get("asset-records")}</h3>
           </div>
           <ul className="tab-ul">
-            <li className={this.state.orderType===1 ? "active" : ""}
+            <li className={orderType===1 ? "active" : ""}
                 onClick={()=>{
                   this.setState({orderType:1},()=>{
                       this.search();
                   });
                 }}>
-                充币记录</li>
-            <li className={this.state.orderType===2 ? "active": ""}
+                {this.intl.get("asset-depositHistory")}</li>
+            <li className={orderType===2 ? "active": ""}
                 onClick={()=>{
                   this.setState({orderType:2},()=>{
                       this.search();
                   });
                 }}>
-                提币记录</li>
+                {this.intl.get("asset-withdrawalsHistory")}</li>
           </ul>
           {orderList && orderList.map(
                   ({
@@ -113,12 +114,12 @@ export default class History extends exchangeViewBase {
                           <span className={orderStatus===1 ? "success" : "fail"}>{this.staticData.status[orderStatus]}</span>
                       </div>
                       <div className="d2">
-                          <p><span>数量</span><i>{count}</i></p>
-                          <p><span>确认数</span>
+                          <p><span>{this.intl.get("asset-withdrawalsAmount")}</span><i>{count}</i></p>
+                          <p><span>{this.intl.get("asset-confirm")}</span>
                               {orderType===1 && <i>{doneCount}/{verifyCount}</i>}
                               {orderType===2 && <i>-</i>}
                           </p>
-                          <p><span>时间</span><i>{orderTime.toDate("yyyy-MM-dd")} {orderTime.toDate("hh:mm:ss")}</i></p>
+                          <p><span>{this.intl.get("time")}</span><i>{orderTime.toDate("yyyy-MM-dd")} {orderTime.toDate("hh:mm:ss")}</i></p>
                       </div>
                   </div>))}
           {(!orderList || orderList.length<=0) && <div className="kong">{this.intl.get("noRecords")}</div>}

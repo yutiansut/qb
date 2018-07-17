@@ -57,35 +57,35 @@ export default class Charge extends exchangeViewBase {
     componentDidMount() {}
 
     render() {
-        let address = this.state.coinAddress.coinAddress || "-";
+        let {coinAddress,verifyNumer} = this.state.coinAddress;
         let walletList=Object.keys(this.state.walletList);
+        let currency=this.state.currency;
         return (
             <div className="charge">
                 <div className="nav">
-                    <NavLink to="/mwallet" className="left">&lt; 返回</NavLink>
-                    <h3>充币</h3>
-                    <NavLink to={{pathname: "/mwallet/dashboard", query: {type:1}}} className="right">充币记录</NavLink>
+                    <NavLink to="/mwallet" className="left">&lt; {this.intl.get("back")}</NavLink>
+                    <h3>{this.intl.get("asset-charge")}</h3>
+                    <NavLink to={{pathname: "/mwallet/dashboard", query: {type:1}}} className="right"><img src="/static/mobile/order/nav_lishidingdan@3x.png"/></NavLink>
                 </div>
                 <div className="filter" onClick={()=>{
                     this.setState({showSelect:true});
                 }}>
-                    <label>选择币种</label>
-                    <b>{this.state.currency}</b>
+                    <label>{this.intl.get("asset-selectCoin")}</label>
+                    <b>{currency}</b>
                     <i>&gt;</i>
                 </div>
                 <div className="info">
-                    <QRCode value={address} level="M" size={160} className="qrcode"/>
+                    <QRCode value={coinAddress || "-"} level="M" size={160} className="qrcode"/>
                     {/* <a className="save-qrcode">保存二维码</a>*/}
-                    <input type="text" ref="addr" value={address} disabled="disabled"/>
+                    <input type="text" ref="addr" value={coinAddress || "-"} disabled="disabled"/>
                     <a className="copy-addr"
                        onClick={()=>{
                            this.copy(this.refs.addr);
                        }}>
-                        复制地址</a>
-                    <p>请勿向上述地址充值任何非USDT资产，否则资产将不可找回。</p>
-                    <p>您充值至上述地址后，需要整个网络节点的确认，5次网络确认后到账。</p>
-                    <p>最小充值金额：10ETH，小于最小金额的充值将不会上账。</p>
-                    <p>请务必确认电脑及浏览器安全，防止信息被篡改或泄露。</p>
+                        {this.intl.get("asset-copy")}</a>
+                    <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
+                    <p>{this.intl.get("asset-depositReminder1",{currency:currency,number:verifyNumer})}</p>
+                    <p>{this.intl.get("asset-charge-h5-tip3")}</p>
                 </div>
                 {/*提示框*/}
                 {this.state.showPopup && (

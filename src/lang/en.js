@@ -255,6 +255,7 @@ export default function en(state) {
     "asset-password-unset": "You haven't created a funding password, cannot withdraw!",
     "asset-withdrawal-failed": 'Withdrawal failed',
     "asset-detail": 'Asset Detail',
+    "asset-charge-h5-tip3": 'Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.',
   };
   const market = {
     "market-favorite": "Favorites",

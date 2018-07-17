@@ -7,13 +7,14 @@
     font-family PingFangSC-Medium
     .total-asset
       background $normal-white-color
-      padding .15rem
+      padding .25rem .15rem
+      background $h5-color-blue
+      color $normal-white-color
       .total
         label
           display block
           line-height .2rem
           font-size .18rem
-          opacity .8
           margin-bottom .04rem
         b
           line-height .4rem
@@ -21,7 +22,6 @@
       .total-cny
         span
           font-size .14rem
-          opacity .8
           margin-top .08rem
           display block
     .menu-ul
@@ -45,7 +45,7 @@
           height .3rem
           top .05rem
         a
-          font-weight bold
+          color $h5-color-blue
     .asset-wallet
       padding-bottom .4rem
       .filter
@@ -56,10 +56,9 @@
         box-shadow .2rem .2rem .2rem $bg-light-color
         img
           height .2rem
+          width .2rem
           margin-right .1rem
           vertical-align -.05rem
-        span
-          font-weight bold
         .toggle-btn
           display inline-block
           width .48rem
@@ -97,6 +96,7 @@
             color $main-color
             img
               height .2rem
+              width .2rem
               margin-right .06rem
               vertical-align -.05rem
           a

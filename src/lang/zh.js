@@ -253,6 +253,7 @@ export default function zh(state) {
     "asset-password-unset": '你还未设置资金密码，不能提现',
     "asset-withdrawal-failed": '提币失败',
     "asset-detail": '资产详情',
+    "asset-charge-h5-tip3": '请务必确认电脑及浏览器安全，防止信息被篡改或泄露。',
   };
   const market = {
     "market-favorite": "收藏",

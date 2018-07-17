@@ -6,21 +6,22 @@
     font-family PingFangSC-Medium
     background $bg-light-color
   .nav
-    height .4rem
-    line-height .4rem
+    height .45rem
+    line-height .45rem
     background $normal-white-color
     border-bottom .01rem solid $h5-border-light
     position relative
+    background $h5-color-blue
+    color $normal-white-color
     h3
       text-align center
-      font-weight bold
       font-size .18rem
       position absolute
       width 100%
       pointer-events none
     a
       font-size .14rem
-      color $h5-color-blue
+      color $normal-white-color
       &.left
         float left
         margin-left .12rem
@@ -37,6 +38,9 @@
       font-size .16rem
       margin 0 .4rem
       border-bottom .02rem solid transparent
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
       &.active
         color $h5-active-blue
         border-color $h5-active-blue
