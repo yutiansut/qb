@@ -4,18 +4,21 @@
   width 100%
   //min-width 11.6rem
   background $footer-gray
-  height 2.1rem
-  padding .35rem 1.2rem 0
+  height 1.98rem
+  padding .35rem 0 0
   .home-img
     display block
-    padding-bottom .24rem
+    width: .82rem
+    padding-bottom .21rem
+    margin: 0 auto
     img
       width .82rem
       height .24rem
   ul
+    text-align: center
     margin-bottom .2rem
     li
-      float left
+      display inline-block
       margin-right .4rem
       a
         color $normal-black-color
@@ -45,10 +48,18 @@
           right -.4rem
           z-index 999
   .right-content
-    padding-top .24rem
-    text-align right
-    p:nth-of-type(1)
-      padding-bottom .25rem
+    p
+      margin: 0 auto
+      width: 3rem
+      text-align: center
+    &:before
+      position relative
+      top: 0.07rem
+      display: block
+      content: ''
+      height: 0
+      width: 100%
+      border-top: 1px solid #404446
 
 .footer-fixed
   position fixed
