@@ -108,7 +108,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
       showChange: (changeArr[changeTypeArr[i]] === index) || (changeTypeArr[i] === 0) || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
-    if (this.state.userInfo.loginVerify === 0 && ((this.state.userInfo.googleAuth === 0 && index === 0) || (this.state.userInfo.email && index === 1) || (this.state.userInfo.phone && index === 2))) { // 登录为无
+    if (i === 0 && this.state.userInfo.loginVerify === 0 && ((this.state.userInfo.googleAuth === 0 && index === 0) || (this.state.userInfo.email && index === 1) || (this.state.userInfo.phone && index === 2))) { // 登录为无
       this.setState({
         showChange: false
       })
@@ -145,7 +145,8 @@ export default class userSafeCenter extends exchangeViewBase {
 
   checkIp() {
     console.log(3434)
-    let reg =  /^\d+\.\d+\.\d+.\d+$/
+    // let reg =  /^\d+\.\d+\.\d+.\d+$/
+    let reg = /^(?:(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)\.){3}(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)$/
     if(!reg.test(this.state.ipValue)) {
       this.setState({
         errIp: "请输入正确的IP"
@@ -290,9 +291,9 @@ export default class userSafeCenter extends exchangeViewBase {
               <div className="check-ip-wrap">
                 <div className="clearfix">
                   <Input placeholder={this.intl.get("user-ipAddr")}  onInput={value => {this.ipInput(value)}} onBlur={this.checkIp}/>
-                  <Button title={this.intl.get("add")} className="name-btn" onClick={() => !this.state.errIp && this.addIp(this.state.ipValue)}/>
+                  <Button title={this.intl.get("add")} className="name-btn" onClick={() => this.state.ipValue && !this.state.errIp && this.addIp(this.state.ipValue)}/>
                 </div>
-                <em className="check-ip">{this.state.errIp}</em>
+                <em className="check-ip">{this.state.ipValue && this.state.errIp}</em>
               </div>
 
               {/*<em>2222</em>*/}

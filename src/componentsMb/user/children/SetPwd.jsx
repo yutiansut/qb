@@ -4,10 +4,11 @@ import {NavLink} from 'react-router-dom';
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
+import RemindPopup from '../../../common/component/Popup/index.jsx'
 import "../stylus/setPass.styl"
 import {AsyncAll} from "../../../core";
 
-export default class SetPassPopup extends exchangeViewBase {
+export default class SetPwd extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +22,10 @@ export default class SetPassPopup extends exchangeViewBase {
       errUser2: "", // 再次输入密码
       errUser3: "", // 修改密码
       isType: 0, // 判断来源
+      verifyNum: this.intl.get("sendCode"),
+      remindPopup: false,
+      popType: "tip1",
+      popMsg: "",
       popupTypeList: [
         {
           title: this.intl.get("user-popBindEmail"),
@@ -62,8 +67,8 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput: this.intl.get("user-inputNewPwd"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
           numInput2: this.intl.get("user-inputAgainPwd"),
-          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : '邮箱验证码',
-          verifyInput: this.props.fundPassType === 3 ? '请输入手机号验证码' : '请输入邮箱验证码',
+          verifyTitle: "",
+          verifyInput: "",
           btnTitle: this.intl.get("save")},
         {
           title: this.intl.get("user-popRecoverFundPwd"),
@@ -73,8 +78,8 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput: this.intl.get("user-inputNewPwd"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
           numInput2: this.intl.get("user-inputAgainPwd"),
-          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : (this.props.fundPassType === 1 ?' 邮箱验证码' : '谷歌验证码'),
-          verifyInput: this.props.fundPassType === 3 ? '请输入手机验证码' : (this.props.fundPassType === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+          verifyTitle: "",
+          verifyInput: "",
           btnTitle: this.intl.get("save")
         },
       ]
@@ -86,7 +91,9 @@ export default class SetPassPopup extends exchangeViewBase {
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
     this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置修改资金密码
-    this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
+    this.getCaptcha = controller.getCaptchaVerify.bind(controller) // 获取图形验证码
+    this.initData = controller.initData.bind(controller) // 获取基本数据
+    this.destroy = controller.clearVerify.bind(controller); // 清除定时器
 
     this.changeInput1 = this.changeInput1.bind(this)
     this.changeInput2 = this.changeInput2.bind(this)
@@ -187,9 +194,6 @@ export default class SetPassPopup extends exchangeViewBase {
     return false
   }
 
-  async componentDidMount() {
-    await AsyncAll([this.initData(), this.getVerify(), this.getCaptchaVerify()])
-  }
 
   componentWillMount() {
     let url = window.location.search, str1, str2;
@@ -200,12 +204,29 @@ export default class SetPassPopup extends exchangeViewBase {
     })
   }
 
+  async componentDidMount() {
+    // this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : '邮箱验证码'
+    // verifyTitle: this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : '邮箱验证码',
+    // verifyInput: this.state.userInfo.fundPassVerify === 3 ? '请输入手机号验证码' : '请输入邮箱验证码',
+    // verifyTitle: this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 邮箱验证码' : '谷歌验证码'),
+    //   verifyInput: this.state.userInfo.fundPassVerify === 3 ? '请输入手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+    await AsyncAll([this.initData(), this.getCaptcha()])
+    let popupTypeList = this.state.popupTypeList
+    popupTypeList[4].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : '邮箱验证码'
+    popupTypeList[4].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? '请输入手机号验证码' : '请输入邮箱验证码'
+    popupTypeList[5].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 邮箱验证码' : '谷歌验证码'),
+    popupTypeList[5].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? '请输入手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+    this.setState({
+      popupTypeList
+    })
+  }
+
   componentWillUnmount() {
-    this.props.destroy && this.props.destroy();
+    this.destroy && this.destroy();
   }
 
   render() {
-    console.log('来源', this.state.isType)
+    console.log('来源', this.state)
     const {url} = this.props
     let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
@@ -214,7 +235,7 @@ export default class SetPassPopup extends exchangeViewBase {
           <div className="back">
             <img src="../../../../static/mobile/user/Back@3x.png"/>
             <NavLink to={`${url}/safe`}>返回</NavLink>
-            <span>设置密码</span>
+            <span>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].title}</span>
           </div>
         </div>
         <div className="pass-info">
@@ -251,19 +272,19 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>{this.intl.get("user-popPicture")}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.intl.get("user-popPicturePlaceholder")}  value={this.state.popupInput4} onInput={value => this.changeInput4(value)}/>
-                  <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
+                  <img src={this.state.captcha || ''} alt="" className="picture-btn btn" onClick={this.getCaptcha}/>
                 </div>
               </li>
-              <li className={([3, 4].includes(this.state.isType) || this.props.fundPassType === 2) ? 'hide' : ''}>
+              <li className={([3, 4].includes(this.state.isType) || this.state.userInfo && this.state.userInfo.fundPassVerify === 2) ? 'hide' : ''}>
                 <p>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.state.isType && this.state.popupTypeList[this.state.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
-                  {this.state.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regEmail.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 1, 3)}}/>}
-                  {this.state.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regPhone.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 0, 3)}}/>}
-                  {[5, 6].includes(this.state.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.state.isType)}}/>}
+                  {this.state.isType === 1 && <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={() => {regEmail.test(this.state.popupInput2) && this.getVerify(this.state.popupInput2, 1, 3)}}/>}
+                  {this.state.isType === 2 && <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={() => {regPhone.test(this.state.popupInput2) && this.getVerify(this.state.popupInput2, 0, 3)}}/>}
+                  {[5, 6].includes(this.state.isType) && <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={() => {this.getVerify(this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : this.state.userInfo.email, this.state.userInfo.fundPassVerify === 3 ? 0 : 1, this.state.isType)}}/>}
                 </div>
               </li>
-              <li className={this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
+              <li className={this.state.userInfo && this.state.userInfo.fundPassVerify === 2 ? 'long-li' : 'hide'}>
                 <p>{this.intl.get("user-popGoole")}</p>
                 <Input placeholder= {this.intl.get("user-inputVerifyGoogle")}
                        value={this.state.popupInput6}
@@ -274,30 +295,35 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
               <li>
-                {this.state.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
-                {this.state.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
-                {this.state.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.props.setLoginPass('', this.state.popupInput2, 0)}/>}
-                {this.state.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.props.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
+                {this.state.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.state.captchaId, this.state.popupInput4)}/>}
+                {this.state.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.state.captchaId, this.state.popupInput4)}/>}
+                {this.state.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.setLoginPass('', this.state.popupInput2, 0)}/>}
+                {this.state.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
                 {this.state.isType === 5 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
-                                                    onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : this.props.email,
-                                                      this.props.fundPassType === 3 ? 0 : 1,
+                                                    onClick={() => this.modifyFundPwd(this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : this.state.userInfo.email,
+                                                      this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? 0 : 1,
                                                       0,
                                                       this.state.popupInput2,
                                                       this.state.popupInput4,
-                                                      this.props.captchaId,
+                                                      this.state.captchaId,
                                                       this.state.popupInput5)}/>}
                 {this.state.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
-                                                    onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ?this.props.email : ''),
-                                                      this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 0),
+                                                    onClick={() => this.modifyFundPwd(this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : (this.state.userInfo && this.state.userInfo.fundPassVerify === 1 ?this.state.userInfo.email : ''),
+                                                      this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? 0 : (this.state.userInfo && this.state.userInfo.fundPassVerify === 1 ? 1 : 0),
                                                       1,
                                                       this.state.popupInput2,
                                                       this.state.popupInput4,
-                                                      this.props.captchaId,
-                                                      this.props.fundPassType === 2 ? this.state.popupInput6 : this.state.popupInput5)}/>}
+                                                      this.state.captchaId,
+                                                      this.state.userInfo && this.state.userInfo.fundPassVerify === 2 ? this.state.popupInput6 : this.state.popupInput5)}/>}
               </li>
             </ul>
           </div>
         </div>
+        {this.state.remindPopup && <RemindPopup
+          type={this.state.popType}
+          msg={this.state.popMsg}
+          autoClose = {true}
+          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }

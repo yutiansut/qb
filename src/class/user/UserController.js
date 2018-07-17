@@ -367,6 +367,19 @@ export default class UserController extends ExchangeControllerBase {
     console.log('退出其他设备', result)
   }
 
+  // 移动端用
+  setFundPwdSpace(type, pwd) { // 设置资金密码间隔
+    this.setFundPwdInterval(type, pwd)
+  }
+
+  async verifyFundPass(fundPass) { // 验证资金密码
+    let result = await this.store.Proxy.verifyFundPass({
+      "userId": this.store.uid,
+      "token": this.store.token,
+      fundPass
+    })
+    console.log('验证资金密码', result)
+  }
 
   // 为其他模块提供接口
   // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码

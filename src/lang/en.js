@@ -125,6 +125,7 @@ export default function en(state) {
     619: "Wrong graphic verification code",
     620: "与资金密码相同",
     621: "与登陆密码相同",
+    623: "账户已被占用",
     704: "The fund password was changed within 24 hours and there was a security wall",
     705: "Insufficient quantity available",
     706: "Less than the minimum withdrawal limit",
