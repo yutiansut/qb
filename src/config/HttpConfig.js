@@ -45,7 +45,6 @@ export default {
     { name: 'setGoogleVerify', data: { url: '/v1/user/', method: 'post' }, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true }, // 验证谷歌验证码
     { name: 'setUserNotify', data: { url: '/v1/user/', method: 'post' }, action: 'setUserNotifyType', actionBack: 'setUserNotifyTypeRes', needToken: true }, // 修改登录方式
     { name: 'outOther', data: { url: '/v1/user/', method: 'post' }, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true }, // 退出其他设备
-    { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },  // 验证资金密码
     { name: 'getAward', data: { url: '/v1/user/', method: 'post' }, action: 'getAward', actionBack: 'getAwardRes', needToken: true }, // 领取奖励
     { name: 'getQbtTrade', data: { url: '/v1/common/', method: 'post' }, action: 'qbtTrade', actionBack: 'qbtTradeRes' }, //活动图片
   ],

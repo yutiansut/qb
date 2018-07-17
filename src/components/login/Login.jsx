@@ -13,6 +13,7 @@ import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
 
+
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
 // import queryString from "querystring";

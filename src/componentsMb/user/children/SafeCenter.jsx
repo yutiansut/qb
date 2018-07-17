@@ -5,7 +5,7 @@ import '../stylus/userSafeCenter.styl'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 import {AsyncAll} from "../../../core";
-import Input from "../../../common/component/Input";
+import Input from "../../../common/component/Input/index.jsx";
 import Button from '../../../common/component/Button/index.jsx'
 
 export default class UserCenterIndex extends exchangeViewBase {
@@ -19,7 +19,9 @@ export default class UserCenterIndex extends exchangeViewBase {
       remindPopup: false,
       popType: "tip1",
       popMsg: "",
-      fundPassType: 0
+      fundPassType: 0,
+      fundValue: "",
+      verifyFundType: "每次"
     }
     const {controller} = props
     //绑定view
@@ -37,6 +39,7 @@ export default class UserCenterIndex extends exchangeViewBase {
     this.setFundPwdSpace = controller.setFundPwdSpace.bind(controller) // 设置资金密码间隔
     this.needFundPwdInterval = this.needFundPwdInterval.bind(this) // 设置密码间隔
     this.fundPwdSpace = this.fundPwdSpace.bind(this) // 资金密码内容
+    this.changeFundValue = this.changeFundValue.bind(this) // 输入资金密码
     // this.closeSet = this.closeSet.bind(this)
   }
 
@@ -48,15 +51,19 @@ export default class UserCenterIndex extends exchangeViewBase {
   }
 
   needFundPwdInterval() { // 是否需要资金密码
-    // if (this.state.userInfo.fundPwd) {
-    //   // this.view.history.push('/muser/setPwd?type=5')
-    //   location.href = '/muser/setPwd?type=5'
-    //   return
-    // }
+    if (this.state.userInfo.fundPwd) {
+      // this.view.history.push('/muser/setPwd?type=5')
+      location.href = '/muser/setPwd?type=5'
+      return
+    }
     this.setState({
       setFundPass: true
     })
 
+  }
+
+  changeFundValue(value) { // 输入资金密码
+    this.setState({fundValue: value});
   }
 
   fundPwdSpace(v, index) { // 资金密码内容
@@ -64,11 +71,11 @@ export default class UserCenterIndex extends exchangeViewBase {
     this.setState({
       setFundPass: false,
       verifyFund: true,
+      fundValue: '',
       fundPassType: index
     })
-    console.log('资金密码内容', v, index )
-    // this.setFundPwdSpace(index)
   }
+
 
   // changeSetPopup(type) { // 设置密码显示
   //   this.setState({
@@ -120,7 +127,7 @@ export default class UserCenterIndex extends exchangeViewBase {
           <li className="item clearfix" onClick={this.needFundPwdInterval}>
             <span className="fl">需要资金密码</span>
             <div className="fr">
-              <span>每次</span>
+              <span>{this.state.verifyFundType}</span>
               <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
             </div>
           </li>
@@ -141,11 +148,12 @@ export default class UserCenterIndex extends exchangeViewBase {
         {this.state.verifyFund && <div className="verify-fund-pass-wrap">
           <div className="verify-fund-pass clearfix">
             <h1 className="clearfix">
-              <span>资金密码</span>
+              <span>身份验证</span>
               <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.setState({ verifyFund: false });}}/>
             </h1>
-            <Input oriType="password" placeholder="请输入资金密码"/>
-            <Button title="确定" onClick={this.setFundPwdSpace}/>
+            <p>开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入</p>
+            <Input oriType="password" placeholder="请输入资金密码" value={this.state.fundValue}  onInput={value => this.changeFundValue(value)}/>
+            <Button title="确定" onClick={() => this.state.fundValue && this.setFundPwdSpace(this.state.fundPassType, this.state.fundValue)}/>
           </div>
         </div>}
         {this.state.remindPopup && <RemindPopup

@@ -89,30 +89,30 @@ export default class SetPassPopup extends exchangeViewBase {
   }
   changeInput1(value) { // 输入
     this.setState({popupInput1: value});
-    console.log(1, value)
+    // console.log(1, value)
     this.state.errUser3 && (this.setState({errUser3: ""}))
   }
   changeInput2(value) { // 输入
     this.setState({popupInput2: value});
-    console.log(2, value)
+    // console.log(2, value)
     this.state.errUser && (this.setState({errUser: ""}))
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
-    console.log(3, value)
+    // console.log(3, value)
     this.state.errUser2 && (this.setState({errUser2: ""}))
   }
   changeInput4(value) {
     this.setState({popupInput4: value});
-    console.log(4, value)
+    // console.log(4, value)
   }
   changeInput5(value) {
     this.setState({popupInput5: value});
-    console.log(5, value)
+    // console.log(5, value)
   }
   changeInput6(value) {
     this.setState({popupInput6: value});
-    console.log(6, value)
+    // console.log(6, value)
   }
 
   // 检验部分
@@ -171,7 +171,7 @@ export default class SetPassPopup extends exchangeViewBase {
     if (this.props.isType === 3 && this.state.popupInput2 && this.state.popupInput3) return true // 设置登录密码
     if (this.props.isType === 4 && this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3) return true // 修改登录密码
     if (this.props.isType === 5 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && this.state.popupInput5) return true // 设置资金密码
-    if (this.props.isType === 6 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && this.state.popupInput5) return true // 修改资金密码
+    if (this.props.isType === 6 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && (this.state.popupInput5 || this.state.popupInput6)) return true // 修改资金密码
     return false
   }
 
@@ -180,7 +180,7 @@ export default class SetPassPopup extends exchangeViewBase {
   }
 
   render() {
-    // console.log(222, this.props.isType, this.props.fundPassType)
+    console.log(222, this.props.isType, this.props.fundPassType)
     let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">
@@ -223,7 +223,7 @@ export default class SetPassPopup extends exchangeViewBase {
                   <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
                 </div>
               </li>
-              <li className={([3, 4].includes(this.props.isType) || this.props.fundPassType === 2) ? 'hide' : ''}>
+              <li className={([3, 4].includes(this.props.isType) && this.props.fundPassType === 2) ? 'hide' : ''}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
@@ -232,7 +232,7 @@ export default class SetPassPopup extends exchangeViewBase {
                   {[5, 6].includes(this.props.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.props.isType)}}/>}
                 </div>
               </li>
-              <li className={this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
+              <li className={this.props.isType === 6 && this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
                 <p>{this.intl.get("user-popGoole")}</p>
                 <Input placeholder= {this.intl.get("user-inputVerifyGoogle")}
                        value={this.state.popupInput6}

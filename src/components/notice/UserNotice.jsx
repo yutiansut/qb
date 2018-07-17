@@ -112,17 +112,15 @@ export default class userNotice extends exchangeViewBase {
           </tbody>
         </table>
         <p className={Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''}>{this.intl.get("user-none")}</p>
-        <div className={Object.keys(this.state.userNotice).length ? '' : 'hide'}>
-          {Object.keys(this.state.userNotice).length && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
-            pageSize={10}
-            showTotal={true}
-            onChange={page => {
-              this.setState({ page });
-              this.getUserNotice(0, page-1, 10)
-            }}
-            currentPage={this.state.page}
-            showQuickJumper={true}/>}
-        </div>
+        {Object.keys(this.state.userNotice).length && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
+          pageSize={10}
+          showTotal={true}
+          onChange={page => {
+            this.setState({ page });
+            this.getUserNotice(0, page-1, 10)
+          }}
+          currentPage={this.state.page}
+          showQuickJumper={true}/>}
         {this.state.userNoticePop && <UserNoticeContent
           onClose={() => {this.setState({ userNoticePop: false });}}
           content={this.state.userContent}/>}

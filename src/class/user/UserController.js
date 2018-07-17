@@ -236,8 +236,6 @@ export default class UserController extends ExchangeControllerBase {
     twoVerifyUser[twoVerifyState] = verifyType
     let userInfo = Object.assign(this.view.state.userInfo, twoVerifyUser)
     let verifyList = this.view.state.verifyList
-    verifyList[position-1].contentList.forEach(v=>v.flag=false)
-    verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
     let result = await this.store.Proxy.setTwoVerify({
       "userId": this.store.uid,
       "token": this.store.token,
@@ -250,6 +248,12 @@ export default class UserController extends ExchangeControllerBase {
       position,//修改的位置 1登陆   2提现   3资金密码
       verifyType//2谷歌验证 1邮件  3短信  0无
     })
+    if (result === null) {
+      verifyList[position-1].contentList.forEach(v=>v.flag=false)
+      verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
+    } else {
+      this.getCaptchaVerify()
+    }
     if (mode || account){
       this.view.setState({
         remindPopup: true,
@@ -259,9 +263,6 @@ export default class UserController extends ExchangeControllerBase {
         showChange: result ? true : false,
         verifyList
       })
-    }
-    if (result !== null) {
-      this.getCaptchaVerify()
     }
     console.log('修改两步认证', result)
   }
@@ -368,18 +369,18 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   // 移动端用
-  setFundPwdSpace(type, pwd) { // 设置资金密码间隔
-    this.setFundPwdInterval(type, pwd)
+  async setFundPwdSpace(type, pwd) { // 设置资金密码间隔
+    let result = await this.setFundPwdInterval(type, pwd)
+    this.view.setState({
+      remindPopup: true,
+      popType: result && result.errCode ? 'tip3': 'tip1',
+      popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-setSucc"),
+      verifyFund:  result && result.errCode ? true : false
+    })
+    console.log('设置资金密码间隔', result)
+
   }
 
-  async verifyFundPass(fundPass) { // 验证资金密码
-    let result = await this.store.Proxy.verifyFundPass({
-      "userId": this.store.uid,
-      "token": this.store.token,
-      fundPass
-    })
-    console.log('验证资金密码', result)
-  }
 
   // 为其他模块提供接口
   // 密码间隔  设置间隔  两步验证  设置用户初始信息  userId  是否设置资金密码
@@ -439,7 +440,6 @@ export default class UserController extends ExchangeControllerBase {
       "interval": type, // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "fundPass": pwd
     })
-    console.log('设置资金密码', result)
     return result
   }
 

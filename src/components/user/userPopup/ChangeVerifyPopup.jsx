@@ -42,6 +42,12 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
     this.setState({popupInput3: value});
     console.log(3, value)
   }
+  canClick() {
+    if (this.props.isType === 1 && this.state.popupInput2 && this.state.popupInput3) return true // 邮箱
+    if (this.props.isType === 2 && this.state.popupInput1 && this.state.popupInput2) return true // 谷歌
+    if (this.props.isType === 3 && this.state.popupInput2 && this.state.popupInput3) return true // 短信
+    return false
+  }
   componentDidMount() {
 
   }
@@ -73,7 +79,10 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
                     onClick={()=>{this.props.getVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : ''), this.props.isType === 3 ? 0 : (this.props.isType === 1 ? 1 : ''), 9)}}/>
           </div>
           <Input placeholder={this.intl.get("user-inputVerifyGoogle")} className={this.props.isType === 2 ? '' : 'hide'} value={this.state.popupInput1} onInput={value => this.changeInput1(value)}/>
-          <Button className="set-btn" title={this.intl.get("sure")} onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
+          <Button className={`${this.canClick() ? 'can-click' : ''} set-btn`}
+                  disable={this.canClick() ? false : true}
+                  title={this.intl.get("sure")}
+                  onClick={() => this.props.setTwoVerify(this.props.isType === 3 ? this.props.phone : (this.props.isType === 1 ? this.props.email : '') ,
                                                                 this.props.isType === 3 ? 0 : this.props.isType,
                                                                 this.props.isType === 2 ? this.state.popupInput1 : this.state.popupInput3,
                                                                 this.state.popupInput2,

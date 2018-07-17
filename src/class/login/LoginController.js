@@ -1,6 +1,7 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import LoginStore from './LoginStore'
 import Sleep from "../../core/libs/Sleep";
+import Crypto from '../../core/libs/Crypto' // 引入加密
 
 export default class LoginController extends ExchangeControllerBase {
   constructor(props) {
@@ -35,7 +36,11 @@ export default class LoginController extends ExchangeControllerBase {
 
   //登录
   login(account, code, type, mode, captchaId, captchaCode, deviceFlag1, deviceFlag2){
-    console.log(112, account, type)
+    // console.log('112登陆', code, type, this.view.state.titleIndex)
+    // if (this.view.state.titleIndex === 1){
+    //   code = Crypto(code, )
+    // }
+    //112登陆 405810 0
     let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
     let keyArr = ['phone','email'];
     obj[keyArr[type]] = account

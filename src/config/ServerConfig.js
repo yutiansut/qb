@@ -13,6 +13,7 @@ export default {
 
   // wshost:'47.74.244.231', //websocket主机地址
   // wsport: 80, //主机端口
+  // wshost:'192.168.55.111', //websocket主机地址
   wshost:'192.168.55.105', //websocket主机地址
   wsport: 8090, //websocket主机端口
   // wshost:'192.168.113.41', //websocket主机地址
