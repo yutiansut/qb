@@ -37,6 +37,7 @@ export default class OrderListStore extends ExchangeStoreBase {
     let recentTradeListArr = isPersonal ? await this.Proxy.recentOrderUser(
         {
           "userId": this.controller.userController.userId,
+          token: this.controller.userController.userToken,
           "tradePairId": id,
           "count": 10
         }

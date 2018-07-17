@@ -226,6 +226,7 @@ export default class UserOrderListStore extends OrderListStore {
     // console.log(321321231,params)
     let currentList = await this.Proxy.currentOrder(
         {
+          token: this.controller.userController.userToken,
           "userId": this.controller.userController.userId,
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
@@ -240,6 +241,7 @@ export default class UserOrderListStore extends OrderListStore {
     let historyList = await this.Proxy.historyOrder(
         {
           "userId": this.controller.userController.userId,
+          token: this.controller.userController.userToken,
           "tradePairId": params.idArray,
           "tradePairName": "xxx",
           "orderType": params.orderType,
@@ -256,6 +258,7 @@ export default class UserOrderListStore extends OrderListStore {
   async getOrderDetail(id){
     let orderDetail = await this.Proxy.orderDetail(
         {
+          token: this.controller.userController.userToken,
           "userId": this.controller.userController.userId,
           "orderId": id
         }
@@ -269,6 +272,7 @@ export default class UserOrderListStore extends OrderListStore {
     console.log('receivePara', this.controller.userController.userId,this.controller.TradeMarketController.tradePair.tradePairId ,orderId)
     let msg = await this.Proxy.cancelOrder(
         {
+          token: this.controller.userController.userToken,
           "userId": this.controller.userController.userId,
           "tradePairId": this.controller.TradeMarketController.tradePair.tradePairId,
           'orderId': orderId,

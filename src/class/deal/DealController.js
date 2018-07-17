@@ -126,6 +126,7 @@ export default class DealController extends ExchangeControllerBase {
     let params = {
       // token: this.userController.userToken,
       userId: this.userController.userId,
+      token: this.userController.userToken,
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
       "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格

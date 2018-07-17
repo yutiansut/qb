@@ -97,19 +97,19 @@ export default {
   ],
   userOrder: [
     //当前订单
-    { name: 'currentOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrders', actionBack: 'getCurrOrdersRes' },
+    { name: 'currentOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrders', actionBack: 'getCurrOrdersRes' , needToken: true },
     //历史订单
-    { name: 'historyOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes' },
+    { name: 'historyOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes' , needToken: true },
     //订单详情
-    { name: 'orderDetail', data: { url: '/v1/order/', method: 'post' }, action: 'orderDetail', actionBack: 'orderDetailRes' },
+    { name: 'orderDetail', data: { url: '/v1/order/', method: 'post' }, action: 'orderDetail', actionBack: 'orderDetailRes' , needToken: true },
     //近期交易市场
     { name: 'recentOrderMarket', data: { url: '/v1/common/', method: 'post' }, action: 'getRecentOrderOfMarket', actionBack: 'getRecentOrderOfMarketRes' },
     //近期交易个人
-    { name: 'recentOrderUser', data: { url: '/v1/order/', method: 'post' }, action: 'getRecentOrderOfUser', actionBack: 'getRecentOrderOfUserRes' },
+    { name: 'recentOrderUser', data: { url: '/v1/order/', method: 'post' }, action: 'getRecentOrderOfUser', actionBack: 'getRecentOrderOfUserRes', needToken: true },
     //挂单列表
     { name: 'getDepth', data: { url: '/v1/common/', method: 'post' }, action: 'getDepth', actionBack: 'getDepthRes' },
     //撤单操作
-    { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'cancelOrder', actionBack: 'cancelOrderRes' },
+    { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'cancelOrder', actionBack: 'cancelOrderRes', needToken: true },
     // 获取k线数据
     { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'getKLine', actionBack: 'getKLineRes' }
 
@@ -117,7 +117,7 @@ export default {
   deal: [
     //交易接口
     // {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
-    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'makeOrder', actionBack: 'makeOrderRes' }
+    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'makeOrder', actionBack: 'makeOrderRes',needToken: true }
   ],
   activity: [
     // 获取邀请列表
