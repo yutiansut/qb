@@ -8,6 +8,7 @@ import Storage from './storage/index'
 import './libs/Prototype'
 
 
+
 const RUNAPP = async (config) => {
   let ServerConfig = config.ServerConfig
   let WebSocketConfig = config.WebSocketConfig

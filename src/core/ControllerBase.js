@@ -3,8 +3,11 @@ import AsyncAll from "./libs/AsyncAll"; //同步多个异步请求
 import Sleep from "./libs/Sleep"; //同步多个异步请求
 import Loop from "./loop"; //localStorage交互
 import GlobalUtil from "./libs/GlobalUtil";
-import Storage from "./storage/index";
+import Storage from "./storage";
 import FileSaver from "file-saver";
+import './libs/RSAUtil'
+const encrypt = new JSEncrypt();
+let rsaPublicKeyFlag = false
 
 const FILTERFUNC = {
   function: (arr, func) => arr.filter(func),
@@ -41,6 +44,19 @@ export default class ControllerBase {
   get initState() {
     return (this.store && this.Util.deepCopy(this.store.state)) || {};
   }
+
+  RSAsetPublicKey(key){
+    encrypt.setPublicKey(key);
+    rsaPublicKeyFlag = true
+  }
+
+  REAencrypt(data){
+    if(!rsaPublicKeyFlag){
+      return 'please set rsa publickey in method RSAsetPublicKey'
+    }
+    return encrypt.encrypt(data);
+  }
+
 
   /**
    * 倒计时方法
