@@ -149,10 +149,10 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? '卖出' : '买入'}</td>
                     {/*todo 颜色改类名统一处理*/}
-                    <td>{v.priceType ? '市价' : (this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal'}) || Number(v.price).format({number:'digital'})))}</td>
+                    <td>{v.priceType ? '市价' : ((this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal'})) || ((this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal'})) || Number(v.price).format({number:'digital'})))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{(this.state.unitsType === 'CNY' && (Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN))) || (this.state.unitsType === 'USD' && (Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN))) || (Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price)))))}</td>
+                    <td>{((this.state.unitsType === 'CNY' && (Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN)))) || ((this.state.unitsType === 'USD' && (Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN)))) || ((Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price))))))}</td>
                     <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal'})) || Number(v.avgPrice).format({number:'digital'})}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
@@ -176,19 +176,19 @@ export default class userOrder extends ExchangeViewBase {
               <div className='trade-order-content'>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.doneCount}</p>
-                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                  <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.dealedMoney}</p>
-                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.price}</p>
-                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
                 </div>
               </div>
               <table className='trade-order-table'>

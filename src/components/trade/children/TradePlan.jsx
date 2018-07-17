@@ -84,9 +84,22 @@ export default class TradePlan extends ExchangeViewBase {
     // let price =  dealType ?  this.state.inputSellFlag ? ( this.state.inputSellValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit) :this.state.inputBuyFlag ? ( this.state.inputBuyValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
   
     let maxNum = this.state[diffArr[dealType].max];
-    let numValue = e.target.value >= maxNum ? maxNum : e.target.value;
-    console.log('dealType, edealType, edealType, e',dealType, e.target.value,maxNum)
-  
+    let value = e.target.value;
+    let priceValue = (this.state[diffArr[dealType].inputValue] || (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit)).toString();
+    let limitPrice = priceValue.split('.');
+    let limitNum = value.split('.');
+    if(limitNum.length > 2)
+      return
+    limitNum[1] = limitNum[1] || '';
+    if (!((/^[0-9]*$/).test(limitNum[0]) && (/^[0-9]*$/).test(limitNum[1])))
+      return
+    if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
+      return
+    let numValue = e.target.value >= maxNum ? maxNum.toFixed(8 - (limitPrice[1] && limitPrice[1].length || 0)) : e.target.value;
+    // let flag =  (limitPrice[1].length > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
+    //     || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
+    //         || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
+    //         || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
     dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
     dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
   }
@@ -94,19 +107,19 @@ export default class TradePlan extends ExchangeViewBase {
   priceInput(dealType, e) {
     let value = e.target.value;
     let arr = value.split('.');
-    console.log('ChangePrice 0.3', arr, arr.length)
+    // console.log('ChangePrice 0.3', arr, arr.length)
     if (arr.length > 2)
       return
     arr[1] = arr[1] || ''
-    console.log('ChangePrice 0.6', !((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1] || '')))
+    // console.log('ChangePrice 0.6', !((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1] || '')))
     if (!((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1])))
       return
-    console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
+    // console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
     let flag = (Number(value) > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
         || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
             || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
             || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
-    console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
+    // console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
     if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
       flag = (/^[0-9]{0,2}$/).test(arr[1])
     }
@@ -116,7 +129,7 @@ export default class TradePlan extends ExchangeViewBase {
         inputSellFlag: true,
         dealType
       })) : (this.setState({inputBuyValue: value, inputBuyFlag: true, dealType}));
-      this.changeMaxNum(dealType, value)
+      value && this.changeMaxNum(dealType, value)
     }
     
   }
@@ -156,7 +169,7 @@ export default class TradePlan extends ExchangeViewBase {
     pwd = this.state.setPass;
     let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
     result === null && this.setState(
-        {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false}
+        {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false, setPass: ''}
     );
     result && result.errCode === 'PWD_ERROR' && this.setState(
         {

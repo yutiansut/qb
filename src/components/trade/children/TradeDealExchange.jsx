@@ -87,13 +87,13 @@ export default class TradeDealExchange extends  ExchangeViewBase{
               {!this.props.fundPassVerify && <input type="password" value={this.props.fundPwdInterval ? 'wfywfywfy' : (this.props.ControllerProps.dealType ? this.props.funpassSell : this.props.funpassBuy)} onChange={this.props.passInput.bind(this,this.props.ControllerProps.dealType)} readOnly={this.props.fundPwdInterval ? true : false}/> || <em><a href="/wuser/safe">{this.intl.get('deal-setpwd')}</a></em>}
             </div>
             {!this.props.fundPassVerify && <p className='password-msg'>
-              <span>{`${this.intl.get('deal-forgetpwd')}`}</span>
+              <span><a href="/wuser/safe">{`${this.intl.get('deal-forgetpwd')}`}</a></span>
               <span onClick={this.props.freePwd.bind(this)} style={{cursor: 'pointer'}}>{`${this.intl.get('deal-freepwd')}`}</span>
             </p> || null }
           </div>
           <div className='trade-deal-turnover'>
             <span>{`${this.intl.get('deal-trunover')}`}:</span>
-            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue)) : Number(Number(this.props.buyNum).multi(this.props.bvalue)))}</em>
+            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue || 0)).format({number:'property'}) : Number(Number(this.props.buyNum).multi(this.props.bvalue || 0)).format({number:'property'}))}</em>
             <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>

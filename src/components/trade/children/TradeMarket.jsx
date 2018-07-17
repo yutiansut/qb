@@ -116,7 +116,7 @@ export default class TradeMarket extends ExchangeViewBase {
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
             return (
               <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''}`}
-                  onClick={this.pairChange.bind(this, v)}>
+                  onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                 <td>{v.tradePairName.toUpperCase()}</td>
                 <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
                 <td>{Number(v.rise).toPercent()}</td>

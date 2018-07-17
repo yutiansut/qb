@@ -59,7 +59,7 @@ export default class DealController extends ExchangeControllerBase {
   setPriceInit(v) {
     this.view.state.priceInit = v;
     this.view.state.buyMax = this.view.state.buyWallet / v;
-    this.view.state.sellMax = this.view.state.sellWallet / v;
+    this.view.state.sellMax = this.view.state.sellWallet;
   }
 
   changeUnit(unit, init) {
@@ -112,7 +112,8 @@ export default class DealController extends ExchangeControllerBase {
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
     (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / v}))
     if (this.view.state.buyNumFlag && (t === 0)) {
-      this.view.setState({inputBuyNum: this.view.state.buyWallet / v})
+      let limit = v.split('.')[1] && v.split('.')[1].length || 0;
+      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(v)).toFixedWithoutUp(8 - limit)})
     }
     // if(this.view.state.sellNumFlag && (t === 1)){
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
@@ -147,6 +148,8 @@ export default class DealController extends ExchangeControllerBase {
             dealPopMsg:'下单成功',
             dealPassType:'positi',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
           }
       );
     }
