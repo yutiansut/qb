@@ -400,7 +400,7 @@ export default class UserController extends ExchangeControllerBase {
     return { email, phone }
   }
 
-  async getUserInfo () { // 请求用户信息
+  async getUserInfo() { // 请求用户信息
     if (!Object.keys(this.store.state.userInfo).length){
        await this.initData()
     }
@@ -412,6 +412,13 @@ export default class UserController extends ExchangeControllerBase {
       state
     } = this.store.state.userAuth
     return {state}
+  }
+
+  async getUserAuthVerify() { // 请求用户认证信息
+    if (!Object.keys(this.store.state.userAuth).length){
+      await this.getUserAuthData()
+    }
+    return this.store.state.userAuth;
   }
 
   get userToken() { // 提供用户token

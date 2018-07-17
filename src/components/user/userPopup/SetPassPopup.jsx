@@ -223,7 +223,7 @@ export default class SetPassPopup extends exchangeViewBase {
                   <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
                 </div>
               </li>
-              <li className={([3, 4].includes(this.props.isType) && this.props.fundPassType === 2) ? 'hide' : ''}>
+              <li className={([3, 4].includes(this.props.isType) || (this.props.isType === 6 && this.props.fundPassType === 2)) ? 'hide' : ''}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
