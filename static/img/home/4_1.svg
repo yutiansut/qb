@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>金融交易</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-37.5%" y="-35.6%" width="175.0%" height="176.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="-17.815%" y1="50%" x2="97.5180321%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#1AC7AB" offset="0%"></stop>
+            <stop stop-color="#1AC7AB" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-10.0510817%" y1="100%" x2="100%" y2="0%" id="linearGradient-3">
+            <stop stop-color="#5C6265" offset="0%"></stop>
+            <stop stop-color="#2F3335" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-4" cx="26" cy="26" r="26"></circle>
+        <filter x="-12.0%" y="-11.1%" width="124.0%" height="124.0%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="0.5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-248.000000, -139.000000)">
+            <g id="首页" transform="translate(99.000000, 63.000000)">
+                <g id="金融交易" filter="url(#filter-1)" transform="translate(160.000000, 85.000000)">
+                    <rect id="Rectangle-path" fill="url(#linearGradient-2)" fill-rule="nonzero" x="21" y="46" width="8" height="3" rx="0.5"></rect>
+                    <rect id="Rectangle-path" fill="url(#linearGradient-2)" fill-rule="nonzero" x="21" y="36" width="8" height="3" rx="0.5"></rect>
+                    <g id="Oval-2">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                    <path d="M31.314328,16.6223574 C31.1646767,16.2488651 30.7905094,16 30.3914782,16 L21.9361397,16 C21.3873403,16 20.9384253,16.4480973 20.9384253,16.9958496 C20.9384253,17.5434462 21.3873403,17.9915046 21.9361397,17.9915046 L27.9970181,17.9915046 L16.2992734,29.6669285 C15.9002422,30.0653539 15.9002422,30.6877113 16.2992734,31.0859422 C16.6984215,31.4841731 17.3219687,31.4841731 17.7209609,31.0859422 L31.1147539,17.7177063 C31.3640948,17.4189748 31.4639793,16.9958496 31.314328,16.6223574 Z M29.6497431,35.004306 C29.6497431,34.4565538 29.2014931,34.0084954 28.6537099,34.0084954 L24.0216766,34.0084954 L35.7010791,22.3330715 C36.0996403,21.9348016 36.0996403,21.3124443 35.7010791,20.9140578 C35.3027125,20.5158269 34.6801431,20.5158269 34.2817765,20.9140578 L20.9088294,34.2824493 C20.6349377,34.5562476 20.5354045,35.004306 20.6847822,35.3776426 C20.7346656,35.5022308 20.8092961,35.6017691 20.9088294,35.7012685 C21.0831877,35.8755674 21.3322933,36 21.606185,36 L28.6537099,36 C29.2014931,36 29.6497431,35.5519416 29.6497431,35.004306 Z" id="交易-2" fill="#2BB789"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

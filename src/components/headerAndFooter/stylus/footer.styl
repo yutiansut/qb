@@ -3,29 +3,49 @@
 .footer-wrap
   width 100%
   //min-width 11.6rem
-  background $footer-gray
-  height 1.98rem
-  padding .35rem 0 0
+  background-color  $normal-black-color
+  height 3.97rem
+  padding-top .95rem
   .home-img
     display block
-    width: .82rem
-    padding-bottom .21rem
-    margin: 0 auto
+    width 1.64rem
+    padding-bottom .40rem
+    margin 0 auto
     img
-      width .82rem
-      height .24rem
+      width 1.64rem
+      height .48rem
   ul
-    text-align: center
-    margin-bottom .2rem
+    text-align center
+    margin-bottom .60rem
     li
       display inline-block
       margin-right .4rem
       a
-        color $normal-black-color
+        color $normal-white-color-a9
+    li:last-child
+      margin-right 0
+  .right-content
+    padding .09rem 0
+    position relative
+    margin-bottom .50rem
+    hr
+      margin 0
+      border-color $normal-white-color-a
+    p
+      position absolute
+      top 0
+      left 50%
+      padding 0 .3rem
+      text-align center
+      line-height .20rem
+      color $normal-white-color-a
+      background-color $normal-black-color
+      transform translateX(-50%)
   ol
+    text-align center
     li
-      float left
-      margin-right .2rem
+      display inline-block
+      margin-right .6rem
       position relative
       img
         width .2rem
@@ -47,19 +67,8 @@
           bottom .3rem
           right -.4rem
           z-index 999
-  .right-content
-    p
-      margin: 0 auto
-      width: 3rem
-      text-align: center
-    &:before
-      position relative
-      top: 0.07rem
-      display: block
-      content: ''
-      height: 0
-      width: 100%
-      border-top: 1px solid #404446
+    li:last-child
+      margin-right 0
 
 .footer-fixed
   position fixed

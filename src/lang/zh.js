@@ -173,6 +173,14 @@ export default function zh(state) {
     "tip-know": '知道了',
     "tip-confirm": '确 定',
     "tip-cancel": '取 消',
+    "home-advantage-h1": "金融级别交易系统",
+    "home-advantage-h2": "顶级安全与风控",
+    "home-advantage-h3": "极高安全性",
+    "home-advantage-h4": "全平台交易支持",
+    "home-advantage-p1": "多重签名、离线签名、及冷钱包存储",
+    "home-advantage-p2": "多重签名、离线签名、及冷钱包存储",
+    "home-advantage-p3": "多重签名、离线签名、及冷钱包存储",
+    "home-advantage-p4": "多重签名、离线签名、及冷钱包存储"
   };
   const asset = {
     "asset-totalAssets": "总资产约",

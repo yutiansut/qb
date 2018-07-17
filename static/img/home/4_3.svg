@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="71px" viewBox="0 0 70 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>elixir</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-29.8%" y="-27.9%" width="159.6%" height="159.6%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="10.707%" y1="70.7098824%" x2="82.694%" y2="15.6734694%" id="linearGradient-2">
+            <stop stop-color="#5C6265" offset="0%"></stop>
+            <stop stop-color="#2F3335" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="115.146484%" y1="100%" x2="-42.1875%" y2="18.1445312%" id="linearGradient-3">
+            <stop stop-color="#5C6265" offset="0%"></stop>
+            <stop stop-color="#2F3335" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-462.000000, -141.000000)">
+            <g id="首页" transform="translate(99.000000, 63.000000)">
+                <g id="elixir" filter="url(#filter-1)" transform="translate(372.000000, 86.000000)">
+                    <polygon id="Triangle-2" fill="url(#linearGradient-2)" points="26 0 52 52 0 52"></polygon>
+                    <polygon id="Triangle-2" fill="#2BB789" transform="translate(26.000000, 39.000000) scale(1, -1) translate(-26.000000, -39.000000) " points="26 26 39 52 13 52"></polygon>
+                    <polygon id="Triangle-2" fill="url(#linearGradient-3)" transform="translate(26.000000, 38.000000) scale(1, -1) translate(-26.000000, -38.000000) " points="26 28 36 48 16 48"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -175,6 +175,14 @@ export default function en(state) {
     "tip-know": 'I know',
     "tip-confirm": 'Confirm',
     "tip-cancel": 'Cancel',
+    "home-advantage-h1": "Financial-market-level Trading System",
+    "home-advantage-h2": "Top-class Security and Risk Control",
+    "home-advantage-h3": "High Stability",
+    "home-advantage-h4": "Muti-platform Trading Support",
+    "home-advantage-p1": "Multiple signatures, off-line signatures, and cold wallet storage",
+    "home-advantage-p2": "Multiple signatures, off-line signatures, and cold wallet storage",
+    "home-advantage-p3": "Multiple signatures, off-line signatures, and cold wallet storage",
+    "home-advantage-p4": "Multiple signatures, off-line signatures, and cold wallet storage"
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",

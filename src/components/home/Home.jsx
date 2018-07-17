@@ -6,6 +6,7 @@ import HomeRecommend from './children/HomeRecommend.jsx' //交易盘市场
 import HomeMarket from './children/HomeMarket.jsx' //交易盘市场
 import HomeNotice from '../notice/HomeNotice.jsx' // 首页公告
 import HomeActivity from '../activity/HomeActivity.jsx' // 首页活动
+import HomeAdvantage from './children/HomeAdvantage.jsx'
 
 import MarketController from '../../class/market/MarketController'
 
@@ -30,6 +31,7 @@ export default class Home extends exchangeViewBase {
             <HomeNotice controller={this.props.noticeController}/>
             <HomeRecommend controller={recommendController}/>
             <HomeMarket controller={this.props.marketController}/>
+            <HomeAdvantage/>
         </div>
     );
   }
