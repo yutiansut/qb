@@ -68,7 +68,7 @@ export default class OrderCurrent extends exchangeViewBase{
   cancelOrder(index) {
     let v = this.state.orderListArray[index];
     let orderId, opType, dealType;
-    orderId = JSON.parse(JSON.stringify(v.orderId)) ;
+    orderId = JSON.parse(JSON.stringify(v.orderId));
     opType = 0;
     dealType =v.orderType;
     this.props.controller.cancelOrder(orderId, opType, dealType)

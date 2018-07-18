@@ -8,13 +8,17 @@
 	justify-content space-between
 	h3
 		font-size .2rem
-		color $normal-black-color
+		color $normal-white-color-a9
 	.filter-reset
 		//margin-left 6.18rem
 		input
 			margin-right .1rem
 			position relative
 			top .04rem
+			border-color $normal-white-color-a
+			background-color $normal-black-color
+		span
+			color $normal-white-color-a
 	.export-record
 		margin-left .3rem
 .order-filter
@@ -25,7 +29,7 @@
 	justify-content space-between
 	span
 		font-size .16rem
-		color $dark-font-color
+		color $normal-white-color-a
 		margin-right .1rem
 	em
 		margin 0 .1rem
@@ -49,13 +53,14 @@
 		tr
 			height .3rem
 			line-height .3rem
-			color $normal-gray-color
-			background $bg-light-color
+			color $normal-white-color-a
+			background $main-bg-active
 	tbody
 		tr
 			height .7rem
 			line-height .7rem
-			border-bottom .01rem solid $line-light
+			color $normal-white-color-a9
+			border-bottom .01rem solid $line-dark
 .order-page
 	justify-content: flex-end;
 	display: flex;
@@ -73,10 +78,11 @@
 		position absolute
 		left 3.5rem
 		top 1.62rem
-		background $normal-white-color
+		background $normal-black-color
 		border-radius .06rem
 		padding .3rem
 		z-index 8889
+		color $normal-white-color-a9
 		.detail-content-title
 			position relative
 			h3
@@ -95,13 +101,16 @@
 			height 1.02rem
 			justify-content space-around
 			margin-top .44rem
-			background $bg-medium-color
+			background $bg-dark-color
+			border-radius .02rem
 			.content-info-items
 				height 100%
 				padding .2rem 0
 				p
 					font-size .16rem
 					margin-bottom .24rem
+					color  $main-color
+					text-align center
 				span
 					color  $normal-gray-color
 		.content-info-table
@@ -109,3 +118,6 @@
 			margin-top .44rem
 			tr
 				height .5rem
+			thead
+				tr
+					color $normal-white-color-a

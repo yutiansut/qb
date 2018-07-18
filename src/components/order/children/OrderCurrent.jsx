@@ -356,7 +356,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                     {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
                     {type === 'orderHistory' && <td>{v.avgPrice}</td>}
                     {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
-                    {type === 'orderCurrent' && <td style={{color:'#0080D0', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
+                    {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{color:'#2BB789', cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
 
                   </tr>
               )
