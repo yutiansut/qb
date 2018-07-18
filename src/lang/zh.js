@@ -99,6 +99,7 @@ export default function zh(state) {
     daelAmount: "实际成交",
     avgDealPrice: "成交均价",
     dealTurnover: "成交总额",
+    passError: '资金密码错误',
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -139,6 +140,7 @@ export default function zh(state) {
     714: '不能转账给自己',
     1001: "连接被禁止",
     1002: "连接时传入的Token不合法",
+    1416: '当前挂单不适合市价交易，建议限价交易',
     2001: "谷歌验证失败",
     2002: "谷歌验证未开启",
     2011: "验证方式不能为空",

@@ -267,6 +267,12 @@ export default {
     },
     errCode: "CODE_NOT_EXPIRE"
   },
+  1416:{
+    get msg(){
+      return intl.get(1416)
+    },
+    errCode: 'RPC_STATUS_ORDER_MARKET_TRADE_UNSUITABLE'
+  },
   2001: {
     // msg: "谷歌验证失败",
     get msg() {

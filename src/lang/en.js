@@ -100,6 +100,7 @@ export default function en(state) {
     daelAmount: "Deal Amount",
     avgDealPrice: "Average Deal Price",
     dealTurnover: "Total Turnover",
+    passError: 'Funding password error'
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -140,6 +141,7 @@ export default function en(state) {
     714: 'You can not make a transfer to yourself',
     1001: "Connection banned",
     1002: "The Token passed in during connection is invalid",
+    1416: 'It may not be suitable for market price trading, we do recommend to change',
     2001: "Google validation failed",
     2002: "Google validation is not enabled",
     2011: "The verification method can not be empty",

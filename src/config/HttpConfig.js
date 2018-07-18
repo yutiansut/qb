@@ -117,7 +117,8 @@ export default {
   deal: [
     //交易接口
     // {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
-    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'makeOrder', actionBack: 'makeOrderRes',needToken: true }
+    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'makeOrder', actionBack: 'makeOrderRes',needToken: true },
+    { name: 'getCoinMinTrade', data: { url: '/v1/common/', method: 'post'}, action: 'getCoinMinTrade', actionBack: 'getCoinMinTradeRes'}
   ],
   activity: [
     // 获取邀请列表

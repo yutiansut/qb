@@ -42,6 +42,8 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.PriceUnit = market;
     this.store.state.NumUnit = coin;
     // this.view.state.Market = market;
+    this.coinMinTradeHandle(coin);//最小交易量的处理
+    console.log('this.view.state.coinMinTrade111111111111', this.store.state.coinMinTrade)
   }
 
   orderHandle(prices) {
@@ -157,7 +159,7 @@ export default class DealController extends ExchangeControllerBase {
     if(result && result.wrongTime < 5){
       this.view.setState(
           {
-            dealPopMsg:'资金密码错误',
+            dealPopMsg: this.intl.get('passError'),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
@@ -199,5 +201,22 @@ export default class DealController extends ExchangeControllerBase {
       sellWallet,
       buyWallet
     })
+  }
+  // 获取最小额度
+  async getCoinMinTrade(){
+    let result = this.store.getCoinMinTrade();
+    this.view.setState(
+        {coinMinTrade: result}
+    )
+  }
+  
+  coinMinTradeHandle(coin){
+    let coinMinTrade = this.store.state.coinMinTrade;
+    let coinMinItem = coinMinTrade.find(v => v.coinName === coin);
+    this.store.state.coinMin = coinMinItem.minTrade;
+    this.view.setState({
+      coinMin:coinMinItem.minTrade
+    })
+    console.log('coinMinItem1111111111',coinMinItem, this.store.state.coinMin)
   }
 }

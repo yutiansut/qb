@@ -320,10 +320,10 @@ export default class App extends Component {
               </Switch>
             </div>
             {/*<Footer/>*/}
-            {/*<Switch>*/}
-              {/*<Route path="/trade" component={tradeFooter} />*/}
-              {/*<Route component={Footer} />*/}
-            {/*</Switch>*/}
+            <Switch>
+              <Route path="/trade" component={tradeFooter} />
+              <Route component={Footer} />
+            </Switch>
           </div>
         )}
       </Router>
