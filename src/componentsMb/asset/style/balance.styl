@@ -5,53 +5,63 @@
   .balance
     font-family PingFangSC-Medium
     .total-asset
-      background $normal-white-color
+      background $h5-foreground
       padding .25rem .15rem
-      background $h5-color-blue
-      color $normal-white-color
       .total
         label
           display block
           line-height .2rem
-          font-size .18rem
+          font-size .15rem
+          opacity 0.8
+          color $h5-color-light
           margin-bottom .04rem
         b
           line-height .4rem
-          font-size .25rem
+          font-size .24rem
+          color $h5-color-normal
       .total-cny
         span
           font-size .14rem
           margin-top .08rem
+          color $h5-color-light
           display block
     .menu-ul
-      line-height .4rem
-      border 1px solid $h5-border-light
+      line-height .45rem
+      border 1px solid $h5-border-weight
       border-left none
       border-right none
-      background $normal-white-color
+      background $h5-foreground
       li
         display inline-block
         width 33%
         text-align center
         position relative
-        color $h5-color-blue
         &:not(:last-of-type)::after
           position absolute
           right 0
           content ""
           width .01rem
-          background $h5-border-light
-          height .3rem
-          top .05rem
+          background $h5-border-weight
+          height .25rem
+          top .1rem
         a
-          color $h5-color-blue
+          color $h5-color-normal
+          img
+            height .2rem
+            margin-right .08rem
+            vertical-align -.05rem
+
+
     .asset-wallet
       padding-bottom .4rem
       .filter
         line-height .45rem
         height .45rem
-        background $normal-white-color
+        background $h5-foreground
         padding 0 .2rem
+        span
+          color $h5-color-normal
+          font-size .15rem
         img
           height .2rem
           width .2rem
@@ -64,33 +74,34 @@
           float right
           margin-top .1rem
           border-radius  .24rem
-          background $h5-color-light
+          background $h5-foreground-weight
           position relative
-          border .02rem solid $h5-color-light
+          border .02rem solid $h5-foreground-weight
           i
             display inline-block
             height .2rem
             width .2rem
-            background $normal-white-color
+            background $h5-color-weight
             border-radius 50%
             position absolute
             top 0
           &.active
-            background $h5-color-blue
-            border-color $h5-color-blue
+            background $h5-color-green
+            border-color $h5-color-green
             i
               right 0
       .wallet-li
-        background $normal-white-color
-        margin-top .12rem
+        background $h5-foreground
         padding .08rem .12rem
+        margin .12rem
+        border-radius .02rem
         .d1
           padding-bottom .08rem
-          border-bottom 1px solid $h5-border-light
+          border-bottom 1px solid $h5-border-weight
           line-height .2rem
           label
             font-size .14rem
-            color $h5-color-blue
+            color $h5-color-weight
             img
               height .2rem
               width .2rem
@@ -98,7 +109,7 @@
               vertical-align -.05rem
           a
             float right
-            color $h5-color-light
+            color $h5-color-normal
             font-size .12rem
         .d2
           padding .08rem 0 .05rem 0
@@ -114,6 +125,7 @@
               margin-bottom .08rem
             i
               font-size .14rem
+              color $h5-color-normal
 
 
 

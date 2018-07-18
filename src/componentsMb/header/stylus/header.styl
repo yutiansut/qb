@@ -6,19 +6,19 @@
   background-color $h5-background
   min-height 6.4rem
   input
-    background none
-    color $h5-color-normal
-    font-size .12rem
-    border .01rem solid $h5-border-light
+    background $h5-foreground
+    color $h5-color-weight
+    font-size .14rem
+    border .01rem solid transparent
     &:hover, &:focus, &:active
-      border-color $h5-color-blue
+      border-color $h5-color-red
     &::placeholder
       color $h5-color-light
       font-size .12rem
   a.default.main, button.default.main
     border none
-    background  $h5-color-blue
-    color $normal-white-color
+    background  $h5-color-green
+    color $h5-color-weight
     border-radius .02rem
     opacity 1
     &:hover, &:focus, &:active
@@ -34,9 +34,9 @@
   font-family PingFangSC-Medium
   height .5rem
   padding 0 .2rem 0 0.1rem
-  background $normal-white-color
-  box-shadow 0 0.02rem .02rem $h5-shadow-light
+  background $h5-foreground
   display flex
+  border-bottom .01rem solid $h5-border-weight
   .logo
     display inline-block
     height 100%
@@ -49,7 +49,7 @@
     justify-content flex-end
     align-items center
     >a
-      color $h5-color-blue
+      color $h5-color-weight
       margin-left .15rem
     >img
       height .3rem
@@ -64,7 +64,7 @@
         position absolute
         right 0
         margin-top .1rem
-        background $normal-white-color
+        background $h5-foreground
         box-shadow 0 0 0.05rem $h5-shadow-weight
         border-radius .02rem
         overflow hidden
@@ -82,27 +82,36 @@
     right 0
     left 37.5%;
     overflow auto
-    background $h5-main-color
+    background $h5-foreground
     box-shadow 0.02rem 0 .05rem $h5-shadow-light
-    .nav-login
-      height .7rem
-      line-height .7rem
     a
       width 100%
-      height .5rem
-      line-height .5rem
+      height .45rem
+      line-height .45rem
       display block;
-      padding-left .3rem
-      color $normal-white-color
-      border-bottom 1px solid $h5-color-light
+      padding-left .2rem
+      color $h5-color-normal
       img
-        margin-right .12rem
+        margin-right .15rem
+        width .24rem
+        height .24rem
+        vertical-align middle
+    .user
+      height .7rem
+      line-height .7rem
+      border-bottom .01rem solid $h5-border-weight
+      img
         width .44rem
         height .44rem
-        border-radius 50%
-        vertical-align middle
+    .logout
+      border-top .01rem solid $h5-border-weight
+      position absolute
+      bottom 0
+      width 100%
 
-  .nav-shadow
+
+
+.nav-shadow
     position: fixed;
     z-index: 100000;
     background-color: rgba(0,0,0,.5);

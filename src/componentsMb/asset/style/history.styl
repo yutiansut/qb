@@ -7,11 +7,11 @@
   .nav
     height .45rem
     line-height .45rem
-    background $normal-white-color
-    border-bottom .01rem solid $h5-border-light
+    background $h5-foreground
+    border-bottom .01rem solid $h5-border-weight
     position relative
     background $h5-color-blue
-    color $normal-white-color
+    color $h5-color-weight
     h3
       text-align center
       font-size .18rem
@@ -20,7 +20,7 @@
       pointer-events none
     a
       font-size .14rem
-      color $normal-white-color
+      color $h5-color-weight
       &.left
         float left
         margin-left .12rem
@@ -29,7 +29,7 @@
         margin-right .12rem
   .tab-ul
     display flex
-    background $normal-white-color
+    background $h5-foreground
     li
       width 100%
       line-height .38rem
@@ -40,9 +40,10 @@
       overflow hidden
       text-overflow ellipsis
       white-space nowrap
+      color $h5-color-light
       &.active
-        color $h5-active-blue
-        border-color $h5-active-blue
+        color $h5-color-green
+        border-color $h5-color-green
   .hist-li
     background $normal-white-color
     margin .12rem
@@ -94,10 +95,8 @@
     letter-spacing 0
     background $icon-nothing no-repeat center 1rem
     background-size auto 1rem
-    background-color $normal-white-color
     padding-top 2.2rem
-
-
+    
   .pagination-wrap
     margin .2rem 0 .4rem 0
 

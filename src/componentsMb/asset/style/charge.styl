@@ -8,11 +8,10 @@
     .nav
       height .45rem
       line-height .45rem
-      background $normal-white-color
-      border-bottom .01rem solid $h5-border-light
+      background $h5-foreground
+      border-bottom .01rem solid $h5-border-weight
       position relative
-      background $h5-color-blue
-      color $normal-white-color
+      color $h5-color-weight
       h3
         text-align center
         font-size .18rem
@@ -35,16 +34,16 @@
       padding 0 .12rem
       line-height .4rem
       height .4rem
-      background $normal-white-color
+      background $h5-foreground
       label
         color $h5-color-normal
         font-size .15rem
       b
-        color $h5-color-weight
+        color $h5-color-normal
         margin-left .3rem
         font-size .15rem
       i
-        color $h5-color-light
+        color $h5-color-normal
         font-size .18rem
         float right
     .info
@@ -54,30 +53,32 @@
       display flex
       flex-direction column
       align-items center
-      background $normal-white-color
       .qrcode
         width 1.6rem
         height 1.6rem
         margin-top .4rem
         margin-bottom .4rem
+        border .02rem solid $h5-color-weight
       .save-qrcode
         line-height .2rem
         margin .12rem 0 .4rem 0
         font-size .16rem
-        color $h5-color-blue
+        color $h5-color-green
       input
-        color $h5-color-weight
+        color $h5-color-normal
         font-size .15rem
         line-height .2rem
         border 0
         width 100%
         text-align center
+        background none
       .copy-addr
-        color $h5-color-blue
+        color $h5-color-green
         font-size .16rem
         margin .12rem 0 .4rem 0
       p
         color $h5-color-light
+        font-size .14rem
         line-height .2rem
         margin .05rem 0
         text-align justify
@@ -88,11 +89,11 @@
       top 0
       bottom 0
       width 100%
-      background $normal-white-color
+      background $h5-background
       ul
         li
           line-height .4rem
-          border-bottom .01rem solid $h5-border-light
+          border-bottom .01rem solid $h5-foreground
           padding 0 .12rem
           color $h5-color-normal
           font-size .15rem

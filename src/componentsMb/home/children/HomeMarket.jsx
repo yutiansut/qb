@@ -30,53 +30,55 @@ export default class HomeMarket extends ExchangeViewBase{
     let marketPair = this.state.homeMarketPairData;  //交易对
     return(
       <div className="market">
-        <ul className="clearfix">
+        <ul>
             {controller.token && <li onClick={this.collectMarket}
                                      className={this.state.collectActive ? "active" : ""}>
-              {this.intl.get('market-favorites')}
+              <span>{this.intl.get('market-favorites')}</span>
             </li>}
             {marketData && marketData.map((v, index) => {
               return(<li key={index}
                          onClick={this.changeMarket.bind(this,v)}
                          className={this.state.market.toUpperCase() === v.toUpperCase() ? "active" : ""}>
-                    {v.toUpperCase()} {this.intl.get('market-market')}
+                    <span>{v.toUpperCase()}</span>
                 </li>
             )})}
           </ul>
-        <table>
-          <thead align="left">
-            <tr>
-              <th style={{width:"40%"}}>{this.intl.get("market-market")}</th>
-              <th>{this.intl.get("market-lastPrice")}</th>
-              <th style={{width:"20%"}}>{this.intl.get("market-change")}</th>
-            </tr>
-          </thead>
-          <tbody>
-          {marketPair && marketPair.map((v, index) => {
-            return(
-              <tr key={index}>
-                <td onClick={e => this.addCollect(v, index, e)}>
-                  <h3>
-                      {controller.token && <img src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"}/>}
-                      {v.coinName.toUpperCase()}
-                      <small>/{v.marketName.toUpperCase()}</small>
-                  </h3>
-                  <span>{this.intl.get("market-volume")} {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
-                </td>
-                <td>
-                  <b className={v.rise<0 ? 'down':'up'}>{Number(v.price).format({number:'digital'}) || 0}</b>
-                  <span>{controller.language === 'zh-CN' ?
-                      Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) :
-                      Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span>
-                </td>
-                <td>
-                  <a>{Number(v.rise).toPercent()}</a>
-                </td>
-              </tr>
-            )
-          })}
-          </tbody>
-        </table>
+        <div className="market-list">
+            <table>
+                <thead align="left">
+                <tr>
+                    <th style={{width:"40%"}}>{this.intl.get("market-market")}</th>
+                    <th>{this.intl.get("market-lastPrice")}</th>
+                    <th style={{width:"20%"}}>{this.intl.get("market-change")}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {marketPair && marketPair.map((v, index) => {
+                    return(
+                        <tr key={index}>
+                            <td onClick={e => this.addCollect(v, index, e)} className="td1">
+                                {controller.token && <img src={v.isFavorite ? "/static/mobile/home/icon_sc_pre@2x.png" : "/static/mobile/home/icon_sc@2x.png"}/>}
+                                <h3>
+                                    {v.coinName.toUpperCase()}
+                                    <small>/{v.marketName.toUpperCase()}</small>
+                                </h3>
+                                <span>{this.intl.get("market-volume")} {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
+                            </td>
+                            <td className="td2">
+                                <b>{Number(v.price).format({number:'digital'}) || 0}</b>
+                                <span>{controller.language === 'zh-CN' ?
+                                    Number(v.priceCN || 0).format({number:'legal',style:{name:'cny'}}) :
+                                    Number(v.priceEN || 0).format({number:'legal',style:{name:'usd'}})}</span>
+                            </td>
+                            <td className="td3">
+                                <a className={v.rise < 0 ? "down" : "up"}>{Number(v.rise).toPercent()}</a>
+                            </td>
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
+        </div>
       </div>
     )
   }

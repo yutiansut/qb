@@ -152,7 +152,7 @@ export default class ForgetPass extends exchangeViewBase {
                 <img src={this.state.captcha || ''} alt="" className="picture-btn btn" onClick={this.getCaptchaVerify} />
               </div>
             </li>
-            <li>
+            <li className="submit-li">
               <Button title={this.intl.get("sure")}
                       className={` ${this.canClick() ? 'can-click' : ''} pass-btn`}
                       disable={this.canClick() ? false : true}

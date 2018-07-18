@@ -2,131 +2,97 @@
 
 .home-wrap-mb
   font-family PingFangSC-Medium
-  //推荐交易对
-  .recommend
-    width 100%
-    background $normal-white-color
-    .noscroll
-      overflow hidden
-      height .9rem;
-    .ul-wrap
-      overflow auto
-      width 100%
-      position relative
-      padding .15rem 0 .3rem 0
-      height 1.05rem
-      ul
-        position absolute
-        white-space nowrap
-        height 0.6rem
-        left 0
-        li
-          display inline-block
-          padding 0.1rem
-          margin 0 0.03rem
-          height 100%
-          background $normal-white-color
-          min-width 1.48rem
-          box-shadow 2px 2px 10px #ddd
-          .p1
-            span
-              color $normal-black-color
-              font-size .16rem
-            img
-              float right
-              height 0.16rem
-          .p2
-            margin-top 0.1rem
-            b
-              margin-right .15rem
-              font-size .15rem
-              color $exchange-blue;
-            i
-              line-height 0.15rem
-              font-size 0.12rem
-              color $exchange-blue;
-              float right
-        li:first-child
-          margin-left 0.1rem
-        li:last-child
-          margin-right 0.1rem
   //市场
   .market
-    background $normal-white-color
-    padding 0 0.12rem
-    margin .12rem 0
+    margin-top .12rem
     ul
       display flex
-      justify-content center
-      height .4rem
-      line-height .3rem
-      padding .05rem 0
-      margin-bottom .14rem
+      justify-content space-between
+      height .36rem
+      line-height .36rem
+      background $h5-foreground
       li
-        position relative
         font-size .13rem
-        padding 0 .1rem
-        color $h5-color-blue
-        overflow hidden
-        text-overflow ellipsis
-        max-width 1rem
-        white-space nowrap
+        color $h5-color-light
+        flex-grow 1
+        text-align center
+        span
+          display inline-block
+          padding 0 .08rem
+          line-height .34rem
         &.active
-          color $normal-white-color
-          background $h5-color-blue
-          box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
-          border-radius .2rem
-    table
-      width 100%
-      thead
-        tr
-          height .3rem
-          line-height .3rem
-          color $h5-color-light
-      tbody
-        tr
-          line-height 0.24rem
-          height 0.62rem
-          td
-            vertical-align middle
-            img
-              height .14rem
-              vertical-align -.02rem
-              margin-right .04rem
-            span
-              font-size 0.12rem
+          span
+            color $h5-color-green
+            border-bottom .02rem solid $h5-color-green
+    .market-list
+      padding 0 .12rem
+      table
+        width 100%
+        thead
+          tr
+            height .3rem
+            line-height .3rem
+            border-bottom .01rem solid $h5-foreground
+            th
+              font-size .12rem
               color $h5-color-light
-            h3
-              font-size 0.14rem
-              color $h5-color-weight
-              small
+        tbody
+          tr
+            line-height 0.24rem
+            height 0.62rem
+            border-bottom .01rem solid $h5-foreground
+            td
+              vertical-align middle
+            .td1
+              img
+                height .2rem
+                width .2rem
+                vertical-align -.02rem
+                margin-right .04rem
+                float left
+                position relative
+                top .14rem
+              span
+                margin-left .32rem
                 font-size 0.12rem
                 color $h5-color-light
-                margin-left .02rem
-                vertical-align .01rem
-            b
-              font-size 0.14rem
-              color $h5-color-normal
-              display block
-              &.up
-                color $h5-color-blue
-              &.down
-                color $h5-color-red
-            a
-              font-size 0.15rem
-              color $normal-white-color
-              background $h5-color-red
-              padding 0.05rem
-              border-radius 1px
-              min-width .8rem
-              display inline-block
-              text-align center
-      th:last-child, td:last-child
-        text-align right
-      th:first-child
-        padding-left .12rem
-      th:last-child
-        padding-right .12rem
+                white-space nowrap
+              h3
+                margin-left .32rem
+                font-size 0.17rem
+                color $h5-color-weight
+                small
+                  font-size 0.12rem
+                  color $h5-color-weight
+                  margin-left .02rem
+                  vertical-align .02rem
+            .td2
+              b
+                font-size 0.14rem
+                color $h5-color-green
+                display block
+              span
+                font-size 0.13rem
+                color $h5-color-light
+            .td3
+              a
+                font-size 0.15rem
+                color $h5-color-weight
+                padding 0.05rem
+                border-radius 1px
+                min-width .8rem
+                display inline-block
+                text-align center
+                &.up
+                  background $h5-color-green
+                &.down
+                  background $h5-color-red
+        th:last-child, td:last-child
+          text-align right
+        th:first-child
+          padding-left .12rem
+        th:last-child
+          padding-right .12rem
 
 
 

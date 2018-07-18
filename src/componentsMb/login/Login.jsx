@@ -53,8 +53,6 @@ export default class Login extends exchangeViewBase {
     this.changePass = this.changePass.bind(this)
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
-    this.checkUser = this.checkUser.bind(this)
-
   }
 
   changeTitle(i) { // 登录切换
@@ -95,11 +93,6 @@ export default class Login extends exchangeViewBase {
     return false
   }
 
-  checkUser(event) {
-    this.setState({
-      checkState: event.target.checked
-    });
-  }
   componentWillMount() {
     // this.bannerSwiper()
   }
@@ -125,8 +118,9 @@ export default class Login extends exchangeViewBase {
     return (
       <div>
         <div className="login-wrap-mb">
+          <h1>{this.state.titleList[this.state.titleIndex]}</h1>
           <div className="tab-ul">
-            {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? 'active' : ''} onClick={i => this.changeTitle(index)}>{v}</span>))}
+            {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? '' : 'show'} onClick={i => this.changeTitle(index)}>{v}</span>))}
           </div>
           <ul>
             <li>
@@ -148,14 +142,16 @@ export default class Login extends exchangeViewBase {
                       title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
                       onClick={()=>{this.getVerify(this.state.userInput, this.state.userType, 0)}}/>
             </li>
-            <li>
+            <li className="login-li">
               <Button title={this.intl.get("login")}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
                       onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())}}/>
             </li>
           </ul>
-          <label className="agree"><input type="checkbox" checked={this.state.checkState} onChange={this.checkUser}/>{this.intl.get("login-read")}
+          <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
+              <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png":"/static/mobile/login/icon_wx@2x.png"}/>
+              {this.intl.get("login-read")}
               <Link to="/mhelp/terms" className="userAgree">《{this.intl.get("login-readUser")}》</Link>
           </label>
         </div>

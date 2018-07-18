@@ -62,27 +62,27 @@ export default class Header extends ExchangeViewBase {
           </a>
          {!isLogin ?
              <NavLink to="/mlogin">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
-             <img src="/static/mobile/user/icon_wd_head@3x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
+             <img src="/static/mobile/header/icon_wode_head@2x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
         </div>
         {(isLogin && !this.state.navHidden) && <div>
             <div className="nav-shadow" onClick={e => this.setState({navHidden: true})}></div>
             <div className="nav-hidden">
-              <a className="nav-login">
-                  <img src="/static/mobile/user/icon_wd_head@3x.png" alt=""/>
+              <a className="user">
+                  <img src="/static/mobile/header/icon_wode_head@2x.png" alt=""/>
                   <span>{userController.userName}</span></a>
               <NavLink to="/mhome"
-                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-home")}</NavLink>
+                       onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_sy@2x.png"/>{this.intl.get("header-home")}</NavLink>
               <NavLink to="/mwallet"
-                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-assets")}</NavLink>
+                       onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_zc@2x.png"/>{this.intl.get("header-assets")}</NavLink>
               <NavLink to="/morder"
-                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-order")}</NavLink>
+                       onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_dd@2x.png"/>{this.intl.get("header-order")}</NavLink>
               <NavLink to="/muser"
-                       onClick={e => this.setState({navHidden: true})}>{this.intl.get("header-user")}</NavLink>
-              <a onClick={e=>{
+                       onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_gr@2x.png"/>{this.intl.get("header-user")}</NavLink>
+              <a className="logout" onClick={e=>{
                   this.setState({navHidden: true},()=>{
                     this.logout();
                   });
-              }}>{this.intl.get("header-logOut")}</a>
+              }}><img src="/static/mobile/header/icon_tc@2x.png"/>{this.intl.get("header-logOut")}</a>
             </div>
           </div>}
       </div>

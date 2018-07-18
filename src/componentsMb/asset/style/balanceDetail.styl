@@ -7,11 +7,10 @@
     .nav
       height .45rem
       line-height .45rem
-      background $normal-white-color
-      border-bottom .01rem solid $h5-border-light
+      background $h5-foreground
+      border-bottom .01rem solid $h5-border-weight
       position relative
-      background $h5-color-blue
-      color $normal-white-color
+      color $h5-color-weight
       h3
         text-align center
         font-size .18rem
@@ -30,7 +29,6 @@
     .d1
       height .61rem
       padding .16rem .12rem .05rem .12rem
-      background $normal-white-color
       img
         width .4rem
         height .4rem
@@ -41,7 +39,7 @@
         margin-left .55rem
         font-size .24rem
         line-height .2rem
-        color $h5-color-weight
+        color $h5-color-normal
         margin-bottom .03rem
       span
         display block
@@ -51,8 +49,7 @@
         line-height .2rem
     .d2
       padding .2rem .12rem
-      background $normal-white-color
-      border-bottom .01rem solid $h5-border-light
+      border-bottom .01rem solid $h5-foreground
       p
         display inline-block
         vertical-align top
@@ -69,16 +66,15 @@
           margin-top .05rem
           display block
     .d3
-      background $normal-white-color
       padding .1rem .12rem
       p
         line-height .3rem
         span
           font-size .14rem
-          color $h5-color-normal
+          color $h5-color-light
         i
           font-size .14rem
-          color $h5-color-weight
+          color $h5-color-normal
           float right
 
     .coin-info
@@ -88,22 +84,21 @@
       line-height .4rem
       width 100%
       padding 0 .12rem
-      background $normal-white-color
-      box-shadow: 0 -.2rem .4rem 0 $h5-shadow-light
-      color $h5-active-blue
+      background $h5-foreground
+      color $h5-color-green
       font-size .15rem
       img
         float right
         height .16rem
         margin-top .12rem
     .footer
-      background $normal-white-color
+      box-shadow 0 -.04rem .2rem 0 rgba(0,0,0,0.20)
+      background $h5-foreground
       position fixed
       bottom 0
       width 100%
       height .4rem
-      border-top .01rem solid $h5-border-light
-      color $h5-active-blue
+      color $h5-color-green
       a
         width 50%
         text-align center
@@ -111,6 +106,6 @@
         font-size .18rem
         line-height .4rem
         &.active
-          background $h5-active-blue
-          color $normal-white-color
+          background $h5-color-green
+          color $h5-color-weight
 
