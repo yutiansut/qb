@@ -67,7 +67,7 @@ export default class userOrder extends ExchangeViewBase {
     // this.props.controller.getCurrentOrder(false, )
   }
   tradeOrderDetail(v){
-    if(v.orderStatus === 1 || v.orderStatus === 2){
+    if([1,2,6,7].indexOf(v.orderStatus) !== -1){
       this.setState({
         detailFlag: true,
         orderDetailType: v.orderType

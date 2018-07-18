@@ -334,7 +334,9 @@ export default function zh(state) {
     "order-reset-sell": '撤销卖出',
     "order-reset-all": '全部撤销',
     "order-export": '导出订单记录',
-    "cancel-successful": '撤销成功'
+    "cancel-successful": '撤销成功',
+    "deal-after":'后可进行交易',
+    "deal-login": '登录/注册'
   };
   const deal = {
     "deal-limit": "限价委托",

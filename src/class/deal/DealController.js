@@ -123,6 +123,9 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   async dealTrade(orderType) {
+    if(this.view.state.fundPwdInterval === -1){
+      return
+    }
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let params = {
