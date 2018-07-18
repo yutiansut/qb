@@ -97,7 +97,14 @@ export default class userSafeCenter extends exchangeViewBase {
     })
   }
   selectType(content, index, i, type) { // 两步认证单选
-
+    if (i === 2 && this.state.userInfo.fundPwd) {
+      this.setState({
+        remindPopup: true,
+        popType: 'tip3',
+        popMsg: '请设置资金密码',
+      })
+      return
+    }
     let changeArr = [3, 1, 0, 2], typeArr = [2, 1, 3, 0]  // 2 谷歌验证 1 邮件 3 短信 0 无
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
@@ -126,6 +133,10 @@ export default class userSafeCenter extends exchangeViewBase {
       })
     }
   }
+
+
+
+
   // selectNotice(index, type) { // 选择通知
   //   this.setState({
   //     type: type,
@@ -244,8 +255,8 @@ export default class userSafeCenter extends exchangeViewBase {
             {this.state.verifyList.map((v, i) => (<dl className="clearfix" key={i}>
               <dt>{v.title}</dt>
               {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(item, index, i, this.state.userInfo.email ? 2 : 1)}>
-                <img src="/static/img/checked.svg" alt="" className={`${(item.flag) ? '' : 'hide'}`}/>
-                <img src="/static/img/normal.svg" alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
+                <img src={this.$imagesMap.$checked} alt="" className={`${(item.flag) ? '' : 'hide'}`}/>
+                <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
                 <span>{item.name}</span>
               </dd>))}
             </dl>))}
@@ -277,8 +288,8 @@ export default class userSafeCenter extends exchangeViewBase {
               <li>{this.intl.get("user-noticeRemind")}</li>
               <li>
                 {this.state.noticeList.map((v, index) => (<span key={index}  onClick={i => this.setUserNotify(index)}>
-                  <img src="/static/img/checked.svg" alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
-                  <img src="/static/img/normal.svg" alt="" className={`${this.state.noticeIndex === index ? 'hide' : ''}`}/>
+                  <img src={this.$imagesMap.$checked} alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
+                  <img src={this.$imagesMap.$nomal_check} alt="" className={`${this.state.noticeIndex === index ? 'hide' : ''}`}/>
                   <b>{v.name}</b>
                 </span>))}
               </li>

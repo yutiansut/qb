@@ -257,7 +257,7 @@ export default class SetPassPopup extends exchangeViewBase {
                                                                    this.state.popupInput5)}/>}
                 {this.props.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
                                                     onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ?this.props.email : ''),
-                                                                   this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 0),
+                                                                   this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 2),
                                                                    1,
                                                                    this.state.popupInput2,
                                                                    this.state.popupInput4,

@@ -4,12 +4,12 @@
     <title>checked</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon" transform="translate(-381.000000, -330.000000)">
-            <g id="16*16" transform="translate(60.000000, 287.000000)">
-                <g id="checked" transform="translate(321.000000, 43.000000)">
-                    <circle id="Oval-2" stroke="#0080D0" cx="7" cy="7" r="6.5"></circle>
-                    <circle id="Oval-2" fill="#0080D0" cx="7" cy="7" r="5"></circle>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-467.000000, -443.000000)">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="checked" transform="translate(368.000000, 0.000000)">
+                    <circle id="Oval-2" stroke="#2BB789" cx="7" cy="7" r="6.5"></circle>
+                    <circle id="Oval-2" fill="#2BB789" cx="7" cy="7" r="5"></circle>
                 </g>
             </g>
         </g>

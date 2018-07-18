@@ -123,7 +123,7 @@ export default class Header extends ExchangeViewBase {
       userToken && (v.tokenShow = false)
     })
     return (
-      <div className={`${this.props.navClass} clearfix`}>
+      <div className={`${this.props.navClass} clearfix`} id="header">
         <ul className="clearfix">
           <li className='nav-logo'>
             <Link to='/whome'></Link>
@@ -132,6 +132,7 @@ export default class Header extends ExchangeViewBase {
             // console.log(match)
             return <li className={`header-nav${match ? '-active' : ''} ${v.tokenShow ? 'hide' : ''} ${v.select ? 'select-list' : ''}`} >
                     <Link to={v.to}>{v.label}</Link>
+                    {/*<img src={this.$imagesMap.$nomal_down} alt=""/>*/}
                       {v.select && (
                         <ul className='select-router'>
                           {v.childrenList.map((v, index) => {

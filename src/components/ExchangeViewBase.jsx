@@ -21,7 +21,10 @@ export default class ExchangeViewBase extends ViewBase {
       $rank_up: "/static/images/rank_up.svg",
       $rank_normal: "/static/images/rank_normal.svg",
       $xianghu: "/static/images/xianghu.svg",
-      $award_success: "/static/images/genrealize/success.png"
+      $award_success: "/static/images/genrealize/success.png",
+      $nomal_down: "/static/img/home/down_normal.svg",
+      $checked: "/static/img/checked.svg",
+      $nomal_check: "/static/img/normal_check.svg",
     }
   }
 

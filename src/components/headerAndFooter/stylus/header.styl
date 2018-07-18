@@ -39,14 +39,25 @@
         &:hover
           .select-router
             display block
+          .select-list:after
+            content: ''
+            width .07rem
+            height .05rem
+            background-image $icon-select
+            background-size cover
+            position absolute
+            top: 50%
+            transform rotate(90deg)
+            right -.1rem
         &:after
           content: ''
           width .07rem
-          height .04rem
+          height .05rem
           background-image $icon-select
           background-size cover
           position absolute
           top: 50%
+          transform translateY(-50%)
           right -.1rem
         .select-router
           position absolute
@@ -211,51 +222,6 @@
           .login-ul
             display block
 
-  >ul
-    float left
-    >li
-      float left
-  li
-    a
-      color $index-gray
-  .select-list
-    position relative
-    &:hover
-      .select-router
-        display block
-    &:after
-      content: ''
-      width .07rem
-      height .04rem
-      background-image $icon-select
-      background-size cover
-      position absolute
-      top: 50%
-      right -.1rem
-    .select-router
-      position absolute
-      display none
-      left -.18rem
-      width 1rem
-      //padding-top .1rem
-      //background $normal-white-color
-      li
-        width 100%
-        height .4rem
-        line-height .4rem
-        text-align center
-        margin-right 0
-        a
-          display block
-          width 100%
-          height 100%
-          padding 0
-          &.children-active
-            // background $main-color
-            color $normal-white-color
-          &:hover
-            color $main-color
-            background $normal-white-color
 
 .headerNav, .homeNav
   width 100%
@@ -263,9 +229,11 @@
   height .7rem
   padding 0 1.2rem
   line-height .7rem
+  background $main-bg-active
   >ul
+    height .7rem
     li
-      height .5rem
+      height .7rem
       margin-right .4rem
       &.header-nav-active
         >a
@@ -282,6 +250,7 @@
           height .5rem
           margin-top .1rem
           background $logo-index no-repeat 0 0 / 1.1rem .5rem
+
   >ol
     >li
       &.language-li

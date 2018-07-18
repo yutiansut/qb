@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>down_normal</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="Artboard" transform="translate(-748.000000, -83.000000)" stroke="#FFFFFF" stroke-width="2">
+            <g id="首页" transform="translate(99.000000, 63.000000)">
+                <polyline id="down_normal" transform="translate(655.126524, 21.126524) rotate(-45.000000) translate(-655.126524, -21.126524) " points="658.626524 24.8765242 651.626524 24.8765242 651.626524 17.3765242"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

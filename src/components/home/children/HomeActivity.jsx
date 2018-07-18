@@ -34,7 +34,7 @@ export default class HomeActivity extends ExchangeViewBase {
   render() {
     // console.log('this.state.bannerImgUrl',this.state.bannerImgUrl)
     return (
-      <div className="banner-wrap">
+      <div className="banner-wrap" id="active">
         {/*<div>*/}
           {/*<img src="/static/img/banner_title.svg" alt=""/>*/}
           {/*<Link to="/activity/fresh">立即注册</Link>*/}
