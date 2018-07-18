@@ -54,7 +54,7 @@
 }
 
 .chart_container.dark #chart_toolbar {
-    background-color: #191f28;
+    background-color: #25292b;
     border-bottom-color: #404040
 }
 
@@ -179,12 +179,12 @@
 .chart_container.dark .chart_dropdown_t {
     background-image: url("../img/dropdown_w.png");
     background-position: right 7px;
-    border-color: #191f28;
+    border-color: #25292b;
     color: #e5e5e5
 }
 
 .chart_container.dark .chart_dropdown-hover.chart_dropdown_t {
-    background-color: #191f28;
+    background-color: #25292b;
     background-image: url("../img/dropup_w.png");
     background-position: right 7px;
     border-color: #606060;
@@ -503,12 +503,12 @@
 }
 
 .chart_container.dark #chart_toolpanel {
-    background-color: #191f28;
+    background-color: #25292b;
     border-right-color: #404040
 }
 
 .chart_container.dark .chart_toolpanel_icon {
-    background-color: #191f28;
+    background-color: #25292b;
 }
 
 .chart_container.dark .chart_toolpanel_button:hover .chart_toolpanel_icon {
@@ -516,13 +516,13 @@
 }
 
 .chart_container.dark .chart_toolpanel_button.selected .chart_toolpanel_icon {
-    background-color: #191f28;
+    background-color: #25292b;
 }
 
 .chart_container.dark .chart_toolpanel_tip {
     background-color: #ffac00;
     border-color: #ffac00;
-    color: #191f28
+    color: #25292b
 }
 
 .chart_container.light #chart_toolpanel {
@@ -674,7 +674,7 @@
 }
 
 .chart_container.dark #chart_tabbar {
-    background-color: #191f28;
+    background-color: #25292b;
     border-top-color: #404040
 }
 

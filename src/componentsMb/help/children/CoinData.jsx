@@ -168,7 +168,7 @@ export default class CoinData extends exchangeViewBase {
               </p>
               <NavLink
                   to={{
-                      pathname: "/wallet/charge",
+                      pathname: "/mwallet/charge",
                       query: { currency: this.state.currency }
                   }}
               >
@@ -198,23 +198,6 @@ export default class CoinData extends exchangeViewBase {
                   : `$${Number(priceEN).format({ number: "legal" })}`}
               </span>
                 <span><b>{this.intl.get('helo-coin-date')}：</b>{releaseTime.toDate("yyyy-MM-dd")}</span>
-            </p>
-            <p className="to-trade">
-              <h3>{this.intl.get('helo-coin-trade')}：</h3>
-              {this.getCoinPair(
-                this.state.tradePair,
-                this.state.currency
-              ).map((v, index) => (
-                <NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: { id: v.id }
-                  }}
-                  key={index}
-                >
-                  {v.name}
-                </NavLink>
-              ))}
             </p>
           </div>
           <div className="detail">

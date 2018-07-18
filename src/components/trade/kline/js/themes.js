@@ -50,6 +50,7 @@ Theme.Font = {
     Default: Theme.theme_font_id++
 };
 
+//深色图样式
 export class DarkTheme extends Theme {
 
     constructor() {
@@ -62,8 +63,9 @@ export class DarkTheme extends Theme {
         this._colors[Theme.Color.NegativeDark] = "#3b0e08";
 
         this._colors[Theme.Color.Unchanged] = "#fff";
-        this._colors[Theme.Color.Background] = "#191f28";
-        this._colors[Theme.Color.Cursor] = "#aaa";
+        //this._colors[Theme.Color.Background] = "#191f28";
+        this._colors[Theme.Color.Background] = "#25292b";    //背景
+        this._colors[Theme.Color.Cursor] = "#000";
         this._colors[Theme.Color.RangeMark] = "#f9ee30";
         this._colors[Theme.Color.Indicator0] = "#ddd";
         this._colors[Theme.Color.Indicator1] = "#f9ee30";
@@ -87,12 +89,12 @@ export class DarkTheme extends Theme {
         this._colors[Theme.Color.CircleColorFill] = "#161616";
         this._colors[Theme.Color.CircleColorStroke] = "#ffffff";
         this._fonts = [];
-        this._fonts[Theme.Font.Default] = "12px Tahoma";
+        this._fonts[Theme.Font.Default] = "12px Tahoma";     // 字体
     }
 
 }
 
-
+//浅色图样式
 export class LightTheme extends Theme {
 
     constructor() {

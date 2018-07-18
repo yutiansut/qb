@@ -19,7 +19,7 @@
     font-weight bold
   //服务协议
   .help-terms
-    color $h5-color-light
+    color $h5-color-normal
     p,li
       margin-bottom 0.1rem
       font-size 0.12rem
@@ -35,7 +35,7 @@
         margin 0
   //api文档
   .help-api
-    color $normal-black-color
+    color $h5-color-normal
     span
       font-size 0.12rem
       padding 0 0.05rem
@@ -43,8 +43,8 @@
       display inline-block
       height 0.2rem
       line-height 0.2rem
-      color $negative-color
-      background $negative-opacity-color
+      color $h5-color-light
+      background $h5-foreground-weight
       border-radius(0.04rem)
     h3
       margin 0.2rem 0
@@ -65,7 +65,7 @@
           line-height .24rem
           word-break break-all
           word-wrap break-word
-          background-color $bg-dark-color
+          background-color $h5-foreground-weight
           border-radius(0.02rem)
           code
             font-family NotoSansHans-Regular
@@ -81,9 +81,9 @@
         td,th
           padding 0.1rem
           line-height 0.2rem
-          border 0.01rem solid $bg-dark-color
+          border 0.01rem solid $h5-foreground
         th
-          background-color $api-table-gray-color
+          background-color $h5-foreground-weight
           text-align center
           vertical-align middle
       ol
@@ -98,7 +98,7 @@
           padding 0 .1rem
   //费率标准
   .help-pricing
-    color $normal-black-color
+    color $h5-color-normal
     margin-top -0.2rem
     .title
       text-align left
@@ -107,15 +107,15 @@
       width 100%
       margin 0.2rem 0
       th
-        color $normal-gray-color
+        color $h5-color-light
       td,th
         vertical-align middle
         padding 0.1rem
         font-size 0.12rem
-        border 0.01rem solid $bg-dark-color
+        border 0.01rem solid $h5-foreground
         text-align center
       thead
-        background-color $api-table-gray-color
+        background-color $h5-foreground-weight
     ul
       margin-bottom 0.2rem
       li
@@ -134,7 +134,7 @@
           text-align center
   // 币种资料
   .help-coin
-    color $normal-black-color
+    color $h5-color-normal
     .title
       margin-bottom 0.2rem
       font-size 0.14rem
@@ -156,8 +156,8 @@
           .search-list
             position relative
             width 100%
-            background $normal-white-color
-            border 0.01rem solid $line-light
+            background $h5-foreground
+            border 0.01rem solid $h5-foreground
             z-index 99
             li
               height 0.35rem
@@ -165,14 +165,14 @@
               font-size 0.13rem
               line-height 0.35rem
               &:hover
-                background $bg-dark-color
+                background $h5-foreground
       button
         width 0.46rem
         font-size 0.26rem
-        color $normal-white-color
-        background-color $coinData-gray
+        color $h5-color-normal
+        background-color $h5-foreground
         &.active
-          background-color $main-color
+          background-color $h5-color-green
         &:nth-child(2)
           border-radius(0.02rem 0 0 0.02rem)
         &:nth-child(3)
@@ -186,7 +186,7 @@
         left 0
         width 0.66rem
         height 0.66rem
-        border 1px solid $line-light
+        border 1px solid $h5-border-weight
         border-radius 50%
       .left
         margin-left 1rem
@@ -198,12 +198,8 @@
           margin-bottom 0.1rem
         a:nth-child(3)
           font-size 0.14rem
-          color $negative-color
+          color $h5-color-green
           text-decoration underline
-          &:hover
-            color $negative-color-hover
-          &:active
-            color $negative-color-active
       .right
         font-size 0.14rem
         margin-top .2rem
@@ -211,7 +207,7 @@
           display block
           line-height .24rem
           b
-            color $dark-font-color
+            color $h5-color-light
             display inline-block
             width 1rem
             padding 0 .1rem
@@ -223,12 +219,8 @@
             margin 0.2rem 0
           a
             margin 0 .1rem
-            color $negative-color
+            color $h5-color-green
             text-decoration underline
-            &:hover
-              color $negative-color-hover
-            &:active
-              color $negative-color-active
       .detail
         h3
           line-height 0.24rem
@@ -246,3 +238,4 @@
             line-height 0.3rem
             margin 0 .1rem
             padding 0 .1rem
+            flex-grow 1
