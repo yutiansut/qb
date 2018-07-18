@@ -58,7 +58,6 @@ export default class AssetStore extends ExchangeStoreBase {
     };
     // websocket监听用户资产更新推送
     this.WebSocket.general.on("userAssetUpdate", data => {
-      console.log("asset-websocket", data);
       let { valuationBTC, valuationEN, valuationCN, coinList } = data;
       this.state.totalAsset.valuationBTC = valuationBTC; //总资产
       this.state.totalAsset.valuationEN = valuationEN; //换算美元
@@ -80,6 +79,24 @@ export default class AssetStore extends ExchangeStoreBase {
     // console.log(result)
     this.state.pairFees = result;
     return result;
+  }
+  // 获取我的QBT
+  async getMyQbt() {
+    let result = await this.Proxy.getMyQbt({
+      token: this.controller.token
+    });
+    if (result && result.userId) {
+      return {
+        availableCount: result.award,
+        price: result.value,
+        coinIcon: "",
+        coinId: '',
+        coinName: "QBT",
+        fullName: "QBT",
+        valuationCN: result.award.value,
+      };
+    }
+    return false;
   }
 
   // 获取总资产

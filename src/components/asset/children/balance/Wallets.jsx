@@ -58,26 +58,39 @@ export default class Wallets extends exchangeViewBase {
     } = this.state;
     let result = this.filter(wallet, value, hideLittle, hideZero);
 
-    return <div className="asset-wallet">
+    return (
+      <div className="asset-wallet">
         <div className="input-wrap">
           <div className="input">
-            <Input type="search2" value={this.state.value} onInput={value => {
+            <Input
+              type="search2"
+              value={this.state.value}
+              onInput={value => {
                 this.setState({ value });
-              }} />
+              }}
+            />
           </div>
-          <span className={`hide-little ${this.state.hideLittle ? "active" : ""}`} onClick={() => {
+          <span
+            className={`hide-little ${this.state.hideLittle ? "active" : ""}`}
+            onClick={() => {
               this.setState({ hideLittle: !this.state.hideLittle });
-            }}>
+            }}
+          >
             <i />
             {this.intl.get("asset-hideLittle")}
             <b className="pop-parent">
-              <em className='img'/>
-              <em className="pop-children uppop-children">{this.intl.get("asset-tip1")}</em>
+              <em className="img" />
+              <em className="pop-children uppop-children">
+                {this.intl.get("asset-tip1")}
+              </em>
             </b>
           </span>
-          <span className={`hide-zero ${this.state.hideZero ? "active" : ""}`} onClick={() => {
+          <span
+            className={`hide-zero ${this.state.hideZero ? "active" : ""}`}
+            onClick={() => {
               this.setState({ hideZero: !this.state.hideZero });
-            }}>
+            }}
+          >
             <i />
             {this.intl.get("asset-hideZero")}
           </span>
@@ -85,35 +98,49 @@ export default class Wallets extends exchangeViewBase {
         <table>
           <thead>
             <tr>
-              <th className="currency" onClick={() => {
+              <th
+                className="currency"
+                onClick={() => {
                   this.sort("coinName", coinName + 1);
-                }}>
-              {this.intl.get("asset-currency")}<img className="img" src={sortIcon[coinName]} alt="" />
+                }}
+              >
+                {this.intl.get("asset-currency")}
+                <img className="img" src={sortIcon[coinName]} alt="" />
               </th>
               <th className="fullname">{this.intl.get("asset-fullname")}</th>
-              <th className="avail" onClick={() => {
+              <th
+                className="avail"
+                onClick={() => {
                   this.sort("availableCount", availableCount + 1);
-                }}>
-                {this.intl.get("asset-avail")}<img className="img" src={sortIcon[availableCount]} alt="" />
+                }}
+              >
+                {this.intl.get("asset-avail")}
+                <img className="img" src={sortIcon[availableCount]} alt="" />
               </th>
-              <th className="lock" onClick={() => {
+              <th
+                className="lock"
+                onClick={() => {
                   this.sort("frozenCount", frozenCount + 1);
-                }}>
+                }}
+              >
                 {this.intl.get("asset-lock")}
                 <b className="pop-parent">
-                  <span className='img'/>
+                  <span className="img" />
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip2")}
                   </em>
                 </b>
                 <img className="img" src={sortIcon[frozenCount]} alt="" />
               </th>
-              <th className="tobtc" onClick={() => {
+              <th
+                className="tobtc"
+                onClick={() => {
                   this.sort("valuationBTC", valuationBTC + 1);
-                }}>
+                }}
+              >
                 {this.intl.get("asset-tobtc")}
                 <b className="pop-parent">
-                  <span className='img'/>
+                  <span className="img" />
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip3")}
                   </em>
@@ -130,28 +157,108 @@ export default class Wallets extends exchangeViewBase {
               frozenCount,
               valuationBTC
             }).map((item, index) => {
-              return <tr key={index}>
+              return item.coinName !== "QBT" ? (
+                <tr key={index}>
                   <td className="currency">
                     <img src={item.coinIcon} alt="" />
                     {item.coinName.toUpperCase()}
                   </td>
-                  <td className="fullname"><NavLink to={{pathname: `/help/currency/`, query: { currency: item.coinName }}}>{item.fullName}</NavLink></td>
-                <td className="avail">{Number(item.availableCount).format({number: "property" })}</td>
-                <td className="lock">{Number(item.frozenCount).format({number: "property" })}</td>
-                  <td className="tobtc">{(Number(item.valuationBTC)).format({number: "property" })}</td>
-                  <td className="handle">
-                    <Button type="base" theme="main" title={this.intl.get('deposit')} onClick={()=>{this.verify(item.coinName)}}/>
-                    <NavLink to={{ pathname: `/wallet/extract/`, query: { currency: item.coinName } }}>
-                      <Button type="base" className="withdraw" theme="main" title={this.intl.get('asset-withdraw')} />
-                    </NavLink>
-                    <NavLink to={{ pathname: `/trade`, query: { pairName: item.coinName } }}>
-                      <Button type="base" theme="main" title={this.intl.get('asset-trade')} />
+                  <td className="fullname">
+                    <NavLink
+                      to={{
+                        pathname: `/help/currency/`,
+                        query: { currency: item.coinName }
+                      }}
+                    >
+                      {item.fullName}
                     </NavLink>
                   </td>
-                </tr>;
+                  <td className="avail">
+                    {Number(item.availableCount).format({ number: "property" })}
+                  </td>
+                  <td className="lock">
+                    {Number(item.frozenCount).format({ number: "property" })}
+                  </td>
+                  <td className="tobtc">
+                    {Number(item.valuationBTC).format({ number: "property" })}
+                  </td>
+                  <td className="handle">
+                    <Button
+                      type="base"
+                      theme="main"
+                      title={this.intl.get("deposit")}
+                      onClick={() => {
+                        this.verify(item.coinName);
+                      }}
+                    />
+                    <NavLink
+                      to={{
+                        pathname: `/wallet/extract/`,
+                        query: { currency: item.coinName }
+                      }}
+                    >
+                      <Button
+                        type="base"
+                        className="withdraw"
+                        theme="main"
+                        title={this.intl.get("asset-withdraw")}
+                      />
+                    </NavLink>
+                    <NavLink
+                      to={{
+                        pathname: `/trade`,
+                        query: { pairName: item.coinName }
+                      }}
+                    >
+                      <Button
+                        type="base"
+                        theme="main"
+                        title={this.intl.get("asset-trade")}
+                      />
+                    </NavLink>
+                  </td>
+                </tr>
+              ) : (
+                <tr key={index}>
+                  <td className="currency">
+                    <img src={item.coinIcon} alt="" />
+                    {item.coinName.toUpperCase()}
+                  </td>
+                  <td className="fullname">
+                    <a>{item.fullName}</a>
+                  </td>
+                  <td className="avail">
+                    {Number(item.availableCount).format({ number: "property" })}
+                  </td>
+                  <td className="lock tac">{"—"}</td>
+                  <td className="tobtc tac">{"—"}</td>
+                  <td className="handle">
+                    <Button
+                      type="base"
+                      theme="main"
+                      disable={true}
+                      title={this.intl.get("deposit")}
+                    />
+                    <Button
+                      type="base"
+                      className="withdraw"
+                      theme="main"
+                      disable={true}
+                      title={this.intl.get("asset-withdraw")}
+                    />
+                    <Button
+                      type="base"
+                      theme="main"
+                      disable={true}
+                      title={this.intl.get("asset-trade")}
+                    />
+                  </td>
+                </tr>
+              );
             })}
           </tbody>
         </table>
-      </div>;
+      </div>
+    );
   }
 }

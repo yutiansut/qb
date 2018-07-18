@@ -10,16 +10,26 @@ export default class Balance extends exchangeViewBase {
     let { controller } = props;
     //绑定view
     controller.setView(this)
-    this.state = {}
+    this.state = {
+      Qbt:null
+    }
     let { totalAsset, wallet } = controller.initState;
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, { totalAsset, wallet });
     //绑定方法
     this.getAssets = controller.getAssets.bind(controller)
+    // 获取Qbt
+    this.getQbt = controller.getMyQbt.bind(controller);
   }
 
   async componentWillMount() {
+    let qbt = await this.getQbt();
+    console.log(qbt)
     await this.getAssets();
+    if (qbt && this.state.wallet) {
+      this.state.wallet.unshift(qbt);
+      this.setState({ wallet: this.state.wallet})
+    }
   }
 
   render() {

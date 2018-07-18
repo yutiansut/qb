@@ -94,6 +94,8 @@ export default {
     { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
     // 获取全部币种列表
     { name: 'getAllCoinList', data: { url: '/v1/common/', method: 'post' }, action: 'getAllCoinList', actionBack: 'getAllCoinListRes' },
+    // 获取我的QBT
+    { name: 'getMyQbt', data: { url: '/v1/user/', method: 'post' }, action: 'getMyQbt', actionBack: 'getMyQbtRes', needToken: true  },
   ],
   userOrder: [
     //当前订单

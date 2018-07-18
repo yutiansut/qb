@@ -100,7 +100,7 @@ export default class AssetController extends ExchangeControllerBase {
   async getWalletList() {
     this.store.state.walletList["BTC"] === undefined &&
       (await this.store.getWalletList());
-    this.view.setState({
+    await this.view.setState({
       walletList: this.store.state.walletList
     });
   }
@@ -430,7 +430,12 @@ export default class AssetController extends ExchangeControllerBase {
   //   }
   //   return this.store.state.wallet.filter(v => v.coinName === coin)[0];
   // }
-
+  // 获取我的QBT
+  async getMyQbt(){
+    let result = await this.store.getMyQbt();
+    if (result) this.view.setState({Qbt:result}) ;
+    return result;
+  }
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
     let curPair =

@@ -100,17 +100,18 @@ export default class Extract extends exchangeViewBase {
         .getQuery("currency")
         .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
     currency && this.setState({ currency: currency, value: currency });
-    await this.getWalletList();
+    await this.getWalletList()
     await this.getExtract();
     this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getTradePair(currency || this.state.currency);
     this.getCurrencyAmount(currency || this.state.currency);
     this.getUserInfo();
+    let coin = currency || "BTC";
     this.getHistory({
       page: 0,
       pageSize: 10,
-      coinId: -1,
-      coinName: -1,
+      coinId: this.state.walletList[coin.toUpperCase()],
+      coinName: coin.toUpperCase(),
       orderType: 2,
       orderStatus: -1,
       startTime: -1,
@@ -170,6 +171,16 @@ export default class Extract extends exchangeViewBase {
         }
       );
       this.getCurrencyAmount(nextState.currency);
+      this.getHistory({
+        page: this.state.page - 1,
+        pageSize: 10,
+        coinId: this.state.walletList[nextState.currency],
+        coinName: nextState.currency,
+        orderType: 2,
+        orderStatus: -1,
+        startTime: -1,
+        endTime: -1
+      });
     }
     // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
   }
@@ -514,8 +525,8 @@ export default class Extract extends exchangeViewBase {
                     this.getHistory({
                       page: page - 1,
                       pageSize: 10,
-                      coinId: -1,
-                      coinName: -1,
+                      coinId: this.state.walletList[this.state.currency],
+                      coinName: this.state.currency,
                       orderType: 2,
                       orderStatus: -1,
                       startTime: -1,

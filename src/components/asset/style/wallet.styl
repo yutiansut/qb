@@ -103,7 +103,7 @@
               &:hover
                 color $main-color
                 text-decoration underline
-            &.lock
+            &lock, &.to
               .pop-parent
                 position relative
                 top 0.01rem
@@ -154,7 +154,8 @@
             color $normal-font-color
             letter-spacing 0.0006rem
             text-align justify
-            // border-bottom 0.01rem solid $line-light
+            &.lock.tac, &.tobtc.tac
+              padding-left 0.3rem
             img
               position relative
               top 0.02rem
@@ -183,3 +184,6 @@
                   color $normal-white-color
                 &.withdraw
                   width 0.7rem
+                &.disable:hover
+                  background-color $bg-btn-color
+                  color $main-color
