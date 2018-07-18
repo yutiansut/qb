@@ -1,9 +1,31 @@
 @import "../../../common/css/variable.styl"
 
+// h5 全局样式
 .route-mb
   padding-top .5rem
   background-color $h5-background
   min-height 6.4rem
+  input
+    background none
+    color $h5-color-normal
+    font-size .12rem
+    border .01rem solid $h5-border-light
+    &:hover, &:focus, &:active
+      border-color $h5-color-blue
+    &::placeholder
+      color $h5-color-light
+      font-size .12rem
+  a.default.main, button.default.main
+    border none
+    background  $h5-color-blue
+    color $normal-white-color
+    border-radius .02rem
+    opacity 1
+    &:hover, &:focus, &:active
+      opacity 0.6
+    &.disable
+      opacity 0.6
+
 .header-nav-mb
   position fixed
   width 100%
@@ -88,4 +110,6 @@
     bottom: 0;
     left: 0;
     right: 0;
+
+
 
