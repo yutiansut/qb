@@ -96,6 +96,10 @@ export default class userOrder extends ExchangeViewBase {
                 return (
                     <td key={index}>
                       {v.unit && (`${v.name && v.name.toUpperCase()}(${v.unit === 'price' && (this.state.unitsType && this.state.unitsType.toUpperCase() || this.state.market && this.state.market.toUpperCase()) || this.state.coin && this.state.coin.toUpperCase()})`) || v.name && v.name.toUpperCase()}
+                      {index === 2 && <b className="pop-parent">
+                        <img src={this.$imagesMap.$yiwen}/>
+                        <em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>
+                      </b>}
                     </td>
                 )
               })}
@@ -138,6 +142,10 @@ export default class userOrder extends ExchangeViewBase {
                 return (
                     <td key={index}>
                       {v.unit && (`${v.name && v.name.toUpperCase()}(${v.unit === 'price' && (this.state.unitsType && this.state.unitsType.toUpperCase() || this.state.market && this.state.market.toUpperCase()) || this.state.coin && this.state.coin.toUpperCase()})`) || v.name && v.name.toUpperCase()}
+                      {(index === 2 || index === 6) && <b className="pop-parent">
+                        <img src={this.$imagesMap.$yiwen}/>
+                        <em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>
+                      </b>}
                     </td>
                 )
               })}

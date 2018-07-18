@@ -179,10 +179,10 @@ export default function en(state) {
     "home-advantage-h2": "Top-class Security and Risk Control",
     "home-advantage-h3": "High Stability",
     "home-advantage-h4": "Muti-platform Trading Support",
-    "home-advantage-p1": "Multiple signatures, off-line signatures, and cold wallet storage",
+    "home-advantage-p1": "Fast as a financial-market-level system, with processing speed of one million trading amount per second",
     "home-advantage-p2": "Multiple signatures, off-line signatures, and cold wallet storage",
-    "home-advantage-p3": "Multiple signatures, off-line signatures, and cold wallet storage",
-    "home-advantage-p4": "Multiple signatures, off-line signatures, and cold wallet storage"
+    "home-advantage-p3": "Multi-network integration ensures that the server cluster is available 24*7",
+    "home-advantage-p4": "IOS, Android and PC terminal access"
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",
@@ -351,7 +351,9 @@ export default function en(state) {
     "deal-market-buy":'Buy for market best price',
     "deal-market-sell":'Sell for market best price',
     'deal-market-msg': 'Market price, no stationary money',
-    'deal-identify': 'ID verification'
+    'deal-identify': 'ID verification',
+    "deal-digital-tip": 'The price shall be subject to the actual price of the digital currency',
+    "deal-price-tip": 'Final trasaction price shall be subject to the actual price of the  digital currency'
   };
   const user = {
     "user-score": "My VIP Status",

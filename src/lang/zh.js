@@ -176,12 +176,12 @@ export default function zh(state) {
     "tip-cancel": '取 消',
     "home-advantage-h1": "金融级别交易系统",
     "home-advantage-h2": "顶级安全与风控",
-    "home-advantage-h3": "极高安全性",
+    "home-advantage-h3": "极高稳定性",
     "home-advantage-h4": "全平台交易支持",
-    "home-advantage-p1": "多重签名、离线签名、及冷钱包存储",
+    "home-advantage-p1": "证券级别算法，每秒处理100万笔交易",
     "home-advantage-p2": "多重签名、离线签名、及冷钱包存储",
-    "home-advantage-p3": "多重签名、离线签名、及冷钱包存储",
-    "home-advantage-p4": "多重签名、离线签名、及冷钱包存储"
+    "home-advantage-p3": "多网融合确保服务器集群24小时不间断服务",
+    "home-advantage-p4": "支持iOS、Android、PC等终端接入"
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -349,8 +349,9 @@ export default function zh(state) {
     "deal-market-buy":'以市场最优价格买入',
     "deal-market-sell":'以市场最优价格卖出',
     'deal-market-msg': '市价交易,无固定金额',
-    'deal-identify': '身份验证'
-
+    'deal-identify': '身份验证',
+    "deal-digital-tip": '此价格为挂单时的CNY/USD计价，只提供估值参考，以实际数字币价格为准',
+    "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考'
   };
   const user = {
     "user-score": "我的积分",

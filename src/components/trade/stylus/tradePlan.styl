@@ -18,6 +18,22 @@
 		.entrust-active
 			color $normal-white-color
 			border-bottom .02rem solid $normal-white-color
+		.pop-parent
+			position relative
+			height .25rem
+			.pop-children
+				position absolute
+				top 50%
+				left 100%
+				transform translate(0.2rem, -50%)
+				min-width 136px
+				width 1.6rem
+				height auto
+				padding .03rem
+				font-size .1rem
+				line-height .14rem
+				text-align justify
+				z-index 99
 	.trade-deal-exchanged
 		width 100%
 		display flex
