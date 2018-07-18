@@ -19,7 +19,8 @@ export default class AssetStore extends ExchangeStoreBase {
         valuationEN: 0, //换算美元
         valuationCN: 0, //换算人民币
         totalQuota: 0, //24小时提现额度
-        availableQuota: 0 //可用额度
+        availableQuota: 0, //可用额度
+        usedQuota: 0 //已用额度
       },
       wallet: [],
       //币种列表
@@ -31,7 +32,8 @@ export default class AssetStore extends ExchangeStoreBase {
         totalCount: 0, //总额度
         frozenCount: 0, //冻结额度
         totalQuota: 0, //24H提现额度
-        availableQuota: 0 //可用提现额度
+        availableQuota: 0, //可用提现额度
+        usedQuota: 0 //已用额度
       },
       //提币信息
       walletExtract: {
@@ -99,7 +101,7 @@ export default class AssetStore extends ExchangeStoreBase {
       });
       this.state.walletList = obj;
     }
-    let { totalQuota, availableQuota } = await this.Proxy.balance({
+    let { totalQuota, availableQuota, usedQuota } = await this.Proxy.balance({
       userId: this.controller.userId,
       coinId: this.state.walletList["BTC"],
       coinName: "btc",
@@ -110,7 +112,8 @@ export default class AssetStore extends ExchangeStoreBase {
       valuationEN,
       valuationCN,
       totalQuota,
-      availableQuota
+      availableQuota,
+      usedQuota
     };
   }
   // 获取walletList

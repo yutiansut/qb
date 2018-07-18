@@ -44,7 +44,7 @@ export default class TotalAsset extends exchangeViewBase {
               {this.intl.get("asset-limitApply")}
             </NavLink>}
             <span>{this.intl.get("asset-usedAsset")}:</span>
-            <b>{Number(totalAsset.totalQuota.minus(totalAsset.availableQuota))} BTC</b>
+            <b>{Number(totalAsset.usedQuota)} BTC</b>
         </div>
       </div>;
   }

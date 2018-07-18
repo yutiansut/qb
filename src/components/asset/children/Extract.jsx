@@ -185,7 +185,8 @@ export default class Extract extends exchangeViewBase {
       frozenCount,
       availableCount,
       totalQuota,
-      availableQuota
+      availableQuota,
+      usedQuota
     } = this.state.currencyAmount;
     let currency = this.state.currency,
       { fee, minerFee, extractAddr } = this.state.walletExtract,
@@ -309,9 +310,7 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{Number(
-                  totalQuota.minus(availableQuota)
-                )}/{totalQuota} BTC
+                {this.intl.get("asset-24hQuota")}：{Number(usedQuota)}/{totalQuota} BTC
                 {
                   totalQuota > 2 ? <span className="apply">{this.intl.get("asset-limitApply")}</span> :
                   <NavLink to="/wuser/identity">
@@ -511,7 +510,6 @@ export default class Extract extends exchangeViewBase {
                   pageSize={10}
                   showTotal={true}
                   onChange={page => {
-                    console.log(page);
                     this.setState({ page });
                     this.getHistory({
                       page: page - 1,
