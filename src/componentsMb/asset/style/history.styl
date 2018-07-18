@@ -45,15 +45,14 @@
         color $h5-color-green
         border-color $h5-color-green
   .hist-li
-    background $normal-white-color
+    background $h5-foreground
     margin .12rem
     padding .12rem
     border-radius .02rem
-    box-shadow: 0 .01rem .03rem 0 $h5-shadow-light
     .d1
       line-height .2rem
       padding-bottom .07rem
-      border-bottom .01rem solid $h5-border-light
+      border-bottom .01rem solid $h5-border-weight
       label
         font-size .14rem
         color $h5-color-weight
@@ -65,9 +64,9 @@
         font-size .14rem
         float right
         &.success
-          color $h5-active-blue
+          color $h5-color-green
         &.fail
-          color $h5-active-yellow
+          color $h5-color-orange
     .d2
       margin-top .1rem
       display flex
@@ -80,6 +79,7 @@
           color $h5-color-light
           line-height .2rem
           margin-bottom .08rem
+          font-size .12rem
         i
           color $h5-color-normal
           font-size .14rem

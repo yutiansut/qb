@@ -2,7 +2,6 @@
 .user-safe-center
   width 100%
   height 100vh
-  background-color #f6f8fa
   .pass-wrap
     .pass-info
       width 100%
@@ -18,13 +17,15 @@
   .safe-center-header
     position relative
     width 100%
-    padding .12rem .12rem
-    background-color #009af6
+    height .45rem
+    line-height .45rem
+    background-color $h5-foreground
+    border-bottom .01rem solid $h5-border-weight
+    padding 0 .12rem
     .back
       a
-        color $normal-white-color
+        color $h5-color-weight
         font-size .14rem
-        line-height .2rem
         vertical-align middle
       img
         height .16rem
@@ -33,7 +34,7 @@
       span 
         font-size .14rem
         line-height .2rem
-        color #FFFFFF
+        color $h5-color-weight
         vertical-align middle
     .name
       position absolute
@@ -42,14 +43,14 @@
       transform translateX(-50%) translateY(-50%)
       font-size .18rem
       line-height .20rem
-      color #FFFFFF
+      color $h5-color-weight
   .safe-center-container
     padding 0 .12rem
     font-size .15rem
     line-height .21rem
-    background-color #ffffff
+    background-color $h5-foreground
     .item
-      border-bottom .01rem solid #D8DAE1
+      border-bottom .01rem solid $h5-border-weight
       line-height .45rem
       display block
       .fl
@@ -76,18 +77,17 @@
       position fixed
       bottom 0
       left 0
-      background-color #f6f8fa
-      button 
-        width 100%
+      background-color $h5-foreground
+      a
+        display block
         font-size .18rem
-        line-height .25rem
-        padding .1rem
-        border-bottom .02rem solid #D8DAE1
-        background-color #ffffff
-      button:nth-child(3)
-        border-bottom 0
-        margin-bottom .12rem
-      button:nth-child(4)
+        line-height .45rem
+        border-bottom .01rem solid $h5-border-weight
+        color $h5-color-normal
+        text-align center
+      a:nth-child(3)
+        border-bottom .08rem solid $h5-background
+      a:nth-child(4)
         border-bottom 0
 
 //验证资金密码弹窗
@@ -104,33 +104,39 @@
     left 50%
     transform translateX(-50%) translateY(-50%)
     width 3.3rem
-    padding .2rem .1rem
-    background $normal-white-color
+    padding .2rem .12rem .6rem .12rem
+    background $h5-foreground
+    border-radius .02rem
+    overflow hidden
     h1
       margin-bottom .2rem
       span
         float left
         font-size .16rem
+        color $h5-color-weight
       img
-        width .1rem
-        height .1rem
+        width .14rem
+        height .14rem
         margin-top -.1rem
         float right
-    p
-      margin-bottom .1rem
-      font-size .12rem
-      color $negative-color
     .base-input-wrap
       width 100%
-      height .3rem
-      margin-bottom .2rem
+      margin-bottom .16rem
       input
         width 100%
-        height .3rem
+        height .4rem
+        background $h5-background
     button
-      float right
-      background $main-color
-      color $normal-white-color
+      width 100%
+      background $h5-color-green
+      color $h5-color-weight
+      height .4rem
+      border-radius 0 !important
+      position absolute
+      left 0
+      right 0
+      bottom 0
+
 
 
 

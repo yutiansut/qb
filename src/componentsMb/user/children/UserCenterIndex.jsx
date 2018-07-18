@@ -34,7 +34,7 @@ export default class UserCenterIndex extends exchangeViewBase {
       <div className="user-center-index">
         <div className="user-center-header">
           <div>
-            <img src="/static/mobile/user/icon_wd_head@3x.png"/>
+            <img src="/static/mobile/header/icon_wode_head@2x.png"/>
             <span>{controller.userName}</span>
           </div>
         </div>
@@ -42,36 +42,41 @@ export default class UserCenterIndex extends exchangeViewBase {
           <ul className="list-section">
             <li className="list-item clearfix">
               <div className="fl">
-                <img src="../../../static/mobile/user/icon_wd_sfrz@3x.png"/>
+                <img src="/static/mobile/user/icon_wd_sfrz@3x.png"/>
                 <span>{this.intl.get("header-idVerify")}</span>
               </div>
               <div className="fr">
                 <span>{this.verifyState[userAuth.state]}</span>
               </div>
             </li>
-            <NavLink to={`${url}/safe`}>
-              <li className="list-item clearfix">
-                <div className="fl">
-                  <img src="../../../static/mobile/user/icon_wd_aqzx@3x.png"/>
-                  <span>{this.intl.get("header-security")}</span>
-                </div>
-                <div className="fr">
-                  <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
-                </div>
-              </li>
+            <NavLink className="list-item clearfix" to={`${url}/safe`}>
+              <div className="fl">
+                <img src="/static/mobile/user/icon_wd_aqzx@3x.png"/>
+                <span>{this.intl.get("header-security")}</span>
+              </div>
+              <div className="fr">
+                <img src="/static/mobile/user/icon_qianjb@3x.png"/>
+              </div>
             </NavLink>
           </ul>
           <ul className="list-section">
-            <NavLink to={`${url}/aboutUs`}>
-              <li className="list-item clearfix">
-                <div className="fl">
-                  <img src="../../../static/mobile/user/icon_wd_gywm@3x.png"/>
-                  <span>{this.intl.get("notice-about")}</span>
-                </div>
-                <div className="fr">
-                  <img src="../../../static/mobile/user/icon_qianjb@3x.png"/>
-                </div>
-              </li>
+            <NavLink to={`${url}/aboutUs`} className="list-item clearfix">
+              <div className="fl">
+                <img src="/static/mobile/user/icon_wd_gywm@3x.png"/>
+                <span>{this.intl.get("notice-about")}</span>
+              </div>
+              <div className="fr">
+                <img src="/static/mobile/user/icon_qianjb@3x.png"/>
+              </div>
+            </NavLink>
+            <NavLink to={"/mhelp/terms"} className="list-item clearfix">
+              <div className="fl">
+                  <img src="/static/mobile/user/icon_wd_yhxy@2x.png"/>
+                  <span>{this.intl.get("login-readUser")}</span>
+              </div>
+              <div className="fr">
+                  <img src="/static/mobile/user/icon_qianjb@3x.png"/>
+              </div>
             </NavLink>
           </ul>
         </div>

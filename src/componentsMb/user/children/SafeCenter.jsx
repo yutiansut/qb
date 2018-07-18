@@ -110,7 +110,7 @@ export default class UserCenterIndex extends exchangeViewBase {
             <span className="fl">{this.intl.get("user-needFundPwd")}</span>
             <span className="fr">{this.fundPassArr[this.state.fundPassType]}</span>
           </a>
-          <a className="item clearfix">
+          <a className="item clearfix two-step">
               <span className="fl">{this.intl.get("twoStep")}</span>
               <img className="fr" src="/static/mobile/user/icon_qianjb@3x.png"/>
           </a>
@@ -118,7 +118,7 @@ export default class UserCenterIndex extends exchangeViewBase {
         {this.state.setFundPass && <div className="need-fund-pass">
           <div className="select-section">
             {this.fundPassArr.map((v, index) =>
-              <button key={index} onClick={value => this.fundPwdSpace(v, index)}>{v}</button>
+              <a key={index} onClick={value => this.fundPwdSpace(v, index)}>{v}</a>
             )}
           </div>
         </div>}
@@ -129,7 +129,6 @@ export default class UserCenterIndex extends exchangeViewBase {
               <span>{this.intl.get("fundPass")}</span>
               <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.setState({ verifyFund: false });}}/>
             </h1>
-            <p>{this.intl.get("deal-inputpwdplease")}</p>
             <Input oriType="password" placeholder={this.intl.get("asset-inputFundPassword")} value={this.state.fundValue}  onInput={value => this.changeFundValue(value)}/>
             <Button title={this.intl.get("ok")} onClick={() => this.state.fundValue && this.setFundPwdSpace(this.state.fundPassType, this.state.fundValue)}/>
           </div>

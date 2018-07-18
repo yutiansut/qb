@@ -2,22 +2,21 @@
 .set-pass-wrap
   width 100%
   height 100vh
-  background-color #f6f8fa
   em
-    position absolute
-    top .68rem
+    display block
     font-size .12rem
-    color $negative-color
-    transform scale(.9)
+    color $h5-color-red
+    margin-top .08rem
   .safe-center-header
     position relative3
     width 100%
     padding .12rem .12rem
-    background-color #009af6
+    background-color $h5-foreground
+    border-bottom .01rem solid $h5-border-weight
     .back
       position relative
       a
-        color $normal-white-color
+        color $h5-color-weight
         font-size .14rem
         line-height .2rem
         vertical-align middle
@@ -29,65 +28,70 @@
         position absolute
         left 50%
         transform translateX(-50%)
-        font-size .14rem
+        font-size .18rem
         line-height .2rem
-        color #FFFFFF
+        color $h5-color-weight
         vertical-align middle
         white-space nowrap
   .hide
     display none
   .pass-info
     width 100%
-    //height 5.55rem
-    padding .24rem .3rem 0
-    //background $normal-white-color
+    padding .12rem
     margin-top .2rem
     ul
       li
         width 100%
         position relative
-        //margin-bottom .44rem
         margin-bottom .25rem
         p
           margin-bottom .1rem
+          font-size .14rem
+          color $h5-color-normal
         input
           width 100%
           height .4rem
-          //margin-right .2rem
           padding-left .1rem
-          //background $main-bg-active
-          //border 1px solid $line-light
-          border-radius (.02rem 0 0 .02rem)
-          vertical-align bottom
+          border-radius .02rem
         .btn
           width 35%
           height .4rem
           font-size .13rem
-          color $normal-white-color
-          background $main-color
-          border-radius (0 .02rem .02rem 0)
-          border none
         .picture-btn
-          background $normal-gray-color
-        .set-btn
-          width 1rem
-          margin-left 2rem
-          opacity .5
-          border-radius (.02rem)
-        .can-click
-          opacity 1
+          border .01rem solid transparent
+          border-left none
+          height .4rem
+          background $h5-foreground-weight
+          border-radius 0
+        .verify-btn
+          border .01rem solid transparent
+          border-left none
+          height .4rem
+          border-radius 0
+          background $h5-foreground-weight
+          color $h5-color-light
         .pass-btn-group
+          display flex
           .base-input-wrap
-            width 65%
-            float left
-          .btn
-            float left
+            flex-grow 1
+            input
+              border-right 0
+              border-radius .02rem 0 0 .02rem
+          &:hover .picture-btn,
+          &:active .picture-btn,
+          &:focus .picture-btn,
+          &:hover .verify-btn,
+          &:active .verify-btn,
+          &:focus .verify-btn
+            border-color $h5-color-red
+            border-left none
 
-      .long-li
-        input
+      .submit-li
+        margin-top .36rem
+        .set-btn
           width 100%
-          border-radius (.02rem)
-      .remind-pass-li
-        fz11()
-        color $negative-color
+          border-radius .02rem
+          opacity 0.6
+          .can-click
+            opacity 1
 
