@@ -305,10 +305,10 @@ export default class History extends exchangeViewBase {
                           </i>
                         </td>
                         <td className="send pop-parent">
-                          <i>{postAddress}</i>
-                          <b className="pop-children uppop-children">
+                            <i>{"—"}</i>
+                          {/* <b className="pop-children uppop-children">
                             {postAddress}
-                          </b>
+                          </b> */}
                         </td>
                         <td className="receive pop-parent">
                           <i>{receiveAddress}</i>
@@ -338,19 +338,6 @@ export default class History extends exchangeViewBase {
                           <span>{this.staticData.status[orderStatus]}</span>
                         </td>
                         <td className="fee">{fee || "—"}</td>
-                        {/* <td className="option">
-                          {orderStatus === 0 ? (
-                            <a
-                              onClick={() => {
-                                this.cancelOreder(orderId);
-                              }}
-                            >
-                              {this.intl.get("cancel")}
-                            </a>
-                          ) : (
-                            "—"
-                          )}
-                        </td> */}
                       </tr>
                     )
                   )}

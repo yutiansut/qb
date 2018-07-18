@@ -270,11 +270,20 @@ export default class App extends Component {
                     key={i}
                     render={props =>
                       !item.auth ? (
-                        <item.component {...props} />
+                        ["/wlogin", "/wlogin/:uid", '/wfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
+                          <Redirect to={{ pathname: "/whome" }} />
+                        ) : (
+                          <item.component {...props} />
+                        )
                       ) : userController.Storage.userToken.get() ? (
                         <item.component {...props} />
                       ) : (
-                        <Redirect to={{pathname:"/wlogin", state:{from:props.location}}} />
+                        <Redirect
+                          to={{
+                            pathname: "/wlogin",
+                            state: { from: props.location }
+                          }}
+                        />
                       )
                     }
                   />

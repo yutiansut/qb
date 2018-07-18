@@ -490,7 +490,7 @@ export default class Extract extends exchangeViewBase {
                             <i>-{count}</i>
                           </td>
                           <td className="send">
-                            <i>{postAddress}</i>
+                            <i>{"—"}</i>
                           </td>
                           <td className="receive">
                             <i>{receiveAddress}</i>

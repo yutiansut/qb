@@ -246,21 +246,18 @@ export default class AssetController extends ExchangeControllerBase {
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
     // console.log('提交订单', result)
-    if (result) {
-      let o = {
-        orderTip: true,
-        orderTipContent: result.errCode === 'CWS_ERROR' ? this.view.intl.get('asset-withdrawal-failed') : result.msg
-      }
-      if (result.errCode === 'NO_VERIFIED') o.orderTipContent = this.view.intl.get("asset-auth-tip");
+    if (result && result.errCode) {
+      let o = { orderTip: true, orderTipContent: result.errCode === "CWS_ERROR" ? this.view.intl.get("asset-withdrawal-failed") : result.msg };
+      if (result.errCode === "NO_VERIFIED") o.orderTipContent = this.view.intl.get("asset-auth-tip");
       this.view.setState(o);
       // 错误处理
       return;
     }
-    if (result === null) {
+    if (result && result.quota !== undefined) {
       this.view.setState({
         tip: true,
         tipSuccess: true,
-        tipContent: this.view.intl.get("optionSuccess"),
+        tipContent: !result.quota ? this.view.intl.get("optionSuccess") : this.view.intl.get('asset-wait-auditing'),
         showTwoVerify: false,
         extractAmount: "", //提现数量
         password: ""

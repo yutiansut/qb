@@ -1,6 +1,7 @@
 @import "../../../common/css/variable.styl"
 @import "../../../common/css/base.styl"
 .help-wrap
+  background-color $normal-black-color
   .route
     padding-top 0.5rem
   h3
@@ -179,8 +180,6 @@
       font-size 0.14rem
       text-align left
       a
-        color $main-color
-        background-color $normal-white-color
         cursor pointer
         &:hover
           color $main-color-hover
@@ -242,12 +241,12 @@
         height 0.66rem
       .info
         margin-bottom 0.5rem
-        color $main-color
+        color $normal-font-color
         .left
           float left
           min-width 2.02rem
           padding-right 0.32rem
-          border-right 1px solid $line-light
+          border-right 1px solid $line-dark
           p:nth-child(1)
             font-size 0.18rem
             margin-bottom 0.2rem
@@ -256,13 +255,13 @@
             margin-bottom 0.2rem
           a:nth-child(3)
             font-size 0.14rem
-            color $negative-color
+            color $main-color
             text-decoration underline
             cursor pointer
             &:hover
-              color $negative-color-hover
+              color $main-color-hover
             &:active
-              color $negative-color-active
+              color $main-color-active
         .right
           float left
           font-size 0.14rem
@@ -284,13 +283,13 @@
               width 0.72rem
             a
               margin-right 0.16rem
-              color $negative-color
+              color $main-color
               text-decoration underline
               cursor pointer
               &:hover
-                color $negative-color-hover
+                color $main-color-hover
               &:active
-                color $negative-color-active
+                color $main-color-active
       .detail
         p
           width 8.7rem

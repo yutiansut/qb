@@ -145,7 +145,7 @@ export default class Login extends exchangeViewBase {
 
 
   componentWillMount() {
-    this.props.controller.Storage.userToken.get() && (this.props.history.push({pathname:"/whome"}));
+    // this.props.controller.Storage.userToken.get() && (this.props.history.push({pathname:"/whome"}));
   }
 
   componentDidMount() {

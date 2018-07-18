@@ -172,7 +172,11 @@ export default class App extends Component {
                     key={i}
                     render={props =>
                       !item.auth ? (
-                        <item.component {...props} />
+                        ["/mlogin", "/mlogin/:uid", '/mfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
+                          <Redirect to={{ pathname: "/mhome" }} />
+                        ) : (
+                            <item.component {...props} />
+                          )
                       ) : userController.Storage.userToken.get() ? (
                         <item.component {...props} />
                       ) : (

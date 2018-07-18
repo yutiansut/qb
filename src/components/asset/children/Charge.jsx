@@ -282,7 +282,7 @@ export default class Charge extends exchangeViewBase {
                           <td>{orderTime}</td>
                           <td>{coinName}</td>
                           <td>{count}</td>
-                          <td>{postAddress}</td>
+                          <td>{"—"}</td>
                           <td>{receiveAddress}</td>
                           <td>
                             <a
