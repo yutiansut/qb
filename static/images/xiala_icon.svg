@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="5px" viewBox="0 0 9 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>pull_down_chose</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-806.000000, -301.000000)" fill="#2BB789">
+            <g id="资产管理" transform="translate(99.000000, 290.000000)">
+                <path d="M712.172673,11.6115207 L715.086066,14.2600599 C715.494724,14.6315669 715.52484,15.2640152 715.153333,15.6726728 C714.963811,15.8811472 714.695138,16 714.413393,16 L708.586607,16 C708.034322,16 707.586607,15.5522847 707.586607,15 C707.586607,14.718255 707.70546,14.4495821 707.913934,14.2600599 L710.827327,11.6115207 C711.208748,11.2647742 711.791252,11.2647742 712.172673,11.6115207 Z" id="pull_down_chose" transform="translate(711.500000, 13.500000) scale(1, -1) translate(-711.500000, -13.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

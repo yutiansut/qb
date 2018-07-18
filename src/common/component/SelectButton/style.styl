@@ -9,8 +9,8 @@
     height 0.4rem
     position relative
     font-size 0.16rem
-    color $normal-font-color
-    background $normal-white-color
+    color $main-color
+    background $dark-font-color
     border none
     letter-spacing 0.0006rem
     text-align justify
@@ -24,11 +24,11 @@
       width .09rem
       height .09rem
       opacity 0.6
-      border .002rem solid $normal-black-color
+      border .002rem solid $normal-font-color
       border-bottom none
       border-right none
       _rotate(45deg)
-    &.hide::after
+    &.hidden::after
       position absolute
       content ''
       bottom .15rem
@@ -36,7 +36,7 @@
       width .09rem
       height .09rem
       opacity 0.6
-      border .002rem solid $normal-black-color
+      border .002rem solid $normal-font-color
       border-bottom none
       border-right none
       _rotate(-135deg)
@@ -45,7 +45,7 @@
     position relative
     padding-left .16rem
     font-size .14rem
-    color $normal-black-color
+    color $normal-font-color
     letter-spacing 0
     text-align left
     line-height .36rem
@@ -85,7 +85,6 @@
       margin-right -0.055rem
   .trade
     position relative
-    //width 0.57rem
     height 0.16rem
     min-width 63px
     min-height 16px
@@ -152,7 +151,7 @@
       &:hover
         color $main-color
       &.active
-        color $normal-black-color
+        color $normal-font-color
         background $main-color
   .trade-list
     position absolute
