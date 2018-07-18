@@ -30,6 +30,7 @@ export default class userOrder extends ExchangeViewBase {
         4: this.intl.get('reseting'),
         5: this.intl.get('overed'),
         6: this.intl.get('partDeal'),
+        7: this.intl.get('partDeal'),
       },
       orderInfoHead: [
         // {name: this.intl.get('order-buy')}, {name: this.intl.get('order-sell')},
@@ -115,8 +116,8 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)}</td>
                     <td>{v.count}</td>
                     <td>{Number(Number(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)).multi(v.count)).format({number:'digital'})}</td>
-                    <td>{v.dealDoneCount}</td>
-                    <td>{v.undealCount || (v.count - v.dealDoneCount)}</td>
+                    <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.price))}</td>
+                    <td>{v.undealCount || Number(v.count.minus(v.dealDoneCount)).formatFixNumberForAmount(Number(v.price))}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                     <td onClick={this.cancelOrder.bind(this, 0, v)} style={{cursor: 'pointer'}}>{this.intl.get('cancel')}</td>
                   </tr>
@@ -134,6 +135,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
+            <a href="/worder/history" style={{color: 'rgba(255,255,255,.5)', fontSize: '.12rem'}}>{this.intl.get('seeMore')}</a>
           </div>
           <table className='trade-current-table'>
             <thead>

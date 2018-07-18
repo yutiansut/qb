@@ -50,7 +50,7 @@ export default class extends ExchangeViewBase {
     return <div>
         <div className="trade-recent-title">
           <h3>{this.intl.get("order-recent")}</h3>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" ,height : '.24rem', alignItems: 'center'}}>
             {this.state.recentItem.map((v, index) => {
               return <div className={`recent-item recent-item-${this.state.recentItemSelect === v.type ? "active" : ""}`} key={index} onClick={this.changeRecentItem.bind(this, v)}>
                   {v.name}

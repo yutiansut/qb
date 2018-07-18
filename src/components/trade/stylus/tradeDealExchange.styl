@@ -1,12 +1,13 @@
 @import "../../../common/css/variable.styl"
 
 .trade-deal-exchange
-  width 3.02rem
+  width 3.8rem
   height 100%
   .trade-deal-asset
     width 100%
-    height .18rem
-    margin .17rem 0 .08rem 0
+    height .36rem
+    //margin .14rem 0 .05rem 0
+    line-height .36rem
     display flex
     justify-content space-between
     .deal-asset-wallet
@@ -23,83 +24,83 @@
       a
         font-size .12rem
     .deal-asset-charge-sell
-      border .01rem solid $exchange-red
       a
         color $exchange-red
     .deal-asset-charge-buy
-      border .01rem solid $exchange-blue
       a
         color $exchange-blue
   .trader-deal-input
     width 100%
     height .34rem
+    background $normal-black-color
     margin-bottom .1rem
     border-radius .02rem
-    border .01rem solid $exchange-border
+    //border .01rem solid $exchange-border
     //border-left none
     display flex
     align-items center
+    color $normal-white-color-a
     .deal-input-label
-      width .54rem
-      height .32rem
+      width .62rem
+      height .34rem
       //border-left .01rem solid $exchange-border
       text-align center
       font-size .12rem
-      line-height .32rem
-      background #2B3038
-      color $normal-white-color-a9
+      line-height .34rem
+      //background #2B3038
+      color $normal-white-color-a
     input
-      width 2.09rem
+      width 2.73rem
       height 100%
       color $normal-white-color-a9
       padding-left .1rem
     .deal-input-unit
-      color $normal-white-color-a9
+      color $normal-white-color-a
   .deal-number-range
-    width 2.4rem
+    width 100%
     padding-top .05rem
-    margin 0 auto
+    //margin 0 auto
     position relative
     .r-buy
       -webkit-appearance none
-      width 2.4rem
-      height .01rem
+      width 3.8rem
+      height .04rem
       &::-webkit-slider-thumb
         position relative
         z-index 100
         -webkit-appearance: none
         cursor pointer
-        width .08rem
-        height .08rem
+        width .1rem
+        height .1rem
         border-radius 50%
         background $exchange-blue
         //background $normal-white-color-a9
         margin-top -.04rem
       &::-webkit-slider-runnable-track
-        height .01rem
-        background $exchange-border
+        height .04rem
+        background $normal-black-color
     .r-sell
       -webkit-appearance none
-      width 2.4rem
-      height .01rem
+      width 3.8rem
+      height .04rem
       &::-webkit-slider-thumb
         position relative
         z-index 100
         -webkit-appearance: none
         cursor pointer
-        width .08rem
-        height .08rem
+        width .1rem
+        height .1rem
         border-radius 50%
         background $exchange-red
         //background $normal-white-color-a9
         margin-top -.04rem
       &::-webkit-slider-runnable-track
-        height .01rem
-        background $exchange-border
+        height .04rem
+        background $normal-black-color
     ul
       display flex
-      top: 0.135rem;
-      width 2.4rem
+      top: 0.12rem;
+      width 3.8rem
       position: absolute;
       //width: 2.46rem;
       justify-content: space-between;
@@ -111,8 +112,8 @@
         background $exchange-border
         cursor pointer
   .deal-number-percent
-    width 2.6rem
-    margin-left .26rem
+    width 3.8rem
+    //margin-left .26rem
     margin-top .08rem
     //margin 0 auto
     ul
@@ -124,33 +125,38 @@
     .trade-password-input
       margin-top .1rem
       width 100%
-      height .26rem
-      line-height .26rem
+      height .34rem
+      //line-height .34rem
       font-size .12rem
+      border-radius .02rem
+      background $normal-black-color
+      padding-left .12rem
+      display flex
+      align-items center
+      justify-content space-between
       span
-        font-size .10rem
-        vertical-align middle
+        font-size .12rem
+        //vertical-align middle
         display inline-block
-        width .6rem
+        min-width .6rem
+        color $normal-white-color-a
       input
         height .26rem
-        width 2.42rem
+        //min-width 2.42rem
         color $normal-white-color-a9
         padding-left .1rem
-        border .01rem solid $exchange-border
-        border-radius .02rem
-        vertical-align middle
+        //border .01rem solid $exchange-border
+        //border-radius .02rem
+        //vertical-align middle
       em
         a
           color $exchange-blue
           font-size .12rem
   .password-msg
-      float right
-      height .3rem
-      line-height .3rem
       span:nth-of-type(1)
         a
-          color $exchange-red
+          color $normal-white-color-a
+          text-decoration underline
           font-size .1rem
           margin-right .1rem
       span:nth-of-type(2)
@@ -158,8 +164,8 @@
         font-size .1rem
   .trade-deal-turnover
     span
-      display inline-block
-      width .6rem
+      //display inline-block
+      //width .6rem
       font-size .11rem
       color $normal-white-color-a9
     em, i
@@ -169,22 +175,25 @@
   .trade-deal-button-buy
     cursor pointer
     width 100%
-    height .3rem
+    height .34rem
     text-align center
-    line-height .3rem
-    margin-top .1rem
+    line-height .34rem
+    //margin-top .1rem
     color $normal-white-color
-    font-size .16rem
+    font-size .14rem
     background $exchange-blue
     border-radius .02rem
   .trade-deal-button-sell
     width 100%
-    height .3rem
-    margin-top .1rem
+    height .34rem
+    //margin-top .1rem
     text-align center
-    line-height .3rem
+    line-height .34rem
     color $normal-white-color
-    font-size .16rem
+    font-size .14rem
     background $exchange-red
     border-radius .02rem
     cursor pointer
+  .trade-deal-turnover
+    height .26rem
+    line-height .26rem

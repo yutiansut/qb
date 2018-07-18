@@ -1,15 +1,21 @@
 @import "../../../common/css/variable.styl"
 .trade-current-order
 	background $exchange-color
-	padding .16rem .4rem .16rem .16rem
+	//padding .16rem .4rem .16rem .16rem
 	min-height 1.75rem
 	margin-bottom .02rem
 	.trade-current-title
 		display flex
 		align-items center
+		height .4rem
+		line-height .4rem
 		justify-content space-between
+		background $normal-black-color
+		padding-left .16rem
+		font-size .12rem
 		h3
 			color $normal-white-color
+			font-size .12rem
 			//margin-right 7.2rem
 		.reset-handle
 			font-size .12rem
@@ -20,6 +26,7 @@
 	.trade-current-table
 		width 100%
 		margin-top .16rem
+		margin-left .32rem
 		font-size .11rem
 		td
 			padding-top .1rem

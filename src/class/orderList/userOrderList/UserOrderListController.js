@@ -159,29 +159,6 @@ export default class UserOrderListController extends OrderListController {
   }
 
   updateUserOrder(para) {
-    // let para = {
-    //       "tradePairId": 2,
-    //       "tradePairName": 1,
-    //       "orderType": 0,//订单类型 0买  1卖
-    //       "priceType": 1,//价格类型 0限价  1市价
-    //       "oderId": 0,
-    //       "orderTime": 947586000,
-    //       "orderStatus": 0,//订单状态 0已成交 1部分成交  2未成交  3已撤销
-    //       "price": 1.23,
-    //       "count": 2.33,//总量
-    //       "dealDoneCount": 1.99,//已成交的量
-    //       "priceCN": 1.23,
-    //       "priceEN": 1.23,
-    //       "avgPrice": 1.22,//均价
-    //       "avgPriceCN": 1.11,
-    //       "avgPriceEN": 1.12,
-    //       "undealCount": 0.34,//未成交的量
-    //       "turnover": 23232.2,//成交额
-    //       "turnoverCN": 23232.2,
-    //       "turnoverEN": 23232.2,
-    //       "fee": 0.04//手续费
-    //     }
-    // console.log('uupp', para,this.view.state.currentOrder,this.view.state.historyOrder)
      let currentOrder = this.view.state.currentOrder;
      let historyOrder = this.view.state.historyOrder;
      // let changeItem = currentOrder.find(v => v.orderId = para.orderId);

@@ -99,13 +99,17 @@ export default class TradePlan extends ExchangeViewBase {
     limitNum[1] = limitNum[1] || '';
     if (!((/^[0-9]*$/).test(limitNum[0]) && (/^[0-9]*$/).test(limitNum[1])))
       return
-    if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
+    // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
+    //   return
+    let flag =  (priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
+        || ((priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+            || (priceValue< 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+            || (priceValue< 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1])));
+    if(!flag)
       return
     let numValue = e.target.value >= maxNum ? maxNum.toFixed(8 - (limitPrice[1] && limitPrice[1].length || 0)) : e.target.value;
-    // let flag =  (limitPrice[1].length > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
-    //     || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
-    //         || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
-    //         || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
+    
+  
     dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
     dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
   }

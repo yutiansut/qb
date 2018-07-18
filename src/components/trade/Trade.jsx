@@ -110,23 +110,23 @@ export default class extends exchangeViewBase {
         <div className="clearfix">
           <div className="trade-left">
             <div className="trade-left-top">
-              <div className="fl">
+              <div className="fl" style={{width: '2.92rem', height: '4rem'}}>
                 <div className="trade-pair-msg">
                   <TradePairDeal controller={TradeDealController} />
                 </div>
                 <TradeMarket controller={TradeMarketController} location={this.props.location}/>
               </div>
               <div className="trade-chart">
-                <div className="k-menu">
-                  <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
-                    K线图
-                  </button>
-                  <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
-                    深度图
-                  </button>
-                </div>
-                <ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />
-                <ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>
+                {/*<div className="k-menu">*/}
+                  {/*<button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>*/}
+                    {/*K线图*/}
+                  {/*</button>*/}
+                  {/*<button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>*/}
+                    {/*深度图*/}
+                  {/*</button>*/}
+                {/*</div>*/}
+                {/*<ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />*/}
+                {/*<ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>*/}
               </div>
             </div>
             <div className="trade-left-bottom">

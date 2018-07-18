@@ -89,7 +89,7 @@ export default class TradeMarket extends ExchangeViewBase {
             })}
           </ul>
           <div>
-            <img src="/static/img/search_bai.svg" alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}}/>
+            <img src="/static/img/search_bai.svg" alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}} style={{opacity: '.5'}}/>
             <p className={this.state.searchInput ? '' : 'hide'}>
               <input type="text"
                      onChange={this.onInputValue.bind(this)}

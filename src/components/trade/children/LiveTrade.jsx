@@ -56,7 +56,7 @@ export default class LiveTrade extends ExchangeViewBase{
           </div>
           <table className='trade-live-table'>
             <thead>
-              <tr>
+              <tr style={{height: '.49rem'}}>
                 <td> </td>
                 <td>{`价格(${(this.state.unitsType && this.state.unitsType.toUpperCase()) || (this.state.market && this.state.market.toUpperCase())})`}</td>
                 <td>{`数量(${(this.state.coin && this.state.coin.toUpperCase())})`}</td>
