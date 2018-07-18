@@ -62,6 +62,7 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if (data.ret !== 0 || data.data === null) {this.getCaptchaVerify()}
+    data = Object.assign(data, data.data)
     this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || '登录失败'})
   }
 

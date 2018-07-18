@@ -34,7 +34,7 @@ export default class TradePairDeal extends ExchangeViewBase {
           </span>
         </div>
         <div className='trade-pair-deal-price'>
-          <span>{this.state.tradePairMsg.prices && this.state.tradePairMsg.prices.price}</span>≈<span>{this.state.tradePairMsg.prices && this.state.tradePairMsg.prices.priceCN}</span>
+          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price)}</span>≈<span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.priceCN)}</span>
         </div>
       </div>
     )

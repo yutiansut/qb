@@ -9,7 +9,7 @@ const EXCHANGE_ADDR = 'Kemp House 152 -160 City Road, London';
 const EXCHANGE_SERVICE_PHONE = '010-53348151'
 const EXCHANGE_SERVICE_QQ = '3310267657';
 const EXCHANGE_COIN = 'QBT';
-const CURRENT_URL = 'http://127.0.0.1:8080'
+const CURRENT_URL = 'http://192.168.55.105:80'
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {

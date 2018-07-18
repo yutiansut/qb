@@ -221,7 +221,7 @@ export default class MarketStore extends ExchangeStoreBase {
     if (!this.state.recommendData.length) {
       let result = await this.Proxy.getRecommendCoins()
       // console.log('this.state.recommendData', result)
-      this.state.recommendData = result.data
+      this.state.recommendData = result && result.data || []
     }
     return this.state.recommendData
   }

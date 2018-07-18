@@ -36,6 +36,7 @@ export default class TradePlan extends ExchangeViewBase {
       inputSellNum: 0,
       inputBuyNum: 0,
       sellNumFlag: false,
+      userVerify:false,
       buyNumFlag: false,
       DealEntrust: [{name: `${this.intl.get('deal-limit')}`, type: 0}, {name: `${this.intl.get('deal-market')}`, type: 1}],
       ControllerProps: [{name: `${this.intl.get('buy')}`, tradeType: 'buy', dealType: 0}, {name: `${this.intl.get('sell')}`, tradeType: 'sell', dealType: 1},],
@@ -61,7 +62,12 @@ export default class TradePlan extends ExchangeViewBase {
   }
 
   componentDidMount() {
+
+    // let res = await this.props.controller.userController.getUserInfo()
     this.props.controller.getFundPwdInterval()
+    // this.setState({
+    //   userVerify:res.fundPwd
+    // })
     // this.setState({
     //   inputValue:this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')]
     // })
@@ -223,7 +229,7 @@ export default class TradePlan extends ExchangeViewBase {
                                  dealTrade={this.dealTrade.bind(this)}
                                  passInput={this.passInput.bind(this)}
                                  fundPwdInterval={this.state.fundPwdInterval}
-                                 fundPassVerify={this.props.controller.userController.userVerify.fundPwd}
+                                 fundPassVerify={this.state.fundPwdInterval<0}
                                  DealEntrustType={this.state.DealEntrustType}
                                  freePwd={this.freePwd.bind(this)}
               />

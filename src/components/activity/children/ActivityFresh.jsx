@@ -30,7 +30,8 @@ export default class activityFresh extends exchangeViewBase {
         '7.一经发现作弊行为，QB有权收回给您的奖励，并对账号进行相应处理',
         '8.该活动最终解释权归QB所有'
       ],
-      address:'还在等什么，邀请好友50万枚QB欢迎你来拿',
+      // address:'还在等什么，邀请好友50万枚QB欢迎你来拿',
+      address:'',
     }
     const {controller} = props
     // 绑定view
@@ -95,17 +96,10 @@ export default class activityFresh extends exchangeViewBase {
           <input
             type="text"
             ref="address"
-            value={`${this.state.address}~${controller.address}`}
+            value={`${this.state.address}${controller.address}`}
             readOnly="readonly"
             className={`active-clip-input-active`}
           />
-          {/*<input*/}
-            {/*type="text"*/}
-            {/*ref="address"*/}
-            {/*readOnly="readonly"*/}
-            {/*value={`${controller.address}`}*/}
-            {/*className={`active-clip-input-hidden`}*/}
-          {/*/>*/}
           <Button
             title={this.intl.get("asset-copy")}
             type="base"

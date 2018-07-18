@@ -68,7 +68,8 @@ export default class userOrder extends ExchangeViewBase {
   tradeOrderDetail(v){
     if(v.orderStatus === 1 || v.orderStatus === 2){
       this.setState({
-        detailFlag: true
+        detailFlag: true,
+        orderDetailType: v.orderType
       })
       this.props.controller.getOrderDetail(v.orderId)
     }
@@ -144,6 +145,9 @@ export default class userOrder extends ExchangeViewBase {
             </thead>
             <tbody>
             {this.state.historyOrder && this.state.historyOrder.length && this.state.historyOrder.map((v, index) => {
+              // console.log('this.state.unitsType 0', (this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN)).format({number: 'property'}))))
+              // console.log('this.state.unitsType 1', (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN)).format({number: 'property'}))) )
+              // console.log('this.state.unitsType 2', (v.turnover && Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price)).format({number: 'property'})))
               return (
                   <tr key={index}>
                     <td>{Number(v.orderTime).toDate()}</td>
@@ -152,7 +156,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.priceType ? '市价' : ((this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal'})) || ((this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal'})) || Number(v.price).format({number:'digital'})))}</td>
                     <td>{v.count}</td>
                     <td>{v.dealDoneCount}</td>
-                    <td>{((this.state.unitsType === 'CNY' && (Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN)))) || ((this.state.unitsType === 'USD' && (Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN)))) || ((Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price))))))}</td>
+                    <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN)).format({number: 'property'}))) || (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN)).format({number: 'property'}))) || (v.turnover && Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price)).format({number: 'property'}))}</td>
                     <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal'})) || Number(v.avgPrice).format({number:'digital'})}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
@@ -188,7 +192,7 @@ export default class userOrder extends ExchangeViewBase {
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]}</span>
                 </div>
               </div>
               <table className='trade-order-table'>
