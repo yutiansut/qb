@@ -1,6 +1,11 @@
 @import "../../../common/css/variable.styl"
 
-.headerNav, .tradeNav
+.tradeNav, .headerNav, .homeNav
+  width 14.4rem
+  height .5rem
+  padding 0 .28rem
+  background $exchange-color
+  line-height .5rem
   position fixed
   top 0
   z-index 999
@@ -8,95 +13,203 @@
     display none
   .login-out
     cursor pointer
+  >ul
+    float left
+    >li
+      float left
+    li
+      height .5rem
+      margin-right .4rem
+      a
+        color $normal-white-color-a
+      &.header-nav-active
+        >a
+          color $normal-white-color
+      &:last-child
+        margin-right 0
+      &.nav-logo
+        margin-right 1.2rem
+        a
+          display block
+          width .88rem
+          height .5rem
+          background $logo-trade no-repeat 0 .12rem / .88rem .26rem
+      &.select-list
+        position relative
+        &:hover
+          .select-router
+            display block
+        &:after
+          content: ''
+          width .07rem
+          height .04rem
+          background-image $icon-select
+          background-size cover
+          position absolute
+          top: 50%
+          right -.1rem
+        .select-router
+          position absolute
+          display none
+          left -.18rem
+          width 1rem
+          background $exchange-color
+          border 1px solid $exchange-bg
+          li
+            width 100%
+            height .4rem
+            line-height .4rem
+            text-align center
+            margin-right 0
+            &:nth-of-type(1)
+              border-bottom 1px solid $exchange-bg
+            a
+              display block
+              width 100%
+              height 100%
+              padding 0
+              &.children-active
+                background $main-color
+                color $normal-white-color
+              &:hover
+                color $normal-white-color
+                background $exchange-color
   >ol
     float right
     >li
       float left
-    .new-li
-      position relative
-      &:hover
-        .new-li-content
-          display block
-      .new-li-img
-        position relative
-        text-align center
-        img
-          position relative
-          top -.02rem
-          width .2rem
-          height .2rem
-          vertical-align middle
-        i
-          position absolute
-          right -.06rem
-          top .25rem
-          display inline-block
-          min-width .12rem
-          height .12rem
-          padding .02rem
-          background $negative-color
-          color $normal-white-color
-          border-radius 50%
-          line-height .12rem
-          font-size .12rem
-          &.hide
-            display none
-      .new-li-content
-        display none
-        position absolute
-        left 50%
-        transform translateX(-50%)
-        width 3.3rem
-        border-radius (.02rem)
+      color $normal-white-color-a
+      &.language-li
+        width .8rem
         p
-          height .4rem
-          line-height .4rem
-          padding 0 .1rem
-          span
-            float left
-          em
-            float right
+          text-align center
         ul
-          max-height 1.5rem
-          padding .1rem
-          overflow-y auto
+          display none
+          background $exchange-color
           li
-            height .3rem
-            line-height .3rem
-            cursor pointer
-        div
-          padding .3rem 0
+            height .4rem
+            padding 0 .05rem
+            line-height .4rem
+            text-align center
+            corsor pointer
+            &:nth-of-type(1)
+              border-bottom 1px solid $exchange-bg
+        img
+          display none
+        &:hover
+          .language-ul
+            display block
+      &.new-li
+        position relative
+        &:hover
+          .new-li-content
+            display block
+          .new-li-img
+            position relative
+            text-align center
+            img
+              position relative
+              top -.02rem
+              width .2rem
+              height .2rem
+              vertical-align middle
+            i
+              position absolute
+              right -.06rem
+              top .25rem
+              display inline-block
+              min-width .12rem
+              height .12rem
+              padding .02rem
+              background $negative-color
+              color $normal-white-color
+              border-radius 50%
+              line-height .12rem
+              font-size .12rem
+              &.hide
+                display none
+        .new-li-content
+          display none
+          position absolute
+          left 50%
+          transform translateX(-50%)
+          width 3.3rem
+          border-radius (.02rem)
+          background $exchange-color
+          border 1px solid $normal-black-color
+          box-shadow 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.30)
+          &:after
+            position absolute
+            top -.06rem
+            left 50%
+            width .1rem
+            height .1rem
+            margin-left -.05rem
+            border-top 1px solid $normal-black-color
+            border-right 1px solid $normal-black-color
+            background $exchange-color
+            transform rotate(-45deg)
+            -webkit-transform rotate(-45deg)
+            content ''
+          p
+            height .4rem
+            line-height .4rem
+            padding 0 .1rem
+            color $normal-white-color
+            border-bottom 1px solid rgba(170,188,191,0.10)
+            span
+              float left
+            em
+              float right
+          ul
+            max-height 1.5rem
+            padding .1rem
+            overflow-y auto
+            li
+              height .3rem
+              line-height .3rem
+              cursor pointer
+          div
+            padding .3rem 0
+            text-align center
+          .check-all
+            display block
+            height .36rem
+            line-height .36rem
+            text-align center
+
+          a
+            color $normal-white-color
+            background  rgba(170,188,191,0.10)
+            text-align center
+
+      &.login-li
+        margin 0 .3rem 0 .35rem
+      &.user-li
+        position relative
+        margin 0 .3rem 0 .35rem
+        p
           text-align center
-        .check-all
-          display block
-          height .36rem
-          line-height .36rem
-          text-align center
-    .language-li
-      ul
-       li
-        cursor pointer
-    .login-li
-      margin 0 .3rem 0 .35rem
-    .user-li
-      position relative
-      //width 1rem
-      p
-        text-align center
-      ul
-        position absolute
-        left 50%
-        transform translateX(-50%)
-        display none
-        width 1rem
-        li
-          height .4rem
-          padding 0 .05rem
-          line-height .4rem
-          text-align center
-      &:hover
-        .login-ul
-          display block
+        ul
+          position absolute
+          left 50%
+          transform translateX(-50%)
+          display none
+          width 1rem
+          background $exchange-color
+          li
+            height .4rem
+            padding 0 .05rem
+            line-height .4rem
+            text-align center
+            a
+              &:hover
+                color $normal-white-color
+            //&:nth-of-type(1)
+            //  border-bottom 1px solid $exchange-bg
+        &:hover
+          .login-ul
+            display block
 
   >ul
     float left
@@ -144,14 +257,12 @@
             color $main-color
             background $normal-white-color
 
-.headerNav
+.headerNav, .homeNav
   width 100%
   min-width 11.6rem
-  height .5rem
+  height .7rem
   padding 0 1.2rem
-  line-height .5rem
-  background $normal-white-color
-  box-shadow 0 1px 4px 0 rgba(151, 168, 178, .3)
+  line-height .7rem
   >ul
     li
       height .5rem
@@ -169,32 +280,8 @@
           display block
           width 1.1rem
           height .5rem
+          margin-top .1rem
           background $logo-index no-repeat 0 0 / 1.1rem .5rem
-      &.select-list
-        &:after
-          content: ''
-          width .07rem
-          height .04rem
-          background-image $icon-select
-          background-size cover
-          position absolute
-          top: 50%
-          right -.1rem
-        .select-router
-          background $normal-white-color
-          li
-            &:nth-of-type(1)
-              border-bottom 1px solid $line-light
-            a
-              &:hover
-                color $main-color
-                background $normal-white-color
-              &.children-active
-                background $main-color
-                color $normal-white-color
-                &:hover
-                  background $main-color
-                  color $normal-white-color
   >ol
     >li
       &.language-li
@@ -203,170 +290,20 @@
           text-align center
         ul
           display none
-          background $normal-white-color
           li
             height .4rem
             padding 0 .05rem
             line-height .4rem
         img
+          display inline-block
           width .2rem
           height .15rem
           margin-right .1rem
           vertical-align middle
-        &:hover
-          .language-ul
-            display block
-      &.login-li
-        .header-right-active
-          border-bottom 2px solid $index-blue
-          color $index-blue
-          padding .06rem .02rem
-      &.user-li
-        margin 0 .3rem 0 .35rem
-        ul
-          background $normal-white-color
-          li
-            color $index-gray
-            border-bottom 1px solid $line-light
-            &:hover
-              color $main-color
-            &:last-child
-              border-bottom none
-            a
-              &:hover
-                color $main-color
-      &.new-li
-        .new-li-content
-          background $normal-white-color
-          border 1px solid $line-light
-          box-shadow 0 .02rem .06rem 0 rgba(0,0,0,0.12), 0 0 .06rem 0 rgba(0,0,0,0.04)
-          &:after
-            position absolute
-            top -.06rem
-            left 50%
-            width .1rem
-            height .1rem
-            margin-left -.05rem
-            border-top 1px solid $line-light
-            border-right 1px solid $line-light
-            background $normal-white-color
-            transform rotate(-45deg)
-            -webkit-transform rotate(-45deg)
-            content ''
-          p
-            border-bottom 1px solid $line-light
-          .check-all
-            color $normal-black-color
-            background $line-dark
-            text-align center
-            &:hover
-              color $main-color-active
-              background $normal-gray-color
 
-
-.tradeNav
-  width 14.4rem
-  height .5rem
-  padding 0 .28rem
-  background $exchange-color
-  line-height .5rem
-  >ul
-    li
-      height .5rem
-      margin-right .4rem
-      &.header-nav-active
-        >a
-          color $normal-white-color
-      &:last-child
-        margin-right 0
-      &.nav-logo
-        margin-right 1.2rem
-        a
-          display block
-          width .88rem
-          height .5rem
-          background $logo-trade no-repeat 0 .12rem / .88rem .26rem
-      &.select-list
-        &:after
-          content: ''
-          width .07rem
-          height .04rem
-          background-image $icon-select
-          background-size cover
-          position absolute
-          top: 50%
-          right -.1rem
-        .select-router
-          background $exchange-color
-          border 1px solid $exchange-bg
-          li
-            &:nth-of-type(1)
-              border-bottom 1px solid $exchange-bg
-            a
-              &.children-active
-                background $main-color
-                color $normal-white-color
-              &:hover
-                color $normal-white-color
-                background $exchange-color
-  >ol
-    >li
-      color $index-gray
-      &.language-li
-        width .8rem
-        p
-          text-align center
-        ul
-          display none
-          background $exchange-color
-          li
-            height .4rem
-            padding 0 .05rem
-            line-height .4rem
-            text-align center
-            &:nth-of-type(1)
-              border-bottom 1px solid $exchange-bg
-        img
-          display none
-        &:hover
-          .language-ul
-            display block
-      &.user-li
-        margin 0 .3rem 0 .35rem
-        .header-right-active
-          color $normal-white-color
-        ul
-          background $exchange-color
-          li
-            a
-              &:hover
-                color $normal-white-color
-            &:nth-of-type(1)
-              border-bottom 1px solid $exchange-bg
-      &.new-li
-        .new-li-content
-          background $exchange-color
-          border 1px solid $normal-black-color
-          box-shadow 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.30)
-          &:after
-            position absolute
-            top -.06rem
-            left 50%
-            width .1rem
-            height .1rem
-            margin-left -.05rem
-            border-top 1px solid $normal-black-color
-            border-right 1px solid $normal-black-color
-            background $exchange-color
-            transform rotate(-45deg)
-            -webkit-transform rotate(-45deg)
-            content ''
-          p
-            color $normal-white-color
-            border-bottom 1px solid rgba(170,188,191,0.10)
-          a
-            color $normal-white-color
-            background  rgba(170,188,191,0.10)
-            text-align center
+.homeNav
+  background transparent
+  box-shadow none
+  color $normal-white-color
 
 

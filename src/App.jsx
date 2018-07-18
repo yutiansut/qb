@@ -141,7 +141,24 @@ const header = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: ".5rem" }} />
+      <div style={{ height: ".7rem" }} />
+    </div>
+  );
+};
+
+const homeHeader = ({ match, history }) => {
+  return (
+    <div>
+      <Header
+        navClass={"homeNav"}
+        userController={userController}
+        noticeController={noticeController}
+        configController={configController}
+        loginController={loginController}
+        match={match}
+        history={history}
+      />
+      <div style={{ height: ".7rem" }} />
     </div>
   );
 };
@@ -253,6 +270,7 @@ export default class App extends Component {
           <div id="app" className="web-wrap">
             {/*<Header/>*/}
             <Switch>
+              <Route path="/whome" component={homeHeader} />
               <Route path="/trade" component={tradeHeader} />
               <Route component={header} />
             </Switch>

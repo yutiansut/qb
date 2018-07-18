@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import exchangeViewBase from '../../components/ExchangeViewBase'
-import "./stylus/homeActivity.styl"
+import ExchangeViewBase from '../../ExchangeViewBase'
+import "../stylus/homeActivity.styl"
 
-export default class HomeActivity extends exchangeViewBase {
+export default class HomeActivity extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,10 +35,10 @@ export default class HomeActivity extends exchangeViewBase {
     // console.log('this.state.bannerImgUrl',this.state.bannerImgUrl)
     return (
       <div className="banner-wrap">
-        <div>
-          <img src="/static/img/banner_title.svg" alt=""/>
-          <Link to="/activity/fresh">立即注册</Link>
-        </div>
+        {/*<div>*/}
+          {/*<img src="/static/img/banner_title.svg" alt=""/>*/}
+          {/*<Link to="/activity/fresh">立即注册</Link>*/}
+        {/*</div>*/}
         <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
       </div>
     );

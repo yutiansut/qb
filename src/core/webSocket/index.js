@@ -24,7 +24,7 @@ const WEB_SOCKET = {
         let webSocketPool = WebSocketPool()
         // webSocketPool.onOpen = event => WEB_SOCKET[v.name].WebSocketHasStart = true
         webSocketPool.hasStart = false
-        await webSocketPool.start(url, size)
+        // await webSocketPool.start(url, size)
         MessageHandler.install(webSocketPool, v)
       }
     })

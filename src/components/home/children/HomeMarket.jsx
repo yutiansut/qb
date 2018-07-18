@@ -61,6 +61,7 @@ export default class HomeMarket extends ExchangeViewBase {
     // console.log(1234,this.state,this.state.recommendDataHandle)
     return (
       <div className='home-market inner'>
+        <div className='home-market-con'>
         <div className="market-nav clearfix">
           <ul className="clearfix">
             {controller.token && <li onClick={this.collectMarket}>
@@ -117,7 +118,7 @@ export default class HomeMarket extends ExchangeViewBase {
                   }}
                 >{v.tradePairName.toUpperCase()}</NavLink></td>
                 <td><span
-                  className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span>
+                  className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span className="second-span">
                   {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({
                     number: 'legal',
                     style: {name: 'cny'}
@@ -134,7 +135,7 @@ export default class HomeMarket extends ExchangeViewBase {
           })}
           </tbody>
         </table>
-
+        </div>
       </div>
     )
   }

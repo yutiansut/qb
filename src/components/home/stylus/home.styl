@@ -45,24 +45,32 @@
   //推荐交易对
   .home-recommend
     width 100%
-    padding .64rem 1.2rem .93rem
-    background $normal-white-color
+    //padding .64rem 1.2rem .93rem
+    height .6rem
+    background $normal-black-color
+    box-shadow 0 1px 10px 1px rgba(0,0,0,0.10)
     ul
       display -webkit-flex
       display flex
       justify-content center
+      height .6rem
+      line-height .6rem
+      padding 0 1.2rem
       li
         position relative
-        padding 0 1rem
-        @media screen and (max-width: 1950px)
-          padding 0 .8rem
-        @media screen and (max-width: 1700px)
-          padding 0 .55rem
-        @media screen and (max-width: 1550px)
-          padding 0 .4rem //&:first-child
+        padding 0 .3rem
+        //@media screen and (max-width: 1950px)
+        //  padding 0 .8rem
+        //@media screen and (max-width: 1700px)
+        //  padding 0 .55rem
+        //@media screen and (max-width: 1550px)
+        //  padding 0 .4rem
+        //&:first-child
         //padding-left 0
+        &:first-child
+          padding-left 0
         &:last-child
-          //padding-right 0
+          padding-right 0
           &:after
             position absolute
             top 0
@@ -71,26 +79,30 @@
             background none
         &:after
           position absolute
-          top .1rem
+          top .19rem
           right 0
           width 1px
-          height .23rem
+          height .22rem
           content ''
           background $line-light
         span
-          color $index-gray
-          font-size .16rem
-          opacity 0.6
-        p
-          padding-top .07rem
-          b
-            margin-right .1rem
-            font-size .2rem
-            color $normal-black-color
+          color $normal-white-color-a
+          padding-right .2rem
+          font-size .2rem
+        b
+          color $normal-white-color-a9
+          margin-right .15rem
+          font-size .12rem
 
   //市场
   .home-market
-    background $normal-white-color
+    padding-top .75rem
+    background $line-dark
+    .home-market-con
+      padding .5rem .55rem
+      box-shadow 0 1px 10px 0 rgba(0,0,0,0.20)
+      border-radius 6px
+      background $dark-font-color
     .market-nav
       height .36rem
       line-height .36rem
@@ -106,12 +118,18 @@
           cursor pointer
           span
             padding .08rem .15rem
+            color $normal-white-color-a
             &.home-market-item-active
-              color $normal-white-color
-              background $index-blue
-              border-radius .2rem
-              box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
-              margin 0 .14rem
+              //color $normal-white-color
+              //background $index-blue
+              //border-radius .2rem
+              //box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
+              //margin 0 .14rem
+              width 100%
+              height 100%
+              background $market-active no-repeat
+              background-size 100% 100%
+              color $exchange-blue
           &:first-child
             padding-left 0
           &:last-child
@@ -135,9 +153,10 @@
         display flex
         justify-content center
         input
-          background $normal-white-color
+          background $bg-dark-color
         button
           width .44rem
+          //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
     table
       width 100%
       tr
@@ -157,13 +176,21 @@
             top .03rem
             left .03rem
       tbody
-        tr:nth-child(odd)
-          background $bg-light-color
+        tr
+          border-bottom 1px solid $normal-white-color-a
+          &:last-child
+            border-bottom none
         td:first-child
           padding-left .3rem
         td
+          color $normal-white-color-a
+          span
+            color $normal-white-color-a
+          .second-span
+            color $normal-white-color-a9
+            font-size .12rem
           a
-            color $index-blue
+            color $normal-white-color-a
           .market-up
             color $index-blue
           .market-down

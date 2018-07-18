@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
-import exchangeViewBase from '../../components/ExchangeViewBase'
-import "./stylus/homeNotice.styl"
+import ExchangeViewBase from '../../ExchangeViewBase'
+import "../stylus/homeNotice.styl"
 
-export default class homeNotice extends exchangeViewBase {
+export default class homeNotice extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {

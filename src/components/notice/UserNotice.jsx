@@ -104,7 +104,7 @@ export default class userNotice extends exchangeViewBase {
             <tr key={index} onClick={value => this.showContent(v, index)}>
               <td >
                 <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
-                {v.content}
+                {v.content.contentCN}
               </td>
               <td>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</td>
             </tr>))

@@ -89,7 +89,7 @@ export default function () {
   pool.send = function (text) {
     // console.log('send text')
     if (connects.length === 0)
-      throw new Error('==connect is all down!===')
+      // throw new Error('==connect is all down!===')
     // console.log('websocket 发送信息', text, connects[index++ % poolSize])
     poolSize && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
@@ -100,7 +100,7 @@ export default function () {
   pool.close = function () {
     // console.log('close all connects in pool')
     if (connects.length === 0)
-      throw new Error('==connect is all down!===')
+      // throw new Error('==connect is all down!===')
     pool.reConnectFlag = false
     poolSize && connects.forEach(v => v.close())
   }

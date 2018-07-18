@@ -24,12 +24,10 @@ export default class HomeRecommend extends ExchangeViewBase{
       <div className='home-recommend'>
         <ul className="clearfix">
           {this.state.recommendData && this.state.recommendData.map((v, index) => {return(
-            <li className='home-recommend-pair' key={index}>
+            <li className='home-recommend-pair clearfix' key={index}>
               <span>{v.coinName.toUpperCase()}</span>
-              <p>
-                <b>{Number(v.priceCN).format({number:'legal', style:{name:'cny'}})}</b>
-                <i className={`${v.rise > 0 ? 'up-i' : 'down-i'} home-updown`}>{Number(v.rise).toPercent()}</i>
-              </p>
+              <b>{Number(v.priceCN).format({number:'legal', style:{name:'cny'}})}</b>
+              <i className={`${v.rise > 0 ? 'up-i' : 'down-i'} home-updown`}>{Number(v.rise).toPercent()}</i>
             </li>
           )}) || null}
         </ul>
