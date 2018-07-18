@@ -96,11 +96,11 @@ export default class Extract extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let currency = this.props.controller
-        .getQuery("currency")
-        .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
+    let currency =
+      this.props.controller.getQuery("currency").toUpperCase() ||
+      (this.props.location.query && this.props.location.query.currency);
     currency && this.setState({ currency: currency, value: currency });
-    await this.getWalletList()
+    await this.getWalletList();
     await this.getExtract();
     this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getTradePair(currency || this.state.currency);
@@ -149,7 +149,10 @@ export default class Extract extends exchangeViewBase {
       );
     }
     if (nextState.currency !== this.state.currency) {
-      this.props.controller.changeUrl("currency", nextState.currency.toLowerCase());
+      this.props.controller.changeUrl(
+        "currency",
+        nextState.currency.toLowerCase()
+      );
       // 切换币种后，重新set address，之后根据address和currency请求矿工费
       let curExtract = this.state.walletExtract.extractAddr.filter(
         v => v.coinName === nextState.currency.toLowerCase()
@@ -158,13 +161,11 @@ export default class Extract extends exchangeViewBase {
         {
           address:
             (curExtract &&
-              curExtract.addressList[0] &&
-              curExtract.addressList[0]) ||
-            "",
+              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressId"], 0)[0]||""),
           extractAmount: "",
-          password: '',
+          password: "",
           noSufficTip: false, // 余额不足提示
-          quotaTip: false,
+          quotaTip: false
         },
         () => {
           this.getMinerFee(nextState.currency, this.state.address);
@@ -281,27 +282,29 @@ export default class Extract extends exchangeViewBase {
                   {this.state.showSelect && (
                     <ul className="search-list">
                       {curExtract &&
-                        curExtract.addressList.map((v, i) => (
-                          <li
-                            key={i}
-                            onClick={e => {
-                              e.stopPropagation();
-                              e.nativeEvent.stopImmediatePropagation();
-                              this.setState({
-                                showSelect: false,
-                                address: {
-                                  address: v.address,
-                                  addressName: v.addressName
-                                }
-                              });
-                              this.getMinerFee(this.state.currency, v);
-                            }}
-                          >
-                            <span>{v.addressName}</span>
-                            <span />
-                            <span>{v.address}</span>
-                          </li>
-                        ))}
+                        this.props.controller
+                          .sort(curExtract.addressList, ["addressId"], 1)
+                          .map((v, i) => (
+                            <li
+                              key={i}
+                              onClick={e => {
+                                e.stopPropagation();
+                                e.nativeEvent.stopImmediatePropagation();
+                                this.setState({
+                                  showSelect: false,
+                                  address: {
+                                    address: v.address,
+                                    addressName: v.addressName
+                                  }
+                                });
+                                this.getMinerFee(this.state.currency, v);
+                              }}
+                            >
+                              <span>{v.addressName}</span>
+                              <span />
+                              <span>{v.address}</span>
+                            </li>
+                          ))}
                     </ul>
                   )}
                 </div>
@@ -321,13 +324,19 @@ export default class Extract extends exchangeViewBase {
             </span>
             <div className="content">
               <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{Number(usedQuota)}/{totalQuota} BTC
-                {
-                  totalQuota > 2 ? <span className="apply">{this.intl.get("asset-limitApply")}</span> :
+                {this.intl.get("asset-24hQuota")}：{Number(usedQuota)}/{
+                  totalQuota
+                }{" "}
+                BTC
+                {totalQuota > 2 ? (
+                  <span className="apply">
+                    {this.intl.get("asset-limitApply")}
+                  </span>
+                ) : (
                   <NavLink to="/wuser/identity">
                     {this.intl.get("asset-limitApply")}
                   </NavLink>
-                }
+                )}
                 {this.state.quotaTip && (
                   <span>
                     {this.intl.get("asset-minWithdraw-tip", {
@@ -357,7 +366,7 @@ export default class Extract extends exchangeViewBase {
                     });
                   }}
                   onBlur={() => {
-                    if (this.state.extractAmount === '') return;
+                    if (this.state.extractAmount === "") return;
                     if (
                       Number(this.state.extractAmount) < curExtract.minCount
                     ) {
@@ -387,7 +396,9 @@ export default class Extract extends exchangeViewBase {
                   <span>
                     {this.intl.get("asset-withdrawActual")}{" "}
                     {Number(Number(this.state.extractAmount).minus(minerFee)) >
-                      0 && Number(this.state.extractAmount) <= availableCount && Number(this.state.extractAmount) >= curExtract.minCount
+                      0 &&
+                    Number(this.state.extractAmount) <= availableCount &&
+                    Number(this.state.extractAmount) >= curExtract.minCount
                       ? Number(Number(this.state.extractAmount).minus(minerFee))
                       : 0}{" "}
                     {currency}
@@ -427,9 +438,12 @@ export default class Extract extends exchangeViewBase {
               title={this.intl.get("asset-submit")}
               type="base"
               onClick={() => {
-                if(this.state.quotaTip || this.state.noSufficTip) return;
+                if (this.state.quotaTip || this.state.noSufficTip) return;
                 let { currency, address, password, extractAmount } = this.state;
-                this.beforeExtract(curExtract && curExtract.minCount, this.state.password);
+                this.beforeExtract(
+                  curExtract && curExtract.minCount,
+                  this.state.password
+                );
               }}
             />
           </div>
@@ -552,8 +566,9 @@ export default class Extract extends exchangeViewBase {
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
             onSave={async add => {
-              let result =await this.appendAddress(
-                Object.assign({ coinName: this.state.currency }, add), curExtract
+              let result = await this.appendAddress(
+                Object.assign({ coinName: this.state.currency }, add),
+                curExtract
               );
               return result;
             }}
@@ -606,14 +621,18 @@ export default class Extract extends exchangeViewBase {
               this.setState({ orderTip: false });
             }}
             onConfirm={() => {
-              if(this.state.orderTipContent === this.intl.get('asset-auth-tip')) {
+              if (
+                this.state.orderTipContent === this.intl.get("asset-auth-tip")
+              ) {
                 this.props.history.push({
-                  pathname: `/wuser/identity/`,
+                  pathname: `/wuser/identity/`
                 });
               }
               this.setState({ orderTip: false });
             }}
-            autoClose={this.state.orderTipContent !== this.intl.get('asset-auth-tip')}
+            autoClose={
+              this.state.orderTipContent !== this.intl.get("asset-auth-tip")
+            }
           />
         )}
       </div>

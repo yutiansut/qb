@@ -268,6 +268,7 @@ export default function zh(state) {
     "asset-charge-h5-tip3": '请务必确认电脑及浏览器安全，防止信息被篡改或泄露。',
     "asset-auth-tip":'您的24小时提现额度不足，请进行实名认证',
     "asset-wait-auditing": '操作成功，日提现量超额，请耐心等待审核',
+    "asset-name-existing": '此名称已存在',
   };
   const market = {
     "market-favorite": "收藏",

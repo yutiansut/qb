@@ -82,7 +82,7 @@ export default class Charge extends exchangeViewBase {
         currency: currency,
         value: currency
       });
-    let map = await this.getWalletList();
+    await this.getWalletList();
     this.getTradePair();
     this.getCurrencyAmount(currency || this.state.currency);
     this.getCoinAddress(currency || this.state.currency);
@@ -90,8 +90,8 @@ export default class Charge extends exchangeViewBase {
     this.getHistory({
       page: 0,
       pageSize: 10,
-      coinId: -1,
-      coinName: -1,
+      coinId: this.state.walletList[coin.toUpperCase()],
+      coinName: coin.toUpperCase(),
       orderType: 1,
       orderStatus: -1,
       startTime: -1,
@@ -108,6 +108,16 @@ export default class Charge extends exchangeViewBase {
       this.props.controller.changeUrl("currency", state.currency.toLowerCase());
       this.getCoinAddress(state.currency);
       this.getCurrencyAmount(state.currency);
+      this.getHistory({
+        page: this.state.page - 1,
+        pageSize: 10,
+        coinId: this.state.walletList[state.currency],
+        coinName: state.currency,
+        orderType: 1,
+        orderStatus: -1,
+        startTime: -1,
+        endTime: -1
+      });
     }
   }
 
@@ -309,8 +319,8 @@ export default class Charge extends exchangeViewBase {
                     this.getHistory({
                       page: page - 1,
                       pageSize: 10,
-                      coinId: -1,
-                      coinName: -1,
+                      coinId: this.state.walletList[this.state.currency],
+                      coinName: this.state.currency,
                       orderType: 1,
                       orderStatus: -1,
                       startTime: -1,

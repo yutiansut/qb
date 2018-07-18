@@ -70,7 +70,7 @@ export default class AssetController extends ExchangeControllerBase {
     await this.store.getTotalAsset();
     this.view.setState({
       totalAsset: this.store.state.totalAsset,
-      wallet: this.store.state.wallet || []
+      wallet: this.sort(this.store.state.wallet, ['coinName'], 0) || []
     });
     if (this.view.name === "simple") {
       this.updataMarketAvaile();

@@ -134,6 +134,13 @@ export default {
     },
     errCode: "FREEZE_PASSWORD"
   },
+  613: {
+    // msg: "未登录",
+    get msg() {
+      return intl.get(613);
+    },
+    errCode: "UN_LOGIN"
+  },
   616: {
     // msg: "未设置密码",
     get msg() {
