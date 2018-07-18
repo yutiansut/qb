@@ -1,7 +1,6 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import LoginStore from './LoginStore'
 import Sleep from "../../core/libs/Sleep";
-import Crypto from '../../core/libs/Crypto' // 引入加密
 
 export default class LoginController extends ExchangeControllerBase {
   constructor(props) {

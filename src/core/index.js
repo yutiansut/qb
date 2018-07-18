@@ -2,6 +2,7 @@ import HttpProxy from './httpProxy'
 import Websocket from './webSocket'
 import Loop from "./loop";
 import GlobalUtil from "./libs/GlobalUtil";
+import AsyncComponent from "./libs/AsyncComponent";
 import AsyncAll from "./libs/AsyncAll";
 import ChangeFontSize from './libs/ChangeFontSize'
 import Storage from './storage/index'
@@ -25,6 +26,7 @@ const RUNAPP = async (config) => {
 module.exports = {
   GlobalUtil,
   Websocket,
+  AsyncComponent,
   RUNAPP,
   AsyncAll,
   ChangeFontSize,

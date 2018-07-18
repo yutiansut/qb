@@ -7,6 +7,8 @@ import {
   Redirect
 } from "react-router-dom";
 
+import {AsyncComponent} from 'core'
+
 // import "./core/libs/ChangeFontSize";
 import "./common/css/index.styl";
 
@@ -22,7 +24,7 @@ import MarketController from "./class/market/MarketController";
 import UserInfo from "./components/user/UserCenter.jsx";
 import Header from "./components/headerAndFooter/Header.jsx";
 import Footer from "./components/headerAndFooter/footer.jsx";
-import LoginCon from "./components/login/Login.jsx";
+// import LoginCon from "./components/login/Login.jsx";
 import Home from "./components/home/Home.jsx";
 import TradeCon from "./components/trade/Trade.jsx";
 import ForgetPassCon from "./components/login/ForgetPass.jsx";
@@ -37,8 +39,7 @@ import KlineController from "./class/kline/KlineController";
 
 import SimpleAsset from "./components/asset/children/Simple";
 
-let testAppController,
-  configController,
+let configController,
   assetController,
   userController,
   loginController,
@@ -76,21 +77,25 @@ const User = ({ match, history }) => {
 // history={history}
 // location={location}
 
-const Login = ({ match, history, location }) => {
-  // let loginObj =  {
-  //   controller: loginController,
-  //     match: match,
-  //     history: history,
-  //     location: location
-  // }
-  return (
-    <LoginCon
-      controller={loginController}
-      match={match}
-      history={history}
-      location={location}
-    />
-  );
+// controller={loginController}
+// match={match}
+// history={history}
+// location={location}
+
+// const Loign = ({ match, history, location }) => {
+//   let obj = {
+//     match, history, location, controller: loginController
+//   }
+//   return (
+//     <LoginCon {...obj} />
+//   );
+// };
+
+const Loign = ({ match, history, location }) => {
+  let obj = {
+    match, history, location, controller: loginController
+  }
+  return AsyncComponent(()=>import("./components/login/Login.jsx"), obj)
 };
 
 const ForgetPass = ({ match, history }) => {

@@ -7,7 +7,7 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 config/local.*
-
+stats.json
 
 # Editor directories and files
 

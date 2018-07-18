@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default function asyncComponent(importComponent) {
+export default function asyncComponent(importComponent, props) {
   class AsyncComponent extends Component {
     constructor(props) {
       super(props);
@@ -12,14 +12,14 @@ export default function asyncComponent(importComponent) {
 
     async componentDidMount() {
       const { default: component } = await importComponent();
-
+      console.log('AsyncComponent')
       this.setState({component});
     }
 
     render() {
       const C = this.state.component;
 
-      return C ? <C {...this.props} /> : null;
+      return C ? <C {props} /> : null;
     }
   }
 

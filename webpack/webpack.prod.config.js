@@ -7,6 +7,7 @@ const webpackConfig = require('./webpack.config');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const env = require('../config/prod.env.js')
 const config = require('../config')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(webpackConfig, {
   mode: 'production',
@@ -17,6 +18,32 @@ module.exports = merge(webpackConfig, {
       publicPath: process.env.NODE_ENV === 'production'
           ? config.build.assetsPublicPath
           : config.dev.assetsPublicPath
+  },
+  optimization:{
+    splitChunks:{
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        },
+        react:{
+          test: /[\\/]node_modules[\\/]react/,
+          name: 'react',
+          chunks: 'all'
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/](?!react)/,
+          name: 'vendors',
+          chunks: 'all'
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   },
   //插件
   plugins: [
@@ -35,6 +62,9 @@ module.exports = merge(webpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+
+    new BundleAnalyzerPlugin(),
+    
     //配置static目录拷贝到服务器目录下
     new CopyWebpackPlugin([
       {
@@ -43,6 +73,7 @@ module.exports = merge(webpackConfig, {
         ignore: ['.*']
       }
     ]),
+
     //生成简化的html文件，
     new HtmlWebpackPlugin({
       template: config.build.index,
