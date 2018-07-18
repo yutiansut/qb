@@ -42,17 +42,17 @@
             .search-list
               position relative
               width 100%
-              border 1px solid $line-light
-              background-color $normal-white-color
+              border 1px solid $line-dark
+              background-color $normal-input-color
               z-index 99
               &.hide
                 display none
               li
                 padding-left 0.15rem
-                background-color $normal-white-color
+                background-color $normal-input-color
                 cursor pointer
                 &:hover
-                  color $normal-white-color
+                  color $normal-font-color
                   background-color $main-color
           ul
             width 3.84rem
@@ -167,6 +167,8 @@
               float right
               margin-right 0.1rem
               color $negative-color
+              &.apply
+                color $normal-gray-color
             a
               float right
           .input

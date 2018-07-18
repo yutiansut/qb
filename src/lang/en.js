@@ -6,7 +6,7 @@ export default function en(state) {
     coin,
     applyEmailUrl,
     contactEmailUrl,
-    addr
+    addr,
   } = state;
 
   // 公共、主页及不在其他模块的翻译属于common
@@ -505,14 +505,22 @@ export default function en(state) {
   };
 
   const activity = {
-    "activity-rule-1": "Start now, every new registered user can claim 20 tokens.",
-    "activity-rule-2": "Invite friends to register and claim 5 more for each successful registry.",
-    "activity-rule-3": "Please use your own invitation code.",
-    "activity-rule-4": "Total 5,000,000 will be distributed.",
-    "activity-rule-5": "New registered user can login web or app to check the tokens on “assets”.",
-    "activity-rule-6": "Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
-    "activity-rule-7": `${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
-    "activity-rule-8": `All rights reserved by ${nameUsd}.`,
+    "activity-rule-1": "1.Start now, every new registered user can claim 20 tokens.",
+    "activity-rule-2": "2.Invite friends to register and claim 5 more for each successful registry.",
+    "activity-rule-3": "3.Please use your own invitation code.",
+    "activity-rule-4": "4.Total 5,000,000 will be distributed.",
+    "activity-rule-5": "5.New registered user can login web or app to check the tokens on “assets”.",
+    "activity-rule-6": "6.Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
+    "activity-rule-7": `7.${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
+    "activity-rule-8": `8.All rights reserved by ${nameUsd}.`,
+    "activity-rule": `Promotion Rules`,
+    "activity-Invitations": `Invitations `,
+    "activity-Accounts": `Friends’ Accounts`,
+    "activity-time1": `Time`,
+    "activity-time2": `Time`,
+    "activity-rewards": `Rewards`,
+    "activity-title": `<b>5,000,000</b> Free Token. Register for <b>20</b> tokens; invite a friend for <b>5</b> more.`,
+    "activity-click": `Click to Claim`
   };
 
   const login = {

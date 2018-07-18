@@ -38,15 +38,10 @@ export default class Wallets extends exchangeViewBase {
     this.rank = controller.rank.bind(controller);
     // 充值前的身份认证状态验证
     this.verify = currency => {
-      // let state = controller.userVerif;
-      // if (state === 1) {
-        props.history.push({
-          pathname: `/wallet/charge/`,
-          query: { currency }
-        });
-        // return;
-      // }
-      // this.props.changeVerify(controller.userVerif);
+      props.history.push({
+        pathname: `/wallet/charge/`,
+        query: { currency }
+      });
     };
   }
   render() {
@@ -76,7 +71,7 @@ export default class Wallets extends exchangeViewBase {
             <i />
             {this.intl.get("asset-hideLittle")}
             <b className="pop-parent">
-              <img src={this.$imagesMap.$yiwen} alt="" />
+              <em className='img'/>
               <em className="pop-children uppop-children">{this.intl.get("asset-tip1")}</em>
             </b>
           </span>
@@ -106,7 +101,7 @@ export default class Wallets extends exchangeViewBase {
                 }}>
                 {this.intl.get("asset-lock")}
                 <b className="pop-parent">
-                  <img src={this.$imagesMap.$yiwen} alt="" />
+                  <span className='img'/>
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip2")}
                   </em>
@@ -118,7 +113,7 @@ export default class Wallets extends exchangeViewBase {
                 }}>
                 {this.intl.get("asset-tobtc")}
                 <b className="pop-parent">
-                  <img src={this.$imagesMap.$yiwen} alt="" />
+                  <span className='img'/>
                   <em className="pop-children uppop-children">
                     {this.intl.get("asset-tip3")}
                   </em>

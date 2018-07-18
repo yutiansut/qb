@@ -5,7 +5,8 @@ export default function zh(state) {
     netUrl,
     applyEmailUrl,
     contactEmailUrl,
-    addr
+    addr,
+    coin
   } = state;
   // 公共、主页及不在其他模块的翻译属于common
   const common = {
@@ -639,14 +640,22 @@ export default function zh(state) {
     "helo-coin-white": "白皮书",
   };
   const activity = {
-      "activity-rule-1": "即日起，新用户完成注册后，可领取20枚QB。",
-      "activity-rule-2": "用户邀请好友注册后，即可领取5枚QB，多邀多得，上不封顶。",
-      "activity-rule-3": "请使用您的专属邀请链接或邀请码进行邀请。",
-      "activity-rule-4": "本次活动共发放5,000,000 枚QB，送完即止。",
-      "activity-rule-5": "新注册用户需要登录后在资产页面查看奖励，或下载App并登录查看奖励。",
-      "activity-rule-6": "如果奖励未到账，请您先刷新页面查看，如果依然未到账，请您与客服联系。",
-      "activity-rule-7": `一经发现作弊行为，${nameUsd}有权收回给您的奖励，并对账号进行相应处理。`,
-      "activity-rule-8": `该活动最终解释权归${nameUsd}所有。`,
+    "activity-rule-1": `1.即日起，新用户完成注册后，可领取20枚${coin}。`,
+    "activity-rule-2": `2.用户邀请好友注册后，即可领取5枚${coin}，多邀多得，上不封顶。`,
+    "activity-rule-3": "3.请使用您的专属邀请链接或邀请码进行邀请。",
+    "activity-rule-4": `4.本次活动共发放5,000,000 枚${coin}，送完即止。`,
+    "activity-rule-5": "5.新注册用户需要登录后在资产页面查看奖励，或下载App并登录查看奖励。",
+    "activity-rule-6": "6.如果奖励未到账，请您先刷新页面查看，如果依然未到账，请您与客服联系。",
+    "activity-rule-7": `7.一经发现作弊行为，${nameUsd}有权收回给您的奖励，并对账号进行相应处理。`,
+    "activity-rule-8": `8.该活动最终解释权归${nameUsd}所有。`,
+    "activity-rule": `活动规则`,
+    "activity-Invitations": `邀请记录 `,
+    "activity-Accounts": `好友账户 `,
+    "activity-time1": `邀请时间`,
+    "activity-time2": `奖励时间`,
+    "activity-rewards": `奖励记录`,
+    "activity-title": `QB限量 <b>5,000,000</b> 枚大放送，注册就送 <b>20</b> 枚！每邀请一人送 <b>5</b> 枚！`,
+    "activity-click": `点我领取`
   };
   return Object.assign(
     {},

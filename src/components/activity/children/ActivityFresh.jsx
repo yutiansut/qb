@@ -21,17 +21,19 @@ export default class activityFresh extends exchangeViewBase {
     super(props);
     this.state = {
       ruleList: [
-        '1.即日起，新用户完成注册后，可领取20枚QB。',
-        '2.用户邀请好友注册后，即可领取5枚QB，多邀多得，上不封顶。',
-        '3.请使用您的专属邀请链接或邀请码进行邀请',
-        '4.本次活动共发放5,000,000 枚QB，送完即止',
-        '5.新注册用户需要登录后在资产页面查看奖励，或下载App并登录查看奖励。',
-        '6.如果奖励未到账，请您先刷新页面查看，如果依然未到账，请您与客服联系。',
-        '7.一经发现作弊行为，QB有权收回给您的奖励，并对账号进行相应处理',
-        '8.该活动最终解释权归QB所有'
+        this.intl.get('activity-rule-1'),
+        this.intl.get('activity-rule-2'),
+        this.intl.get('activity-rule-3'),
+        this.intl.get('activity-rule-4'),
+        this.intl.get('activity-rule-5'),
+        this.intl.get('activity-rule-6'),
+        this.intl.get('activity-rule-7'),
+        this.intl.get('activity-rule-8'),
       ],
       // address:'还在等什么，邀请好友50万枚QB欢迎你来拿',
       address:'',
+      // banner_img: '',
+      bannerImgUrl: ''
     }
     const {controller} = props
     // 绑定view
@@ -46,6 +48,7 @@ export default class activityFresh extends exchangeViewBase {
       });
     };
     this.getInvited = controller.getInvited.bind(controller)
+    this.getHomeBanner = controller.getHomeBanner.bind(controller)
   }
 
   setView(view) {
@@ -54,7 +57,7 @@ export default class activityFresh extends exchangeViewBase {
   }
 
   componentWillMount() {
-
+    this.getHomeBanner(1,0);
   }
 
   componentDidMount() {
@@ -88,10 +91,10 @@ export default class activityFresh extends exchangeViewBase {
             autoClose={true}
           />
         )}
-        <div className="banner-img">
-          <img src="/static/img/banner_title.svg" alt=""/>
+        <div className="banner-img" style={{ 'background-size': `100% 100%`, backgroundImage: `url(${this.state.bannerImgUrl})`}}>
+          {/* <img src="/static/img/banner_title.svg" alt=""/> */}
         </div>
-        <h1>QB限量 <span>5,000,000</span> 枚大放送，注册就送 <span>20</span> 枚！每邀请一人送 <span>5</span> 枚！{(!controller.userId && <Link to="/wlogin">点我领取</Link> || null)}</h1>
+        <h1>{this.intl.getHTML('activity-title')}{(!controller.userId && <Link to="/wlogin">{this.intl.get('activity-click')}</Link> || null)}</h1>
         <div className={`active-clip`}>
           <input
             type="text"
@@ -109,7 +112,7 @@ export default class activityFresh extends exchangeViewBase {
           />
         </div>
         <dl>
-          <dt>活动规则</dt>
+          <dt>{this.intl.get('activity-rule')}</dt>
           {/*<dd>1. 新用户即开通注册之日起30天内，可享受0手续费交易。<Link to="/trade">快来交易吧！</Link></dd>*/}
           {/*<dd>2. <span>用户需要完成实名认证后方可参与此活动</span></dd>*/}
           {this.state.ruleList.map((v, index) => (<dd key={index}>{v}</dd>))}
@@ -118,17 +121,17 @@ export default class activityFresh extends exchangeViewBase {
         {/*{questionList.map((v, index) => (<li key={index}>{v}</li>))}*/}
         {/*</ul>*/}
         <div className="record-list">
-          <p>邀请记录</p>
+          <p>{this.intl.get('activity-Invitations')}</p>
           <table>
             <thead>
             <tr>
-              <td>好友账号</td>
-              <td>邀请时间</td>
+              <td>{this.intl.get('activity-Accounts')}</td>
+              <td>{this.intl.get('activity-time1')}</td>
             </tr>
             </thead>
             <tbody>
             {!this.state.recordList.length && (<tr>
-              <td colSpan={2} className={`record-list-no-data`}>{`暂无记录`}</td>
+              <td colSpan={2} className={`record-list-no-data`}>{this.intl.get('noRecords')}</td>
             </tr>)}
             {this.state.recordList.map((v, index) => (<tr key={index}>
               <td>{v.invited}</td>
@@ -138,17 +141,17 @@ export default class activityFresh extends exchangeViewBase {
           </table>
         </div>
         <div className="record-list">
-          <p>奖励记录</p>
+          <p>{this.intl.get('activity-rewards')}</p>
           <table>
             <thead>
             <tr>
-              <td>奖励记录</td>
-              <td>奖励时间</td>
+              <td>{this.intl.get('activity-rewards')}</td>
+              <td>{this.intl.get('activity-time2')}</td>
             </tr>
             </thead>
             <tbody>
             {!this.state.recordList.length && (<tr>
-              <td colSpan={2} className={`record-list-no-data`}>{`暂无记录`}</td>
+              <td colSpan={2} className={`record-list-no-data`}>{this.intl.get('noRecords')}</td>
             </tr>)}
             {this.state.recordList.map((v, index) => (<tr key={index}>
               <td>{`${v.prize}QB`}</td>

@@ -186,13 +186,15 @@
             &:nth-of-type(1)
               border-bottom 1px solid $line-light
             a
-              &.children-active
-                // background $main-color
-                color $normal-white-color
               &:hover
                 color $main-color
                 background $normal-white-color
-
+              &.children-active
+                background $main-color
+                color $normal-white-color
+                &:hover
+                  background $main-color
+                  color $normal-white-color
   >ol
     >li
       &.language-li

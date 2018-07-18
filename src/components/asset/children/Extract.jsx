@@ -312,9 +312,12 @@ export default class Extract extends exchangeViewBase {
                 {this.intl.get("asset-24hQuota")}：{Number(
                   totalQuota.minus(availableQuota)
                 )}/{totalQuota} BTC
-                <NavLink to="/wuser/identity">
-                  {this.intl.get("asset-limitApply")}
-                </NavLink>
+                {
+                  totalQuota > 2 ? <span className="apply">{this.intl.get("asset-limitApply")}</span> :
+                  <NavLink to="/wuser/identity">
+                    {this.intl.get("asset-limitApply")}
+                  </NavLink>
+                }
                 {this.state.quotaTip && (
                   <span>
                     {this.intl.get("asset-minWithdraw-tip", {

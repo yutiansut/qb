@@ -35,6 +35,10 @@
           &:hover, &.active
             color $main-color
             border 0.01rem solid $main-color
+            .pop-parent .img
+              background $yiwen-active no-repeat center center
+            i
+              border-color $main-color
           &.active
             i
               border none
@@ -54,6 +58,14 @@
             height 0.12rem
             line-height 0.12rem
             &.pop-parent
+              .img
+                position relative
+                display inline-block
+                top -0.01rem
+                width 12px
+                height 12px
+                margin-right 0.05rem
+                background $yiwen no-repeat center center
               .pop-children
                 left -0.45rem
                 min-width 136px
@@ -74,6 +86,16 @@
             letter-spacing 0.0005rem
             text-align justify
             line-height 0.3rem
+            &.lock, &.tobtc
+              .pop-parent .img
+                display inline-block
+                width 12px
+                height 12px
+                margin-right 0.05rem
+                background $yiwen no-repeat center center
+              &:hover
+                .pop-parent .img
+                  background $yiwen-active no-repeat center center
             &.currency, &.avail, &.lock, &.tobtc
               cursor pointer
               &:hover
