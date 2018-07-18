@@ -177,6 +177,7 @@ export default function en(state) {
     "tip-know": 'I know',
     "tip-confirm": 'Confirm',
     "tip-cancel": 'Cancel',
+    "home-advantage": "Our advantage",
     "home-advantage-h1": "Financial-market-level Trading System",
     "home-advantage-h2": "Top-class Security and Risk Control",
     "home-advantage-h3": "High Stability",
@@ -355,8 +356,8 @@ export default function en(state) {
     "deal-market-sell":'Sell for market best price',
     'deal-market-msg': 'Market price, no stationary money',
     'deal-identify': 'ID verification',
-    "deal-digital-tip": 'The price shall be subject to the actual price of the digital currency',
-    "deal-price-tip": 'Final trasaction price shall be subject to the actual price of the  digital currency'
+    "deal-digital-tip": 'The price shall be subject to the actual price of the digital currency.',
+    "deal-price-tip": 'Final trasaction price shall be subject to the actual price of the  digital currency.'
   };
   const user = {
     "user-score": "My VIP Status",

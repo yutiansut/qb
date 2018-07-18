@@ -30,22 +30,22 @@ export default class HomeAdvantage extends ExchangeViewBase {
   render() {
     return (
       <div className="home-advan-wrap">
-        <h1>我们的优势</h1>
+        <h1>{this.intl.get("home-advantage")}</h1>
         <div className="home-advan-header clearfix">
           <ul>
-            <li className={this.state.index === 0 && "active"} onClick={() => {this.setState({index: 0})}}>
+            <li className={`${this.state.index === 0 &&"active"}`} onClick={() => {this.setState({index: 0})}}>
               <img src="/static/img/home/4_1.svg"/>
               <p>{this.intl.get("home-advantage-h1")}</p>
             </li>
-            <li className={this.state.index === 1 && "active"} onClick={() => {this.setState({index: 1})}}>
+            <li className={`${this.state.index === 1 &&"active"}`} onClick={() => {this.setState({index: 1})}}>
               <img src="/static/img/home/4_2.svg" style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h2")}</p>
             </li>
-            <li className={this.state.index === 2 && "active"} onClick={() => {this.setState({index: 2})}}>
+            <li className={`${this.state.index === 2 &&"active"}`} onClick={() => {this.setState({index: 2})}}>
               <img src="/static/img/home/4_3.svg" style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h3")}</p>
             </li>
-            <li className={this.state.index === 3 && "active"} onClick={() => {this.setState({index: 3})}}>
+            <li className={`${this.state.index === 3 &&"active"}`} onClick={() => {this.setState({index: 3})}}>
               <img src="/static/img/home/4_4.svg" style={{padding: ".05rem 0"}}/>
               <p>{this.intl.get("home-advantage-h4")}</p>
             </li>

@@ -176,6 +176,7 @@ export default function zh(state) {
     "tip-know": '知道了',
     "tip-confirm": '确 定',
     "tip-cancel": '取 消',
+    "home-advantage": "我们的优势",
     "home-advantage-h1": "金融级别交易系统",
     "home-advantage-h2": "顶级安全与风控",
     "home-advantage-h3": "极高稳定性",

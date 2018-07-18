@@ -220,7 +220,7 @@ export default class TradePlan extends ExchangeViewBase {
                 this.changeUnit(e,this.intl.get('deal-digital'))
               }}
             />
-            <em className="pop-children rightpop-children">{this.intl.get("deal-digital-tip")}</em>
+            <em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>
           </div>
 
         </div>

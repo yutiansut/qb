@@ -163,7 +163,7 @@ export default class Header extends ExchangeViewBase {
               {Object.keys(this.state.userNoticeHeader || {}).length &&  this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length ? (
                 <ul>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.map((v, index) => (
                   <li key={index} onClick={value => this.changeHeaderNotice(v, index)}>{v.content.contentCN}
-                    {/*<Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link>*/}
+                    {/* <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
                   </li>
                 ))}</ul>
               ) : (

@@ -341,7 +341,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                   <tr key={index}>
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td>{v.tradePairName}</td>
-                    <td style={{color: `${v.orderType ? '#D84747' : '#129FCC'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
+                    <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
                     {/*价格*/}
                     {type === 'orderCurrent' && <td>{v.price}</td>}

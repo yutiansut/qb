@@ -47,6 +47,7 @@ export default class OrderManage extends exchangeViewBase{
   render(){
     const {match} = this.props;
     return(
+      <div className="order-manage-wrap">
         <div className='order-manage clearfix'>
           <ul className='order-nav fl'>
             {this.state.orderNavItems.map((v, index) => {
@@ -74,6 +75,7 @@ export default class OrderManage extends exchangeViewBase{
             </Switch>
           </div>
         </div>
+      </div>
     )
   }
 }
