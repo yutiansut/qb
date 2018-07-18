@@ -8,6 +8,7 @@ import HomeNotice from './children/HomeNotice.jsx' // 首页公告
 import HomeActivity from './children/HomeActivity.jsx' // 首页活动
 import HomeAdvantage from './children/HomeAdvantage.jsx'
 
+
 import MarketController from '../../class/market/MarketController'
 
 let recommendController,
