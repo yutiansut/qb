@@ -1,5 +1,7 @@
 import StoreBase from '../core/StoreBase'
 import Msg from "../config/ErrCodeConfig";
+import DetectOS from './lib/Os'
+import Browser from './lib/Browser'
 
 const WebsocketCallBackList = {}, websocketHistory = {}
 let srartFlag = false
@@ -57,7 +59,9 @@ export default class ExchangeStoreBase extends StoreBase {
       this.Storage.websocketToken.set(data.token)
     })
     // websocket.send(websocket.config.optionList.global.connect)
-    this.WebSocket.general.emit('connect', {token: this.Storage.websocketToken.get()})
+    // console.log('12324324', `${DetectOS()}/${Browser()}`)
+    // console.log('123243244545', Browser())
+    this.WebSocket.general.emit('connect', {Token: this.Storage.websocketToken.get(), Version: 0, Device: Browser(), IMEI: `${DetectOS()}/${Browser()}`, Os: 3 })
     this.Loop.websocketHeartBreak.clear()
     this.Loop.websocketHeartBreak.setDelayTime(1)
     this.Loop.websocketHeartBreak.set(async () => {

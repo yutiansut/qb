@@ -16,7 +16,7 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   getVerify(account, mode, type) { // 获取验证码
-    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3578]\d{9}$/;
+    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3456789]\d{9}$/;
     if(!reg1.test(this.view.state.userInput) && !reg2.test(this.view.state.userInput)) return
     if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})

@@ -4,7 +4,7 @@ import Sleep from "../../core/libs/Sleep";
 // uid : 232601699242483712, 232602529072947201
 export default class UserStore extends ExchangeStoreBase {
   constructor() {
-    super("user");
+    super("user", "general");
     this.state = {
       // userId: JSON.parse("232602529072947201"),
       // userId: JSON.parse("232602529072947201"),
@@ -25,6 +25,14 @@ export default class UserStore extends ExchangeStoreBase {
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
     this.state.token && this.userInfo()
+
+    // websocket监听退出消息
+    this.WebSocket.general.on("login", data => {
+      // console.log("login-user-websocket", data);
+      if(data.ret === 2006) {
+        this.clearUserInfo()
+      }
+    });
     // this.preHandlerndler.push(this.userPreHandler)
     // this.installProxy("user", this.preHandler, this.afterHandler)
   }

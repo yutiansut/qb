@@ -41,7 +41,7 @@ export default class GooglePopup extends exchangeViewBase {
             <ul>
               <li>2</li>
               <li>{this.intl.get("user-googleExplain1")}</li>
-              <li><QRCode value={`otpauth://totp/exchange?secret= ${this.props.googleSecret || ''}`} level="M" /></li>
+              <li><QRCode value={`otpauth://totp/exchange?secret= ${this.props.googleSecret || ''}`} level="M" bgColor="#D5D6D6"/></li>
               <li>{this.intl.get("user-googleExplain2")} {this.props.googleSecret}</li>
             </ul>
             <ul>

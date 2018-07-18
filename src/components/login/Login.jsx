@@ -117,9 +117,9 @@ export default class Login extends exchangeViewBase {
     return false
   }
 
-  checkUser(event) {
+  checkUser() {
     this.setState({
-      checkState: event.target.checked
+      checkState: !this.state.checkState
     });
   }
 
@@ -224,16 +224,19 @@ export default class Login extends exchangeViewBase {
                       }}/>
             </li>
           </ul>
-          <p className="checkbox-wrap">
-            <input type="checkbox"
-                    className="check-select"
-                    checked={this.state.checkState}
-                    onChange={this.checkUser}/>
-              {/*<span></span>*/}
-              {/*<img src={this.$imagesMap.$checkbox_check} alt=""/>*/}
+          <div className="checkbox-wrap">
+            {/*<input type="checkbox"*/}
+                    {/*className="check-select"*/}
+                    {/*checked={this.state.checkState}*/}
+                    {/*onChange={this.checkUser}/>*/}
+              <p onClick={this.checkUser}>
+                {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
+
+
+              </p>
               {this.intl.get("login-read")}
             <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
-          </p>
+          </div>
         </div>
         {this.state.showPopup && (
           <Popup

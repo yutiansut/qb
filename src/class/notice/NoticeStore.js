@@ -48,13 +48,14 @@ export default class NoticeStore extends ExchangeStoreBase {
   async userNotice(unRead, page, pageSize) { // 获取用户通知列表
     // unRead 0 全部 1未读, page, pageSize 0 全部
     let userNotice = await this.Proxy.getUserNocticeList({
-      "userId": this.controller.userId,
+      "userId": this.controller.userIdz,
       "token": this.controller.token,
       unRead,
       page,
       pageSize
     })
     console.log(1111, userNotice)
+    userNotice = userNotice ? userNotice : {}
     if (unRead) {
       this.state.userNoticeHeader = userNotice
     }
