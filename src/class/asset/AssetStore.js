@@ -82,6 +82,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取我的QBT
   async getMyQbt() {
+    // console.log(this.controller.token);
     let result = await this.Proxy.getMyQbt({
       token: this.controller.token
     });

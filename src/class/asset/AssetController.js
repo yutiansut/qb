@@ -156,7 +156,7 @@ export default class AssetController extends ExchangeControllerBase {
                 "," +
                 v.count +
                 "," +
-                v.postAddress +
+                '—' +
                 "," +
                 v.receiveAddress +
                 "," +
