@@ -196,6 +196,8 @@
 
       &.login-li
         margin 0 .3rem 0 .35rem
+        a
+          color $normal-white-color-a
       &.user-li
         position relative
         margin 0 .3rem 0 .35rem
@@ -213,9 +215,13 @@
             padding 0 .05rem
             line-height .4rem
             text-align center
-            a
-              &:hover
+            color $normal-font-color
+            &:hover
+              color $normal-white-color
+              a
                 color $normal-white-color
+            a
+              color $normal-font-color
             //&:nth-of-type(1)
             //  border-bottom 1px solid $exchange-bg
         &:hover

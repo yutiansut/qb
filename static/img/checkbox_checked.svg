@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="11px" viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>check_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-579.000000, -444.000000)">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="check_icon" transform="translate(480.000000, 1.000000)">
+                    <rect id="Rectangle-3" fill="#2BB789" x="0" y="0" width="11" height="11" rx="2"></rect>
+                    <polyline id="Check" stroke="#2F3335" points="1 5.91304348 4.04347826 8.95652174 11 2"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

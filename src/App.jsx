@@ -71,8 +71,18 @@ const User = ({ match, history }) => {
     <UserInfo controller={userController} match={match} history={history} />
   );
 };
+// controller={loginController}
+// match={match}
+// history={history}
+// location={location}
 
-const Loign = ({ match, history, location }) => {
+const Login = ({ match, history, location }) => {
+  // let loginObj =  {
+  //   controller: loginController,
+  //     match: match,
+  //     history: history,
+  //     location: location
+  // }
   return (
     <LoginCon
       controller={loginController}
@@ -196,8 +206,8 @@ const Order = ({ match }) => {
 const Routers = [
   { path: "/whome", component: HomeComponent },
   { path: "/trade", component: Trade },
-  { path: "/wlogin", component: Loign },
-  { path: "/wlogin/:uid", component: Loign },
+  { path: "/wlogin", component: Login },
+  { path: "/wlogin/:uid", component: Login },
   { path: "/wallet", component: Asset, auth: true },
   { path: "/worder", component: Order, auth: true },
   { path: "/wuser", component: User, auth: true },

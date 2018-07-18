@@ -14,7 +14,7 @@ export default class HomeMarket extends ExchangeViewBase {
       sortImg: this.$imagesMap.$rank_normal,
       searchRealt: [],
       collectActive: false, // 控制收藏区的active
-      // collectImg: "/static/img/star.svg",
+      // collectImg: "/static/img/star_select.svg",
       // collectType: 0
       marketTableHead: [
         {name: `${this.intl.get('market-markets')}`, sortValue: ''},
@@ -108,9 +108,9 @@ export default class HomeMarket extends ExchangeViewBase {
             // console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
             return (
               <tr key={index}>
-                {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star.svg"} alt=""/></td>*/}
+                {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
                 {controller.token && <td onClick={e => this.addCollect(v, index, e)}><img
-                  src={v.isFavorite ? "/static/img/star_select.svg" : "/static/img/star.svg"} alt=""/></td> || null}
+                  src={`${v.isFavorite ? this.$imagesMap.$home_star_sel : this.$imagesMap.$home_star_nor}`} alt=""/></td> || null}
                 <td><NavLink
                   to={{
                     pathname: `/trade`,

@@ -258,8 +258,8 @@ export default class userIdentity extends exchangeViewBase {
             <dl className="clearfix">
               <dt>{this.intl.get("user-name")}</dt>
               {this.state.verifyTypeArr.map((item, index) => (<dd key={index} onClick={content => this.state.checkVerifyArr && this.selectVerifyType(index, item)}>
-                <img src="/static/img/checked.svg" alt="" className={`${this.state.selectIndex === index ? '' : 'hide'}`}/>
-                <img src="/static/img/normal.svg" alt="" className={`${this.state.selectIndex === index ? 'hide' : ''}`}/>
+                <img src={this.$imagesMap.$checked} alt="" className={`${this.state.selectIndex === index ? '' : 'hide'}`}/>
+                <img src={this.$imagesMap.$nomal_check} alt="" className={`${this.state.selectIndex === index ? 'hide' : ''}`}/>
                 <i>{item.name}</i>
               </dd>))}
             </dl>

@@ -224,8 +224,14 @@ export default class Login extends exchangeViewBase {
                       }}/>
             </li>
           </ul>
-          <p><input type="checkbox" checked={this.state.checkState}
-                    onChange={this.checkUser}/>{this.intl.get("login-read")}
+          <p className="checkbox-wrap">
+            <input type="checkbox"
+                    className="check-select"
+                    checked={this.state.checkState}
+                    onChange={this.checkUser}/>
+              {/*<span></span>*/}
+              {/*<img src={this.$imagesMap.$checkbox_check} alt=""/>*/}
+              {this.intl.get("login-read")}
             <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
           </p>
         </div>

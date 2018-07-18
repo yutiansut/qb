@@ -25,6 +25,9 @@ export default class ExchangeViewBase extends ViewBase {
       $nomal_down: "/static/img/home/down_normal.svg",
       $checked: "/static/img/checked.svg",
       $nomal_check: "/static/img/normal_check.svg",
+      $checkbox_check: "/static/img/checkbox_checked.svg",
+      $home_star_sel: "/static/img/star_select.svg",
+      $home_star_nor: "/static/img/star_normal.svg"
     }
   }
 
