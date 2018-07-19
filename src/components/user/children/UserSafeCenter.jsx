@@ -34,9 +34,9 @@ export default class userSafeCenter extends exchangeViewBase {
       sureTwoVerify: 0, // 点击更改验证类型
       timeAddr: '', // 时区
       verifyList: [
-        {title: this.intl.get("user-loginVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}, {name: this.intl.get("none"), flag: false}]},
-        {title: this.intl.get("user-cashVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}]},
-        {title: this.intl.get("user-fundVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false}, {name: this.intl.get("user-email"), flag: false}, {name: this.intl.get("user-msg"), flag: false}]}
+        {title: this.intl.get("user-loginVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false, imgFlag: true}, {name: this.intl.get("user-email"), flag: false, imgFlag: false}, {name: this.intl.get("user-msg"), flag: false, imgFlag: false}, {name: this.intl.get("none"), flag: false, imgFlag: false}]},
+        {title: this.intl.get("user-cashVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false, imgFlag: true}, {name: this.intl.get("user-email"), flag: false, imgFlag: false}, {name: this.intl.get("user-msg"), flag: false, imgFlag: false}]},
+        {title: this.intl.get("user-fundVerify"), contentList: [{name: this.intl.get("user-googleVerify"), flag: false, imgFlag: true}, {name: this.intl.get("user-email"), flag: false, imgFlag: false}, {name: this.intl.get("user-msg"), flag: false, imgFlag: false}]}
       ],
       noticeList: [
         {name: this.intl.get("user-noticeEmail"), flag: true},
@@ -166,14 +166,14 @@ export default class userSafeCenter extends exchangeViewBase {
     }
   }
 
-  closeChange() {
+  closeChange() { // 关闭两步认证弹窗
     this.setState({
       showChange: false
     })
     this.getCaptchaVerify()
   }
 
-  closeSet() {
+  closeSet() { // 关闭设置弹窗
     this.setState({
       showSet: false
     })
@@ -200,12 +200,16 @@ export default class userSafeCenter extends exchangeViewBase {
     })
     noticeList[0].name = this.state.userInfo.email ? this.intl.get("user-noticeEmail") : this.intl.get("user-bindEmail") // 通知设置未绑定邮箱时
     noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-msg") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
-    // this.state.notifyMethod
     this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
+
   }
 
   componentWillUpdate(props, state, next) {
-
+    // console.log(232, state)
+    // if(state.showSet || state.showChange) { // 打开更换图片
+    //   // console.log(111)
+    //   // this.getCaptchaVerify()
+    // }
   }
 
 
@@ -257,7 +261,11 @@ export default class userSafeCenter extends exchangeViewBase {
               {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(item, index, i, this.state.userInfo.email ? 2 : 1)}>
                 <img src={this.$imagesMap.$checked} alt="" className={`${(item.flag) ? '' : 'hide'}`}/>
                 <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
-                <span>{item.name}</span>
+                <span>
+                  {item.name}
+                  {item.imgFlag && <img src={this.props.controller.configController.language === 'zh-CN' ? '/static/img/user/recommend_cn.svg' : '/static/img/user/recommend_en.svg'}
+                                        className={this.props.controller.configController.language === 'zh-CN' ? 'img-cn' : 'img-en'} alt="" />}
+                </span>
               </dd>))}
             </dl>))}
           </div>

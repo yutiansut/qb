@@ -22,7 +22,8 @@ export default class ForgetPass extends exchangeViewBase {
       captcha: "",
       captchaId: "",
       errPass: "",
-      errPassAgain: ""
+      errPassAgain: "",
+      userErr: ""
     }
     //绑定view
     controller.setView(this)
@@ -34,6 +35,7 @@ export default class ForgetPass extends exchangeViewBase {
     this.forgetLoginPass = controller.forgetLoginPass.bind(controller) // 图形验证码
     this.checkPassInput = this.checkPassInput.bind(this) // 检验密码
     this.checkAgainInput = this.checkAgainInput.bind(this) // 检验密码
+    this.checkUserInput = this.checkUserInput.bind(this) // 手机号
   }
 
   changeUserInput(value) {
@@ -69,6 +71,17 @@ export default class ForgetPass extends exchangeViewBase {
     console.log(5, value)
   }
 
+  checkUserInput() { // 手机号／邮箱
+    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
+      reg2 = /^1[3456789]\d{9}$/;
+
+    if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
+      this.setState({
+        userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
+      })
+    }
+  }
+
   checkPassInput() {
     let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
     if(!reg.test(this.state.passInput)) {
@@ -92,7 +105,7 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   canClick() { // 能否点击
-    if (this.state.errPassAgain || this.state.errPass) return false
+    if (this.state.userErr || this.state.errPassAgain || this.state.errPass) return false
     if (this.state.userInput && this.state.verifyInput && this.state.passInput && this.state.againInput && this.state.picInput) return true
     return false
   }
@@ -111,13 +124,17 @@ export default class ForgetPass extends exchangeViewBase {
 
   render() {
     return (
-      <div>
+      <div className="find-pass-wrap-con" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
         <div className="find-pass-wrap">
           <h1>{this.intl.get("login-findPass")}</h1>
           <ul>
             <li>
               <p>{this.intl.get("login-userInput")}</p>
-              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUserInput(value)}/>
+              <Input placeholder={this.intl.get("login-userInput")}
+                     value={this.state.userInput}
+                     onInput={value => this.changeUserInput(value)}
+                     onBlur={this.checkUserInput}/>
+              <em>{this.state.userInput && this.state.userErr}</em>
             </li>
             <li className="send-verify-li">
               <p>{this.intl.get("login-code")}</p>
@@ -135,7 +152,7 @@ export default class ForgetPass extends exchangeViewBase {
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
-              <em>{this.state.errPass}</em>
+              <em>{this.state.passInput && this.state.errPass}</em>
               <span>{this.intl.get("login-passRule")}</span>
             </li>
             <li>
@@ -145,7 +162,7 @@ export default class ForgetPass extends exchangeViewBase {
                      value={this.state.againInput}
                      onBlur={this.checkAgainInput}
                      onInput={value => this.changeAgainInput(value)}/>
-              <em>{this.state.errPassAgain}</em>
+              <em>{this.state.againInput && this.state.errPassAgain}</em>
             </li>
             <li className="send-picture-li">
               <p>{this.intl.get("user-popPicture")}</p>

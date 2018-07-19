@@ -14,6 +14,10 @@ export default class LoginController extends ExchangeControllerBase {
     // return this.store.data
   }
 
+  setHeaderOutView(view) { // 头部导航view
+    this.headerView = view
+  }
+
   getVerify(account, mode, type) { // 获取验证码
     let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3456789]\d{9}$/;
     if(!reg1.test(this.view.state.userInput) && !reg2.test(this.view.state.userInput)) return
@@ -68,7 +72,19 @@ export default class LoginController extends ExchangeControllerBase {
   async clearLoginInfo() { // 退出登陆
     this.store.loginOutRemind()
     this.userController.clearUserInfo()
-    // window.location.href = '/home'
+    window.location.href = '/whome'
+  }
+
+  loginUpdata(obj) { // 监听退出消息
+    if(obj.ret === 2006) {
+      setTimeout(() => {
+        this.clearLoginInfo()
+      }, 3000)
+
+      this.headerView.setState({
+        otherLogin: true
+      })
+    }
   }
 
   // 找回密码

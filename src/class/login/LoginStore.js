@@ -16,6 +16,7 @@ export default class LoginStore extends ExchangeStoreBase {
       if(data.ret === 0 && pushHistoryFlag ){
         this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
       }
+      this.controller.loginUpdata(data);
     })
     this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
   }

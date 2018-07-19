@@ -47,7 +47,8 @@ export default class Header extends ExchangeViewBase {
       userNoticeHeader: {},
       userNoticePop: false, // 弹窗信息
       userContent: "", // 弹窗信息
-      showNews: false // 消息下拉
+      showNews: false, // 消息下拉
+      otherLogin: false // 提示登录弹窗
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
@@ -63,6 +64,8 @@ export default class Header extends ExchangeViewBase {
     this.upDateUserNoctice = this.noticeController.upDateUserNoctice.bind(this.noticeController) // 消息变成已读
     //绑定view
     this.noticeController.setHeaderView(this)
+    //绑定view
+    this.loginController.setHeaderOutView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, this.noticeController.store.state.userNoticeHeader);
     this.matched = '/whome'
@@ -119,7 +122,7 @@ export default class Header extends ExchangeViewBase {
   }
 
   render() {
-    // console.log('头部', this.state, this.state.userNoticeHeader)
+    console.log('头部', this.state, this.state.userNoticeHeader)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
@@ -160,19 +163,21 @@ export default class Header extends ExchangeViewBase {
             </div>
             {this.state.showNews && <div className="new-li-content">
               <p className="clearfix">
-                <span>通知</span>
-                <em onClick={this.checkAll}>✓︎</em>
+                <span>{this.intl.get("userNotice")}</span>
+                <em onClick={this.checkAll}>{this.intl.get("notice-allRead")}</em>
               </p>
               {Object.keys(this.state.userNoticeHeader || {}).length &&  this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length ? (
                 <ul>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.map((v, index) => (
-                  <li key={index} onClick={value => this.changeHeaderNotice(v, index)}>{v.content.contentCN}
+                  <li key={index} onClick={value => this.changeHeaderNotice(v, index)} className="clearfix">
+                    <span>{this.props.configController.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}</span>
+                    <b>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</b>
                     {/* <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
                   </li>
                 ))}</ul>
               ) : (
-                <div>没有新通知</div>
+                <div>{this.intl.get("notice-none")}</div>
               )}
-              <Link to="/wuserNotice" className="check-all">查看全部</Link>
+              <Link to="/wuserNotice" className="check-all">{this.intl.get("asset-viewAll")}</Link>
             </div>}
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
@@ -206,6 +211,9 @@ export default class Header extends ExchangeViewBase {
         {this.state.userNoticePop && <UserNoticeContent
           onClose={() => {this.setState({ userNoticePop: false });}}
           content={this.state.userContent}/>}
+        {this.state.otherLogin && <div className="other-login">
+          <p>已在其他地方登录，请重新登录</p>
+        </div>}
       </div>
     )
   }

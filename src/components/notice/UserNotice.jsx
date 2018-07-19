@@ -41,7 +41,7 @@ export default class userNotice extends exchangeViewBase {
     }
     this.setState({
       userNoticePop: true,
-      userContent: v.content,
+      userContent: this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN,
       userNotice
     })
   }
@@ -91,7 +91,7 @@ export default class userNotice extends exchangeViewBase {
     console.log('内容', this.state.userNotice)
     return (
       <div className="user-notice-wrap">
-        <h1>通知</h1>
+        <h1>{this.intl.get("userNotice")}</h1>
         <table>
           <thead>
             <tr>
@@ -104,14 +104,14 @@ export default class userNotice extends exchangeViewBase {
             <tr key={index} onClick={value => this.showContent(v, index)}>
               <td >
                 <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
-                {v.content.contentCN}
+                {this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}
               </td>
               <td>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</td>
             </tr>))
             }
           </tbody>
         </table>
-        <p className={Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''}>{this.intl.get("user-none")}</p>
+        <p className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
         {Object.keys(this.state.userNotice).length && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
           pageSize={10}
           showTotal={true}

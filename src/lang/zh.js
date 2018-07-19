@@ -100,6 +100,7 @@ export default function zh(state) {
     avgDealPrice: "成交均价",
     dealTurnover: "成交总额",
     passError: '资金密码错误',
+    userNotice: '通知'
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -121,6 +122,7 @@ export default function zh(state) {
     609: "操作类型错误",
     610: "与原密码相同",
     612: '密码错误5次已锁定, 请{number}分钟后再试',
+    613: '已在其他地方登录',
     616: "未设置密码",
     617: "用户未实名认证",
     619: "图形验证码错误",
@@ -305,6 +307,9 @@ export default function zh(state) {
     "notice-appleContent6": "ICO信息，发行时间、数量、兑换比例等信息",
     "notice-appleContent7": "用户及社区信息，现有注册、活跃用户数量及社区链接",
     "notice-appleContent8": "白皮书或其他补充说明材料",
+    "notice-userDetail": "详情",
+    "notice-allRead": "全部标记为已读",
+    "notice-none": "没有新通知"
   };
   const order = {
     "order-current": "当前订单",

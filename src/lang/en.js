@@ -100,7 +100,8 @@ export default function en(state) {
     daelAmount: "Deal Amount",
     avgDealPrice: "Average Deal Price",
     dealTurnover: "Total Turnover",
-    passError: 'Funding password error'
+    passError: 'Funding password error',
+    userNotice: 'Notice'
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -122,6 +123,7 @@ export default function en(state) {
     609: "Wrong operation type",
     610: "Same as the original password",
     612: 'Password wrong, your account has been frozen, try after {number}mins！',
+    613: '已在其他地方登录',
     616: "Password is not set",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
@@ -223,6 +225,9 @@ export default function en(state) {
     "notice-appleContent6": "ICO information, issue data and amount, raising coin/token types and percentage etc.,",
     "notice-appleContent7": "Customer information, number of registered/active users, community addresses(if applicable)",
     "notice-appleContent8": "White papers or other materials",
+    "notice-userDetail": "Details",
+    "notice-allRead": "全部标记为已读",
+    "notice-none": "没有新通知"
   };
   const order = {
     "order-current": "Current order",

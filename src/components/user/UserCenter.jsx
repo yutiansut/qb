@@ -23,14 +23,14 @@ export default class User extends exchangeViewBase {
     const {controller} = this.props
     let match = this.props.match
     return (
-      <div className="user-big-wrap">
-        <div className="clearfix user-wrap">
-          <ul className="user-nav fl">
+      <div className="user-big-wrap" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
+        <div className="clearfix user-wrap" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
+          <ul className="user-nav fl" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
             <li><NavLink activeClassName="active" to={`${match.url}/safe`} >{this.intl.get("header-security")}</NavLink></li>
             <li><NavLink activeClassName="active" to={`${match.url}/identity`}>{this.intl.get("header-idVerify")}</NavLink></li>
             <li><NavLink activeClassName="active" to={`${match.url}/integration`}>{this.intl.get("user-score")}</NavLink></li>
           </ul>
-          <div className="user-content fl">
+          <div className="user-content fl" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
             <Switch>
               <Route path={`${match.url}/safe`} component={({match}) => (
                 <UserSafeCenter controller={controller} history={this.props.history}/>

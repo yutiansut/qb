@@ -159,6 +159,7 @@ export default class UserController extends ExchangeControllerBase {
         verifyList
       })
       // console.log('绑定成功', this.view.state)
+      this.getCaptchaVerify()
       return
     }
 
@@ -170,6 +171,7 @@ export default class UserController extends ExchangeControllerBase {
         noticeList,
         verifyList
       })
+      this.getCaptchaVerify()
       // console.log('绑定成功', this.view.state)
     }
 
@@ -223,6 +225,10 @@ export default class UserController extends ExchangeControllerBase {
     if (result === null && opType === 0) {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
       this.store.state.userInfo.fundPwd = 0
+      this.getCaptchaVerify()
+    }
+    if (result === null && opType === 1) {
+      this.getCaptchaVerify()
     }
     if (result !== null) {
       this.getCaptchaVerify()
@@ -251,6 +257,7 @@ export default class UserController extends ExchangeControllerBase {
     if (result === null) {
       verifyList[position-1].contentList.forEach(v=>v.flag=false)
       verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
+      this.getCaptchaVerify()
     } else {
       this.getCaptchaVerify()
     }

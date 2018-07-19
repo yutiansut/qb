@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="18px" viewBox="0 0 30 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>recommend_cn</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-261.000000, -443.000000)">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="recommend_cn" transform="translate(162.000000, 0.000000)">
+                    <path d="M5.80982578,13.6202124 L5.80982578,17 C5.80982578,17.5522847 6.2610887,18 6.81774971,18 L28.9920761,18 C29.5487371,18 30,17.5522847 30,17 L30,1 C30,0.44771525 29.5487371,0 28.9920761,0 L6.81774971,0 C6.2610887,0 5.80982578,0.44771525 5.80982578,1 L5.80982578,5.37978757 C5.80982578,5.75969448 5.59455257,6.10679041 5.25422008,6.27561887 L0.557387435,8.60557281 C0.362326536,8.70233651 0.204160602,8.859259 0.106630152,9.0527864 C-0.142316221,9.5467649 0.0594946889,10.1474379 0.557387435,10.3944272 L5.25422008,12.7243811 C5.59455257,12.8932096 5.80982578,13.2403055 5.80982578,13.6202124 Z" id="Combined-Shape-Copy-3" fill="#2BB789"></path>
+                    <text id="荐-copy-3" font-family="PingFangSC-Regular, PingFang SC" font-size="11" font-weight="normal" letter-spacing="0.044352" fill="#2F3335">
+                        <tspan x="11" y="13">荐</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

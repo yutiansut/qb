@@ -266,17 +266,17 @@ export default class userIdentity extends exchangeViewBase {
             {/*.userAuth.number*/}
             <Input placeholder={`${this.state.selectIndex === 0 ? this.intl.get("user-fillId") : this.intl.get("user-fillPassport")}`}
                    className="id-input"
-                   value={this.state.userAuth.number ? this.state.userAuth.number : this.state.numberValue}
+                   value={this.state.userAuth.number ? this.state.userAuth.number.replace(/(\d{3})\d{9,12}(\d{3})/, "$1****$2") : this.state.numberValue}
                    disabled ={this.state.userAuth.number ? true : false}
                    onInput={value => this.numberInput(value)}
                    onBlur={this.checkNumber}/>
-            <em className="number-err">{this.state.errNum}</em>
+            <em className="number-err">{this.state.userAuth.number && this.state.errNum}</em>
           </div>
         </div>
         <div className="photo-identify clearfix">
           <h2>{this.intl.get("user-photoVerify")}</h2>
-          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authProRes")}</em></div>
-          <div className={`${this.state.userAuth.state == 2 ? '' : 'hide'} fl`}><em>{this.intl.get("user-authSuccRes")}</em></div>
+          <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em className="auth-res">{this.intl.get("user-authProRes")}</em></div>
+          <div className={`${this.state.userAuth.state == 2 ? '' : 'hide'} fl`}><em className="auth-res">{this.intl.get("user-authSuccRes")}</em></div>
           <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 3 ? '' : 'hide'} fl`}>
             <dl>
               <dt>{this.intl.get("user-idReq")}</dt>

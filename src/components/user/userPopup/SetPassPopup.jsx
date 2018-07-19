@@ -242,6 +242,9 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>{this.intl.get("user-popPwdRule")}</p>
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
+              <li className={[2].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
+                <p>*目前仅支持中国大陆手机号码</p>
+              </li>
               <li>
                 {this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
                 {this.props.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}

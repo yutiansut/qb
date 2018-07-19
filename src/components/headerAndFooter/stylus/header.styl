@@ -85,8 +85,7 @@
                 background $main-color
                 color $normal-white-color
               &:hover
-                color $normal-white-color
-                background $exchange-color
+                color $main-color
   >ol
     float right
     >li
@@ -100,6 +99,7 @@
         ul
           display none
           background $exchange-color
+          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
           li
             cursor pointer
             height .4rem
@@ -107,8 +107,8 @@
             line-height .4rem
             text-align center
             corsor pointer
-            &:nth-of-type(1)
-              border-bottom 1px solid $exchange-bg
+            &:hover
+              color $main-color
         img
           display none
         &:hover
@@ -122,17 +122,20 @@
           cursor pointer
           img
             position relative
-            top -.02rem
+            top -.01rem
             width .2rem
             height .2rem
             vertical-align middle
+            opacity .5
+            &:hover
+              opacity 1
           i
-            position absolute
-            right -.06rem
-            top .25rem
+            position relative
+            right .08rem
+            top .08rem
             display inline-block
-            min-width .12rem
-            height .12rem
+            min-width .15rem
+            height .15rem
             padding .02rem
             background $negative-color
             color $normal-white-color
@@ -149,30 +152,33 @@
           border-radius (.02rem)
           background $exchange-color
           border 1px solid $normal-black-color
-          box-shadow 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.30)
-          &:after
-            position absolute
-            top -.06rem
-            left 50%
-            width .1rem
-            height .1rem
-            margin-left -.05rem
-            border-top 1px solid $normal-black-color
-            border-right 1px solid $normal-black-color
-            background $exchange-color
-            transform rotate(-45deg)
-            -webkit-transform rotate(-45deg)
-            content ''
+          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.3)
+          //&:after
+          //  position absolute
+          //  top -.06rem
+          //  left 50%
+          //  width .1rem
+          //  height .1rem
+          //  margin-left -.05rem
+          //  border-top 1px solid $normal-black-color
+          //  border-right 1px solid $normal-black-color
+          //  background $exchange-color
+          //  transform rotate(-45deg)
+          //  -webkit-transform rotate(-45deg)
+          //  content ''
           p
             height .4rem
             line-height .4rem
             padding 0 .1rem
-            color $normal-white-color
-            border-bottom 1px solid rgba(170,188,191,0.10)
+            color $normal-font-color
+            background $normal-black-color
             span
               float left
             em
               float right
+              &:hover
+                cursor pointer
+                color $main-color
           ul
             max-height 1.5rem
             padding .1rem
@@ -181,19 +187,29 @@
               height .3rem
               line-height .3rem
               cursor pointer
+              span
+                display inline-block
+                float left
+                width 1.2rem
+                max-width 1.2rem
+                overflow hidden
+                white-space nowrap
+                text-overflow ellipsis
+              b
+                float right
           div
             padding .3rem 0
             text-align center
+            color $normal-font-color
           .check-all
             display block
             height .36rem
             line-height .36rem
             text-align center
-
-          a
-            color $normal-white-color
-            background  rgba(170,188,191,0.10)
-            text-align center
+            color $normal-font-color
+            background $normal-black-color
+            &:hover
+              color $main-color
 
       &.login-li
         margin 0 .3rem 0 .35rem
@@ -203,6 +219,7 @@
         position relative
         margin 0 .3rem 0 .35rem
         p
+          cursor pointer
           text-align center
         ul
           position absolute
@@ -216,13 +233,14 @@
             padding 0 .05rem
             line-height .4rem
             text-align center
-            color $normal-font-color
+            color $normal-white-color-a
+            border-bottom 1px solid $exchange-bg
             &:hover
-              color $normal-white-color
+              color $main-color
               a
-                color $normal-white-color
+                color $main-color
             a
-              color $normal-font-color
+              color $normal-white-color-a
             //&:nth-of-type(1)
             //  border-bottom 1px solid $exchange-bg
         &:hover
@@ -281,6 +299,13 @@
   background transparent
   box-shadow none
   color $normal-white-color
+  >ul
+    li
+      &.select-list
+        .select-router
+          margin-top -.1rem
+          //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
+          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
   >ol
     >li
       &.language-li
@@ -289,10 +314,8 @@
           text-align center
         ul
           display none
-          background none
-          margin-top -.2rem
+          margin-top -.1rem
           li
-            color $main-color
             &:nth-of-type(1)
               border-bottom none
         img
@@ -301,5 +324,31 @@
           height .15rem
           margin-right .1rem
           vertical-align middle
+      &.user-li
+        ul
+          margin-top -.1rem
+          //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
+          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
+      &.new-li
+        .new-li-content
+          margin-top -.1rem
+          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
 
+// 其他地方登录弹窗
+.other-login
+  position absolute
+  top 100%
+  left 50%
+  transform translateX(-50%)
+  width 6rem
+  height 2rem
+  line-height 2rem
+  background $normal-black-color
+  z-index 999
+  border 1px solid $line-dark
+  border-radius .1rem
+  text-align center
+  color $normal-font-color
+  p
+    font-size .2rem
 
