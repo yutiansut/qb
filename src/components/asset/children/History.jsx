@@ -248,6 +248,7 @@ export default class History extends exchangeViewBase {
               title={this.intl.get("reset")}
               className="reset"
               onClick={() => {
+                this.props.controller.initHistory();
                 this.initSearch();
               }}
             />
