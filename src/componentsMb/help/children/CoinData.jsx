@@ -16,7 +16,6 @@ export default class CoinData extends exchangeViewBase {
       unit: controller.configData.language === "zh-CN" ? 1 : 0,
       value: "ETH",
       walletList: {},
-      tradePair: null
     };
     let { coinInfo } = controller.marketController.initState;
 
@@ -29,8 +28,6 @@ export default class CoinData extends exchangeViewBase {
     this.getCoinInfo = controller.marketController.getCoinInfo.bind(
       controller.marketController
     );
-    // 获取币种对应交易对
-    this.getTradePair = controller.getTradePair.bind(controller);
     // 处理出币种对应的交易对数组
     this.getCoinPair = controller.getCoinPair.bind(controller);
 
@@ -61,12 +58,10 @@ export default class CoinData extends exchangeViewBase {
 
     (!currency || currency === this.state.currency) && await this.getCoinInfo(this.state.walletList[currency || this.state.currency]);
 
-    this.getTradePair();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.currency !== this.state.currency) {
-      console.log('updateing', nextState.currency, this.state.currency);
       this.getCoinInfo(this.state.walletList[nextState.currency]);
     }
     if (JSON.stringify(nextState) === JSON.stringify(this.state)) return false;
@@ -78,8 +73,6 @@ export default class CoinData extends exchangeViewBase {
     let {
       name,
       enName,
-      icoPriceCN,
-      icoPriceEN,
       priceCN,
       priceEN,
       logo_url,
@@ -89,9 +82,6 @@ export default class CoinData extends exchangeViewBase {
       totalVolume,
       circulationVolume,
       description,
-      webSite,
-      blockSites,
-      whitePaper
     } = this.state.coinInfo;
     let { controller } = this.props;
     this.searchArr = controller.filter(
@@ -205,11 +195,6 @@ export default class CoinData extends exchangeViewBase {
             <p>
               {description && this.intl.get(description) ? this.intl.get(description) : description}
             </p>
-            <div className="button">
-              <Button type="base" title={this.intl.get('helo-coin-website')} href={webSite && webSite[0]} target={true} />
-              <Button type="base" title={this.intl.get('helo-coin-browser')} href={blockSites && blockSites[0]} target={true} />
-              <Button type="base" title={this.intl.get('helo-coin-white')} href={whitePaper && whitePaper[0]} target={true} />
-            </div>
           </div>
         </div>
       </div>

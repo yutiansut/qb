@@ -279,7 +279,8 @@ export default function zh(state) {
     "market-change": "涨跌幅",
     "market-change7D": "7日涨跌幅",
     "market-currencyInfo": "币种资料",
-    "market-volume": "24h量"
+    "market-volume": "24h量",
+    "market-volume-h5": "24h量",
   };
   const notice = {
     "notice-about": "关于我们",

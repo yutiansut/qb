@@ -21,15 +21,14 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 export default class Help extends exchangeViewBase {
   constructor(props) {
     super(props);
-
-    this.assetController = props.controller;
+    this.assetController = props.assetController;
     this.activityController = props.activityController;
   }
 
   render() {
     let match = this.props.match;
     const terms = () => {
-      return <Terms controller={this.activityController} />;
+      return <Terms/>;
     };
     const pricing = () => {
       return <Pricing controller={this.assetController} />;

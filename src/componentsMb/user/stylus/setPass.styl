@@ -58,16 +58,14 @@
           height .4rem
           font-size .13rem
         .picture-btn
-          border .01rem solid transparent
-          border-left none
+          border 0
           height .4rem
           background $h5-foreground-weight
-          border-radius 0
+          border-radius 0 .02rem .02rem 0
         .verify-btn
-          border .01rem solid transparent
-          border-left none
+          border 0
           height .4rem
-          border-radius 0
+          border-radius 0 .02rem .02rem 0
           background $h5-foreground-weight
           color $h5-color-light
         .pass-btn-group
@@ -77,15 +75,6 @@
             input
               border-right 0
               border-radius .02rem 0 0 .02rem
-          &:hover .picture-btn,
-          &:active .picture-btn,
-          &:focus .picture-btn,
-          &:hover .verify-btn,
-          &:active .verify-btn,
-          &:focus .verify-btn
-            border-color $h5-color-red
-            border-left none
-
       .submit-li
         margin-top .36rem
         .set-btn

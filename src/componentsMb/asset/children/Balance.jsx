@@ -33,7 +33,7 @@ export default class Balance extends exchangeViewBase {
       <ul className="menu-ul">
         <li><Link to="/mwallet/charge"><img src="/static/mobile/asset/icon_zc_cb@2x.png"/>{this.intl.get("asset-charge")}</Link></li>
         <li><a><img src="/static/mobile/asset/icon_zc_tb@2x.png"/>{this.intl.get("asset-withdraw")}</a></li>
-        <li><Link to="/mwallet/dashboard"><img src="/static/mobile/asset/icon_dd_pre@2x.png"/>{this.intl.get("asset-records")}</Link></li>
+        <li><Link to="/mwallet/dashboard" className="assets-record"><img src="/static/mobile/asset/icon_dd_pre@2x.png"/>{this.intl.get("asset-records")}</Link></li>
       </ul>
       <Wallets wallet={this.state.wallet} history={this.props.history} controller={this.props.controller} />
     </div>

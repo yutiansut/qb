@@ -280,7 +280,8 @@ export default function en(state) {
     "market-change": "Change",
     "market-change7D": "7D Change",
     "market-currencyInfo": "Currency details",
-    "market-volume": "24h Volume"
+    "market-volume": "24h Volume",
+    "market-volume-h5": "24h Vol",
   };
   const notice = {
     "notice-about": "About Us",

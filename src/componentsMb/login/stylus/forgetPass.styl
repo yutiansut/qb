@@ -29,14 +29,6 @@
       .clearfix
         display flex
         height .45rem
-        &:hover .picture-btn,
-        &:active .picture-btn,
-        &:focus .picture-btn,
-        &:hover .send-code-btn,
-        &:active .send-code-btn,
-        &:focus .send-code-btn
-          border-color $h5-color-red
-          border-left none
         .base-input-wrap
           flex-grow 1
           input
@@ -45,15 +37,13 @@
         .send-code-btn
           width 1rem
           background $h5-foreground-weight
-          border .01rem solid transparent
-          border-left none
+          border 0
           border-radius (0 .02rem .02rem 0)
           color $h5-color-light
         .picture-btn
           width 1rem
           border-radius (0 .02rem .02rem 0)
-          border .01rem solid transparent
-          border-left none
+          border 0
           background $h5-foreground-weight
 
     .submit-li

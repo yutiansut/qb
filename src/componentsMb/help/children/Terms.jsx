@@ -4,14 +4,12 @@ import exchangeViewBase from "../../../components/../components/ExchangeViewBase
 
 
 export default class Terms extends exchangeViewBase {
+
   constructor(props) {
     super(props);
-    // const {controller} = props
-    // console.log('jsxconfig',controller.configData)
   }
+
   render() {
-    // const controller = this.props.controller;
-    // let { nameUsd, netUrl } = controller.configData;
 
     const content = this.getContent();
     return <div className="help-terms">
@@ -36,9 +34,6 @@ export default class Terms extends exchangeViewBase {
     </div>;
   }
   getContent() {
-    // const controller = this.props.controller;
-    // let { nameUsd, netUrl } = controller.configData;
-
     return [
       {
         title: this.intl.get('help-terms-1'),

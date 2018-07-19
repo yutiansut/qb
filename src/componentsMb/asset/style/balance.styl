@@ -31,11 +31,15 @@
       border-left none
       border-right none
       background $h5-foreground
+      height .45rem
       li
         display inline-block
         width 33%
         text-align center
         position relative
+        overflow hidden
+        .assets-record
+          font-size .12rem
         &:not(:last-of-type)::after
           position absolute
           right 0
@@ -46,6 +50,7 @@
           top .1rem
         a
           color $h5-color-normal
+          white-space nowrap
           img
             height .2rem
             margin-right .08rem

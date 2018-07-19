@@ -58,11 +58,13 @@ export default class HomeMarket extends ExchangeViewBase{
                         <tr key={index}>
                             <td onClick={e => this.addCollect(v, index, e)} className="td1">
                                 {controller.token && <img src={v.isFavorite ? "/static/mobile/home/icon_sc_pre@2x.png" : "/static/mobile/home/icon_sc@2x.png"}/>}
-                                <h3>
-                                    {v.coinName.toUpperCase()}
-                                    <small>/{v.marketName.toUpperCase()}</small>
-                                </h3>
-                                <span>{this.intl.get("market-volume")} {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
+                                <div className="td1-r">
+                                    <h3>
+                                        {v.coinName.toUpperCase()}
+                                        <small>/{v.marketName.toUpperCase()}</small>
+                                    </h3>
+                                    <span>{this.intl.get("market-volume-h5")} {Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</span>
+                                </div>
                             </td>
                             <td className="td2">
                                 <b>{Number(v.price).format({number:'digital'}) || 0}</b>
