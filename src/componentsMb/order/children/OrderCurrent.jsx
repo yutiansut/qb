@@ -174,17 +174,17 @@ export default class OrderCurrent extends exchangeViewBase{
 
         <div className='order-current-header clearfix'>
           <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
-            <img src={this.$imagesMap.$back_white}/>
+            <img src="../../../../static/mobile/order/icon_fh@3x.png"/>
             <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.intl.get("order-current")}</div>
           <NavLink to={`${match.url}/history`}>
           <div className="history fr">
-            <img src={this.$imagesMap.$order_history}/>
+            <img src="../../../../static/mobile/order/icon_cd@3x.png"/>
           </div>
           </NavLink>
           <div className="filter fr" onClick={this.changeFilter}>
-            <img src={this.$imagesMap.$order_filter}/>
+            <img src="../../../../static/mobile/order/icon_shaixuan@3x.png"/>
           </div>
         </div>
         {/* <div className="order-current-hide">

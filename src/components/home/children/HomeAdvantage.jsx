@@ -1,8 +1,8 @@
-import React from 'react';
-import ExchangeViewBase from "../../ExchangeViewBase.jsx";
+import React, {Component} from 'react';
+import exchangeViewBase from "../../ExchangeViewBase.jsx";
 import '../stylus/homeAdvadtage.styl'
 
-export default class HomeAdvantage extends ExchangeViewBase {
+export default class HomeAdvantage extends exchangeViewBase {
   constructor() {
     super()
     this.imageArray = [
@@ -16,8 +16,9 @@ export default class HomeAdvantage extends ExchangeViewBase {
       {head: this.intl.get("home-advantage-h2"), para: this.intl.get("home-advantage-p2")},
       {head: this.intl.get("home-advantage-h3"), para: this.intl.get("home-advantage-p3")},
       {head: this.intl.get("home-advantage-h4"), para: this.intl.get("home-advantage-p4")},
-    ]
-    this.state = {index: 0}
+    ];
+    this.state = {index: 0};
+    this.changeIndex = this.changeIndex.bind(this);
   }
 
   componentWillMount() {
@@ -27,25 +28,28 @@ export default class HomeAdvantage extends ExchangeViewBase {
   componentDidMount() {
 
   }
+  changeIndex(index) {
+    this.setState({index})
+  }
   render() {
     return (
       <div className="home-advan-wrap">
         <h1>{this.intl.get("home-advantage")}</h1>
         <div className="home-advan-header clearfix">
           <ul>
-            <li className={`${this.state.index === 0 &&"active"}`} onClick={() => {this.setState({index: 0})}}>
+            <li className={this.state.index === 0 ?"active" : ""} onClick={() => {this.setState({index: 0})}}>
               <img src="/static/img/home/4_1.svg"/>
               <p>{this.intl.get("home-advantage-h1")}</p>
             </li>
-            <li className={`${this.state.index === 1 &&"active"}`} onClick={() => {this.setState({index: 1})}}>
+            <li className={this.state.index === 1 ?"active" : ""} onClick={() => {this.setState({index: 1})}}>
               <img src="/static/img/home/4_2.svg" style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h2")}</p>
             </li>
-            <li className={`${this.state.index === 2 &&"active"}`} onClick={() => {this.setState({index: 2})}}>
+            <li className={this.state.index === 2 ?"active" : ""} onClick={() => {this.setState({index: 2})}}>
               <img src="/static/img/home/4_3.svg" style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h3")}</p>
             </li>
-            <li className={`${this.state.index === 3 &&"active"}`} onClick={() => {this.setState({index: 3})}}>
+            <li className={this.state.index === 3 ?"active" : ""} onClick={() => {this.setState({index: 3})}}>
               <img src="/static/img/home/4_4.svg" style={{padding: ".05rem 0"}}/>
               <p>{this.intl.get("home-advantage-h4")}</p>
             </li>

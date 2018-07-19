@@ -9,8 +9,8 @@
     left 0;
     width 100%
     padding .12rem
-    color $normal-white-color
-    background-color $h5-color-blue
+    color $h5-color-normal
+    background-color $h5-foreground
     img
       height .2rem
       padding .02rem
@@ -43,22 +43,23 @@
     background-color $popup-bg-color
     .filter-container
       padding .12rem .12rem 0 .12rem
-      background-color $normal-white-color
-      border-bottom .01rem solid $h5-filter-button
+      background-color $h5-background
+      border-bottom .02rem solid $h5-foreground
       h1
         font-size .14rem
         line-height .2rem
+        color $h5-color-normal
       .choose-button
         padding .06rem .24rem
         border-radius .02rem
         margin-right .12rem
         font-size .15rem
         line-height .2rem
-        color $h5-orderlist-th
-        background-color $h5-order-filter-button
+        color $h5-color-light
+        background-color $h5-foreground
       .chosen
         position relative
-        background-color $h5-order-filter-button-chosen
+        color $h5-color-green
         color $h5-color-blue
       .chosen:after
         position absolute
@@ -76,15 +77,15 @@
         width 10.8em
     .filter-operate
       padding .08rem 0
-      background-color $normal-white-color
+      background-color $h5-background
       button
         width 50%
         font-size .18rem
         line-height .25rem
-        color $h5-color-blue
+        color $h5-color-green
       button:first-child
         box-sizing border-box
-        border-right .01rem solid $h5-filter-button
+        border-right .02rem solid $h5-foreground
   .order-history-list
     width 100%
     height 100%

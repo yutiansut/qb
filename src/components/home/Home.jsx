@@ -25,6 +25,7 @@ export default class Home extends exchangeViewBase {
   }
 
   componentDidMount() { // 滚动事件 改变头部
+    super.componentDidMount();
     let headerName = document.getElementById('header'), activeHeight = document.getElementById('active')
     // console.log(headerName.className, activeHeight.offsetHeight)
     window.addEventListener('scroll', () => {

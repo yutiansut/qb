@@ -8,7 +8,7 @@
     left 0
     width 100%
     padding .12rem .12rem
-    border-bottom .02rem solid $h5-border-light
+    background-color $h5-foreground
     .back
       img 
         height .16rem
@@ -17,7 +17,7 @@
       span 
         font-size .14rem
         line-height .2rem
-        color $h5-color-blue
+        color $h5-color-normal
         vertical-align middle
     .name
       position absolute
@@ -27,7 +27,7 @@
       margin-left -0.36rem
       font-size .18rem
       line-height .20rem
-      color $h5-color-weight
+      color $h5-color-normal
   .order-details-info
     padding .72rem .12rem 0
     h1 
@@ -35,7 +35,7 @@
       font-size .2rem
       line-height .28rem
       text-align center
-      color $h5-color-weight
+      color $h5-color-normal
     h2 
       margin-bottom .25rem
       font-size .18rem
@@ -48,23 +48,26 @@
       .fl
         font-size .14rem
         line-height .2rem
-        color $h5-orderlist-th
+        color $h5-color-light
       .fl:nth-child(1)
         margin-right .05rem
         text-align justify
+      .fr
+        color $h5-color-normal
     .deal
-      color $h5-color-blue
+      color $h5-color-green
     .partdeal
-      color $h5-active-yellow
+      color $h5-color-orange
     .end
-      color $h5-undeal-gray
+      color $h5-color-light
   .order-deal-info
     padding .12rem
-    border-top .02rem solid $h5-border-light
+    border-top .02rem solid $h5-foreground
     h3 
       margin-bottom .06rem
       font-size .15rem
       line-height .21rem
+      color $h5-color-normal
     table 
       width 3.51rem
       .set-width
@@ -73,7 +76,8 @@
         font-size .12rem
         line-height .29rem
         text-align left
-        color $h5-orderlist-th
+        color $h5-color-light
       td 
         font-size .15rem
         line-height .33rem
+        color $h5-color-normal

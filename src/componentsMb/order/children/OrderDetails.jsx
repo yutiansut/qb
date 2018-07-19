@@ -52,17 +52,17 @@ export default class OrderDetails extends exchangeViewBase {
       <div className="order-details">
         <div className="order-details-header">
           <div className="back" onClick={() => {this.props.setListDisplay()}}>
-            <img src="../../../../static/mobile/order/Back Copy@3x.png"/>
+            <img src="../../../../static/mobile/order/icon_fh@3x.png"/>
             <span>{this.intl.get("back")}</span>
           </div>
           <div className="name">{this.intl.get("orderDetail")}</div>
         </div>
         <div className="order-details-info">
-          <h1>{orderDetail.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")}{tradePairName}</h1>
+          <h1>{orderDetail.orderType === 0 ? this.intl.get("buy") : this.intl.get("sell")} {tradePairName}</h1>
           <h2 className={orderStatusClass[orderDetail.orderStatus]}>{this.state.orderStatus[orderDetail.orderStatus]}</h2>
           <div className="info-item clearfix">
             <span className="fl">{this.intl.get("orderType")}</span>
-            <span className="fr">{type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</span>
+            <span className="fr" style={type === "current" ? {color: "#EF8534"} : {}}>{type === "current" ? this.intl.get("order-current") : this.intl.get("order-history")}</span>
           </div>
           <div className="info-item clearfix">
             <span className="fl">{type === "current" ? this.intl.get("price") : this.intl.get("avgDealPrice")}</span>

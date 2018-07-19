@@ -319,7 +319,7 @@ export default function zh(state) {
     'hideReset': '隐藏已撤销',
     "exportOrderRecord": "导出历史订单记录",
     "exportDealRecord": "导出历史成交记录",
-    "orderDetail": '订单详情',
+    "orderDetail": '订单明细',
     "order-deal-total": '成交总量',
     "order-deal-money": '成交金额',
     "order-buy": '买方',
