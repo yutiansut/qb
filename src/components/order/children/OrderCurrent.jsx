@@ -131,6 +131,18 @@ export default class OrderCurrent extends ExchangeViewBase {
     })
   }
 
+  resetFilter() {
+    this.setState({
+      startTime: Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
+      endTime: Math.floor(new Date().getTime() / 1000),
+      idArray: [],
+      coinSelect: this.intl.get('all'),
+      marketSelect: this.intl.get('all'),
+      orderType: 2,
+      typeSelect: this.intl.get('all'),
+    });
+  }
+
   hideReset(e) {
     let orderStatus = e.target.checked ? [ 2, 4, 5, 6, 7] : [2, 3, 4, 5, 6, 7];
     let params = {
@@ -243,6 +255,15 @@ export default class OrderCurrent extends ExchangeViewBase {
         endTime: this.state.endTime,
         page: this.state.page,
         pageSize: this.state.pageSize
+      },
+      orderDeal: {
+        idArray: this.state.idArray,
+        orderType: this.state.orderType,
+        orderStatus: this.state.orderStatus,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime,
+        page: this.state.page,
+        pageSize: this.state.pageSize
       }
     };
     this.props.type === 'orderCurrent' && this.orderListHandle(this.props.type, params[this.props.type]);
@@ -250,14 +271,15 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
 
   startTime(e) {
+    console.log(e)
     this.setState({
-      startTime: e
+      startTime: parseInt(e / 1000)
     })
   }
 
   endTime(e) {
     this.setState({
-      endTime: e
+      endTime: parseInt(e / 1000)
     })
   }
 
@@ -276,6 +298,7 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
   render() {
     const {type} = this.props;
+    console.log("ggggggggggggggggggggg",this.state.orderListArray)
     return (
         <div className='order-detail'>
           <div className='order-title'>
@@ -319,51 +342,58 @@ export default class OrderCurrent extends ExchangeViewBase {
               />
             </li>
             {type !== 'orderCurrent' && <li className='data-filter'>
-              <DatePicker onChangeStart={(e) => this.startTime(e)} onChangeEnd={(e) => this.endTime(e)}/>
+              <DatePicker 
+                startTime={this.state.startTime}
+                endTime={this.state.endTime}
+                onChangeStart={(e) => this.startTime(e)} 
+                onChangeEnd={(e) => this.endTime(e)}
+              />
             </li>}
             <li className='filter-handle'>
               <Button type="base" title={this.intl.get('search')} className="search" onClick={this.searchFilter.bind(this)}/>
-              {type !== 'orderCurrent' && <Button type="base" title={this.intl.get('reset')} className="reset"/>}
+              {type !== 'orderCurrent' && <Button type="base" title={this.intl.get('reset')} className="reset" onClick={this.resetFilter.bind(this)}/>}
             </li>
           </ul>
-          <table className='order-detail-table'>
-            <thead>
-            <tr>
-              {this.state.orderDetailHead[type].map((v, index) => {
+          {this.state.orderListArray.length > 0 ? (
+            <table className='order-detail-table'>
+              <thead>
+              <tr>
+                {this.state.orderDetailHead[type].map((v, index) => {
+                  return (
+                      <td key={index}>{v.name}</td>
+                  )
+                })}
+              </tr>
+              </thead>
+              <tbody>
+              {this.state.orderListArray && this.state.orderListArray.map((v, index) => {
                 return (
-                    <td key={index}>{v.name}</td>
+                    <tr key={index}>
+                      <td>{Number(v.orderTime).toDate()}</td>
+                      <td>{v.tradePairName}</td>
+                      <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
+                      {/*todo 颜色改类名统一处理*/}
+                      {/*价格*/}
+                      {type === 'orderCurrent' && <td>{v.price}</td>}
+                      {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : v.price}</td>}
+                      {type === 'orderDeal' && <td>{v.avgPrice}</td>}
+                      {/*数量*/}
+                      {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
+
+                      <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
+                      {type === 'orderDeal' && <td>{v.fee}</td>}
+                      {type === 'orderCurrent' && <td>{v.undealCount}</td>}
+                      {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
+                      {type === 'orderHistory' && <td>{v.avgPrice}</td>}
+                      {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
+                      {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{color:'#2BB789', cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
+
+                    </tr>
                 )
               })}
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.orderListArray && this.state.orderListArray.map((v, index) => {
-              return (
-                  <tr key={index}>
-                    <td>{Number(v.orderTime).toDate()}</td>
-                    <td>{v.tradePairName}</td>
-                    <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
-                    {/*todo 颜色改类名统一处理*/}
-                    {/*价格*/}
-                    {type === 'orderCurrent' && <td>{v.price}</td>}
-                    {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : v.price}</td>}
-                    {type === 'orderDeal' && <td>{v.avgPrice}</td>}
-                    {/*数量*/}
-                    {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
-
-                    <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
-                    {type === 'orderDeal' && <td>{v.fee}</td>}
-                    {type === 'orderCurrent' && <td>{v.undealCount}</td>}
-                    {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
-                    {type === 'orderHistory' && <td>{v.avgPrice}</td>}
-                    {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
-                    {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{color:'#2BB789', cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
-
-                  </tr>
-              )
-            })}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          ) : (<div className="no-order-detail-list">{this.intl.get("noRecords")}</div>)}
           <div className='order-page'>
             {(this.props.type !== 'orderCurrent' && this.state.total) && <Pagination total={this.state.total} showTotal={true} pageSize={20}/>}
           </div>
