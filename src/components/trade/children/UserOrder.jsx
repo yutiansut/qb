@@ -211,31 +211,33 @@ export default class userOrder extends ExchangeViewBase {
                   <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]}</span>
                 </div>
               </div>
-              <table className='trade-order-table'>
-                <thead>
-                <tr>
-                  {this.state.orderInfoHead.map((v, index) => {
+              <div className="trade-order-table-wrap">
+                <table className='trade-order-table'>
+                  <thead>
+                  <tr>
+                    {this.state.orderInfoHead.map((v, index) => {
+                      return (
+                          <td key={index}>{v.name}</td>
+                      )
+                    })}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
                     return (
-                        <td key={index}>{v.name}</td>
+                        <tr key={index}>
+                          {/*<td>{v.buyer}</td>*/}
+                          {/*<td>{v.seller}</td>*/}
+                          <td>{Number(v.orderTime).toDate()}</td>
+                          <td>{v.price}</td>
+                          <td>{v.volume}</td>
+                          <td>{v.turnover}</td>
+                        </tr>
                     )
                   })}
-                </tr>
-                </thead>
-                <tbody>
-                {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
-                  return (
-                      <tr key={index}>
-                        {/*<td>{v.buyer}</td>*/}
-                        {/*<td>{v.seller}</td>*/}
-                        <td>{Number(v.orderTime).toDate()}</td>
-                        <td>{v.price}</td>
-                        <td>{v.volume}</td>
-                        <td>{v.turnover}</td>
-                      </tr>
-                  )
-                })}
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
               <div className='trade-order-close' onClick={()=> this.setState({detailFlag: false})}>{this.intl.get('close')}</div>
             </div>
           </div>

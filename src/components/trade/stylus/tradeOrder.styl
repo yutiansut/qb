@@ -103,23 +103,26 @@
 		top 50%
 		left 50%
 		transform translate(-50%, -50%)
-		background $normal-white-color
-		width 7.57rem
-		min-height 3.8rem
+		background $line-dark
+		width 7rem
+		min-height 3.3rem
 		border-radius .02rem
 		z-index 6666
 		h3
-			height .7rem
-			font-size .18rem
-			line-height .7rem
+			padding .11rem 0
+			margin-bottom .2rem
+			font-size .14rem
+			line-height .21rem
 			text-align center
-			color $normal-black-color
+			color $normal-white-color-a9
+			background-color $normal-black-color
 		.trade-order-content
-			width 6.48rem
+			width 6.68rem
 			height 1.01rem
 			margin 0 auto
+			border-bottom .02rem dashed $exchange-search-bg
 			border-radius .02rem
-			background $line-light
+			background $bg-medium-color
 			display flex
 			color $normal-black-color
 			justify-content space-around
@@ -128,25 +131,19 @@
 				padding .2rem 0
 				p
 					margin-bottom .25rem
+					text-align center
+					color $normal-white-color-a9
 				span
-					color $normal-gray-color
+					color $normal-white-color-a
 		.trade-order-table
-			width 7.22rem
-			margin .3rem auto .2rem
-			font-size .14rem
-			border-bottom .01rem solid $line-light
+			width 100%
+			font-size .12rem
+			line-height .28rem
+			text-align center
 			thead
-				tr
-					height .30rem
-					color $normal-gray-color
-					td
-						text-align center
+				color $normal-white-color-a
 			tbody
-				color $normal-black-color
-				tr
-					height .3rem
-					td
-						text-align center
+				color $normal-white-color-a9
 		.trade-order-close
 			cursor pointer
 			width 1.6rem
@@ -156,6 +153,11 @@
 			background $exchange-blue
 			line-height .35rem
 			text-align center
+		.trade-order-table-wrap
+			width 6.68rem
+			padding .19rem 0
+			margin 0 auto .2rem
+			background $bg-medium-color
 .reset-pop
 	.reset-pop-location
 		top 50%
