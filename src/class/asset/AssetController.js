@@ -155,7 +155,7 @@ export default class AssetController extends ExchangeControllerBase {
         "," +
         (v.orderType === 1 ? `${v.doneCount}/${v.verifyCount}` : "-") +
         "," +
-        this.view.status[v.orderStatus] +
+        this.view.staticData.status[v.orderStatus] +
         "," +
         v.fee;
     });
