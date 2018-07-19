@@ -7,6 +7,7 @@ import "../../style/wallet.styl";
 export default class Wallets extends exchangeViewBase {
   constructor(props) {
     super(props);
+    let { controller } = this.props;
     this.state = {
       value: "",
       hideLittle: false,
@@ -19,7 +20,8 @@ export default class Wallets extends exchangeViewBase {
         this.$imagesMap.$rank_down,
         this.$imagesMap.$rank_up,
         this.$imagesMap.$rank_normal
-      ]
+      ],
+      lang: controller.configData.language
     };
     this.sort = (k, v) => {
       let obj = {
@@ -33,7 +35,6 @@ export default class Wallets extends exchangeViewBase {
       this.setState(obj);
     };
 
-    let { controller } = this.props;
     this.filter = controller.filte.bind(controller);
     this.rank = controller.rank.bind(controller);
     // 充值前的身份认证状态验证
@@ -126,7 +127,7 @@ export default class Wallets extends exchangeViewBase {
                 {this.intl.get("asset-lock")}
                 <b className="pop-parent">
                   <span className="img" />
-                  <em className="pop-children uppop-children">
+                  <em className={`pop-children uppop-children ${this.state.lang === 'en-US' ? 'en' : 'cn'}`}>
                     {this.intl.get("asset-tip2")}
                   </em>
                 </b>

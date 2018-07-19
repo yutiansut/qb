@@ -102,28 +102,27 @@
               &:hover
                 color $main-color
                 text-decoration underline
-            &.lock, &.tobtc
+            &.lock
               .pop-parent
-                position relative
                 top 0.01rem
                 left 0.03rem
                 .pop-children
                   left -0.75rem
-                  // top 0.02rem
                   min-width 217px
                   z-index 99
+                  &.en
+                    min-width 575px
                   &::before
                     left 0.85rem
             &.tobtc
               .pop-parent
-                position relative
                 top 0.01rem
                 left 0.03rem
                 .pop-children
                   left -0.75rem
                   // top 0.02rem
-                  min-width 184px
-                  width 1.9rem
+                  min-width 150px
+                  width 1.8rem
                   z-index 99
                   &::before
                     left 0.81rem
