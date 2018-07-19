@@ -199,7 +199,8 @@ export default class MarketController extends ExchangeControllerBase {
     type < 2 && this.store[arr[type]](List)
     // console.log('updateMarketAll 1', this.store.state)
     //根据市场从交易对池中选择该市场中的交易对
-    let homeMarketPairData = await this.store.selectMarketData()
+    let homeMarketPairData = await this.store.selectMarketData();
+    console.log('homeMarketPairData11111111111',homeMarketPairData)
     // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),

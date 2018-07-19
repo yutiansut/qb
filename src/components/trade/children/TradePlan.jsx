@@ -131,7 +131,7 @@ export default class TradePlan extends ExchangeViewBase {
       let b = a.split(',');
       let c;
       b.length > 1 && (c = b.join(''));
-      dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
+      dealType ? (this.setState({inputSellNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
       dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
     }
   }

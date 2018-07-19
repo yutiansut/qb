@@ -73,14 +73,14 @@ export default class LiveTrade extends ExchangeViewBase{
                     <td>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</td>
                     <td style={{color : '#F25656 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal'}) || Number(v.price).format({number: 'digital'})) }</td>
                     <td>{Number(v.amount).formatFixNumberForAmount(v.price)}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN.multi(v.amount)).format({number:'property'}) || (this.state.unitsType === 'USD' && Number(v.priceEN.multi(v.amount)).format({number:'property'}) || Number(v.price.multi(v.amount)).format({number:'property'})) }</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN.multi(v.amount)).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN.multi(v.amount)).format({number:'legal'}) || Number(v.price.multi(v.amount)).format({number:'property'})) }</td>
                   </tr>
               )
             )}
             </tbody>
 
           <tbody className='live-deal'>
-            <tr><td colSpan='4'>{this.state.unitsType === 'CNY' && Number(this.state.prices.priceCN).format({number:'property',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(this.state.prices.priceEN).format({number:'property',style:{name:'usd'}}) || Number(this.state.prices.price).format({number:'property'}))}</td></tr>
+            <tr><td colSpan='4'>{this.state.unitsType === 'CNY' && Number(this.state.prices.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(this.state.prices.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(this.state.prices.price).format({number:'digital'}))}</td></tr>
           </tbody>
             <tbody>
             {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>
@@ -89,7 +89,7 @@ export default class LiveTrade extends ExchangeViewBase{
                     <td>{`${this.intl.get('order-b')}${index + 1}`}</td>
                     <td style={{color : '#2BB789 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal'}) || Number(v.price).format({number: 'digital'})) }</td>
                     <td>{Number(v.amount).formatFixNumberForAmount(v.price)}</td>
-                    <td>{this.state.unitsType === 'CNY' && (Number((v.priceCN).multi(v.amount)).format({number:'property'})) || (this.state.unitsType === 'USD' && (Number((v.priceEN).multi(v.amount)).format({number:'property'})) || (Number((v.price).multi(v.amount)).format({number:'property'}))) }</td>
+                    <td>{this.state.unitsType === 'CNY' && (Number((v.priceCN).multi(v.amount)).format({number:'legal'})) || (this.state.unitsType === 'USD' && (Number((v.priceEN).multi(v.amount)).format({number:'legal'})) || (Number((v.price).multi(v.amount)).format({number:'property'}))) }</td>
                   </tr>
               )
             )}

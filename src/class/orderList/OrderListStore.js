@@ -16,7 +16,7 @@ export default class OrderListStore extends ExchangeStoreBase {
       // console.log('joinRoom getWebSocketData Recent', data, this.controller)
     })
     this.WebSocket.general.on('orderUpdate', data => {
-      // console.log(this.controller,'orderUpdate getWebSocketData', data);
+      // console.log(this.controller,'orderUpdate getWebSocketData123456', data);
       this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(data)
     })
   }

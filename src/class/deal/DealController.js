@@ -145,6 +145,7 @@ export default class DealController extends ExchangeControllerBase {
           });
       return
     }
+    
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let params = {
@@ -162,6 +163,17 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
+    if(!params.price){
+      this.view.setState(
+          {
+            dealPopMsg:'价格不能为空',
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+          }
+      )
+    }
     // if(Number(params.price.multi(params.count)).formatFixNumberForAmount())
     let result = await this.store.dealTrade(params);
     if(result === null){

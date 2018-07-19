@@ -87,11 +87,15 @@ export default class OrderListController extends ExchangeControllerBase {
       return
     }
     let recentTradeListArr = this.view.state.recentTradeListArr;
-    recentTradeListArr.unshift(data);
-    this.view.setState(
-        {
-          recentTradeListArr
-        }
-    )
+    let findIndex = recentTradeListArr.findIndex(v => Number(v.orderId) === Number(data.orderId));
+    if(data.orderStatus === 2 && findIndex === -1){
+      recentTradeListArr.unshift(data);
+      this.view.setState(
+          {
+            recentTradeListArr
+          }
+      )
+    }
+    
   }
 }
