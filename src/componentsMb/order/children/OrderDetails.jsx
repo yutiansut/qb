@@ -95,7 +95,7 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fr">{orderDetail.undoneCount}</span>
           </div>}
         </div>
-        {type === "history" && <div className="order-deal-info">
+        {(orderDetail.orderStatus === 1 || orderDetail.orderStatus === 6 || orderDetail.orderStatus === 2) && <div className="order-deal-info">
           <h3>{this.intl.get("orderDetail")}</h3>
           <table>
             <tr className="clearfix">

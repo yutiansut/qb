@@ -24,6 +24,7 @@ export default class User extends exchangeViewBase {
     const {controller} = this.props
     let match = this.props.match
     return (
+      <div className="notice-wrap-container">
       <div className="clearfix notice-wrap">
         <ul className="notice-nav fl">
           <li><NavLink activeClassName="active" to={`${match.url}/content`} >{this.intl.get("footer-info")}</NavLink></li>
@@ -44,6 +45,7 @@ export default class User extends exchangeViewBase {
             <Redirect to={`${match.url}/content`} />
           </Switch>
         </div>
+      </div>
       </div>
     );
   }

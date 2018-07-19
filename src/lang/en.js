@@ -293,7 +293,7 @@ export default function en(state) {
     "notice-title": "Title",
     "notice-type": "Type",
     "notice-addr": "Address",
-    "notice-web": "网址",
+    "notice-web": "Website",
     "notice-appleTitle": "Listing Application and Specifications",
     "notice-appleState1": "To protect the interests of our clients,",
     "notice-appleState2": "will review and evaluate every trading product listed on our platform. Please provide following information and send it over to our email: ",
