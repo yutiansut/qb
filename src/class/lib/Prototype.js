@@ -154,10 +154,17 @@ Number.prototype.formatFixNumber = function (formatType) {
 
 Number.prototype.formatFixNumberForAmount = function (price) {
   // console.log('number amount 0',this, price, price < 100)
-  if(price < 100){
+  if(price < 100 && price >= 0.1){
     // console.log('number amount 1',this.toFixedWithoutUp(4).formatFixStyle({}).addZero(4))
     return (''+this.toFixedWithoutUp(4).formatFixStyle({})).addZero(4)
   }
+  if(price < 0.1 && price >= 0.01){
+    return (''+this.toFixedWithoutUp(2).formatFixStyle({})).addZero(2)
+  }
+  if(price < 0.01){
+    return (''+this.toFixedWithoutUp(0).formatFixStyle({})).addZero(0)
+  }
+  if(price)
   // console.log('number amount 2',this.toFixedWithoutUp(6).formatFixStyle({}).addZero(6))
   return (''+this.toFixedWithoutUp(6).formatFixStyle({})).addZero(6)
 }

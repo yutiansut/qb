@@ -71,19 +71,18 @@ export default class extends ExchangeViewBase {
           </thead>
           <tbody>
             {this.state.recentTradeListArr && this.state.recentTradeListArr.map(
-              (v, index) => {
-                return (
+              (v, index) =>
+                index <= 50 && (
                   <tr key={index}>
                     <td>{Number(v.dealTime).toDate('HH:mm:ss')}</td>
                     <td>
-                      {(this.state.unitsType === "CNY" && v.priceCN) ||
-                        ((this.state.unitsType === "USD" && v.priceEN) ||
-                          v.price)}
+                      {(this.state.unitsType === "CNY" && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) ||
+                        ((this.state.unitsType === "USD" && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) ||
+                          Number(v.price).format({number:'digital'}))}
                     </td>
-                    <td>{v.volume}</td>
+                    <td>{Number(v.volume).formatFixNumberForAmount(Number(v.price))}</td>
                   </tr>
-                );
-              }
+                )
             )}
           </tbody>
         </table>

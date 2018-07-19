@@ -78,6 +78,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         4: this.intl.get('reseting'),
         5: this.intl.get('overed'),
         6: this.intl.get('partDeal'),
+        7: this.intl.get('partDeal'),
       },
       orderDetailHead : {
         orderCurrent: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('amount')}, {name: this.intl.get('deal-trunover')}, {name: this.intl.get('order-unDeal')}, {name: this.intl.get('dealed')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],

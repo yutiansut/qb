@@ -22,8 +22,39 @@
 			font-size .12rem
 			margin-right .49rem
 			cursor pointer
+			position relative
 			&:hover
 				color $normal-white-color-a9
+			&:nth-of-type(1):before
+				content ''
+				position absolute
+				width .12rem
+				height .12rem
+				background $trade-reset
+				top .14rem
+				left -.16rem
+			&:nth-of-type(2):before
+				content ''
+				position absolute
+				width .12rem
+				height .12rem
+				background $trade-reset
+				top .14rem
+				left -.16rem
+			&:nth-of-type(3):before
+				content ''
+				position absolute
+				width .12rem
+				height .12rem
+				background $trade-reset-all
+				top .14rem
+				left -.16rem
+		.reset-handle:nth-of-type(1):hover::before
+			background $trade-reset-hover
+		.reset-handle:nth-of-type(2):hover::before
+			background $trade-reset-hover
+		.reset-handle:nth-of-type(3):hover::before
+			background $trade-reset-all-hover
 	.trade-current-table
 		width 11.12rem
 		margin-top .16rem
@@ -53,6 +84,12 @@
 		tbody
 			td
 				color $normal-white-color-a9
+	.trader-order-none
+		height 1.19rem
+		line-height 1.19rem
+		text-align center
+		font-size .2rem
+		
 .trade-order-shadow
 	position fixed
 	top 0

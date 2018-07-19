@@ -337,7 +337,10 @@ export default function zh(state) {
     "order-export": '导出订单记录',
     "cancel-successful": '撤销成功',
     "deal-after":'后可进行交易',
-    "deal-login": '登录/注册'
+    "deal-login": '登录/注册',
+    'order-bs': '买卖',
+    'order-b':'买',
+    'order-s':'卖',
   };
   const deal = {
     "deal-limit": "限价委托",
@@ -346,7 +349,7 @@ export default function zh(state) {
     "deal-timeSetting": "时限设置",
     "deal-every": "每次输入",
     "deal-2h": "每两小时输入",
-    "deal-never": "不输入",
+    "deal-never": "二十四小时不输入",
     "deal-inputpwdplease": "开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入",
     "deal-marketbuy": "以市场最优价格买入",
     "deal-trunover": "交易额",

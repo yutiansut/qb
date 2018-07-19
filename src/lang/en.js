@@ -336,7 +336,10 @@ export default function en(state) {
     "order-reset-sell": "Undo sell",
     "order-reset-all": "Undo all",
     "order-export": 'Export',
-    "cancel-successful": 'Cancellation failed'
+    "cancel-successful": 'Cancellation failed',
+    'order-bs': 'Bid/Ask',
+    'order-b':'buy',
+    'order-s':'sell',
   };
   const deal = {
     "deal-limit": "Limit price",
@@ -345,7 +348,7 @@ export default function en(state) {
     "deal-timeSetting": "Time limit setting",
     "deal-every": "Enter every time",
     "deal-2h": "Enter every two hours",
-    "deal-never": "Never enter",
+    "deal-never": "Enter every twenty-four hours",
     "deal-inputpwdplease":
       "To activate no fund password feature, please input fund password for ID authentication first",
     "deal-marketbuy": "Buy for market best price",
