@@ -4,17 +4,16 @@
 // import 'es6-shim/es6-sham'
 // import 'es7-shim'
 
-require('es5-shim');
-require('es5-shim/es5-sham');
-require('es6-shim');
-require('es6-shim/es6-sham');
-require('es7-shim');
-require('console-polyfill');
-require('es6-promise').polyfill();
-require('fetch-detector');
-require('fetch-ie8');
-require('babel-polyfill');
-
+// require('es5-shim');
+// require('es5-shim/es5-sham');
+// require('es6-shim');
+// require('es6-shim/es6-sham');
+// require('es7-shim');
+// require('console-polyfill');
+// require('es6-promise').polyfill();
+// require('fetch-detector');
+// require('fetch-ie8');
+// require('babel-polyfill');
 // import 'es6-promise/auto'
 // import 'fetch-detector'
 // import 'fetch-ie8'

@@ -42,6 +42,11 @@ module.exports = merge(webpackConfig, {
           name: 'vendors',
           chunks: 'all'
         },
+        // vendors: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name: 'vendors',
+        //   chunks: 'all'
+        // },
         default: {
           minChunks: 2,
           priority: -20,

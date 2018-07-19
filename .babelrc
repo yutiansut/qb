@@ -6,10 +6,6 @@
   ],
   "plugins": [
     "syntax-dynamic-import",
-    ["transform-es2015-template-literals", {
-      "loose": true,
-      "spec": true
-    }],
     ["transform-runtime", {
       "helpers": false,
       "polyfill": false,
