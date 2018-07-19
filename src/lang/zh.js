@@ -255,6 +255,7 @@ export default function zh(state) {
     "asset-balan": "余额",
     "asset-checkState": "审核状态",
     "asset-copySuccess": "复制成功",
+    "asset-copyFail": "复制失败",
     "asset-option-failed": "操作失败",
     "asset-not-enough": "账户余额不足",
     "asset-input-twoVerify1": "请输入邮箱验证密码",

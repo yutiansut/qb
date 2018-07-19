@@ -37,9 +37,9 @@ export default class Charge extends exchangeViewBase {
         // 绑定方法
         this.copy = el => {
             if(controller.copy(el)){
-                this.setState({showPopup:true,popMsg:"复制成功",popType:"tip1"})
+                this.setState({showPopup:true,popMsg:this.intl.get("asset-copySuccess"),popType:"tip1"})
             }else{
-                this.setState({showPopup:true,popMsg:"复制失败",popType:"tip3"})
+                this.setState({showPopup:true,popMsg:this.intl.get(""),popType:"tip3"})
             }
         };
 
