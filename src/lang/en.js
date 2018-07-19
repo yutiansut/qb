@@ -515,6 +515,7 @@ export default function en(state) {
     "user-verify-state3": "Failed",
     "user-verify-state4": "Malicious",
     "user-verify-state5": "Prohibit",
+    "user-not-surport": "请前往PC端完成",
   };
 
   const activity = {

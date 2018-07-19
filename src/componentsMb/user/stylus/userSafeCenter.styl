@@ -63,8 +63,13 @@
       img.fr
         height .16rem
         margin-top .14rem
-    .item:last-child
-      border-bottom 0
+      &.br
+        height .12rem
+        background $h5-background
+        margin 0 -.12rem
+      &:nth-child(3),
+      &:nth-child(5)
+        border-bottom 0
   .need-fund-pass
     position fixed
     bottom 0

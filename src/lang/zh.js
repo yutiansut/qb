@@ -504,6 +504,7 @@ export default function zh(state) {
     "user-verify-state3": "未通过",
     "user-verify-state4": "恶意上传",
     "user-verify-state5": "永久禁止",
+    "user-not-surport": "请前往PC端完成",
 
   };
   const login = {

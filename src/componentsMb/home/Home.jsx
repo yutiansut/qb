@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 
 import exchangeViewBase from "../../components/ExchangeViewBase";
-import HomeActivity from '../activity/HomeActivity.jsx'
+import HomeActivity from './children/HomeActivity.jsx'
 import HomeMarket from './children/HomeMarket.jsx'
+import HomeNotice from './children/HomeNotice.jsx'
 
 import "./stylus/home.styl"
 
@@ -14,7 +15,8 @@ export default class Home extends exchangeViewBase {
   render() {
     return (
         <div className="home-wrap-mb">
-            <HomeActivity controller={this.props.activityController}/>
+            <HomeActivity activityController={this.props.activityController} history={this.props.history}/>
+            <HomeNotice controller={this.props.noticeController}/>
             <HomeMarket controller={this.props.marketController}/>
         </div>
     );

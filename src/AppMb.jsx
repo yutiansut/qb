@@ -137,7 +137,7 @@ export default class App extends Component {
     configController.setAppView(this);
 
     let Gener = AsyncComponent(()=>import("./componentsMb/genrealize/Genrealize.jsx"), {controller:activityController});
-    let HomeCompoment = AsyncComponent(()=>import("./componentsMb/home/Home.jsx"), {activityController, marketController});
+    let HomeCompoment = AsyncComponent(()=>import("./componentsMb/home/Home.jsx"), {activityController, marketController,noticeController});
     let LoginComponent = AsyncComponent(()=>import("./componentsMb/login/Login.jsx"), {controller:loginController});
     let ForgetPassComponent = AsyncComponent(()=>import("./componentsMb/login/ForgetPass.jsx"), {controller:loginController});
     let HelpComponent = AsyncComponent(()=>import("./componentsMb/help/Help.jsx"), {activityController,assetController});

@@ -11,7 +11,7 @@
     font-size .14rem
     border .01rem solid transparent
     &:hover, &:focus, &:active
-      border-color $h5-color-red
+      border-color $h5-color-red !important
     &::placeholder
       color $h5-color-light
       font-size .12rem
@@ -23,8 +23,10 @@
     opacity 1
     &:hover, &:focus, &:active
       opacity 0.6
+      color $h5-color-weight
     &.disable
       opacity 0.6
+      color $h5-color-weight
 
 .header-nav-mb
   position fixed

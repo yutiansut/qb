@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import exchangeViewBase from "../../components/ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
-import "./viewsPopup.styl"
+import "./stylus/viewsPopup.styl"
+
 // destroy 组件销毁时执行的方法
 // onClose 关闭弹窗
 // type 验证类型1 邮件 3 短信 2 谷歌验证

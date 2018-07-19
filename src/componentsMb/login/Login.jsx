@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import {
-  Route,
   NavLink,
   Link,
-  Redirect,
-  Switch
 } from 'react-router-dom'
 import "./stylus/login.styl"
 import exchangeViewBase from "../../components/ExchangeViewBase";
@@ -37,7 +34,7 @@ export default class Login extends exchangeViewBase {
       verifyType: "", // 密码登录两步认证弹窗
       checkState: true, // checkbox判断
       from: props.location.state && props.location.state.from.pathname || '/whome'
-    }
+    };
     const {controller} = props
     //绑定view
     controller.setView(this);
