@@ -290,7 +290,7 @@ export default class App extends Component {
     return (
       <Router>
         {this.state.initDone && (
-          <div id="app" className="web-wrap">
+          <div className="web-wrap">
             {/*<Header/>*/}
             <Switch>
               <Route path="/whome" component={homeHeader} />
@@ -309,23 +309,25 @@ export default class App extends Component {
                   <Route
                     path={item.path}
                     key={i}
-                    render={props =>
-                      !item.auth ? (
+                    render={props => {
+                      document.getElementById("app").scrollIntoView(true);
+                      return !item.auth ? (
                         ["/wlogin", "/wlogin/:uid", '/wfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
                           <Redirect to={{ pathname: "/whome" }} />
                         ) : (
-                          <item.component {...props} />
-                        )
+                            <item.component {...props} />
+                          )
                       ) : userController.Storage.userToken.get() ? (
                         <item.component {...props} />
                       ) : (
-                        <Redirect
-                          to={{
-                            pathname: "/wlogin",
-                            state: { from: props.location }
-                          }}
-                        />
-                      )
+                            <Redirect
+                              to={{
+                                pathname: "/wlogin",
+                                state: { from: props.location }
+                              }}
+                            />
+                          )
+                      }
                     }
                   />
                 ))}

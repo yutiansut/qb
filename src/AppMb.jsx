@@ -184,8 +184,9 @@ export default class App extends Component {
                   <Route
                     path={item.path}
                     key={i}
-                    render={props =>
-                      !item.auth ? (
+                    render={props => {
+                      document.getElementById("app").scrollIntoView(true);
+                      return !item.auth ? (
                         ["/mlogin", "/mlogin/:uid", '/mfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
                           <Redirect to={{ pathname: "/mhome" }} />
                         ) : (
@@ -194,13 +195,14 @@ export default class App extends Component {
                       ) : userController.Storage.userToken.get() ? (
                         <item.component {...props} />
                       ) : (
-                        <Redirect
-                          to={{
-                            pathname: "/mlogin",
-                            state: { from: props.location }
-                          }}
-                        />
-                      )
+                            <Redirect
+                              to={{
+                                pathname: "/mlogin",
+                                state: { from: props.location }
+                              }}
+                            />
+                          )
+                    }
                     }
                   />
                 ))}

@@ -6,12 +6,6 @@ export default class AssetController extends ExchangeControllerBase {
     super(props);
     this.store = new AssetStore();
     this.store.setController(this);
-    this.orderStatus = {
-      0: "审核中",
-      1: "通过",
-      2: "未通过",
-      3: "撤销"
-    };
   }
   setView(view) {
     super.setView(view);
@@ -70,7 +64,7 @@ export default class AssetController extends ExchangeControllerBase {
     await this.store.getTotalAsset();
     this.view.setState({
       totalAsset: this.store.state.totalAsset,
-      wallet: this.sort(this.store.state.wallet, ['coinName'], 0) || []
+      wallet: this.sort(this.store.state.wallet, ["coinName"], 0) || []
     });
     if (this.view.name === "simple") {
       this.updataMarketAvaile();
@@ -106,10 +100,10 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取币种资产
   // async getWallet() {
-    // let data = await this.store.Proxy.topCurrency();
-    // console.log(data);
-    // this.store.state.wallet = data;
-    // this.view.setState({ wallet: data});
+  // let data = await this.store.Proxy.topCurrency();
+  // console.log(data);
+  // this.store.state.wallet = data;
+  // this.view.setState({ wallet: data});
   // }
   // 获取矿工费
   async getMinerFee(coin, address) {
@@ -141,30 +135,29 @@ export default class AssetController extends ExchangeControllerBase {
     result.forEach(v => {
       str +=
         "\n" +
-          v.orderTime.toDate("yyyy-MM-dd HH:mm:ss") +
-          "," +
-          v.coinName +
-          "," +
-          (v.orderType ===
-        1
-          ? "充币"
+        v.orderTime.toDate("yyyy-MM-dd HH:mm:ss") +
+        "," +
+        v.coinName +
+        "," +
+        (v.orderType === 1
+          ? this.view.intl.get("deposit")
           : v.orderType === 15000
-            ? "提币"
+            ? this.view.intl.get("asset-withdraw")
             : v.orderType === 5
-              ? "转账"
+              ? this.view.intl.get("asset-transfer")
               : " ") +
-                "," +
-                v.count +
-                "," +
-                '—' +
-                "," +
-                v.receiveAddress +
-                "," +
-                (v.orderType === 1 ? `${v.doneCount}/${v.verifyCount}`: '-') +
-                "," +
-                this.orderStatus[v.orderStatus] +
-                "," +
-                v.fee
+        "," +
+        v.count +
+        "," +
+        "—" +
+        "," +
+        v.receiveAddress +
+        "," +
+        (v.orderType === 1 ? `${v.doneCount}/${v.verifyCount}` : "-") +
+        "," +
+        this.view.status[v.orderStatus] +
+        "," +
+        v.fee;
     });
     this.exportExcel(str, "资产记录.xls");
   }
@@ -247,8 +240,15 @@ export default class AssetController extends ExchangeControllerBase {
     let result = await this.store.extractOrder(obj);
     // console.log('提交订单', result)
     if (result && result.errCode) {
-      let o = { orderTip: true, orderTipContent: result.errCode === "CWS_ERROR" ? this.view.intl.get("asset-withdrawal-failed") : result.msg };
-      if (result.errCode === "NO_VERIFIED") o.orderTipContent = this.view.intl.get("asset-auth-tip");
+      let o = {
+        orderTip: true,
+        orderTipContent:
+          result.errCode === "CWS_ERROR"
+            ? this.view.intl.get("asset-withdrawal-failed")
+            : result.msg
+      };
+      if (result.errCode === "NO_VERIFIED")
+        o.orderTipContent = this.view.intl.get("asset-auth-tip");
       this.view.setState(o);
       // 错误处理
       return;
@@ -257,7 +257,9 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState({
         tip: true,
         tipSuccess: true,
-        tipContent: !result.quota ? this.view.intl.get("optionSuccess") : this.view.intl.get('asset-wait-auditing'),
+        tipContent: !result.quota
+          ? this.view.intl.get("optionSuccess")
+          : this.view.intl.get("asset-wait-auditing"),
         showTwoVerify: false,
         extractAmount: "", //提现数量
         password: ""
@@ -283,13 +285,17 @@ export default class AssetController extends ExchangeControllerBase {
       this.setViewTip(false, this.view.intl.get("asset-incomplete"));
       return false;
     }
+    // 验证地址名称是否存在
     // 验证地址是否存在
     let flag = false;
-    curExtract && curExtract.addressList && curExtract.addressList.forEach(v => {
-        v.address === obj.address && (flag = true);
+    curExtract &&
+      curExtract.addressList &&
+      curExtract.addressList.forEach(v => {
+        v.address === obj.address && (flag = 713);
+        v.addressName === obj.addressName && (flag = 'asset-name-existing')
       });
     if (flag) {
-      this.setViewTip(false, this.view.intl.get(713));
+      this.setViewTip(false, this.view.intl.get(flag));
       return false;
     }
     // 发送添加地址请求交由后台校验
@@ -431,18 +437,18 @@ export default class AssetController extends ExchangeControllerBase {
   //   return this.store.state.wallet.filter(v => v.coinName === coin)[0];
   // }
   // 获取我的QBT
-  async getMyQbt(){
+  async getMyQbt() {
     let result = await this.store.getMyQbt();
-    if (result) this.view.setState({Qbt:result}) ;
+    if (result) this.view.setState({ Qbt: result });
     return result;
   }
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
     let curPair =
-        this.view.state.pairFees &&
-        this.view.state.pairFees.filter(
-          item => item.id === this.view.state.tradePairId
-        )[0],
+      this.view.state.pairFees &&
+      this.view.state.pairFees.filter(
+        item => item.id === this.view.state.tradePairId
+      )[0],
       currencyArr = curPair && curPair.name.split("/"),
       avail1 = this.store.state.wallet.filter(
         item => item.coinName === (currencyArr && currencyArr[0])
@@ -451,7 +457,8 @@ export default class AssetController extends ExchangeControllerBase {
         item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
     // console.log("updataMarketAvaile", avail1, avail2);
-    avail1 && this.TradePlanController &&
+    avail1 &&
+      this.TradePlanController &&
       this.TradePlanController.setWallet(
         avail1.availableCount,
         avail2.availableCount

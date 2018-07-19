@@ -75,8 +75,8 @@ export default class Charge extends exchangeViewBase {
 
   async componentWillMount() {
     let currency = this.props.controller
-        .getQuery("currency")
-        .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
+      .getQuery("currency")
+      .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
     currency &&
       this.setState({
         currency: currency,
@@ -218,7 +218,7 @@ export default class Charge extends exchangeViewBase {
             />
             {this.state.address && (
               <div className={`qrcode ${this.state.showQrcode ? "show" : ""}`}>
-                <QRCode value={this.state.address} level="M" />
+                <QRCode value={this.state.address} level="M" bgColor="#D5D6D6" />
               </div>
             )}
           </div>
@@ -289,23 +289,23 @@ export default class Charge extends exchangeViewBase {
                         },
                         index
                       ) => (
-                        <tr key={index}>
-                          <td>{orderTime}</td>
-                          <td>{coinName}</td>
-                          <td>{count}</td>
-                          <td>{"—"}</td>
-                          <td>{receiveAddress}</td>
-                          <td>
-                            <a
-                              href={blockSite}
-                              target="_blank"
-                            >{`${doneCount}/${verifyCount}`}</a>
-                          </td>
-                          <td>
-                            <span>{this.status[orderStatus]}</span>
-                          </td>
-                        </tr>
-                      )
+                          <tr key={index}>
+                            <td>{orderTime}</td>
+                            <td>{coinName}</td>
+                            <td>{count}</td>
+                            <td>{"—"}</td>
+                            <td>{receiveAddress}</td>
+                            <td>
+                              <a
+                                href={blockSite}
+                                target="_blank"
+                              >{`${doneCount}/${verifyCount}`}</a>
+                            </td>
+                            <td>
+                              <span>{this.status[orderStatus]}</span>
+                            </td>
+                          </tr>
+                        )
                     )}
                 </tbody>
               </table>
@@ -338,8 +338,8 @@ export default class Charge extends exchangeViewBase {
               </p>
             </div>
           ) : (
-            <div className="kong">{this.intl.get("noRecords")}</div>
-          )}
+              <div className="kong">{this.intl.get("noRecords")}</div>
+            )}
           {this.state.showPopup && (
             <Popup
               type={this.state.copySuccess ? "tip1" : "tip3"}
