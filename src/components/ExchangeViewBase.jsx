@@ -41,7 +41,8 @@ export default class ExchangeViewBase extends ViewBase {
       $user_add: "/static/img/user/user_add.svg",
       $home_banner_text_cn: "/static/img/banner/text_cn.svg",
       $home_banner_text_en: "/static/img/banner/text_en.svg",
-      $home_user_notice: "/static/img/home/new_bai.svg"
+      $home_user_notice: "/static/img/home/new_bai.svg",
+      $invite: "/static/images/genrealize/invite.png",
       // $home_banner_btn_cn: "/static/img/banner/sign_up_cn.svg",
       // $home_banner_btn_en: "/static/img/banner/sign_up_en.svg",
       // $home_banner_btn_cn_hover: "/static/img/banner/sign_up_cn_hover.svg",

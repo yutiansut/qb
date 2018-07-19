@@ -32,19 +32,20 @@ export default class Terms extends exchangeViewBase {
         <p className="welfare">有福同享真哥们，赶紧转发海报邀请吧~</p>
         <div className="poster">
           <div className="up">
-            <h4 className="header">10亿{coin}欢迎你来拿！</h4>
+            <img src={this.$imagesMap.$invite} alt="" />
+            {/* <h4 className="header">10亿{coin}欢迎你来拿！</h4>
             <div className="wait" />
             <p className="code-text">
               长按二维码，注册即领取<span>100</span>
               {coin}！<br />邀请好友更有多多{coin}等你拿~
-            </p>
+            </p> */}
             <div className="qrcode">
               <div className="qrcode-wrap">
-              <QRCode value={`http://${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="rgb(255,255,255)" fgColor="#000"/>
+                <QRCode value={`http://${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
               </div>
             </div>
           </div>
-          <div className="down">
+          {/* <div className="down">
             <div className="crt-intro-header">{coin}介绍</div>
             <p className="crt-intro-text1">
               {coin}是{netUrl}币荣网发行的代币，币荣网通过{coin}与全体支持者共享平台成长利益
@@ -85,7 +86,7 @@ export default class Terms extends exchangeViewBase {
             <div className="coming-soon">
               更多价值将进一步挖掘，敬请期待！
             </div>
-          </div>
+          </div> */}
         </div>
       </div>;
   }

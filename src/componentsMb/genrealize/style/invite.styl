@@ -1,8 +1,7 @@
 @import "../../../common/css/variable.styl"
 @import "../../../common/css/base.styl"
 .minvite{
-  padding: 0.2rem 0.12rem 0 0.12rem;
-  margin-bottom: 0.12rem;
+  padding: 0.2rem 0.12rem 0.12rem 0.12rem;
 }
 /* 文案部分 */
 .minvite h3{
@@ -37,45 +36,51 @@
   text-align: center;
 }
 .minvite .poster .up{
-  height: 5.00rem;
+  position relative
   padding-top: 0.24rem;
   background: $invite-bg1 no-repeat 0 0;
   background-size: 100% 100%;
 }
-.minvite .poster .down{
-  height: 5.9rem;
-  background: $invite-bg2 no-repeat 0 0;
-  background-size: 100% 100%;
+.minvite .poster .up img{
+  width 100%
+  height auto
 }
-.minvite .poster .up .header{
-  height: 0.55rem;
-  line-height: 0.4rem;
-  font-size: 0.2rem;
-  color: #ff5142;
-  margin-bottom: 0.12rem;
-  font-weight: bold;
-  background: $invite-header-bg no-repeat center center;
-  background-size: auto 100%;
-}
-.minvite .poster .up .wait{
-  height: 1.53rem;
-  margin-bottom: 0.20rem;
-  background: $invite-wait no-repeat center center;
-  background-size: auto 100%;
-}
-.minvite .poster .up .code-text{
-  line-height: 0.26rem;
-  margin-bottom: 0.16rem;
-  color: $normal-white-color;
-  font-size: 0.18rem;
-}
-.minvite .poster .up .code-text span{
-  margin: 0 0.07rem;
-  color: #fbf288;
-  font-size: 0.23rem;
-}
+// .minvite .poster .down{
+//   height: 5.9rem;
+//   background: $invite-bg2 no-repeat 0 0;
+//   background-size: 100% 100%;
+// }
+// .minvite .poster .up .header{
+//   height: 0.55rem;
+//   line-height: 0.4rem;
+//   font-size: 0.2rem;
+//   color: #ff5142;
+//   margin-bottom: 0.12rem;
+//   font-weight: bold;
+//   background: $invite-header-bg no-repeat center center;
+//   background-size: auto 100%;
+// }
+// .minvite .poster .up .wait{
+//   height: 1.53rem;
+//   margin-bottom: 0.20rem;
+//   background: $invite-wait no-repeat center center;
+//   background-size: auto 100%;
+// }
+// .minvite .poster .up .code-text{
+//   line-height: 0.26rem;
+//   margin-bottom: 0.16rem;
+//   color: $normal-white-color;
+//   font-size: 0.18rem;
+// }
+// .minvite .poster .up .code-text span{
+//   margin: 0 0.07rem;
+//   color: #fbf288;
+//   font-size: 0.23rem;
+// }
 .minvite .poster .up .qrcode{
-  position: relative;
+  position absolute
+  left 50%
+  top 28%
   height: 1.36rem;
 }
 .minvite .poster .up .qrcode .qrcode-wrap{
@@ -84,122 +89,122 @@
   margin-left: -0.68rem;
   width: 1.28rem;
   height: 1.28rem;
-  border: 0.04rem solid $normal-white-color;
+  // border: 0.04rem solid $normal-white-color;
   border-radius: 0.1rem
 }
 .minvite .poster .up .qrcode .qrcode-wrap canvas {
   display block
   position absolute
-  left 7.5%
-  top 7.5%
-  width 85% !important
-  height 85% !important
-  border 0.05rem solid $normal-white-color
+  left 6%
+  top 6%
+  width 100% !important
+  height 100% !important
+  border 0.05rem solid $normal-font-color
 }
-.minvite .poster .down .crt-intro-header{
-  height: 0.55rem;
-  line-height: 0.4rem;
-  font-size: 0.25rem;
-  color: #7380f0;
-  margin-bottom: 0.16rem;
-  font-weight: bold;
-  background: $invite-crt-bg no-repeat center center;
-  background-size: auto 100%;
-}
-.minvite .poster .down .crt-intro-text1{
-  padding:  0 0.12rem;
-  text-align: left;
-  font-size: 0.15rem;
-  color: $normal-white-color;
-  line-height: 0.24rem;
-}
-.minvite .poster .down .crt-intro-text2{
-  padding:  0 0.12rem;
-  text-align: left;
-  font-size: 0.16rem;
-  font-weight: bold;
-  letter-spacing: -0.01rem;
-  color: #fbf288;
-  margin-bottom: 0.36rem;
-}
-.minvite .poster .down .crt-func-header{
-  height: 0.55rem;
-  line-height: 0.4rem;
-  font-size: 0.25rem;
-  color: #7380f0;
-  margin-bottom: 0.24rem;
-  font-weight: bold;
-  background: $invite-crt-func no-repeat center center;
-  background-size: auto 100%;
-}
-.minvite .poster .down .crt-func-intro{
-  text-align: left;
-  padding: 0 0.12rem;
-  color: $normal-white-color;
-  font-size: 0.16rem;
-  margin-bottom: 0.15rem;
-}
-.minvite .poster .down .crt-func{
-  width: 3.24rem;
-  margin-left: 0.13rem;
-  margin-bottom: 0.28rem;
-}
-.minvite .poster .down .crt-func h5{
-  margin-bottom:0.05rem
-}
-.minvite .poster .down .crt-func li{
-  box-sizing: border-box;
-  float: left;
-  width: 1.62rem;
-  height: 0.7rem;
-  background: $invite-value no-repeat 0.1rem center $normal-white-color;
-  background-size: 0.4rem auto;
-  padding: 0.18rem 0 0 0.55rem;
-}
-.minvite .poster .down .crt-func li h5{
-  font-size: 0.16rem;
-  font-weight: bold;
-  text-align: left;
-  color: #636262;
-}
-.minvite .poster .down .crt-func li p{
-  font-size: 0.12rem;
-  color: #80807f;
-  text-align: left;
-}
-.minvite .poster .down .crt-func .value,.minvite .poster .down .crt-func .usage{
-  border-right: 0.01rem solid rgba(255,0,0,0.2);
-  border-bottom: 0.01rem solid rgba(255,0,0,0.2)
-}
-.minvite .poster .down .crt-func .cost,.minvite .poster .down .crt-func .welfa{
-  background-image: $invite-welfa;
-  border-bottom: 0.01rem solid rgba(255,0,0,0.2)
-}
-.minvite .poster .down .crt-func .usage{
-  background-image: $invite-usage;
-}
-.minvite .poster .down .crt-func .interesting{
-  border-right: 0.01rem solid rgba(255,0,0,0.2);
-}
-.minvite .poster .down .crt-func .value {
-  border-radius: 0.1rem 0 0 0;
-}
-.minvite .poster .down .crt-func .cost{
-  background-image: $invite-cost;
-  border-radius: 0 0.1rem 0 0;
-}
-.minvite .poster .down .crt-func .interesting{
-  background-image: $invite-interesting;
-  border-radius: 0 0 0 0.1rem;
-}
-.minvite .poster .down .crt-func .more{
-  background-image: $invite-more;
-  border-radius: 0 0 0.1rem 0;
-}
+// .minvite .poster .down .crt-intro-header{
+//   height: 0.55rem;
+//   line-height: 0.4rem;
+//   font-size: 0.25rem;
+//   color: #7380f0;
+//   margin-bottom: 0.16rem;
+//   font-weight: bold;
+//   background: $invite-crt-bg no-repeat center center;
+//   background-size: auto 100%;
+// }
+// .minvite .poster .down .crt-intro-text1{
+//   padding:  0 0.12rem;
+//   text-align: left;
+//   font-size: 0.15rem;
+//   color: $normal-white-color;
+//   line-height: 0.24rem;
+// }
+// .minvite .poster .down .crt-intro-text2{
+//   padding:  0 0.12rem;
+//   text-align: left;
+//   font-size: 0.16rem;
+//   font-weight: bold;
+//   letter-spacing: -0.01rem;
+//   color: #fbf288;
+//   margin-bottom: 0.36rem;
+// }
+// .minvite .poster .down .crt-func-header{
+//   height: 0.55rem;
+//   line-height: 0.4rem;
+//   font-size: 0.25rem;
+//   color: #7380f0;
+//   margin-bottom: 0.24rem;
+//   font-weight: bold;
+//   background: $invite-crt-func no-repeat center center;
+//   background-size: auto 100%;
+// }
+// .minvite .poster .down .crt-func-intro{
+//   text-align: left;
+//   padding: 0 0.12rem;
+//   color: $normal-white-color;
+//   font-size: 0.16rem;
+//   margin-bottom: 0.15rem;
+// }
+// .minvite .poster .down .crt-func{
+//   width: 3.24rem;
+//   margin-left: 0.13rem;
+//   margin-bottom: 0.28rem;
+// }
+// .minvite .poster .down .crt-func h5{
+//   margin-bottom:0.05rem
+// }
+// .minvite .poster .down .crt-func li{
+//   box-sizing: border-box;
+//   float: left;
+//   width: 1.62rem;
+//   height: 0.7rem;
+//   background: $invite-value no-repeat 0.1rem center $normal-white-color;
+//   background-size: 0.4rem auto;
+//   padding: 0.18rem 0 0 0.55rem;
+// }
+// .minvite .poster .down .crt-func li h5{
+//   font-size: 0.16rem;
+//   font-weight: bold;
+//   text-align: left;
+//   color: #636262;
+// }
+// .minvite .poster .down .crt-func li p{
+//   font-size: 0.12rem;
+//   color: #80807f;
+//   text-align: left;
+// }
+// .minvite .poster .down .crt-func .value,.minvite .poster .down .crt-func .usage{
+//   border-right: 0.01rem solid rgba(255,0,0,0.2);
+//   border-bottom: 0.01rem solid rgba(255,0,0,0.2)
+// }
+// .minvite .poster .down .crt-func .cost,.minvite .poster .down .crt-func .welfa{
+//   background-image: $invite-welfa;
+//   border-bottom: 0.01rem solid rgba(255,0,0,0.2)
+// }
+// .minvite .poster .down .crt-func .usage{
+//   background-image: $invite-usage;
+// }
+// .minvite .poster .down .crt-func .interesting{
+//   border-right: 0.01rem solid rgba(255,0,0,0.2);
+// }
+// .minvite .poster .down .crt-func .value {
+//   border-radius: 0.1rem 0 0 0;
+// }
+// .minvite .poster .down .crt-func .cost{
+//   background-image: $invite-cost;
+//   border-radius: 0 0.1rem 0 0;
+// }
+// .minvite .poster .down .crt-func .interesting{
+//   background-image: $invite-interesting;
+//   border-radius: 0 0 0 0.1rem;
+// }
+// .minvite .poster .down .crt-func .more{
+//   background-image: $invite-more;
+//   border-radius: 0 0 0.1rem 0;
+// }
 
-.minvite .poster .down .coming-soon{
-  font-size: 0.16rem;
-  height: 0.16rem;
-  line-height: 0.16rem;
-  color: rgba(255,255,255,0.6)
-}
+// .minvite .poster .down .coming-soon{
+//   font-size: 0.16rem;
+//   height: 0.16rem;
+//   line-height: 0.16rem;
+//   color: rgba(255,255,255,0.6)
+// }
