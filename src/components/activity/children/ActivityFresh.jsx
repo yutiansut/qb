@@ -91,7 +91,7 @@ export default class activityFresh extends exchangeViewBase {
             autoClose={true}
           />
         )}
-        <div className="banner-img" style={{ 'background-size': `100% 100%`, backgroundImage: `url(${this.state.bannerImgUrl})`}}>
+        <div className="banner-img" style={{ backgroundSize: `100% 100%`, backgroundImage: `url(${this.state.bannerImgUrl})`}}>
           {/* <img src="/static/img/banner_title.svg" alt=""/> */}
         </div>
         <h1>{this.intl.getHTML('activity-title')}{(!controller.userId && <Link to="/wlogin">{this.intl.get('activity-click')}</Link> || null)}</h1>
