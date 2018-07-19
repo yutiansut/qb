@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../../../common/component/Button"
+import Input from "../../../common/component/Input"
 import "../style/register.styl";
 
 export default class Register extends exchangeViewBase {
@@ -60,8 +61,8 @@ export default class Register extends exchangeViewBase {
           <div className="title">{this.intl.get("activity-invite-29")}</div>
           <p>{this.intl.getHTML("activity-title")}</p>
           <div className="form">
-            <input type="text" placeholder={this.intl.get("activity-rule-41")} value={this.state.account} onInput={e => {
-                this.setState({ account: e.target.value });
+            <Input type="text" placeholder={this.intl.get("activity-rule-41")} value={this.state.account} onInput={value => {
+                this.setState({ account: value });
               }} />
             <Button type="base" title={this.intl.get("activity-click")} onClick={() => {
                 this.getAward({

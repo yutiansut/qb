@@ -469,11 +469,10 @@ export default class AssetController extends ExchangeControllerBase {
         item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
     // console.log("updataMarketAvaile", avail1, avail2);
-    avail1 &&
       this.TradePlanController &&
       this.TradePlanController.setWallet(
-        avail1.availableCount,
-        avail2.availableCount
+        avail1 && avail1.availableCount || 0,
+        avail2 && avail2.availableCount || 0
       );
     return { avail1, avail2, currencyArr, curPair };
   }

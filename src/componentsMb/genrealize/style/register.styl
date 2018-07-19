@@ -58,11 +58,13 @@
 }
 .mregister .content .form input{
   width: 100%;
-  outline: none;
   display: block;
   height: 0.45rem;
   border-radius: 0.02rem;
   padding: .13rem .16rem;
+}
+.mregister .content .form input:focus{
+  border-color:$main-color
 }
 .mregister .content .form input::placeholder { /* WebKit, Blink, Edge */
   color: $h5-color-light;
@@ -140,6 +142,7 @@
   font-size: .15rem;
   color: $h5-color-red;
   margin: 0 .08rem;
+  font-weight bold
 }
 .mregister .successAlert .download{
   padding: 0 .16rem;
