@@ -138,9 +138,7 @@ export default class Extract extends exchangeViewBase {
         {
           address:
             (curExtract &&
-              curExtract.addressList[0] &&
-              curExtract.addressList[0]) ||
-            "",
+              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0] || ""),
           extractAmount: ""
         },
         () => {
@@ -157,11 +155,12 @@ export default class Extract extends exchangeViewBase {
       let curExtract = this.state.walletExtract.extractAddr.filter(
         v => v.coinName === nextState.currency.toLowerCase()
       )[0];
+      console.log(this.props.controller.sort(curExtract.addressList, ["addressName"], 1));
       this.setState(
         {
           address:
             (curExtract &&
-              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressId"], 0)[0]||""),
+              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0]||""),
           extractAmount: "",
           password: "",
           noSufficTip: false, // 余额不足提示
@@ -283,7 +282,7 @@ export default class Extract extends exchangeViewBase {
                     <ul className="search-list">
                       {curExtract &&
                         this.props.controller
-                          .sort(curExtract.addressList, ["addressId"], 1)
+                          .sort(curExtract.addressList, ["addressName"], 1)
                           .map((v, i) => (
                             <li
                               key={i}

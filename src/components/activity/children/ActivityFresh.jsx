@@ -21,14 +21,14 @@ export default class activityFresh extends exchangeViewBase {
     super(props);
     this.state = {
       ruleList: [
-        this.intl.get('activity-rule-1'),
-        this.intl.get('activity-rule-2'),
-        this.intl.get('activity-rule-3'),
-        this.intl.get('activity-rule-4'),
-        this.intl.get('activity-rule-5'),
-        this.intl.get('activity-rule-6'),
-        this.intl.get('activity-rule-7'),
-        this.intl.get('activity-rule-8'),
+        `1.${this.intl.get('activity-rule-1')}`,
+        `2.${this.intl.get('activity-rule-2')}`,
+        `3.${this.intl.get('activity-rule-3')}`,
+        `4.${this.intl.get('activity-rule-4')}`,
+        `5.${this.intl.get('activity-rule-5')}`,
+        `6.${this.intl.get('activity-rule-6')}`,
+        `7.${this.intl.get('activity-rule-7')}`,
+        `8.${this.intl.get('activity-rule-8')}`,
       ],
       // address:'还在等什么，邀请好友50万枚QB欢迎你来拿',
       address:'',

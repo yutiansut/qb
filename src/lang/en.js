@@ -518,14 +518,14 @@ export default function en(state) {
   };
 
   const activity = {
-    "activity-rule-1": "1.Start now, every new registered user can claim 20 tokens.",
-    "activity-rule-2": "2.Invite friends to register and claim 5 more for each successful registry.",
-    "activity-rule-3": "3.Please use your own invitation code.",
-    "activity-rule-4": "4.Total 5,000,000 will be distributed.",
-    "activity-rule-5": "5.New registered user can login web or app to check the tokens on “assets”.",
-    "activity-rule-6": "6.Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
-    "activity-rule-7": `7.${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
-    "activity-rule-8": `8.All rights reserved by ${nameUsd}.`,
+    "activity-rule-1": "Start now, every new registered user can claim 20 tokens.",
+    "activity-rule-2": "Invite friends to register and claim 5 more for each successful registry.",
+    "activity-rule-3": "Please use your own invitation code.",
+    "activity-rule-4": "Total 5,000,000 will be distributed.",
+    "activity-rule-5": "New registered user can login web or app to check the tokens on “assets”.",
+    "activity-rule-6": "Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
+    "activity-rule-7": `${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
+    "activity-rule-8": `All rights reserved by ${nameUsd}.`,
     "activity-rule": `Promotion Rules`,
     "activity-Invitations": `Invitations `,
     "activity-Accounts": `Friends’ Accounts`,
@@ -536,10 +536,10 @@ export default function en(state) {
     "activity-click": `Click to Claim`,
     // 移动端活动 新增
     "activity-invite-1": `Refer a friend for rewards：`,
-    "activity-invite-2": `If your friends finish registration, you will get 10 ${coin} rewards for each`,
+    "activity-invite-2": `If your friends finish registration, you will get 5 ${coin} rewards for each`,
     "activity-invite-3": `2. Trading and get commission back`,
     "activity-invite-4": `You will get 30% trading commission rewards from your each friend's trading`,
-    "activity-invite-5": `As well, your friend will get 100 ${coin} bonus`,
+    "activity-invite-5": `As well, your friend will get 20 ${coin} bonus`,
     "activity-invite-6": `Forward the poster now for you and your friends`,
     "activity-invite-7": `1 billion ${coin} are waiting for you`,
     "activity-invite-8": `press the QR code, and register for getting 100 ${coin} now`,
@@ -573,6 +573,7 @@ export default function en(state) {
     "activity-invite-36": `Got it`,
     "activity-invite-38": `Refer a friend and get token`,
     "activity-invite-37": `Refer each friend to finish registration ${netUrl}`,
+    "activity-invite-39": `Register for tokens：`,
   };
 
   const login = {

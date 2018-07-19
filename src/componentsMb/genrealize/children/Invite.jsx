@@ -14,22 +14,22 @@ export default class Terms extends exchangeViewBase {
     console.log(`${serverConfig.host}/mgenrealize/register/${this.props.location.search}`);
     let { nameUsd, netUrl, coin } = controller.configData;
     return <div className="minvite">
-        <h3>邀请有礼：</h3>
         <dl>
-          <dt>每邀请一位好友注册{netUrl}完成：</dt>
+          <dt>{this.intl.get("activity-invite-37")}</dt>
           <dd>
-            <h4>1、邀请送币：</h4>
-            <p>好友注册，您获得10{coin}作为奖励，上不封顶~</p>
+            <h4>1、{this.intl.get("activity-invite-39")}</h4>
+            <p>{this.intl.get("activity-rule-1")}</p>
           </dd>
           <dd>
-            <h4>2、交易返佣：</h4>
-            <p>好友交易，您进一步获得好友交易手续费的30%作为奖励~</p>
+            <h4>2、{this.intl.get("activity-invite-38")}</h4>
+            <p>{this.intl.get("activity-invite-2")}</p>
           </dd>
         </dl>
         <p className="welfare">
-          同时，您的好友也将获得<span>100{coin}</span>福利
+          {this.intl.getHTML("activity-invite-5")}
         </p>
-        <p className="welfare">有福同享真哥们，赶紧转发海报邀请吧~</p>
+      <p className="welfare">{this.intl.getHTML('activity-rule-40')}</p>
+      <p className="welfare">{this.intl.get('activity-invite-6')}</p>
         <div className="poster">
           <div className="up">
             <img src={this.$imagesMap.$invite} alt="" />

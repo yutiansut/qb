@@ -10,16 +10,17 @@
   line-height: 0.16rem;
   margin-bottom: 0.16rem;
 }
-.minvite dl dt, .minvite dl dd p{
+.minvite dl dd p{
   height: 0.13rem;
   font-size: 13px;
-  color: $h5-color-normal;
+  color: $h5-color-light;
   line-height: 13px;
   margin-bottom: 0.16rem;
 }
-.minvite dl dd h4, .minvite .welfare{
+.minvite dl dt, .minvite dl dd h4, .minvite .welfare, .minvite .welfare span{
+  font-weight bold
   font-size: 15px;
-  color: $h5-color-light;
+  color: $normal-font-color;
   line-height: 15px;
   margin-bottom: 0.12rem;
 }
@@ -27,9 +28,10 @@
   font-weight: bold;
   margin-bottom: 0.16rem;
 }
-.minvite .welfare span{
+.minvite .welfare i{
   margin: 0 0.07rem;
   color: $h5-color-green;
+  font-weight bold
 }
 /* 海报部分 */
 .minvite .poster{
@@ -80,23 +82,23 @@
 .minvite .poster .up .qrcode{
   position absolute
   left 50%
-  top 28%
+  top 27%
   height: 1.36rem;
 }
 .minvite .poster .up .qrcode .qrcode-wrap{
   position: absolute;
   left: 50%;
-  margin-left: -0.68rem;
-  width: 1.28rem;
-  height: 1.28rem;
+  margin-left: -0.75rem;
+  width: 1.4rem;
+  height: 1.4rem;
   // border: 0.04rem solid $normal-white-color;
   border-radius: 0.1rem
 }
 .minvite .poster .up .qrcode .qrcode-wrap canvas {
   display block
   position absolute
-  left 6%
-  top 6%
+  left 5%
+  top 5%
   width 100% !important
   height 100% !important
   border 0.05rem solid $normal-font-color
