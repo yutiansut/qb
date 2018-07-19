@@ -19,30 +19,30 @@ export default {
       name: 'general', url: '/sub', optionList: {
         // test:{testEmit:{var: 1, op: 2}},
         global: {
-          connect: {var: 1, op: 0, seq: 0, resOp: 1},//握手
-          heartBreak: {var: 1, op: 2, seq: 0, resOp: 3},//心跳
-          joinRoom: {var: 1, op: 4, seq: 0, resOp: 5, history:true},//加入房间
+          connect: {ver: 1, op: 0, seq: 0, resOp: 1},//握手
+          heartBreak: {ver: 1, op: 2, seq: 0, resOp: 3},//心跳
+          joinRoom: {ver: 1, op: 4, seq: 0, resOp: 5, history:true},//加入房间
         },
         market: {
-          recommendCurrency: {var: 1, op: 108, seq: 0, resOp: 108},//推荐币种
-          marketPair: {var: 1, op: 107, seq: 0, resOp: 107},//涨跌幅数据更新
-          collectArr: {var: 1, op: 109, seq: 0, resOp: 109}//收藏
+          recommendCurrency: {ver: 1, op: 108, seq: 0, resOp: 108},//推荐币种
+          marketPair: {ver: 1, op: 107, seq: 0, resOp: 107},//涨跌幅数据更新
+          collectArr: {ver: 1, op: 109, seq: 0, resOp: 109}//收藏
         },
         userOrder: {
-          tradeKline: { var: 1, op: 104, seq: 0, resOp: 104 }, //K线更新
-          tradeDepth: {var: 1, op: 105, seq: 0, resOp: 105},//深度更新
-          orderUpdate: {var: 1, op: 103, seq: 0, resOp: 103},//订单跟新
-          userOrderUpdate: {var: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
+          tradeKline: { ver: 1, op: 104, seq: 0, resOp: 104 }, //K线更新
+          tradeDepth: {ver: 1, op: 105, seq: 0, resOp: 105},//深度更新
+          orderUpdate: {ver: 1, op: 103, seq: 0, resOp: 103},//订单跟新
+          userOrderUpdate: {ver: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
         },
         login: {
-          login: {var: 1, op: 10, seq: 0, resOp: 11},//登录
-          loginOut: {var: 1, op: 12, seq: 0, resOp: 13}//退出登录
+          login: {ver: 1, op: 10, seq: 0, resOp: 11},//登录
+          loginOut: {ver: 1, op: 12, seq: 0, resOp: 13}//退出登录
           },
         asset: {
-          userAssetUpdate: { var: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
+          userAssetUpdate: { ver: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
         },
         notice: {
-          userNoticeUpdata: {var: 1, op: 111, seq: 0, resOp: 111} // 用户通知消息更新
+          userNoticeUpdata: {ver: 1, op: 111, seq: 0, resOp: 111} // 用户通知消息更新
         }
       }
     },
