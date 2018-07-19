@@ -244,8 +244,8 @@ export default class App extends Component {
     configController.setAppView(this); //configController获取app view 以便设置语言后重新渲染
 
     let Loign = AsyncComponent(()=>import("./components/login/Login.jsx"), {controller:loginController});
-    let ForgetPass = AsyncComponent(()=>import("./components/login/ForgetPass.jsx"), {controller:noticeController});
-    let Notice = AsyncComponent(()=>import("./components/notice/NoticeBulletin.jsx"), {controller:loginController});
+    let ForgetPass = AsyncComponent(()=>import("./components/login/ForgetPass.jsx"), {controller:loginController});
+    let Notice = AsyncComponent(()=>import("./components/notice/NoticeBulletin.jsx"), {controller:noticeController});
     let UserNotice = AsyncComponent(()=>import("./components/notice/UserNotice.jsx"), {controller:noticeController});
     let Asset = AsyncComponent(()=>import("./components/asset/AssetManage"), {controller:assetController});
     // let tradeFooter = AsyncComponent(()=>import("./components/asset/children/Simple"), {controller:assetController});
