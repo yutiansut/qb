@@ -120,11 +120,23 @@ export default class AssetController extends ExchangeControllerBase {
       address: this.store.state.coinAddress.coinAddress
     });
   }
+  initHistory(flag){
+    this.view.state.page = 1;
+    flag ? (this.view.state.assetHistory = { total: 0, orderList: []}) : this.view.setState({
+      assetHistory: {
+        total: 0,
+        orderList: [],
+      },
+      page: 1
+    });
+    this.store.initHistory();
+  }
   // 获取充提记录
   async getHistory(obj) {
-    await this.store.getHistory(obj);
+    let result = await this.store.getHistory(obj);
+    console.log('history,,,,,,,,,,,,,,,,,,,,,,,,,,,',result)
     this.view.setState({
-      assetHistory: this.Util.deepCopy(this.store.state.assetHistory)
+      assetHistory: this.Util.deepCopy(result),
     });
   }
 

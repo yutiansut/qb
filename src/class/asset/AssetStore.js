@@ -177,6 +177,11 @@ export default class AssetStore extends ExchangeStoreBase {
           coinAddress: "" //地址
         });
   }
+  // 清空充提记录
+  initHistory(){
+    this.state.assetHistory.orderList = [];
+    this.state.assetHistory.total = 0;
+  }
 
   // 获取资产记录
   async getHistory(obj) {
@@ -190,7 +195,9 @@ export default class AssetStore extends ExchangeStoreBase {
       )
     );
     if (result && result.errCode) {
-      return result;
+      this.state.assetHistory.orderList = [];
+      this.state.assetHistory.total = 0;
+      return this.state.assetHistory;
     }
     this.state.assetHistory.orderList =
       result &&

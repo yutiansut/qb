@@ -14,6 +14,7 @@ export default class Charge extends exchangeViewBase {
     super(props);
     this.name = "charge";
     let { controller } = props;
+    controller.setView(this);
     this.status = {
       0: this.intl.get("pending"),
       1: this.intl.get("passed"),
@@ -31,7 +32,7 @@ export default class Charge extends exchangeViewBase {
       tradePair: null
     };
     //绑定view
-    controller.setView(this);
+    controller.initHistory(true);
     //初始化数据，数据来源即store里面的state
     let {
       walletList,
@@ -108,6 +109,7 @@ export default class Charge extends exchangeViewBase {
       this.props.controller.changeUrl("currency", state.currency.toLowerCase());
       this.getCoinAddress(state.currency);
       this.getCurrencyAmount(state.currency);
+      this.props.controller.initHistory();
       this.getHistory({
         page: this.state.page - 1,
         pageSize: 10,

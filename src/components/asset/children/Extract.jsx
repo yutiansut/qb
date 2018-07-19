@@ -16,6 +16,7 @@ export default class Extract extends exchangeViewBase {
     // 绑定视图，初始化数据
     let { controller } = this.props;
     controller.setView(this);
+
     this.name = "extract";
     this.status = {
       0: this.intl.get("pending"),
@@ -44,7 +45,7 @@ export default class Extract extends exchangeViewBase {
       userTwoVerify: { withdrawVerify: -1, fundPwd: -1 },
       showSelect: false
     };
-
+    controller.initHistory(true);
     let {
       walletExtract,
       walletList,
@@ -155,7 +156,6 @@ export default class Extract extends exchangeViewBase {
       let curExtract = this.state.walletExtract.extractAddr.filter(
         v => v.coinName === nextState.currency.toLowerCase()
       )[0];
-      console.log(this.props.controller.sort(curExtract.addressList, ["addressName"], 1));
       this.setState(
         {
           address:
@@ -171,6 +171,7 @@ export default class Extract extends exchangeViewBase {
         }
       );
       this.getCurrencyAmount(nextState.currency);
+      this.props.controller.initHistory();
       this.getHistory({
         page: this.state.page - 1,
         pageSize: 10,
@@ -191,6 +192,7 @@ export default class Extract extends exchangeViewBase {
   }
 
   render() {
+    console.log('his...................', this.state.assetHistory.total);
     let {
       totalCount,
       frozenCount,

@@ -6,11 +6,13 @@ import DatePicker from "../../../common/component/DatePicker/DatePicker";
 import Pagination from "../../../common/component/Pagination";
 import BasePopup from "../../../common/component/Popup";
 import "../style/history.styl";
+import { ENGINE_METHOD_DIGESTS } from "constants";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = this.props;
     controller.setView(this);
+
     // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
       orderType: {
@@ -55,13 +57,20 @@ export default class History extends exchangeViewBase {
       tip: false,
       tipSuccess: true,
       tipContent: "",
+      // 搜索条件
       currency: this.intl.get("all"),
       orderType: this.intl.get("all"),
       status: this.intl.get("all"),
       startTime: this.dealTime().start,
-      endTime: this.dealTime().end
+      endTime: this.dealTime().end,
+      //选择条件
+      currency_s: this.intl.get("all"),
+      orderType_s: this.intl.get("all"),
+      status_s: this.intl.get("all"),
+      startTime_s: this.dealTime().start,
+      endTime_s: this.dealTime().end
     };
-
+    controller.initHistory(true);
     let { wallList, assetHistory } = controller.initState;
     this.state = Object.assign(this.state, {
       wallList,
@@ -80,7 +89,12 @@ export default class History extends exchangeViewBase {
           orderType: this.intl.get("all"),
           status: this.intl.get("all"),
           startTime: this.dealTime().start,
-          endTime: this.dealTime().end
+          endTime: this.dealTime().end,
+          currency_s: this.intl.get("all"),
+          orderType_s: this.intl.get("all"),
+          status_s: this.intl.get("all"),
+          startTime_s: this.dealTime().start,
+          endTime_s: this.dealTime().end
         },
         () => {
           this.search(0);
@@ -147,7 +161,7 @@ export default class History extends exchangeViewBase {
             <li className="item">
               <span>{this.intl.get("asset-currency")}</span>
               <SelectButton
-                title={this.state.currency}
+                title={this.state.currency_s}
                 type="main"
                 className="select"
                 valueArr={
@@ -159,14 +173,14 @@ export default class History extends exchangeViewBase {
                     : []
                 }
                 onSelect={value => {
-                  this.setState({ currency: value });
+                  this.setState({ currency_s: value });
                 }}
               />
             </li>
             <li className="item">
               <span>{this.intl.get("type")}</span>
               <SelectButton
-                title={this.state.orderType}
+                title={this.state.orderType_s}
                 type="main"
                 className="select"
                 valueArr={[
@@ -176,14 +190,14 @@ export default class History extends exchangeViewBase {
                   this.intl.get("asset-transfer")
                 ]}
                 onSelect={value => {
-                  this.setState({ orderType: value });
+                  this.setState({ orderType_s: value });
                 }}
               />
             </li>
             <li className="item">
               <span>{this.intl.get("state")}</span>
               <SelectButton
-                title={this.state.status}
+                title={this.state.status_s}
                 type="main"
                 className="select"
                 valueArr={[
@@ -193,20 +207,20 @@ export default class History extends exchangeViewBase {
                   this.intl.get("pending")
                 ]}
                 onSelect={value => {
-                  this.setState({ status: value });
+                  this.setState({ status_s: value });
                 }}
               />
             </li>
           </ul>
           <div className="datepicker">
             <DatePicker
-              startTime={this.state.startTime}
-              endTime={this.state.endTime}
+              startTime={this.state.startTime_s}
+              endTime={this.state.endTime_s}
               onChangeStart={time => {
-                this.setState({ startTime: parseInt(time / 1000) });
+                this.setState({ startTime_s: parseInt(time / 1000) });
               }}
               onChangeEnd={time => {
-                this.setState({ endTime: parseInt(time / 1000) });
+                this.setState({ endTime_s: parseInt(time / 1000) });
               }}
             />
           </div>
@@ -216,7 +230,17 @@ export default class History extends exchangeViewBase {
               title={this.intl.get("search")}
               className="search"
               onClick={() => {
-                this.search(this.state.page - 1);
+                this.props.controller.initHistory();
+                this.setState({
+                  page: 1,
+                  currency: this.state.currency_s,
+                  orderType: this.state.orderType_s,
+                  status: this.state.status_s,
+                  startTime: this.state.startTime_s,
+                  endTime: this.state.endTime_s
+                },()=>{
+                  this.search(0);
+                });
               }}
             />
             <Button
@@ -349,6 +373,13 @@ export default class History extends exchangeViewBase {
               showTotal={true}
               onChange={page => {
                 this.setState({ page });
+                this.setState({
+                  currency_s: this.state.currency,
+                  orderType_s: this.state.orderType,
+                  status_s: this.state.status,
+                  startTime_s: this.state.startTime,
+                  endTime_s: this.state.endTime
+                });
                 this.search(page - 1);
               }}
               showQuickJumper={true}
