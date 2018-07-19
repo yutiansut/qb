@@ -67,7 +67,7 @@
         right 0
         margin-top .1rem
         background $h5-foreground
-        box-shadow 0 0 0.05rem $h5-shadow-weight
+        box-shadow 0 0 0.1rem $h5-border-weight
         border-radius .02rem
         overflow hidden
         li
@@ -79,13 +79,13 @@
   .nav-hidden
     position: fixed
     z-index: 100001
-    top 0
+    top .5rem
     bottom 0
     right 0
     left 37.5%;
     overflow auto
     background $h5-foreground
-    box-shadow 0.02rem 0 .05rem $h5-shadow-light
+    box-shadow 0.02rem 0 .1rem $h5-border-weight
     a
       width 100%
       height .45rem
@@ -111,12 +111,10 @@
       bottom 0
       width 100%
 
-
-
 .nav-shadow
     position: fixed;
     z-index: 100000;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.2);
     top: 0;
     bottom: 0;
     left: 0;
