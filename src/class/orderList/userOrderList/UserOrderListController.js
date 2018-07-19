@@ -183,7 +183,16 @@ export default class UserOrderListController extends OrderListController {
 
   async cancelOrder(orderId, opType, dealType, v = 1) {
     let msg = await this.store.cancelOrder(orderId, opType, dealType);
-    console.log('xiadan', msg)
+    // console.log('xiadan', msg,orderId);
+    let orderListArray = this.view.state.orderListArray
+    if(orderListArray){
+      let index = orderListArray.findIndex((item) => Number(item.orderId) === Number(orderId))
+      orderListArray.splice(index,1)
+      console.log(index,orderListArray)
+      this.view.setState({
+        orderListArray
+      })
+    }
     if(!v){
       this.view.setState({resetPopFlag:true}// 下单弹窗}
       );

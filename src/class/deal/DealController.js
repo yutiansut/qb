@@ -122,8 +122,26 @@ export default class DealController extends ExchangeControllerBase {
     // }
   }
 
-  async dealTrade(orderType) {
+  async dealTrade(orderType,e) {
+    e.preventDefault();
+    e.stopPropagation();
     if(this.view.state.fundPwdInterval === -1){
+      this.view.setState(
+          {
+            dealPopMsg:'请设置资金密码',
+            dealPassType:'positi',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+      return
+    }
+    if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
+      this.view.setState(
+          {
+            dealPopMsg:'不能低于最小交易量',
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          });
       return
     }
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
@@ -143,11 +161,8 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
-    // let j = 1
-    // for(var i =1;i<=500;i++){
-    //   j+=0.01;
+    
     let result = await this.store.dealTrade(params);
-    console.log('下单返回结果', result)
     if(result === null){
       this.view.setState(
           {
@@ -162,7 +177,8 @@ export default class DealController extends ExchangeControllerBase {
     if(result && result.wrongTime < 5){
       this.view.setState(
           {
-            dealPopMsg: this.intl.get('passError'),
+            // dealPopMsg: this.intl.get('passError'),
+            dealPopMsg: '下单成功123',
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
@@ -220,6 +236,5 @@ export default class DealController extends ExchangeControllerBase {
     this.view.setState({
       coinMin:coinMinItem.minTrade
     })
-    console.log('coinMinItem1111111111',coinMinItem, this.store.state.coinMin)
   }
 }

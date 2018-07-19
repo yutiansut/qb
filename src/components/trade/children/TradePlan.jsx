@@ -283,9 +283,7 @@ export default class TradePlan extends ExchangeViewBase {
           </div>
         </div>
         <div className='deal-pop'>
-          {this.state.dealPass && <TradePopup theme={this.state.dealPassType} msg={this.state.dealPopMsg} onClose={() => {
-            this.setState({ dealPass: false });
-          }} className='deal-pop-location'/>}
+          {this.state.dealPass && <TradePopup theme={this.state.dealPassType} msg={this.state.dealPopMsg} onClose={() => {console.log(1231111);this.setState({ dealPass: false });}} className='deal-pop-location'/>}
         </div>
         <div className='deal-login-shadow' style={{display:this.props.controller.userController.userId ? 'none' : 'block'}}>
           <p>
