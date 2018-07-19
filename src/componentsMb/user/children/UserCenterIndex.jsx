@@ -1,6 +1,7 @@
 import React from 'react';
 import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
+import RemindPopup from '../../../common/component/Popup/index.jsx'
 
 import '../stylus/userCenterIndex.styl'
 
@@ -17,6 +18,9 @@ export default class UserCenterIndex extends exchangeViewBase {
     };
     this.state={
       userAuth:{},
+      remindPopup: false,
+      popType: "tip1",
+      popMsg: "",
     };
     let controller=this.props.controller;
     controller.setView(this);
@@ -25,6 +29,12 @@ export default class UserCenterIndex extends exchangeViewBase {
 
   async componentWillMount() {
       await this.getUserAuthData();
+  }
+
+  isAuthentication() {
+    if (this.state.userAuth.state !== 1 || this.state.userAuth.state !== 2) {
+      this.setState({remindPopup:true,popType:"tip4",popMsg:this.intl.get("user-not-surport")})
+    }
   }
 
   render() {
@@ -40,7 +50,7 @@ export default class UserCenterIndex extends exchangeViewBase {
         </div>
         <div className="user-center-main">
           <ul className="list-section">
-            <li className="list-item clearfix">
+            <li className="list-item clearfix" onClick={this.isAuthentication.bind(this)}>
               <div className="fl">
                 <img src="/static/mobile/user/icon_wd_sfrz@3x.png"/>
                 <span>{this.intl.get("header-idVerify")}</span>
@@ -80,6 +90,11 @@ export default class UserCenterIndex extends exchangeViewBase {
             </NavLink>
           </ul>
         </div>
+        {this.state.remindPopup && <RemindPopup
+          type={this.state.popType}
+          msg={this.state.popMsg}
+          autoClose = {true}
+          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }

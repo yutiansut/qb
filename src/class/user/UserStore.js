@@ -48,7 +48,6 @@ export default class UserStore extends ExchangeStoreBase {
   // }
 
   async userLogin(data) { // 获取登录信息
-    console.log('ccc4', data)
     this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName

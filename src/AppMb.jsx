@@ -121,6 +121,7 @@ export default class App extends Component {
 
     activityController.configController = configController;
     noticeController.userController = userController;
+    userController.configController = configController;
 
     assetController.configController = configController;
     assetController.userController = userController;

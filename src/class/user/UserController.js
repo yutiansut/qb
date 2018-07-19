@@ -14,7 +14,9 @@ export default class UserController extends ExchangeControllerBase {
   //   // view.setState({count: this.store.count})
   //   // return this.store.data
   // }
-
+  get configData() {
+    return this.configController.initState;
+  }
 
   //清除用户信息
   clearUserInfo(){
