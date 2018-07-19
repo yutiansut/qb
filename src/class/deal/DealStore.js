@@ -15,6 +15,10 @@ export default class DealStore extends ExchangeStoreBase {
       priceInit:0,
       coinMinTrade:[],
       coinMin: 0,
+      priceBuyValueCN:0,
+      priceBuyValueEN:0,
+      priceSellValueEN:0,
+      priceSellValueCN:0,
       // UnitObject: {
       //   'cny计价': 'CNY',
       //   'usd计价': 'USD'

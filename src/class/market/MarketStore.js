@@ -281,14 +281,14 @@ export default class MarketStore extends ExchangeStoreBase {
       coinCorrespondingId[coin][market] = v.tradePairId;
       coinCorrespondingPair[coin] = coinCorrespondingPair[coin] || [];
       marketCorrespondingPair[market] = marketCorrespondingPair[market] || [];
-      coinCorrespondingPair[coin].push(market);
-      marketCorrespondingPair[market].push(coin);
-    });
-    let pairMsg = {};
-    pairMsg.pairIdCoin = coinCorrespondingId;
-    pairMsg.pairIdMarket = marketCorrespondingId;
-    pairMsg.pairNameCoin = coinCorrespondingPair;
-    pairMsg.pairNameMarket = marketCorrespondingPair;
-    return pairMsg
+    coinCorrespondingPair[coin].push(market);
+    marketCorrespondingPair[market].push(coin);
+  });
+  let pairMsg = {};
+  pairMsg.pairIdCoin = coinCorrespondingId;
+  pairMsg.pairIdMarket = marketCorrespondingId;
+  pairMsg.pairNameCoin = coinCorrespondingPair;
+  pairMsg.pairNameMarket = marketCorrespondingPair;
+  return pairMsg
   }
 }

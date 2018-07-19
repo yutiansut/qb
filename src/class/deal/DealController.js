@@ -95,13 +95,13 @@ export default class DealController extends ExchangeControllerBase {
     this.view.setState({
       priceBank
       // inputValue: priceBank[v] || initPrice
-    })
+    });
+    // console.log('bugbugbgugbug',this.view.state.inputBuyFlag,this.view.state.inputBuyValue,fromValue)
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
       let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
         inputSellValue, inputBuyValue;
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
-      console.log('inputSellValue', inputSellValue, inputBuyValue)
       this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue
       this.view.setState({
         inputSellValue,
@@ -135,6 +135,7 @@ export default class DealController extends ExchangeControllerBase {
       );
       return
     }
+    
     if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
       this.view.setState(
           {
@@ -161,7 +162,7 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
-    
+    // if(Number(params.price.multi(params.count)).formatFixNumberForAmount())
     let result = await this.store.dealTrade(params);
     if(result === null){
       this.view.setState(
@@ -178,7 +179,7 @@ export default class DealController extends ExchangeControllerBase {
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
-            dealPopMsg: '下单成功123',
+            dealPopMsg: '资金密码错误',
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }

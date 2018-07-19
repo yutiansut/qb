@@ -80,8 +80,7 @@ export default class TradePlan extends ExchangeViewBase {
     })
   }
 
-  numInput(dealType,e) {
-   
+  numInput(dealType,type, e) {
     let diffArr = [{
       inputValue: 'inputBuyValue',
       wallet: 'buyWallet',
@@ -100,8 +99,7 @@ export default class TradePlan extends ExchangeViewBase {
     //   })
     //   return
     // }
-    let priceValue = (this.state[diffArr[dealType].inputValue] || (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit)).toString();
-    let limitPrice = priceValue.split('.');
+    let priceValue = (this.state[diffArr[dealType].inputValue] || (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit)) || 0;
     let value = e.target.value;
     let limitNum = value.split('.');
     if(limitNum.length > 2)
@@ -111,18 +109,31 @@ export default class TradePlan extends ExchangeViewBase {
       return
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
     //   return
-    let flag =  (priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
-        || ((priceValue >= 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-            || (priceValue > 0.01 && priceValue< 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
-            || (priceValue <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1])));
-    console.log('flag',flag)
+    
+    let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
+        || (priceValue >= 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+            || (priceValue > 0.01 && priceValue < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+            || (priceValue <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
     if(!flag)
       return
-    let numValue = e.target.value >= maxNum ? maxNum.toFixed(8 - (limitPrice[1] && limitPrice[1].length || 0)) : value;
+    let limitPrice = 0;
+    priceValue > 100 && (limitPrice = 6);
+    priceValue >= 0.1 && priceValue <= 100 && (limitPrice = 4);
+    priceValue > 0.01 && priceValue < 0.1 && (limitPrice = 2);
+    let numValue = e.target.value >= maxNum ? maxNum.toFixed(limitPrice) : value;
     
-  console.log(222222222222222222222,numValue)
-    dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
-    dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+    if(type){
+      dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
+      dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+    }
+   else{
+      let a = Number(numValue).formatFixNumberForAmount(Number(priceValue));
+      let b = a.split(',');
+      let c;
+      b.length > 1 && (c = b.join(''));
+      dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
+      dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+    }
   }
 
   priceInput(dealType, e) {

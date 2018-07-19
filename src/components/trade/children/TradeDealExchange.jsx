@@ -53,13 +53,13 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trader-deal-input'>
             <div className='deal-input-label'>{`${this.intl.get('amount')}`}</div>
             {/*<Input/>*/}
-            <input type="text" value={this.props.ControllerProps.dealType ? this.props.sellNum : this.props.buyNum} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType)}/>
+            <input type="text" value={this.props.ControllerProps.dealType ? this.props.sellNum : this.props.buyNum} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType,true)}/>
             <div className='deal-input-unit'>
               {this.props.NumUnit.toUpperCase()}
             </div>
           </div>
           <div className='deal-number-range'>
-            <input type="range"  min='0' max={maxValue} step={maxValue/100} className={`r-${this.props.ControllerProps.tradeType}`} value={this.props.ControllerProps.dealType ? this.props.sellNum : this.props.buyNum} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType)}/>
+            <input type="range"  min='0' max={maxValue || 0} step={(maxValue/100) || 0} className={`r-${this.props.ControllerProps.tradeType}`} value={this.props.ControllerProps.dealType ? Number(this.props.sellNum) : Number(this.props.buyNum)} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType,false)}/>
             <ul>
               {rangeItems.map((v, index) => {
                 return(
