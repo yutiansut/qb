@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
-import serverConfig from '../../../config/ServerConfig';
 import "../style/invite.styl";
 
 export default class Terms extends exchangeViewBase {
@@ -11,7 +10,6 @@ export default class Terms extends exchangeViewBase {
 
   render() {
     const controller = this.props.controller;
-    console.log(`${serverConfig.host}/mgenrealize/register/${this.props.location.search}`);
     let { nameUsd, netUrl, coin } = controller.configData;
     return <div className="minvite">
         <dl>
@@ -41,7 +39,7 @@ export default class Terms extends exchangeViewBase {
             </p> */}
             <div className="qrcode">
               <div className="qrcode-wrap">
-                <QRCode value={`http://${serverConfig.host}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
+              <QRCode value={`${controller.configData.currentUrl}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
               </div>
             </div>
           </div>

@@ -85,7 +85,7 @@ export default class Wallets extends exchangeViewBase {
               </em>
             </b>
           </span>
-          <span
+          {/* <span
             className={`hide-zero ${this.state.hideZero ? "active" : ""}`}
             onClick={() => {
               this.setState({ hideZero: !this.state.hideZero });
@@ -93,7 +93,7 @@ export default class Wallets extends exchangeViewBase {
           >
             <i />
             {this.intl.get("asset-hideZero")}
-          </span>
+          </span> */}
         </div>
         <table>
           <thead>

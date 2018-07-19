@@ -23,7 +23,7 @@ export default class Genrealize extends exchangeViewBase {
       return <Terms controller={this.controller} />;
     };
     const Invit = ({ match, location, history }) => {
-      return <Invite controller={this.controller} location={location} />;
+      return <Invite controller={this.controller} location={location} controller={this.controller} />;
     };
     const Regist = ({ match, location, history }) => {
       return <Register controller={this.controller} location={location} />;

@@ -97,13 +97,11 @@ export default class Pricing extends exchangeViewBase {
   getPricing(nameUsd) {
     return {
       table1: {
-        thead: [this.intl.get('help-level'), this.intl.get('help-require-points'), this.intl.get('help-trade-fee'), this.intl.get('help-quick-withdrawal')],
+        thead: [this.intl.get('help-level'), this.intl.get('help-require-points')],
         tbody: [
           {
             grade: `VIP0`,
             score: `0`,
-            fee: this.intl.get('help-see-below'),
-            fast: `0%`
           },
           {
             grade: `VIP1`,
@@ -144,53 +142,13 @@ export default class Pricing extends exchangeViewBase {
         ],
         tradeTable: {
           thead: [this.intl.get('help-trade-type'), `Maker`, `Taker`],
-          tbody: [
-            {
-              var: `ETH / BTC`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `BCH / BTC`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `LSK / BTC`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `LSK / ETH`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `BCH / ETH`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `LSK / USDT`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `BTC / USDT`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `BCH / USDT`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            },
-            {
-              var: `ETH / USDT`,
-              maker: `0.08%`,
-              taker: `0.12%`
-            }
-          ]
+          tbody: [{ "tradePairId": 1, "tradePairName": "lsk/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/lsk.png", "isRecommend": true, "isNewBorn": false }, { "tradePairId": 2, "tradePairName": "bch/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/bch.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 3, "tradePairName": "eth/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/eth.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 6, "tradePairName": "ltc/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/ltc.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 7, "tradePairName": "omg/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/omg.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 32, "tradePairName": "lsk/eth", "marketName": "eth", "icon": "http://www.cointalks.com/res/lsk.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 33, "tradePairName": "bch/eth", "marketName": "eth", "icon": "http://www.cointalks.com/res/bch.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 34, "tradePairName": "lsk/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/lsk.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 35, "tradePairName": "btc/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/btc.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 36, "tradePairName": "bch/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/bch.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 37, "tradePairName": "eth/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/eth.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 41, "tradePairName": "ltc/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/ltc.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 42, "tradePairName": "dash/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/dash.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 43, "tradePairName": "zec/usdt", "marketName": "usdt", "icon": "http://www.cointalks.com/res/zec.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 44, "tradePairName": "dash/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/dash.png", "isRecommend": true, "isNewBorn": false }, { "tradePairId": 45, "tradePairName": "zec/btc", "marketName": "btc", "icon": "http://www.cointalks.com/res/zec.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 46, "tradePairName": "omg/eth", "marketName": "eth", "icon": "http://www.cointalks.com/res/omg.png", "isRecommend": false, "isNewBorn": false }, { "tradePairId": 47, "tradePairName": "zec/eth", "marketName": "eth", "icon": "http://www.cointalks.com/res/zec.png", "isRecommend": false, "isNewBorn": false }].map(v=>{
+           return {
+            var: v.tradePairName.toUpperCase(),
+            maker: `0.08%`,
+            taker: `0.12%`}
+          })
+
         }
       },
       scoreTable: {
