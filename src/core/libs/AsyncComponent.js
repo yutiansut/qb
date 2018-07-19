@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-export default function asyncComponent(importComponent, props) {
-  class AsyncComponent extends Component {
+export default function AsyncComponent(importComponent, props) {
+  class AsyncComponentCache extends Component {
     constructor(props) {
       super(props);
 
@@ -12,16 +12,16 @@ export default function asyncComponent(importComponent, props) {
 
     async componentDidMount() {
       const { default: component } = await importComponent();
-      console.log('AsyncComponent')
+      console.log('AsyncComponentCache 0')
       this.setState({component});
     }
 
     render() {
       const C = this.state.component;
-
-      return C ? <C {props} /> : null;
+      console.log('AsyncComponentCache 1', props, this.props)
+      return C ? <C {...props} {...this.props} /> : null;
     }
   }
-
-  return AsyncComponent;
+  // console.log('AsyncComponentCache', AsyncComponentCache)
+  return AsyncComponentCache;
 }

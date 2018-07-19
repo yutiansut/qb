@@ -14,7 +14,7 @@ module.exports = merge(webpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
       path: config.build.assetsRoot, // 输出的路径
-      filename: 'app/[name].js', // 打包后文件
+      filename: 'app/[name].[chunkhash:8].js', // 打包后文件
       publicPath: process.env.NODE_ENV === 'production'
           ? config.build.assetsPublicPath
           : config.dev.assetsPublicPath
@@ -26,6 +26,11 @@ module.exports = merge(webpackConfig, {
           name: 'commons',
           chunks: 'initial',
           minChunks: 2
+        },
+        core: {
+          test: /.[\\/]core[\\/]/,
+          name: 'core',
+          chunks: 'all'
         },
         react:{
           test: /[\\/]node_modules[\\/]react/,
