@@ -32,13 +32,20 @@ export default class HomeActivity extends ExchangeViewBase {
   }
 
   render() {
-    // console.log('this.state.bannerImgUrl',this.state.bannerImgUrl)
+    console.log('this.state.bannerImgUrl',this.props.controller)
     return (
       <div className="banner-wrap" id="active">
-        {/*<div>*/}
-          {/*<img src="/static/img/banner_title.svg" alt=""/>*/}
-          {/*<Link to="/activity/fresh">立即注册</Link>*/}
-        {/*</div>*/}
+        <div className="banner-content">
+          <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en} alt="" className="content"/>
+          {this.props.controller.configController.store.state.language === "zh-CN" ? (
+            <Link to="/activity/fresh" className="content-link cn-content">
+              <span className="banner-btn"></span>
+            </Link>) : (
+            <Link to="/activity/fresh" className="content-link en-content">
+              <span className="banner-btn"></span>
+            </Link>
+          )}
+        </div>
         <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
       </div>
     );

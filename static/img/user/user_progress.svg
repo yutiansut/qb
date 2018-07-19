@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>ing_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-551.000000, -514.000000)" fill="#E6AD26">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="ing_icon" transform="translate(452.000000, 71.000000)">
+                    <path d="M23.4666667,22.2 L23.4666667,9.26666667 L20.5333333,9.26666667 L20.5333333,25.1035156 L20.5501709,25.1035156 L20.5501709,25.1333333 L36.3333333,25.1333333 L36.3333333,22.2 L23.4666667,22.2 Z M22,44 C9.8497355,44 0,34.1502645 0,22 C0,9.8497355 9.8497355,0 22,0 C34.1502645,0 44,9.8497355 44,22 C44,34.1502645 34.1502645,44 22,44 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

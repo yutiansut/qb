@@ -56,7 +56,7 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证
-      this.view.setState({showTwoVerify: true, verifyType: data.ret, twoVerifyUser: data.data.account})
+      this.view.setState({showTwoVerify: true, verifyType: data.ret, twoVerifyUser: data.data.account, verifyNum: this.view.intl.get("sendCode")})
       console.log('二次登录', this.view.state)
       return
     }

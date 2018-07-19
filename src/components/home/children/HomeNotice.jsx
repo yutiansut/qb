@@ -66,20 +66,22 @@ export default class homeNotice extends ExchangeViewBase {
   }
 
   render() {
-    // console.log('首页公告', this.state)
+    console.log('首页公告', this.state)
     return <div className={`${this.state.noticeList && this.state.noticeList.length ? "" : "hide"} home-notice-wrap`}>
       {this.state.noticeList && this.state.noticeList.length && <div className="home-notice-content">
         <ul style={{top: this.state.top1 + "%"}}>
-          {this.state.noticeList.map((v, index) => <li key={index}><i>{this.intl.get("notice")}</i>
+          {this.state.noticeList.map((v, index) => <li key={index}>
             <Link to={`notice/content/detail?noticeId=${v.activityId}`}>
-              {this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}
+              <i>【{v.createdAt.toDate('MM-dd')}】</i>
+              <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
             </Link>
           </li>)}
         </ul>
         <ul style={{top: this.state.top2 + "%"}}>
-          {this.state.noticeList.map((v, index) => <li key={index}><i>{this.intl.get("notice")}</i>
+          {this.state.noticeList.map((v, index) => <li key={index}>
             <Link to={`notice/content/detail?noticeId=${v.activityId}`}>
-              {this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}
+              <i>【{v.createdAt.toDate('MM-dd')}】</i>
+              <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
             </Link>
           </li>)}
         </ul>

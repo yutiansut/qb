@@ -146,17 +146,33 @@
             right -.05rem
             content '/'
             color $normal-gray-color
-      .base-input-wrap
+      .search_wrap
         float right
         width 2rem
         height .36rem
-        display flex
-        justify-content center
-        input
-          background $bg-dark-color
-        button
-          width .44rem
+        .base-input-wrap
+          float left
+          //float right
+          //width 2rem
+          //height .36rem
+          display flex
+          justify-content center
+          input
+            width 1.5rem
+            background $bg-dark-color
+          button
+            width .44rem
           //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
+        img
+          position relative
+          top -.06rem
+          left -.2rem
+          float right
+          width .48rem
+          height .48rem
+          vertical-align top
+          cursor pointer
+
     table
       width 100%
       tr

@@ -72,20 +72,24 @@ export default class HomeMarket extends ExchangeViewBase {
               return (
                 <li key={index} onClick={this.changeMarket.bind(this, v)}>
                   <span
-                    className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active' : ''}`}>{v.toUpperCase()} {this.intl.get('market-market')}</span>
+                    className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active' : ''}`}>{v.toUpperCase()}</span>
                 </li>
               )
             })}
           </ul>
-          <Input
-            type="search1"
-            onEnter={() => {
-              this.filte(this.state.homeMarketPairData, this.state.searchValue)
-            }}
-            value={this.state.searchValue}
-            onInput={value => {
-              (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
-            }}/>
+          <div className="search_wrap clearfix">
+            <Input
+              // type="search1"
+              onEnter={() => {
+                this.filte(this.state.homeMarketPairData, this.state.searchValue)
+              }}
+              value={this.state.searchValue}
+              onInput={value => {
+                (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
+              }}/>
+            <img src="/static/img/home/home_search_btn.svg" alt=""/>
+          </div>
+          
         </div>
 
         <table>

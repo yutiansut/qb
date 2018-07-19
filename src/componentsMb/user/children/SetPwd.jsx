@@ -150,7 +150,7 @@ export default class SetPwd extends exchangeViewBase {
   checkInput2() { // 离开
     let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, // 邮箱
       reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/, // 密码
-      reg3 = /^1[3578]\d{9}$/ // 手机
+      reg3 = /^1[3456789]\d{9}$/ // 手机
     if (this.state.isType === 1) { // 验证邮箱
       if(!reg1.test(this.state.popupInput2)) {
         this.setState({
@@ -227,7 +227,7 @@ export default class SetPwd extends exchangeViewBase {
 
   render() {
     const {url} = this.props
-    let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
+    let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3456789]\d{9}$/ // 邮箱/手机
     return (
       <div className="set-pass-wrap">
         <div className="safe-center-header">

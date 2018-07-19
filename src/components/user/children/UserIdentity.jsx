@@ -32,26 +32,26 @@ export default class userIdentity extends exchangeViewBase {
       photoArr: [
         {
           photoList: [
-            {imgUrl: '/static/img/user/ID.svg', name: this.intl.get("user-idFront")},
-            {imgUrl: '/static/img/user/ID_2.svg', name: this.intl.get("user-idBack")},
-            {imgUrl: '/static/img/user/ID_3.svg', name: this.intl.get("user-idHand")}
+            {imgUrl: this.$imagesMap.$user_id01, name: this.intl.get("user-idFront")},
+            {imgUrl: this.$imagesMap.$user_id02, name: this.intl.get("user-idBack")},
+            {imgUrl: this.$imagesMap.$user_id03, name: this.intl.get("user-idHand")}
           ]
         },
         {
           photoList: [
-            {imgUrl: '/static/img/user/passport.svg', name: this.intl.get("user-passFront")},
-            {imgUrl: '/static/img/user/passport_2.svg', name: this.intl.get("user-passHand")},
-            {imgUrl: '/static/img/user/passport_3.svg', name: this.intl.get("user-addr")}
+            {imgUrl: this.$imagesMap.$user_passport01, name: this.intl.get("user-passFront")},
+            {imgUrl: this.$imagesMap.$user_passport02, name: this.intl.get("user-passHand")},
+            {imgUrl: this.$imagesMap.$user_passport03, name: this.intl.get("user-addr")}
           ]
         },
       ],
       realNameArr: [ // 是否认证:0未认证;1审核中;2已审核;3未通过;4恶意上传失败封锁3天;5永久禁止
-        {imgUrl: '/static/img/user/identity_no.png', content: this.intl.get("user-authNo")},
-        {imgUrl: '/static/img/user/identity_progress.png', content: this.intl.get("user-authProcess")},
-        {imgUrl: '/static/img/user/identity_succ.png', content: this.intl.get("user-authSucc")},
-        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
-        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
-        {imgUrl: '/static/img/user/identity_err.png', content: this.intl.get("user-authErr")},
+        {imgUrl: this.$imagesMap.$user_no, content: this.intl.get("user-authNo")},
+        {imgUrl: this.$imagesMap.$user_progress, content: this.intl.get("user-authProcess")},
+        {imgUrl: this.$imagesMap.$user_succ, content: this.intl.get("user-authSucc")},
+        {imgUrl: this.$imagesMap.$user_err, content: this.intl.get("user-authErr")},
+        {imgUrl: this.$imagesMap.$user_err, content: this.intl.get("user-authErr")},
+        {imgUrl: this.$imagesMap.$user_err, content: this.intl.get("user-authErr")},
       ]
     }
     const {controller} = props
@@ -171,9 +171,9 @@ export default class userIdentity extends exchangeViewBase {
     if ((this.state.userAuth.state == 3 || this.state.userAuth.state == 4 || this.state.userAuth.state == 5) &&  this.state.checkState && this.state.image1 && this.state.image2 && this.state.image3) return true
     return false
   }
-  checkAgree(event) {
+  checkAgree() {
     this.setState({
-      checkState: event.target.checked
+      checkState: !this.state.checkState
     });
   }
   submitInfo() { // 确认提交
@@ -294,11 +294,17 @@ export default class userIdentity extends exchangeViewBase {
               {this.state.photoArr[this.state.selectIndex].photoList && this.state.photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
-                <img src="/static/img/user/add.svg" alt="" className="add-img"/>
+                <img src={this.$imagesMap.$user_add} alt="" className="add-img"/>
                 <p>{item.name}</p>
               </dd>))}
             </dl>
-            <h3><input type="checkbox" checked={this.state.checkState} onChange={this.checkAgree}/>{this.intl.get("user-photoSure")}</h3>
+            <h3>
+              <p onClick={this.checkAgree}>
+                {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
+              </p>
+              {/*<input type="checkbox" checked={this.state.checkState} onChange={this.checkAgree}/>*/}
+              {this.intl.get("user-photoSure")}
+            </h3>
             <Button
               title={this.intl.get("user-submit")}
               className={`${this.canClick() ? 'identify-btn-active' : ''} identify-btn`}

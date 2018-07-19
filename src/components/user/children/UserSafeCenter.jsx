@@ -328,7 +328,7 @@ export default class userSafeCenter extends exchangeViewBase {
               </table>
               <p className={`${this.state.ipList && this.state.ipList.length ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
               <p>
-                {this.intl.get("user-ipAddRemind")}{this.props.controller.configController.initState.netUrl}{this.intl.get("user-ipAddRemind2")}
+                {this.intl.get("user-ipAddRemind")}<a href={this.props.controller.configController.initState.currentUrl} target="_blank">{this.props.controller.configController.initState.netUrl}</a>{this.intl.get("user-ipAddRemind2")}
               </p>
             </div>
           </div>

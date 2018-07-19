@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>add</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.7">
+        <g id="Artboard" transform="translate(-661.000000, -510.000000)" fill="#2BB789">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="add" transform="translate(562.000000, 67.000000)">
+                    <rect id="Rectangle-5" x="0" y="19" width="44" height="6"></rect>
+                    <rect id="Rectangle-5" transform="translate(22.000000, 22.000000) rotate(90.000000) translate(-22.000000, -22.000000) " x="0" y="19" width="44" height="6"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -23,19 +23,23 @@
         height .25rem
         cursor pointer
         text-align center
+        &:hover
+          text-decoration underline
         i
           position relative
           padding-left .2rem
           margin-right .2rem
-          &:before
-            position absolute
-            top .03rem
-            left 0
-            width .15rem
-            height .15rem
-            content ''
-            background url(/static/img/tongzhi.svg) no-repeat
-            background-size .15rem .15rem
-        &:hover
-          text-decoration underline
+          color $main-color
+        span
+          color $normal-font-color
+          //&:before
+          //  position absolute
+          //  top .03rem
+          //  left 0
+          //  width .15rem
+          //  height .15rem
+          //  content ''
+          //  background url(/static/img/tongzhi.svg) no-repeat
+          //  background-size .15rem .15rem
+
 

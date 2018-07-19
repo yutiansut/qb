@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>tongguo_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-352.000000, -514.000000)" fill="#2BB789">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="tongguo_icon" transform="translate(253.000000, 71.000000)">
+                    <path d="M22,44 C9.8497355,44 0,34.1502645 0,22 C0,9.8497355 9.8497355,0 22,0 C34.1502645,0 44,9.8497355 44,22 C44,34.1502645 34.1502645,44 22,44 Z M19.1679454,28.9251917 L13.1451766,22.8327149 L11.0116861,24.9417949 L19.1679454,33.1924553 L36.4392943,15.7212066 L34.3058037,13.6121267 L19.1679454,28.9251917 Z" id="Oval-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

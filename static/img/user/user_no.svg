@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>weiyanzheng_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-261.000000, -514.000000)" fill="#2BB789">
+            <g id="个人中心" transform="translate(99.000000, 443.000000)">
+                <g id="weiyanzheng_icon" transform="translate(162.000000, 71.000000)">
+                    <path d="M22,44 C9.8497355,44 0,34.1502645 0,22 C0,9.8497355 9.8497355,0 22,0 C34.1502645,0 44,9.8497355 44,22 C44,34.1502645 34.1502645,44 22,44 Z M8.46666667,20 C7.65664903,20 7,20.656649 7,21.4666667 C7,22.2766843 7.65664903,22.9333333 8.46666667,22.9333333 L34.8666667,22.9333333 C35.6766843,22.9333333 36.3333333,22.2766843 36.3333333,21.4666667 C36.3333333,20.656649 35.6766843,20 34.8666667,20 L8.46666667,20 Z" id="Oval-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

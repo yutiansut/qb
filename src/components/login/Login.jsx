@@ -125,7 +125,7 @@ export default class Login extends exchangeViewBase {
 
   checkUserInput() { // 手机号／邮箱
     let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
-      reg2 = /^1[3578]\d{9}$/;
+      reg2 = /^1[3456789]\d{9}$/;
 
     if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
       this.setState({
@@ -231,8 +231,6 @@ export default class Login extends exchangeViewBase {
                     {/*onChange={this.checkUser}/>*/}
               <p onClick={this.checkUser}>
                 {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
-
-
               </p>
               {this.intl.get("login-read")}
             <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
@@ -250,6 +248,7 @@ export default class Login extends exchangeViewBase {
         )}
         {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0,  0)}} onClose={() => {
           this.setState({ showTwoVerify: false });
+          this.getCaptchaVerify()
         }} destroy={this.destroy} onConfirm={code => {
           this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput);
         }} />}

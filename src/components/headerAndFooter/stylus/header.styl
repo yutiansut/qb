@@ -39,26 +39,28 @@
         &:hover
           .select-router
             display block
-          .select-list:after
+          &:after
+            position absolute
+            top: 50%
+            right -.1rem
             content: ''
-            width .07rem
+            width .08rem
             height .05rem
             background-image $icon-select
             background-size cover
-            position absolute
-            top: 50%
-            transform rotate(90deg)
-            right -.1rem
+            transform translateY(-50%) rotate(180deg)
+
         &:after
+          position absolute
+          top: 50%
+          right -.1rem
           content: ''
-          width .07rem
+          width .08rem
           height .05rem
           background-image $icon-select
           background-size cover
-          position absolute
-          top: 50%
           transform translateY(-50%)
-          right -.1rem
+
         .select-router
           position absolute
           display none
@@ -93,11 +95,13 @@
       &.language-li
         width .8rem
         p
+          cursor pointer
           text-align center
         ul
           display none
           background $exchange-color
           li
+            cursor pointer
             height .4rem
             padding 0 .05rem
             line-height .4rem
@@ -112,35 +116,32 @@
             display block
       &.new-li
         position relative
-        &:hover
-          .new-li-content
-            display block
-          .new-li-img
+        .new-li-img
+          position relative
+          text-align center
+          cursor pointer
+          img
             position relative
-            text-align center
-            img
-              position relative
-              top -.02rem
-              width .2rem
-              height .2rem
-              vertical-align middle
-            i
-              position absolute
-              right -.06rem
-              top .25rem
-              display inline-block
-              min-width .12rem
-              height .12rem
-              padding .02rem
-              background $negative-color
-              color $normal-white-color
-              border-radius 50%
-              line-height .12rem
-              font-size .12rem
-              &.hide
-                display none
+            top -.02rem
+            width .2rem
+            height .2rem
+            vertical-align middle
+          i
+            position absolute
+            right -.06rem
+            top .25rem
+            display inline-block
+            min-width .12rem
+            height .12rem
+            padding .02rem
+            background $negative-color
+            color $normal-white-color
+            border-radius 50%
+            line-height .12rem
+            font-size .12rem
+            &.hide
+              display none
         .new-li-content
-          display none
           position absolute
           left 50%
           transform translateX(-50%)
@@ -208,7 +209,7 @@
           left 50%
           transform translateX(-50%)
           display none
-          width 1rem
+          width 1.2rem
           background $exchange-color
           li
             height .4rem
@@ -280,5 +281,25 @@
   background transparent
   box-shadow none
   color $normal-white-color
+  >ol
+    >li
+      &.language-li
+        width 1rem
+        p
+          text-align center
+        ul
+          display none
+          background none
+          margin-top -.2rem
+          li
+            color $main-color
+            &:nth-of-type(1)
+              border-bottom none
+        img
+          display inline-block
+          width .2rem
+          height .15rem
+          margin-right .1rem
+          vertical-align middle
 
 

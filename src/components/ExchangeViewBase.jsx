@@ -27,7 +27,25 @@ export default class ExchangeViewBase extends ViewBase {
       $nomal_check: "/static/img/normal_check.svg",
       $checkbox_check: "/static/img/checkbox_checked.svg",
       $home_star_sel: "/static/img/star_select.svg",
-      $home_star_nor: "/static/img/star_normal.svg"
+      $home_star_nor: "/static/img/star_normal.svg",
+      $user_id01: "/static/img/user/ID_01.svg",
+      $user_id02: "/static/img/user/ID_02.svg",
+      $user_id03: "/static/img/user/ID_03.svg",
+      $user_passport01: "/static/img/user/passport_01.svg",
+      $user_passport02: "/static/img/user/passport_02.svg",
+      $user_passport03: "/static/img/user/passport_03.svg",
+      $user_err: "/static/img/user/user_err.svg",
+      $user_no: "/static/img/user/user_no.svg",
+      $user_progress: "/static/img/user/user_progress.svg",
+      $user_succ: "/static/img/user/user_succ.svg",
+      $user_add: "/static/img/user/user_add.svg",
+      $home_banner_text_cn: "/static/img/banner/text_cn.svg",
+      $home_banner_text_en: "/static/img/banner/text_en.svg",
+      $home_user_notice: "/static/img/home/new_bai.svg"
+      // $home_banner_btn_cn: "/static/img/banner/sign_up_cn.svg",
+      // $home_banner_btn_en: "/static/img/banner/sign_up_en.svg",
+      // $home_banner_btn_cn_hover: "/static/img/banner/sign_up_cn_hover.svg",
+      // $home_banner_btn_en_hover: "/static/img/banner/sign_up_en_hover.svg",
     }
   }
 

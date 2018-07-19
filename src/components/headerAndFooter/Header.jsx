@@ -46,7 +46,8 @@ export default class Header extends ExchangeViewBase {
       ],
       userNoticeHeader: {},
       userNoticePop: false, // 弹窗信息
-      userContent: "" // 弹窗信息
+      userContent: "", // 弹窗信息
+      showNews: false // 消息下拉
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
@@ -68,7 +69,9 @@ export default class Header extends ExchangeViewBase {
   }
 
   async componentDidMount() {
-    ChangeFontSize(1440*0.8, 1440*1)
+    // console.log(21324, this.props)
+    let changeBase = this.props.navClass === 'tradeNav' ? 1440 * 2 : 1440
+    ChangeFontSize(1440*0.8, changeBase)
     await this.getUserNoticeHeader(1, 0, 0)
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
@@ -151,11 +154,11 @@ export default class Header extends ExchangeViewBase {
         </ul>
         <ol className="clearfix">
           <li className={`${userToken ? 'new-li' : 'hide'}`}>
-            <div className="new-li-img">
-              <img src="/static/img/home/new_hei.svg" alt=""/>
+            <div className="new-li-img"  onClick={() => {this.setState({ showNews: !this.state.showNews});}}>
+              <img src={this.$imagesMap.$home_user_notice} alt=""/>
               <i className={Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length ? '' : 'hide'}>{Object.keys(this.state.userNoticeHeader || {}).length && this.state.userNoticeHeader.list && this.state.userNoticeHeader.list.length}</i>
             </div>
-            <div className="new-li-content">
+            {this.state.showNews && <div className="new-li-content">
               <p className="clearfix">
                 <span>通知</span>
                 <em onClick={this.checkAll}>✓︎</em>
@@ -170,7 +173,7 @@ export default class Header extends ExchangeViewBase {
                 <div>没有新通知</div>
               )}
               <Link to="/wuserNotice" className="check-all">查看全部</Link>
-            </div>
+            </div>}
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
             <NavLink activeClassName="header-right-active" to="/wlogin">{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
@@ -184,7 +187,7 @@ export default class Header extends ExchangeViewBase {
               <li>
                 <NavLink to="/wuser/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
-              <li className="login-out" onClick={this.loginOut}>退出</li>
+              <li className="login-out" onClick={this.loginOut}>{this.intl.get("header-logOut")}</li>
             </ul>
           </li>
           <li className="language-li">
