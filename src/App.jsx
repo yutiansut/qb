@@ -260,8 +260,8 @@ export default class App extends Component {
     Routers = [
       { path: "/whome", component: HomeComponent },
       { path: "/trade", component: Trade },
-      { path: "/wlogin", component: Loign },
       { path: "/wlogin/:uid", component: Loign },
+      { path: "/wlogin", component: Loign },
       { path: "/wallet", component: Asset, auth: true },
       { path: "/worder", component: Order, auth: true },
       { path: "/wuser", component: User, auth: true },

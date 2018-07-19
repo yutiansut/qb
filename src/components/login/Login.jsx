@@ -50,6 +50,7 @@ export default class Login extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
+    // console.log("marthc........................", match.params);
     let query = match.params && match.params.uid || null;
     this.state.query = query
     console.log('query', query)

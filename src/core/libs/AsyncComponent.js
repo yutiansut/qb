@@ -18,7 +18,7 @@ export default function AsyncComponent(importComponent, props) {
 
     render() {
       const C = this.state.component;
-      console.log('AsyncComponentCache 1', props, this.props)
+      // console.log('AsyncComponentCache 1', props, this.props, C)
       return C ? <C {...props} {...this.props} /> : null;
     }
   }
