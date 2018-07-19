@@ -492,6 +492,8 @@ export default function en(state) {
     "activity-invite-38": `Refer a friend and get token`,
     "activity-invite-37": `Refer each friend to finish registration ${netUrl}`,
     "activity-invite-39": `Register for tokens：`,
+    "activity-rule-40": `Total <i>5,000,000</i> ${coin} will be distributed.`,
+    "activity-rule-41": `Input Your Phone Number/Email Address`,
   };
 
   const login = {

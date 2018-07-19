@@ -2,89 +2,96 @@
 @import "../../../common/css/base.styl"
 .mregister{
   text-align: center;
+  font-family: PingFangSC-Regular;
 }
 .mregister .banner{
   box-sizing: border-box;
-  width: 100%;
   height: 2.07rem;
-  padding-top: 0.48rem;
-  background: $registe-bg1 no-repeat center center;
+  padding: .5rem 0;
+  background: $h5-foreground;
   background-size: 100% auto;
+  box-shadow: 0 .02rem .05rem 0 rgba(0,0,0,0.30);
+  border-radius .02rem
+  margin .2rem .12rem
 }
 .mregister .banner .balance{
-  font-size: 0.2rem;
-  color: $normal-white-color;
-  margin-bottom: 0.36rem;
+
 }
+.mregister .banner .balance b{
+   display: block;
+   font-size: 0.2rem;
+   opacity: 0.8;
+   color: $h5-color-weight;
+   letter-spacing: .02rem;
+   line-height: .26rem;
+   margin-bottom: 0.26rem;
+ }
+
 .mregister .banner .balance span{
-  font-size: 0.4rem;
-}
-.mregister .banner .wait{
-  font-size: 0.24rem;
-  color:$normal-white-color;
-  text-indent: 0.1rem;
+  font-size: 0.3rem;
+  color $h5-color-red
+  display: inline-block;
+  background-image: linear-gradient(0deg, rgba(92,98,101,0.50) 0%, #2F3335 64%);
+  line-height: .5rem;
+  border-radius: .04rem;
+  padding: 0 .4rem;
+  letter-spacing: .02rem;
 }
 .mregister .content{
   padding-top: 0.35rem;
 }
 .mregister .content .title{
-  height: 0.61rem;
-  margin-bottom: 0.25rem;
-  font-size: 0.21rem;
-  line-height: 0.5rem;
-  font-weight: bold;
-  color: $normal-white-color;
-  background:$registe-bg2 no-repeat center center;
-  background-size: auto 100%;
+  font-size: 0.25rem;
+  color: $h5-color-green;
 }
 .mregister .content p{
-  height: 0.28rem;
-  line-height: 0.28rem;
-  font-size: 0.18rem;
-  color: #8b8a89;
-  margin-bottom: 0.5rem;
+  font-size: 14px;
+  color: $h5-color-weight;
+  text-align: center;
+  line-height: 24px;
+  padding: .18rem .45rem;
+  opacity: 0.8;
 }
-.mregister .content p span{
-  font-size: 0.28rem;
-  margin: 0 0.13rem;
-  font-weight: bold;
-  color:#ff4e41;
+.mregister .content .form{
+  margin-top: .08rem;
+  padding: 0 .12rem;
 }
-.mregister .content input{
+.mregister .content .form input{
+  width: 100%;
   outline: none;
   display: block;
-  width: 3.22rem;
-  height: 0.5rem;
-  margin: 0 auto 0.25rem;
-  font-size: 0.18rem;
-  padding-left: 0.18rem;
-  border: 0.02rem solid rgba(255,0,0,0.3);
-  border-radius: 0.05rem;
+  height: 0.45rem;
+  border-radius: 0.02rem;
+  padding: .13rem .16rem;
 }
-.mregister .content input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: rgba(107,105,105,0.4);
+.mregister .content .form input::placeholder { /* WebKit, Blink, Edge */
+  color: $h5-color-light;
+  font-size: .15rem;
 }
 .mregister .content input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: rgba(107,105,105,0.4);
+  color: $h5-color-light;
+  font-size: .15rem;
 }
 .mregister .content input::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: rgba(107,105,105,0.4);
+  color: $h5-color-light;
+  font-size: .15rem;
 }
 .mregister .content input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: rgba(107,105,105,0.4);
+  color: $h5-color-light;
+  font-size: .15rem;
 }
-.mregister .content button{
+.mregister .content .form button{
   display: block;
-  width: 3.51rem;
+  width: 100%;
   height: 0.45rem;
   line-height: 0.45rem;
-  margin: 0 auto;
-  color: $normal-white-color;
+  color: $h5-color-weight;
   font-size: 0.18rem;
   border-radius: 0.02rem;
-  // background: $registe-bg3 no-repeat center center;
-  // background-size: 100% 100%;
+  background: $h5-color-green;
+  margin-top: .12rem;
 }
+
 .mregister .vagueBgView{
   display: none;
   position: fixed;
@@ -92,7 +99,8 @@
   left:0;
   width: 100%;
   height: 100%;
-  background:rgba(0,0,0,0.76)
+  background:rgba(0,0,0,0.76);
+  z-index: 100;
 }
 .mregister .successAlert{
   display: none;
@@ -107,38 +115,46 @@
   margin-top: -1.46rem;
   background-color: $h5-foreground;
   border-radius: 0.02rem;
+  z-index: 101;
+}
+.mregister .successAlert img{
+  widht: .6rem;
+  height: .6rem;
 }
 .mregister .successAlert p{
-  font-size: 0.21rem;
-  color $normal-font-color;
-  font-weight: bold;
-  margin-top: 0.07rem;
-  margin-bottom: 0.27rem;
+  font-size: 20px;
+  color: $h5-color-green;
+  line-height: 26px;
+  padding: .08rem 0 .2rem 0;
+  text-align center
 }
 .mregister .successAlert .mregister-asset{
-  height: 0.4rem;
-  line-height: 0.4rem;
-  font-size: 0.14rem;
-  color:$normal-font-color;
-  border-top: 0.01rem dashed rgba(105,103,103,0.7);
+  font-size: 14px;
+  color: $h5-color-weight;
+  text-align: center;
+  line-height: 26px;
+  border-top: 0.01rem solid rgba(216,216,216,0.1);
+  padding: .2rem 0;
 }
 .mregister .successAlert .mregister-asset span{
-  color:#ff4e41;
-  font-size: 0.24rem;
-  margin:0 0.05rem;
+  font-size: .15rem;
+  color: $h5-color-red;
+  margin: 0 .08rem;
 }
-.mregister .successAlert a{
+.mregister .successAlert .download{
+  padding: 0 .16rem;
+}
+.mregister .successAlert .download a{
   display: block;
-  width: 2.68rem;
   height: 0.45rem;
   line-height: 0.45rem;
   text-decoration: none;
-  margin: 0 auto;
-  color: $normal-white-color;
-  font-size: 0.16rem;
+  color: $h5-color-weight;
+  font-size: 0.12rem;
   border-radius: 0.02rem;
-  // background: $registe-bg3 no-repeat center center;
-  // background-size: 100% 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .mregister .failureAlert{
@@ -153,25 +169,24 @@
   margin-top: -1.07rem;
   background-color: $h5-foreground;
   border-radius: 0.02rem;
+  padding-bottom: .2rem;
+  z-index: 101;
 }
 .mregister .failureAlert p{
   height: 0.64rem;
   margin-bottom: 0.08rem;
   font-size: 0.2rem;
-  color $main-color;
-  font-weight: bold;
+  color: $h5-color-green;
   line-height: 0.64rem;
-  border-bottom: 0.01rem solid $h5-border-weight;
+  border-bottom: 0.01rem solid rgba(216,216,216,0.1);
 }
 .mregister .failureAlert .tip{
   padding: 0 0.2rem;
   margin-bottom: 0.18rem;
-  text-align: left;
   line-height: 0.28rem;
   font-size: 0.14rem;
-  text-align center
-  font-weight bold
-  color: $normal-font-color;
+  text-align: center;
+  color: $h5-color-weight;
 }
 .mregister .failureAlert button{
   width: 2.68rem;
@@ -179,9 +194,8 @@
   line-height: 0.45rem;
   text-decoration: none;
   margin: 0 auto;
-  // color: $normal-white-color;
+  color: $h5-color-weight;
   font-size: 0.16rem;
-  border-radius: 0.05rem;
-  // background: $registe-bg3 no-repeat center center;
-  // background-size: 100% 100%;
+  border-radius: 0.02rem;
+  background: $h5-color-green;
 }

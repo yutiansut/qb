@@ -696,13 +696,13 @@ export default function zh(state) {
     "activity-invite-24": `更多智囊服务`,
     "activity-invite-25": `${coin}提升等级身份`,
     "activity-invite-26": `更多价值将进一步挖掘，敬请期待！`,
-    "activity-invite-27": `${coin}余额`,
+    "activity-invite-27": `${coin} 余额`,
     "activity-invite-28": `还在等什么？`,
     "activity-invite-29": `新人奖励`,
     "activity-invite-30": `领取`,
     "activity-invite-31": `领取成功`,
     "activity-invite-32": `您当前的资产`,
-    "activity-invite-33": `下载${nameUsd}app,登录即查看资产~`,
+    "activity-invite-33": `下载${nameUsd} App,登录即查看资产~`,
     "activity-invite-34": `温馨提示`,
     "activity-invite-35": `亲，你已经是${nameUsd}的用户了，马上下载${nameUsd}app, 每天还能领${coin}哦~`,
     "activity-invite-36": `知道了`,
@@ -710,6 +710,7 @@ export default function zh(state) {
     "activity-invite-37": `每邀请一位好友注册${netUrl}完成：`,
     "activity-invite-39": `注册送币：`,
     "activity-rule-40": `本次活动共发放 <i>5,000,000</i> 枚${coin}，送完即止。`,
+    "activity-rule-41": `请输入您的手机号/邮箱地址`,
   };
   return Object.assign(
     {},
