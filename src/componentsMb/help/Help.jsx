@@ -21,7 +21,8 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 export default class Help extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.assetController = props.assetController;
+
+    this.assetController = props.controller;
     this.activityController = props.activityController;
   }
 
