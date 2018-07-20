@@ -64,7 +64,7 @@ export default class Login extends exchangeViewBase {
         verifyNum: this.intl.get("sendCode"),
     });
     this.getCaptchaVerify();
-    this.clearVerify();
+    this.destroy();
   }
 
   changeUser(value) {
