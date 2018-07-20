@@ -31,9 +31,6 @@ import StorageConfig from './config/StorageConfig'
 import './class/lib/Prototype'
 import Device from './core/libs/Device'
 
-let a = 1
-console.log(`${a}23`)
-
 
 const renderDom = async Component => {
   // console.log(Date.now())
