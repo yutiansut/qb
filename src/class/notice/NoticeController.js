@@ -96,6 +96,14 @@ export default class NoticeController extends ExchangeControllerBase {
     }
   }
 
+  changeAllNotice() { // 点击头部全部已读更改列表页信息
+    let userNotice = this.view.state.userNotice
+    userNotice.list.forEach(v => {
+      v.isRead = 1
+    })
+    this.view.setState({userNotice})
+  }
+
   async activityCon(activityId, activityType) { // 获取详情
     let activityList = await this.store.activityCon(activityId, activityType);
     this.view.setState({activityList})

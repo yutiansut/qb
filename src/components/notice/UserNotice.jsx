@@ -92,43 +92,42 @@ export default class userNotice extends exchangeViewBase {
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>{this.intl.get("notice-title")}</th>
-              <th>{this.intl.get("time")}</th>
-            </tr>
-          </thead>
-          <tbody className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>
-          {Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (
-            <tr key={index} onClick={value => this.showContent(v, index)}>
-              <td >
-                <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
-                {this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}
-              </td>
-              <td>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</td>
-            </tr>))
-            }
-          </tbody>
-        </table>
-        {/*<div>*/}
-          {/*<ol>*/}
-            {/*<li>*/}
-              {/*<span>{this.intl.get("notice-title")}</span>*/}
-              {/*<i>{this.intl.get("time")}</i>*/}
-            {/*</li>*/}
-          {/*</ol>*/}
-          {/*<ul className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>*/}
+        {/*<table>*/}
+          {/*<thead>*/}
+            {/*<tr>*/}
+              {/*<th>{this.intl.get("notice-title")}</th>*/}
+              {/*<th>{this.intl.get("time")}</th>*/}
+            {/*</tr>*/}
+          {/*</thead>*/}
+          {/*<tbody className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>*/}
           {/*{Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (*/}
-            {/*<li key={index} onClick={value => this.showContent(v, index)}>*/}
-              {/**/}
-              {/*<b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>*/}
-              {/*{this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}*/}
+            {/*<tr key={index} onClick={value => this.showContent(v, index)}>*/}
+              {/*<td >*/}
+                {/*<b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>*/}
+                {/*{this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}*/}
+              {/*</td>*/}
               {/*<td>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</td>*/}
-            {/*</li>))*/}
-          {/*}*/}
-          {/*</ul>*/}
-        {/*</div>*/}
+            {/*</tr>))*/}
+            {/*}*/}
+          {/*</tbody>*/}
+        {/*</table>*/}
+        <div className="table-div">
+          <div className="table-title">
+            <span>{this.intl.get("notice-title")}</span>
+            <i>{this.intl.get("time")}</i>
+          </div>
+          <ul className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>
+          {Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (
+            <li key={index} onClick={value => this.showContent(v, index)} className="clearfix">
+              <p>
+                <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
+                <span>{this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}</span>
+              </p>
+              <i>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</i>
+            </li>))
+          }
+          </ul>
+        </div>
         <p className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
         {Object.keys(this.state.userNotice).length && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
           pageSize={10}

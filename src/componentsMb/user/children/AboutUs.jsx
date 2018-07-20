@@ -16,7 +16,6 @@ export default class AboutUs extends exchangeViewBase {
 
   componentWillMount() {
   }
-
   componentDidMount() {
     this.getQbtTrade()
   }

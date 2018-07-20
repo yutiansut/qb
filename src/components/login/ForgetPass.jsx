@@ -23,7 +23,8 @@ export default class ForgetPass extends exchangeViewBase {
       captchaId: "",
       errPass: "",
       errPassAgain: "",
-      userErr: ""
+      userErr: "",
+      verifyNum: this.intl.get("sendCode"),
     }
     //绑定view
     controller.setView(this)
@@ -47,6 +48,7 @@ export default class ForgetPass extends exchangeViewBase {
     } else {
       this.setState({userType: 0})
     }
+    this.state.userErr && (this.setState({userErr: ""}))
   }
 
   changeVerifyInput(value) {
@@ -72,6 +74,7 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkUserInput() { // 手机号／邮箱
+    // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
     let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
       reg2 = /^1[3456789]\d{9}$/;
 

@@ -89,6 +89,7 @@ export default class LoginController extends ExchangeControllerBase {
 
   // 找回密码
   async forgetLoginPass(account, mode, code, newPass, captchaId, captchaCode) { // 找回密码
+
     let result = await this.store.Proxy.forgetLoginPass({
       account,
       mode, // 0 phone 1 email
@@ -99,12 +100,23 @@ export default class LoginController extends ExchangeControllerBase {
       os: 3
     })
     console.log('忘记密码', result)
-    this.view.setState({showPopup: true, popType: result ? 'tip3': 'tip1', popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")})
+    this.view.setState({
+      showPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
+    })
     if (result === null) {
-      this.view && this.view.history.push('/wlogin')
-      this.view.setState({titleIndex: 1})
+      setTimeout(() => {
+        console.log('登录view', this.view)
+        this.view.history.push('/wlogin')
+        // this.view.history.push({ pathname: '/wlogin'})
+        this.view.setState({ titleIndex: 1})
+      }, 2000)
+      return
     }
-    if (result !== null) {this.getCaptchaVerify()}
+    if (result !== null) {
+      this.getCaptchaVerify()
+    }
   }
 
   async initLoginVerification() { // 获取手势验证
