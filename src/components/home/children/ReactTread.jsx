@@ -9,7 +9,7 @@ class ReactTrend extends React.Component {
             height: 30,
             ratio: 3.33,           // 宽高比例
             trends: [120,345,300,432,253,163,765,324],      // 数据节点
-            stroke: "#333",                 // 线颜色
+            stroke: "#fff",           // 线颜色
             strokeWidth: 1,                 // 线宽
         };
         // console.log(this.props)
@@ -18,7 +18,8 @@ class ReactTrend extends React.Component {
 
     render() {
 
-        let trends=this.state.trends;
+        // let trends=this.state.trends;
+         let trends=[5,4,8,2,7,3]
         if(trends.length<2) return (
             <span></span>
         );
