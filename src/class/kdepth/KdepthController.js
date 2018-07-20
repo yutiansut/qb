@@ -32,6 +32,7 @@ export default class KdepthController extends ExchangeControllerBase {
           return arr;
         })
       : [];
+    console.log('深度数据', result)
     this.view.setData(result);
   }
 }

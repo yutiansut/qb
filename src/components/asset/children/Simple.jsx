@@ -18,13 +18,11 @@ export default class Simple extends exchangeViewBase {
     // this.getWallet = controller.getWallet.bind(controller);
     this.getPairFees = controller.getPairFees.bind(controller);
   }
-  async componentWillMount() {
+  async componentDidMount() {
     await this.getPairFees();
     await this.getAssets();
     // !this.state.wallet && this.getWallet();
   }
-
-  componentDidMount() {}
 
   componentWillUpdate() {}
 

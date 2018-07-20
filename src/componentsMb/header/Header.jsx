@@ -7,8 +7,6 @@ import {
 } from 'react-router-dom'
 
 import "./stylus/header.styl"
-import zh from "../../lang/zh";
-import en from "../../lang/en";
 
 export default class Header extends ExchangeViewBase {
   constructor(props) {

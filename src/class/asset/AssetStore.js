@@ -112,13 +112,13 @@ export default class AssetStore extends ExchangeStoreBase {
       token: this.controller.token
     });
     this.state.wallet = coinList || [];
-    if (this.state.wallet.length) {
-      let obj = {};
-      this.controller.sort(this.state.wallet, ["coinName"], 1).forEach(v => {
-        obj[v.coinName.toUpperCase()] = v.coinId;
-      });
-      this.state.walletList = obj;
-    }
+    // if (this.state.wallet.length) {
+    //   let obj = {};
+    //   this.controller.sort(this.state.wallet, ["coinName"], 1).forEach(v => {
+    //     obj[v.coinName.toUpperCase()] = v.coinId;
+    //   });
+    //   this.state.walletList = obj;
+    // }
     let { totalQuota, availableQuota, usedQuota } = await this.Proxy.balance({
       userId: this.controller.userId,
       coinId: this.state.walletList["BTC"],

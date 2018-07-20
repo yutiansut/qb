@@ -20,6 +20,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader', // 加载器
         exclude: /node_modules/,
+        // include: [
+        //   // 包括 babel inherts 处理，兼容 ie10
+        //   // babel-plugin-transform-proto-to-assign
+        //   // 将 inherits.js 中的 subClass.__proto__ = superClass 进行转换
+        //   // /\/node_modules\/babel-runtime\/helpers\/inherits/
+        // ],
       },
       // {
       //   test: /\.css$/,

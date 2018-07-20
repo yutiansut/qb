@@ -36,11 +36,12 @@ export default class TwoVerifyPopup extends exchangeViewBase {
           <h2>{this.intl.get('twoStep')}</h2>
           <div className="clearfix">
             <Input
+              className={`${type !== 1 && type !== 3 ? 'long' : ''}`}
               placeholder={this.verifyState[type]}
               value={this.state.value}
               onInput={(value) => { this.setState({ value }) }}
             />
-            <Button type="base" disable={type !== 1 && type !== 3} title={(typeof verifyNum === "number" && ((verifyNum === 0 && this.intl.get("sendAgain")) || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify() }} />
+            {(type === 1 || type === 3) && <Button type="base" title={(typeof verifyNum === "number" && ((verifyNum === 0 && this.intl.get("sendAgain")) || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify() }} />}
           </div>
           <Button title={this.intl.get('asset-submit')} disable={this.state.value === ''} type="base" className="set-btn" onClick={() => { onConfirm && onConfirm(this.state.value); }} />
         </div>

@@ -586,7 +586,7 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={this.state.userTwoVerify.withdrawVerify} //短信验证码
+            type={this.state.userTwoVerify.withdrawVerify} //两步验证码类型
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });

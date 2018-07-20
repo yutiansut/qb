@@ -9,6 +9,7 @@ export default class Register extends exchangeViewBase {
     super(props);
     const { controller } = this.props;
     controller.setView(this);
+    console.log(controller.getQuery('uid'));
     let uid = this.props.location.search.substring(1).split('=')[1];
 
     this.state = {
