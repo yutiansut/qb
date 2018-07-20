@@ -76,7 +76,8 @@ export default class OrderItem extends exchangeViewBase{
             </div>
             <div className="fl">
               <div>{type === "current" ? this.intl.get("amount") : this.intl.get("dealPrice")}{type === "current" ? ` (${tradePairArr[0]})` : ` (${tradePairArr[1]})`}</div>
-              <div>{type==="current" ? orderInfo.count : orderInfo.price}</div>
+              {type === "current" && <div>{orderInfo.count}</div>}
+              {type === "history" && <div>{orderInfo.priceType ? this.intl.get('marketPrice') : orderInfo.price}</div>}
             </div>
             <div className="fr">
               <div>{type === "current" ? this.intl.get("daelAmount") : this.intl.get("amount")}{` (${tradePairArr[0]})`}</div>

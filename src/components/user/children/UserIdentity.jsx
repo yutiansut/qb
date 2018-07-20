@@ -27,7 +27,7 @@ export default class userIdentity extends exchangeViewBase {
       popType:"",
       popMsg: "",
       checkVerifyArr: true, // 单选是否能够点击
-      checkState: true, // 同意协议单选框按钮
+      checkState: false, // 同意协议单选框按钮
       errNum: "",
       photoArr: [
         {
@@ -282,7 +282,7 @@ export default class userIdentity extends exchangeViewBase {
               <dt>{this.intl.get("user-idReq")}</dt>
               <dd>{this.intl.get("user-req1")}</dd>
               <dd>{this.intl.get("user-req2")}</dd>
-              <dd>{this.intl.get("user-req3")}{this.intl.get("user-req4")}{this.intl.get("user-req5")}</dd>
+              <dd>{this.intl.get("user-req3")}<span style={{color: "#F25656"}}>{this.intl.get("user-req4")}</span>{this.intl.get("user-req5")}</dd>
               <dd>{this.intl.get("user-req6")}</dd>
             </dl>
             <dl className="clearfix">

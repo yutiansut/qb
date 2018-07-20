@@ -6,10 +6,10 @@ export default class HomeAdvantage extends exchangeViewBase {
   constructor() {
     super()
     this.imageArray = [
-      '/static/img/home/4_1.svg',
+      '/static/img/home/金融交易@2x.png',
       '/static/img/home/4_2.svg',
       '/static/img/home/4_3.svg',
-      '/static/img/home/4_4.svg'
+      '/static/img/home/muti@2x.png'
     ];
     this.wordArray = [
       {head: this.intl.get("home-advantage-h1"), para: this.intl.get("home-advantage-p1")},
@@ -38,7 +38,7 @@ export default class HomeAdvantage extends exchangeViewBase {
         <div className="home-advan-header clearfix">
           <ul>
             <li className={this.state.index === 0 ?"active" : ""} onClick={() => {this.setState({index: 0})}}>
-              <img src="/static/img/home/4_1.svg"/>
+              <img src="/static/img/home/金融交易@2x.png"/>
               <p>{this.intl.get("home-advantage-h1")}</p>
             </li>
             <li className={this.state.index === 1 ?"active" : ""} onClick={() => {this.setState({index: 1})}}>
@@ -50,7 +50,7 @@ export default class HomeAdvantage extends exchangeViewBase {
               <p>{this.intl.get("home-advantage-h3")}</p>
             </li>
             <li className={this.state.index === 3 ?"active" : ""} onClick={() => {this.setState({index: 3})}}>
-              <img src="/static/img/home/4_4.svg" style={{padding: ".05rem 0"}}/>
+              <img src="/static/img/home/muti@2x.png" style={{padding: ".05rem 0"}}/>
               <p>{this.intl.get("home-advantage-h4")}</p>
             </li>
           </ul>

@@ -359,14 +359,14 @@ export default function en(state) {
     "user-photoVerify": "Photo verification",
     "user-idReq": "ID requirements",
     "user-req1":
-      "Id photo: according to the sample, please upload the negative and positive id, face and the font should be clearly visible",
+      "1. Id photo: according to the sample, please upload the negative and positive id, face and the font should be clearly visible",
     "user-req2":
-      "Passport: according to the sample, please upload ID passport pages can be positive, face and the font should be clearly visible",
+      "2. Passport: according to the sample, please upload ID passport pages can be positive, face and the font should be clearly visible",
     "user-req3":
-      "Holding a certificate as: according to the sample, please upload photos in hand, please do not block any effective information in the photo. Face and font must be clearly visible,Paper must show ",
-    "user-req4": "Paper must show “Just for QB and date",
+      "3. Holding a certificate as: according to the sample, please upload photos in hand, please do not block any effective information in the photo. Face and font must be clearly visible,Paper must show ",
+    "user-req4": 'Paper must show "Just for QB and date"',
     "user-req5": "",
-    "user-req6": "Image format: less than 10M,  jpg or png format",
+    "user-req6": "4. Image format: less than 10M,  jpg or png format",
     "user-photo": "ID photo",
     "user-type": "ID type",
     "user-photoSure":
