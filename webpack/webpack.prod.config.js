@@ -10,37 +10,38 @@ const config = require('../config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(webpackConfig, {
-  mode: 'production',
+  mode: "production",
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-      path: config.build.assetsRoot, // 输出的路径
-      filename: 'app/[name].[chunkhash:8].js', // 打包后文件
-      publicPath: process.env.NODE_ENV === 'production'
-          ? config.build.assetsPublicPath
-          : config.dev.assetsPublicPath
+    path: config.build.assetsRoot, // 输出的路径
+    filename: "app/[name].[chunkhash:8].js", // 打包后文件
+    publicPath:
+      process.env.NODE_ENV === "production"
+        ? config.build.assetsPublicPath
+        : config.dev.assetsPublicPath
   },
-  optimization:{
-    splitChunks:{
+  optimization: {
+    splitChunks: {
       cacheGroups: {
         commons: {
-          name: 'commons',
-          chunks: 'initial',
+          name: "commons",
+          chunks: "initial",
           minChunks: 2
         },
         core: {
           test: /.[\\/]core[\\/]/,
-          name: 'core',
-          chunks: 'all'
+          name: "core",
+          chunks: "all"
         },
-        react:{
+        react: {
           test: /[\\/]node_modules[\\/]react/,
-          name: 'react',
-          chunks: 'all'
+          name: "react",
+          chunks: "all"
         },
         vendors: {
           test: /[\\/]node_modules[\\/](?!react)/,
-          name: 'vendors',
-          chunks: 'all'
+          name: "vendors",
+          chunks: "all"
         },
         // vendors: {
         //   test: /[\\/]node_modules[\\/]/,
@@ -62,25 +63,25 @@ module.exports = merge(webpackConfig, {
       uglifyOptions: {
         output: {
           comments: false,
-          beautify: false,
-        },
+          beautify: false
+        }
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
     //传递环境变量，todo此处有待修改
     new webpack.DefinePlugin({
-      'process.env': env
+      "process.env": env
     }),
 
     new BundleAnalyzerPlugin(),
-    
+
     //配置static目录拷贝到服务器目录下
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: path.resolve(__dirname, "../static"),
         to: config.build.assetsSubDirectory,
-        ignore: ['.*']
+        ignore: [".*"]
       }
     ]),
 
@@ -94,8 +95,8 @@ module.exports = merge(webpackConfig, {
         removeComments: true,
         removeTagWhitespace: true,
         removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-      },
-    }),
-  ],
+        removeStyleLinkTypeAttributes: true
+      }
+    })
+  ]
 });

@@ -16,6 +16,7 @@ module.exports = merge(webpackConfig, {
   entry: [
     `webpack-dev-server/client?http://${HOST || config.dev.host}:${PORT || config.dev.port}`,
     'webpack/hot/only-dev-server',
+    'whatwg-fetch',
     path.resolve(__dirname, '../src/index.js'),
   ],
   plugins: [

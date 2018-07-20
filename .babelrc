@@ -5,6 +5,13 @@
     "react"
   ],
   "plugins": [
+    [
+     "transform-es2015-classes",
+      {
+      "loose": true
+      }
+    ],
+     "transform-proto-to-assign",
     "syntax-dynamic-import",
     ["transform-es2015-template-literals", {
       "loose": true,
