@@ -55,6 +55,7 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   orderHandle(prices) {
+    // console.log('tttttt',priceType)
     this.view.setState({
       prices,
       inputBuyFlag: false,
@@ -62,6 +63,15 @@ export default class DealController extends ExchangeControllerBase {
       priceBank: prices
     });
     this.store.state.prices = prices;
+    // console.log('live789465123',this.view.state.UnitSelected,prices)
+    if(this.view.state.PriceUnit === 'CNY'){
+      this.setPriceInit(prices.priceCN);
+      return
+    }
+    if(this.view.state.PriceUnit === 'USD'){
+      this.setPriceInit(prices.priceEN);
+      return
+    }
     this.setPriceInit(prices.price);
   }
 
@@ -181,6 +191,16 @@ export default class DealController extends ExchangeControllerBase {
             inputBuyNum: 0,
           }
       )
+      return
+    }
+    if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
+      this.view.setState(
+          {
+            dealPopMsg:'不能低于最小交易量',
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          });
+      return
     }
     // if(Number(params.price.multi(params.count)).formatFixNumberForAmount())
     let result = await this.store.dealTrade(params);
@@ -194,6 +214,17 @@ export default class DealController extends ExchangeControllerBase {
             inputBuyNum: 0,
           }
       );
+    }
+    if(result && result.ret === 1416){
+      this.view.setState(
+          {
+            // dealPopMsg: this.intl.get('passError'),
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+      return
     }
     if(result && result.wrongTime < 5){
       this.view.setState(

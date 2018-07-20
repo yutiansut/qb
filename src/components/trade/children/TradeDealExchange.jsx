@@ -45,7 +45,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trader-deal-input'>
             <div className='deal-input-label'>{`${this.intl.get('price')}`}</div>
             {/*<Input/>*/}
-            <input type="text" value={this.props.DealEntrustType ? (this.props.ControllerProps.dealType ? this.intl.get('deal-market-sell') : this.intl.get('deal-market-buy')):(this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue)} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)} readOnly={this.props.DealEntrustType ? true : false}/>
+            <input type="text" value={this.props.DealEntrustType ? (this.intl.get('marketPrice')) : (this.props.ControllerProps.dealType ? this.props.avalue : this.props.bvalue)} name='price' onChange={this.props.priceInput.bind(this, this.props.ControllerProps.dealType)} readOnly={this.props.DealEntrustType ? true : false}/>
             <div className='deal-input-unit'>
               {this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase()}
             </div>
@@ -88,9 +88,10 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </div>
           </div>
           <div className='trade-deal-turnover'>
-            <span>{`${this.intl.get('deal-trunover')}`}:</span>
-            <em>{this.props.DealEntrustType ? (this.intl.get('deal-market-msg')) : (this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue || 0)).format({number:'property'}) : Number(Number(this.props.buyNum).multi(this.props.bvalue || 0)).format({number:'property'}))}</em>
+            {this.props.DealEntrustType ? '' : <span>  <span>{`${this.intl.get('deal-trunover')}`}:</span>
+            <em>{this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue || 0)).format({number:'property'}) : Number(Number(this.props.buyNum).multi(this.props.bvalue || 0)).format({number:'property'})}</em>
             <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
+              </span>}
             {!this.props.fundPassVerify && <p className='password-msg fr'>
               <span><a href="/wuser/safe/">{`${this.intl.get('deal-forgetpwd')}`}</a></span>
             </p> || null }

@@ -275,9 +275,11 @@ export default {
     errCode: "CODE_NOT_EXPIRE"
   },
   1416:{
+    // 市价溢出
     get msg(){
       return intl.get(1416)
     },
+    ret:1416,
     errCode: 'RPC_STATUS_ORDER_MARKET_TRADE_UNSUITABLE'
   },
   2001: {
