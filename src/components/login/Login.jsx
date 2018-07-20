@@ -56,6 +56,7 @@ export default class Login extends exchangeViewBase {
     console.log('query', query)
     this.getAward = controller.getAward.bind(controller)
     this.getVerify = controller.getVerify.bind(controller)
+    this.clearVerify = controller.clearVerify.bind(controller)
     this.login = controller.login.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
     this.destroy = controller.clearVerify.bind(controller); // 清除定时器
@@ -78,9 +79,11 @@ export default class Login extends exchangeViewBase {
       codeInput: "",
       passInput: "",
       userErr: "", // 手机号/邮箱错误
-      pwdErr: "" // 密码错误
-    })
-    this.getCaptchaVerify()
+      pwdErr: "", // 密码错误
+      verifyNum: this.intl.get("sendCode"),
+    });
+    this.getCaptchaVerify();
+    this.clearVerify();
   }
 
   changeUser(value) {

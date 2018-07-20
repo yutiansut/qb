@@ -54,11 +54,17 @@ export default class Login extends exchangeViewBase {
 
   changeTitle(i) { // 登录切换
     this.setState({
-      titleIndex: i,
-      userInput: "",
-      picInput: "",
-    })
-    this.getCaptchaVerify()
+        titleIndex: i,
+        userInput: "",
+        picInput: "",
+        codeInput: "",
+        passInput: "",
+        userErr: "", // 手机号/邮箱错误
+        pwdErr: "", // 密码错误
+        verifyNum: this.intl.get("sendCode"),
+    });
+    this.getCaptchaVerify();
+    this.clearVerify();
   }
 
   changeUser(value) {

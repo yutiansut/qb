@@ -71,6 +71,17 @@ export default class Header extends ExchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, this.noticeController.store.state.userNoticeHeader);
     this.matched = '/whome'
+
+    //
+    this.hideNotice=(event)=>{
+      let el=event.target;
+      while(el){
+          if(el.classList && el.classList.contains("new-li"))
+            return;
+          el=el.parentNode;
+      }
+      this.setState({showNews:false});
+    };
   }
 
   async componentDidMount() {
@@ -84,6 +95,12 @@ export default class Header extends ExchangeViewBase {
     this.state.navArrayLeft.forEach(v => {
       this.userToken && (v.tokenShow = false)
     })
+    //
+    document.addEventListener("click",this.hideNotice)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click",this.hideNotice);
   }
 
   componentWillUpdate(props, state, next) {
@@ -128,7 +145,6 @@ export default class Header extends ExchangeViewBase {
   }
 
   render() {
-    console.log('头部', this.state, this.state.userNoticeHeader)
     let userToken = this.props.userController.userToken || null
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {

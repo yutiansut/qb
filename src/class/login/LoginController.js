@@ -98,13 +98,7 @@ export default class LoginController extends ExchangeControllerBase {
       captchaId,
       captchaCode,
       os: 3
-    })
-    console.log('忘记密码', result)
-    this.view.setState({
-      showPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
-    })
+    });
     if (result === null) {
       setTimeout(() => {
         console.log('登录view', this.view)
