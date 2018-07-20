@@ -105,7 +105,8 @@ export default class Header extends ExchangeViewBase {
     let userNoticeHeader = this.state.userNoticeHeader
     userNoticeHeader = {}
     this.setState({
-      userNoticeHeader
+      userNoticeHeader,
+      showNews: false
     })
     this.readAllUserNotifications()
   }
@@ -114,9 +115,10 @@ export default class Header extends ExchangeViewBase {
     let userNoticeHeader = this.state.userNoticeHeader
     userNoticeHeader.list.length && userNoticeHeader.list.splice(index, 1)
     this.setState({
-      userContent: v.content,
+      userContent: this.props.configController.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN,
       userNoticePop: true,
-      userNoticeHeader
+      userNoticeHeader,
+      showNews: false
     })
     this.upDateUserNoctice(v.id)
   }

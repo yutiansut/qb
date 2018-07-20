@@ -39,6 +39,16 @@
 
           &.no-read
             display none
+        &:nth-of-type(1)
+          text-align left
+          width 10rem
+          padding-left .3rem
+          //overflow hidden
+          //white-space nowrap
+          //text-overflow ellipsis
+        &:nth-of-type(2)
+          text-align right
+          padding-right .3rem
 
 
 // 内容详情弹窗
@@ -60,6 +70,7 @@
     span
       float left
       font-size .2rem
+      color $normal-font-color
     img
       float right
       width .2rem
