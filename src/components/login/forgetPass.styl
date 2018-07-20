@@ -4,11 +4,11 @@
   width 100%
   background $dark-font-color
 .find-pass-wrap
-  position absolute
-  top 40%
+  position relative
+  transform translateX(-50%)
   left 50%
-  transform translateX(-50%) translateY(-50%)
   width 3.8rem
+  padding .8rem 0
   h1
     width 100%
     text-align center
@@ -22,8 +22,8 @@
       margin-bottom .25rem
       em
         position absolute
-        top 0
-        right 0
+        left 0
+        margin-top .07rem
         font-size .12rem
         color $negative-color
       p
@@ -57,11 +57,14 @@
         border-radius (0 .02rem .02rem 0)
         color $normal-white-color
     .pass-li
-      .base-input-wrap
-        margin-bottom .1rem
-      span
-        font-size .12rem
-        color $negative-color-active
+      position relative
+      margin-bottom .5rem
+      //span
+      //  position absolute
+      //  display inline-block
+      //  margin-top .1rem
+      //  font-size .12rem
+      //  color $negative-color-active
     .send-picture-li
       img
         float left

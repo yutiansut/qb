@@ -163,7 +163,7 @@ export default class Login extends exchangeViewBase {
   }
 
   render() {
-    // console.log('登录', this.state)
+    console.log('地址', this.props.params && this.props.params)
     let verifyTypeObj = {
       2008: 2,
       2009: 1,

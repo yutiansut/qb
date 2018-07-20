@@ -41,7 +41,6 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeUserInput(value) {
     this.setState({userInput: value});
-    console.log(1, value)
     let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     if (reg.test(value)){
       this.setState({userType: 1})
@@ -53,24 +52,20 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeVerifyInput(value) {
     this.setState({verifyInput: value});
-    console.log(2, value)
   }
 
   changePassInput(value) {
     this.setState({passInput: value});
     this.state.errPass && (this.setState({errPass: ""}))
-    console.log(3, value)
   }
 
   changeAgainInput(value) {
     this.setState({againInput: value});
     this.state.errPassAgain && (this.setState({errPassAgain: ""}))
-    console.log(4, value)
   }
 
   changePicInput(value) {
     this.setState({picInput: value});
-    console.log(5, value)
   }
 
   checkUserInput() { // 手机号／邮箱
@@ -97,6 +92,7 @@ export default class ForgetPass extends exchangeViewBase {
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
+
   }
 
   checkAgainInput() {
@@ -128,7 +124,7 @@ export default class ForgetPass extends exchangeViewBase {
   render() {
     return (
       <div className="find-pass-wrap-con" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
-        <div className="find-pass-wrap">
+        <div className="find-pass-wrap" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
           <h1>{this.intl.get("login-findPass")}</h1>
           <ul>
             <li>
@@ -155,8 +151,7 @@ export default class ForgetPass extends exchangeViewBase {
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
-              <em>{this.state.passInput && this.state.errPass}</em>
-              <span>{this.intl.get("login-passRule")}</span>
+              <em>{this.state.passInput && this.state.errPass || this.intl.get("login-passRule")}</em>
             </li>
             <li>
               <p>{this.intl.get("login-passAgain")}</p>

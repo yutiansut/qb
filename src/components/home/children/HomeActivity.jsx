@@ -32,9 +32,8 @@ export default class HomeActivity extends ExchangeViewBase {
   }
 
   render() {
-    console.log('this.state.bannerImgUrl',this.props.controller)
     return (
-      <div className="banner-wrap" id="active">
+      <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
         <div className="banner-content">
           <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en} alt="" className="content"/>
           {this.props.controller.configController.store.state.language === "zh-CN" ? (
@@ -46,7 +45,7 @@ export default class HomeActivity extends ExchangeViewBase {
             </Link>
           )}
         </div>
-        <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
+        <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`, height: `${document.body.clientWidth * 750 / 1440}px`}}/>
       </div>
     );
   }

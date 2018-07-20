@@ -108,9 +108,12 @@ export default class LoginController extends ExchangeControllerBase {
     if (result === null) {
       setTimeout(() => {
         console.log('登录view', this.view)
-        this.view.history.push('/wlogin')
-        // this.view.history.push({ pathname: '/wlogin'})
-        this.view.setState({ titleIndex: 1})
+        // this.view.history.push('/wlogin')
+        this.view.history.push({
+          pathname: '/wlogin',
+          query: { titleIndex: 1 }
+        })
+        // this.view.setState({ titleIndex: 1})
       }, 2000)
       return
     }
