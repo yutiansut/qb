@@ -60,7 +60,7 @@ export default class OrderManage extends exchangeViewBase{
               )
             })}
           </ul>
-          <div className='order-content fr'>
+          <div className='order-content fl'>
             <Switch>
               <Route path={`${match.url}/current`} component={({match}) => (
                   <OrderCurrent controller={this.props.controller} type='orderCurrent' pairIdMsg={this.state.pairIdMsg}/>

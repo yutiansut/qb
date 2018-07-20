@@ -82,7 +82,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       },
       orderDetailHead : {
         orderCurrent: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('amount')}, {name: this.intl.get('deal-trunover')}, {name: this.intl.get('order-unDeal')}, {name: this.intl.get('dealed')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
-        orderHistory: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('dealed')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
+        orderHistory: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('price')}, {name: this.intl.get('amount')}, {name: this.intl.get('total')}, {name: this.intl.get('dealed')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('state')}, {name: this.intl.get('action')},],
         orderDeal: [{name: this.intl.get('time')}, {name: this.intl.get('pair')}, {name: this.intl.get('type')}, {name: this.intl.get('avgPrice')}, {name: this.intl.get('volume')}, {name: this.intl.get('total')}, {name: this.intl.get('fee')},],
       },
       orderInfoHead : [
@@ -96,7 +96,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.orderListHandle = controller.orderListHandle.bind(controller);
-    this.checkoutDetail = controller.getOrderDetail.bind(controller)
+    // this.checkoutDetail = controller.getOrderDetail.bind(controller)
     // console.log(controller)
     this.exportHistory = controller.exportHistory.bind(controller);
     // this.getCurrent = controller.getCurrentOrder.bind(controller)
@@ -271,7 +271,6 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
 
   startTime(e) {
-    console.log(e)
     this.setState({
       startTime: parseInt(e / 1000)
     })
@@ -283,11 +282,14 @@ export default class OrderCurrent extends ExchangeViewBase {
     })
   }
 
-  checkoutDetail(id) {
-    this.setState({
-      orderId: id,
-      detailFlag: true
-    })
+  checkoutDetail(v) {
+    if (v.orderStatus === 2 || v.orderStatus === 6) {
+      this.setState({
+        orderId: v.orderId,
+        detailFlag: true
+      })
+      this.props.controller.getOrderDetail(v.orderId);
+    }
   }
   cancelOrder(v){
     let orderId, opType, dealType;
@@ -373,6 +375,8 @@ export default class OrderCurrent extends ExchangeViewBase {
               </thead>
               <tbody>
               {this.state.orderListArray && this.state.orderListArray.map((v, index) => {
+                let tradePairUpcase = v.tradePairName.toUpperCase();
+                let tradePairArr = tradePairUpcase.split('/');
                 return (
                     <tr key={index}>
                       <td>{Number(v.orderTime).toDate()}</td>
@@ -387,12 +391,12 @@ export default class OrderCurrent extends ExchangeViewBase {
                       {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
 
                       <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
-                      {type === 'orderDeal' && <td>{v.fee}</td>}
+                      {type === 'orderDeal' && <td>{v.fee}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
                       {type === 'orderCurrent' && <td>{v.undealCount}</td>}
                       {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
                       {type === 'orderHistory' && <td>{v.avgPrice}</td>}
                       {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
-                      {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v.orderId)} style={{color:'#2BB789', cursor: 'pointer'}}>{this.intl.get('detail')}</td>}
+                      {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6) ? this.intl.get('detail') : '—'}</td>}
 
                     </tr>
                 )
@@ -424,7 +428,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                 </div>
                 <div className='content-info-items'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1] : this.state.orderDetail.tradePairName.split('/')[0])}</span>
                 </div>
               </div>
               <table className='content-info-table'>

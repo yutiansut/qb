@@ -36,8 +36,10 @@ export default class Home extends exchangeViewBase {
         headerName.className = 'homeNav clearfix'
       }
       if (scrollTop >= document.documentElement.clientHeight) {
+        console.log('true')
         buttonTop.style.display = "block";
       } else {
+        console.log('false')
         buttonTop.style.display = "none";
       }
     })
