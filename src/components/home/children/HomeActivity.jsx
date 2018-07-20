@@ -34,8 +34,10 @@ export default class HomeActivity extends ExchangeViewBase {
   render() {
     return (
       <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
-        <div className="banner-content">
-          <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en} alt="" className="content"/>
+        <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
+          <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en}
+               alt=""
+               className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} content`}/>
           {this.props.controller.configController.store.state.language === "zh-CN" ? (
             <Link to="/activity/fresh" className="content-link cn-content">
               <span className="banner-btn"></span>
