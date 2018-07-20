@@ -67,7 +67,7 @@ export default class Footer extends ExchangeViewBase {
         </div>
         <div className='aside-nav'>
           <div className='aside-nav-desk'></div>
-          <div className='aside-nav-top'></div>
+          <div className='aside-nav-top' onClick={() => {window.scroll(0, 0)}}></div>
         </div>
       </div>
     )

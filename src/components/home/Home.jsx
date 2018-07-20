@@ -27,14 +27,18 @@ export default class Home extends exchangeViewBase {
   componentDidMount() { // 滚动事件 改变头部
     super.componentDidMount();
     let headerName = document.getElementById('header'), activeHeight = document.getElementById('active')
-    // console.log(headerName.className, activeHeight.offsetHeight)
+    let buttonTop = document.querySelector('.aside-nav-top');
     window.addEventListener('scroll', () => {
       let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-      // console.log('scrollTop', scrollTop)
       if(scrollTop >= activeHeight.offsetHeight) {
         headerName.className = 'headerNav clearfix'
       } else {
         headerName.className = 'homeNav clearfix'
+      }
+      if (scrollTop >= document.documentElement.clientHeight) {
+        buttonTop.style.display = "block";
+      } else {
+        buttonTop.style.display = "none";
       }
     })
   }

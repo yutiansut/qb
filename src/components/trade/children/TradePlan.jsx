@@ -285,7 +285,7 @@ export default class TradePlan extends ExchangeViewBase {
                     </div>
                 ) || this.state.fundPwdIntervalWindow.map((v, index) => {
                   return(
-                      <div key={index}>
+                      <div className="choice" key={index}>
                         <input type="radio" className='pwd-radio' name='pwd-Radio' value={v.value} id={v.id} checked={this.state.fundPwdInterval === v.value ? true : false} onChange={this.setFunPwdIntervalShow.bind(this,v)}/><label htmlFor={v.id}>{v.label}</label>
                       </div>
                   )
