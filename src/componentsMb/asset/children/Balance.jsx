@@ -23,7 +23,7 @@ export default class Balance extends exchangeViewBase {
     this.getAssets = controller.getAssets.bind(controller);
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     await this.getAssets();
   }
 

@@ -77,7 +77,7 @@ export default class Charge extends exchangeViewBase {
                 <div className="info">
                     <QRCode value={coinAddress || "-"} level="M" size={160} className="qrcode"/>
                     {/* <a className="save-qrcode">保存二维码</a>*/}
-                    <input type="text" ref="addr" value={coinAddress || "-"}/>
+                    <input type="text" ref="addr" value={coinAddress || "-"} readOnly="readOnly"/>
                     <a className="copy-addr"
                        onClick={()=>{
                            this.copy(this.refs.addr);
