@@ -22,7 +22,8 @@ export default class ForgetPass extends exchangeViewBase {
       captcha: "",
       captchaId: "",
       errPass: "",
-      errPassAgain: ""
+      errPassAgain: "",
+      verifyNum: this.intl.get("sendCode"),
     }
     //绑定view
     controller.setView(this)
