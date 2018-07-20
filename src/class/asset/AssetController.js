@@ -144,15 +144,7 @@ export default class AssetController extends ExchangeControllerBase {
     let result = await this.store.exportHistory();
     // let str =
     //   "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
-    let str=`${this.view.intl.get("time")},
-    ${this.view.intl.get("asset-currency")},
-    ${this.view.intl.get("notice-type")},
-    ${this.view.intl.get("asset-amount2")},
-    ${this.view.intl.get("asset-sendAddress")},
-    ${this.view.intl.get("asset-receiveAddress")},
-    ${this.view.intl.get("asset-confirm")},
-    ${this.view.intl.get("asset-checkState")},
-    ${this.view.intl.get("fee")},`;
+    let str=`${this.view.intl.get("time")},${this.view.intl.get("asset-currency")},${this.view.intl.get("notice-type")},${this.view.intl.get("asset-amount2")},${this.view.intl.get("asset-sendAddress")},${this.view.intl.get("asset-receiveAddress")},${this.view.intl.get("asset-confirm")},${this.view.intl.get("asset-checkState")},${this.view.intl.get("fee")},`;
     result.forEach(v => {
       str +=
         "\n" +

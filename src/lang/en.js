@@ -107,6 +107,8 @@ export default function en(state) {
     noLowerMiniTradeNum: 'Must not be lower than the minimum volume of transaction',
     noEmptyPrice: 'The price can not be empty',
     orderSuccess: 'order success',
+    kline:"Kline",
+    depth:"Depth",
   };
   const errMessage = {
     "-1": "FETCH ERROR",

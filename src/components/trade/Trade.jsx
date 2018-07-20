@@ -117,16 +117,16 @@ export default class extends exchangeViewBase {
                 <TradeMarket controller={TradeMarketController} location={this.props.location}/>
               </div>
               <div className="trade-chart">
-                {/*<div className="k-menu">*/}
-                  {/*<button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>*/}
-                    {/*K线图*/}
-                  {/*</button>*/}
-                  {/*<button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>*/}
-                    {/*深度图*/}
-                  {/*</button>*/}
-                {/*</div>*/}
-                {/*<ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />*/}
-                {/*<ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>*/}
+                <div className="k-menu">
+                  <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
+                      {this.intl.get("kline")}
+                  </button>
+                  <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
+                      {this.intl.get("depth")}
+                  </button>
+                </div>
+                <ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />
+                <ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>
               </div>
             </div>
             <div className="trade-left-bottom">

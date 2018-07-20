@@ -106,6 +106,8 @@ export default function zh(state) {
     noLowerMiniTradeNum: '不能低于最小交易量',
     noEmptyPrice: '价格不能为空',
     orderSuccess: '下单成功',
+    kline:"K线图",
+    depth:"深度图",
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -373,7 +375,7 @@ export default function zh(state) {
     'deal-market-msg': '市价交易,无固定金额',
     'deal-identify': '身份验证',
     "deal-digital-tip": '此价格为挂单时的CNY/USD计价，只提供估值参考，以实际数字币价格为准',
-    "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考'
+    "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考',
   };
   const user = {
     "user-score": "我的积分",

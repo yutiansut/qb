@@ -101,15 +101,7 @@ export default class UserOrderListController extends OrderListController {
     let str;
     if (type === 'orderHistory'){
       // str = "时间,交易对,类型,价格,成交量,成交额,已成交,平均成交价,状态";
-      str = `${this.view.intl.get("time")},
-      ${this.view.intl.get("pair")},
-      ${this.view.intl.get("notice-type")},
-      ${this.view.intl.get("price")},
-      ${this.view.intl.get("avgPrice")},
-      ${this.view.intl.get("total")},
-      ${this.view.intl.get("dealed")},
-      ${this.view.intl.get("avgPrice")},
-      ${this.view.intl.get("state")}`;
+      str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("price")},${this.view.intl.get("avgPrice")},${this.view.intl.get("total")},${this.view.intl.get("dealed")},${this.view.intl.get("avgPrice")},${this.view.intl.get("state")}`;
       result.orderList.forEach(v => {
         str +=
           "\n" +
@@ -135,13 +127,7 @@ export default class UserOrderListController extends OrderListController {
       return;
     }
     // str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";
-      str = `${this.intl.get("time")},
-      ${this.intl.get("pair")},
-      ${this.intl.get("notice-type")},
-      ${this.intl.get("avgPrice")},
-      ${this.intl.get("volume")},
-      ${this.intl.get("total")},
-      ${this.intl.get("fee")}`;
+      str = `${this.intl.get("time")},${this.intl.get("pair")},${this.intl.get("notice-type")},${this.intl.get("avgPrice")},${this.intl.get("volume")},${this.intl.get("total")},${this.intl.get("fee")}`;
       result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)).forEach(v => {
         str +=
           "\n" +
