@@ -105,6 +105,7 @@ export default class TradePlan extends ExchangeViewBase {
     if(limitNum.length > 2)
       return
     limitNum[1] = limitNum[1] || '';
+    // console.log('limitNum[1]1',limitNum[1])
     if (!((/^[0-9]*$/).test(limitNum[0]) && (/^[0-9]*$/).test(limitNum[1])))
       return
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
@@ -114,13 +115,14 @@ export default class TradePlan extends ExchangeViewBase {
         || (priceValue >= 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
             || (priceValue > 0.01 && priceValue < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
             || (priceValue <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
+    // console.log('limitNum[2',flag)
     if(!flag)
       return
     let limitPrice = 0;
     priceValue > 100 && (limitPrice = 6);
     priceValue >= 0.1 && priceValue <= 100 && (limitPrice = 4);
     priceValue > 0.01 && priceValue < 0.1 && (limitPrice = 2);
-    let numValue = e.target.value >= maxNum ? maxNum.toFixed(limitPrice) : value;
+    let numValue = e.target.value > maxNum ? maxNum.toFixed(limitPrice) : value;
     
     if(type){
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))

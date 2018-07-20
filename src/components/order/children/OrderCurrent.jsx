@@ -176,12 +176,12 @@ export default class OrderCurrent extends ExchangeViewBase {
     let idArray = [];
     let hideOther = 1;
     if (coinValue) {
-      marketArray = pairIdMsg.pairNameCoin[coinValue];
+      marketArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()];
       // marketArray.unshift(this.intl.get('all'));
-      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]));
+      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue.toLowerCase()][marketValue.toLowerCase()])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue.toLowerCase()]));
     }
     else {
-      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) || (idArray = []);
+      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue.toLowerCase()])) || (idArray = []);
     // && (marketArray = pairIdMsg.pairNameMarket[marketValue])
       marketArray = Object.keys(pairIdMsg.pairIdMarket)
       coinValue = this.intl.get('all');
@@ -208,12 +208,12 @@ export default class OrderCurrent extends ExchangeViewBase {
     let idArray = [];
     let hideOther = 1;
     if (marketValue) {
-      coinArray = pairIdMsg.pairNameMarket[marketValue];
-      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue])) || (idArray = Object.values(pairIdMsg.pairIdMarket && pairIdMsg.pairIdMarket[marketValue]));
+      coinArray = pairIdMsg.pairNameMarket[marketValue.toLowerCase()];
+      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue.toLowerCase()][coinValue.toLowerCase()])) || (idArray = Object.values(pairIdMsg.pairIdMarket && pairIdMsg.pairIdMarket[marketValue.toLowerCase()]));
     }
     else {
     // && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]))
-      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue]) || (idArray = []);
+      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) || (idArray = []);
       coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)
       marketValue = this.intl.get('all')
     }
@@ -291,14 +291,20 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
   cancelOrder(v){
     let orderId, opType, dealType;
-    orderId = JSON.parse(JSON.stringify(v.orderId)) ;
+    orderId = v.orderId;
     opType = 0;
     dealType =v.orderType;
     this.props.controller.cancelOrder(orderId, opType, dealType)
   }
+  changePage(page){
+    console.log(1231456789,page);
+    this.setState({
+      page
+    })
+  }
   render() {
     const {type} = this.props;
-    console.log("ggggggggggggggggggggg",this.state.orderListArray)
+    // console.log("ggggggggggggggggggggg",this.state.orderListArray)
     return (
         <div className='order-detail'>
           <div className='order-title'>
@@ -316,19 +322,19 @@ export default class OrderCurrent extends ExchangeViewBase {
             <li className='order-pair'>
               <span>{this.intl.get("pair")}</span>
               <SelectButton
-                  title={this.state.coinSelect}
+                  title={this.state.coinSelect.toUpperCase()}
                   type="main"
                   className="select"
                   onSelect={(e) => this.changeCoin(e)}
-                  valueArr={this.state.coinArray}
+                  valueArr={this.state.coinArray && this.state.coinArray.map(v=>v.toUpperCase())}
               />
               <em>/</em>
               <SelectButton
-                  title={this.state.marketSelect}
+                  title={this.state.marketSelect.toUpperCase()}
                   type="main"
                   className="select"
                   onSelect={(e) => this.changeMarket(e)}
-                  valueArr={this.state.marketArray}
+                  valueArr={this.state.marketArray && this.state.marketArray.map(v=>v.toUpperCase())}
               />
             </li>
             <li>
@@ -370,7 +376,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                 return (
                     <tr key={index}>
                       <td>{Number(v.orderTime).toDate()}</td>
-                      <td>{v.tradePairName}</td>
+                      <td>{v.tradePairName.toUpperCase()}</td>
                       <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                       {/*todo 颜色改类名统一处理*/}
                       {/*价格*/}
@@ -395,7 +401,7 @@ export default class OrderCurrent extends ExchangeViewBase {
             </table>
           ) : (<div className="no-order-detail-list">{this.intl.get("noRecords")}</div>)}
           <div className='order-page'>
-            {(this.props.type !== 'orderCurrent' && this.state.total) && <Pagination total={this.state.total} showTotal={true} pageSize={20}/>}
+            {(this.props.type !== 'orderCurrent' && this.state.total) && <Pagination total={this.state.total} showTotal={true} pageSize={20} onChange={page => {this.changePage(page)}}/>}
           </div>
           <div className='history-order-detail' style={{display: this.state.detailFlag ? 'block' : 'none'}}>
             <div className='history-order-detail-content'>

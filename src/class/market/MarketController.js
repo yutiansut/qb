@@ -204,7 +204,7 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    });
+    }, this.setDealMsg());
     if(this.view.state.query) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
@@ -257,6 +257,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
+    this.TradePlanController && this.TradePlanController.setPriceFlag();
     this.setDealMsg();
     this.view.setState({
       query:''
@@ -315,10 +316,13 @@ export default class MarketController extends ExchangeControllerBase {
 
   //为交易模块提供价格以及交易对的信息
   setDealMsg() {
+    if(!this.store.state.tradePair)
+      return
     //改变deal模块中的信息
-    // console.log('this.store.state.homeMarketPairData', this.store.state.homeMarketPairData, this.store.state.tradePair)
-    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair),
-      dealMsg = {
+    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
+    console.log('hah',this.store.state.tradePair)
+    console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
+    let  dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].icon,
         prices: {

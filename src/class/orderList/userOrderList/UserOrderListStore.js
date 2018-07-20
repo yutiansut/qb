@@ -271,6 +271,7 @@ export default class UserOrderListStore extends OrderListStore {
   //撤单操作
   async cancelOrder(orderId, opType, dealType){
     // console.log('receivePara', this.controller.userController.userId,this.controller.TradeMarketController.tradePair.tradePairId ,orderId)
+    console.log(Number(orderId),orderId,JSON.stringify(orderId),JSON.parse(JSON.stringify(orderId)))
     let msg = await this.Proxy.cancelOrder(
         {
           token: this.controller.userController.userToken,

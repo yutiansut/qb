@@ -12,11 +12,19 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   setPairMsg(value) {
+    console.log(222222222,value)
     this.view.setState({
       tradePairMsg: value
     });
   }
-
+  setPriceFlag(){
+    this.view.setState(
+        {
+          inputBuyFlag: false,
+          inputSellFlag: false
+        }
+    )
+  }
   tradePairHandle(pair, prices) {
     let pairArr = pair.split('/'),
       coin = pairArr[0],
@@ -29,8 +37,8 @@ export default class DealController extends ExchangeControllerBase {
         Coin: coin,
         // prices,
         priceBank: prices,
-        inputBuyFlag: false,
-        inputSellFlag: false,
+        // inputBuyFlag: false,
+        // inputSellFlag: false,
       }
     );
     this.store.state.prices = prices;
