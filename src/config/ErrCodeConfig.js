@@ -183,6 +183,20 @@ export default {
     },
     errCode: "NO_PICTURECODE"
   },
+  624: {
+    // msg: "验证码输入错误次数过多，处于禁止输入时间内",
+    get msg() {
+        return intl.get(624);
+    },
+    errCode: "CODE_EXCESSIVE"
+  },
+  625: {
+    // msg: "谷歌验证码输入错误次数过多，处于禁止输入时间内",
+    get msg() {
+        return intl.get(625);
+    },
+    errCode: "GCODE_EXCESSIVE"
+  },
   704: {
     // msg: "24小时内修改过资金密码,存在安全保护墙",
     get msg() {

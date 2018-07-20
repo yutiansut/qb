@@ -57,7 +57,7 @@ export default class Charge extends exchangeViewBase {
     componentDidMount() {}
 
     render() {
-        let {coinAddress,verifyNumer} = this.state.coinAddress;
+        let {coinAddress,verifyNumber} = this.state.coinAddress;
         let walletList=Object.keys(this.state.walletList);
         let currency=this.state.currency;
         return (
@@ -84,7 +84,7 @@ export default class Charge extends exchangeViewBase {
                        }}>
                         {this.intl.get("asset-copy")}</a>
                     <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
-                    <p>{this.intl.get("asset-depositReminder1",{currency:currency,number:verifyNumer})}</p>
+                    <p>{this.intl.get("asset-depositReminder1",{currency:currency,number:verifyNumber})}</p>
                     <p>{this.intl.get("asset-charge-h5-tip3")}</p>
                 </div>
                 {/*提示框*/}
