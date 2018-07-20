@@ -55,6 +55,7 @@ export default class extends exchangeViewBase {
     // klineController = new KlineController();
     kdepthController = new KdepthController();
     TradeMarketController.klineController = props.klineController;
+    kdepthController.configController = configController;
 
     // TradeMarketController.klineController = klineController;
     TradePlanController.userController = userController;

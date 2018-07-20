@@ -16,23 +16,22 @@ export default class KdepthController extends ExchangeControllerBase {
     if (!data || !data.buy || !data.sell) {
       result = { bids: [], asks: [] };
     }
-    result.bids = data.buy
-      ? data.buy.map(v => {
+    result.bids = data && data.buy ? data.buy.map(v => {
           let arr = [];
           arr.push(v.price);
           arr.push(v.amount);
           return arr;
-        })
-      : [];
-    result.asks = data.sell
-      ? data.sell.map(v => {
-          let arr = [];
-          arr.push(v.price);
-          arr.push(v.amount);
-          return arr;
-        })
-      : [];
-    console.log('深度数据', result)
+        }) : [];
+    result.asks = data && data.sell ? data.sell.map(v => {
+            let arr = [];
+            arr.push(v.price);
+            arr.push(v.amount);
+            return arr;
+          }) : [];
+    // console.log('深度数据', result)
     this.view.setData(result);
+  }
+  get language() {
+    return this.configController.initState.language.toLowerCase();
   }
 }

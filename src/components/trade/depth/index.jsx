@@ -53,6 +53,7 @@ class ReactKDepth extends exchangeViewBase {
         Object.assign(cfg,this.state.props);
         this.state.kdepth = new KDepth(cfg);
         this.state.kdepth.draw();
+        this.state.kdepth.setLanguage(this.props.controller.language);
         // this.setData();
         //
         let _kdepth=this.state.kdepth;
