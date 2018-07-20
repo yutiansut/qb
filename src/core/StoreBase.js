@@ -42,4 +42,11 @@ export default class StoreBase {
     return MassageHandler[connectName]
   }
 
+  // 获取url中的query
+  getQuery(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1]);
+  }
 }

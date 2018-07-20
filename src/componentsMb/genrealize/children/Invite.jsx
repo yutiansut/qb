@@ -10,7 +10,6 @@ export default class Terms extends exchangeViewBase {
 
   render() {
     const controller = this.props.controller;
-    let { nameUsd, netUrl, coin } = controller.configData;
     return <div className="minvite">
         <dl>
           <dt>{this.intl.get("activity-invite-37")}</dt>
