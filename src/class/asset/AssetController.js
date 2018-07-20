@@ -142,8 +142,17 @@ export default class AssetController extends ExchangeControllerBase {
 
   async exportHistory() {
     let result = await this.store.exportHistory();
-    let str =
-      "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
+    // let str =
+    //   "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
+    let str=`${this.view.intl.get("time")},
+    ${this.view.intl.get("asset-currency")},
+    ${this.view.intl.get("notice-type")},
+    ${this.view.intl.get("asset-amount2")},
+    ${this.view.intl.get("asset-sendAddress")},
+    ${this.view.intl.get("asset-receiveAddress")},
+    ${this.view.intl.get("asset-confirm")},
+    ${this.view.intl.get("asset-checkState")},
+    ${this.view.intl.get("fee")},`;
     result.forEach(v => {
       str +=
         "\n" +
@@ -171,7 +180,8 @@ export default class AssetController extends ExchangeControllerBase {
         "," +
         v.fee;
     });
-    this.exportExcel(str, "资产记录.xls");
+    // this.exportExcel(str, "资产记录.xls");
+    this.exportExcel(str, `${this.view.intl.get("asset-records")}.xls`);
   }
 
   // 获取确认中充币信息(顶部轮播)
@@ -224,7 +234,7 @@ export default class AssetController extends ExchangeControllerBase {
       // 错误处理
       return false;
     }
-    this.view.setState({ tip: true, tipSuccess: true, tipContent: "发送成功" });
+    this.view.setState({ tip: true, tipSuccess: true, tipContent: this.view.intl.get("sendSuccess") });
     return true;
   }
 

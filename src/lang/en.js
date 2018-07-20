@@ -60,6 +60,7 @@ export default function en(state) {
     fee: "Fee",
     option: "Option",
     setFund: "Funding Password",
+    pleaseSetFund: "Please Funding Password",
     remark: "Comments",
     name: "Name",
     address: "Address",
@@ -101,7 +102,11 @@ export default function en(state) {
     avgDealPrice: "Average Deal Price",
     dealTurnover: "Total Turnover",
     passError: 'Funding password error',
-    userNotice: 'Notice'
+    userNotice: 'Notice',
+    sendSuccess: 'Send Success',
+    noLowerMiniTradeNum: 'Must not be lower than the minimum volume of transaction',
+    noEmptyPrice: 'The price can not be empty',
+    orderSuccess: 'order success',
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -433,6 +438,18 @@ export default function en(state) {
     "user-supportPhone": "Currently, only Mainland China cell numbers are supported",
     "user-errIp": "Please enter the correct IP",
     "user-googleSucc": "Google verification Setup Success",
+
+    "user-log-1": "Logon log",
+    "user-log-2": "Register log",
+    "user-log-3": "Third party account",
+    "user-log-4": "Mailbox verification",
+    "user-log-5": "Mobile phone number verification",
+    "user-log-6": "Login password settings",
+    "user-log-7": "Wallet log",
+    "user-log-8": "API settings",
+    "user-log-9": "Fund cipher setting",
+    "user-log-10": "system log",
+    "user-log-11": "contact manager",
     // h5
     "user-verify-state0": "Uncertified",
     "user-verify-state1": "Checking",

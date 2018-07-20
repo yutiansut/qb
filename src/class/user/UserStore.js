@@ -21,6 +21,7 @@ export default class UserStore extends ExchangeStoreBase {
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
+        
 
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
@@ -120,7 +121,22 @@ export default class UserStore extends ExchangeStoreBase {
     let loginContent = await this.Proxy.getLoginList({"userId": this.uid, "page":0, "pageSize":10, "src":-1, "catalog":0, "token": this.token});
     let loginlist = loginContent.data ? loginContent.data : [];
     // console.log('denglu', loginContent)
-    let catalogArr = ['登录日志', '注册日志', '第三方账号', '实名认证', '两步验证', '邮件验证', '手机号验证', '登录密码设置', '钱包日志', 'API设置', '资金密码设置', '系统日志', 'IP 白名单', '联系人管理']
+    // let catalogArr = ['登录日志', '注册日志', '第三方账号', '实名认证', '两步验证', '邮件验证', '手机号验证', '登录密码设置', '钱包日志', 'API设置', '资金密码设置', '系统日志', 'IP 白名单', '联系人管理']
+    let catalogArr = [
+        this.controller.view.intl.get("user-log-1"),
+        this.controller.view.intl.get("user-log-2"),
+        this.controller.view.intl.get("user-log-3"),
+        this.controller.view.intl.get("user-name"),
+        this.controller.view.intl.get("twoStep"),
+        this.controller.view.intl.get("user-log-4"),
+        this.controller.view.intl.get("user-log-5"),
+        this.controller.view.intl.get("user-log-6"),
+        this.controller.view.intl.get("user-log-7"),
+        this.controller.view.intl.get("user-log-8"),
+        this.controller.view.intl.get("user-log-9"),
+        this.controller.view.intl.get("user-log-10"),
+        this.controller.view.intl.get("user-ipWhite"),
+        this.controller.view.intl.get("user-log-11")];
     loginlist.length && loginlist.forEach(v => {
       v.catalog = catalogArr[v.catalog]
     })

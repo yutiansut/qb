@@ -60,6 +60,7 @@ export default function zh(state) {
     fee: "手续费",
     option: "操作",
     setFund: "设置资金密码",
+    pleaseSetFund: "请设置资金密码",
     remark: "备注",
     name: '名称',
     address: '地址',
@@ -100,7 +101,11 @@ export default function zh(state) {
     avgDealPrice: "成交均价",
     dealTurnover: "成交总额",
     passError: '资金密码错误',
-    userNotice: '通知'
+    userNotice: '通知',
+    sendSuccess: '发送成功',
+    noLowerMiniTradeNum: '不能低于最小交易量',
+    noEmptyPrice: '价格不能为空',
+    orderSuccess: '下单成功',
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -205,7 +210,7 @@ export default function zh(state) {
     "asset-lock": "冻结中金额",
     "asset-tobtc": "BTC估值",
     "asset-valuation": "估值",
-    "asset-tip1": "小于0.001btc",
+    "asset-tip1": "小于0.001BTC",
     "asset-tip2": "处于挂单环节和提币审核中的金额 ",
     "asset-tip3": "此项估值为总额BTC估值",
     "asset-records": "资产记录",
@@ -506,6 +511,19 @@ export default function zh(state) {
     "user-supportPhone": "目前仅支持中国大陆手机号码",
     "user-errIp": "请输入正确的IP",
     "user-googleSucc": "谷歌验证设置成功",
+
+    "user-log-1": "登录日志",
+    "user-log-2": "注册日志",
+    "user-log-3": "第三方账号",
+    "user-log-4": "邮件验证",
+    "user-log-5": "手机号验证",
+    "user-log-6": "登录密码设置",
+    "user-log-7": "钱包日志",
+    "user-log-8": "API设置",
+    "user-log-9": "资金密码设置",
+    "user-log-10": "系统日志",
+    "user-log-11": "联系人管理",
+
     // h5
     "user-verify-state0": "未认证",
     "user-verify-state1": "审核中",

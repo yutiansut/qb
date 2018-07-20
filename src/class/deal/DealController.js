@@ -136,7 +136,7 @@ export default class DealController extends ExchangeControllerBase {
     if(this.view.state.fundPwdInterval === -1){
       this.view.setState(
           {
-            dealPopMsg:'请设置资金密码',
+            dealPopMsg: this.view.intl.get("pleaseSetFund"),
             dealPassType:'positi',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
@@ -147,7 +147,7 @@ export default class DealController extends ExchangeControllerBase {
     if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
       this.view.setState(
           {
-            dealPopMsg:'不能低于最小交易量',
+            dealPopMsg: this.view.intl.get("noLowerMiniTradeNum"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           });
@@ -174,7 +174,7 @@ export default class DealController extends ExchangeControllerBase {
     if(!params.price){
       this.view.setState(
           {
-            dealPopMsg:'价格不能为空',
+            dealPopMsg: this.view.intl.get("noEmptyPrice"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
             inputSellNum: 0, // 数量清空
@@ -187,7 +187,7 @@ export default class DealController extends ExchangeControllerBase {
     if(result === null){
       this.view.setState(
           {
-            dealPopMsg:'下单成功',
+            dealPopMsg: this.view.intl.get("orderSuccess"),
             dealPassType:'positi',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
             inputSellNum: 0, // 数量清空
@@ -199,7 +199,7 @@ export default class DealController extends ExchangeControllerBase {
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
-            dealPopMsg: '资金密码错误',
+            dealPopMsg: this.view.get("passError"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
@@ -208,7 +208,7 @@ export default class DealController extends ExchangeControllerBase {
     if(result && result.wrongTime >=5){
       this.view.setState(
           {
-            dealPopMsg:'资金密码错误超过5次,已锁定',
+            dealPopMsg: this.view.intl.get("612"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
