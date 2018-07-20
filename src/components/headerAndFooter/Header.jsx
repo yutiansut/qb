@@ -62,6 +62,7 @@ export default class Header extends ExchangeViewBase {
     this.loginOut = this.loginOut.bind(this)
     this.changeHeaderNotice = this.changeHeaderNotice.bind(this) // 改变头部消息数量
     this.upDateUserNoctice = this.noticeController.upDateUserNoctice.bind(this.noticeController) // 消息变成已读
+    this.changeNotice = this.noticeController.changeNotice.bind(this.noticeController) // 改变列表页信息
     //绑定view
     this.noticeController.setHeaderView(this)
     //绑定view
@@ -120,6 +121,7 @@ export default class Header extends ExchangeViewBase {
       userNoticeHeader,
       showNews: false
     })
+    this.changeNotice(v)
     this.upDateUserNoctice(v.id)
   }
 

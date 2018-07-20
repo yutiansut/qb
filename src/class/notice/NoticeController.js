@@ -46,7 +46,7 @@ export default class NoticeController extends ExchangeControllerBase {
     this.view && this.view.setState({userNotice})
   }
 
-  async getUserNoticeHeader( unRead, page, pageSize) { // 获取用户通知列表
+  async getUserNoticeHeader( unRead, page, pageSize) { // 获取用户头部通知列表
     let userNoticeHeader = await this.store.userNotice( unRead, page, pageSize);
     console.log('通知列表头部', userNoticeHeader)
     this.noticeHeaderView.setState({userNoticeHeader})
@@ -82,6 +82,20 @@ export default class NoticeController extends ExchangeControllerBase {
     }
   }
 
+  changeNotice(v) { // 点击头部更改列表页信息
+    let userNotice = this.view.state.userNotice,
+        idArr = [],
+        selectIndex = 0;
+    if (v.isRead === 0){
+      userNotice.list.forEach(v => {
+        idArr.push(v.id)
+      })
+      selectIndex = idArr.indexOf(v.id)
+      userNotice.list[selectIndex].isRead = 1
+      this.view.setState({userNotice})
+    }
+  }
+
   async activityCon(activityId, activityType) { // 获取详情
     let activityList = await this.store.activityCon(activityId, activityType);
     this.view.setState({activityList})
@@ -99,8 +113,8 @@ export default class NoticeController extends ExchangeControllerBase {
       content: obj.content,
       createAt: new Date().getTime() / 1000
     }
-    userNoticeHeader.list.push(noticeObj)
-    userNotice.list.push(noticeObj)
+    userNoticeHeader.list.unshift(noticeObj)
+    userNotice.list.unshift(noticeObj)
     this.noticeHeaderView.setState({userNoticeHeader})
     this.view && this.view.setState({userNotice})
   }
