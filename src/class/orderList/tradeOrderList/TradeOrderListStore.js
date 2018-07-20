@@ -4,6 +4,7 @@ export default class TradeOrderListStore extends OrderListStore{
   constructor() {
     super('userOrder', 'general');
     this.state={
+      changeFlag: true,
       room: '',
       liveTradeList: {
         buy: [

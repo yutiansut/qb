@@ -7,6 +7,7 @@ export default class LiveTrade extends ExchangeViewBase{
   constructor(props){
     super(props);
     this.state = {
+      changeFlag:true,
       titleSelect: 'all',
       newPrice: 0,
       prices:{},

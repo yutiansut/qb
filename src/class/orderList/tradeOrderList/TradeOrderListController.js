@@ -41,8 +41,24 @@ export default class TradeOrderListController extends OrderListController {
       priceEN: v.priceEN,
     };
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
+    // this.store.changeFlag = false
+    this.view.state.changeFlag = false
   }
-
+  get changeFlag(){
+    return this.view.state.changeFlag
+  }
+  setChangeFlag(){
+    // this.store.changeFlag = true
+    this.view.setState({
+      changeFlag:true
+    })
+  }
+  setChangeFlagClose(){
+    // this.store.changeFlag = true
+    this.view.setState({
+      changeFlag:false
+    })
+  }
   joinRoom(tradePairName){
     // console.log(this.store.room)
     let room = `${tradePairName}-D0`

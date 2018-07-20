@@ -196,19 +196,19 @@ export default class userOrder extends ExchangeViewBase {
               <div className='trade-order-content'>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.doneCount}</p>
-                  <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                  <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.dealedMoney}</p>
-                  <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.price}</p>
-                  <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]}</span>
+                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType].toUpperCase()}</span>
                 </div>
               </div>
               <div className="trade-order-table-wrap">

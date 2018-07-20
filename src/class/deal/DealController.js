@@ -42,7 +42,7 @@ export default class DealController extends ExchangeControllerBase {
       }
     );
     this.store.state.prices = prices;
-    this.setPriceInit(prices.price);
+    this.setPriceInit(prices);
     // this.TradeMarketController.setUnitsType(market, coin);
     this.userOrderController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
@@ -51,34 +51,44 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.NumUnit = coin;
     // this.view.state.Market = market;
     this.coinMinTradeHandle(coin);//最小交易量的处理
-    console.log('this.view.state.coinMinTrade111111111111', this.store.state.coinMinTrade)
   }
 
   orderHandle(prices) {
-    // console.log('tttttt',priceType)
     this.view.setState({
       prices,
       inputBuyFlag: false,
       inputSellFlag: false,
-      priceBank: prices
+      priceBank: {
+        CNY: prices.priceCN,
+        USD: prices.priceEN
+      }
     });
     this.store.state.prices = prices;
     // console.log('live789465123',this.view.state.UnitSelected,prices)
-    if(this.view.state.PriceUnit === 'CNY'){
-      this.setPriceInit(prices.priceCN);
-      return
-    }
-    if(this.view.state.PriceUnit === 'USD'){
-      this.setPriceInit(prices.priceEN);
-      return
-    }
-    this.setPriceInit(prices.price);
+    // if(this.view.state.PriceUnit === 'CNY'){
+    //   this.setPriceInit(prices.priceCN);
+    //   return
+    // }
+    // if(this.view.state.PriceUnit === 'USD'){
+    //   this.setPriceInit(prices.priceEN);
+    //   return
+    // }
+    this.setPriceInit(prices);
   }
 
   // 数字币计价 初始值获取
   setPriceInit(v) {
-    this.view.state.priceInit = v;
-    this.view.state.buyMax = this.view.state.buyWallet / v;
+    // let priceInit;
+    // if(this.view.state.PriceUnit === 'CNY'){
+    //   priceInit = v.price
+    // }
+    // this.view.setState({
+    //   priceInit:v.price,
+    //   buyMax:this.view.state.buyWallet / v,
+    //   sellMax:this.view.state.sellWallet
+    // })
+    this.view.state.priceInit = v.price;
+    this.view.state.buyMax = this.view.state.buyWallet / v.price;
     this.view.state.sellMax = this.view.state.sellWallet;
   }
 
@@ -95,6 +105,7 @@ export default class DealController extends ExchangeControllerBase {
       UnitSelected: unit
     });
     this.changePrice(unitSelected, fromValue);
+    this.TradeOrderListController.setChangeFlagClose();
     this.store.state.PriceUnit = unitSelected;
     this.TradeMarketController.setUnitsType(unitSelected);
     this.userOrderController.setUnitsType(unitSelected);
@@ -103,18 +114,21 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   changePrice(v, fromValue) {
-    let initPrice = this.view.state.priceInit,
-      prices = this.store.state.prices,
+    let prices = this.store.state.prices,
+        initPrice = prices.price,
+        // initPrice = this.view.state.priceInit,
       priceBank = {
-        CNY: initPrice / prices.price * prices.priceCN,
-        USD: initPrice / prices.price * prices.priceEN,
+        // CNY: initPrice / prices.price * prices.priceCN,
+        CNY: prices.priceCN,
+        // USD: initPrice / prices.price * prices.priceEN,
+        USD: prices.priceEN,
       }
     ;
     this.view.setState({
-      priceBank
+      priceBank,
+      initPrice: prices.price
       // inputValue: priceBank[v] || initPrice
     });
-    // console.log('bugbugbgugbug',this.view.state.inputBuyFlag,this.view.state.inputBuyValue,fromValue)
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
       let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
         inputSellValue, inputBuyValue;
@@ -154,15 +168,7 @@ export default class DealController extends ExchangeControllerBase {
       return
     }
     
-    if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
-      this.view.setState(
-          {
-            dealPopMsg: this.view.intl.get("noLowerMiniTradeNum"),
-            dealPassType:'passive',// 弹窗类型倾向
-            dealPass:true,// 下单弹窗
-          });
-      return
-    }
+
     
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
@@ -196,7 +202,7 @@ export default class DealController extends ExchangeControllerBase {
     if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
       this.view.setState(
           {
-            dealPopMsg:'不能低于最小交易量',
+            dealPopMsg: this.view.intl.get("noLowerMiniTradeNum"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           });
@@ -230,7 +236,7 @@ export default class DealController extends ExchangeControllerBase {
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
-            dealPopMsg: this.view.get("passError"),
+            dealPopMsg: this.view.intl.get("passError"),
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
