@@ -88,7 +88,7 @@ export default class userOrder extends ExchangeViewBase {
                 return (
                     <div className='reset-handle' key={index} onClick={this.cancelOrder.bind(this,index + 1)}>{v.name}</div>
                 )
-              })}
+              }) || null}
             </div>
           </div>
           {this.state.currentOrder && this.state.currentOrder.length && <table className='trade-current-table'>
@@ -121,7 +121,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.price))}</td>
                     <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(Number(v.price)) || Number(v.count.minus(v.dealDoneCount)).formatFixNumberForAmount(Number(v.price))}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
-                    <td onClick={this.cancelOrder.bind(this, 0, v)} style={{cursor: 'pointer'}}>{this.intl.get('cancel')}</td>
+                    <td onClick={this.cancelOrder.bind(this, 0, v)} className={`cancel`} >{this.intl.get('cancel')}</td>
                   </tr>
               )
             })}
@@ -140,8 +140,8 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
-            {this.state.historyOrder && this.state.historyOrder.length && <a href="/worder/history/" style={{color: 'rgba(255,255,255,.5)', fontSize: '.12rem',marginRight:'.49rem'}}>{this.intl.get('seeMore')}</a>}
-          </div>
+            {this.state.historyOrder && this.state.historyOrder.length && <a href="/worder/history/">{this.intl.get('seeMore')}</a>}
+        </div>
           {this.state.historyOrder && this.state.historyOrder.length && <table className='trade-current-table'>
             <thead>
             <tr>
