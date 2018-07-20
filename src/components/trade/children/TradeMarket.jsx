@@ -102,37 +102,37 @@ export default class TradeMarket extends ExchangeViewBase {
             </p>
           </div>
         </div>
-
-        <table className='trade-market-table'>
-          <thead>
-            <tr>
-              {this.state.marketTableHead.map((v, index) => {
-                return (<td onClick={this.pairSort.bind(this, v, index)} key={index} className={`${v.sortValue ? 'sort-img-td' : ''}`}>
-                  {v.name}
-                  <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt=""
-                       className={`${v.sortValue ? '' : 'hide'}`}/>
-                </td>)
-              })}
-            </tr>
-          </thead>
-          <tbody>
-          {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            return (
-              <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
-                  onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
-                <td>{v.tradePairName.toUpperCase()}</td>
-                <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
-                <td>{Number(v.rise).toPercent()}</td>
-                {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
-                  <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>
-                </td>) || null}
-                <td className="pop-children rightpop-children trade-remind">交易量：{v.volume}</td>
+        <div className="scroll-bar">
+          <table className='trade-market-table'>
+            <thead>
+              <tr>
+                {this.state.marketTableHead.map((v, index) => {
+                  return (<td onClick={this.pairSort.bind(this, v, index)} key={index} className={`${v.sortValue ? 'sort-img-td' : ''}`}>
+                    {v.name}
+                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt=""
+                        className={`${v.sortValue ? '' : 'hide'}`}/>
+                  </td>)
+                })}
               </tr>
-            )
-          })}
-          </tbody>
-
-        </table>
+            </thead>
+            <tbody>
+            {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
+              return (
+                <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
+                    onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
+                  <td>{v.tradePairName.toUpperCase()}</td>
+                  <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+                  <td>{Number(v.rise).toPercent()}</td>
+                  {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
+                    <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>
+                  </td>) || null}
+                  <td className="pop-children rightpop-children trade-remind">交易量：{v.volume}</td>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

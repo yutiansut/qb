@@ -61,6 +61,21 @@
         width .12rem
         height .12rem
         cursor pointer
+  .scroll-bar
+    overflow-y auto
+    max-height 2.69rem
+    &::-webkit-scrollbar-button
+      display none
+    &::-webkit-scrollbar
+      position relative
+      width .03rem
+      height 100%
+    &::-webkit-scrollbar-track
+      width .03rem
+      background #222730
+    &::-webkit-scrollbar-thumb
+      width .03rem
+      background #8C8F93
   .trade-market-table
     width 100%
     thead
@@ -88,9 +103,9 @@
           cursor pointer
     tr
       td:nth-child(1)
-        padding-left .18rem
-      td:last-child
-        padding-right .18rem
+        padding-left .10rem
+      // td:last-child
+      //   padding-right .01rem
     .trade-remind
       left 3rem
       z-index 99
