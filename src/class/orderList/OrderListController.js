@@ -32,6 +32,9 @@ export default class OrderListController extends ExchangeControllerBase {
   }
 
   changeRecentItem(v) {
+    this.view.setState({
+      recentTradeListArr: []
+    })
     this.getRecentOrder(v.isPersonal, this.store.state.tradePairId);
     this.view.setState({
       recentItemSelect: v.type,

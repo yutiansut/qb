@@ -82,11 +82,13 @@ export default class UserOrderListController extends OrderListController {
     this.view.setState({
       // 若orderList为undefined，则默认为空数组
       orderListArray: historyOrder && historyOrder.orderList || [],
-      total: historyOrder && historyOrder.totalCount || 0
-    })
+      // total: historyOrder && this.view.state.page === 1 && historyOrder.totalCount || 0
+    });
+    historyOrder && this.view.state.page === 1 && (this.view.setState(
+        {total: historyOrder.totalCount}
+    ))
   }
   async exportHistory(type){
-    console.log(this.configController)
     let result = await this.store.getHistoryOrder({
       "tradePairId": [],
       "tradePairName": "xxx",

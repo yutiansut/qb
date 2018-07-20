@@ -16,10 +16,10 @@ export default class MarketStore extends ExchangeStoreBase {
       coin: '',
       sortValue:[],//排序值
       ascending:0,//是否升序， 0 否 1 是
-      tradePair: '',
       pairInfo: {},
       unitsType: '',
       pairMsg: {},
+      tradePair:'lsk/btc',
       coinInfo: {
         "id": 0,            // 币种id
         "name": "",      // 币种名

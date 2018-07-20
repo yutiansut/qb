@@ -243,6 +243,11 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
 
   searchFilter() {
+    this.setState(
+        {total: 0,
+          orderListArray:[]
+        }
+    )
     const params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
@@ -299,14 +304,22 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.props.controller.cancelOrder(orderId, opType, dealType)
   }
   changePage(page){
-    console.log(1231456789,page);
+    const params = {
+      idArray: this.state.idArray,
+      orderType: this.state.orderType,
+      orderStatus: this.state.orderStatus,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      page,
+      pageSize: this.state.pageSize
+    };
+    this.orderListHandle(this.props.type, params);
     this.setState({
       page
     })
   }
   render() {
     const {type} = this.props;
-    // console.log("ggggggggggggggggggggg",this.state.orderListArray)
     return (
         <div className='order-detail'>
           <div className='order-title'>
@@ -384,17 +397,17 @@ export default class OrderCurrent extends ExchangeViewBase {
                       <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                       {/*todo 颜色改类名统一处理*/}
                       {/*价格*/}
-                      {type === 'orderCurrent' && <td>{v.price}</td>}
-                      {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : v.price}</td>}
-                      {type === 'orderDeal' && <td>{v.avgPrice}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.price).format({number:'legal'})}</td>}
+                      {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : Number(v.price).format({number:'legal'})}</td>}
+                      {type === 'orderDeal' && <td>{Number(v.avgPrice).format({number:'legal'})}</td>}
                       {/*数量*/}
-                      {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td> || <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
 
-                      <td>{type === 'orderCurrent' && (v.price * v.count) || v.turnover}</td>
+                      <td>{type === 'orderCurrent' && (Number(v.price * v.count).format({number: 'legal'})) || Number(v.turnover).format({number: 'legal'})}</td>
                       {type === 'orderDeal' && <td>{v.fee}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
-                      {type === 'orderCurrent' && <td>{v.undealCount}</td>}
-                      {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
-                      {type === 'orderHistory' && <td>{v.avgPrice}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.undealCount).formatFixNumberForAmount(v.price)}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
+                      {type === 'orderHistory' && <td>{Number(v.avgPrice).format({number: 'legal'})}</td>}
                       {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
                       {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6) ? this.intl.get('detail') : '—'}</td>}
 
@@ -448,9 +461,9 @@ export default class OrderCurrent extends ExchangeViewBase {
                         {/*<td>{v.buyer}</td>*/}
                         {/*<td>{v.seller}</td>*/}
                         <td>{Number(v.orderTime).toDate()}</td>
-                        <td>{v.price}</td>
-                        <td>{v.volume}</td>
-                        <td>{v.turnover}</td>
+                        <td>{Number(v.price).format({number:'legal'})}</td>
+                        <td>{Number(v.volume).formatFixNumberForAmount(v.price)}</td>
+                        <td>{Number(v.turnover).format({number:'legal'})}</td>
                       </tr>
                   )
                 })}

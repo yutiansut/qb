@@ -202,22 +202,23 @@ export default class MarketController extends ExchangeControllerBase {
     let homeMarketPairData = await this.store.selectMarketData();
     console.log('homeMarketPairData11111111111',homeMarketPairData)
     // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
-    this.view.setState({
-      homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    }, this.setDealMsg());
     if(this.view.state.query) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
       console.log('queryValuequeryValue',queryValue)
       if(queryValue.split('/').length === 1){
         console.log('queryValuequeryValue',queryValue,this.view.state.marketDataHandle,this.view.state.marketDataHandle.indexOf(queryValue),pairMsg.pairNameCoin)
-  
+      
         this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue][0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue][0]}`);
         this.view.setState({query:queryValue})
       }
       this.changeMarket(queryValue.split('/')[1]);
       return
     }
+    this.view.setState({
+      homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
+    }, this.setDealMsg());
+    
     type > 1 && this.tradePairChange(homeMarketPairData[0]);
   }
 

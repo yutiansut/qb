@@ -47,7 +47,6 @@ export default class extends ExchangeViewBase {
   }
 
   render() {
-    console.log('zifeng55555555555555',this.state.recentTradeListArr)
     return <div>
         <div className="trade-recent-title">
           <h3>{this.intl.get("order-recent")}</h3>
@@ -71,7 +70,7 @@ export default class extends ExchangeViewBase {
             </tr>
           </thead>
           <tbody>
-            {this.state.recentTradeListArr && this.state.recentTradeListArr.map(
+            {this.state.recentTradeListArr && this.state.recentTradeListArr.length && this.state.recentTradeListArr.map(
               (v, index) =>
                 index <= 50 && (
                   <tr key={index}>
@@ -82,7 +81,7 @@ export default class extends ExchangeViewBase {
                     <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.volume).formatFixNumberForAmount(Number(v.price)) : Number(v.dealDoneCount).formatFixNumberForAmount(Number(v.avgPrice))}</td>
                   </tr>
                 )
-            )}
+            ) || <span>{this.intl.get('noRecords')}</span>}
           </tbody>
         </table>
       </div>;
