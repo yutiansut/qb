@@ -19,9 +19,9 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   getVerify(account, mode, type) { // 获取验证码
-    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, reg2 = /^1[3456789]\d{9}$/;
+    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, reg2 = /^1[3456789]\d{9}$/;
     if(!reg1.test(this.view.state.userInput) && !reg2.test(this.view.state.userInput)) return
-    if (this.view.state.verifyNum !== '获取验证码' && this.view.state.verifyNum !== 0) return
+    if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
     this.userController.getCode(account, mode, type)
@@ -66,7 +66,7 @@ export default class LoginController extends ExchangeControllerBase {
     }
     if (data.ret !== 0 || data.data === null) {this.getCaptchaVerify()}
     data = Object.assign(data, data.data);
-    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || '登录失败'})
+    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || this.view.intl.get("login-err")})
   }
 
   async clearLoginInfo() { // 退出登陆

@@ -1,7 +1,7 @@
 function getExplorerInfo() {
   let explorer = window.navigator.userAgent.toLowerCase();
   //ie
-  console.log(explorer);
+  // console.log(explorer);
   if (explorer.indexOf("msie") >= 0) {
     let ver = explorer.match(/msie ([\d.]+)/)[1];
     return "IE" + ver;

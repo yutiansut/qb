@@ -63,7 +63,7 @@ export default class Login extends exchangeViewBase {
 
   changeUser(value) {
     this.setState({userInput: value});
-    let reg = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/
+    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     if (reg.test(value)){
       this.setState({userType: 1})
     } else {

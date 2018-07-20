@@ -48,6 +48,7 @@ export default class userSafeCenter extends exchangeViewBase {
       ipValue: '',
       errIp: '',
       popupInputErr2:"",
+      verifyNum: this.intl.get("sendCode")
     }
 
     const {controller} = props
@@ -96,7 +97,7 @@ export default class userSafeCenter extends exchangeViewBase {
       otherShow: true,
     })
   }
-  selectType(content, index, i, type) { // 两步认证单选
+  selectType(content, index, i, type, e) { // 两步认证单选
     if (i === 2 && this.state.userInfo.fundPwd) {
       this.setState({
         remindPopup: true,
@@ -132,6 +133,11 @@ export default class userSafeCenter extends exchangeViewBase {
         showSet: !this.state.userInfo.phone && index === 2 ? true : false,
       })
     }
+    // if (this.state.showChange) {
+    //   this.setState({
+    //     verifyNum: this.intl.get("sendCode")
+    //   })
+    // }
   }
 
 
@@ -155,13 +161,11 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   checkIp() {
-    console.log(3434)
     // let reg =  /^\d+\.\d+\.\d+.\d+$/
     let reg = /^(?:(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)\.){3}(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)$/
     if(!reg.test(this.state.ipValue)) {
       this.setState({
-        errIp: "请输入正确的IP"
-          // this.intl.get("user-checkNewPwd")
+        errIp: this.intl.get("user-errIp")
       })
     }
   }
@@ -199,7 +203,7 @@ export default class userSafeCenter extends exchangeViewBase {
       v.contentList[2].name = this.state.userInfo.phone ? this.intl.get("user-msg") : this.intl.get("user-bindPhone")
     })
     noticeList[0].name = this.state.userInfo.email ? this.intl.get("user-noticeEmail") : this.intl.get("user-bindEmail") // 通知设置未绑定邮箱时
-    noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-msg") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
+    noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-noticePhone") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
     this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
 
   }
@@ -360,7 +364,7 @@ export default class userSafeCenter extends exchangeViewBase {
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
                     <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
-                    <td>{`${v.isMe ? '是' : '否'}`}</td>
+                    <td>{`${v.isMe ? this.intl.get("yes") : this.intl.get("no")}`}</td>
                   </tr>))}
                 </tbody>
               </table>

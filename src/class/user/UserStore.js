@@ -12,7 +12,7 @@ export default class UserStore extends ExchangeStoreBase {
       userId: "",
       token: "",
       userName: "",
-      verifyNum: '获取验证码',
+      // verifyNum: "",
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
       userCreditsNum: "", // 用户积分

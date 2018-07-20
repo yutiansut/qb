@@ -85,7 +85,7 @@ export default class Login extends exchangeViewBase {
 
   changeUser(value) {
     this.setState({userInput: value});
-    let reg = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/
+    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     if (reg.test(value)) {
       this.setState({userType: 1})
     } else {
@@ -125,8 +125,9 @@ export default class Login extends exchangeViewBase {
   }
 
   checkUserInput() { // 手机号／邮箱
-    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
-      reg2 = /^1[3456789]\d{9}$/;
+    // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
+    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
+        reg2 = /^1[3456789]\d{9}$/;
 
     if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
       this.setState({
@@ -182,7 +183,7 @@ export default class Login extends exchangeViewBase {
                      value={this.state.userInput}
                      onInput={value => this.changeUser(value)}
                      onBlur={this.checkUserInput}/>
-              <em>{this.state.userErr}</em>
+              <em>{this.state.userInput && this.state.userErr}</em>
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
               <Input placeholder={this.intl.get("login-passInput")}
@@ -191,7 +192,7 @@ export default class Login extends exchangeViewBase {
                      onInput={value => this.changePass(value)}
                      onBlur={this.checkPassInput}/>
               <span><NavLink to="/wfindPass">{this.intl.get("login-forget")}</NavLink></span>
-              <em>{this.state.pwdErr}</em>
+              <em>{this.state.passInput && this.state.pwdErr}</em>
             </li>
             <li className="verify-li">
               <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput}

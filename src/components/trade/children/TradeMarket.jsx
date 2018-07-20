@@ -64,11 +64,14 @@ export default class TradeMarket extends ExchangeViewBase {
   }
   onEnter(e) { // 搜索回车选中事件
     if (e.nativeEvent.keyCode !== 13) return;
-    this.setState({
-      searchInput: false
-    })
+
     let result = this.filte(this.state.homeMarketPairData, this.state.searchValue)
-    this.tradePairSelect(result)
+    this.setState({
+      searchInput: false,
+      searchValue: ''
+    })
+    // console.log()
+    this.pairChange(result[0], e)
   }
 
   render() {
@@ -115,7 +118,7 @@ export default class TradeMarket extends ExchangeViewBase {
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
             return (
-              <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''}`}
+              <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
                   onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                 <td>{v.tradePairName.toUpperCase()}</td>
                 <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
@@ -123,6 +126,7 @@ export default class TradeMarket extends ExchangeViewBase {
                 {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                   <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>
                 </td>) || null}
+                <td className="pop-children rightpop-children trade-remind">交易量：{v.volume}</td>
               </tr>
             )
           })}

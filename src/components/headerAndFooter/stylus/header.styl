@@ -84,6 +84,9 @@
               &.children-active
                 background $main-color
                 color $normal-white-color
+                &:hover
+                  background $main-color
+                  color $normal-white-color
               &:hover
                 color $main-color
   >ol
@@ -93,9 +96,33 @@
       color $normal-white-color-a
       &.language-li
         width .8rem
+        &:hover
+          .language-ul
+            display block
+          p:after
+            position absolute
+            top 50%
+            right -.1rem
+            content ''
+            width .08rem
+            height .05rem
+            background-image $icon-select
+            background-size cover
+            transform translateY(-50%) rotate(180deg)
         p
+          position relative
           cursor pointer
           text-align center
+          &:after
+            position absolute
+            top 50%
+            right -.1rem
+            content ''
+            width .08rem
+            height .05rem
+            background-image $icon-select
+            background-size cover
+            transform translateY(-50%)
         ul
           display none
           background $exchange-color
@@ -111,9 +138,6 @@
               color $main-color
         img
           display none
-        &:hover
-          .language-ul
-            display block
       &.new-li
         position relative
         .new-li-img
@@ -219,8 +243,19 @@
         position relative
         margin 0 .3rem 0 .35rem
         p
+          position relative
           cursor pointer
           text-align center
+          &:after
+            position absolute
+            top 50%
+            right -.1rem
+            content ''
+            width .08rem
+            height .05rem
+            background-image $icon-select
+            background-size cover
+            transform translateY(-50%)
         ul
           position absolute
           left 50%
@@ -246,6 +281,16 @@
         &:hover
           .login-ul
             display block
+          p:after
+            position absolute
+            top 50%
+            right -.1rem
+            content ''
+            width .08rem
+            height .05rem
+            background-image $icon-select
+            background-size cover
+            transform translateY(-50%) rotate(180deg)
 
 
 .headerNav, .homeNav

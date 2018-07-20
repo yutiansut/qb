@@ -90,5 +90,23 @@
         padding-left .18rem
       td:last-child
         padding-right .18rem
+    .trade-remind
+      left 3rem
+      z-index 99
+      margin-top -.03rem
+      background $normal-black-color
+      color $normal-font-color
+      &:before
+        content ""
+        width 0
+        height 0
+        border .05rem solid $normal-black-color
+        border-bottom .05rem solid transparent
+        border-left .05rem solid transparent
+        border-top .05rem solid transparent
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        left  -.1rem
 
 //

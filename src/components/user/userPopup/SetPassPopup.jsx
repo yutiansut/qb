@@ -24,7 +24,7 @@ export default class SetPassPopup extends exchangeViewBase {
           numTitle: this.intl.get("user-popEmail"),
           numInput: this.intl.get("user-inputEmail"),
           verifyTitle: this.intl.get("user-verifyEmail"),
-          verifyInput: '请输入邮箱验证码',
+          verifyInput: this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("user-popBind")
         },
         {
@@ -32,7 +32,7 @@ export default class SetPassPopup extends exchangeViewBase {
           numTitle: this.intl.get("phone"),
           numInput: this.intl.get("user-inputPhone"),
           verifyTitle: this.intl.get("user-verifyPhone"),
-          verifyInput: '请输入手机号验证码',
+          verifyInput: this.intl.get("user-inputVerifyPhone"),
           btnTitle: this.intl.get("user-popBind")
         },
         {
@@ -59,8 +59,8 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput: this.intl.get("user-inputNewPwd"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
           numInput2: this.intl.get("user-inputAgainPwd"),
-          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : '邮箱验证码',
-          verifyInput: this.props.fundPassType === 3 ? '请输入手机号验证码' : '请输入邮箱验证码',
+          verifyTitle: this.props.fundPassType === 3 ? this.intl.get("user-verifyPhone") : this.intl.get("user-verifyEmail"),
+          verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("save")},
         {
           title: this.intl.get("user-popRecoverFundPwd"),
@@ -70,8 +70,8 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput: this.intl.get("user-inputNewPwd"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
           numInput2: this.intl.get("user-inputAgainPwd"),
-          verifyTitle: this.props.fundPassType === 3 ? '手机验证码' : (this.props.fundPassType === 1 ?' 邮箱验证码' : '谷歌验证码'),
-          verifyInput: this.props.fundPassType === 3 ? '请输入手机验证码' : (this.props.fundPassType === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+          verifyTitle: this.props.fundPassType === 3 ? this.intl.get("user-verifyPhone") : (this.props.fundPassType === 1 ? this.intl.get("user-verifyEmail") : this.intl.get("user-popGoole")),
+          verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : (this.props.fundPassType === 1 ? this.intl.get("user-inputVerifyEmail") : this.intl.get("user-inputVerifyGoogle")),
           btnTitle: this.intl.get("save")
         },
       ]
@@ -243,7 +243,7 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
               <li className={[2].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
-                <p>*目前仅支持中国大陆手机号码</p>
+                <p>*{this.intl.get("user-supportPhone")}</p>
               </li>
               <li>
                 {this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}

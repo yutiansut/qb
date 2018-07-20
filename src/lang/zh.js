@@ -503,6 +503,9 @@ export default function zh(state) {
     "user-nonePicture": "信息不完整",
     "user-idErr": "身份证填写有误",
     "user-passportErr": "护照填写有误",
+    "user-supportPhone": "目前仅支持中国大陆手机号码",
+    "user-errIp": "请输入正确的IP",
+    "user-googleSucc": "谷歌验证设置成功",
     // h5
     "user-verify-state0": "未认证",
     "user-verify-state1": "审核中",
@@ -528,7 +531,9 @@ export default function zh(state) {
     "login-passAgain": "再输一遍",
     "login-passAgainPlaceholder": "请再输入一遍密码",
     "login-findPass": "找回密码",
-    "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱"
+    "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱",
+    "login-other": "已在其他地方登录，请重新登录",
+    "login-err": "登录失败,请重试"
   };
   const help = {
     "help-fees": "费率标准",

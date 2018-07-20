@@ -7,6 +7,7 @@ export default class UserController extends ExchangeControllerBase {
   constructor(props) {
     super(props)
     this.store = new UserStore()
+    this.store.setController(this)
   }
 
   // setView(view){
@@ -23,6 +24,7 @@ export default class UserController extends ExchangeControllerBase {
     this.store.clearUserInfo()
   }
 
+
   async getVerify(account, mode, type) { // 获取短信验证码
     if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
@@ -32,7 +34,7 @@ export default class UserController extends ExchangeControllerBase {
 
   clearVerify() { // 清除短信验证码
     this.countDownStop('verifyCountDown')
-    this.view.setState({verifyNum: '获取验证码'})
+    this.view.setState({verifyNum: this.view.intl.get("sendCode")})
   }
   // 从登录接口获取信息
   getUserId(data) {
@@ -153,8 +155,8 @@ export default class UserController extends ExchangeControllerBase {
     })
 
     if (result === null && mode === 0) {
-      noticeList[noticeArr[mode]].name = '短信'
-      verifyList.forEach(v => { v.contentList[2].name = '短信' })
+      noticeList[noticeArr[mode]].name = this.view.intl.get("user-noticePhone")
+      verifyList.forEach(v => { v.contentList[2].name = this.view.intl.get("user-noticePhone") })
       this.view.setState({
         userInfo: Object.assign(this.view.state.userInfo, {phone: account}),
         noticeList,
@@ -166,8 +168,8 @@ export default class UserController extends ExchangeControllerBase {
     }
 
     if (result === null && mode === 1) {
-      noticeList[noticeArr[mode]].name = '邮件通知'
-      verifyList.forEach(v => { v.contentList[1].name = '邮件通知' })
+      noticeList[noticeArr[mode]].name = this.view.intl.get("user-noticeEmail")
+      verifyList.forEach(v => { v.contentList[1].name = this.view.intl.get("user-noticeEmail") })
       this.view.setState({
         userInfo: Object.assign(this.view.state.userInfo, {email: account}),
         noticeList,
@@ -329,7 +331,7 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : '谷歌验证设置成功',
+      popMsg: result ? result.msg : this.view.intl.get("user-googleSucc"),
       showGoogle: result ? true : false,
       userInfo: Object.assign(this.view.state.userInfo, {googleAuth: 0})
     })
