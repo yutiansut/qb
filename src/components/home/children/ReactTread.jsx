@@ -18,8 +18,7 @@ class ReactTrend extends React.Component {
 
     render() {
 
-        // let trends=this.state.trends;
-         let trends=[5,4,8,2,7,3]
+        let trends=this.state.trends;
         if(trends.length<2) return (
             <span></span>
         );
