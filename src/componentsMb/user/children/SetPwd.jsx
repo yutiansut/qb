@@ -212,10 +212,10 @@ export default class SetPwd extends exchangeViewBase {
     //   verifyInput: this.state.userInfo.fundPassVerify === 3 ? '请输入手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
     await AsyncAll([this.initData(), this.getCaptcha()])
     let popupTypeList = this.state.popupTypeList
-    popupTypeList[4].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : '邮箱验证码'
-    popupTypeList[4].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? '请输入手机号验证码' : '请输入邮箱验证码'
-    popupTypeList[5].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? '手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 邮箱验证码' : '谷歌验证码'),
-    popupTypeList[5].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? '请输入手机验证码' : (this.state.userInfo.fundPassVerify === 1 ?' 请输入邮箱验证码' : '请输入谷歌验证码'),
+    popupTypeList[4].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? this.intl.get("user-verifyPhone") : this.intl.get("user-verifyEmail");
+    popupTypeList[4].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? this.intl.get("user-inputVerifyPhone") : this.intl.get("user-inputVerifyEmail");
+    popupTypeList[5].verifyTitle =  this.state.userInfo.fundPassVerify === 3 ? this.intl.get("user-verifyPhone") : (this.state.userInfo.fundPassVerify === 1 ? this.intl.get("user-verifyEmail") : this.intl.get("user-popGoole")),
+    popupTypeList[5].verifyInput =  this.state.userInfo.fundPassVerify === 3 ? this.intl.get("user-inputVerifyPhone") : (this.state.userInfo.fundPassVerify === 1 ? this.intl.get("user-inputVerifyEmail") : this.intl.get('user-inputVerifyGoogle')),
     this.setState({
       popupTypeList
     })

@@ -722,6 +722,7 @@ export default function zh(state) {
     "activity-invite-39": `注册送币：`,
     "activity-rule-40": `本次活动共发放 <i>5,000,000</i> 枚${coin}，送完即止。`,
     "activity-rule-41": `请输入您的手机号/邮箱地址`,
+    "activity-rule-42": `邀请好友`,
   };
   return Object.assign(
     {},

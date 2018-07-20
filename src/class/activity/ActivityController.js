@@ -73,7 +73,7 @@ export default class ActivityController extends ExchangeControllerBase {
       //验证邮箱号是否合法
       p2 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
     if (!p1.test(invited) && !p2.test(invited)) {
-      alert("请输入正确的手机号或邮箱");
+      alert(this.view.intl.get("login-inputVerifyPhoneAndEmail"));
       return;
     }
 

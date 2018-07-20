@@ -127,7 +127,7 @@ export default function en(state) {
     616: "Password is not set",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
-    620: "The same as the capital cipher",
+    620: "The same as the capital password",
     621: "The same as the login password",
     623: "Account has been occupied",
     704: "The fund password was changed within 24 hours and there was a security wall",
@@ -402,14 +402,14 @@ export default function en(state) {
     "user-googleRemind1": "Please make sure you save these security keys：",
     "user-googleRemind2": "If you accidentally delete your account or change your cell phone, these security keys are the only way to help you restore your account.",
     "user-googleInput": "Please fill in the verification code on the screen",
-    "user-inputEmail": "Please enter a mailbox account",
-    "user-inputPhone": "Please enter the phone number",
-    "user-inputNewPwd": "Please enter a new password",
-    "user-inputNowPwd": "Please enter the current password",
+    "user-inputEmail": "Please Enter Email Address",
+    "user-inputPhone": "Please Enter Phone Number",
+    "user-inputNewPwd": "Please enter new password",
+    "user-inputNowPwd": "Please enter current password",
     "user-inputAgainPwd": "Enter the password again",
-    "user-inputVerifyPhone": "Please enter the phone number verification code",
-    "user-inputVerifyEmail": "Please enter the mailbox verification code",
-    "user-inputVerifyGoogle": "Please enter the Google verification code",
+    "user-inputVerifyPhone": "Please enter phone verification  code",
+    "user-inputVerifyEmail": "Please enter email verification  code",
+    "user-inputVerifyGoogle": "Please enter google verification  code",
     "user-inputVerify": "Please enter the verification code",
     "user-verifyEmail": "Email Verification Code",
     "user-verifyPhone": "Cellphone Verification Code",
@@ -424,7 +424,7 @@ export default function en(state) {
     "user-modifiedSucc": "Modified successfully",
     "user-addSucc": "Successfully added",
     "user-delSucc": "Successfully deleted",
-    "user-outSucc": "Exit success",
+    "user-outSucc": "Successfully quit",
     "user-bigPicture": "picture is too big, must be less than 10M",
     "user-uploadPicture": "Please upload the picture",
     "user-nonePicture": "Incomplete information",
@@ -440,7 +440,7 @@ export default function en(state) {
     "user-verify-state3": "Failed",
     "user-verify-state4": "Malicious",
     "user-verify-state5": "Prohibit",
-    "user-not-surport": "Please go to the PC side to complete",
+    "user-not-surport": "Please go to the PC client to complete",
   };
 
   const activity = {
@@ -502,6 +502,7 @@ export default function en(state) {
     "activity-invite-39": `Register for tokens：`,
     "activity-rule-40": `Total <i>5,000,000</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
+    "activity-rule-42": `Invite friends`,
   };
 
   const login = {
