@@ -13,9 +13,15 @@
 }
 
 .home-wrap
+  .home-top
+    position relative
+    .home-notice-wrap
+      position absolute
+      bottom .6rem
   .home-updown
     position relative
     padding-left .15rem
+    font-weight 100
     &.up-i
       color $index-blue
       &:before
@@ -42,9 +48,11 @@
         background-size .12rem .12rem
   .hide
     display none
+
   //推荐交易对
   .home-recommend
-    position relative
+    position absolute
+    bottom 0
     width 100%
     //padding .64rem 1.2rem .93rem
     height .6rem
@@ -53,21 +61,13 @@
     ul
       display -webkit-flex
       display flex
-      justify-content center
+      justify-content space-around
       height .6rem
       line-height .6rem
       padding 0 1.2rem
       li
         position relative
-        padding 0 .3rem
-        //@media screen and (max-width: 1950px)
-        //  padding 0 .8rem
-        //@media screen and (max-width: 1700px)
-        //  padding 0 .55rem
-        //@media screen and (max-width: 1550px)
-        //  padding 0 .4rem
-        //&:first-child
-        //padding-left 0
+        padding 0 .8rem
         &:first-child
           padding-left 0
         &:last-child
@@ -80,27 +80,32 @@
             background none
         &:after
           position absolute
-          top .19rem
+          top .25rem
           right 0
           width 1px
-          height .22rem
+          height .14rem
           content ''
-          background $line-light
+          background $normal-white-color
+          opacity .1
         span
-          color $normal-white-color-a
+          color $normal-white-color
           padding-right .2rem
           font-size .2rem
         b
-          color $normal-white-color-a9
+          color $home-recommend
           margin-right .15rem
           font-size .12rem
+          font-weight 100
+        i
+          font-size .12rem
+
 
   //市场
   .home-market
     padding-top .75rem
     background $line-dark
     .home-market-con
-      padding .5rem .55rem
+      padding .5rem .55rem .98rem
       box-shadow 0 1px 10px 0 rgba(0,0,0,0.20)
       border-radius 6px
       background $dark-font-color
@@ -110,7 +115,6 @@
       margin-bottom .48rem
       ul
         float left
-        height .36rem
         li
           position relative
           float left
@@ -118,7 +122,8 @@
           font-size .16rem
           cursor pointer
           span
-            padding .08rem .15rem
+            display inline-block
+            padding .08rem .26rem
             color $normal-white-color-a
             &.home-market-item-active
               //color $normal-white-color
@@ -126,6 +131,7 @@
               //border-radius .2rem
               //box-shadow: 0 .07rem .3rem rgba(65, 139, 255, .4)
               //margin 0 .14rem
+              display inline-block
               width 100%
               height 100%
               background $market-active no-repeat
@@ -143,7 +149,7 @@
               background none
           &:after
             position absolute
-            top 0rem
+            top .1rem
             right -.05rem
             content '/'
             color $normal-gray-color
@@ -151,6 +157,7 @@
         float right
         width 2rem
         height .36rem
+        margin-top .05rem
         .base-input-wrap
           float left
           //float right
@@ -191,23 +198,26 @@
             height .16rem
             position relative
             top .03rem
-            left .03rem
+            left .06rem
+        th
+          font-weight 100
       tbody
         tr
           border-bottom 1px solid $home-market-line
-          &:last-child
-            border-bottom none
         td:first-child
           padding-left .3rem
         td
-          color $normal-white-color-a
+          font-weight 100
+          color $normal-white-color-a9
           span
-            color $normal-white-color-a
-          .second-span
+            font-weight 100
             color $normal-white-color-a9
+          .second-span
+            color $normal-white-color-a
             font-size .12rem
           a
-            color $normal-white-color-a
+            font-weight 100
+            color $normal-white-color-a9
           .market-up
             color $index-blue
           .market-down

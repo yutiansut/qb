@@ -48,11 +48,13 @@ export default class Home extends exchangeViewBase {
   render() {
     return (
         <div className="home-wrap">
+          <div className="home-top">
             <HomeActivity controller={this.props.activityController} ref="dfa"/>
             <HomeNotice controller={this.props.noticeController}/>
             <HomeRecommend controller={recommendController}/>
-            <HomeMarket controller={this.props.marketController}/>
-            <HomeAdvantage/>
+          </div>
+          <HomeMarket controller={this.props.marketController}/>
+          <HomeAdvantage/>
         </div>
     );
   }
