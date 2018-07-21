@@ -221,6 +221,7 @@ export default class DealController extends ExchangeControllerBase {
     }
     // 判断数量精度
     let limitNum = params.count.toString().split('.');
+    limitNum[1] = limitNum[1] || '';
     let numLimited =  (params.price > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
         || (params.price >= 0.1 && params.price <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
         || (params.price > 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
