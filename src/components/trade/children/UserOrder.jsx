@@ -208,7 +208,7 @@ export default class userOrder extends ExchangeViewBase {
                 </div>
                 <div className='trade-order-info'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType].toUpperCase()}</span>
+                  <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && (this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]).toUpperCase()}</span>
                 </div>
               </div>
               <div className="trade-order-table-wrap">

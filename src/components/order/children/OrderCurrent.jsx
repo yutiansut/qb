@@ -429,19 +429,19 @@ export default class OrderCurrent extends ExchangeViewBase {
               <div className='detail-content-info'>
                 <div className='content-info-items'>
                   <p>{this.state.orderDetail.doneCount}</p>
-                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1]}</span>
+                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{this.state.orderDetail.dealedMoney}</p>
-                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{this.state.orderDetail.price}</p>
-                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0]}</span>
+                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{this.state.orderDetail.fee}</p>
-                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1] : this.state.orderDetail.tradePairName.split('/')[0])}</span>
+                  <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1].toUpperCase() : this.state.orderDetail.tradePairName.split('/')[0].toUpperCase())}</span>
                 </div>
               </div>
               <table className='content-info-table'>
