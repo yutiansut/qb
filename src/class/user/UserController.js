@@ -191,6 +191,8 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.uid,
       "token": this.store.token,
+      // oldPwd: this.RSAencrypt(oldPwd),
+      // newPwd: this.RSAencrypt(newPwd),
       oldPwd,
       newPwd,
       type,// 0:设置密码 （不用传old_pass） 1:修改密码
@@ -216,6 +218,7 @@ export default class UserController extends ExchangeControllerBase {
       mode, // 0:phone 1:email 2:google
       opType, // 0:设置资金密码 1:修改资金密码
       newPass,
+      // newPass: this.RSAencrypt(newPwd),
       captchaCode, // 图形验证码，没有就传空
       captchaId, // 图形验证码id，没有就传空
       code,
