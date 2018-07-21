@@ -192,7 +192,6 @@ export default class Extract extends exchangeViewBase {
   }
 
   render() {
-    console.log('his...................', this.state.assetHistory.total);
     let {
       totalCount,
       frozenCount,

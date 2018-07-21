@@ -256,6 +256,7 @@ export default class AssetStore extends ExchangeStoreBase {
 
   // 提交提币订单
   async extractOrder(obj) {
+    // obj.fundPass = this.controller.RSAencrypt(obj.fundPass);
     let result = await this.Proxy.extractOrder(
       Object.assign(obj, {
         userId: this.controller.userId,
@@ -335,7 +336,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 验证资金密码
   async verifyPass(fundPass) {
-    console.log(this.controller.RSAencrypt(fundPass));
+    // console.log(this.controller.RSAencrypt(fundPass));
     let result = await this.Proxy.verifyFundPass({
       userId: this.controller.userId,
       token: this.controller.token,

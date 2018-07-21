@@ -20,7 +20,8 @@ export default class LoginStore extends ExchangeStoreBase {
     this.WebSocket.general.on("loginOther", data => {
       this.controller.loginUpdata(data);
     });
-    this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get(), os:3})
+    let token = (window.location.pathname === "/wlogin/" && this.getQuery("token")) || this.Storage.userToken.get();
+    token && this.WebSocket.general.emit('login', { 'token': token, os:3})
   }
 
   login(obj) { // 登陆接口

@@ -134,7 +134,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取充提记录
   async getHistory(obj) {
     let result = await this.store.getHistory(obj);
-    console.log('history,,,,,,,,,,,,,,,,,,,,,,,,,,,',result)
+    // console.log('history,,,,,,,,,,,,,,,,,,,,,,,,,,,',result)
     this.view.setState({
       assetHistory: this.Util.deepCopy(result),
     });
