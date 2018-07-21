@@ -407,8 +407,10 @@ export default function zh(state) {
     "user-ipRemind": "注：请勿添加IP会变动的网络至IP白名单（如：拨号上网）以免影响您的正常使用。",
     "user-ipAddr": "IP 地址",
     "user-ipExample": "例如：216.58.197.238 或 104.244.42.0/24",
-    "user-ipAddRemind": "添加 IP 地址或范围后，你将无法从这个白名单之外的 IP 地址登录你的账户。出于安全方面的考虑，添加或删除 IP 地址后，你的账户将在24 小时内无法提现。你可以访问",
+    // "user-ipAddRemind": "添加 IP 地址或范围后，你将无法从这个白名单之外的 IP 地址登录你的账户。出于安全方面的考虑，添加或删除 IP 地址后，你的账户将在24 小时内无法提现。你可以访问",
+    "user-ipAddRemind": "添加 IP 地址或范围后，你将无法从这个白名单之外的 IP 地址登录你的账户。出于安全方面的考虑，添加或删除 IP 地址后，你的账户将在24 小时内无法提现。你可以",
     "user-ipAddRemind2": "获得当前 IP 地址",
+    "user-ipAddRemind3": "点击此处",
     "user-current": "登录设备",
     "user-currentTitle": "当前已登录你账户的浏览器或设备。",
     "user-isCurrent": "是否当前",
@@ -555,7 +557,8 @@ export default function zh(state) {
     "login-findPass": "找回密码",
     "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱",
     "login-other": "已在其他地方登录，请重新登录",
-    "login-err": "登录失败,请重试"
+    "login-err": "登录失败,请重试",
+    "login-miss": "登录信息已失效,请重试"
   };
   const help = {
     "help-fees": "费率标准",

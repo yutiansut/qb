@@ -155,6 +155,13 @@ export default class Login extends exchangeViewBase {
 
   componentDidMount() {
     this.getCaptchaVerify()
+    let queryIndex = this.props.location.query && this.props.location.query.titleIndex
+    if (queryIndex) {
+      this.setState({
+        titleIndex: queryIndex
+      })
+    }
+
   }
 
   componentWillUpdate(...parmas) {

@@ -234,7 +234,7 @@ export default class Header extends ExchangeViewBase {
           onClose={() => {this.setState({ userNoticePop: false });}}
           content={this.state.userContent}/>}
         {this.state.otherLogin && <div className="other-login">
-          <p>{this.intl.get("login-other")}</p>
+          <p>{this.intl.get("login-miss")}</p>
         </div>}
       </div>
     )

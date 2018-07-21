@@ -47,8 +47,10 @@ export default class userSafeCenter extends exchangeViewBase {
       popMsg: '验证成功',
       ipValue: '',
       errIp: '',
-      popupInputErr2:"",
-      verifyNum: this.intl.get("sendCode")
+      popupInputErr2: "",
+      verifyNum: this.intl.get("sendCode"),
+      ipAddr: "", // 获取当前ip
+      showIp: false
     }
 
     const {controller} = props
@@ -76,6 +78,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setGoogleVerify = controller.setGoogleVerify.bind(controller) // 验证谷歌验证码
     this.bindUser = controller.bindUser.bind(controller)
     this.outOther = controller.outOther.bind(controller) // 退出其他设备
+    this.getIPAddr = controller.getIPAddr.bind(controller) // 获取当前ip
     this.showOther = this.showOther.bind(this)
     // this.selectNotice = this.selectNotice.bind(this) // 绑定通知
     this.setUserNotify = controller.setUserNotify.bind(controller) //  修改通知方式
@@ -183,6 +186,7 @@ export default class userSafeCenter extends exchangeViewBase {
     })
     this.getCaptchaVerify()
   }
+
 
   componentWillMount() {
 
@@ -339,8 +343,11 @@ export default class userSafeCenter extends exchangeViewBase {
                 </tbody>
               </table>
               <p className={`${this.state.ipList && this.state.ipList.length ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
+              {/*<p>*/}
+                {/*{this.intl.get("user-ipAddRemind")}<a href={this.props.controller.configController.initState.currentUrl} target="_blank">{this.props.controller.configController.initState.netUrl}</a>{this.intl.get("user-ipAddRemind2")}*/}
+              {/*</p>*/}
               <p>
-                {this.intl.get("user-ipAddRemind")}<a href={this.props.controller.configController.initState.currentUrl} target="_blank">{this.props.controller.configController.initState.netUrl}</a>{this.intl.get("user-ipAddRemind2")}
+                {this.intl.get("user-ipAddRemind")}<em onClick={this.getIPAddr} className="ip-show">{this.intl.get("user-ipAddRemind3")}</em>{this.intl.get("user-ipAddRemind2")}
               </p>
             </div>
           </div>
@@ -433,6 +440,11 @@ export default class userSafeCenter extends exchangeViewBase {
                      msg={this.state.popMsg}
                      autoClose = {true}
                      onClose={() => {this.setState({ remindPopup: false });}}/>}
+        {this.state.showIp && (
+          <div className="ip-popup">
+            <img src="/static/img/guanbi_hei.svg" onClick={() => {this.setState({ showIp: false });}}/>
+            <p>{this.state.ipAddr}</p>
+          </div>)}
       </div>
     );
   }

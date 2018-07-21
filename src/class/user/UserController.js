@@ -379,6 +379,16 @@ export default class UserController extends ExchangeControllerBase {
     console.log('退出其他设备', result)
   }
 
+  async getIPAddr() {
+    let result = await this.store.Proxy.getIPAddr()
+    console.log('获取ip', result, this.view)
+    this.view.setState({
+      ipAddr: result.ip,
+      showIp: true
+    })
+  }
+
+
   // 移动端用
   async setFundPwdSpace(type, pwd) { // 设置资金密码间隔
     let result = await this.setFundPwdInterval(type, pwd)

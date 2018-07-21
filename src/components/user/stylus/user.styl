@@ -10,7 +10,7 @@
 
   .user-nav
     width 1.58rem
-    min-width 130px
+    min-width 150px
     li
       height .6rem
       margin-right .28rem
@@ -43,4 +43,30 @@
       font-size .15rem
       color $normal-font-color
       width 1.5rem
+
+  // ip弹窗
+  .ip-popup
+    position fixed
+    //top 50%
+    //left 50%
+    //transform translateX(-50%) translateY(-50%)
+    left 0
+    right 0
+    top 0
+    bottom 0
+    margin auto
+    width 5rem
+    height 2rem
+    text-align center
+    line-height 2rem
+    background $line-dark
+    border-radius .05rem
+    img
+      position absolute
+      top .1rem
+      right .1rem
+      cursor pointer
+    p
+      color $normal-font-color
+
 

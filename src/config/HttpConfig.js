@@ -47,6 +47,7 @@ export default {
     { name: 'outOther', data: { url: '/v1/user/', method: 'post' }, action: 'kickoffClient', actionBack: 'kickoffClientRes', needToken: true }, // 退出其他设备
     { name: 'getAward', data: { url: '/v1/user/', method: 'post' }, action: 'getAward', actionBack: 'getAwardRes', needToken: true }, // 领取奖励
     { name: 'getQbtTrade', data: { url: '/v1/common/', method: 'post' }, action: 'getAboutInfo', actionBack: 'getAboutInfoRes' }, //活动图片
+    { name: 'getIPAddr', data: { url: '/v1/common/', method: 'post' }, action: 'getIPAddr', actionBack: 'getIPAddrRes' }, // 获取当前iP
   ],
   notice: [
     { name: 'getActivity', data: { url: '/v1/common/', method: 'post' }, action: 'getActivity', actionBack: 'getActivityRes' }, // 资讯公告内容

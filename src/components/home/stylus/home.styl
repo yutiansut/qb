@@ -68,6 +68,18 @@
       li
         position relative
         padding 0 .8rem
+        @media (max-width: 1800px)
+          padding 0 .6rem
+        @media (max-width: 1700px)
+          padding 0 .5rem
+        @media (max-width: 1600px)
+          padding 0 .3rem
+        @media (max-width: 1500px)
+          padding 0 .25rem
+        @media (max-width: 1400px)
+          padding 0 .2rem
+        @media (max-width: 1300px)
+          padding 0 .1rem
         &:first-child
           padding-left 0
         &:last-child
@@ -98,6 +110,7 @@
           font-weight 100
         i
           font-size .12rem
+          opacity .8
 
 
   //市场
@@ -123,7 +136,7 @@
           cursor pointer
           span
             display inline-block
-            padding .08rem .26rem
+            padding .04rem .26rem
             color $normal-white-color-a
             &.home-market-item-active
               //color $normal-white-color
@@ -149,15 +162,16 @@
               background none
           &:after
             position absolute
-            top .1rem
+            top .06rem
             right -.05rem
             content '/'
-            color $normal-gray-color
+            color $normal-white-color
+            opacity .1
       .search_wrap
         float right
         width 2rem
         height .36rem
-        margin-top .05rem
+        //margin-top .05rem
         .base-input-wrap
           float left
           //float right

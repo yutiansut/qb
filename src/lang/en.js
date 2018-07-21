@@ -329,9 +329,12 @@ export default function en(state) {
       "OBS! For you convenience and safety, do not add unstable IP address to this white-list (e.g Dial-up Internet access) ",
     "user-ipAddr": "IP address",
     "user-ipExample": "example：216.58.197.238 or 104.244.42.0/24",
+    // "user-ipAddRemind":
+    //   "After adding an IP address or range, you will not be able to log in to your account from an IP address outside of this white list.For security reasons, after adding or removing IP addresses, your account will not be able to withdraw cash within 24 hours.You can access",
     "user-ipAddRemind":
-      "After adding an IP address or range, you will not be able to log in to your account from an IP address outside of this white list.For security reasons, after adding or removing IP addresses, your account will not be able to withdraw cash within 24 hours.You can access",
+      "After adding an IP address or range, you will not be able to log in to your account from an IP address outside of this white list.For security reasons, after adding or removing IP addresses, your account will not be able to withdraw cash within 24 hours.You can",
     "user-ipAddRemind2": "Get current IP Address",
+    "user-ipAddRemind3": "Click here",
     "user-current": "Active Sessions",
     "user-currentTitle":
       "These sessions are currently signed in to your account.",
@@ -543,7 +546,8 @@ export default function en(state) {
     "login-findPass": "Retrieve password",
     "login-inputVerifyPhoneAndEmail": "Please fill in correct mobile phone number",
     "login-other": "Log on in other places, please log in again",
-    "login-err": "Login failed, please try again"
+    "login-err": "Login failed, please try again",
+    "login-miss": "登录信息已失效,请重试"
   };
   const help = {
     "help-fees": "Fees",

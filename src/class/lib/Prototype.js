@@ -16,14 +16,14 @@ JSON.parse = (...parmas)=>{
 const NUMBER_SUFFIX_ARR = []; // 数字后缀格式{value:10000,suffix:'万'},{value:100000000,suffix:'亿'}
 const NUMBER_PREFIX_ARR = {
   cny: {
-    up: {prefix: '¥'},
-    stable: {prefix: '¥'},
-    down: {prefix: '¥'}
+    up: {prefix: '¥ '},
+    stable: {prefix: '¥ '},
+    down: {prefix: '¥ '}
   },
   usd: {
-    up: {prefix: '$'},
-    stable: {prefix: '$'},
-    down: {prefix: '$'}
+    up: {prefix: '$ '},
+    stable: {prefix: '$ '},
+    down: {prefix: '$ '}
   }
 }
 
@@ -190,7 +190,8 @@ Number.prototype.format = function (para) {
 
 //百分比
 Number.prototype.toPercent = function (type = true){
-  if(type && (this*100) === 0)
+  // console.log('aaa')
+  return `${Math.abs(this*100).toFixed(2)}%`
     return (this*100).toFixed(2)
   if(type && (this*100) > 0)
     return `+${(this*100).toFixed(2)}%`

@@ -1,5 +1,17 @@
 @import "../../../common/css/variable.styl"
 
+@keyframes btnOpacity {
+  0% {
+    opacity .5
+  }
+  50% {
+    opacity .8
+  }
+  100% {
+    opacity 1
+  }
+}
+
 .banner-wrap
   position relative
   .banner-img
@@ -29,8 +41,11 @@
       transform translateX(-50%)
       border 2px solid $main-color
       border-radius .04rem
+      background transparent
+      transition background 1s
       &:hover
         background $main-color
+        //animation btnOpacity 1s
         .banner-btn
           display block
           width .8rem
