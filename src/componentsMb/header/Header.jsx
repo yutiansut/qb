@@ -40,11 +40,11 @@ export default class Header extends ExchangeViewBase {
   }
 
   render() {
-    const {userController,configController} = this.props;
+    const {userController, configController, history} = this.props;
     let lang = configController.language;
     let isLogin = !!userController.userToken;
     return (
-      <div className="header-nav-mb">
+      <div className={`header-nav-mb ${history.location.pathname === '/mhelp/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
         <Link to='/home' className="logo">
           <img src="/static/mobile/header/icon_logo@2x.png"/>
         </Link>

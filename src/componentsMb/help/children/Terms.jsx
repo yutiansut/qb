@@ -10,28 +10,24 @@ export default class Terms extends exchangeViewBase {
   }
 
   render() {
-
+    const {controller} = this.props;
     const content = this.getContent();
-    return <div className="help-terms">
-      <h2 className="title">{this.intl.get('help-terms')}</h2>
-      <p>
-        {this.intl.get('help-termsFirst')}
-      </p>
-      <p>
-        {this.intl.get('help-termsSecond')}
-      </p>
-      {content.map((v, index) => <div key={index}>
-        <h3>{v.title}</h3>
-        <ul>
-          {v.content.map((v, index) => <li key={index}>
-            {v.title}
-            {v.detail && <ol>
-              {v.detail.map((v, index) => <li key={index}>{v}</li>)}
-            </ol>}
-          </li>)}
-        </ul>
-      </div>)}
-    </div>;
+    return <div className={`help-terms ${controller.getQuery("os") === "0" ? "nohead" : ''}`}>
+        <h2 className="title">{this.intl.get("help-terms")}</h2>
+        <p>{this.intl.get("help-termsFirst")}</p>
+        <p>{this.intl.get("help-termsSecond")}</p>
+        {content.map((v, index) => <div key={index}>
+            <h3>{v.title}</h3>
+            <ul>
+              {v.content.map((v, index) => <li key={index}>
+                  {v.title}
+                  {v.detail && <ol>
+                      {v.detail.map((v, index) => <li key={index}>{v}</li>)}
+                    </ol>}
+                </li>)}
+            </ul>
+          </div>)}
+      </div>;
   }
   getContent() {
     return [
