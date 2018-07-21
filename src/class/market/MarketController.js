@@ -39,29 +39,6 @@ export default class MarketController extends ExchangeControllerBase {
     })
   }
 
-  // 推荐交易对处理
-  // recommendDataHandle() {
-  //   const recommendValues = Object.values(this.store.state.recommendData);
-  //   const allPairData = Object.values(this.store.state.allPairData);
-  //   let recommendPair = [];
-  //   let pairDataValues = [];
-  //   recommendValues.map((v) => {
-  //     recommendPair.push(... v)
-  //   });
-  //   allPairData.forEach((v) => {
-  //     pairDataValues.push(... v)
-  //   });
-  //   // let recommendData =pairDataValues.filter(v=> recommendPair.filter(vv=>vv===v.name).length)
-  //   let recommendData = pairDataValues.filter((item) =>
-  //       recommendPair.findIndex(v => v === item.name) !== -1
-  //   );
-  //   this.view.setState({
-  //     recommendDataHandle:recommendData
-  //   })
-  //   this.store.state.recommendDataHandle = recommendData
-  // }
-
-
   // 切换市场
   async changeMarket(v) {
     // let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
@@ -154,11 +131,8 @@ export default class MarketController extends ExchangeControllerBase {
       points: [],
       coinName: v.tradePairName.split('/')[0]
     })))
-    // console.log(homeMarket, this.store.allPair, homeMarket[0])
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
-    // console.log('更新交易对池 0', JSON.stringify(marketAll))
-    // console.log('更新交易对池 1', marketAll)
     this.store.updateAllPairListFromData(marketAll, 0)
     //请求收藏列表
     let collectIdArr = []
@@ -167,42 +141,19 @@ export default class MarketController extends ExchangeControllerBase {
     }
     this.store.updateAllPairListFromCollect(collectIdArr)
 
-
-    // console.log('homeMarketPair', homeMarketPairData)
     //更新视图层
     this.updateMarketAll([], 2)
-    // this.store.initWebsocket()
-
-
-    // this.
-
-    // pairMsg[market[0]]
-    // allPairData.map(v => homeMarket.push(v.market_name));
-    // let homeMarketPair = this.store.state.allPairData.filter(v => v.market_name === this.store.state.market)[0].market_data;
-    // homeMarketPair.forEach(v => {
-    //   let aaa = {isFavorite: collectIdArr.indexOf(v.tradePairId) > -1 ? 1 : 0}
-    //   v = Object.assign(v, aaa);
-    // })
-    // this.view.setState({
-    //   marketDataHandle: homeMarket,
-    //   homeMarketPairData: homeMarketPair,
-    // });
-    // this.store.state.marketDataHandle = homeMarket;
-    // this.store.state.homeMarketPairData = homeMarketPair;
-    // this.tradePairSelect(homeMarketPair);
   }
 
   //更新MarketAll数据
   async updateMarketAll(List, type) {
     let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
-    // console.log('updateMarketAll 0', List, this.store.state, this.view)
     //根据数据更新allPair
     type < 2 && this.store[arr[type]](List)
-    // console.log('updateMarketAll 1', this.store.state)
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
-    // console.log('homeMarketPairData11111111111',homeMarketPairData)
-    // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
+
+    type > 1 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName)
     if(this.view.state.query) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
@@ -210,15 +161,14 @@ export default class MarketController extends ExchangeControllerBase {
       if(queryValue.split('/').length === 1){
         this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue].sort((a,b)=>a>b)[0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]}`);
         this.view.setState({query:queryValue})
-        // console.log('shunxuuuuuuuuuuuuuuuuuuu',pairMsg.pairNameCoin[queryValue],pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0])
-  
+
       }
       this.changeMarket(queryValue.split('/')[1]);
       return
     }
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    }, () => this.view.name === 'tradeMarket' && type > 1 &&this.setDealMsg());
+    }, () => this.view.name === 'tradeMarket' && type > 1 && this.setDealMsg());
 
     type !== 1 && this.view.name === 'tradeMarket' && this.tradePairChange(homeMarketPairData[0]);
   }
@@ -230,21 +180,7 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   //交易对的选中
-  //   tradePairSelect(list) {
-  //   let tradePair = list[0].tradePairName;
-  //   this.view.setState({
-  //     tradePair,
-  //     tradePairId:list[0].tradePairId
-  //   });
-  //   this.store.state.tradePair = tradePair;
-  //   this.TradeRecentController && this.TradeRecentController.setTradePairId(list[0].tradePairId);
-  //   this.userOrderController && this.userOrderController.changeTradePairId(list[0].tradePairId)
-  //   this.setDealMsg();
-  // }
-
-  //交易对的选中
   tradePairChange(value) {
-    // console.log('tradePairChange',value)
     if(!value){
       return
     }
@@ -264,9 +200,6 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       query:''
     })
-    // console.log('setTradePair....................................', value )
-    // 为K线图设置交易对
-
   }
 
   clearRoom(){
@@ -358,7 +291,6 @@ export default class MarketController extends ExchangeControllerBase {
     let pairItems = data.split('/'),id;
     if(pairItems.length > 1){
       id = pairMsg.pairIdCoin[pairItems[0]][pairItems[1]];
-      // this.changeMarket(pairItems[1]);
       this.tradePairChange({tradePairId:id,tradePairName:data});
       return
     }
