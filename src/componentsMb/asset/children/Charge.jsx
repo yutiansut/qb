@@ -49,7 +49,7 @@ export default class Charge extends exchangeViewBase {
 
     async componentWillMount() {
         let currency = this.props.location.query && this.props.location.query.currency;
-        currency && this.setState({currency: currency});
+        currency && (currency=currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
         await this.getWalletList();
         this.getCoinAddress(currency || this.state.currency);
     }
@@ -59,7 +59,7 @@ export default class Charge extends exchangeViewBase {
     render() {
         let {coinAddress,verifyNumber} = this.state.coinAddress;
         let walletList=Object.keys(this.state.walletList);
-        let currency=this.state.currency;
+        let currency=this.state.currency.toUpperCase();
         return (
             <div className="charge">
                 <div className="nav">

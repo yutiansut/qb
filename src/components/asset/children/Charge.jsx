@@ -87,7 +87,7 @@ export default class Charge extends exchangeViewBase {
     this.getTradePair();
     this.getCurrencyAmount(currency || this.state.currency);
     this.getCoinAddress(currency || this.state.currency);
-    let coin = currency || 'BTC'
+    let coin = currency || 'BTC';
     this.getHistory({
       page: 0,
       pageSize: 10,
