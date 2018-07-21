@@ -229,9 +229,9 @@ export default class CoinData extends exchangeViewBase {
               {description && this.intl.get(description) ? this.intl.get(description) : description}
             </p>
             <div className="button">
-              <Button type="base" title={this.intl.get('helo-coin-website')} href={webSite && webSite[0]} target={true} />
-              <Button type="base" title={this.intl.get('helo-coin-browser')} href={blockSites && blockSites[0]} target={true} />
-              <Button type="base" title={this.intl.get('helo-coin-white')} href={whitePaper && whitePaper[0]} target={true} />
+              {webSite && <Button type="base" title={this.intl.get('helo-coin-website')} href={webSite[0]} target={true} />}
+              {blockSites && <Button type="base" title={this.intl.get('helo-coin-browser')} href={blockSites[0]} target={true} />}
+              {whitePaper && <Button type="base" title={this.intl.get('helo-coin-white')} href={whitePaper[0]} target={true} />}
             </div>
           </div>
         </div>
