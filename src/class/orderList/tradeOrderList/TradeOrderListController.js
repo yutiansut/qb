@@ -13,7 +13,6 @@ export default class TradeOrderListController extends OrderListController {
   }
   
   liveTradeListHandle(liveTradeList) {
-    console.log('liveTradeList asdasdasdasd',liveTradeList)
     let liveTradeData = liveTradeList;
     let liveBuyArray = liveTradeData && liveTradeData.buy || [];
     let liveSellArray = liveTradeData.sell && liveTradeData.sell.reverse();
@@ -37,8 +36,8 @@ export default class TradeOrderListController extends OrderListController {
   orderListSelect(v){
     let prices = {
       price: v.price,
-      priceCN: v.priceCN,
-      priceEN: v.priceEN,
+      priceCN: v.priceCN.toFixed(2),
+      priceEN: v.priceEN.toFixed(2),
     };
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
     // this.store.changeFlag = false
@@ -48,7 +47,6 @@ export default class TradeOrderListController extends OrderListController {
     return this.view.state.changeFlag
   }
   setChangeFlag(){
-    console.log('changeflaghgggggggggggggg')
     // this.store.changeFlag = true
     this.view.setState({
       changeFlag:true

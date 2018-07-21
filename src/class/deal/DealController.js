@@ -61,8 +61,8 @@ export default class DealController extends ExchangeControllerBase {
       inputBuyFlag: false,
       inputSellFlag: false,
       priceBank: {
-        CNY: prices.priceCN,
-        USD: prices.priceEN
+        CNY: prices.priceCN.toFixed(2),
+        USD: prices.priceEN.toFixed(2)
       }
     });
     this.store.state.prices = prices;
@@ -121,9 +121,9 @@ export default class DealController extends ExchangeControllerBase {
         // initPrice = this.view.state.priceInit,
       priceBank = {
         // CNY: initPrice / prices.price * prices.priceCN,
-        CNY: prices.priceCN,
+        CNY: Number(prices.priceCN).toFixed(2),
         // USD: initPrice / prices.price * prices.priceEN,
-        USD: prices.priceEN,
+        USD: Number(prices.priceEN).toFixed(2),
       }
     ;
     this.view.setState({
