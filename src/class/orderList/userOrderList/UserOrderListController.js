@@ -125,7 +125,7 @@ export default class UserOrderListController extends OrderListController {
           "," +
           this.view.state.orderStatusItems[v.orderStatus]
       });
-      this.exportExcel(str, `${this.intl.get("order-history")}.xls`);
+      this.exportExcel(str, `${this.view.intl.get("order-history")}.xls`);
       return;
     }
     // str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";

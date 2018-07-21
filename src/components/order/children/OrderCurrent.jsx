@@ -140,7 +140,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       marketSelect: this.intl.get('all'),
       orderType: 2,
       typeSelect: this.intl.get('all'),
-    });
+    },this.searchFilter);
   }
 
   hideReset(e) {
@@ -247,7 +247,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         {total: 0,
           orderListArray:[]
         }
-    )
+    );
     const params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
