@@ -68,7 +68,7 @@ export default class Home extends exchangeViewBase {
 
   componentWillUnmount() {
     let buttonK = document.getElementById('udesk_container');
-    buttonK && (buttonK.parentNode.removeChild(buttonK));
+    buttonK && (buttonK.style.display = "none");
     window.removeEventListener("scroll", this.onScroll);
   }
 
