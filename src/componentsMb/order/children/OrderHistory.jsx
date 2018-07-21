@@ -15,8 +15,12 @@ export default class OrderHistory extends exchangeViewBase{
       idArray: [],
       coinSelect: this.intl.get('all'),     // SelectButton选中币种
       marketSelect: this.intl.get('all'),   // SelectButton选中市场
+      showCoinSelect: this.intl.get('all'),
+      showMarketSelect: this.intl.get('all'),
       coinArray: [],    // SelectButton币种数组
       marketArray: [],  // SelectButton市场数组
+      showCoinArray: [],
+      showMarketArray: [],
       hideOther: 0,     // SelectButton隐藏
       orderType: 2,
       orderStatus: [2, 3, 5, 6, 7],
@@ -53,11 +57,21 @@ export default class OrderHistory extends exchangeViewBase{
     const {pairIdMsg} = this.props;
     let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
     let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
+    let showCoinArray = coinArray && coinArray.map(function(item) {
+      return item.toUpperCase()
+    })
+    let showMarketArray = marketArray && marketArray.map(function(item) {
+      return item.toUpperCase()
+    })
     marketArray && marketArray.unshift(this.intl.get('all'));
     coinArray && coinArray.unshift(this.intl.get('all'));
+    showCoinArray && showCoinArray.unshift(this.intl.get('all'));
+    showMarketArray && showMarketArray.unshift(this.intl.get('all'));
     this.setState({
       coinArray,
-      marketArray
+      marketArray,
+      showCoinArray,
+      showMarketArray
     })
   }
   getOrderList() {
@@ -118,6 +132,8 @@ export default class OrderHistory extends exchangeViewBase{
       idArray: [],
       coinSelect: this.intl.get('all'),
       marketSelect: this.intl.get('all'),
+      showCoinSelect: this.intl.get('all'),
+      showMarketSelect: this.intl.get('all'),
       orderType: 2,
       totalDeal: true,
       reseted: true,
@@ -143,10 +159,10 @@ export default class OrderHistory extends exchangeViewBase{
   changeCoin(e) {
     const {pairIdMsg} = this.props;
     let marketArray = [];
-    if(e === this.state.coinSelect){
+    if(e.toLowerCase() === this.state.coinSelect){
       return
     }
-    let coinValue = (e === this.intl.get('all')) ? '' : e;
+    let coinValue = (e === this.intl.get('all')) ? '' : e.toLowerCase();
     let marketValue = (this.state.marketSelect === this.intl.get('all')) ? '' : this.state.marketSelect;
     let idArray = [];
     let hideOther = 1;
@@ -167,7 +183,8 @@ export default class OrderHistory extends exchangeViewBase{
           marketArray,
           idArray,
           coinSelect: coinValue,
-          hideOther
+          hideOther,
+          showCoinSelect: e
         }
     )
   }
@@ -175,10 +192,10 @@ export default class OrderHistory extends exchangeViewBase{
   changeMarket(e) {
     const {pairIdMsg} = this.props;
     let coinArray = [];
-    if(e === this.state.marketSelect){
+    if(e.toLowerCase() === this.state.marketSelect){
       return
     }
-    let marketValue = (e === this.intl.get('all')) ? '' : e;
+    let marketValue = (e === this.intl.get('all')) ? '' : e.toLowerCase();
     let coinValue = (this.state.coinSelect === this.intl.get('all')) ? '' : this.state.coinSelect;
     let idArray = [];
     let hideOther = 1;
@@ -197,7 +214,8 @@ export default class OrderHistory extends exchangeViewBase{
           coinArray,
           idArray,
           marketSelect: marketValue,
-          hideOther
+          hideOther,
+          showMarketSelect: e
         }
     )
   }
@@ -229,19 +247,19 @@ export default class OrderHistory extends exchangeViewBase{
             <h1>{this.intl.get("pair")}</h1>
             <div className="choose-section">
               <SelectButton
-                title={this.state.coinSelect}
+                title={this.state.showCoinSelect}
                 type="main"
                 className="select"
                 onSelect={(e) => this.changeCoin(e)}
-                valueArr={this.state.coinArray}
+                valueArr={this.state.showCoinArray}
               />
               <em>——</em>
               <SelectButton
-                title={this.state.marketSelect}
+                title={this.state.showMarketSelect}
                 type="main"
                 className="select"
                 onSelect={(e) => this.changeMarket(e)}
-                valueArr={this.state.marketArray}
+                valueArr={this.state.showMarketArray}
               />
             </div>
             <h1>{this.intl.get("type")}</h1>
