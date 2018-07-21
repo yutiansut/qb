@@ -67,11 +67,13 @@ export default class OrderCurrent extends exchangeViewBase{
   // 撤销订单
   cancelOrder(index) {
     let v = this.state.orderListArray[index];
-    let orderId, opType, dealType;
-    orderId = JSON.parse(JSON.stringify(v.orderId));
+    // orderId = JSON.parse(JSON.stringify(v.orderId));
+    let orderId, opType, dealType,tradePairId;
+    orderId = v.orderId;
     opType = 0;
     dealType =v.orderType;
-    this.props.controller.cancelOrder(orderId, opType, dealType)
+    tradePairId = v.tradePairId;
+    this.props.controller.cancelOrder(orderId, opType, dealType, tradePairId)
   }
 
   // 返回列表模式
