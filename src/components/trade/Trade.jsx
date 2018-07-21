@@ -101,8 +101,14 @@ export default class extends exchangeViewBase {
   switchChart(name) {
     this.setState({ curChart: name });
   }
+
   componentWillUnmount() {
     TradeMarketController.klineController = null;
+    TradeMarketController.TradeDealController = null;
+    TradeMarketController.TradePlanController = null;
+    TradeMarketController.TradeRecentController = null;
+    TradeMarketController.TradeOrderListController = null;
+    TradeMarketController.userOrderController = null;
   }
 
 

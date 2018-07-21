@@ -48,7 +48,7 @@ export default class NoticeController extends ExchangeControllerBase {
 
   async getUserNoticeHeader( unRead, page, pageSize) { // 获取用户头部通知列表
     let userNoticeHeader = await this.store.userNotice( unRead, page, pageSize);
-    console.log('通知列表头部', userNoticeHeader)
+    // console.log('通知列表头部', userNoticeHeader)
     this.noticeHeaderView.setState({userNoticeHeader})
   }
 
@@ -111,7 +111,7 @@ export default class NoticeController extends ExchangeControllerBase {
 
   // websocke更新
   userNoticeUpdata(obj) {
-    console.log('试图', obj)
+    // console.log('试图', obj)
     let userNoticeHeader = this.noticeHeaderView.state.userNoticeHeader,
         userNotice = this.view.state.userNotice,
         noticeObj = {};
@@ -121,8 +121,8 @@ export default class NoticeController extends ExchangeControllerBase {
       content: obj.content,
       createAt: new Date().getTime() / 1000
     }
-    userNoticeHeader.list.unshift(noticeObj)
-    userNotice.list.unshift(noticeObj)
+    userNoticeHeader.list && userNoticeHeader.list.unshift(noticeObj)
+    userNotice.list && userNotice.list.unshift(noticeObj)
     this.noticeHeaderView.setState({userNoticeHeader})
     this.view && this.view.setState({userNotice})
   }

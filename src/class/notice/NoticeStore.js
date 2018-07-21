@@ -54,7 +54,7 @@ export default class NoticeStore extends ExchangeStoreBase {
       page,
       pageSize
     })
-    console.log(1111, userNotice)
+    // console.log(1111, userNotice)
     userNotice = userNotice ? userNotice : {}
     if (unRead) {
       this.state.userNoticeHeader = userNotice

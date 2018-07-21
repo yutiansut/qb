@@ -12,7 +12,7 @@ export default function AsyncComponent(importComponent, props) {
 
     async componentDidMount() {
       const { default: component } = await importComponent();
-      console.log('AsyncComponentCache 0')
+      // console.log('AsyncComponentCache 0')
       this.setState({component});
     }
 

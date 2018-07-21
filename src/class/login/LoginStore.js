@@ -12,6 +12,7 @@ export default class LoginStore extends ExchangeStoreBase {
       // console.log('登录', data)
       this.controller.userLoginInfo(data)
       if(data.ret === 0 && pushHistoryFlag ){
+        this.WebSocket.general.clearWebsocketHistoryArr('login')
         this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get()})
       }
       this.controller.loginUpdata(data);

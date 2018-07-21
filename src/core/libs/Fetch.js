@@ -5,7 +5,7 @@
  */
 
 export default async (url, params) => {
-  console.log('sendHttp', url, params)
+  // console.log('sendHttp', url, params)
   try {
     let response = await fetch(url, params).catch((e, obj) => {
         obj = { ret: -1, data: e };
@@ -16,7 +16,7 @@ export default async (url, params) => {
         obj = { ret: -2, data: e };
         throw obj;
       });
-    console.log('reciveHttp', JSON.parse(result))
+    // console.log('reciveHttp', JSON.parse(result))
     return JSON.parse(result);
   } catch (e) {
     // console.error('error', e);

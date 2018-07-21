@@ -27,9 +27,10 @@ export default function () {
     webSocket.onopen = event => onOpen(pool, event)
 
     function onOpen(pool, event) {
-      console.log('webSocket开启', event.target.url, pool.onOpen)
+      // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
       connects.push(webSocket)
       poolSize = connects.length;
+      // console.log('webSocket开启 1', connects)
       pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
@@ -87,11 +88,11 @@ export default function () {
    */
   let index = 0;
   pool.send = function (text) {
-    // console.log('send text')
+    // console.log('send text', connects.length )
     if (connects.length === 0)
-      throw new Error('==connect is all down!===')
+      console.error('==connect is all down!===')
     // console.log('websocket 发送信息', text, connects[index++ % poolSize])
-    poolSize && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
+    poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 
   /**
@@ -100,9 +101,9 @@ export default function () {
   pool.close = function () {
     // console.log('close all connects in pool')
     if (connects.length === 0)
-      throw new Error('==connect is all down!===')
+      console.error('==connect is all down!===')
     pool.reConnectFlag = false
-    poolSize && connects.forEach(v => v.close())
+    poolSize && connects && connects.forEach(v => v.close())
   }
 
   return pool

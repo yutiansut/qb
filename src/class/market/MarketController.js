@@ -200,7 +200,7 @@ export default class MarketController extends ExchangeControllerBase {
     // console.log('updateMarketAll 1', this.store.state)
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
-    console.log('homeMarketPairData11111111111',homeMarketPairData)
+    // console.log('homeMarketPairData11111111111',homeMarketPairData)
     // console.log('updateMarketAll 2', homeMarketPairData, this.view, this.store.sortValue, this.store.ascending)
     if(this.view.state.query) {
       let pairMsg = await this.getTradePairHandle();
@@ -208,7 +208,7 @@ export default class MarketController extends ExchangeControllerBase {
       console.log('queryValuequeryValue',queryValue)
       if(queryValue.split('/').length === 1){
         console.log('queryValuequeryValue',queryValue,this.view.state.marketDataHandle,this.view.state.marketDataHandle.indexOf(queryValue),pairMsg.pairNameCoin)
-      
+
         this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue][0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue][0]}`);
         this.view.setState({query:queryValue})
       }
@@ -218,7 +218,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     }, this.setDealMsg());
-    
+
     type > 1 && this.tradePairChange(homeMarketPairData[0]);
   }
 
@@ -321,7 +321,7 @@ export default class MarketController extends ExchangeControllerBase {
       return
     //改变deal模块中的信息
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
-    console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
+    // console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
     let  dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].icon,

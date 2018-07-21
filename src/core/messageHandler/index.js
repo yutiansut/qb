@@ -36,32 +36,11 @@ async function messageHandler() {
       // console.log(PoolDic)
       let pool = PoolDic[poolName]
       if (pool.EMIT_QUENE.length) {
-        /**
-         * 逐条发送
-         * 加帧数
-         * 具体发送根据不同的项目不同
-         */
         // console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
-        pool.send(pool.EMIT_QUENE.shift())
+        pool && pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
-        /**
-         * 逐条处理
-         * 校验seq和var
-         * 此处根据op分发到各处回调
-         */
-        //op1,3代表握手和心跳，对此不做处理
         // console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
-        // if(pool.RECEIVE_QUENE[0].op === 1){
-        //   pool.hasStart = true
-        //   pool.RECEIVE_QUENE.shift()
-        //   return
-        // }
-        // if(pool.RECEIVE_QUENE[0].op === 3){
-        //   // console.log('无用包')
-        //   pool.RECEIVE_QUENE.shift()
-        //   return
-        // }
         MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })
@@ -79,7 +58,6 @@ const MESSAGE_HANDLER = {
    * @param webSocketList
    */
   install(pool, config) {
-    // console.log('install Websocket to messageHandler')
     PoolDic[config.name] = pool;
     pool.EMIT_QUENE = [];
     pool.RECEIVE_QUENE = [];
@@ -90,7 +68,10 @@ const MESSAGE_HANDLER = {
     }
 
     MESSAGE_HANDLER[config.name] = {}
-    MESSAGE_HANDLER[config.name].send = data => pool.EMIT_QUENE.push(data)
+    MESSAGE_HANDLER[config.name].send = data => {
+      // console.log('MESSAGE_HANDLER[config.name].send',data, pool)
+      pool.EMIT_QUENE.push(data)
+    }
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
     MESSAGE_HANDLER[config.name].onMessage = data => data && console.log(data)
     MESSAGE_HANDLER[config.name].onClose = func => pool.onClose = func
