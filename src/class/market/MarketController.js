@@ -218,7 +218,7 @@ export default class MarketController extends ExchangeControllerBase {
     }
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    }, () => this.view.name === 'tradeMarket' && type > 0 &&this.setDealMsg());
+    }, () => this.view.name === 'tradeMarket' && type > 1 &&this.setDealMsg());
 
     type !== 1 && this.view.name === 'tradeMarket' && this.tradePairChange(homeMarketPairData[0]);
   }
