@@ -270,16 +270,16 @@ export default class UserController extends ExchangeControllerBase {
     } else {
       this.getCaptchaVerify()
     }
-    if (mode || account){
-      this.view.setState({
-        remindPopup: true,
-        popType: result ? 'tip3': 'tip1',
-        popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc"),
-        userInfo,
-        showChange: result ? true : false,
-        verifyList
-      })
-    }
+    // if (mode || account){
+    this.view.setState({
+      remindPopup: true,
+      popType: result ? 'tip3': 'tip1',
+      popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc"),
+      userInfo,
+      showChange: result ? true : false,
+      verifyList
+    })
+    // }
     console.log('修改两步认证', result)
   }
 
@@ -338,7 +338,7 @@ export default class UserController extends ExchangeControllerBase {
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-googleSucc"),
       showGoogle: result ? true : false,
-      userInfo: Object.assign(this.view.state.userInfo, {googleAuth: 0})
+      userInfo: result ? Object.assign(this.view.state.userInfo, {googleAuth: 1}) : Object.assign(this.view.state.userInfo, {googleAuth: 0})
     })
     if (result === null) {
       this.getUserCreditsNum()
