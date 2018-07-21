@@ -255,7 +255,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.state.tradePair = value.tradePairName;
     this.store.state.tradePairId = value.tradePairId;
     this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId, value.tradePairName);
-    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName) && this.TradeOrderListController.setChangeFlag();
+    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);          this.TradeOrderListController && this.TradeOrderListController.setChangeFlag();
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
@@ -321,7 +321,6 @@ export default class MarketController extends ExchangeControllerBase {
     if(!this.store.state.tradePair)
       return
     //改变deal模块中的信息
-    console.log('aaaaaa' ,this.store.state.tradePair, this.store.state.homeMarketPairData)
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
     // console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
     let  dealMsg = {
@@ -334,6 +333,7 @@ export default class MarketController extends ExchangeControllerBase {
         }
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
+    console.log('MSG2222222',this.TradeOrderListController.changeFlag)
     this.TradePlanController && this.TradeOrderListController && this.TradeOrderListController.changeFlag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg)
   }

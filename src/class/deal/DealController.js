@@ -12,7 +12,6 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   setPairMsg(value) {
-    console.log(222222222,value)
     this.view.setState({
       tradePairMsg: value
     });
@@ -187,8 +186,18 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
+    if(params.priceType === 0 && params.funpass === ''){
+      this.view.setState(
+          {
+            dealPopMsg: this.view.intl.get("deal-pass-empty"),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      )
+      return
+    }
     //   价格判断不能为空
-    if(!params.price){
+    if(!params.price && params.priceType === 0){
       this.view.setState(
           {
             dealPopMsg: this.view.intl.get("noEmptyPrice"),
@@ -240,7 +249,7 @@ export default class DealController extends ExchangeControllerBase {
           }
       );
     }
-    if(result && result.ret === 1416){
+    if(result && (result.ret === 1416 || result.ret === 1412)){
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),

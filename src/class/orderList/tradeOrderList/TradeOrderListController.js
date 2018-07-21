@@ -48,6 +48,7 @@ export default class TradeOrderListController extends OrderListController {
     return this.view.state.changeFlag
   }
   setChangeFlag(){
+    console.log('changeflaghgggggggggggggg')
     // this.store.changeFlag = true
     this.view.setState({
       changeFlag:true
