@@ -187,6 +187,7 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
+    //   价格判断不能为空
     if(!params.price){
       this.view.setState(
           {
@@ -199,6 +200,7 @@ export default class DealController extends ExchangeControllerBase {
       )
       return
     }
+    // 数量不能为最小交易量
     if(Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum) < this.store.state.coinMin){
       this.view.setState(
           {
@@ -210,6 +212,7 @@ export default class DealController extends ExchangeControllerBase {
     }
     // if(Number(params.price.multi(params.count)).formatFixNumberForAmount())
     let result = await this.store.dealTrade(params);
+    console.log('result',result)
     if(result === null){
       this.view.setState(
           {
@@ -242,10 +245,10 @@ export default class DealController extends ExchangeControllerBase {
           }
       );
     }
-    if(result && result.wrongTime >=5){
+    if(result && result.errCode === 'FREEZE_PASSWORD'){
       this.view.setState(
           {
-            dealPopMsg: this.view.intl.get("612"),
+            dealPopMsg: result.msg,
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
