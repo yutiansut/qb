@@ -30,9 +30,10 @@ export default class ConfigController extends ExchangeControllerBase {
   }
   changeLanguage(lang){
     this.store.changeLanguage(lang);
-    this.app.setState({ initDone: false},()=>{
-      this.loadLocales();
-    })
+    location.reload();
+    // this.app.setState({ initDone: false},()=>{
+    //   this.loadLocales();
+    // })
   }
   async loadLocales() {
     const locales = {
