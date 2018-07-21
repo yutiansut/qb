@@ -6,6 +6,7 @@ import '../stylus/tradeMarket.styl'
 export default class TradeMarket extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = 'tradeMarket'
     this.state = {
       query:'',
       searchInput: false,

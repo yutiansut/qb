@@ -8,6 +8,7 @@ import ReactTrend from './ReactTread'
 export default class HomeMarket extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = 'homeMarket'
     this.state = {
       searchValue: '',
       sortIndex: 0,
