@@ -122,7 +122,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.price))}</td>
                     <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(Number(v.price)) || Number(v.count.minus(v.dealDoneCount)).formatFixNumberForAmount(Number(v.price))}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
-                    <td onClick={this.cancelOrder.bind(this, 0, v)} className={`cancel`} >{this.intl.get('cancel')}</td>
+                    <td onClick={this.cancelOrder.bind(this, 0, v)} className={`cancel`} style={{cursor: 'pointer'}} >{this.intl.get('cancel')}</td>
                   </tr>
               )
             })}

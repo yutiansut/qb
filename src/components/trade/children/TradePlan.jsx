@@ -207,7 +207,7 @@ export default class TradePlan extends ExchangeViewBase {
     );
     result && result.errCode === 'PWD_ERROR' && this.setState(
         {
-          dealPopMsg:'资金密码错误',
+          dealPopMsg:this.intl.get('passError'),
           dealPassType:'passive',// 弹窗类型倾向
           dealPass:true,// 下单弹窗
         }

@@ -246,10 +246,10 @@ export default class userSafeCenter extends exchangeViewBase {
             </li>
           </ul>
         </div>
-        <div className="change-pass model-div clearfix">
+        <div className="change-pass model-div" style={{display: 'flex'}}>
           <h2>{this.intl.get("user-changePwd")}</h2>
           <div className="fl">
-            <ol className="clearfix">
+            <ol className="clearfix" style={{display: 'flex'}}>
               <li>{this.intl.get("loginPwd")}</li>
               <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}</li>
             </ol>

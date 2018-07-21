@@ -41,6 +41,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     super(props);
     this.state = {
       preArray: [],
+      searchSaveFlag:false,
       // startTime: 1509484067,
       // endTime: 1530088867,
       "startTime": Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
@@ -246,7 +247,8 @@ export default class OrderCurrent extends ExchangeViewBase {
   searchFilter() {
     this.setState(
         {total: 0,
-          orderListArray:[]
+          orderListArray:[],
+          searchSaveFlag:true
         }
     );
     const params = {
