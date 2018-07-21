@@ -82,6 +82,7 @@ export default class ExchangeStoreBase extends StoreBase {
         delete data.body.msg
         dataCache = Object.assign(Msg[data.body.ret || 0] || {}, data.body)
       }
+      console.log('websocket.onMessage', data, dataCache)
       opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](dataCache)
     }
 

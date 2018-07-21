@@ -46,6 +46,33 @@
         height .12rem
         background $home-down no-repeat center center
         background-size .12rem .12rem
+  .market-updown
+    position relative
+    font-weight 100
+    &.up-after
+      color $index-blue
+      &:after
+        position absolute
+        top 50%
+        transform translate(0, -50%)
+        right -.15rem
+        content ''
+        width .12rem
+        height .12rem
+        background $home-up no-repeat center center
+        background-size .12rem .12rem
+    &.down-after
+      color $index-red
+      &:after
+        position absolute
+        top 50%
+        transform translate(0, -50%)
+        right -.15rem
+        content ''
+        width .12rem
+        height .12rem
+        background $home-down no-repeat center center
+        background-size .12rem .12rem
   .hide
     display none
 

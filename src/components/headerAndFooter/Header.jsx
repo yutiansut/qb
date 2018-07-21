@@ -48,7 +48,8 @@ export default class Header extends ExchangeViewBase {
       userNoticePop: false, // 弹窗信息
       userContent: "", // 弹窗信息
       showNews: false, // 消息下拉
-      otherLogin: false // 提示登录弹窗
+      otherLogin: false, // 提示登录弹窗
+      otherLoginCon: "", // 提示登录弹窗内容
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
@@ -234,7 +235,7 @@ export default class Header extends ExchangeViewBase {
           onClose={() => {this.setState({ userNoticePop: false });}}
           content={this.state.userContent}/>}
         {this.state.otherLogin && <div className="other-login">
-          <p>{this.intl.get("login-miss")}</p>
+          <p>{this.state.otherLoginCon === 2006 ? this.intl.get("login-miss") : this.intl.get("login-other")}</p>
         </div>}
       </div>
     )

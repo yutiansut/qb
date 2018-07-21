@@ -76,14 +76,25 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   loginUpdata(obj) { // 监听退出消息
-    if(obj.ret === 2006) {
+    // console.log('监听退出消息', obj)
+    if(obj.ret === 120) {
+      this.headerView.setState({
+        otherLoginCon: obj.ret,
+        otherLogin: true
+      })
       setTimeout(() => {
         this.clearLoginInfo()
       }, 3000)
-
+      return
+    }
+    if(obj.ret === 2006) {
       this.headerView.setState({
+        otherLoginCon: obj.ret,
         otherLogin: true
       })
+      setTimeout(() => {
+        this.clearLoginInfo()
+      }, 3000)
     }
   }
 

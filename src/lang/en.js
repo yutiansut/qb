@@ -130,7 +130,7 @@ export default function en(state) {
     609: "Wrong operation type",
     610: "Same as the original password",
     612: 'Password wrong, your account has been frozen, try after {number}mins！',
-    613: 'Has been logged in elsewhere',
+    613: 'Login exception, please log in again',
     616: "Password is not set",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",

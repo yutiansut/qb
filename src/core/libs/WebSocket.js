@@ -39,7 +39,7 @@ export default function () {
     webSocket.onmessage = event => onMessage(pool, event)
 
     function onMessage(pool, event) {
-      // console.log('webSocket接收信息', event.data)
+      console.log('webSocket接收信息', event.data)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
       pool.onMessage && pool.onMessage(JSON.parse(event.data))
     }

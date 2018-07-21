@@ -32,6 +32,8 @@ export default class HomeActivity extends ExchangeViewBase {
   }
 
   render() {
+    let userToken = this.props.controller.userController.userToken
+     // console.log('登录', userToken)
     return (
       <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
         <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
@@ -39,9 +41,10 @@ export default class HomeActivity extends ExchangeViewBase {
                alt=""
                className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} content`}/>
           {this.props.controller.configController.store.state.language === "zh-CN" ? (
-            <Link to="/activity/fresh" className="content-link cn-content">
+            <Link href="/wlogin" className="content-link cn-content">
               <span className="banner-btn"></span>
-            </Link>) : (
+            </Link>
+          ) : (
             <Link to="/activity/fresh" className="content-link en-content">
               <span className="banner-btn"></span>
             </Link>
