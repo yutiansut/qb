@@ -187,8 +187,8 @@ export default class UserOrderListController extends OrderListController {
      })
   }
 
-  async cancelOrder(orderId, opType, dealType, v = 1) {
-    let msg = await this.store.cancelOrder(orderId, opType, dealType);
+  async cancelOrder(orderId, opType, dealType, tradePairId,v = 1) {
+    let msg = await this.store.cancelOrder(orderId, opType, dealType, tradePairId);
     // console.log('xiadan', msg,orderId);
     let orderListArray = this.view.state.orderListArray
     if(orderListArray){

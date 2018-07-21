@@ -212,7 +212,7 @@ export default class UserOrderListStore extends OrderListStore {
     this.WebSocket.general.on('userOrderUpdate', data => {
       this.controller.updateUserOrder(data);
       console.log('userOrderUpdate12222222222',data)
-      this.controller.TradeRecentController.updateRecentOrderUser(data)
+      this.controller.TradeRecentController && this.controller.TradeRecentController.updateRecentOrderUser(data)
       // console.log('wsOrderList userOrderUpdate', data)
     })
   }
@@ -269,14 +269,13 @@ export default class UserOrderListStore extends OrderListStore {
   }
 
   //撤单操作
-  async cancelOrder(orderId, opType, dealType){
+  async cancelOrder(orderId, opType, dealType,tradePairId){
     // console.log('receivePara', this.controller.userController.userId,this.controller.TradeMarketController.tradePair.tradePairId ,orderId)
-    console.log(Number(orderId),orderId,JSON.stringify(orderId),JSON.parse(JSON.stringify(orderId)))
     let msg = await this.Proxy.cancelOrder(
         {
           token: this.controller.userController.userToken,
           "userId": this.controller.userController.userId,
-          "tradePairId": this.controller.marketController.tradePair.tradePairId,
+          tradePairId,
           'orderId': orderId,
           "opType": opType, //0默认 1买单全部  2卖单全部  3所有
           "dealType":dealType

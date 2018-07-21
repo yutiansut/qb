@@ -51,13 +51,14 @@ export default class userOrder extends ExchangeViewBase {
   }
   
   cancelOrder(cancelType, v = 0){
-    let orderId, opType, dealType;
+    let orderId, opType, dealType, tradePairId;
     orderId = cancelType ? 0 : JSON.parse(JSON.stringify(v.orderId)) ;
     opType = cancelType;
-    dealType =cancelType ? 0 : v.orderType;
+    dealType = cancelType ? 0 : v.orderType;
+    tradePairId = this.props.controller.TradeMarketController.tradePair.tradePairId
     // dealType =v && v.orderType || 0;
     // console.log('cancelop',orderId, opType, dealType)
-    this.props.controller.cancelOrder(orderId, opType, dealType, 0)
+    this.props.controller.cancelOrder(orderId, opType, dealType,tradePairId, 0)
   }
   componentWillMount() {
   

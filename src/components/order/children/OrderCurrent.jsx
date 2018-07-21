@@ -56,6 +56,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       orderStatus: [1, 2, 3, 4, 5, 6, 7],
       page: 1,
       pageSize: 20,
+      tradePairId:1,
       total: 0,
       detailFlag: false,
       orderDetail: {},
@@ -297,11 +298,12 @@ export default class OrderCurrent extends ExchangeViewBase {
     }
   }
   cancelOrder(v){
-    let orderId, opType, dealType;
+    let orderId, opType, dealType,tradePairId;
     orderId = v.orderId;
     opType = 0;
     dealType =v.orderType;
-    this.props.controller.cancelOrder(orderId, opType, dealType)
+    tradePairId = v.tradePairId;
+    this.props.controller.cancelOrder(orderId, opType, dealType, tradePairId)
   }
   changePage(page){
     const params = {
