@@ -58,6 +58,7 @@ export default class extends ExchangeViewBase {
             })}
           </div>
         </div>
+        <div className="scroll-bar-recenttrade">
         <table className="trade-recent-table">
           <thead>
             <tr>
@@ -84,6 +85,7 @@ export default class extends ExchangeViewBase {
             ) || <span>{this.intl.get('noRecords')}</span>}
           </tbody>
         </table>
+        </div>
       </div>;
   }
 }

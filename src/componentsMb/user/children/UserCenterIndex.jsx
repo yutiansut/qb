@@ -32,7 +32,7 @@ export default class UserCenterIndex extends exchangeViewBase {
   }
 
   isAuthentication() {
-    if (this.state.userAuth.state !== 1 || this.state.userAuth.state !== 2) {
+    if (this.state.userAuth.state === 0 || this.state.userAuth.state === 3) {
       this.setState({remindPopup:true,popType:"tip4",popMsg:this.intl.get("user-not-surport")})
     }
   }

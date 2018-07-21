@@ -14,6 +14,7 @@ const orderStatusClass = {
   1: 'partdeal',  // 当前订单——部分成交
   2: 'deal',      // 历史订单——已成交
   6: 'partdeal',  // 历史订单——部分成交
+  7: 'partdeal',  // 历史订单——部分成交
 };
 
 export default class OrderDetails extends exchangeViewBase {
@@ -27,7 +28,8 @@ export default class OrderDetails extends exchangeViewBase {
         3: this.intl.get("reseted"),
         4: this.intl.get("reseting"),
         5: this.intl.get("overed"),
-        6: this.intl.get("partDeal")
+        6: this.intl.get("partDeal"),
+        7: this.intl.get("partDeal")
       }
     };
 
@@ -95,7 +97,7 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fr">{orderDetail.undoneCount}</span>
           </div>}
         </div>
-        {(orderDetail.orderStatus === 1 || orderDetail.orderStatus === 6 || orderDetail.orderStatus === 2) && <div className="order-deal-info">
+        {(orderDetail.orderStatus !== 0) && <div className="order-deal-info">
           <h3>{this.intl.get("orderDetail")}</h3>
           <table>
             <tr className="clearfix">

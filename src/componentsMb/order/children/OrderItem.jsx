@@ -7,7 +7,8 @@ const orderStatusClass = {
   2: 'deal',
   3: 'cancel',
   5: 'end',
-  6: 'partdeal'
+  6: 'partdeal',
+  7: 'partdeal'
 }
 
 export default class OrderItem extends exchangeViewBase{
@@ -21,7 +22,8 @@ export default class OrderItem extends exchangeViewBase{
           3: this.intl.get("reseted"),
           4: this.intl.get("reseting"),
           5: this.intl.get("overed"),
-          6: this.intl.get("partDeal")
+          6: this.intl.get("partDeal"),
+          7: this.intl.get("partDeal")
       }
     }
 
@@ -40,7 +42,7 @@ export default class OrderItem extends exchangeViewBase{
       this.props.setDetailsDisplay(this.props.index);
     } else {
       const orderStatus = this.props.orderInfo.orderStatus;
-      if (orderStatus === 2 || orderStatus === 4) {
+      if (orderStatus === 2 || orderStatus === 6 || orderStatus === 7) {
         this.props.setDetailsDisplay(this.props.index);
       }
     }
@@ -65,7 +67,7 @@ export default class OrderItem extends exchangeViewBase{
             ) : (
               <div className="info-history fr" onClick={this.goDetailDisplay}>
                 <span className={orderStatusClass[orderInfo.orderStatus]}>{this.state.orderStatus[orderInfo.orderStatus]}</span>
-                {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6) && <img src="../../../../static/mobile/order/icon_qianjb@3x.png"/>}
+                {(orderInfo.orderStatus === 2 || orderInfo.orderStatus === 6 || orderInfo.orderStatus === 7) && <img src="../../../../static/mobile/order/icon_qianjb@3x.png"/>}
               </div>
             )}
           </div>

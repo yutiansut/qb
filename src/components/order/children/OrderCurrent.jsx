@@ -289,7 +289,7 @@ export default class OrderCurrent extends ExchangeViewBase {
   }
 
   checkoutDetail(v) {
-    if (v.orderStatus === 2 || v.orderStatus === 6) {
+    if (v.orderStatus === 2 || v.orderStatus === 6  || v.orderStatus === 7) {
       this.setState({
         orderId: v.orderId,
         detailFlag: true
@@ -411,7 +411,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                       {type !== 'orderDeal' && <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
                       {type === 'orderHistory' && <td>{Number(v.avgPrice).format({number: 'legal'})}</td>}
                       {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
-                      {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6) ? this.intl.get('detail') : '—'}</td>}
+                      {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? this.intl.get('detail') : '—'}</td>}
 
                     </tr>
                 )

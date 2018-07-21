@@ -19,7 +19,7 @@ export default class OrderHistory extends exchangeViewBase{
       marketArray: [],  // SelectButton市场数组
       hideOther: 0,     // SelectButton隐藏
       orderType: 2,
-      orderStatus: [2, 3, 5, 6],
+      orderStatus: [2, 3, 5, 6, 7],
       totalDeal: true,  // 订单状态——已成交
       reseted: true,    // 订单状态——已撤销
       partDeal: true,   // 订单状态——部分成交
@@ -130,6 +130,7 @@ export default class OrderHistory extends exchangeViewBase{
     this.state.totalDeal && orderStatus.push(2);
     this.state.reseted && orderStatus.push(3);
     this.state.partDeal && orderStatus.push(6);
+    this.state.partDeal && orderStatus.push(7);
     this.setState({
       orderStatus,
       filterShow: false
