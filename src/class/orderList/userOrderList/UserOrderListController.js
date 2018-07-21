@@ -172,13 +172,13 @@ export default class UserOrderListController extends OrderListController {
      let changeIndex = currentOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId));
      let historyIndex = historyOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId))
      // console.log('changeIndex', changeIndex, historyIndex)
-     if(para.orderStatus === 0 || para.orderStatus === 1) {
+     if((para.orderStatus === 0 || para.orderStatus === 1) && para.priceType === 0) {
        changeIndex !== -1 && currentOrder.splice(changeIndex, 1, para) || currentOrder.unshift(para);
         this.view.setState(currentOrder);
        // console.log('currentOrder22', currentOrder)
         return
      }
-     changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
+    para.priceType === 0 && changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
      historyIndex !== -1 && historyOrder.splice(historyIndex, 1, para) || historyOrder.unshift(para);
     // console.log('currentOrder33', historyOrder)
      this.view.setState({
