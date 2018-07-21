@@ -154,7 +154,7 @@ export default class UserStore extends ExchangeStoreBase {
     return ipList
   }
 
-  async userCredits() { // 获取用户积分
+  async userCredits() { // 获取用户积分列表
     let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.uid, "page":0, "pageSize":10, "token": this.token});
     let userCredits = userCreditsCon.list ? userCreditsCon.list : []
     console.log('积分', userCredits)

@@ -315,7 +315,7 @@ export default function en(state) {
     "user-bindPhone": "Available after binding mobile",
     "user-email": "Email",
     "user-msg": "Message",
-    "user-otherAll": "Other security settings",
+    "user-otherAll": "Other security settings+",
     "user-otherSet": "Other settings",
     "user-time": "Timezone",
     "user-noticeSet": "Notification Settings",
