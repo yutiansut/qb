@@ -40,7 +40,7 @@ async function messageHandler() {
         pool && pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
-        console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
+        // console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
         MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })
@@ -62,7 +62,7 @@ const MESSAGE_HANDLER = {
     pool.EMIT_QUENE = [];
     pool.RECEIVE_QUENE = [];
     pool.onMessage = function (data){
-      console.log('pool.onMessage = function (data){', data)
+      // console.log('pool.onMessage = function (data){', data)
       pool.RECEIVE_QUENE.push(data)
       // console.log(pool.RECEIVE_QUENE)
     }

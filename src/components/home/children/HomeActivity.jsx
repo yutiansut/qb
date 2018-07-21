@@ -35,8 +35,8 @@ export default class HomeActivity extends ExchangeViewBase {
     let userToken = this.props.controller.userController.userToken
      // console.log('登录', userToken) /activity/fresh
     return (
-      <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
-        <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
+      <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}>
+        <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}>
           <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en}
                alt=""
                className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} content`}/>
@@ -50,7 +50,7 @@ export default class HomeActivity extends ExchangeViewBase {
             </Link>
           )}
         </div>
-        <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`, height: `${document.body.clientWidth * 750 / 1440}px`}}/>
+        <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`, height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}/>
       </div>
     );
   }
