@@ -289,12 +289,12 @@ export default {
     errCode: "CODE_NOT_EXPIRE"
   },
   
-  // 1412: {
-  //   get msg() {
-  //     return intl.get(1412)
-  //   },
-  //   ret: 1412
-  // },
+  1412: {
+    get msg() {
+      return intl.get(1416)
+    },
+    ret: 1412
+  },
   1416:{
     // 市价溢出
     get msg(){
