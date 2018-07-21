@@ -365,6 +365,7 @@ export default class Kline {
                     Control.switchIndic('off');
                 }
             });
+            /*
             $('#chart_language_setting_div li a').click(function () {
 
                 $('#chart_language_setting_div a').removeClass('selected');
@@ -377,6 +378,7 @@ export default class Kline {
                     Control.chartSwitchLanguage('zh-tw');
                 }
             });
+            */
             $(document).keyup(function (e) {
                 if (e.keyCode === 46) {
                     ChartManager.instance.deleteToolObject();

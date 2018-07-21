@@ -68,11 +68,10 @@ class ReactKline extends exchangeViewBase {
     let _kline = this.state.kline;
     window.redrawKline = function () {
       let tradeChart = document.querySelector(".trade-chart");
-      _kline.resize(tradeChart.clientWidth, tradeChart.clientHeight);
-      // 自动取消全屏
-      if (_kline.isSized) {
-        let sizeIcon = document.querySelector("#sizeIcon");
-        sizeIcon.click();
+      if(_kline.isSized){
+          _kline.resize();
+      }else{
+          _kline.resize(tradeChart.clientWidth, tradeChart.clientHeight);
       }
     };
   }
@@ -492,6 +491,7 @@ class ReactKline extends exchangeViewBase {
                 </table>
               </div>
             </div>
+              {/*
             <div
               className="chart_dropdown"
               id="chart_language_setting_div"
@@ -519,6 +519,7 @@ class ReactKline extends exchangeViewBase {
                 </ul>
               </div>
             </div>
+            */}
             <div id="chart_updated_time">
               <div id="sizeIcon" className="chart_BoxSize" />
             </div>

@@ -218,7 +218,7 @@ export class Control {
                 $(this)[0].innerHTML = attr;
             });
         });
-        $("#chart_language_setting_div li a[name='" + lang + "']").addClass("selected");
+        //$("#chart_language_setting_div li a[name='" + lang + "']").addClass("selected");
         ChartManager.instance.setLanguage(lang);
         ChartManager.instance.getChart().setTitle();
         let tmp = ChartSettings.get();
@@ -332,7 +332,7 @@ export class Control {
         if (chartWidth < periodsHorzNW) {
             domElemCache.append(periodsHorz);
         } else {
-            periodsVert.after(periodsHorz);
+            //periodsVert.after(periodsHorz);
         }
         if (chartWidth < showIndicNW) {
             domElemCache.append(showIndic);

@@ -192,7 +192,7 @@
 }
 
 .chart_container.dark .chart_dropdown_data {
-    background-color: rgba(25, 31, 40, 0.8);
+    background-color: rgba(37, 41, 43, 1);
     border-color: #606060
 }
 
@@ -229,7 +229,7 @@
 }
 
 .chart_container.light .chart_dropdown_data {
-    background-color: rgba(246,246,246,0.8);
+    background-color: rgba(246,246,246,1);
     border-color: #4c4f53
 }
 
@@ -360,10 +360,10 @@
 }
 
 #chart_toolbar_periods_horz {
-    display: inline-block;
     float: left;
     position: relative;
-    z-index: 100
+    z-index: 100;
+    display: none;
 }
 
 #chart_toolbar_periods_vert {
@@ -389,7 +389,7 @@
 
 .chart_container a.chart_icon_theme_dark,
 .chart_container .chart_dropdown_data li a.chart_icon_theme_dark:hover {
-    background-color: #000
+    background-color: #25292b;
 }
 
 .chart_container a.chart_icon_theme_light,
@@ -811,7 +811,7 @@
 }
 
 .chart_container.dark #chart_parameter_settings {
-    background-color: rgba(22, 22, 22, 0.8);
+    background-color: rgba(22, 22, 22, 1);
     border-color: #666;
     color: #ccc;
 }
@@ -821,7 +821,7 @@
 }
 
 .chart_container.dark #chart_parameter_settings #close_settings {
-    background: #1887da;
+    background: #2bb789;
     color: #eee
 }
 
@@ -835,7 +835,7 @@
 }
 
 .chart_container.light #chart_parameter_settings {
-    background-color: rgba(246, 246, 246, 0.8);
+    background-color: rgba(246, 246, 246, 1);
     border-color: #afb1b3;
     color: #393c40
 }

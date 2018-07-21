@@ -51,8 +51,8 @@ export class DarkTheme extends Theme {
         super();
         this._colors = [];
 
-        this._colors[Theme.Color.Positive] = "#19b34c";     // 上升柱
-        this._colors[Theme.Color.Negative] = "#990e0e";      // 下降柱
+        this._colors[Theme.Color.Positive] = "#2bb789";     // 上升柱
+        this._colors[Theme.Color.Negative] = "#f25656";      // 下降柱
         this._colors[Theme.Color.PositiveDark] = "#004718";
         this._colors[Theme.Color.NegativeDark] = "#3b0e08";
 
@@ -92,7 +92,6 @@ export class LightTheme extends Theme {
         this._colors[Theme.Color.Positive] = "#53b37b";
         this._colors[Theme.Color.Negative] = "#db5542";
         this._colors[Theme.Color.PositiveDark] = "#66d293";
-        this._colors[Theme.Color.PositiveDark] = "#000";
         this._colors[Theme.Color.NegativeDark] = "#ffadaa";
 
         this._colors[Theme.Color.Background] = "#f6f6f6";

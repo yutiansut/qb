@@ -328,8 +328,10 @@ export class CandlestickPlotter extends NamedObject {
         }
         if (strokePosRects.length > 0) {
             context.strokeStyle = theme.getColor(themes.Theme.Color.Positive);
+            context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
             Plotter.createRectangles(context, strokePosRects);
             context.stroke();
+            context.fill();
         }
         if (fillPosRects.length > 0) {
             context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
@@ -444,8 +446,10 @@ export class CandlestickHLCPlotter extends Plotter {
         }
         if (strokePosRects.length > 0) {
             context.strokeStyle = theme.getColor(themes.Theme.Color.Positive);
+            context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
             Plotter.createRectangles(context, strokePosRects);
             context.stroke();
+            context.fill();
         }
         if (fillPosRects.length > 0) {
             context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
@@ -819,8 +823,10 @@ export class IndicatorPlotter extends NamedObject {
         }
         if (strokePosRects.length > 0) {
             context.strokeStyle = theme.getColor(themes.Theme.Color.Positive);
+            context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
             Plotter.createRectangles(context, strokePosRects);
             context.stroke();
+            context.fill();
         }
         if (fillPosRects.length > 0) {
             context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
@@ -862,13 +868,17 @@ export class IndicatorPlotter extends NamedObject {
         }
         if (strokePosRects.length > 0) {
             context.strokeStyle = theme.getColor(themes.Theme.Color.Positive);
+            context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
             Plotter.createRectangles(context, strokePosRects);
             context.stroke();
+            context.fill();
         }
         if (strokeNegRects.length > 0) {
             context.strokeStyle = theme.getColor(themes.Theme.Color.Negative);
+            context.fillStyle = theme.getColor(themes.Theme.Color.Negative);
             Plotter.createRectangles(context, strokeNegRects);
             context.stroke();
+            context.fill();
         }
         if (fillPosRects.length > 0) {
             context.fillStyle = theme.getColor(themes.Theme.Color.Positive);
