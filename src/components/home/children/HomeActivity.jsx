@@ -33,19 +33,19 @@ export default class HomeActivity extends ExchangeViewBase {
 
   render() {
     let userToken = this.props.controller.userController.userToken
-     // console.log('登录', userToken)
+     // console.log('登录', userToken) /activity/fresh
     return (
       <div className="banner-wrap" id="active" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
         <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440}px`}}>
           <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en}
                alt=""
                className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} content`}/>
-          {this.props.controller.configController.store.state.language === "zh-CN" ? (
-            <Link href="/wlogin" className="content-link cn-content">
+          {userToken ? (
+            <a href="/wlogin" target="_blank" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
               <span className="banner-btn"></span>
-            </Link>
+            </a>
           ) : (
-            <Link to="/activity/fresh" className="content-link en-content">
+            <Link to="/wlogin" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
               <span className="banner-btn"></span>
             </Link>
           )}
