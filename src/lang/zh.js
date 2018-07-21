@@ -379,6 +379,7 @@ export default function zh(state) {
     'deal-identify': '身份验证',
     "deal-digital-tip": '此价格为挂单时的CNY/USD计价，只提供估值参考，以实际数字币价格为准',
     "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考',
+    "deal-num-err":'输入数量精度有误'
   };
   const user = {
     "user-score": "我的积分",

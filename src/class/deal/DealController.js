@@ -210,7 +210,23 @@ export default class DealController extends ExchangeControllerBase {
           });
       return
     }
-    // if(Number(params.price.multi(params.count)).formatFixNumberForAmount())
+    // 判断数量精度
+    let limitNum = params.count.toString().split('.');
+    let numLimited =  (params.price > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
+        || (params.price >= 0.1 && params.price <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+        || (params.price > 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+        || (params.price <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]));
+    if(!numLimited){
+      this.view.setState(
+          {
+            // dealPopMsg: this.intl.get('passError'),
+            dealPopMsg: this.view.intl.get('deal-num-err'),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+      return
+    }
     let result = await this.store.dealTrade(params);
     console.log('result',result)
     if(result === null){

@@ -296,7 +296,8 @@ export default function en(state) {
     "deal-digital-tip": 'The price shall be subject to the actual price of the digital currency',
     "deal-price-tip": 'Final trasaction price shall be subject to the actual price of the  digital currency',
     "deal-after": 'Then can trade',
-    "deal-login": 'Sign in/Sign up'
+    "deal-login": 'Sign in/Sign up',
+    "deal-num-err":'Error of input quantity accuracy'
   };
   const user = {
     "user-score": "My VIP Status",
