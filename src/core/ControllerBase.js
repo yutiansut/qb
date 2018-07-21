@@ -50,7 +50,7 @@ export default class ControllerBase {
     rsaPublicKeyFlag = true
   }
 
-  REAencrypt(data){
+  RSAencrypt(data){
     if(!rsaPublicKeyFlag){
       return 'please set rsa publickey in method RSAsetPublicKey'
     }
