@@ -335,6 +335,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 验证资金密码
   async verifyPass(fundPass) {
+    console.log(this.controller.RSAencrypt(fundPass));
     let result = await this.Proxy.verifyFundPass({
       userId: this.controller.userId,
       token: this.controller.token,

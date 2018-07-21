@@ -324,11 +324,13 @@ export default class Extract extends exchangeViewBase {
               {this.intl.get("asset-withdrawAmount")}
             </span>
             <div className="content">
-              <p className="limit">
-                {this.intl.get("asset-24hQuota")}：{Number(usedQuota)}/{
-                  totalQuota
-                }{" "}
-                BTC
+              <p className="limit clearfix">
+                <span className="asset-24hQuota">
+                  {this.intl.get("asset-24hQuota")}：{Number(usedQuota)}/{
+                    totalQuota
+                  }{" "}
+                  BTC
+                </span>
                 {totalQuota > 2 ? (
                   <span className="apply">
                     {this.intl.get("asset-limitApply")}

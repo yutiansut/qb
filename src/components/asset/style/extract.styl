@@ -159,16 +159,21 @@
         margin-bottom 0.45rem
         .content
           .limit
+            width 100%
             margin-bottom .14rem
             font-size 0.13rem
             color $normal-gray-color
             letter-spacing 0
             span
-              float right
               margin-right 0.1rem
               color $negative-color
+              &.asset-24hQuota
+                float left
+                color $normal-font-color
               &.apply
+                float right
                 color $normal-gray-color
+                margin-right 0
             a
               float right
           .input
@@ -219,9 +224,9 @@
             letter-spacing 0
           .set
             position absolute
-            width 0.84rem
+            width 1.84rem
             bottom 0
-            right -1rem
+            right -2rem
             font-size 0.14rem
       .handel
         position relative
