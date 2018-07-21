@@ -17,7 +17,7 @@ export default class LoginStore extends ExchangeStoreBase {
       }
       this.controller.loginUpdata(data);
     })
-    this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get()})
+    this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get(), os:3})
   }
 
   login(obj) { // 登陆接口
