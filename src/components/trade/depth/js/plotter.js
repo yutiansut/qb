@@ -165,7 +165,7 @@ export default class Plotter {
         ctx.fillStyle=Theme._color["scaleFontColor"];
         ctx.font=Theme._fonts;
         for(let i=1;i<=scaleXNum;i++){
-            let str=this.formatFloat(strX0+i*gapW*ratioStrX,2);
+            let str=this.formatFloat(strX0+i*gapW*ratioStrX,4);
             let strW=ctx.measureText(str).width;
             ctx.fillText(str, oX+i*gapW-strW/2, oY+scaleLength+17);
         }
@@ -282,14 +282,15 @@ export default class Plotter {
             //测量线文本
             let strX = (x - oX) * ratioStrX + strX0;
             let strY = (oY - y) * ratioStrY + strY0;
-            strX = this.formatFloat(strX, 2);
-            strY = this.formatFloat(strY, 0);
-            let strXW = oCtx.measureText(strX).width;
-            let strYW = oCtx.measureText(strY).width;
+
+            let strX_Tip = this.formatFloat(strX,4);
+            let strY_Tip = this.formatFloat(strY,0);
+            let strXW = oCtx.measureText(strX_Tip).width;
+            let strYW = oCtx.measureText(strY_Tip).width;
             oCtx.fillStyle = Theme._color["infoFontColor"];
             oCtx.font = Theme._fonts;
-            oCtx.fillText(strX, x - strXW / 2, oY + scaleLength + 17);
-            oCtx.fillText(strY, oX - scaleLength - strYW - 7, y + 6);
+            oCtx.fillText(strX_Tip, x - strXW / 2, oY + scaleLength + 17);
+            oCtx.fillText(strY_Tip, oX - scaleLength - strYW - 7, y + 6);
 
             //信息文本
             let strInfos = [];
@@ -331,8 +332,8 @@ export default class Plotter {
                     }
                 }
             }
-            oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 2) + "  " + strInfos[1] + this.formatFloat(strVol, 0) + "  "
-                + strInfos[2] + this.formatFloat(strAccu, 0), oX + 20, oY - chartHeight + 16);
+            oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
+                + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
 
         });
 
@@ -409,13 +410,13 @@ export default class Plotter {
         let maxStrXW=0;
         let maxStrYW=0;
         for(let i=0;i<asks.length;i++){
-            let xw=ctx.measureText(this.formatFloat(asks[i][0],2)).width;
+            let xw=ctx.measureText(this.formatFloat(asks[i][0],4)).width;
             xw>maxStrXW && (maxStrXW=xw);
             let yw=ctx.measureText(this.formatFloat(asks[i][2],0)).width;
             yw>maxStrYW && (maxStrYW=yw);
         }
         for(let i=0;i<bids.length;i++){
-            let xw=ctx.measureText(this.formatFloat(bids[i][0],2)).width;
+            let xw=ctx.measureText(this.formatFloat(bids[i][0],4)).width;
             xw>maxStrXW && (maxStrXW=xw);
             let yw=ctx.measureText(this.formatFloat(bids[i][2],0)).width;
             yw>maxStrYW && (maxStrYW=yw);

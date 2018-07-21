@@ -10,7 +10,7 @@ let Theme={
         scaleFontColor: "#aaa",                     // 坐标轴文本
         barFill1: "#129fcc",                        //买-柱状线
         barFill2: "#d84747",                        //卖-柱状线
-        infoFontColor: "#ccc",                      //左上方-鼠标提示文本
+        infoFontColor: "rgb(43, 183, 137)",       //左上方-鼠标提示文本
     },
     _fonts:"12px Tahoma",                               //字体
 };
