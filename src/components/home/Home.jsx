@@ -23,20 +23,23 @@ export default class Home extends exchangeViewBase {
     recommendController = new MarketController('recommend');
     // marketController = new MarketController();
     this.scrollMove = () => { // 滚动改变头部／客服／置顶
-      let headerName = document.getElementById('header'), activeHeight = document.getElementById('active')
+      let headerName = document.getElementById('header'), activeHeight = document.getElementById('active');
       let buttonTop = document.querySelector('.aside-nav-top');
       let buttonKf = document.querySelector('.aside-nav-desk');
       let buttonK = document.getElementById('udesk_container');
       let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-      if(scrollTop >= activeHeight.offsetHeight - 120) {
-        headerName.className = 'headerNav clearfix'
-      } else {
-        headerName.className = 'homeNav clearfix'
+      if (activeHeight) {
+        if(scrollTop >= activeHeight.offsetHeight - 120) {
+          headerName.className = 'headerNav clearfix'
+        } else {
+          headerName.className = 'homeNav clearfix'
+        }
       }
+
       if (scrollTop >= document.documentElement.clientHeight) {
         // console.log('true')
-        buttonTop.style.display = "block";
-        buttonKf.style.display = "block";
+        buttonTop && (buttonTop.style.display = "block");
+        buttonKf && (buttonKf.style.display = "block");
         (function(a,h,c,b,f,g){a["UdeskApiObject"]=f;a[f]=a[f]||function(){(a[f].d=a[f].d||[]).push(arguments)};g=h.createElement(c);g.async=1;g.charset="utf-8";g.src=b;c=h.getElementsByTagName(c)[0];c.parentNode.insertBefore(g,c)})(window,document,"script","http://assets-cli.udesk.cn/im_client/js/udeskApi.js","ud");
         ud({
           "code": "278eh9c7",
@@ -44,8 +47,8 @@ export default class Home extends exchangeViewBase {
         });
       } else {
         // console.log('false')
-        buttonTop.style.display = "none";
-        buttonKf.style.display = "none";
+        buttonTop && (buttonTop.style.display = "none");
+        buttonKf && (buttonKf.style.display = "none");
       }
     }
   }
