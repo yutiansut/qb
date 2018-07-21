@@ -264,6 +264,9 @@ export default class Plotter {
             let strY1=this.strY1;
             let scaleLength=this.scaleLength;
 
+            let bids=this.bids;
+            let asks=this.asks;
+
             if (x < oX || x > oX + chartWidth || y > oY || y < oY - chartHeight) {
                 oCanvas.style.cursor = "default";
                 return;
@@ -332,6 +335,7 @@ export default class Plotter {
                     }
                 }
             }
+
             oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
                 + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
 
