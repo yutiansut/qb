@@ -12,14 +12,6 @@ export default class MarketController extends ExchangeControllerBase {
     super.setView(view);
   }
 
-  async getRecommendData() {
-
-  }
-
-  async getPairData() {
-
-  }
-
 // 获取币种资料
   async getCoinInfo(coinId) {
     await this.store.getCoinInfo(coinId);
@@ -33,7 +25,6 @@ export default class MarketController extends ExchangeControllerBase {
   //获取getRecommendCoins
   async getRecommendCoins() {
     let recommendData = await this.store.getRecommendCoins()
-    // console.log(recommendData)
     this.view.setState({
       recommendData
     })
@@ -41,7 +32,6 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 切换市场
   async changeMarket(v) {
-    // let homeMarketPairData = this.store.state.allPairData.filter(vv => vv.market_name === v)[0].market_data;
     this.store.setSelecedMarket(v);
     this.store.setSort([], 0)
     let homeMarketPairData = await this.store.selectMarketData()
@@ -54,20 +44,16 @@ export default class MarketController extends ExchangeControllerBase {
       market: v,
       homeMarketPairData
     });
-    // this.store.state.market = v;
-    // this.store.state.homeMarketPairData = homeMarketPairData;
     if(this.view.state.query) {
       this.querySelectPair(this.view.state.query)
       return
     }
     this.tradePairChange(homeMarketPairData[0]);
-     // this.tradePairChange(homeMarketPairData[0]);
   }
 
   // 点击收藏
   collectMarket() {
     let homeMarketPairData = this.getCollectArr()
-    // console.log('collectMarket', homeMarketPairData)
     this.store.setSelecedMarket('收藏区');
     this.store.setHomeMarketPairData(homeMarketPairData);
     this.store.setSort([], 0)
@@ -85,14 +71,9 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 添加/取消收藏
   async addCollect(v, index, e) {
-    // console.log(e)
     e.preventDefault();
     e.stopPropagation();
-    // v.isFavorite = 1 - v.isFavorite
-    // console.log('收藏 0', v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
     await this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
-
-    // console.log('收藏 1', res)
   }
 
   get language() {
@@ -140,7 +121,6 @@ export default class MarketController extends ExchangeControllerBase {
       collectIdArr = await this.store.getFavoriteList(this.userController.userToken, this.userController.userId)
     }
     this.store.updateAllPairListFromCollect(collectIdArr)
-
     //更新视图层
     this.updateMarketAll([], 2)
   }
@@ -234,13 +214,11 @@ export default class MarketController extends ExchangeControllerBase {
   // 筛选功能
   filte(arr, value) {
     let result = this.filter(arr, item => item.coinName.toUpperCase().includes(value.toUpperCase()));
-    // console.log(result)
     return result;
   }
 
   // 点击收藏筛选数组
   getCollectArr() {
-    console.log('this.store.collectData', this.store.collectData)
     return this.store.collectData
   }
 
@@ -255,7 +233,6 @@ export default class MarketController extends ExchangeControllerBase {
       return
     //改变deal模块中的信息
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
-    // console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
     let  dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].icon,
