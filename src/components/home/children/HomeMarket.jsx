@@ -110,7 +110,7 @@ export default class HomeMarket extends ExchangeViewBase {
           </thead>
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
+            // console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
             return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
