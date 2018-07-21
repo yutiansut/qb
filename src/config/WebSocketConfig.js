@@ -36,8 +36,9 @@ export default {
         },
         login: {
           login: {ver: 1, op: 10, seq: 0, resOp: 11},//登录
-          loginOut: {ver: 1, op: 12, seq: 0, resOp: 13}//退出登录
-          },
+          loginOut: {ver: 1, op: 12, seq: 0, resOp: 13},//退出登录
+          loginOther: {ver: 1, op: 120, seq: 0, resOp: 120}//退出登录
+        },
         asset: {
           userAssetUpdate: { ver: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
         },

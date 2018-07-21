@@ -40,10 +40,9 @@ export default class LoginController extends ExchangeControllerBase {
   //登录
   login(account, code, type, mode, captchaId, captchaCode, deviceFlag1, deviceFlag2){
     // console.log('112登陆', code, type, this.view.state.titleIndex)
-    // if (this.view.state.titleIndex === 1){
-    //   code = Crypto(code, )
-    // }
-    //112登陆 405810 0
+    if (this.view.state.titleIndex === 1){
+      code = this.RSAencrypt(code)
+    }
     let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
     let keyArr = ['phone','email'];
     obj[keyArr[type]] = account

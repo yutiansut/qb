@@ -17,6 +17,9 @@ export default class LoginStore extends ExchangeStoreBase {
       }
       this.controller.loginUpdata(data);
     })
+    this.WebSocket.general.on("loginOther", data => {
+      this.controller.loginUpdata(data);
+    });
     this.Storage.userToken.get() && this.WebSocket.general.emit('login', {'token': this.Storage.userToken.get(), os:3})
   }
 
@@ -33,5 +36,4 @@ export default class LoginStore extends ExchangeStoreBase {
     // let result =
     return await this.Proxy.getAward(obj);
   }
-
 }
