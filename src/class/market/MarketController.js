@@ -205,12 +205,12 @@ export default class MarketController extends ExchangeControllerBase {
     if(this.view.state.query) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
-      console.log('queryValuequeryValue',queryValue)
+    
       if(queryValue.split('/').length === 1){
-        console.log('queryValuequeryValue',queryValue,this.view.state.marketDataHandle,this.view.state.marketDataHandle.indexOf(queryValue),pairMsg.pairNameCoin)
-
-        this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue][0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue][0]}`);
+        this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue].sort((a,b)=>a>b)[0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]}`);
         this.view.setState({query:queryValue})
+        // console.log('shunxuuuuuuuuuuuuuuuuuuu',pairMsg.pairNameCoin[queryValue],pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0])
+  
       }
       this.changeMarket(queryValue.split('/')[1]);
       return
