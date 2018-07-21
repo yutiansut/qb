@@ -30,6 +30,8 @@ export default class Plotter {
         this.strX1=0;
         this.strY1=0;
 
+        this.rangeX = 0.8;   // 数据过滤：[中间价*(1-rangeX),中间价*(1+rangeX)]
+
         this.initOverlay=false;
 
         if(!Plotter.instance){
@@ -377,6 +379,26 @@ export default class Plotter {
             return a[0]-b[0];
         });
 
+        //数据过滤rangeX
+        let mX = asks[0][0];
+        let rangeX = this.rangeX;
+        for(let i=0;i<bids.length;i++){
+            if(bids[i][0]>mX*(1+rangeX) || bids[i][0]<mX*(1-rangeX)){
+                bids.splice(i,1);
+                i--;
+            }
+        }
+        for(let i=0;i<asks.length;i++){
+            if(asks[i][0]>mX*(1+rangeX) || asks[i][0]<mX*(1-rangeX)){
+                asks.splice(i,1);
+                i--;
+            }
+        }
+        if(bids.length<2 || asks.length<2){
+            bids=[[0,0],[0,0]];
+            asks=[[0,0],[0,0]];
+        }
+
         //计算累计量,[价格，成交量，累计成交量]
         bids[bids.length-1][2]=bids[bids.length-1][1];
         for(let i=bids.length-1;i>0;i--){
@@ -425,6 +447,8 @@ export default class Plotter {
             let yw=ctx.measureText(this.formatFloat(bids[i][2],0)).width;
             yw>maxStrYW && (maxStrYW=yw);
         }
+
+        //console.log(asks,bids,"=====================");
 
         //
         this.asks=asks;
