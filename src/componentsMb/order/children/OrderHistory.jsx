@@ -15,12 +15,8 @@ export default class OrderHistory extends exchangeViewBase{
       idArray: [],
       coinSelect: this.intl.get('all'),     // SelectButton选中币种
       marketSelect: this.intl.get('all'),   // SelectButton选中市场
-      showCoinSelect: this.intl.get('all'),
-      showMarketSelect: this.intl.get('all'),
       coinArray: [],    // SelectButton币种数组
       marketArray: [],  // SelectButton市场数组
-      showCoinArray: [],
-      showMarketArray: [],
       hideOther: 0,     // SelectButton隐藏
       orderType: 2,
       orderStatus: [2, 3, 5, 6, 7],
@@ -57,21 +53,11 @@ export default class OrderHistory extends exchangeViewBase{
     const {pairIdMsg} = this.props;
     let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
     let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
-    let showCoinArray = coinArray && coinArray.map(function(item) {
-      return item.toUpperCase()
-    })
-    let showMarketArray = marketArray && marketArray.map(function(item) {
-      return item.toUpperCase()
-    })
     marketArray && marketArray.unshift(this.intl.get('all'));
     coinArray && coinArray.unshift(this.intl.get('all'));
-    showCoinArray && showCoinArray.unshift(this.intl.get('all'));
-    showMarketArray && showMarketArray.unshift(this.intl.get('all'));
     this.setState({
       coinArray,
       marketArray,
-      showCoinArray,
-      showMarketArray
     })
   }
   getOrderList() {
@@ -132,8 +118,6 @@ export default class OrderHistory extends exchangeViewBase{
       idArray: [],
       coinSelect: this.intl.get('all'),
       marketSelect: this.intl.get('all'),
-      showCoinSelect: this.intl.get('all'),
-      showMarketSelect: this.intl.get('all'),
       orderType: 2,
       totalDeal: true,
       reseted: true,
@@ -159,20 +143,20 @@ export default class OrderHistory extends exchangeViewBase{
   changeCoin(e) {
     const {pairIdMsg} = this.props;
     let marketArray = [];
-    if(e.toLowerCase() === this.state.coinSelect){
+    if(e === this.state.coinSelect){
       return
     }
-    let coinValue = (e === this.intl.get('all')) ? '' : e.toLowerCase();
+    let coinValue = (e === this.intl.get('all')) ? '' : e;
     let marketValue = (this.state.marketSelect === this.intl.get('all')) ? '' : this.state.marketSelect;
     let idArray = [];
     let hideOther = 1;
     if (coinValue) {
-      marketArray = pairIdMsg.pairNameCoin[coinValue];
+      marketArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()];
       // marketArray.unshift(this.intl.get('all'));
-      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue][marketValue])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]));
+      marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue.toLowerCase()][marketValue.toLowerCase()])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue.toLowerCase()]));
     }
     else {
-      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue])) || (idArray = []);
+      marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue.toLowerCase()])) || (idArray = []);
     // && (marketArray = pairIdMsg.pairNameMarket[marketValue])
       marketArray = Object.keys(pairIdMsg.pairIdMarket)
       coinValue = this.intl.get('all');
@@ -183,28 +167,28 @@ export default class OrderHistory extends exchangeViewBase{
           marketArray,
           idArray,
           coinSelect: coinValue,
-          hideOther,
-          showCoinSelect: e
+          hideOther
         }
     )
   }
-  // 选择市场
+
   changeMarket(e) {
     const {pairIdMsg} = this.props;
     let coinArray = [];
-    if(e.toLowerCase() === this.state.marketSelect){
+    if(e === this.state.marketSelect){
       return
     }
-    let marketValue = (e === this.intl.get('all')) ? '' : e.toLowerCase();
+    let marketValue = (e === this.intl.get('all')) ? '' : e;
     let coinValue = (this.state.coinSelect === this.intl.get('all')) ? '' : this.state.coinSelect;
     let idArray = [];
     let hideOther = 1;
     if (marketValue) {
-      coinArray = pairIdMsg.pairNameMarket[marketValue];
-      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue][coinValue])) || (idArray = Object.values(pairIdMsg.pairIdMarket && pairIdMsg.pairIdMarket[marketValue]));
+      coinArray = pairIdMsg.pairNameMarket[marketValue.toLowerCase()];
+      coinValue && (idArray.push(pairIdMsg.pairIdMarket[marketValue.toLowerCase()][coinValue.toLowerCase()])) || (idArray = Object.values(pairIdMsg.pairIdMarket && pairIdMsg.pairIdMarket[marketValue.toLowerCase()]));
     }
     else {
-      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue]) || (idArray = []);
+    // && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]))
+      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) || (idArray = []);
       coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)
       marketValue = this.intl.get('all')
     }
@@ -214,8 +198,7 @@ export default class OrderHistory extends exchangeViewBase{
           coinArray,
           idArray,
           marketSelect: marketValue,
-          hideOther,
-          showMarketSelect: e
+          hideOther
         }
     )
   }
@@ -247,19 +230,19 @@ export default class OrderHistory extends exchangeViewBase{
             <h1>{this.intl.get("pair")}</h1>
             <div className="choose-section">
               <SelectButton
-                title={this.state.showCoinSelect}
+                title={this.state.coinSelect.toUpperCase()}
                 type="main"
                 className="select"
                 onSelect={(e) => this.changeCoin(e)}
-                valueArr={this.state.showCoinArray}
+                valueArr={this.state.coinArray && this.state.coinArray.map(v=>v.toUpperCase())}
               />
               <em>——</em>
               <SelectButton
-                title={this.state.showMarketSelect}
+                title={this.state.marketSelect.toUpperCase()}
                 type="main"
                 className="select"
                 onSelect={(e) => this.changeMarket(e)}
-                valueArr={this.state.showMarketArray}
+                valueArr={this.state.marketArray && this.state.marketArray.map(v=>v.toUpperCase())}
               />
             </div>
             <h1>{this.intl.get("type")}</h1>
