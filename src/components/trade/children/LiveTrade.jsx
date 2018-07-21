@@ -72,9 +72,9 @@ export default class LiveTrade extends ExchangeViewBase{
                 ((this.state.titleSelect === 'all' && this.state.liveSellArray.length - 13 <= index) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length - 26 <= index)) && (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</td>
-                    <td style={{color : '#F25656 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal'}) || Number(v.price).format({number: 'digital'})) }</td>
+                    <td style={{color : '#F25656 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal', style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal',style:{name:'usd'}}) || Number(v.price).format({number: 'digital'})) }</td>
                     <td>{Number(v.amount).formatFixNumberForAmount(v.price)}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(Number(v.priceCN).multi(v.amount)).format({number:'legal'}) || (this.state.unitsType === 'USD' && Number(Number(v.priceEN).multi(v.amount)).format({number:'legal'}) || Number(Number(v.price).multi(v.amount)).format({number:'property'})) }</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(Number(v.priceCN).multi(v.amount)).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(Number(v.priceEN).multi(v.amount)).format({number:'legal',style:{name:'usd'}}) || Number(Number(v.price).multi(v.amount)).format({number:'property'})) }</td>
                   </tr>
               )
             )}
@@ -88,9 +88,9 @@ export default class LiveTrade extends ExchangeViewBase{
                 ((this.state.titleSelect === 'all' && index < 13) || (this.state.titleSelect === 'buy' && index < 24)) && (
                   <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`${this.intl.get('order-b')}${index + 1}`}</td>
-                    <td style={{color : '#2BB789 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal'}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal'}) || Number(v.price).format({number: 'digital'})) }</td>
+                    <td style={{color : '#2BB789 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal',style:{name:'usd'}}) || Number(v.price).format({number: 'digital'})) }</td>
                     <td>{Number(v.amount).formatFixNumberForAmount(v.price)}</td>
-                    <td>{this.state.unitsType === 'CNY' && (Number(Number(v.priceCN).multi(v.amount)).format({number:'legal'})) || (this.state.unitsType === 'USD' && (Number(Number(v.priceEN).multi(v.amount)).format({number:'legal'})) || (Number(Number(v.price).multi(v.amount)).format({number:'property'}))) }</td>
+                    <td>{this.state.unitsType === 'CNY' && (Number(Number(v.priceCN).multi(v.amount)).format({number:'legal',style:{name:'cny'}})) || (this.state.unitsType === 'USD' && (Number(Number(v.priceEN).multi(v.amount)).format({number:'legal',style:{name:'usd'}})) || (Number(Number(v.price).multi(v.amount)).format({number:'property'}))) }</td>
                   </tr>
               )
             )}
