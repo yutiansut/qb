@@ -154,11 +154,13 @@
         height 0.34rem
         margin-right 0.2rem
     .history
+      display flex
+      justify-content flex-start
       width 9.52rem
       padding 0.44rem 0 0
       .title
         float left
-        width 1.58rem
+        width 2.08rem
         height 100%
         font-size 0.15rem
         color $normal-font-color
@@ -207,6 +209,12 @@
             overflow hidden
             white-space nowrap
             text-overflow ellipsis
+          &.receive
+            i
+              width 2rem
+          &.amount
+            i
+              width 0.89rem
           a
             text-decoration underline
           span

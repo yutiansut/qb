@@ -31,8 +31,8 @@ export default class Charge extends exchangeViewBase {
       page: 1,
       tradePair: null
     };
-    //绑定view
     controller.initHistory(true);
+    //绑定view
     //初始化数据，数据来源即store里面的state
     let {
       walletList,
@@ -292,11 +292,11 @@ export default class Charge extends exchangeViewBase {
                         index
                       ) => (
                           <tr key={index}>
-                            <td>{orderTime}</td>
-                            <td>{coinName}</td>
-                            <td>{count}</td>
+                            <td>{orderTime.toDate()}</td>
+                            <td>{coinName.toUpperCase()}</td>
+                            <td className="amount"><i>{count}</i></td>
                             <td>{"—"}</td>
-                            <td>{receiveAddress}</td>
+                            <td className="receive"><i>{receiveAddress}</i></td>
                             <td>
                               <a
                                 href={blockSite}
