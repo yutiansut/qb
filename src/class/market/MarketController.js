@@ -176,7 +176,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
     this.TradePlanController && this.TradePlanController.setPriceFlag();
-    this.setDealMsg();
+    this.setDealMsg(true);
     this.view.setState({
       query:''
     })
@@ -228,7 +228,7 @@ export default class MarketController extends ExchangeControllerBase {
 
 
   //为交易模块提供价格以及交易对的信息
-  setDealMsg() {
+  setDealMsg(flag = false) {
     if(!this.store.state.tradePair)
       return
     //改变deal模块中的信息
@@ -238,13 +238,12 @@ export default class MarketController extends ExchangeControllerBase {
         coinIcon: tradePairMsg[0].icon,
         prices: {
           price: tradePairMsg[0].price,
-          priceCN: tradePairMsg[0].priceCN,
-          priceEN: tradePairMsg[0].priceEN,
+          priceCN: tradePairMsg[0].priceCN.toFixed(2),
+          priceEN: tradePairMsg[0].priceEN.toFixed(2),
         }
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
-    console.log('MSG2222222',this.TradeOrderListController.changeFlag)
-    this.TradePlanController && this.TradeOrderListController && this.TradeOrderListController.changeFlag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
+    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg)
   }
 

@@ -35,7 +35,10 @@ export default class DealController extends ExchangeControllerBase {
         Market: market,
         Coin: coin,
         // prices,
-        priceBank: prices,
+        priceBank: {
+          CNY: prices.priceCN,
+          USD: prices.priceEN
+        },
         // inputBuyFlag: false,
         // inputSellFlag: false,
       }
@@ -186,7 +189,7 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
-    if(params.priceType === 0 && params.funpass === ''){
+    if(params.interval === 0 && params.priceType === 0 && params.funpass === ''){
       this.view.setState(
           {
             dealPopMsg: this.view.intl.get("deal-pass-empty"),
