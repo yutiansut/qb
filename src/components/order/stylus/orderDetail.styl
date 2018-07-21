@@ -88,14 +88,29 @@
 	z-index: 8888;
 	.history-order-detail-content
 		width 8.5rem
+		max-height 80vh
 		position absolute
-		left 3.5rem
-		top 1.62rem
+		left 50%
+		top 50%
+		transform translate(-50%, -50%)
 		background $normal-black-color
 		border-radius .06rem
 		padding .3rem
 		z-index 8889
 		color $normal-white-color-a9
+		overflow-y: auto
+		&::-webkit-scrollbar-button
+			display none
+		&::-webkit-scrollbar
+			position relative
+			width .03rem
+			height 100%
+		&::-webkit-scrollbar-track
+			width .03rem
+			background #222730
+		&::-webkit-scrollbar-thumb
+			width .03rem
+			background #8C8F93
 		.detail-content-title
 			position relative
 			h3
