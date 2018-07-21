@@ -85,9 +85,9 @@ export default class NoticeController extends ExchangeControllerBase {
   changeNotice(v) { // 点击头部更改列表页信息
     let userNotice = this.view.state.userNotice,
         idArr = [],
-        selectIndex = 0;
+        selectIndex = 0
     if (v.isRead === 0){
-      userNotice.list.forEach(v => {
+      userNotice.list && userNotice.list.forEach(v => {
         idArr.push(v.id)
       })
       selectIndex = idArr.indexOf(v.id)
@@ -98,7 +98,7 @@ export default class NoticeController extends ExchangeControllerBase {
 
   changeAllNotice() { // 点击头部全部已读更改列表页信息
     let userNotice = this.view.state.userNotice
-    userNotice.list.forEach(v => {
+    userNotice.list && userNotice.list.forEach(v => {
       v.isRead = 1
     })
     this.view.setState({userNotice})
