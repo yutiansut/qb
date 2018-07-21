@@ -114,6 +114,7 @@ export default class MarketController extends ExchangeControllerBase {
     // v.isFavorite = 1 - v.isFavorite
     // console.log('收藏 0', v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
     await this.store.changeFavorite(v.tradePairId, this.userController.userId, v.isFavorite, this.userController.userToken)
+
     // console.log('收藏 1', res)
   }
 
@@ -217,9 +218,9 @@ export default class MarketController extends ExchangeControllerBase {
     }
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    }, () => this.view.name === 'tradeMarket' && this.setDealMsg());
+    }, () => this.view.name === 'tradeMarket' && type > 0 &&this.setDealMsg());
 
-    type > 1 && this.view.name === 'tradeMarket' && this.tradePairChange(homeMarketPairData[0]);
+    type !== 1 && this.view.name === 'tradeMarket' && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据
@@ -320,6 +321,7 @@ export default class MarketController extends ExchangeControllerBase {
     if(!this.store.state.tradePair)
       return
     //改变deal模块中的信息
+    console.log('aaaaaa' ,this.store.state.tradePair, this.store.state.homeMarketPairData)
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
     // console.log('this.store.state.homeMarketPairData11111', this.store.state.homeMarketPairData, this.store.state.tradePair,tradePairMsg)
     let  dealMsg = {
