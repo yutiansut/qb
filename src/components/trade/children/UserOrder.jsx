@@ -143,7 +143,7 @@ export default class userOrder extends ExchangeViewBase {
             <h3>{this.intl.get('order-history')}</h3>
             {this.state.historyOrder && this.state.historyOrder.length && <a href="/worder/history/">{this.intl.get('seeMore')}</a>}
         </div>
-          {this.state.historyOrder && this.state.historyOrder.length && <table className='trade-current-table'>
+          {this.state.historyOrder && this.state.historyOrder.length !== 0 && <table className='trade-current-table'>
             <thead>
             <tr>
               {this.state.historyOrderHead.map((v, index) => {

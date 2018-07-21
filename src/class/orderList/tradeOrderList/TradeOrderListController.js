@@ -65,13 +65,14 @@ export default class TradeOrderListController extends OrderListController {
     this.store.setRoom(room)
   }
   
-  getNewPrice(v){
+  getNewPrice(v,flag){
     this.view.setState(
         {
          prices:v.prices
         }
-    )
-    this.getDepth(v.tradePair)
+    );
+    console.log('flagggggggg',flag)
+    flag && this.getDepth(v.tradePair)
   }
 
 }

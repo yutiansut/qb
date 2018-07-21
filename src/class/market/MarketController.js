@@ -233,7 +233,7 @@ export default class MarketController extends ExchangeControllerBase {
       return
     //改变deal模块中的信息
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
-    let  dealMsg = {
+    let dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].icon,
         prices: {
@@ -244,7 +244,7 @@ export default class MarketController extends ExchangeControllerBase {
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
-    this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg)
+    this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg,flag)
   }
 
   setUnitsType(v) {

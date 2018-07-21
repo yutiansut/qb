@@ -268,7 +268,7 @@ export default function en(state) {
     "order-reset-sell": "Undo sell",
     "order-reset-all": "Undo all",
     "order-export": 'Export',
-    "cancel-successful": 'Cancellation failed',
+    "cancel-successful": 'Cancellation success',
     'order-bs': 'Bid/Ask',
     'order-b':'buy',
     'order-s':'sell',
