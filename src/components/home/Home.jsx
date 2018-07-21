@@ -22,17 +22,13 @@ export default class Home extends exchangeViewBase {
     super(props);
     recommendController = new MarketController('recommend');
     // marketController = new MarketController();
-  }
-
-  componentDidMount() { // 滚动事件 改变头部
-    super.componentDidMount();
-    let headerName = document.getElementById('header'), activeHeight = document.getElementById('active')
-    let buttonTop = document.querySelector('.aside-nav-top');
-    let buttonKf = document.querySelector('.aside-nav-desk')
-    let buttonK = document.getElementById('udesk_container')
-    window.addEventListener('scroll', () => {
+    this.scrollMove = () => { // 滚动改变头部／客服／置顶
+      let headerName = document.getElementById('header'), activeHeight = document.getElementById('active')
+      let buttonTop = document.querySelector('.aside-nav-top');
+      let buttonKf = document.querySelector('.aside-nav-desk');
+      let buttonK = document.getElementById('udesk_container');
       let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-      if(scrollTop >= activeHeight.offsetHeight) {
+      if(scrollTop >= activeHeight.offsetHeight - 120) {
         headerName.className = 'headerNav clearfix'
       } else {
         headerName.className = 'homeNav clearfix'
@@ -50,9 +46,18 @@ export default class Home extends exchangeViewBase {
         // console.log('false')
         buttonTop.style.display = "none";
         buttonKf.style.display = "none";
-
       }
-    })
+    }
+  }
+
+  componentDidMount() { // 滚动事件 改变头部
+    super.componentDidMount();
+    window.removeEventListener("scroll", this.scrollMove);
+    window.addEventListener("scroll", this.scrollMove);
+  }
+
+  componentWillUnmount() {
+
   }
 
   render() {
