@@ -25,7 +25,7 @@ export default function en(state) {
     readMore: "Read more",
     yes: "Yes",
     no: "No",
-    login: "Sing up",
+    login: "Sign in",
     charge: "Deposit",
     email: "Email Address",
     phone: "Mobile",
