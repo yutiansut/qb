@@ -110,7 +110,7 @@ export default class HomeMarket extends ExchangeViewBase {
           </thead>
           <tbody>
           {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            // console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
+            console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
             return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
@@ -130,7 +130,7 @@ export default class HomeMarket extends ExchangeViewBase {
                     style: {name: 'cny'}
                   }) || Number(v.priceEN || 0).format({number: 'legal', style: {name: 'usd'}})}</span></td>
                 <td>{Number(v.turnover).format({number: 'property'}) || 0}</td>
-                <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.price_to_cny) || 0}</td>
+                <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
                 <td className={`home-updown ${v.rise < 0 ? 'down-i' : 'up-i'}`}>{Number(v.rise).toPercent()}</td>
                 <td>
                   {/* 宽高等样式在homeMakt.styl里设置 */}

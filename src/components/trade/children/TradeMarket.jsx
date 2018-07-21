@@ -127,7 +127,7 @@ export default class TradeMarket extends ExchangeViewBase {
                   {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                     <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>
                   </td>) || null}
-                  <td className="pop-children rightpop-children trade-remind">交易量：{v.volume}</td>
+                  <td className="pop-children rightpop-children trade-remind">交易量：{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
                 </tr>
               )
             })}
