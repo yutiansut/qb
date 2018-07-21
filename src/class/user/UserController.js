@@ -164,6 +164,7 @@ export default class UserController extends ExchangeControllerBase {
       })
       // console.log('绑定成功', this.view.state)
       this.getCaptchaVerify()
+      this.getUserCreditsNum()
       return
     }
 
@@ -176,6 +177,7 @@ export default class UserController extends ExchangeControllerBase {
         verifyList
       })
       this.getCaptchaVerify()
+      this.getUserCreditsNum()
       // console.log('绑定成功', this.view.state)
     }
 
@@ -335,6 +337,9 @@ export default class UserController extends ExchangeControllerBase {
       showGoogle: result ? true : false,
       userInfo: Object.assign(this.view.state.userInfo, {googleAuth: 0})
     })
+    if (result === null) {
+      this.getUserCreditsNum()
+    }
     // if (result === null) {this.view.setState({showGoogle: false})}
     console.log('验证谷歌', result)
   }

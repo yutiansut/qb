@@ -26,17 +26,30 @@
       .trade-market-item-active
         color $normal-white-color
         border-bottom .02rem solid $normal-white-color
-    div
+    .img-div
       position absolute
       right .2rem
-      top 0.15rem
+      top 0.13rem
+      cursor pointer
+      img
+        opacity .5
+
+    .input-div
+      display flex
+      height 0.4rem
+      width 2.92rem
+      padding 0 0.16rem
+      background #2f3335
+      line-height 0.4rem
       p
-        position relative
-        height .2rem
+        //position relative
+        //height .2rem
+        //top -.05rem
+
         &:before
           position absolute
-          top .035rem
-          left .05rem
+          top .15rem
+          left .16rem
           width .12rem
           height .12rem
           content ''
@@ -44,18 +57,31 @@
           background-size .12rem .12rem
         img
           position absolute
-          top .035rem
-          right .05rem
+          top .15rem
+          right .16rem
           width .1rem
           height .1rem
           cursor pointer
         input
-          width .8rem
+          //width .8rem
+          //height .2rem
+          //padding-left .2rem
+          //background $exchange-search-bg
+          //color $normal-white-color
+          //font-size .12rem
+
+          width 2.6rem
           height .2rem
           padding-left .2rem
-          background $exchange-search-bg
+          //background $line-dark
           color $normal-white-color
           font-size .12rem
+
+          //display: flex;
+          //height: 0.4rem;
+          //width: 2.6rem;
+          //padding-left: 0.2rem;
+          //background: #2f3335
       img
         //display none
         width .12rem

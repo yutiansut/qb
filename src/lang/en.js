@@ -210,6 +210,7 @@ export default function en(state) {
     "market-currencyInfo": "Currency details",
     "market-volume": "24h Volume",
     "market-volume-h5": "24h Vol",
+    "market-search": "Search the whole currency"
   };
   const notice = {
     "notice-about": "About Us",
@@ -547,7 +548,7 @@ export default function en(state) {
     "login-inputVerifyPhoneAndEmail": "Please fill in correct mobile phone number",
     "login-other": "Log on in other places, please log in again",
     "login-err": "Login failed, please try again",
-    "login-miss": "登录信息已失效,请重试"
+    "login-miss": "The login information has failed, please try again"
   };
   const help = {
     "help-fees": "Fees",

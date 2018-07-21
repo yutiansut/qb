@@ -80,7 +80,7 @@ export default class TradeMarket extends ExchangeViewBase {
     return (
       <div className='trade-market'>
         <div className='trade-market-list'>
-          <ul>
+          {!this.state.searchInput && <ul>
             {controller.token && (<li onClick={this.collectMarket} className={`${this.state.collectActive ? 'trade-market-item-active' : ''}`}>{this.intl.get('market-favorite')}</li>) || null}
             {this.state.marketDataHandle.map((v, index) => {
               return (
@@ -91,16 +91,17 @@ export default class TradeMarket extends ExchangeViewBase {
                 </li>
               )
             })}
-          </ul>
-          <div>
-            <img src="/static/img/search_bai.svg" alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}} style={{opacity: '.5'}}/>
-            <p className={this.state.searchInput ? '' : 'hide'}>
+          </ul>}
+          <div className={this.state.searchInput ? 'input-div' : 'img-div'}>
+            <img src="/static/img/search_bai.svg" alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}}/>
+            {this.state.searchInput && <p>
               <input type="text"
+                     placeholder={this.intl.get("market-search")}
                      onChange={this.onInputValue.bind(this)}
                      onKeyDown={this.onEnter.bind(this)}
               />
               <img src="/static/img/guanbi_bai.svg" alt="" onClick={() => {this.setState({searchInput: false, searchValue: ''})}}/>
-            </p>
+            </p>}
           </div>
         </div>
         <div className="scroll-bar">
