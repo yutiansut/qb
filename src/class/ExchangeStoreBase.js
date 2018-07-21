@@ -52,7 +52,7 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   startWebsocket(websocket) {
-    console.log('开启11', websocket)
+    // console.log('开启11', websocket)
     this.WebSocket.general.on('connect', data => {
       this.Storage.websocketToken.set(data.token)
     })
