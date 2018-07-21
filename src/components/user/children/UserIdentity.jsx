@@ -270,7 +270,7 @@ export default class userIdentity extends exchangeViewBase {
                    disabled ={this.state.userAuth.number ? true : false}
                    onInput={value => this.numberInput(value)}
                    onBlur={this.checkNumber}/>
-            <em className="number-err">{this.state.userAuth.number && this.state.errNum}</em>
+            <em className="number-err">{this.state.numberValue && this.state.errNum}</em>
           </div>
         </div>
         <div className="photo-identify clearfix">

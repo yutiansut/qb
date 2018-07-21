@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
 import "../stylus/integration.styl"
+import Pagination from '../../../common/component/Pagination/index.jsx'
 
 export default class userIntegration extends exchangeViewBase {
   constructor(props) {
@@ -9,7 +10,9 @@ export default class userIntegration extends exchangeViewBase {
     this.state = {
       scoreEnd: 0,
       scoreStart: 0,
-      scoreIndex: 0
+      scoreIndex: 0,
+      page: 1,
+      totalPage: 0
     }
     const {controller} = props
     //绑定view
@@ -48,12 +51,13 @@ export default class userIntegration extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await Promise.all([this.initData(), this.getUserCredits(), this.getUserCreditsNum()])
+    await Promise.all([this.initData(), this.getUserCredits(0), this.getUserCreditsNum()])
     let obj = this.checkNum(this.state.userCreditsNum)
     this.setState({
       scoreEnd: obj.checkEnd,
       scoreStart: obj.checkStart,
-      scoreIndex: obj.checkIndex
+      scoreIndex: obj.checkIndex,
+      totalPage: this.state.userCredits.totalCount
     })
   }
 
@@ -116,16 +120,25 @@ export default class userIntegration extends exchangeViewBase {
                 <th>{this.intl.get("time")}</th>
               </tr>
               </thead>
-              <tbody className={this.state.userCredits.length ? '' : 'hide'}>
-                {this.state.userCredits.map((v, index) => (<tr key={index}>
+              <tbody className={Object.keys(this.state.userCredits).length && this.state.userCredits.list && this.state.userCredits.list.length ? '' : 'hide'}>
+                {Object.keys(this.state.userCredits).length && this.state.userCredits.list && this.state.userCredits.list.map((v, index) => (<tr key={index}>
                   <td>+{v.gain}</td>
                   <td>{v.operation}</td>
                   <td>{v.createdTime.toDate('yyyy-MM-dd HH:mm:SS')}</td>
-                </tr>))}
+                </tr>)) || null}
               </tbody>
             </table>
           </div>
         </div>
+        {Object.keys(this.state.userCredits).length && <Pagination total={this.state.totalPage || this.state.userCredits.totalCount}
+          pageSize={10}
+          showTotal={true}
+          onChange={page => {
+            this.setState({ page });
+            this.getUserCredits(page - 1)
+          }}
+          currentPage={this.state.page}
+          showQuickJumper={true}/>}
       </div>
     );
   }

@@ -78,8 +78,8 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({userCreditsNum})
   }
 
-  async getUserCredits() { // 获取用户积分信息列表
-    let userCredits = await this.store.userCredits();
+  async getUserCredits(page) { // 获取用户积分信息列表
+    let userCredits = await this.store.userCredits(page);
     this.view.setState({userCredits})
   }
 
@@ -249,7 +249,7 @@ export default class UserController extends ExchangeControllerBase {
     let twoVerifyState = twoVerifyArr[position-1]
     let twoVerifyUser = {}
     twoVerifyUser[twoVerifyState] = verifyType
-    let userInfo = Object.assign(this.view.state.userInfo, twoVerifyUser)
+    let userInfo = this.view.state.userInfo
     let verifyList = this.view.state.verifyList
     let result = await this.store.Proxy.setTwoVerify({
       "userId": this.store.uid,
@@ -266,6 +266,7 @@ export default class UserController extends ExchangeControllerBase {
     if (result === null) {
       verifyList[position-1].contentList.forEach(v=>v.flag=false)
       verifyList[position-1].contentList[changeVerifyArr[verifyType]].flag = true
+      userInfo = Object.assign(this.view.state.userInfo, twoVerifyUser)
       this.getCaptchaVerify()
     } else {
       this.getCaptchaVerify()

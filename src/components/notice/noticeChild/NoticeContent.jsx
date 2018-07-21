@@ -75,7 +75,7 @@ export default class noticeContent extends exchangeViewBase {
 
         <div className="news-wrap" >
           <h1>{this.intl.get("information")}</h1>
-          <h2 className={this.state.infoList.length ? 'hide' : ''}>暂无资讯</h2>
+          <h2 className={this.state.infoList.length ? 'hide' : ''}>{this.intl.get("user-none")}</h2>
           <dl className={this.state.infoList.length ? '' : 'hide'}>
             <dt>
               <i>{this.intl.get("notice-title")}</i>

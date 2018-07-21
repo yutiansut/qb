@@ -92,25 +92,6 @@ export default class userNotice extends exchangeViewBase {
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>
-        {/*<table>*/}
-          {/*<thead>*/}
-            {/*<tr>*/}
-              {/*<th>{this.intl.get("notice-title")}</th>*/}
-              {/*<th>{this.intl.get("time")}</th>*/}
-            {/*</tr>*/}
-          {/*</thead>*/}
-          {/*<tbody className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? '' : 'hide'}`}>*/}
-          {/*{Object.keys(this.state.userNotice).length && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (*/}
-            {/*<tr key={index} onClick={value => this.showContent(v, index)}>*/}
-              {/*<td >*/}
-                {/*<b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>*/}
-                {/*{this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}*/}
-              {/*</td>*/}
-              {/*<td>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</td>*/}
-            {/*</tr>))*/}
-            {/*}*/}
-          {/*</tbody>*/}
-        {/*</table>*/}
         <div className="table-div">
           <div className="table-title">
             <span>{this.intl.get("notice-title")}</span>

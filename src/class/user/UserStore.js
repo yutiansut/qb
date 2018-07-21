@@ -17,7 +17,7 @@ export default class UserStore extends ExchangeStoreBase {
       userAuth: {}, // 认证信息
       userCreditsNum: "", // 用户积分
       loginList: [], // 登录日志
-      userCredits: [], // 用户积分列表
+      userCredits: {}, // 用户积分列表
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
@@ -145,6 +145,36 @@ export default class UserStore extends ExchangeStoreBase {
     return loginlist
   }
 
+  async userCredits(page) { // 获取用户积分列表
+    let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.uid, page, "pageSize":10, "token": this.token});
+    // let userCredits = userCreditsCon.list ? userCreditsCon.list : []
+    //['每日登录', 'CNY充值', 'BTC充值', '交易额', '网站改进意见采纳', '注册并实名认证', '邮箱认证', '绑定手机', '添加谷歌验证', '首次充值BTC', '首次充值CNY', '首次交易', 'USD充值', '首次充值USD']
+    let userCreditsArr = [
+      this.controller.view.intl.get("user-credits1"),
+      this.controller.view.intl.get("user-credits2"),
+      this.controller.view.intl.get("user-credits3"),
+      this.controller.view.intl.get("user-credits4"),
+      this.controller.view.intl.get("user-credits5"),
+      this.controller.view.intl.get("user-credits6"),
+      this.controller.view.intl.get("user-credits7"),
+      this.controller.view.intl.get("user-credits8"),
+      this.controller.view.intl.get("user-credits9"),
+      this.controller.view.intl.get("user-credits10"),
+      this.controller.view.intl.get("user-credits11"),
+      this.controller.view.intl.get("user-credits12"),
+      this.controller.view.intl.get("user-credits13"),
+      this.controller.view.intl.get("user-credits14"),
+      this.controller.view.intl.get("user-credits15"),
+    ]
+    console.log('积分列表', userCreditsCon)
+    userCreditsCon && userCreditsCon.list.forEach(v => {
+      v.operation = userCreditsArr[v.id]
+    })
+    // if(userCredits.errCode)
+    //   userCredits = []
+    this.state.userCredits = userCreditsCon;
+    return userCreditsCon
+  }
 
   async ipList() { // 获取ip白名单
     let ipListCon = await this.Proxy.getIpList({"userId": this.uid, "token": this.token});
@@ -154,15 +184,6 @@ export default class UserStore extends ExchangeStoreBase {
     return ipList
   }
 
-  async userCredits() { // 获取用户积分列表
-    let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.uid, "page":0, "pageSize":10, "token": this.token});
-    let userCredits = userCreditsCon.list ? userCreditsCon.list : []
-    console.log('积分', userCredits)
-    // if(userCredits.errCode)
-    //   userCredits = []
-    this.state.userCredits = userCredits;
-    return userCredits
-  }
 
   async googleSecret() { // 获取谷歌验证密钥
     let googleSecret = await this.Proxy.getGoogle({"userId": this.uid, "token": this.token})

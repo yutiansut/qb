@@ -58,9 +58,9 @@ export default class homeNotice extends exchangeViewBase {
         <h3>
           {this.props.controller.configData.language === 'zh-CN' ? activityInfo.abstractCn : activityInfo.abstractEn}
         </h3>
-        <h4>
-          作者
-        </h4>
+        {/*<h4>*/}
+          {/*作者*/}
+        {/*</h4>*/}
         <div className="content">
           {this.props.controller.configData.language === 'zh-CN' ? activityInfo.contentCn : activityInfo.contentEn}
           <img src={activityInfo.titleImage} alt=""/>

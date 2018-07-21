@@ -533,6 +533,22 @@ export default function zh(state) {
     "user-log-10": "系统日志",
     "user-log-11": "联系人管理",
 
+    "user-credits1": "每日登录",
+    "user-credits2": "人民币充值",
+    "user-credits3": "BTC 充值",
+    "user-credits4": "交易额",
+    "user-credits5": "网站改进意见采纳",
+    "user-credits6": "注册并实名认证",
+    "user-credits7": "邮箱认证",
+    "user-credits8": "添加手机验证",
+    "user-credits9": "添加谷歌验证",
+    "user-credits10": "首次充值 BTC",
+    "user-credits11": "首次充值 CNY",
+    "user-credits12": "首次交易",
+    "user-credits13": "首次发红包",
+    "user-credits14": "美元充值",
+    "user-credits15": "首次充值 USD",
+
     // h5
     "user-verify-state0": "未认证",
     "user-verify-state1": "审核中",

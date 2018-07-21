@@ -460,6 +460,23 @@ export default function en(state) {
     "user-log-9": "Fund cipher setting",
     "user-log-10": "system log",
     "user-log-11": "contact manager",
+
+    "user-credits1": "Daily Login",
+    "user-credits2": "CNY Deposit",
+    "user-credits3": "BTC Deposit",
+    "user-credits4": "Trade Amount",
+    "user-credits5": "Site Improvements suggestions",
+    "user-credits6": "Register and real-name verification",
+    "user-credits7": "Email authentication",
+    "user-credits8": "Add mobile authentication",
+    "user-credits9": "Add Google authentication",
+    "user-credits10": "First time BTC deposit",
+    "user-credits11": "First time CNY deposit",
+    "user-credits12": "First Trade",
+    "user-credits13": "First BitGift",
+    "user-credits14": "USD deposit",
+    "user-credits15": "First USD deposit",
+
     // h5
     "user-verify-state0": "Uncertified",
     "user-verify-state1": "Checking",

@@ -31,7 +31,7 @@ export default class User extends exchangeViewBase {
           <li><NavLink activeClassName="active" to={`${match.url}/contact`}>{this.intl.get("notice-contact")}</NavLink></li>
           <li><NavLink activeClassName="active" to={`${match.url}/apply`}>{this.intl.get("footer-request")}</NavLink></li>
         </ul>
-        <div className="notice-content fl">
+        <div className="notice-content fl" style={{minHeight: `${window.innerHeight - 2.1 * 100}px`}}>
           <Switch>
             <Route path={`${match.url}/content`} component={({match, location}) => (
               <NoticeContent controller={controller} match={match} location={location}/>
