@@ -49,7 +49,9 @@ export default class OrderDetails extends exchangeViewBase {
     const type = this.props.type;
     const tradePairName = this.props.orderInfo.tradePairName.toUpperCase();
     const tradePairArr = tradePairName.split('/');
-
+    setTimeout(() => {
+      console.log(orderDetail);
+    }, 5000);
     return(
       <div className="order-details">
         <div className="order-details-header">
@@ -77,13 +79,13 @@ export default class OrderDetails extends exchangeViewBase {
             <span className="fr">{type === "current" ? orderDetail.count : orderDetail.doneCount}</span>
           </div>
           <div className="info-item clearfix">
-            <span className="fl">{type === "current" ? this.intl.get("order-deal-money") : this.intl.get("dealTurnover")}</span>
+            <span className="fl">{type === "current" ? this.intl.get("deal-trunover") : this.intl.get("dealTurnover")}</span>
             <span className="fl">({tradePairArr[1]})</span>
-            <span className="fr">{orderDetail.dealedMoney}</span>
+            <span className="fr">{type === "current" ? parseFloat(orderDetail.count) * parseFloat(orderDetail.price) : orderDetail.dealedMoney}</span>
           </div>
           {orderDetail.orderStatus !== 0 && <div className="info-item clearfix">
             <span className="fl">{this.intl.get("fee")}</span>
-            <span className="fl">({tradePairArr[0]})</span>
+            <span className="fl">({orderDetail.orderType ? tradePairArr[1] : tradePairArr[0]})</span>
             <span className="fr">{orderDetail.fee}</span>
           </div>}
           <div className="info-item clearfix">
