@@ -80,18 +80,29 @@ export default class DealController extends ExchangeControllerBase {
 
   // 数字币计价 初始值获取
   setPriceInit(v) {
+    console.log('vvvvvvvvvvvvvvvvvvv')
     // let priceInit;
     // if(this.view.state.PriceUnit === 'CNY'){
     //   priceInit = v.price
     // }
-    // this.view.setState({
-    //   priceInit:v.price,
-    //   buyMax:this.view.state.buyWallet / v,
-    //   sellMax:this.view.state.sellWallet
-    // })
-    this.view.state.priceInit = v.price;
-    this.view.state.buyMax = this.view.state.buyWallet / v.price;
-    this.view.state.sellMax = this.view.state.sellWallet;
+    this.view.setState({
+      priceInit:v.price,
+      buyMax:this.view.state.buyWallet / v.price,
+      inputSellNum: 0,
+      inputBuyNum: 0
+      // sellMax:this.view.state.sellWallet
+    })
+    // this.view.state.priceInit = v.price;
+    // this.view.state.buyMax = this.view.state.buyWallet / v.price;
+    // this.view.state.sellMax = this.view.state.sellWallet;
+  }
+  // 设置市价交易的最大数量值
+  setMarketPriceMaxNum(v){
+    if(this.view.state.DealEntrustType === 0)
+      return
+    this.view.setState({
+      buyMax: Number(Number(this.view.state.buyWallet).div(v.price))
+    })
   }
 
   changeUnit(unit, init) {
@@ -148,8 +159,13 @@ export default class DealController extends ExchangeControllerBase {
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
     (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / v}))
     if (this.view.state.buyNumFlag && (t === 0)) {
-      let limit = v.split('.')[1] && v.split('.')[1].length || 0;
-      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(v)).toFixedWithoutUp(8 - limit)})
+      // let limit;
+      // v > 100 && (limit = 2);
+      // v <= 100 && v > 0.1 && (limit = 4);
+      // v <= 0.1 && v > 0.01 && (limit = 6);
+      // v <= 0.01 && (limit = 8);
+      // let limit = v.split('.')[1] && v.split('.')[1].length || 0;
+      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(v))})
     }
     // if(this.view.state.sellNumFlag && (t === 1)){
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
@@ -191,16 +207,6 @@ export default class DealController extends ExchangeControllerBase {
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // this.view.state.PriceUnit || this.view.state.Market
     };
-    if(params.interval === 0 && params.priceType === 0 && emptyCharge === ''){
-      this.view.setState(
-          {
-            dealPopMsg: this.view.intl.get("deal-pass-empty"),
-            dealPassType:'passive',// 弹窗类型倾向
-            dealPass:true,// 下单弹窗
-          }
-      )
-      return
-    }
     //   价格判断不能为空
     if(!params.price && params.priceType === 0){
       this.view.setState(
@@ -240,6 +246,16 @@ export default class DealController extends ExchangeControllerBase {
             dealPass:true,// 下单弹窗
           }
       );
+      return
+    }
+    if(params.interval === 0 && params.priceType === 0 && emptyCharge === ''){
+      this.view.setState(
+          {
+            dealPopMsg: this.view.intl.get("deal-pass-empty"),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      )
       return
     }
     let result = await this.store.dealTrade(params);
@@ -317,11 +333,12 @@ export default class DealController extends ExchangeControllerBase {
 
   //设置可用额度
   setWallet(sellWallet, buyWallet) {
-    // console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
+    console.log('setWallet(buyWallet, sellWallet)', buyWallet, sellWallet, this.view)
     this.store.setWallet(buyWallet, sellWallet)
     this.view.setState({
       sellWallet,
-      buyWallet
+      buyWallet,
+      sellMax:sellWallet
     })
   }
 

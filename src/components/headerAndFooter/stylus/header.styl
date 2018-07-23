@@ -2,10 +2,10 @@
 
 .tradeNav, .headerNav, .homeNav
   width 14.4rem
-  height .5rem
-  padding 0 .28rem
+  height 50px
+  padding 0 28px
   background $exchange-color
-  line-height .5rem
+  line-height 50px
   position fixed
   top 0
   z-index 999
@@ -22,6 +22,7 @@
       margin-right .4rem
       a
         color $normal-white-color-a
+        font-size 14px
         &:hover
           color $normal-white-color
       &.header-nav-active
@@ -33,9 +34,9 @@
         margin-right 1.2rem
         a
           display block
-          width 1.01rem
-          height .5rem
-          background $logo-index no-repeat 0 .15rem / 1.01rem .2rem
+          width 101px
+          height 50px
+          background $logo-index no-repeat 0 15px / 101px 20px
       &.select-list
         position relative
         &:hover
@@ -44,10 +45,10 @@
           &:after
             position absolute
             top: 50%
-            right -.1rem
+            right -10px
             content: ''
-            width .08rem
-            height .05rem
+            width 8px
+            height 5rpx
             background-image $icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
@@ -55,10 +56,10 @@
         &:after
           position absolute
           top: 50%
-          right -.1rem
+          right -10px
           content: ''
-          width .08rem
-          height .05rem
+          width 8px
+          height 5px
           background-image $icon-select
           background-size cover
           transform translateY(-50%)
@@ -66,14 +67,14 @@
         .select-router
           position absolute
           display none
-          left -.18rem
-          width 1rem
+          left -18px
+          width 100px
           background $exchange-color
           border 1px solid $exchange-bg
           li
             width 100%
-            height .4rem
-            line-height .4rem
+            height 40px
+            line-height 40pxm
             text-align center
             margin-right 0
             &:nth-of-type(1)
@@ -97,7 +98,7 @@
       float left
       color $normal-white-color-a
       &.language-li
-        width .8rem
+        width 80px
         &:hover
           color $normal-white-color
           .language-ul
@@ -105,10 +106,10 @@
           p:after
             position absolute
             top 50%
-            right -.1rem
+            right -10px
             content ''
-            width .08rem
-            height .05rem
+            width 8px
+            height 5px
             background-image $icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
@@ -119,10 +120,10 @@
           &:after
             position absolute
             top 50%
-            right -.1rem
+            right -10px
             content ''
-            width .08rem
-            height .05rem
+            width 8px
+            height 5px
             background-image $icon-select
             background-size cover
             transform translateY(-50%)
@@ -132,9 +133,9 @@
           box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
           li
             cursor pointer
-            height .4rem
-            padding 0 .05rem
-            line-height .4rem
+            height 40px
+            padding 0 5px
+            line-height 40px
             text-align center
             corsor pointer
             &:hover
@@ -149,37 +150,37 @@
           cursor pointer
           img
             position relative
-            top -.01rem
-            width .16rem
-            height .16rem
+            top -1px
+            width 16px
+            height 16px
             vertical-align middle
             opacity .5
             &:hover
               opacity 1
           i
             position relative
-            right .08rem
-            top .08rem
+            right 8px
+            top 8px
             display inline-block
-            min-width .15rem
-            height .15rem
-            padding .02rem
+            min-width 15px
+            height 15px
+            padding 2px
             background $negative-color
             color $normal-white-color
             border-radius 50%
-            line-height .12rem
-            font-size .12rem
+            line-height 12px
+            font-size 12px
             &.hide
               display none
         .new-li-content
           position absolute
           left 50%
           transform translateX(-50%)
-          width 3.3rem
-          border-radius (.02rem)
+          width 330px
+          border-radius (2px)
           background $exchange-color
           border 1px solid $normal-black-color
-          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.3)
+          box-shadow  0 0 10px 0 rgba(0,0,0,0.3)
           //&:after
           //  position absolute
           //  top -.06rem
@@ -194,9 +195,9 @@
           //  -webkit-transform rotate(-45deg)
           //  content ''
           p
-            height .4rem
-            line-height .4rem
-            padding 0 .1rem
+            height 40px
+            line-height 40px
+            padding 0 10px
             color $normal-font-color
             background $normal-black-color
             span
@@ -207,31 +208,31 @@
                 cursor pointer
                 color $main-color
           ul
-            max-height 1.5rem
-            padding .1rem
+            max-height 150px
+            padding 10px
             overflow-y auto
             li
-              height .3rem
-              line-height .3rem
+              height 30px
+              line-height 30px
               cursor pointer
               span
                 display inline-block
                 float left
-                width 1.2rem
-                max-width 1.2rem
+                width 120px
+                max-width 120px
                 overflow hidden
                 white-space nowrap
                 text-overflow ellipsis
               b
                 float right
           div
-            padding .3rem 0
+            padding 30px 0
             text-align center
             color $normal-font-color
           .check-all
             display block
-            height .36rem
-            line-height .36rem
+            height 36px
+            line-height 36px
             text-align center
             color $normal-font-color
             background $normal-black-color
@@ -239,14 +240,14 @@
               color $main-color
 
       &.login-li
-        margin 0 .3rem 0 .35rem
+        margin 0 30px 0 35px
         a
           color $normal-white-color-a
           &:hover
             color $normal-white-color
       &.user-li
         position relative
-        margin 0 .3rem 0 .35rem
+        margin 0 30px 0 35px
         p
           position relative
           cursor pointer
@@ -256,10 +257,10 @@
           &:after
             position absolute
             top 50%
-            right -.1rem
+            right -10px
             content ''
-            width .08rem
-            height .05rem
+            width 8px
+            height 5px
             background-image $icon-select
             background-size cover
             transform translateY(-50%)
@@ -268,12 +269,12 @@
           left 50%
           transform translateX(-50%)
           display none
-          width 1.2rem
+          width 120px
           background $exchange-color
           li
-            height .4rem
-            padding 0 .05rem
-            line-height .4rem
+            height 40px
+            padding 0 5px
+            line-height 40px
             text-align center
             color $normal-white-color-a
             border-bottom 1px solid $exchange-bg
@@ -291,10 +292,10 @@
           p:after
             position absolute
             top 50%
-            right -.1rem
+            right -10px
             content ''
-            width .08rem
-            height .05rem
+            width 8px
+            height 5px
             background-image $icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)

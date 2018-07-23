@@ -10,6 +10,7 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      dbPrePass:false,
       dealPopMsg:'',
       dealPassType:'positi',// 弹窗类型倾向
       dealPass:false,// 下单弹窗
@@ -90,6 +91,7 @@ export default class TradePlan extends ExchangeViewBase {
     // let wallet = this.state[diffArr[dealType].wallet];
     // let price =  dealType ?  this.state.inputSellFlag ? ( this.state.inputSellValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit) :this.state.inputBuyFlag ? ( this.state.inputBuyValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
     let maxNum = this.state[diffArr[dealType].max];
+    // console.log('maxNummmmm',maxNum)
    
     // if(value < this.state.coinMin){
     //   console.log('this.state.coinMinthis.state.coinMinthis.state.coinMinthis.state.coinMin',this.state.coinMin)
@@ -197,19 +199,47 @@ export default class TradePlan extends ExchangeViewBase {
       fundPwdIntervalWindowFlag: true
     })
   }
-  async setPassSubmit(){
+  async setPassSubmit(e){
+    e.preventDefault();
+    e.stopPropagation();
     let type, pwd;
     type = this.state.fundPwdIntervalClick;
     pwd = this.state.setPass;
+    this.setState(
+        {
+          dbPrePass: true
+        }
+    )
+    if(pwd === ''){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get('deal-pass-empty'),
+            dealPassType: 'passive',// 弹窗类型倾向
+            dealPass: true,// 下单弹窗
+          }
+      );
+      return
+    }
     let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
     result === null && this.setState(
-        {fundPwdInterval: type, fundPwdIntervalShow: type, fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false, setPass: ''}
+        {
+          fundPwdInterval: type,
+          fundPwdIntervalShow: type,
+          fundPwdIntervalWindowFlag: false,
+          fundPwdIntervalSetFlag: false,
+          setPass: '',
+          dealPopMsg: this.intl.get('user-setSucc'),
+          dealPassType: 'positi',// 弹窗类型倾向
+          dealPass: true,// 下单弹窗
+          dbPrePass: false
+        }
     );
     result && result.errCode === 'PWD_ERROR' && this.setState(
         {
           dealPopMsg:this.intl.get('passError'),
           dealPassType:'passive',// 弹窗类型倾向
           dealPass:true,// 下单弹窗
+          dbPrePass: false
         }
     )
   }
@@ -282,7 +312,7 @@ export default class TradePlan extends ExchangeViewBase {
                       <p className='set-pwd-input'>
                         <span>{this.intl.get('fundPass')}:</span>
                         <input type="password" className='set-pwd' onChange={this.changeSetPass.bind(this)} value={this.state.setPass} autoFocus/>
-                        <input type="button" value={this.intl.get('user-submit')} className='set-pwd-sub' onClick={this.setPassSubmit.bind(this)}/>
+                        <input type="button" value={this.intl.get('user-submit')} className='set-pwd-sub' onClick={this.setPassSubmit.bind(this)} style={{cursor: 'pointer'}} disabled={this.state.dbPrePass}/>
                       </p>
                     </div>
                 ) || this.state.fundPwdIntervalWindow.map((v, index) => {
@@ -296,7 +326,7 @@ export default class TradePlan extends ExchangeViewBase {
           </div>
         </div>
         <div className='deal-pop'>
-          {this.state.dealPass && <TradePopup theme={this.state.dealPassType} msg={this.state.dealPopMsg} onClose={() => {console.log(1231111);this.setState({ dealPass: false });}} className='deal-pop-location'/>}
+          {this.state.dealPass && <TradePopup theme={this.state.dealPassType} msg={this.state.dealPopMsg} onClose={() => {this.setState({ dealPass: false });}} className='deal-pop-location'/>}
         </div>
         <div className='deal-login-shadow' style={{display:this.props.controller.userController.userId ? 'none' : 'block'}}>
           <p>

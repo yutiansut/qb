@@ -151,7 +151,7 @@ export default class UserOrderListController extends OrderListController {
       return;
   }
   async getOrderDetail(id) {
-    let orderDetail = await this.store.getOrderDetail(id);
+    let orderDetail =  await this.store.getOrderDetail(id);
     this.view.setState({
       detailFlag: true,
       orderDetail
