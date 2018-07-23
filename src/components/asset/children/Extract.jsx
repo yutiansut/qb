@@ -632,9 +632,6 @@ export default class Extract extends exchangeViewBase {
               }
               this.setState({ orderTip: false });
             }}
-            autoClose={
-              this.state.orderTipContent !== this.intl.get("asset-auth-tip")
-            }
           />
         )}
       </div>
