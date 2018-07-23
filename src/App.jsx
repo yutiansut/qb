@@ -273,7 +273,7 @@ export default class App extends Component {
       { path: "/wnotice/content/detail", component: NoticeDetail },
       { path: "/wnotice", component: Notice },
       { path: "/help", component: Help },
-      { path: "/activity", component: Activity },
+      // { path: "/activity", component: Activity },
       { path: "/wuserNotice", component: UserNotice, auth: true }
     ];
   }

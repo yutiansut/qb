@@ -151,7 +151,7 @@ export default class App extends Component {
       { path: "/mlogin", component: LoginComponent },
       { path: "/mlogin/:uid", component: LoginComponent },
       { path: "/mfindPass", component: ForgetPassComponent },
-      { path: "/mgenrealize", component: Gener },
+      // { path: "/mgenrealize", component: Gener },
       { path: "/mhelp", component: HelpComponent },
       { path: "/mwallet", component: AssetComponent, auth: true },
       { path: "/morder", component: OrderManageCompoment, auth: true },

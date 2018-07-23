@@ -23,7 +23,8 @@ export default class HomeActivity extends ExchangeViewBase {
     let {history,activityController}=this.props;
     let lang = activityController.configController.store.state.language;
     return (
-      <div className="banner-wrap-mb" onClick={() => history.push("/mgenrealize/invite")}>
+      <div className="banner-wrap-mb">
+        {/*<div className="banner-wrap-mb" onClick={() => history.push("/mgenrealize/invite")}>*/}
           <img src={lang === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en} alt=""/>
         <div alt="" className="banner-img"
                style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`}}/>
