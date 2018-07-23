@@ -242,7 +242,7 @@ export default class DealController extends ExchangeControllerBase {
       return
     }
     let result = await this.store.dealTrade(params);
-    console.log('result',result)
+    console.log('result',result);
     if(result === null){
       this.view.setState(
           {
@@ -253,6 +253,17 @@ export default class DealController extends ExchangeControllerBase {
             inputBuyNum: 0,
           }
       );
+    }
+    if(result && result.errCode === "ErrCodeUnknown"){
+      this.view.setState(
+          {
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+          }
+      )
     }
     if(result && (result.ret === 1416 || result.ret === 1412)){
       this.view.setState(
