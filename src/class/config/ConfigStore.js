@@ -1,12 +1,12 @@
 import ExchangeStoreBase from '../ExchangeStoreBase'
 
-const EXCHANGE_NAME_CNY = '币荣';
+const EXCHANGE_NAME_CNY = 'QB';
 // const EXCHANGE_NAME_USD = 'CoinRising';
 // const EXCHANGE_URl = 'www.coinrising.com';
 const EXCHANGE_NAME_USD = 'QB';
 const EXCHANGE_URl = 'qb.com';
-const EXCHANGE_Apply_EMAIL = 'business@coinrising.com';
-const EXCHANGE_CONTACT_EMAIL = 'support@coinrising.com';
+const EXCHANGE_Apply_EMAIL = 'business@qb.com';
+const EXCHANGE_CONTACT_EMAIL = 'support@qb.com';
 const EXCHANGE_ADDR = 'Kemp House 152 -160 City Road, London';
 const EXCHANGE_SERVICE_PHONE = '010-53348151'
 const EXCHANGE_SERVICE_QQ = '3310267657';
