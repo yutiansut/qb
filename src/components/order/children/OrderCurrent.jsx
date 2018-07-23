@@ -308,7 +308,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.props.controller.cancelOrder(orderId, opType, dealType, tradePairId)
   }
   changePage(page){
-    const params = this.view.state.searchSaveFlag ? {
+    const params = this.state.searchSaveFlag ? {
       idArray: this.state.idArray,
       orderType: this.state.orderType,
       orderStatus: this.state.orderStatus,

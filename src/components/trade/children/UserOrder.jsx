@@ -191,24 +191,24 @@ export default class userOrder extends ExchangeViewBase {
         <div>
           {this.renderCurrentOrder()}
           {this.renderHistoryOrder()}
-          <div className='trade-order-shadow' style={{display: this.state.detailFlag ? 'block' : 'none'}}>
+          {this.state.detailFlag && <div className='trade-order-shadow' style={{display: this.state.detailFlag ? 'block' : 'none'}}>
             <div className='trade-order-detail'>
               <h3>{this.intl.get('orderDetail')}</h3>
               <div className='trade-order-content'>
                 <div className='trade-order-info'>
-                  <p>{this.state.orderDetail.doneCount}</p>
+                  <p>{Number(this.state.orderDetail.doneCount).formatFixNumberForAmount(this.state.orderDetail.price)}</p>
                   <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{this.state.orderDetail.dealedMoney}</p>
+                  <p>{Number(this.state.orderDetail.dealedMoney).format({number:'property'})}</p>
                   <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{this.state.orderDetail.price}</p>
+                  <p>{Number(this.state.orderDetail.price).format({number: 'digital'})}</p>
                   <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{this.state.orderDetail.fee}</p>
+                  <p>{Number(this.state.orderDetail.fee).format({number: 'property'})}</p>
                   <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && (this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]).toUpperCase()}</span>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default class userOrder extends ExchangeViewBase {
               </div>
               <div className='trade-order-close' onClick={()=> this.setState({detailFlag: false})}>{this.intl.get('close')}</div>
             </div>
-          </div>
+          </div>}
           <div className='reset-pop'>
             {this.state.resetPopFlag && <TradePopup  msg={this.intl.get('cancel-successful')} onClose={() => {this.setState({ resetPopFlag: false })}} className='reset-pop-location'/>}
           </div>
