@@ -8,17 +8,19 @@
 import WebSocketPool from '../libs/WebSocket'//引入webscoket
 import MessageHandler from '../messageHandler'
 
-let host,//主机
+let protocol,//协议
+  host,//主机
   port//端口
 
 const WEB_SOCKET = {
   install(ServerConfig, webSocketList) {
     host = ServerConfig.wshost
     port = ServerConfig.wsport
+    protocol = ServerConfig.wSecure && 'wss' || 'ws';
 
     webSocketList.forEach(v => {
       WEB_SOCKET[v.name] = async params => {
-        let url = v.url && `ws://${host}:${port}${v.url}` || `ws://${host}:${port}`
+        let url = v.url && `${protocol}://${host}:${port}${v.url}` || `ws://${host}:${port}`
         if (params) (url += `?`) && Object.keys(params).forEach((key, index) => (url += `${key}=${params[key]}`) && Object.keys(params).length - 1 !== index && (url += '&'))
         let size = v.size || 1
         let webSocketPool = WebSocketPool()

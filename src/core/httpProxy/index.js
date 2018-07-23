@@ -8,7 +8,7 @@
 import Fetch from "../libs/Fetch";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
 
-let host, port, HttpList;
+let host, port, HttpList, protocol;
 
 const formatParams = req => {
   if (req.url.path.indexOf(":") > 0) {
@@ -18,7 +18,7 @@ const formatParams = req => {
     req.url.path = `${url}${req.data.params[replaceKey]}`;
     delete req.data.params[replaceKey];
   }
-  req.url.path && (req.url = `http://${req.url.host}:${req.url.port}${req.url.path}`);
+  req.url.path && (req.url = `${req.url.protocol}://${req.url.host}:${req.url.port}${req.url.path}`);
   if (req.data && req.data.method === "post" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.data.body = JSON.stringify(req.data.params));
   if (req.data && req.data.method === "get" && req.data.params)
@@ -31,6 +31,7 @@ const formatParams = req => {
 const HTTP_PROXY = {
   setConfig(HttpConfig, ServerConfig){
     HttpList = HttpConfig;
+    protocol = ServerConfig.hSecure && 'https' || 'http';
     host = ServerConfig.host;
     port = ServerConfig.port;
   },
@@ -40,7 +41,7 @@ const HTTP_PROXY = {
       this.Proxy[v.name] = async params => {
         let req = {},
           res = {};
-        req.url = {host, port}
+        req.url = {host, port, protocol}
         req.url.path = v.data.url
         let data = JSON.parse(JSON.stringify(v.data));
         delete data.url
