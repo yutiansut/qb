@@ -31,7 +31,7 @@ export default class homeNotice extends ExchangeViewBase {
 
   async componentDidMount() {
     await this.getNoticeCon(0, 5);
-    let result = Object.keys(this.state.noticeList).length && this.state.noticeList.data
+    let result = Object.keys(this.state.noticeList).length && this.state.noticeList.data || []
     if (Object.keys(this.state.noticeList).length) {
       this.setState(
         {

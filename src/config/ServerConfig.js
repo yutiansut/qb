@@ -7,8 +7,9 @@ export default {
   // host: '192.168.55.104', //架构http主机地址
   // host: '192.168.55.108', //肖宇http主机地址
   // host: '192.168.55.111', //书寒http主机地址
-  // port: 90, //架构主机端口
   port: 80, //测试,书寒主机端口
+  // port: 90, //架构主机端口
+
 
   // wSecure: true,//正式websocket开启wss
   // wshost:'www.qb.com', //正式websocket主机地址

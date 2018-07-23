@@ -177,7 +177,7 @@ export default class MarketStore extends ExchangeStoreBase {
     //根据选择市场从pair里拿到id，再从allPairData中取出数据
     let pairMsg = await this.getPairMsg()
     // console.log('selectMarketData 0 ', JSON.stringify(this.state.allPairData))
-    let coinNameList = pairMsg.pairNameMarket[this.selecedMarket]
+    let coinNameList = pairMsg.pairNameMarket[this.selecedMarket] || []
     this.state.homeMarketPairData = coinNameList.map(v => this.state.allPairData.find(vv => vv.tradePairId === pairMsg.pairIdMarket[this.selecedMarket][v]))
     // console.log('selectMarketData 1 ', coinNameList, JSON.stringify(this.state.homeMarketPairData))
     return this.state.homeMarketPairData
