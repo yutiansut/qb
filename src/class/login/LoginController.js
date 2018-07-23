@@ -82,7 +82,7 @@ export default class LoginController extends ExchangeControllerBase {
   async clearLoginInfo() { // 退出登陆
     this.store.loginOutRemind()
     this.userController.clearUserInfo()
-    window.location.href = '/whome'
+    window.location.href = '/'
   }
 
   async loginUpdata(obj) { // 监听退出消息
@@ -130,7 +130,7 @@ export default class LoginController extends ExchangeControllerBase {
         // console.log('登录view', this.view)
         // this.view.history.push('/wlogin')
         this.view.history.push({
-          pathname: '/wlogin',
+          pathname: this.view.state.to,
           query: { titleIndex: 1 }
         })
         // this.view.setState({ titleIndex: 1})

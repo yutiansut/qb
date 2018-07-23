@@ -34,7 +34,7 @@ export default class Login extends exchangeViewBase {
       showTwoVerify: false,
       verifyType: "", // 密码登录两步认证弹窗
       checkState: true, // checkbox判断
-      from: props.location.state && props.location.state.from.pathname || '/whome'
+      from: props.location.state && props.location.state.from.pathname || '/mhome'
     };
     const {controller} = props
     //绑定view
@@ -92,8 +92,8 @@ export default class Login extends exchangeViewBase {
   }
 
   canClick() {
-    if (this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
-    if (this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
+    if (this.state.titleIndex === 0 && this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
+    if (this.state.titleIndex === 1 && this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false
   }
 
