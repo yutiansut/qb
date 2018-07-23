@@ -271,7 +271,7 @@ export default class userSafeCenter extends exchangeViewBase {
                 <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
                 <span>
                   {item.name}
-                  {item.imgFlag && <img src={this.props.controller.configController.language === 'zh-CN' ? '/static/img/user/recommend_cn.svg' : '/static/img/user/recommend_en.svg'}
+                  {item.imgFlag && <img src={this.props.controller.configController.language === 'zh-CN' ? '/static/img/user/recommend_cn.svg' : '/static/img/user/recommendEn.svg'}
                                         className={this.props.controller.configController.language === 'zh-CN' ? 'img-cn' : 'img-en'} alt="" />}
                 </span>
               </dd>))}

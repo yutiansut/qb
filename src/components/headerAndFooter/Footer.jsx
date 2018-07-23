@@ -67,7 +67,7 @@ export default class Footer extends ExchangeViewBase {
     return (
       <div className="footer-wrap">
         <div>
-          <Link to='/whome' className="home-img"><img src="/static/img/logo_footer.png" alt="" /></Link>
+          <Link to='/whome' className="home-img"><img src="/static/img/home/logo_footer.svg" alt="" /></Link>
           <ul>
             {this.footerArray.map((item, index) => (<li key={index}>
               <Link to={item.to}>{item.label}</Link>
