@@ -281,7 +281,7 @@ export default class TradePlan extends ExchangeViewBase {
                       </div>
                       <p className='set-pwd-input'>
                         <span>{this.intl.get('fundPass')}:</span>
-                        <input type="password" className='set-pwd' onChange={this.changeSetPass.bind(this)} value={this.state.setPass}/>
+                        <input type="password" className='set-pwd' onChange={this.changeSetPass.bind(this)} value={this.state.setPass} autoFocus/>
                         <input type="button" value={this.intl.get('user-submit')} className='set-pwd-sub' onClick={this.setPassSubmit.bind(this)}/>
                       </p>
                     </div>
