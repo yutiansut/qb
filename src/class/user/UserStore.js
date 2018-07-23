@@ -115,7 +115,7 @@ export default class UserStore extends ExchangeStoreBase {
     let currentLogin = currentLoginCon ? currentLoginCon.list : []
     // if(currentLogin.errCode)
     //   currentLogin = []
-    console.log('当前登录', currentLoginCon)
+    // console.log('当前登录', currentLoginCon)
     this.state.currentLogin = currentLogin
     return currentLogin
   }
@@ -169,7 +169,7 @@ export default class UserStore extends ExchangeStoreBase {
       this.controller.view.intl.get("user-credits14"),
       this.controller.view.intl.get("user-credits15"),
     ]
-    console.log('积分列表', userCreditsCon)
+    // console.log('积分列表', userCreditsCon)
     userCreditsCon && userCreditsCon.list.forEach(v => {
       v.operation = userCreditsArr[v.id]
     })
@@ -182,7 +182,7 @@ export default class UserStore extends ExchangeStoreBase {
   async ipList() { // 获取ip白名单
     let ipListCon = await this.Proxy.getIpList({"userId": this.uid, "token": this.token});
     let ipList = ipListCon.data
-    console.log('白名单', ipList)
+    // console.log('白名单', ipList)
     this.state.ipList = ipList;
     return ipList
   }
@@ -212,12 +212,12 @@ export default class UserStore extends ExchangeStoreBase {
   async getAward(){
     await this.userInfo();
     let account = this.state.userInfo.phone || this.state.userInfo.email
-    console.log('getAward 0', account)
+    // console.log('getAward 0', account)
     let result = await this.Proxy.getAward({
       token:this.token,
       account
     })
-    console.log('getAward 1', result)
+    // console.log('getAward 1', result)
     return result
   }
 

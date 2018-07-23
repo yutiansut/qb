@@ -108,30 +108,30 @@ export default class SetPwd extends exchangeViewBase {
   }
   changeInput1(value) { // 输入
     this.setState({popupInput1: value});
-    console.log(1, value)
+    // console.log(1, value)
     this.state.errUser3 && (this.setState({errUser3: ""}))
   }
   changeInput2(value) { // 输入
     this.setState({popupInput2: value});
-    console.log(2, value)
+    // console.log(2, value)
     this.state.errUser && (this.setState({errUser: ""}))
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
-    console.log(3, value)
+    // console.log(3, value)
     this.state.errUser2 && (this.setState({errUser2: ""}))
   }
   changeInput4(value) {
     this.setState({popupInput4: value});
-    console.log(4, value)
+    // console.log(4, value)
   }
   changeInput5(value) {
     this.setState({popupInput5: value});
-    console.log(5, value)
+    // console.log(5, value)
   }
   changeInput6(value) {
     this.setState({popupInput6: value});
-    console.log(6, value)
+    // console.log(6, value)
   }
 
   // 检验部分

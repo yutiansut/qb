@@ -55,7 +55,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    console.log('this.props.location', this.props.location.query)
+    // console.log('this.props.location', this.props.location.query)
     // let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
     //     fromId = this.props.location.query && this.props.location.query.newsCon.id,
     //     userNotice = this.state.userNotice,
@@ -88,7 +88,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   render() {
-    console.log('内容', this.state.userNotice)
+    // console.log('内容', this.state.userNotice)
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>

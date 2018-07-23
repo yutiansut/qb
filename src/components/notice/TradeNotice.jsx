@@ -48,7 +48,6 @@ export default class tradeNotice extends exchangeViewBase {
 
   render() {
     // console.log('资讯', this.state)
-
     return <div className="trade-notice-wrap">
         <h3 id="notice_title">{this.intl.get("information")}</h3>
         {Object.keys(this.state.infoList).length ? <ul id="notice_con" style={{height: `${(this.state.tradeOrderHeight - this.state.noticeTitleHeight) / 100}rem`}}>

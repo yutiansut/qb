@@ -66,7 +66,7 @@ export default class userIntegration extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息3', this.state)
+    // console.log('用户信息3', this.state)
     return (
       <div className="integration-wrap">
         <h1>{this.intl.get("user-score")}</h1>

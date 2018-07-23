@@ -222,7 +222,7 @@ export default class userIdentity extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息2', this.state)
+    // console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
         <h1>{this.intl.get("header-idVerify")}</h1>

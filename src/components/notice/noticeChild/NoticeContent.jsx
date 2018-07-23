@@ -52,7 +52,7 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   render() {
-    console.log('内容', this.state)
+    // console.log('内容', this.state)
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">

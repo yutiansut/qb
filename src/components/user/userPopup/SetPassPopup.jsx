@@ -180,7 +180,7 @@ export default class SetPassPopup extends exchangeViewBase {
   }
 
   render() {
-    console.log(222, this.props.isType, this.props.fundPassType)
+    // console.log(222, this.props.isType, this.props.fundPassType)
     let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">

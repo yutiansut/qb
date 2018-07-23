@@ -17,7 +17,7 @@ export default class GooglePopup extends exchangeViewBase {
 
   changeInput(value) {
     this.setState({codeValue: value});
-    console.log(1, value)
+    // console.log(1, value)
   }
 
   async componentDidMount() {

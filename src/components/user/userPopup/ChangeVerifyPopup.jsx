@@ -32,15 +32,15 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
   }
   changeInput1(value) {
     this.setState({popupInput1: value});
-    console.log(1, value)
+    // console.log(1, value)
   }
   changeInput2(value) {
     this.setState({popupInput2: value});
-    console.log(2, value)
+    // console.log(2, value)
   }
   changeInput3(value) {
     this.setState({popupInput3: value});
-    console.log(3, value)
+    // console.log(3, value)
   }
   canClick() {
     if (this.props.isType === 1 && this.state.popupInput2 && this.state.popupInput3) return true // 邮箱
@@ -62,7 +62,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
     this.props.destroy && this.props.destroy();
   }
   render() {
-    console.log(77999, this.props.isType)
+    // console.log(77999, this.props.isType)
     return (
       <div className="change-popup-wrap">
         <div className="change-info">

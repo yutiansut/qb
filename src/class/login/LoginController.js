@@ -90,9 +90,9 @@ export default class LoginController extends ExchangeControllerBase {
         otherLoginCon: obj.ret,
         otherLogin: true
       })
-      setTimeout(() => {
-        this.clearLoginInfo()
-      }, 3000)
+      // setTimeout(() => {
+      //   this.clearLoginInfo()
+      // }, 3000)
       return
     }
     if(obj.ret === 2006 || obj.ret === 2007) {
@@ -100,9 +100,9 @@ export default class LoginController extends ExchangeControllerBase {
         otherLoginCon: obj.ret,
         otherLogin: true
       })
-      setTimeout(() => {
-        this.clearLoginInfo()
-      }, 3000)
+      // setTimeout(() => {
+      //   this.clearLoginInfo()
+      // }, 3000)
     }
   }
 

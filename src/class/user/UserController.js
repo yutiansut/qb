@@ -69,7 +69,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getIpList() { // 获取ip白名单
     let ipList = await this.store.ipList();
-    console.log('ip白名单', ipList)
+    // console.log('ip白名单', ipList)
     this.view.setState({ipList})
   }
 
@@ -111,7 +111,7 @@ export default class UserController extends ExchangeControllerBase {
       "image2": this.view.state.image2, // 背面照
       "image3": this.view.state.image3  // 手持照
     })
-    console.log('上传信息', result)
+    // console.log('上传信息', result)
     succObj = {
       state: 1,
       firstName: this.view.state.firstNameValue,
@@ -207,7 +207,7 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})})
       this.store.state.userInfo.loginPwd = 0
     }
-    console.log('设置密码', result)
+    // console.log('设置密码', result)
   }
 
   async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 修改资金密码
@@ -281,7 +281,7 @@ export default class UserController extends ExchangeControllerBase {
       verifyList
     })
     // }
-    console.log('修改两步认证', result)
+    // console.log('修改两步认证', result)
   }
 
   async addIp(ipAdd) { // 添加ip白名单
@@ -345,7 +345,7 @@ export default class UserController extends ExchangeControllerBase {
       this.getUserCreditsNum()
     }
     // if (result === null) {this.view.setState({showGoogle: false})}
-    console.log('验证谷歌', result)
+    // console.log('验证谷歌', result)
   }
   async setUserNotify(index) { // 修改通知方式
     this.view.setState({
@@ -370,7 +370,7 @@ export default class UserController extends ExchangeControllerBase {
         popType: result ? 'tip3': 'tip1',
         popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
       })
-      console.log('改变通知', result, index)
+      // console.log('改变通知', result, index)
     }
   }
 
@@ -385,12 +385,12 @@ export default class UserController extends ExchangeControllerBase {
       popType: result && result.errCode ? 'tip3': 'tip1',
       popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-outSucc"),
     })
-    console.log('退出其他设备', result)
+    // console.log('退出其他设备', result)
   }
 
   async getIPAddr() {
     let result = await this.store.Proxy.getIPAddr()
-    console.log('获取ip', result, this.view)
+    // console.log('获取ip', result, this.view)
     this.view.setState({
       ipAddr: result.ip,
       showIp: true
@@ -407,7 +407,7 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-setSucc"),
       verifyFund:  result && result.errCode ? true : false
     })
-    console.log('设置资金密码间隔', result)
+    // console.log('设置资金密码间隔', result)
 
   }
 
@@ -423,7 +423,7 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   get userInfo() { // 提供用户手机号或者邮箱
-    console.log('userInfo', this.store.state.userInfo)
+    // console.log('userInfo', this.store.state.userInfo)
     let {
       email, phone
     } = this.store.state.userInfo
@@ -496,7 +496,7 @@ export default class UserController extends ExchangeControllerBase {
       type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
       "os": 3// 1 android 2 iOS 3 browser
     })
-    console.log('发送验证码', result, account, mode, type )
+    // console.log('发送验证码', result, account, mode, type )
     return result
   }
 
