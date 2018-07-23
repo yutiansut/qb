@@ -170,7 +170,7 @@ export default class userOrder extends ExchangeViewBase {
                     <td style={{color: `${v.orderType ? '#F25656' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
                     <td>{v.priceType ? this.intl.get('marketPrice') : ((this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital'})))}</td>
-                    <td>{Number(v.count).formatFixNumberForAmount(v.avgPrice)}</td>
+                    <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td>
                     <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.avgPrice))}</td>
                     <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'legal',style:{name: 'cny'}}) || Number(v.dealDoneCount.multi(v.avgPriceCN)).format({number: 'legal',style:{name: 'cny'}}))) || (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'legal',style:{name: 'usd'}}) || Number(v.dealDoneCount.multi(v.avgPriceEN)).format({number: 'legal',style:{name: 'usd'}}))) || (v.turnover && Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.avgPrice)).format({number: 'property'}))}</td>
                     <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal',style:{name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal',style:{name: 'usd'}})) || Number(v.avgPrice).format({number:'digital'})}</td>
