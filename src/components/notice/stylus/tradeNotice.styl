@@ -11,18 +11,34 @@
     margin-bottom .2rem
     font-size .12rem
   ul
+    overflow auto
     padding 0 .1rem
+    &::-webkit-scrollbar-button
+      display none
+    &::-webkit-scrollbar
+      position relative
+      width 3px
+      height 100%
+    &::-webkit-scrollbar-track
+      width 3px
+      background #222730
+    &::-webkit-scrollbar-thumb
+      width 3px
+      background #8C8F93
     li
-      height .5rem
-      margin-bottom .15rem
+      //height .35rem
+      margin-bottom .1rem
       p
-        margin-bottom .1rem
+        margin-bottom .05rem
         a
+          display block
+          //height .12rem
           font-size .12rem
           text-decoration underline
           color $normal-white-color-a9
       span
+        //height .12rem
         display block
         text-align right
-        font-size .12rem
+        font-size .11rem
         color $normal-white-color-a
