@@ -21,7 +21,7 @@ export default class UserStore extends ExchangeStoreBase {
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
-        
+
 
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
@@ -52,6 +52,9 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.userId = data && data.userId
     this.state.token = data && data.token
     this.state.userName = data && data.userName
+    this.Storage.userToken.set(data && data.token);
+    this.Storage.userId.set(data && data.userId);
+    this.Storage.userName.set(data && data.userName);
     // data && await this.userInfo()
     // data && await this.userAuth()
     data && data.isNew && this.getAward()
