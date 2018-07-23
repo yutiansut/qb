@@ -65,7 +65,7 @@ export default class LoginController extends ExchangeControllerBase {
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证
       this.view.setState({showTwoVerify: true, verifyType: data.ret, twoVerifyUser: data.data.account, verifyNum: this.view.intl.get("sendCode")})
-      console.log('二次登录', this.view.state)
+      // console.log('二次登录', this.view.state)
       return
     }
     if (data.ret !== 0 || data.data === null) {
@@ -85,16 +85,15 @@ export default class LoginController extends ExchangeControllerBase {
     window.location.href = '/whome'
   }
 
-  loginUpdata(obj) { // 监听退出消息
+  async loginUpdata(obj) { // 监听退出消息
     console.log('监听退出消息', obj)
-    if(obj.flag && obj.flag) {
+    if(obj && obj.flag) {
       this.headerView.setState({
         otherLoginCon: obj.ret,
         otherLogin: true
       })
-      // setTimeout(() => {
-      //   this.clearLoginInfo()
-      // }, 3000)
+      await this.Sleep(2000)
+      this.clearLoginInfo()
       return
     }
     if(obj.ret === 2006 || obj.ret === 2007) {
@@ -102,9 +101,8 @@ export default class LoginController extends ExchangeControllerBase {
         otherLoginCon: obj.ret,
         otherLogin: true
       })
-      // setTimeout(() => {
-      //   this.clearLoginInfo()
-      // }, 3000)
+      await this.Sleep(2000)
+      this.clearLoginInfo()
     }
   }
 
@@ -121,8 +119,7 @@ export default class LoginController extends ExchangeControllerBase {
       captchaCode,
       os: 3
     })
-    console.log('忘记密码', result)
-
+    // console.log('忘记密码', result)
     this.view.setState({
       showPopup: true,
       popType: result ? 'tip3': 'tip1',
@@ -131,7 +128,7 @@ export default class LoginController extends ExchangeControllerBase {
 
     if (result === null) {
       setTimeout(() => {
-        console.log('登录view', this.view)
+        // console.log('登录view', this.view)
         // this.view.history.push('/wlogin')
         this.view.history.push({
           pathname: '/wlogin',
@@ -149,7 +146,7 @@ export default class LoginController extends ExchangeControllerBase {
 
   async initLoginVerification() { // 获取手势验证
     let res = await this.store.Proxy.fetch('http://192.168.113.241:5555/vaptcha/challenge/', {method: 'get'})
-    console.log('获取手势验证res', res)
+    // console.log('获取手势验证res', res)
     //根据服务端接口获取的vid与challenge创建实例
     //验证参数对象
     let config={
@@ -163,11 +160,11 @@ export default class LoginController extends ExchangeControllerBase {
       color:"#0080D0", //按钮颜色, string
       outage:"http://192.168.113.241:5555/vaptcha/downtime/", //服务器端配置的宕机模式接口地址
       success:(token,challenge) => {//验证成功回调函数, 参数token, challenge 为string, 必填
-        console.log(token,challenge)
+        // console.log(token,challenge)
         //执行表单验证失败时，需要重新初始化VAPTCHA
       },
       fail:() => {//验证失败回调函数
-        console.log('error')
+        // console.log('error')
       }
     }
     //Vaptcha对象
@@ -179,9 +176,9 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   async getAward(obj){
-    console.log('getAward',obj)
+    // console.log('getAward',obj)
     let result = await this.store.getAward(obj);
-    console.log('getAward', result)
+    // console.log('getAward', result)
     if (result.award === 100) {
       // this.view.setState({
       //   showVagueBgView: true,

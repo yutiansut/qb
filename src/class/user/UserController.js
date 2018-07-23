@@ -102,14 +102,14 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.Proxy.uploadUserAuth({
       "uid": this.store.uid,
       "token": this.store.token,
-      "firstName": this.view.state.firstNameValue, // 姓氏
-      "lastName": this.view.state.lastNameValue, // 名字
-      "name": `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
-      "type": typeIndexArr[this.view.state.selectIndex],  // 0：无 1：身份证 2：军官证 3：护照
-      "number": this.view.state.numberValue, // 证件号
-      "image1": this.view.state.image1, // 正面照
-      "image2": this.view.state.image2, // 背面照
-      "image3": this.view.state.image3  // 手持照
+      "firstName": userAuth.number ? userAuth.firstName : this.view.state.firstNameValue, // 姓氏
+      "lastName": userAuth.number ? userAuth.lastName : this.view.state.lastNameValue, // 名字
+      "name": userAuth.number ? `${userAuth.firstName}${userAuth.lastName}` : `${this.view.state.firstNameValue}${this.view.state.lastNameValue}`, // 名字
+      "type": userAuth.number ? userAuth.type : typeIndexArr[this.view.state.selectIndex],  // 0：无 1：身份证 2：军官证 3：护照
+      "number": userAuth.number ? userAuth.number : this.view.state.numberValue, // 证件号
+      "image1": this.view.state.image1 || userAuth.image1, // 正面照
+      "image2": this.view.state.image2 || userAuth.image2, // 背面照
+      "image3": this.view.state.image3 || userAuth.image3  // 手持照
     })
     // console.log('上传信息', result)
     succObj = {

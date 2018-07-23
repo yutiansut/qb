@@ -19,6 +19,9 @@ export default class LoginStore extends ExchangeStoreBase {
       this.controller.loginUpdata(data);
     })
     this.WebSocket.general.on("loginOther", data => {
+      console.log('a')
+      this.WebSocket.general.clearWebsocketHistoryArr('login')
+      console.log('b')
       let dataOther = Object.assign(data, {flag: 1})
       this.controller.loginUpdata(dataOther);
     });

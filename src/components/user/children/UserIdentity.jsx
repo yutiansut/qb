@@ -166,9 +166,10 @@ export default class userIdentity extends exchangeViewBase {
     }
   }
   canClick() {
+    let userAuth = this.state.userAuth
     if (this.state.errNum) return false
-    if (this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image3) return true
-    if ((this.state.userAuth.state == 3 || this.state.userAuth.state == 4 || this.state.userAuth.state == 5) &&  this.state.checkState && this.state.image1 && this.state.image2 && this.state.image3) return true
+    if ((this.state.userAuth.state === 0) &&  this.state.checkState && this.state.firstNameValue && this.state.lastNameValue && this.state.numberValue && this.state.image1 && this.state.image2 && this.state.image3) return true
+    if ((this.state.userAuth.state === 3 || this.state.userAuth.state === 4 || this.state.userAuth.state === 5) &&  this.state.checkState && (userAuth.image1 || this.state.image1) && (userAuth.image2 || this.state.image2) && (userAuth.image3 || this.state.image3)) return true
     return false
   }
   checkAgree() {
@@ -222,7 +223,7 @@ export default class userIdentity extends exchangeViewBase {
   }
 
   render() {
-    // console.log('用户信息2', this.state)
+    console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
         <h1>{this.intl.get("header-idVerify")}</h1>
