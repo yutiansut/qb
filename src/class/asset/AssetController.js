@@ -182,13 +182,13 @@ export default class AssetController extends ExchangeControllerBase {
       userId: this.userId,
       token: this.token,
       page: 0,
-      pageSize: 20,
+      pageSize: 0,
       coinId: -1,
       coinName: -1,
       orderType: 1,
-      orderStatus: -1,
-      startTime: parseInt((new Date() - 604800000) / 1000),
-      endTime: parseInt((new Date() - 0) / 1000)
+      orderStatus: 0,
+      startTime: -1,
+      endTime: -1
     });
     if (result && !result.errCode) {
       return result.orderList.filter(v => v.doneCount !== v.verifyCount);
