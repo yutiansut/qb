@@ -54,7 +54,7 @@ export default class GooglePopup extends exchangeViewBase {
               <li>{this.intl.get("user-googleRemind2")}</li>
               <li>{this.intl.get("user-googleInput")}</li>
               <li className="clearfix">
-                <Input placeholder={this.intl.get("user-inputVerify")}  value={this.state.codeValue} onInput={value => this.changeInput(value)}/>
+                <Input value={this.state.codeValue} onInput={value => this.changeInput(value)}/>
                 <Button title={this.intl.get("user-submit")}
                         className={`${this.state.codeValue ? 'can-click' : 'no-click'} name-btn`}
                         onClick={() => {this.state.codeValue && this.props.setGoogleVerify(this.state.codeValue)}}/>
