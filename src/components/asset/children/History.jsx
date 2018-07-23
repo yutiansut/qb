@@ -346,7 +346,7 @@ export default class History extends exchangeViewBase {
                             <a
                               href={blockSite}
                               target="_blank"
-                            >{`${doneCount}/${verifyCount}`}</a>
+                            >{`${doneCount || 0}/${verifyCount}`}</a>
                           ) : (
                             "—"
                           )}

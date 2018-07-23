@@ -56,7 +56,7 @@ export default class ChargeMessage extends exchangeViewBase {
               <NavLink to="/wallet/dashboard">
                 【{this.intl.get("deposit")}】{v.orderTime.toDate()} {v.count}{" "}
                 {v.coinName.toUpperCase()} {this.intl.get("asset-confirming")}({`${
-                  v.doneCount
+                  v.doneCount || 0
                   }/${v.verifyCount}`})
               </NavLink>
             </li>

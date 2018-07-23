@@ -26,6 +26,7 @@ export default class Charge extends exchangeViewBase {
       this.props.walletList,
       this.props.value.toUpperCase()
     );
+    let { totalCount, frozenCount, availableCount, currency} = this.props;
     return (
       <div className="input">
         <Input
@@ -71,6 +72,29 @@ export default class Charge extends exchangeViewBase {
             </ul>
           }
         </Input>
+        <ul>
+          <li>
+            <span>{this.intl.get("asset-amount")}</span>
+            <i>
+              {Number(totalCount).format({ number: "property" })}{" "}
+              {currency}
+            </i>
+          </li>
+          <li>
+            <span>{this.intl.get("asset-orderLock")}</span>
+            <i>
+              {Number(frozenCount).format({ number: "property" })}{" "}
+              {currency}
+            </i>
+          </li>
+          <li>
+            <span>{this.intl.get("asset-avail")}</span>
+            <i>
+              {Number(availableCount).format({ number: "property" })}{" "}
+              {currency}
+            </i>
+          </li>
+        </ul>
       </div>
     );
   }

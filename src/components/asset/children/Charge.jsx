@@ -156,30 +156,11 @@ export default class Charge extends exchangeViewBase {
                 setCurrency={currency => {
                   this.setState({ currency });
                 }}
+                totalCount = {totalCount}
+                frozenCount = {frozenCount}
+                availableCount = {availableCount}
+                currency = {this.state.currency}
               />
-              <ul>
-                <li>
-                  <span>{this.intl.get("asset-amount")}</span>
-                  <i>
-                    {Number(totalCount).format({ number: "property" })}{" "}
-                    {this.state.currency}
-                  </i>
-                </li>
-                <li>
-                  <span>{this.intl.get("asset-orderLock")}</span>
-                  <i>
-                    {Number(frozenCount).format({ number: "property" })}{" "}
-                    {this.state.currency}
-                  </i>
-                </li>
-                <li>
-                  <span>{this.intl.get("asset-avail")}</span>
-                  <i>
-                    {Number(availableCount).format({ number: "property" })}{" "}
-                    {this.state.currency}
-                  </i>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -301,7 +282,7 @@ export default class Charge extends exchangeViewBase {
                               <a
                                 href={blockSite}
                                 target="_blank"
-                              >{`${doneCount}/${verifyCount}`}</a>
+                              >{`${doneCount || 0}/${verifyCount}`}</a>
                             </td>
                             <td>
                               <span>{this.status[orderStatus]}</span>

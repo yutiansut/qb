@@ -225,30 +225,11 @@ export default class Extract extends exchangeViewBase {
                 setCurrency={currency => {
                   this.setState({ currency });
                 }}
+                totalCount={totalCount}
+                frozenCount={frozenCount}
+                availableCount={availableCount}
+                currency={this.state.currency}
               />
-              <ul>
-                <li>
-                  <span>{this.intl.get("asset-amount")}</span>
-                  <i>
-                    {Number(totalCount).format({ number: "property" })}{" "}
-                    {currency}
-                  </i>
-                </li>
-                <li>
-                  <span>{this.intl.get("asset-orderLock")}</span>
-                  <i>
-                    {Number(frozenCount).format({ number: "property" })}{" "}
-                    {currency}
-                  </i>
-                </li>
-                <li>
-                  <span>{this.intl.get("asset-avail")}</span>
-                  <i>
-                    {Number(availableCount).format({ number: "property" })}{" "}
-                    {currency}
-                  </i>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
