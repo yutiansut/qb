@@ -19,7 +19,6 @@ export default class UserStore extends ExchangeStoreBase {
     super();
     let language = this.getQuery("language") === '0' ? "zh-CN" : this.getQuery("language") === '1' ? "en-US" : undefined;
     language && this.Storage.language.set(language);
-    console.log(1)
     this.state = {
       nameCny: EXCHANGE_NAME_CNY,
       nameUsd: EXCHANGE_NAME_USD,

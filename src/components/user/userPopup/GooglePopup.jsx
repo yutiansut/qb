@@ -34,9 +34,9 @@ export default class GooglePopup extends exchangeViewBase {
             <ul>
               <li>1</li>
               <li>{this.intl.get("user-googleInstall")}: Google Authenticator</li>
-              <li><Button title="App Store" className="google-btn"/></li>
-              <li><Button title="Google.play" className="google-btn"/></li>
-              <li>Google Authenticator on other devices</li>
+              <li><Button title="App Store" href="https://itunes.apple.com/cn/app/google-authenticator/id388497605?mt=8" target="_blank" className="google-btn"/></li>
+              <li><Button title="Google.play" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank" className="google-btn"/></li>
+              <li><a href="https://support.google.com/accounts/answer/1066447?hl=en" target="_blank">Google Authenticator on other devices</a></li>
             </ul>
             <ul>
               <li>2</li>
