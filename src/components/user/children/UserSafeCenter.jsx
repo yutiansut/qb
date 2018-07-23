@@ -251,11 +251,11 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="fl">
             <ol className="clearfix" style={{display: 'flex'}}>
               <li>{this.intl.get("loginPwd")}</li>
-              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{this.state.userInfo.loginPwd && this.intl.get("set") || this.intl.get("alter")}</li>
+              <li onClick = {state => this.state.userInfo.loginPwd ? this.changeSetPopup(3) : this.changeSetPopup(4)}>{this.state.userInfo.loginPwd === 0 ? this.intl.get("alter") : this.intl.get("set")}</li>
             </ol>
             <ul className="clearfix">
               <li>{this.intl.get("fundPass")}</li>
-              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{this.state.userInfo.fundPwd && this.intl.get("set") || this.intl.get("alter")}</li>
+              <li onClick = {state => this.state.userInfo.fundPwd ? this.changeSetPopup(5) : this.changeSetPopup(6)}>{this.state.userInfo.fundPwd === 0 ? this.intl.get("alter") : this.intl.get("set")}</li>
               <li>{this.intl.get("user-setFund")}</li>
             </ul>
           </div>

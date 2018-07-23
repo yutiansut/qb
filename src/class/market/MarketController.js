@@ -25,6 +25,7 @@ export default class MarketController extends ExchangeControllerBase {
   //获取getRecommendCoins
   async getRecommendCoins() {
     let recommendData = await this.store.getRecommendCoins()
+    recommendData.length = 5
     this.view.setState({
       recommendData
     })

@@ -5,6 +5,7 @@ import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 import "../stylus/identify.styl"
+import Server from '../../../config/ServerConfig'
 
 export default class userIdentity extends exchangeViewBase {
   constructor(props) {
@@ -196,16 +197,16 @@ export default class userIdentity extends exchangeViewBase {
         photoArr: [
           {
             photoList: [
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
             ]
           },
           {
             photoList: [
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
-              {imgUrl: `http://192.168.55.105/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
+              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
             ]
           }
         ]

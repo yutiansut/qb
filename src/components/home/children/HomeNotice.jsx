@@ -66,8 +66,8 @@ export default class homeNotice extends ExchangeViewBase {
 
   render() {
     // console.log('首页公告', this.state)
-    return <div className={`${Object.keys(this.state.noticeList).length ? "" : "hide"} home-notice-wrap`}>
-      {Object.keys(this.state.noticeList).length && <div className="home-notice-content">
+    return <div className={`${Object.keys(this.state.noticeList).length && this.state.noticeList.data ? "" : "hide"} home-notice-wrap`}>
+      {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <div className="home-notice-content">
         <ul style={{top: this.state.top1 + "%"}}>
           {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
             <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>

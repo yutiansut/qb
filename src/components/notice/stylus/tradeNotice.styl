@@ -1,6 +1,7 @@
 @import "../../../common/css/variable.styl"
 
 .trade-notice-wrap
+  border-bottom .04rem solid $exchange-bg
   h3
     width 100%
     height .4rem
@@ -8,11 +9,12 @@
     background $normal-black-color
     padding-left .17rem
     color $normal-white-color
-    margin-bottom .2rem
+    //margin-bottom .2rem
     font-size .12rem
   ul
     overflow auto
-    padding 0 .1rem
+    padding .2rem .1rem 0
+
     &::-webkit-scrollbar-button
       display none
     &::-webkit-scrollbar

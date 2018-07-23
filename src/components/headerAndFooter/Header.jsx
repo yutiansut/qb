@@ -160,14 +160,14 @@ export default class Header extends ExchangeViewBase {
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
             // console.log(match)
             return <li className={`header-nav${match ? '-active' : ''} ${v.tokenShow ? 'hide' : ''} ${v.select ? 'select-list' : ''}`} >
-                    <Link to={v.to}>{v.label}</Link>
+                    <Link to={v.to}>{v.label.toUpperCase()}</Link>
                     {/*<img src={this.$imagesMap.$nomal_down} alt=""/>*/}
                       {v.select && (
                         <ul className='select-router'>
                           {v.childrenList.map((v, index) => {
                             return (
                               <li key={index}>
-                                <NavLink activeClassName="children-active" to={v.to}>{v.label}</NavLink>
+                                <NavLink activeClassName="children-active" to={v.to}>{v.label.toUpperCase()}</NavLink>
                               </li>
                             )
                           })}

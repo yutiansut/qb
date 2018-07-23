@@ -108,7 +108,6 @@ export default class LoginController extends ExchangeControllerBase {
 
   // 找回密码
   async forgetLoginPass(account, mode, code, newPass, captchaId, captchaCode) { // 找回密码
-
     let result = await this.store.Proxy.forgetLoginPass({
       account,
       mode, // 0 phone 1 email

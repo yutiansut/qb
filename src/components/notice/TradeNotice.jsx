@@ -18,7 +18,7 @@ export default class tradeNotice extends exchangeViewBase {
     this.getInfoCon = controller.getInfoCon.bind(controller) // 获取资讯
   }
 
-  setView(view){
+  setView(view) {
     super.setView(view);
     return this.store.data
   }
@@ -49,19 +49,21 @@ export default class tradeNotice extends exchangeViewBase {
   render() {
     // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
-        <h3 id="notice_title">{this.intl.get("information")}</h3>
-        {Object.keys(this.state.infoList).length ? <ul id="notice_con" style={{height: `${(this.state.tradeOrderHeight - this.state.noticeTitleHeight) / 100}rem`}}>
-            {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) => <li key={index} id='notice_con'>
-                <p>
-                  <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>
-                    {this.props.controller.configData.language === "zh-CN"
-                      ? v.subjectCn
-                      : v.subjectEn}
-                  </Link>
-                </p>
-                <span>{v.createdAt.toDate('yyyy-MM-dd HH:mm:SS')}</span>
-              </li>)}
-          </ul> : <div>{this.intl.get("user-none")}</div>}
-      </div>;
+      <h3 id="notice_title">{this.intl.get("information")}</h3>
+      {Object.keys(this.state.infoList).length && this.state.infoList.data ?
+        <ul id="notice_con" style={{height: `${(this.state.tradeOrderHeight - this.state.noticeTitleHeight - 5)}px`}}>
+          {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) =>
+            <li key={index} id='notice_con'>
+              <p>
+                <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>
+                  {this.props.controller.configData.language === "zh-CN"
+                    ? v.subjectCn
+                    : v.subjectEn}
+                </Link>
+              </p>
+              <span>{v.createdAt.toDate('yyyy-MM-dd HH:mm:SS')}</span>
+            </li>)}
+        </ul> : <div>{this.intl.get("user-none")}</div>}
+    </div>;
   }
 }

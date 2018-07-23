@@ -119,7 +119,7 @@ export default function en(state) {
     101: "Id Verify underway",
     102: "Id Verify state nonrecognition",
     103: "Id Verify passed",
-    601: "The password entered is incorrect, please try again!",
+    601: "Inputted original password error, please try again!",
     602: "Database error",
     603: "Request parameter error",
     604: "The user does not exist.",
