@@ -170,6 +170,10 @@ const homeHeader = ({ match, history }) => {
   );
 };
 
+const homeFooter = ({ match, history }) => {
+    return <Footer configController={configController}/>;
+};
+
 const tradeHeader = ({ match, history }) => {
   return (
     <div>
@@ -337,7 +341,7 @@ export default class App extends Component {
             {/*<Footer/>*/}
             <Switch>
               <Route path="/trade" component={tradeFooter} />
-              <Route component={Footer} />
+              <Route component={homeFooter} />
             </Switch>
           </div>
         )}
