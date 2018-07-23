@@ -208,7 +208,11 @@ export default class AssetController extends ExchangeControllerBase {
       address:
         (curExtract &&
           curExtract.addressList[0] &&
-          curExtract.addressList[0].address) ||
+          this.sort(
+            curExtract.addressList,
+            ["addressName"],
+            1
+          )[0]) ||
         ""
     });
   }

@@ -130,11 +130,15 @@ export default class Extract extends exchangeViewBase {
     // 切换地址后重新请求矿工费
     if (
       JSON.stringify(nextState.walletExtract) !==
-      JSON.stringify(this.state.walletExtract)
+      JSON.stringify(this.state.walletExtract) && nextState.currency === this.state.currency
     ) {
       let curExtract = nextState.walletExtract.extractAddr.filter(
         v => v.coinName === nextState.currency.toLowerCase()
       )[0];
+      let preExtract = this.state.walletExtract.extractAddr.filter(
+        v => v.coinName === this.state.currency.toLowerCase()
+      )[0];
+      if((curExtract && curExtract.addressList.length) === (preExtract && preExtract.addressList.length)) return;
       this.setState(
         {
           address:
@@ -148,7 +152,6 @@ export default class Extract extends exchangeViewBase {
       );
     }
     if (nextState.currency !== this.state.currency) {
-      // console.log("changecurrency");
       this.props.controller.changeUrl(
         "currency",
         nextState.currency.toLowerCase()
@@ -168,7 +171,6 @@ export default class Extract extends exchangeViewBase {
           quotaTip: false
         },
         () => {
-          console.log('getMineFee...............')
           this.getMinerFee(nextState.currency, this.state.address);
         }
       );
