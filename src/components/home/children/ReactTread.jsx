@@ -20,11 +20,11 @@ class ReactTrend extends React.Component {
 
         let trends=this.state.trends;
         if(trends.length<2) return (
-            <span></span>
+            <span/>
         );
 
         let ratio = this.state.ratio;
-        let viewHeight=100 * ratio;
+        let viewHeight=100 / ratio;
         let viewBox = "0 0 100 " + viewHeight;
 
         let dx = Math.floor(100 / (trends.length - 1));

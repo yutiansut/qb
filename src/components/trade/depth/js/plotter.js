@@ -310,7 +310,7 @@ export default class Plotter {
                 }else if(KDepth.instance.lang==="zh-tw"){
                     strInfos = ["購買價格: ", "購買量: ", "累計購買量: "];
                 }
-                for (let i = bids.length - 1; i > 0; i--) {
+                for (let i = bids.length - 1; i >= 0; i--) {
                     if (Math.abs(bids[i][0] - strX) < ratioStrX) {
                         strPrice = bids[i][0];
                         strVol = bids[i][1];
