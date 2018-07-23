@@ -197,16 +197,16 @@ export default class userIdentity extends exchangeViewBase {
         photoArr: [
           {
             photoList: [
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
             ]
           },
           {
             photoList: [
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
-              {imgUrl: `http://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
             ]
           }
         ]
@@ -217,6 +217,16 @@ export default class userIdentity extends exchangeViewBase {
         checkVerifyArr: false
       })
     )
+    let userAuth = this.state.userAuth;
+    if (userAuth.firstName === '' || userAuth.lastName === '') {
+      let fullName = userAuth.fullName, firstName = fullName.substring(0, 1), lastName = fullName.substring(1);
+      // console.log('全称', fullName, firstName, lastName)
+      userAuth.firstName = firstName
+      userAuth.lastName = lastName
+      this.setState({
+        userAuth
+      })
+    }
   }
 
   componentWillUpdate(...parmas) {

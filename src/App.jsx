@@ -148,7 +148,7 @@ const header = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: ".7rem" }} />
+      <div style={{ height: "70px" }} />
     </div>
   );
 };
@@ -165,7 +165,7 @@ const homeHeader = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: ".7rem" }} />
+      <div style={{ height: "70px" }} />
     </div>
   );
 };
@@ -186,7 +186,7 @@ const tradeHeader = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: ".5rem" }} />
+      <div style={{ height: "50px" }} />
     </div>
   );
 };

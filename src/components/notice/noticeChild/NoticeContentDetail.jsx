@@ -64,7 +64,7 @@ export default class homeNotice extends exchangeViewBase {
         <div className="content">
           <p dangerouslySetInnerHTML={{ __html: this.props.controller.configData.language === 'zh-CN' ? activityInfo.contentCn : activityInfo.contentEn }}></p>
           {/* {this.props.controller.configData.language === 'zh-CN' ? activityInfo.contentCn : activityInfo.contentEn} */}
-          <img src={activityInfo.titleImage} alt=""/>
+          <img src={`${activityInfo.source}${activityInfo.titleImage}`} alt=""/>
         </div>
         <h5>
           <span>{this.intl.get("notice-link")}：</span>

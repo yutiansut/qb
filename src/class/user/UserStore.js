@@ -211,7 +211,7 @@ export default class UserStore extends ExchangeStoreBase {
     // headers.set('Token', this.token);
     // console.log(headers)
     // console.log('uploadImg', uploadImg, file)
-    return await fetch(`http://${Server.host}/v1/usupload/`, {
+    return await fetch(`${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usupload/`, {
       method: 'Post',
       body: uploadImg,
       // headers,

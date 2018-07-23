@@ -282,7 +282,18 @@ export default class DealController extends ExchangeControllerBase {
           }
       )
     }
-    if(result && (result.ret === 1416 || result.ret === 1412)){
+    if(result && (result.ret === 1412 && params.priceType === 0)){
+      this.view.setState(
+        {
+          // dealPopMsg: this.intl.get('passError'),
+          dealPopMsg: this.view.intl.get('asset-not-enough'),
+          dealPassType:'passive',// 弹窗类型倾向
+          dealPass:true,// 下单弹窗
+        }
+      );
+      return
+    }
+    if(result && (result.ret === 1416 || (result.ret === 1412 && params.priceType === 1))){
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),

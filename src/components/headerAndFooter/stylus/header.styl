@@ -48,7 +48,7 @@
             right -10px
             content: ''
             width 8px
-            height 5rpx
+            height 5px
             background-image $icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
@@ -74,7 +74,7 @@
           li
             width 100%
             height 40px
-            line-height 40pxm
+            line-height 40px
             text-align center
             margin-right 0
             &:nth-of-type(1)
@@ -127,6 +127,8 @@
             background-image $icon-select
             background-size cover
             transform translateY(-50%)
+          span
+            font-size 14px
         ul
           display none
           background $exchange-color
@@ -138,8 +140,11 @@
             line-height 40px
             text-align center
             corsor pointer
+
             &:hover
               color $main-color
+            span
+              font-size 14px
         img
           display none
       &.new-li
@@ -252,6 +257,7 @@
           position relative
           cursor pointer
           text-align center
+          font-size 14px
           &:hover
             color $normal-white-color
           &:after
@@ -283,6 +289,7 @@
               a
                 color $main-color
             a
+              font-size 14px
               color $normal-white-color-a
             //&:nth-of-type(1)
             //  border-bottom 1px solid $exchange-bg
@@ -303,51 +310,50 @@
 
 .headerNav, .homeNav
   width 100%
-  min-width 11.6rem
-  height .7rem
-  padding 0 1.2rem
-  line-height .7rem
+  min-width 1160px
+  height 70px
+  padding 0 120px
+  line-height 70px
   background $main-bg-active
   >ul
-    height .7rem
+    height 70px
     li
-      height .7rem
-      margin-right .4rem
+      height 70px
+      margin-right 40px
       &.header-nav-active
         >a
           //border-bottom 2px solid $index-blue
           color $index-blue
-          padding .06rem .02rem
+          padding 6px 2px
       &:last-child
         margin-right 0
       &.nav-logo
-        margin-right 1.2rem
+        margin-right 120px
         a
           display block
-          width 1.21rem
-          height .5rem
-          margin-top .1rem
-          background $logo-index no-repeat 0 0.125rem / 1.21rem .24rem
+          width 121px
+          height 50px
+          margin-top 10px
+          background $logo-index no-repeat 0 12.5px / 121px 24px
 
   >ol
     >li
       &.language-li
-        width 1rem
+        width 100px
         p
           text-align center
         ul
           display none
           li
-            height .4rem
-            padding 0 .05rem
-            line-height .4rem
+            height 40px
+            padding 0 5px
         img
           position relative
-          top -.02rem
+          top -2px
           display inline-block
-          width .2rem
-          height .15rem
-          margin-right .1rem
+          width 20px
+          height 15px
+          margin-right 10px
           vertical-align middle
 
 .homeNav
@@ -358,36 +364,36 @@
     li
       &.select-list
         .select-router
-          margin-top -.1rem
+          margin-top -10px
           //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
-          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
+          box-shadow  0 0 1px 0 rgba(0,0,0,0.5)
   >ol
     >li
       &.language-li
-        width 1rem
+        width 100px
         p
           text-align center
         ul
           display none
-          margin-top -.1rem
+          margin-top -10px
           li
             &:nth-of-type(1)
               border-bottom none
         img
           display inline-block
-          width .2rem
-          height .15rem
-          margin-right .1rem
+          width 20px
+          height 15px
+          margin-right 10px
           vertical-align middle
       &.user-li
         ul
-          margin-top -.1rem
+          margin-top -10px
           //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
-          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
+          box-shadow  0 0 10px rgba(0,0,0,0.5)
       &.new-li
         .new-li-content
-          margin-top -.1rem
-          box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
+          margin-top -10px
+          box-shadow  0 0 10px 0 rgba(0,0,0,0.5)
 
 // 其他地方登录弹窗
 .other-login
