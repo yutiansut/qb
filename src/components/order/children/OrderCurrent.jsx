@@ -308,7 +308,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.props.controller.cancelOrder(orderId, opType, dealType, tradePairId)
   }
   changePage(page){
-    const params = {
+    const params = this.view.state.searchSaveFlag ? {
       idArray: this.state.idArray,
       orderType: this.state.orderType,
       orderStatus: this.state.orderStatus,
@@ -316,6 +316,14 @@ export default class OrderCurrent extends ExchangeViewBase {
       endTime: this.state.endTime,
       page,
       pageSize: this.state.pageSize
+    } : {
+        startTime: Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
+        endTime: Math.floor(new Date().getTime() / 1000),
+        idArray: [],
+        orderType: 2,
+        typeSelect: this.intl.get('all'),
+        page,
+        pageSize: this.state.pageSize
     };
     this.orderListHandle(this.props.type, params);
     this.setState({
