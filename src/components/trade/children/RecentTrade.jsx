@@ -82,7 +82,7 @@ export default class extends ExchangeViewBase {
                     <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.volume).formatFixNumberForAmount(Number(v.price)) : Number(v.dealDoneCount).formatFixNumberForAmount(Number(v.avgPrice))}</td>
                   </tr>
                 )
-            ) || <span>{this.intl.get('noRecords')}</span>}
+            ) || <tr><td><span>{this.intl.get('noRecords')}</span></td></tr>}
           </tbody>
         </table>
         </div>
