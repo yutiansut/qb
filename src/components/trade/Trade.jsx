@@ -153,7 +153,7 @@ export default class extends exchangeViewBase {
           <div className="trade-notice">
             <TradeNotice controller={noticeController} />
           </div>
-          <div className="trade-order">
+          <div className="trade-order" id="trade_order">
             <UserOrder controller={userOrderController} />
           </div>
         </div>

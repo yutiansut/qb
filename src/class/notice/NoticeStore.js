@@ -25,7 +25,7 @@ export default class NoticeStore extends ExchangeStoreBase {
       page,
       pageSize
     });
-    noticeList = noticeList.msg ? [] : noticeList.data
+    // noticeList = noticeList.msg ? [] : noticeList.data
     this.state.noticeList = noticeList;
     // console.log('获取公告', noticeList)
     return noticeList
@@ -39,7 +39,7 @@ export default class NoticeStore extends ExchangeStoreBase {
       page,
       pageSize
     });
-    infoList = infoList.msg ? [] : infoList.data
+    // infoList = infoList.msg ? [] : infoList.data
     this.state.infoList = infoList
     // console.log('获取资讯', infoList)
     return infoList

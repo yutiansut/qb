@@ -12,7 +12,12 @@ import Pagination from '../../../common/component/Pagination/index.jsx'
 export default class noticeContent extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      // noticeTotalPage: 0,
+      // infoTotalPage: 0,
+      noticePage: 0,
+      infoPage: 0,
+    }
     const {controller} = props
     //绑定view
     controller.setView(this)
@@ -35,6 +40,10 @@ export default class noticeContent extends exchangeViewBase {
 
   async componentDidMount() {
     await Promise.all([this.getNoticeCon(0, 10), this.getInfoCon(0, 10)])
+    this.setState({
+      noticeTotalPage: this.state.noticeList.totalCount,
+      infoTotalPage: this.state.infoList.totalCount
+    })
 
   }
 
@@ -48,59 +57,69 @@ export default class noticeContent extends exchangeViewBase {
       <div className="bulletin-wrap">
         <div className="information-wrap">
           <h1>{this.intl.get("notice")}</h1>
-          <h2 className={this.state.noticeList.length ? 'hide' : ''}>{this.intl.get("user-none")}</h2>
-          <dl className={this.state.noticeList.length ? '' : 'hide'}>
-            <dt>
-              <i>{this.intl.get("notice-title")}</i>
-              <em>{this.intl.get("notice-type")}</em>
-              <span>{this.intl.get("time")}</span>
-            </dt>
-            {/*<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>*/}
-            {this.state.noticeList.length && this.state.noticeList.map((v, index) => (
-              <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
-                <dd >
-                  <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                  <em>{this.intl.get("notice")}</em>
-                  <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
-                </dd>
-              </Link>))}
-          </dl>
-          <div className={this.state.noticeList.length ? '' : 'hide'}>
-            {this.state.noticeList.totalCount &&<Pagination total={this.state.noticeList.totalCount}
-                        pageSize={10}
-                        showTotal={true}
-                        showQuickJumper={true}/>}
-          </div>
+          {
+            Object.keys(this.state.noticeList).length ? (<dl>
+              <dt>
+                <i>{this.intl.get("notice-title")}</i>
+                <em>{this.intl.get("notice-type")}</em>
+                <span>{this.intl.get("time")}</span>
+              </dt>
+              {/*<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>*/}
+              {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (
+                <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
+                  <dd >
+                    <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                    <em>{this.intl.get("notice")}</em>
+                    <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
+                  </dd>
+                </Link>))}
+            </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
+          }
+
+          {Object.keys(this.state.noticeList).length && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount}
+                      pageSize={10}
+                      showTotal={true}
+                      onChange={page => {
+                        this.setState({ noticePage: page });
+                        this.getNoticeCon(page - 1, 10)
+                      }}
+                      currentPage={this.state.noticePage}
+                      showQuickJumper={true}/>}
         </div>
 
         <div className="news-wrap" >
           <h1>{this.intl.get("information")}</h1>
-          <h2 className={this.state.infoList.length ? 'hide' : ''}>{this.intl.get("user-none")}</h2>
-          <dl className={this.state.infoList.length ? '' : 'hide'}>
-            <dt>
-              <i>{this.intl.get("notice-title")}</i>
-              <em>{this.intl.get("notice-type")}</em>
-              <span>{this.intl.get("time")}</span>
-            </dt>
-            {this.state.infoList.length && this.state.infoList.map((v, index) => (
-              <Link to={{pathname: `${this.props.match.url}/detail`, query: { infoId: v.activityId }}} key={index}>
-                <dd>
-                {/*<a href={`http://${v.source}`} target="_blank">*/}
-                  <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
-                  <em>{this.intl.get("information")}</em>
-                  <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
-                {/*</a>*/}
-                </dd>
-            </Link>))}
-          </dl>
-          <div className={this.state.infoList.length ? '' : 'hide'}>
-            {this.state.infoList.totalCount && <Pagination total={this.state.infoList.totalCount}
-                        pageSize={10}
-                        showTotal={true}
-                        showQuickJumper={true}/>}
-          </div>
-        </div>
+          {
+            Object.keys(this.state.infoList).length ? (<dl>
+              <dt>
+                <i>{this.intl.get("notice-title")}</i>
+                <em>{this.intl.get("notice-type")}</em>
+                <span>{this.intl.get("time")}</span>
+              </dt>
+              {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) => (
+                <Link to={`${this.props.match.url}/detail?infoId=${v.activityId}`} key={index}>
+                  <dd>
+                    {/*<a href={`http://${v.source}`} target="_blank">*/}
+                    <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                    <em>{this.intl.get("information")}</em>
+                    <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
+                    {/*</a>*/}
+                  </dd>
+                </Link>))}
+            </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
+          }
 
+          {Object.keys(this.state.infoList).length && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount}
+                      pageSize={10}
+                      showTotal={true}
+                      onChange={page => {
+                        this.setState({ infoPage: page });
+                        this.getInfoCon(page - 1, 10)
+                      }}
+                      currentPage={this.state.infoPage}
+                      showQuickJumper={true}/>}
+
+        </div>
       </div>
     );
   }

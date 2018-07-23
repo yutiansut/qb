@@ -53,7 +53,7 @@ export default class homeNotice extends exchangeViewBase {
         </h1>
         <h2 className="clearfix">
           <span>{this.props.controller.configData.language === 'zh-CN' ? activityInfo.subjectCn : activityInfo.subjectEn}</span>
-          <b>{activityInfo.createdAt}</b>
+          <b>{activityInfo.createdAt && activityInfo.createdAt.toDate('yyyy-MM-dd HH:mm:SS')}</b>
         </h2>
         <h3>
           {this.props.controller.configData.language === 'zh-CN' ? activityInfo.abstractCn : activityInfo.abstractEn}

@@ -25,7 +25,13 @@ export default class tradeNotice extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    await this.getInfoCon(0, 10)
+    // let tradeOrderHeight = document.getElementById('trade_order').offsetHeight
+    // let noticeTitleHeight = document.getElementById('notice_title').offsetHeight
+    // let noticeHeight =  document.getElementById('notice_con').offsetHeight
+    // let noticeNum = Math.floor((tradeOrderHeight - noticeTitleHeight) / noticeHeight)
+    await this.getInfoCon(0, 5)
+    console.log(123, tradeOrderHeight, noticeHeight, noticeTitleHeight, noticeNum)
+
   }
 
   componentWillUpdate(...parmas) {
@@ -35,11 +41,11 @@ export default class tradeNotice extends exchangeViewBase {
   render() {
     // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
-        <h3>{this.intl.get("information")}</h3>
-        {this.state.infoList && this.state.infoList.length ? <ul>
-            {this.state.infoList.map((v, index) => <li key={index}>
+        <h3 id="notice_title">{this.intl.get("information")}</h3>
+        {Object.keys(this.state.infoList).length ? <ul>
+            {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) => <li key={index} id='notice_con'>
                 <p>
-                  <Link to={`notice/content/detail?infoId=${v.activityId}`}>
+                  <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>
                     {this.props.controller.configData.language === "zh-CN"
                       ? v.subjectCn
                       : v.subjectEn}

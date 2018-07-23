@@ -238,7 +238,10 @@ export default class SetPassPopup extends exchangeViewBase {
                        value={this.state.popupInput6}
                        onInput={value => this.changeInput6(value)}/>
               </li>
-              <li className={[3, 4].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
+              <li className={[3, 5].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
+                <p>{this.intl.get("user-popPwdRule")}</p>
+              </li>
+              <li className={[4, 6].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
                 <p>{this.intl.get("user-popPwdRule")}</p>
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
