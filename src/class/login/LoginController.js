@@ -57,6 +57,8 @@ export default class LoginController extends ExchangeControllerBase {
       this.userController.getUserId(data.data)
       // console.log("login success", this.view, flag);
       // console.log("window.location", window.location.origin);
+      // console.log(this.userController.store.state.userId, this.store.Storage.userId.get());
+      !flag && this.userController.store.userListener()
       !flag && this.view && this.view.name === "login" && this.view.history.push(this.view.state.from);
       flag && (window.location.href = window.location.origin + '/whome')
       return

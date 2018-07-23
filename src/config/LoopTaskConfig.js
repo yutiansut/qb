@@ -23,5 +23,6 @@ export default {
   verifyCountDown: {},
   swiper: {},
   carousel: {},
-  activityH5:{}
+  activityH5:{},
+  userListener:{}
 }

@@ -47,7 +47,13 @@ export default class UserStore extends ExchangeStoreBase {
   //   // req.params = Object.assign({app:0}, req.params)
   //   console.log('用户', app, req)
   // }
-
+  userListener(){
+    this.Loop["userListener"].clear();
+    this.Loop["userListener"].set(()=>{
+      JSON.stringify(this.state.userId) !== JSON.stringify(this.Storage.userId.get()) && window.location.reload();
+    },1000);
+    this.Loop["userListener"].start();
+  }
   async userLogin(data) { // 获取登录信息
     this.state.userId = data && data.userId
     this.state.token = data && data.token
