@@ -125,7 +125,7 @@ export default class LoginController extends ExchangeControllerBase {
       popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
     })
 
-    if (result === null) {
+    if (result === null) {console.log(this.view,"==============")
       setTimeout(() => {
         // console.log('登录view', this.view)
         // this.view.history.push('/wlogin')

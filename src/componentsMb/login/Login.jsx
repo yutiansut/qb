@@ -36,12 +36,15 @@ export default class Login extends exchangeViewBase {
       checkState: true, // checkbox判断
       from: props.location.state && props.location.state.from.pathname || '/mhome'
     };
-    const {controller} = props
+    const {controller, match} = props
     //绑定view
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
     this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
+    let query = match.params && match.params.uid || null;
+    this.state.query = query
+    this.getAward = controller.getAward.bind(controller)
     this.getVerify = controller.getVerify.bind(controller)
     this.login = controller.login.bind(controller)
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller)
@@ -102,7 +105,13 @@ export default class Login extends exchangeViewBase {
   }
 
   componentDidMount() {
-    this.getCaptchaVerify()
+    this.getCaptchaVerify();
+    let queryIndex = this.props.location.query && this.props.location.query.titleIndex
+    if (queryIndex) {
+        this.setState({
+            titleIndex: queryIndex
+        })
+    }
   }
 
   componentWillUpdate(...parmas) {
@@ -150,7 +159,17 @@ export default class Login extends exchangeViewBase {
               <Button title={this.intl.get("login")}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
-                      onClick={()=>{this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())}}/>
+                      onClick={
+                          async () => {
+                              let res = this.state.query && await this.getAward({
+                                  inviter: JSON.parse(this.state.query),
+                                  invited: this.state.userInput
+                              }) || true
+                              if(!res)
+                                  return
+                              this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
+                          }
+                      }/>
             </li>
           </ul>
           <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
