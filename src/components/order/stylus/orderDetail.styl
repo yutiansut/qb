@@ -1,0 +1,151 @@
+@import "../../../common/css/variable.styl"
+
+.order-title
+	height .28rem
+	margin-top .3rem
+	display flex
+	align-items center
+	justify-content space-between
+	h3
+		font-size .2rem
+		color $normal-white-color-a9
+	.filter-reset
+		//margin-left 6.18rem
+		input
+			margin-right .1rem
+			position relative
+			top .04rem
+			border-color $normal-white-color-a
+			background-color $normal-black-color
+		span
+			color $normal-white-color-a
+	.export-record
+		margin-left .3rem
+.order-filter
+	height .3rem
+	margin .43rem 0 .4rem 0
+	display flex
+	align-items center
+	justify-content space-between
+	span
+		font-size .16rem
+		color $normal-white-color-a
+		margin-right .1rem
+	em
+		margin 0 .1rem
+	.select
+		width .8rem
+		height .3rem
+		line-height .3rem
+	.data-filter
+		input
+			margin-bottom 0
+	.filter-handle
+		button
+			width .64rem
+			height .3rem
+			margin-right .1rem
+.order-detail-table
+	width 100%
+	td:nth-of-type(1)
+		padding-left .1rem
+	thead
+		tr
+			height .3rem
+			line-height .3rem
+			color $normal-white-color-a
+			background $main-bg-active
+			td:last-child
+				text-align: center
+	tbody
+		tr
+			height .7rem
+			line-height .7rem
+			color $normal-white-color-a9
+			border-bottom .01rem solid $line-dark
+			td:last-child
+				text-align: center
+.no-order-detail-list
+	height 2.5rem
+	line-height 3rem
+	text-align center
+	font-size 0.16rem
+	color $normal-gray-color
+	letter-spacing 0
+	background $icon-nothing no-repeat center 0.3rem
+	background-size auto 1.01rem
+.order-page
+	justify-content: flex-end;
+	display: flex;
+	margin-top: .2rem;
+.history-order-detail
+	background: rgba(0,0,0,.4);
+	top: 0;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 8888;
+	.history-order-detail-content
+		width 8.5rem
+		max-height 80vh
+		position absolute
+		left 50%
+		top 50%
+		transform translate(-50%, -50%)
+		background $normal-black-color
+		border-radius .06rem
+		padding .3rem
+		z-index 8889
+		color $normal-white-color-a9
+		overflow-y: auto
+		&::-webkit-scrollbar-button
+			display none
+		&::-webkit-scrollbar
+			position relative
+			width .03rem
+			height 100%
+		&::-webkit-scrollbar-track
+			width .03rem
+			background #222730
+		&::-webkit-scrollbar-thumb
+			width .03rem
+			background #8C8F93
+		.detail-content-title
+			position relative
+			h3
+				font-size .2rem
+			i
+				cursor pointer
+				position absolute
+				width .16rem
+				height .16rem
+				right 0
+				top 0
+				background-image $close-button
+		.detail-content-info
+			display flex
+			width 100%
+			height 1.02rem
+			justify-content space-around
+			margin-top .44rem
+			background $bg-dark-color
+			border-radius .02rem
+			.content-info-items
+				height 100%
+				padding .2rem 0
+				p
+					font-size .16rem
+					margin-bottom .24rem
+					color  $main-color
+					text-align center
+				span
+					color  $normal-gray-color
+		.content-info-table
+			width 100%
+			margin-top .44rem
+			tr
+				height .5rem
+			thead
+				tr
+					color $normal-white-color-a
