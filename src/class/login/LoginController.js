@@ -39,7 +39,7 @@ export default class LoginController extends ExchangeControllerBase {
 
   //登录
   login(account, code, type, mode, captchaId, captchaCode, deviceFlag1, deviceFlag2){
-    console.log('112登陆', code, type, this.view.state.titleIndex, this.view.state.verifyType)
+    // console.log('112登陆', code, type, this.view.state.titleIndex, this.view.state.verifyType)
     if (this.view.state.titleIndex === 1 && !this.view.state.verifyType){
       code = this.RSAencrypt(code)
     }

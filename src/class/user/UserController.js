@@ -191,10 +191,10 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.uid,
       "token": this.store.token,
-      // oldPwd: this.RSAencrypt(oldPwd),
-      // newPwd: this.RSAencrypt(newPwd),
-      oldPwd,
-      newPwd,
+      oldPwd: this.RSAencrypt(oldPwd),
+      newPwd: this.RSAencrypt(newPwd),
+      // oldPwd,
+      // newPwd,
       type,// 0:设置密码 （不用传old_pass） 1:修改密码
     })
     this.view.setState({
@@ -217,14 +217,14 @@ export default class UserController extends ExchangeControllerBase {
       account,
       mode, // 0:phone 1:email 2:google
       opType, // 0:设置资金密码 1:修改资金密码
-      newPass,
-      // newPass: this.RSAencrypt(newPwd),
+      // newPass,
+      newPass: this.RSAencrypt(newPwd),
       captchaCode, // 图形验证码，没有就传空
       captchaId, // 图形验证码id，没有就传空
       code,
       "os": 3, // 1:android 2:iOS 3:browser
     })
-    console.log('设置密码', result)
+    // console.log('设置密码', result)
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
@@ -475,7 +475,7 @@ export default class UserController extends ExchangeControllerBase {
       "userId": this.store.uid,
       "token": this.store.token,
       "interval": type, // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
-      "fundPass": pwd
+      "fundPass": this.RSAencrypt(pwd),
     })
     return result
   }
