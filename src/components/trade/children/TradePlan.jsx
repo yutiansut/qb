@@ -122,20 +122,19 @@ export default class TradePlan extends ExchangeViewBase {
       return
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
     //   return
-    
+   
     let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
         || (priceValue >= 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-            || (priceValue > 0.01 && priceValue < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
-            || (priceValue <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
-    // console.log('limitNum[2',flag)
+            || (priceValue >= 0.01 && priceValue < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+            || (priceValue < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
     if(!flag)
       return
+  
     let limitPrice = 0;
     priceValue > 100 && (limitPrice = 6);
     priceValue >= 0.1 && priceValue <= 100 && (limitPrice = 4);
-    priceValue > 0.01 && priceValue < 0.1 && (limitPrice = 2);
+    priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
     let numValue = e.target.value > maxNum ? maxNum.toFixed(limitPrice) : value;
-    
     if(type){
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
       dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
@@ -163,7 +162,7 @@ export default class TradePlan extends ExchangeViewBase {
     // console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
     let flag = (Number(value) > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
         || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
-            || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
+            || (Number(value) <= 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
             || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
     // console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
     if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
