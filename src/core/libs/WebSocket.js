@@ -7,13 +7,15 @@
  * _size websocket数量
  * @returns {{}}
  */
+import Sleep from './Sleep'
 
 export default function () {
   let pool = {}, //连接池对象
     poolSize = 0, //连接池大小
     connects = [], //连接数组
     size, //传入的大小
-    url //地址
+    url, //地址
+    reConnectTime = 0 //重连次数
 
   /**
    * 建立websocket连接方法
@@ -27,10 +29,10 @@ export default function () {
     webSocket.onopen = event => onOpen(pool, event)
 
     function onOpen(pool, event) {
-      // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
+      console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
       connects.push(webSocket)
       poolSize = connects.length;
-      // console.log('webSocket开启 1', connects)
+      console.log('webSocket开启 1', connects)
       pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
@@ -40,7 +42,7 @@ export default function () {
 
     function onMessage(pool, event) {
 
-      //console.log('webSocket接收信息', event.data)
+      console.log('webSocket接收信息', event.data)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
       pool.onMessage && pool.onMessage(JSON.parse(event.data))
     }
@@ -48,25 +50,44 @@ export default function () {
     //webSocket断开之后的操作
     webSocket.onclose = onClose
 
-    function onClose(event) {
+    async function onClose(event) {
       // console.log('webSocket断开', event.target.url)
       // console.log('webSocket断开', event)
       pool.onClose && pool.onClose(event)
+      if(reConnectTime > 4) {
+        console.log('reConnect 重连 onClose', reConnectTime);
+        await Sleep(7000)
+        reConnectTime = 0
+      }
+      if(reConnectTime === 0){
+        await Sleep(3000)
+        // reConnectTime = 0
+      }
       reConnect(webSocket, callBack)
     }
 
     //webSocket出错之后的操作
     webSocket.onerror = onError
 
-    function onError(event) {
+    async function onError(event) {
       // console.error('webSocket出错', event.target.url,event )
       pool.onError && pool.onError(event)
+      if(reConnectTime > 4){
+        console.log('reConnect 重连 onError', reConnectTime);
+        await Sleep(7000)
+        reConnectTime = 0
+      }
+      if(reConnectTime === 0){
+        await Sleep(3000)
+        // reConnectTime = 0
+      }
       reConnect(webSocket, callBack)
     }
   }
 
   function reConnect(webSocket, callBack, index) {
-    // console.log('reConnect 重连');
+    console.log('reConnect 重连', reConnectTime);
+    reConnectTime ++ ;
     ((index = connects.indexOf(webSocket)) >= 0) && connects.splice(index, 1);
     !webSocket.hadRemoved && (webSocket.hadRemoved = true) && connects.length < size && pool.reConnectFlag && createConnect(url, callBack)
   }
@@ -92,7 +113,7 @@ export default function () {
     // console.log('send text', connects.length )
     if (connects.length === 0)
       console.error('==connect is all down!===')
-    // console.log('websocket 发送信息', text, connects[index++ % poolSize])
+    console.log('websocket 发送信息', JSON.stringify(text), connects[index++ % poolSize])
     poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 
