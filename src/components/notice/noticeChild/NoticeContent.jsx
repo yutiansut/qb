@@ -52,7 +52,7 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   render() {
-    // console.log('内容', this.state)
+    console.log('内容', this.state)
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">
@@ -76,7 +76,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.noticeList).length && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount}
+          {Object.keys(this.state.noticeList).length && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount || 0}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {
@@ -109,7 +109,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.infoList).length && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount}
+          {Object.keys(this.state.infoList).length && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount || 0}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {
