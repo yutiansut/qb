@@ -15,10 +15,18 @@ export default class extends ExchangeViewBase {
             {name: this.intl.get('order-mine'), type: 'mine', isPersonal: 1}
           ],
       isPersonal: 0,
-      recentTableHead : [
+      recentTableHead:[
         {name: this.intl.get('time'), sortValue: ''},
         {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
         {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'price'},],
+      recentTableMarketHead : [
+        {name: this.intl.get('time'), sortValue: ''},
+        {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
+        {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'price'},],
+      recentTableMineHead : [
+        {name: this.intl.get('time'), sortValue: ''},
+        {name: this.intl.get('price'), sortValue: ['avgPrice'], type: 0, sortDefault: 'avgPrice'},
+        {name: this.intl.get('amount'), sortValue: ['dealDoneCount'], type: 1, sortDefault: 'avgPrice'},],
       recentItemSelect: 'mineLess'
     };
     const {controller} = this.props;

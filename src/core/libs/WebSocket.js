@@ -29,10 +29,10 @@ export default function () {
     webSocket.onopen = event => onOpen(pool, event)
 
     function onOpen(pool, event) {
-      console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
+      // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
       connects.push(webSocket)
       poolSize = connects.length;
-      console.log('webSocket开启 1', connects)
+      // console.log('webSocket开启 1', connects)
       pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
@@ -55,7 +55,7 @@ export default function () {
       // console.log('webSocket断开', event)
       pool.onClose && pool.onClose(event)
       if(reConnectTime > 4) {
-        console.log('reConnect 重连 onClose', reConnectTime);
+        // console.log('reConnect 重连 onClose', reConnectTime);
         await Sleep(7000)
         reConnectTime = 0
       }
@@ -73,7 +73,7 @@ export default function () {
       // console.error('webSocket出错', event.target.url,event )
       pool.onError && pool.onError(event)
       if(reConnectTime > 4){
-        console.log('reConnect 重连 onError', reConnectTime);
+        // console.log('reConnect 重连 onError', reConnectTime);
         await Sleep(7000)
         reConnectTime = 0
       }
@@ -86,7 +86,7 @@ export default function () {
   }
 
   function reConnect(webSocket, callBack, index) {
-    console.log('reConnect 重连', reConnectTime);
+    // console.log('reConnect 重连', reConnectTime);
     reConnectTime ++ ;
     ((index = connects.indexOf(webSocket)) >= 0) && connects.splice(index, 1);
     !webSocket.hadRemoved && (webSocket.hadRemoved = true) && connects.length < size && pool.reConnectFlag && createConnect(url, callBack)
@@ -113,7 +113,7 @@ export default function () {
     // console.log('send text', connects.length )
     if (connects.length === 0)
       console.error('==connect is all down!===')
-    console.log('websocket 发送信息', JSON.stringify(text), connects[index++ % poolSize])
+    // console.log('websocket 发送信息', JSON.stringify(text), connects[index++ % poolSize])
     poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
   }
 

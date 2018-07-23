@@ -86,7 +86,7 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   async loginUpdata(obj) { // 监听退出消息
-    console.log('监听退出消息', obj)
+    // console.log('监听退出消息', obj)
     if(obj && obj.flag) {
       this.headerView.setState({
         otherLoginCon: obj.ret,

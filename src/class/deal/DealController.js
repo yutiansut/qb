@@ -324,6 +324,7 @@ export default class DealController extends ExchangeControllerBase {
       buyWallet
     })
   }
+
   // 获取最小额度
   async getCoinMinTrade(){
     let result = this.store.getCoinMinTrade();

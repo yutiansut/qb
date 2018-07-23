@@ -49,10 +49,10 @@ export default class Footer extends ExchangeViewBase {
   componentDidMount() {
       let lang = this.props.configController.language;
       // 加载客服
-      (function(a,h,c,b,f,g){a["UdeskApiObject"]=f;a[f]=a[f]||function(){(a[f].d=a[f].d||[]).push(arguments)};g=h.createElement(c);g.async=1;g.charset="utf-8";g.src=b;c=h.getElementsByTagName(c)[0];c.parentNode.insertBefore(g,c)})(window,document,"script","http://assets-cli.udesk.cn/im_client/js/udeskApi.js","ud");
+      (function(a,h,c,b,f,g){a["UdeskApiObject"]=f;a[f]=a[f]||function(){(a[f].d=a[f].d||[]).push(arguments)};g=h.createElement(c);g.async=1;g.charset="utf-8";g.src=b;c=h.getElementsByTagName(c)[0];c.parentNode.insertBefore(g,c)})(window,document,"script","https://assets-cli.udesk.cn/im_client/js/udeskApi.js","ud");
       ud({
           "code": "278eh9c7",
-          "link":   "//qbservice.udesk.cn/im_client/?web_plugin_id=" + (lang === "zh-CN" ?  "49139" :  "50065")
+          "link":   "https://qbservice.udesk.cn/im_client/?web_plugin_id=" + (lang === "zh-CN" ?  "49139" :  "50065")
       });
       window.addEventListener("scroll", this.onScroll);
   }
