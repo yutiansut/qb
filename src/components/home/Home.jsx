@@ -21,6 +21,7 @@ export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
     recommendController = new MarketController('recommend');
+    recommendController.configController = props.marketController.configController
     // marketController = new MarketController();
 
     this.onScroll= () => {
@@ -55,6 +56,7 @@ export default class Home extends exchangeViewBase {
     super.componentDidMount();
 
     let lang = this.props.marketController.configController.language;
+
 
     // 加载客服
     (function(a,h,c,b,f,g){a["UdeskApiObject"]=f;a[f]=a[f]||function(){(a[f].d=a[f].d||[]).push(arguments)};g=h.createElement(c);g.async=1;g.charset="utf-8";g.src=b;c=h.getElementsByTagName(c)[0];c.parentNode.insertBefore(g,c)})(window,document,"script","http://assets-cli.udesk.cn/im_client/js/udeskApi.js","ud");

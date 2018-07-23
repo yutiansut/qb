@@ -77,10 +77,12 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   get language() {
-    return this.configController.language
+    // console.log('this.configController', this.configController)
+    return this.configController && this.configController.language
   }
 
   get token() {
+    // console.log('this.userController', this.userController)
     return this.userController.userToken
   }
 
