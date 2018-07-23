@@ -33,7 +33,7 @@ export default class Footer extends ExchangeViewBase {
     // });
     // let a =document.getElementById('udesk_btn') && document.getElementById('udesk_btn').getElementsByTagName('a')[0];
     // a.style.top='4.5rem'
-    
+
     // console.log(123,document.getElementById('udesk_btn').getElementsByTagName('a'))
   }
 
@@ -45,7 +45,7 @@ export default class Footer extends ExchangeViewBase {
     return (
       <div className="footer-wrap">
         <div>
-          <Link to='/whome' className="home-img"><img src="/static/img/logo_footer.svg" alt="" /></Link>
+          <Link to='/whome' className="home-img"><img src="/static/img/logo_footer.png" alt="" /></Link>
           <ul>
             {this.footerArray.map((item, index) => (<li key={index}>
               <Link to={item.to}>{item.label}</Link>

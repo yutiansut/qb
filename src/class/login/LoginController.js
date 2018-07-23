@@ -49,13 +49,16 @@ export default class LoginController extends ExchangeControllerBase {
     this.store.login(obj)
   }
 
-  userLoginInfo(data) { // 登陆返回信息
+  userLoginInfo(data, flag) { // 登陆返回信息
     // console.log('ccc2', data, this.view.state.from)
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.ret === 0 &&  data.data) { // 登陆成功
       this.userController.getUserId(data.data)
-      this.view && this.view.history.push(this.view.state.from)
+      // console.log("login success", this.view, flag);
+      // console.log("window.location", window.location.origin);
+      !flag && this.view && this.view.name === "login" && this.view.history.push(this.view.state.from);
+      flag && (window.location.href = window.location.origin + '/whome')
       return
     }
     if ([2008, 2009, 2010].includes(data.ret)) { // 需要二次验证
@@ -63,7 +66,13 @@ export default class LoginController extends ExchangeControllerBase {
       console.log('二次登录', this.view.state)
       return
     }
-    if (data.ret !== 0 || data.data === null) {this.getCaptchaVerify()}
+    if (data.ret !== 0 || data.data === null) {
+      if (flag) {
+        !this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/wlogin");
+        this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/whome");
+      }
+      this.getCaptchaVerify()
+    }
     data = Object.assign(data, data.data);
     this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || this.view.intl.get("login-err")})
   }

@@ -76,18 +76,18 @@ export default class UserStore extends ExchangeStoreBase {
 
   // 提供基础数据
   get uid(){ // 提供用户id
-    this.Storage.userId.set(this.state.userId)
-    return this.Storage.userId.get() || this.state.userId;
+    // this.Storage.userId.set(this.state.userId)
+    return this.state.userId || this.Storage.userId.get();
   }
 
   get token() { // 提供用户token
-    this.Storage.userToken.set(this.state.token)
-    return this.Storage.userToken.get() || this.state.token;
+    // this.Storage.userToken.set(this.state.token)
+    return this.state.token || this.Storage.userToken.get();
   }
 
   get name() { // 提供用户姓名
-    this.Storage.userName.set(this.state.userName)
-    return this.Storage.userName.get() || this.state.userName;
+    // this.Storage.userName.set(this.state.userName)
+    return this.state.userName || this.Storage.userName.get();
   }
 
   async userInfo() { // 获取用户信息

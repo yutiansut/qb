@@ -24,6 +24,7 @@ import Browser from '../../class/lib/Browser'
 export default class Login extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = 'login';
     this.state = {
       titleList: [this.intl.get("login-verify"), this.intl.get("login-pass")],
       titleIndex: 0, // 点击下标

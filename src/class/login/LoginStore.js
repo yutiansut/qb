@@ -6,11 +6,12 @@ export default class LoginStore extends ExchangeStoreBase {
   constructor() {
     super('login', 'general');
     this.state = {}
+    let urlToken = window.location.pathname === "/whome/" && this.getQuery("token");
     this.WebSocket.general.on('login', data => {
       // console.log('joinRoom getWebSocketData', data, this.controller)
       // console.log('ccc1', data.data)
       // console.log('登录', data)
-      this.controller.userLoginInfo(data)
+      this.controller.userLoginInfo(data, urlToken ? true : false);
       if(data.ret === 0 && pushHistoryFlag ){
         this.WebSocket.general.clearWebsocketHistoryArr('login')
         this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get(), os:3})
@@ -21,7 +22,7 @@ export default class LoginStore extends ExchangeStoreBase {
       let dataOther = Object.assign(data, {flag: 1})
       this.controller.loginUpdata(dataOther);
     });
-    let token = (window.location.pathname === "/wlogin/" && this.getQuery("token")) || this.Storage.userToken.get();
+    let token = urlToken || this.Storage.userToken.get();
     token && this.WebSocket.general.emit('login', { 'token': token, os:3})
   }
 
