@@ -4,63 +4,130 @@
  */
 class Dom{
 
-    constructor(el){
-        this.els=[];
-        if( typeof(el) === "object"){
-            this.els.push(el);
+    constructor(sel){
+        if(typeof sel === "object"){
+            this.el = sel;
         }else{
-            this.els=document.querySelectorAll(el);
+            this.el = document.querySelector(sel);
         }
     }
 
-    find(el){
-        let res=[];
-        this.els.forEach((e)=>{console.log(e);
-            res.concat(e.querySelectorAll(el));
-        });
-        this.els=res;
-        return this;
-    }
-
     bind(event,handler){
-        this.els.forEach((e)=>{
-            e.addEventListener(event,handler.bind(e));
-        });
+        let el = this.el;
+        el.addEventListener(event,handler.bind(el));
         return this;
     }
 
     attr(name,value){
-        if(typeof(name)==="object"){
-            for(let key in name){
-                this.els.forEach((e)=>{
-                    e.setAttribute(key,name[key]);
-                });
-            }
-        }else{
-            this.els.forEach((e)=>{
-                e.setAttribute(name,value);
-            })
-        }
+        let el = this.el;
+        el.setAttribute(name,value);
+        return this;
     }
 
     css(name,value){
-        if(typeof(name)==="object"){
-            for(let key in name){
-                this.els.forEach((e)=>{
-                    let name1=name.replace(/-./g,function(str) {
-                        return str.substr(1).toUpperCase();
-                    });
-                    e.style[name1]=name[key];
-                });
+        let el = this.el;
+        let name1=name.replace(/-./g , function(str){
+            return str.substr(1).toUpperCase();
+        });
+        el.style[name1]=value;
+        return this;
+    }
+
+    cssA(obj){
+        Object.keys(obj).forEach(key=>{
+            this.css(key , obj[key]);
+        });
+        return this;
+    }
+
+   removeClass(cls){
+        let el = this.el;
+        el.className = el.className.replace(new RegExp(cls,"g"),"");
+        el.className = el.className.replace(/^\s+|\s+$/g, '');
+        return this;
+   }
+
+   addClass(cls){
+        let el = this.el;
+        el.className += " " + cls;
+        el.className = el.className.replace(/^\s+|\s+$/g, '');
+        return this;
+   }
+
+   parent(){
+        let el = this.el;
+        this.el = el.parentNode;
+        return this;
+   }
+
+   html(txt){
+        let el = this.el;
+        el.innerHTML = txt;
+        return this;
+   }
+
+   text(txt){
+        let el = this.el;
+        el.innerText = txt;
+        return this;
+   }
+
+   before(nEl){
+       let el = this.el;
+       let parent = el.parentNode;
+       for(let i=0;i<parent.childNodes.length;i++){
+           if(parent.childNodes[i]===el){
+               parent.insertBefore(nEl,parent.childNodes[i]);
+           }
+       }
+       return this;
+   }
+
+   after(nEl){
+        let el = this.el;
+        let parent = el.parentNode;
+        for(let i=0;i<parent.childNodes.length;i++){
+            if(parent.childNodes[i]===el){
+                if(i===parent.childNodes.length-1){
+                    parent.appendChild(nEl);
+                }else{
+                    parent.insertBefore(nEl,parent.childNodes[i+1]);
+                }
             }
-        }else{
-            this.els.forEach((e)=>{
-                let name1=name.replace(/-./g,function(str) {
-                    return str.substr(1).toUpperCase();
-                });
-                e.style[name1]=value;
-            })
         }
+        return this;
+   }
+
+   append(nEl){
+        let el=this.el;
+        el.appendChild(nEl);
+        return this;
+   }
+
+   //******************************************************************************************
+
+    find(sel){
+        let el = this.el;
+        return el.querySelector(sel);
+    }
+
+    findA(sel){
+        let el = this.el;
+        return el.querySelectorAll(sel);
+    }
+
+    getEl(){
+        return this.el;
+    }
+
+    width(){
+        let el = this.el;
+        return el.offsetWidth;
+    }
+
+    height(){
+        let el = this.el;
+        return el.offsetHeight;
     }
 
 }

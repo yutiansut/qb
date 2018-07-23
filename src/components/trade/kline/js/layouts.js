@@ -2,7 +2,6 @@ import * as areas from './areas'
 import {ChartManager} from './chart_manager'
 import * as themes from './themes'
 import {ChartSettings} from './chart_settings'
-import Kline from "./kline";
 
 export class TableLayout extends areas.ChartAreaGroup {
 
