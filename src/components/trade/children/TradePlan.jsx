@@ -108,6 +108,16 @@ export default class TradePlan extends ExchangeViewBase {
       return
     limitNum[1] = limitNum[1] || '';
     // console.log('limitNum[1]1',limitNum[1])
+    if(maxNum < this.state.coinMin){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get('deal-num-limited'),
+            dealPassType: 'passive',// 弹窗类型倾向
+            dealPass: true,// 下单弹窗
+          }
+      )
+      return
+    }
     if (!((/^[0-9]*$/).test(limitNum[0]) && (/^[0-9]*$/).test(limitNum[1])))
       return
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))

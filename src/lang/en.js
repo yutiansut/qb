@@ -298,7 +298,8 @@ export default function en(state) {
     "deal-after": 'Then can trade',
     "deal-login": 'Sign in/Sign up',
     "deal-num-err":'Error of input quantity accuracy',
-    "deal-pass-empty": 'Please input fund password'
+    "deal-pass-empty": 'Please input fund password',
+    "deal-num-limited":'Insufficient balance'
   };
   const user = {
     "user-score": "My VIP Status",
