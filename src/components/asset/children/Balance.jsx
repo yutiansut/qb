@@ -23,13 +23,12 @@ export default class Balance extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let qbt = await this.getQbt();
-    console.log(qbt)
+    // let qbt = await this.getQbt();
     await this.getAssets();
-    if (qbt && this.state.wallet) {
-      this.state.wallet.unshift(qbt);
-      this.setState({ wallet: this.state.wallet})
-    }
+    // if (qbt && this.state.wallet) {
+    //   this.state.wallet.unshift(qbt);
+    //   this.setState({ wallet: this.state.wallet})
+    // }
   }
 
   render() {

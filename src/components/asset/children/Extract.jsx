@@ -148,6 +148,7 @@ export default class Extract extends exchangeViewBase {
       );
     }
     if (nextState.currency !== this.state.currency) {
+      // console.log("changecurrency");
       this.props.controller.changeUrl(
         "currency",
         nextState.currency.toLowerCase()
@@ -167,6 +168,7 @@ export default class Extract extends exchangeViewBase {
           quotaTip: false
         },
         () => {
+          console.log('getMineFee...............')
           this.getMinerFee(nextState.currency, this.state.address);
         }
       );
