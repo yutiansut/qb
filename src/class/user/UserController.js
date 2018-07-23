@@ -218,7 +218,7 @@ export default class UserController extends ExchangeControllerBase {
       mode, // 0:phone 1:email 2:google
       opType, // 0:设置资金密码 1:修改资金密码
       // newPass,
-      newPass: this.RSAencrypt(newPwd),
+      newPass: this.RSAencrypt(newPass),
       captchaCode, // 图形验证码，没有就传空
       captchaId, // 图形验证码id，没有就传空
       code,
