@@ -60,7 +60,7 @@ export default class Header extends ExchangeViewBase {
           </a>
          {!isLogin ?
              <NavLink to="/mlogin">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
-             <img src="/static/mobile/header/icon_wode_head@2x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
+             <img src="/static/mobile/header/icon_cd@3x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
         </div>
         {(isLogin && !this.state.navHidden) && <div>
             <div className="nav-shadow" onClick={e => this.setState({navHidden: true})}></div>
