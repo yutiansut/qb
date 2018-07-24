@@ -199,8 +199,8 @@ export default class CoinData extends exchangeViewBase {
               <p>
                 <span>
                   {this.intl.get('helo-coin-price')}：{this.state.unit
-                    ? `¥${Number(priceCN).format({ number: "legal" })}`
-                    : `$${Number(priceEN).format({ number: "legal" })}`}
+                    ? `¥${Number(icoPriceCN).format({ number: "legal" })}`
+                    : `$${Number(icoPriceEN).format({ number: "legal" })}`}
                 </span>
                 <span>{this.intl.get('helo-coin-date')}：{releaseTime.toDate("yyyy-MM-dd")}</span>
               </p>
