@@ -242,8 +242,8 @@ export default class DealController extends ExchangeControllerBase {
     limitNum[1] = limitNum[1] || '';
     let numLimited =  (params.price >= 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
         || (params.price >= 0.1 && params.price < 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-        || (params.price > 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
-        || (params.price <= 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]));
+        || (params.price >= 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+        || (params.price < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]));
     if(!numLimited){
       this.view.setState(
           {

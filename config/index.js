@@ -30,7 +30,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     devtool: '#source-map',
 
     externals:{}

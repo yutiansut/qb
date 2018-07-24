@@ -66,7 +66,7 @@ module.exports = merge(webpackConfig, {
           beautify: false
         }
       },
-      sourceMap: config.build.productionSourceMap,
+      // sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
     //传递环境变量，todo此处有待修改
