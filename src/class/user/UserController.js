@@ -136,6 +136,11 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
+    if(!this.view.state.setPassFlag)
+      return
+    this.view.setState({
+      setPassFlag: false
+    })
     let noticeArr = [1, 0], noticeList = this.view.state.noticeList, verifyList = this.view.state.verifyList
     let result = await this.store.Proxy.bindUser({
       "userId": this.store.uid,
@@ -151,7 +156,8 @@ export default class UserController extends ExchangeControllerBase {
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-bindSucc"),
-      showSet: result ? true : false
+      showSet: result ? true : false,
+      setPassFlag: true
     })
 
     if (result === null && mode === 0) {
@@ -187,7 +193,12 @@ export default class UserController extends ExchangeControllerBase {
     // console.log('绑定手机号／邮箱', result)
   }
 
-  async setLoginPass(oldPwd, newPwd, type) { // 设置登录密码
+  async setLoginPass(oldPwd, newPwd, type) { // 设置／修改登录密码
+    if(!this.view.state.setPassFlag)
+      return
+    this.view.setState({
+      setPassFlag: false
+    })
     let result = await this.store.Proxy.getLoginPwd({
       "userId": this.store.uid,
       "token": this.store.token,
@@ -202,6 +213,7 @@ export default class UserController extends ExchangeControllerBase {
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
       showSet: result ? true : false,
+      setPassFlag: true
     })
     if (result === null) {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})})
@@ -210,7 +222,12 @@ export default class UserController extends ExchangeControllerBase {
     // console.log('设置密码', result)
   }
 
-  async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 修改资金密码
+  async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 设置／修改资金密码
+    if(!this.view.state.setPassFlag)
+      return
+    this.view.setState({
+      setPassFlag: false
+    })
     let result = await this.store.Proxy.modifyFundPwd({
       "userId": this.store.uid,
       "token": this.store.token,
@@ -229,7 +246,8 @@ export default class UserController extends ExchangeControllerBase {
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
       popMsg: result ? result.msg : this.view.intl.get("user-setSucc"),
-      showSet: result ? true : false
+      showSet: result ? true : false,
+      setPassFlag: true
     })
     if (result === null && opType === 0) {
       this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {fundPwd: 0})})
@@ -245,6 +263,11 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setTwoVerify(account, mode, code, picCode, picId, position, verifyType) { // 修改两步认证
+    if(!this.view.state.verifyFlag)
+      return
+    this.view.setState({
+      verifyFlag: false
+    })
     let twoVerifyArr = ['loginVerify', 'withdrawVerify', 'fundPassVerify'], changeVerifyArr = [3, 1, 0, 2];
     let twoVerifyState = twoVerifyArr[position-1]
     let twoVerifyUser = {}
@@ -262,6 +285,9 @@ export default class UserController extends ExchangeControllerBase {
       picId,//验证码图片的id
       position,//修改的位置 1登陆   2提现   3资金密码
       verifyType//2谷歌验证 1邮件  3短信  0无
+    })
+    this.view.setState({
+      verifyFlag:true
     })
     if (result === null) {
       verifyList[position-1].contentList.forEach(v=>v.flag=false)

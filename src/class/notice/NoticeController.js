@@ -42,7 +42,7 @@ export default class NoticeController extends ExchangeControllerBase {
 
   async getUserNotice( unRead, page, pageSize) { // 获取用户通知列表
     let userNotice = await this.store.userNotice( unRead, page, pageSize);
-    console.log('通知列表', userNotice)
+    // console.log('通知列表', userNotice)
     this.view && this.view.setState({userNotice})
   }
 
@@ -58,14 +58,14 @@ export default class NoticeController extends ExchangeControllerBase {
       "token": this.token,
       notiId
     })
-    console.log('未读', result)
+    // console.log('未读', result)
   }
 
   async readAllUserNotifications() {
     let result = await this.store.Proxy.readAllUserNotifications({
       "token": this.token
     })
-    console.log('删除全部', result)
+    // console.log('删除全部', result)
   }
 
   changeHeaderNotice(v) { // 点击列表页改变头部信息

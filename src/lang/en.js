@@ -449,6 +449,7 @@ export default function en(state) {
     "user-supportPhone": "Currently, only Mainland China cell numbers are supported",
     "user-errIp": "Please enter the correct IP",
     "user-googleSucc": "Google verification Setup Success",
+    "user-setFundPwd": "Please set up the fund password",
 
     "user-log-1": "Logon log",
     "user-log-2": "Register log",

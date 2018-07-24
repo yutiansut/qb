@@ -11,6 +11,7 @@ export default class TradePlan extends ExchangeViewBase {
     super(props);
     this.state = {
       dbPrePass:false,
+      dbPreOrder:true,
       dealPopMsg:'',
       dealPassType:'positi',// 弹窗类型倾向
       dealPass:false,// 下单弹窗

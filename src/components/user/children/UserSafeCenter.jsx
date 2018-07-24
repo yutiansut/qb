@@ -50,7 +50,9 @@ export default class userSafeCenter extends exchangeViewBase {
       popupInputErr2: "",
       verifyNum: this.intl.get("sendCode"),
       ipAddr: "", // 获取当前ip
-      showIp: false
+      showIp: false,
+      setPassFlag: true, // 设置／绑定防连点
+      verifyFlag: true, // 两步验证防连点
     }
 
     const {controller} = props
@@ -105,7 +107,7 @@ export default class userSafeCenter extends exchangeViewBase {
       this.setState({
         remindPopup: true,
         popType: 'tip3',
-        popMsg: '请设置资金密码',
+        popMsg: this.intl.get("user-setFundPwd")
       })
       return
     }
@@ -175,14 +177,16 @@ export default class userSafeCenter extends exchangeViewBase {
 
   closeChange() { // 关闭两步认证弹窗
     this.setState({
-      showChange: false
+      showChange: false,
+      verifyFlag: true
     })
     this.getCaptchaVerify()
   }
 
   closeSet() { // 关闭设置弹窗
     this.setState({
-      showSet: false
+      showSet: false,
+      setPassFlag: true
     })
     this.getCaptchaVerify()
   }

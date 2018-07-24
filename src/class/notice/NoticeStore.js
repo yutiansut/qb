@@ -12,7 +12,7 @@ export default class NoticeStore extends ExchangeStoreBase {
     }
     // websocket监听用户资产更新推送
     this.WebSocket.general.on("userNoticeUpdata", data => {
-      console.log("userNoticeUpdata-websocket", data);
+      // console.log("userNoticeUpdata-websocket", data);
       this.controller.userNoticeUpdata(data);
     });
   }
@@ -75,7 +75,7 @@ export default class NoticeStore extends ExchangeStoreBase {
     });
     activityList = activityList.msg ? [] : activityList.data[0]
     this.state.activityList = activityList
-    console.log('获取详细信息', activityList)
+    // console.log('获取详细信息', activityList)
     return activityList
   }
 }

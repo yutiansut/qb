@@ -156,8 +156,10 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   changeMaxNum(t, v) {
+    let a = Number(v) ? v :1;
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
-    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / v}))
+    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / a}));
+    // console.log(11111111,a,v,this.view.state.buyWallet / a)
     if (this.view.state.buyNumFlag && (t === 0)) {
       // let limit;
       // v > 100 && (limit = 2);
@@ -165,7 +167,7 @@ export default class DealController extends ExchangeControllerBase {
       // v <= 0.1 && v > 0.01 && (limit = 6);
       // v <= 0.01 && (limit = 8);
       // let limit = v.split('.')[1] && v.split('.')[1].length || 0;
-      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(v))})
+      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(a))})
     }
     // if(this.view.state.sellNumFlag && (t === 1)){
     //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
@@ -175,6 +177,11 @@ export default class DealController extends ExchangeControllerBase {
   async dealTrade(orderType,e) {
     e.preventDefault();
     e.stopPropagation();
+    if(!this.view.state.dbPreOrder)
+      return
+    this.view.setState({
+      dbPreOrder: false
+    })
     if(this.view.state.fundPwdInterval === -1){
       this.view.setState(
           {
@@ -259,6 +266,9 @@ export default class DealController extends ExchangeControllerBase {
       return
     }
     let result = await this.store.dealTrade(params);
+    this.view.setState({
+      dbPreOrder:true
+    })
     console.log('result',result);
     if(result === null){
       this.view.setState(
