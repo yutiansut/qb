@@ -18,6 +18,7 @@ export default class Charge extends exchangeViewBase {
       this.props.setValue(value);
     };
     this.setCurrency = currency => {
+      console.log('setCurrency')
       this.props.setCurrency(currency);
     };
   }
@@ -39,12 +40,14 @@ export default class Charge extends exchangeViewBase {
           onEnter={() => {
             let value = searchArr[0] || "BTC";
             this.setValue(value);
+            console.log("setCurrency1");
             this.setCurrency(value);
             this.hide();
           }}
           clickOutSide={() => {
             let value = searchArr[0] || "BTC";
             this.setValue(value);
+            console.log("setCurrency2");
             this.setCurrency(value);
             this.hide();
           }}
@@ -62,6 +65,7 @@ export default class Charge extends exchangeViewBase {
                     e.stopPropagation();
                     e.nativeEvent.stopImmediatePropagation();
                     this.setValue(item);
+                    console.log("setCurrency3");
                     this.setCurrency(item);
                     this.hide();
                   }}

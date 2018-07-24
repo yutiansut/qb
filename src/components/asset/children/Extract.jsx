@@ -99,8 +99,12 @@ export default class Extract extends exchangeViewBase {
   async componentWillMount() {
     let currency =
       this.props.controller.getQuery("currency").toUpperCase() ||
-      (this.props.location.query && this.props.location.query.currency);
+      (this.props.location.query && this.props.location.query.currency.toUpperCase());
     currency && this.setState({ currency: currency, value: currency });
+    currency && this.props.controller.changeUrl(
+      "currency",
+      currency.toLowerCase()
+    );
     await this.getWalletList();
     await this.getExtract();
     this.getMinerFee(currency || this.state.currency, this.state.address);

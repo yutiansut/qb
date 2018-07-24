@@ -22,13 +22,13 @@ export default class HomeNotice extends ExchangeViewBase {
 
   async componentDidMount() {
     await this.getNoticeCon(0, 5);
-    let result = this.state.noticeList;
-    if (this.state.noticeList && this.state.noticeList.length) {
-      this.setState({
+    let result = Object.keys(this.state.noticeList).length && this.state.noticeList.data || []
+    if (Object.keys(this.state.noticeList).length) {
+      this.setState(
+        {
           top2: Math.ceil(result.length) * 100,
-
           criticalArr: Array.from(
-            {length: Math.ceil(result.length + 1)},
+            { length: Math.ceil(result.length + 1) },
             (item, index) => index * 100
           )
         },
@@ -56,23 +56,22 @@ export default class HomeNotice extends ExchangeViewBase {
   }
 
   render() {
-
-    return <div className={`${this.state.noticeList && this.state.noticeList.length ? "" : "hide"} home-notice-wrap`}>
-      {this.state.noticeList && this.state.noticeList.length && <div className="home-notice-content">
-        <ul style={{top: this.state.top1 + "%"}}>
-          {this.state.noticeList.map((v, index) => <li key={index}>
-            <a>
-              <img src="/static/mobile/home/img_lb@2x.png"/>
+    return <div className={`${Object.keys(this.state.noticeList).length && this.state.noticeList.data ? "" : "hide"} home-notice-wrap`}>
+      {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <div className="home-notice-content">
+        <ul style={{ top: this.state.top1 + "%" }}>
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
+            <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
+              <i>【{v.createdAt.toDate('MM-dd')}】</i>
               <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
-            </a>
+            </Link>
           </li>)}
         </ul>
-        <ul style={{top: this.state.top2 + "%"}}>
-          {this.state.noticeList.map((v, index) => <li key={index}>
-            <a>
-              <img src="/static/mobile/home/img_lb@2x.png"/>
+        <ul style={{ top: this.state.top2 + "%" }}>
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
+            <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
+              <i>【{v.createdAt.toDate('MM-dd')}】</i>
               <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
-            </a>
+            </Link>
           </li>)}
         </ul>
       </div>}

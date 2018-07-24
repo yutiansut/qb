@@ -189,35 +189,43 @@ export default class Wallets extends exchangeViewBase {
                       type="base"
                       theme="main"
                       title={this.intl.get("deposit")}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
                         this.verify(item.coinName);
                       }}
                     />
-                    <NavLink
-                      to={{
-                        pathname: `/wallet/extract/`,
-                        query: { currency: item.coinName }
-                      }}
-                    >
                       <Button
                         type="base"
                         className="withdraw"
                         theme="main"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.nativeEvent.stopImmediatePropagation();
+                          this.props.history.push({
+                            pathname: `/wallet/extract/`,
+                            query: {
+                              currency: item.coinName
+                            }
+                          });
+                        }}
                         title={this.intl.get("asset-withdraw")}
                       />
-                    </NavLink>
-                    <NavLink
-                      to={{
-                        pathname: `/trade`,
-                        query: { pairName: item.coinName }
-                      }}
-                    >
                       <Button
                         type="base"
                         theme="main"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.nativeEvent.stopImmediatePropagation();
+                          this.props.history.push({
+                            pathname: `/trade`,
+                            query: {
+                              pairName: item.coinName
+                            }
+                          });
+                        }}
                         title={this.intl.get("asset-trade")}
                       />
-                    </NavLink>
                   </td>
                 </tr>
               )

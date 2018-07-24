@@ -77,12 +77,16 @@ export default class Charge extends exchangeViewBase {
   async componentWillMount() {
     let currency = this.props.controller
       .getQuery("currency")
-      .toUpperCase() || (this.props.location.query && this.props.location.query.currency);
+      .toUpperCase() || (this.props.location.query && this.props.location.query.currency.toUpperCase());
     currency &&
       this.setState({
         currency: currency,
         value: currency
       });
+    currency && this.props.controller.changeUrl(
+      "currency",
+      currency.toLowerCase()
+    );
     await this.getWalletList();
     this.getTradePair();
     this.getCurrencyAmount(currency || this.state.currency);

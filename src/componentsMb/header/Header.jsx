@@ -46,7 +46,7 @@ export default class Header extends ExchangeViewBase {
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/mhelp/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
         <Link to='/home' className="logo">
-          <img src="/static/mobile/header/icon_logo@2x.png"/>
+          <img src="/static/img/home/logo_header.svg"/>
         </Link>
         <div className="nav-menu">
           <a href="javascript:void(0)" className="drop-menu"
