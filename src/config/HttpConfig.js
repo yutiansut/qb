@@ -83,20 +83,20 @@ export default {
     { name: 'chargeAddress', data: { url: '/v1/property/', method: 'post' }, action: 'ca', actionBack: 'car', needToken: true },
     // 充提记录4.10
     { name: 'history', data: { url: '/v1/property/', method: 'post' }, action: 'cr', actionBack: 'crr', needToken: true },
-    // 撤销提币申请
-    { name: 'cancelWithdraw', data: { url: '/v1/property/', method: 'post' }, action: 'cancelWithdraw', actionBack: 'cancelWithdrawRes', needToken: true },
     // 提币矿工费4.5
-    { name: 'minerFee', data: { url: '/v1/property/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes', needToken: true },
-    // 提交提币订单4.6（pass）
-    { name: 'extractOrder', data: { url: '/v1/property/', method: 'post' }, action: 'withdraw', actionBack: 'withdrawRes', needToken: true },
+    { name: 'minerFee', data: { url: '/v1/property/', method: 'post' }, action: 'mf', actionBack: 'mfr', needToken: true },
     // 提币地址查询4.7（pass）
-    { name: 'extractAddress', data: { url: '/v1/property/', method: 'post' }, action: 'getWithdrawAddress', actionBack: 'getWithdrawAddressRes', needToken: true },
+    { name: 'extractAddress', data: { url: '/v1/property/', method: 'post' }, action: 'wa', actionBack: 'war', needToken: true },
+    // 提交提币订单4.6（pass）
+    { name: 'extractOrder', data: { url: '/v1/property/', method: 'post' }, action: 'wd', actionBack: 'wdr', needToken: true },
+    // 撤销提币申请
+    { name: 'cancelWithdraw', data: { url: '/v1/property/', method: 'post' }, action: 'cwd', actionBack: 'cwdr', needToken: true },
     //增加提币地址4.8(需要登录)（pass）
-    { name: 'addAddress', data: { url: '/v1/property/', method: 'post' }, action: 'addWithdrawAddress', actionBack: 'addWithdrawAddressRes', needToken: true },
+    { name: 'addAddress', data: { url: '/v1/property/', method: 'post' }, action: 'awa', actionBack: 'awar', needToken: true },
     // 删除提币地址4.9(需要登录)（pass）
-    { name: 'delAddress', data: { url: '/v1/property/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
+    { name: 'delAddress', data: { url: '/v1/property/', method: 'post' }, action: 'dwa', actionBack: 'dwar', needToken: true },
     // 验证资金密码
-    { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
+    { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'vf', actionBack: 'vfr', needToken: true },
   ],
   userOrder: [
     //当前订单

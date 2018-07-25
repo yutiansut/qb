@@ -130,7 +130,7 @@ export default {
   612: {
     // msg: "与原密码相同",
     get msg() {
-      return intl.get(612, { number: this.frozenTime % 60 ? parseInt(this.frozenTime / 60) + 1 : parseInt(this.frozenTime / 60)});
+      return intl.get(612, { number: this.ft % 60 ? parseInt(this.ft / 60) + 1 : parseInt(this.ft / 60)});
     },
     errCode: "FREEZE_PASSWORD"
   },
@@ -288,7 +288,7 @@ export default {
     },
     errCode: "CODE_NOT_EXPIRE"
   },
-  
+
   1412: {
     get msg() {
       return intl.get(1416)

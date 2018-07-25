@@ -263,65 +263,112 @@ export default class AssetStore extends ExchangeStoreBase {
   // 导出资产记录
   async exportHistory() {
     let result = await this.Proxy.history({
-      userId: this.controller.userId,
+      // userId: this.controller.userId,
       token: this.controller.token,
-      coinId: -1, //如果不设定 传-1
-      coinName: -1,
-      orderType: -1, //充1提2转4  注意:交易所内提币收方显示为转账  所有状态传-1，如果需要两种状态则将需要的状态相与（|）
-      startTime: -1, //不设定传-1 都传Unix秒
-      endTime: -1, //不设定传-1 都传Unix秒
-      orderStatus: -1, //所有状态传-1
-      page: 0,
-      pageSize: 0
+      "id": -1,//如果不设定 传-1 coin id
+      "na": -1,//coin name
+      "ot": -1,//充1提2转4  注意:交易所内提币收方显示为转账  所有状态传-1，如果需要两种状态则将需要的状态相与（|） //order type
+      "st": -1,//不设定传-1 都传Unix秒 start time
+      "et": -1,//不设定传-1 都传Unix秒 end time
+      "ost": -1, //所有状态传-1 //order status
+      "p": 0, //page
+      "s": 0 //page size
     });
     if (result && result.errCode) {
       return [];
     }
-    return result.orderList;
+    return result.ol.map(v=>{
+      return {
+        "orderType": v.ot === 15000 ? 2 : (v.ot === 5 ? 4 : v.ot),
+        "orderStatus": v.ost,
+        "fullname": v.fna,
+        "coinIcon": v.cic,
+        "coinName": v.cna,
+        "coinId": v.cid,
+        "count": v.cou,
+        "balance": b.bal,//余额
+        "postAddress": v.psa,//发送地址
+        "receiveAddress": v.rea,//接收地址
+        "fee": v.fee,//手续费
+        "verifyCount": v.vc,//确认数
+        "doneCount": v.dc,//已确认数
+        "hashAddress": v.ha,//hash地址
+        "blockSite": v.bs,//点击查看交易信息的地址
+        "orderTime": v.t,
+        "orderId": v.oid
+      }
+    });
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
     let result = await this.Proxy.minerFee({
-      coinId: this.state.walletList[coin],
-      coinAddr: address,
+      id: this.state.walletList[coin],
+      add: address,
       token: this.controller.token
     });
-    this.state.walletExtract.minerFee = result.minerFee;
+    this.state.walletExtract.minerFee = result.fee;
   }
   // 获取提币地址信息
   async getwalletExtract() {
     if (this.state.walletExtract.extractAddr.length) return;
     let result = await this.Proxy.extractAddress({
-      userId: this.controller.userId,
+      // userId: this.controller.userId,
       token: this.controller.token
     });
     if (result && result.errCode) {
       // console.log(result);
       return result;
     }
-    this.state.walletExtract.extractAddr = result.addresses;
+    this.state.walletExtract.extractAddr = result.add.map(v=>{
+      return {
+        "coinId": v.id,
+        "coinName": v.na,
+        "minCount": v.mic,//最小提币数量
+        "addressList": v.adl.map(i=>{
+          return {
+            "addressId": i.aid,
+            "addressName": i.ana,
+            "address": i.add
+          }
+        })
+      }
+    });
   }
 
   // 提交提币订单
   async extractOrder(obj) {
     obj.fundPass = this.controller.RSAencrypt(obj.fundPass);
+
     let result = await this.Proxy.extractOrder(
-      Object.assign(obj, {
-        userId: this.controller.userId,
+      {
         token: this.controller.token,
-        coinId: this.state.walletList[obj.coinName],
-        coinName: obj.coinName.toLowerCase(),
-        os: 3
-      })
+        "id": this.state.walletList[obj.coinName],//coin id
+        "na": obj.coinName.toLowerCase(),//coin name
+        "tad": obj.toAddr,//to addre
+        "a": obj.amount,//amount
+        // "rm": obj.remark,// 备注，可空remark
+        "fp": obj.fundPass,//资金密码
+        "cd": obj.code,//code
+        "ac": obj.account, // Googlecode传空 account
+        // "md": 0,//mode
+        "os": 3
+      }
     );
+    if(result.ri !== undefined) {
+      result = {
+        "recordId": result.ri,
+        "status": result.sta, // 0 审核 1通过 2未通过 4处理
+        "quota": result.qut // 是否超出限额
+      }
+    }
     return result;
   }
   // 撤销提币申请
   async cancelOrder(id) {
     let result = await this.Proxy.cancelWithdraw({
-      userId: this.controller.userId,
+      // userId: this.controller.userId,
       token: this.controller.token,
-      applyId: id
+      aid: id
     });
     if (result === null) {
       this.state.assetHistory.orderList.forEach(v => {
@@ -334,12 +381,13 @@ export default class AssetStore extends ExchangeStoreBase {
   // 增加提现地址
   async appendAddress({ coinName, addressName, address }) {
     let result = await this.Proxy.addAddress({
-      userId: this.controller.userId,
-      coinId: this.state.walletList[coinName],
-      coinName: coinName.toLowerCase(),
-      addressName: addressName,
+      // userId: this.controller.userId,
       address: address,
-      token: this.controller.token
+      token: this.controller.token,
+      "id": this.state.walletList[coinName], //coin id
+      "na": coinName.toLowerCase(),//coin name
+      "ana": addressName,//address name
+      "add": address //address
     });
     if (result && result.errCode) {
       return result;
@@ -350,7 +398,7 @@ export default class AssetStore extends ExchangeStoreBase {
         v.addressList.push({
           addressName: addressName,
           address: address,
-          addressId: result.addressId
+          addressId: result.aid
         });
     });
     return this.state.walletExtract;
@@ -360,12 +408,8 @@ export default class AssetStore extends ExchangeStoreBase {
   async deletAddress({ coinName, addressId, addressName, address }) {
     // console.log(coinName, addressId, addressName, address);
     let result = await this.Proxy.delAddress({
-      userId: this.controller.userId,
-      coinId: this.state.walletList[coinName],
-      coinName: coinName.toLowerCase(),
-      addressId: addressId,
-      addressName: addressName,
-      address: address,
+      // userId: this.controller.userId,
+      aid: addressId,
       token: this.controller.token
     });
     if (result && result.errCode) {
@@ -386,9 +430,9 @@ export default class AssetStore extends ExchangeStoreBase {
   async verifyPass(fundPass) {
     // console.log(this.controller.RSAencrypt(fundPass));
     let result = await this.Proxy.verifyFundPass({
-      userId: this.controller.userId,
+      // userId: this.controller.userId,
       token: this.controller.token,
-      fundPass: this.controller.RSAencrypt(fundPass)
+      fpd: this.controller.RSAencrypt(fundPass)
     });
     return result;
   }
