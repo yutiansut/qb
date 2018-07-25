@@ -200,11 +200,6 @@ export default class TradePlan extends ExchangeViewBase {
     let type, pwd;
     type = this.state.fundPwdIntervalClick;
     pwd = this.state.setPass;
-    this.setState(
-        {
-          dbPrePass: true
-        }
-    )
     if(pwd === ''){
       this.setState(
           {
@@ -215,6 +210,11 @@ export default class TradePlan extends ExchangeViewBase {
       );
       return
     }
+    this.setState(
+        {
+          dbPrePass: true
+        }
+    )
     let result = await this.props.controller.userController.setFundPwdInterval(type, pwd);
     result === null && this.setState(
         {

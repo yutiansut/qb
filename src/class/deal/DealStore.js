@@ -51,7 +51,14 @@ export default class DealStore extends ExchangeStoreBase {
   
   async getCoinMinTrade(){
     let result = await this.Proxy.getCoinMinTrade();
-    this.state.coinMinTrade = result;
-    return result
+    let resultAf = result.map(v => {
+      return {
+        "coinId": v.id,
+        "coinName": v.n,
+        "minTrade": v.mt
+      }
+    })
+    this.state.coinMinTrade = resultAf;
+    return resultAf
   }
 }

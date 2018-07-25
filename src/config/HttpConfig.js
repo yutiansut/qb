@@ -100,19 +100,19 @@ export default {
   ],
   userOrder: [
     //当前订单
-    { name: 'currentOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrders', actionBack: 'getCurrOrdersRes' , needToken: true },
+    { name: 'currentOrder', data: { url: '/v1/order/', method: 'post' }, action: 'co', actionBack: 'cor' , needToken: true },
     //历史订单
-    { name: 'historyOrder', data: { url: '/v1/order/', method: 'post' }, action: 'getCurrOrderRecord', actionBack: 'getCurrOrderRecordRes' , needToken: true },
+    { name: 'historyOrder', data: { url: '/v1/order/', method: 'post' }, action: 'cor', actionBack: 'corr' , needToken: true },
     //订单详情
-    { name: 'orderDetail', data: { url: '/v1/order/', method: 'post' }, action: 'orderDetail', actionBack: 'orderDetailRes' , needToken: true },
+    { name: 'orderDetail', data: { url: '/v1/order/', method: 'post' }, action: 'od', actionBack: 'odr' , needToken: true },
     //近期交易市场
-    { name: 'recentOrderMarket', data: { url: '/v1/common/', method: 'post' }, action: 'getRecentOrderOfMarket', actionBack: 'getRecentOrderOfMarketRes' },
+    { name: 'recentOrderMarket', data: { url: '/v1/common/', method: 'post' }, action: 'rom', actionBack: 'romr' },
     //近期交易个人
-    { name: 'recentOrderUser', data: { url: '/v1/order/', method: 'post' }, action: 'getRecentOrderOfUser', actionBack: 'getRecentOrderOfUserRes', needToken: true },
+    { name: 'recentOrderUser', data: { url: '/v1/order/', method: 'post' }, action: 'rou', actionBack: 'rour', needToken: true },
     //挂单列表
-    { name: 'getDepth', data: { url: '/v1/common/', method: 'post' }, action: 'getDepth', actionBack: 'getDepthRes' },
+    { name: 'getDepth', data: { url: '/v1/common/', method: 'post' }, action: 'gd', actionBack: 'gdr' },
     //撤单操作
-    { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'cancelOrder', actionBack: 'cancelOrderRes', needToken: true },
+    { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'can', actionBack: 'canr', needToken: true },
     // 获取k线数据
     { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'gk', actionBack: 'gks' }
 
@@ -120,8 +120,8 @@ export default {
   deal: [
     //交易接口
     // {name: 'dealExchange', data: {url: '/order/', method: 'post'}, action: 'makeOrder', actionBack: 'makeOrderRes', needToken: true}
-    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'makeOrder', actionBack: 'makeOrderRes',needToken: true },
-    { name: 'getCoinMinTrade', data: { url: '/v1/common/', method: 'post'}, action: 'getCoinMinTrade', actionBack: 'getCoinMinTradeRes'}
+    { name: 'dealExchange', data: { url: '/v1/order/', method: 'post' }, action: 'mo', actionBack: 'mor',needToken: true },
+    { name: 'getCoinMinTrade', data: { url: '/v1/common/', method: 'post'}, action: 'gcm', actionBack: 'gcmr'}
   ],
   activity: [
     // 获取邀请列表

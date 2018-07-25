@@ -53,7 +53,7 @@ export default class UserOrderListStore extends OrderListStore {
           ot: params.orderType,
         }
     );
-    let currentListAf = currentList.ol.map(v => {
+    let currentListAf = currentList && currentList.ol && currentList.ol.map(v => {
       return {
         "tradePairId": v.id,
         "tradePairName": v.name,
@@ -91,7 +91,7 @@ export default class UserOrderListStore extends OrderListStore {
         }
     );
     let historyListAf = {
-      orderList: histortList.ol.map(v => {
+      orderList: historyList && historyList.ol && historyList.ol.map(v => {
         return {
           "tradePairId": v.id,
           "tradePairName": v.na,
