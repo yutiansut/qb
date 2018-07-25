@@ -18,31 +18,69 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async noticeCon(page, pageSize) { // 获取公告
-    let noticeList = await this.Proxy.getActivity({
-      "activityId": 0,
-      "activityType": 0,  //类型 0公告 1新闻 2资讯
-      "contentType": 0, //内容类型 0则不返回content 1则返回全部数据
-      page,
-      pageSize
+    let res = await this.Proxy.getActivity({
+      id: 0,
+      ty: 0,  //类型 0公告 1新闻 2资讯
+      con: 0, //内容类型 0则不返回content 1则返回全部数据
+      p: page,
+      ps: pageSize,
+      //la: "zh-CN,
     });
-    // noticeList = noticeList.msg ? [] : noticeList.data
+    let noticeList={
+        catalog: res.cat,
+        activityId: res.id,
+        subject: res.su,
+        subjectCN: res.su,
+        subjectEN: res.su,
+        content: res.cnt,
+        contentCN: res.cnt,
+        contentEN: res.cnt,
+        source: res.s,
+        createdAt: res.t,
+        titleImage: res.tim,
+        recommend: res.re,
+        recommendCN: res.re,
+        recommendEN: res.re,
+        recommendLink: res.url,
+        abstract: res.ab,
+        abstractCN: res.ab,
+        abstractEN: res.ab,
+    };
     this.state.noticeList = noticeList;
-    // console.log('获取公告', noticeList)
     return noticeList
   }
 
   async infoCon(page, pageSize) { // 获取资讯
-    let infoList = await this.Proxy.getActivity({
-      "activityId": 0,
-      "activityType": 2,
-      "contentType": 0,
-      page,
-      pageSize
+    let res = await this.Proxy.getActivity({
+      id: 0,
+      ty: 2,
+      con: 0,
+      p: page,
+      ps: pageSize,
+      //la: "zh-CN",
     });
-    // infoList = infoList.msg ? [] : infoList.data
-    this.state.infoList = infoList
-    // console.log('获取资讯', infoList)
-    return infoList
+    let infoList={
+        catalog: res.cat,
+        activityId: res.id,
+        subject: res.su,
+        subjectCN: res.su,
+        subjectEN: res.su,
+        content: res.cnt,
+        contentCN: res.cnt,
+        contentEN: res.cnt,
+        source: res.s,
+        createdAt: res.t,
+        titleImage: res.tim,
+        recommend: res.re,
+        recommendCN: res.re,
+        recommendEN: res.re,
+        recommendLink: res.url,
+        abstract: res.ab,
+        abstractCN: res.ab,
+        abstractEN: res.ab,
+    };
+    this.state.infoList = infoList;
+    return infoList;
   }
 
   async userNotice(unRead, page, pageSize) { // 获取用户通知列表
