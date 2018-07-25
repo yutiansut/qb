@@ -119,7 +119,7 @@ export default class AssetStore extends ExchangeStoreBase {
       // userId: this.controller.userId,
       token: this.controller.token
     });
-    this.state.wallet = cl && cl.map(({cn,fn,cic,cid,avc,frc,va,vac,toc})=>{
+    this.state.wallet = cl && cl.map(({cn,fn,cic,cid,avc,frc,va,tc})=>{
       return {
         "coinName": cn,
         "fullname": fn,
@@ -128,8 +128,7 @@ export default class AssetStore extends ExchangeStoreBase {
         "availableCount": avc,//可用余额
         "frozenCount": frc,//冻结余额
         "valuationBTC": va,//btc估值
-        "valuationCN": vac,
-        "totalCount": toc//总量
+        "totalCount": tc//总量
       }
     }) || [];
     let { toq, avq, usq } = await this.Proxy.balance({
@@ -187,12 +186,16 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取充币地址
   async getChargeAddress(coin) {
     let result = await this.Proxy.chargeAddress({
-      userId: this.controller.userId,
-      coinId: this.state.walletList[coin],
+      // userId: this.controller.userId,
+      id: this.state.walletList[coin],
       token: this.controller.token
     });
     result.coinAddress
-      ? (this.state.coinAddress = result)
+      ? (this.state.coinAddress = {
+        coinId: result.id, //币种ID
+        verifyNumer: result.ven, //最大确认数
+        coinAddress: result.cad //地址
+      })
       : (this.state.coinAddress = {
           coinId: this.state.walletList[coin], //币种ID
           verifyNumer: "", //最大确认数
@@ -206,14 +209,21 @@ export default class AssetStore extends ExchangeStoreBase {
   }
 
   // 获取资产记录
-  async getHistory(obj) {
+  async getHistory({coinId, coinName, orderType, startTime, endTime, orderStatus, page, pageSize}) {
     let result = await this.Proxy.history(
       Object.assign(
         {
-          userId: this.controller.userId,
-          token: this.controller.token
-        },
-        obj
+          // userId: this.controller.userId,
+          token: this.controller.token,
+          "id": coinId,//如果不设定 传-1 coin id
+          "na": coinName,//coin name
+          "ot": orderType,//充1提2转4  注意:交易所内提币收方显示为转账  所有状态传-1，如果需要两种状态则将需要的状态相与（|） //order type
+          "st": startTime,//不设定传-1 都传Unix秒 start time
+          "et": endTime,//不设定传-1 都传Unix秒 end time
+          "ost": orderStatus, //所有状态传-1 //order status
+          "p": page, //page
+          "s": pageSize //page size
+        }
       )
     );
     if (result && result.errCode) {
@@ -223,15 +233,31 @@ export default class AssetStore extends ExchangeStoreBase {
     }
     this.state.assetHistory.orderList =
       result &&
-      result.orderList.map(v => {
-        v.orderType === 15000 && (v.orderType = 2);
-        v.orderType === 5 && (v.orderType = 4);
-        return v;
+      result.ol.map(v => {
+        return {
+          "orderType": v.ot === 15000 ? 2 : (v.ot === 5 ? 4 : v.ot),
+          "orderStatus": v.ost,
+          "fullname": v.fna,
+          "coinIcon": v.cic,
+          "coinName": v.cna,
+          "coinId": v.cid,
+          "count": v.cou,
+          "balance": b.bal,//余额
+          "postAddress": v.psa,//发送地址
+          "receiveAddress": v.rea,//接收地址
+          "fee": v.fee,//手续费
+          "verifyCount": v.vc,//确认数
+          "doneCount": v.dc,//已确认数
+          "hashAddress": v.ha,//hash地址
+          "blockSite": v.bs,//点击查看交易信息的地址
+          "orderTime":v.t,
+          "orderId": v.oid
+        }
       });
-    obj.page === 0 && !result.totalCount && (this.state.assetHistory.total = 0);
+    obj.page === 0 && !result.tc && (this.state.assetHistory.total = 0);
     obj.page === 0 &&
-      result.totalCount &&
-      (this.state.assetHistory.total = result.totalCount);
+      result.tc &&
+      (this.state.assetHistory.total = result.tc);
     return this.state.assetHistory;
   }
   // 导出资产记录

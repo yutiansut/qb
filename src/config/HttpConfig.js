@@ -79,10 +79,12 @@ export default {
     { name: 'getAllCoinList', data: { url: '/v1/common/', method: 'post' }, action: 'gai', actionBack: 'gair' },
     //24小时提现额度, 查询币种额度，4.2
     { name: 'balance', data: { url: '/v1/property/', method: 'post' }, action: 'gb', actionBack: 'gbr', needToken: true },
+    // 充币地址查询4.4（pass）
+    { name: 'chargeAddress', data: { url: '/v1/property/', method: 'post' }, action: 'ca', actionBack: 'car', needToken: true },
+    // 充提记录4.10
+    { name: 'history', data: { url: '/v1/property/', method: 'post' }, action: 'cr', actionBack: 'crr', needToken: true },
     // 撤销提币申请
     { name: 'cancelWithdraw', data: { url: '/v1/property/', method: 'post' }, action: 'cancelWithdraw', actionBack: 'cancelWithdrawRes', needToken: true },
-    // 充币地址查询4.4（pass）
-    { name: 'chargeAddress', data: { url: '/v1/property/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes', needToken: true },
     // 提币矿工费4.5
     { name: 'minerFee', data: { url: '/v1/property/', method: 'post' }, action: 'getMinerFee', actionBack: 'getMinerFeeRes', needToken: true },
     // 提交提币订单4.6（pass）
@@ -93,8 +95,6 @@ export default {
     { name: 'addAddress', data: { url: '/v1/property/', method: 'post' }, action: 'addWithdrawAddress', actionBack: 'addWithdrawAddressRes', needToken: true },
     // 删除提币地址4.9(需要登录)（pass）
     { name: 'delAddress', data: { url: '/v1/property/', method: 'post' }, action: 'deleteWithdrawAddress', actionBack: 'deleteWithdrawAddressRes', needToken: true },
-    // 充提记录4.10
-    { name: 'history', data: { url: '/v1/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
     // 验证资金密码
     { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
   ],
