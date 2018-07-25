@@ -26,12 +26,13 @@ export default class NoticeStore extends ExchangeStoreBase {
       ps: pageSize,
       la: {"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0,
     });
+    if(!res) return;
     let noticeList={
         page: res.p,
         totalCount: res.c,
         data: [],
     };
-    res && res.d && res.d.map(item=>{
+    res.d && res.d.map(item=>{
       noticeList.data.push({
           catalog: item.cat,
           activityId: item.id,
@@ -58,12 +59,13 @@ export default class NoticeStore extends ExchangeStoreBase {
       ps: pageSize,
       la: {"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0,
     });
+    if(!res) return;
     let infoList={
         page: res.p,
         totalCount: res.c,
         data: [],
     };
-    res && res.d && res.d.map(item=>{
+    res.d && res.d.map(item=>{
         infoList.data.push({
             catalog: item.cat,
             activityId: item.id,
@@ -89,11 +91,12 @@ export default class NoticeStore extends ExchangeStoreBase {
       p: page,
       s: pageSize
     });
+    if(!res) return;
     let userNotice={
       totalCount: res.tc,
       list: [],
     };
-    res && res.l && res.l.map(item=>{
+    res.l && res.l.map(item=>{
       userNotice.list.push({
          id: item.id,
          isRead: item.ir,
@@ -120,12 +123,13 @@ export default class NoticeStore extends ExchangeStoreBase {
         ps: 10,
         la: {"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0,
     });
+    if(!res) return;
     let activityList={
         page: res.p,
         totalCount: res.c,
         data: [],
     };
-    res && res.d && res.d.map(item=>{
+    res.d && res.d.map(item=>{
         activityList.data.push({
             catalog: item.cat,
             activityId: item.id,
