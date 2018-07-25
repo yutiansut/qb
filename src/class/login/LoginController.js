@@ -50,7 +50,7 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   userLoginInfo(data, flag) { // 登陆返回信息
-    // console.log('ccc2', data, this.view.state.from)
+    console.log('ccc2', data.d)
     // console.log('this.view.history.goBack()', this.userController.store.state.token);
     // history.push()
     if (data.r === 0 &&  data.d) { // 登陆成功
@@ -64,7 +64,7 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if ([2008, 2009, 2010].includes(data.r)) { // 需要二次验证
-      this.view.setState({showTwoVerify: true, verifyType: data.r, twoVerifyUser: data.data.account, verifyNum: this.view.intl.get("sendCode")})
+      this.view.setState({showTwoVerify: true, verifyType: data.r, twoVerifyUser: data.d.ac, verifyNum: this.view.intl.get("sendCode")})
       // console.log('二次登录', this.view.state)
       return
     }

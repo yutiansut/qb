@@ -57,12 +57,13 @@ export default class UserStore extends ExchangeStoreBase {
     this.Loop["userListener"].start();
   }
   async userLogin(data) { // 获取登录信息
-    this.state.userId = data && data.userId
-    this.state.token = data && data.token
-    this.state.userName = data && data.userName
-    this.Storage.userToken.set(data && data.token);
-    this.Storage.userId.set(data && data.userId);
-    this.Storage.userName.set(data && data.userName);
+    console.log('ccc4', data)
+    this.state.userId = data && data.id
+    this.state.token = data && data.tk
+    this.state.userName = data && data.na
+    this.Storage.userToken.set(data && data.tk);
+    this.Storage.userId.set(data && data.id);
+    this.Storage.userName.set(data && data.na);
     // data && await this.userInfo()
     // data && await this.userAuth()
     // data && data.isNew && this.getAward()

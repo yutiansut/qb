@@ -38,7 +38,7 @@ export default class UserController extends ExchangeControllerBase {
   }
   // 从登录接口获取信息
   getUserId(data) {
-    // console.log('ccc3', data)
+    console.log('ccc3', data)
     this.store.userLogin(data)
     // console.log('this.view',this.view)
     // this.view.history.goBack()
