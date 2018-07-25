@@ -41,9 +41,9 @@ class ReactTrend extends React.Component {
 
             let y;
             if(max===min){
-                y=max;
+                y=viewHeight/2;
             }else{
-              y = viewHeight - (e - min) / (max - min) * viewHeight;
+                y = viewHeight - (e - min) / (max - min) * viewHeight;
             }
 
             if(i<=0){
