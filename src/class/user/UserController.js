@@ -359,7 +359,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.getCaptcha()
-    this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+    this.view.setState({captcha: captcha.d, captchaId: captcha.id})
   }
 
   async setGoogleVerify(code) { // 验证谷歌验证码
