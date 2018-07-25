@@ -147,7 +147,7 @@ export default class UserOrderListStore extends OrderListStore {
       "dealedMoneyCN": orderDetail.dmc,
       "dealedMoneyEN": orderDetail.dme,
       "fee": orderDetail.fee,
-      "orderList": orderDetail.ol.map(v => {
+      "orderList": orderDetail && orderDetail.ol.length && orderDetail.ol.map(v => {
         return {
           "orderTime": v.t,
           "price": v.p,
