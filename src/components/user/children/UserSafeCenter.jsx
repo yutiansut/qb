@@ -232,7 +232,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    console.log(111, this.state.userInfo)
+    console.log(111, this.state)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("header-security")}</h1>
@@ -372,7 +372,7 @@ export default class userSafeCenter extends exchangeViewBase {
                 </thead>
                 <tbody className={`${this.state.currentLogin && this.state.currentLogin.length ? '' : 'hide'}`}>
                   {this.state.currentLogin && this.state.currentLogin.map((v, index) => (<tr key={index}>
-                    <td>{v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
+                    <td>{v.loginTime && v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
                     <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
