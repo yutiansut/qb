@@ -30,21 +30,13 @@ export default class NoticeStore extends ExchangeStoreBase {
         catalog: res.cat,
         activityId: res.id,
         subject: res.su,
-        subjectCN: res.su,
-        subjectEN: res.su,
         content: res.cnt,
-        contentCN: res.cnt,
-        contentEN: res.cnt,
         source: res.s,
         createdAt: res.t,
         titleImage: res.tim,
         recommend: res.re,
-        recommendCN: res.re,
-        recommendEN: res.re,
         recommendLink: res.url,
         abstract: res.ab,
-        abstractCN: res.ab,
-        abstractEN: res.ab,
     };
     this.state.noticeList = noticeList;
     return noticeList
@@ -63,21 +55,13 @@ export default class NoticeStore extends ExchangeStoreBase {
         catalog: res.cat,
         activityId: res.id,
         subject: res.su,
-        subjectCN: res.su,
-        subjectEN: res.su,
         content: res.cnt,
-        contentCN: res.cnt,
-        contentEN: res.cnt,
         source: res.s,
         createdAt: res.t,
         titleImage: res.tim,
         recommend: res.re,
-        recommendCN: res.re,
-        recommendEN: res.re,
         recommendLink: res.url,
         abstract: res.ab,
-        abstractCN: res.ab,
-        abstractEN: res.ab,
     };
     this.state.infoList = infoList;
     return infoList;
@@ -104,13 +88,26 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async activityCon(activityId, activityType) { // 活动详情
-    let activityList = await this.Proxy.getActivity({
-      activityId,
-      activityType,
-      "contentType": 1,
-      "page": 0,
-      "pageSize": 10
+    let res = await this.Proxy.getActivity({
+        id: activityId,
+        ty: activityType,
+        con: 1,
+        p: 0,
+        ps: 10,
+        //la: "zh-CN",
     });
+    let activityList={
+        catalog: res.cat,
+        activityId: res.id,
+        subject: res.su,
+        content: res.cnt,
+        source: res.s,
+        createdAt: res.t,
+        titleImage: res.tim,
+        recommend: res.re,
+        recommendLink: res.url,
+        abstract: res.ab,
+    };
     activityList = activityList.msg ? [] : activityList.data[0]
     this.state.activityList = activityList
     // console.log('获取详细信息', activityList)
