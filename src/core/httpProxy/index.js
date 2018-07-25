@@ -64,9 +64,15 @@ const HTTP_PROXY = {
             return e
           }
         }
-        let result = await Fetch(req.url, req.data);
+        let result = await Fetch(req.url, req.data), buffer;
+        if(!HttpZip) {
+          buffer = await result.text().catch((e, obj) => {
+            obj = {ret: -2, data: e};
+            throw obj;
+          });
+        }
         if(HttpZip){
-          let buffer = await result.arrayBuffer().catch((e, obj) => {
+          buffer = await result.arrayBuffer().catch((e, obj) => {
             obj = { ret: -2, data: e };
             throw obj;
           });

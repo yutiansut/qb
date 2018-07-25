@@ -38,7 +38,7 @@ export default {
   "-6": {
     // msg: "Blob数据解析错误",
     get msg() {
-      return intl.get("-5");
+      return intl.get("-6");
     },
     errCode: "BLOB_PARSE_ERROR"
   },
