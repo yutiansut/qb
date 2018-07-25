@@ -145,43 +145,47 @@ export default class DealController extends ExchangeControllerBase {
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
       let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
         inputSellValue, inputBuyValue;
+        
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
-      this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue
+      let checkValue = inputSellValue || inputBuyValue;
+      let checkNum = 8;
+      checkValue > 100 && (checkNum = 2);
+      checkValue >= 0.1 && checkValue <= 100 && (checkNum = 4);
+      checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
+      let limitedValue = (v === 'CNY' || v === 'USD') ? 2 : checkNum;
+          this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue;
+      this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixed(limitedValue));
+      this.view.state.inputBuyFlag && (inputBuyValue = inputBuyValue.toFixed(limitedValue));
       this.view.setState({
-        inputSellValue,
-        inputBuyValue
+            inputSellValue,
+            inputBuyValue
       });
     }
   }
 
   changeMaxNum(t, v) {
     let a = Number(v) ? v :1;
+    let changeBankPrice = this.view.state.PriceUnit === "CNY" ? (a * this.store.state.prices.price / this.store.state.prices.priceCN) :(this.view.state.PriceUnit === "USD" && a * this.store.state.prices.price / this.store.state.prices.priceEN || a);
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
-    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / a}));
-    // console.log(11111111,a,v,this.view.state.buyWallet / a)
-    if (this.view.state.buyNumFlag && (t === 0)) {
-      // let limit;
-      // v > 100 && (limit = 2);
-      // v <= 100 && v > 0.1 && (limit = 4);
-      // v <= 0.1 && v > 0.01 && (limit = 6);
-      // v <= 0.01 && (limit = 8);
-      // let limit = v.split('.')[1] && v.split('.')[1].length || 0;
-      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(a))})
+    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / changeBankPrice}));
+    if(this.view.state.PriceUnit === "CNY" || this.view.state.PriceUnit === "USD") {
+      t === 1 && (this.view.setState({changBankPriceS : changeBankPrice}));
+      t === 0 && (this.view.setState({changBankPriceB : changeBankPrice}))
     }
-    // if(this.view.state.sellNumFlag && (t === 1)){
-    //   this.view.setState({inputSellNum: this.view.state.sellWallet / v})
-    // }
+    if (this.view.state.buyNumFlag && (t === 0)) {
+      let checkNum = 0;
+      changeBankPrice > 100 && (checkNum = 6);
+      changeBankPrice >= 0.1 && changeBankPrice <= 100 && (checkNum = 4);
+      changeBankPrice >= 0.01 && changeBankPrice < 0.1 && (checkNum = 2);
+      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixed(checkNum)})
+    }
   }
 
   async dealTrade(orderType,e) {
     e.preventDefault();
     e.stopPropagation();
-    if(!this.view.state.dbPreOrder)
-      return
-    this.view.setState({
-      dbPreOrder: false
-    })
+  
     if(this.view.state.fundPwdInterval === -1){
       this.view.setState(
           {
@@ -192,8 +196,6 @@ export default class DealController extends ExchangeControllerBase {
       );
       return
     }
-    
-
     
     let sellPriceValue = this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
     let buyPriceValue = this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit);
@@ -255,7 +257,7 @@ export default class DealController extends ExchangeControllerBase {
       );
       return
     }
-    if(params.interval === 0 && params.priceType === 0 && emptyCharge === ''){
+    if(params.interval === 0 && emptyCharge === ''){
       this.view.setState(
           {
             dealPopMsg: this.view.intl.get("deal-pass-empty"),
@@ -265,6 +267,11 @@ export default class DealController extends ExchangeControllerBase {
       )
       return
     }
+    if(!this.view.state.dbPreOrder)
+      return
+    this.view.setState({
+      dbPreOrder: false
+    })
     let result = await this.store.dealTrade(params);
     this.view.setState({
       dbPreOrder:true

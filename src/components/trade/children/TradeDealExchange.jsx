@@ -89,7 +89,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           </div>
           <div className='trade-deal-turnover'>
             {this.props.DealEntrustType ? '' : <span>  <span>{`${this.intl.get('deal-trunover')}`}:</span>
-            <em>{this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue || 0)).format({number:'property'}) : Number(Number(this.props.buyNum).multi(this.props.bvalue || 0)).format({number:'property'})}</em>
+            <em>{this.props.ControllerProps.dealType ? Number(Number(this.props.sellNum).multi(this.props.avalue || 0)).format((this.props.PriceUnit === 'USD' || this.props.PriceUnit === 'CNY') ? {number: 'legal'} :{number:'property'} ) : Number(Number(this.props.buyNum).multi(this.props.bvalue || 0)).format((this.props.PriceUnit === 'USD' || this.props.PriceUnit === 'CNY') ? {number: 'legal'} :{number:'property'} )}</em>
             <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
               </span>}
             {!this.props.fundPassVerify && <p className='password-msg fr'>

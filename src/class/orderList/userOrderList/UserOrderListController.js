@@ -84,9 +84,10 @@ export default class UserOrderListController extends OrderListController {
       orderListArray: historyOrder && historyOrder.orderList || [],
       // total: historyOrder && this.view.state.page === 1 && historyOrder.totalCount || 0
     });
-    historyOrder && this.view.state.page === 1 && (this.view.setState(
-        {total: historyOrder.totalCount}
-    ))
+    console.log(this.view,'pageeeeeeeeeeee', this.view.state.page,historyOrder.totalCount)
+    historyOrder && this.view.state.page === 1 && this.view.setState(
+        {total: historyOrder.totalCount},console.log('yibuuuuuuuuuuu',this.view.state.total)
+    )
   }
   async exportHistory(type){
     let result = await this.store.getHistoryOrder({

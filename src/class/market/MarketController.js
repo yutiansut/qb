@@ -137,14 +137,12 @@ export default class MarketController extends ExchangeControllerBase {
     let homeMarketPairData = await this.store.selectMarketData();
 
     type > 1 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName);
-    if(this.view.state.query) {
+    if(this.view.state.query && type === 2) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
-    
       if(queryValue.split('/').length === 1){
-        this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue].sort((a,b)=>a>b)[0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]}`);
+        this.view.state.marketDataHandle.indexOf(queryValue) !== -1 && (queryValue = `${pairMsg.pairNameMarket[queryValue][0]}/${queryValue}`) || (queryValue = `${queryValue}/${pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]}`);
         this.view.setState({query:queryValue})
-
       }
       this.changeMarket(queryValue.split('/')[1]);
       // return
@@ -153,7 +151,7 @@ export default class MarketController extends ExchangeControllerBase {
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg());
 
-    type !== 1 && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
+    type === 2 && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据

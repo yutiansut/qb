@@ -39,6 +39,7 @@ const orderInfoHead = [
 export default class OrderCurrent extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = 'orderOrder';
     this.state = {
       preArray: [],
       searchSaveFlag:false,
@@ -162,7 +163,9 @@ export default class OrderCurrent extends ExchangeViewBase {
       }
     };
     this.setState(
-        {orderStatus}
+        {orderStatus,
+          total: 0,
+        }
     );
     this.orderListHandle(this.props.type, params[this.props.type])
   }
@@ -331,6 +334,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     })
   }
   render() {
+    console.log('rendex',this.state.total)
     const {type} = this.props;
     return (
         <div className='order-detail'>

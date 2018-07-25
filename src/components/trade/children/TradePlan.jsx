@@ -10,6 +10,8 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      changeBankPriceB:0,
+      changeBankPriceS:0,
       dbPrePass:false,
       dbPreOrder:true,
       dealPopMsg:'',
@@ -87,22 +89,14 @@ export default class TradePlan extends ExchangeViewBase {
       inputValue: 'inputBuyValue',
       wallet: 'buyWallet',
       setValue: 'inputBuyNum',
-      max: 'buyMax'
-    }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax'}];
-    // let wallet = this.state[diffArr[dealType].wallet];
-    // let price =  dealType ?  this.state.inputSellFlag ? ( this.state.inputSellValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit) :this.state.inputBuyFlag ? ( this.state.inputBuyValue ) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+      max: 'buyMax',
+      changeBank: 'changeBankB'
+    }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changeBankS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    // console.log('maxNummmmm',maxNum)
-   
-    // if(value < this.state.coinMin){
-    //   console.log('this.state.coinMinthis.state.coinMinthis.state.coinMinthis.state.coinMin',this.state.coinMin)
-    //   this.setState({
-    //     dealPass: true,
-    //     dealPopMsg: `123456`
-    //   })
-    //   return
-    // }
-    let priceValue = (this.state[diffArr[dealType].inputValue] || (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit)) || 0;
+    let priceValue = this.state[diffArr[dealType].inputValue];
+    if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
+      priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
+    }
     let value = e.target.value;
     let limitNum = value.split('.');
     if(limitNum.length > 2)
