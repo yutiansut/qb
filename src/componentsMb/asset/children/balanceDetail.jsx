@@ -29,12 +29,7 @@ export default class BalanceDetail extends exchangeViewBase {
     render() {
         //获取路由参数,选取对应币种
         let coin = this.props.location.query && this.props.location.query.currency || "BTC";
-        let i=0;
-        this.state.wallet && this.state.wallet.map((item,index)=>{
-            item.coinName.toUpperCase()===coin.toUpperCase() && (i=index);
-        });
-        let result=this.state.wallet[i];
-        !result && (result={});
+        let result = this.state.wallet && this.state.wallet.filter(item=>item.coinName.toUpperCase()===coin.toUpperCase())[0] || {};
         //
         return <div className="balance-detail">
             <div className="nav">
