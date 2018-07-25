@@ -100,26 +100,60 @@ export default class UserStore extends ExchangeStoreBase {
 
   async userInfo() { // 获取用户信息
     let userInfo = await this.Proxy.getUserInfo({"userId": this.uid, "token": this.token});
-    this.state.userInfo = userInfo;
-    return userInfo
+    let userInfoObj = {
+      "cardVerify": userInfo.cardVerify,
+      "credits": userInfo.credits,
+      "email": userInfo.email,
+      "fundPassVerify": userInfo.fundPassVerify,
+      "fundPwd": userInfo.fundPwd,
+      "googleAuth": userInfo.googleAuth,
+      "interval": userInfo.interval,
+      "level": userInfo.level,
+      "loginPwd": userInfo.loginPwd,
+      "loginVerify": userInfo.loginVerify,
+      "notifyMethod": userInfo.notifyMethod,
+      "phone": userInfo.phone,
+      "userId": userInfo.userId,
+      "userName": userInfo.userName,
+      "withdrawVerify": userInfo.withdrawVerify,
+    }
+    // console.log('qqqq', userInfoObj)
+    this.state.userInfo = userInfoObj;
+    return userInfoObj
   }
 
   async userAuth() { // 获取用户认证信息
     let userAuth = await this.Proxy.getUserAuth({"uid": this.uid, "token": this.token});
-    this.state.userAuth = userAuth;
-    return userAuth
+    let userAuthObj = {
+      "userId": userAuth.userId,
+      "state": userAuth.state,                     // 0未认证 1审核中 2已审核 3未通过 4恶意上传审核失败封锁3天 5永久禁止
+      "firstName": userAuth.firstName,
+      "lastName": userAuth.lastName,
+      "fullName": userAuth.fullName,
+      "type": userAuth.type,                      // 0：无 1：身份证 2：军官证 3：护照
+      "number": userAuth.number, // 证件号
+      "image1": userAuth.image1,   // 正面
+      "image2": userAuth.image2,   // 背面
+      "image3": userAuth.image3,    // 手持
+      "updateAt": userAuth.updateAt        // 最后更新时间 当状态为4封锁3天时使用，updateAt+3天为封锁终止时间
+    }
+    // console.log('qqq', userAuthObj)
+    this.state.userAuth = userAuthObj;
+    return userAuthObj
   }
 
 
   async userCreditsNum() { // 获取用户积分
     let userCreditsCon = await this.Proxy.getUserCreditsNum({"userId": this.uid, "token": this.token});
     let userCreditsNum = userCreditsCon.credits;
+    // let userCreditsNum = userCreditsCon.cre
     this.state.userCreditsNum = userCreditsNum;
     return userCreditsNum
   }
 
   async currentLogin() { // 获取当前登录设备列表
     let currentLoginCon = await this.Proxy.getCurrentLogin({"userId": this.uid, "token": this.token});
+    console.log('qwrr', currentLoginCon)
     let currentLogin = currentLoginCon ? currentLoginCon.list : []
     // if(currentLogin.errCode)
     //   currentLogin = []

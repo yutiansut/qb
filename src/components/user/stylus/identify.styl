@@ -1,5 +1,19 @@
 @import "../../../common/css/variable.styl"
 
+@keyframes loading
+  0%
+    transform rotate(0deg)
+    -ms-transform rotate(0deg)
+    -moz-transform rotate(0deg)
+    -webkit-transform rotate(0deg)
+    -o-transform rotate(0deg)
+  100%
+    transform rotate(360deg)
+    -ms-transform rotate(360deg)
+    -moz-transform rotate(360deg)
+    -webkit-transform rotate(360deg)
+    -o-transform rotate(360deg)
+
 .identify-wrap
   .hide
     display none
@@ -151,6 +165,19 @@
           left 0
           width 100%
           text-align center
+        .loading-wrap
+          position absolute
+          left 50%
+          top 50%
+          transform translateX(-50%) translateY(-50%)
+          img
+            position absolute
+            width .32rem
+            height .32rem
+            margin-top -.16rem
+            margin-left -.16rem
+            animation loading 1.5s linear infinite;
+            -webkit-animation loading 1.5s linear infinite;
 
 
 

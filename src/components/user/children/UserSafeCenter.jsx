@@ -232,6 +232,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
+    // console.log(111, this.state.userInfo)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("header-security")}</h1>
