@@ -7,6 +7,7 @@
 
 import Fetch from "../libs/Fetch";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
+let zlib = require("zlib");
 
 let host, port, HttpList, protocol;
 
@@ -52,8 +53,20 @@ const HTTP_PROXY = {
           }
         }
         req = formatParams(req)
-        // console.log(req)
-        res.result = await Fetch(req.url, req.data);
+        let zip = new Promise((resolve, reject)=>zlib.deflate(req.data.body, (err, buffer) => !err && resolve(buffer) || reject({ret: -4, data: err})))
+        req.data.body = await zip
+        let result = await Fetch(req.url, req.data);
+        const buffer = await result.arrayBuffer().catch((e, obj) => {
+          obj = { ret: -2, data: e };
+          throw obj;
+        });
+        let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(buffer), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
+        try{
+          res.result = JSON.parse(await unZip)
+        } catch (e) {
+          res.result = {ret: -3, data: e}
+        }
+
         if (afterHandler && afterHandler.length) {
           for (let i = 0; i < afterHandler.length; i++) {
             await afterHandler[i](this, req, res, v)

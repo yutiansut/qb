@@ -44,8 +44,8 @@ export default function () {
 
       // console.log('webSocket接收信息',event.data ,event)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
-      pool.onMessage && pool.onMessage(JSON.parse(event.data))
-    }
+      pool.onMessage && pool.onMessage(event.data)
+}
 
     //webSocket断开之后的操作
     webSocket.onclose = onClose
@@ -113,8 +113,8 @@ export default function () {
     // console.log('send text', connects.length )
     if (connects.length === 0)
       console.error('==connect is all down!===')
-    // console.log('websocket 发送信息', JSON.stringify(text), connects[index++ % poolSize])
-    poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(typeof text === 'object' ? JSON.stringify(text) : text)
+    // console.log('websocket 发送信息', text.toString("base64"))
+    poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(text)
   }
 
   /**

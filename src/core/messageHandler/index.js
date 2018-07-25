@@ -21,6 +21,7 @@
 
 
 import Sleep from '../libs/Sleep'
+let zlib = require("zlib");
 const PoolDic = {}
 
 //循环读取完成收发消息队列的处理
@@ -32,18 +33,34 @@ async function messageHandler() {
   startFlag = true
   // console.log('startFlag2', startFlag)
   while (true) {
-    Object.keys(PoolDic).forEach(poolName => {
+    Object.keys(PoolDic).forEach(async poolName => {
       // console.log(PoolDic)
       let pool = PoolDic[poolName]
       if (pool.EMIT_QUENE.length) {
         // console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
-        pool && pool.send(pool.EMIT_QUENE.shift())
+        let zip = new Promise((resolve, reject)=>zlib.deflate(JSON.stringify(pool.EMIT_QUENE.shift()), (err, buffer) => !err && resolve(buffer) || reject({ret: -4, data: err})))
+        pool && pool.send(await zip)
       }
       if (pool.RECEIVE_QUENE.length) {
-
         //console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
-
-        MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
+        // let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(buffer), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
+        let data = new Promise((resolve, reject)=>{
+          try{
+            var reader = new FileReader();
+            reader.addEventListener("loadend", function() {
+              // reader.result 包含转化为类型数组的blob
+              // console.log('reader.result 包含转化为类型数组的blob',reader.result)
+              resolve(reader.result)
+            });
+            reader.readAsArrayBuffer(pool.RECEIVE_QUENE.shift());
+            // console.log(res)
+          } catch (e) {
+            reject({ret: -6, data: e})
+          }
+        })
+        data = await data
+        let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(data), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
+        MESSAGE_HANDLER[poolName].onMessage(JSON.parse(await unZip))
       }
     })
     await Sleep(8)
@@ -75,7 +92,7 @@ const MESSAGE_HANDLER = {
       pool.EMIT_QUENE.push(data)
     }
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
-    MESSAGE_HANDLER[config.name].onMessage = data => data && console.log(data)
+    MESSAGE_HANDLER[config.name].onMessage = data => data && console.log('data', data)
     MESSAGE_HANDLER[config.name].onClose = func => pool.onClose = func
     MESSAGE_HANDLER[config.name].onError = func => pool.onError = func
     MESSAGE_HANDLER[config.name].onOpen = func => pool.onOpen = func
