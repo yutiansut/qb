@@ -48,7 +48,7 @@ export default class ExchangeStoreBase extends StoreBase {
       res.result = Msg[1];
       return
     }
-    res.result = res.result.data
+    res.result = res.result.d
     // console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 

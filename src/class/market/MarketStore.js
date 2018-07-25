@@ -16,7 +16,7 @@ export default class MarketStore extends ExchangeStoreBase {
       coin: '',
       sortValue: [],//排序值
       ascending: 0,//是否升序， 0 否 1 是
-      pairInfo: {},
+      pairInfo: [],
       unitsType: '',
       pairMsg: {},
       tradePair: 'lsk/btc',
@@ -81,9 +81,18 @@ export default class MarketStore extends ExchangeStoreBase {
     if (name === 'recommend') {
       // 监听推荐币种
       this.WebSocket.general.on('recommendCurrency', data => {
+        let result = data && data.d.map(v=>{
+          return {
+            coinName: v.n,
+            priceCN: v.pc,
+            priceEN: v.pe,
+            rise: v.r,
+            coinId: v.id,
+          }
+        })
         // console.log('getWebSocketData', data, this.controller)
-        this.controller.updateRecommend(data.data)
-        this.recommendData = data.data
+        this.controller.updateRecommend(result)
+        // this.state.recommendData = result
       })
     }
 
@@ -194,12 +203,12 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //加入房间
   joinHome() {
-    this.WebSocket.general.emit('joinRoom', {from: '', to: 'home'})
+    this.WebSocket.general.emit('joinRoom', {f: '', t: 'home'})
   }
 
   //退出房间
   clearRoom() {
-    this.WebSocket.general.emit('joinRoom', {from: 'home', to: ''})
+    this.WebSocket.general.emit('joinRoom', {f: 'home', t: ''})
   }
 
   //清除websocket历史记录
@@ -224,7 +233,15 @@ export default class MarketStore extends ExchangeStoreBase {
     if (!this.state.recommendData.length) {
       let result = await this.Proxy.getRecommendCoins()
       // console.log('this.state.recommendData', result)
-      this.state.recommendData = result && result.data || []
+      this.state.recommendData = result && result.data.map(v=>{
+        return {
+          coinName: v.n,
+          priceCN: v.pc,
+          priceEN: v.pe,
+          rise: v.r,
+          coinId: v.id,
+        }
+      }) || []
     }
     return this.state.recommendData
   }
@@ -251,42 +268,13 @@ export default class MarketStore extends ExchangeStoreBase {
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
     console.log('getPairInfo', pairInfo)
-    this.state.pairInfo = pairInfo.list.map(v => {
+    this.state.pairInfo = pairInfo && pairInfo.l.map(v => {
       return {
-        coinName: v.coinName,
-        highPrice: v.highPrice,
-        highPriceCN: v.highPriceCN,
-        highPriceEN: v.highPriceEN,
-        icon: v.icon,
-        isFavorite: v.isFavorite,
-        isNewBorn: v.isNewBorn,
-        isRecommend: v.isRecommend,
-        lowPrice: v.lowPrice,
-        lowPriceCN: v.lowPriceCN,
-        lowPriceEN: v.lowPriceEN,
-        marketName: v.marketName,
-        openPrice: v.openPrice,
-        openPriceCN: v.openPriceCN,
-        openPriceEN: v.openPriceEN,
-        points: v.points,
-        price: v.price,
-        priceCN: v.priceCN,
-        priceEN: v.priceEN,
-        rise: v.rise,
-        tempTurnover: v.tempTurnover,
-        tempTurnoverCN: v.tempTurnoverCN,
-        tempTurnoverEN: v.tempTurnoverEN,
-        tempVolume: v.tempVolume,
-        tradePairId: v.tradePairId,
-        tradePairName: v.tradePairName,
-        turnover: v.turnover,
-        turnoverCN: v.turnoverCN,
-        turnoverEN: v.turnoverEN,
-        updateTime: v.updateTime,
-        updown: v.updown,
-        volume: v.volume,
+        tradePairName: v.n,
+        tradePairId: v.id,
+        marketName: v.mn,
       }
-    })
+    }) || []
     // this.state.pairMsg = this.formatPairMsg(pairInfo)
     return this.state.pairInfo
   }
@@ -299,7 +287,7 @@ export default class MarketStore extends ExchangeStoreBase {
     let marketAll = await this.Proxy.getAllChg();
     // console.log('marketAll', marketAll)
     // this.state.allPairData = marketAll.marketList
-    return marketAll.items.map(v => {
+    return marketAll && marketAll.items.map(v => {
       return {
         highPrice: v.highPrice,
         highPriceCN: v.highPriceCN,
@@ -327,7 +315,7 @@ export default class MarketStore extends ExchangeStoreBase {
         updateTime: v.updateTime,
         volume: v.volume,
       }
-    })
+    }) || []
     // console.log('arr',arr)
     // console.log('marketAll.items',marketAll.items)
     // return arr
@@ -341,9 +329,9 @@ export default class MarketStore extends ExchangeStoreBase {
       await this.getPairInfo()
     }
     this.state.pairInfo.map((v) => {
-      // let pair = v.tradePairName.split('/');
-      let coin = v.coinName;
-      let market = v.marketName;
+      let pair = v.tradePairName.split('/');
+      let coin = pair[0];
+      let market = pair[1];
       marketCorrespondingId[market] = marketCorrespondingId[market] || {};
       coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
       marketCorrespondingId[market][coin] = v.tradePairId;

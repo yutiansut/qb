@@ -59,14 +59,14 @@ export default {
     //币种资料
     { name: 'coinInfo', data: { url: '/v1/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
     // 获取交易对名称以及id
-    { name: 'pairInfo', data: { url: '/v1/common/', method: 'post' }, action: 'getAllTradePairList', actionBack: 'getAllTradePairListRes' },
-    { name: 'getRecommendCoins', data: { url: '/v1/common/', method: 'post' }, action: 'getRecommendCoins', actionBack: 'getRecommendCoinsRes' },
+    { name: 'pairInfo', data: { url: '/v1/common/', method: 'post' }, action: 'al', actionBack: 'alr' },
+    { name: 'getRecommendCoins', data: { url: '/v1/common/', method: 'post' }, action: 'rc', actionBack: 'rcr' },
     // 添加收藏
-    { name: 'changeFavorite', data: { url: '/v1/user/', method: 'post' }, action: 'changeFavorite', actionBack: 'changeFavoriteRes', needToken: true },
+    { name: 'changeFavorite', data: { url: '/v1/user/', method: 'post' }, action: 'cf', actionBack: 'cfr', needToken: true },
     // 获取收藏
-    { name: 'getFavoriteList', data: { url: '/v1/user/', method: 'post' }, action: 'getFavoriteList', actionBack: 'getFavoriteListRes', needToken: true },
+    { name: 'getFavoriteList', data: { url: '/v1/user/', method: 'post' }, action: 'fl', actionBack: 'flr', needToken: true },
     // 获取交易对
-    { name: 'getAllChg', data: { url: '/v1/common/', method: 'post' }, action: 'getAllChg', actionBack: 'getAllChgRes' },
+    { name: 'getAllChg', data: { url: '/v1/common/', method: 'post' }, action: 'gac', actionBack: 'gacr' },
   ],
   asset: [
     // 获取交易对手续费5.16（pass）
