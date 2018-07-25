@@ -28,11 +28,11 @@ export default class ExchangeStoreBase extends StoreBase {
     //添加token
     if (!config.needToken) return
     console.log(req.data.params)
-    if (!req.data.params.data.token) return
+    if (!req.data.params.d.token) return
     let headers = new Headers()
-    headers.set('token', req.data.params.data.token)
+    headers.set('token', req.data.params.d.token)
     req.data.headers = headers;
-    delete req.data.params.data.token
+    delete req.data.params.d.token
     // console.log('exchangeStoreBaseAfterHandler', app, req, res, config)
   }
 
