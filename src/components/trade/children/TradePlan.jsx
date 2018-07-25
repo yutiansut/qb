@@ -62,20 +62,11 @@ export default class TradePlan extends ExchangeViewBase {
   }
 
   componentWillMount() {
-    // console.log('componentWillMount', this.state.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.state.PriceUnit === 'USD' && 'priceEN' || 'price')])
   }
 
   componentDidMount() {
-
-    // let res = await this.props.controller.userController.getUserInfo()
     this.props.controller.getFundPwdInterval();
     this.props.controller.getCoinMinTrade();
-    // this.setState({
-    //   userVerify:res.fundPwd
-    // })
-    // this.setState({
-    //   inputValue:this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')]
-    // })
   }
 //切换市价委托/限价委托
   changeEntrustType(v) {

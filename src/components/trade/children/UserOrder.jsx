@@ -54,12 +54,10 @@ export default class userOrder extends ExchangeViewBase {
   
   cancelOrder(cancelType, v = 0){
     let orderId, opType, dealType, tradePairId;
-    orderId = cancelType ? 0 : JSON.parse(JSON.stringify(v.orderId)) ;
+    orderId = cancelType ? 0 : v.orderId;
     opType = cancelType;
     dealType = cancelType ? 0 : v.orderType;
     tradePairId = this.props.controller.TradeMarketController.tradePair.tradePairId
-    // dealType =v && v.orderType || 0;
-    // console.log('cancelop',orderId, opType, dealType)
     this.props.controller.cancelOrder(orderId, opType, dealType,tradePairId, 0)
   }
   componentWillMount() {
@@ -67,13 +65,10 @@ export default class userOrder extends ExchangeViewBase {
   }
   
   componentDidMount() {
-    // this.props.controller.wsOrderList()
-    // this.props.controller.getCurrentOrder(false, )
   }
   tradeOrderDetail(v){
     if([1,2,6,7].indexOf(v.orderStatus) !== -1){
       this.setState({
-        // detailFlag: true,
         orderDetailType: v.orderType
       })
       this.props.controller.getOrderDetail(v.orderId)
@@ -81,7 +76,6 @@ export default class userOrder extends ExchangeViewBase {
     
   }
   renderCurrentOrder() {
-    // console.log('this.state.currentOrder', this.state.currentOrder)
     return (
         <div className='trade-current-order' >
           <div className='trade-current-title'>
@@ -120,7 +114,6 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'}))}</td>
                     <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td>
                     <td>{this.state.unitsType === 'CNY' && Number((v.priceCN).multi(v.count)).format({number: 'legal', style: {name: 'cny'}}) || (this.state.unitsType === 'USD' && Number((v.priceEN).multi(v.count)).format({number: 'legal', style: {name: 'usd'}})) || Number((v.price).multi(v.count)).format({number: 'property'})}</td>
-                    {/*<td>{Number(Number(this.state.unitsType === 'CNY' && v.priceCN || (this.state.unitsType === 'USD' && v.priceEN || v.price)).multi(v.count)).format({number:'property',style:{name:}})}</td>*/}
                     <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.price))}</td>
                     <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(Number(v.price)) || Number(v.count.minus(v.dealDoneCount)).formatFixNumberForAmount(Number(v.price))}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
@@ -132,8 +125,6 @@ export default class userOrder extends ExchangeViewBase {
           </table> || <div className='trader-order-none'>
            {this.intl.get('noRecords')}
           </div>}
-         
-        
         </div>
     )
   }
@@ -163,9 +154,6 @@ export default class userOrder extends ExchangeViewBase {
             </thead>
             <tbody>
             {this.state.historyOrder && this.state.historyOrder.length && this.state.historyOrder.map((v, index) => {
-              // console.log('this.state.unitsType 0', (this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceCN)).format({number: 'property'}))))
-              // console.log('this.state.unitsType 1', (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.priceEN)).format({number: 'property'}))) )
-              // console.log('this.state.unitsType 2', (v.turnover && Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.price)).format({number: 'property'})))
               return (
                   <tr key={index}>
                     <td>{Number(v.orderTime).toDate()}</td>
@@ -187,22 +175,10 @@ export default class userOrder extends ExchangeViewBase {
         </div>
     )
   }
-
   componentDidUpdate() {
     let tradeOrderHeight = document.getElementById('trade_order').offsetHeight
-    // console.log('height', tradeOrderHeight)
     this.getOrderHeight(tradeOrderHeight)
-    // console.log('height', tradeOrderHeight)
-    // this.props.controller.noticeController.getOrderHeight(tradeOrderHeight)
-    // noticeTitleHeight = document.getElementById('notice_title').offsetHeight
-    // let tradeBottomHeight = document.getElementById('trade_bottom').offsetHeight
-    // this.setState({
-    //   tradeOrderHeight,
-    //   noticeTitleHeight
-    // })
-    // console.log(123, tradeOrderHeight, this.getOrderHeight(tradeOrderHeight))
   }
-
   render() {
     return (
         <div id="trade_order">
@@ -244,8 +220,6 @@ export default class userOrder extends ExchangeViewBase {
                   {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
                     return (
                         <tr key={index}>
-                          {/*<td>{v.buyer}</td>*/}
-                          {/*<td>{v.seller}</td>*/}
                           <td>{Number(v.orderTime).toDate()}</td>
                           <td>{Number(v.price).format({number: 'digital'})}</td>
                           <td>{Number(v.volume).formatFixNumberForAmount(v.price)}</td>

@@ -23,12 +23,22 @@ export default class DealStore extends ExchangeStoreBase {
       //   'cny计价': 'CNY',
       //   'usd计价': 'USD'
       // }
-     
     }
   }
   async dealTrade(params){
     let result = await this.Proxy.dealExchange(
-        params
+        {
+          token: params.token,
+          ot: params.orderType,
+          pt: params.priceType,//0限价  1市价
+          p: params.price,//价格
+          c: params.count,//数量
+          id: params.tradePairId,//交易对id
+          na: params.tradePairName,//交易对name
+          fp: params.funpass,//资金密码
+          in: params.interval,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+          put: params.priceUnit//计价单位  0数字币  1人民币 2美元
+        }
     );
     return result
   }
@@ -42,7 +52,6 @@ export default class DealStore extends ExchangeStoreBase {
   async getCoinMinTrade(){
     let result = await this.Proxy.getCoinMinTrade();
     this.state.coinMinTrade = result;
-    // console.log('minmin11111111111111', result)
     return result
   }
 }

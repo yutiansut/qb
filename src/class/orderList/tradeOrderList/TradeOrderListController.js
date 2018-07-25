@@ -22,10 +22,7 @@ export default class TradeOrderListController extends OrderListController {
   }
   
   async getDepth(tradePairName){
-    // console.log('this.TradeMarketController.tradePair.tradePairName',this.TradeMarketController.tradePair.tradePairName)
     let liveTradeData = await this.store.getDepth(tradePairName);
-    console.log(this,'livelivelivelivelive', liveTradeData);
-    // liveTradeData && liveTradeData.sell.length && this.TradePlanController.setMarketPriceMaxNum(liveTradeData.sell[liveTradeData.sell.length - 1]);
     this.view.setState(
         {
           liveBuyArray: liveTradeData && liveTradeData.buy || [],
@@ -41,20 +38,17 @@ export default class TradeOrderListController extends OrderListController {
       priceEN: v.priceEN.toFixed(2),
     };
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
-    // this.store.changeFlag = false
     this.view.state.changeFlag = false
   }
   get changeFlag(){
     return this.view.state.changeFlag
   }
   setChangeFlag(){
-    // this.store.changeFlag = true
     this.view.setState({
       changeFlag:true
     })
   }
   setChangeFlagClose(){
-    // this.store.changeFlag = true
     this.view.setState({
       changeFlag:false
     })
@@ -72,7 +66,6 @@ export default class TradeOrderListController extends OrderListController {
          prices:v.prices
         }
     );
-    // console.log('flagggggggg',flag)
     flag && this.getDepth(v.tradePair)
   }
 

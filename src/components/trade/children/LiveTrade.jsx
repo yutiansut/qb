@@ -27,24 +27,17 @@ export default class LiveTrade extends ExchangeViewBase{
   
   }
   componentDidMount(){
-    // this.props.controller.joinRoom();
-    // this.props.controller.getDepth();
-    // this.liveTradeListHandle()
   }
   changeLiveTitleSelect(v){
     this.setState({
       titleSelect: v.type
     });
   }
-  // getNewPrice(v){
-  //
-  // }
   componentWillUnmount() {
     this.clearRoom()
   }
 
   render() {
-    // console.log('nummmmmmmmmmmmm',(12 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)),)
     return(
         <div className='live-trade'>
           <div className='trade-live-title'>

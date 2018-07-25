@@ -92,10 +92,29 @@ export default class TradeOrderListStore extends OrderListStore{
     });
     this.WebSocket.general.on('tradeDepth', data => {
       console.log(this.controller,'tradeDepth getWebSocketData', data);
-      this.controller.liveTradeListHandle(data)
-      this.controller.kdepthController && this.controller.kdepthController.setData(data);
-      // this.controller.updateRecommend(data.data)
-      // this.recommendData = data.data
+      let dataAf = {
+        "tradePairName": data.n,
+        "time": data.t,
+        "levle": data.lv,
+        "buy": data.b && data.b.map(v => {
+          return {
+            "price": v.p,
+            "priceCN": v.pc,
+            "priceEN": v.pe,
+            "amount": v.a
+          }
+        }) || [],
+        "sell": data.s && data.s.map(v => {
+          return {
+            "price": v.p,
+            "priceCN": v.pc,
+            "priceEN": v.pe,
+            "amount": v.a
+          }
+        }) || [],
+      };
+      this.controller.liveTradeListHandle(dataAf)
+      this.controller.kdepthController && this.controller.kdepthController.setData(dataAf);
     })
   }
 
@@ -105,20 +124,39 @@ export default class TradeOrderListStore extends OrderListStore{
   async getDepth(tradePairName) {
     let orderListArray = await this.Proxy.getDepth(
         {
-          'tradePairName': tradePairName,
-          "level":0 //深度 可传6,5,4,3
+          n: tradePairName,
+          lv: 0 //深度 可传6,5,4,3
         }
     );
-    this.state.liveTrade = orderListArray;
-    this.controller.kdepthController && this.controller.kdepthController.setData(orderListArray);
-    return orderListArray
+    let orderListArrayAf = {
+      "tradePairName": orderListArray.n,
+      "time": orderListArray.t,
+      "levle": orderListArray.lv,
+      "buy": orderListArray.b && orderListArray.b.map(v => {
+        return {
+          "price": v.p,
+          "priceCN": v.pc,
+          "priceEN": v.pe,
+          "amount": v.a
+        }
+      }) || [],
+      "sell": orderListArray.s && orderListArray.s.map(v => {
+        return {
+          "price": v.p,
+          "priceCN": v.pc,
+          "priceEN": v.pe,
+          "amount": v.a
+        }
+      }) || [],
+  
+    }
+    this.state.liveTrade = orderListArrayAf;
+    this.controller.kdepthController && this.controller.kdepthController.setData(orderListArrayAf);
+    return orderListArrayAf
   }
   getWebSocketData() {
-    console.log('getData', this.WebSocket)
     this.WebSocket.general.on('tradeDepth', data => {
       console.log('tradeDepth getWebSocketData', data)
-      // this.controller.updateRecommend(data.data)
-      // this.recommendData = data.data
     })
   }
 }

@@ -13,11 +13,21 @@ export default class OrderListStore extends ExchangeStoreBase {
       tradePairId: 3
     }
     this.WebSocket.general.on('joinRoom', data => {
-      // console.log('joinRoom getWebSocketData Recent', data, this.controller)
     })
     this.WebSocket.general.on('orderUpdate', data => {
-      // console.log(this.controller,'orderUpdate getWebSocketData123456', data);
-      this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(data)
+      let dataAf = {
+        orders: data.ors.map(v => {
+          return {
+            "dealTime": v.t,
+            "price": v.p,
+            "priceCN": v.pc,
+            "priceEN": v.pe,
+            "volume": v.vol,
+            "orderType": v.ty //0买1卖
+          }
+        })
+      }
+      this.state.recentItemSelect === 'mineLess' && this.controller.updateRecentOrder(dataAf)
     })
   }
 
@@ -36,19 +46,39 @@ export default class OrderListStore extends ExchangeStoreBase {
   async getRecentOrder(isPersonal, id){
     let recentTradeListArr = isPersonal ? await this.Proxy.recentOrderUser(
         {
-          "userId": this.controller.userController.userId,
           token: this.controller.userController.userToken,
-          "tradePairId": id,
-          "count": 10
+          id: id,
+          c: 10
         }
     ): await this.Proxy.recentOrderMarket(
         {
           "tradePairId": id,
-          "count": 10
+          a: 10
         }
     );
-    this.state.recentTradeListArr = recentTradeListArr && recentTradeListArr.orders || [];
-    return recentTradeListArr && recentTradeListArr.orders || []
+    let recentTradeListArrAf = isPersonal ?{
+      orders: recentTradeListArr.ors.map(v => {
+        return{
+          "orderTime": v.t,
+          "avgPrice": v.ap,
+          "avgPriceCN": v.apc,
+          "avgPriceEN": v.ape,
+          "dealDoneCount": v.a
+        }
+      })
+    } : {
+      orders: recentTradeListArr.ors.map(v => {
+        return{
+          "dealTime": v.t,
+          "price": v.p,
+          "priceCN": v.pc,
+          "priceEN": v.pe,
+          "volume": v.vol
+        }
+      })
+    }
+    this.state.recentTradeListArr = recentTradeListArr && recentTradeListArrAf.orders || [];
+    return recentTradeListArr && recentTradeListArrAf.orders || []
   }
   // async getRecentOrderMarket(id){
   //   let recentTradeListArr = await this.Proxy.recentOrderMarket(

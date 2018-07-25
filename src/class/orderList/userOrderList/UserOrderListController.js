@@ -21,34 +21,19 @@ export default class UserOrderListController extends OrderListController {
   orderListHandle(type, params) {
     type === 'orderCurrent' && this.getCurrentOrder(type, params);
     type !== 'orderCurrent' && this.getHistoryOrder(type, params);
-    // this.view.setState(
-    //   type !== 'orderDeal' &&  {
-    //   orderListArray: this.store.state[order[type]]
-    // } || {
-    //   orderListArray: this.store.state[order[type]].filter(v => v.orderStatus === 0)
-    //     },
-    // )
-    // type === 'orderHistory' && this.view.setState(
-    //     {preArray:  this.store.state[order[type]]}
-    // )
   }
 
   changeTradePairId(value) {
     let idArray = [];
     idArray.push(value);
-    // console.log(123123123123,idArray)
     let currentParams = {
-      // 'userId': JSON.parse(this.userController.userId),
        idArray,
       "orderType": 2,
     };
     let historyParams = {
-      // 'userId': JSON.parse(this.userController.userId),
        idArray,
       "orderType": 2,
       "orderStatus": [2, 3, 4, 5, 6, 7],
-      // startTime: 1509484067,
-      // endTime: 1530088867,
       "startTime": Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60,
       "endTime": Math.floor(new Date().getTime() / 1000),
       "page": 1,
@@ -84,9 +69,8 @@ export default class UserOrderListController extends OrderListController {
       orderListArray: historyOrder && historyOrder.orderList || [],
       // total: historyOrder && this.view.state.page === 1 && historyOrder.totalCount || 0
     });
-    console.log(this.view,'pageeeeeeeeeeee', this.view.state.page,historyOrder.totalCount)
     historyOrder && this.view.state.page === 1 && this.view.setState(
-        {total: historyOrder.totalCount},console.log('yibuuuuuuuuuuu',this.view.state.total)
+        {total: historyOrder.totalCount}
     )
   }
   async exportHistory(type){
@@ -168,34 +152,26 @@ export default class UserOrderListController extends OrderListController {
       return
      let currentOrder = this.view.state.currentOrder;
      let historyOrder = this.view.state.historyOrder;
-     // console.log('102102102102102102102', para)
-     // let changeItem = currentOrder.find(v => v.orderId = para.orderId);
      let changeIndex = currentOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId));
      let historyIndex = historyOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId))
-     // console.log('changeIndex', changeIndex, historyIndex)
      if((para.orderStatus === 0 || para.orderStatus === 1) && para.priceType === 0) {
        changeIndex !== -1 && currentOrder.splice(changeIndex, 1, para) || currentOrder.unshift(para);
         this.view.setState(currentOrder);
-       // console.log('currentOrder22', currentOrder)
         return
      }
     para.priceType === 0 && changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
      historyIndex !== -1 && historyOrder.splice(historyIndex, 1, para) || historyOrder.unshift(para);
-    // console.log('currentOrder33', historyOrder)
      this.view.setState({
        historyOrder,
        currentOrder
      })
   }
-
   async cancelOrder(orderId, opType, dealType, tradePairId,v = 1) {
     let msg = await this.store.cancelOrder(orderId, opType, dealType, tradePairId);
-    // console.log('xiadan', msg,orderId);
     let orderListArray = this.view.state.orderListArray
     if(orderListArray){
       let index = orderListArray.findIndex((item) => Number(item.orderId) === Number(orderId))
       orderListArray.splice(index,1)
-      console.log(index,orderListArray)
       this.view.setState({
         orderListArray
       })
