@@ -69,14 +69,18 @@ export default {
     { name: 'getAllChg', data: { url: '/v1/common/', method: 'post' }, action: 'getAllChg', actionBack: 'getAllChgRes' },
   ],
   asset: [
+    // 获取交易对手续费5.16（pass）
+    { name: 'getFee', data: { url: '/v1/common/', method: 'post' }, action: 'atp', actionBack: 'atpr' },
+    // 获取我的QBT
+    { name: 'getMyQbt', data: { url: '/v1/user/', method: 'post' }, action: 'gmq', actionBack: 'gmqr', needToken: true  },
+    // 获取总资产(包含各个钱包币种的详细信息)4.1
+    { name: 'totalAsset', data: { url: '/v1/property/', method: 'post' }, action: 'gp', actionBack: 'gpr', needToken: true },
+    // 获取全部币种列表
+    { name: 'getAllCoinList', data: { url: '/v1/common/', method: 'post' }, action: 'gai', actionBack: 'gair' },
+    //24小时提现额度, 查询币种额度，4.2
+    { name: 'balance', data: { url: '/v1/property/', method: 'post' }, action: 'gb', actionBack: 'gbr', needToken: true },
     // 撤销提币申请
     { name: 'cancelWithdraw', data: { url: '/v1/property/', method: 'post' }, action: 'cancelWithdraw', actionBack: 'cancelWithdrawRes', needToken: true },
-    // 获取交易对手续费5.16（pass）
-    { name: 'getFee', data: { url: '/v1/common/', method: 'post' }, action: 'getAllTradePairFee', actionBack: 'getAllTradePairFeeRes' },
-    // 获取总资产(包含各个钱包币种的详细信息)4.1
-    { name: 'totalAsset', data: { url: '/v1/property/', method: 'post' }, action: 'getProperty', actionBack: 'getPropertyRes', needToken: true },
-    //24小时提现额度, 查询币种额度，4.2
-    { name: 'balance', data: { url: '/v1/property/', method: 'post' }, action: 'getBalance', actionBack: 'getBalanceRes', needToken: true },
     // 充币地址查询4.4（pass）
     { name: 'chargeAddress', data: { url: '/v1/property/', method: 'post' }, action: 'getChargeAddress', actionBack: 'getChargeAddressRes', needToken: true },
     // 提币矿工费4.5
@@ -93,10 +97,6 @@ export default {
     { name: 'history', data: { url: '/v1/property/', method: 'post' }, action: 'getChargeRecord', actionBack: 'getChargeRecordRes', needToken: true },
     // 验证资金密码
     { name: 'verifyFundPass', data: { url: '/v1/user/', method: 'post' }, action: 'verifyFundPass', actionBack: 'verifyFundPassRes', needToken: true },
-    // 获取全部币种列表
-    { name: 'getAllCoinList', data: { url: '/v1/common/', method: 'post' }, action: 'getAllCoinList', actionBack: 'getAllCoinListRes' },
-    // 获取我的QBT
-    { name: 'getMyQbt', data: { url: '/v1/user/', method: 'post' }, action: 'getMyQbt', actionBack: 'getMyQbtRes', needToken: true  },
   ],
   userOrder: [
     //当前订单

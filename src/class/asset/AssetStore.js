@@ -74,7 +74,15 @@ export default class AssetStore extends ExchangeStoreBase {
   async getFee() {
     let result = await this.Proxy.getFee({
       token: this.controller.token
-    });
+    })
+    result && result.length ? (result = result.map(v=>{
+     return {
+       id: v.id,
+       na: v.name,
+       t: v.taker,
+       m: v.maker
+     }
+    })) : (result = [])
     // console.log('getFee')
     // console.log(result)
     this.state.pairFees = result;
@@ -86,15 +94,15 @@ export default class AssetStore extends ExchangeStoreBase {
     let result = await this.Proxy.getMyQbt({
       token: this.controller.token
     });
-    if (result && result.userId) {
+    if (result && result.id) {
       return {
-        availableCount: result.award,
-        price: result.value,
+        availableCount: result.aw,
+        price: result.p,
         coinIcon: "",
         coinId: '',
         coinName: "QBT",
         fullName: "QBT",
-        valuationCN: result.award.value,
+        valuationCN: result.vl,
       };
     }
     return false;
@@ -103,36 +111,41 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取总资产
   async getTotalAsset() {
     let {
-      valuationBTC,
-      valuationEN,
-      valuationCN,
-      coinList
+      va,
+      vae,
+      vac,
+      cl
     } = await this.Proxy.totalAsset({
-      userId: this.controller.userId,
+      // userId: this.controller.userId,
       token: this.controller.token
     });
-
-    this.state.wallet = coinList || [];
-    // if (this.state.wallet.length) {
-    //   let obj = {};
-    //   this.controller.sort(this.state.wallet, ["coinName"], 1).forEach(v => {
-    //     obj[v.coinName.toUpperCase()] = v.coinId;
-    //   });
-    //   this.state.walletList = obj;
-    // }
-    let { totalQuota, availableQuota, usedQuota } = await this.Proxy.balance({
-      userId: this.controller.userId,
-      coinId: this.state.walletList["BTC"],
-      coinName: "btc",
+    this.state.wallet = cl && cl.map(({cn,fn,cic,cid,avc,frc,va,vac,toc})=>{
+      return {
+        "coinName": cn,
+        "fullname": fn,
+        "coinIcon": cic,//币种icon
+        "coinId": cid,
+        "availableCount": avc,//可用余额
+        "frozenCount": frc,//冻结余额
+        "valuationBTC": va,//btc估值
+        "valuationCN": vac,
+        "totalCount": toc//总量
+      }
+    }) || [];
+    let { toq, avq, usq } = await this.Proxy.balance({
+      // userId: this.controller.userId,
+      // coinId: this.state.walletList["BTC"],
+      // coinName: "btc",
+      id: 0,
       token: this.controller.token
     });
     this.state.totalAsset = {
-      valuationBTC,
-      valuationEN,
-      valuationCN,
-      totalQuota,
-      availableQuota,
-      usedQuota
+      valuationBTC: va, //总资产
+      valuationEN: vae, //换算美元
+      valuationCN: vac, //换算人民币
+      totalQuota: toq, //24小时提现额度
+      availableQuota: avq, //可用额度
+      usedQuota: usq //已用额度
     };
   }
   // 获取walletList
@@ -140,8 +153,8 @@ export default class AssetStore extends ExchangeStoreBase {
     let result = await this.Proxy.getAllCoinList();
     if (result && result.list && result.list.length) {
       let obj = {};
-      this.controller.sort(result.list, ["coinName"], 1).forEach(v => {
-        obj[v.coinName.toUpperCase()] = v.coinId;
+      this.controller.sort(result.list, ["n"], 1).forEach(v => {
+        obj[v.n.toUpperCase()] = v.id;
       });
       this.state.walletList = obj;
     }
@@ -150,14 +163,22 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取单个币种资产信息
   async getCurrencyAmount(coin) {
     let obj = {
-      userId: this.controller.userId,
-      coinId: this.state.walletList[coin],
-      coinName: coin.toLowerCase(),
+      // userId: this.controller.userId,
+      id: this.state.walletList[coin],
+      // coinName: coin.toLowerCase(),
       token: this.controller.token
     };
     let result = await this.Proxy.balance(obj);
     if (result && result.errCode) {
       return result;
+    }
+    result = {
+      "availableCount": result.avc,//当前币种可用余额
+      "totalCount": result.toc,//当前币种总余额
+      "frozenCount": result.frc,//当前币种冻结额度
+      "totalQuota": result.toq,//24H提现额度
+      "availableQuota": result.avq,//可用提现额度
+      "usedQuota": result.usq
     }
     this.state.currencyAmount = result;
     return result;
