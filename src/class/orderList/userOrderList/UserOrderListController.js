@@ -97,7 +97,7 @@ export default class UserOrderListController extends OrderListController {
       "orderStatus": [2,3,4,5,6,7],
       "startTime": 0,
       "endTime": Math.floor(new Date().getTime() / 1000),
-      "page": 0,
+      "page": 1,
       "pageSize": 0
     });
     if (!result || !result.orderList || !result.orderList) return;
@@ -130,7 +130,7 @@ export default class UserOrderListController extends OrderListController {
       return;
     }
     // str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";
-      str = `${this.intl.get("time")},${this.intl.get("pair")},${this.intl.get("notice-type")},${this.intl.get("avgPrice")},${this.intl.get("volume")},${this.intl.get("total")},${this.intl.get("fee")}`;
+      str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("avgPrice")},${this.view.intl.get("volume")},${this.view.intl.get("total")},${this.view.intl.get("fee")}`;
       result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)).forEach(v => {
         str +=
           "\n" +
@@ -148,7 +148,7 @@ export default class UserOrderListController extends OrderListController {
           "," +
           v.fee
       });
-      this.exportExcel(str, `${this.intl.get("order-deal")}.xls`);
+      this.exportExcel(str, `${this.view.intl.get("order-deal")}.xls`);
       return;
   }
   async getOrderDetail(id) {

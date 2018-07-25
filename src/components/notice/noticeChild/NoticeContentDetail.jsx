@@ -44,8 +44,8 @@ export default class homeNotice extends exchangeViewBase {
 
   render() {
     let activityInfo = this.state.activityList;
-    let activityRecommend = this.props.controller.configData.language === "zh-CN" ? eval(activityInfo.recommendCn) : eval(activityInfo.recommendEn);
-    console.log(activityRecommend);
+    let activityRecommend;
+    activityInfo.catalog && (activityRecommend = this.props.controller.configData.language === "zh-CN" ? eval(activityInfo.recommendCn) : eval(activityInfo.recommendEn));
     return <div className="notice-detail-wrap ">
         <h1>
           <Link to="/whome">{this.intl.get("header-home")}</Link>&gt;
@@ -85,14 +85,16 @@ export default class homeNotice extends exchangeViewBase {
             </p> */}
           </div>
         </div>
-        <h5>
-          <span>{this.intl.get("notice-link")}：</span>
-          <a href={`${activityInfo.source}`} target="_blank">{`${activityInfo.source}`}</a>
-        </h5>
-        <h6>
-          <span>{this.intl.get("notice-recommend")}：</span>
-        {activityRecommend && activityRecommend.map((v, i) => <a href={activityInfo.recommendLink[i]} target="_blank" key={i}>{v}</a>)}
-        </h6>
+      {activityInfo.catalog && <div>
+          <h5>
+            <span>{this.intl.get("notice-link")}：</span>
+            <a href={`${activityInfo.source}`} target="_blank">{`${activityInfo.source}`}</a>
+          </h5>
+          <h6>
+            <span>{this.intl.get("notice-recommend")}：</span>
+          {activityRecommend && activityRecommend.map((v, i) => <a href={activityInfo.recommendLink[i]} target="_blank" key={i}>{v}</a>)}
+          </h6>
+        </div>}
       </div>;
   }
 }
