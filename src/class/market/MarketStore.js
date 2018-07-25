@@ -69,7 +69,7 @@ export default class MarketStore extends ExchangeStoreBase {
       // 监听收藏
       this.WebSocket.general.on('collectArr', data => {
         // console.log('getWebSocketData collectArr', data, this.controller, name)
-        this.controller.updateMarketAll(data.d, 0)
+        this.controller.updateMarketAll(data, 0)
       })
       // 监听市场数据更新
       this.WebSocket.general.on('marketPair', data => {
