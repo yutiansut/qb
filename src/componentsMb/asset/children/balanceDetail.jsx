@@ -43,12 +43,12 @@ export default class BalanceDetail extends exchangeViewBase {
             </div>
             <div className="d1">
                 <img src={result.coinIcon}/>
-                <b>{result.coinName.toUpperCase()}</b>
+                <b>{result.coinName && result.coinName.toUpperCase()}</b>
                 <span>{result.fullName}</span>
             </div>
             <div className="d2">
                 <p><span>{this.intl.get("asset-valuation")} (BTC)</span><i>{result.valuationBTC}</i></p>
-                <p><span>{this.intl.get("asset-valuation")} (CNY)</span><i>{result.valuationCN}</i></p>
+                {/*<p><span>{this.intl.get("asset-valuation")} (CNY)</span><i>{result.valuationCN}</i></p>*/}
             </div>
             <div className="d3">
                 <p><span>{this.intl.get("asset-avail")}</span><i>{result.availableCount}</i></p>
