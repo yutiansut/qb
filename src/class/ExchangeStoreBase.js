@@ -21,8 +21,8 @@ export default class ExchangeStoreBase extends StoreBase {
 
   exchangeStoreBasePreHandler(app, req, config) {
     let paramsObj = {
-      action: config.action,
-      data: req.data.params
+      a: config.action,
+      d: req.data.params
     }
     req.data.params = paramsObj
     //添加token
@@ -38,12 +38,12 @@ export default class ExchangeStoreBase extends StoreBase {
   exchangeStoreBaseAfterHandler(app, req, res, config) {
     // console.log("res.result.ret", res.result.ret);
 
-    if (res.result.ret !== 0) {
+    if (res.result.r !== 0) {
       // res.result = Msg[res.result.ret]
-      res.result = res.result.data ? Object.assign(Msg[res.result.ret], res.result.data) : Msg[res.result.ret];
+      res.result = res.result.d ? Object.assign(Msg[res.result.r], res.result.d) : Msg[res.result.r];
       return
     }
-    if (res.result.action !== config.actionBack) {
+    if (res.result.a !== config.actionBack) {
       res.result = Msg[1];
       return
     }

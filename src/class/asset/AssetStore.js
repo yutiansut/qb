@@ -111,6 +111,7 @@ export default class AssetStore extends ExchangeStoreBase {
       userId: this.controller.userId,
       token: this.controller.token
     });
+
     this.state.wallet = coinList || [];
     // if (this.state.wallet.length) {
     //   let obj = {};

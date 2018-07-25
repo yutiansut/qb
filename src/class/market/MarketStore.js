@@ -14,12 +14,12 @@ export default class MarketStore extends ExchangeStoreBase {
       marketDataHandle: [],
       homeMarketPairData: [],
       coin: '',
-      sortValue:[],//排序值
-      ascending:0,//是否升序， 0 否 1 是
+      sortValue: [],//排序值
+      ascending: 0,//是否升序， 0 否 1 是
       pairInfo: {},
       unitsType: '',
       pairMsg: {},
-      tradePair:'lsk/btc',
+      tradePair: 'lsk/btc',
       coinInfo: {
         "id": 0,            // 币种id
         "name": "",      // 币种名
@@ -105,16 +105,16 @@ export default class MarketStore extends ExchangeStoreBase {
     // console.log('setAllPair 1', this.state.allPairData)
   }
 
-  setSort(sortValue, ascending){
+  setSort(sortValue, ascending) {
     this.state.sortValue = sortValue
     this.state.ascending = ascending
   }
 
-  get sortValue(){
+  get sortValue() {
     return this.state.sortValue
   }
 
-  get ascending(){
+  get ascending() {
     return this.state.ascending
   }
 
@@ -126,7 +126,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //从交易对池中拿到收藏数据
   get collectData() {
     // console.log('this.state.allPairData', this, this.state.allPairData)
-    return this.state.allPairData.filter(v => v.isFavorite).sort((a,b)=>a.collectIndex-b.collectIndex)
+    return this.state.allPairData.filter(v => v.isFavorite).sort((a, b) => a.collectIndex - b.collectIndex)
   }
 
 
@@ -134,7 +134,10 @@ export default class MarketStore extends ExchangeStoreBase {
   updateAllPairListFromCollect(list = []) {
     // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
     // list && list.length && lgitist.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
-    this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {isFavorite: 1, collectIndex: list.indexOf(v.tradePairId)} || {isFavorite: 0}))
+    this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {
+      isFavorite: 1,
+      collectIndex: list.indexOf(v.tradePairId)
+    } || {isFavorite: 0}))
     // console.log('updateAllPairListFromCollect 1', this.allPair)
   }
 
@@ -228,7 +231,7 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //币种资料
   async getCoinInfo(coinId) {
-    let result = await this.Proxy.coinInfo({ coinFlag: coinId });
+    let result = await this.Proxy.coinInfo({coinFlag: coinId});
     result.name && (this.state.coinInfo = result);
   }
 
@@ -238,7 +241,7 @@ export default class MarketStore extends ExchangeStoreBase {
       userId,
       token
     });
-    if(!(this.state.collectArr instanceof Array)){
+    if (!(this.state.collectArr instanceof Array)) {
       this.state.collectArr = [];
     }
     return this.state.collectArr
@@ -247,10 +250,45 @@ export default class MarketStore extends ExchangeStoreBase {
   //全部交易对
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
-    // console.log('getPairInfo', pairInfo)
-    this.state.pairInfo = pairInfo.list
+    console.log('getPairInfo', pairInfo)
+    this.state.pairInfo = pairInfo.list.map(v => {
+      return {
+        coinName: v.coinName,
+        highPrice: v.highPrice,
+        highPriceCN: v.highPriceCN,
+        highPriceEN: v.highPriceEN,
+        icon: v.icon,
+        isFavorite: v.isFavorite,
+        isNewBorn: v.isNewBorn,
+        isRecommend: v.isRecommend,
+        lowPrice: v.lowPrice,
+        lowPriceCN: v.lowPriceCN,
+        lowPriceEN: v.lowPriceEN,
+        marketName: v.marketName,
+        openPrice: v.openPrice,
+        openPriceCN: v.openPriceCN,
+        openPriceEN: v.openPriceEN,
+        points: v.points,
+        price: v.price,
+        priceCN: v.priceCN,
+        priceEN: v.priceEN,
+        rise: v.rise,
+        tempTurnover: v.tempTurnover,
+        tempTurnoverCN: v.tempTurnoverCN,
+        tempTurnoverEN: v.tempTurnoverEN,
+        tempVolume: v.tempVolume,
+        tradePairId: v.tradePairId,
+        tradePairName: v.tradePairName,
+        turnover: v.turnover,
+        turnoverCN: v.turnoverCN,
+        turnoverEN: v.turnoverEN,
+        updateTime: v.updateTime,
+        updown: v.updown,
+        volume: v.volume,
+      }
+    })
     // this.state.pairMsg = this.formatPairMsg(pairInfo)
-    return pairInfo.list
+    return this.state.pairInfo
   }
 
   get pairInfo() {
@@ -259,9 +297,40 @@ export default class MarketStore extends ExchangeStoreBase {
 
   async getMarketAll() {
     let marketAll = await this.Proxy.getAllChg();
-    // console.log(marketAll)
+    // console.log('marketAll', marketAll)
     // this.state.allPairData = marketAll.marketList
-    return marketAll.items
+    return marketAll.items.map(v => {
+      return {
+        highPrice: v.highPrice,
+        highPriceCN: v.highPriceCN,
+        highPriceEN: v.highPriceEN,
+        lowPrice: v.lowPrice,
+        lowPriceCN: v.lowPriceCN,
+        lowPriceEN: v.lowPriceEN,
+        openPrice: v.openPrice,
+        openPriceCN: v.openPriceCN,
+        openPriceEN: v.openPriceEN,
+        points: v.points,
+        price: v.price,
+        priceCN: v.priceCN,
+        priceEN: v.priceEN,
+        rise: v.rise,
+        tempTurnover: v.tempTurnover,
+        tempTurnoverCN: v.tempTurnoverCN,
+        tempTurnoverEN: v.tempTurnoverEN,
+        tempVolume: v.tempVolume,
+        tradePairId: v.tradePairId,
+        tradePairName: v.tradePairName,
+        turnover: v.turnover,
+        turnoverCN: v.turnoverCN,
+        turnoverEN: v.turnoverEN,
+        updateTime: v.updateTime,
+        volume: v.volume,
+      }
+    })
+    // console.log('arr',arr)
+    // console.log('marketAll.items',marketAll.items)
+    // return arr
   }
 
   //或区域交易对信息
@@ -272,23 +341,23 @@ export default class MarketStore extends ExchangeStoreBase {
       await this.getPairInfo()
     }
     this.state.pairInfo.map((v) => {
-      let pair = v.tradePairName.split('/');
-      let coin = pair[0];
-      let market = pair[1];
+      // let pair = v.tradePairName.split('/');
+      let coin = v.coinName;
+      let market = v.marketName;
       marketCorrespondingId[market] = marketCorrespondingId[market] || {};
       coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
       marketCorrespondingId[market][coin] = v.tradePairId;
       coinCorrespondingId[coin][market] = v.tradePairId;
       coinCorrespondingPair[coin] = coinCorrespondingPair[coin] || [];
       marketCorrespondingPair[market] = marketCorrespondingPair[market] || [];
-    coinCorrespondingPair[coin].push(market);
-    marketCorrespondingPair[market].push(coin);
-  });
-  let pairMsg = {};
-  pairMsg.pairIdCoin = coinCorrespondingId;
-  pairMsg.pairIdMarket = marketCorrespondingId;
-  pairMsg.pairNameCoin = coinCorrespondingPair;
-  pairMsg.pairNameMarket = marketCorrespondingPair;
-  return pairMsg
+      coinCorrespondingPair[coin].push(market);
+      marketCorrespondingPair[market].push(coin);
+    });
+    let pairMsg = {};
+    pairMsg.pairIdCoin = coinCorrespondingId;
+    pairMsg.pairIdMarket = marketCorrespondingId;
+    pairMsg.pairNameCoin = coinCorrespondingPair;
+    pairMsg.pairNameMarket = marketCorrespondingPair;
+    return pairMsg
   }
 }

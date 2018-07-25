@@ -14,7 +14,7 @@ export default {
   // wSecure: true,//正式websocket开启wss
   // wshost:'www.qb.com', //正式websocket主机地址
   // wsport: 443, //正式websocket主机端口
-  // wSecure: false,//测试websocket不开启wss
+  wSecure: false,//测试websocket不开启wss
   // wshost:'192.168.55.104', //架构websocket主机地址
   // wshost:'192.168.55.108', //肖宇websocket主机地址
   // wshost:'192.168.55.111', ///书寒websocket主机地址
