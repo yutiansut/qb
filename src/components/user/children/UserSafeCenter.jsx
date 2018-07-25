@@ -232,7 +232,7 @@ export default class userSafeCenter extends exchangeViewBase {
   }
 
   render() {
-    console.log(111, this.state)
+    // console.log(111, this.state)
     return (
       <div className="safe-content">
         <h1>{this.intl.get("header-security")}</h1>
@@ -342,7 +342,7 @@ export default class userSafeCenter extends exchangeViewBase {
                 <tbody className={`${this.state.ipList && this.state.ipList.length ? '' : 'hide'}`}>
                   {this.state.ipList && this.state.ipList.map((v, index) => (<tr key={index}>
                     <td>{v.IPAddress}</td>
-                    <td>{v.createAt.toDate('yyyy-MM-dd')}</td>
+                    <td>{v.createAt && v.createAt.toDate('yyyy-MM-dd')}</td>
                     <td onClick={() => this.delIp(v.IPId, v.IPAddress, index)} className="delIp">{this.intl.get("delete")}</td>
                   </tr>))}
                 </tbody>
@@ -407,7 +407,7 @@ export default class userSafeCenter extends exchangeViewBase {
           </table>
         </div>
         {/*changeGooglePopup = {state => this.changeGooglePopup(state)}*/}
-        {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret.secret}
+        {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret}
                      setGoogleVerify = {this.setGoogleVerify}
                      onClose={() => {this.setState({ showGoogle: false });}}/>}
         {this.state.showSet && <PassPopup onClose={this.closeSet}

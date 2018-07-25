@@ -142,10 +142,9 @@ export default class UserStore extends ExchangeStoreBase {
     return userAuthObj
   }
 
-
   async userCreditsNum() { // 获取用户积分
     let userCreditsCon = await this.Proxy.getUserCreditsNum({"token": this.token});
-    console.log('afafas', userCreditsCon)
+    // console.log('afafas', userCreditsCon)
     // let userCreditsNum = userCreditsCon.credits;
     let userCreditsNum = userCreditsCon.cre
     this.state.userCreditsNum = userCreditsNum;
@@ -263,12 +262,13 @@ export default class UserStore extends ExchangeStoreBase {
 
   async ipList() { // 获取ip白名单
     let ipListCon = await this.Proxy.getIpList({"token": this.token});
-    let ipList = ipListCon ? ipListCon.d : []
-    ipList && ipList.map(v => {
+    // console.log('获取ip白名单', ipListCon)
+    // let ipList = ipListCon ? ipListCon.d : []
+    let ipList = ipListCon.d && ipListCon.d.map(v => {
       return {
         IPId: v.id,
         IPAddress: v.add,
-        createdAt: v.t
+        createAt: v.t
       }
     })
     // console.log('白名单', ipList)
@@ -279,6 +279,7 @@ export default class UserStore extends ExchangeStoreBase {
 
   async googleSecret() { // 获取谷歌验证密钥
     let googleSecretCon = await this.Proxy.getGoogle({"token": this.token})
+    // console.log('获取谷歌验证密钥', googleSecretCon)
     let googleSecret = googleSecretCon.sec
     this.state.googleSecret = googleSecret;
     return googleSecret

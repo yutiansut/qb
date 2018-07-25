@@ -90,17 +90,17 @@ export default class UserController extends ExchangeControllerBase {
 
   async uploadImg(file) { // 上传图片
     console.log('上传图片', file)
-    // let photoArr = this.view.state.photoArr
-    //     photoArr[this.view.state.selectIndex].photoList[this.view.state.imgUrlIndex].loadingFlag = true
+    let photoArr = this.view.state.photoArr
+        photoArr[this.view.state.selectIndex].photoList[this.view.state.imgUrlIndex].loadingFlag = true
     //     this.view.setState(photoArr)
     let imgUrl = `image${this.view.state.imgUrlIndex + 1}`
     let res = await this.store.uploadImg(file),
         result = await res.text()
     let obj={}
     obj[imgUrl] = result
-    // if (result) {
-    //   photoArr[this.view.state.selectIndex].photoList[this.view.state.imgUrlIndex].loadingFlag = false
-    // }
+    if (result) {
+      photoArr[this.view.state.selectIndex].photoList[this.view.state.imgUrlIndex].loadingFlag = false
+    }
     //
     console.log('上传图片2', result, obj)
     this.view.setState(obj)
@@ -317,13 +317,14 @@ export default class UserController extends ExchangeControllerBase {
       token: this.store.token,
       ipd: ipAdd
     })
-    if (result && result.IPId) {
-      ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.IPId})
+    // console.log('添加ip白名单', result)
+    if (result && result.ipd) {
+      ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.ipd})
     }
     this.view.setState({
       remindPopup: true,
-      popType: result && result.IPId ?  'tip1' : 'tip3',
-      popMsg: result && result.IPId ?  this.view.intl.get("user-addSucc") : result.msg,
+      popType: result && result.ipd ?  'tip1' : 'tip3',
+      popMsg: result && result.ipd ?  this.view.intl.get("user-addSucc") : result.msg,
       ipList
     })
   }
@@ -344,12 +345,12 @@ export default class UserController extends ExchangeControllerBase {
       popMsg: result ? result.msg : this.view.intl.get("user-delSucc"),
       ipList
     })
-
   }
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.getCaptcha()
-    this.view.setState({captcha: captcha.d, captchaId: captcha.id})
+    // console.log('获取图形验证码', captcha)
+    this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
 
   async setGoogleVerify(code) { // 验证谷歌验证码
@@ -504,8 +505,11 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.Proxy.getFundPwdSuspend({
       "token": this.store.token,
     })
+    let resultObj = {
+      mode: result.mo
+    }
     // console.log('查看资金密码', result)
-    return result
+    return resultObj
   }
 
   async getCode(account, mode, type) { // 获取短信验证码
@@ -521,7 +525,11 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCaptcha() { // 获取图形验证码
     let result = await this.store.Proxy.getCaptcha()
-    return result
+    let resultObj = {
+      id: result.id,
+      data: result.d
+    }
+    return resultObj
   }
 
   //h5新增活动图片

@@ -234,7 +234,7 @@ export default class userIdentity extends exchangeViewBase {
   }
 
   render() {
-    console.log('用户信息2', this.state.userAuth)
+    // console.log('用户信息2', this.state.userAuth)
     return (
       <div className="identify-wrap">
         <h1>{this.intl.get("header-idVerify")}</h1>
@@ -307,9 +307,9 @@ export default class userIdentity extends exchangeViewBase {
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
                 <img src={this.$imagesMap.$user_add} alt="" className="add-img"/>
-                {/*{this.state.photoArr[this.state.selectIndex].photoList[index].loadingFlag && <div className="loading-wrap">*/}
-                  {/*<img src="/static/img/user/loading.png" alt="" />*/}
-                {/*</div>}*/}
+                {this.state.photoArr[this.state.selectIndex].photoList[index].loadingFlag && <div className="loading-wrap">
+                  <img src="/static/img/user/loading.png" alt="" />
+                </div>}
                 <p>{item.name}</p>
               </dd>))}
             </dl>
