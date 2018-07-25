@@ -57,7 +57,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.Loop["userListener"].start();
   }
   async userLogin(data) { // 获取登录信息
-    console.log('ccc4', data)
+    // console.log('ccc4', data)
     this.state.userId = data && data.id
     this.state.token = data && data.tk
     this.state.userName = data && data.na
@@ -118,7 +118,7 @@ export default class UserStore extends ExchangeStoreBase {
       // "userName": userInfo.userName,
       "withdrawVerify": userInfo.wvf,
     }
-    // console.log('qqqq', userInfoObj)
+    console.log('qqqq', userInfoObj)
     this.state.userInfo = userInfoObj;
     return userInfoObj
   }
