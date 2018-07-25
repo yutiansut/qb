@@ -165,6 +165,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.setState(
         {orderStatus,
           total: 0,
+          searchSaveFlag: true
         }
     );
     this.orderListHandle(this.props.type, params[this.props.type])

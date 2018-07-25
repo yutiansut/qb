@@ -84,9 +84,8 @@ export default class extends ExchangeViewBase {
               (v, index) =>
                 index <= 50 && (
                   <tr key={index}>
-                    {/*<td>{this.state.recentItemSelect === 'mineLess' ? Number(v.dealTime).toDate('HH:mm:ss'):Number(v.orderTime).toDate('HH:mm:ss')}</td>*/}
-                    style={{color: this.state.recentItemSelect !== 'mineLess' ? (v.orderType && '#f25656' || '#2bb789') : 'rgba(255,255,255,0.8)'}}
-                    <td>
+                    <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.dealTime).toDate('HH:mm:ss'):Number(v.orderTime).toDate('HH:mm:ss')}</td>
+                    <td  style={{color: this.state.recentItemSelect !== 'mineLess' ? (v.orderType && '#f25656' || '#2bb789') : 'rgba(255,255,255,0.8)'}}>
                       {this.state.recentItemSelect === 'mineLess' ? ((this.state.unitsType === "CNY" && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital'}))): ((this.state.unitsType === "CNY" && Number(v.avgPriceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.avgPriceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.avgPrice).format({number:'digital'})))}
                     </td>
                     <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.volume).formatFixNumberForAmount(Number(v.price)) : Number(v.dealDoneCount).formatFixNumberForAmount(Number(v.avgPrice))}</td>
