@@ -10,8 +10,11 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async getQbtMargin(){
-    // let result =
-    return await this.Proxy.getQbtMargin();
+    let res = await this.Proxy.getQbtMargin();
+    return {
+      totalVolume: res.t,
+      margin: res.m,
+    }
   }
 
   async getAward(obj){
@@ -20,7 +23,7 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async getHomeBanner(activityStatus, activityPosition) {
-    let result = await this.Proxy.getHomeBanner({
+    let res = await this.Proxy.getHomeBanner({
       os: 3,
       st : activityStatus,
       ps : activityPosition
