@@ -127,7 +127,7 @@ export default {
     // 获取邀请列表
     { name: 'getInvited', data: { url: '/v1/user/', method: 'post' }, action: 'getInvited', actionBack: 'getInvitedRes', needToken: true },
     // 活动内容
-    { name: 'getHomeBanner', data: { url: '/v1/common/', method: 'post' }, action: 'getHomeBanner', actionBack: 'getHomeBannerRes' },
+    { name: 'getHomeBanner', data: { url: '/v1/common/', method: 'post' }, action: 'hb', actionBack: 'hbr' },
     // H5活动页，获取qbt活动余量
     { name: 'getQbtMargin', data: { url: '/v1/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes' },
     //H5活动页，领取qbt奖励

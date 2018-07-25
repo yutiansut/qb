@@ -63,7 +63,7 @@ export default class ActivityController extends ExchangeControllerBase {
   async getInvited() {
     let result = await this.store.getInvited(this.userId, this.userToken)
     this.view.setState({
-      recordList: result.list || []
+      recordList: result || []
     })
   }
 

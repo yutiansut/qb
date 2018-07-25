@@ -122,7 +122,7 @@ export default class MarketController extends ExchangeControllerBase {
     //请求收藏列表
     let collectIdArr = []
     if (this.userController.userToken) {
-      collectIdArr = await this.store.getFavoriteList(this.userController.userToken, this.userController.userId)
+      collectIdArr = await this.store.getFavoriteList(this.userController.userToken)
     }
     this.store.updateAllPairListFromCollect(collectIdArr)
     //更新视图层

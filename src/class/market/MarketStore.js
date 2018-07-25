@@ -69,12 +69,25 @@ export default class MarketStore extends ExchangeStoreBase {
       // 监听收藏
       this.WebSocket.general.on('collectArr', data => {
         // console.log('getWebSocketData collectArr', data, this.controller, name)
-        this.controller.updateMarketAll(data, 0)
+        this.controller.updateMarketAll(data.d, 0)
       })
       // 监听市场数据更新
       this.WebSocket.general.on('marketPair', data => {
         // console.log('getWebSocketData marketPair', data, this.controller)
-        this.controller.updateMarketAll(data.items, 1)
+        let result = data.d.map(v => {
+          return {
+            points: v.ps,
+            price: v.p,
+            priceCN: v.pc,
+            priceEN: v.pe,
+            rise: v.r,
+            tradePairId: v.id,
+            tradePairName: v.n,
+            turnover: v.to,
+            volume: v.vol,
+          }
+        })
+        this.controller.updateMarketAll(result, 1)
       })
     }
 
@@ -220,9 +233,8 @@ export default class MarketStore extends ExchangeStoreBase {
   //收藏接口
   async changeFavorite(tradePairId, userId, operateType, token) {
     await this.Proxy.changeFavorite({
-      operateType, //0添加 1取消
-      tradePairId,
-      userId,
+      ty: operateType, //0添加 1取消
+      id: tradePairId,
       token
     });
     // console.log('收藏 0', tradePairId, userId, operateType)
@@ -233,7 +245,7 @@ export default class MarketStore extends ExchangeStoreBase {
     if (!this.state.recommendData.length) {
       let result = await this.Proxy.getRecommendCoins()
       // console.log('this.state.recommendData', result)
-      this.state.recommendData = result && result.data.map(v=>{
+      this.state.recommendData = result && result.d.map(v=>{
         return {
           coinName: v.n,
           priceCN: v.pc,
@@ -253,9 +265,8 @@ export default class MarketStore extends ExchangeStoreBase {
   }
 
   //收藏列表
-  async getFavoriteList(token, userId) {
+  async getFavoriteList(token) {
     this.state.collectArr = await this.Proxy.getFavoriteList({
-      userId,
       token
     });
     if (!(this.state.collectArr instanceof Array)) {
@@ -267,7 +278,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //全部交易对
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
-    console.log('getPairInfo', pairInfo)
+    // console.log('getPairInfo', pairInfo)
     this.state.pairInfo = pairInfo && pairInfo.l.map(v => {
       return {
         tradePairName: v.n,
@@ -287,33 +298,17 @@ export default class MarketStore extends ExchangeStoreBase {
     let marketAll = await this.Proxy.getAllChg();
     // console.log('marketAll', marketAll)
     // this.state.allPairData = marketAll.marketList
-    return marketAll && marketAll.items.map(v => {
+    return marketAll && marketAll.d.map(v => {
       return {
-        highPrice: v.highPrice,
-        highPriceCN: v.highPriceCN,
-        highPriceEN: v.highPriceEN,
-        lowPrice: v.lowPrice,
-        lowPriceCN: v.lowPriceCN,
-        lowPriceEN: v.lowPriceEN,
-        openPrice: v.openPrice,
-        openPriceCN: v.openPriceCN,
-        openPriceEN: v.openPriceEN,
-        points: v.points,
-        price: v.price,
-        priceCN: v.priceCN,
-        priceEN: v.priceEN,
-        rise: v.rise,
-        tempTurnover: v.tempTurnover,
-        tempTurnoverCN: v.tempTurnoverCN,
-        tempTurnoverEN: v.tempTurnoverEN,
-        tempVolume: v.tempVolume,
-        tradePairId: v.tradePairId,
-        tradePairName: v.tradePairName,
-        turnover: v.turnover,
-        turnoverCN: v.turnoverCN,
-        turnoverEN: v.turnoverEN,
-        updateTime: v.updateTime,
-        volume: v.volume,
+        points: v.ps,
+        price: v.p,
+        priceCN: v.pc,
+        priceEN: v.pe,
+        rise: v.r,
+        tradePairId: v.id,
+        tradePairName: v.n,
+        turnover: v.to,
+        volume: v.vol,
       }
     }) || []
     // console.log('arr',arr)

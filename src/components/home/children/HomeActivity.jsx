@@ -24,7 +24,7 @@ export default class HomeActivity extends ExchangeViewBase {
   }
 
   componentDidMount() {
-    this.getHomeBanner(1,0)
+    this.getHomeBanner(1, 0)
   }
 
   componentWillUpdate(...parmas) {
