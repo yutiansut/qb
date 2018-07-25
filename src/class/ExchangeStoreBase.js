@@ -79,7 +79,7 @@ export default class ExchangeStoreBase extends StoreBase {
     })
     websocket.onMessage = data => {
       let dataCache = data.b
-      if(data.b.r){
+      if(data.b && data.b.r){
         delete data.b.m
         dataCache = Object.assign(Msg[data.body.r || 0] || {}, data.b)
       }
