@@ -153,12 +153,35 @@ export default class UserStore extends ExchangeStoreBase {
 
   async currentLogin() { // 获取当前登录设备列表
     let currentLoginCon = await this.Proxy.getCurrentLogin({"userId": this.uid, "token": this.token});
+    let currentLoginConObj = {
+      list: currentLoginCon.list.map(v => {
+        return {
+          country: v.country,
+          device: v.device,
+          deviceId: v.deviceId,
+          ip: v.ip,
+          ipLocation: {"isoCode": v.ipLocation.isoCode},
+          isMe: v.isMe,
+          loginTime: v.loginTime,
+          os: v.os
+        }
+      })
+    }
     console.log('qwrr', currentLoginCon)
     let currentLogin = currentLoginCon ? currentLoginCon.list : []
+
     // if(currentLogin.errCode)
     //   currentLogin = []
     // console.log('当前登录', currentLoginCon)
     this.state.currentLogin = currentLogin
+    // country
+    // device
+    // deviceId
+    // ip
+    // ipLocation:{isoCode: "", countryCN: "", provinceCN: "", countryEN: "", provinceEN: ""}
+    // isMe
+    // loginTime
+    // os
     return currentLogin
   }
 
