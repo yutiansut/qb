@@ -22,7 +22,6 @@ export default class TradePairDeal extends ExchangeViewBase {
 
   }
   render() {
-    console.log(this.state.tradePairMsg.prices,111111111,this.props.controller.configController.language)
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className='trade-pair-deal-title'>
