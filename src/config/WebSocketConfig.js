@@ -19,31 +19,31 @@ export default {
       name: 'general', url: '/sub', optionList: {
         // test:{testEmit:{var: 1, op: 2}},
         global: {
-          connect: {ver: 1, op: 0, seq: 0, resOp: 1},//握手
-          heartBreak: {ver: 1, op: 2, seq: 0, resOp: 3},//心跳
-          joinRoom: {ver: 1, op: 4, seq: 0, resOp: 5, history:true},//加入房间
+          connect: {v: 1, o: 0, s: 0, resOp: 1},//握手
+          heartBreak: {v: 1, o: 2, s: 0, resOp: 3},//心跳
+          joinRoom: {v: 1, o: 4, s: 0, resOp: 5, history:true},//加入房间
         },
         market: {
-          recommendCurrency: {ver: 1, op: 108, seq: 0, resOp: 108},//推荐币种
-          marketPair: {ver: 1, op: 107, seq: 0, resOp: 107},//涨跌幅数据更新
-          collectArr: {ver: 1, op: 109, seq: 0, resOp: 109}//收藏
+          recommendCurrency: {v: 1, o: 108, s: 0, resOp: 108},//推荐币种
+          marketPair: {v: 1, o: 107, s: 0, resOp: 107},//涨跌幅数据更新
+          collectArr: {v: 1, o: 109, s: 0, resOp: 109}//收藏
         },
         userOrder: {
-          tradeKline: { ver: 1, op: 104, seq: 0, resOp: 104 }, //K线更新
-          tradeDepth: {ver: 1, op: 105, seq: 0, resOp: 105},//深度更新
-          orderUpdate: {ver: 1, op: 103, seq: 0, resOp: 103},//订单跟新
-          userOrderUpdate: {ver: 1, op: 102, seq: 0, resOp: 102},//个人订单跟新
+          tradeKline: { v: 1, o: 104, s: 0, resOp: 104 }, //K线更新
+          tradeDepth: {v: 1, o: 105, s: 0, resOp: 105},//深度更新
+          orderUpdate: {v: 1, o: 103, s: 0, resOp: 103},//订单跟新
+          userOrderUpdate: {v: 1, o: 102, s: 0, resOp: 102},//个人订单跟新
         },
         login: {
-          login: {ver: 1, op: 10, seq: 0, resOp: 11},//登录
-          loginOut: {ver: 1, op: 12, seq: 0, resOp: 13},//退出登录
-          loginOther: {ver: 1, op: 120, seq: 0, resOp: 120}//退出登录
+          login: {v: 1, o: 10, s: 0, resOp: 11},//登录
+          loginOut: {v: 1, o: 12, s: 0, resOp: 13},//退出登录
+          loginOther: {v: 1, o: 120, s: 0, resOp: 120}//退出登录
         },
         asset: {
-          userAssetUpdate: { ver: 1, op: 110, seq: 0, resOp: 110}//用户资产更新
+          userAssetUpdate: { v: 1, o: 110, s: 0, resOp: 110}//用户资产更新
         },
         notice: {
-          userNoticeUpdata: {ver: 1, op: 111, seq: 0, resOp: 111} // 用户通知消息更新
+          userNoticeUpdata: {v: 1, o: 111, s: 0, resOp: 111} // 用户通知消息更新
         }
       }
     },

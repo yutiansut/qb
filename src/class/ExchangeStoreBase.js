@@ -27,6 +27,7 @@ export default class ExchangeStoreBase extends StoreBase {
     req.data.params = paramsObj
     //添加token
     if (!config.needToken) return
+    console.log(req.data.params)
     if (!req.data.params.data.token) return
     let headers = new Headers()
     headers.set('token', req.data.params.data.token)
@@ -58,7 +59,7 @@ export default class ExchangeStoreBase extends StoreBase {
     })
     this.WebSocket.general.emit('connect', {Token: this.Storage.websocketToken.get(), Version: 0, Device: Browser(), IMEI: `${DetectOS()}/${Browser()}`, Os: 3 })
     this.Loop.websocketHeartBreak.clear()
-    this.Loop.websocketHeartBreak.setDelayTime(1)
+    this.Loop.websocketHeartBreak.setDelayTime(10)
     this.Loop.websocketHeartBreak.set(async () => {
       this.WebSocket.general.emit('heartBreak')
       await this.Sleep(5000)
@@ -77,13 +78,13 @@ export default class ExchangeStoreBase extends StoreBase {
       opConfig[headerConfig[v].resOp] = v
     })
     websocket.onMessage = data => {
-      let dataCache = data.body
-      if(data.body.ret){
-        delete data.body.msg
-        dataCache = Object.assign(Msg[data.body.ret || 0] || {}, data.body)
+      let dataCache = data.b
+      if(data.b.r){
+        delete data.b.m
+        dataCache = Object.assign(Msg[data.body.r || 0] || {}, data.b)
       }
       // console.log('websocket.onMessage', data, dataCache)
-      opConfig[data.op] && WebsocketCallBackList[opConfig[data.op]] && WebsocketCallBackList[opConfig[data.op]](dataCache)
+      opConfig[data.o] && WebsocketCallBackList[opConfig[data.o]] && WebsocketCallBackList[opConfig[data.o]](dataCache)
     }
 
     websocket.onClose(data => {
@@ -112,8 +113,8 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = (key, data) => {
-      headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign(headerConfig[key], {body: data})
+      headerConfig[key].s = Math.floor(Math.random() * 1000000000)
+      let emitData = Object.assign(headerConfig[key], {b: data})
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
       websocket.send(this.Util.deepCopy(emitData))
       headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data))
@@ -123,8 +124,8 @@ export default class ExchangeStoreBase extends StoreBase {
       WebsocketCallBackList[key] = func
     }
     this.WebSocket[connectName].pushWebsocketHistoryArr = (key, value) => {
-      headerConfig[key].seq = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign(headerConfig[key], {body: value})
+      headerConfig[key].s = Math.floor(Math.random() * 1000000000)
+      let emitData = Object.assign(headerConfig[key], {b: value})
       websocketHistory[key] = websocketHistory[key] || []
       websocketHistory[key].push(this.Util.deepCopy(emitData))
     }
