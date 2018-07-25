@@ -56,17 +56,25 @@ const HTTP_PROXY = {
         }
         req = formatParams(req)
         console.log(req.url, ' sendHttp ',  req.data.body)
-        req.data.body = await zip(req.data.body)
+        if(HttpZip){
+          try {
+            req.data.body = await zip(req.data.body)
+          } catch (e) {
+            console.error(e)
+            return e
+          }
+        }
         let result = await Fetch(req.url, req.data);
-        let buffer = await result.arrayBuffer().catch((e, obj) => {
-          obj = { ret: -2, data: e };
-          throw obj;
-        });
-        try{
-          buffer = await unZip(buffer)
-        } catch (e) {
-          buffer = JSON.stringify(e)
-          // console.log(e)
+        if(HttpZip){
+          let buffer = await result.arrayBuffer().catch((e, obj) => {
+            obj = { ret: -2, data: e };
+            throw obj;
+          });
+          try{
+            buffer = await unZip(buffer)
+          } catch (e) {
+            buffer = JSON.stringify(e)
+          }
         }
         try{
           res.result = JSON.parse(buffer)
