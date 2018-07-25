@@ -18,13 +18,14 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async noticeCon(page, pageSize) { // 获取公告
+    let lang ={"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0;
     let res = await this.Proxy.getActivity({
       id: 0,
       ty: 0,  //类型 0公告 1新闻 2资讯
       con: 0, //内容类型 0则不返回content 1则返回全部数据
       p: page,
       ps: pageSize,
-      //la: "zh-CN,
+      la: lang,
     });
     let noticeList={
         catalog: res.cat,
@@ -43,13 +44,14 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async infoCon(page, pageSize) { // 获取资讯
+    let lang ={"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0;
     let res = await this.Proxy.getActivity({
       id: 0,
       ty: 2,
       con: 0,
       p: page,
       ps: pageSize,
-      //la: "zh-CN",
+      la: lang,
     });
     let infoList={
         catalog: res.cat,
@@ -88,13 +90,14 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async activityCon(activityId, activityType) { // 活动详情
+    let lang ={"en-US":0,"zh-CN":1}[this.controller.configController.language] || 0;
     let res = await this.Proxy.getActivity({
         id: activityId,
         ty: activityType,
         con: 1,
         p: 0,
         ps: 10,
-        //la: "zh-CN",
+        la: lang,
     });
     let activityList={
         catalog: res.cat,
