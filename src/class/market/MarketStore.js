@@ -344,9 +344,9 @@ export default class MarketStore extends ExchangeStoreBase {
       await this.getPairInfo()
     }
     this.state.pairInfo.map((v) => {
-      let pair = v.tradePairName.split('/');
-      let coin = pair[0];
-      let market = pair[1];
+      // let pair = v.tradePairName.split('/');
+      let coin = v.coinName;
+      let market = v.marketName;
       marketCorrespondingId[market] = marketCorrespondingId[market] || {};
       coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
       marketCorrespondingId[market][coin] = v.tradePairId;
