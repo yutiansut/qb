@@ -180,7 +180,7 @@ export default class DealController extends ExchangeControllerBase {
       "tradePairId": this.TradeMarketController.tradePair.tradePairId,
       "tradePairName": this.TradeMarketController.tradePair.tradePairName,
       "funpass": orderType === 'buy' ? this.RSAencrypt(this.view.state.funpassBuy) : this.RSAencrypt(this.view.state.funpassSell),//资金密码
-      "interval": this.view.state.fundPwdInterval,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "interval": this.view.state.fundPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "priceUnit": this.view.state.PriceUnit === 'cny' && 1 || (this.view.state.PriceUnit === 'usd' && 2 || 0)//计价单位  0数字币  1人民币 2美元
     };
     //   价格判断不能为空

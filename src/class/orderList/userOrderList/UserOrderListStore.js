@@ -56,10 +56,11 @@ export default class UserOrderListStore extends OrderListStore {
     let currentListAf = currentList && currentList.ol && currentList.ol.map(v => {
       return {
         "tradePairId": v.id,
-        "tradePairName": v.name,
+        "tradePairName": v.na,
         "orderType": v.ot, //0买 1卖
         "priceType": v.pt, //0限价 1市价
         "orderId": v.oi,
+        "undealCount": v.c - v.ddc,
         "orderTime": v.t,
         "orderStatus": v.ost,//订单状态 0未成交 1部分成交 2全部成交 3已撤单 4撤单中 5已结束(市价单独有的。市价买单没买到任何东西时) 6部分成交(市价单没买够) 7部分成交(限价单部分成交后撤单)
         "price": v.p,
@@ -115,8 +116,8 @@ export default class UserOrderListStore extends OrderListStore {
           "fee": v.fee//手续费
         }
       }),
-      "page": historyList.p,
-      "totalCount": historyList.c
+      "page":historyList && Object.keys(historyList).indexOf('p') !== -1 && historyList.p || 0,
+      "totalCount":historyList && Object.keys(historyList).indexOf('c') !== -1 && historyList.c || 0
     };
     this.state.historyOrder = historyListAf;
     return historyListAf

@@ -113,7 +113,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     const {pairIdMsg} = this.props;
     let orderStatus = [];
     this.props.type === 'orderHistory' && (orderStatus = [2, 3, 4, 5, 6, 7]) && (this.setState({orderStatus}));
-    this.props.type === 'orderDeal' && (orderStatus = [ 2, 5, 6, 7]) && (this.setState({orderStatus}));
+    this.props.type === 'orderDeal' && (orderStatus = [2, 5, 6]) && (this.setState({orderStatus}));
     let params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
@@ -421,7 +421,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                       {type !== 'orderDeal' && <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td> || <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
 
                       <td>{type === 'orderCurrent' && (Number(v.price * v.count).format({number: 'property'})) || Number(v.turnover).format({number: 'property'})}</td>
-                      {type === 'orderDeal' && <td>{v.fee}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
+                      {type === 'orderDeal' && <td>{Number(v.fee).format({number: 'property'})}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
                       {type === 'orderCurrent' && <td>{Number(v.undealCount).formatFixNumberForAmount(v.price)}</td>}
                       {type !== 'orderDeal' && <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
                       {type === 'orderHistory' && <td>{Number(v.avgPrice).format({number: 'digital'})}</td>}
@@ -445,19 +445,19 @@ export default class OrderCurrent extends ExchangeViewBase {
               </div>
               <div className='detail-content-info'>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail.doneCount}</p>
+                  <p>{Number(this.state.orderDetail.doneCount).formatFixNumberForAmount(Number(this.state.orderDetail.price))}</p>
                   <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail.dealedMoney}</p>
+                  <p>{Number(this.state.orderDetail.dealedMoney).format({number: 'property'})}</p>
                   <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail.price}</p>
+                  <p>{Number(this.state.orderDetail.price).format({number: 'digital'})}</p>
                   <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail.fee}</p>
+                  <p>{Number(this.state.orderDetail.fee).format({number: 'property'})}</p>
                   <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1].toUpperCase() : this.state.orderDetail.tradePairName.split('/')[0].toUpperCase())}</span>
                 </div>
               </div>
