@@ -40,8 +40,8 @@ export default class OrderListStore extends ExchangeStoreBase {
   }
 
 
-  emitRecentOrderWs(from, to){
-    this.WebSocket.general.emit('joinRoom', {from, to})
+  emitRecentOrderWs(f, t){
+    this.WebSocket.general.emit('joinRoom', {f, t})
   }
   async getRecentOrder(isPersonal, id){
     let recentTradeListArr = isPersonal ? await this.Proxy.recentOrderUser(

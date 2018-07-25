@@ -118,8 +118,8 @@ export default class TradeOrderListStore extends OrderListStore{
     })
   }
 
-  emitTradeOrderWs(from , to){
-    this.WebSocket.general.emit('joinRoom', {from, to});
+  emitTradeOrderWs(f , t){
+    this.WebSocket.general.emit('joinRoom', {f, t});
   }
   async getDepth(tradePairName) {
     let orderListArray = await this.Proxy.getDepth(
