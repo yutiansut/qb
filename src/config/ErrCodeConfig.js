@@ -22,18 +22,25 @@ export default {
     errCode: "JSON_PARSE_ERROR"
   },
   "-4": {
-    // msg: "压缩错误解析错误",
+    // msg: "压缩错误",
     get msg() {
       return intl.get("-4");
     },
     errCode: "ZIP_PARSE_ERROR"
   },
   "-5": {
-    // msg: "解压缩错误解析错误",
+    // msg: "解压缩错误",
     get msg() {
       return intl.get("-5");
     },
     errCode: "UNZIP_PARSE_ERROR"
+  },
+  "-6": {
+    // msg: "Blob数据解析错误",
+    get msg() {
+      return intl.get("-5");
+    },
+    errCode: "BLOB_PARSE_ERROR"
   },
   1: {
     // msg: "未知错误",
