@@ -23,7 +23,7 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async getHomeBanner(activityStatus, activityPosition) {
-    let res = await this.Proxy.getHomeBanner({
+    let result = await this.Proxy.getHomeBanner({
       os: 3,
       st : activityStatus,
       ps : activityPosition

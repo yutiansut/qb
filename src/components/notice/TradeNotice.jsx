@@ -63,9 +63,7 @@ export default class tradeNotice extends exchangeViewBase {
             <li key={index} id='notice_con'>
               <p>
                 <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>
-                  {this.props.controller.configData.language === "zh-CN"
-                    ? v.subjectCn
-                    : v.subjectEn}
+                  {v.subject}
                 </Link>
               </p>
               <span>{v.createdAt.toDate('yyyy-MM-dd HH:mm:SS')}</span>

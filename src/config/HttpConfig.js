@@ -50,7 +50,7 @@ export default {
     { name: 'getIPAddr', data: { url: '/v1/common/', method: 'post' }, action: 'getIPAddr', actionBack: 'getIPAddrRes' }, // 获取当前iP
   ],
   notice: [
-    { name: 'getActivity', data: { url: '/v1/common/', method: 'post' }, action: 'getActivity', actionBack: 'getActivityRes' }, // 资讯公告内容
+    { name: 'getActivity', data: { url: '/v1/common/', method: 'post' }, action: 'at', actionBack: 'atr' }, // 资讯公告内容
     { name: 'getUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'GetUserNotificationList', actionBack: 'GetUserNotificationListRes', needToken: true }, // 获取通知列表
     { name: 'upDateUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'updateUserNotificationStatus', actionBack: 'updateUserNotificationStatusRes', needToken: true }, // 读取通知
     { name: 'readAllUserNotifications', data: { url: '/v1/user/', method: 'post' }, action: 'readAllUserNotifications', actionBack: 'readAllUserNotifications', needToken: true }, // 清除全部通知

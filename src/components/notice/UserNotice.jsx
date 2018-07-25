@@ -79,7 +79,7 @@ export default class userNotice extends exchangeViewBase {
     // }
     await this.getUserNotice(0, 0, 10)
     this.setState({
-      totalPage: this.state.userNotice.totalCount
+      totalPage: this.state.userNotice.totalCount || 0
     })
   }
 
@@ -88,7 +88,6 @@ export default class userNotice extends exchangeViewBase {
   }
 
   render() {
-    // console.log('内容', this.state.userNotice)
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>
@@ -110,7 +109,7 @@ export default class userNotice extends exchangeViewBase {
           </ul>
         </div>
         <p className={`${Object.keys(this.state.userNotice).length && this.state.userNotice.list ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-        {Object.keys(this.state.userNotice).length && this.state.userNotice.list && <Pagination total={this.state.totalPage || this.state.userNotice.totalCount}
+        {Object.keys(this.state.userNotice).length && this.state.userNotice.list && <Pagination total={this.state.totalPage}
           pageSize={10}
           showTotal={true}
           onChange={page => {

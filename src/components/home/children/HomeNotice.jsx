@@ -72,7 +72,7 @@ export default class homeNotice extends ExchangeViewBase {
           {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
             <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
               <i>【{v.createdAt.toDate('MM-dd')}】</i>
-              <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
+              <span>{v.subject}</span>
             </Link>
           </li>)}
         </ul>
@@ -80,7 +80,7 @@ export default class homeNotice extends ExchangeViewBase {
           {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
             <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
               <i>【{v.createdAt.toDate('MM-dd')}】</i>
-              <span>{this.props.controller.configData.language === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
+              <span>{v.subject}</span>
             </Link>
           </li>)}
         </ul>

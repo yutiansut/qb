@@ -22,11 +22,10 @@ export default class HomeNotice extends ExchangeViewBase {
 
     async componentDidMount() {
         await this.getNoticeCon(0, 5);
-        let result = this.state.noticeList;
-        if (this.state.noticeList && this.state.noticeList.length) {
+        let result = this.state.noticeList.data;
+        if (result && result.length) {
             this.setState({
                     top2: Math.ceil(result.length) * 100,
-
                     criticalArr: Array.from(
                         {length: Math.ceil(result.length + 1)},
                         (item, index) => index * 100
@@ -64,7 +63,7 @@ export default class HomeNotice extends ExchangeViewBase {
                     {noticeList.map((v, index) => <li key={index}>
                         <a>
                             <img src="/static/mobile/home/img_lb@2x.png"/>
-                            <span>{lang === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
+                            <span>{v.subject}</span>
                         </a>
                     </li>)}
                 </ul>
@@ -72,7 +71,7 @@ export default class HomeNotice extends ExchangeViewBase {
                     {noticeList.map((v, index) => <li key={index}>
                         <a>
                             <img src="/static/mobile/home/img_lb@2x.png"/>
-                            <span>{lang === "zh-CN" ? v.subjectCn : v.subjectEn}</span>
+                            <span>{v.subject}</span>
                         </a>
                     </li>)}
                 </ul>

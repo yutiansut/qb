@@ -13,8 +13,8 @@ export default class noticeContent extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      // noticeTotalPage: 0,
-      // infoTotalPage: 0,
+      noticeTotalPage: 0,
+      infoTotalPage: 0,
       noticePage: 0,
       infoPage: 0,
     }
@@ -41,8 +41,8 @@ export default class noticeContent extends exchangeViewBase {
   async componentDidMount() {
     await Promise.all([this.getNoticeCon(0, 10), this.getInfoCon(0, 10)])
     this.setState({
-      noticeTotalPage: this.state.noticeList.totalCount,
-      infoTotalPage: this.state.infoList.totalCount
+      noticeTotalPage: this.state.noticeList.totalCount || 0,
+      infoTotalPage: this.state.infoList.totalCount || 0
     })
 
   }
@@ -52,7 +52,6 @@ export default class noticeContent extends exchangeViewBase {
   }
 
   render() {
-    console.log('内容', this.state)
     return (
       <div className="bulletin-wrap">
         <div className="information-wrap">
@@ -68,7 +67,7 @@ export default class noticeContent extends exchangeViewBase {
               {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (
                 <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
                   <dd >
-                    <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                    <i>{v.subject}</i>
                     <em>{this.intl.get("notice")}</em>
                     <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
                   </dd>
@@ -76,7 +75,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount}
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <Pagination total={this.state.noticeTotalPage}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {
@@ -100,7 +99,7 @@ export default class noticeContent extends exchangeViewBase {
                 <Link to={`${this.props.match.url}/detail?infoId=${v.activityId}`} key={index}>
                   <dd>
                     {/*<a href={`http://${v.source}`} target="_blank">*/}
-                    <i>{this.props.controller.configData.language === 'zh-CN' ? v.subjectCn : v.subjectEn}</i>
+                    <i>{v.subject}</i>
                     <em>{this.intl.get("information")}</em>
                     <span>{v.createdAt.toDate('yyyy-MM-dd')}</span>
                     {/*</a>*/}
@@ -109,7 +108,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.infoList).length && this.state.infoList.data && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount}
+          {Object.keys(this.state.infoList).length && this.state.infoList.data && <Pagination total={this.state.infoTotalPage}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {

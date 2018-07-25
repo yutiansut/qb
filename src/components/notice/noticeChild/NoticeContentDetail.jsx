@@ -45,7 +45,7 @@ export default class homeNotice extends exchangeViewBase {
   render() {
     let activityInfo = this.state.activityList;
     let activityRecommend;
-    activityInfo.catalog && (activityRecommend = this.props.controller.configData.language === "zh-CN" ? eval(activityInfo.recommendCn) : eval(activityInfo.recommendEn));
+    activityInfo.catalog && (activityRecommend = eval(activityInfo.recommend));
     return <div className="notice-detail-wrap ">
         <h1>
           <Link to="/whome">{this.intl.get("header-home")}</Link>&gt;
@@ -54,9 +54,7 @@ export default class homeNotice extends exchangeViewBase {
         </h1>
         <h2 className="clearfix">
           <span>
-            {this.props.controller.configData.language === "zh-CN"
-              ? activityInfo.subjectCn
-              : activityInfo.subjectEn}
+            {activityInfo.subject}
           </span>
           <b>
             {activityInfo.createdAt &&
@@ -65,14 +63,14 @@ export default class homeNotice extends exchangeViewBase {
         </h2>
         <h3>
           {/* 从比特节点数据获悉，跟着区块链热度一起上涨的，还有比特币世界中全节点的数量。全球比特币全节点数量在2018年2月之前，一直处于相对稳定的10000点左右状态，中国在全球的全节点占有率在5%到8%之间，但是自2月后突然猛增，一直到3月，全球市场占有率飙升至17%，全球排名也超过一直稳居老二的德国，跃居全球第二，目前排在第一位的仍是美国。 */}
-          {this.props.controller.configData.language === 'zh-CN' ? activityInfo.abstractCn : activityInfo.abstractEn}
+          {activityInfo.abstract}
         </h3>
         {/*<h4>*/}
         {/*作者*/}
         {/*</h4>*/}
         <div className="content">
           <img src={`http://${activityInfo.titleImage}`} alt="" />
-          <div dangerouslySetInnerHTML={{ __html: this.props.controller.configData.language === "zh-CN" ? activityInfo.contentCn : activityInfo.contentEn }}>
+          <div dangerouslySetInnerHTML={{ __html: activityInfo.content}}>
          {/*  <div>
             <p>
               2018年农历新年伊始，区块链热度再上一层。腾讯《一线》从比特节点数据获悉，跟着区块链热度一起上涨的，还有比特币世界中全节点的数量。

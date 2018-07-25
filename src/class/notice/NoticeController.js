@@ -54,16 +54,15 @@ export default class NoticeController extends ExchangeControllerBase {
 
   async upDateUserNoctice(notiId) { // 改变未读状态
     let result = await this.store.Proxy.upDateUserNocticeList({
-      "userId": this.userId,
-      "token": this.token,
-      notiId
+      token: this.token,
+      nid: notiId
     })
     // console.log('未读', result)
   }
 
   async readAllUserNotifications() {
     let result = await this.store.Proxy.readAllUserNotifications({
-      "token": this.token
+      token: this.token
     })
     // console.log('删除全部', result)
   }
