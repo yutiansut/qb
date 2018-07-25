@@ -48,6 +48,15 @@ export default class NoticeStore extends ExchangeStoreBase {
       p: page,
       s: pageSize
     })
-   return result.l
+    return result && result.l && result.l.map(v=>{
+      return {
+        "inviter": v.in,
+        "inviterAccount": v.ac,
+        "prize": v.pr,
+        "invited": v.iv,
+        "award": v.aw,
+        "timestamp": v.t
+      }
+    })
   }
 }

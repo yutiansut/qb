@@ -45,7 +45,7 @@ export default {
     { name: 'setGoogleVerify', data: { url: '/v1/user/', method: 'post' }, action: 'vgc', actionBack: 'vgcr', needToken: true }, // 验证谷歌验证码
     { name: 'setUserNotify', data: { url: '/v1/user/', method: 'post' }, action: 'sut', actionBack: 'sutr', needToken: true }, // 修改通知方式
     { name: 'outOther', data: { url: '/v1/user/', method: 'post' }, action: 'kfc', actionBack: 'kfcr', needToken: true }, // 退出其他设备
-    //{ name: 'getAward', data: { url: '/v1/user/', method: 'post' }, action: 'getAward', actionBack: 'getAwardRes', needToken: true }, // 领取奖励
+    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' }, // 领取奖励
     { name: 'getQbtTrade', data: { url: '/v1/common/', method: 'post' }, action: 'ai', actionBack: 'air' }, //关于我们
     { name: 'getIPAddr', data: { url: '/v1/common/', method: 'post' }, action: 'ia', actionBack: 'iar' }, // 获取当前iP
   ],
@@ -125,7 +125,7 @@ export default {
   ],
   activity: [
     // 获取邀请列表
-    { name: 'getInvited', data: { url: '/v1/user/', method: 'post' }, action: 'getInvited', actionBack: 'getInvitedRes', needToken: true },
+    { name: 'getInvited', data: { url: '/v1/user/', method: 'post' }, action: 'gi', actionBack: 'gir', needToken: true },
     // 活动内容
     { name: 'getHomeBanner', data: { url: '/v1/common/', method: 'post' }, action: 'hb', actionBack: 'hbr' },
     // H5活动页，获取qbt活动余量
@@ -136,6 +136,6 @@ export default {
   login: [
     { name: 'forgetLoginPass', data: { url: '/v1/common/', method: 'post' }, action: 'flp', actionBack: 'flpr' }, // 找回密码
     //H5活动页，领取qbt奖励
-    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'invite', actionBack: 'inviteRes' }
+    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' }
   ]
 }
