@@ -200,7 +200,7 @@ export default class Header extends ExchangeViewBase {
               ) : (
                 <div>{this.intl.get("notice-none")}</div>
               )}
-              <Link to="/wuserNotice" className="check-all">{this.intl.get("asset-viewAll")}</Link>
+              <Link to="/wuserNotice" className="check-all" onClick={e=>this.setState({showNews:false})}>{this.intl.get("asset-viewAll")}</Link>
             </div>}
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
