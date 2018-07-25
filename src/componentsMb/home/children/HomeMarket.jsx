@@ -56,8 +56,9 @@ export default class HomeMarket extends ExchangeViewBase{
                 {marketPair && marketPair.map((v, index) => {
                     return(
                         <tr key={index}>
-                            <td onClick={e => this.addCollect(v, index, e)} className="td1">
-                                {controller.token && <img src={v.isFavorite ? "/static/mobile/home/icon_sc_pre@2x.png" : "/static/mobile/home/icon_sc@2x.png"}/>}
+                            <td className="td1">
+                                {controller.token && <img src={v.isFavorite ? "/static/mobile/home/icon_sc_pre@2x.png" : "/static/mobile/home/icon_sc@2x.png"}
+                                                          onClick={e => this.addCollect(v, index, e)}/>}
                                 <div className="td1-r">
                                     <h3>
                                         {v.coinName.toUpperCase()}
