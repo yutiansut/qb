@@ -69,7 +69,7 @@ export default class homeNotice extends exchangeViewBase {
         {/*作者*/}
         {/*</h4>*/}
         <div className="content">
-          <img src={`http://${activityInfo.titleImage}`} alt="" />
+        {activityInfo.catalog ? <img src={`${this.props.controller.configData.currentImgUrl}downloadimage/origin/${activityInfo.titleImage}`} alt="" /> : ''}
           <div dangerouslySetInnerHTML={{ __html: activityInfo.content}}>
          {/*  <div>
             <p>
@@ -83,7 +83,7 @@ export default class homeNotice extends exchangeViewBase {
             </p> */}
           </div>
         </div>
-      {activityInfo.catalog && <div>
+      {activityInfo.catalog ? <div>
           <h5>
             <span>{this.intl.get("notice-link")}：</span>
             <a href={`${activityInfo.source}`} target="_blank">{`${activityInfo.source}`}</a>
@@ -92,7 +92,7 @@ export default class homeNotice extends exchangeViewBase {
             <span>{this.intl.get("notice-recommend")}：</span>
           {activityRecommend && activityRecommend.map((v, i) => <a href={activityInfo.recommendLink[i]} target="_blank" key={i}>{v}</a>)}
           </h6>
-        </div>}
+        </div> : ''}
       </div>;
   }
 }

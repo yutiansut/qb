@@ -93,7 +93,7 @@ export default class NoticeStore extends ExchangeStoreBase {
     });
     if(!res) return;
     let userNotice={
-      totalCount: res.tc,
+      totalCount: res && res.tc,
       list: [],
     };
     res.l && res.l.map(item=>{

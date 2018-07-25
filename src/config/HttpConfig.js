@@ -129,9 +129,9 @@ export default {
     // 活动内容
     { name: 'getHomeBanner', data: { url: '/v1/common/', method: 'post' }, action: 'hb', actionBack: 'hbr' },
     // H5活动页，获取qbt活动余量
-    { name: 'getQbtMargin', data: { url: '/v1/common/', method: 'post' }, action: 'getQbtMargin', actionBack: 'getQbtMarginRes' },
+    { name: 'getQbtMargin', data: { url: '/v1/common/', method: 'post' }, action: 'qm', actionBack: 'qmr' },
     //H5活动页，领取qbt奖励
-    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'invite', actionBack: 'inviteRes' }
+    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' }
   ],
   login: [
     { name: 'forgetLoginPass', data: { url: '/v1/common/', method: 'post' }, action: 'flp', actionBack: 'flpr' }, // 找回密码

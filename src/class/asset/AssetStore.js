@@ -300,7 +300,7 @@ export default class AssetStore extends ExchangeStoreBase {
           coinName: v.cna,
           coinId: v.cid,
           count: v.cou,
-          balance: b.bal, //余额
+          balance: v.bal, //余额
           postAddress: v.psa, //发送地址
           receiveAddress: v.rea, //接收地址
           fee: v.fee, //手续费

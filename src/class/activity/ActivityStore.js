@@ -12,14 +12,22 @@ export default class NoticeStore extends ExchangeStoreBase {
   async getQbtMargin(){
     let res = await this.Proxy.getQbtMargin();
     return {
-      totalVolume: res.t,
-      margin: res.m,
+      totalVolume: res && res.t,
+      margin: res && res.m,
     }
   }
 
   async getAward(obj){
-    // let result =
-    return await this.Proxy.getAward(obj);
+    let result = await this.Proxy.getAward({
+      "iv": obj.inviter,   // 邀请人ID
+      "in": obj.invited    // 被邀请人账号
+    });
+    if (result && result.aw !== undefined) {
+      result = {
+        "award": result.aw
+      }
+    }
+    return result;
   }
 
   async getHomeBanner(activityStatus, activityPosition) {

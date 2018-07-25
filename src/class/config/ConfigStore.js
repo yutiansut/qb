@@ -3,6 +3,7 @@ import ExchangeStoreBase from '../ExchangeStoreBase'
 const EXCHANGE_NAME_CNY = 'QB';
 // const EXCHANGE_NAME_USD = 'CoinRising';
 // const EXCHANGE_URl = 'www.coinrising.com';
+// const CURRENT_IMGURL = "http://user.qb.com/";
 const EXCHANGE_NAME_USD = 'QB';
 const EXCHANGE_URl = 'qb.com';
 const EXCHANGE_Apply_EMAIL = 'business@qb.com';
@@ -12,6 +13,7 @@ const EXCHANGE_SERVICE_PHONE = '010-53348151'
 const EXCHANGE_SERVICE_QQ = '3310267657';
 const EXCHANGE_COIN = 'QB';
 const CURRENT_URL = 'http://192.168.55.105:80'
+const CURRENT_IMGURL = "http://192.168.55.107/";
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
@@ -30,6 +32,7 @@ export default class UserStore extends ExchangeStoreBase {
       servicePhone: EXCHANGE_SERVICE_PHONE,
       serviceQQ: EXCHANGE_SERVICE_QQ,
       currentUrl: CURRENT_URL,
+      currentImgUrl: CURRENT_IMGURL,
       // language: 'zh-CN',
       language: this.Storage.language.get() || "en-US"
     }

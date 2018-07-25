@@ -88,7 +88,6 @@ export default class ActivityController extends ExchangeControllerBase {
       })
       return;
     }
-    console.log(result)
     // 已领取过
     if (result && result.errCode === 'AWARD_DRAWED') {
       this.view.setState({showVagueBgView: true, showFail: true});
