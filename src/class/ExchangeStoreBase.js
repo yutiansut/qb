@@ -81,7 +81,7 @@ export default class ExchangeStoreBase extends StoreBase {
       let dataCache = data.b
       if(data.b && data.b.r){
         delete data.b.m
-        dataCache = Object.assign(Msg[data.body.r || 0] || {}, data.b)
+        dataCache = Object.assign(Msg[data.body && data.body.r || 0] || {}, data.b)
       }
       // console.log('websocket.onMessage', data, dataCache)
       opConfig[data.o] && WebsocketCallBackList[opConfig[data.o]] && WebsocketCallBackList[opConfig[data.o]](dataCache)

@@ -219,8 +219,10 @@ export default class UserController extends ExchangeControllerBase {
       setPassFlag: true
     })
     if (result === null) {
-      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})})
+      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})});
       this.store.state.userInfo.loginPwd = 0
+      // 修改密码成功跳转至...
+      this.view.state.to && this.view.history.push(this.view.state.to);
     }
     // console.log('设置密码', result)
   }
@@ -260,6 +262,10 @@ export default class UserController extends ExchangeControllerBase {
     }
     if (result !== null) {
       this.getCaptchaVerify()
+    }
+    if(result===null){
+      //修改成功跳转至...
+      this.view.state.to && this.view.history.push(this.view.state.to);
     }
   }
 

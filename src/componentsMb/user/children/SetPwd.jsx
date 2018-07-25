@@ -12,6 +12,7 @@ export default class SetPwd extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      to: "/muser/safe",
       popupInput1: "",
       popupInput2: "",
       popupInput3: "",
@@ -82,12 +83,13 @@ export default class SetPwd extends exchangeViewBase {
           verifyInput: "",
           btnTitle: this.intl.get("save")
         },
-      ]
+      ],
+      setPassFlag: true,
     }
-    const {controller} = props
+    const {controller,history} = props;
+    this.history = history;
     //绑定view
     controller.setView(this)
-
     this.getVerify = controller.getVerify.bind(controller) // 发送短信验证码
     this.setLoginPass = controller.setLoginPass.bind(controller) // 设置登录密码
     this.modifyFundPwd = controller.modifyFundPwd.bind(controller) // 设置修改资金密码
