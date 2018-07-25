@@ -101,21 +101,21 @@ export default class UserStore extends ExchangeStoreBase {
   async userInfo() { // 获取用户信息
     let userInfo = await this.Proxy.getUserInfo({"userId": this.uid, "token": this.token});
     let userInfoObj = {
-      "cardVerify": userInfo.cardVerify,
-      "credits": userInfo.credits,
-      "email": userInfo.email,
-      "fundPassVerify": userInfo.fundPassVerify,
-      "fundPwd": userInfo.fundPwd,
-      "googleAuth": userInfo.googleAuth,
-      "interval": userInfo.interval,
-      "level": userInfo.level,
-      "loginPwd": userInfo.loginPwd,
-      "loginVerify": userInfo.loginVerify,
-      "notifyMethod": userInfo.notifyMethod,
-      "phone": userInfo.phone,
-      "userId": userInfo.userId,
-      "userName": userInfo.userName,
-      "withdrawVerify": userInfo.withdrawVerify,
+      // "cardVerify": userInfo.cardVerify,
+      "credits": userInfo.cre,
+      "email": userInfo.em,
+      "fundPassVerify": userInfo.fvf,
+      "fundPwd": userInfo.fpd,
+      "googleAuth": userInfo.gla,
+      "interval": userInfo.int,
+      "level": userInfo.lv,
+      "loginPwd": userInfo.lpd,
+      "loginVerify": userInfo.lvf,
+      "notifyMethod": userInfo.nm,
+      "phone": userInfo.ph,
+      "userId": userInfo.id,
+      // "userName": userInfo.userName,
+      "withdrawVerify": userInfo.wvf,
     }
     // console.log('qqqq', userInfoObj)
     this.state.userInfo = userInfoObj;

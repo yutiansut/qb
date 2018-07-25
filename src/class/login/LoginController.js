@@ -33,7 +33,7 @@ export default class LoginController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.userController.getCaptcha()
-    this.view && this.view.setState({captcha: captcha.data, captchaId: captcha.id})
+    this.view && this.view.setState({captcha: captcha.d, captchaId: captcha.id})
     // console.log('aaa 1', this.view.state, )
   }
 
@@ -43,8 +43,8 @@ export default class LoginController extends ExchangeControllerBase {
     if (this.view.state.titleIndex === 1 && !this.view.state.verifyType){
       code = this.RSAencrypt(code)
     }
-    let obj = {passCode:code, mode, captchaId, captchaCode, os:3 , device: `${deviceFlag1}/${deviceFlag2}`};
-    let keyArr = ['phone','email'];
+    let obj = {"pa":code, "mo":mode, "pid":captchaId, "pco":captchaCode, "os":3 , "d": `${deviceFlag1}/${deviceFlag2}`, "did": ''};
+    let keyArr = ['ph','em'];
     obj[keyArr[type]] = account
     this.store.login(obj)
   }

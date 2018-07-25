@@ -381,6 +381,7 @@ export default class UserController extends ExchangeControllerBase {
     // if (result === null) {this.view.setState({showGoogle: false})}
     // console.log('验证谷歌', result)
   }
+
   async setUserNotify(index) { // 修改通知方式
     this.view.setState({
       type: index + 1,
@@ -525,9 +526,9 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCode(account, mode, type) { // 获取短信验证码
     let result = await this.store.Proxy.getVerifyCode({
-      account, // 手机号或者邮箱
-      mode,//0 phone 1 email
-      type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
+      "ac": account, // 手机号或者邮箱
+      "mo": mode,//0 phone 1 email
+      "ty": type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
       "os": 3// 1 android 2 iOS 3 browser
     })
     // console.log('发送验证码', result, account, mode, type )

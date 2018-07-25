@@ -16,7 +16,7 @@ export default class LoginStore extends ExchangeStoreBase {
       this.controller.userLoginInfo(data, urlToken ? true : false);
       if(data.ret === 0 && pushHistoryFlag ){
         this.WebSocket.general.clearWebsocketHistoryArr('login')
-        this.WebSocket.general.pushWebsocketHistoryArr('login', {'token': this.Storage.userToken.get(), os:3, device: `${ DetectOS()}/${Browser()}`})
+        this.WebSocket.general.pushWebsocketHistoryArr('login', {"tk": this.Storage.userToken.get(), "os":3, "d": `${ DetectOS()}/${Browser()}`, "did": ''})
       }
       this.controller.loginUpdata(data);
     })
@@ -28,7 +28,7 @@ export default class LoginStore extends ExchangeStoreBase {
       this.controller.loginUpdata(dataOther);
     });
     let token = urlToken || this.Storage.userToken.get();
-    token && this.WebSocket.general.emit('login', { 'token': token, os:3, device: `${ DetectOS()}/${Browser()}`})
+    token && this.WebSocket.general.emit('login', { "tk": token, "os":3, "d": `${ DetectOS()}/${Browser()}`, "did": ''})
   }
 
   login(obj) { // 登陆接口

@@ -22,12 +22,12 @@ export default {
   // httpAfterHandler,
 
   user: [ // 用户
-    { name: 'getUserInfo', data: { url: '/v1/user/', method: 'post' }, action: 'userInfo', actionBack: 'userInfoRes', needToken: true }, // 获取用户信息
-    { name: 'getUserAuth', data: { url: '/v1/user/', method: 'post' }, action: 'userAuth', actionBack: 'userAuthRes', needToken: true }, // 获取用户认证信息
+    { name: 'getUserInfo', data: { url: '/v1/user/', method: 'post' }, action: 'ui', actionBack: 'uir', needToken: true }, // 获取用户信息
+    { name: 'getUserAuth', data: { url: '/v1/user/', method: 'post' }, action: 'ua', actionBack: 'uar', needToken: true }, // 获取用户认证信息
     { name: 'getUserCreditsNum', data: { url: '/v1/user/', method: 'post' }, action: 'getUserCredits', actionBack: 'getUserCreditsRes', needToken: true }, // 获取用户积分
     { name: 'uploadUserAuth', data: { url: '/v1/user/', method: 'post' }, action: 'uploadAuth', actionBack: 'uploadAuthRes', needToken: true }, // 上传用户认证信息
     { name: 'getLoginPwd', data: { url: '/v1/user/', method: 'post' }, action: 'modifyLoginPwd', actionBack: 'modifyLoginPwdRes', needToken: true }, // 设置登录密码
-    { name: 'getVerifyCode', data: { url: '/v1/common/', method: 'post' }, action: 'getCode', actionBack: 'getCodeRes' }, // 获取验证码
+    { name: 'getVerifyCode', data: { url: '/v1/common/', method: 'post' }, action: 'gco', actionBack: 'gcor' }, // 获取验证码
     // {name: 'setFundPwd', data: {url: '/user/', method: 'post'}, action: 'setFundPass', actionBack: 'setFundPassRes', needToken: true}, // 设置资金密码
     { name: 'modifyFundPwd', data: { url: '/v1/user/', method: 'post' }, action: 'modifyFundPass', actionBack: 'modifyFundPassRes', needToken: true }, // 修改资金密码
     { name: 'bindUser', data: { url: '/v1/user/', method: 'post' }, action: 'bindAccount', actionBack: 'bindAccountRes', needToken: true }, // 绑定手机邮箱
@@ -40,7 +40,7 @@ export default {
     { name: 'deletIp', data: { url: '/v1/user/', method: 'post' }, action: 'deleteIP', actionBack: 'deleteIPRes', needToken: true }, // 删除ip白名单
     { name: 'setFundPwdSuspend', data: { url: '/v1/user/', method: 'post' }, action: 'setFundPassSuspend', actionBack: 'setFundPassSuspendRes', needToken: true }, // 设置资金密码输入间隔
     { name: 'getFundPwdSuspend', data: { url: '/v1/user/', method: 'post' }, action: 'getFundPassSuspend', actionBack: 'getFundPassSuspendRes', needToken: true }, // 查看资金密码输入间隔
-    { name: 'getCaptcha', data: { url: '/v1/common/', method: 'post' }, action: 'getCaptcha', actionBack: 'getCaptchaRes' }, // 获取图形验证码
+    { name: 'getCaptcha', data: { url: '/v1/common/', method: 'post' }, action: 'gca', actionBack: 'gcar' }, // 获取图形验证码
     { name: 'setTwoVerify', data: { url: '/v1/user/', method: 'post' }, action: 'setVerifyType', actionBack: 'setVerifyTypeRes', needToken: true }, // 修改两步认证
     { name: 'setGoogleVerify', data: { url: '/v1/user/', method: 'post' }, action: 'verifyGoogleCode', actionBack: 'verifyGoogleCodeRes', needToken: true }, // 验证谷歌验证码
     { name: 'setUserNotify', data: { url: '/v1/user/', method: 'post' }, action: 'setUserNotifyType', actionBack: 'setUserNotifyTypeRes', needToken: true }, // 修改登录方式
