@@ -10,6 +10,7 @@
 
 export default {
   useHttp: true,// 是否开启http
+  useHttpZip: false,// 是否开启http压缩
   /**
    * name:请求标识
    * data:请求数据

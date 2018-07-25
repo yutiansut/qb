@@ -7,9 +7,9 @@
 
 import Fetch from "../libs/Fetch";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
-let zlib = require("zlib");
+import {zip, unZip} from '../libs/Zip'
 
-let host, port, HttpList, protocol;
+let host, port, HttpList, protocol, HttpZip;
 
 const formatParams = req => {
   if (req.url.path.indexOf(":") > 0) {
@@ -29,9 +29,11 @@ const formatParams = req => {
   return req
 }
 
+
 const HTTP_PROXY = {
   setConfig(HttpConfig, ServerConfig){
     HttpList = HttpConfig;
+    HttpZip = HttpConfig.useHttpZip
     protocol = ServerConfig.hSecure && 'https' || 'http';
     host = ServerConfig.host;
     port = ServerConfig.port;
@@ -53,20 +55,25 @@ const HTTP_PROXY = {
           }
         }
         req = formatParams(req)
-        let zip = new Promise((resolve, reject)=>zlib.deflate(req.data.body, (err, buffer) => !err && resolve(buffer) || reject({ret: -4, data: err})))
-        req.data.body = await zip
+        console.log(req.url, ' sendHttp ',  req.data.body)
+        req.data.body = await zip(req.data.body)
         let result = await Fetch(req.url, req.data);
-        const buffer = await result.arrayBuffer().catch((e, obj) => {
+        let buffer = await result.arrayBuffer().catch((e, obj) => {
           obj = { ret: -2, data: e };
           throw obj;
         });
-        let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(buffer), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
         try{
-          res.result = JSON.parse(await unZip)
+          buffer = await unZip(buffer)
+        } catch (e) {
+          buffer = JSON.stringify(e)
+          // console.log(e)
+        }
+        try{
+          res.result = JSON.parse(buffer)
         } catch (e) {
           res.result = {ret: -3, data: e}
         }
-
+        console.log(req.url, ' reciveHttp ', res.result)
         if (afterHandler && afterHandler.length) {
           for (let i = 0; i < afterHandler.length; i++) {
             await afterHandler[i](this, req, res, v)
