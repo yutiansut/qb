@@ -21,6 +21,7 @@ export default function en(state) {
     total: "Total",
     volume: "Volume",
     infoView: "Info Overview",
+    newsView: "Notice Overview",
     seeMore: "See more",
     readMore: "Read more",
     yes: "Yes",
@@ -109,6 +110,7 @@ export default function en(state) {
     orderSuccess: 'order success',
     kline:"Kline",
     depth:"Depth",
+    noDate: "No data"
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -216,7 +218,8 @@ export default function en(state) {
     "notice-about": "About Us",
     "activity-regist": "Sign up now",
     "notice-contact": "Contact Us",
-    "notice-detail": "Information details",
+    "notice-detail": "Notice details",
+    "info-detail": "Information details",
     "notice-link": "Link",
     "notice-recommend": "Recommend",
     "notice-title": "Title",

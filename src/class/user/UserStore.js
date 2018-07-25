@@ -158,7 +158,7 @@ export default class UserStore extends ExchangeStoreBase {
 
   async userCredits(page) { // 获取用户积分列表
     let userCreditsCon = await this.Proxy.getUserCredits({"userId": this.uid, page, "pageSize":10, "token": this.token});
-    console.log('积分列表', userCreditsCon)
+    // console.log('积分列表', userCreditsCon)
     // let userCredits = userCreditsCon.list ? userCreditsCon.list : []
     //['每日登录', 'CNY充值', 'BTC充值', '交易额', '', '网站改进意见采纳', '注册并实名认证', '邮箱认证', '绑定手机', '添加谷歌验证', '首次充值BTC', '首次充值CNY', '首次交易', 'USD充值', '首次充值USD']
     let userCreditsArr = [

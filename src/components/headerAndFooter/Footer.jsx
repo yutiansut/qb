@@ -23,6 +23,7 @@ export default class Footer extends ExchangeViewBase {
           let headerName = document.getElementById('header'), activeHeight = document.getElementById('active');
           let buttonTop = document.querySelector('.aside-nav-top');
           let buttonKf = document.querySelector('.aside-nav-desk');
+          let buttonApp = document.querySelector('.aside-nav-app');
           let buttonK = document.getElementById('udesk_container');
           let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 
@@ -37,10 +38,12 @@ export default class Footer extends ExchangeViewBase {
           if (scrollTop >= document.documentElement.clientHeight) {
               buttonTop.style.display = "block";
               buttonKf.style.display = "block";
+              buttonApp.style.display = "block";
               buttonK && (buttonK.style.display = "block");
           } else {
               buttonTop.style.display = "none";
               buttonKf.style.display = "none";
+              buttonApp.style.display = "none";
               buttonK && (buttonK.style.display = "none");
           }
       };
@@ -88,6 +91,12 @@ export default class Footer extends ExchangeViewBase {
           </ol>
         </div>
         <div className='aside-nav'>
+          <div className='aside-nav-app'>
+            <div className='erweima'>
+              <img src={this.$imagesMap.$aside_erweima} alt=""/>
+              <span>Android</span>
+            </div>
+          </div>
           <div className='aside-nav-desk'></div>
           <div className='aside-nav-top' onClick={() => {window.scroll(0, 0)}}></div>
         </div>

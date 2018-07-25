@@ -22,6 +22,7 @@
       margin-right .4rem
       a
         color $normal-white-color-a
+        font-weight 100
       a:hover
         color $normal-white-color
     li:last-child
@@ -96,6 +97,40 @@
     background-position:center;
     background-repeat:no-repeat;
     cursor pointer
+  .aside-nav-app
+    position fixed
+    display: none
+    right 0
+    bottom: 338px
+    width 56px
+    height 56px
+    background-color  #363B3D
+    border-radius 4px
+    background-image  $foot-app
+    background-size 17px 26px
+    background-position:center;
+    background-repeat:no-repeat;
+    cursor pointer
+    &:hover
+      .erweima
+        display block
+    .erweima
+      position absolute
+      display none
+      right 58px
+      width 120px
+      height 140px
+      padding 10px
+      background-color  #363B3D
+      border-radius 4px
+      text-align center
+      img
+        width 100px
+        height 100px
+        margin-bottom 4px
+      span
+        font-size 14px
+        color $normal-font-color
 .footer-fixed
   position fixed
   bottom 0

@@ -109,6 +109,13 @@ export default class NoticeController extends ExchangeControllerBase {
     this.view.setState({activityList})
   }
 
+  getOrderHeight(height) { // 获取订单高度
+    this.view && this.view.setState({
+      orderHeight: height
+    })
+    return height
+  }
+
   // websocke更新
   userNoticeUpdata(obj) {
     // console.log('试图', obj)

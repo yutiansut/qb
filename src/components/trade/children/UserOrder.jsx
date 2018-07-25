@@ -44,6 +44,8 @@ export default class userOrder extends ExchangeViewBase {
       resetPopFlag: false
     };
     const {controller} = this.props;
+    this.noticeController = controller.noticeController;
+    this.getOrderHeight = this.noticeController.getOrderHeight.bind(this.noticeController) // 获取通知列表
     //绑定view
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
@@ -81,7 +83,7 @@ export default class userOrder extends ExchangeViewBase {
   renderCurrentOrder() {
     // console.log('this.state.currentOrder', this.state.currentOrder)
     return (
-        <div className='trade-current-order'>
+        <div className='trade-current-order' >
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-current')}</h3>
             <div style={{display: 'flex'}}>
@@ -185,10 +187,25 @@ export default class userOrder extends ExchangeViewBase {
         </div>
     )
   }
-  
+
+  componentDidUpdate() {
+    let tradeOrderHeight = document.getElementById('trade_order').offsetHeight
+    // console.log('height', tradeOrderHeight)
+    this.getOrderHeight(tradeOrderHeight)
+    // console.log('height', tradeOrderHeight)
+    // this.props.controller.noticeController.getOrderHeight(tradeOrderHeight)
+    // noticeTitleHeight = document.getElementById('notice_title').offsetHeight
+    // let tradeBottomHeight = document.getElementById('trade_bottom').offsetHeight
+    // this.setState({
+    //   tradeOrderHeight,
+    //   noticeTitleHeight
+    // })
+    // console.log(123, tradeOrderHeight, this.getOrderHeight(tradeOrderHeight))
+  }
+
   render() {
     return (
-        <div>
+        <div id="trade_order">
           {this.renderCurrentOrder()}
           {this.renderHistoryOrder()}
           {this.state.detailFlag && <div className='trade-order-shadow' style={{display: this.state.detailFlag ? 'block' : 'none'}}>

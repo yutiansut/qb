@@ -22,6 +22,7 @@ export default function zh(state) {
     charge: '充值',
     pair: '交易对',
     infoView: "资讯概览",
+    newsView: "公告概览",
     seeMore: "查看更多",
     readMore: "阅读详情",
     yes: "是",
@@ -108,6 +109,7 @@ export default function zh(state) {
     orderSuccess: '下单成功',
     kline:"K线图",
     depth:"深度图",
+    noDate: "暂无数据"
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -299,7 +301,8 @@ export default function zh(state) {
     "notice-about": "关于我们",
     "activity-regist": "立即注册",
     "notice-contact": "联系我们",
-    "notice-detail": "资讯详情",
+    "notice-detail": "公告详情",
+    "info-detail": "资讯详情",
     "notice-link": "链接",
     "notice-recommend": "推荐",
     "notice-title": "标题",

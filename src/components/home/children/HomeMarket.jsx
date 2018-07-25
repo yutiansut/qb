@@ -59,7 +59,7 @@ export default class HomeMarket extends ExchangeViewBase {
 
   render() {
     const {controller} = this.props;
-    // console.log(1234,this.state,this.state.recommendDataHandle)
+    // console.log(1234, this.state.homeMarketPairData)
     return (
       <div className='home-market inner'>
         <div className='home-market-con'>
@@ -109,8 +109,8 @@ export default class HomeMarket extends ExchangeViewBase {
           </tr>
           </thead>
           <tbody>
-          {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            // console.log('this.filte(this.state.homeMarketPairData, this.state.searchValue)',v)
+          {this.filte(this.state.homeMarketPairData, this.state.searchValue).length ? this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
+            // console.log(12345, this.filte(this.state.homeMarketPairData, this.state.searchValue))
             return (
               <tr key={index}>
                 {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
@@ -140,7 +140,7 @@ export default class HomeMarket extends ExchangeViewBase {
                 </td>
               </tr>
             )
-          })}
+          }) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
           </tbody>
         </table>
         </div>

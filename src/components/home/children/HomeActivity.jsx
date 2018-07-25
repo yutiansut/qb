@@ -39,16 +39,19 @@ export default class HomeActivity extends ExchangeViewBase {
         <div className="banner-content" style={{height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}>
           <img src={this.props.controller.configController.store.state.language === "zh-CN" ? this.$imagesMap.$home_banner_text_cn : this.$imagesMap.$home_banner_text_en}
                alt=""
-               className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} content`}/>
-          {userToken ? (
-            <a href="/wlogin" target="_blank" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
-              <span className="banner-btn"></span>
-            </a>
-          ) : (
-            <Link to="/wlogin" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
-              <span className="banner-btn"></span>
-            </Link>
-          )}
+               className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'img-cn' : 'img-en'} ${userToken ? 'login-content' : ''} content`}/>
+          {/*{userToken ? (*/}
+            {/*<a href="/wlogin" target="_blank" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>*/}
+              {/*<span className="banner-btn"></span>*/}
+            {/*</a>*/}
+          {/*) : (*/}
+            {/*<Link to="/wlogin" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>*/}
+              {/*<span className="banner-btn"></span>*/}
+            {/*</Link>*/}
+          {/*)}*/}
+          {!userToken && <Link to="/wlogin" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
+            <span className="banner-btn"></span>
+          </Link>}
         </div>
         <div alt="" className="banner-img" style={{background: `url(${this.state.bannerImgUrl}) center center / cover no-repeat`, height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}/>
       </div>

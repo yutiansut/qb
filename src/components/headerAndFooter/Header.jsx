@@ -89,7 +89,7 @@ export default class Header extends ExchangeViewBase {
     // console.log(21324, this.props)
     let changeBase = this.props.navClass === 'tradeNav' ? 1440 * 2 : 1440
     ChangeFontSize(1440*0.8, changeBase)
-    await this.getUserNoticeHeader(1, 0, 0)
+    this.props.userController.userToken && await this.getUserNoticeHeader(1, 0, 0)
     languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })

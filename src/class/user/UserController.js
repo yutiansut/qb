@@ -114,9 +114,9 @@ export default class UserController extends ExchangeControllerBase {
     // console.log('上传信息', result)
     succObj = {
       state: 1,
-      firstName: this.view.state.firstNameValue,
-      lastName: this.view.state.lastNameValue,
-      number: this.view.state.numberValue
+      firstName: userAuth.number ? userAuth.firstName : this.view.state.firstNameValue,
+      lastName: userAuth.number ? userAuth.lastName : this.view.state.lastNameValue,
+      number: userAuth.number ? userAuth.number : this.view.state.numberValue
     }
     if (result === null) {
       userAuth = Object.assign(userAuth, succObj)
@@ -131,7 +131,6 @@ export default class UserController extends ExchangeControllerBase {
       userAuth,
       checkVerifyArr: result ? true : false
     })
-
     // result.ret === 101 && this.view.setState({userAuth: Object.assign(this.view.state.userAuth, succObj), checkVerifyArr: false})
   }
 

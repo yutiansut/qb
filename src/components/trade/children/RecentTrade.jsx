@@ -54,6 +54,7 @@ export default class extends ExchangeViewBase {
     this.clearRoom()
   }
 
+
   render() {
     return <div>
         <div className="trade-recent-title">

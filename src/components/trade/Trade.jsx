@@ -92,6 +92,7 @@ export default class extends exchangeViewBase {
     assetController.TradePlanController = TradePlanController;
     // 父子实例
     userOrderController.TradeRecentController = TradeRecentController;
+    userOrderController.noticeController = noticeController // 调用notice里的高度方法
 
     this.state = {
       curChart: "kline",
@@ -149,11 +150,11 @@ export default class extends exchangeViewBase {
             <LiveTrade controller={TradeOrderListController} />
           </div>
         </div>
-        <div className="trade-bottom clearfix">
+        <div className="trade-bottom clearfix" id="trade_bottom">
           <div className="trade-notice">
             <TradeNotice controller={noticeController} />
           </div>
-          <div className="trade-order" id="trade_order">
+          <div className="trade-order">
             <UserOrder controller={userOrderController} />
           </div>
         </div>

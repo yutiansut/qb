@@ -1,194 +1,197 @@
 @import "../../../common/css/variable.styl"
 .trade-current-order
-	background $exchange-color
-	//padding .16rem .4rem .16rem .16rem
-	min-height 1.75rem
-	margin-bottom .02rem
-	padding-bottom .16rem
-	.trade-current-title
-		display flex
-		align-items center
-		height .4rem
-		line-height .4rem
-		justify-content space-between
-		background $normal-black-color
-		padding-left .16rem
-		font-size .12rem
-		h3
-			color $normal-white-color
-			font-size .12rem
-		a
-			color: $normal-white-color-a
-			font-size '.12rem'
-			margin-right '.49rem'
-			&:hover
-				color: $normal-white-color-a9
-		//margin-right 7.2rem
-		.reset-handle
-			font-size .12rem
-			margin-right .49rem
-			cursor pointer
-			position relative
-			&:hover
-				color $normal-white-color-a9
-			&:nth-of-type(1):before
-				content ''
-				position absolute
-				width .12rem
-				height .12rem
-				background $trade-reset
-				background-size contain
-				top .14rem
-				left -.16rem
-			&:nth-of-type(2):before
-				content ''
-				position absolute
-				width .12rem
-				height .12rem
-				background $trade-reset
-				background-size contain
-				top .14rem
-				left -.16rem
-			&:nth-of-type(3):before
-				content ''
-				position absolute
-				width .12rem
-				height .12rem
-				background $trade-reset-all
-				background-size contain
-				top .14rem
-				left -.16rem
-		.reset-handle:nth-of-type(1):hover::before
-			background $trade-reset-hover
-			background-size contain
-		.reset-handle:nth-of-type(2):hover::before
-			background $trade-reset-hover
-			background-size contain
-		.reset-handle:nth-of-type(3):hover::before
-			background $trade-reset-all-hover
-			background-size contain
-	.trade-current-table
-		width 11.12rem
-		margin-top .16rem
-		//padding-left .32rem
-		margin-left .32rem
-		font-size .11rem
-		.cancel
-			cursor: 'pointer'
-		td
-			padding-top .1rem
-		.pop-parent
-			position relative
-			margin-left .04rem
-			display inline-block
-			vertical-align middle
-			.pop-children
-				position absolute
-				top 50%
-				left 100%
-				transform translate(0.13rem, -50%)
-				min-width 136px
-				width 1.7rem
-				height auto
-				padding .03rem
-				font-size .1rem
-				line-height .14rem
-				text-align justify
-				z-index 99
-		tbody
-			td
-				color $normal-white-color-a9
-	.trader-order-none
-		height 1.19rem
-		line-height 1.19rem
-		text-align center
-		font-size .2rem
-		
+  &:nth-of-type(2)
+    margin-bottom 0
+  background $exchange-color
+  //padding .16rem .4rem .16rem .16rem
+  min-height 1.75rem
+  margin-bottom .02rem
+  padding-bottom .16rem
+  .trade-current-title
+    display flex
+    align-items center
+    height .4rem
+    line-height .4rem
+    justify-content space-between
+    background $normal-black-color
+    padding-left .16rem
+    font-size .12rem
+    h3
+      color $normal-white-color
+      font-size .12rem
+    a
+      color: $normal-white-color-a
+      font-size '.12rem'
+      margin-right '.49rem'
+      &:hover
+        color: $normal-white-color-a9
+    //margin-right 7.2rem
+    .reset-handle
+      font-size .12rem
+      margin-right .49rem
+      cursor pointer
+      position relative
+      &:hover
+        color $normal-white-color-a9
+      &:nth-of-type(1):before
+        content ''
+        position absolute
+        width .12rem
+        height .12rem
+        background $trade-reset
+        background-size contain
+        top .14rem
+        left -.16rem
+      &:nth-of-type(2):before
+        content ''
+        position absolute
+        width .12rem
+        height .12rem
+        background $trade-reset
+        background-size contain
+        top .14rem
+        left -.16rem
+      &:nth-of-type(3):before
+        content ''
+        position absolute
+        width .12rem
+        height .12rem
+        background $trade-reset-all
+        background-size contain
+        top .14rem
+        left -.16rem
+    .reset-handle:nth-of-type(1):hover::before
+      background $trade-reset-hover
+      background-size contain
+    .reset-handle:nth-of-type(2):hover::before
+      background $trade-reset-hover
+      background-size contain
+    .reset-handle:nth-of-type(3):hover::before
+      background $trade-reset-all-hover
+      background-size contain
+  .trade-current-table
+    width 11.12rem
+    margin-top .16rem
+    //padding-left .32rem
+    margin-left .32rem
+    font-size .11rem
+    .cancel
+      cursor: 'pointer'
+    td
+      padding-top .1rem
+    .pop-parent
+      position relative
+      margin-left .04rem
+      display inline-block
+      vertical-align middle
+      .pop-children
+        position absolute
+        top 50%
+        left 100%
+        transform translate(0.13rem, -50%)
+        min-width 136px
+        width 1.7rem
+        height auto
+        padding .03rem
+        font-size .1rem
+        line-height .14rem
+        text-align justify
+        z-index 99
+    tbody
+      td
+        color $normal-white-color-a9
+  .trader-order-none
+    height 1.19rem
+    line-height 1.19rem
+    text-align center
+    font-size .2rem
+
 .trade-order-shadow
-	position fixed
-	top 0
-	left 0
-	bottom 0
-	right 0
-	background $exchange-shadow-color
-	z-index 6665
-	.trade-order-detail
-		position absolute
-		top 50%
-		left 50%
-		transform translate(-50%, -50%)
-		background $line-dark
-		width 7rem
-		padding-bottom .2rem
-		max-height: 80vh
-		border-radius .02rem
-		z-index 6666
-		overflow-y auto
-		&::-webkit-scrollbar-button
-			display none
-		&::-webkit-scrollbar
-			position relative
-			width .03rem
-			height 100%
-		&::-webkit-scrollbar-track
-			width .03rem
-			background #222730
-		&::-webkit-scrollbar-thumb
-			width .03rem
-			background #8C8F93
-		h3
-			padding .11rem 0
-			margin-bottom .2rem
-			font-size .14rem
-			line-height .21rem
-			text-align center
-			color $normal-white-color-a9
-			background-color $normal-black-color
-		.trade-order-content
-			width 6.68rem
-			height 1.01rem
-			margin 0 auto
-			border-bottom .02rem dashed $exchange-search-bg
-			border-radius .02rem
-			background $bg-medium-color
-			display flex
-			color $normal-black-color
-			justify-content space-around
-			.trade-order-info
-				height 100%
-				padding .2rem 0
-				p
-					margin-bottom .25rem
-					text-align center
-					color $normal-white-color-a9
-				span
-					color $normal-white-color-a
-		.trade-order-table
-			width 100%
-			font-size .12rem
-			line-height .28rem
-			text-align center
-			thead
-				color $normal-white-color-a
-			tbody
-				color $normal-white-color-a9
-		.trade-order-close
-			cursor pointer
-			width 1.6rem
-			margin 0 auto
-			height .35rem
-			color $normal-white-color
-			background $exchange-blue
-			line-height .35rem
-			text-align center
-		.trade-order-table-wrap
-			width 6.68rem
-			padding .19rem 0
-			margin 0 auto .2rem
-			background $bg-medium-color
+  position fixed
+  top 0
+  left 0
+  bottom 0
+  right 0
+  background $exchange-shadow-color
+  z-index 6665
+  .trade-order-detail
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    background $line-dark
+    width 7rem
+    padding-bottom .2rem
+    max-height: 80vh
+    border-radius .02rem
+    z-index 6666
+    overflow-y auto
+    &::-webkit-scrollbar-button
+      display none
+    &::-webkit-scrollbar
+      position relative
+      width .03rem
+      height 100%
+    &::-webkit-scrollbar-track
+      width .03rem
+      background #222730
+    &::-webkit-scrollbar-thumb
+      width .03rem
+      background #8C8F93
+    h3
+      padding .11rem 0
+      margin-bottom .2rem
+      font-size .14rem
+      line-height .21rem
+      text-align center
+      color $normal-white-color-a9
+      background-color $normal-black-color
+    .trade-order-content
+      width 6.68rem
+      height 1.01rem
+      margin 0 auto
+      border-bottom .02rem dashed $exchange-search-bg
+      border-radius .02rem
+      background $bg-medium-color
+      display flex
+      color $normal-black-color
+      justify-content space-around
+      .trade-order-info
+        height 100%
+        padding .2rem 0
+        p
+          margin-bottom .25rem
+          text-align center
+          color $normal-white-color-a9
+        span
+          color $normal-white-color-a
+    .trade-order-table
+      width 100%
+      font-size .12rem
+      line-height .28rem
+      text-align center
+      thead
+        color $normal-white-color-a
+      tbody
+        color $normal-white-color-a9
+    .trade-order-close
+      cursor pointer
+      width 1.6rem
+      margin 0 auto
+      height .35rem
+      color $normal-white-color
+      background $exchange-blue
+      line-height .35rem
+      text-align center
+    .trade-order-table-wrap
+      width 6.68rem
+      padding .19rem 0
+      margin 0 auto .2rem
+      background $bg-medium-color
+
 .reset-pop
-	.reset-pop-location
-		top 50%
-		left 50%
-		transform translate(-50%, -50%)
-		z-index 9999
+  .reset-pop-location
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    z-index 9999

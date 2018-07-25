@@ -7,7 +7,7 @@ export default class tradeNotice extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      tradeOrderHeight: 0,
+      orderHeight: 0,
       noticeTitleHeight: 0
     }
     const {controller} = props
@@ -16,6 +16,7 @@ export default class tradeNotice extends exchangeViewBase {
     // 初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.getInfoCon = controller.getInfoCon.bind(controller) // 获取资讯
+    this.getOrderHeight = controller.getOrderHeight.bind(controller) // 获取高度
   }
 
   setView(view) {
@@ -28,30 +29,36 @@ export default class tradeNotice extends exchangeViewBase {
   }
 
   async componentDidMount() {
-    let tradeOrderHeight = document.getElementById('trade_order').offsetHeight
+     // tradeOrderHeight = document.getElementById('trade_order').offsetHeight
     let noticeTitleHeight = document.getElementById('notice_title').offsetHeight
     this.setState({
-      tradeOrderHeight,
-      noticeTitleHeight
+      noticeTitleHeight: noticeTitleHeight
     })
+    console.log(123, noticeTitleHeight)
+    // console.log(1234334, tradeOrderHeight)
     // let noticeCon = document.getElementById('notice_con')
     // noticeCon.style.height = (tradeOrderHeight - noticeTitleHeight)
     // let noticeHeight =  35
     // let noticeNum = Math.floor((tradeOrderHeight - noticeTitleHeight) / noticeHeight)
     await this.getInfoCon(0, -1)
-    // console.log(123, tradeOrderHeight, noticeHeight, noticeTitleHeight, noticeNum)
-  }
-
-  componentWillUpdate(...parmas) {
 
   }
+  componentWillUpdate() {
+
+  }
+
+  componentDidUpdate() {
+
+  }
+
 
   render() {
+    // console.log(456, this.state.orderHeight)
     // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
       <h3 id="notice_title">{this.intl.get("information")}</h3>
       {Object.keys(this.state.infoList).length && this.state.infoList.data ?
-        <ul id="notice_con" style={{minHeight: `${(this.state.tradeOrderHeight - this.state.noticeTitleHeight - 5)}px`, height: `${(this.state.tradeOrderHeight - this.state.noticeTitleHeight - 5)}px`}}>
+        <ul id="notice_con" style={{minHeight: `${(this.state.orderHeight - this.state.noticeTitleHeight - 5)}px`, height: `${(this.state.orderHeight - this.state.noticeTitleHeight - 5)}px`}}>
           {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) =>
             <li key={index} id='notice_con'>
               <p>

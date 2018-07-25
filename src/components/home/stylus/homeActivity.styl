@@ -21,16 +21,17 @@
     width 100%
     .content
       position absolute
+      top 24%
       left 50%
       transform translateX(-50%)
+    .login-content
+      top 26.4%
     .img-cn
       width 8.03rem
       height 0.91rem
-      top 24%
     .img-en
       width 9.49rem
       height 1.25rem
-      top 24%
     .content-link
       display block
       position absolute
@@ -39,13 +40,14 @@
       width 1.8rem
       height .65rem
       transform translateX(-50%)
-      border 2px solid $main-color
+      border 1.5px solid $banner-btn
       border-radius .04rem
-      background transparent
-      transition background 1s
+      opacity .8
+      //background transparent
+      //transition background 1s
       &:hover
-        background $main-color
-        //animation btnOpacity 1s
+        opacity 1
+        //background $main-color
         .banner-btn
           display block
           width .8rem
@@ -59,18 +61,18 @@
         margin-left .5rem
         margin-top .2rem
     .cn-content
-      &:hover
-        .banner-btn
-          background $home_banner_btn_cn_hover no-repeat
-          background-size 100%
+      //&:hover
+      //  .banner-btn
+      //    background $home_banner_btn_cn_hover no-repeat
+      //    background-size 100%
       span
         background $home_banner_btn_cn no-repeat
         background-size 100%
     .en-content
-      &:hover
-        .banner-btn
-          background $home_banner_btn_en_hover no-repeat
-          background-size 100%
+      //&:hover
+      //  .banner-btn
+      //    background $home_banner_btn_en_hover no-repeat
+      //    background-size 100%
       span
         background $home_banner_btn_en no-repeat
         background-size 100%
