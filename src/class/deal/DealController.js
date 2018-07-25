@@ -75,10 +75,13 @@ export default class DealController extends ExchangeControllerBase {
   }
   // 设置市价交易的最大数量值
   setMarketPriceMaxNum(v){
+    this.view.setState(
+        {marketChangePrice: v.price}
+    )
     if(this.view.state.DealEntrustType === 0)
       return
     this.view.setState({
-      buyMax: Number(Number(this.view.state.buyWallet).div(v.price))
+      buyMax: Number(Number(this.view.state.buyWallet).div(v.price)),
     })
   }
 
@@ -175,7 +178,7 @@ export default class DealController extends ExchangeControllerBase {
       token: this.userController.userToken,
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.view.state.DealEntrustType,//0限价  1市价
-      "price": Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格
+      "price": this.view.state.DealEntrustType ? 0 : Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格
       "count": Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum),//数量
       "tradePairId": this.TradeMarketController.tradePair.tradePairId,
       "tradePairName": this.TradeMarketController.tradePair.tradePairName,

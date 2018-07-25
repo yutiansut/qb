@@ -10,11 +10,12 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      changeBankPriceB:0,
-      changeBankPriceS:0,
-      dbPrePass:false,
-      dbPreOrder:true,
-      dealPopMsg:'',
+      marketChangePrice:0,
+      changeBankPriceB:0, //买入价格输入框实时汇率
+      changeBankPriceS:0,//卖入价格输入框实时汇率
+      dbPrePass:false, // 免输资金密码二次点击
+      dbPreOrder:true, // 下单二次点击
+      dealPopMsg:'',// 弹窗信息
       dealPassType:'positi',// 弹窗类型倾向
       dealPass:false,// 下单弹窗
       fundPwdIntervalClick:0,
@@ -84,8 +85,8 @@ export default class TradePlan extends ExchangeViewBase {
       changeBank: 'changeBankB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changeBankS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    let priceValue = this.state[diffArr[dealType].inputValue];
-    if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
+    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : this.state[diffArr[dealType].inputValue];
+    if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
       priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
     }
     let value = e.target.value;

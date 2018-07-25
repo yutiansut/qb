@@ -47,8 +47,8 @@ export default class extends exchangeViewBase {
     TradeRecentController = new OrderListController();//近期交易
     userOrderController = props.userOrderController;//用户订单
     noticeController = new NoticeController(); //资讯
-    TradeDealController = new DealController(); //交易
-    TradePlanController = new DealController();//市场上交易价格
+    TradeDealController = new DealController(); //市场上交易信息
+    TradePlanController = new DealController();//交易
     userController = props.userController; //用户
     assetController = props.assetController; //用户
     configController = new ConfigController(); // 基础设置
@@ -56,6 +56,7 @@ export default class extends exchangeViewBase {
     kdepthController = new KdepthController();
     TradeMarketController.klineController = props.klineController;
     kdepthController.configController = configController;
+    TradeDealController.configController = configController;
 
     // TradeMarketController.klineController = klineController;
     TradePlanController.userController = userController;

@@ -52,18 +52,19 @@ export default class OrderListStore extends ExchangeStoreBase {
         }
     ): await this.Proxy.recentOrderMarket(
         {
-          "tradePairId": id,
+          id: id,
           a: 10
         }
     );
-    let recentTradeListArrAf = isPersonal ?{
+    let recentTradeListArrAf = isPersonal ? {
       orders: recentTradeListArr.ors.map(v => {
         return{
           "orderTime": v.t,
           "avgPrice": v.ap,
           "avgPriceCN": v.apc,
           "avgPriceEN": v.ape,
-          "dealDoneCount": v.a
+          "dealDoneCount": v.a,
+          "orderType": v.ot
         }
       })
     } : {

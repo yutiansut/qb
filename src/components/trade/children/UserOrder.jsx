@@ -1,6 +1,13 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
 import TradePopup from '../../../common/component/TradePopup/index.jsx'
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import '../stylus/tradeOrder.styl'
 
 export default class userOrder extends ExchangeViewBase {
@@ -134,7 +141,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
-            {this.state.historyOrder && this.state.historyOrder.length !== 0 && <a href="/worder/history/">{this.intl.get('seeMore')}</a>}
+            {this.state.historyOrder && this.state.historyOrder.length !== 0 && <NavLink to={{pathname: "/worder/history/"}}>{this.intl.get('seeMore')}</NavLink>}
         </div>
           {this.state.historyOrder && this.state.historyOrder.length !== 0 && <table className='trade-current-table'>
             <thead>
