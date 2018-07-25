@@ -98,13 +98,6 @@ export default class AssetController extends ExchangeControllerBase {
       walletList: this.store.state.walletList
     });
   }
-  // 获取币种资产
-  // async getWallet() {
-  // let data = await this.store.Proxy.topCurrency();
-  // console.log(data);
-  // this.store.state.wallet = data;
-  // this.view.setState({ wallet: data});
-  // }
   // 获取矿工费
   async getMinerFee(coin, address) {
     await this.store.getMinerFee(coin, address.address);
@@ -178,22 +171,8 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 获取确认中充币信息(顶部轮播)
   async getChargeMessage() {
-    let result = await this.store.Proxy.history({
-      userId: this.userId,
-      token: this.token,
-      page: 0,
-      pageSize: 0,
-      coinId: -1,
-      coinName: -1,
-      orderType: 1,
-      orderStatus: 0,
-      startTime: -1,
-      endTime: -1
-    });
-    if (result && !result.errCode) {
-      return result.orderList.filter(v => v.doneCount !== v.verifyCount);
-    }
-    return [];
+    let result = await this.store.getChargeMessage();
+    return result;
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
   async getExtract() {

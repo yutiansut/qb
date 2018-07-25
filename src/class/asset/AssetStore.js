@@ -78,9 +78,9 @@ export default class AssetStore extends ExchangeStoreBase {
     result && result.length ? (result = result.map(v=>{
      return {
        id: v.id,
-       na: v.name,
-       t: v.taker,
-       m: v.maker
+       name: v.na,
+       taker: v.t,
+       maker: v.m
      }
     })) : (result = [])
     // console.log('getFee')
@@ -122,7 +122,7 @@ export default class AssetStore extends ExchangeStoreBase {
     this.state.wallet = cl && cl.map(({cn,fn,cic,cid,avc,frc,va,tc})=>{
       return {
         "coinName": cn,
-        "fullname": fn,
+        "fullName": fn,
         "coinIcon": cic,//币种icon
         "coinId": cid,
         "availableCount": avc,//可用余额
@@ -190,7 +190,7 @@ export default class AssetStore extends ExchangeStoreBase {
       id: this.state.walletList[coin],
       token: this.controller.token
     });
-    result.coinAddress
+    result.cad
       ? (this.state.coinAddress = {
         coinId: result.id, //币种ID
         verifyNumer: result.ven, //最大确认数
@@ -202,10 +202,50 @@ export default class AssetStore extends ExchangeStoreBase {
           coinAddress: "" //地址
         });
   }
+
   // 清空充提记录
   initHistory(){
     this.state.assetHistory.orderList = [];
     this.state.assetHistory.total = 0;
+  }
+
+  // 获取确认中充币信息(顶部轮播)
+  async getChargeMessage() {
+    let result = await this.Proxy.history({
+      token: this.controller.token,
+      "id": -1,//如果不设定 传-1 coin id
+      "na": -1,//coin name
+      "ot": 1,//充1提2转4  注意:交易所内提币收方显示为转账  所有状态传-1，如果需要两种状态则将需要的状态相与（|） //order type
+      "st": -1,//不设定传-1 都传Unix秒 start time
+      "et": -1,//不设定传-1 都传Unix秒 end time
+      "ost": 0, //所有状态传-1 //order status
+      "p": 0, //page
+      "s": 0 //page size
+    });
+    if (result && !result.errCode) {
+      return result.ol.filter(v => v.dc !== v.vc).map(v => {
+        return {
+          "orderType": 1,
+          "orderStatus": v.ost,
+          "fullname": v.fna,
+          "coinIcon": v.cic,
+          "coinName": v.cna,
+          "coinId": v.cid,
+          "count": v.cou,
+          "balance": b.bal,//余额
+          "postAddress": v.psa,//发送地址
+          "receiveAddress": v.rea,//接收地址
+          "fee": v.fee,//手续费
+          "verifyCount": v.vc,//确认数
+          "doneCount": v.dc,//已确认数
+          "hashAddress": v.ha,//hash地址
+          "blockSite": v.bs,//点击查看交易信息的地址
+          "orderTime": v.t,
+          "orderId": v.oid
+        }
+      });
+    }
+    return [];
   }
 
   // 获取资产记录
