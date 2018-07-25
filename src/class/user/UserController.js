@@ -89,11 +89,14 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async uploadImg(file) { // 上传图片
+    // console.log('上传图片', file)
+    let imgUrl = `image${this.view.state.imgUrlIndex + 1}`
     let res = await this.store.uploadImg(file),
       result = await res.text()
-    // console.log(res, result)
-    let imgUrl = `image${this.view.state.imgUrlIndex + 1}`, obj={}
+    // console.log(res, result, imgUrl)
+    let obj={}
     obj[imgUrl] = result
+    // console.log('上传图片2', result, obj)
     this.view.setState(obj)
   }
 
