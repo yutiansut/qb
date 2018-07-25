@@ -57,7 +57,7 @@ export default {
   ],
   market: [
     //币种资料
-    { name: 'coinInfo', data: { url: '/v1/common/', method: 'post' }, action: 'getCoinInfo', actionBack: 'getCoinInfoRes' },
+    { name: 'coinInfo', data: { url: '/v1/common/', method: 'post' }, action: 'ci', actionBack: 'cir' },
     // 获取交易对名称以及id
     { name: 'pairInfo', data: { url: '/v1/common/', method: 'post' }, action: 'al', actionBack: 'alr' },
     { name: 'getRecommendCoins', data: { url: '/v1/common/', method: 'post' }, action: 'rc', actionBack: 'rcr' },
@@ -114,7 +114,7 @@ export default {
     //撤单操作
     { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'cancelOrder', actionBack: 'cancelOrderRes', needToken: true },
     // 获取k线数据
-    { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'getKLine', actionBack: 'getKLineRes' }
+    { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'gk', actionBack: 'gks' }
 
   ],
   deal: [

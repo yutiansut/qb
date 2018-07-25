@@ -74,7 +74,7 @@ export default class AssetStore extends ExchangeStoreBase {
           totalCount: tc //总量
         };
       });
-      this.controller.userAssetUpdate(data);
+      this.controller.userAssetUpdate();
       // this.recommendData = data.data
     });
   }
@@ -161,11 +161,13 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取walletList
   async getWalletList() {
     let result = await this.Proxy.getAllCoinList();
-    if (result && result.list && result.list.length) {
+    console.log(result);
+    if (result && result.l && result.l.length) {
       let obj = {};
-      this.controller.sort(result.list, ["n"], 1).forEach(v => {
+      this.controller.sort(result.l, ["n"], 1).forEach(v => {
         obj[v.n.toUpperCase()] = v.id;
       });
+      console.log(obj);
       this.state.walletList = obj;
     }
   }

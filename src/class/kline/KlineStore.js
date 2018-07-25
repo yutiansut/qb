@@ -10,14 +10,14 @@ export default class KlineStore extends ExchangeStoreBase {
       kline: []
     }
     this.WebSocket.general.on("tradeKline", data => {
-      this.state.kline = data.kline.map(v => {
+      this.state.kline = data.ns.map(v => {
         let arr = [];
-        arr.push(v.endTime * 1000);
-        arr.push(v.openPrice);
-        arr.push(v.highPrice);
-        arr.push(v.lowPrice);
-        arr.push(v.closePrice);
-        arr.push(v.volume);
+        arr.push(v.et * 1000);
+        arr.push(v.op);
+        arr.push(v.hp);
+        arr.push(v.lp);
+        arr.push(v.cp);
+        arr.push(v.vol);
         return arr;
       });
       this.controller.setKline(this.state.kline)
@@ -28,19 +28,19 @@ export default class KlineStore extends ExchangeStoreBase {
   }
   async getData() {
     let result = await this.Proxy.getKline({
-      "tradePairName": this.state.tradePairName,
-      "duration": this.state.duration // k线时间段秒数
+      "n": this.state.tradePairName,
+      "dur": this.state.duration // k线时间段秒数
     })
-    if (result.tradePairName) {
-      if (!result.kline) { this.state.kline = []; return };
-      this.state.kline = result.kline.map(v => {
+    if (result.n) {
+      if (!result.ns) { this.state.kline = []; return };
+      this.state.kline = result.ns.map(v => {
         let arr = [];
-        arr.push(v.endTime * 1000);
-        arr.push(v.openPrice);
-        arr.push(v.highPrice);
-        arr.push(v.lowPrice);
-        arr.push(v.closePrice);
-        arr.push(v.volume);
+        arr.push(v.et * 1000);
+        arr.push(v.op);
+        arr.push(v.hp);
+        arr.push(v.lp);
+        arr.push(v.cp);
+        arr.push(v.vol);
         return arr;
       });
       // console.log(this.state.kline);
@@ -54,7 +54,7 @@ export default class KlineStore extends ExchangeStoreBase {
       this.state.tradePairName = '',
       this.state.kline = [];
     }
-    this.WebSocket.general.emit("joinRoom", { from: fromRoom, to: toRoom });
+    this.WebSocket.general.emit("joinRoom", { f: fromRoom, t: toRoom });
   }
 
   update(k, v) {

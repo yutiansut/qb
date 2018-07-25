@@ -260,8 +260,28 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //币种资料
   async getCoinInfo(coinId) {
-    let result = await this.Proxy.coinInfo({coinFlag: coinId});
-    result.name && (this.state.coinInfo = result);
+    let r = await this.Proxy.coinInfo({cf: coinId});
+    r.n && (this.state.coinInfo = {
+      "id": r.id,            // 币种id
+      "name": r.n,      // 币种名
+      "enName": r.ne,   // 币种英文全称
+      "cnName": r.nc,  // 币种中文名
+      "icon": r.ic,        // 币种符号
+      "logo_url": r.lu,//币种logo
+      "webSite": r.ws,
+      "whitePaper": r.wp,
+      "blockSites": r.bs,
+      "description": r.des,  //币种简介
+      "releaseTime": r.rt,  // 发行时间
+      "totalVolume": r.tv,   // 总发行量
+      "circulationVolume": r.cv,  // 流通量
+      "priceCN": r.pc,  // 人民币价格
+      "priceEN": r.pe,  // 美元价格
+      "totalValueCN": r.tvc,   // 人民币总市值
+      "totalValueEN": r.tve, // 美元总市值
+      "icoPriceCN": r.ipc,              // 人民币ico价格
+      "icoPriceEN": r.ipe  // 美元ico价格
+    });
   }
 
   //收藏列表
