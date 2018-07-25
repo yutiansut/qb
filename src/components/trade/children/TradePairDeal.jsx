@@ -22,6 +22,7 @@ export default class TradePairDeal extends ExchangeViewBase {
 
   }
   render() {
+    console.log(this.state.tradePairMsg.prices,111111111,this.props.controller.configController.language)
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className='trade-pair-deal-title'>
@@ -34,7 +35,7 @@ export default class TradePairDeal extends ExchangeViewBase {
           </span>
         </div>
         <div className='trade-pair-deal-price'>
-          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price)}</span>≈<span>{this.state.tradePairMsg.prices && this.props.controller.configController.language === 'zh-CN' && Number(this.state.tradePairMsg.prices.priceCN).format({number: 'legal', style:{name:'cny'}})|| Number(this.state.tradePairMsg.prices.priceEN).format({number: 'legal', style:{name:'usd'}}) }</span>
+          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price)}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN).format({number: 'legal', style:{name:'usd'}}))) }</span>
         </div>
       </div>
     )
