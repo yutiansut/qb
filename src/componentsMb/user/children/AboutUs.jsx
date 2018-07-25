@@ -21,12 +21,12 @@ export default class AboutUs extends exchangeViewBase {
   }
 
   render() {
-    const {controller, history} = this.props
+    const {controller, history} = this.props;
     const language = this.props.controller.configData.language;
     return (
       <div className={`about-us`}>
         {this.state.qbtTrade && this.state.qbtTrade.map((v,index) =>
-          <img key={index} src={language === "zh-CN" ? v.url : v.urlEN}/>
+          <img key={index} src={language === "zh-CN" ? v.uc : v.ue}/>
           )}
           {/*<a className="invite-btn" onClick={e => {*/}
               {/*history.push(`/mgenrealize/invite/?uid=${controller.userId}`)*/}

@@ -541,6 +541,6 @@ export default class UserController extends ExchangeControllerBase {
   //h5新增活动图片
   async getQbtTrade(){
     let result = await this.store.getQbtTrade()
-    result && result.list && this.view.setState({ qbtTrade: result.list });
+    result && result.li && this.view.setState({ qbtTrade: result.li });
   }
 }
