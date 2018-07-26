@@ -21,46 +21,22 @@
 
 
 import Sleep from '../libs/Sleep'
-let zlib = require("zlib");
 const PoolDic = {}
 
 //循环读取完成收发消息队列的处理
 //core包中的websocket不认识op，seq，var，此处校验在外面传入
 
 let startFlag
-// console.log('startFlag1', startFlag)
 async function messageHandler() {
   startFlag = true
-  // console.log('startFlag2', startFlag)
   while (true) {
     Object.keys(PoolDic).forEach(async poolName => {
-      // console.log(PoolDic)
       let pool = PoolDic[poolName]
       if (pool.EMIT_QUENE.length) {
-        // console.log('pool.EMIT_QUENE', poolName, pool, JSON.stringify(pool.EMIT_QUENE))
-        let zip = new Promise((resolve, reject)=>zlib.deflate(JSON.stringify(pool.EMIT_QUENE.shift()), (err, buffer) => !err && resolve(buffer) || reject({ret: -4, data: err})))
-        pool && pool.send(await zip)
+        pool && pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
-        //console.log('pool.RECEIVE_QUENE', poolName, pool, JSON.stringify(pool.RECEIVE_QUENE))
-        // let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(buffer), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
-        let data = new Promise((resolve, reject)=>{
-          try{
-            var reader = new FileReader();
-            reader.addEventListener("loadend", function() {
-              // reader.result 包含转化为类型数组的blob
-              // console.log('reader.result 包含转化为类型数组的blob',reader.result)
-              resolve(reader.result)
-            });
-            reader.readAsArrayBuffer(pool.RECEIVE_QUENE.shift());
-            // console.log(res)
-          } catch (e) {
-            reject({ret: -6, data: e})
-          }
-        })
-        data = await data
-        let unZip = new Promise((resolve, reject)=>zlib.unzip(Buffer.from(data), (err, buffer) => !err && resolve(buffer) || reject({ret: -5, data: err})))
-        MESSAGE_HANDLER[poolName].onMessage(JSON.parse(await unZip))
+        MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })
     await Sleep(8)

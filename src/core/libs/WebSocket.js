@@ -24,7 +24,7 @@ export default function () {
    */
   function createConnect(url, callBack) {
     let webSocket = new WebSocket(url) // 创建链接
-
+    // webSocket.binaryType = "arraybuffer"
     //webSocket连接之后的操作
     webSocket.onopen = event => onOpen(pool, event)
 
@@ -32,8 +32,8 @@ export default function () {
       // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
       connects.push(webSocket)
       poolSize = connects.length;
-      // console.log('webSocket开启 1', connects)
-      pool.onOpen && pool.onOpen(event)
+      console.log('webSocket开启 1', webSocket.binaryType)
+      // pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
 
@@ -41,11 +41,13 @@ export default function () {
     webSocket.onmessage = event => onMessage(pool, event)
 
     function onMessage(pool, event) {
-
-      // console.log('webSocket接收信息',event.data ,event)
+      console.log('webSocket接收信息', event.data, event)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
       pool.onMessage && pool.onMessage(event.data)
-}
+    }
+
+
+
 
     //webSocket断开之后的操作
     webSocket.onclose = onClose
@@ -113,7 +115,7 @@ export default function () {
     // console.log('send text', connects.length )
     if (connects.length === 0)
       console.error('==connect is all down!===')
-    // console.log('websocket 发送信息', text.toString("base64"))
+    console.log('websocket 发送信息', text)
     poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(text)
   }
 

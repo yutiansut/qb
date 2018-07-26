@@ -34,7 +34,6 @@ import Device from './core/libs/Device'
 
 
 const renderDom = async Component => {
-  // console.log(Date.now())
   await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig, StorageConfig})
   WebSocketConfig.useWebSocket && await Websocket.general()
   render(

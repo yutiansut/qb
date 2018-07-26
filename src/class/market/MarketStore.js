@@ -299,7 +299,7 @@ export default class MarketStore extends ExchangeStoreBase {
   async getPairInfo() {
     let pairInfo = await this.Proxy.pairInfo();
     // console.log('getPairInfo', pairInfo)
-    this.state.pairInfo = pairInfo && pairInfo.l.map(v => {
+    this.state.pairInfo = pairInfo && pairInfo.l && pairInfo.l.map(v => {
       return {
         tradePairName: v.n,
         tradePairId: v.id,

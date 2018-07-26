@@ -1,7 +1,7 @@
-import StoreBase from '../core/StoreBase'
 import Msg from "../config/ErrCodeConfig";
 import DetectOS from './lib/Os'
 import Browser from './lib/Browser'
+import {ZipUtil, StoreBase} from '../core'
 
 const WebsocketCallBackList = {}, websocketHistory = {}
 let srartFlag = false
@@ -57,11 +57,13 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket.general.on('connect', data => {
       this.Storage.websocketToken.set(data.token)
     })
-    this.WebSocket.general.emit('connect', {Token: this.Storage.websocketToken.get(), Version: 0, Device: Browser(), IMEI: `${DetectOS()}/${Browser()}`, Os: 3 })
+    this.WebSocket.general.emit('connect', {t: this.Storage.websocketToken.get(), v: 0, d: Browser(), im: `${DetectOS()}/${Browser()}`, os: 3 })
     this.Loop.websocketHeartBreak.clear()
     this.Loop.websocketHeartBreak.setDelayTime(10)
     this.Loop.websocketHeartBreak.set(async () => {
-      this.WebSocket.general.emit('heartBreak')
+      // for(let i = 0; i< 10; i++) {
+        this.WebSocket.general.emit('heartBreak')
+      // }
       await this.Sleep(5000)
     })
     this.Loop.websocketHeartBreak.start()
@@ -77,14 +79,45 @@ export default class ExchangeStoreBase extends StoreBase {
     headerConfig && Object.keys(headerConfig).forEach(v => {
       opConfig[headerConfig[v].resOp] = v
     })
-    websocket.onMessage = data => {
-      let dataCache = data.b
-      if(data.b && data.b.r){
-        delete data.b.m
-        dataCache = Object.assign(Msg[data.body && data.body.r || 0] || {}, data.b)
+    websocket.onMessage = async data => {
+      // console.log('websocket.onMessage', data)
+      let ver, op, seq, zip, body
+      try{
+        data = await ZipUtil.BlobParse(data)
+      } catch (e) {
+        console.error('解析Blob',e)
       }
-      // console.log('websocket.onMessage', data, dataCache)
-      opConfig[data.o] && WebsocketCallBackList[opConfig[data.o]] && WebsocketCallBackList[opConfig[data.o]](dataCache)
+      try{
+        data = Buffer.from(data)
+        ver = data.readInt16BE(0)
+        op = data.readInt16BE(2)
+        seq = data.readInt32BE(4)
+        zip = data.readInt8(8)
+        body = data.length > 9 && data.slice(9)
+      } catch (e) {
+        console.error('操作buffer', e)
+      }
+
+      console.log('params', ver, op, seq, zip, body, body.toString(), JSON.parse(body.toString()))
+      if(zip){
+        try{
+          body = await ZipUtil.unZip(body)
+        } catch (e) {
+          console.error('解压缩', e)
+        }
+
+      }
+      try{
+        body = JSON.parse(body.toString())
+      } catch (e) {
+        console.error('解析json', e)
+      }
+      let dataCache = body
+      if(body && body.r){
+        delete body.m
+        dataCache = Object.assign(Msg[body && body.r || 0] || {}, body)
+      }
+      opConfig[op] && WebsocketCallBackList[opConfig[op]] && WebsocketCallBackList[opConfig[op]](dataCache)
     }
 
     websocket.onClose(data => {
@@ -112,23 +145,26 @@ export default class ExchangeStoreBase extends StoreBase {
 
     this.WebSocket[connectName] = {}
 
-    this.WebSocket[connectName].emit = (key, data) => {
-      headerConfig[key].s = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign({v:headerConfig[key].v, s:headerConfig[key].s , o:headerConfig[key].o,  z: 0}, {b: data})
+    this.WebSocket[connectName].emit = async (key, data) => {
+      let emitData = await this.formatWebSocketEmitData(headerConfig, key, data)
+      // console.log(emitData)
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
 
-      websocket.send(this.Util.deepCopy(emitData))
+
+        websocket.send(emitData)
+
+
+
       headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data))
       // console.log('websocketHistory',websocketHistory)
     }
     this.WebSocket[connectName].on = (key, func) => {
       WebsocketCallBackList[key] = func
     }
-    this.WebSocket[connectName].pushWebsocketHistoryArr = (key, value) => {
-      headerConfig[key].s = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign(headerConfig[key], {b: value})
+    this.WebSocket[connectName].pushWebsocketHistoryArr = async (key, value) => {
+      let emitData = await this.formatWebSocketEmitData(headerConfig, key, value)
       websocketHistory[key] = websocketHistory[key] || []
-      websocketHistory[key].push(this.Util.deepCopy(emitData))
+      websocketHistory[key].push(emitData)
     }
 
     this.WebSocket[connectName].clearWebsocketHistoryArr = (key) => {
@@ -139,5 +175,41 @@ export default class ExchangeStoreBase extends StoreBase {
       this.startWebsocket(websocket)
       srartFlag = true
     }
+  }
+
+  async formatWebSocketEmitData(headerConfig, key, data){
+    // console.log('this.WebSocket[connectName]', data)
+    let dataBuffer, flag = 0, buffer
+    try{
+      dataBuffer = data && Buffer.from(JSON.stringify(data)) || null
+      buffer = Buffer.allocUnsafe(9)
+    } catch (e) {
+      console.error('操作buffer', e)
+    }
+
+    // console.log('dataBuffer', dataBuffer)
+    if(dataBuffer && dataBuffer.length > 50){
+      flag = 1
+      dataBuffer = await ZipUtil.zip(dataBuffer)
+      // console.log('dataBuffer.toString', dataBuffer, dataBuffer.toString('base64'))
+    }
+    try{
+      buffer.writeInt16BE(headerConfig[key].v, 0)
+      buffer.writeInt16BE(headerConfig[key].o, 2)
+      buffer.writeInt32BE(Math.floor(Math.random() * 1000000000), 4)
+      buffer.writeInt8(flag, 8)
+    } catch (e) {
+      console.error('操作buffer', e)
+    }
+    try {
+      if (dataBuffer && dataBuffer.length) {
+        buffer = Buffer.concat([buffer, dataBuffer], 9 + dataBuffer.length)
+      }
+    } catch (e) {
+      console.error('操作buffer', e)
+    }
+    return buffer
+
+    // return Object.assign({v:headerConfig[key].v, s:headerConfig[key].s , o:headerConfig[key].o, z: flag}, {b: flag && dataJson || data})
   }
 }

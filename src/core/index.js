@@ -7,6 +7,8 @@ import AsyncAll from "./libs/AsyncAll";
 import ChangeFontSize from './libs/ChangeFontSize'
 import Storage from './storage/index'
 import './libs/Prototype'
+import ZipUtil from './libs/ZipUtil'
+import StoreBase from './StoreBase'
 
 
 
@@ -30,5 +32,7 @@ module.exports = {
   RUNAPP,
   AsyncAll,
   ChangeFontSize,
-  Storage
+  Storage,
+  ZipUtil,
+  StoreBase
 }
