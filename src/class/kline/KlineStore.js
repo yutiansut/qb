@@ -43,7 +43,6 @@ export default class KlineStore extends ExchangeStoreBase {
         arr.push(v.vol);
         return arr;
       });
-      // console.log(this.state.kline);
     }
   }
 

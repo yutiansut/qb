@@ -114,7 +114,7 @@ export default {
     //撤单操作
     { name: 'cancelOrder', data: { url: '/v1/order/', method: 'post' }, action: 'can', actionBack: 'canr', needToken: true },
     // 获取k线数据
-    { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'gk', actionBack: 'gks' }
+    { name: 'getKline', data: { url: '/v1/common/', method: 'post' }, action: 'gk', actionBack: 'gkr' }
 
   ],
   deal: [
