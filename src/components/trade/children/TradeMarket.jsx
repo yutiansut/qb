@@ -123,7 +123,7 @@ export default class TradeMarket extends ExchangeViewBase {
                 <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
                     onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                   <td>{v.tradePairName.toUpperCase()}</td>
-                  <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
                   <td>{Number(v.rise).toPercent()}</td>
                   {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                     <img src={v.isFavorite ? "/static/img/trade_star.svg" :  "/static/img/trade_star_select.svg"} alt=""/>

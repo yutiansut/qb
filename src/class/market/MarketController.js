@@ -237,11 +237,11 @@ export default class MarketController extends ExchangeControllerBase {
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
     let dealMsg = {
         tradePair: this.store.state.tradePair,
-        coinIcon: tradePairMsg[0].icon,
+        coinIcon: tradePairMsg[0].coinIcon,
         prices: {
           price: tradePairMsg[0].price,
-          priceCN: tradePairMsg[0].priceCN,
-          priceEN: tradePairMsg[0].priceEN,
+          priceCN: tradePairMsg[0].priceCN.toFixedWithoutUp(2),
+          priceEN: tradePairMsg[0].priceEN.toFixedWithoutUp(2),
         }
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
