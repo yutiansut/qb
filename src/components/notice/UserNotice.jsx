@@ -81,6 +81,7 @@ export default class userNotice extends exchangeViewBase {
     this.setState({
       totalPage: this.state.userNotice && this.state.userNotice.totalCount || 0
     })
+
   }
 
   componentWillUpdate(...parmas) {
@@ -89,6 +90,7 @@ export default class userNotice extends exchangeViewBase {
 
   render() {
     let userNotice = this.state.userNotice && this.state.userNotice.list || [];
+    // console.log('userNotice', userNotice, this.state.userNotice.totalCount, this.state.totalPage)
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>
@@ -109,8 +111,8 @@ export default class userNotice extends exchangeViewBase {
           }
           </ul>
         </div>
-        <p className={`${userNotice.length>0 ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-        {userNotice && <Pagination total={this.state.totalPage  || this.state.userNotice.totalCount || 0}
+        <p className={`${userNotice.length > 0 ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
+        {userNotice.length && <Pagination total={this.state.totalPage  || this.state.userNotice.totalCount}
           pageSize={10}
           showTotal={true}
           onChange={page => {
