@@ -96,7 +96,7 @@ export default class NoticeController extends ExchangeControllerBase {
   }
 
   changeAllNotice() { // 点击头部全部已读更改列表页信息
-    let userNotice = this.view && this.view.state.userNotice
+    let userNotice = this.view && this.view.state.userNotice || [];
     userNotice.list && userNotice.list.forEach(v => {
       v.isRead = 1
     })
