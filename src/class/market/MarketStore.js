@@ -341,13 +341,13 @@ export default class MarketStore extends ExchangeStoreBase {
   async getPairMsg() {
     let coinCorrespondingId = {}, marketCorrespondingId = {}, coinCorrespondingPair = {}, marketCorrespondingPair = {};
     // console.log(Object.keys(this.state.pairInfo).length)
-    if (!Object.keys(this.state.pairInfo).length) {
+    if (!this.state.pairInfo.length) {
       await this.getPairInfo()
     }
     this.state.pairInfo.map((v) => {
-      // let pair = v.tradePairName.split('/');
-      let coin = v.coinName;
-      let market = v.marketName;
+      let pair = v.tradePairName.split('/');
+      let coin = pair[0];
+      let market = pair[1];
       marketCorrespondingId[market] = marketCorrespondingId[market] || {};
       coinCorrespondingId[coin] = coinCorrespondingId[coin] || {};
       marketCorrespondingId[market][coin] = v.tradePairId;

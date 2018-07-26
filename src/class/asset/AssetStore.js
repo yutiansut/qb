@@ -405,7 +405,7 @@ export default class AssetStore extends ExchangeStoreBase {
       fp: obj.fundPass, //资金密码
       cd: obj.code, //code
       ac: obj.account, // Googlecode传空 account
-      // "md": 0,//mode
+      md: obj.mode,//mode
       os: 3
     });
     if (result.ri !== undefined) {

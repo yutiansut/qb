@@ -336,7 +336,7 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
-    if (!o) return [];
+    if (!o || !o.length) return [];
     if (coin.toUpperCase() !== "USDT") {
       return o.pairNameCoin[coin.toLowerCase()].map(v => {
         return {
