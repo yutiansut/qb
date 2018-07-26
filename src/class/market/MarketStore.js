@@ -74,7 +74,7 @@ export default class MarketStore extends ExchangeStoreBase {
       // 监听市场数据更新
       this.WebSocket.general.on('marketPair', data => {
         // console.log('getWebSocketData marketPair', data, this.controller)
-        let result = data.d.map(v => {
+        let result = data && data.d && data.d.map(v => {
           return {
             points: v.ps,
             price: v.p,
@@ -318,7 +318,7 @@ export default class MarketStore extends ExchangeStoreBase {
     let marketAll = await this.Proxy.getAllChg();
     // console.log('marketAll', marketAll)
     // this.state.allPairData = marketAll.marketList
-    return marketAll && marketAll.d.map(v => {
+    return marketAll && marketAll.d && marketAll.d.map(v => {
       return {
         points: v.ps,
         price: v.p,
