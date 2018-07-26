@@ -25,51 +25,51 @@ body
     clear both
     content ""
 
-vendor(prop, args)
-  -webkit-{prop} args
-  -moz-{prop} args
-  {prop} args
+// vendor(prop, args)
+//   -webkit-{prop} args
+//   -moz-{prop} args
+//   {prop} args
 
-border-radius()
-  vendor('border-radius', arguments)
+// border-radius()
+//   vendor('border-radius', arguments)
 
-box-shadow()
-  vendor('box-shadow', arguments)
+// box-shadow()
+//   vendor('box-shadow', arguments)
 
-align-item()
-  vendor('align-item', arguments)
-//需要兼容按上述方法先声明,即可直接写属性
+// align-item()
+//   vendor('align-item', arguments)
+// //需要兼容按上述方法先声明,即可直接写属性
 
-fz11()
-  font-size .11rem
-  -webkit-transform scale(0.916666666)
-  -webkit-transform-origin 0 0
-fz10()
-  font-size .10rem
-  -webkit-transform scale(0.8333333333)
-  -webkit-transform-origin 0 0
+// fz11()
+//   font-size .11rem
+//   -webkit-transform scale(0.916666666)
+//   -webkit-transform-origin 0 0
+// fz10()
+//   font-size .10rem
+//   -webkit-transform scale(0.8333333333)
+//   -webkit-transform-origin 0 0
 
-// 旋转方法rotate兼容
-_rotate(deg)
-  transform rotate(deg)
-  -ms-transform rotate(deg); 	/* IE 9 */
-  -moz-transform rotate(deg); 	/* Firefox */
-  -webkit-transform rotate(deg); /* Safari 和 Chrome */
-  -o-transform rotate(deg); 	/* Opera */
+// // 旋转方法rotate兼容
+// _rotate(deg)
+//   transform rotate(deg)
+//   -ms-transform rotate(deg); 	/* IE 9 */
+//   -moz-transform rotate(deg); 	/* Firefox */
+//   -webkit-transform rotate(deg); /* Safari 和 Chrome */
+//   -o-transform rotate(deg); 	/* Opera */
 
-placeholder(col, fz)
-  &::-webkit-input-placeholder
-    color col
-    font-size fz
-  &::-moz-placeholder
-    color col
-    font-size fz
-  &:-moz-placeholder
-    color col
-    font-size fz
-  &:-ms-input-placeholder
-    color col
-    font-size fz
+// placeholder(col, fz)
+//   &::-webkit-input-placeholder
+//     color col
+//     font-size fz
+//   &::-moz-placeholder
+//     color col
+//     font-size fz
+//   &:-moz-placeholder
+//     color col
+//     font-size fz
+//   &:-ms-input-placeholder
+//     color col
+//     font-size fz
 
 // 中心内容
 .inner // 中心内容
