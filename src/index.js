@@ -19,8 +19,8 @@
 // import 'fetch-ie8'
 import React from 'react';
 import {render} from 'react-dom';
-import App from './App'
-import AppMb from './AppMb'
+// import App from './App'
+// import AppMb from './AppMb'
 import {RUNAPP, Websocket, Storage} from './core'
 import "whatwg-fetch";
 import ServerConfig from './config/ServerConfig'
@@ -44,8 +44,10 @@ const renderDom = async Component => {
 
 if (Device.mobile()) {
 
-  //mobile
-  renderDom(AppMb);
+
+  import ('./AppMb').then(Component => renderDom(Component.default))
+
+
 
   if (module.hot) {
     module.hot.accept('./AppMb', async () => {
@@ -56,7 +58,9 @@ if (Device.mobile()) {
 } else {
 
   //desktop
-  renderDom(App);
+  // renderDom('./App');
+  import ('./App').then(Component => renderDom(Component.default))
+
 
   if (module.hot) {
     module.hot.accept('./App', async () => {

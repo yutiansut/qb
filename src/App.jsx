@@ -7,10 +7,7 @@ import {
 } from "react-router-dom";
 
 import {AsyncComponent} from './core'
-
-// import "./core/libs/ChangeFontSize";
 import "./common/css/index.styl";
-
 import ConfigController from "./class/config/ConfigController";
 import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
@@ -20,20 +17,9 @@ import ActivityController from "./class/activity/ActivityController";
 import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController";
 import MarketController from "./class/market/MarketController";
 
-// import UserInfo from "./components/user/UserCenter.jsx";
 import Header from "./components/headerAndFooter/Header.jsx";
 import Footer from "./components/headerAndFooter/footer.jsx";
-// import LoginCon from "./components/login/Login.jsx";
-// import Home from "./components/home/Home.jsx";
-// import TradeCon from "./components/trade/Trade.jsx";
-// import ForgetPassCon from "./components/login/ForgetPass.jsx";
-// import NoticeInfo from "./components/notice/NoticeBulletin.jsx";
-// import UserNoticeInfo from "./components/notice/UserNotice.jsx"; // 用户通知
-// import OrderManage from "./components/order/OrderManage.jsx";
-// import AssetManange from "./components/asset/AssetManage";
-// import Helper from "./components/help/Help";
-// import ActivityInfo from "./components/activity/Activity.jsx";
-// import NoticeDetailCon from "./components/notice/noticeChild/NoticeContentDetail.jsx";
+
 import KlineController from "./class/kline/KlineController";
 
 import SimpleAsset from "./components/asset/children/Simple";
@@ -49,92 +35,10 @@ let configController,
   klineController,
   Routers;
 
-// const Asset = ({ match }) => {
-//   return <AssetManange controller={assetController} match={match} />;
-// };
-
-// const Trade = ({ match, location }) => {
-//   return (
-//     <TradeCon
-//       marketController={marketController}
-//       userOrderController={userOrderController}
-//       match={match}
-//       userController={userController}
-//       assetController={assetController}
-//       klineController={klineController}
-//       location={location}
-//     />
-//   );
-// };
-
-// const User = ({ match, history }) => {
-//   return (
-//     <UserInfo controller={userController} match={match} history={history} />
-//   );
-// };
-
-// controller={loginController}
-// match={match}
-// history={history}
-// location={location}
-
-// const Loign = ({ match, history, location }) => {
-//   let obj = {
-//     match, history, location, controller: loginController
-//   }
-//   return (
-//     <LoginCon {...obj} />
-//   );
-// };
-
-// let obj = {controller: loginController}
-
-
-// const ForgetPass = ({ match, history }) => {
-//   return (
-//     <ForgetPassCon
-//       controller={loginController}
-//       match={match}
-//       history={history}
-//     />
-//   );
-// };
-
-// const Notice = ({ match }) => {
-//   return <NoticeInfo controller={noticeController} match={match} />;
-// };
-
-// const UserNotice = ({ match, location }) => {
-//   return (
-//     <UserNoticeInfo
-//       controller={noticeController}
-//       match={match}
-//       location={location}
-//     />
-//   );
-// };
-
-// const NoticeDetail = ({ match, location }) => {
-//   return (
-//     <NoticeDetailCon
-//       controller={noticeController}
-//       match={match}
-//       location={location}
-//     />
-//   );
-// };
-
 const tradeFooter = ({ match }) => {
   return <SimpleAsset controller={assetController} />;
 };
 
-// const Help = ({ match }) => {
-//   return <Helper controller={assetController} match={match} />;
-// };
-
-// const Activity = ({ match }) => {
-//   return <ActivityInfo controller={activityController} match={match} />;
-// };
 
 const header = ({ match, history }) => {
   return (
@@ -190,21 +94,6 @@ const tradeHeader = ({ match, history }) => {
     </div>
   );
 };
-
-// const HomeComponent = () => {
-//   return (
-//     <Home
-//       marketController={marketController}
-//       activityController={activityController}
-//       noticeController={noticeController}
-//     />
-//   );
-// };
-// const Order = ({ match }) => {
-//   return <OrderManage controller={userOrderController} match={match} />;
-// };
-
-// const
 
 export default class App extends Component {
   constructor(props) {
