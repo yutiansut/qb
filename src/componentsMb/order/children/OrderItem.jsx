@@ -73,17 +73,17 @@ export default class OrderItem extends exchangeViewBase{
               </div>
             )}
           </div>
-          <div className="order-item-content clearfix" onClick={this.goDetailDisplay}>
-            <div className="fl">
+          <div className="order-item-content" onClick={this.goDetailDisplay}>
+            <div>
               <div>{type === "current" ? this.intl.get("price") : this.intl.get("time")}{type === "current" && ` (${tradePairArr[1]})`}</div>
               <div>{type==="current" ? orderInfo.price : Number(orderInfo.orderTime).toDate('HH:mm MM-dd')}</div>
             </div>
-            <div className="fl">
+            <div>
               <div>{type === "current" ? this.intl.get("amount") : this.intl.get("dealPrice")}{type === "current" ? ` (${tradePairArr[0]})` : ` (${tradePairArr[1]})`}</div>
               {type === "current" && <div>{orderInfo.count}</div>}
               {type === "history" && <div>{orderInfo.priceType ? this.intl.get('marketPrice') : orderInfo.price}</div>}
             </div>
-            <div className="fr">
+            <div>
               <div>{type === "current" ? this.intl.get("daelAmount") : this.intl.get("amount")}{` (${tradePairArr[0]})`}</div>
               <div>{type==="current" ? orderInfo.dealDoneCount : orderInfo.count}</div>
             </div>

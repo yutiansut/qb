@@ -46,8 +46,8 @@
 
   .order-item-content
     padding .12rem 0
-    .fl:nth-child(1)
-      width 1.2rem
+    display flex
+    justify-content space-between
     div
       div:nth-child(1)
         margin-bottom .08rem
@@ -58,6 +58,5 @@
         font-size .15rem
         line-height .21rem
         color $h5-color-normal
-    .fr
-      div:nth-child(2)
-        text-align right
+    div:nth-child(3)
+      text-align right
