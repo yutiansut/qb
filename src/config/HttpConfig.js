@@ -51,9 +51,9 @@ export default {
   ],
   notice: [
     { name: 'getActivity', data: { url: '/v1/common/', method: 'post' }, action: 'at', actionBack: 'atr' }, // 资讯公告内容
-    { name: 'getUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'gunl', actionBack: 'vacr', needToken: true }, // 获取通知列表
-    { name: 'upDateUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'uuns', actionBack: 'vacr', needToken: true }, // 读取通知
-    { name: 'readAllUserNotifications', data: { url: '/v1/user/', method: 'post' }, action: 'rauns', actionBack: 'vacr', needToken: true }, // 清除全部通知
+    { name: 'getUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'gunl', actionBack: 'gunlr', needToken: true }, // 获取通知列表
+    { name: 'upDateUserNocticeList', data: { url: '/v1/user/', method: 'post' }, action: 'uuns', actionBack: 'uunsr', needToken: true }, // 读取通知
+    { name: 'readAllUserNotifications', data: { url: '/v1/user/', method: 'post' }, action: 'rauns', actionBack: 'raunsr', needToken: true }, // 清除全部通知
   ],
   market: [
     //币种资料

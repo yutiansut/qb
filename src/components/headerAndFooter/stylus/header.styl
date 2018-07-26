@@ -133,16 +133,16 @@
             font-size 14px
             font-weight 100
         ul
+          position relative
           display none
           background $exchange-color
           box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
           li
-            cursor pointer
             height 40px
             padding 0 5px
             line-height 40px
             text-align center
-            corsor pointer
+            cursor pointer
             &:hover
               color $main-color
             span
@@ -219,6 +219,18 @@
             max-height 150px
             padding 10px
             overflow-y auto
+            &::-webkit-scrollbar-button
+              display none
+            &::-webkit-scrollbar
+              position relative
+              width 3px
+              height 100%
+            &::-webkit-scrollbar-track
+              width 3px
+              background #222730
+            &::-webkit-scrollbar-thumb
+              width 3px
+              background #8C8F93
             li
               height 30px
               line-height 30px
@@ -349,7 +361,6 @@
         p
           text-align center
         ul
-          display none
           li
             height 40px
             padding 0 5px
@@ -380,7 +391,6 @@
         p
           text-align center
         ul
-          display none
           margin-top -10px
           li
             &:nth-of-type(1)

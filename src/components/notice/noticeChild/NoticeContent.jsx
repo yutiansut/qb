@@ -75,7 +75,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <Pagination total={this.state.noticeTotalPage}
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {
@@ -108,7 +108,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.infoList).length && this.state.infoList.data && <Pagination total={this.state.infoTotalPage}
+          {Object.keys(this.state.infoList).length && this.state.infoList.data && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {

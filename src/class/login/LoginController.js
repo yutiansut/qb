@@ -112,7 +112,7 @@ export default class LoginController extends ExchangeControllerBase {
       ac: account,
       mo: mode, // 0 phone 1 email
       co: code,
-      npd: this.RSAencrypt(newPass),
+      np: this.RSAencrypt(newPass),
       pi: captchaId,
       pc: captchaCode,
       os: 3

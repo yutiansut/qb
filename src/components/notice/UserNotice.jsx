@@ -110,7 +110,7 @@ export default class userNotice extends exchangeViewBase {
           </ul>
         </div>
         <p className={`${userNotice.length>0 ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-        {userNotice && <Pagination total={this.state.totalPage}
+        {userNotice && <Pagination total={this.state.totalPage  || this.state.userNotice.totalCount || 0}
           pageSize={10}
           showTotal={true}
           onChange={page => {

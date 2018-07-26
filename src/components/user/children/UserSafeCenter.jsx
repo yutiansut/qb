@@ -375,7 +375,7 @@ export default class userSafeCenter extends exchangeViewBase {
                     <td>{v.loginTime && v.loginTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
                     <td>{v.device}</td>
                     <td>{v.ip}</td>
-                    <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
+                    <td>{this.props.controller.configController.language === 'zh-CN' ? `${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}` : `${v.ipLocation.countryEN} - ${v.ipLocation.provinceEN}`}</td>
                     <td>{`${v.isMe ? this.intl.get("yes") : this.intl.get("no")}`}</td>
                   </tr>))}
                 </tbody>
@@ -400,7 +400,7 @@ export default class userSafeCenter extends exchangeViewBase {
             {this.state.loginList.map((v, index) => (<tr key={index}>
               <td>{v.catalog}</td>
               <td>{v.ip}</td>
-              <td>{`${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}`}</td>
+              <td>{this.props.controller.configController.language === 'zh-CN' ? `${v.ipLocation.countryCN} - ${v.ipLocation.provinceCN}` : `${v.ipLocation.countryEN} - ${v.ipLocation.provinceEN}`}</td>
               <td>{v.createdTime.toDate('yyyy-MM-dd HH:mm:ss')}</td>
             </tr>))}
             </tbody>
