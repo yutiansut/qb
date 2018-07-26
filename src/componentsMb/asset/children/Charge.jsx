@@ -92,6 +92,7 @@ export default class Charge extends exchangeViewBase {
                     <Popup
                         type={this.state.popType}
                         msg={this.state.popMsg}
+                        h5={true}
                         onClose={() => {
                             this.setState({ showPopup: false });
                         }}

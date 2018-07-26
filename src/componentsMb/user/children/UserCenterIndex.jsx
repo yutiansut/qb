@@ -93,6 +93,7 @@ export default class UserCenterIndex extends exchangeViewBase {
         {this.state.remindPopup && <RemindPopup
           type={this.state.popType}
           msg={this.state.popMsg}
+          h5={true}
           autoClose = {true}
           onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
