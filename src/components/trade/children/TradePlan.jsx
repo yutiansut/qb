@@ -82,8 +82,8 @@ export default class TradePlan extends ExchangeViewBase {
       wallet: 'buyWallet',
       setValue: 'inputBuyNum',
       max: 'buyMax',
-      changeBank: 'changeBankB'
-    }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changeBankS'}];
+      changeBank: 'changBankPriceB'
+    }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
     let maxNum = this.state[diffArr[dealType].max];
     let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : this.state[diffArr[dealType].inputValue];
     if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
@@ -111,15 +111,15 @@ export default class TradePlan extends ExchangeViewBase {
     //   return
    
     let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
-        || (priceValue >= 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-            || (priceValue >= 0.01 && priceValue < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+        || (priceValue > 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+            || (priceValue >= 0.01 && priceValue <= 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
             || (priceValue < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
     if(!flag)
       return
   
     let limitPrice = 0;
-    priceValue > 100 && (limitPrice = 6);
-    priceValue >= 0.1 && priceValue <= 100 && (limitPrice = 4);
+    priceValue >= 100 && (limitPrice = 6);
+    priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
     priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
     let numValue = e.target.value > maxNum ? maxNum.toFixed(limitPrice) : value;
     if(type){
@@ -147,9 +147,9 @@ export default class TradePlan extends ExchangeViewBase {
     if (!((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1])))
       return
     // console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
-    let flag = (Number(value) > 100 && (/^[0-9]{0,2}$/).test(arr[1]))
-        || ((Number(value) <= 100 && (/^[0-9]{0,4}$/).test(arr[1]))
-            || (Number(value) <= 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
+    let flag = (Number(value) >= 100 && (/^[0-9]{0,2}$/).test(arr[1]))
+        || ((Number(value) < 100 && (/^[0-9]{0,4}$/).test(arr[1]))
+            || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
             || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
     // console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
     if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
@@ -297,7 +297,7 @@ export default class TradePlan extends ExchangeViewBase {
           <div className='deal-pwd-detail'>
             <div className='deal-pwd-title'>
               {this.state.fundPwdIntervalSetFlag && this.intl.get('deal-identify')||this.intl.get('deal-timeSetting')}
-              <em onClick={() => this.setState({fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false})} style={{cursor: 'pointer'}}></em>
+              <em onClick={() => this.setState({fundPwdIntervalWindowFlag: false, fundPwdIntervalSetFlag: false, setPass: ''})} style={{cursor: 'pointer'}}></em>
             </div>
             <div className='deal-pwd-content'>
                 {this.state.fundPwdIntervalSetFlag && (

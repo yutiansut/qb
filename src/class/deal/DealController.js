@@ -126,8 +126,8 @@ export default class DealController extends ExchangeControllerBase {
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
       let checkValue = inputSellValue || inputBuyValue;
       let checkNum = 8;
-      checkValue > 100 && (checkNum = 2);
-      checkValue >= 0.1 && checkValue <= 100 && (checkNum = 4);
+      checkValue >= 100 && (checkNum = 2);
+      checkValue >= 0.1 && checkValue < 100 && (checkNum = 4);
       checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
       let limitedValue = (v === 'CNY' || v === 'USD') ? 2 : checkNum;
           this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue;
@@ -141,7 +141,7 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   changeMaxNum(t, v) {
-    let a = Number(v) ? v :1;
+    let a = Number(v) ? v : 1;
     let changeBankPrice = this.view.state.PriceUnit === "CNY" ? (a * this.store.state.prices.price / this.store.state.prices.priceCN) :(this.view.state.PriceUnit === "USD" && a * this.store.state.prices.price / this.store.state.prices.priceEN || a);
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
     (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / changeBankPrice}));
@@ -151,8 +151,8 @@ export default class DealController extends ExchangeControllerBase {
     }
     if (this.view.state.buyNumFlag && (t === 0)) {
       let checkNum = 0;
-      changeBankPrice > 100 && (checkNum = 6);
-      changeBankPrice >= 0.1 && changeBankPrice <= 100 && (checkNum = 4);
+      changeBankPrice >= 100 && (checkNum = 6);
+      changeBankPrice >= 0.1 && changeBankPrice < 100 && (checkNum = 4);
       changeBankPrice >= 0.01 && changeBankPrice < 0.1 && (checkNum = 2);
       this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixed(checkNum)})
     }

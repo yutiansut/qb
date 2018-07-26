@@ -62,7 +62,7 @@ export default class LiveTrade extends ExchangeViewBase{
             <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(13 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)) > 0 ? (13 - (this.state.liveSellArray && this.state.liveSellArray.length ) || 0) * .21 : 0}rem`}}>
             </tr>
             {this.state.liveSellArray && this.state.liveSellArray.map((v,index) =>
-                ((this.state.titleSelect === 'all' && this.state.liveSellArray.length - 13 <= index) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length - 26 <= index)) && (
+                ((this.state.titleSelect === 'all' && this.state.liveSellArray.length - 13 <= index) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length - 24 <= index)) && (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</td>
                     <td style={{color : '#F25656 '}}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number: 'legal', style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number: 'legal',style:{name:'usd'}}) || Number(v.price).format({number: 'digital'})) }</td>
