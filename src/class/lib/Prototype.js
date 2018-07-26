@@ -178,13 +178,13 @@ Number.prototype.format = function (para) {
   let numberType = para && para.number || "general",
     style = para && para.style || {},
     decimalLength = config.format.numberFormat[numberType].decimalLength,
-    number = this.formatFixNumber(numberType),
+    // number = this.formatFixNumber(numberType),
     numberTypeStyle = (numberType === 'digital' || numberType === 'legal') && {thousandSign:false} || {},
-    str = number.formatFixStyle(Object.assign(style,numberTypeStyle)),
-    flag = findFlag(Math.abs(number), numberType);
+    str = this.formatFixStyle(Object.assign(style,numberTypeStyle))
+    // flag = findFlag(Math.abs(number), numberType);
   // console.log('Number.prototype.format', this, str, flag, decimalLength[flag], numberType)
-  if(decimalLength[flag])
-    str = str.addZero(decimalLength[flag])
+  // if(decimalLength[flag])
+  //   str = str.addZero(decimalLength[flag])
   return str
 }
 
