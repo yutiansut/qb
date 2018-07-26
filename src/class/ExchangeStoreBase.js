@@ -58,11 +58,11 @@ export default class ExchangeStoreBase extends StoreBase {
       this.Storage.websocketToken.set(data.token)
     })
     this.WebSocket.general.emit('connect', {t: this.Storage.websocketToken.get(), v: 0, de: Browser(), im: `${DetectOS()}/${Browser()}`, os: 3 })
-    this.Loop.websocketHeartBreak.clear()
-    this.Loop.websocketHeartBreak.setDelayTime(10)
+    this.Loop.websocketHeartBreak.clear();
+    this.Loop.websocketHeartBreak.setDelayTime(10);
     this.Loop.websocketHeartBreak.set(async () => {
       // for(let i = 0; i< 10; i++) {
-        this.WebSocket.general.emit('heartBreak')
+        this.WebSocket.general.emit('heartBreak');
       // }
       await this.Sleep(5000)
     })
