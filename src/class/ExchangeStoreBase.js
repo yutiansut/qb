@@ -114,7 +114,7 @@ export default class ExchangeStoreBase extends StoreBase {
 
     this.WebSocket[connectName].emit = (key, data) => {
       headerConfig[key].s = Math.floor(Math.random() * 1000000000)
-      let emitData = Object.assign({v:headerConfig[key].v, s:headerConfig[key].s , o:headerConfig[key].o}, {b: data})
+      let emitData = Object.assign({v:headerConfig[key].v, s:headerConfig[key].s , o:headerConfig[key].o,  z: 0}, {b: data})
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
 
       websocket.send(this.Util.deepCopy(emitData))
