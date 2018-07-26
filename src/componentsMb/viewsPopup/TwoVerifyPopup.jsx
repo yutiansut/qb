@@ -16,6 +16,11 @@ import "./stylus/viewsPopup.styl"
 export default class TwoVerifyPopup extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.verifyState={
+        1: this.intl.get('asset-input-twoVerify1'),
+        2: this.intl.get('asset-input-twoVerify2'),
+        3: this.intl.get('asset-input-twoVerify3'),
+    };
     this.state = {
       value: ''
     }
@@ -32,11 +37,11 @@ export default class TwoVerifyPopup extends exchangeViewBase {
           <h2>{this.intl.get('twoStep')}</h2>
           <div className="clearfix">
             <Input
-              placeholder={this.intl.get('asset-input-twoVerify')}
+              placeholder={this.verifyState[type]}
               value={this.state.value}
               onInput={(value) => { this.setState({ value }) }}
             />
-            <Button type="base" disable={type !== 1 && type !== 3} title={(typeof verifyNum === "number" && ((verifyNum === 0 && this.intl.get("sendAgain")) || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify() }} />
+            {(type === 1 || type === 3) && <Button type="base" title={(typeof verifyNum === "number" && ((verifyNum === 0 && this.intl.get("sendAgain")) || `${verifyNum}s`)) || verifyNum} className="verify-btn" onClick={() => { getVerify && getVerify() }} />}
           </div>
           <Button title={this.intl.get('asset-submit')} disable={this.state.value === ''} type="base" className="set-btn" onClick={() => { onConfirm && onConfirm(this.state.value); }} />
         </div>

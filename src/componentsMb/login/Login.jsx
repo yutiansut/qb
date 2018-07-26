@@ -63,8 +63,8 @@ export default class Login extends exchangeViewBase {
         picInput: "",
         codeInput: "",
         passInput: "",
-        userErr: "", // 手机号/邮箱错误
-        pwdErr: "", // 密码错误
+        //userErr: "", // 手机号/邮箱错误
+        //pwdErr: "", // 密码错误
         verifyNum: this.intl.get("sendCode"),
     });
     this.getCaptchaVerify();
@@ -82,16 +82,15 @@ export default class Login extends exchangeViewBase {
   }
   changePass(value) {
     this.setState({passInput: value});
-    console.log(2, value)
-
+    //console.log(2, value)
   }
   changeCode(value) {
     this.setState({codeInput: value});
-    console.log(3, value)
+    //console.log(3, value)
   }
   changePic(value) {
     this.setState({picInput: value});
-    console.log(4, value)
+    //console.log(4, value)
   }
 
   canClick() {
@@ -107,11 +106,7 @@ export default class Login extends exchangeViewBase {
   componentDidMount() {
     this.getCaptchaVerify();
     let queryIndex = this.props.location.query && this.props.location.query.titleIndex
-    if (queryIndex) {
-        this.setState({
-            titleIndex: queryIndex
-        })
-    }
+    queryIndex && this.setState({titleIndex: queryIndex})
   }
 
   componentWillUpdate(...parmas) {
@@ -189,10 +184,11 @@ export default class Login extends exchangeViewBase {
             autoClose = {true}
           />
         )}
-        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.userInput, this.state.userType, 7)}} onClose={() => {
-          this.setState({ showTwoVerify: false });
+        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0,  0)}} onClose={() => {
+            this.setState({ showTwoVerify: false });
+            this.getCaptchaVerify()
         }} destroy={this.destroy} onConfirm={code => {
-          this.login(this.state.userInput, code, this.state.userType, this.state.verifyType === 2009 ? 2 : 0, this.state.captchaId, this.state.picInput);
+            this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput, DetectOS(), Browser());
         }} />}
       </div>
     );
