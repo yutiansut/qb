@@ -57,7 +57,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket.general.on('connect', data => {
       this.Storage.websocketToken.set(data.token)
     })
-    this.WebSocket.general.emit('connect', {t: this.Storage.websocketToken.get(), v: 0, d: Browser(), im: `${DetectOS()}/${Browser()}`, os: 3 })
+    this.WebSocket.general.emit('connect', {t: this.Storage.websocketToken.get(), v: 0, de: Browser(), im: `${DetectOS()}/${Browser()}`, os: 3 })
     this.Loop.websocketHeartBreak.clear()
     this.Loop.websocketHeartBreak.setDelayTime(10)
     this.Loop.websocketHeartBreak.set(async () => {
@@ -115,7 +115,7 @@ export default class ExchangeStoreBase extends StoreBase {
       } catch (e) {
         console.error('解析json', e)
       }
-      console.log('JSON.parse', body)
+      console.log('reciveWebsocket', body)
       let dataCache = body
       if(body && body.r){
         delete body.m
@@ -150,6 +150,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = async (key, data) => {
+      console.log('reciveWebsocket', data)
       let emitData = await this.formatWebSocketEmitData(headerConfig, key, data)
       // console.log(emitData)
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)

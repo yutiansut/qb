@@ -43,7 +43,7 @@ export default class LoginController extends ExchangeControllerBase {
     if (this.view.state.titleIndex === 1 && !this.view.state.verifyType){
       code = this.RSAencrypt(code)
     }
-    let obj = {"pa":code, "mo":mode, "pid":captchaId, "pco":captchaCode, "os":3 , "d": `${deviceFlag1}/${deviceFlag2}`, "did": ''};
+    let obj = {"pa":code, "mo":mode, "pid":captchaId, "pco":captchaCode, "os":3 , "de": `${deviceFlag1}/${deviceFlag2}`, "did": ''};
     let keyArr = ['ph','em'];
     obj[keyArr[type]] = account
     this.store.login(obj)

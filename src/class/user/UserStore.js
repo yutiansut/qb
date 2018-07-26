@@ -154,6 +154,7 @@ export default class UserStore extends ExchangeStoreBase {
 
   async currentLogin() { // 获取当前登录设备列表
     let currentLoginCon = await this.Proxy.getCurrentLogin({"token": this.token});
+    console.log('获取当前登录设备列表', currentLoginCon)
     let currentLoginConObj = {
       list: currentLoginCon.l && currentLoginCon.l.map(v => {
         return {
