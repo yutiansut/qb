@@ -55,6 +55,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   async componentDidMount() {
+    console.log('this.state.userNotice.totalCount', this.state.userNotice.totalCount)
     // console.log('this.props.location', this.props.location.query)
     // let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
     //     fromId = this.props.location.query && this.props.location.query.newsCon.id,
