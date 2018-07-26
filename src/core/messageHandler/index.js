@@ -36,7 +36,8 @@ async function messageHandler() {
         pool && pool.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
-        MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
+        // console.log('pool.RECEIVE_QUENE.length', pool.RECEIVE_QUENE.length)
+        await MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })
     await Sleep(8)
@@ -68,7 +69,7 @@ const MESSAGE_HANDLER = {
       pool.EMIT_QUENE.push(data)
     }
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
-    MESSAGE_HANDLER[config.name].onMessage = data => data && console.log('data', data)
+    MESSAGE_HANDLER[config.name].onMessage = async data => data && console.log('data', data)
     MESSAGE_HANDLER[config.name].onClose = func => pool.onClose = func
     MESSAGE_HANDLER[config.name].onError = func => pool.onError = func
     MESSAGE_HANDLER[config.name].onOpen = func => pool.onOpen = func

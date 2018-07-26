@@ -32,7 +32,7 @@ export default function () {
       // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
       connects.push(webSocket)
       poolSize = connects.length;
-      console.log('webSocket开启 1', webSocket.binaryType)
+      // console.log('webSocket开启 1', webSocket.binaryType)
       // pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
@@ -41,7 +41,7 @@ export default function () {
     webSocket.onmessage = event => onMessage(pool, event)
 
     function onMessage(pool, event) {
-      console.log('webSocket接收信息', event.data, event)
+      // console.log('webSocket接收信息', event.data, event)
       // console.log('webSocket接收信息',  event.data, pool.onMessage)
       pool.onMessage && pool.onMessage(event.data)
     }
