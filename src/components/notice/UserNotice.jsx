@@ -88,6 +88,7 @@ export default class userNotice extends exchangeViewBase {
   }
 
   render() {
+    let userNotice = this.state.userNotice && this.state.userNotice.list || [];
     return (
       <div className="user-notice-wrap">
         <h1>{this.intl.get("userNotice")}</h1>
@@ -96,8 +97,8 @@ export default class userNotice extends exchangeViewBase {
             <span>{this.intl.get("notice-title")}</span>
             <i>{this.intl.get("time")}</i>
           </div>
-          <ul className={this.state.userNotice && this.state.userNotice.list ? '' : 'hide'}>
-          {this.state.userNotice && this.state.userNotice.list && this.state.userNotice.list.map((v, index) => (
+          <ul className={userNotice.length>0 ? '' : 'hide'}>
+          {userNotice.map((v, index) => (
             <li key={index} onClick={value => this.showContent(v, index)} className="clearfix">
               <p>
                 <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
@@ -108,8 +109,8 @@ export default class userNotice extends exchangeViewBase {
           }
           </ul>
         </div>
-        <p className={`${this.state.userNotice && this.state.userNotice.list ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-        {this.state.userNotice && this.state.userNotice.list && <Pagination total={this.state.totalPage}
+        <p className={`${userNotice.length>0 ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
+        {userNotice && <Pagination total={this.state.totalPage}
           pageSize={10}
           showTotal={true}
           onChange={page => {

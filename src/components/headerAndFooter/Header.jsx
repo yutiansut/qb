@@ -77,8 +77,7 @@ export default class Header extends ExchangeViewBase {
     this.hideNotice=(event)=>{
       let el=event.target;
       while(el){
-          if(el.classList && el.classList.contains("new-li"))
-            return;
+          if(el.classList && el.classList.contains("new-li")) return;
           el=el.parentNode;
       }
       this.setState({showNews:false});
