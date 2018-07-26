@@ -85,7 +85,7 @@ export default class ExchangeStoreBase extends StoreBase {
       try{
         data = await ZipUtil.BlobParse(data)
       } catch (e) {
-        // console.error('解析Blob',e)
+        console.error('解析Blob',e)
       }
       // console.log('ZipUtil.BlobParse',data)
       try{
@@ -97,7 +97,7 @@ export default class ExchangeStoreBase extends StoreBase {
         zip = data.readInt8(8)
         body = data.length > 9 && data.slice(9)
       } catch (e) {
-        // console.error('操作buffer', e)
+        console.error('操作buffer', e)
       }
 
       // console.log('params', ver, op, seq, zip, body)
@@ -105,7 +105,7 @@ export default class ExchangeStoreBase extends StoreBase {
         try{
           body = await ZipUtil.unZip(body)
         } catch (e) {
-          // console.error('解压缩', e)
+          console.error('解压缩', e)
         }
 
       }
@@ -113,8 +113,9 @@ export default class ExchangeStoreBase extends StoreBase {
         // console.log('JSON.parse', body, body.toString())
         body = JSON.parse(body.toString())
       } catch (e) {
-        // console.error('解析json', e)
+        console.error('解析json', e)
       }
+      console.log('JSON.parse', body)
       let dataCache = body
       if(body && body.r){
         delete body.m
