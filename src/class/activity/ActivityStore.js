@@ -30,16 +30,17 @@ export default class NoticeStore extends ExchangeStoreBase {
     return result;
   }
 
-  async getHomeBanner(activityStatus, activityPosition) {
+  async getHomeBanner(activityStatus, activityPosition,it) {
     let result = await this.Proxy.getHomeBanner({
       os: 3,
       st : activityStatus,
-      ps : activityPosition
+      ps : activityPosition,
+      it: it,
     });
     // console.log('getHomeBanner 0',result)
-    this.state.bannerImgUrl = result.al && result.al[0].hBc;
+    this.state.homeBanner = result && result.al && result.al[0];
     // console.log('getHomeBanner 0',this.state.bannerImgUrl)
-    return this.state.bannerImgUrl
+    return this.state.homeBanner
   }
 
   async getInvited(userToken, page = 1, pageSize = 10){

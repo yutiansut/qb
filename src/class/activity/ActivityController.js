@@ -51,12 +51,10 @@ export default class ActivityController extends ExchangeControllerBase {
     this.Loop["activityH5"].clear();
   }
 
-  async getHomeBanner(activityStatus, activityPosition) {
-    let bannerImgUrl = await this.store.getHomeBanner(activityStatus, activityPosition)
-    // console.log('getHomeBanner 1',bannerImgUrl,this.view)
-    // return result
+  async getHomeBanner(activityStatus, activityPosition,it) {
+    let homeBanner = await this.store.getHomeBanner(activityStatus, activityPosition,it)
     this.view.setState({
-      bannerImgUrl
+        homeBanner
     })
   }
 
