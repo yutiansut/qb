@@ -7,11 +7,7 @@ import {
 } from "react-router-dom";
 
 import {AsyncComponent} from './core'
-
-// import "./core/libs/ChangeFontSize";
-import "./common/css/reset.styl";
-import "./common/css/base.styl";
-
+import "./common/css/index.styl";
 import ConfigController from "./class/config/ConfigController";
 import AssetController from "./class/asset/AssetController";
 import UserController from "./class/user/UserController";
