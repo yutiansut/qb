@@ -39,7 +39,9 @@ export default class OrderItem extends exchangeViewBase{
   }
   goDetailDisplay() {
     if (this.props.type === "current") {
-      this.props.setDetailsDisplay(this.props.index);
+      if (this.props.orderInfo.orderStatus === 1) {
+        this.props.setDetailsDisplay(this.props.index);
+      }
     } else {
       const orderStatus = this.props.orderInfo.orderStatus;
       if (orderStatus === 2 || orderStatus === 6 || orderStatus === 7) {
