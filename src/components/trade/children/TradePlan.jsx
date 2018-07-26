@@ -85,10 +85,11 @@ export default class TradePlan extends ExchangeViewBase {
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : this.state[diffArr[dealType].inputValue];
+    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue] || this.state.priceInit);
     if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
       priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
     }
+    console.log(this.state[diffArr[dealType].inputValue],789456,this.state.priceInit)
     let value = e.target.value;
     let limitNum = value.split('.');
     if(limitNum.length > 2)
@@ -147,6 +148,8 @@ export default class TradePlan extends ExchangeViewBase {
     if (!((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1])))
       return
     // console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
+    // let cc = 2
+    // let reg = new RegExp(`^[0-9]{0,${cc}}$`);
     let flag = (Number(value) >= 100 && (/^[0-9]{0,2}$/).test(arr[1]))
         || ((Number(value) < 100 && (/^[0-9]{0,4}$/).test(arr[1]))
             || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
