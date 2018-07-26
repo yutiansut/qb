@@ -188,12 +188,12 @@ export default class userIdentity extends exchangeViewBase {
   async componentDidMount() {
     await this.getUserAuthData()
     let verifyArr = [0, 0, 2, 1] // 0 身份证 1 护照 -> 1 身份证 3 护照
-    // verifyArr[this.state.userAuth.type]
-    this.setState({
-      selectIndex: 0
+    this.setState({ // 选择护照／身份证
+      selectIndex: this.state.userAuth.type ? verifyArr[this.state.userAuth.type] : 0,
     })
-    this.state.userAuth.state === 3 && (
+    if ([3, 4, 5].includes(this.state.userAuth.state)) { // 失败情况下照片处理
       this.setState({
+        checkState: true,
         photoArr: [
           {
             photoList: [
@@ -211,13 +211,13 @@ export default class userIdentity extends exchangeViewBase {
           }
         ]
       })
-    )
-    this.state.userAuth.state !== 0 && (
+    }
+    this.state.userAuth.state !== 0 && ( // 不是认证中不能选择类型
       this.setState({
         checkVerifyArr: false
       })
     )
-    let userAuth = this.state.userAuth;
+    let userAuth = this.state.userAuth; // 姓名分离
     if (userAuth.firstName === '' || userAuth.lastName === '') {
       let fullName = userAuth.fullName, firstName = fullName.substring(0, 1), lastName = fullName.substring(1);
       // console.log('全称', fullName, firstName, lastName)
@@ -234,7 +234,7 @@ export default class userIdentity extends exchangeViewBase {
   }
 
   render() {
-    // console.log('用户信息2', this.state.image1)
+    // console.log('用户信息2', this.state)
     return (
       <div className="identify-wrap">
         <h1>{this.intl.get("header-idVerify")}</h1>
@@ -289,19 +289,19 @@ export default class userIdentity extends exchangeViewBase {
           <h2>{this.intl.get("user-photoVerify")}</h2>
           <div className={`${this.state.userAuth.state == 1 ? '' : 'hide'} fl`}><em className="auth-res">{this.intl.get("user-authProRes")}</em></div>
           <div className={`${this.state.userAuth.state == 2 ? '' : 'hide'} fl`}><em className="auth-res">{this.intl.get("user-authSuccRes")}</em></div>
-          <div className={`${this.state.userAuth.state == 0 || this.state.userAuth.state == 3 ? '' : 'hide'} fl`}>
-            <dl>
+          <div className={`${[0, 3, 4, 5].includes(this.state.userAuth.state) ? '' : 'hide'} fl`}>
+            <dl className="user-photoVerify-req">
               <dt>{this.intl.get("user-idReq")}</dt>
               <dd>{this.intl.get("user-req1")}</dd>
               <dd>{this.intl.get("user-req2")}</dd>
               <dd>{this.intl.get("user-req3")}<span style={{color: "#F25656"}}>{this.intl.get("user-req4")}</span>{this.intl.get("user-req5")}</dd>
               <dd>{this.intl.get("user-req6")}</dd>
             </dl>
-            <dl className="clearfix">
+            {this.state.userAuth.state == 0 && <dl className="clearfix user-photoVerify-type">
               <dt>{this.intl.get("user-type")}</dt>
               <dd>{this.state.selectIndex === 0 ? this.intl.get("user-idCard") : this.intl.get("user-passport")}</dd>
-            </dl>
-            <dl className="clearfix">
+            </dl>}
+            <dl className="clearfix user-photoVerify-upload">
               <dt>{this.intl.get("upLoad")}{this.intl.get("user-photo")}</dt>
               {this.state.photoArr[this.state.selectIndex].photoList && this.state.photoArr[this.state.selectIndex].photoList.map((item, index) => (<dd key={index} onClick={i => this.checkPhoto(index)}>
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>

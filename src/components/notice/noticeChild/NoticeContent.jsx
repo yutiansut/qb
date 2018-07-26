@@ -57,14 +57,14 @@ export default class noticeContent extends exchangeViewBase {
         <div className="information-wrap">
           <h1>{this.intl.get("notice")}</h1>
           {
-            Object.keys(this.state.noticeList).length && this.state.noticeList.data ? (<dl>
+            Object.keys(this.state.noticeList).length && this.state.noticeList.data.length ? (<dl>
               <dt>
                 <i>{this.intl.get("notice-title")}</i>
                 <em>{this.intl.get("notice-type")}</em>
                 <span>{this.intl.get("time")}</span>
               </dt>
               {/*<Link to={{pathname: `${this.props.match.url}/detail`, query: { noticeId: v.activityId }}} key={index}>*/}
-              {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => (
+              {Object.keys(this.state.noticeList).length && this.state.noticeList.data.length && this.state.noticeList.data.map((v, index) => (
                 <Link to={`${this.props.match.url}/detail?noticeId=${v.activityId}`} key={index}>
                   <dd >
                     <i>{v.subject}</i>
@@ -75,7 +75,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount}
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data.length && <Pagination total={this.state.noticeTotalPage || this.state.noticeList.totalCount || 0}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {
@@ -89,13 +89,13 @@ export default class noticeContent extends exchangeViewBase {
         <div className="news-wrap" >
           <h1>{this.intl.get("information")}</h1>
           {
-            Object.keys(this.state.infoList).length && this.state.infoList.data ? (<dl>
+            Object.keys(this.state.infoList).length && this.state.infoList.data.length ? (<dl>
               <dt>
                 <i>{this.intl.get("notice-title")}</i>
                 <em>{this.intl.get("notice-type")}</em>
                 <span>{this.intl.get("time")}</span>
               </dt>
-              {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) => (
+              {Object.keys(this.state.infoList).length && this.state.infoList.data.length && this.state.infoList.data.map((v, index) => (
                 <Link to={`${this.props.match.url}/detail?infoId=${v.activityId}`} key={index}>
                   <dd>
                     {/*<a href={`http://${v.source}`} target="_blank">*/}
@@ -108,7 +108,7 @@ export default class noticeContent extends exchangeViewBase {
             </dl>) : ( <h2>{this.intl.get("user-none")}</h2>)
           }
 
-          {Object.keys(this.state.infoList).length && this.state.infoList.data && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount}
+          {Object.keys(this.state.infoList).length && this.state.infoList.data.length && <Pagination total={this.state.infoTotalPage || this.state.infoList.totalCount || 0}
                       pageSize={10}
                       showTotal={true}
                       onChange={page => {

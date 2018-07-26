@@ -124,11 +124,12 @@ export default class UserStore extends ExchangeStoreBase {
 
   async userAuth() { // 获取用户认证信息
     let userAuth = await this.Proxy.getUserAuth({"token": this.token});
+    // console.log('获取用户认证信息', userAuth)
     let userAuthObj = {
       // "userId": userAuth.userId,
       state: userAuth.sta,                     // 0未认证 1审核中 2已审核 3未通过 4恶意上传审核失败封锁3天 5永久禁止
       firstName: userAuth.fn,
-      lastName: userAuth.la,
+      lastName: userAuth.ln,
       fullName: userAuth.fun,
       type: userAuth.ty,                      // 0：无 1：身份证 2：军官证 3：护照
       number: userAuth.num, // 证件号

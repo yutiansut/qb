@@ -27,7 +27,7 @@ export default class ExchangeStoreBase extends StoreBase {
     req.data.params = paramsObj
     //添加token
     if (!config.needToken) return
-    console.log(req.data.params)
+    // console.log(req.data.params)
     if (!req.data.params.d.token) return
     let headers = new Headers()
     headers.set('token', req.data.params.d.token)

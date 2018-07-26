@@ -115,7 +115,7 @@ export default function () {
     // console.log('send text', connects.length )
     if (connects.length === 0)
       console.error('==connect is all down!===')
-    console.log('websocket 发送信息', text)
+    // console.log('websocket 发送信息', text)
     poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(text)
   }
 

@@ -34,7 +34,7 @@ export default class tradeNotice extends exchangeViewBase {
     this.setState({
       noticeTitleHeight: noticeTitleHeight
     })
-    console.log(123, noticeTitleHeight)
+    // console.log(123, noticeTitleHeight)
     // console.log(1234334, tradeOrderHeight)
     // let noticeCon = document.getElementById('notice_con')
     // noticeCon.style.height = (tradeOrderHeight - noticeTitleHeight)
@@ -57,9 +57,9 @@ export default class tradeNotice extends exchangeViewBase {
     // console.log('资讯', this.state)
     return <div className="trade-notice-wrap">
       <h3 id="notice_title">{this.intl.get("information")}</h3>
-      {Object.keys(this.state.infoList).length && this.state.infoList.data ?
+      {Object.keys(this.state.infoList).length && this.state.infoList.data.length ?
         <ul id="notice_con" style={{minHeight: `${(this.state.orderHeight - this.state.noticeTitleHeight - 5)}px`, height: `${(this.state.orderHeight - this.state.noticeTitleHeight - 5)}px`}}>
-          {Object.keys(this.state.infoList).length && this.state.infoList.data && this.state.infoList.data.map((v, index) =>
+          {Object.keys(this.state.infoList).length && this.state.infoList.data.length && this.state.infoList.data.map((v, index) =>
             <li key={index} id='notice_con'>
               <p>
                 <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>

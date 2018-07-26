@@ -66,10 +66,10 @@ export default class homeNotice extends ExchangeViewBase {
 
   render() {
     // console.log('首页公告', this.state)
-    return <div className={`${Object.keys(this.state.noticeList).length && this.state.noticeList.data ? "" : "hide"} home-notice-wrap`}>
-      {Object.keys(this.state.noticeList).length && this.state.noticeList.data && <div className="home-notice-content">
+    return <div className={`${Object.keys(this.state.noticeList).length && this.state.noticeList.data.length ? "" : "hide"} home-notice-wrap`}>
+      {Object.keys(this.state.noticeList).length && this.state.noticeList.data.length && <div className="home-notice-content">
         <ul style={{top: this.state.top1 + "%"}}>
-          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data.length && this.state.noticeList.data.map((v, index) => <li key={index}>
             <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
               <i>【{v.createdAt.toDate('MM-dd')}】</i>
               <span>{v.subject}</span>
@@ -77,7 +77,7 @@ export default class homeNotice extends ExchangeViewBase {
           </li>)}
         </ul>
         <ul style={{top: this.state.top2 + "%"}}>
-          {Object.keys(this.state.noticeList).length && this.state.noticeList.data && this.state.noticeList.data.map((v, index) => <li key={index}>
+          {Object.keys(this.state.noticeList).length && this.state.noticeList.data.length && this.state.noticeList.data.map((v, index) => <li key={index}>
             <Link to={`wnotice/content/detail?noticeId=${v.activityId}`}>
               <i>【{v.createdAt.toDate('MM-dd')}】</i>
               <span>{v.subject}</span>

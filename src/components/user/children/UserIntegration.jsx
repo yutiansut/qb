@@ -133,7 +133,7 @@ export default class userIntegration extends exchangeViewBase {
             </table>
           </div>
         </div>
-        {Object.keys(this.state.userCredits).length && <Pagination total={this.state.totalPage || this.state.userCredits.totalCount}
+        {Object.keys(this.state.userCredits).length && <Pagination total={this.state.totalPage || this.state.userCredits.totalCount || 0}
           pageSize={10}
           showTotal={true}
           onChange={page => {

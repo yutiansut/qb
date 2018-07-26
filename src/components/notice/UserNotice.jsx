@@ -17,13 +17,13 @@ export default class userNotice extends exchangeViewBase {
     const {controller} = props
     //绑定view
     controller.setView(this)
+    controller.clearUserNotice() // 清除store中的userNotice数据
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
     this.getUserNotice = controller.getUserNotice.bind(controller) // 获取通知列表
     this.upDateUserNoctice = controller.upDateUserNoctice.bind(controller)
     this.showContent = this.showContent.bind(this)
     this.changeHeaderNotice = controller.changeHeaderNotice.bind(controller) // 改变头部信息
-    this.changePage = this.changePage.bind(this)
   }
 
   setView(view){
@@ -46,16 +46,11 @@ export default class userNotice extends exchangeViewBase {
     })
   }
 
-  changePage() { // 切换分页
-
-  }
-
   componentWillMount() {
 
   }
 
   async componentDidMount() {
-    console.log('this.state.userNotice.totalCount', this.state.userNotice.totalCount)
     // console.log('this.props.location', this.props.location.query)
     // let fromCon = this.props.location.query && this.props.location.query.newsCon.content,
     //     fromId = this.props.location.query && this.props.location.query.newsCon.id,
@@ -82,7 +77,6 @@ export default class userNotice extends exchangeViewBase {
     this.setState({
       totalPage: this.state.userNotice && this.state.userNotice.totalCount || 0
     })
-
   }
 
   componentWillUpdate(...parmas) {
@@ -113,7 +107,7 @@ export default class userNotice extends exchangeViewBase {
           </ul>
         </div>
         <p className={`${userNotice.length > 0 ? 'hide' : ''} nothing-text`}>{this.intl.get("user-none")}</p>
-        {userNotice.length && <Pagination total={this.state.totalPage  || this.state.userNotice.totalCount}
+        {userNotice.length && <Pagination total={this.state.totalPage  || this.state.userNotice.totalCount || 0}
           pageSize={10}
           showTotal={true}
           onChange={page => {

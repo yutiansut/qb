@@ -108,9 +108,9 @@ export default class NoticeController extends ExchangeControllerBase {
     this.view.setState({activityList})
   }
 
-  // clearUserNotice() {
-  //
-  // }
+  clearUserNotice() { // 进入消息通知列表清除store里的userNotice
+    this.store.state.userNotice = {}
+  }
 
   getOrderHeight(height) { // 获取订单高度
     this.view && this.view.setState({

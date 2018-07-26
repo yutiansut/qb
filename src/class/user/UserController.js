@@ -55,6 +55,7 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserAuthData() { // 获取用户认证信息
     let userAuth = await this.store.userAuth();
+    // console.log('获取用户认证信息', userAuth)
     this.view.setState({userAuth})
   }
 
