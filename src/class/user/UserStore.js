@@ -251,7 +251,7 @@ export default class UserStore extends ExchangeStoreBase {
       this.controller.view.intl.get("user-credits15"),
     ]
 
-    userCreditsConObj && userCreditsConObj.list.forEach(v => {
+    userCreditsConObj.list && userCreditsConObj.list.forEach(v => {
       v.operation = userCreditsArr[v.id]
     })
     // if(userCredits.errCode)

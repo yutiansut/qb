@@ -14,16 +14,16 @@ export default class LoginStore extends ExchangeStoreBase {
       // console.log('ccc1', data.data)
       // console.log('登录', data)
       this.controller.userLoginInfo(data, urlToken ? true : false);
-      if(data.ret === 0 && pushHistoryFlag ){
+      if(data.r === 0 && pushHistoryFlag ){
         this.WebSocket.general.clearWebsocketHistoryArr('login')
         this.WebSocket.general.pushWebsocketHistoryArr('login', {"tk": this.Storage.userToken.get(), "os":3, "d": `${ DetectOS()}/${Browser()}`, "did": ''})
       }
       this.controller.loginUpdata(data);
     })
     this.WebSocket.general.on("loginOther", data => {
-      console.log('a')
+      // console.log('a')
       this.WebSocket.general.clearWebsocketHistoryArr('login')
-      console.log('b')
+      // console.log('b')
       let dataOther = Object.assign(data, {flag: 1})
       this.controller.loginUpdata(dataOther);
     });

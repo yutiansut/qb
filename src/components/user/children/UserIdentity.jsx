@@ -33,16 +33,16 @@ export default class userIdentity extends exchangeViewBase {
       photoArr: [
         {
           photoList: [
-            {imgUrl: this.$imagesMap.$user_id01, name: this.intl.get("user-idFront"), loadingFlag: false},
-            {imgUrl: this.$imagesMap.$user_id02, name: this.intl.get("user-idBack"), loadingFlag: false},
-            {imgUrl: this.$imagesMap.$user_id03, name: this.intl.get("user-idHand"), loadingFlag: false}
+            {imgUrl: this.$imagesMap.$user_id01, name: this.intl.get("user-idFront")},
+            {imgUrl: this.$imagesMap.$user_id02, name: this.intl.get("user-idBack")},
+            {imgUrl: this.$imagesMap.$user_id03, name: this.intl.get("user-idHand")}
           ]
         },
         {
           photoList: [
-            {imgUrl: this.$imagesMap.$user_passport01, name: this.intl.get("user-passFront"), loadingFlag: false},
-            {imgUrl: this.$imagesMap.$user_passport02, name: this.intl.get("user-passHand"), loadingFlag: false},
-            {imgUrl: this.$imagesMap.$user_passport03, name: this.intl.get("user-addr"), loadingFlag: false}
+            {imgUrl: this.$imagesMap.$user_passport01, name: this.intl.get("user-passFront")},
+            {imgUrl: this.$imagesMap.$user_passport02, name: this.intl.get("user-passHand")},
+            {imgUrl: this.$imagesMap.$user_passport03, name: this.intl.get("user-addr")}
           ]
         },
       ],
@@ -197,16 +197,16 @@ export default class userIdentity extends exchangeViewBase {
         photoArr: [
           {
             photoList: [
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront"), loadingFlag: false},
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack"), loadingFlag: false},
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand"), loadingFlag: false}
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-idFront")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image2}`, name: this.intl.get("user-idBack")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image3}`, name: this.intl.get("user-idHand")}
             ]
           },
           {
             photoList: [
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront"), loadingFlag: false},
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand"), loadingFlag: false},
-              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr"), loadingFlag: false}
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passFront")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-passHand")},
+              {imgUrl: `${Server.hSecure && 'https' || 'http'}://${Server.host}/v1/usimage/thumb/${this.state.userAuth.image1}`, name: this.intl.get("user-addr")}
             ]
           }
         ]
@@ -234,7 +234,7 @@ export default class userIdentity extends exchangeViewBase {
   }
 
   render() {
-    // console.log('用户信息2', this.state.userAuth)
+    // console.log('用户信息2', this.state.image1)
     return (
       <div className="identify-wrap">
         <h1>{this.intl.get("header-idVerify")}</h1>
@@ -307,7 +307,7 @@ export default class userIdentity extends exchangeViewBase {
                 <img src={item.imgUrl} alt="" className={`${this.state.showPhotoList[index] ? 'hide' : ''}`}/>
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
                 <img src={this.$imagesMap.$user_add} alt="" className="add-img"/>
-                {this.state.photoArr[this.state.selectIndex].photoList[index].loadingFlag && <div className="loading-wrap">
+                {this.state.showPhotoList[index] !== '' && this.state[`image${index + 1}`] === '' && <div className="loading-wrap">
                   <img src="/static/img/user/loading.png" alt="" />
                 </div>}
                 <p>{item.name}</p>

@@ -96,9 +96,9 @@ export default class LoginController extends ExchangeControllerBase {
       this.clearLoginInfo()
       return
     }
-    if(obj.ret === 2006 || obj.ret === 2007) {
+    if(obj.r === 2006 || obj.r === 2007) {
       this.headerView.setState({
-        otherLoginCon: obj.ret,
+        otherLoginCon: obj.r,
         otherLogin: true
       })
       await this.Sleep(2000)
