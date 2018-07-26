@@ -80,40 +80,40 @@ export default class ExchangeStoreBase extends StoreBase {
       opConfig[headerConfig[v].resOp] = v
     })
     websocket.onMessage = async data => {
-      console.log('websocket.onMessage', data)
+      // console.log('websocket.onMessage', data)
       let ver, op, seq, zip, body
       try{
         data = await ZipUtil.BlobParse(data)
       } catch (e) {
-        console.error('解析Blob',e)
+        // console.error('解析Blob',e)
       }
-      console.log('ZipUtil.BlobParse',data)
+      // console.log('ZipUtil.BlobParse',data)
       try{
         data = Buffer.from(data)
-        console.log('Buffer.from',data, data.length)
+        // console.log('Buffer.from',data, data.length)
         ver = data.readInt16BE(0)
         op = data.readInt16BE(2)
         seq = data.readInt32BE(4)
         zip = data.readInt8(8)
         body = data.length > 9 && data.slice(9)
       } catch (e) {
-        console.error('操作buffer', e)
+        // console.error('操作buffer', e)
       }
 
-      console.log('params', ver, op, seq, zip, body)
+      // console.log('params', ver, op, seq, zip, body)
       if(zip){
         try{
           body = await ZipUtil.unZip(body)
         } catch (e) {
-          console.error('解压缩', e)
+          // console.error('解压缩', e)
         }
 
       }
       try{
-        console.log('JSON.parse', body, body.toString())
+        // console.log('JSON.parse', body, body.toString())
         body = JSON.parse(body.toString())
       } catch (e) {
-        console.error('解析json', e)
+        // console.error('解析json', e)
       }
       let dataCache = body
       if(body && body.r){
@@ -187,7 +187,7 @@ export default class ExchangeStoreBase extends StoreBase {
       dataBuffer = data && Buffer.from(JSON.stringify(data)) || null
       buffer = Buffer.allocUnsafe(9)
     } catch (e) {
-      console.error('操作buffer', e)
+      // console.error('操作buffer', e)
     }
 
     // console.log('dataBuffer', dataBuffer)
@@ -202,14 +202,14 @@ export default class ExchangeStoreBase extends StoreBase {
       buffer.writeInt32BE(Math.floor(Math.random() * 1000000000), 4)
       buffer.writeInt8(flag, 8)
     } catch (e) {
-      console.error('操作buffer', e)
+      // console.error('操作buffer', e)
     }
     try {
       if (dataBuffer && dataBuffer.length) {
         buffer = Buffer.concat([buffer, dataBuffer], 9 + dataBuffer.length)
       }
     } catch (e) {
-      console.error('操作buffer', e)
+      // console.error('操作buffer', e)
     }
     return buffer
 

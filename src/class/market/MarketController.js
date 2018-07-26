@@ -240,14 +240,13 @@ export default class MarketController extends ExchangeControllerBase {
         coinIcon: tradePairMsg[0].icon,
         prices: {
           price: tradePairMsg[0].price,
-          priceCN: tradePairMsg[0].priceCN.toFixed(2),
-          priceEN: tradePairMsg[0].priceEN.toFixed(2),
+          priceCN: tradePairMsg[0].priceCN,
+          priceEN: tradePairMsg[0].priceEN,
         }
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
-    this.TradePlanController && this.TradeOrderListController && flag &&
-      this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) &&
-      (this.TradePlanController.coinMinTradeHandle() || this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices));
+    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
+    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices)
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg,flag)
   }
 
