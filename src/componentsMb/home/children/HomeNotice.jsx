@@ -22,8 +22,8 @@ export default class HomeNotice extends ExchangeViewBase {
 
     async componentDidMount() {
         await this.getNoticeCon(0, 5);
-        let result = this.state.noticeList.data;
-        if (result && result.length) {
+        let result = this.state.noticeList && this.state.noticeList.data || [];
+        if (result.length) {
             this.setState({
                     top2: Math.ceil(result.length) * 100,
                     criticalArr: Array.from(
@@ -55,12 +55,13 @@ export default class HomeNotice extends ExchangeViewBase {
     }
 
     render() {
-        let noticeList = this.state.noticeList ? this.state.noticeList.data : [];
+        let noticeList = this.state.noticeList && this.state.noticeList.data || [];
         let lang = this.props.controller.configData.language;
-        return <div className={`${noticeList && noticeList.length ? "" : "hide"} home-notice-wrap`}>
-            {noticeList && <div className="home-notice-content">
+        return <div className={`${noticeList.length ? "" : "hide"} home-notice-wrap`}>
+             <div className="home-notice-content">
                 <ul style={{top: this.state.top1 + "%"}}>
-                    {noticeList.map((v, index) => <li key={index}>
+                    {noticeList.map((v, index) =>
+                        <li key={index}>
                         <a>
                             <img src="/static/mobile/home/img_lb@2x.png"/>
                             <span>{v.subject}</span>
@@ -68,14 +69,15 @@ export default class HomeNotice extends ExchangeViewBase {
                     </li>)}
                 </ul>
                 <ul style={{top: this.state.top2 + "%"}}>
-                    {noticeList.map((v, index) => <li key={index}>
+                    {noticeList.map((v, index) =>
+                        <li key={index}>
                         <a>
                             <img src="/static/mobile/home/img_lb@2x.png"/>
                             <span>{v.subject}</span>
                         </a>
                     </li>)}
                 </ul>
-            </div>}
+            </div>
         </div>;
     }
 }
