@@ -245,7 +245,9 @@ export default class MarketController extends ExchangeControllerBase {
         }
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
-    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle() || this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices);
+    this.TradePlanController && this.TradeOrderListController && flag &&
+      this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) &&
+      (this.TradePlanController.coinMinTradeHandle() || this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices));
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg,flag)
   }
 
