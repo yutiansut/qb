@@ -80,15 +80,17 @@ export default class ExchangeStoreBase extends StoreBase {
       opConfig[headerConfig[v].resOp] = v
     })
     websocket.onMessage = async data => {
-      // console.log('websocket.onMessage', data)
+      console.log('websocket.onMessage', data)
       let ver, op, seq, zip, body
       try{
         data = await ZipUtil.BlobParse(data)
       } catch (e) {
         console.error('解析Blob',e)
       }
+      console.log('ZipUtil.BlobParse',data)
       try{
         data = Buffer.from(data)
+        console.log('Buffer.from',data, data.length)
         ver = data.readInt16BE(0)
         op = data.readInt16BE(2)
         seq = data.readInt32BE(4)
@@ -98,7 +100,7 @@ export default class ExchangeStoreBase extends StoreBase {
         console.error('操作buffer', e)
       }
 
-      console.log('params', ver, op, seq, zip, body, body.toString(), JSON.parse(body.toString()))
+      console.log('params', ver, op, seq, zip, body)
       if(zip){
         try{
           body = await ZipUtil.unZip(body)
@@ -108,6 +110,7 @@ export default class ExchangeStoreBase extends StoreBase {
 
       }
       try{
+        console.log('JSON.parse', body, body.toString())
         body = JSON.parse(body.toString())
       } catch (e) {
         console.error('解析json', e)
@@ -188,7 +191,7 @@ export default class ExchangeStoreBase extends StoreBase {
     }
 
     // console.log('dataBuffer', dataBuffer)
-    if(dataBuffer && dataBuffer.length > 50){
+    if(dataBuffer && dataBuffer.length > 5000){
       flag = 1
       dataBuffer = await ZipUtil.zip(dataBuffer)
       // console.log('dataBuffer.toString', dataBuffer, dataBuffer.toString('base64'))
