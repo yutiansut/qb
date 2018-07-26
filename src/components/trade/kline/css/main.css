@@ -557,7 +557,10 @@
 }
 
 .chart_container.dark #chart_toolbar .chart_BoxSize {
-    background: url("../img/size_d.png") no-repeat;
+    background: url("../img/qp.png") no-repeat;
+}
+.chart_container.dark #chart_toolbar .chart_BoxSize.qp {
+    background: url("../img/qp_v.png") no-repeat;
 }
 
 .chart_container.light #chart_toolpanel .chart_toolpanel_button .chart_toolpanel_icon {
@@ -569,7 +572,10 @@
 }
 
 .chart_container.light #chart_toolbar .chart_BoxSize {
-    background: url("../img/size_l.png") no-repeat;
+    background: url("../img/qp2.png") no-repeat;
+}
+.chart_container.light #chart_toolbar .chart_BoxSize.qp {
+    background: url("../img/qp2_v.png") no-repeat;
 }
 
 .chart_container #chart_toolpanel #chart_Cursor {
