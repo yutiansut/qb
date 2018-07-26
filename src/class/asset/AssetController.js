@@ -336,14 +336,14 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
-    if (!o || !o.length) return [];
+    if (!o) return [];
     if (coin.toUpperCase() !== "USDT") {
       return o.pairNameCoin[coin.toLowerCase()].map(v => {
         return {
           name: `${coin}/${v.toUpperCase()}`,
           id: o.pairIdCoin[coin.toLowerCase()][v]
         };
-      });
+      })
     }
     if (coin.toUpperCase() === "USDT") {
       return o.pairNameMarket[coin.toLowerCase()].map(v => {

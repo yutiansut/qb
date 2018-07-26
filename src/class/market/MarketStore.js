@@ -362,6 +362,7 @@ export default class MarketStore extends ExchangeStoreBase {
     pairMsg.pairIdMarket = marketCorrespondingId;
     pairMsg.pairNameCoin = coinCorrespondingPair;
     pairMsg.pairNameMarket = marketCorrespondingPair;
+    console.log(pairMsg);
     return pairMsg
   }
 }
