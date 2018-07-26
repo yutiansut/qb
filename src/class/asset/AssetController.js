@@ -113,15 +113,17 @@ export default class AssetController extends ExchangeControllerBase {
       address: this.store.state.coinAddress.coinAddress
     });
   }
-  initHistory(flag){
+  initHistory(flag) {
     this.view.state.page = 1;
-    flag ? (this.view.state.assetHistory = { total: 0, orderList: []}) : this.view.setState({
-      assetHistory: {
-        total: 0,
-        orderList: [],
-      },
-      page: 1
-    });
+    flag
+      ? (this.view.state.assetHistory = { total: 0, orderList: [] })
+      : this.view.setState({
+          assetHistory: {
+            total: 0,
+            orderList: []
+          },
+          page: 1
+        });
     this.store.initHistory();
   }
   // 获取充提记录
@@ -129,15 +131,23 @@ export default class AssetController extends ExchangeControllerBase {
     let result = await this.store.getHistory(obj);
     // console.log('history,,,,,,,,,,,,,,,,,,,,,,,,,,,',result)
     this.view.setState({
-      assetHistory: this.Util.deepCopy(result),
+      assetHistory: this.Util.deepCopy(result)
     });
   }
 
   async exportHistory() {
     let result = await this.store.exportHistory();
     // let str =
-    //   "时间,币种,类型,金额数量,发送地址,接收地址,确认数,审核状态,手续费";
-    let str=`${this.view.intl.get("time")},${this.view.intl.get("asset-currency")},${this.view.intl.get("notice-type")},${this.view.intl.get("asset-amount2")},${this.view.intl.get("asset-sendAddress")},${this.view.intl.get("asset-receiveAddress")},${this.view.intl.get("asset-confirm")},${this.view.intl.get("asset-checkState")},${this.view.intl.get("fee")},`;
+    //   "时间,币种,类型,金额数量,余额，发送地址,接收地址,确认数,审核状态,手续费";
+    let str = `${this.view.intl.get("time")},${this.view.intl.get(
+      "asset-currency"
+    )},${this.view.intl.get("notice-type")},${this.view.intl.get(
+      "asset-amount2"
+      )},${this.view.intl.get("asset-balan")},${this.view.intl.get("asset-sendAddress")},${this.view.intl.get(
+      "asset-receiveAddress"
+    )},${this.view.intl.get("asset-confirm")},${this.view.intl.get(
+      "asset-checkState"
+    )},${this.view.intl.get("fee")},`;
     result.forEach(v => {
       str +=
         "\n" +
@@ -154,6 +164,8 @@ export default class AssetController extends ExchangeControllerBase {
               : " ") +
         "," +
         v.count +
+        "," +
+        v.balance +
         "," +
         "—" +
         "," +
@@ -187,11 +199,7 @@ export default class AssetController extends ExchangeControllerBase {
       address:
         (curExtract &&
           curExtract.addressList[0] &&
-          this.sort(
-            curExtract.addressList,
-            ["addressName"],
-            1
-          )[0]) ||
+          this.sort(curExtract.addressList, ["addressName"], 1)[0]) ||
         ""
     });
   }
@@ -209,7 +217,11 @@ export default class AssetController extends ExchangeControllerBase {
       // 错误处理
       return false;
     }
-    this.view.setState({ tip: true, tipSuccess: true, tipContent: this.view.intl.get("sendSuccess") });
+    this.view.setState({
+      tip: true,
+      tipSuccess: true,
+      tipContent: this.view.intl.get("sendSuccess")
+    });
     return true;
   }
 
@@ -289,7 +301,7 @@ export default class AssetController extends ExchangeControllerBase {
       curExtract.addressList &&
       curExtract.addressList.forEach(v => {
         v.address === obj.address && (flag = 713);
-        v.addressName === obj.addressName && (flag = 'asset-name-existing')
+        v.addressName === obj.addressName && (flag = "asset-name-existing");
       });
     if (flag) {
       this.setViewTip(false, this.view.intl.get(flag));
@@ -442,10 +454,10 @@ export default class AssetController extends ExchangeControllerBase {
   // 更新币币交易页委托币种可用
   updataMarketAvaile() {
     let curPair =
-      this.view.state.pairFees &&
-      this.view.state.pairFees.filter(
-        item => item.id === this.view.state.tradePairId
-      )[0],
+        this.view.state.pairFees &&
+        this.view.state.pairFees.filter(
+          item => item.id === this.view.state.tradePairId
+        )[0],
       currencyArr = curPair && curPair.name.split("/"),
       avail1 = this.store.state.wallet.filter(
         item => item.coinName === (currencyArr && currencyArr[0])
@@ -454,10 +466,10 @@ export default class AssetController extends ExchangeControllerBase {
         item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
     // console.log("updataMarketAvaile", avail1, avail2);
-      this.TradePlanController &&
+    this.TradePlanController &&
       this.TradePlanController.setWallet(
-        avail1 && avail1.availableCount || 0,
-        avail2 && avail2.availableCount || 0
+        (avail1 && avail1.availableCount) || 0,
+        (avail2 && avail2.availableCount) || 0
       );
     return { avail1, avail2, currencyArr, curPair };
   }
