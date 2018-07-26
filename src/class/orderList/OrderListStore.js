@@ -57,7 +57,7 @@ export default class OrderListStore extends ExchangeStoreBase {
         }
     );
     let recentTradeListArrAf = isPersonal ? {
-      orders: recentTradeListArr.ors.map(v => {
+      orders: recentTradeListArr && recentTradeListArr.ors && recentTradeListArr.ors.map(v => {
         return{
           "orderTime": v.t,
           "avgPrice": v.ap,
