@@ -196,6 +196,14 @@ export default class userSafeCenter extends exchangeViewBase {
 
   }
 
+  componentWillUpdate(...parmas) {
+
+  }
+
+  componentWillUnmount() {
+
+  }
+
 
   async componentDidMount() {
     // this.getCurrentLogin(),

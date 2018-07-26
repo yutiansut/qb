@@ -17,7 +17,7 @@ export default class UserStore extends ExchangeStoreBase {
       // verifyNum: "",
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
-      userCreditsNum: "", // 用户积分
+      userCreditsNum: 0, // 用户积分
       loginList: [], // 登录日志
       userCredits: {}, // 用户积分列表
       currentLogin: [], // 当前登录设备
@@ -146,7 +146,7 @@ export default class UserStore extends ExchangeStoreBase {
     let userCreditsCon = await this.Proxy.getUserCreditsNum({"token": this.token});
     // console.log('afafas', userCreditsCon)
     // let userCreditsNum = userCreditsCon.credits;
-    let userCreditsNum = userCreditsCon.cre
+    let userCreditsNum = userCreditsCon.cre || 0
     this.state.userCreditsNum = userCreditsNum;
     return userCreditsNum
   }
@@ -217,7 +217,7 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async userCredits(page) { // 获取用户积分列表
-    let userCreditsCon = await this.Proxy.getUserCredits({"pageSize":10, "token": this.token});
+    let userCreditsCon = await this.Proxy.getUserCredits({"p": page, "s":10, "token": this.token});
     // console.log('积分列表', userCreditsCon)
     // let userCredits = userCreditsCon.list ? userCreditsCon.list : []
     //['每日登录', 'CNY充值', 'BTC充值', '交易额', '', '网站改进意见采纳', '注册并实名认证', '邮箱认证', '绑定手机', '添加谷歌验证', '首次充值BTC', '首次充值CNY', '首次交易', 'USD充值', '首次充值USD']

@@ -18,6 +18,7 @@ export default class userIntegration extends exchangeViewBase {
     //绑定view
     controller.setView(this)
     //初始化数据，数据来源即store里面的state
+    controller.clearUserCreditsNum() // 清除用户积分数据
     this.state = Object.assign(this.state, controller.initState);
     this.initData = controller.initData.bind(controller) // 获取用户信息
     this.getUserCredits = controller.getUserCredits.bind(controller) // 获取用户积分列表
@@ -102,8 +103,10 @@ export default class userIntegration extends exchangeViewBase {
               <li>MVP</li>
             </ul>
             <div className="progress-line">
-              <span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userCreditsNum}</span>
-              <p style={{width: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>
+              {/*<span style={{left: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}>{this.state.userCreditsNum}</span>*/}
+              <span style={{left: `${(1.2 * (this.state.scoreIndex - 1) + ((this.state.userCreditsNum - this.state.scoreStart) / (this.state.scoreEnd - this.state.scoreStart) * 1.2)) || 0}rem`}}>{this.state.userCreditsNum || 0}</span>
+              {/*<p style={{width: `calc(1.2rem * (${this.state.scoreIndex} - 1) + ((${this.state.userCreditsNum} - ${this.state.scoreStart}) / (${this.state.scoreEnd} - ${this.state.scoreStart}) * 1.2rem))`}}></p>*/}
+              <p style={{width: `${(1.2 * (this.state.scoreIndex - 1) + ((this.state.userCreditsNum - this.state.scoreStart) / (this.state.scoreEnd - this.state.scoreStart) * 1.2)) || 0}rem`}}></p>
             </div>
           </div>
         </div>

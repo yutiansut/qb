@@ -8,6 +8,7 @@ export default class UserController extends ExchangeControllerBase {
     super(props)
     this.store = new UserStore()
     this.store.setController(this)
+
   }
 
   // setView(view){
@@ -419,6 +420,9 @@ export default class UserController extends ExchangeControllerBase {
     })
   }
 
+  clearUserCreditsNum() { // 清除store里的用户积分
+    this.store.state.userCreditsNum = 0
+  }
 
   // 移动端用
   async setFundPwdSpace(type, pwd) { // 设置资金密码间隔

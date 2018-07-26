@@ -21,11 +21,11 @@ export default class Pricing extends exchangeViewBase {
     // let anchor = this.props.location.query && this.props.location.query.user
     let anchorElement = document.getElementById(anchor);
     // console.log(222, anchor, anchorElement, anchorElement.offsetTop)
-    window.onload = () => {
-      // let anchor = window.location.hash.split('#')[1]
-      // console.log(232, anchorElement,  anchorElement.offsetTop)
-      anchor && (document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop)
-    }
+    // window.onload = () => {
+    //   // let anchor = window.location.hash.split('#')[1]
+    //   console.log(333, anchorElement,  anchorElement.offsetTop)
+    anchor && (document.body.scrollTop = document.documentElement.scrollTop = anchorElement.offsetTop - 500)
+    // }
   }
   render() {
     // const { controller } = this.props;
