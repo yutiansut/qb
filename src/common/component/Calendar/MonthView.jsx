@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 
-export default class MonthView extends Component {
+export default class MonthView extends exchangeViewBase {
   constructor(props) {
     super(props);
   }
@@ -42,9 +43,9 @@ export default class MonthView extends Component {
       for (let i = 0; i < arr.length / 7; i++) {
         let temp = [];
         for (let j = 0; j < 7; j++) {
-          (year === new Date().getFullYear() && month === new Date().getMonth() + 1 && arr[i * 7 + j] === day) && (arr[i * 7 + j] = '今天')
+          (year === new Date().getFullYear() && month === new Date().getMonth() + 1 && arr[i * 7 + j] === day) && (arr[i * 7 + j] = this.intl.get('today'))
           temp.push(<td key={j}
-                        className={`${(arr[i * 7 + j] === '今天') ? ((isStart && new Date().getDate() < new Date(isStart).getDate()) || (isEnd && new Date().getDate() > new Date(isEnd).getDate()) ? 'is-disabled' : 'today-text') : ''}
+                        className={`${(arr[i * 7 + j] === this.intl.get('today')) ? ((isStart && new Date().getDate() < new Date(isStart).getDate()) || (isEnd && new Date().getDate() > new Date(isEnd).getDate()) ? 'is-disabled' : 'today-text') : ''}
                                     ${(arr[i * 7 + j] !== '') ? 'active-text' : ''}
                                     ${arr[i * 7 + j] === index ? 'active' : ''}
                                     ${(new Date(isStart).getFullYear() === year && new Date(isStart).getMonth() + 1 === month && arr[i * 7 + j] < new Date(isStart).getDate()) ? 'is-disabled' : ''}
@@ -62,25 +63,21 @@ export default class MonthView extends Component {
       return domarr;
     }
 
-    return (
-      <div className="calendar-content">
+    return <div className="calendar-content">
         <table>
           <thead>
             <tr>
-              <td>日</td>
-              <td>一</td>
-              <td>二</td>
-              <td>三</td>
-              <td>四</td>
-              <td>五</td>
-              <td>六</td>
+              <td>{this.intl.get("Su")}</td>
+              <td>{this.intl.get("Mo")}</td>
+              <td>{this.intl.get('Tu')}</td>
+              <td>{this.intl.get('We')}</td>
+              <td>{this.intl.get('Th')}</td>
+              <td>{this.intl.get('Fr')}</td>
+              <td>{this.intl.get('Sa')}</td>
             </tr>
           </thead>
-          <tbody>
-            {showMonth(daysArr)}
-          </tbody>
+          <tbody>{showMonth.call(this,daysArr)}</tbody>
         </table>
-      </div>
-    );
+      </div>;
   }
 }

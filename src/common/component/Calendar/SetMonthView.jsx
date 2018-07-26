@@ -1,15 +1,29 @@
 import React, { Component } from "react";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 
-export default class SeletMonthView extends Component {
+export default class SeletMonthView extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.monthList = [
+      this.intl.get('Jan'),
+      this.intl.get('Feb'),
+      this.intl.get('Mar'),
+      this.intl.get('Apr'),
+      this.intl.get('May'),
+      this.intl.get('Jun'),
+      this.intl.get('Jul'),
+      this.intl.get('Aug'),
+      this.intl.get('Sep'),
+      this.intl.get('Oct'),
+      this.intl.get('Nov'),
+      this.intl.get('Dec'),
+    ]
   }
 
   render() {
-    let month = this.props.month;
+    let monthList = this.monthList;
     let setMonth = this.props.setMonth;
     let firstMonth = 1;
-    let monthList = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 
     function showTable() {
       let arr = [];
@@ -17,13 +31,14 @@ export default class SeletMonthView extends Component {
         let temp = [];
         for (let j = 0; j < 4; j++) {
           let month = firstMonth + i * 4 + j;
-          i * 4 + j > 10 && (month = firstMonth + 10)
+          // console.log(month)
+          // i * 4 + j > 10 && (month = firstMonth + 10)
           temp .push(<td
             key={j}
             className={'active-set'}
-            onClick={() => {setMonth(firstMonth + i * 4 + j)}}
+            onClick={() => {setMonth(month)}}
           >
-            {monthList[firstMonth + i * 4 + j - 1]}
+            {monthList[month - 1]}
           </td>)
         }
         arr.push(<tr key={i}>{temp}</tr>);

@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import MonthView from "./MonthView.jsx";
 import DecadeView from "./DecadeView.jsx";
 import SetMonthView from "./SetMonthView.jsx";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import "./calendar.styl"
 
-export default class Calendar extends Component {
+export default class Calendar extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -147,7 +148,7 @@ export default class Calendar extends Component {
   };
 
   setDay(day) {
-    let time = day === '今天' ? `${this.state.year}-${this.state.month}-${new Date().getDate()}` : `${this.state.year}-${this.state.month}-${day}`
+    let time = day === this.intl.get('today') ? `${this.state.year}-${this.state.month}-${new Date().getDate()}` : `${this.state.year}-${this.state.month}-${day}`
     this.setState({
       inputValue: time,
       clickActive: day
@@ -179,19 +180,19 @@ export default class Calendar extends Component {
             <h3>
               <img src="/static/img/calendar/calendar_pre_year.svg" alt="" onClick={this.goPrevYear.bind(this)} className="pre-year-img"/>
               <img src="/static/img/calendar/calendar_pre_month.svg" alt=""  onClick={this.goPrevMonth.bind(this)} className="pre-month-img"/>
-              <i className="year-i" onClick={() => {this.setState({view: "decade", showCalendar: "block", istarget: true})}}>{this.state.year}年</i>
-              <i onClick={() => {this.setState({view: "changeMonth", showCalendar: "block", istarget: true})}}>{this.state.month}月</i>
+              <i className="year-i" onClick={() => {this.setState({view: "decade", showCalendar: "block", istarget: true})}}>{this.state.year}{this.intl.get('yearSp')}</i>
+              <i onClick={() => {this.setState({view: "changeMonth", showCalendar: "block", istarget: true})}}>{this.state.month}{this.intl.get('month')}</i>
               <img src="/static/img/calendar/calendar_next_month.svg" alt=""  onClick={this.goNextMonth.bind(this)} className="next-month-img"/>
               <img src="/static/img/calendar/calendar_next_year.svg" alt="" onClick={this.goNextYear.bind(this)} className="next-year-img"/>
             </h3>
           ) : (this.state.view == "decade" ? (
             <h3>
               <img src="/static/img/calendar/calendar_pre_month.svg" alt="" onClick={this.goPreTenYear.bind(this)} className="pre-month-img"/>
-              {this.state.year - (this.state.year % 10)}年 - {this.state.year - (this.state.year % 10) + 9}年
+              {this.state.year - (this.state.year % 10)}{this.intl.get('year')} - {this.state.year - (this.state.year % 10) + 9}{this.intl.get('year')}
               <img src="/static/img/calendar/calendar_next_month.svg" alt="" onClick={this.goNextTenYear.bind(this)} className="next-month-img"/>
             </h3>
           ) : (
-            <h3>{this.state.year}年</h3>
+            <h3>{this.state.year}{this.intl.get('year')}</h3>
           ))}
 
           {this.state.view == "month" ? (

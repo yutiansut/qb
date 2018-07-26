@@ -6,13 +6,11 @@ import DatePicker from "../../../common/component/DatePicker/DatePicker";
 import Pagination from "../../../common/component/Pagination";
 import BasePopup from "../../../common/component/Popup";
 import "../style/history.styl";
-import { ENGINE_METHOD_DIGESTS } from "constants";
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = this.props;
     controller.setView(this);
-
     // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
       orderType: {
