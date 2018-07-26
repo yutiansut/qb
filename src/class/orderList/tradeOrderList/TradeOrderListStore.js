@@ -128,7 +128,7 @@ export default class TradeOrderListStore extends OrderListStore{
           lv: 0 //深度 可传6,5,4,3
         }
     );
-    let orderListArrayAf = {
+    let orderListArrayAf = orderListArray && {
       "tradePairName": orderListArray.n,
       "time": orderListArray.t,
       "levle": orderListArray.lv,
@@ -148,7 +148,6 @@ export default class TradeOrderListStore extends OrderListStore{
           "amount": v.a
         }
       }) || [],
-  
     }
     this.state.liveTrade = orderListArrayAf;
     this.controller.kdepthController && this.controller.kdepthController.setData(orderListArrayAf);
