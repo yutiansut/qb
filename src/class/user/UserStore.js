@@ -76,7 +76,7 @@ export default class UserStore extends ExchangeStoreBase {
     // await Sleep(100)
     this.Storage.userToken.removeAll();
     // await Sleep(100)
-    this.Storage.userName.removeAll()
+    this.Storage.userName.removeAll();
     // await Sleep(100)
     this.state.userId = ''
     this.state.token = ''
