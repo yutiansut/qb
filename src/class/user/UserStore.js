@@ -72,7 +72,7 @@ export default class UserStore extends ExchangeStoreBase {
 
   //清除用户信息
   clearUserInfo() {
-    this.Storage.userId.removeAll()
+    this.Storage.userId.removeAll();
     // await Sleep(100)
     this.Storage.userToken.removeAll()
     // await Sleep(100)
