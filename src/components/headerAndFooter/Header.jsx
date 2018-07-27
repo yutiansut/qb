@@ -193,7 +193,7 @@ export default class Header extends ExchangeViewBase {
                   <li key={index} onClick={value => this.changeHeaderNotice(v, index)} className="clearfix">
                     <span>{this.props.configController.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}</span>
                     <b>{v.createAt.toDate('yyyy-MM-dd HH:mm:ss')}</b>
-                    {/* <Link to = {{pathname: `/userNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
+                    {/* <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
                   </li>
                 ))}</ul>
               ) : (
