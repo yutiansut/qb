@@ -100,7 +100,7 @@ export default class ExchangeStoreBase extends StoreBase {
         console.error('操作buffer', e)
       }
 
-      // console.log('reciveWebsocket params', ver, op, seq, zip, body)
+      // console.log('params', ver, op, seq, zip, body)
       if(zip){
         try{
           body = await ZipUtil.unZip(body)
@@ -206,7 +206,6 @@ export default class ExchangeStoreBase extends StoreBase {
     } catch (e) {
       // console.error('操作buffer', e)
     }
-    // console.log('sendWebsocket params', buffer)
     try {
       if (dataBuffer && dataBuffer.length) {
         buffer = Buffer.concat([buffer, dataBuffer], 9 + dataBuffer.length)
