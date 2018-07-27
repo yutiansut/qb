@@ -178,9 +178,7 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //数据变动更新推荐币种
   updateRecListFromData(list) {
-    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
     list && list.length && (this.state.recommendData = this.state.recommendData.map(v => Object.assign(v, list.find(vv => vv.coinId === v.coinId) || {})))
-    // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   setHomeMarketPairData(homeMarketPairData) {
