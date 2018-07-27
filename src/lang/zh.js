@@ -608,6 +608,7 @@ export default function zh(state) {
     "login-read": "新用户使用验证登录将自动注册，且代表您已同意",
     "login-readUser": "《用户协议》",
     "login-readUser2": "用户协议",
+    "h5-login-read": "新用户使用验证登录将自动注册，且代表您已同意",
     "login-placeholderPhoneAndEmail": "请输入邮箱／手机验证码",
     "login-passRule": "必须是 6-18 位英文字母、数字或符号，不能纯数字或纯字母",
     "login-passAgain": "再输一遍",
