@@ -769,7 +769,7 @@
     position: fixed;
     overflow: hidden;
     visibility: hidden;
-    z-index: 500;
+    z-index: 9999;
 }
 
 #chart_parameter_settings.clicked {
