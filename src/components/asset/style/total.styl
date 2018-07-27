@@ -1,8 +1,8 @@
-@import "./base.styl"
+// @import "./base.styl"
 .asset
   .balance
     padding 0.32rem 0 1.25rem 0
-    border-left 0.01rem solid $line-dark
+    border-left 0.01rem solid $asset-line-main
     .total-asset
       padding-left 0.3rem
       margin-bottom 0.35rem
@@ -10,7 +10,7 @@
         height 0.2rem
         font-size 0.2rem
         margin-bottom 0.4rem
-        color $normal-font-color
+        color $asset-font-normal
         letter-spacing 0.0008rem
         text-align justify
       .item
@@ -33,31 +33,31 @@
             // background-color $normal-white-color
         b
           font-size 0.16rem
-          color $normal-font-color
+          color $asset-font-normal
           letter-spacing 0.0006rem
           text-align justify
         &.total b
           font-size 0.18rem
-          color $main-color
+          color $asset-title-main
           letter-spacing 0.0007rem
           text-align justify
         &.limit
           a
             margin-left 0.3rem
             font-size 0.12rem
-            color $main-color
+            color $asset-title-main
             text-decoration underline
             &:hover
-              color $main-color-hover
+              color $asset-title-main-hover
             &:active
-              color $main-color-active
+              color $asset-title-main-active
           .disable
             margin-left 0.3rem
             font-size 0.12rem
-            color $normal-gray-color
+            color $asset-font-minor
         span
           font-size 0.14rem
           margin 0 0.1rem 0 0.1rem
-          color $normal-gray-color
+          color $asset-font-minor
           letter-spacing: 0.0006rem
           text-align justify

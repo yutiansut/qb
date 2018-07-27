@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../ExchangeViewBase";
-import "../style/chargeMessage.styl";
+// import "../style/chargeMessage.styl";
 export default class ChargeMessage extends exchangeViewBase {
   constructor(props) {
     super(props);

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../ExchangeViewBase";
 import Button from "../../../../common/component/Button";
 import Input from "../../../../common/component/Input";
-import "./style.styl";
+// import "./style.styl";
 
 export default class Popup extends exchangeViewBase {
   constructor(props) {

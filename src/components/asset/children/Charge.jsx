@@ -7,7 +7,7 @@ import Popup from "../../../common/component/Popup";
 import Pagination from "../../../common/component/Pagination";
 import SearchInput from "../components/SearchInput";
 import ToTrade from "../components/ToTrade";
-import "../style/charge.styl";
+// import "../style/charge.styl";
 
 export default class Charge extends exchangeViewBase {
   constructor(props) {

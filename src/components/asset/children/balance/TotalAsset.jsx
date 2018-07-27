@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import exchangeViewBase from "../../../ExchangeViewBase";
 import { NavLink } from "react-router-dom";
 import SelectButton from "../../../../common/component/SelectButton";
-import "../../style/total.styl";
+// import "../../style/total.styl";
 
 export default class TotalAsset extends exchangeViewBase {
   constructor(props) {

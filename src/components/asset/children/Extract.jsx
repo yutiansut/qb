@@ -9,7 +9,7 @@ import ToTrade from "../components/ToTrade";
 import TwoVerifyPopup from "../../viewsPopup/TwoVerifyPopup";
 import Popup from "../components/popup";
 import BasePopup from "../../../common/component/Popup";
-import "../style/extract.styl";
+// import "../style/extract.styl";
 export default class Extract extends exchangeViewBase {
   constructor(props) {
     super(props);

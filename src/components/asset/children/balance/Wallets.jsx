@@ -3,7 +3,7 @@ import exchangeViewBase from "../../../ExchangeViewBase";
 import { NavLink } from "react-router-dom";
 import Button from "../../../../common/component/Button";
 import Input from "../../../../common/component/Input";
-import "../../style/wallet.styl";
+// import "../../style/wallet.styl";
 export default class Wallets extends exchangeViewBase {
   constructor(props) {
     super(props);
