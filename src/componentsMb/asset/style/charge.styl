@@ -1,4 +1,3 @@
-@import "../../../common/css/variable.styl"
 
 .asset-mb
   .charge
@@ -7,10 +6,10 @@
     .nav
       height .45rem
       line-height .45rem
-      background $h5-foreground
-      border-bottom .01rem solid $h5-border-weight
+      background $h5-asset-bg
+      border-bottom .01rem solid $h5-asset-border
       position relative
-      color $h5-color-weight
+      color $h5-asset-font-weight
       h3
         text-align center
         font-size .18rem
@@ -19,7 +18,7 @@
         pointer-events none
       a
         font-size .14rem
-        color $normal-white-color
+        color $h5-asset-font-weight
         &.left
           float left
           margin-left .12rem
@@ -33,16 +32,16 @@
       padding 0 .12rem
       line-height .4rem
       height .4rem
-      background $h5-foreground
+      background $h5-asset-bg
       label
-        color $h5-color-normal
+        color $h5-asset-font-normal
         font-size .15rem
       b
-        color $h5-color-normal
+        color $h5-asset-font-normal
         margin-left .3rem
         font-size .15rem
       i
-        color $h5-color-normal
+        color $h5-asset-font-normal
         font-size .18rem
         float right
     .info
@@ -57,14 +56,14 @@
         height 1.6rem
         margin-top .4rem
         margin-bottom .4rem
-        border .04rem solid $h5-color-weight
+        border .04rem solid $h5-asset-font-weight
       .save-qrcode
         line-height .2rem
         margin .12rem 0 .4rem 0
         font-size .16rem
-        color $h5-color-green
+        color $h5-asset-font-active
       input
-        color $h5-color-normal
+        color $h5-asset-font-normal
         font-size .15rem
         line-height .2rem
         border 0
@@ -72,11 +71,11 @@
         text-align center
         background none
       .copy-addr
-        color $h5-color-green
+        color $h5-asset-font-active
         font-size .16rem
         margin .12rem 0 .4rem 0
       p
-        color $h5-color-light
+        color $h5-asset-font-light
         font-size .14rem
         line-height .2rem
         margin .05rem 0
@@ -88,13 +87,13 @@
       top 0
       bottom 0
       width 100%
-      background $h5-background
+      background $h5-asset-bg
       ul
         li
           line-height .4rem
-          border-bottom .01rem solid $h5-foreground
+          border-bottom .01rem solid $h5-asset-border
           padding 0 .12rem
-          color $h5-color-normal
+          color $h5-asset-font-normal
           font-size .15rem
 
 

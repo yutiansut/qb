@@ -10,6 +10,8 @@ import History from "./children/History";
 import BalanceDetail from "./children/balanceDetail";
 import Charge from "./children/Charge";
 
+import "./style/asset.styl"
+
 export default class AssetManage extends exchangeViewBase {
   constructor(props) {
     super(props);

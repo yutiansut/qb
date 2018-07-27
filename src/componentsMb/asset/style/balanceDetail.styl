@@ -1,4 +1,3 @@
-@import "../../../common/css/variable.styl"
 
 .asset-mb
   .balance-detail
@@ -6,10 +5,10 @@
     .nav
       height .45rem
       line-height .45rem
-      background $h5-foreground
-      border-bottom .01rem solid $h5-border-weight
+      background $h5-asset-bg
+      border-bottom .01rem solid $h5-asset-border
       position relative
-      color $h5-color-weight
+      color $h5-asset-font-weight
       h3
         text-align center
         font-size .18rem
@@ -18,7 +17,7 @@
         pointer-events none
       a
         font-size .14rem
-        color $normal-white-color
+        color $h5-asset-font-weight
         &.left
           float left
           margin-left .12rem
@@ -43,17 +42,17 @@
         margin-left .55rem
         font-size .24rem
         line-height .2rem
-        color $h5-color-normal
+        color $h5-asset-font-normal
         margin-bottom .03rem
       span
         display block
         margin-left .55rem
         font-size .12rem
-        color $h5-color-light
+        color $h5-asset-font-light
         line-height .2rem
     .d2
       padding .2rem .12rem
-      border-bottom .01rem solid $h5-foreground
+      border-bottom .01rem solid $h5-asset-bg
       p
         display inline-block
         vertical-align top
@@ -61,11 +60,11 @@
         span
           display block
           font-size .12rem
-          color $h5-color-light
+          color $h5-asset-font-light
           line-height .16rem
         i
           font-size .14rem
-          color $h5-color-normal
+          color $h5-asset-font-normal
           line-height .2rem
           margin-top .05rem
           display block
@@ -75,10 +74,10 @@
         line-height .3rem
         span
           font-size .14rem
-          color $h5-color-light
+          color $h5-asset-font-light
         i
           font-size .14rem
-          color $h5-color-normal
+          color $h5-asset-font-normal
           float right
 
     .coin-info
@@ -88,8 +87,8 @@
       line-height .4rem
       width 100%
       padding 0 .12rem
-      background $h5-foreground
-      color $h5-color-green
+      background $h5-asset-bg
+      color $h5-asset-font-active
       font-size .15rem
       img
         float right
@@ -97,12 +96,12 @@
         margin-top .12rem
     .footer
       box-shadow 0 -.04rem .2rem 0 rgba(0,0,0,0.20)
-      background $h5-foreground
+      background $h5-asset-bg
       position fixed
       bottom 0
       width 100%
       height .4rem
-      color $h5-color-green
+      color $h5-asset-font-active
       button
         width 50%
         text-align center
@@ -111,6 +110,6 @@
         line-height .4rem
         background transparent
         &.active
-          background $h5-color-green
-          color $h5-color-weight
+          background $h5-asset-font-active
+          color $h5-asset-font-weight
 
