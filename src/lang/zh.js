@@ -605,6 +605,7 @@ export default function zh(state) {
     "login-userInput": "手机号/邮箱",
     "login-passInput": "密码",
     "login-forget": "忘记密码",
+    "h5-login-read": "新用户使用验证登录将自动注册，且代表您已同意",
     "login-read": "新用户使用验证登录将自动注册，且代表您已同意",
     "login-readUser": "《用户协议》",
     "login-readUser2": "用户协议",
