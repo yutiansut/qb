@@ -1,12 +1,12 @@
-@import "./theme"
+@import "./variable"
 
 // h5 全局样式
 .route-mb
   padding-top .5rem
-  background-color $h5-route-background
+  background-color $h5-route-bg
   min-height calc(100vh);
   input
-    background $h5-input-background
+    background $h5-input-bg
     color $h5-input-color
     font-size .14rem
     border .01rem solid transparent
@@ -17,7 +17,7 @@
       font-size .12rem
   a.default.main, button.default.main
     border none
-    background  $h5-button-background
+    background  $h5-button-bg
     color $h5-button-color
     border-radius .02rem
     opacity 1
@@ -37,9 +37,9 @@
   font-family PingFangSC-Medium
   height .5rem
   padding 0 .12rem 0 0.12rem
-  background $h5-foreground
+  background $h5-header-bg
   display flex
-  border-bottom .01rem solid $h5-border-weight
+  border-bottom .01rem solid $h5-header-border
   &.hide
     display none
   .logo
@@ -54,7 +54,7 @@
     justify-content flex-end
     align-items center
     >a
-      color $h5-color-weight
+      color $h5-header-font-weight
       margin-left .15rem
     >img
       height .18rem
@@ -69,15 +69,15 @@
         position absolute
         right 0
         margin-top .1rem
-        background $h5-foreground
-        box-shadow 0 0 0.1rem $h5-border-weight
+        background $h5-header-bg
+        box-shadow 0 0 0.1rem $h5-header-border
         border-radius .02rem
         overflow hidden
         li
           line-height .3rem
           padding 0 .1rem
           white-space nowrap
-          color $h5-color-normal
+          color $h5-header-font-normal
           font-size .13rem
   .nav-hidden
     position: fixed
@@ -87,15 +87,15 @@
     right 0
     left 37.5%;
     overflow auto
-    background $h5-foreground
-    box-shadow 0.02rem 0 .1rem $h5-border-weight
+    background $h5-header-bg
+    box-shadow 0.02rem 0 .1rem $h5-header-border
     a
       width 100%
       height .45rem
       line-height .45rem
       display block;
       padding-left .2rem
-      color $h5-color-normal
+      color $h5-header-font-normal
       img
         margin-right .15rem
         width .24rem
@@ -104,12 +104,12 @@
     .user
       height .7rem
       line-height .7rem
-      border-bottom .01rem solid $h5-border-weight
+      border-bottom .01rem solid $h5-header-border
       img
         width .44rem
         height .44rem
     .logout
-      border-top .01rem solid $h5-border-weight
+      border-top .01rem solid $h5-header-font-weight
       position absolute
       bottom 0
       width 100%

@@ -1,4 +1,4 @@
-@import "./theme"
+@import "./variable"
 
 .home-wrap-mb
   font-family PingFangSC-Medium
@@ -42,7 +42,7 @@
     position relative
     height .4rem
     padding .08rem 0
-    background $h5-background
+    background $h5-home-bg-main
     &.hide
       display none
     .home-notice-content
@@ -61,7 +61,7 @@
           overflow hidden
           text-overflow ellipsis
           span
-            color $h5-color-normal
+            color $h5-home-font-normal
           img
             height .16rem
             margin-right .07rem
@@ -75,10 +75,10 @@
       justify-content space-between
       height .36rem
       line-height .36rem
-      background $h5-foreground
+      background $h5-home-bg-minor
       li
         font-size .13rem
-        color $h5-color-light
+        color $h5-home-font-light
         flex-grow 1
         text-align center
         span
@@ -87,8 +87,8 @@
           line-height .34rem
         &.active
           span
-            color $h5-color-active
-            border-bottom .02rem solid $h5-color-active
+            color $h5-home-font-active
+            border-bottom .02rem solid $h5-home-font-active
     .market-list
       padding 0 .12rem
       table
@@ -97,14 +97,14 @@
           tr
             height .3rem
             line-height .3rem
-            border-bottom .01rem solid $h5-foreground
+            border-bottom .01rem solid $h5-home-bg-minor
             th
               font-size .12rem
-              color $h5-color-light
+              color $h5-home-font-light
         tbody
           tr
             line-height 0.24rem
-            border-bottom .01rem solid  $h5-foreground
+            border-bottom .01rem solid  $h5-home-bg-minor
             td
               vertical-align middle
             .td1
@@ -120,37 +120,37 @@
                 display inline-block
                 span
                   font-size 0.12rem
-                  color $h5-color-light
+                  color $h5-home-font-light
                   white-space nowrap
                 h3
                   font-size 0.17rem
-                  color $h5-color-light
+                  color $h5-home-font-light
                   small
                     font-size 0.12rem
-                    color$h5-color-weight
+                    color $h5-home-font-weight
                     margin-left .02rem
                     vertical-align .02rem
             .td2
               b
                 font-size 0.14rem
-                color $h5-color-up
+                color $h5-home-font-up
                 display block
               span
                 font-size 0.13rem
-                color $h5-color-light
+                color $h5-home-font-light
             .td3
               a
                 font-size 0.15rem
-                color $h5-color-weight
+                color $h5-home-font-weight
                 padding 0.05rem
                 border-radius 1px
                 min-width .8rem
                 display inline-block
                 text-align center
                 &.up
-                  background $h5-color-up
+                  background $h5-home-font-up
                 &.down
-                  background $h5-color-down
+                  background $h5-home-font-down
         th:last-child, td:last-child
           text-align right
         th:first-child
