@@ -37,12 +37,14 @@ export default class Charge extends exchangeViewBase {
     let {
       walletList,
       assetHistory,
+      walletHandle,
       currencyAmount,
       coinAddress
     } = controller.initState;
 
     this.state = Object.assign(this.state, {
       walletList,
+      walletHandle,
       assetHistory,
       currencyAmount,
       coinAddress
@@ -61,6 +63,15 @@ export default class Charge extends exchangeViewBase {
         copySuccess: controller.copy(el)
       });
     };
+    this.deal = o =>{
+      let j ={}
+      for(let k in o) {
+        if(this.state.walletHandle[k].c === 1){
+          j[k] = this.state.walletList[k];
+        }
+      }
+      return Object.keys(j)
+    }
     this.getWalletList = controller.getWalletList.bind(controller);
 
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
@@ -152,7 +163,7 @@ export default class Charge extends exchangeViewBase {
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
-                walletList={Object.keys(this.state.walletList)}
+                walletList={this.deal(this.state.walletList)}
                 value={this.state.value}
                 setValue={value => {
                   this.setState({ value });

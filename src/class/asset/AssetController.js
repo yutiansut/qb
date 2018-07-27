@@ -95,7 +95,8 @@ export default class AssetController extends ExchangeControllerBase {
     this.store.state.walletList["BTC"] === undefined &&
       (await this.store.getWalletList());
     await this.view.setState({
-      walletList: this.store.state.walletList
+      walletList: this.store.state.walletList,
+      walletHandle: this.store.state.walletHandle
     });
   }
   // 获取矿工费

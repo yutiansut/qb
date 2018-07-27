@@ -49,15 +49,26 @@ export default class Extract extends exchangeViewBase {
     let {
       walletExtract,
       walletList,
+      walletHandle,
       currencyAmount,
       assetHistory
     } = controller.initState;
     this.state = Object.assign(this.state, {
       walletExtract,
+      walletHandle,
       walletList,
       assetHistory,
       currencyAmount
     });
+    this.deal = o => {
+      let j = {}
+      for (let k in o) {
+        if (this.state.walletHandle[k].c === 1) {
+          j[k] = this.state.walletList[k];
+        }
+      }
+      return Object.keys(j)
+    }
 
     //绑定方法
     //获取市场下交易对
@@ -225,7 +236,7 @@ export default class Extract extends exchangeViewBase {
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
-                walletList={Object.keys(this.state.walletList)}
+                walletList={this.deal(this.state.walletList)}
                 value={this.state.value}
                 setValue={value => {
                   this.setState({ value });

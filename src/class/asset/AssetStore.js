@@ -25,6 +25,7 @@ export default class AssetStore extends ExchangeStoreBase {
       wallet: [],
       //币种列表
       walletList: {},
+      walletHandle: {},
       // 获取单个币种资产及提现额度
       currencyAmount: {
         coinName: "BTC",
@@ -172,8 +173,12 @@ export default class AssetStore extends ExchangeStoreBase {
       let obj = {};
       this.controller.sort(result.l, ["n"], 1).forEach(v => {
         obj[v.n.toUpperCase()] = v.id;
+        this.state.walletHandle[v.n.toUpperCase()]= {
+          c: v.c,
+          w: v.w,
+          e: v.e
+        };
       });
-      console.log(obj);
       this.state.walletList = obj;
     }
   }
