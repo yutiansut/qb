@@ -35,6 +35,11 @@ export default class ConfigController extends ExchangeControllerBase {
     //   this.loadLocales();
     // })
   }
+  // 获取活动状态
+  async getActivityState() {
+    await this.store.getActivityState();
+  }
+
   async loadLocales() {
     const locales = {
       "en-US": en(this.store.state),

@@ -21,6 +21,8 @@ export default class Balance extends exchangeViewBase {
     this.state = Object.assign(this.state, { totalAsset, wallet });
     //绑定方法
     this.getAssets = controller.getAssets.bind(controller);
+    // 获取Qbt
+    this.getQbt = controller.getMyQbt.bind(controller);
   }
 
   async componentDidMount() {

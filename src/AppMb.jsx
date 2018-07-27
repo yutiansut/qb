@@ -116,6 +116,7 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController("market");
     userOrderController = new UserOrderListController();
+    // configController.getActivityState();
 
     noticeController.configController = configController;
 

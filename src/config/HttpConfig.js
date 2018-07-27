@@ -21,7 +21,9 @@ export default {
    */
   // httpPreHandler,
   // httpAfterHandler,
-
+  config: [
+    { name: 'activityState', data: { url: '/v1/common/', method: 'post' }, action: 'cfg', actionBack: 'cfgr'}
+  ],
   user: [ // 用户
     { name: 'getUserInfo', data: { url: '/v1/user/', method: 'post' }, action: 'ui', actionBack: 'uir', needToken: true }, // 获取用户信息
     { name: 'getUserAuth', data: { url: '/v1/user/', method: 'post' }, action: 'ua', actionBack: 'uar', needToken: true }, // 获取用户认证信息

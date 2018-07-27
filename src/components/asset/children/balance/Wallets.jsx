@@ -158,8 +158,8 @@ export default class Wallets extends exchangeViewBase {
               frozenCount,
               valuationBTC
             }).map((item, index) => {
-              {/* return item.coinName !== "QBT" ?  */}
-              return (
+              return item.coinName !== "QBT" ?
+              (
                 <tr key={index}>
                   <td className="currency">
                     <img src={item.coinIcon} alt="" />
@@ -228,8 +228,8 @@ export default class Wallets extends exchangeViewBase {
                       />
                   </td>
                 </tr>
-              )
-              {/* (
+              ) :
+              (
                 <tr key={index}>
                   <td className="currency">
                     <img src={item.coinIcon} alt="" />
@@ -265,7 +265,7 @@ export default class Wallets extends exchangeViewBase {
                     />
                   </td>
                 </tr>
-              ); */}
+              );
             })}
           </tbody>
         </table>

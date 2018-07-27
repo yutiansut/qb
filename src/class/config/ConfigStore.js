@@ -18,7 +18,7 @@ const CURRENT_IMGURL = "http://192.168.55.107/";
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
 
-    super();
+    super("config", "general");
     let language = this.getQuery("language") === '0' ? "zh-CN" : this.getQuery("language") === '1' ? "en-US" : undefined;
     language && this.Storage.language.set(language);
     this.state = {
@@ -34,7 +34,8 @@ export default class UserStore extends ExchangeStoreBase {
       currentUrl: CURRENT_URL,
       currentImgUrl: CURRENT_IMGURL,
       // language: 'zh-CN',
-      language: this.Storage.language.get() || "en-US"
+      language: this.Storage.language.get() || "en-US",
+      activityState: 1
     }
   }
 
@@ -42,7 +43,11 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.language = lang;
     this.Storage.language.set(lang);
   }
-
+  // 获取活动状态
+  async getActivityState(){
+    let result = await this.Proxy.activityState();
+    this.state.activityState = result && result.qe;
+  }
   get language(){
     return this.state.language;
   }
