@@ -59,9 +59,9 @@ export default class Charge extends exchangeViewBase {
         return (
             <div className="charge">
                 <div className="nav">
-                    <NavLink to="/mwallet" className="left">&lt; {this.intl.get("back")}</NavLink>
+                    <NavLink to="/wallet" className="left">&lt; {this.intl.get("back")}</NavLink>
                     <h3>{this.intl.get("asset-charge")}</h3>
-                    <NavLink to={{pathname: "/mwallet/dashboard", query: {type:1}}} className="right"><img src="/static/mobile/asset/icon_dd_pre@2x.png"/></NavLink>
+                    <NavLink to={{pathname: "/wallet/dashboard", query: {type:1}}} className="right"><img src="/static/mobile/asset/icon_dd_pre@2x.png"/></NavLink>
                 </div>
                 <div className="filter" onClick={()=>{
                     this.setState({showSelect:true});

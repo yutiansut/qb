@@ -161,7 +161,7 @@ export default class CoinData extends exchangeViewBase {
                 this.state.walletHandle[name.toUpperCase()] && this.state.walletHandle[name.toUpperCase()].c ?
                 <NavLink
                     to={{
-                        pathname: "/mwallet/charge",
+                        pathname: "/wallet/charge",
                         query: { currency: this.state.currency }
                     }}
                 >

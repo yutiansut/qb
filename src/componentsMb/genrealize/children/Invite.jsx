@@ -52,7 +52,7 @@ export default class Terms extends exchangeViewBase {
             <img src={this.$imagesMap.$invite} alt="" />
             <div className="qrcode">
               <div className="qrcode-wrap">
-                <QRCode value={`${this.controller.configData.currentUrl}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
+                <QRCode value={`${this.controller.configData.currentUrl}/genrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
               </div>
             </div>
           </div>

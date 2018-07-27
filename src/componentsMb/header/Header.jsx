@@ -30,7 +30,7 @@ export default class Header extends ExchangeViewBase {
 
   logout(){
     this.clearLoginInfo();
-    this.props.history.push("/mhome");
+    this.props.history.push("/home");
   }
 
   changeLang(lang){
@@ -44,7 +44,7 @@ export default class Header extends ExchangeViewBase {
     let lang = configController.language;
     let isLogin = !!userController.userToken;
     return (
-      <div className={`header-nav-mb ${history.location.pathname === '/mhelp/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
+      <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
         <Link to='/home' className="logo">
           <img src="/static/img/home/logo_header.svg"/>
         </Link>
@@ -59,7 +59,7 @@ export default class Header extends ExchangeViewBase {
             </ul>}
           </a>
          {!isLogin ?
-             <NavLink to="/mlogin">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
+             <NavLink to="/login">{this.intl.get("header-login")}/{this.intl.get("header-regist")}</NavLink> :
              <img src="/static/mobile/header/icon_cd@3x.png" onClick={() => this.setState({navHidden: !this.state.navHidden})}/>}
         </div>
         {(isLogin && !this.state.navHidden) && <div>
@@ -68,13 +68,13 @@ export default class Header extends ExchangeViewBase {
               <a className="user">
                   <img src="/static/mobile/header/icon_wode_head@2x.png" alt=""/>
                   <span>{userController.userName}</span></a>
-              <NavLink to="/mhome"
+              <NavLink to="/home"
                        onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_sy@2x.png"/>{this.intl.get("header-home")}</NavLink>
-              <NavLink to="/mwallet"
+              <NavLink to="/wallet"
                        onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_zc@2x.png"/>{this.intl.get("header-assets")}</NavLink>
-              <NavLink to="/morder"
+              <NavLink to="/order"
                        onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_dd@2x.png"/>{this.intl.get("header-order")}</NavLink>
-              <NavLink to="/muser"
+              <NavLink to="/user"
                        onClick={e => this.setState({navHidden: true})}><img src="/static/mobile/header/icon_gr@2x.png"/>{this.intl.get("header-user")}</NavLink>
               <a className="logout" onClick={e=>{
                   this.setState({navHidden: true},()=>{

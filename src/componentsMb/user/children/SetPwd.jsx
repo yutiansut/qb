@@ -12,7 +12,7 @@ export default class SetPwd extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      to: "/muser/safe",
+      to: "/user/safe",
       popupInput1: "",
       popupInput2: "",
       popupInput3: "",
@@ -235,7 +235,7 @@ export default class SetPwd extends exchangeViewBase {
         <div className="safe-center-header">
           <div className="back">
             <img src="../../../../static/mobile/user/Back@3x.png"/>
-            <NavLink to="/muser/safe">{this.intl.get("back")}</NavLink>
+            <NavLink to="/user/safe">{this.intl.get("back")}</NavLink>
             <span>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].title}</span>
           </div>
         </div>

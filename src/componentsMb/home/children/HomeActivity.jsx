@@ -30,7 +30,7 @@ export default class HomeActivity extends ExchangeViewBase {
     let t = {"zh-CN":homeBanner.tc,"en-US":homeBanner.te}[lang];
     return (
       <div className="banner-wrap-mb">
-        {/*<div className="banner-wrap-mb" onClick={() => history.push("/mgenrealize/invite")}>*/}
+        {/*<div className="banner-wrap-mb" onClick={() => history.push("/genrealize/invite")}>*/}
           <img src={t} alt=""/>
         <div alt="" className="banner-img"
                style={{background: `url(${hB}) center center / cover no-repeat`}}/>

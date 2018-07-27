@@ -39,7 +39,7 @@ export default class BalanceDetail extends exchangeViewBase {
     return (
       <div className="balance-detail">
         <div className="nav">
-          <NavLink to="/mwallet" className="left">
+          <NavLink to="/wallet" className="left">
             &lt; {this.intl.get("back")}
           </NavLink>
           <h3>{this.intl.get("asset-detail")}</h3>
@@ -84,7 +84,7 @@ export default class BalanceDetail extends exchangeViewBase {
         <Link
           className="coin-info"
           to={{
-            pathname: `/mhelp/currency/`,
+            pathname: `/help/currency/`,
             query: { currency: result.coinName }
           }}
         >
@@ -97,7 +97,7 @@ export default class BalanceDetail extends exchangeViewBase {
             className="active"
             disable={result.c === 0 ? true : false}
             onClick={() => {
-                this.props.history.push({ pathname: "/mwallet/charge", query: { currency: result.coinName }})
+                this.props.history.push({ pathname: "/wallet/charge", query: { currency: result.coinName }})
             }}
           />
           <Button title={this.intl.get("asset-withdraw")} />

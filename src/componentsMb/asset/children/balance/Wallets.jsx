@@ -34,7 +34,7 @@ export default class Wallets extends exchangeViewBase {
             (<div className="wallet-li"  key={index}>
                 <div className="d1">
                     <label><img src={item.coinIcon}/>{item.coinName.toUpperCase()}</label>
-                    <NavLink to={{pathname: `/mwallet/detail/`, query: { currency: item.coinName }}}>{this.intl.get("asset-detail")} ></NavLink>
+                    <NavLink to={{pathname: `/wallet/detail/`, query: { currency: item.coinName }}}>{this.intl.get("asset-detail")} ></NavLink>
                 </div>
                 <div className="d2">
                     <p>

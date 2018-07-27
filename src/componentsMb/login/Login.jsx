@@ -34,7 +34,7 @@ export default class Login extends exchangeViewBase {
       showTwoVerify: false,
       verifyType: "", // 密码登录两步认证弹窗
       checkState: true, // checkbox判断
-      from: props.location.state && props.location.state.from.pathname || '/mhome'
+      from: props.location.state && props.location.state.from.pathname || '/home'
     };
     const {controller, match} = props
     //绑定view
@@ -136,7 +136,7 @@ export default class Login extends exchangeViewBase {
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
               <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput} onInput={value => this.changePass(value)}/>
-              <span><NavLink to="/mfindPass">{this.intl.get("login-forget")}</NavLink></span>
+              <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
             </li>
             <li className="verify-li">
               <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePic(value)}/>
@@ -170,7 +170,7 @@ export default class Login extends exchangeViewBase {
           {this.state.titleIndex===0 && <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
               <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png":"/static/mobile/login/icon_wx@2x.png"}/>
               {this.intl.get("h5-login-read")}
-              <Link to="/mhelp/terms" className="userAgree">《{this.intl.get("login-readUser")}》</Link>
+              <Link to="/help/terms" className="userAgree">《{this.intl.get("login-readUser")}》</Link>
           </label>}
         </div>
         {this.state.showPopup && (

@@ -149,15 +149,15 @@ export default class App extends Component {
     let UserCenterComponent = AsyncComponent(()=>import("./componentsMb/user/UserCenter.jsx"), {controller:userController});
 
     Routers = [
-      { path: "/mhome", component: HomeCompoment },
-      { path: "/mlogin", component: LoginComponent },
-      { path: "/mlogin/:uid", component: LoginComponent },
-      { path: "/mfindPass", component: ForgetPassComponent },
-      { path: "/mgenrealize", component: Gener},
-      { path: "/mhelp", component: HelpComponent },
-      { path: "/mwallet", component: AssetComponent},
-      { path: "/morder", component: OrderManageCompoment, auth: true },
-      { path: "/muser", component: UserCenterComponent, auth: true }
+      { path: "/home", component: HomeCompoment },
+      { path: "/login", component: LoginComponent },
+      { path: "/login/:uid", component: LoginComponent },
+      { path: "/findPass", component: ForgetPassComponent },
+      { path: "/genrealize", component: Gener },
+      { path: "/help", component: HelpComponent },
+      { path: "/wallet", component: AssetComponent, auth: true },
+      { path: "/order", component: OrderManageCompoment, auth: true },
+      { path: "/user", component: UserCenterComponent, auth: true }
     ];
 
 
@@ -190,8 +190,8 @@ export default class App extends Component {
                     render={props => {
                       document.getElementById("app").scrollIntoView(true);
                       return !item.auth ? (
-                        ["/mlogin", "/mlogin/:uid", '/mfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
-                          <Redirect to={{ pathname: "/mhome" }} />
+                        ["/login", "/login/:uid", '/findPass'].includes(item.path) && userController.Storage.userToken.get() ? (
+                          <Redirect to={{ pathname: "/home" }} />
                         ) : (
                             <item.component {...props} />
                           )
@@ -200,7 +200,7 @@ export default class App extends Component {
                       ) : (
                             <Redirect
                               to={{
-                                pathname: "/mlogin",
+                                pathname: "/login",
                                 state: { from: props.location }
                               }}
                             />
@@ -209,7 +209,7 @@ export default class App extends Component {
                     }
                   />
                 ))}
-                <Redirect to="/mhome" />
+                <Redirect to="/home" />
               </Switch>
             </div>
           </div>

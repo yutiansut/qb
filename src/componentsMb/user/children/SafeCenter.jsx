@@ -53,7 +53,7 @@ export default class UserCenterIndex extends exchangeViewBase {
   needFundPwdInterval() {
       // 是否需要资金密码
     if (this.state.userInfo.fundPwd) {
-        this.props.history.push('/muser/setPwd?type=5');
+        this.props.history.push('/user/setPwd?type=5');
         return
     }
     this.setState({

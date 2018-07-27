@@ -77,7 +77,7 @@ export default class UserCenterIndex extends exchangeViewBase {
                 <img src="/static/mobile/user/icon_qianjb@3x.png"/>
               </div>
             </NavLink>
-            <NavLink to={"/mhelp/terms"} className="list-item clearfix">
+            <NavLink to={"/help/terms"} className="list-item clearfix">
               <div className="fl">
                   <img src="/static/mobile/user/icon_wd_yhxy@2x.png"/>
                   <span>{this.intl.get("login-readUser2")}</span>

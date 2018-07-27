@@ -24,7 +24,7 @@ export default class ForgetPass extends exchangeViewBase {
       errPass: "",
       errPassAgain: "",
       verifyNum: this.intl.get("sendCode"),
-      to: "/mlogin",
+      to: "/login",
     }
     //绑定view
     controller.setView(this)

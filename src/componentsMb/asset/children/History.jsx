@@ -76,7 +76,7 @@ export default class History extends exchangeViewBase {
     return (
       <div className="hist">
           <div className="nav">
-              <NavLink to="/mwallet" className="left">&lt; {this.intl.get("back")}</NavLink>
+              <NavLink to="/wallet" className="left">&lt; {this.intl.get("back")}</NavLink>
               <h3>{this.intl.get("asset-records")}</h3>
           </div>
           <ul className="tab-ul">
