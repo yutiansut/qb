@@ -282,7 +282,7 @@ export default class UserStore extends ExchangeStoreBase {
   async googleSecret() { // 获取谷歌验证密钥
     let googleSecretCon = await this.Proxy.getGoogle({"token": this.token});
     // console.log('获取谷歌验证密钥', googleSecretCon)
-    let googleSecret = googleSecretCon.sec
+    let googleSecret = googleSecretCon.sec;
     this.state.googleSecret = googleSecret;
     return googleSecret
   }
