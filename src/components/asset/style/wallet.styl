@@ -3,12 +3,12 @@
   .balance
     .asset-wallet
       a
-        color $asset-font-fullname
+        color $asset-font-main
         cursor pointer
         &:hover
-          color $main-color-hover
+          color $asset-font-main-hover
         &:active
-          color $main-color-active
+          color $asset-font-main-active
       .input-wrap
         .input
           display inline-block
@@ -24,24 +24,24 @@
           padding 0 0.22rem
           margin-right 0.2rem
           font-size 0.12rem
-          color $normal-gray-color
+          color $asset-font-minor
           line-height 0.3rem
           border-radius(0.02rem)
-          border 0.01rem solid $normal-gray-color
+          border 0.01rem solid $asset-border-minor
           cursor pointer
           &:hover
-            background-color $bg-dark-color
+            background-color $asset-bg-deep
           &:hover, &.active
-            color $main-color
-            border 0.01rem solid $main-color
+            color $asset-border-main
+            border 0.01rem solid $asset-border-main
             .pop-parent .img
               background $yiwen-active no-repeat center center
             i
-              border-color $main-color
+              border-color $asset-border-main
           &.active
             i
               border none
-              background-color $main-color
+              background-color $asset-bg-main
           i
             position absolute
             width 0.1rem
@@ -49,7 +49,7 @@
             left 0.06rem
             top 0.1rem
             letter-spacing 0.05px
-            border 0.02rem solid $normal-gray-color
+            border 0.02rem solid $asset-border-minor
             border-radius(60%)
           b
             position absolute
@@ -75,13 +75,13 @@
       table
         width 10.12rem
         thead
-          background $bg-btn-color
+          background $asset-bg-btn
           th
             min-width 120px
             width 1.35rem
             height 0.3rem
             font-size 0.12rem
-            color $normal-gray-color
+            color $asset-font-minor
             letter-spacing 0.0005rem
             text-align justify
             line-height 0.3rem
@@ -102,7 +102,7 @@
             &.currency, &.avail, &.lock, &.tobtc
               cursor pointer
               &:hover
-                color $main-color
+                color $asset-font-main
                 text-decoration underline
             &.lock
               .pop-parent
@@ -143,14 +143,14 @@
         tbody
           tr
             position relative
-            border-bottom 0.01rem solid $line-dark
+            border-bottom 0.01rem solid $asset-line-normal
             &:hover
-             background-color $bg-dark-color
+             background-color $asset-bg-deep
           td
             height 0.7rem
             line-height 0.7rem
             font-size 0.14rem
-            color $normal-font-color
+            color $asset-font-normal
             letter-spacing 0.0006rem
             text-align justify
             &.avail
@@ -169,7 +169,7 @@
               span
                 width 0.16rem
                 height 0.16rem
-                background $bg-btn-color
+                background $asset-bg-btn
             &.handle
               padding-left 0.2rem
               button
@@ -177,14 +177,14 @@
                 height 0.3rem
                 line-height 0.3rem
                 margin-right 0.18rem
-                background-color $bg-btn-color
-                color $main-color
+                background-color $asset-bg-btn
+                color $asset-font-main
                 &:hover
-                  background-color $main-color
-                  color $normal-white-color
+                  background-color $asset-bg-main
+                  color $asset-font-none
                 &:active
-                  background-color $main-color-active
-                  color $normal-white-color
+                  background-color $asset-bg-main-active
+                  color $asset-font-main
                 &.disable:hover
-                  background-color $bg-btn-color
-                  color $main-color
+                  background-color $asset-bg-btn
+                  color $asset-font-main

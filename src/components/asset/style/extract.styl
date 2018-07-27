@@ -1,30 +1,29 @@
-// @import "./base.styl"
 .asset
   .extract
     padding 0.32rem 0 0.45rem 0.3rem
-    border-left 0.01rem solid $line-dark
+    border-left 0.01rem solid $asset-line-normal
     .title
       float left
       width 1.38rem
       font-size 0.15rem
-      color $normal-font-color
+      color $asset-font-normal
       letter-spacing 0
     .content
       float left
       position relative
       width 4.56rem
     a
-      color $main-color
+      color $asset-font-main
       cursor pointer
       &:hover
-        color $main-color-hover
+        color $asset-font-main-hover
       &:active
-        color $main-color-active
+        color $asset-font-main-active
     h3
       height 0.2rem
       margin-bottom 0.63rem
       font-size 0.2rem
-      color $normal-font-color
+      color $asset-font-normal
       letter-spacing 0.0008rem
       text-align justify
     .select
@@ -41,18 +40,18 @@
             .search-list
               position relative
               width 100%
-              border 1px solid $line-dark
-              background-color $normal-input-color
+              border 1px solid $asset-line-normal
+              background-color $asset-bg-deep
               z-index 99
               &.hide
                 display none
               li
                 padding-left 0.15rem
-                background-color $normal-input-color
+                background-color $asset-bg-deep
                 cursor pointer
                 &:hover
-                  color $normal-font-color
-                  background-color $main-color
+                  color $asset-font-normal
+                  background-color $asset-bg-main
           ul
             width 3.84rem
             li
@@ -67,10 +66,10 @@
       width 9.52rem
       padding .24rem 0 0.49rem .2rem
       margin-bottom 0.45rem
-      background-color $bg-medium-color
+      background-color $asset-bg-medium
       .tips
         margin-bottom 0.2rem
-        color $negative-color
+        color $asset-font-negative
         line-height 0.28rem
         padding-left 0.4rem
         text-indent -0.4rem
@@ -86,14 +85,14 @@
             line-height 0.4rem
             margin-right 0.2rem
             border-radius(0.02rem)
-            background $normal-input-color
+            background $asset-bg-deep
             border-radius 0.02rem
             .search-list
               position absolute
               left 0
               top 0.4rem
               width 100%
-              background $normal-input-color
+              background $asset-bg-deep
               box-shadow: 6px 0 6px 0 rgba(0,0,0,0.06), 0 6px 6px 0 rgba(0,0,0,0.06);
               z-index 99
               li
@@ -101,7 +100,7 @@
                 padding 0 0.1rem
                 cursor pointer
                 &:hover
-                  background-color $bg-dark-color
+                  background-color $asset-bg-deep
                 span
                   overflow hidden
                   float left
@@ -121,8 +120,8 @@
               line-height 0.4rem
               padding 0 10% 0 0.1rem
               border-radius(0.02rem)
-              border 0.01rem solid $line-dark
-              background $normal-input-color
+              border 0.01rem solid $asset-line-normal
+              background $asset-bg-deep
               &::after
                 position absolute
                 top 0
@@ -133,7 +132,7 @@
                 background $icon-xiala no-repeat center center
                 background-size: auto 12%;
               &:hover
-                border-color $main-color
+                border-color $asset-border-main
               p
                 width 100%
                 height 100%
@@ -163,18 +162,18 @@
             width 100%
             margin-bottom .14rem
             font-size 0.13rem
-            color $normal-gray-color
+            color $asset-font-minor
             letter-spacing 0
             span
               margin-right 0.1rem
-              color $negative-color
+              color $asset-font-negative
               &.asset-24hQuota
                 float left
-                color $normal-font-color
+                color $asset-font-normal
                 margin-bottom 0.05rem
               &.apply
                 float right
-                color $normal-gray-color
+                color $asset-font-minor
                 margin-right 0
               &.min
                 display inline-block
@@ -201,23 +200,23 @@
               right -0.54rem
               top .13rem
               font-size 0.16rem
-              color $normal-font-color
+              color $asset-font-normal
               letter-spacing 0
           .fee
             p
               font-size 0.13rem
-              color $normal-font-color
+              color $asset-font-normal
               letter-spacing 0
               margin-bottom 0.14rem
               span
                 float right
-                color $normal-font-color
+                color $asset-font-normal
                 font-size 0.13rem
                 letter-spacing 0
               &.explain
                 margin-bottom 0
                 font-size 0.12rem
-                color $normal-gray-color
+                color $asset-font-minor
                 letter-spacing 0
       .password
         margin-bottom 0.44rem
@@ -249,14 +248,13 @@
           left 0
           width 1.5rem
           height 1.5rem
-          border 0.01rem solid $line-light;
-          background $normal-white-color
+          border 0.01rem solid $asset-line-minor;
           &.show
             display block
     .tip
       width 9.52rem
       padding-bottom 0.44rem
-      border-bottom 0.01rem solid $line-light
+      border-bottom 0.01rem solid $asset-line-minor
       .title
         width 1.78rem
       ol
@@ -267,14 +265,14 @@
           font-size 0.14rem
           line-height 0.14rem
           margin-bottom 0.14rem
-          color $normal-font-color
+          color $asset-font-normal
           letter-spacing 0
           a
             font-size 0.14rem
     .to-trade
       width 9.52rem
       padding 0.44rem 0
-      border-bottom 0.01rem solid $line-light
+      border-bottom 0.01rem solid $asset-line-minor
       .title
         width 1.58rem
       .bts
@@ -300,7 +298,7 @@
         line-height 1rem
         text-align center
         font-size 0.16rem
-        color $normal-gray-color
+        color $asset-font-minor
         letter-spacing 0
       table
         float left
@@ -309,7 +307,7 @@
         th,td
           height 0.3rem
           font-size 0.13rem
-          color $normal-gray-color
+          color $asset-font-minor
           letter-spacing 0
           &.time
             width 1.63rem
@@ -328,7 +326,7 @@
           height 0.32rem
           line-height 0.32rem
           font-size 0.14rem
-          color $normal-font-color
+          color $asset-font-normal
           letter-spacing 0
           i
             display block
@@ -349,7 +347,7 @@
           a
             text-decoration underline
           span
-            color $warn-color-hover
+            color $asset-font-extrude-hover
       .pagina
         float left
         width 100%
