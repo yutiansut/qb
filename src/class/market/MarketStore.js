@@ -166,10 +166,8 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //数据变动更新列表
   updateAllPairListFromData(list, type = 1) {
-
-    // console.log('updateAllPairListFromData 0', this.state.allPairData, list)
     list && list.length && (this.state.allPairData = this.state.allPairData.map(v => {
-      let res = list.find(vv => vv.tradePairId === v.tradePairId)
+      let res = list.find(vv => vv.tradePairId === v.tradePairId);
       if (!res) {
         return v
       }
