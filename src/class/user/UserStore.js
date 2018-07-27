@@ -147,7 +147,7 @@ export default class UserStore extends ExchangeStoreBase {
     let userCreditsCon = await this.Proxy.getUserCreditsNum({"token": this.token});
     // console.log('afafas', userCreditsCon)
     // let userCreditsNum = userCreditsCon.credits;
-    let userCreditsNum = userCreditsCon.cre || 0
+    let userCreditsNum = userCreditsCon.cre || 0;
     this.state.userCreditsNum = userCreditsNum;
     return userCreditsNum
   }
