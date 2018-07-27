@@ -97,7 +97,7 @@ export default class activityFresh extends exchangeViewBase {
         <div className="banner-img" style={{ backgroundSize: `100% 100%`, backgroundImage: `url(${this.state.bannerImgUrl})`}}>
           {/* <img src="/static/img/banner_title.svg" alt=""/> */}
         </div>
-        <h1>{this.intl.getHTML('activity-title')}{(!controller.userId && <Link to="/wlogin">{this.intl.get('activity-click')}</Link> || null)}</h1>
+        <h1>{this.intl.getHTML('activity-title')}{(!controller.userId && <Link to="/login">{this.intl.get('activity-click')}</Link> || null)}</h1>
         <div className={`active-clip`}>
           <input
             type="text"

@@ -62,7 +62,7 @@ export default class tradeNotice extends ExchangeViewBase {
           {Object.keys(this.state.infoList).length && this.state.infoList.data.length && this.state.infoList.data.map((v, index) =>
             <li key={index} id='notice_con'>
               <p>
-                <Link to={`wnotice/content/detail?infoId=${v.activityId}`}>
+                <Link to={`/notice/content/detail?infoId=${v.activityId}`}>
                   {v.subject}
                 </Link>
               </p>

@@ -13,9 +13,9 @@ export default class Footer extends ExchangeViewBase {
   constructor() {
     super()
     this.footerArray = [
-      { label: this.intl.get('footer-info'), to: '/wnotice' },
+      { label: this.intl.get('footer-info'), to: '/notice' },
       { label: this.intl.get('help-fees'), to: '/help/pricing' },
-      { label: this.intl.get('footer-request'), to: '/wnotice/apply' },
+      { label: this.intl.get('footer-request'), to: '/notice/apply' },
       { label: this.intl.get('footer-protocol'), to: '/help/terms' },
       { label: this.intl.get('help-api-title'), to: '/help/api' }
     ];
@@ -70,7 +70,7 @@ export default class Footer extends ExchangeViewBase {
     return (
       <div className="footer-wrap">
         <div>
-          <Link to='/whome' className="home-img"><img src="/static/img/home/logo_footer.svg" alt="" /></Link>
+          <Link to='/home' className="home-img"><img src="/static/img/home/logo_footer.svg" alt="" /></Link>
           <ul>
             {this.footerArray.map((item, index) => (<li key={index}>
               <Link to={item.to}>{item.label}</Link>

@@ -8,7 +8,7 @@ export default class LoginStore extends ExchangeStoreBase {
   constructor() {
     super('login', 'general');
     this.state = {}
-    let urlToken = window.location.pathname === "/whome/" && this.getQuery("token");
+    let urlToken = window.location.pathname === "/home/" && this.getQuery("token");
     this.WebSocket.general.on('login', data => {
       // console.log('joinRoom getWebSocketData', data, this.controller)
       // console.log('ccc1', data.data)

@@ -150,7 +150,7 @@ export default function en(state) {
     601: "The password entered is incorrect, please try again!",
     602: "Database error",
     603: "Request parameter error",
-    604: "The user does not exist.",
+    604: "Please log in first, and set the login password in the personal center.",
     605: "User service system access failed",
     606: "Sent, not exceeding 3 minutes",
     607: "The verification code has expired",

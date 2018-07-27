@@ -335,7 +335,7 @@ export default class Extract extends exchangeViewBase {
                     {this.intl.get("asset-limitApply")}
                   </span>
                 ) : (
-                  <NavLink to="/wuser/identity">
+                  <NavLink to="/user/identity">
                     {this.intl.get("asset-limitApply")}
                   </NavLink>
                 )}
@@ -422,11 +422,11 @@ export default class Extract extends exchangeViewBase {
               />
               <div className="set">
                 {this.state.userTwoVerify.fundPwd === 1 ? (
-                  <NavLink to="/wuser/safe" target="_blank">
+                  <NavLink to="/user/safe" target="_blank">
                     {this.intl.get("asset-setFundPassword")}
                   </NavLink>
                 ) : this.state.userTwoVerify.fundPwd === 0 ? (
-                  <NavLink to="/wuser/safe" target="_blank">
+                  <NavLink to="/user/safe" target="_blank">
                     {this.intl.get("login-forget")}
                   </NavLink>
                 ) : (
@@ -627,7 +627,7 @@ export default class Extract extends exchangeViewBase {
                 this.state.orderTipContent === this.intl.get("asset-auth-tip")
               ) {
                 this.props.history.push({
-                  pathname: `/wuser/identity/`
+                  pathname: `/user/identity/`
                 });
               }
               this.setState({ orderTip: false });

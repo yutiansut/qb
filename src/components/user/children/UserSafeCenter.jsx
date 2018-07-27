@@ -255,7 +255,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>{this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}</li>
             <li>{this.intl.get("user-level")}</li>
             <li>
-              <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/wuser/integration">{this.state.userCreditsNum}</Link>)
+              <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/user/integration">{this.state.userCreditsNum}</Link>)
             </li>
           </ul>
         </div>

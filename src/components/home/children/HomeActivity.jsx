@@ -53,7 +53,7 @@ export default class HomeActivity extends ExchangeViewBase {
               <span className="banner-btn"></span>
             </Link>
           ) : (
-            !userToken && <Link to="/wlogin" className={`${lang === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
+            !userToken && <Link to="/login" className={`${lang === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
             <span className="banner-btn" style={{ background: `url(${btn}) center center / 100% no-repeat` }}></span>
           </Link>
           )}

@@ -343,7 +343,7 @@ export default class TradePlan extends ExchangeViewBase {
         </div>
         <div className='deal-login-shadow' style={{display:this.props.controller.userController.userId ? 'none' : 'block'}}>
           <p>
-            <a href="/wlogin/">{this.intl.get('deal-login')}</a>
+            <a href="/login/">{this.intl.get('deal-login')}</a>
             <span>{this.intl.get('deal-after')}</span>
           </p>
         </div>

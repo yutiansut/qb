@@ -60,7 +60,7 @@ export default class LoginController extends ExchangeControllerBase {
       // console.log(this.userController.store.state.userId, this.store.Storage.userId.get());
       !flag && this.userController.store.userListener()
       !flag && this.view && this.view.name === "login" && window.location.href.includes("login") && this.view.history.push(this.view.state.from);
-      flag && (window.location.href = window.location.origin + '/whome')
+      flag && (window.location.href = window.location.origin + '/home')
       return
     }
     if ([2008, 2009, 2010].includes(data.r)) { // 需要二次验证
@@ -70,8 +70,8 @@ export default class LoginController extends ExchangeControllerBase {
     }
     if (data.r !== 0 || data.d === null) {
       if (flag) {
-        !this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/wlogin");
-        this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/whome");
+        !this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/login");
+        this.store.Storage.userToken.get() && (window.location.href = window.location.origin + "/home");
       }
       this.getCaptchaVerify()
     }
@@ -127,7 +127,7 @@ export default class LoginController extends ExchangeControllerBase {
     if (result === null) {
       setTimeout(() => {
         // console.log('登录view', this.view)
-        // this.view.history.push('/wlogin')
+        // this.view.history.push('/login')
         this.view.history.push({
           pathname: this.view.state.to,
           query: { titleIndex: 1 }

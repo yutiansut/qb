@@ -40,7 +40,7 @@ export default class TotalAsset extends exchangeViewBase {
           <b>{totalAsset.totalQuota} BTC</b>
               {totalAsset.totalQuota === 10 ? <span className="disable">
               {this.intl.get("asset-limitApply")}
-            </span> : <NavLink to="/wuser/identity">
+            </span> : <NavLink to="/user/identity">
               {this.intl.get("asset-limitApply")}
             </NavLink>}
             <span>{this.intl.get("asset-usedAsset")}:</span>

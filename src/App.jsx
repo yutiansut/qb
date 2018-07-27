@@ -153,19 +153,19 @@ export default class App extends Component {
     let HomeComponent = AsyncComponent(()=>import("./components/home/Home.jsx"), {marketController, activityController, noticeController});
 
     Routers = [
-      { path: "/whome", component: HomeComponent },
+      { path: "/home", component: HomeComponent },
       { path: "/trade", component: Trade },
-      { path: "/wlogin/:uid", component: Loign },
-      { path: "/wlogin", component: Loign },
+      { path: "/login/:uid", component: Loign },
+      { path: "/login", component: Loign },
       { path: "/wallet", component: Asset, auth: true },
-      { path: "/worder", component: Order, auth: true },
-      { path: "/wuser", component: User, auth: true },
-      { path: "/wfindPass", component: ForgetPass },
-      { path: "/wnotice/content/detail", component: NoticeDetail },
-      { path: "/wnotice", component: Notice },
+      { path: "/order", component: Order, auth: true },
+      { path: "/user", component: User, auth: true },
+      { path: "/findPass", component: ForgetPass },
+      { path: "/notice/content/detail", component: NoticeDetail },
+      { path: "/notice", component: Notice },
       { path: "/help", component: Help },
       { path: "/activity", component: Activity },
-      { path: "/wuserNotice", component: UserNotice, auth: true }
+      { path: "/userNotice", component: UserNotice, auth: true }
     ];
   }
   componentWillMount() {
@@ -188,7 +188,7 @@ export default class App extends Component {
           <div className="web-wrap">
             {/*<Header/>*/}
             <Switch>
-              <Route path="/whome" component={homeHeader} />
+              <Route path="/home" component={homeHeader} />
               <Route path="/trade" component={tradeHeader} />
               <Route component={header} />
             </Switch>
@@ -207,8 +207,8 @@ export default class App extends Component {
                     render={props => {
                       document.getElementById("app").scrollIntoView(true);
                       return !item.auth ? (
-                        ["/wlogin", "/wlogin/:uid", '/wfindPass'].includes(item.path) && userController.Storage.userToken.get() ? (
-                          <Redirect to={{ pathname: "/whome" }} />
+                        ["/login", "/login/:uid", '/findPass'].includes(item.path) && userController.Storage.userToken.get() ? (
+                          <Redirect to={{ pathname: "/home" }} />
                         ) : (
                             <item.component {...props} />
                           )
@@ -217,7 +217,7 @@ export default class App extends Component {
                       ) : (
                             <Redirect
                               to={{
-                                pathname: "/wlogin",
+                                pathname: "/login",
                                 state: { from: props.location }
                               }}
                             />
@@ -226,7 +226,7 @@ export default class App extends Component {
                     }
                   />
                 ))}
-                <Redirect to="/whome" />
+                <Redirect to="/home" />
               </Switch>
             </div>
             {/*<Footer/>*/}

@@ -84,7 +84,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           <div className='trade-password clearfix' style={{marginBottom: this.props.fundPassVerif && '.2rem'}}>
             <div className='trade-password-input'>
               <span>{`${this.intl.get('fundPass')}`}:</span>
-              {!this.props.fundPassVerify && <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight:'.1rem'}}><input type="password" value={this.props.fundPwdInterval ? 'wfywfywfy' : (this.props.ControllerProps.dealType ? this.props.funpassSell : this.props.funpassBuy)} onChange={this.props.passInput.bind(this,this.props.ControllerProps.dealType)} readOnly={this.props.fundPwdInterval ? true : false}/>{<span onClick={this.props.freePwd.bind(this)} style={{cursor: 'pointer', color:'#2BB789'}}>{`${this.intl.get('deal-freepwd')}`}</span>}</div> || <em><a href="/wuser/safe/">{this.intl.get('deal-setpwd')}</a></em>}
+              {!this.props.fundPassVerify && <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight:'.1rem'}}><input type="password" value={this.props.fundPwdInterval ? 'wfywfywfy' : (this.props.ControllerProps.dealType ? this.props.funpassSell : this.props.funpassBuy)} onChange={this.props.passInput.bind(this,this.props.ControllerProps.dealType)} readOnly={this.props.fundPwdInterval ? true : false}/>{<span onClick={this.props.freePwd.bind(this)} style={{cursor: 'pointer', color:'#2BB789'}}>{`${this.intl.get('deal-freepwd')}`}</span>}</div> || <em><a href="/user/safe/">{this.intl.get('deal-setpwd')}</a></em>}
             </div>
           </div>
           <div className='trade-deal-turnover'>
@@ -93,7 +93,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             <i>{this.props.DealEntrustType === 0 && (this.props.PriceUnit.toUpperCase() || this.props.Market.toUpperCase())}</i>
               </span>}
             {!this.props.fundPassVerify && <p className='password-msg fr'>
-              <span><a href="/wuser/safe/">{`${this.intl.get('deal-forgetpwd')}`}</a></span>
+              <span><a href="/user/safe/">{`${this.intl.get('deal-forgetpwd')}`}</a></span>
             </p> || null }
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>

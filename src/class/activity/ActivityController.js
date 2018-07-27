@@ -30,7 +30,7 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   get address() {
-    return `${this.configController.currentUrl}/wlogin/${this.userId}`
+    return `${this.configController.currentUrl}/login/${this.userId}`
   }
 
 

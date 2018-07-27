@@ -33,7 +33,7 @@ export default class Header extends ExchangeViewBase {
       navClass: 'headerNav',
       languageIndex: 0,
       navArrayLeft : [
-        {label: `${this.intl.get('header-home')}`, to: '/whome', select: false, linkUser: false, tokenShow: false},
+        {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false, tokenShow: false},
         {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false, tokenShow: false},
         {
           label: `${this.intl.get('header-assets')}`,
@@ -41,7 +41,7 @@ export default class Header extends ExchangeViewBase {
           select: true,
           linkUser: true,
           tokenShow: true,
-          childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/worder',}]
+          childrenList: [{label: `${this.intl.get('header-assets')}`, to: '/wallet',}, {label: `${this.intl.get('header-order')}`, to: '/order',}]
         }
       ],
       userNoticeHeader: {},
@@ -71,7 +71,7 @@ export default class Header extends ExchangeViewBase {
     this.loginController.setHeaderOutView(this)
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, this.noticeController.store.state.userNoticeHeader);
-    this.matched = '/whome'
+    this.matched = '/home'
 
     //
     this.hideNotice=(event)=>{
@@ -114,7 +114,7 @@ export default class Header extends ExchangeViewBase {
   loginOut() {
     // console.log(222, this)
     this.clearLoginInfo()
-    this.props.history.push('/whome')
+    this.props.history.push('/home')
     let navArrayLeft = this.state.navArrayLeft
     navArrayLeft[2].tokenShow = true
     this.setState({navArrayLeft})
@@ -154,7 +154,7 @@ export default class Header extends ExchangeViewBase {
       <div className={`${this.props.navClass} clearfix`} id="header">
         <ul className="clearfix">
           <li className='nav-logo'>
-            <Link to='/whome'></Link>
+            <Link to='/home'></Link>
           </li>
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
             // console.log(match)
@@ -193,26 +193,26 @@ export default class Header extends ExchangeViewBase {
                   <li key={index} onClick={value => this.changeHeaderNotice(v, index)} className="clearfix">
                     <span>{this.props.configController.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}</span>
                     <b>{v.createAt.toDate('yyyy-MM-dd HH:mm:ss')}</b>
-                    {/* <Link to = {{pathname: `/wuserNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
+                    {/* <Link to = {{pathname: `/userNotice`, query: { newsCon: v }}}>{v.content}</Link> */}
                   </li>
                 ))}</ul>
               ) : (
                 <div>{this.intl.get("notice-none")}</div>
               )}
-              <Link to="/wuserNotice" className="check-all" onClick={e=>this.setState({showNews:false})}>{this.intl.get("asset-viewAll")}</Link>
+              <Link to="/userNotice" className="check-all" onClick={e=>this.setState({showNews:false})}>{this.intl.get("asset-viewAll")}</Link>
             </div>}
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
-            <NavLink activeClassName="header-right-active" to="/wlogin" style={{fontSize: '14px'}}>{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
+            <NavLink activeClassName="header-right-active" to="/login" style={{fontSize: '14px'}}>{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
           </li>
           <li className={`${userToken ? 'user-li' : 'hide'}`} >
             <p>{userName}</p>
             <ul className="login-ul">
               <li>
-                <NavLink to="/wuser/safe">{`${this.intl.get('header-security')}`}</NavLink>
+                <NavLink to="/user/safe">{`${this.intl.get('header-security')}`}</NavLink>
               </li>
               <li>
-                <NavLink to="/wuser/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
+                <NavLink to="/user/identity">{`${this.intl.get('header-idVerify')}`}</NavLink>
               </li>
               <li className="login-out" onClick={this.loginOut}>{this.intl.get("header-logOut")}</li>
             </ul>

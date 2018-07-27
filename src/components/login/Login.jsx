@@ -43,7 +43,7 @@ export default class Login extends exchangeViewBase {
       userErr: "", // 手机号/邮箱错误
       pwdErr: "", // 密码错误
       twoVerifyUser: "", // 两步认证用户信息
-      from: props.location.state && props.location.state.from.pathname || '/whome'
+      from: props.location.state && props.location.state.from.pathname || '/home'
     }
     const {controller, match} = props
     //绑定view
@@ -151,7 +151,7 @@ export default class Login extends exchangeViewBase {
 
 
   componentWillMount() {
-    // this.props.controller.Storage.userToken.get() && (this.props.history.push({pathname:"/whome"}));
+    // this.props.controller.Storage.userToken.get() && (this.props.history.push({pathname:"/home"}));
   }
 
   componentDidMount() {
@@ -201,7 +201,7 @@ export default class Login extends exchangeViewBase {
                      value={this.state.passInput}
                      onInput={value => this.changePass(value)}
                      onBlur={this.checkPassInput}/>
-              <span><NavLink to="/wfindPass">{this.intl.get("login-forget")}</NavLink></span>
+              <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
               <em>{this.state.passInput && this.state.pwdErr}</em>
             </li>
             <li className="verify-li">

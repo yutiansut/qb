@@ -141,7 +141,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
-            {this.state.historyOrder && this.state.historyOrder.length !== 0 && <NavLink to={{pathname: "/worder/history/"}}>{this.intl.get('seeMore')}</NavLink>}
+            {this.state.historyOrder && this.state.historyOrder.length !== 0 && <NavLink to={{pathname: "/order/history/"}}>{this.intl.get('seeMore')}</NavLink>}
         </div>
           {this.state.historyOrder && this.state.historyOrder.length !== 0 && <table className='trade-current-table'>
             <thead>

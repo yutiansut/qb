@@ -9,7 +9,7 @@ class ReactTrend extends React.Component {
             height: 30,
             ratio: 3.33,           // 宽高比例
             trends: [120,345,300,432,253,163,765,324],      // 数据节点
-            stroke: "#fff",           // 线颜色
+            stroke: "rgba(255, 255, 255, .5)",           // 线颜色
             strokeWidth: 1,                 // 线宽
         };
         // console.log(this.props)
