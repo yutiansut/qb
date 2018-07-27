@@ -10,6 +10,8 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      priceLimit : 6,
+      numLimit: 2,
       marketChangePrice:0,
       changeBankPriceB:0, //买入价格输入框实时汇率
       changeBankPriceS:0,//卖入价格输入框实时汇率
@@ -85,12 +87,12 @@ export default class TradePlan extends ExchangeViewBase {
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue] || this.state.priceInit);
-    if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
-      priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
-    }
-    console.log(this.state[diffArr[dealType].inputValue],789456,this.state.priceInit)
-    console.log(this.state.marketChangePrice,'aaaa',priceValue)
+    // let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue] || this.state.priceInit);
+    // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
+    //   priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
+    // }
+    // console.log(this.state[diffArr[dealType].inputValue],789456,this.state.priceInit)
+    // console.log(this.state.marketChangePrice,'aaaa',priceValue)
     let value = e.target.value;
     let limitNum = value.split('.');
     if(limitNum.length > 2)
@@ -112,28 +114,33 @@ export default class TradePlan extends ExchangeViewBase {
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
     //   return
    
-    let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
-        || (priceValue > 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-            || (priceValue >= 0.01 && priceValue <= 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
-            || (priceValue < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
+    // let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
+    //     || (priceValue > 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+    //         || (priceValue >= 0.01 && priceValue <= 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+    //         || (priceValue < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]))) : true;
+    let numLimit = this.state.numLimit;
+    let reg = new RegExp(`^[0-9]{0,${numLimit}}$`);
+    let flag =  type ? reg.test(limitNum[1]) : true;
     if(!flag)
       return
   
-    let limitPrice = 0;
-    priceValue >= 100 && (limitPrice = 6);
-    priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
-    priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
-    let numValue = e.target.value > maxNum ? maxNum.toFixed(limitPrice) : value;
+    // let limitPrice = 0;
+    // priceValue >= 100 && (limitPrice = 6);
+    // priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
+    // priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
+    let numValue = e.target.value > maxNum ? maxNum.toFixedWithoutUp(numLimit) : value;
     if(type){
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
       dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
     }
    else{
-      let a = Number(numValue).formatFixNumberForAmount(Number(priceValue));
-      let b = a.split(',');
-      let c;
-      b.length > 1 && (c = b.join(''));
-      dealType ? (this.setState({inputSellNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
+      // let a = Number(numValue).formatFixNumberForAmount(Number(priceValue));
+      // let b = a.split(',');
+      // let c;
+      // b.length > 1 && (c = b.join(''));
+      // dealType ? (this.setState({inputSellNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
+      // dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+      dealType ? (this.setState({inputSellNum: Number(numValue).toFixedWithoutUp(numLimit)})) : (this.setState({inputBuyNum: Number(numValue).toFixedWithoutUp(numLimit)}));
       dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
     }
   }
@@ -149,12 +156,13 @@ export default class TradePlan extends ExchangeViewBase {
     if (!((/^[0-9]*$/).test(arr[0]) && (/^[0-9]*$/).test(arr[1])))
       return
     // console.log('ChangePrice', Number(value), arr[0], arr[1], (/^[0-9]{0,4}$/).test(arr[1]), (/^[0-9]{0,6}$/).test(arr[1]), (/^[0-9]{0,8}$/).test(arr[1]))
-    // let cc = 2
-    // let reg = new RegExp(`^[0-9]{0,${cc}}$`);
-    let flag = (Number(value) >= 100 && (/^[0-9]{0,2}$/).test(arr[1]))
-        || ((Number(value) < 100 && (/^[0-9]{0,4}$/).test(arr[1]))
-            || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
-            || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
+    let priceLimit = this.state.priceLimit;
+    let reg = new RegExp(`^[0-9]{0,${priceLimit}}$`);
+    // let flag = (Number(value) >= 100 && (/^[0-9]{0,2}$/).test(arr[1]))
+    //     || ((Number(value) < 100 && (/^[0-9]{0,4}$/).test(arr[1]))
+    //         || (Number(value) < 0.1 && (/^[0-9]{0,6}$/).test(arr[1]))
+    //         || (Number(value) < 0.01 && (/^[0-9]{0,8}$/).test(arr[1])));
+    let flag = reg.test(arr[1]);
     // console.log('ChangePrice 0.5',flag,this.state.PriceUnit)
     if(this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD'){
       flag = (/^[0-9]{0,2}$/).test(arr[1])

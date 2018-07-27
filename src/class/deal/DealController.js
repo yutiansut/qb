@@ -55,8 +55,8 @@ export default class DealController extends ExchangeControllerBase {
       inputBuyFlag: false,
       inputSellFlag: false,
       priceBank: {
-        CNY: Number(prices.priceCN).toFixed(2),
-        USD: Number(prices.priceEN).toFixed(2)
+        CNY: Number(prices.priceCN).toFixedWithoutUp(2),
+        USD: Number(prices.priceEN).toFixedWithoutUp(2)
       }
     });
     this.store.state.prices = prices;
@@ -110,8 +110,8 @@ export default class DealController extends ExchangeControllerBase {
     let prices = this.store.state.prices,
         initPrice = prices.price,
       priceBank = {
-        CNY: Number(prices.priceCN).toFixed(2),
-        USD: Number(prices.priceEN).toFixed(2),
+        CNY: Number(prices.priceCN).toFixedWithoutUp(2),
+        USD: Number(prices.priceEN).toFixedWithoutUp(2),
       }
     ;
     this.view.setState({
@@ -125,14 +125,14 @@ export default class DealController extends ExchangeControllerBase {
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
       let checkValue = inputSellValue || inputBuyValue;
-      let checkNum = 8;
-      checkValue >= 100 && (checkNum = 2);
-      checkValue >= 0.1 && checkValue < 100 && (checkNum = 4);
-      checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
+      let checkNum = this.view.state.priceLimit;
+      // checkValue >= 100 && (checkNum = 2);
+      // checkValue >= 0.1 && checkValue < 100 && (checkNum = 4);
+      // checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
       let limitedValue = (v === 'CNY' || v === 'USD') ? 2 : checkNum;
           this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue;
-      this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixed(limitedValue));
-      this.view.state.inputBuyFlag && (inputBuyValue = inputBuyValue.toFixed(limitedValue));
+      this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixedWithoutUp(limitedValue));
+      this.view.state.inputBuyFlag && (inputBuyValue = inputBuyValue.toFixedWithoutUp(limitedValue));
       this.view.setState({
             inputSellValue,
             inputBuyValue
@@ -150,11 +150,13 @@ export default class DealController extends ExchangeControllerBase {
       t === 0 && (this.view.setState({changBankPriceB : changeBankPrice}))
     }
     if (this.view.state.buyNumFlag && (t === 0)) {
-      let checkNum = 0;
-      changeBankPrice >= 100 && (checkNum = 6);
-      changeBankPrice >= 0.1 && changeBankPrice < 100 && (checkNum = 4);
-      changeBankPrice >= 0.01 && changeBankPrice < 0.1 && (checkNum = 2);
-      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixed(checkNum)})
+      // let checkNum = 0;
+      let checkNum = this.view.state.numLimit;
+      // changeBankPrice >= 100 && (checkNum = 6);
+      // changeBankPrice >= 0.1 && changeBankPrice < 100 && (checkNum = 4);
+      // changeBankPrice >= 0.01 && changeBankPrice < 0.1 && (checkNum = 2);
+      // console.log('aaaaaaaaaaaaaa',Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum))
+      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
     }
   }
 
@@ -211,12 +213,21 @@ export default class DealController extends ExchangeControllerBase {
     }
     // 判断数量精度
     let limitNum = params.count.toString().split('.');
+    let limitPrice = params.price.toString().split('.')
     limitNum[1] = limitNum[1] || '';
-    let numLimited =  (params.price >= 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
-        || (params.price >= 0.1 && params.price < 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
-        || (params.price >= 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
-        || (params.price < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]));
-    if(!numLimited){
+    limitPrice[1] = limitPrice[1] || '';
+    let numLimit = this.view.state.numLimit;
+    let priceLimit = this.view.state.priceLimit;
+    let regN = new RegExp(`^[0-9]{0,${numLimit}}$`);
+    let regP = new RegExp(`^[0-9]{0,${priceLimit}}$`);
+    let flagN =   regN.test(limitNum[1]) ;
+    let flagP =   regP.test(limitPrice[1]) ;
+    // let numLimited =
+    // let numLimited =  (params.price >= 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
+    //     || (params.price >= 0.1 && params.price < 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
+    //     || (params.price >= 0.01 && params.price < 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
+    //     || (params.price < 0.01 && (/^[0-9]{0,0}$/).test(limitNum[1]));
+    if(!(flagN && flagP)){
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
@@ -290,11 +301,11 @@ export default class DealController extends ExchangeControllerBase {
       );
       return
     }
-    if(result && result.wrongTime < 5){
+    if(result && result.errCode === "PWD_ERROR"){
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
-            dealPopMsg: this.view.intl.get("passError"),
+            dealPopMsg: result.msg,
             dealPassType:'passive',// 弹窗类型倾向
             dealPass:true,// 下单弹窗
           }
