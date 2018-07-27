@@ -6,7 +6,8 @@ import {
   Redirect
 } from "react-router-dom";
 
-import "./common/css/index.styl";
+import "./common/css/base.styl";
+import "./common/css/reset.styl";
 
 import {AsyncComponent} from './core'
 
