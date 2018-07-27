@@ -175,7 +175,8 @@ export default class MarketStore extends ExchangeStoreBase {
       }
       //除第一次外需要计算增长值改变字体颜色
       if (type) {
-        res.updown = res.price > v.price
+        // console.log('计算涨跌', res.price, v.price)
+        res.updown = res.price - v.price
       }
       return Object.assign(v, res)
     }))
