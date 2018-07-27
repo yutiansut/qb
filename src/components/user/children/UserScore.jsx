@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import exchangeViewBase from '../../../components/ExchangeViewBase'
-import "../stylus/integration.styl"
+import "../stylus/score.styl"
 import Pagination from '../../../common/component/Pagination/index.jsx'
 
 export default class userIntegration extends exchangeViewBase {

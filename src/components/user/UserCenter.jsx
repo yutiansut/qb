@@ -9,9 +9,10 @@ import {
 
 import UserSafeCenter from './children/UserSafeCenter.jsx' // 安全中心
 import UserIdentity from './children/UserIdentity.jsx' // 身份认证
-import UserIntegration from './children/UserIntegration.jsx' // 我的积分
+import UserIntegration from './children/UserScore.jsx' // 我的积分
 
-import "./stylus/user.styl"
+// import "./stylus/user.styl"
+import "./stylus/index.styl"
 import exchangeViewBase from "../ExchangeViewBase";
 
 export default class User extends exchangeViewBase {
