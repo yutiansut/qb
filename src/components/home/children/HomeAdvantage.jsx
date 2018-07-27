@@ -6,7 +6,7 @@ export default class HomeAdvantage extends exchangeViewBase {
   constructor() {
     super()
     this.imageArray = [
-      '/static/img/home/金融交易@2x.png',
+      '/static/img/home/financial@2x.png',
       '/static/img/home/4_2.svg',
       '/static/img/home/4_3.svg',
       '/static/img/home/muti@2x.png'
@@ -38,7 +38,7 @@ export default class HomeAdvantage extends exchangeViewBase {
         <div className="home-advan-header clearfix">
           <ul>
             <li className={this.state.index === 0 ?"active" : ""} onClick={() => {this.setState({index: 0})}}>
-              <img src="/static/img/home/金融交易@2x.png"/>
+              <img src="/static/img/home/financial@2x.png"/>
               <p>{this.intl.get("home-advantage-h1")}</p>
             </li>
             <li className={this.state.index === 1 ?"active" : ""} onClick={() => {this.setState({index: 1})}}>
