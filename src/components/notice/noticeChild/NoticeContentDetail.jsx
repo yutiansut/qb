@@ -59,7 +59,7 @@ export default class homeNotice extends exchangeViewBase {
           </span>
           <b>
             {activityInfo.createdAt &&
-              activityInfo.createdAt.toDate("yyyy-MM-dd HH:mm:SS")}
+              activityInfo.createdAt.toDate("yyyy-MM-dd HH:mm:ss")}
           </b>
         </h2>
         <h3>

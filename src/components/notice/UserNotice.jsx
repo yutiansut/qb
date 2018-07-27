@@ -101,7 +101,7 @@ export default class userNotice extends exchangeViewBase {
                 <b className={`${v.isRead === 0 ? '' : 'no-read'} read-flag`}></b>
                 <span>{this.props.controller.configData.language === 'zh-CN' ? v.content.contentCN : v.content.contentEN}</span>
               </p>
-              <i>{v.createAt.toDate('yyyy-MM-dd HH:mm:SS')}</i>
+              <i>{v.createAt.toDate('yyyy-MM-dd HH:mm:ss')}</i>
             </li>))
           }
           </ul>
