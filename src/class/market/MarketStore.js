@@ -179,7 +179,6 @@ export default class MarketStore extends ExchangeStoreBase {
       }
       return Object.assign(v, res)
     }))
-    // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //数据变动更新推荐币种
