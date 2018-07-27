@@ -155,13 +155,10 @@ export default class MarketStore extends ExchangeStoreBase {
 
   //收藏变动更新列表
   updateAllPairListFromCollect(list = []) {
-    // console.log('updateAllPairListFromCollect 0', this, this.allPair, list)
-    // list && list.length && lgitist.forEach(v => this.allPair.find(vv => vv.tradePairId === v).isFavorite = 1)
     this.state.allPairData = this.state.allPairData.map(v => Object.assign(v, list.includes(v.tradePairId) && {
       isFavorite: 1,
       collectIndex: list.indexOf(v.tradePairId)
     } || {isFavorite: 0}))
-    // console.log('updateAllPairListFromCollect 1', this.allPair)
   }
 
   //数据变动更新列表
