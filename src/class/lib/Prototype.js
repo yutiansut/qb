@@ -131,7 +131,7 @@ function findFlag(number, formatType) {
   for (let i = 0; i < numberValue.length; i++) {
     if (number >= numberValue[i]) {
       flag = i;
-      break
+      break;
     }
   }
   return flag
