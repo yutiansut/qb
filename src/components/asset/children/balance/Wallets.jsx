@@ -188,6 +188,7 @@ export default class Wallets extends exchangeViewBase {
                     <Button
                       type="base"
                       theme="main"
+                      disable={ item.c === 0 ? true : false}
                       title={this.intl.get("deposit")}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -199,6 +200,7 @@ export default class Wallets extends exchangeViewBase {
                         type="base"
                         className="withdraw"
                         theme="main"
+                        disable={item.c === 0 ? true : false}
                         onClick={(e) => {
                           e.stopPropagation();
                           e.nativeEvent.stopImmediatePropagation();
@@ -214,6 +216,7 @@ export default class Wallets extends exchangeViewBase {
                       <Button
                         type="base"
                         theme="main"
+                        disable={item.c === 0 ? true : false}
                         onClick={(e) => {
                           e.stopPropagation();
                           e.nativeEvent.stopImmediatePropagation();
