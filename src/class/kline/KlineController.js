@@ -7,16 +7,17 @@ export default class KlineController extends ExchangeControllerBase {
     this.store = new KlineStore();
     this.store.setController(this)
     this.rooms = {
-      604800: "K1w",
-      86400: "K1d",
-      43200: "K6h",
-      14400: "K4h",
-      7200: "K2h",
-      3600: "K1h",
-      1800: "K30min",
-      900: "K15min",
-      300: "K5min",
-      60: "K1min"
+      604800: "1w",
+      86400: "1d",
+      43200: '12h',
+      21600: "6h",
+      14400: "4h",
+      7200: "2h",
+      3600: "1h",
+      1800: "30m",
+      900: "15m",
+      300: "5m",
+      60: "1m"
     };
   }
 

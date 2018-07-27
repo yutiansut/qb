@@ -102,4 +102,22 @@ export default class OrderListController extends ExchangeControllerBase {
     }
     
   }
+  // 设置价格及数量精度
+  setAccuracy(priceAccuracy,volumeAccuracy) {
+    this.view.setState(
+        {
+          priceAccuracy,
+          volumeAccuracy
+        },
+    )
+    this.store.state.volumeAccuracy = volumeAccuracy;
+    this.store.state.priceAccuracy = priceAccuracy;
+  }
+  
+  get accuracy(){
+    return{
+      volumeAccuracy: this.store.state.volumeAccuracy,
+      priceAccuracy: this.store.state.priceAccuracy
+    }
+  }
 }

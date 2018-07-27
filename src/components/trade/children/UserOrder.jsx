@@ -118,11 +118,11 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#F25656' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
-                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'}))}</td>
-                    <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number((v.priceCN).multi(v.count)).format({number: 'legal', style: {name: 'cny'}}) || (this.state.unitsType === 'USD' && Number((v.priceEN).multi(v.count)).format({number: 'legal', style: {name: 'usd'}})) || Number((v.price).multi(v.count)).format({number: 'property'})}</td>
-                    <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.price))}</td>
-                    <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(Number(v.price)) || Number(v.count.minus(v.dealDoneCount)).formatFixNumberForAmount(Number(v.price))}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))}</td>
+                    <td>{Number(v.count).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number((v.priceCN).multi(v.count)).format({number: 'legal', style: {name: 'cny'}}) || (this.state.unitsType === 'USD' && Number((v.priceEN).multi(v.count)).format({number: 'legal', style: {name: 'usd'}})) || Number((v.price).multi(v.count)).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</td>
+                    <td>{v.dealDoneCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
+                    <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                     <td onClick={this.cancelOrder.bind(this, 0, v)} className={`cancel`} style={{cursor: 'pointer'}} >{this.intl.get('cancel')}</td>
                   </tr>
@@ -166,11 +166,11 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#F25656' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                     {/*todo 颜色改类名统一处理*/}
-                    <td>{v.priceType ? this.intl.get('marketPrice') : ((this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital'})))}</td>
-                    <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td>
-                    <td>{v.dealDoneCount.formatFixNumberForAmount(Number(v.avgPrice))}</td>
-                    <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'legal',style:{name: 'cny'}}) || Number(v.dealDoneCount.multi(v.avgPriceCN)).format({number: 'legal',style:{name: 'cny'}}))) || (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'legal',style:{name: 'usd'}}) || Number(v.dealDoneCount.multi(v.avgPriceEN)).format({number: 'legal',style:{name: 'usd'}}))) || (v.turnover && Number(v.turnover).format({number: 'property'}) || Number(v.dealDoneCount.multi(v.avgPrice)).format({number: 'property'}))}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal',style:{name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal',style:{name: 'usd'}})) || Number(v.avgPrice).format({number:'digital'})}</td>
+                    <td>{v.priceType ? this.intl.get('marketPrice') : ((this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})))}</td>
+                    <td>{Number(v.count).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy,false)}</td>
+                    <td>{v.dealDoneCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy,false)}</td>
+                    <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'legal',style:{name: 'cny'}}) || Number(v.dealDoneCount.multi(v.avgPriceCN)).format({number: 'legal',style:{name: 'cny'}}))) || (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'legal',style:{name: 'usd'}}) || Number(v.dealDoneCount.multi(v.avgPriceEN)).format({number: 'legal',style:{name: 'usd'}}))) || (v.turnover && Number(v.turnover).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}}) || Number(v.dealDoneCount.multi(v.avgPrice)).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}}))}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal',style:{name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal',style:{name: 'usd'}})) || Number(v.avgPrice).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )
@@ -200,15 +200,15 @@ export default class userOrder extends ExchangeViewBase {
                   <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{Number(this.state.orderDetail.dealedMoney).format({number:'property'})}</p>
+                  <p>{Number(this.state.orderDetail.dealedMoney).format({number:'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</p>
                   <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{Number(this.state.orderDetail.price).format({number: 'digital'})}</p>
+                  <p>{Number(this.state.orderDetail.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</p>
                   <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{Number(this.state.orderDetail.fee).format({number: 'property'})}</p>
+                  <p>{Number(this.state.orderDetail.fee).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</p>
                   <span>{this.intl.get('fee')} {this.state.orderDetail.tradePairName && (this.state.orderDetail.tradePairName.split('/')[this.state.orderDetailType]).toUpperCase()}</span>
                 </div>
               </div>
@@ -228,9 +228,9 @@ export default class userOrder extends ExchangeViewBase {
                     return (
                         <tr key={index}>
                           <td>{Number(v.orderTime).toDate()}</td>
-                          <td>{Number(v.price).format({number: 'digital'})}</td>
-                          <td>{Number(v.volume).formatFixNumberForAmount(v.price)}</td>
-                          <td>{Number(v.turnover).format({number: 'property'})}</td>
+                          <td>{Number(v.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</td>
+                          <td>{Number(v.volume).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy,false)}</td>
+                          <td>{Number(v.turnover).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</td>
                         </tr>
                     )
                   })}

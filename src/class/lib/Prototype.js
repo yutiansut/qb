@@ -18,12 +18,14 @@ const NUMBER_PREFIX_ARR = {
   cny: {
     up: {prefix: '¥ '},
     stable: {prefix: '¥ '},
-    down: {prefix: '¥ '}
+    down: {prefix: '¥ '},
+    // decimalLength: 2
   },
   usd: {
     up: {prefix: '$ '},
     stable: {prefix: '$ '},
-    down: {prefix: '$ '}
+    down: {prefix: '$ '},
+    // decimalLength: 2
   }
 }
 
@@ -107,13 +109,13 @@ Number.prototype.formatFixStyle = function (para) {
     decimalSign = para.decimalSign || '.',
     thousandSign = typeof para.thousandSign !== 'boolean' && (para.thousandSign || ',') || '',
     numberArr = (number > 0.000001 || number === 0) ? number.toString().split('.') : number.toFixed(8).split('.'),
-    numberSuffix = "", decimal = numberArr[1],
+    numberSuffix = "", decimal = numberArr[1] || '',
     i = numberArr[0],
     j = i.length > 3 ? i.length % 3 : 0;
-  decimal && decimal.length < decimalLength && new Array(decimalLength - decimal.length).fill(0).forEach(v => decimal+=v)
+  decimal.length < decimalLength && new Array(decimalLength - decimal.length).fill(0).forEach(v => decimal+=v)
   numberSuffixArr.forEach(v => number>=v.value && (numberSuffix = v.suffix));
   suffix += numberSuffix;
-  return prefix + negative + (j ? i.substr(0, j) + thousandSign : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousandSign) + (numberArr.length > 1 ? decimalSign + decimal : '') + suffix;
+  return prefix + negative + (j ? i.substr(0, j) + thousandSign : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousandSign) + (decimal.length > 0 ? decimalSign + decimal : '') + suffix;
 }
 
 //专业补零函数
@@ -152,21 +154,24 @@ Number.prototype.formatFixNumber = function (formatType) {
   return type * numberFunc[flag](number);
 };
 
-Number.prototype.formatFixNumberForAmount = function (price) {
+Number.prototype.formatFixNumberForAmount = function (accuracy, test = true){
+  if(test)
+    return this
+  return (''+this.toFixedWithoutUp(accuracy).formatFixStyle({})).addZero(accuracy)
   // console.log('number amount 0',this, price, price < 100)
-  if(price < 100 && price >= 0.1){
-    // console.log('number amount 1',this.toFixedWithoutUp(4).formatFixStyle({}).addZero(4))
-    return (''+this.toFixedWithoutUp(4).formatFixStyle({})).addZero(4)
-  }
-  if(price < 0.1 && price >= 0.01){
-    return (''+this.toFixedWithoutUp(2).formatFixStyle({})).addZero(2)
-  }
-  if(price < 0.01){
-    return (''+this.toFixedWithoutUp(0).formatFixStyle({})).addZero(0)
-  }
-  if(price)
-  // console.log('number amount 2',this.toFixedWithoutUp(6).formatFixStyle({}).addZero(6))
-  return (''+this.toFixedWithoutUp(6).formatFixStyle({})).addZero(6)
+  // if(price < 100 && price >= 0.1){
+  //   // console.log('number amount 1',this.toFixedWithoutUp(4).formatFixStyle({}).addZero(4))
+  //   return (''+this.toFixedWithoutUp(4).formatFixStyle({})).addZero(4)
+  // }
+  // if(price < 0.1 && price >= 0.01){
+  //   return (''+this.toFixedWithoutUp(2).formatFixStyle({})).addZero(2)
+  // }
+  // if(price < 0.01){
+  //   return (''+this.toFixedWithoutUp(0).formatFixStyle({})).addZero(0)
+  // }
+  // if(price)
+  // // console.log('number amount 2',this.toFixedWithoutUp(6).formatFixStyle({}).addZero(6))
+  // return (''+this.toFixedWithoutUp(6).formatFixStyle({})).addZero(6)
 }
 
 //数字format
@@ -177,10 +182,10 @@ Number.prototype.formatFixNumberForAmount = function (price) {
 Number.prototype.format = function (para) {
   let numberType = para && para.number || "general",
     style = para && para.style || {},
-    decimalLength = config.format.numberFormat[numberType].decimalLength,
-    // number = this.formatFixNumber(numberType),
+    // decimalLength = config.format.numberFormat[numberType].decimalLength,
+    number = numberType === 'legal' ? this.formatFixNumber(numberType) : this,
     numberTypeStyle = (numberType === 'digital' || numberType === 'legal') && {thousandSign:false} || {},
-    str = this.formatFixStyle(Object.assign(style,numberTypeStyle))
+    str = number.formatFixStyle(Object.assign(style,numberTypeStyle))
     // flag = findFlag(Math.abs(number), numberType);
   // console.log('Number.prototype.format', this, str, flag, decimalLength[flag], numberType)
   // if(decimalLength[flag])

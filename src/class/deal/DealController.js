@@ -279,6 +279,28 @@ export default class DealController extends ExchangeControllerBase {
           }
       )
     }
+    if(result && result.ret === 1421){
+      this.view.setState(
+          {
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+          }
+      )
+    }
+    if(result && result.ret === 1422){
+      this.view.setState(
+          {
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+          }
+      )
+    }
     if(result && (result.ret === 1412 && params.priceType === 0)){
       this.view.setState(
         {
@@ -364,5 +386,16 @@ export default class DealController extends ExchangeControllerBase {
     this.view.setState({
       coinMin:coinMinItem.minTrade
     })
+  }
+  
+  setAccuracy(priceAccuracy,volumeAccuracy) {
+    this.view.setState(
+        {
+          priceLimit: priceAccuracy,
+          numLimit:volumeAccuracy
+        },
+    )
+    // this.store.state.volumeAccuracy = volumeAccuracy;
+    // this.store.state.priceAccuracy = priceAccuracy;
   }
 }

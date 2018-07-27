@@ -324,6 +324,27 @@ export default {
     ret:1416,
     errCode: 'RPC_STATUS_ORDER_MARKET_TRADE_UNSUITABLE'
   },
+  1420:{
+    // 当前交易对不支持交易
+    get msg(){
+      return intl.get(1420)
+    },
+    ret:1420
+  },
+  1421:{
+    // 价格精度超出限制
+    get msg(){
+      return intl.get(1421)
+    },
+    ret: 1421
+  },
+  1422:{
+    // 数量精度超出限制
+    get msg(){
+      return intl.get(1422)
+    },
+    ret: 1422
+  },
   2001: {
     // msg: "谷歌验证失败",
     get msg() {

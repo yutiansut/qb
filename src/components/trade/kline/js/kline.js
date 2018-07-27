@@ -25,7 +25,7 @@ export default class Kline {
         this.debug = true;
         this.language = "zh-cn";
         this.theme = "dark";
-        this.ranges = ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"];
+        this.ranges = ["1w", "1d","12h", "1h", "30m", "15m", "5m", "1m", "line"];
 
         this.periodMap = {
             "01w": 7 * 86400 * 1000,

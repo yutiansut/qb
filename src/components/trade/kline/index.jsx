@@ -53,7 +53,7 @@ class ReactKline extends exchangeViewBase {
       height: tradeChart.clientHeight,
       theme: "dark",
       language: 'zh-cn',
-      ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
+      ranges: ["1w", "1d", "12h","1h", "30m", "15m", "5m", "1m", "line"],
       symbol: "",
       symbolName: "",
       debug: false,

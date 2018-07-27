@@ -55,7 +55,7 @@ export default class TradeOrderListController extends OrderListController {
   }
   joinRoom(tradePairName){
     // console.log(this.store.room)
-    let room = `${tradePairName}-D0`
+    let room = `${tradePairName}-0`
     this.emitRecentOrderWs(this.store.room, room)
     this.store.setRoom(room)
   }
@@ -63,7 +63,8 @@ export default class TradeOrderListController extends OrderListController {
   getNewPrice(v,flag){
     this.view.setState(
         {
-         prices:v.prices
+         prices:v.prices,
+          updown: v.updown
         }
     );
     flag && this.getDepth(v.tradePair)

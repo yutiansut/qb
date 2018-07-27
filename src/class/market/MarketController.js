@@ -163,6 +163,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
+    console.log('valueeeee',value)
     if(!value){
       return
     }
@@ -172,7 +173,13 @@ export default class MarketController extends ExchangeControllerBase {
     });
     this.store.state.tradePair = value.tradePairName;
     this.store.state.tradePairId = value.tradePairId;
-    this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId, value.tradePairName);
+    this.store.state.volumeAccuracy = value.volumeAccuracy;
+    this.store.state.priceAccuracy = value.priceAccuracy;
+    this.TradeRecentController && this.TradeRecentController.setTradePairId(value.tradePairId, value.tradePairName) ;
+    this.TradeRecentController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
+    this.TradeOrderListController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
+    this.userOrderController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
+    this.TradePlanController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
     this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);          this.TradeOrderListController && this.TradeOrderListController.setChangeFlag();
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
@@ -242,7 +249,10 @@ export default class MarketController extends ExchangeControllerBase {
           price: tradePairMsg[0].price,
           priceCN: tradePairMsg[0].priceCN.toFixedWithoutUp(2),
           priceEN: tradePairMsg[0].priceEN.toFixedWithoutUp(2),
-        }
+        },
+        priceAccuracy: tradePairMsg[0].priceAccuracy,
+        volumeAccuracy: tradePairMsg[0].volumeAccuracy,
+        updown: tradePairMsg[0].updown
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();

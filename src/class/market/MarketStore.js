@@ -305,7 +305,9 @@ export default class MarketStore extends ExchangeStoreBase {
         tradePairName: v.n,
         tradePairId: v.id,
         marketName: v.mn,
-        coinIcon : v.i
+        coinIcon : v.i,
+        priceAccuracy: v.pb,
+        volumeAccuracy: v.vb
       }
     }) || []
     // this.state.pairMsg = this.formatPairMsg(pairInfo)
