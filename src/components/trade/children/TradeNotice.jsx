@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import exchangeViewBase from '../../components/ExchangeViewBase'
-import "./stylus/tradeNotice.styl"
+import ExchangeViewBase from '../../ExchangeViewBase'
+import "../stylus/tradeNotice.styl"
 
-export default class tradeNotice extends exchangeViewBase {
+export default class tradeNotice extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {

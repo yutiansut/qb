@@ -5,7 +5,7 @@ import LiveTrade from './children/LiveTrade.jsx'
 import RecentTrade from './children/RecentTrade.jsx'
 import TradePairDeal from './children/TradePairDeal.jsx'
 import TradePlan from './children/TradePlan.jsx'
-import TradeNotice from '../notice/TradeNotice.jsx'
+import TradeNotice from './children/TradeNotice.jsx'
 import ReactKline from './kline'
 import ReactKDepth from './depth'
 
