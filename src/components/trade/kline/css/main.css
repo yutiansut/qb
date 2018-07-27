@@ -202,7 +202,7 @@
 }
 
 .chart_container.dark .chart_dropdown_data li a {
-    color: #1987da
+    color: #2bb789
 }
 
 .chart_container.dark .chart_dropdown_data li a:hover {
@@ -239,7 +239,7 @@
 }
 
 .chart_container.light .chart_dropdown_data li a {
-    color: #1478c8
+    color: #2bb789
 }
 
 .chart_container.light .chart_dropdown_data a:hover {
@@ -336,7 +336,7 @@
 }
 
 .chart_container.dark .chart_toolbar_tabgroup li a {
-    color: #1987da
+    color: #2bb789
 }
 
 .chart_container.dark .chart_toolbar_tabgroup li a:hover {
@@ -348,7 +348,7 @@
 }
 
 .chart_container.light .chart_toolbar_tabgroup li a {
-    color: #1478c8
+    color: #2bb789
 }
 
 .chart_container.light .chart_toolbar_tabgroup li a:hover {
@@ -421,7 +421,7 @@
 }
 
 .chart_container.dark a.chart_icon:hover {
-    border-color: #1987da
+    border-color: #2bb789
 }
 
 .chart_container.dark a.chart_icon.selected {
@@ -847,7 +847,7 @@
 }
 
 .chart_container.light #chart_parameter_settings #close_settings {
-    background: #1478c8;
+    background: #2bb789;
     color: #eee
 }
 

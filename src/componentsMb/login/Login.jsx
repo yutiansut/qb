@@ -95,7 +95,7 @@ export default class Login extends exchangeViewBase {
 
   canClick() {
     if (this.state.titleIndex === 0 && this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
-    if (this.state.titleIndex === 1 && this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
+    if (this.state.titleIndex === 1 && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false
   }
 
@@ -167,11 +167,11 @@ export default class Login extends exchangeViewBase {
                       }/>
             </li>
           </ul>
-          <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
+          {this.state.titleIndex===0 && <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
               <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png":"/static/mobile/login/icon_wx@2x.png"}/>
-              {this.intl.get("login-read")}
+              {this.intl.get("h5-login-read")}
               <Link to="/mhelp/terms" className="userAgree">《{this.intl.get("login-readUser")}》</Link>
-          </label>
+          </label>}
         </div>
         {this.state.showPopup && (
           <Popup
