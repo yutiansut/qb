@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 .h5-view-popup-wrap
   position fixed
   top 0
@@ -14,7 +14,7 @@
     padding .2rem .12rem .8rem .12rem
     border-radius (.06rem)
     transform translateX(-50%) translateY(-50%)
-    background $h5-foreground
+    background $h5-vp-bg
     overflow hidden
     .close-popup
       width .14rem
@@ -22,7 +22,7 @@
       float right
     h2
       font-size 0.18rem
-      color $h5-color-weight
+      color $h5-vp-font-weight
       letter-spacing 0
       margin-bottom .2rem
     .clearfix
@@ -34,12 +34,12 @@
           border-right 0
           height .4rem
           border-radius(0.02rem 0 0 0.02rem)
-          background $h5-background
+          background $h5-vp-bg-weight
       .verify-btn
         width 1rem
         border 0
-        background $h5-green
-        color $h5-color-normal
+        background $h5-vp-font-active
+        color $h5-vp-font-normal
         border-radius(0 .02rem .02rem 0)
     .set-btn
       position absolute

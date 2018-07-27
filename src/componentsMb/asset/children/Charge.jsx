@@ -4,8 +4,6 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
 import Popup from '../../../common/component/Popup'
 
-import "../style/charge.styl";
-
 export default class Charge extends exchangeViewBase {
     constructor(props) {
         super(props);

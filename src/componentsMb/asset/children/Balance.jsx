@@ -6,8 +6,6 @@ import {
     Link
 } from "react-router-dom";
 
-import "../style/balance.styl"
-
 export default class Balance extends exchangeViewBase {
   constructor(props) {
     super(props)

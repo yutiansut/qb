@@ -3,8 +3,6 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Pagination from "../../../common/component/Pagination";
 import { NavLink } from "react-router-dom";
 
-import "../style/history.styl";
-
 export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);

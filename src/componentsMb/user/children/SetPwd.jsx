@@ -5,7 +5,7 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
-// import "../stylus/setPass.styl"
+
 import {AsyncAll} from "../../../core";
 
 export default class SetPwd extends exchangeViewBase {
