@@ -39,7 +39,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </i>
             </div>
             <div className={`deal-asset-charge deal-asset-charge-${this.props.ControllerProps.tradeType}`}>
-            <NavLink to={{ pathname: '/wallet/charge', query: {currency: this.props.ControllerProps.dealType ? this.props.steadUnitN.toLowerCase() : this.props.steadUnitP.toLowerCase()}}}>{`${this.intl.get('deposit')}`}</NavLink>
+            <NavLink to={{ pathname: '/wallet/charge', query: {currency: this.props.ControllerProps.dealType ? this.props.steadUnitN.toLowerCase() : this.props.steadUnitP.toLowerCase()}}} style={{display: (this.props.ControllerProps.dealType ? this.props.marketChargeFlag : this.props.coinChargeFlag) ? 'block': 'none'}}>{`${this.intl.get('deposit')}`}</NavLink>
             </div>
           </div>
           <div className='trader-deal-input'>

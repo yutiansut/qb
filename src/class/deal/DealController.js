@@ -47,6 +47,7 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.PriceUnit = market;
     this.store.state.NumUnit = coin;
     this.coinMinTradeHandle(coin);//最小交易量的处理
+    this.getCharge(coin, market)
   }
 
   orderHandle(prices) {
@@ -397,5 +398,14 @@ export default class DealController extends ExchangeControllerBase {
     )
     // this.store.state.volumeAccuracy = volumeAccuracy;
     // this.store.state.priceAccuracy = priceAccuracy;
+  }
+  async getCharge(coin, market){
+    let result = await this.store.getCharge();
+    let coinCharge = result.l.find(v => v.n === coin);
+    let marketCharge = result.l.find(v => v.n === market);
+    this.view.setState({
+      coinChargeFlag: coinCharge.c,
+      marketChargeFlag: marketCharge.c
+    })
   }
 }

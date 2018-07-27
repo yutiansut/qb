@@ -10,6 +10,8 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      coinChargeFlag: false,
+      marketChargeFlag: false,
       priceLimit : 6,
       numLimit: 2,
       marketChangePrice:0,
@@ -70,6 +72,7 @@ export default class TradePlan extends ExchangeViewBase {
   componentDidMount() {
     this.props.controller.getFundPwdInterval();
     this.props.controller.getCoinMinTrade();
+    this.props.controller.getCharge();
   }
 //切换市价委托/限价委托
   changeEntrustType(v) {
@@ -299,6 +302,8 @@ export default class TradePlan extends ExchangeViewBase {
                                  fundPassVerify={this.state.fundPwdInterval<0}
                                  DealEntrustType={this.state.DealEntrustType}
                                  freePwd={this.freePwd.bind(this)}
+                                 coinChargeFlag={this.state.coinChargeFlag}
+                                 marketChargeFlag={this.state.marketChargeFlag}
               />
 
             )

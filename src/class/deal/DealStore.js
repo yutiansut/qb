@@ -61,4 +61,9 @@ export default class DealStore extends ExchangeStoreBase {
     this.state.coinMinTrade = resultAf;
     return resultAf
   }
+  async getCharge(){
+    let result = await this.Proxy.getCharge();
+    this.state.getCharge = result;
+    return result
+  }
 }
