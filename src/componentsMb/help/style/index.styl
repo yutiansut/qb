@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 
 .help-wrap-mb
   font-family PingFangSC-Medium
@@ -9,17 +9,17 @@
     letter-spacing 0.0129rem
     line-height 0.20rem
     text-align left
-    color $h5-color-green
+    color $h5-help-font-green
   .title
     margin-bottom 0.3rem
     font-size 0.16rem
-    color $h5-color-green
+    color $h5-help-font-green
     letter-spacing 0.0157rem
     text-align center
     font-weight bold
   //服务协议
   .help-terms
-    color $h5-color-normal
+    color $h5-help-font-normal
     &.nohead
       margin-top -0.5rem
       .title
@@ -39,7 +39,7 @@
         margin 0
   //api文档
   .help-api
-    color $h5-color-normal
+    color $h5-help-font-normal
     span
       font-size 0.12rem
       padding 0 0.05rem
@@ -47,8 +47,8 @@
       display inline-block
       height 0.2rem
       line-height 0.2rem
-      color $h5-color-light
-      background $h5-foreground-weight
+      color $h5-help-font-light
+      background $h5-help-bg-weight
       border-radius(0.04rem)
     h3
       margin 0.2rem 0
@@ -69,7 +69,7 @@
           line-height .24rem
           word-break break-all
           word-wrap break-word
-          background-color $h5-foreground-weight
+          background-color $h5-help-bg-weight
           border-radius(0.02rem)
           code
             font-family NotoSansHans-Regular
@@ -85,9 +85,9 @@
         td,th
           padding 0.1rem
           line-height 0.2rem
-          border 0.01rem solid $h5-foreground
+          border 0.01rem solid $h5-help-bg
         th
-          background-color $h5-foreground-weight
+          background-color $h5-help-bg-weight
           text-align center
           vertical-align middle
       ol
@@ -102,7 +102,7 @@
           padding 0 .1rem
   //费率标准
   .help-pricing
-    color $h5-color-normal
+    color $h5-help-font-normal
     margin-top -0.2rem
     .title
       text-align left
@@ -111,15 +111,15 @@
       width 100%
       margin 0.2rem 0
       th
-        color $h5-color-light
+        color $h5-help-font-light
       td,th
         vertical-align middle
         padding 0.1rem
         font-size 0.12rem
-        border 0.01rem solid $h5-foreground
+        border 0.01rem solid $h5-help-bg
         text-align center
       thead
-        background-color $h5-foreground-weight
+        background-color $h5-help-bg-weight
     ul
       margin-bottom 0.2rem
       li
@@ -138,7 +138,7 @@
           text-align center
   // 币种资料
   .help-coin
-    color $h5-color-normal
+    color $h5-help-font-normal
     .title
       margin-bottom 0.2rem
       font-size 0.14rem
@@ -160,8 +160,8 @@
           .search-list
             position relative
             width 100%
-            background $h5-foreground
-            border 0.01rem solid $h5-foreground
+            background $h5-help-bg
+            border 0.01rem solid $h5-help-bg
             z-index 99
             li
               height 0.35rem
@@ -169,14 +169,14 @@
               font-size 0.13rem
               line-height 0.35rem
               &:hover
-                background $h5-foreground
+                background $h5-help-bg
       button
         width 0.46rem
         font-size 0.26rem
-        color $h5-color-normal
-        background-color $h5-foreground
+        color $h5-help-font-normal
+        background-color $h5-help-bg
         &.active
-          background-color $h5-color-green
+          background-color $h5-help-font-green
         &:nth-child(2)
           border-radius(0.02rem 0 0 0.02rem)
         &:nth-child(3)
@@ -190,7 +190,7 @@
         left 0
         width 0.66rem
         height 0.66rem
-        border 1px solid $h5-border-weight
+        border 1px solid $h5-background
         border-radius 50%
       .left
         margin-left 1rem
@@ -202,27 +202,27 @@
           margin-bottom 0.1rem
         a:nth-child(3)
           font-size 0.14rem
-          color $h5-color-green
+          color $h5-help-font-green
           text-decoration underline
       .right
         font-size 0.14rem
         margin-top .2rem
-        border-bottom .01rem solid $h5-foreground
+        border-bottom .01rem solid $h5-help-bg
         span
           display block
           line-height .4rem
           text-align right
-          border-top .01rem solid $h5-foreground
+          border-top .01rem solid $h5-help-bg
           b
-            color $h5-color-light
+            color $h5-help-font-light
             display inline-block
             float left
       .detail
         h3
           font-size .15 rem
-          color $h5-color-light
+          color $h5-help-font-light
           line-height .4rem
         p
           line-height .24rem
-          color $h5-color-normal
+          color $h5-help-font-normal
           text-align justify
