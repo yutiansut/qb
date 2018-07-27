@@ -1,14 +1,8 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 .user-center-index
   height calc(100vh - 50px)
   .user-center-header
-    background-color $h5-foreground
-    h1
-      padding .13rem 0 .06rem
-      font-size .18rem
-      line-height .25rem
-      text-align center
-      color #ffffff
+    background-color $h5-user-bg-active
     div
       padding .25rem 0
       display flex
@@ -21,18 +15,18 @@
       span
         margin-top .1rem
         font-size .2rem
-        color $h5-color-normal
+        color $h5-user-font-normal
   .user-center-main
     margin-top .12rem
     padding 0 .12rem
     .list-section
       padding 0 .12rem
       margin-bottom .16rem
-      background-color $h5-foreground
+      background-color $h5-user-bg-active
       .list-item
         height .45rem
         line-height .45rem
-        border-bottom .01rem solid $h5-border-weight
+        border-bottom .01rem solid $h5-user-line
         display block
         clear both
         .fl
@@ -42,7 +36,7 @@
             margin-right .13rem
           span
             font-size .15rem
-            color $h5-color-normal
+            color $h5-user-font-normal
             vertical-align middle
         .fr
           img
@@ -51,6 +45,6 @@
             margin-left .04rem
           span
             font-size .12rem
-            color $h5-color-light
+            color $h5-user-font-light
       .list-item:last-child
         border-bottom 0

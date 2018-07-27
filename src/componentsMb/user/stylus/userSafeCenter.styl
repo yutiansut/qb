@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 .user-safe-center
   width 100%
   height 100vh
@@ -19,12 +19,12 @@
     width 100%
     height .45rem
     line-height .45rem
-    background-color $h5-foreground
-    border-bottom .01rem solid $h5-border-weight
+    background-color $h5-user-bg-active
+    border-bottom .01rem solid $h5-user-line
     padding 0 .12rem
     .back
       a
-        color $h5-color-weight
+        color $h5-user-font-weight
         font-size .14rem
         vertical-align middle
       img
@@ -34,7 +34,7 @@
       span 
         font-size .14rem
         line-height .2rem
-        color $h5-color-weight
+        color $h5-user-font-weight
         vertical-align middle
     .name
       position absolute
@@ -43,30 +43,30 @@
       transform translateX(-50%) translateY(-50%)
       font-size .18rem
       line-height .20rem
-      color $h5-color-weight
+      color $h5-user-font-weight
   .safe-center-container
     margin .2rem .12rem
     padding 0 .12rem
     font-size .15rem
     line-height .21rem
-    background-color $h5-foreground
+    background-color $h5-user-bg-active
     .item
-      border-bottom .01rem solid $h5-border-weight
+      border-bottom .01rem solid $h5-user-line
       line-height .45rem
       display block
       .fl
-        color $h5-color-normal
+        color $h5-user-font-normal
       .fr
         float right
         height .16rem
         font-size .12rem
-        color $h5-color-light
+        color $h5-user-font-light
       img.fr
         height .16rem
         margin-top .14rem
       &.br
         height .12rem
-        background $h5-background
+        background $h5-user-bg
         margin 0 -.12rem
       &:nth-child(3),
       &:nth-child(5)
@@ -83,16 +83,16 @@
       position fixed
       bottom 0
       left 0
-      background-color $h5-foreground
+      background-color $h5-user-bg-active
       a
         display block
         font-size .15rem
         line-height .45rem
-        border-bottom .01rem solid $h5-border-weight
-        color $h5-color-normal
+        border-bottom .01rem solid $h5-user-line
+        color $h5-user-font-normal
         text-align center
       a:nth-child(3)
-        border-bottom .08rem solid $h5-background
+        border-bottom .08rem solid $h5-user-line
       a:nth-child(4)
         border-bottom 0
 
@@ -111,7 +111,7 @@
     transform translateX(-50%) translateY(-50%)
     width 3.3rem
     padding .2rem .12rem .6rem .12rem
-    background $h5-foreground
+    background $h5-user-bg-active
     border-radius .02rem
     overflow hidden
     h1
@@ -119,7 +119,7 @@
       span
         float left
         font-size .16rem
-        color $h5-color-weight
+        color $h5-user-font-weight
       img
         width .14rem
         height .14rem
@@ -131,11 +131,11 @@
       input
         width 100%
         height .4rem
-        background $h5-background
+        background $h5-user-bg
     button
       width 100%
-      background $h5-color-green
-      color $h5-color-weight
+      background $h5-user-green
+      color $h5-user-font-weight
       height .4rem
       border-radius 0 !important
       position absolute
