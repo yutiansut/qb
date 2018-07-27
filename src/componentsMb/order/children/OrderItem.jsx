@@ -1,8 +1,6 @@
 import React from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 
-import "../stylus/orderItem.styl"
-
 const orderStatusClass = {
   2: 'deal',
   3: 'cancel',

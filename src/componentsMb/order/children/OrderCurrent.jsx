@@ -6,8 +6,6 @@ import OrderItem from './OrderItem.jsx';
 import OrderDetails from './OrderDetails.jsx';
 import SelectButton from "../../../common/component/SelectButton"
 
-import '../stylus/orderCurrent.styl';
-
 export default class OrderCurrent extends exchangeViewBase{
   constructor(props){
     super(props);

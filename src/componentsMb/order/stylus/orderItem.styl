@@ -1,14 +1,14 @@
-@import "../../../common/css/variable.styl"
+// @import "./base.styl"
 .order-item
   padding 0 .12rem
   margin-bottom .12rem
   border-radius .02rem
   font-size .14rem
   line-height .2rem
-  background-color $h5-foreground
+  background-color $order-bg
   .order-item-head
     padding .08rem 0
-    border-bottom .02rem solid $h5-border-weight
+    border-bottom .02rem solid $order-line
     span
       vertical-align middle
     .way
@@ -16,33 +16,33 @@
       line-height .2rem
       padding-right .02rem
     .sell
-      color $h5-color-red
+      color $order-font-red
       width 1.46rem
     .buy
-      color $h5-color-green
+      color $order-font-green
       width 1.46rem
     .time-current
-      color $h5-color-light
+      color $order-font-gray
     .cancel-current
       img
         height .14rem
         margin-right .05rem
         vertical-align middle
       span
-        color $h5-color-normal
+        color $order-font-normal
     .info-history
       img
         height .14rem
         margin-left .05rem
         vertical-align middle
       .deal
-        color $h5-color-green
+        color $order-font-green
       .partdeal
-        color $h5-color-orange
+        color $order-font-orange
       .end
-        color $h5-color-light
+        color $order-font-gray
       .cancel
-        color $h5-color-red
+        color $order-font-red
 
   .order-item-content
     padding .12rem 0
@@ -53,10 +53,10 @@
         margin-bottom .08rem
         font-size .12rem
         line-height .17rem
-        color $h5-color-light
+        color $order-font-gray
       div:nth-child(2)
         font-size .15rem
         line-height .21rem
-        color $h5-color-normal
+        color $order-font-normal
     div:nth-child(3)
       text-align right

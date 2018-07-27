@@ -1,8 +1,6 @@
 import React from 'react';
 import exchangeViewBase from '../../../components/ExchangeViewBase';
 
-import '../stylus/orderDetails.styl';
-
 const orderStatus = {
   0: '未成交',    // 当前订单——未成交
   1: '部分成交',  // 当前订单——部分成交
