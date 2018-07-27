@@ -93,8 +93,10 @@ export default class Footer extends ExchangeViewBase {
         <div className='aside-nav'>
           <div className='aside-nav-app'>
             <div className='erweima'>
-              <img src={this.$imagesMap.$aside_erweima} alt=""/>
-              <span>Android</span>
+              <a href="http://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.apk">
+                <img src={this.$imagesMap.$aside_erweima} alt=""/>
+                <span>Android</span>
+              </a>
             </div>
           </div>
           <div className='aside-nav-desk'></div>

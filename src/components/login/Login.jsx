@@ -222,7 +222,7 @@ export default class Login extends exchangeViewBase {
                       }}/>
             </li>
             <li>
-              <Button title={this.intl.get("login")}
+              <Button title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('login')} / ${this.intl.get('header-regist')}`}`}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
                       onClick={async () => {
@@ -236,7 +236,7 @@ export default class Login extends exchangeViewBase {
                       }}/>
             </li>
           </ul>
-          <div className="checkbox-wrap">
+          {!this.state.titleIndex && <div className="checkbox-wrap">
             {/*<input type="checkbox"*/}
                     {/*className="check-select"*/}
                     {/*checked={this.state.checkState}*/}
@@ -246,7 +246,7 @@ export default class Login extends exchangeViewBase {
               </p>
               {this.intl.get("login-read")}
             <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
-          </div>
+          </div>}
         </div>
         {this.state.showPopup && (
           <Popup

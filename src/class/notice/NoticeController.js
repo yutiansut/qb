@@ -72,11 +72,11 @@ export default class NoticeController extends ExchangeControllerBase {
         idArr = [],
         selectIndex = 0;
     if (v.isRead === 0){
-      userNoticeHeader.list.forEach(v => {
+      userNoticeHeader && userNoticeHeader.list && userNoticeHeader.list.forEach(v => {
         idArr.push(v.id)
       })
       selectIndex = idArr.indexOf(v.id)
-      selectIndex > 0 && (userNoticeHeader.list.splice(selectIndex, 1))
+      selectIndex >= 0 && (userNoticeHeader.list.splice(selectIndex, 1))
       this.noticeHeaderView && this.noticeHeaderView.setState({userNoticeHeader})
     }
   }
@@ -86,18 +86,18 @@ export default class NoticeController extends ExchangeControllerBase {
         idArr = [],
         selectIndex = 0
     if (v.isRead === 0){
-      userNotice.list && userNotice.list.forEach(v => {
+      userNotice && userNotice.list && userNotice.list.forEach(v => {
         idArr.push(v.id)
       })
       selectIndex = idArr.indexOf(v.id)
-      selectIndex > 0 && (userNotice.list[selectIndex].isRead = 1)
+      selectIndex >= 0 && (userNotice.list[selectIndex].isRead = 1)
       this.view && this.view.setState({userNotice})
     }
   }
 
   changeAllNotice() { // 点击头部全部已读更改列表页信息
     let userNotice = this.view && this.view.state.userNotice || [];
-    userNotice.list && userNotice.list.forEach(v => {
+    userNotice && userNotice.list && userNotice.list.forEach(v => {
       v.isRead = 1
     })
     this.view && this.view.setState({userNotice})
@@ -122,8 +122,8 @@ export default class NoticeController extends ExchangeControllerBase {
   // websocke更新
   userNoticeUpdata(obj) {
     // console.log('试图', obj)
-    let userNoticeHeader = this.noticeHeaderView.state.userNoticeHeader,
-        userNotice = this.view.state.userNotice,
+    let userNoticeHeader = this.noticeHeaderView && this.noticeHeaderView.state.userNoticeHeader,
+        userNotice = this.view && this.view.state.userNotice,
         noticeObj = {};
     noticeObj = {
       id: obj.id,
@@ -133,7 +133,7 @@ export default class NoticeController extends ExchangeControllerBase {
     }
     userNoticeHeader.list && userNoticeHeader.list.unshift(noticeObj)
     userNotice.list && userNotice.list.unshift(noticeObj)
-    this.noticeHeaderView.setState({userNoticeHeader})
+    this.noticeHeaderView && this.noticeHeaderView.setState({userNoticeHeader})
     this.view && this.view.setState({userNotice})
   }
 }
