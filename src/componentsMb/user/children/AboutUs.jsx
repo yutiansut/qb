@@ -1,7 +1,7 @@
 import React from 'react';
 import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 
-import '../stylus/aboutUs.styl'
+// import '../stylus/aboutUs.styl'
 
 export default class AboutUs extends exchangeViewBase {
   constructor(props) {

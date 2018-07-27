@@ -3,7 +3,7 @@ import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 
-import '../stylus/userCenterIndex.styl'
+// import '../stylus/userCenterIndex.styl'
 
 export default class UserCenterIndex extends exchangeViewBase {
   constructor(props) {

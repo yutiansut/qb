@@ -1,7 +1,7 @@
 import React from 'react';
 import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
-import '../stylus/userSafeCenter.styl'
+// import '../stylus/userSafeCenter.styl'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 import {AsyncAll} from "../../../core";
 import Input from "../../../common/component/Input/index.jsx";

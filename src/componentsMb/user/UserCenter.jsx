@@ -7,6 +7,8 @@ import SafeCenter from './children/SafeCenter.jsx';
 import AboutUs from './children/AboutUs.jsx';
 import SetPwd from './children/SetPwd.jsx';
 
+import "./stylus/index.styl"
+
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
