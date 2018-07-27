@@ -48,31 +48,27 @@
       &:hover
         opacity 1
         //background $main-color
-        .banner-btn
-          display block
-          width .8rem
-          height .25rem
-          margin-left .5rem
-          margin-top .2rem
       span
+        position absolute
         display block
         width .8rem
         height .25rem
-        margin-left .5rem
-        margin-top .2rem
-    .cn-content
-      //&:hover
-      //  .banner-btn
-      //    background $home_banner_btn_cn_hover no-repeat
-      //    background-size 100%
-      span
-        background $home_banner_btn_cn no-repeat
-        background-size 100%
-    .en-content
-      //&:hover
-      //  .banner-btn
-      //    background $home_banner_btn_en_hover no-repeat
-      //    background-size 100%
-      span
-        background $home_banner_btn_en no-repeat
-        background-size 100%
+        left 50%
+        top 50%
+        transform translateX(-50%) translateY(-50%)
+    //.cn-content
+    //  //&:hover
+    //  //  .banner-btn
+    //  //    background $home_banner_btn_cn_hover no-repeat
+    //  //    background-size 100%
+    //  span
+    //    //background $home_banner_btn_cn no-repeat
+    //    background-size 100%
+    //.en-content
+    //  //&:hover
+    //  //  .banner-btn
+    //  //    background $home_banner_btn_en_hover no-repeat
+    //  //    background-size 100%
+    //  span
+    //    //background $home_banner_btn_en no-repeat
+    //    background-size 100%

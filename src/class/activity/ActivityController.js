@@ -53,6 +53,7 @@ export default class ActivityController extends ExchangeControllerBase {
 
   async getHomeBanner(activityStatus, activityPosition,it) {
     let homeBanner = await this.store.getHomeBanner(activityStatus, activityPosition,it)
+    // console.log('活动页数据', homeBanner)
     this.view.setState({
         homeBanner
     })
