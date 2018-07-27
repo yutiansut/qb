@@ -169,7 +169,7 @@ export default class UserStore extends ExchangeStoreBase {
       })
     }
     // console.log('qwrr', currentLoginCon)
-    let currentLogin = currentLoginConObj ? currentLoginConObj.list : []
+    let currentLogin = currentLoginConObj ? currentLoginConObj.list : [];
 
     // if(currentLogin.errCode)
     //   currentLogin = []
