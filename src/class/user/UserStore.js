@@ -60,7 +60,7 @@ export default class UserStore extends ExchangeStoreBase {
     // console.log('ccc4', data)
     this.state.userId = data && data.id;
     this.state.token = data && data.tk;
-    this.state.userName = data && data.na
+    this.state.userName = data && data.na;
     this.Storage.userToken.set(data && data.tk);
     this.Storage.userId.set(data && data.id);
     this.Storage.userName.set(data && data.na);
