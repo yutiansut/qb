@@ -27,6 +27,13 @@ export default class Balance extends exchangeViewBase {
 
   async componentDidMount() {
     await this.getAssets();
+    if (this.props.controller.configData.activityState) {
+      let qbt = await this.getQbt();
+      if (qbt && this.state.wallet) {
+        this.state.wallet.unshift(qbt);
+        this.setState({ wallet: this.state.wallet })
+      }
+    }
   }
 
   render() {

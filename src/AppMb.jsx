@@ -116,7 +116,7 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController("market");
     userOrderController = new UserOrderListController();
-    // configController.getActivityState();
+    configController.getActivityState();
 
     noticeController.configController = configController;
 
@@ -152,9 +152,9 @@ export default class App extends Component {
       { path: "/mlogin", component: LoginComponent },
       { path: "/mlogin/:uid", component: LoginComponent },
       { path: "/mfindPass", component: ForgetPassComponent },
-      { path: "/mgenrealize", component: Gener },
+      { path: "/mgenrealize", component: Gener},
       { path: "/mhelp", component: HelpComponent },
-      { path: "/mwallet", component: AssetComponent, auth: true },
+      { path: "/mwallet", component: AssetComponent},
       { path: "/morder", component: OrderManageCompoment, auth: true },
       { path: "/muser", component: UserCenterComponent, auth: true }
     ];

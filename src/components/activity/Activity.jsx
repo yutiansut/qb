@@ -20,7 +20,7 @@ export default class Help extends exchangeViewBase {
   render() {
     let match = this.props.match;
     const fresh = () => {
-      return <ActivityFresh controller={this.controller} />;
+      return <ActivityFresh history={this.props.history} controller={this.controller} />;
     };
 
     return (

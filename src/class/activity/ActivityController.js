@@ -36,6 +36,9 @@ export default class ActivityController extends ExchangeControllerBase {
 
   // 轮询qbt余量
   getQbtMargin() {
+    if (!this.configData.activityState) {
+      return true;
+    }
     this.Loop['activityH5'].clear()
     this.Loop["activityH5"].set(async () => {
       let result = await this.store.getQbtMargin();
@@ -60,6 +63,9 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   async getInvited() {
+    if (!this.configData.activityState) {
+      return true
+    }
     let result = await this.store.getInvited(this.userId, this.userToken)
     this.view.setState({
       recordList: result || []
@@ -67,6 +73,9 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   async getAward({inviter, invited}) {
+    if (!this.configData.activityState) {
+      return true;
+    }
     //验证手机号是否合法
     let p1 = /^[1][3,4,5,7,8][0-9]{9}$/,
       //验证邮箱号是否合法

@@ -226,12 +226,12 @@ export default class Login extends exchangeViewBase {
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
                       onClick={async () => {
-                        // let res = this.state.query && await this.getAward({
-                        //   inviter: JSON.parse(this.state.query),
-                        //   invited: this.state.userInput
-                        // }) || true
-                        // if(!res)
-                        //   return
+                        let res = this.state.query && await this.getAward({
+                          inviter: JSON.parse(this.state.query),
+                          invited: this.state.userInput
+                        }) || true
+                        if(!res)
+                          return
                         this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
                       }}/>
             </li>

@@ -17,6 +17,14 @@ export default class Genrealize extends exchangeViewBase {
     this.controller = this.props.controller;
   }
 
+  componentWillMount() {
+    if(!this.props.controller.configData.activityState){
+      this.props.history.push({
+        pathname:'/whome'
+      })
+    }
+  }
+
   render() {
     let match = this.props.match;
     // const Term = ({ match, location, history }) => {

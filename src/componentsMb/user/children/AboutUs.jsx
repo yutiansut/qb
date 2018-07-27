@@ -28,9 +28,9 @@ export default class AboutUs extends exchangeViewBase {
         {this.state.qbtTrade && this.state.qbtTrade.map((v,index) =>
           <img key={index} src={language === "zh-CN" ? v.uc : v.ue}/>
           )}
-          {/*<a className="invite-btn" onClick={e => {*/}
-              {/*history.push(`/mgenrealize/invite/?uid=${controller.userId}`)*/}
-          {/*}}>{this.intl.get("activity-rule-42")}</a>*/}
+        {this.props.controller.configData.activityState && <a className="invite-btn" onClick={e => {
+              history.push(`/mgenrealize/invite/?uid=${controller.userId}`)
+          }}>{this.intl.get("activity-rule-42")}</a>}
       </div>
     );
   }

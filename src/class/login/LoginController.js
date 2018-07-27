@@ -174,6 +174,9 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   async getAward(obj){
+    if(!this.configData.activityState){
+      return true
+    }
     // console.log('getAward',obj)
     let result = await this.store.getAward(obj);
     // console.log('getAward', result)

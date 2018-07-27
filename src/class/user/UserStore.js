@@ -66,7 +66,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.Storage.userName.set(data && data.na);
     // data && await this.userInfo()
     // data && await this.userAuth()
-    // data && data.isNew && this.getAward()
+    data && data.isNew && this.getAward()
     // console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 
@@ -303,6 +303,9 @@ export default class UserStore extends ExchangeStoreBase {
   }
 
   async getAward(){
+    if (!this.controller.configData.activityState) {
+      return true
+    }
     await this.userInfo();
     let account = this.state.userInfo.phone || this.state.userInfo.email
     // console.log('getAward 0', account)

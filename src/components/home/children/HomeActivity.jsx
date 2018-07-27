@@ -48,18 +48,15 @@ export default class HomeActivity extends ExchangeViewBase {
           <img src={t}
                alt=""
                className={`${lang === "zh-CN" ? 'img-cn' : 'img-en'} ${userToken ? 'login-content' : ''} content`}/>
-          {/*{userToken ? (*/}
-            {/*<a href="/wlogin" target="_blank" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>*/}
-              {/*<span className="banner-btn"></span>*/}
-            {/*</a>*/}
-          {/*) : (*/}
-            {/*<Link to="/wlogin" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>*/}
-              {/*<span className="banner-btn"></span>*/}
-            {/*</Link>*/}
-          {/*)}*/}
-          {!userToken && <Link to="/wlogin" className={`${lang === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
-            <span className="banner-btn" style={{background: `url(${btn}) center center / 100% no-repeat`}}></span>
-          </Link>}
+          {this.props.controller.configData.activityState ? (
+            <Link to="/activity/fresh" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
+              <span className="banner-btn"></span>
+            </Link>
+          ) : (
+            !userToken && <Link to="/wlogin" className={`${lang === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
+            <span className="banner-btn" style={{ background: `url(${btn}) center center / 100% no-repeat` }}></span>
+          </Link>
+          )}
         </div>
         <div alt="" className="banner-img" style={{background: `url(${hB}) center center / cover no-repeat`, height: `${document.body.clientWidth * 750 / 1440 - 60}px`}}/>
       </div>

@@ -11,6 +11,7 @@ export default class Wallets extends exchangeViewBase {
 
     let { controller } = this.props;
     this.filter = controller.filte.bind(controller);
+    this.rank = controller.rank.bind(controller);
   }
 
   render() {
@@ -29,7 +30,8 @@ export default class Wallets extends exchangeViewBase {
               <i/></span>
         </div>
         {result && result.map((item, index) => {
-            return <div className="wallet-li"  key={index}>
+            return item.coinName.toUpperCase() !== 'QBT' ?
+            (<div className="wallet-li"  key={index}>
                 <div className="d1">
                     <label><img src={item.coinIcon}/>{item.coinName.toUpperCase()}</label>
                     <NavLink to={{pathname: `/mwallet/detail/`, query: { currency: item.coinName }}}>{this.intl.get("asset-detail")} ></NavLink>
@@ -43,7 +45,20 @@ export default class Wallets extends exchangeViewBase {
                         <i>{Number(item.frozenCount).format({number: "property" })}</i>
                     </p>
                 </div>
-            </div>
+                </div>) : (<div className="wallet-li" key={index}>
+                    <div className="d1">
+                        <label>{item.coinName.toUpperCase()}</label>
+                    </div>
+                    <div className="d2">
+                        <p>
+                            <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" })}</i>
+                        </p>
+                        <p>
+                            <span>{this.intl.get("asset-lock")}</span>
+                            <i>—</i>
+                        </p>
+                    </div>
+                </div>)
         })}
       </div>;
   }

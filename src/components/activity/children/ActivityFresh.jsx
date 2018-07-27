@@ -57,6 +57,9 @@ export default class activityFresh extends exchangeViewBase {
   }
 
   componentWillMount() {
+    if (!this.props.controller.configData.activityState) {
+      this.props.history.push({ pathname: "/mhome" });
+    }
     this.getHomeBanner(1,0);
   }
 
