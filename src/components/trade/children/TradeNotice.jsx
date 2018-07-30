@@ -68,7 +68,7 @@ export default class tradeNotice extends ExchangeViewBase {
               </p>
               <span>{v.createdAt.toDate('yyyy-MM-dd HH:mm:ss')}</span>
             </li>)}
-        </ul> : <div>{this.intl.get("user-none")}</div>}
+        </ul> : <div className="text-nothing">{this.intl.get("user-none")}</div>}
     </div>;
   }
 }
