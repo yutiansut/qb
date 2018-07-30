@@ -303,7 +303,7 @@ export default class userIdentity extends exchangeViewBase {
               <dt>{this.intl.get("user-idReq")}</dt>
               <dd>{this.intl.get("user-req1")}</dd>
               <dd>{this.intl.get("user-req2")}</dd>
-              <dd>{this.intl.get("user-req3")}<span style={{color: "#F25656"}}>{this.intl.get("user-req4")}</span>{this.intl.get("user-req5")}</dd>
+              <dd>{this.intl.get("user-req3")}<span className="user-req4">{this.intl.get("user-req4")}</span>{this.intl.get("user-req5")}</dd>
               <dd>{this.intl.get("user-req6")}</dd>
             </dl>
             {this.state.userAuth.state == 0 && <dl className="clearfix user-photoVerify-type">

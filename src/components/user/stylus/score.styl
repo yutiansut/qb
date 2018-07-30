@@ -5,32 +5,32 @@
     display none
   .info
     padding .44rem 0
-    border-bottom 1px solid $bg-dark-color
+    border-bottom 1px solid $user-line-main
     .integration-title
       width 1rem
     h3
       margin-bottom .44rem
       b
-        color $normal-font-color
+        color $user-font-normal
         margin-right .25rem
       a
-        color $main-color
+        color $user-font-pointLevel
     ul
       margin-bottom .64rem
       li
         float left
         width 1.2rem
-        color $normal-font-color
+        color $user-font-normal
     .progress-line
       position relative
       width 7.2rem
       height .1rem
-      background $normal-input-color
+      background $user-bg-progress
       border-radius (1rem)
       p
         height .1rem
         border-radius (1rem)
-        background $main-color
+        background $user-bg-progressLine
       span
         position absolute
         display block
@@ -38,8 +38,9 @@
         transform translateX(-50%)
         padding .05rem .15rem
         //background linear-gradient(-90deg, $main-color 0%, $main-color-hover 100%)
-        background $main-color
+        background $user-bg-progressLine
         border-radius (.02rem)
+        color $user-font-progressNum
         &::after
           position absolute
           top .23rem
@@ -48,7 +49,7 @@
           content ''
           border-width .05rem
           border-style solid dashed dashed
-          border-color $main-color transparent transparent
+          border-color $user-bg-progressLine transparent transparent
           font-size 0
           line-height 0
 
@@ -59,13 +60,13 @@
     a
       display block
       margin-bottom .37rem
-      color $main-color
+      color $user-font-pointNum
     table
       width 7.79rem
       margin-bottom .2rem
       th, td
         padding-bottom .24rem
         text-align left
-        color $normal-font-color
+        color $user-font-normal
       th
-        color $normal-gray-color
+        color $user-title-table
