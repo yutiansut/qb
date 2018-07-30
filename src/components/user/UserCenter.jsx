@@ -9,7 +9,7 @@ import {
 
 import UserSafeCenter from './children/UserSafeCenter.jsx' // 安全中心
 import UserIdentity from './children/UserIdentity.jsx' // 身份认证
-import UserIntegration from './children/UserScore.jsx' // 我的积分
+import UserScore from './children/UserScore.jsx' // 我的积分
 
 // import "./stylus/user.styl"
 import "./stylus/index.styl"
@@ -40,7 +40,7 @@ export default class User extends exchangeViewBase {
                 <UserIdentity controller={controller} />
               )}/>
               <Route path={`${match.url}/integration`} component={({match}) => (
-                <UserIntegration controller={controller} />
+                <UserScore controller={controller} />
               )}/>
               <Redirect to={`${match.url}/safe`} />
             </Switch>
