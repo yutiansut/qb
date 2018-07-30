@@ -50,7 +50,7 @@ export default class HomeActivity extends ExchangeViewBase {
                className={`${lang === "zh-CN" ? 'img-cn' : 'img-en'} ${userToken ? 'login-content' : ''} content`}/>
           {this.props.controller.configData.activityState ? (
             <Link to="/activity/fresh" className={`${this.props.controller.configController.store.state.language === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
-              <span className="banner-btn"></span>
+              <span className="banner-btn" style={{ background: `url(${btn}) center center / 100% no-repeat` }}></span>
             </Link>
           ) : (
             !userToken && <Link to="/login" className={`${lang === "zh-CN" ? 'cn-content' : 'en-content'} content-link`}>
