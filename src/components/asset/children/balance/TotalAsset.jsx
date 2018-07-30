@@ -21,7 +21,7 @@ export default class TotalAsset extends exchangeViewBase {
           <div className="content">
             <span>{this.intl.get("asset-totalAssets")}:</span>
             <b>
-              {Number(totalAsset.valuationBTC).format({ number: "property" })}BTC
+              {Number(totalAsset.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}})}BTC
             </b>
             {this.state.unit === this.intl.get("cny") ? <span>
             ≈ {Number(totalAsset.valuationCN).format({ number: "legal" })} CNY

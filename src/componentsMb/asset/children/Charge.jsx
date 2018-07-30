@@ -13,19 +13,17 @@ export default class Charge extends exchangeViewBase {
         this.state = {
             currency: "BTC",
             address: "",
-
             showPopup: false,
             popMsg: "",
             popType: "",
-
             showSelect: false
-
         };
         //绑定view
         controller.setView(this);
         //初始化数据，数据来源即store里面的state
         let {
             walletList,
+            walletHandle,
             coinAddress
         } = controller.initState;
 
@@ -42,15 +40,15 @@ export default class Charge extends exchangeViewBase {
                 this.setState({showPopup:true,popMsg:this.intl.get(""),popType:"tip3"})
             }
         };
-
+        this.deal = controller.dealCoin.bind(controller);
         this.getWalletList = controller.getWalletList.bind(controller);
         this.getCoinAddress = controller.getCoinAddress.bind(controller);
     }
 
     async componentWillMount() {
+        await this.getWalletList();
         let currency = this.props.location.query && this.props.location.query.currency;
         currency && (currency=currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
-        await this.getWalletList();
         this.getCoinAddress(currency || this.state.currency);
     }
 
@@ -58,7 +56,7 @@ export default class Charge extends exchangeViewBase {
 
     render() {
         let {coinAddress,verifyNumber} = this.state.coinAddress;
-        let walletList=Object.keys(this.state.walletList);
+        let walletList = this.deal(this.state.walletList, 'c');
         let currency=this.state.currency.toUpperCase();
         return (
             <div className="charge">

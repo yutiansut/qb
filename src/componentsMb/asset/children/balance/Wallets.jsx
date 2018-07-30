@@ -38,11 +38,11 @@ export default class Wallets extends exchangeViewBase {
                 </div>
                 <div className="d2">
                     <p>
-                        <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({number: "property" })}</i>
+                        <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
                     </p>
                     <p>
                         <span>{this.intl.get("asset-lock")}</span>
-                        <i>{Number(item.frozenCount).format({number: "property" })}</i>
+                        <i>{Number(item.frozenCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
                     </p>
                 </div>
                 </div>) : (<div className="wallet-li" key={index}>
@@ -51,7 +51,7 @@ export default class Wallets extends exchangeViewBase {
                     </div>
                     <div className="d2">
                         <p>
-                            <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" })}</i>
+                            <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
                         </p>
                         <p>
                             <span>{this.intl.get("asset-lock")}</span>

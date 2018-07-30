@@ -324,7 +324,7 @@ export default class History extends exchangeViewBase {
                         </td>
                         <td className="balan">
                           <i>
-                            {Number(balance).format({ number: "property" })}
+                            {Number(balance).format({ number: "property" , style:{ decimalLength: 8}})}
                           </i>
                         </td>
                         <td className="send pop-parent">

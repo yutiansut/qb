@@ -13,7 +13,7 @@ export default class TotalAsset extends exchangeViewBase {
     return <div className="total-asset">
         <div className="total">
             <label>{this.intl.get("asset-totalAssets")}:</label>
-            <b>{Number(totalAsset.valuationBTC).format({ number: "property" })} BTC</b>
+            <b>{Number(totalAsset.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}})} BTC</b>
         </div>
         <div className="total-cny">
             {this.state.unit === this.intl.get("cny") ?

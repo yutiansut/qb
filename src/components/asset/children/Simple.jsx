@@ -57,12 +57,12 @@ export default class Simple extends exchangeViewBase {
             <span className="avail1">
               {this.intl.get("deal-use")}
               {currencyArr && currencyArr[0].toUpperCase()}：{avail1 &&
-                Number(avail1.availableCount || 0).format({ number: "property" })}
+                Number(avail1.availableCount || 0).format({ number: "property" , style:{ decimalLength: 8}})}
             </span>
             <span className="avail2">
               {this.intl.get("deal-use")}
               {currencyArr && currencyArr[1].toUpperCase()}：{avail2 &&
-                Number(avail2.availableCount || 0).format({ number: "property" })}
+                Number(avail2.availableCount || 0).format({ number: "property" , style:{ decimalLength: 8}})}
             </span>
           </p>}
           <span>

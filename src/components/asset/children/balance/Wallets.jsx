@@ -176,13 +176,13 @@ export default class Wallets extends exchangeViewBase {
                     </NavLink>
                   </td>
                   <td className="avail">
-                    {Number(item.availableCount).format({ number: "property" })}
+                    {Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}
                   </td>
                   <td className="lock">
-                    {Number(item.frozenCount).format({ number: "property" })}
+                    {Number(item.frozenCount).format({ number: "property" , style:{ decimalLength: 8}})}
                   </td>
                   <td className="tobtc">
-                    {Number(item.valuationBTC).format({ number: "property" })}
+                    {Number(item.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}})}
                   </td>
                   <td className="handle">
                     <Button
@@ -242,7 +242,7 @@ export default class Wallets extends exchangeViewBase {
                     <a>{item.fullName}</a>
                   </td>
                   <td className="avail">
-                    {Number(item.availableCount).format({ number: "property" })}
+                    {Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}
                   </td>
                   <td className="lock tac">{"—"}</td>
                   <td className="tobtc tac">{"—"}</td>

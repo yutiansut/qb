@@ -16,6 +16,7 @@ export default class CoinData extends exchangeViewBase {
       unit: controller.configData.language === "zh-CN" ? 1 : 0,
       value: "ETH",
       walletList: {},
+      walletHandle: {},
     };
     let { coinInfo } = controller.marketController.initState;
 
@@ -156,14 +157,17 @@ export default class CoinData extends exchangeViewBase {
                       ? `¥${Number(priceCN).format({ number: "legal" })}`
                       : `$${Number(priceEN).format({ number: "legal" })}`}
               </p>
-              <NavLink
-                  to={{
-                      pathname: "/mwallet/charge",
-                      query: { currency: this.state.currency }
-                  }}
-              >
-                  {this.intl.get('helo-coin-deposit')}
-              </NavLink>
+              {
+                this.state.walletHandle[name.toUpperCase()] && this.state.walletHandle[name.toUpperCase()].c ?
+                <NavLink
+                    to={{
+                        pathname: "/mwallet/charge",
+                        query: { currency: this.state.currency }
+                    }}
+                >
+                    {this.intl.get('helo-coin-deposit')}
+                </NavLink> : ''
+              }
           </div>
           <div className="right">
             <p>
