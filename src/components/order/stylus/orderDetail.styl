@@ -8,17 +8,17 @@
 	justify-content space-between
 	h3
 		font-size .2rem
-		color $normal-white-color-a9
+		color $pc-order-font-content
 	.filter-reset
 		//margin-left 6.18rem
 		input
 			margin-right .1rem
 			position relative
 			top .04rem
-			border-color $normal-white-color-a
-			background-color $normal-black-color
+			border-color $pc-order-font-title
+			background-color $pc-order-bg
 		span
-			color $normal-white-color-a
+			color $pc-order-font-title
 	.export-record
 		margin-left .3rem
 .order-filter
@@ -29,7 +29,7 @@
 	justify-content space-between
 	span
 		font-size .16rem
-		color $normal-white-color-a
+		color $pc-order-font-title
 		margin-right .1rem
 	em
 		margin 0 .1rem
@@ -54,16 +54,16 @@
 		tr
 			height .3rem
 			line-height .3rem
-			color $normal-white-color-a
-			background $main-bg-active
+			color $pc-order-font-title
+			background $pc-order-bg-active
 			td:last-child
 				text-align: center
 	tbody
 		tr
 			height .7rem
 			line-height .7rem
-			color $normal-white-color-a9
-			border-bottom .01rem solid $line-dark
+			color $pc-order-font-content
+			border-bottom .01rem solid $pc-order-line
 			td:last-child
 				text-align: center
 .no-order-detail-list
@@ -71,9 +71,9 @@
 	line-height 3rem
 	text-align center
 	font-size 0.16rem
-	color $normal-gray-color
+	color $pc-order-font-detail
 	letter-spacing 0
-	background $icon-nothing no-repeat center 0.3rem
+	background $pc-order-image-nothing no-repeat center 0.3rem
 	background-size auto 1.01rem
 .order-page
 	justify-content: flex-end;
@@ -94,11 +94,11 @@
 		left 50%
 		top 50%
 		transform translate(-50%, -50%)
-		background $normal-black-color
+		background $pc-order-bg
 		border-radius .06rem
 		padding .3rem
 		z-index 8889
-		color $normal-white-color-a9
+		color $pc-order-font-content
 		overflow-y: auto
 		&::-webkit-scrollbar-button
 			display none
@@ -123,7 +123,7 @@
 				height .16rem
 				right 0
 				top 0
-				background-image $close-button
+				background-image $pc-order-image-close
 		.detail-content-info
 			display flex
 			width 100%
@@ -138,10 +138,10 @@
 				p
 					font-size .16rem
 					margin-bottom .24rem
-					color  $main-color
+					color  $pc-order-font-active
 					text-align center
 				span
-					color  $normal-gray-color
+					color  $pc-order-font-detail
 		.content-info-table
 			width 100%
 			margin-top .44rem
@@ -149,4 +149,4 @@
 				height .5rem
 			thead
 				tr
-					color $normal-white-color-a
+					color $pc-order-font-title

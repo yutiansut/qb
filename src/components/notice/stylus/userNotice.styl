@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
  // 通知列表
 .user-notice-wrap
   width 12rem
@@ -18,7 +18,7 @@
     width 100%
     color $normal-font-color
     .table-title
-      border-bottom .01rem solid $line-light
+      border-bottom .01rem solid $pc-notice-line-light
       padding-bottom .2rem
       span
         display inline-block
@@ -35,7 +35,7 @@
       min-height 5rem
       li
         cursor pointer
-        border-bottom .01rem solid $line-light
+        border-bottom .01rem solid $pc-notice-line-light
         height .5rem
         line-height .5rem
         padding 0 .3rem
@@ -51,7 +51,7 @@
             display inline-block
             width .1rem
             height .1rem
-            background $main-color
+            background $pc-notice-font-active
             border-radius 50%
             margin-right .1rem
             &.no-read
@@ -112,15 +112,15 @@
   left 50%
   transform translateX(-50%)
   width 6rem
-  background $normal-black-color
+  background $pc-notice-bg
   z-index 9999
-  border 1px solid $line-dark
+  border 1px solid $pc-notice-line
   .user-notice-pop-title
     height .6rem
     padding 0 .3rem
     line-height .6rem
     margin 0 0 .3rem
-    border-bottom  1px solid $line-dark
+    border-bottom  1px solid $pc-notice-line
     span
       float left
       font-size .2rem
