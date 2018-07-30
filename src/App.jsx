@@ -8,9 +8,8 @@ import {
 
 import {AsyncComponent} from './core'
 
-// import "./core/libs/ChangeFontSize";
-import "./common/css/reset.styl";
 import "./common/css/base.styl";
+import "./common/css/reset.styl";
 
 import ConfigController from "./class/config/ConfigController";
 import AssetController from "./class/asset/AssetController";
