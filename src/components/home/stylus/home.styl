@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 
 @keyframes bgscale {
   0% {
@@ -23,7 +23,7 @@
     padding-left .15rem
     font-weight 100
     &.up-i
-      color $index-blue
+      color $home-font-up
       //&:before
       //  position absolute
       //  top 50%
@@ -35,7 +35,7 @@
       //  background $home-up no-repeat center center
       //  background-size .12rem .12rem
     &.down-i
-      color $index-red
+      color $home-font-down
       //&:before
       //  position absolute
       //  top 50%
@@ -50,7 +50,7 @@
     position relative
     font-weight 100
     &.up-after
-      color $index-blue
+      color $home-font-up
       //&:after
       //  position absolute
       //  top 50%
@@ -62,7 +62,7 @@
       //  background $home-up no-repeat center center
       //  background-size .12rem .12rem
     &.down-after
-      color $index-red
+      color $home-font-down
       //&:after
       //  position absolute
       //  top 50%
@@ -83,7 +83,7 @@
     width 100%
     //padding .64rem 1.2rem .93rem
     height .6rem
-    background $normal-black-color
+    background $home-bg-recommend
     box-shadow 0 1px 10px 1px rgba(0,0,0,0.10)
     ul
       display -webkit-flex
@@ -129,11 +129,11 @@
         //  background $normal-white-color
         //  opacity .1
         span
-          color $normal-white-color
+          color $home-font-recommendName
           padding-right .2rem
           font-size .2rem
         b
-          color $home-recommend
+          color $home-font-recommendPrice
           margin-right .15rem
           font-size .12rem
           font-weight 100
@@ -145,12 +145,12 @@
   //市场
   .home-market
     padding-top .75rem
-    background $line-dark
+    background $home-bg-main
     .home-market-con
       padding .5rem .55rem .98rem
       box-shadow 0 1px 10px 0 rgba(0,0,0,0.20)
       border-radius 6px
-      background $dark-font-color
+      background $home-bg-market
     .market-nav
       height .36rem
       line-height .36rem
@@ -166,7 +166,7 @@
           span
             display inline-block
             padding .04rem .28rem
-            color $normal-white-color-a9
+            color $home-font-market
             &.home-market-item-active
               //color $normal-white-color
               //background $index-blue
@@ -178,7 +178,7 @@
               height 100%
               background $market-active no-repeat
               background-size 100% 100%
-              color $exchange-blue
+              color $home-font-active
           &:first-child
             padding-left 0
           &:last-child
@@ -195,7 +195,7 @@
             transform translateY(-50%)
             right -.05rem
             content '/'
-            color $normal-white-color
+            color $home-line-main
             opacity .1
       .search_wrap
         float right
@@ -211,7 +211,7 @@
           justify-content center
           input
             width 1.5rem
-            background $bg-dark-color
+            background $home-bg-input
           button
             width .44rem
           //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
@@ -228,7 +228,7 @@
     table
       width 100%
       .nothing-market-pair
-        color $normal-font-color
+        color $home-font-normal
         text-align center
         border-bottom none
         td
@@ -239,7 +239,7 @@
         line-height .45rem
       thead
         tr
-          color $normal-gray-color
+          color $home-title-table
         th:nth-of-type(1)
           padding-left .3rem
         .sort-img-li
@@ -254,7 +254,7 @@
           font-weight 100
       tbody
         tr
-          border-bottom 1px solid $home-market-line
+          border-bottom 1px solid $home-line-market
           &:hover
             background rgba(255,255,255,0.03)
 
@@ -262,24 +262,30 @@
           padding-left .3rem
         td
           font-weight 100
-          color $normal-white-color-a9
+          color $home-font-table
           span
             font-weight 100
-            color $normal-white-color-a9
+            color $home-font-table
           .second-span
-            color $normal-white-color-a
+            color $home-font-marketPrice
             font-size .12rem
           a
             font-weight 100
-            color $normal-white-color-a9
+            color $home-font-table
           .market-up
-            color $index-blue
+            color $home-font-up
           .market-down
-            color $index-red
+            color $home-font-down
         img
           position relative
           top .03rem
           width .16rem
           height .16rem
           cursor pointer
+
+.kline-trend
+  position relative
+  top 0.05rem
+  width 1rem
+  height 0.2rem
 

@@ -13,9 +13,7 @@ import MarketController from '../../class/market/MarketController'
 let recommendController,
   marketController;
 
-import "./stylus/home.styl"
-import "./stylus/homeMarkt.styl"
-
+import "./stylus/index.styl"
 
 export default class Home extends exchangeViewBase {
   constructor(props) {
