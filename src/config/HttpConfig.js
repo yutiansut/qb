@@ -48,7 +48,7 @@ export default {
     { name: 'setGoogleVerify', data: { url: '/v1/user/', method: 'post' }, action: 'vgc', actionBack: 'vgcr', needToken: true }, // 验证谷歌验证码
     { name: 'setUserNotify', data: { url: '/v1/user/', method: 'post' }, action: 'sut', actionBack: 'sutr', needToken: true }, // 修改通知方式
     { name: 'outOther', data: { url: '/v1/user/', method: 'post' }, action: 'kfc', actionBack: 'kfcr', needToken: true }, // 退出其他设备
-    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' }, // 领取奖励
+    { name: 'getAward', data: { url: '/v1/user/', method: 'post' }, action: 'ga', actionBack: 'gar', needToken: true }, // 领取奖励
     { name: 'getQbtTrade', data: { url: '/v1/common/', method: 'post' }, action: 'ai', actionBack: 'air' }, //关于我们
     { name: 'getIPAddr', data: { url: '/v1/common/', method: 'post' }, action: 'ia', actionBack: 'iar' }, // 获取当前iP
   ],

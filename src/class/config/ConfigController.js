@@ -20,6 +20,10 @@ export default class ConfigController extends ExchangeControllerBase {
     return this.store.state.nameCny
   }
 
+  get activityState() {
+    return this.store.state.activityState
+  }
+
   get currentUrl() {
     return this.store.state.currentUrl
   }

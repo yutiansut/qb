@@ -1,6 +1,8 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import ActivityStore from './ActivityStore'
 
+import ServerConfig from "../../config/ServerConfig"
+
 export default class ActivityController extends ExchangeControllerBase {
   constructor() {
     super('activity')
@@ -30,7 +32,7 @@ export default class ActivityController extends ExchangeControllerBase {
   }
 
   get address() {
-    return `${this.configController.currentUrl}/login/${this.userId}`
+    return `${ServerConfig.hSecure && "https" || 'http'}://${ServerConfig.host}/login/${this.userId || ''}`
   }
 
 

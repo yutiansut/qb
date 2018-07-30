@@ -227,8 +227,8 @@ export default class Login extends exchangeViewBase {
                       disable={this.canClick() ? false : true}
                       onClick={async () => {
                         let res = this.state.query && await this.getAward({
-                          inviter: JSON.parse(this.state.query),
-                          invited: this.state.userInput
+                          iv: JSON.parse(this.state.query),
+                          in: this.state.userInput
                         }) || true
                         if(!res)
                           return

@@ -66,7 +66,7 @@ export default class UserStore extends ExchangeStoreBase {
     this.Storage.userName.set(data && data.na);
     // data && await this.userInfo()
     // data && await this.userAuth()
-    data && data.isNew && this.getAward()
+    data && data.in && this.getAward()
     // console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 
@@ -311,7 +311,7 @@ export default class UserStore extends ExchangeStoreBase {
     // console.log('getAward 0', account)
     let result = await this.Proxy.getAward({
       token:this.token,
-      account
+      ac: account
     })
     // console.log('getAward 1', result)
     return result
