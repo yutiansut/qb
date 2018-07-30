@@ -63,6 +63,7 @@ export default {
     { name: 'coinInfo', data: { url: '/v1/common/', method: 'post' }, action: 'ci', actionBack: 'cir' },
     // 获取交易对名称以及id
     { name: 'pairInfo', data: { url: '/v1/common/', method: 'post' }, action: 'al', actionBack: 'alr' },
+    // 获取推荐交易对
     { name: 'getRecommendCoins', data: { url: '/v1/common/', method: 'post' }, action: 'rc', actionBack: 'rcr' },
     // 添加收藏
     { name: 'changeFavorite', data: { url: '/v1/user/', method: 'post' }, action: 'cf', actionBack: 'cfr', needToken: true },
