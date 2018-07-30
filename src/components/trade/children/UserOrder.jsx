@@ -197,15 +197,15 @@ export default class userOrder extends ExchangeViewBase {
               <div className='trade-order-content'>
                 <div className='trade-order-info'>
                   <p>{Number(this.state.orderDetail.doneCount).formatFixNumberForAmount(this.state.orderDetail.price)}</p>
-                  <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
+                  <span>{this.intl.get('order-deal-total')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{Number(this.state.orderDetail.dealedMoney).format({number:'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</p>
-                  <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
+                  <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{Number(this.state.orderDetail.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</p>
-                  <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
+                  <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
                   <p>{Number(this.state.orderDetail.fee).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</p>

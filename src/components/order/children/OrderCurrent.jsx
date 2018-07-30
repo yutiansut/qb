@@ -446,15 +446,15 @@ export default class OrderCurrent extends ExchangeViewBase {
               <div className='detail-content-info'>
                 <div className='content-info-items'>
                   <p>{Number(this.state.orderDetail.doneCount).formatFixNumberForAmount(Number(this.state.orderDetail.price))}</p>
-                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
+                  <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{Number(this.state.orderDetail.dealedMoney).format({number: 'property'})}</p>
-                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
+                  <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{Number(this.state.orderDetail.price).format({number: 'digital'})}</p>
-                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
+                  <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
                   <p>{Number(this.state.orderDetail.fee).format({number: 'property'})}</p>
