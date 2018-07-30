@@ -44,7 +44,7 @@ export default class AssetStore extends ExchangeStoreBase {
       //充币地址
       coinAddress: {
         // coinId: 0, //币种ID
-        // verifyNumer: 5, //最大确认数
+        // verifyNumber: 5, //最大确认数
         // coinAddress: "asdfdeagds0gfhgdfjhgfjkgfhkjgsgdsfg" //地址
       },
       //充币记录
@@ -217,12 +217,12 @@ export default class AssetStore extends ExchangeStoreBase {
     result.cad
       ? (this.state.coinAddress = {
           coinId: result.id, //币种ID
-          verifyNumer: result.ven, //最大确认数
+          verifyNumber: result.ven, //最大确认数
           coinAddress: result.cad //地址
         })
       : (this.state.coinAddress = {
           coinId: this.state.walletList[coin], //币种ID
-          verifyNumer: "", //最大确认数
+          verifyNumber: "", //最大确认数
           coinAddress: "" //地址
         });
   }

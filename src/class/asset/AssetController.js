@@ -464,7 +464,7 @@ export default class AssetController extends ExchangeControllerBase {
     return result;
   }
   // 更新币币交易页委托币种可用
-  updataMarketAvaile() {
+  updataMarketAvaile(flag) {
     let curPair =
         this.view.state.pairFees &&
         this.view.state.pairFees.filter(
@@ -478,7 +478,7 @@ export default class AssetController extends ExchangeControllerBase {
         item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
     // console.log("updataMarketAvaile", avail1, avail2);
-    this.TradePlanController &&
+    !flag && this.TradePlanController &&
       this.TradePlanController.setWallet(
         (avail1 && avail1.availableCount) || 0,
         (avail2 && avail2.availableCount) || 0

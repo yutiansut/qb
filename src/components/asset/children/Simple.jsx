@@ -17,14 +17,22 @@ export default class Simple extends exchangeViewBase {
     this.getAssets = controller.getAssets.bind(controller);
     // this.getWallet = controller.getWallet.bind(controller);
     this.getPairFees = controller.getPairFees.bind(controller);
+    this.updataMarketAvaile = controller.updataMarketAvaile.bind(controller);
   }
   async componentDidMount() {
     await this.getPairFees();
     await this.getAssets();
+    this.updataMarketAvaile();
     // !this.state.wallet && this.getWallet();
   }
 
-  componentWillUpdate() {}
+
+  componentDidUpdate(prevProps, prevState) {
+    this.updataMarketAvaile();
+  }
+
+  // componentWillUpdate() {
+  // }
 
   render() {
     // console.log('simple.............', this.state.pairFees);
@@ -40,7 +48,7 @@ export default class Simple extends exchangeViewBase {
     //   )[0];
     let lang = this.props.controller.configData.language;
     // console.log(this.state.totalAsset);
-    let { avail1, avail2, currencyArr, curPair } = this.props.controller.updataMarketAvaile();
+    let { avail1, avail2, currencyArr, curPair } = this.updataMarketAvaile(true);
     let total =
       lang === "en-US"
         ? this.state.totalAsset.valuationEN
