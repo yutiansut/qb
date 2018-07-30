@@ -68,6 +68,7 @@ export default class userIdentity extends exchangeViewBase {
     this.canClick = this.canClick.bind(this)
     this.checkAgree = this.checkAgree.bind(this)
     this.checkNumber = this.checkNumber.bind(this)
+    // this.checkName = this.checkName.bind(this)
   }
   getObjectURL (file) {
     let url = null ;
@@ -136,13 +137,21 @@ export default class userIdentity extends exchangeViewBase {
     })
   }
   firstInput(value) {
-    value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
+    // value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
     this.setState({firstNameValue: value.trim()});
   }
   lastInput(value) {
-    value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
+    // value = value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')
     this.setState({lastNameValue: value.trim()});
   }
+  // checkName() {
+  //   let reg = /^[a-zA-Z\u4e00-\u9fa5]+$/
+  //   if (!reg.test(this.state.firstNameValue)) {
+  //     this.setState({
+  //       errNum: '正确姓名'
+  //     })
+  //   }
+  // }
   numberInput(value) {
     this.setState({numberValue: value.trim()});
     this.state.errNum && (this.setState({errNum: ""}))
