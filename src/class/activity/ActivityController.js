@@ -107,4 +107,9 @@ export default class ActivityController extends ExchangeControllerBase {
       return;
     }
   }
+
+  async getPrice(){
+    await this.store.getPrice();
+    this.view.setState({ pr: this.store.state.pr, aw: this.store.state.aw, tv: this.store.state.tv });
+  }
 }

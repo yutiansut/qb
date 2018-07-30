@@ -116,7 +116,7 @@ export default class TradePlan extends ExchangeViewBase {
       return
     // if(limitNum[1].length > 8 - (limitPrice[1] && limitPrice[1].length || 0))
     //   return
-   
+
     // let flag =  type ? ((priceValue > 100 && (/^[0-9]{0,6}$/).test(limitNum[1]))
     //     || (priceValue > 0.1 && priceValue <= 100 && (/^[0-9]{0,4}$/).test(limitNum[1]))
     //         || (priceValue >= 0.01 && priceValue <= 0.1 && (/^[0-9]{0,2}$/).test(limitNum[1]))
@@ -126,7 +126,7 @@ export default class TradePlan extends ExchangeViewBase {
     let flag =  type ? reg.test(limitNum[1]) : true;
     if(!flag)
       return
-  
+
     // let limitPrice = 0;
     // priceValue >= 100 && (limitPrice = 6);
     // priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
@@ -178,7 +178,7 @@ export default class TradePlan extends ExchangeViewBase {
       })) : (this.setState({inputBuyValue: value, inputBuyFlag: true, dealType}));
       value && this.changeMaxNum(dealType, value)
     }
-    
+
   }
 
   passInput(v,e) {
@@ -188,15 +188,15 @@ export default class TradePlan extends ExchangeViewBase {
     }
     this.setState({funpassSell: e.target.value})
   }
-  
+
   setFunPwdIntervalShow(v){
-    
+
       this.setState(
           {fundPwdIntervalSetFlag: true,
            fundPwdIntervalClick: v.value
           }
       )
-    
+
   }
   changeSetPass(e){
     this.setState(

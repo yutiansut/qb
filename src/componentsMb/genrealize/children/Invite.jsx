@@ -6,10 +6,17 @@ import "../style/invite.styl";
 export default class Terms extends exchangeViewBase {
   constructor(props) {
     super(props);
+    this.controller = this.props.controller;
+    this.controller.setView(this);
+    this.state={}
+    let { pr, aw, tv } = this.controller.initState;
+    this.state = Object.assign(this.state, { pr, aw, tv });
+    this.getPrice = this.controller.getPrice.bind(this.controller);
   }
-
+  async componentDidMount(){
+    await this.getPrice();
+  }
   render() {
-    const controller = this.props.controller;
     return <div className="minvite">
         <dl>
           <dt>{this.intl.get("activity-invite-37")}</dt>
@@ -19,71 +26,36 @@ export default class Terms extends exchangeViewBase {
           </dd>
           <dd>
             <h4>2、{this.intl.get("activity-invite-38")}</h4>
-            <p>{this.intl.get("activity-invite-2")}</p>
+            <p>
+              {this.intl.get("activity-invite-2", {
+                number: this.state.pr
+              })}
+            </p>
           </dd>
         </dl>
         <p className="welfare">
-          {this.intl.getHTML("activity-invite-5")}
+          {this.intl.getHTML("activity-invite-5", {
+            number: this.state.aw
+          })}
         </p>
-      <p className="welfare">{this.intl.getHTML('activity-rule-40')}</p>
-      <p className="welfare">{this.intl.get('activity-invite-6')}</p>
+        <p className="welfare">
+          {this.intl.getHTML("activity-rule-40", {
+            number: this.state.tv.format({
+              number: "property",
+              style: { decimalLength: 0 }
+            })
+          })}
+        </p>
+        <p className="welfare">{this.intl.get("activity-invite-6")}</p>
         <div className="poster">
           <div className="up">
             <img src={this.$imagesMap.$invite} alt="" />
-            {/* <h4 className="header">10亿{coin}欢迎你来拿！</h4>
-            <div className="wait" />
-            <p className="code-text">
-              长按二维码，注册即领取<span>100</span>
-              {coin}！<br />邀请好友更有多多{coin}等你拿~
-            </p> */}
             <div className="qrcode">
               <div className="qrcode-wrap">
-              <QRCode value={`${controller.configData.currentUrl}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
+                <QRCode value={`${this.controller.configData.currentUrl}/mgenrealize/register/${this.props.location.search}`} level="M" bgColor="#D5D6D6" fgColor="#000" />
               </div>
             </div>
           </div>
-          {/* <div className="down">
-            <div className="crt-intro-header">{coin}介绍</div>
-            <p className="crt-intro-text1">
-              {coin}是{netUrl}币荣网发行的代币，币荣网通过{coin}与全体支持者共享平台成长利益
-            </p>
-            <p className="crt-intro-text2">
-              {coin}总量10亿枚，定期回购销毁，永不增发。
-            </p>
-            <div className="crt-func-header">{coin}的价值与用途</div>
-            <p className="crt-func-intro">
-              {nameUsd}币荣将通过{coin}与全球支持者实现利益共享，方式包括但不限于：
-            </p>
-            <ul className="crt-func clearfix">
-              <li className="value">
-                <h5>保证价值提升</h5>
-                <p>{coin}定期回购销毁</p>
-              </li>
-              <li className="cost">
-                <h5>降低交易成本</h5>
-                <p>{coin}可支付手续费</p>
-              </li>
-              <li className="usage">
-                <h5>更多灵活用法</h5>
-                <p>{coin}兑换数字货币</p>
-              </li>
-              <li className="welfa">
-                <h5>福利大权在握</h5>
-                <p>{coin}用于股票投资</p>
-              </li>
-              <li className="interesting">
-                <h5>让交易更有趣</h5>
-                <p>{coin}参与趣味活动</p>
-              </li>
-              <li className="more">
-                <h5>更多智囊服务</h5>
-                <p>{coin}提升等级身份</p>
-              </li>
-            </ul>
-            <div className="coming-soon">
-              更多价值将进一步挖掘，敬请期待！
-            </div>
-          </div> */}
         </div>
       </div>;
   }

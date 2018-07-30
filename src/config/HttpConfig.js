@@ -136,7 +136,9 @@ export default {
     // H5活动页，获取qbt活动余量
     { name: 'getQbtMargin', data: { url: '/v1/common/', method: 'post' }, action: 'qm', actionBack: 'qmr' },
     //H5活动页，领取qbt奖励
-    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' }
+    { name: 'getAward', data: { url: '/v1/common/', method: 'post' }, action: 'in', actionBack: 'inr' },
+    //H5活动页，邀请奖励和赚币活动
+    { name: 'getPrice', data: { url: '/v1/common/', method: 'post' }, action: 'ip', actionBack: 'ipr'}
   ],
   login: [
     { name: 'forgetLoginPass', data: { url: '/v1/common/', method: 'post' }, action: 'flp', actionBack: 'flpr' }, // 找回密码

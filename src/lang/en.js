@@ -540,10 +540,10 @@ export default function en(state) {
     "activity-click": `Click to Claim`,
     // 移动端活动 新增
     "activity-invite-1": `Refer a friend for rewards：`,
-    "activity-invite-2": `If your friends finish registration, you will get 5 ${coin} rewards for each`,
+    "activity-invite-2": `If your friends finish registration, you will get {number} ${coin} rewards for each`,
     "activity-invite-3": `2. Trading and get commission back`,
     "activity-invite-4": `You will get 30% trading commission rewards from your each friend's trading`,
-    "activity-invite-5": `As well, your friend will get 20 ${coin} bonus`,
+    "activity-invite-5": `As well, your friend will get {number} ${coin} bonus`,
     "activity-invite-6": `Forward the poster now for you and your friends`,
     "activity-invite-7": `1 billion ${coin} are waiting for you`,
     "activity-invite-8": `press the QR code, and register for getting 100 ${coin} now`,
@@ -578,9 +578,10 @@ export default function en(state) {
     "activity-invite-38": `Refer a friend and get token`,
     "activity-invite-37": `Refer each friend to finish registration ${netUrl}`,
     "activity-invite-39": `Register for tokens：`,
-    "activity-rule-40": `Total <i>5,000,000</i> ${coin} will be distributed.`,
+    "activity-rule-40": `Total <i>{number}</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
     "activity-rule-42": `Invite friends`,
+    "asset-funds-transfer": 'Funds transfer',
   };
 
   const login = {

@@ -332,7 +332,7 @@ export default class Extract extends exchangeViewBase {
                   </NavLink>
                 )}
                 {this.state.quotaTip && (
-                  <span>
+                  <span className="min">
                     {this.intl.get("asset-minWithdraw-tip", {
                       number: curExtract && curExtract.minCount,
                       currency: currency

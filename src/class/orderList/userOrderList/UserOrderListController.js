@@ -88,7 +88,7 @@ export default class UserOrderListController extends OrderListController {
     let str;
     if (type === 'orderHistory'){
       // str = "时间,交易对,类型,价格,成交量,成交额,已成交,平均成交价,状态";
-      str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("price")},${this.view.intl.get("avgPrice")},${this.view.intl.get("total")},${this.view.intl.get("dealed")},${this.view.intl.get("avgPrice")},${this.view.intl.get("state")}`;
+      str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("price")},${this.view.intl.get("amount")},${this.view.intl.get("total")},${this.view.intl.get("dealed")},${this.view.intl.get("avgPrice")},${this.view.intl.get("state")}`;
       result.orderList.forEach(v => {
         str +=
           "\n" +

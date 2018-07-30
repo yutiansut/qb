@@ -122,7 +122,7 @@ export default class DealController extends ExchangeControllerBase {
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
       let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
         inputSellValue, inputBuyValue;
-        
+
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
       let checkValue = inputSellValue || inputBuyValue;
@@ -379,7 +379,7 @@ export default class DealController extends ExchangeControllerBase {
         {coinMinTrade: result}
     )
   }
-  
+
   coinMinTradeHandle(coin){
     let coinMinTrade = this.store.state.coinMinTrade;
     let coinMinItem = coinMinTrade.find(v => v.coinName === coin);
@@ -388,7 +388,7 @@ export default class DealController extends ExchangeControllerBase {
       coinMin:coinMinItem.minTrade
     })
   }
-  
+
   setAccuracy(priceAccuracy,volumeAccuracy) {
     this.view.setState(
         {

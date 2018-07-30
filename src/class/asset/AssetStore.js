@@ -304,7 +304,7 @@ export default class AssetStore extends ExchangeStoreBase {
       result &&
       result.ol.map(v => {
         return {
-          orderType: v.ot === 15000 ? 2 : v.ot === 5 ? 4 : v.ot,
+          orderType: v.ot === 15000 ? 2 : v.ot === 5 ? 4 : v.ot === 17000 ? 8 : v.ot,
           orderStatus: v.ost,
           fullname: v.fna,
           coinIcon: v.cic,

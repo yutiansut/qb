@@ -5,7 +5,10 @@ export default class NoticeStore extends ExchangeStoreBase {
     super('activity');
     this.state = {
       recordList: [],
-      bannerImgUrl:''
+      bannerImgUrl:'',
+      pr: 5,
+      aw: 20,
+      tv: 5000000,
     }
   }
 
@@ -59,5 +62,15 @@ export default class NoticeStore extends ExchangeStoreBase {
         "timestamp": v.t
       }
     })
+  }
+
+  async getPrice(){
+    let result = await this.Proxy.getPrice()
+    if (result && result.tv) {
+      this.state.pr = result.pr;
+      this.state.aw = result.aw;
+      this.state.tv = result.tv;
+    }
+    return false;
   }
 }

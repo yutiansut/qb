@@ -312,6 +312,7 @@ export default function zh(state) {
     "asset-auth-tip":'您的24小时提现额度不足，请进行实名认证',
     "asset-wait-auditing": '操作成功，日提现量超额，请耐心等待审核',
     "asset-name-existing": '此名称已存在',
+    "asset-funds-transfer": '资金划转',
   };
   const market = {
     "market-favorite": "收藏",
@@ -760,10 +761,10 @@ export default function zh(state) {
     "activity-click": `点我领取`,
     // 移动端活动 新增
     "activity-invite-1": `邀请有礼：`,
-    "activity-invite-2": `好友注册，您获得5${coin}作为奖励，上不封顶~`,
+    "activity-invite-2": `好友注册，您获得{number}${coin}作为奖励，上不封顶~`,
     "activity-invite-3": `2、交易返佣：`,
     "activity-invite-4": `好友交易，您进一步获得好友交易手续费的30%作为奖励~`,
-    "activity-invite-5": `同时，您的好友也将获得 <i>20${coin}</i> 福利`,
+    "activity-invite-5": `同时，您的好友也将获得 <i>{number}${coin}</i> 福利`,
     "activity-invite-6": `有福同享真哥们，赶紧转发海报邀请吧~`,
     "activity-invite-7": `10亿${coin}欢迎你来拿！`,
     "activity-invite-8": `长按二维码，注册即领取100${coin}！`,
@@ -798,7 +799,7 @@ export default function zh(state) {
     "activity-invite-38": `邀请送币：`,
     "activity-invite-37": `每邀请一位好友注册${netUrl}完成：`,
     "activity-invite-39": `注册送币：`,
-    "activity-rule-40": `本次活动共发放 <i>5,000,000</i> 枚${coin}，送完即止。`,
+    "activity-rule-40": `本次活动共发放 <i>{number}</i> 枚${coin}，送完即止。`,
     "activity-rule-41": `请输入您的手机号/邮箱地址`,
     "activity-rule-42": `邀请好友`,
   };

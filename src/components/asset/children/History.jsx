@@ -16,7 +16,8 @@ export default class History extends exchangeViewBase {
       orderType: {
         1: this.intl.get("deposit"),
         2: this.intl.get("asset-withdraw"),
-        4: this.intl.get("asset-transfer")
+        4: this.intl.get("asset-transfer"),
+        8: this.intl.get("asset-funds-transfer"),
         // 1: this.intl.get("deposit"),
         // 15000: this.intl.get("asset-withdraw")
         // 5: this.intl.get("asset-transfer"),
@@ -175,17 +176,18 @@ export default class History extends exchangeViewBase {
                 }}
               />
             </li>
-            <li className="item">
+            <li className="item type">
               <span>{this.intl.get("type")}</span>
               <SelectButton
                 title={this.state.orderType_s}
                 type="main"
-                className="select"
+                className="select type"
                 valueArr={[
                   this.intl.get("all"),
                   this.intl.get("deposit"),
                   this.intl.get("asset-withdraw"),
-                  this.intl.get("asset-transfer")
+                  this.intl.get("asset-transfer"),
+                  this.intl.get("asset-funds-transfer")
                 ]}
                 onSelect={value => {
                   this.setState({ orderType_s: value });

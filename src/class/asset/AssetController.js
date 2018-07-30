@@ -173,6 +173,8 @@ export default class AssetController extends ExchangeControllerBase {
             ? this.view.intl.get("asset-withdraw")
             : v.orderType === 5
               ? this.view.intl.get("asset-transfer")
+            : v.orderType === 17000
+              ? this.view.intl.get("asset-funds-transfer")
               : " ") +
         "," +
         v.count +
