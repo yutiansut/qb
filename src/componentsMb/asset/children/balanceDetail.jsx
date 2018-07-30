@@ -3,7 +3,6 @@ import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../../../common/component/Button";
 import { Link, NavLink } from "react-router-dom";
 
-import "../style/balanceDetail.styl";
 
 export default class BalanceDetail extends exchangeViewBase {
   constructor(props) {
