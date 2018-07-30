@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 
 .trade-deal-exchange
   width 3.8rem
@@ -13,7 +13,7 @@
     .deal-asset-wallet
       font-size .12rem
       span, i
-        color $normal-white-color-a9
+        color $trade-font-normal
         margin-left .05rem
         font-size .12rem
     .deal-asset-charge
@@ -25,21 +25,21 @@
         font-size .12rem
     .deal-asset-charge-sell
       a
-        color $exchange-red
+        color $trade-sell-font
     .deal-asset-charge-buy
       a
-        color $exchange-blue
+        color $trade-buy-font
   .trader-deal-input
     width 100%
     height .34rem
-    background $normal-black-color
+    background $trade-deal-input-bg
     margin-bottom .1rem
     border-radius .02rem
     //border .01rem solid $exchange-border
     //border-left none
     display flex
     align-items center
-    color $normal-white-color-a
+    color $trade-deal-input-color
     .deal-input-label
       width .62rem
       height .34rem
@@ -48,14 +48,14 @@
       font-size .12rem
       line-height .34rem
       //background #2B3038
-      color $normal-white-color-a
+      color $trade-deal-input-color
     input
       width 2.73rem
       height 100%
-      color $normal-white-color-a9
+      color $trade-font-normal
       padding-left .1rem
     .deal-input-unit
-      color $normal-white-color-a
+      color $trade-deal-input-color
   .deal-number-range
     width 100%
     padding-top .05rem
@@ -73,12 +73,12 @@
         width .1rem
         height .1rem
         border-radius 50%
-        background $exchange-blue
+        background $trade-buy-bg
         //background $normal-white-color-a9
         margin-top -.04rem
       &::-webkit-slider-runnable-track
         height .04rem
-        background $normal-black-color
+        background $trade-bg-title
     .r-sell
       -webkit-appearance none
       width 3.8rem
@@ -91,12 +91,12 @@
         width .1rem
         height .1rem
         border-radius 50%
-        background $exchange-red
+        background $trade-sell-bg
         //background $normal-white-color-a9
         margin-top -.04rem
       &::-webkit-slider-runnable-track
         height .04rem
-        background $normal-black-color
+        background $trade-bg-title
     ul
       display flex
       top: 0.12rem;
@@ -109,7 +109,7 @@
         width .06rem
         height .06rem
         border-radius 50%
-        background $exchange-border
+        background $trade-deal-scroller-border
         cursor pointer
   .deal-number-percent
     width 3.8rem
@@ -129,7 +129,7 @@
       //line-height .34rem
       font-size .12rem
       border-radius .02rem
-      background $normal-black-color
+      background $trade-deal-input-bg
       padding-left .12rem
       display flex
       align-items center
@@ -139,37 +139,37 @@
         //vertical-align middle
         display inline-block
         min-width .6rem
-        color $normal-white-color-a
+        color $trade-deal-input-color
       input
         height .26rem
         //min-width 2.42rem
-        color $normal-white-color-a9
+        color $trade-deal-input-color-white = $normal-white-color-a9
         padding-left .1rem
         //border .01rem solid $exchange-border
         //border-radius .02rem
         //vertical-align middle
       em
         a
-          color $exchange-blue
+          color $trade-deal-free-color
           font-size .12rem
   .password-msg
       span:nth-of-type(1)
         a
-          color $normal-white-color-a
+          color $trade-deal-input-color
           text-decoration underline
           font-size .1rem
           margin-right .1rem
       span:nth-of-type(2)
-        color $exchange-blue
+        color $trade-deal-free-color
         font-size .1rem
   .trade-deal-turnover
     span
       //display inline-block
       //width .6rem
       font-size .11rem
-      color $normal-white-color-a9
+      color $trade-deal-input-color-white
     em, i
-      color $normal-white-color-a9
+      color $trade-deal-input-color-white
       margin-right .1rem
       font-size .12rem
   .trade-deal-button-buy
@@ -179,9 +179,9 @@
     text-align center
     line-height .34rem
     //margin-top .1rem
-    color $normal-white-color
+    color $trade-font-title
     font-size .14rem
-    background $exchange-blue
+    background $trade-buy-bg
     border-radius .02rem
   .trade-deal-button-sell
     width 100%
@@ -189,9 +189,9 @@
     //margin-top .1rem
     text-align center
     line-height .34rem
-    color $normal-white-color
+    color $trade-font-title
     font-size .14rem
-    background $exchange-red
+    background $trade-sell-bg
     border-radius .02rem
     cursor pointer
   .trade-deal-turnover

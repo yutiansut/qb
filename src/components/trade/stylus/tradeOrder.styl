@@ -1,8 +1,8 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 .trade-current-order
   &:nth-of-type(2)
     margin-bottom 0
-  background $exchange-color
+  background $trade-model-bg
   //padding .16rem .4rem .16rem .16rem
   min-height 1.75rem
   margin-bottom .02rem
@@ -13,18 +13,18 @@
     height .4rem
     line-height .4rem
     justify-content space-between
-    background $normal-black-color
+    background $trade-bg-title
     padding-left .16rem
     font-size .12rem
     h3
-      color $normal-white-color
+      color $trade-font-title
       font-size .12rem
     a
-      color: $normal-white-color-a
+      color: $trade-font-thead
       font-size '.12rem'
       margin-right '.49rem'
       &:hover
-        color: $normal-white-color-a9
+        color: $trade-font-normal
     //margin-right 7.2rem
     .reset-handle
       font-size .12rem
@@ -32,7 +32,7 @@
       cursor pointer
       position relative
       &:hover
-        color $normal-white-color-a9
+        color $trade-font-normal
       &:nth-of-type(1):before
         content ''
         position absolute
@@ -99,7 +99,7 @@
         z-index 99
     tbody
       td
-        color $normal-white-color-a9
+        color $trade-font-normal
   .trader-order-none
     height 1.19rem
     line-height 1.19rem
@@ -112,7 +112,7 @@
   left 0
   bottom 0
   right 0
-  background $exchange-shadow-color
+  background $trade-order-shadow
   z-index 6665
   .trade-order-detail
     position absolute
@@ -134,25 +134,25 @@
       height 100%
     &::-webkit-scrollbar-track
       width .03rem
-      background #222730
+      background $trade-scrollbar-track
     &::-webkit-scrollbar-thumb
       width .03rem
-      background #8C8F93
+      background $trade-scrollbar-thumb
     h3
       padding .11rem 0
       margin-bottom .2rem
       font-size .14rem
       line-height .21rem
       text-align center
-      color $normal-white-color-a9
-      background-color $normal-black-color
+      color $trade-font-normal
+      background-color $trade-bg-title
     .trade-order-content
       width 6.68rem
       height 1.01rem
       margin 0 auto
-      border-bottom .02rem dashed $exchange-search-bg
+      border-bottom .02rem dashed $trade-order-detail-dash
       border-radius .02rem
-      background $bg-medium-color
+      background $trade-order-detail-bg
       display flex
       color $normal-black-color
       justify-content space-around
@@ -162,32 +162,32 @@
         p
           margin-bottom .25rem
           text-align center
-          color $normal-white-color-a9
+          color $trade-font-normal
         span
-          color $normal-white-color-a
+          color $trade-font-thead
     .trade-order-table
       width 100%
       font-size .12rem
       line-height .28rem
       text-align center
       thead
-        color $normal-white-color-a
+        color $trade-font-thead
       tbody
-        color $normal-white-color-a9
+        color $trade-font-normal
     .trade-order-close
       cursor pointer
       width 1.6rem
       margin 0 auto
       height .35rem
-      color $normal-white-color
-      background $exchange-blue
+      color $trade-font-title
+      background $trade-order-detail-close
       line-height .35rem
       text-align center
     .trade-order-table-wrap
       width 6.68rem
       padding .19rem 0
       margin 0 auto .2rem
-      background $bg-medium-color
+      background $trade-order-detail-bg
 
 .reset-pop
   .reset-pop-location

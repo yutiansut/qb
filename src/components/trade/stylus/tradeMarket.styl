@@ -1,10 +1,10 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 .trade-market
   width 2.92rem
   height 3.09rem
-  background $exchange-color
+  background $trade-model-bg
   float left
-  color $normal-white-color
+  color $trade-font-title
   .hide
     display none
   .trade-market-list
@@ -14,7 +14,7 @@
       height .4rem
       width 2.92rem
       padding-left .2rem
-      background $normal-black-color
+      background $trade-bg-title
       li
         height .4rem
         line-height .4rem
@@ -22,10 +22,10 @@
         margin-bottom -.01rem
         margin-right .2rem
         font-size .12rem
-        color $normal-white-color-a
+        color $trade-font-thead
       .trade-market-item-active
-        color $normal-white-color
-        border-bottom .02rem solid $normal-white-color
+        color $trade-tab-active-font
+        border-bottom .02rem solid $trade-tab-active-border
     .img-div
       position absolute
       right .2rem
@@ -44,7 +44,7 @@
       height 0.4rem
       width 2.92rem
       padding 0 0.16rem
-      background #2f3335
+      background $trade-market-select
       line-height 0.4rem
       p
         //position relative
@@ -79,7 +79,7 @@
           height .2rem
           padding-left .2rem
           //background $line-dark
-          color $normal-white-color
+          color $trade-font-title
           font-size .12rem
 
           //display: flex;
@@ -103,10 +103,10 @@
       height 100%
     &::-webkit-scrollbar-track
       width .03rem
-      background #222730
+      background $trade-scrollbar-track
     &::-webkit-scrollbar-thumb
       width .03rem
-      background #8C8F93
+      background $trade-scrollbar-thumb
   .trade-market-table
     width 100%
     thead
@@ -114,7 +114,7 @@
         cursor pointer
       td
         font-size .11rem
-        color $normal-white-color-a
+        color $trade-font-thead
         padding .11rem 0
         img
           position relative
@@ -125,15 +125,15 @@
       tr
         height .21rem
         line-height .21rem
-        color $normal-white-color-a9
+        color $trade-font-normal
       .pair-items-active
-        background $exchange-select-bg
+        background $trade-market-select
         td
           font-size .11rem
         .market-up
-          color $exchange-blue
+          color $trade-change-positive
         .market-down
-          color $exchange-red
+          color $trade-change-negative
         .img-td
           cursor pointer
     tr
@@ -145,13 +145,13 @@
       left 3rem
       z-index 99
       margin-top -.03rem
-      background $normal-black-color
-      color $normal-font-color
+      background $trade-bg-title
+      color $trade-market-volume-color
       &:before
         content ""
         width 0
         height 0
-        border .05rem solid $normal-black-color
+        border .05rem solid $trade-market-border
         border-bottom .05rem solid transparent
         border-left .05rem solid transparent
         border-top .05rem solid transparent

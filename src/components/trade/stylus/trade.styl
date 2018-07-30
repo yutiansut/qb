@@ -1,9 +1,18 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
+@import "./variable.styl"
+@import "./tradeMarket.styl"
+@import "./tradePairDeal.styl"
+@import "./tradeRecent.styl"
+@import "./tradeLive.styl"
+@import "./tradePlan.styl"
+@import "./tradeDealExchange.styl"
+@import "./tradeOrder.styl"
+@import "./tradeNotice.styl"
 #trade
 	width 14.4rem
-	background $exchange-bg
-	border-top .04rem solid $exchange-bg
-	color rgba(255,255,255,.5)
+	background $trade-main-bg
+	border-top .04rem solid $trade-model-bg
+	color $trade-font-thead
 	td
 		font-size .11rem
 	.trade-left
@@ -13,18 +22,16 @@
 		.trade-left-top
 			width 11.16rem
 			height 4rem
-			//background $exchange-bg
 			.trade-pair-msg
 				width 2.92rem
 				height 0.91rem
-				background $normal-black-color
-				border-bottom .01rem solid rgba(255,255,255,.05)
-				//padding .18rem .28rem 0 .2rem
+				background $trade-bg-title
+				border-bottom .01rem solid $trade-market-line
 			.trade-chart
 				width 8.2rem
 				height 4rem
 				float right
-				background $exchange-color
+				background $trade-model-bg
 		.trade-left-bottom
 			width 11.16rem
 			margin-top .04rem
@@ -33,23 +40,23 @@
 			.trade-recent
 				width 2.92rem
 				height 3.12rem
-				background $exchange-color
+				background $trade-model-bg
 			.trade-plan
 				width: 8.2rem
 				height: 3.12rem
-				background $exchange-color
+				background $trade-model-bg
 	.trade-right
 		width 3.2rem
 		float right
 		height 7.16rem
-		background $exchange-color
+		background $trade-model-bg
 	.trade-bottom
 		width 14.4rem
 		margin-top .04rem
 		display flex
-		border-bottom .04rem solid $exchange-bg
+		border-bottom .04rem solid $trade-main-bg
 		.trade-notice
-			background $exchange-color
+			background $trade-model-bg
 			width 2.92rem
 			min-height 3.5rem
 			//padding .16rem
@@ -57,7 +64,7 @@
 			//padding-right .27rem
 			margin-right .04rem
 		.trade-order
-			background $exchange-bg
+			background $trade-main-bg
 			width 11.44rem
 
 // k线图部分样式

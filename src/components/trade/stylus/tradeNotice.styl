@@ -1,13 +1,13 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 
 .trade-notice-wrap
   h3
     width 100%
     height .4rem
     line-height .4rem
-    background $normal-black-color
+    background $trade-bg-title
     padding-left .17rem
-    color $normal-white-color
+    color $trade-font-title
     font-size .12rem
   .text-nothing
     padding .16rem .1rem
@@ -23,13 +23,13 @@
       height 100%
     &::-webkit-scrollbar-track
       width 3px
-      background #222730
+      background $trade-scrollbar-track
     &::-webkit-scrollbar-thumb
       width 3px
-      background #8C8F93
+      background $trade-scrollbar-thumb
     li
       //height .35rem
-      margin-bottom .1rem
+      margin-bottom .16rem
       p
         margin-bottom .05rem
         a
@@ -46,4 +46,4 @@
         display block
         text-align right
         font-size .11rem
-        color $normal-white-color-a
+        color $trade-font-thead

@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 .trade-recent-title
   display flex
   height .4rem
@@ -7,16 +7,16 @@
   padding-right .16rem
   justify-content space-between
   align-items center
-  background $normal-black-color
+  background $trade-bg-title
   h3
-    color $normal-white-color
+    color $trade-font-title
   .recent-item
     min-width .56rem
     padding 0 .06rem
     line-height .24rem
     text-align center
-    border .01rem solid $exchange-blue
-    color $exchange-blue
+    border .01rem solid $trade-recent-tab-border
+    color $trade-recent-tab-font
     font-size .11rem
     cursor pointer
     height .24rem
@@ -27,8 +27,8 @@
       border-radius: 0 2px 2px 0
       border-left none
   .recent-item-active
-    background $exchange-blue
-    color $exchange-color
+    background $trade-recent-tab-active-bg
+    color $trade-recent-tab-active-font
 .scroll-bar-recenttrade
   overflow-y auto
   max-height 2.72rem
@@ -40,10 +40,10 @@
     height 100%
   &::-webkit-scrollbar-track
     width 3px
-    background #222730
+    background $trade-scrollbar-track
   &::-webkit-scrollbar-thumb
     width 3px
-    background #8C8F93
+    background $trade-scrollbar-thumb
   .trade-recent-table
     //height 2.72rem
     width 2.78rem
@@ -59,4 +59,4 @@
         margin-bottom .16rem
       td
         padding 0 0 .1rem 0
-        color $normal-white-color-a9
+        color $trade-font-normal

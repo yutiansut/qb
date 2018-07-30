@@ -1,9 +1,8 @@
-@import "../../../common/css/variable.styl"
 .trade-live-title
 	display flex
 	height .4rem
 	align-items center
-	background $normal-black-color
+	background $trade-bg-title
 	padding-left .2rem
 	.trade-live-item
 		font-size .12rem
@@ -13,8 +12,8 @@
 		line-height .4rem
 		//border-bottom .02rem solid $normal-white-color
 	.live-item-active
-		color $normal-white-color
-		border-bottom .02rem solid $normal-white-color
+		color $trade-tab-active-font
+		border-bottom .02rem solid $trade-tab-active-border
 .trade-live-table
 	width 3.18rem
 	thead
@@ -22,7 +21,7 @@
 			//padding .11rem 0
 			padding  0
 	tbody
-		color $normal-white-color-a9
+		color $trade-font-normal
 		.no-content-none
 			display none
 		tr
@@ -46,11 +45,11 @@
 			height .52rem
 			line-height .52rem
 			text-align center
-			background $normal-black-color
+			background $trade-live-deal-bg
 		.market-up
-			color $exchange-blue
+			color $trade-change-positive
 		.market-down
-			color $exchange-red
+			color $trade-change-negative
 	
 	
 		

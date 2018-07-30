@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+//@import "../../../common/css/variable.styl"
 .trade-plan-deal
 	//padding .08rem .64rem .16rem .64rem
 	padding-bottom .16rem
@@ -10,7 +10,7 @@
 		height .4rem
 		line-height .4rem
 		padding 0 .16rem;
-		background $normal-black-color
+		background $trade-bg-title
 		//padding .08rem 0
 		.select-button .trade
 			min-width 90px
@@ -25,8 +25,8 @@
 			font-size .12rem
 			cursor pointer
 		.entrust-active
-			color $normal-white-color
-			border-bottom .02rem solid $normal-white-color
+			color $trade-tab-active-font
+			border-bottom .02rem solid $trade-tab-active-border
 		.pop-parent
 			position relative
 			height .25rem
@@ -54,7 +54,7 @@
 		left 0
 		bottom 0
 		right 0
-		background $exchange-shadow-color
+		background $trade-deal-shadow
 		z-index 6665
 		.deal-pwd-detail
 			position absolute
@@ -69,11 +69,11 @@
 				width 100%
 				padding 0 .2rem
 				line-height .36rem
-				color $normal-white-color-a9
+				color $trade-font-normal
 				display flex
 				align-items center
 				justify-content space-between
-				background-color $normal-black-color
+				background-color $trade-bg-title
 				em
 					width .12rem
 					height .12rem
@@ -82,12 +82,12 @@
 			.deal-pwd-content
 				width 100%
 				margin 0 auto
-				background $bg-dark-color
+				background $trade-main-bg
 				display flex
 				align-items center
 				min-height .7rem
 				justify-content space-around
-				color $normal-white-color-a
+				color $trade-deal-input-color
 				.choice label
 					font-size .12rem
 				.set-pwd-msg
@@ -103,18 +103,18 @@
 					align-items center
 					justify-content space-between
 					span
-						color $exchange-blue
+						color $trade-deal-setPass-color
 						font-size .12rem
 					.set-pwd
 						border-radius .02rem
-						border .01rem solid $main-color
-						background-color $bg-medium-color
+						border .01rem solid $trade-deal-setPass-border
+						background-color $trade-deal-setPass-bg
 						padding .02rem .04rem
-						color $normal-white-color-a9
+						color $trade-font-normal
 					.set-pwd-sub
 						font-size .12rem
-						color $normal-white-color
-						background $exchange-blue
+						color $trade-font-title
+						background $trade-deal-setPass-botton-bg
 						border-radius .02rem
 						padding 0 .04rem
 						height 100%
@@ -134,9 +134,9 @@
 		text-align center
 		line-height 3.12rem
 		a
-			color $exchange-blue
+			color $trade-deal-setPass-color
 			font-size .28rem
 		span
-			color $normal-white-color
+			color $trade-font-title
 			font-size .28rem
 
