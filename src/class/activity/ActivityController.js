@@ -68,7 +68,7 @@ export default class ActivityController extends ExchangeControllerBase {
     if (!this.configData.activityState) {
       return true
     }
-    let result = await this.store.getInvited(this.userId, this.userToken)
+    let result = await this.store.getInvited(this.userToken)
     this.view.setState({
       recordList: result || []
     })
