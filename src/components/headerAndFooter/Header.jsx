@@ -114,10 +114,10 @@ export default class Header extends ExchangeViewBase {
   loginOut() {
     // console.log(222, this)
     this.clearLoginInfo()
-    this.props.history.push('/home')
-    let navArrayLeft = this.state.navArrayLeft
-    navArrayLeft[2].tokenShow = true
-    this.setState({navArrayLeft})
+    // this.props.history.push('/home')
+    // let navArrayLeft = this.state.navArrayLeft
+    // navArrayLeft[2].tokenShow = true
+    // this.setState({navArrayLeft})
   }
 
   checkAll() { // 全部已读
