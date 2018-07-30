@@ -399,13 +399,14 @@ export default class DealController extends ExchangeControllerBase {
     // this.store.state.volumeAccuracy = volumeAccuracy;
     // this.store.state.priceAccuracy = priceAccuracy;
   }
+  // 是否可充币处理
   async getCharge(coin, market){
     let result = await this.store.getCharge();
     let coinCharge = result.l.find(v => v.n === coin);
     let marketCharge = result.l.find(v => v.n === market);
     this.view.setState({
-      coinChargeFlag: coinCharge.c,
-      marketChargeFlag: marketCharge.c
+      coinChargeFlag: coinCharge && coinCharge.c,
+      marketChargeFlag: marketCharge && marketCharge.c
     })
   }
 }

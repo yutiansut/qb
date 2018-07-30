@@ -10,10 +10,10 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      coinChargeFlag: false,
-      marketChargeFlag: false,
-      priceLimit : 6,
-      numLimit: 2,
+      coinChargeFlag: false, // 币种充币开关
+      marketChargeFlag: false, // 币种充币开关
+      priceLimit : 6, // 价格精度限制
+      numLimit: 2, // 数量精度限制
       marketChangePrice:0,
       changeBankPriceB:0, //买入价格输入框实时汇率
       changeBankPriceS:0,//卖入价格输入框实时汇率
@@ -22,9 +22,9 @@ export default class TradePlan extends ExchangeViewBase {
       dealPopMsg:'',// 弹窗信息
       dealPassType:'positi',// 弹窗类型倾向
       dealPass:false,// 下单弹窗
-      fundPwdIntervalClick:0,
-      fundPwdIntervalShow: 0,
-      fundPwdInterval: '',
+      fundPwdIntervalClick:0, // 免输密码选中状态
+      fundPwdIntervalShow: 0, // 免输密码框显示
+      fundPwdInterval: '', // 密码间隔
       funpass: '',
       funpassBuy:'',
       funpassSell:'',

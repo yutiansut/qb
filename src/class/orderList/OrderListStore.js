@@ -68,7 +68,7 @@ export default class OrderListStore extends ExchangeStoreBase {
         }
       })
     } : {
-      orders: recentTradeListArr.ors.map(v => {
+      orders: recentTradeListArr.ors && recentTradeListArr.ors.length && recentTradeListArr.ors.map(v => {
         return{
           "dealTime": v.t,
           "price": v.p,
