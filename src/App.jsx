@@ -113,6 +113,7 @@ export default class App extends Component {
     marketController = new MarketController("market");
     userOrderController = new UserOrderListController();
     klineController = new KlineController();
+    
     configController.getActivityState();
 
     userOrderController.userController = userController; //订单管理获取用户id
