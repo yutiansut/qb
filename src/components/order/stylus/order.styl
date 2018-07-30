@@ -1,9 +1,9 @@
 @import "../../../common/css/variable.styl"
-
+@import "./variable.styl"
 .order-manage
 	width 100%
 	margin 0 auto
-	background-color $pc-order-bg
+	background-color $order-bg-main
 	.order-nav
 		width 1.86rem
 		li
@@ -14,22 +14,22 @@
 				display: block;
 				width: 100%;
 				padding-left: 0.24rem;
-				border-left 0.04rem solid $pc-order-bg
-				color $normal-white-color-a9
+				border-left 0.04rem solid $order-bg-main
+				color $order-font-content
 				&.active
-					border-left 0.04rem solid $pc-order-font-active
-					background $pc-order-bg-active
-					color $pc-order-font-active
+					border-left 0.04rem solid $order-font-active
+					background $order-bg-active
+					color $order-font-active
 				&:hover
-					border-left 0.04rem solid $pc-order-font-active
-					background $pc-order-bg-active
-					color $pc-order-font-active
+					border-left 0.04rem solid $order-font-active
+					background $order-bg-active
+					color $order-font-active
 	.order-content
 		width 10.12rem
 		min-height 7.4rem
 		padding 0 .3rem
-		border-left 1px solid $pc-order-line
+		border-left 1px solid $order-line
 .order-manage-wrap
 	width 100%
-	background-color $pc-order-bg
+	background-color $order-bg-main
 	padding 0.64rem 0 .68rem 1.2rem

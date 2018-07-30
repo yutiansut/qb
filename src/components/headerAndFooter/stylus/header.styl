@@ -1,10 +1,9 @@
-@import "../../../common/css/variable.styl"
 @import "./variable.styl"
 .tradeNav, .headerNav, .homeNav
   width 14.4rem
   height 50px
   padding 0 28px
-  background $pc-header-bg-exchange
+  background $header-bg-exchange
   line-height 50px
   position fixed
   top 0
@@ -21,14 +20,14 @@
       height 50px
       margin-right 40px
       a
-        color $pc-header-font-nav
+        color $header-font-nav
         font-size 14px
         font-weight 100
         &:hover
-          color $pc-header-font-hover
+          color $header-font-hover
       &.header-nav-active
         >a
-          color $pc-header-font-active
+          color $header-font-active
       &:last-child
         margin-right 0
       &.nav-logo
@@ -37,7 +36,7 @@
           display block
           width 101px
           height 50px
-          background $pc-header-image-trade no-repeat 0 15px / 101px 20px
+          background $header-image-trade no-repeat 0 15px / 101px 20px
       &.select-list
         position relative
         &:hover
@@ -50,7 +49,7 @@
             content: ''
             width 8px
             height 5px
-            background-image $pc-header-icon-select
+            background-image $header-icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
 
@@ -61,7 +60,7 @@
           content: ''
           width 8px
           height 5px
-          background-image $pc-header-icon-select
+          background-image $header-icon-select
           background-size cover
           transform translateY(-50%)
 
@@ -70,8 +69,8 @@
           display none
           left -18px
           width 100px
-          background $pc-header-bg-exchange
-          border 1px solid $pc-header-line-exchange 
+          background $header-bg-exchange
+          border 1px solid $header-line-exchange 
           li
             width 100%
             height 40px
@@ -79,7 +78,7 @@
             text-align center
             margin-right 0
             &:nth-of-type(1)
-              border-bottom 1px solid $pc-header-line-exchange 
+              border-bottom 1px solid $header-line-exchange 
             a
               display block
               width 100%
@@ -87,22 +86,22 @@
               padding 0
               font-weight 100
               &.children-active
-                background $pc-header-font-active
-                color $pc-header-font-hover
+                background $header-font-active
+                color $header-font-hover
                 &:hover
-                  background $pc-header-font-active
-                  color $pc-header-font-hover
+                  background $header-font-active
+                  color $header-font-hover
               &:hover
-                color $pc-header-font-active
+                color $header-font-active
   >ol
     float right
     >li
       float left
-      color $pc-header-font-nav
+      color $header-font-nav
       &.language-li
         width 80px
         &:hover
-          color $pc-header-font-hover
+          color $header-font-hover
           .language-ul
             display block
           p:after
@@ -112,7 +111,7 @@
             content ''
             width 8px
             height 5px
-            background-image $pc-header-icon-select
+            background-image $header-icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
         p
@@ -126,7 +125,7 @@
             content ''
             width 8px
             height 5px
-            background-image $pc-header-icon-select
+            background-image $header-icon-select
             background-size cover
             transform translateY(-50%)
           span
@@ -135,7 +134,7 @@
         ul
           position relative
           display none
-          background $pc-header-bg-exchange
+          background $header-bg-exchange
           box-shadow  0 0 .10rem 0 rgba(0,0,0,0.5)
           li
             height 40px
@@ -144,7 +143,7 @@
             text-align center
             cursor pointer
             &:hover
-              color $pc-header-font-active
+              color $header-font-active
             span
               font-size 14px
               font-weight 100
@@ -174,7 +173,7 @@
             height 15px
             padding 2px
             background $negative-color
-            color $pc-header-font-hover
+            color $header-font-hover
             border-radius 50%
             line-height 12px
             font-size 12px
@@ -186,8 +185,8 @@
           transform translateX(-50%)
           width 330px
           border-radius (2px)
-          background $pc-header-bg-exchange
-          border 1px solid $pc-header-font-normal
+          background $header-bg-exchange
+          border 1px solid $header-font-normal
           box-shadow  0 0 10px 0 rgba(0,0,0,0.3)
           //&:after
           //  position absolute
@@ -206,8 +205,8 @@
             height 40px
             line-height 40px
             padding 0 10px
-            color $pc-header-font-light
-            background $pc-header-font-normal
+            color $header-font-light
+            background $header-font-normal
             span
               float left
               font-size 14px
@@ -216,7 +215,7 @@
               font-size 14px
               &:hover
                 cursor pointer
-                color $pc-header-font-active
+                color $header-font-active
           ul
             max-height 150px
             padding 10px
@@ -252,25 +251,25 @@
           div
             padding 30px 0
             text-align center
-            color $pc-header-font-light
+            color $header-font-light
           .check-all
             display block
             height 36px
             line-height 36px
             text-align center
-            color $pc-header-font-light
-            background $pc-header-font-normal
+            color $header-font-light
+            background $header-font-normal
             font-size 14px
             &:hover
-              color $pc-header-font-active
+              color $header-font-active
 
       &.login-li
         margin 0 30px 0 35px
         a
           font-weight 100
-          color $pc-header-font-nav
+          color $header-font-nav
           &:hover
-            color $pc-header-font-hover
+            color $header-font-hover
       &.user-li
         position relative
         margin 0 30px 0 35px
@@ -281,7 +280,7 @@
           font-size 14px
           font-weight 100
           &:hover
-            color $pc-header-font-hover
+            color $header-font-hover
           &:after
             position absolute
             top 50%
@@ -289,7 +288,7 @@
             content ''
             width 8px
             height 5px
-            background-image $pc-header-icon-select
+            background-image $header-icon-select
             background-size cover
             transform translateY(-50%)
         ul
@@ -298,23 +297,23 @@
           transform translateX(-50%)
           display none
           width 120px
-          background $pc-header-bg-exchange
+          background $header-bg-exchange
           li
             height 40px
             padding 0 5px
             line-height 40px
             text-align center
-            color $pc-header-font-li
-            border-bottom 1px solid $pc-header-line-exchange 
+            color $header-font-li
+            border-bottom 1px solid $header-line-exchange 
             font-size 14px
             font-weight 100
             &:hover
-              color $pc-header-font-active
+              color $header-font-active
               a
-                color $pc-header-font-active
+                color $header-font-active
             a
               font-size 14px
-              color $pc-header-font-li
+              color $header-font-li
               font-weight 100
             //&:nth-of-type(1)
             //  border-bottom 1px solid $exchange-bg
@@ -328,7 +327,7 @@
             content ''
             width 8px
             height 5px
-            background-image $pc-header-icon-select
+            background-image $header-icon-select
             background-size cover
             transform translateY(-50%) rotate(180deg)
 
@@ -339,7 +338,7 @@
   height 70px
   padding 0 120px
   line-height 70px
-  background $pc-header-bg-active
+  background $header-bg-active
   >ul
     height 70px
     li
@@ -348,7 +347,7 @@
       &.header-nav-active
         >a
           //border-bottom 2px solid $index-blue
-          color $pc-header-font-active
+          color $header-font-active
           padding 6px 2px
           font-weight 400
       &:last-child
@@ -360,7 +359,7 @@
           width 121px
           height 50px
           margin-top 10px
-          background $pc-header-image-logo no-repeat 0 12.5px / 121px 24px
+          background $header-image-logo no-repeat 0 12.5px / 121px 24px
 
   >ol
     >li
@@ -384,7 +383,7 @@
 .homeNav
   background transparent
   box-shadow none
-  color $pc-header-font-hover
+  color $header-font-hover
   >ul
     li
       &.select-list
@@ -428,12 +427,12 @@
   width 6rem
   height 2rem
   line-height 2rem
-  background $pc-header-font-normal
+  background $header-font-normal
   z-index 999
-  border 1px solid $pc-header-line
+  border 1px solid $header-line
   border-radius .1rem
   text-align center
-  color $pc-header-font-light
+  color $header-font-light
   p
     font-size .2rem
 

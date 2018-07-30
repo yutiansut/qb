@@ -1,4 +1,5 @@
 @import "./variable.styl"
+
  // 通知列表
 .user-notice-wrap
   width 12rem
@@ -8,17 +9,17 @@
   h1
     margin .3rem 0 .45rem
     font-size .2rem
-    color $normal-font-color
+    color $notice-font-para
   .nothing-text
-    color $normal-font-color
+    color $notice-font-para
     font-size .2rem
     margin-top .2rem
     text-align center
   .table-div
     width 100%
-    color $normal-font-color
+    color $notice-font-para
     .table-title
-      border-bottom .01rem solid $pc-notice-line-light
+      border-bottom .01rem solid $notice-line-light
       padding-bottom .2rem
       span
         display inline-block
@@ -35,7 +36,7 @@
       min-height 5rem
       li
         cursor pointer
-        border-bottom .01rem solid $pc-notice-line-light
+        border-bottom .01rem solid $notice-line-light
         height .5rem
         line-height .5rem
         padding 0 .3rem
@@ -51,7 +52,7 @@
             display inline-block
             width .1rem
             height .1rem
-            background $pc-notice-font-active
+            background $notice-bg-notice
             border-radius 50%
             margin-right .1rem
             &.no-read
@@ -78,7 +79,7 @@
   //      line-height .5rem
   //      text-align center
   //      border-bottom .01rem solid $line-light
-  //      color $normal-font-color
+  //      color $notice-font-para
   //      &:last-of-type
   //        border-bottom none
   //    td
@@ -112,19 +113,19 @@
   left 50%
   transform translateX(-50%)
   width 6rem
-  background $pc-notice-bg
+  background $notice-bg-main
   z-index 9999
-  border 1px solid $pc-notice-line
+  border 1px solid $notice-line-dark
   .user-notice-pop-title
     height .6rem
     padding 0 .3rem
     line-height .6rem
     margin 0 0 .3rem
-    border-bottom  1px solid $pc-notice-line
+    border-bottom  1px solid $notice-line-dark
     span
       float left
       font-size .2rem
-      color $normal-font-color
+      color $notice-font-para
     img
       float right
       width .2rem
@@ -135,7 +136,7 @@
     min-height .5rem
     padding 0 .2rem .2rem
     font-size .16rem
-    color $normal-font-color
+    color $notice-font-para
     line-height .25rem
 
 
