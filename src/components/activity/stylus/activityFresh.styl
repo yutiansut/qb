@@ -1,4 +1,4 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 
 .active-fresh-wrap
   width 12rem
@@ -23,7 +23,7 @@
 
   h1
     font-size .28rem
-    color $normal-font-color
+    color $activity-font-normal
     line-height .28rem
     margin-bottom .44rem
     span
@@ -33,7 +33,7 @@
     a
       font-size .28rem
       line-height .28rem
-      color $main-color
+      color $activity-font-main
       margin-left .1rem
       &:hover
         text-decoration underline
@@ -44,9 +44,9 @@
     .active-clip-input-active
       width 7rem
       height .5rem
-      border .01rem solid $main-color
-      background $disale-bg-color
-      color $normal-gray-color
+      border .01rem solid $activity-font-main
+      background $activity-bg-disable
+      color $activity-font-title
       padding .18rem 0 .18rem .1rem
     //.active-clip-input-hidden
     //  width .01px
@@ -57,11 +57,11 @@
       width 2rem
       height .5rem
       border-radius 0 2px 2px 0
-      background $main-color
-      color $normal-white-color
+      background $activity-font-main
+      color $activity-font-button
   dl
     margin .5rem 0
-    color $normal-font-color
+    color $activity-font-normal
     dt
       font-size .2rem
       letter-spacing 1.43px;
@@ -71,12 +71,12 @@
       margin-bottom .15rem
       &:nth-of-type(1)
         a
-          color $main-color
+          color $activity-font-main
           &:hover
             text-decoration underline
       &:nth-of-type(2)
         span
-          color $negative-color
+          color $activity-font-negative
   ul
     margin-bottom .44rem
     li
@@ -85,7 +85,7 @@
     margin-top .3rem
     p
       font-size .2rem
-      color $normal-font-color
+      color $activity-font-normal
       margin-bottom .3rem
     table
       width 5rem
@@ -96,15 +96,9 @@
         &:nth-of-type(even)
           text-align right
       thead
-        color $normal-gray-color
+        color $activity-font-title
       tbody
-        color $normal-font-color
+        color $activity-font-normal
         .record-list-no-data
           padding .5rem 0
           text-align center
-
-
-
-
-
-
