@@ -307,7 +307,7 @@ export default class UserStore extends ExchangeStoreBase {
       return true
     }
     await this.userInfo();
-    let account = this.state.userInfo.phone || this.state.userInfo.email
+    let account = this.state.userInfo.phone || this.state.userInfo.email;
     // console.log('getAward 0', account)
     let result = await this.Proxy.getAward({
       token:this.token,
