@@ -174,7 +174,7 @@ export default class UserStore extends ExchangeStoreBase {
     // if(currentLogin.errCode)
     //   currentLogin = []
     // console.log('当前登录', currentLoginCon)
-    this.state.currentLogin = currentLogin
+    this.state.currentLogin = currentLogin;
     return currentLogin
   }
 
