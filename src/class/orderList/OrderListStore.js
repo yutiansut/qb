@@ -48,12 +48,12 @@ export default class OrderListStore extends ExchangeStoreBase {
         {
           token: this.controller.userController.userToken,
           id: id,
-          c: 10
+          c: 50
         }
     ): await this.Proxy.recentOrderMarket(
         {
           id: id,
-          a: 10
+          a: 50
         }
     );
     let recentTradeListArrAf = isPersonal ? {
