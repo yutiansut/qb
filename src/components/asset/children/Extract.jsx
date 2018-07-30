@@ -60,15 +60,7 @@ export default class Extract extends exchangeViewBase {
       assetHistory,
       currencyAmount
     });
-    this.deal = o => {
-      let j = {}
-      for (let k in o) {
-        if (this.state.walletHandle[k].c === 1) {
-          j[k] = this.state.walletList[k];
-        }
-      }
-      return Object.keys(j)
-    }
+    this.deal = controller.dealCoin.bind(controller);
 
     //绑定方法
     //获取市场下交易对
@@ -108,15 +100,15 @@ export default class Extract extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let currency =
-      this.props.controller.getQuery("currency").toUpperCase() ||
-      (this.props.location.query && this.props.location.query.currency.toUpperCase());
+    await this.getWalletList();
+    let arr = this.deal(this.state.walletList, 'c');
+    let query = this.props.controller.getQuery("currency").toUpperCase();
+    let currency = query && (arr.includes(query) && query || 'BTC') || (this.props.location.query && this.props.location.query.currency.toUpperCase()) || "BTC";
     currency && this.setState({ currency: currency, value: currency });
     currency && this.props.controller.changeUrl(
       "currency",
       currency.toLowerCase()
     );
-    await this.getWalletList();
     await this.getExtract();
     this.getMinerFee(currency || this.state.currency, this.state.address);
     this.getTradePair(currency || this.state.currency);
@@ -236,7 +228,7 @@ export default class Extract extends exchangeViewBase {
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
-                walletList={this.deal(this.state.walletList)}
+                walletList={this.deal(this.state.walletList, 'w')}
                 value={this.state.value}
                 setValue={value => {
                   this.setState({ value });

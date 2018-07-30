@@ -40,6 +40,17 @@ export default class AssetController extends ExchangeControllerBase {
     // return { withdrawVerify: 1 };
   }
 
+  // 筛选出可充提币种
+  dealCoin(o, type){
+    let j = {}
+    for (let k in o) {
+      if (this.view.state.walletHandle[k][type] === 1) {
+        j[k] = this.view.state.walletList[k];
+      }
+    }
+    return Object.keys(j)
+  }
+
   async getUserInfo() {
     if (this.userTwoVerify.fundPwd === undefined) {
       let {

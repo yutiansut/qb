@@ -63,15 +63,7 @@ export default class Charge extends exchangeViewBase {
         copySuccess: controller.copy(el)
       });
     };
-    this.deal = o =>{
-      let j ={}
-      for(let k in o) {
-        if(this.state.walletHandle[k].c === 1){
-          j[k] = this.state.walletList[k];
-        }
-      }
-      return Object.keys(j)
-    }
+    this.deal = controller.dealCoin.bind(controller);
     this.getWalletList = controller.getWalletList.bind(controller);
 
     this.getCurrencyAmount = controller.getCurrencyAmount.bind(controller);
@@ -86,21 +78,21 @@ export default class Charge extends exchangeViewBase {
   }
 
   async componentWillMount() {
-    let currency = this.props.controller
-      .getQuery("currency")
-      .toUpperCase() || (this.props.location.query && this.props.location.query.currency.toUpperCase());
+    await this.getWalletList();
+    let arr = this.deal(this.state.walletList, 'c');
+    let query = this.props.controller.getQuery("currency").toUpperCase();
+    let currency = query && (arr.includes(query) && query || 'BTC')  || (this.props.location.query && this.props.location.query.currency.toUpperCase()) || "BTC";
     currency &&
       this.setState({
         currency: currency,
         value: currency
       });
-    currency && this.props.controller.changeUrl(
-      "currency",
-      currency.toLowerCase()
-    );
-    await this.getWalletList();
+      currency && this.props.controller.changeUrl(
+        "currency",
+        currency.toLowerCase()
+      );
     await this.getTradePair();
-    this.getCurrencyAmount(currency || this.state.currency);
+      this.getCurrencyAmount(currency || this.state.currency);
     this.getCoinAddress(currency || this.state.currency);
     let coin = currency || 'BTC';
     this.getHistory({
@@ -163,7 +155,7 @@ export default class Charge extends exchangeViewBase {
             <div className="currency-asset">
               <SearchInput
                 filte={this.props.controller.filter}
-                walletList={this.deal(this.state.walletList)}
+                walletList={this.deal(this.state.walletList,'c')}
                 value={this.state.value}
                 setValue={value => {
                   this.setState({ value });
