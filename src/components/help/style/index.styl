@@ -1,6 +1,6 @@
-@import "../../../common/css/variable.styl"
+@import "./variable.styl"
 .help-wrap
-  background-color $normal-black-color
+  background-color $help-bg-normal
   .route
     padding-top 0.5rem
   h3
@@ -11,12 +11,12 @@
   .title
     margin-bottom 0.3rem
     font-size 0.22rem
-    color $normal-font-color
+    color $help-font-normal
     letter-spacing 0.0157rem
     text-align center
   //服务协议
   .help-terms
-    color $normal-font-color
+    color $help-font-normal
     margin-bottom 0.74rem
     p,li
       margin-bottom 0.1rem
@@ -32,7 +32,7 @@
         margin 0
   //api文档
   .help-api
-    color $normal-font-color
+    color $help-font-normal
     .title
       margin 0.05rem 0 0.1rem 0
     span
@@ -42,8 +42,8 @@
       display inline-block
       height 0.19rem
       line-height 0.19rem
-      color $negative-color
-      background $negative-opacity-color
+      color $help-font-negative
+      background $help-bg-negative-op
       border-radius(0.04rem)
     h3
       margin 0.05rem 0 0.1rem 0
@@ -64,7 +64,7 @@
           line-height 1.42857143
           word-break break-all
           word-wrap break-word
-          background-color $bg-dark-color
+          background-color $help-bg-deep
           border-radius(0.02rem)
           code
             font-family NotoSansHans-Regular
@@ -83,10 +83,10 @@
           height 0.52rem
           padding-left 0.34rem
           line-height 0.52rem
-          border 0.01rem solid $exchange-border
+          border 0.01rem solid $help-border-minor
         thead
           tr
-            background-color $line-dark-a
+            background-color $help-bg-medium
             th:first-child
               width 2rem
             th:nth-child(2)
@@ -104,21 +104,21 @@
           font-size 0.18rem
   //费率标准
   .help-pricing
-    color $normal-font-color
+    color $help-font-normal
     width 11.4rem
     margin 0 auto
     .title
       text-align left
     table
       th
-        color $normal-gray-color
+        color $help-font-minor
       td,th
         vertical-align middle
         height 0.52rem
         font-size 0.14rem
-        border 0.01rem solid $exchange-border
+        border 0.01rem solid $help-border-minor
       thead
-        background-color $line-dark-a
+        background-color $help-bg-medium
     .standard
       margin 0.45rem 0 0.35rem
       text-align center
@@ -169,7 +169,7 @@
   .help-coin
     width 10.8rem
     margin 0 auto
-    color $normal-font-color
+    color $help-font-normal
     .title
       margin-bottom 0.5rem
       font-size 0.14rem
@@ -177,9 +177,9 @@
       a
         cursor pointer
         &:hover
-          color $main-color-hover
+          color $help-font-main-hover
         &:active
-          color $main-color-active
+          color $help-font-main-active
     .search
       margin 0 0 1rem 1.27rem
       height 0.4rem
@@ -199,8 +199,8 @@
           .search-list
             position relative
             width 100%
-            background $normal-input-color
-            border 0.01rem solid $line-dark
+            background $help-bg-deep
+            border 0.01rem solid $help-line-normal
             z-index 99
             li
               height 0.35rem
@@ -209,17 +209,17 @@
               line-height 0.35rem
               cursor pointer
               &:hover
-                background $main-color
+                background $help-bg-main
       button
         float left
         width 0.46rem
         height 100%
         font-size 0.26rem
-        color $normal-white-color
-        background-color $coinData-gray
+        color $help-font-none
+        background-color $help-font-content
         cursor pointer
         &.active
-          background-color $main-color
+          background-color $help-bg-main
         &:nth-child(2)
           border-radius(0.02rem 0 0 0.02rem)
         &:nth-child(3)
@@ -227,7 +227,7 @@
     .content
       position relative
       padding-left 1rem
-      color $normal-gray-color
+      color $help-font-minor
       img
         position absolute
         top 0
@@ -236,12 +236,12 @@
         height 0.66rem
       .info
         margin-bottom 0.5rem
-        color $normal-font-color
+        color $help-font-normal
         .left
           float left
           min-width 2.02rem
           padding-right 0.32rem
-          border-right 1px solid $line-dark
+          border-right 1px solid $help-line-normal
           p:nth-child(1)
             font-size 0.18rem
             margin-bottom 0.2rem
@@ -250,13 +250,13 @@
             margin-bottom 0.2rem
           a:nth-child(3)
             font-size 0.14rem
-            color $main-color
+            color $help-font-main
             text-decoration underline
             cursor pointer
             &:hover
-              color $main-color-hover
+              color $help-font-main-hover
             &:active
-              color $main-color-active
+              color $help-font-main-active
         .right
           float left
           font-size 0.14rem
@@ -278,13 +278,13 @@
               width 0.72rem
             a
               margin-right 0.16rem
-              color $main-color
+              color $help-font-main
               text-decoration underline
               cursor pointer
               &:hover
-                color $main-color-hover
+                color $help-font-main-hover
               &:active
-                color $main-color-active
+                color $help-font-main-active
       .detail
         p
           width 8.7rem
