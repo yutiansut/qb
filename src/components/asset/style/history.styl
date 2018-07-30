@@ -2,20 +2,20 @@
 .asset
   .hist
     padding 0.32rem 0 0.45rem 0.3rem
-    border-left 0.01rem solid $line-dark
+    border-left 0.01rem solid $asset-line-normal
     a
-      color $main-color
+      color $asset-font-main
       cursor pointer
       &:hover
-        color $main-color-hover
+        color $asset-font-main-hover
       &:active
-        color $main-color-active
+        color $asset-font-main-active
     .title
       width 9.74rem
       height 0.2rem
       margin-bottom 0.63rem
       font-size 0.2rem
-      color $normal-font-color
+      color $asset-font-normal
       letter-spacing 0.0008rem
       text-align justify
       button
@@ -25,7 +25,7 @@
       line-height 3rem
       text-align center
       font-size 0.16rem
-      color $normal-gray-color
+      color $asset-font-minor
       letter-spacing 0
       background $icon-nothing no-repeat center 0.3rem
       background-size auto 1.01rem
@@ -43,7 +43,7 @@
           span
             margin-right 0.1rem
             font-size 0.16rem
-            color $normal-font-color
+            color $asset-font-normal
             letter-spacing 0.0006rem
             text-align justify
           .select
@@ -68,13 +68,13 @@
       margin-bottom 0.44rem
       thead
         tr
-          background $bg-btn-color
+          background $asset-bg-btn
       th,td
         height 0.3rem
         box-sizing()
         line-height 0.3rem
         font-size 0.12rem
-        color $normal-gray-color
+        color $asset-font-minor
         letter-spacing 0.0005rem
         text-align justify
         &.confirm, &.state, &.fee
@@ -111,14 +111,14 @@
         height 0.7rem
         line-height 0.7rem
         tr
-          border-bottom 0.01rem solid $line-dark
+          border-bottom 0.01rem solid $asset-line-normal
           &:hover
-            background $bg-dark-color
+            background $asset-bg-deep
           td
             height 0.7rem
             line-height 0.7rem
             font-size 0.14rem
-            color $normal-font-color
+            color $asset-font-normal
             letter-spacing 0.0006rem
             text-align justify
             img
@@ -175,15 +175,15 @@
                 min-width 155px
             &.cash
               &.red
-                color $up-red-color
+                color $asset-font-negative
               &.green
-                color $up-green-color
+                color $asset-font-main
              &.state
               &.pending
-                color $warn-color-hover
+                color $asset-font-extrude-hover
               &.failed
-                color $normal-gray-color
+                color $asset-font-minor
               &.unpassed
-                color $normal-gray-color
+                color $asset-font-minor
             &.confirm, &.state, &.fee
               text-align center

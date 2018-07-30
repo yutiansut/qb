@@ -11,13 +11,13 @@
     background rgba(0,0,0,0.7)
     z-index 999
     a
-      color $main-color
+      color $asset-font-main
       text-decoration underline
       cursor pointer
       &:hover
-        color $main-color-hover
+        color $asset-font-main-hover
       &:active
-        color $main-color-active
+        color $asset-font-main-active
     .asset-popup-content
       position relative
       .close
@@ -34,7 +34,7 @@
         width 5.64rem
         height 2.56rem
         border-radius(0.06rem)
-        background $normal-white-color
+        background $asset-font-none
         p
           margin-top 1.1rem
           text-align center
@@ -48,13 +48,13 @@
         width 7.4rem
         padding 0.44rem 0.31rem 0.3rem 0.3rem
         border-radius(0.06rem)
-        background $normal-black-color
+        background $asset-bg-normal
         h3
           padding-right 0.66rem
           font-size 0.2rem
           font-weight bold
           margin-bottom 0.44rem
-          color $normal-font-color
+          color $asset-font-normal
           letter-spacing 0
           span
             position relative
@@ -63,7 +63,7 @@
             padding-left 0.22rem
             line-height 0.2rem
             font-size 0.15rem
-            color $main-color
+            color $asset-font-main
             letter-spacing 0
             cursor pointer
             &::before
@@ -78,7 +78,7 @@
         table.list
           thead
             font-size 0.13rem
-            color $normal-gray-color
+            color $asset-font-minor
             text-align left
             letter-spacing 0
             tr
@@ -108,14 +108,14 @@
                   button:first-child
                     margin-right 0.12rem
               &.base3-content
-                border-bottom 0.01rem solid $line-dark
+                border-bottom 0.01rem solid $asset-line-normal
                 &:last-child
                   border-bottom 0
                 td
                   height 0.52rem
                   line-height 0.52rem
                   font-size 0.14rem
-                  color $normal-font-color
+                  color $asset-font-normal
                   letter-spacing 0
                 td:nth-child(3)
                   button
