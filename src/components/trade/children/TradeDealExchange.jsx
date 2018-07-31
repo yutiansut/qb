@@ -98,6 +98,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
           </div>
           <div className={`trade-deal-button-${this.props.ControllerProps.tradeType}`} onClick={this.props.dealTrade.bind(this, this.props.ControllerProps.tradeType)}>
             {this.props.ControllerProps.dealType ? `${this.intl.get('sell')}` : `${this.intl.get('buy')}`}
+           <em>{this.props.NumUnit.toUpperCase()}</em>
           </div>
 
         </div>
