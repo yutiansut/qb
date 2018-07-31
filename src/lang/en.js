@@ -698,7 +698,7 @@ export default function en(state) {
     "activity-rule-40": `Total <i>{number}</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
     "activity-rule-42": `Invite friends`,
-    "asset-funds-transfer": 'Funds transfer',
+    "asset-funds-transfer": "Funds transfer"
   };
 
   const login = {
@@ -709,11 +709,10 @@ export default function en(state) {
     "login-userInput": "Mobile/Email",
     "login-passInput": "Password",
     "login-forget": "Forgot password",
-    "login-read":
-      "The new user will use the verification login automatically to register, and on behalf of you have agreed",
+    "h5-login-read": "The new user is automatically registered on behalf of you have agreed",
+    "login-read": "The new user will use the verification login automatically to register, and on behalf of you have agreed",
     "login-readUser": "《User Agreement》",
     "login-readUser2": "User Agreement",
-    "h5-login-read": "The new user is automatically registered on behalf of you have agreed",
     "login-placeholderPhoneAndEmail": "Cellphone number/ Email address",
     "login-passRule":
       "New passwords must have at least 6 letters, numbers or special characters and cannot be only letters or only numbers",
