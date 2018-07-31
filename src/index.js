@@ -1,8 +1,6 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-// import App from './App'
-// import AppMb from './AppMb'
 import {RUNAPP, Websocket, Storage} from './core'
 import "whatwg-fetch";
 import ServerConfig from './config/ServerConfig'
