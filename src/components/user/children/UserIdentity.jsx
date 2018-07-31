@@ -287,7 +287,7 @@ export default class userIdentity extends exchangeViewBase {
             {/*.userAuth.number*/}
             <Input placeholder={`${this.state.selectIndex === 0 ? this.intl.get("user-fillId") : this.intl.get("user-fillPassport")}`}
                    className="id-input"
-                   value={this.state.userAuth.number ? this.state.userAuth.number.replace(/(\d{3})\d{9,12}(\d{3})/, "$1****$2") : this.state.numberValue}
+                   value={this.state.userAuth.number ? (this.state.selectIndex === 0 ? this.state.userAuth.number.replace(/(\d{3})\d{9,12}(\d{3})/, "$1****$2") : this.state.userAuth.number.replace(/(\w{2})\w{1,13}(\w{2})/, "$1***$2")) : this.state.numberValue}
                    disabled ={this.state.userAuth.number ? true : false}
                    onInput={value => this.numberInput(value)}
                    onBlur={this.checkNumber}/>

@@ -51,11 +51,11 @@ export default class Header extends ExchangeViewBase {
         <div className="nav-menu">
           <a href="javascript:void(0)" className="drop-menu"
              onBlur={()=>{this.setState({showLangDrop:false})}}>
-            <img src={lang==="zh-CN" ? "/static/img/home/chinese.svg":"/static/img/home/english.png"}
+            <img src={lang==="zh-CN" ? "/static/img/home/cn.svg":"/static/img/home/en.svg"}
                  onClick={()=>{this.setState({showLangDrop:!this.state.showLangDrop})}}/>
             {this.state.showLangDrop && <ul>
-                <li onClick={this.changeLang.bind(this,"zh-CN")}><img src="/static/img/home/chinese.svg"/>简体中文</li>
-                <li onClick={this.changeLang.bind(this,"en-US")}><img src="/static/img/home/english.png"/>English</li>
+                <li onClick={this.changeLang.bind(this,"zh-CN")}><img src="/static/img/home/cn.svg"/>简体中文</li>
+                <li onClick={this.changeLang.bind(this,"en-US")}><img src="/static/img/home/en.svg"/>English</li>
             </ul>}
           </a>
          {!isLogin ?
