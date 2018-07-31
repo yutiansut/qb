@@ -70,7 +70,7 @@ export default class CoinData extends exchangeViewBase {
   }
 
   render() {
-    console.log(this.state.coinInfo);
+    //console.log(this.state.coinInfo);
     let {
       name,
       enName,
@@ -166,7 +166,7 @@ export default class CoinData extends exchangeViewBase {
                     }}
                 >
                     {this.intl.get('helo-coin-deposit')}
-                </NavLink> : ''
+                </NavLink> : <span>-</span>
               }
           </div>
           <div className="right">
