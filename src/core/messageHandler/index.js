@@ -32,11 +32,13 @@ async function messageHandler() {
   while (true) {
     Object.keys(PoolDic).forEach(async poolName => {
       let pool = PoolDic[poolName]
+      if(!pool.transfer){
+        return
+      }
       if (pool.EMIT_QUENE.length) {
-        pool && pool.send(pool.EMIT_QUENE.shift())
+        pool.transfer && pool.transfer.send(pool.EMIT_QUENE.shift())
       }
       if (pool.RECEIVE_QUENE.length) {
-        // console.log('pool.RECEIVE_QUENE.length', pool.RECEIVE_QUENE.length)
         await MESSAGE_HANDLER[poolName].onMessage(pool.RECEIVE_QUENE.shift())
       }
     })
@@ -53,15 +55,13 @@ const MESSAGE_HANDLER = {
    * @param ServerConfig
    * @param webSocketList
    */
-  install(pool, config) {
+  install(config) {
+    console.log('aaaaaaa')
+    let pool = {}
     PoolDic[config.name] = pool;
     pool.EMIT_QUENE = [];
     pool.RECEIVE_QUENE = [];
-    pool.onMessage = function (data){
-      // console.log('pool.onMessage = function (data){', data)
-      pool.RECEIVE_QUENE.push(data)
-      // console.log(pool.RECEIVE_QUENE)
-    }
+
 
     MESSAGE_HANDLER[config.name] = {}
     MESSAGE_HANDLER[config.name].send = data => {
@@ -69,12 +69,49 @@ const MESSAGE_HANDLER = {
       pool.EMIT_QUENE.push(data)
     }
     MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
+
+    //此处需被重写
     MESSAGE_HANDLER[config.name].onMessage = async data => data && console.log('data', data)
-    MESSAGE_HANDLER[config.name].onClose = func => pool.onClose = func
-    MESSAGE_HANDLER[config.name].onError = func => pool.onError = func
-    MESSAGE_HANDLER[config.name].onOpen = func => pool.onOpen = func
-    MESSAGE_HANDLER[config.name].get = () => PoolDic[config.name].hasStart && PoolDic[config.name] || null//获取当前链接
+
+    MESSAGE_HANDLER[config.name].onClose = func => {
+      pool.onClose = func
+      if(pool.transfer){
+        pool.transfer.onClose = pool.onClose
+      }
+    }
+
+    MESSAGE_HANDLER[config.name].onError = func => {
+      pool.onError = func
+      if(pool.transfer){
+        pool.transfer.onError = pool.onError
+      }
+    }
+
+    MESSAGE_HANDLER[config.name].onOpen = func => {
+      pool.onOpen = func
+      if(pool.transfer){
+        pool.transfer.onOpen = pool.onOpen
+      }
+    }
+
+    MESSAGE_HANDLER[config.name].get = () => pool//获取当前链接
   },
+
+
+  installWebsocket(transfer, name){
+    let pool = PoolDic[name]
+    console.log('bbbbbbbbbbb', JSON.stringify(pool.EMIT_QUENE))
+    pool.transfer = transfer
+    transfer.onMessage = function (data){
+      // console.log('pool.onMessage = function (data){', data)
+      pool.RECEIVE_QUENE.push(data)
+      // console.log(pool.RECEIVE_QUENE)
+    }
+    transfer.onClose = pool.onClose
+    transfer.onError = pool.onError
+    transfer.onOpen = pool.onOpen
+  },
+
   getAll: () => PoolDic
 }
 

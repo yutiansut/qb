@@ -1,26 +1,6 @@
-// import 'es5-shim'
-// import 'es5-shim/es5-sham'
-// import 'es6-shim'
-// import 'es6-shim/es6-sham'
-// import 'es7-shim'
 
-// require('es5-shim');
-// require('es5-shim/es5-sham');
-// require('es6-shim');
-// require('es6-shim/es6-sham');
-// require('es7-shim');
-// require('console-polyfill');
-// require('es6-promise').polyfill();
-// require('fetch-detector');
-// require('fetch-ie8');
-// require('babel-polyfill');
-// import 'es6-promise/auto'
-// import 'fetch-detector'
-// import 'fetch-ie8'
 import React from 'react';
 import {render} from 'react-dom';
-// import App from './App'
-// import AppMb from './AppMb'
 import {RUNAPP, Websocket, Storage} from './core'
 import "whatwg-fetch";
 import ServerConfig from './config/ServerConfig'
@@ -32,10 +12,11 @@ import StorageConfig from './config/StorageConfig'
 import './class/lib/Prototype'
 import Device from './core/libs/Device'
 
+let str = Date.now() + '-' + Math.random().toString(36).substr(2);
 
 const renderDom = async Component => {
   await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig, StorageConfig})
-  WebSocketConfig.useWebSocket && await Websocket.general()
+  WebSocketConfig.useWebSocket && Websocket.general({test:str})
   render(
     <Component/>,
     document.getElementById('app')

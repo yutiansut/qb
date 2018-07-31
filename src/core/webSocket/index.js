@@ -20,14 +20,20 @@ const WEB_SOCKET = {
 
     webSocketList.forEach(v => {
       WEB_SOCKET[v.name] = async params => {
-        let url = v.url && `${protocol}://${host}:${port}${v.url}` || `ws://${host}:${port}`
+        //先在message中注册此条连接信息
+        MessageHandler.install(v)
+
+        let url = v.url && `${protocol}://${host}:${port}${v.url}` || `${protocol}://${host}:${port}`
         if (params) (url += `?`) && Object.keys(params).forEach((key, index) => (url += `${key}=${params[key]}`) && Object.keys(params).length - 1 !== index && (url += '&'))
         let size = v.size || 1
         let webSocketPool = WebSocketPool()
         // webSocketPool.onOpen = event => WEB_SOCKET[v.name].WebSocketHasStart = true
         webSocketPool.hasStart = false
         await webSocketPool.start(url, size)
-        MessageHandler.install(webSocketPool, v)
+        webSocketPool.hasStart = true
+
+        //websocket连接完毕再注册webaocket
+        MessageHandler.installWebsocket(webSocketPool, v.name)
       }
     })
   },
