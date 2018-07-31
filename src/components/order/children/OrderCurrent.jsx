@@ -6,36 +6,6 @@ import DatePicker from "../../../common/component/DatePicker/DatePicker";
 import Pagination from "../../../common/component/Pagination";
 import '../stylus/orderDetail.styl'
 
-const orderDetailHead = {
-  orderCurrent: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '价格'}, {name: '数量'}, {name: '交易额'}, {name: '尚未成交'}, {name: '已成交'}, {name: '状态'}, {name: '操作'},],
-  orderHistory: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '价格'}, {name: '数量'}, {name: '成交额'}, {name: '已成交'}, {name: '平均成交价'}, {name: '状态'}, {name: '操作'},],
-  orderDeal: [{name: '时间'}, {name: '交易对'}, {name: '类型'}, {name: '平均成交价'}, {name: '成交数量'}, {name: '成交额'}, {name: '手续费'},],
-};
-
-const orderStatus = {
-  0: '未成交',
-  1: '部分成交',
-  2: '全部成交',
-  3: '已撤销',
-  4: '撤单中',
-  5: '已结束',
-  6: '部分成交',
-};
-// const orderNavItems = {
-//   orderCurrent: {
-//     title:this.intl.get("order-current"),
-//   },
-//   orderHistory: {
-//     title:this.intl.get("order-history")
-//   },
-//   orderDeal: {
-//     title:this.intl.get("order-deal")
-//   }
-// };
-//
-const orderInfoHead = [
-  {name: '买方'}, {name: '卖方'}, {name: '成交时间'}, {name: '成交单价'}, {name: '成交数量'}, {name: '成交金额'},
-]
 export default class OrderCurrent extends ExchangeViewBase {
   constructor(props) {
     super(props);
