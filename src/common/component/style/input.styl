@@ -1,0 +1,98 @@
+.base-input-wrap
+  position relative
+  height 100%
+  &.default
+    border none
+  &.select
+    &::after
+      position absolute
+      top 0
+      right 0
+      content ''
+      width 10.9%
+      height 100%
+      background $icon-xiala no-repeat center center
+      background-size auto 12%
+    .search-list
+      position relative
+      width 100%
+      box-shadow 6px 0 6px 0 rgba(0,0,0,0.06), 0 6px 6px 0 rgba(0,0,0,0.06)
+      z-index 99
+      li
+        width 100%
+        height 0.43rem
+        padding 0 0.1rem
+        background-color $common-bg-deep
+        &:hover
+          background-color $common-bg-active
+  &.search2
+    &::after
+      position absolute
+      top 0
+      right 0
+      content ''
+      width 13%
+      height 100%
+      background $search-default no-repeat center center
+      background-size auto 44%
+    &:hover::after, &.focus::after
+      background-image $search-click
+      background-size auto 44%
+    &:hover
+      input
+        border-color $common-border-main-hover
+    input
+      padding-right 13%
+      border 0.01rem solid $common-border-dark
+      background $common-bg-deep
+      color $common-font-normal
+      border-radius(0.02rem)
+  &.search1
+    input
+      width 84.21%
+      height 100%
+      border-right 0
+      background $common-bg-deep
+      color $common-font-normal
+      border-radius(0.02rem 0 0 0.02rem)
+      // &:focus
+      //   background $normal-white-color
+  input, textarea
+    padding-left 0.1rem
+    padding-right 0.1rem
+    font-size 0.14rem
+    background $common-bg-deep
+    color $common-font-normal
+    border 0.01rem solid $common-border-dark
+    letter-spacing 0
+    border-radius(0.02rem)
+    placeholder($common-font-minor, 0.14rem)
+    &:hover, &:focus
+      border-color $common-border-main
+    &.disabled
+      background $common-bg-deep
+      border 0.01rem solid $common-border-dark
+      border-radius(0.02rem)
+      placeholder($common-font-dark, 0.14rem)
+    &.dark, &.dark:hover, &.dark:focus
+      color $common-font-light
+      background transparent
+      border 0.01rem solid $common-bg-deep-op
+  textarea
+    padding-top 0.1rem
+    padding-bottom 0.1rem
+    resize none
+  button
+    position absolute
+    right 0
+    top 0
+    width 15.79%
+    height 100%
+    cursor pointer
+    border-radius(0 0.02rem 0.02rem 0)
+    background $search-bai no-repeat center center $common-bg-main
+    background-size 0.2rem 0.2rem
+    &:hover
+      background-color $common-bg-main-hover
+    &:active
+      background-color $common-bg-main-active
