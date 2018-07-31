@@ -130,7 +130,7 @@ export default class UserOrderListController extends OrderListController {
           "," +
           v.turnover +
           "," +
-          v.fee
+          v.fee + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
       });
       this.exportExcel(str, `${this.view.intl.get("order-deal")}.xls`);
       return;
