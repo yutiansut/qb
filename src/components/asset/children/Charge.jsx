@@ -173,7 +173,7 @@ export default class Charge extends exchangeViewBase {
         </div>
         <div className="address">
           <p className="tips">
-            {this.intl.get("asset-depositTip", {
+            {this.intl.getHTML("asset-depositTip", {
               currency: this.state.currency
             })}
           </p>
@@ -217,7 +217,7 @@ export default class Charge extends exchangeViewBase {
           <span className="title">{this.intl.get("asset-reminder")}</span>
           <ol>
             <li>
-              {this.intl.get("asset-depositReminder1", {
+              {this.intl.getHTML("asset-depositReminder1", {
                 currency: this.state.currency,
                 number: address && address.verifyNumber
               })}

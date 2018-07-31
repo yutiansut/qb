@@ -259,7 +259,7 @@ export default function zh(state) {
     "asset-copy": "复制到剪贴板",
     "asset-reminder": "温馨提示",
     "asset-depositReminder1":
-      "使用{currency}地址充值需要{number}个网络确认才能到账",
+      "使用{currency}地址充值需要<i> {number} </i>个网络确认才能到账",
     "asset-depositReminder2-1": "您可以在充值提现",
     "asset-depositReminder2-2": "页面跟踪进度",
     "asset-toTrade": "去交易",
@@ -272,7 +272,7 @@ export default function zh(state) {
     "asset-confirming": "确认中",
     "asset-viewAll": "查看全部",
     "asset-minWithdraw":
-      "注意：最小提现数量为{number}{currency};请勿直接提现至众筹或ICO地址 ，我们不会处理未来代币的发放。",
+      "注意：最小提现数量为{number}{currency};<br/>请勿直接提现至众筹或ICO地址 ，我们不会处理未来代币的发放。",
     "asset-minWithdraw-tip":'最小提现数量为{number}{currency}',
     "asset-withdrawAddress": "提现地址",
     "asset-addAddress": "添加地址",
