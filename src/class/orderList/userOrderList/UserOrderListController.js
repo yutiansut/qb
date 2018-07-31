@@ -102,7 +102,7 @@ export default class UserOrderListController extends OrderListController {
           "," +
           v.count +
           "," +
-          v.turnover +
+          (v.turnover + ' ' + v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
           v.dealDoneCount +
           "," +
@@ -127,10 +127,10 @@ export default class UserOrderListController extends OrderListController {
           v.avgPrice +
           "," +
           v.count +
+          "," + (
+          v.turnover + ' ' +  v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
-          v.turnover +
-          "," +
-          v.fee + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
+          v.fee + ' ' + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
       });
       this.exportExcel(str, `${this.view.intl.get("order-deal")}.xls`);
       return;
