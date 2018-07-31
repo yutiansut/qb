@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.styl";
 /*
   placeholder, 占位文案
   type,  默认default, 可选search1(带搜索按钮),search2(带搜索图标),textarea, select

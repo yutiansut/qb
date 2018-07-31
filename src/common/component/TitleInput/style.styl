@@ -1,30 +1,29 @@
-@import "../style/index.styl"
 .title-input
   display flex
   height 0.36rem
   line-height 0.36rem
-  color $normal-black-color
+  color $common-font-deep
   input
     height 100%
     padding 0 0.1rem 0 0.1rem
-    border 0.01rem solid $line-dark
+    border 0.01rem solid $common-border-dark
   p
     height 100%
     padding 0 0.1rem
-    border 0.01rem solid $line-dark
+    border 0.01rem solid $common-border-dark
     border-left none
-    color $normal-gray-color
-    background-color $normal-input-color
+    color $common-font-deep
+    background-color $common-bg-deep
     border-radius(0 0.02rem 0.02rem 0)
   p:nth-child(1)
     height 100%
     padding 0 0.1rem
-    border 0.01rem solid $line-dark
+    border 0.01rem solid $common-border-dark
     border-right none
     border-radius(0.02rem 0 0 0.02rem)
   &.focus, &:hover
     p,input
-      border-color $main-color
+      border-color $common-border-main
   &.left
     input
       border-radius(0 0.02rem 0.02rem 0)
@@ -34,8 +33,7 @@
   &.dark
     background-color transparent
     p,input
-      color $normal-white-color-a
-      border-color $line-dark-a
+      color $common-font-minor
+      border-color $common-border-dark-op
     p
-      background-color $line-dark-a
-
+      background-color $common-bg-deep-op

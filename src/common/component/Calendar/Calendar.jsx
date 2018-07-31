@@ -3,7 +3,6 @@ import MonthView from "./MonthView.jsx";
 import DecadeView from "./DecadeView.jsx";
 import SetMonthView from "./SetMonthView.jsx";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
-import "./calendar.styl"
 
 export default class Calendar extends exchangeViewBase {
   constructor(props) {

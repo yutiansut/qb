@@ -7,7 +7,6 @@
 
 import React, { Component } from "react";
 import Calendar from  "../Calendar/Calendar.jsx"
-import "./datePicker.styl"
 
 export default class DateInterval extends Component {
   constructor(props) {

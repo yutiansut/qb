@@ -1,11 +1,11 @@
-@import "../style/index.styl"
+// @import "../style/variable.styl"
 
 .calendar-wrap
   position relative
   .input-wrap
     &.active
       input
-       border .01rem solid $main-color
+       border .01rem solid $common-border-main
       &:before
         position absolute
         top .04rem
@@ -32,9 +32,9 @@
       margin-bottom .05rem
       font-size .14rem
       line-height .36rem
-      color $normal-font-color
-      background $normal-input-color
-      border .01rem solid $line-dark
+      color $common-font-normal
+      background $common-bg-deep
+      border .01rem solid $common-border-dark
       border-radius (.04rem)
       &::-webkit-input-placeholder
         font-size .14rem
@@ -47,9 +47,9 @@
   box-sizing()
   width 2.58rem
   padding .16rem .26rem .18rem
-  color $normal-font-color
-  background $bg-medium-color
-  border .01rem solid $disale-border-color
+  color $common-font-normal
+  background $common-bg-medium
+  border .01rem solid $common-border-dark
   box-shadow 0 .02rem .04rem 0 rgba(0, 0, 0, 0.12), 0 0 .06rem 0 rgba(0, 0, 0, 0.04)
   border-radius (.02rem)
   text-align center
@@ -60,7 +60,7 @@
     margin 0 auto .16rem
     font-size .14rem
     font-weight normal
-    color $normal-font-color
+    color $common-font-normal
     margin-bottom 0rem
     img
       position relative
@@ -88,30 +88,30 @@
     tr
       line-height 0.3rem
     thead
-      color $normal-font-color
+      color $common-font-normal
     tbody
       td
         width .32rem
         height .28rem
-        padding
+        // padding
         &.is-disabled, &.today-disabled
-          color $line-light
+          color $common-font-light
           pointer-events none
           cursor not-allowed
         &.today-text
-          color $main-color
+          color $common-font-main
         &.active-text:hover
           cursor pointer
-          background $line-light
+          background $common-bg-light
         &.active-set:hover
           cursor pointer
-          color $main-color
+          color $common-font-main
         &.active
-          color $normal-white-color
-          background $main-color
+          color $common-font-none
+          background $common-bg-main
           &:hover
-            color $normal-white-color
-            background  $main-color
+            color $common-font-none
+            background $common-bg-main
 
   .calendar-content
     font-size .12rem

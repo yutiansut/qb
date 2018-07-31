@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../Button/";
-import "./style.styl";
 /*
   currentPage	当前页码，默认为1
   total	数据总条数

@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.styl";
 /*
 type  默认default(无提示性图标，文案居中), 可选ico(带有提示性图标，文案左对齐)
 theme 主题 默认positi,可选passive

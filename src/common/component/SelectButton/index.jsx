@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./style.styl";
 
 export default class SelectButton extends Component {
   constructor(props) {

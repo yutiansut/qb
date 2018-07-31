@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "./style.styl";
 /*
   placeholder, 占位文案
   type 默认无，可选left, right

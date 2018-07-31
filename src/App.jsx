@@ -10,6 +10,7 @@ import {AsyncComponent} from './core'
 
 import "./common/css/base.styl";
 import "./common/css/reset.styl";
+import "./common/component/style/index.styl";
 
 import ConfigController from "./class/config/ConfigController";
 import AssetController from "./class/asset/AssetController";

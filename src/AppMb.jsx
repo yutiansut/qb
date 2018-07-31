@@ -8,6 +8,7 @@ import {
 
 import "./common/css/base.styl";
 import "./common/css/reset.styl";
+import "./common/component/style/index.styl";
 
 import {AsyncComponent} from './core'
 

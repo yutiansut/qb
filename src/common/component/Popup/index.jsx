@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../Button/";
-import "./style.styl";
 /*
   title 标题 type为tip1、tip2、tip3、tip4时不生效
   type  默认或不在选择范围内时为default(消息提示), 可选base(基础),confirm(确认消息),custom(自定义),tip1、tip2、tip3、tip4(带有倾向性成功，警告，错误，信息),
