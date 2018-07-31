@@ -21,9 +21,9 @@ import UserNoticeContent from '../notice/noticeChild/UserNoticePop.jsx'
 
 
 const languageArr = [
-  { imgUrl: '/static/img/home/chinese.svg', content: '简体中文', value: "zh-CN"},
+  { imgUrl: '/static/img/home/cn.svg', content: '简体中文', value: "zh-CN"},
   // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
-  {imgUrl: '/static/img/home/english.png', content: 'English', value: "en-US"}
+  {imgUrl: '/static/img/home/en.svg', content: 'English', value: "en-US"}
 ]
 
 export default class Header extends ExchangeViewBase {

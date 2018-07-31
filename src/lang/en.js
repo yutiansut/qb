@@ -6,7 +6,7 @@ export default function en(state) {
     coin,
     applyEmailUrl,
     contactEmailUrl,
-    addr,
+    addr
   } = state;
 
   // 公共、主页及不在其他模块的翻译属于common
@@ -53,11 +53,11 @@ export default function en(state) {
     state: "Status",
     time: "Time",
     cancel: "Cancel",
-    canceled: 'Cancelled',
+    canceled: "Cancelled",
     pending: "pending",
     passed: "Passed",
     failed: "Failed",
-    dealing: 'Processing',
+    dealing: "Processing",
     fee: "Fee",
     option: "Option",
     setFund: "Funding Password",
@@ -102,38 +102,39 @@ export default function en(state) {
     daelAmount: "Deal Amount",
     avgDealPrice: "Average Deal Price",
     dealTurnover: "Total Turnover",
-    passError: 'Funding password error',
-    userNotice: 'Notice',
-    sendSuccess: 'Send Success',
-    noLowerMiniTradeNum: 'Must not be lower than the minimum volume of transaction',
-    noEmptyPrice: 'The price can not be empty',
-    orderSuccess: 'order success',
-    kline:"Kline",
-    depth:"Depth",
+    passError: "Funding password error",
+    userNotice: "Notice",
+    sendSuccess: "Send Success",
+    noLowerMiniTradeNum:
+      "Must not be lower than the minimum volume of transaction",
+    noEmptyPrice: "The price can not be empty",
+    orderSuccess: "order success",
+    kline: "Kline",
+    depth: "Depth",
     noDate: "No data",
-    Su: 'Su',
-    Mo: 'Mo',
-    Tu: 'Tu',
-    We: 'We',
-    Th: 'Th',
-    Fr: 'Fr',
-    Sa: 'Sa',
-    Jan: 'Jan',
-    Feb: 'Feb',
-    Mar: 'Mar',
-    Apr: 'Apr',
-    May: 'May',
-    Jun: 'Jun',
-    Jul: 'Jul',
-    Aug: 'Aug',
-    Sep: 'Sep',
-    Oct: 'Oct',
-    Nov: 'Nov',
-    Dec: 'Dec',
-    today: 'Today',
-    year: '',
-    yearSp: ' -',
-    month: ''
+    Su: "Su",
+    Mo: "Mo",
+    Tu: "Tu",
+    We: "We",
+    Th: "Th",
+    Fr: "Fr",
+    Sa: "Sa",
+    Jan: "Jan",
+    Feb: "Feb",
+    Mar: "Mar",
+    Apr: "Apr",
+    May: "May",
+    Jun: "Jun",
+    Jul: "Jul",
+    Aug: "Aug",
+    Sep: "Sep",
+    Oct: "Oct",
+    Nov: "Nov",
+    Dec: "Dec",
+    today: "Today",
+    year: "",
+    yearSp: " -",
+    month: ""
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -157,8 +158,8 @@ export default function en(state) {
     608: "Wrong verification code",
     609: "Wrong operation type",
     610: "Same as the original password",
-    612: 'Password wrong, your account has been frozen, try after {number}mins！',
-    613: 'Login exception, please log in again',
+    612: "Password wrong, your account has been frozen, try after {number}mins！",
+    613: "Login exception, please log in again",
     616: "Please log in first, and set the login password in the personal center.",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
@@ -176,14 +177,14 @@ export default function en(state) {
     710: "Withdrawal: cannot find the to address",
     711: "cws error",
     712: "The withdrawal address format is wrong",
-    713: 'This address already exists',
-    714: 'You can not make a transfer to yourself',
+    713: "This address already exists",
+    714: "You can not make a transfer to yourself",
     1001: "Connection banned",
     1002: "The Token passed in during connection is invalid",
-    1416: 'It may not be suitable for market price trading, we do recommend to change',
-    1420: 'Current tradePair does not support trading',
-    1421: 'The price exceeds the limit accuracy',
-    1422: 'The amount exceeds the limit accuracy',
+    1416: "It may not be suitable for market price trading, we do recommend to change",
+    1420: "Current tradePair does not support trading",
+    1421: "The price exceeds the limit accuracy",
+    1422: "The amount exceeds the limit accuracy",
     2001: "Google validation failed",
     2002: "Google validation is not enabled",
     2011: "The verification method can not be empty",
@@ -195,8 +196,8 @@ export default function en(state) {
     2400: "IP already exists",
     2401: "IP has not been found",
     2402: "IP is not on the white list",
-    2601: "The reward has been received. Please look forward to the next activity",
-  }
+    2601: "The reward has been received. Please look forward to the next activity"
+  };
   const other = {
     "header-home": "home",
     "header-exchange": "exchange",
@@ -212,24 +213,119 @@ export default function en(state) {
     "footer-protocol": "Service Protocol",
     "footer-info": "Info&Announcement",
     "footer-request": "Coin Request",
-    "tip-success": 'Success',
-    "tip-warn": 'Warning',
-    "tip-error": 'Error',
-    "tip-message": 'Message',
-    "tip-know": 'I know',
-    "tip-confirm": 'Confirm',
-    "tip-cancel": 'Cancel',
+    "tip-success": "Success",
+    "tip-warn": "Warning",
+    "tip-error": "Error",
+    "tip-message": "Message",
+    "tip-know": "I know",
+    "tip-confirm": "Confirm",
+    "tip-cancel": "Cancel",
     "home-advantage": "Our advantage",
     "home-advantage-h1": "Financial-market-level Trading System",
     "home-advantage-h2": "Top-class Security and Risk Control",
     "home-advantage-h3": "High Stability",
     "home-advantage-h4": "Muti-platform Trading Support",
-    "home-advantage-p1": "Fast as a financial-market-level system, with processing speed of one million trading amount per second",
-    "home-advantage-p2": "Multiple signatures, off-line signatures, and cold wallet storage",
-    "home-advantage-p3": "Multi-network integration ensures that the server cluster is available 24*7",
+    "home-advantage-p1":
+      "Fast as a financial-market-level system, with processing speed of one million trading amount per second",
+    "home-advantage-p2":
+      "Multiple signatures, off-line signatures, and cold wallet storage",
+    "home-advantage-p3":
+      "Multi-network integration ensures that the server cluster is available 24*7",
     "home-advantage-p4": "IOS, Android and PC terminal access"
   };
-  const asset = { "asset-totalAssets": "Total assets (approx)", "asset-balance": "Balance", "asset-24hQuota": "Withdraw quota in 24H", "asset-limitApply": "Apply for a higher withdrawal limit", "asset-usedAsset": "Already in used", "asset-hideLittle": "Hide small balance", "asset-hideZero": "Hide 0 balances", "asset-charge": "Charge", "asset-withdraw": "Withdraw", "asset-trade": "Trade", "asset-currency": "Currency", "asset-fullname": "Full name", "asset-avail": "Available Balance", "asset-lock": "Frozen balance", "asset-tobtc": "BTC Valuation", "asset-valuation": "Valuation", "asset-tip1": "Less than0.001BTC", "asset-tip2": "The amount of money in the process of issuing bills and checking the withdrawal of money", "asset-tip3": "Total valuation", "asset-records": "Assets records", "asset-selectCoin": "Select currency", "asset-amount": "Amount", "asset-orderLock": "Frozen order", "asset-depositTip": "OBS! Do not charge any other currencies to {currency} address except {currency}, any other currencies to {currency} address would not be refunded", "asset-depositAddress": "deposit address", "asset-showQrcode": "Show the QR code", "asset-copy": "Copy to clipboard", "asset-reminder": "Friendly reminder", "asset-depositReminder1": "Deposit to {currency} address, {number} confirmations would be needed", "asset-depositReminder2-1": "Deposit & Withdraw", "asset-depositReminder2-2": "Tracking progress", "asset-toTrade": "Trade", "asset-depositHistory": "Deposits history", "asset-depositTime": "deposit time", "asset-depositAmount": "deposit amount", "asset-sendAddress": "From", "asset-receiveAddress": "To", "asset-confirm": "Subscription Period", "asset-confirming": "Subscription Period", "asset-viewAll": "View all", "asset-minWithdraw": "OBS：Minimal withdraw amount is {number}{currency};do not withdraw to ICO address,We would not deal with the token in the future.", "asset-minWithdraw-tip": "Minimal withdraw amount is {number}{currency}", "asset-withdrawAddress": "withdraw address", "asset-addAddress": "add address", "asset-withdrawAmount": "Amount of Withdrawal", "asset-withdrawAvailable": "Available Balance", "asset-gasFee": "Gas fee", "asset-withdrawActual": "Actual Deposit Amount", "asset-inputFundPassword": "Input Funding Password", "asset-setFundPassword": "Funding Password", "asset-submit": "Submit", "asset-withdrawalsHistory": "withdrawals history", "asset-withdrawalsTime": "Withdraw time", "asset-withdrawalsAmount": "Withdraw quantity", "asset-inputName": "Input name", "asset-inputAddress": "Input address", "asset-input-extractAmount": "Failed to submit, please check that the withdrawal amount is greater than the minimum withdrawal amount", "asset-export": "Export", "asset-transfer": "Transfer", "asset-amount2": "amount", "asset-balan": "Balance", "asset-checkState": "State", "asset-copySuccess": "Copy Succeed!", "asset-copyFail": "Copy Failed!", "asset-option-failed": "Operation failed", "asset-not-enough": "Insufficient funds", "asset-input-twoVerify1": "Please enter 2-Factor Authentication email code", "asset-input-twoVerify2": "Please enter 2-Factor Authentication google code", "asset-input-twoVerify3": "Please enter 2-Factor Authentication phone code", "asset-incomplete": "Information incomplete!", "asset-add-success": "Successfully added!", "asset-delet-fail": "Delete failed!", "asset-input-address": "Please select a withdrawal address", "asset-password-unset": "You haven't created a funding password, cannot withdraw!", "asset-withdrawal-failed": "Withdrawal failed", "asset-detail": "Asset Detail", "asset-charge-h5-tip3": "Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.", "asset-auth-tip": "Insufficient 24H withdrawal limit, please finish the real-name verification", "asset-wait-auditing": "Daily withdraw limit exceeded, please wait for auditing", "asset-name-existing": "The name is existing" };
+  const asset = {
+    "asset-totalAssets": "Total assets (approx)",
+    "asset-balance": "Balance",
+    "asset-24hQuota": "Withdraw quota in 24H",
+    "asset-limitApply": "Apply for a higher withdrawal limit",
+    "asset-usedAsset": "Already in used",
+    "asset-hideLittle": "Hide small balance",
+    "asset-hideZero": "Hide 0 balances",
+    "asset-charge": "Charge",
+    "asset-withdraw": "Withdraw",
+    "asset-trade": "Trade",
+    "asset-currency": "Currency",
+    "asset-fullname": "Full name",
+    "asset-avail": "Available Balance",
+    "asset-lock": "Frozen balance",
+    "asset-tobtc": "BTC Valuation",
+    "asset-valuation": "Valuation",
+    "asset-tip1": "Less than0.001BTC",
+    "asset-tip2":
+      "The amount of money in the process of issuing bills and checking the withdrawal of money",
+    "asset-tip3": "Total valuation",
+    "asset-records": "Assets records",
+    "asset-selectCoin": "Select currency",
+    "asset-amount": "Amount",
+    "asset-orderLock": "Frozen order",
+    "asset-depositTip":
+      "OBS! Do not charge any other currencies to {currency} address except {currency}, any other currencies to {currency} address would not be refunded",
+    "asset-depositAddress": "deposit address",
+    "asset-showQrcode": "Show the QR code",
+    "asset-copy": "Copy to clipboard",
+    "asset-reminder": "Friendly reminder",
+    "asset-depositReminder1":
+      "Deposit to {currency} address, <i> {number} </i> confirmations would be needed",
+    "asset-depositReminder2-1": "Deposit & Withdraw",
+    "asset-depositReminder2-2": "Tracking progress",
+    "asset-safe-tip": "Please make sure that your computer and browser are secure and your information is protected from being tampered or leaked.",
+    "asset-toTrade": "Trade",
+    "asset-depositHistory": "Deposits history",
+    "asset-depositTime": "deposit time",
+    "asset-depositAmount": "deposit amount",
+    "asset-sendAddress": "From",
+    "asset-receiveAddress": "To",
+    "asset-confirm": "Subscription Period",
+    "asset-confirming": "Subscription Period",
+    "asset-viewAll": "View all",
+    "asset-minWithdraw":
+      "OBS：Minimal withdraw amount is {number}{currency};<br/>do not withdraw to ICO address,We would not deal with the token in the future.",
+    "asset-minWithdraw-tip": "Minimal withdraw amount is {number}{currency}",
+    "asset-withdrawAddress": "withdraw address",
+    "asset-addAddress": "add address",
+    "asset-withdrawAmount": "Amount of Withdrawal",
+    "asset-withdrawAvailable": "Available Balance",
+    "asset-gasFee": "Gas fee",
+    "asset-withdrawActual": "Actual Deposit Amount",
+    "asset-inputFundPassword": "Input Funding Password",
+    "asset-setFundPassword": "Funding Password",
+    "asset-submit": "Submit",
+    "asset-withdrawalsHistory": "withdrawals history",
+    "asset-withdrawalsTime": "Withdraw time",
+    "asset-withdrawalsAmount": "Withdraw quantity",
+    "asset-inputName": "Input name",
+    "asset-inputAddress": "Input address",
+    "asset-input-extractAmount":
+      "Failed to submit, please check that the withdrawal amount is greater than the minimum withdrawal amount",
+    "asset-export": "Export",
+    "asset-transfer": "Transfer",
+    "asset-amount2": "amount",
+    "asset-balan": "Balance",
+    "asset-checkState": "State",
+    "asset-copySuccess": "Copy Succeed!",
+    "asset-copyFail": "Copy Failed!",
+    "asset-option-failed": "Operation failed",
+    "asset-not-enough": "Insufficient funds",
+    "asset-input-twoVerify1": "Please enter 2-Factor Authentication email code",
+    "asset-input-twoVerify2":
+      "Please enter 2-Factor Authentication google code",
+    "asset-input-twoVerify3": "Please enter 2-Factor Authentication phone code",
+    "asset-incomplete": "Information incomplete!",
+    "asset-add-success": "Successfully added!",
+    "asset-delet-fail": "Delete failed!",
+    "asset-input-address": "Please select a withdrawal address",
+    "asset-password-unset":
+      "You haven't created a funding password, cannot withdraw!",
+    "asset-withdrawal-failed": "Withdrawal failed",
+    "asset-detail": "Asset Detail",
+    "asset-charge-h5-tip3":
+      "Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.",
+    "asset-auth-tip":
+      "Insufficient 24H withdrawal limit, please finish the real-name verification",
+    "asset-wait-auditing":
+      "Daily withdraw limit exceeded, please wait for auditing",
+    "asset-name-existing": "The name is existing"
+  };
   const market = {
     "market-favorite": "Favorites",
     "market-favorites": "Favourites",
@@ -257,15 +353,21 @@ export default function en(state) {
     "notice-web": "Website",
     "notice-appleTitle": "Listing Application and Specifications",
     "notice-appleState1": "To protect the interests of our clients,",
-    "notice-appleState2": "will review and evaluate every trading product listed on our platform. Please provide following information and send it over to our email: ",
+    "notice-appleState2":
+      "will review and evaluate every trading product listed on our platform. Please provide following information and send it over to our email: ",
     "notice-appleDetailTile": "Information should include but not limited to:",
     "notice-appleContent1": "Contact Email，Name and title of contact person",
     "notice-appleContent2": "Token information，name、abbr and logo etc.,",
-    "notice-appleContent3": "Issue date and amount, other exchange platforms you have listed",
-    "notice-appleContent4": "Project information, main features and official website",
-    "notice-appleContent5": "Core members and their backgrounds, Linkedin accounts' links (if applicable)'",
-    "notice-appleContent6": "ICO information, issue data and amount, raising coin/token types and percentage etc.,",
-    "notice-appleContent7": "Customer information, number of registered/active users, community addresses(if applicable)",
+    "notice-appleContent3":
+      "Issue date and amount, other exchange platforms you have listed",
+    "notice-appleContent4":
+      "Project information, main features and official website",
+    "notice-appleContent5":
+      "Core members and their backgrounds, Linkedin accounts' links (if applicable)'",
+    "notice-appleContent6":
+      "ICO information, issue data and amount, raising coin/token types and percentage etc.,",
+    "notice-appleContent7":
+      "Customer information, number of registered/active users, community addresses(if applicable)",
     "notice-appleContent8": "White papers or other materials",
     "notice-userDetail": "Details",
     "notice-allRead": "All marked as read",
@@ -275,7 +377,7 @@ export default function en(state) {
     "order-current": "Current order",
     "order-history": "Order history",
     "order-deal": "Deal history",
-    'order-unDeal':'Not traded',
+    "order-unDeal": "Not traded",
     unDeal: "Not traded",
     partDeal: "Partially filled",
     totalDeal: "Filled",
@@ -283,8 +385,8 @@ export default function en(state) {
     reseting: "Cancelling",
     overed: "Complete",
     hideReset: "Hide undo",
-    "exportOrderRecord": "export",
-    "exportDealRecord": "export",
+    exportOrderRecord: "export",
+    exportDealRecord: "export",
     orderDetail: "order details",
     "order-deal-total": "Total",
     "order-deal-money": "Turnover",
@@ -299,11 +401,11 @@ export default function en(state) {
     "order-reset-buy": "Undo buy",
     "order-reset-sell": "Undo sell",
     "order-reset-all": "Undo all",
-    "order-export": 'Export',
-    "cancel-successful": 'Cancellation success',
-    'order-bs': 'Bid/Ask',
-    'order-b':'buy',
-    'order-s':'sell',
+    "order-export": "Export",
+    "cancel-successful": "Cancellation success",
+    "order-bs": "Bid/Ask",
+    "order-b": "buy",
+    "order-s": "sell"
   };
   const deal = {
     "deal-limit": "Limit price",
@@ -320,18 +422,20 @@ export default function en(state) {
     "deal-forgetpwd": "Forget password",
     "deal-freepwd": "Free password",
     "deal-inputpwd": "Input fund password",
-    'deal-setpwd': 'Set fund password',
-    "deal-market-buy":'Buy for market best price',
-    "deal-market-sell":'Sell for market best price',
-    'deal-market-msg': 'Market price, no stationary money',
-    'deal-identify': 'ID verification',
-    "deal-digital-tip": 'The price shall be subject to the actual price of the digital currency',
-    "deal-price-tip": 'Final trasaction price shall be subject to the actual price of the  digital currency',
-    "deal-after": 'Then can trade',
-    "deal-login": 'Sign in/Sign up',
-    "deal-num-err":'Error of input quantity accuracy',
-    "deal-pass-empty": 'Please input fund password',
-    "deal-num-limited":'Insufficient balance'
+    "deal-setpwd": "Set fund password",
+    "deal-market-buy": "Buy for market best price",
+    "deal-market-sell": "Sell for market best price",
+    "deal-market-msg": "Market price, no stationary money",
+    "deal-identify": "ID verification",
+    "deal-digital-tip":
+      "The price shall be subject to the actual price of the digital currency",
+    "deal-price-tip":
+      "Final trasaction price shall be subject to the actual price of the  digital currency",
+    "deal-after": "Then can trade",
+    "deal-login": "Sign in/Sign up",
+    "deal-num-err": "Error of input quantity accuracy",
+    "deal-pass-empty": "Please input fund password",
+    "deal-num-limited": "Insufficient balance"
   };
   const user = {
     "user-score": "My VIP Status",
@@ -437,18 +541,23 @@ export default function en(state) {
     "user-newPwd": "New password",
     "user-currentPwd": "Current Password",
     "user-popBind": "Bind",
-    "user-popPwdRule": "*New passwords must have at least 6 letters, numbers or special characters, and cannot be only letters or only numbers",
-    "user-popFundRule": "*Upon password change, withdrawals on your account will be blocked for 24 hours for security reasons.",
+    "user-popPwdRule":
+      "*New passwords must have at least 6 letters, numbers or special characters, and cannot be only letters or only numbers",
+    "user-popFundRule":
+      "*Upon password change, withdrawals on your account will be blocked for 24 hours for security reasons.",
     "user-popGoole": "Google Verification Code",
     "user-popPicture": "CAPTCHA Code",
     "user-popPicturePlaceholder": "Please fill in the CAPTCHA code",
     "user-googleStart": "Activate Google Verification",
     "user-googleInstall": "Install double verification software",
-    "user-googleExplain1": "Click ‘add a new account’ and scan the QR code below in the Google Authenticator App",
-    "user-googleExplain2": "If you cannot scan the QR code above, you can manually add your account and type in security keys below",
+    "user-googleExplain1":
+      "Click ‘add a new account’ and scan the QR code below in the Google Authenticator App",
+    "user-googleExplain2":
+      "If you cannot scan the QR code above, you can manually add your account and type in security keys below",
     "user-googleWarnings": "Warnings",
     "user-googleRemind1": "Please make sure you save these security keys：",
-    "user-googleRemind2": "If you accidentally delete your account or change your cell phone, these security keys are the only way to help you restore your account.",
+    "user-googleRemind2":
+      "If you accidentally delete your account or change your cell phone, these security keys are the only way to help you restore your account.",
     "user-googleInput": "Please fill in the verification code on the screen",
     "user-inputEmail": "Please Enter Email Address",
     "user-inputPhone": "Please Enter Phone Number",
@@ -463,7 +572,8 @@ export default function en(state) {
     "user-verifyPhone": "Cellphone Verification Code",
     "user-checkAgainPwd": "Please ensure that both password entries match",
     // "user-checkNewPwd": "Code length must be 6~18 digits",
-    "user-checkNewPwd": "Must be 6-18 combinations of letters, numbers or symbols in English",
+    "user-checkNewPwd":
+      "Must be 6-18 combinations of letters, numbers or symbols in English",
     "user-checkEmail": "Invalid email address format",
     "user-checkPhone": "Cellphone number incorrect",
     "user-photoSucc": "Upload success",
@@ -478,7 +588,8 @@ export default function en(state) {
     "user-nonePicture": "Incomplete information",
     "user-idErr": "There was an error. Check the ID box.",
     "user-passportErr": "There was an error. Check the Passport box.",
-    "user-supportPhone": "Currently, only Mainland China cell numbers are supported",
+    "user-supportPhone":
+      "Currently, only Mainland China cell numbers are supported",
     "user-errIp": "Please enter the correct IP",
     "user-googleSucc": "Google verification Setup Success",
     "user-setFundPwd": "Please set up the fund password",
@@ -518,16 +629,20 @@ export default function en(state) {
     "user-verify-state3": "Failed",
     "user-verify-state4": "Malicious",
     "user-verify-state5": "Prohibit",
-    "user-not-surport": "Please go to the PC client to complete",
+    "user-not-surport": "Please go to the PC client to complete"
   };
 
   const activity = {
-    "activity-rule-1": "Start now, every new registered user can claim 20 tokens.",
-    "activity-rule-2": "Invite friends to register and claim 5 more for each successful registry.",
+    "activity-rule-1":
+      "Start now, every new registered user can claim 20 tokens.",
+    "activity-rule-2":
+      "Invite friends to register and claim 5 more for each successful registry.",
     "activity-rule-3": "Please use your own invitation code.",
     "activity-rule-4": "Total 5,000,000 will be distributed.",
-    "activity-rule-5": "New registered user can login web or app to check the tokens on “assets”.",
-    "activity-rule-6": "Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
+    "activity-rule-5":
+      "New registered user can login web or app to check the tokens on “assets”.",
+    "activity-rule-6":
+      "Please refresh your assets if the tokens are not in your account yet, or contact our customer service if the tokens are still not received after.",
     "activity-rule-7": `${nameUsd} will revoke the tokens when there are cheatings, and will disable the cheating account.`,
     "activity-rule-8": `All rights reserved by ${nameUsd}.`,
     "activity-rule": `Promotion Rules`,
@@ -581,7 +696,7 @@ export default function en(state) {
     "activity-rule-40": `Total <i>{number}</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
     "activity-rule-42": `Invite friends`,
-    "asset-funds-transfer": 'Funds transfer',
+    "asset-funds-transfer": "Funds transfer"
   };
 
   const login = {
@@ -592,15 +707,18 @@ export default function en(state) {
     "login-userInput": "Mobile/Email",
     "login-passInput": "Password",
     "login-forget": "Forgot password",
-    "login-read": "The new user will use the verification login automatically to register, and on behalf of you have agreed",
+    "login-read":
+      "The new user will use the verification login automatically to register, and on behalf of you have agreed",
     "login-readUser": "《User Agreement》",
     "login-readUser2": "User Agreement",
     "login-placeholderPhoneAndEmail": "Cellphone number/ Email address",
-    "login-passRule": "New passwords must have at least 6 letters, numbers or special characters and cannot be only letters or only numbers",
+    "login-passRule":
+      "New passwords must have at least 6 letters, numbers or special characters and cannot be only letters or only numbers",
     "login-passAgain": "Confirm Password",
     "login-passAgainPlaceholder": "Please enter the password again",
     "login-findPass": "Retrieve password",
-    "login-inputVerifyPhoneAndEmail": "Please fill in correct mobile phone number",
+    "login-inputVerifyPhoneAndEmail":
+      "Please fill in correct mobile phone number",
     "login-other": "Log on in other places, please log in again",
     "login-err": "Login failed, please try again",
     "login-miss": "The login information has failed, please try again"
@@ -706,14 +824,19 @@ export default function en(state) {
     "help-terms-9": `IX. Primacy of the Agreement`,
     "help-terms-9-1": `This Agreement is an important legal document by which users register to become ${nameUsd} users and use ${nameUsd} services. When there are discrepancies between the expressed wishes of ${nameUsd} or users, in writing or verbally, this Agreement shall prevail.`,
 
-    "help-api-title": 'API Documentation',
-    "help-api-overview": 'Overview',
-    "help-api-overview-1": '1. Public API include <span>ticker</span>, <span>trades</span>, <span>depth</span>',
-    "help-api-overview-2": '2. Each User API request requires an additional POST parameter: nonce (must be a positive integer)',
+    "help-api-title": "API Documentation",
+    "help-api-overview": "Overview",
+    "help-api-overview-1":
+      "1. Public API include <span>ticker</span>, <span>trades</span>, <span>depth</span>",
+    "help-api-overview-2":
+      "2. Each User API request requires an additional POST parameter: nonce (must be a positive integer)",
     "help-api-overview-3": `3. API initiation address:https://${netUrl}/api/v1`,
-    "help-api-overview-4": '4. Public API uses HTTP GET requests. User API uses POST requests.',
-    "help-api-overview-5": '5. Server responses use the JSON format, and the data structure is as follows:',
-    "help-api-overview-error": 'During a normal request, status is 200 and result returns the content. When there is a request error, status is not 200, message will return a specific error message',
+    "help-api-overview-4":
+      "4. Public API uses HTTP GET requests. User API uses POST requests.",
+    "help-api-overview-5":
+      "5. Server responses use the JSON format, and the data structure is as follows:",
+    "help-api-overview-error":
+      "During a normal request, status is 200 and result returns the content. When there is a request error, status is not 200, message will return a specific error message",
 
     "help-api-list": "API List",
     "help-api-list-auth": "Identity Verification Required",
@@ -725,8 +848,8 @@ export default function en(state) {
     "help-api-list-1-2-1": "Market, optional: ",
     "help-api-list-1-3": "3. Examples：",
 
-    "helo-coin-search": 'Search currency',
-    "helo-coin-deposit": 'Go to deposit',
+    "helo-coin-search": "Search currency",
+    "helo-coin-deposit": "Go to deposit",
     "helo-coin-market": "Market value",
     "helo-coin-total": "Circulation",
     "helo-coin-liquidity": "Liquidity",
@@ -738,47 +861,88 @@ export default function en(state) {
     "helo-coin-browser": "Block chain browser",
     "helo-coin-white": "White paper",
 
-    "Aeternity号称新一代区块链网络,由德裔计算机科学家“以太坊教父”Yanislav Malahov与前Augur核心开发者Zack Hess、前Synereo核心开发者Jack Pettersson于2016年发起，聚集诸多颠覆性创新于一身，旨在重树当今智能合约的底层协议。Aeternity的技术亮点是图灵完备状态通道(State Channels)和去中心化预言机（Oracles）。Aeternity项目曾经被看成是欧洲的以太坊，也被很多币粉视为超优质项目,但是在两轮ICO之后，项目组并没有像很多项目一样迅速发币，而雪上加霜的是，在以太坊钱包被盗事件中，AE第二轮ICO筹得的资金也大量丢失，这让参与ICO的币粉们非常失望。": "Aeternity is known as the next-generation blockchain network. It was launched in 2016 by the German-speaking computer scientist 'Episte Ethereum' Yanislav Malahov and the former Augur core developer Zack Hess and the former Synereo core developer Jack Pettersson, and gathered many subversive innovations. An underlying protocol that aims to recapture today's smart contracts. The technical highlights of Aeternity are the Turing Complete State Channels and the Decentralized Prediction Engine (Oracles). The Aeternity project was once regarded as Ethereum in Europe and was considered as a super-quality project by many coins. However, after two rounds of ICO, the project team did not issue coins as quickly as many projects, and what was worse was that in Ethereum. In the event of a purse theft, the funds raised by AE's second round of ICOs were also lost. This made it very disappointing for the participating ICOs.",
-    "Bitquence是一种针对区块链的人力驱动的加密服务。Bitquence的使命是让每个人都能获得参与到令人生畏的加密货币市场的机会，加速区块链技术的采用，并让加密货币的所有权民主化。我们让加密货币变的更容易购买和转让，从而每个人都能够参与到新经济中。我们信奉中本聪创建的哲学使命。我们通过创建普通人可访问的安全层，将本该属于大家的权力交还给大家。Bitquence优势：1.安全：最先进的数字安全保证您的资产安全。2.简化和透明度：资产分配是透明的，可以完全了解详细的分配信息。分配是简单易懂的，所以你知道你在买什么。3.高流动性和访问性：所有资产仅分配在流动资产中，因此易于存款和取款。使用Bitquence流动性网络，任何类型的付款都可以立即发送到任何地方。4.快速入门：存入数字货币或法定货币，没有设置费和隐藏费用。快速的资产配置和管理钱包可以快速实现价值多元化。5.社区共识：社区共识风险预测奖励有经验的用户的专业知识，同时为新用户提供有关数字资产风险和质量的信息。6.移动通用电子钱包：我们的移动专家团队确保Bitquence是移动友好的，所以您可以随时监控和转移分配。": "Bitquence is a human-driven encryption service for blockchains. Bitquence's mission is to give everyone the opportunity to participate in the daunting cryptocurrency market, accelerate the adoption of blockchain technology, and democratize the ownership of cryptocurrency. We make it easier to buy and transfer cryptocurrencies so that everyone can participate in the new economy. We believe in the philosophical mission created by Satoshi Nakamoto. By creating a security layer accessible to ordinary people, we return the power that belongs to everyone to everyone. Bitquence advantages: 1. Security: The most advanced digital security guarantees the safety of your assets. 2. Simplification and Transparency: Asset allocation is transparent and can fully understand detailed allocation information. Allocation is easy to understand, so you know what you are buying. 3. High liquidity and accessibility: All assets are only allocated in current assets and are therefore easy to deposit and withdraw funds. With the Bitquence mobility network, any type of payment can be sent instantly to anywhere. 4. Quick Start: Deposits into digital or legal currency, no setup fees and hidden charges. Rapid asset allocation and management wallets can quickly realize value diversification. 5. Community Consensus: Community consensus risk forecasting rewards the expertise of experienced users while providing new users with information on the risks and quality of digital assets. 6. Mobile Universal Wallet: Our team of mobile experts ensures that Bitquence is mobile friendly, so you can monitor and transfer assignments at any time.",
-    "WINGS是一个创造和发展社区的区块链平台，它致力于通过一个流动的组织模型来发动、支持和推广新的项目建议书，该模型被称作去中心化自治组织（DAO）。通过使用不可篡改的区块链和智能合约执行，DAO实现了自主和独立的组织统治、管理和运行。 WINGS结合了多个概念，包括关注奖励、预测市场、智能合约、治理模型和联邦基金安全。该平台着重鼓励WINGS社区进行高位值提案的认证和推广，以获取更多积极的财务回报。WINGS创造了一个去中心化预测生态系统，它给予WINGS代币持有者有形的奖励，以促进社区成员为最大化其奖励而努力做出最优的选择。": "WINGS is a blockchain platform for creating and developing communities. It is committed to launching, supporting, and promoting new project proposals through a mobile organization model called the Decentralized Autonomous Organization (DAO). Through the use of non-tamperable blockchains and smart contract enforcement, DAO has achieved autonomous, independent organizational governance, management, and operations. WINGS combines several concepts, including attention to rewards, forecasting markets, smart contracts, governance models, and federal fund security. The platform focuses on encouraging the WINGS community to certify and promote high value proposals in order to obtain more positive financial returns. WINGS has created a decentralized forecasting ecosystem that gives tangible incentives to WINGS token holders to promote community members to make the best choices to maximize their rewards.",
-    "district0x网络社区是一个去中心化的开源自治社区，基于以太坊、Aragon、IPFS等技术开发的。其核心框架为d0xINFRA是基于以太坊的智能合约并通过IPFS分发存储，支持所有的社区成员部署自己的网络应用。": "The district0x online community is a decentralized, open source, autonomous community based on technologies such as Ethereum, Aragon, and IPFS. Its core framework, d0xINFRA, is based on Ethereum's smart contracts and distributes storage over IPFS, allowing all community members to deploy their own web applications.",
-    "STORJ 是Storj项目的以太坊代币，Storj是一个去中心化的基于区块链的分布式云存储系统，功能与中心化的Dropbox，oneDrive类似。Storj激励用户分享自己的剩余空间和流量以获得区块奖励，因为其充分利用用户资源，成本极低，并且数据采用冗余和端对端加密存储，更加安全可靠。Storj已经达成与开源文件传输项目Filezilla的合作。STORJ在第二次ICO中募集到3000万美金，成本为约6CNY，发行后曾处于破发状态。为请务必注意投资风险。": "STORJ is an Ethereum token for the Storj project. Storj is a decentralized blockchain-based distributed cloud storage system with similar functionality to the centralized Dropbox, oneDrive. Storj encourages users to share their remaining space and traffic to obtain block rewards because they make the best use of user resources. The cost is extremely low, and data is redundant and end-to-end encrypted storage, which is more secure and reliable. Storj has already reached an agreement with Filezilla, an open source file transfer project. STORJ raised 30 million dollars in the second ICO, and the cost was about 6CNY. After the release, STORJ was in a broken state. Please be sure to pay attention to investment risks.",
-    "SingularDTV是区块链智能合约技术支持的影视娱乐综合直销平台,  最终目标是建立并维护一个可靠的去中心化影视娱乐工业体系 。SingularDTV是全球性平台。虽然短期内平台及影视作品仅针对英文、西班牙语和中文，未来 SinglarDTV 将触及到全球更多种语言使用者。": "SingularDTV is a video and entertainment integrated direct sales platform supported by blockchain smart contract technology. The ultimate goal is to establish and maintain a reliable decentralized film and television entertainment industry system. SingularDTV is a global platform. Although short-term platform and film and television works are only for English, Spanish and Chinese, SinglarDTV will reach more users in more languages in the world.",
-    "总部位于美国纽约的FunFair 是一个由以太坊智能合约支持的去中心化游戏平台，也是以太坊技术第一次真正意义地应用在了线上博彩游戏利于，解决了“赌场”游戏高费用和低信任度的问题。实际上，游戏是智能合约技术最主要的一个垂直应用领域，FunFair 公司创始人兼首席执行官 Jez San 则把区块链技术引入到了游戏领域，其平台不仅可以接受以太币，还可以接受比特币，ZCash，以及 ERC20 代币。": "FunFair, headquartered in New York City, USA, is a decentralized gaming platform powered by Ethereum Smart Contracts. It is also the first time that Ethereum technology is truly applied to online gaming games. It solves the high cost and low cost of “casino” games. The problem of trust. In fact, the game is the most important vertical application field of smart contract technology. FunFair founder and CEO Jez San introduced blockchain technology to the game field. Its platform not only accepts Ethernet but also accepts Bitcoin. , ZCash, and ERC20 tokens.",
-    "Bancor协议使用支持智能合约的以太坊区块链，为其代币内嵌价格发现和流动机制。这些“智能代币”能把一个或数个代币作为储备金，让任何人随时通过智能合约快速兑换、销毁代币或储备金。": "The Bancor agreement uses Ethereum blockchains that support smart contracts to embed price discovery and movement mechanisms for their tokens. These 'smart tokens' can use one or several tokens as reserves, allowing anyone to quickly convert and destroy tokens or reserves through smart contracts.",
-    "SNT(Status) Status是一个开源的聊天平台和支持以太坊上面的去中心化应用（dApp）的移动浏览器。在2017年6月22日开始的ICO因热度太高造成以太坊网络有史以来最拥堵的一天，因为其智能合约限制大额投入，投资分布较均匀，总共募集到约30万ETH。SNT ICO的成本价格为万分之一ETH，按当时币价计算约为0.25CNY，请务必注意投资风险。": "SNT (Status) Status is an open source chat platform and mobile browser that supports decentralized applications (dApp) on Ethereum. The ICO, which began on June 22, 2017, was overheated, causing Ethereum Networks to be the most congested day in history. Because of its smart contracts that limit large-scale investment and the investment distribution is even, a total of about 300,000 ETHs were raised. The cost price of the SNT ICO is one ten-thousandth of an ETH, which is approximately 0.25 CNY at the current currency price. Please pay attention to the investment risk.",
-    "由于Segwit2X宣告失败，海外Evey团队和007团队联合开发的Bitcoin Diamond（比特币钻石）应运而生！    比特币钻石币背后有一个非常有趣的想法，因为有一小部分比特币核心开发商认为比特币创建是不可改变的，比特币作为分散货币创建的主要目的是为了给大众控制和管理自己的钱和通过自己的家用电脑的权力。这正是比特币钻石在比特币挖掘中重新赋予普通人的权利，从而实现真正的分权。通过采用新的工作证明挖掘算法来解决这个问题，该算法将再次使人们能够在家用电脑上挖掘比特币金币。比特币钻石,预计在十一月十八日       比特币钻石由Bitcoin Diamond Foundation负责全球运营，属比特币区块的新分叉币，英文缩写BCD，将于比特币区块高度495866分叉，在预定的区块高度下，比特币钻石矿工将使用新的工作验证算法开始创建区块，并将陆续在BTC原有特性上增加转账隐私保护等功能。原始的比特币区块链保持不变，比特币钻石是其一个新的硬分叉链。需要比特币交易平台系统开发关注VxinQKL17999新的分支与Bitcoin有相同的交易历史，直到分叉产生新链，这条新的BTC分叉链称为比特币钻石。比特币钻石在快速发展中的解决比特币的一系列问题1.隐私保护：BCD添加转账金额加密功能，从而保护参与者的交易隐私，使整个交易生态更安全更具备隐私性。2.提高交易速度：BCD提高单位区块大小并支持每个区块大小为一个动态值，更灵活地处理每个区块中的所有交易。除此之外，将出块速度提高了5倍，最终目的是为了提高整个链中的交易确认速度。3.降低转账手续费和用户参与门槛：BCD总量为BTC的10倍，降低了用户的单位参与成本与门槛，使得更多的用户能更容易地参与到BCD的交易活动当中。     但现在，比特币的网络大部分都是由强大的中国矿工提供的，这些矿工雇用专用硬件ASIC来挖掘新的比特币。所以他们对比特币的网络有更大的影响。然而，Segwit2x支持者指出，大约90％的矿工正在通过硬分叉来发信号通知协议升级，百度交易系统开发贺顾问。未来几个月我们可以看到比特币的短期波动，但长期看来非常乐观。货币的未来是数字化的，这是毫无疑问的。正可谓是：真正的比特币，价值就像钻石一样稀少。": "Due to the failure of Segwit2X, the Bitcoin Diamond jointly developed by the overseas Evey team and the 007 team came into being! Bitcoin diamonds are operated globally by the Bitcoin Diamond Foundation and are new bifurcation coins in the Bitcoin block. The English initials BCD will be bifurcated at a bitcoin block height of 495866. Bitcoin diamond miners will be working at a predetermined block height. A new work verification algorithm is used to start the creation of blocks, and functions such as transfer privacy protection will be added to the original characteristics of BTC one after another. The original bitcoin blockchain remains unchanged, and bitcoin diamonds are a new hard bifurcation chain. Need Bitcoin Trading Platform System Development Focus on VxinQKL17999 The new branch has the same trading history as Bitcoin until the fork produces a new chain. This new BTC branching chain is called Bitcoin Diamond. Bitcoin Diamonds' rapid development of a series of issues to solve Bitcoin 1. Privacy Protection: BCD adds the transfer amount encryption function to protect the privacy of participants' transactions, making the entire transaction ecosystem safer and more private. 2. Increase transaction speed: BCD increases the size of unit blocks and supports each block size as a dynamic value, allowing more flexible handling of all transactions in each block. In addition, the block speed is increased by a factor of five. The ultimate goal is to increase the speed of transaction confirmation in the entire chain. 3. Reduce the transfer fee and user participation threshold: The total amount of BCD is 10 times that of BTC, which reduces the user's unit participation cost and threshold, so that more users can more easily participate in the BCD trading activities. But now, most of Bitcoin's network is provided by powerful Chinese miners who employ dedicated hardware ASICs to mine new bitcoins. So they have a greater impact on Bitcoin's network. However, Segwit2x supporters pointed out that about 90% of the miners are signaling a protocol upgrade through hard fork, and Baidu’s trading system development consultant. In the coming months we can see the short-term fluctuations of Bitcoin, but in the long term it looks very optimistic. The future of money is digital. There is no doubt about this. It can be said: The real bitcoin is as rare as diamonds.",
-    "比特币黄金在块491406（2017-10-24 01:17:35 UTC）之后按计划分叉比特币区块链。BTG是对比特币区块链进行硬分叉得到的一种新的数字货币，具体时间为比特币区块高度491406（2017-10-24 01:17:35 UTC），其主要特点为：类似于Bitcoin Cash，BTG已经添加SIGHASH_FORKED(一种硬分叉后的安全机制)。BTG将会采用Equihash PoW算法，这个算法和BTC用的SHA256的区别在于，哈希算力将受计算设备的内存大小影响。所以，ASIC矿机将不再有效用于BTG挖矿，这也是为了抵御ASIC导致的算力集中化，也算是给比特币未来能否修改挖矿算法做了一次实验路线猜想的实施。BTG目前存在的问题有：没有具名的代码开发者。同时，BTG代码库还包含8,000块(100,000 BTG)的私有预挖区块。开发商可能会在公开市场上出售其预挖的BTG。": "Bitcoin Gold forked the Bitcoin blockchain as planned after Block 491406 (2017-10-24 01:17:35 UTC). BTG is a new digital currency obtained by hard bifurcation of the Bitcoin blockchain. The specific time is bitcoin block height 491406 (2017-10-24 01:17:35 UTC). Its main features are: In Bitcoin Cash, BTG has added SIGHASH_FORKED (a hard forked security mechanism). The BTG will use the Equihash PoW algorithm. The difference between this algorithm and the SHA256 BTC is that the hashing power will be affected by the memory size of the computing device. Therefore, the ASIC mining machine will no longer be effectively used for BTG mining. This is to resist the centralization of computing power caused by the ASIC, and it is also an implementation of an experimental route conjecture for Bitcoin's ability to modify the mining algorithm in the future. The current problems with BTG are: There is no named code developer. At the same time, the BTG code base also contains 8,000 (100,000 BTG) private pre-excavation blocks. Developers may sell their pre-excavated BTGs on the open market.",
-    "CVC公民的生态系统，Civic的模型允许通过块链接进行身份验证的按需，安全和低成本访问。每次新的机构或应用程序需要时，背景和个人信息验证检查可能不再需要从头开始。Civic已经拥有全球范围内的工作身份验证产品 。公民在2017年K（NO）W身份认证会议上获得了最佳新创业奖。 为了拥抱创建真正分散的身份生态系统的愿景，我们现在打算推出一个名为公民代币（CVC） 的实用程序代币。": "CVC Citizen's Ecosystem, Civic's model allows on-demand, secure, and low-cost access for authentication via block links. Every time a new organization or application needs it, background and personal information verification checks may no longer need to start from scratch. Civic already has a worldwide work identity authentication product. Citizens won the Best New Entrepreneurship Award at the 2017 K(NO)W Identity Conference. In order to embrace the vision of creating a truly fragmented identity ecosystem, we now plan to introduce a utility token named Citizen Credits (CVC).",
-    "第一滴血，是一个可以让玩家随时随地挑战对手并获得赏金的去中心化电竞平台。全球电竞市场正在以迅猛的方式增长。2015年全球电竞市场的市值为7.48亿美元，预计到2018年，电竞市场在全球的市值将增长至19.2亿美元。而在如此高的市值下，电子竞技平台所提供的公平性与安全性却参差不齐。当前电子竞技平台面临的首要问题是没法提供一个可以信赖的仲裁机制并且没有自动化的赏金分发系统。第一滴血项目，是搭建于以太坊上的区块链平台。该平台致力于使用去中心化的方式解决中心平台的信任问题，并利用智能合约解决赏金支付问题。": "The first blood is a decentralized e-sports platform that allows players to challenge their opponents and win prizes anytime, anywhere. The global gaming market is growing rapidly. The market value of the global gaming market in 2015 was 748 million U.S. dollars. It is estimated that by 2018, the market value of the eSports market will increase to 1.92 billion U.S. dollars. At such a high market value, the e-sports platform offers a wide range of fairness and security. The primary problem facing the current eSports platform is the inability to provide a trustworthy arbitration mechanism and no automated bounty distribution system. The first blood project is a blockchain platform built on Ethereum. The platform is committed to using a decentralized approach to resolve the trust issues of the central platform and to use smart contracts to resolve bounty payment issues.",
-    "比特币（BitCoin）的概念最初由中本聪在2009年提出，根据中本聪的思路设计发布的开源软件以及建构其上的P2P网络。比特币是一种P2P形式的数字货币。点对点的传输意味着一个去中心化的支付系统。与大多数货币不同，比特币不依靠特定货币机构发行，它依据特定算法，通过大量的计算产生，比特币经济使用整个P2P网络中众多节点构成的分布式数据库来确认并记录所有的交易行为，并使用密码学的设计来确保货币流通各个环节安全性。P2P的去中心化特性与算法本身可以确保无法通过大量制造比特币来人为操控币值。基于密码学的设计可以使比特币只能被真实的拥有者转移或支付。这同样确保了货币所有权与流通交易的匿名性。比特币与其他虚拟货币最大的不同，是其总数量非常有限，具有极强的稀缺性。该货币系统曾在4年内只有不超过1050万个，之后的总数量将被永久限制在2100万个。": " Bitcoin is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central repository or single administrator. The network is peer-to-peer and transactions take place between users directly through the use of cryptography, without an intermediary. These transactions are verified by network nodes and recorded in a public distributed ledger called a blockchain. Bitcoin was invented by an unknown person or group of people under the name Satoshi Nakamoto and released as open-source software in 2009. In recent years, more and more financial institutions in Wall Street and central banks across the world start to study and analyze the bitcoin blockchain technology. People’s bank of China also announced and published its plan of developing the cryptocurrency. Japanese government even gave bitcoin legal status in payment methods.",
-    "Lisk是一个基于Node.js与Javascript，建立于区块链技术之上的区块链应用平台，开发者可以通过官方提供的SDK，使用JavaScript语言在Lisk平台内开发自已的Blockchain APP，我们认为，未来必定是中心化应用与去中心化应用共存的时代，Lisk提供这么一种简单，易行的方式，让开发者可以很快速的在区块链上建立自己的应用。Lisk的团队是由分别来自德国，英国，美国的经验丰富的专家组成，CEO是来自德国的Max Kordek，来自亚琛工业大学，在区块链行业有多年的经验，对于区块链行业的发展有自已独特的见解，Max最终成功地为Lisk项目筹集了14000多个BTC。核心开发者是来自英国的Oliver Beddows，具有15年的软件开发经验，另一位核心开发者François-Xavier Thoorens，以及其它还有多位开发者与多位在各自领域具备丰富经验的顾问团。": " Lisk is a blockchain application platform based on Node.js and Javascript built on blockchain technology. Developers can develop their own Blockchain APP within the Lisk platform through the official SDK, using the JavaScript language. We think, The future must be the era of coexistence between centralized applications and decentralized applications. Lisk provides such a simple and easy way for developers to quickly build their own applications on the blockchain. Lisk's team is made up of experienced experts from Germany, the United Kingdom, and the United States. The CEO is Max Kordek from Germany. He is from Aachen University of Technology and has many years of experience in the blockchain industry. He has developed the blockchain industry. With his own unique insight, Max eventually managed to raise more than 14,000 BTCs for the Lisk project. The core developer is Oliver Beddows from the UK, with 15 years of software development experience, another core developer, François-Xavier Thoorens, and many other developers and consultants with extensive experience in their respective fields.",
-    "2017年7月21日，比特币分叉方案BIP91已经获得全网算力支持，一致同意先进行隔离见证升级，并在之后的6个月内把底层区块链的区块大小升级至2M。然而“搅局者”出现了——挖矿巨头比特币大陆旗下的矿池ViaBTC准备了一套硬分叉的体系，基于比特币的原链推出“比特币现金”。2017年8月1日20时20分，比特币现金开始挖矿，这是比特币的新的分支还是另外一种“山寨币”，业内论调不一，但是此前BCC提前报价已经达到2000元，也就是已经超过比特币价格的十分之一。比特币现金修改了比特币的代码，支持大区块（将区块大小提升至8M），不包含SegWit功能，是BitcoinABC方案产生的区块链资产。": " BCC(BitConnect) is a blockchain asset generated under the Bitcoin ABC program. In order to keep the protocol stable and stable, the Bitcoin ABC solution removes the Segwit function and supports the upgrade of the block size to 8M, which is a technical solution for on-chain expansion. The Bitcoin ABC code is based on a stable version of the Bitcoin protocol that has been enhanced to include Segwit for greater stability, security, robustness. It is also a backup of the current bitcoin protocol and bitcoin system. BCC has began mining since 20:20 on 1/8/2017.",
-    "Ethereum（以太坊）是一个平台和一种编程语言，使开发人员能够建立和发布下一代分布式应用。 Ethereum可以用来编程，分散，担保和交易任何事物：投票，域名，金融交易所，众筹，公司管理， 合同和大部分的协议，知识产权，还有得益于硬件集成的智能资产。以太坊将使用混合型的安全协议，前期使用工作量证明机制（POW），用于分发以太币，然后会切换到权益证明机制（POS）。自上线时起，每年都将有0.26x，即每年有60102216 * 0.26 = 15626576个以太币被矿工挖出。转成POS后，每年产出的以太币将减少": " Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third party interference. These apps run on a custom built blockchain, an enormously powerful shared global infrastructure that can move value around and represent the ownership of property. This enables developers to create markets, store registries of debts or promises, move funds in accordance with instructions given long in the past (like a will or a futures contract) and many other things that have not been invented yet, all without a middle man or counterparty risk.The project was bootstrapped via an ether presale in August 2014 by fans all around the world. It is developed by the Ethereum Foundation, a Swiss nonprofit, with contributions from great minds across the globe.",
-    "Asch是一个去中心化的应用平台，其设计初衷是为了降低开发者的门槛，比如使用javascript作为应用编程语言，支持关系数据库来存储交易数据，使得开发一个dapp与传统的web应用非常相似，相信这对开发者和中小型企业有很大的吸引力，只有开发者的生产力提高了，整个平台的生态才能够更迅速的繁荣起来。Asch在设计上也是开放的，并没有局限于某个细分领域，比如金融、文件存储、版权证明等，其提供的api都是较底层和抽象的，它们可以被自由组合实现各种不同的应用。在共识机制方面，Asch继承并增强了DPOS算法，大大降低了分叉几率和双重支付风险。另外，Asch的侧链即应用模式不但延缓了区块链膨胀问题，还使得dapp更加的灵活和个性化。Asch是一个具有前瞻性的、低成本的一站式应用解决方案，相信将成为新一代去中心化应用的孵化器。": "Asch is an efficient, flexible and safe decentralized application platform, which was initially designed to lower the threshold / barrier to entry for developers. With the use of JavaScript as its application programming language, the platform makes use of relational databases to store data, drawing similarities between developing a DAPP and developing a traditional web application. This type of platform carries a great deal of appeal to developers, as well as small and medium enterprises, since its ease of use results in greater productivity, fueling and facilitating a more prosperous ecosystem in the process. Asch is open in design and is not limited to any particular niche market such as finance, document storage, copyright certification, etc. The APIs which it provides are underlying and abstract, and they can be combined freely so as to facilitate a variety of applications. In terms of the consensus mechanism, Asch has inherited and enhanced the DPOS algorithm, simultaneously reducing the probability of forking and double spending by a significant degree. Furthermore, Asch's side chain, i.e. the application mode, not only improves scalability by delaying the expansion of the blockchain, but also makes DAPPs more flexible and personalized. Asch is a forward-looking, low-cost and one-stop application solution, which is believed to be a new generation of incubator for decentralized application.",
-    "莱特币Litecoin（简写：LTC，货币符号：Ł）是一种基于“点对点”(peer-to-peer)技术的网络货币，也是MIT/X11许可下的一个开源软件项目。它可以帮助用户即时付款给世界上任何一个人。莱特币受到了比特币（BTC）的启发，并且在技术上具有相同的实现原理，莱特币的创造和转让基于一种开源的加密协议，不受到任何中央机构的管理。莱特币旨在改进比特币，与其相比，莱特币具有三种显著差异。第一，莱特币网络每2.5分钟（而不是10分钟）就可以处理一个块，因此可以提供更快的交易确认。第二，莱特币网络预期产出8400万个莱特币，是比特币网络发行货币量的四倍之多。第三，莱特币在其工作量证明算法中使用了由Colin Percival首次提出的scrypt加密算法，这使得相比于比特币，在普通计算机上进行莱特币挖掘更为容易。每一个莱特币被分成100,000,000个更小的单位，通过八位小数来界定。": " By maintaining full compatibility with the Bitcoin API, Litecoin is very easy to integrate into existing applications that already offer Bitcoin support. One of the main advantages offered by the Litecoin network is faster transaction confirmation, making it ideal for small-size purchases. Comparing to Bitcoin, Litecoin has three main differences. Firstly, Litecoin network can deal with a block in every 2.5 minutes(instead of 10 minutes for Bitcoin blockchain). Secondly, Litecoin blockchain is expected to produce 84 million Litecoins, four times the amount of tokens issued by Bitcoin blockchain. Finally, Litecoin is based on Scrypt encryption algorithm, created by Colin Percival for the very first time.",
-    "达世币是一种可线上操作的数字货币，用户可以使用达世币进行安全的在线即时支付，商户则可以为店内添加由全球千万用户所建立的开源支付平台。达世币核心由独特的激励制P2P网络构成。 矿工们维护区块链安全得到奖励；而主节点持有者则是为用户验证交易、存储数据以及提供多种服务而获得奖励。主节点代表着新一层级的网络。 它们可组成高度安全的集群 – 仲裁链, 提供多种类的去中心化服务，如即时交易、匿名性、去中心化管理等等，同时它还可以防止低成本的网络攻击。得益于达世币的奖励机制，它的网络主节点自2014年发行以来已经增长到了4100个，这意味着达世币P2P网络已经成为全球最大的网络之一。更多的节点意味着更高的安全性能，达世币能为更多来自全球各地的终端用户提供全天候的数字货币服务。": "Dash coin(DASH, used name Dark coin(DRK) has many innovations that are widely adopted by later generations. Using the original 11 rounds of scientific algorithms for hashing operations, the anonymous block transfer method has been first proposed and implemented. With a hybrid mining method similar to PoW + PoS, Masternodes received a 10% mining reward. For the first time, dark gravity wave (DGW) difficulty adjustment algorithm has been introduced to protect the block network. Total amount is about 22 million.",
-    "i量化链提供分布式资产及应用平台，让用户能够通过i量化链提供的基础架构和开发接口SDK开发数字资产以及相应的分布式应用。同时i量化链提供一系列的行业标准技术方案，包含智能合约，资产侧链等。我们期望能够提供简单易用、全方位的即插即用型选择。": " i Quantization Chain (IQT) is a blockchain technology application which based on the i-quantification platform to create a close link between the first digital asset in the blockchain industry and the real financial business. As a world-class and authoritative quantitative platform, iQ is also the only one that has entered the blockchain application field and has successfully landed in the field of intelligent transaction in China.",
-    "《杀戮链条》(Killing chain)，是全球首款基于加密数字货币的大型多人在线竞技游戏，其核心为大逃杀玩法。核心研发团队来自暴雪、育碧等国际顶级游戏公司，研发至今历时2年、斥资过亿，现已经进入内测阶段，首个公开版本已于2017年11月3日上线。": " Killing chain is the world's first massively multiplayer online gaming game based on cryptocurrency and its core characteristic is Battle Royale. The core R & D teams consists members from Blizzard, Ubisoft and other famous international game companies. The developing process lasted two years and over 100 million UDS dollars has been spent. It has now entered the beta test stage, and the first public version will launch on 3rd November 2017.",
-    "域链DOC是域链项目(Dochain)的以太坊代币，域链项目(Dochain)由原康盛创想社区运营负责人，火币联合创始人，金色财经创始人，资深域名投资人杜均领导和发起的数字区块链项目，目的是通过域链的区块链技术让域名、商标、网络账号等传统数字资产Bit化，打造全新的域名资产登记、流通的去中心化网络。": " DOC is a Dochain's Ethereum token, and Dochain is running by Jun Du, the former CommScope Creator Community Operations operations manager, co-founder of Huobi.pro, founder of Golden Financea, a senior domain name investor. The goal of the digital blockchain project is to use the blockchain technology of the domainchain to make the traditional digital assets such as domain names, trademarks and online accounts digitized and meanwhile create a brand new domain name asset registration and circulation decentralized network.",
-    "2016.6以太坊最热项目TheDAO被黑客利用智能合约的漏洞，转移了市值五千万美元的以太币。为了挽回投资者资产，以太坊社区最终做出投票表决，大部分参与者同意更改以太坊代码，希望索回资金。为此，以太坊进行硬分叉，作出一个向后不兼容的改变，让所有的以太币——包括被黑客占有的——都回归原处。由于此次硬分叉是通过区块链公开进行的，因此虽然存在着反对的意见，但随着越来越多人对于硬分叉的支持，2016年7月21日，以太坊硬分叉成功。目前，以太坊的“官方”版本ETH，是由其原始开发者进行维护的;以太经典ETC则是由一个全新团队进行维护。这是第一次主流区块链为了补偿投资人而通过分叉来变更交易纪录。分叉以前就持有以太币的人在分叉后会同时持有ETH和ETC，存在交易所或在线钱包中的以太币也不例外。此次分叉衍生出来的两个市场，总价值达12亿美元以上。目前，越来越多的以太坊矿工投入大量算力到这款经典区块链中，ETC交易量上涨，不仅仅是因为理念上的符合，更是因为他们看到了保护交易安全及赢得相关挖矿奖励的价值。以太经典面世后一两天的数据让人印象深刻，其网络的哈希率是544GH/s，占了以太坊网络哈希总量的13%。": " The DAO was a digital decentralized autonomous organization, and a form of investor-directed venture capital fund.The DAO had an objective to provide a new decentralized business model for organizing both commercial and non-profit enterprises. It was instantiated on the Ethereum blockchain, and had no conventional management structure or board of directors. The code of the DAO is open-source.The DAO was stateless, and not tied to any particular nation state. As a result, many questions of how government regulators would deal with a stateless fund were yet to be dealt with.The DAO was crowdfunded via a token sale in May 2016. It set the record for the largest crowdfunding campaign in history.In June 2016, users exploited a vulnerability in the DAO code to enable them to siphon off one third of The DAO's funds to a subsidiary account. On 20 July 2016 01:20:40 PM +UTC at Block 1920000, theEthereum community decided to hard-fork the Ethereum blockchain to restore virtually all funds to the original contract. This was controversial, and led to a fork in Ethereum, where the original unforked blockchain was maintained as Ethereum Classic, thus breaking Ethereum into two separate active blockchains, each with its own cryptocurrency.The DAO was delisted from trading on major exchanges such as Poloniex and Kraken in late 2016.",
-    "Zcash 是首个使用零知识证明机制的区块链系统，它可提供完全的支付保密性，同时仍能够使用公有区块链来维护一个去中心化网络。与比特币相同的是，Zcash代币（ZEC）的总量也是2100万，不同之处在于，Zcash交易自动隐藏区块链上所有交易的发送者、接受者及数额。只用那些拥有查看秘钥的人才能看到交易的内容。用户拥有完全的控制权，他们可自行选择向其他人提供查看秘钥。ZCash 是 bitcoin 的分支，保留了 bitcoin 原有的模式，基于比特币 0.11.2 版代码修改的。 ZCash 钱包资金分 2 种：透明资金、私有资金，透明资金类似比特币资金；私有资金加强了 隐私性，涉及到私有资金的交易是保密不可查的，透明资金与透明资金的交易是公开可查的。": "Zcash is a cryptocurrency that grew out of the Zerocoin project, aimed at improving anonymity for Bitcoin users. Zcash payments are published on a public blockchain, but users are able to use an optional privacy feature to conceal the sender, recipient, and amount being transacted.Like Bitcoin, Zcash has a fixed total supply of 21 million units.",
-    "瑞波币是Ripple网络的基础货币，它可以在整个ripple网络中流通，总数量为1000亿，并且随着交易的增多而逐渐减少，瑞波币的运营公司为Ripple Labs（其前身为OpenCoin）。瑞波币是ripple系统中唯一的通用货币，其不同于ripple系统中的其他货币，其他货币比如CNY、USD不能跨网关提现的，换句话说，A网关发行的CNY只能在A网关提现，若想在B网关提现，必须通过ripple系统的挂单功能转化为B网关的CNY才可以到B网关提现。而瑞波币完全没有这方面的限制，它在ripple系统内是通用的。瑞波币（XRP）和比特币一样都是基于数学和密码学的数字货币，但是与比特币没有真正的用途不同，XRP在Ripple系统中有主要桥梁货币和有保障安全的功能，其中保障安全的功能是不可或缺的，这要求参与这个协议的网关都必须持有少量XRP。": " Ripple provides an unobstructed global payment experience with blockchain technology. By joining Ripple's growing global payments network, financial institutions can handle the transactions of their clients to anywhere in the world and maintain real-time, reliable and low-cost. Banks and payment service providers can use digital currency XRP to further reduce costs and access new markets.",
-    "行云币是行云链的唯一内置资产，同时也是行云链协议的一部分，采用POE共识机制产出的发行模式，总量恒定，不可增发。": "Moving Cloud Chain is a distributed data storage protocol based on block chaining technology. The development team is trying to build a safe and stable block chain asset platform to meet the current rapid development of financial, Internet of things, entertainment, health, public services and other traditional areas, and quickly enter the block chain+smart industry.",
-    "知产链是定位于各类有形无形知产物质实现资本化，商品化，商业化的区块链商业应用底层平台的公有区块链项目，其初衷是利用区块链技术为各类有形无形的知识智慧进行存证、确权、交换、防伪的底层保护，保障合法的知产产权权益，开创知识智慧新经济。知产币是在知产链上运行业务的代币，其用途包括并不限于：支持知产链交易；支持知产链记账节点押金；支持基于知产链构建的各种应用；支持基于知产链的侧链开发。": " A decentralized IPR protection platform has been set up through the Intellectual Property Rights Chain. Anyone can set up their own IPR library and propose to the decentering platform to confirm their IPR content. After confirmation, the authorization or transfer of property rights could be completed by platform sales, consumption, lease and other means without the need of the approval from any centralized node.",
-    "量子链Qtum是首个基于UTXO模型的POS智能合约平台，可以实现和比特币生态和以太坊生态的兼容性，并通过移动端的战略，促进区块链技术的产品化和提高区块链行业的易用性，旨在将真实商业社会与区块链世界连接。因此，量子链是一个区块链应用平台的集大成者。量子链利用其学术合作伙伴、开发工具和方法论对商业智能合约的开发进行了标准化，包括将自然语言的合约准确的转译成机器可读智能合约、高容错度的细节及合约条款。第三方将在量子链的协助下开发专用的用户接口来加强智能合约生命周期管理。量子链旨在通过与一系列合作伙伴和第三方的协作建立一个智能合约枢纽，提供安全并经过反复测试的合约模板，适用于各种行业和用例，例如供应链管理、通讯、物联网、社交媒体等。": "Qtum (read Quantum) is a Chinese hybrid platform that connects the existing blockchain with a virtual machine, such as Ethereum. A platform that enables developers to build applications and smart contracts on the current blockchain technology.Focusing on building a platform that helps companies create smart contracts on blockchain, Qtum is a toolkit in the first place. Designed to be both robust and modular, the platform can create small contracts to be used on most major blockchain.Qtum is a project for the creation of a public blockchain with an open-source code, combining the technologies of Bitcoin and Ethereum. The Qtum Foundation Company that is implementing the project is located in Singapore and was founded by Patrick Dai, the developer of the Chinese origin.",
-    "Omise成立于2013年，是一家总部位于泰国的金融科技初创公司，目前已经获得了有3轮的融资。Omise主要在泰国、日本、新加坡和印度尼西亚运营，并在亚太地区迅速扩张。2016年11月，Omise在福布斯杂志上被评为“金融科技明星”。2017年5月，Omise宣布与支付宝合作推出一款电子钱包，在自己的支付服务套件中整合“支付宝”支付解决方案，帮助泰国本地电子商务商户接受来自中国游客的线上支付交易。关于OmiseGo 这个项目是采取传统VC+ICO组合模式，之前通过VC融资了大概2500万美元的Omise发起的ICO，项目名称为OmiseGo。它打算利用以太坊的技术开发一个电子钱包，通过OmiseGo，任何人都可以以一种完全分布式和比较便宜的方式来进行金融交易。": "OmiseGO is a public Ethereum-based financial technology for use in mainstream digital wallets, that enables real-time, peer-to-peer value exchange and payment services agnostically across jurisdictions and organizational silos, and across both fiat money and decentralized currencies. Designed to enable financial inclusion and disrupt existing institutions, access will be made available to everyone via the OmiseGO network and digital wallet framework.",
-    "TenX力求在最大程度上方便用户访问尽可能多的区块链资产，同时遵守生态系统中最高的安全标准。可以通过区块链来实现，利用COMIT标准，以完全去信任、实时和无成本的方式工作。我们为终端用户提供借记卡和随附的移动钱包，不仅可以使用比特币（BTC），以太坊（ETH），Dash（DASH），而且可以提供几乎所有的区块链资产。TenX钱包可以在近200个国家使用，今天接受验收的有超过3600万个节点。这是可能的，因为我们与主要的信用卡公司，如VISA和万事达卡达成了合作。": "The goal of the TenX project is to create a payment system that connects the real world and the blockchain network. Hence, blockchain assets can be accessed and spent at anytime and anywhere in the world via TenX payment cards, mobile wallet, ATMs and bank accounts.",
-    "EOS 为区块链奇才 BM （Daniel Larimer）领导开发的类似操作系统的区块链架构平台，旨在实现分布式应用的性能扩展。EOS 提供帐户，身份验证，数据库，异步通信以及在数以百计的CPU或群集上的程序调度。该技术的最终形式是一个区块链体系架构，该区块链每秒可以支持数百万个交易，同时普通用户无需支付使用费用。": "EOS.IO is leaded by Dan Larimer, CTO of Block.one. It aims at building a new blockchain architecture designed to enable vertical and hotizontal scaling of decentralized applications. The software provides accounts, authentication, databases and other necessary applications across hundreds of CPU cores or cluters.",
-    "REP是reputation的简写，是Augur系统的流通货币。Augur 是建立在以太坊平台上的去中心化预测市场平台。利用 Augur ，任何人都可以为任何自己感兴趣的主题（比如美国大选谁会获胜）创建一个预测市场，并提供初始流动性，这是一个去中心化的过程。作为回报，该市场的创建者将从市场中获得一半的交易费用。普通用户可以根据自己的信息和判断在 Augur 上预测、买卖事件的股票，例如美国总统大选。当事件发生以后，如果你预测正确、持有正确结果的股票，每股你将获得1美元，从而你的收益是1美元减去当初的买入成本。如果你预测错误、持有错误结果的股票，你将不会获得奖励，从而你的亏损就是当初的买入成本。": " REP is a shorthand for reputation and is the currency of the Augur system. Augur is a de-centralized marketplace based on the Ethereum platform. With Augur, anyone can create a predictive market and provide initial liquidity for any subject of their own interest (such as who is going to win the US presidential election), with a decentralized process. In return, the creator of this market will get half of the transaction fees from the market. Ordinary users can predict, buy and sell stocks on augur, based on their own information and judgment, such as the US presidential election. If, after the incident, you predict the correct stock of the correct result, you will receive $ 1 per share, giving you a gain of $ 1 less the initial cost of the purchase. If you predict the wrong stocks that hold the wrong result, you will not be rewarded, so your loss will be your initial buying cost.",
-    "Golem 是建立在以太坊平台上的去中心化计算机算力租赁平台。通过 Golem 平台，任何用户都可以成为算力的发售方和租用者。无论用户提供的是一台闲置的家用电脑还是几台大型的数据中心，都可以加入到 Golem 平台中。基于以太坊的交易系统被应用于 Golem 平台，用于结算算力提供者的收益和算力使用者所需要支付的费用。": " Golem is a global, open sourced, decentralized supercomputer that anyone can access. It’s made up of the combined power of user’s machines, from personal laptops to entire datacenter. Anyone will be able to use Golem to compute almost any program you can think of, from rendering to research to running websites, in a completely decentralized & inexpensive way. The Golem Network is a decentralized sharing economy of computing power, where anyone can make money ‘renting’ out their computing power or developing & selling software.",
-    "Monaco是一个基于以太坊智能合约的数字货币加密Visa卡。使用Monaco，可以直接消费卡中的比特币和以太币等ERC20数字货币，无论在线上线下，只要持有Monaco，就可以享受最佳汇率。Monaco团队具有传统金融机构和互联网的双重基因。公司CFO是前MasterCard移动支付CFO，顾问团队有前任VISA高管。这意味着公司在风险合规，发卡方和合作方优势明显。另外，公司CEO是前东南亚最大闪购电商联合创始人兼CEO，创立的电商公司曾获得唯品会、高盛、黑石、富达基金等金融机构投资。除此以外，Monaco Visa已经与全球知名的发卡机构达成合作，该发卡商在法兰克福证券交易所上市，并在德国拥有一系列全套银行牌照。而其支付处理平台是一家MasterCard和VISA全认证的处理平台，符合一级PCI DSS标准。": " Founded in 2016, Monaco aims to give everyone's wallet a blockchain asset. By using Monaco's cryptocurrency credit card, users can pay with VISA credit cards using Bitcoin at the bank's best bank rate, saving $ 30-40 for every $ 500 spent. Monaco generated a total of US $ 26.7 million through ICO, making it one of the top ten tokens sales in 2017. Monaco’s headquarter is in Switzerland and has operations in Beijing and Singapore.",
-    "BAT(Basic Attention Token)是Javascript创始人，Mozilla和Firefox浏览器联合创始人Brendan Eich创办的一个用于在广告商和用户之间进行流通的数字资产，用于解决浏览器中的广告展示和用户激励问题。项目基于Brave浏览器开展去中心化数字广告业务，通过零知识证明的运用保护用户隐私，同时可以使用户的关注得到回报。Brave浏览器中有一个独特的概念——注意力。Brave使用ANONIZE算法，能统计用户行为，比如点击什么链接最多，或在哪个网站停留时间最久。这些行为都可以使用“注意力”这个单位量化，具体方式就是在浏览器中嵌入区块链账本系统，而这个系统流通的代币就是BAT（注意力币）。简单说，整合了BAT代币的Brave浏览器，会让商家、网站主和用户间保持良好的正反馈关系。平时Brave用户观看广告或优质内容时，因为花费了注意力，会获得BAT代币的奖励；而网站主凭借广告和优质内容成功吸引了用户的注意力，系统也会对其进行奖励。用户和网站主获得的BAT代币都来自商家的广告费用投入。": " Basic Attention Token is an open-source, decentralized digital advertising platform based on Ethereum, founded by web pioneer Brendan Eich. Basic Attention Token (BAT) held an initial coin offering (ICO) on May 31, 2017 for its eponymous ERC20 utility token, raising approximately $35M USD at the time in less than 30 seconds. The BAT token is designed to correctly value and price user attention within the platform.",
-    "ICONOMI被冠以区块链基金管理中的优步，筹集了600万美元，成为目前第三大的众筹项目。该项目创始人必须证明公司的“优步化”(uberization，引入低廉而高效的替代品，改变市场或者某种经济模式)不仅仅适用于“消费者级别”的服务，还可以开启金融业“不可避免的变革”。": "Published on Dec 29th 2013, scrypt algorithm, 10 minutes and 100 pieces per block, 3 confirmation for each transaction",
-    "Gnosis是建立在以太坊协议上的去中心化预测市场。Gnosis为人们对任何事件的结果预测提供了一个开放平台，大大简化了定制预测市场应用的创建过程。同时，Gnosis利用了区块链信任机器以及智能合约自动执行的特点使玩家可以更加灵活自由的进入预测市场，给预测市场的带来了更加巨大的想象空间。将来，Gnosis的参与者甚至不需要是自然人。在物联网中，传感器收集的信息也可以被轻易的录入区块链做为信息资产来买卖。": " Gnosis.pm is a decentralized prediction market built on the Ethereum protocol. Gnosis provides an open platform for anyone to predict the outcome of any event and plans to drastically simplify the creation of customized prediction market applications.  Gnosis is a ConsenSys backed project and was founded by Martin Koeppelmann and Stefan George, who previously founded and built Fairlay.com, a centralized Bitcoin prediction market.  The token sold during the token launch is known as the Gnosis Token, or GNO. This is the only time that these tokens can be created, and therefore the total supply of GNO is fixed. In the Gnosis launch, 10 million Gnosis tokens (GNO) where created and a percentage of them where distributed through the token launch. ",
-    "DigixDAO是一个智能合同套件，由去中心化自治机构（DAO）创建、由DigixGlobal部署在区块链上，目标是与社区一起治理并建立21世纪以太坊金本位金融平台。作为一个开发、透明的机构，它会建立这样一个标准，利用以太坊智能合同的力量，DigixDAO代币持有人能直接对那些致力于DigixCore黄金平台成长和宣传的决定产生影响。作为回报，给予代币持有人以太坊平台Digix黄金代币交易费作为奖励。DigixDAO众筹于2016年3月31日启动，12小时内募集了550万美元，超出目标10倍。": " DigixDAO is a Decentralized Autonomous Organization (DAO) based on the Ethereum platform that tokenizes gold and other physical assets. DigixDAO introduced a new Proof of Asset protocol that allows users to track their physical assets in the forms of tokens on the Ethereum blockchain. This allows for public verification of the asset existence without the need for a centralized database.  Each Dgix token represents 1 gram of gold, divisible up to 0.001gram and can be tracked back to the physical gold bar for redemption. DigixDAO is a Singapore-based company and they utilize a 3-pronged audit process to proof existence of the gold bar.",
-    "2014年11月下旬，注册地为马恩岛和香港的公司Realcoin改名为Tether。2015年2月发布时就抱上了一条粗腿，当时比特币期货交易量最大交易平台：bitfinex宣布支持泰达币（下称USDT）交易。随后竞争币交易平台Poloniex交易所也支持USDT。P网凭着以太币强势崛起，在竞争币交易平台中隐有龙头之势，也顺带提携了USDT的交易量。USDT的发行和交易使用的是Omni（原Mastercoin）协议，而Omni币可以说是市面上的第一个基于比特币区块链的2.0币种。所以USDT的交易确认等参数是与比特币一致的。根据Tether的CTO及联合创始人Craig Sellars 称，用户可以通过SWIFT电汇美元至Tether公司提供的银行帐户，或通过Bitfinex交易所换取USDT。赎回美元时，反向操作即可。用户也可在上述两个网站用比特币换取USDT。其网站宣称严格遵守1：1的准备金保证，即每发行1枚USDT代币，其银行帐户都会有1美元的资金保障。在合规方面，所有涉及到法币的操作，都要求用户完成KYC认证。当被问及用户如何验证银行帐户保证金时，Craig称法币由Tether Liminted公司保管，并有定期审计，但目前用户还不能直接查询保证金。目前USDT的交易量在所有稳定虚拟货币中的交易量是最大的。": "Tether is a cryptocurrency token claimed by its creators to be backed by one dollar for each token issued, though Tether Limited has not issued a promised audit of their currency reserves. Subpoenas from the U.S. Commodity Futures Trading Commission were sent to Tether on December 6, 2017.A spokesperson for Bitfinex and Tether has said that the CEO of both firms is Jan Ludovicus van der Velde.Tether was issued on the Bitcoin blockchain through the Omni Layer Protocol. Tether says that each unit of Tether is backed by one United States dollar held in reserve by Tether Limited, and may be redeemed through the Tether Platform. The primary objective is to facilitate transactions between cryptocurrency exchanges with a rate fixed to the United States dollar allowing traders to take advantage of high speed arbitrage opportunities without resorting to slow bank wires. As of February 2018, Tether is ranked around the 15th highest market cap cryptocurrency in the world, with a market cap around $2 billion United States dollars as of 5 February 2018.Tether tokens are issued by Tether Limited.",
-    "CRT是CoinRising公司发行的代币，CoinRising通过CRT与全体支持者共享平台成长利益。CRT总量10亿枚，定期回购销毁，永不增发。CRT的价值与用途:CoinRising币荣将通过CRT与全球支持者实现利益共享，方式包括但不限于：1.     平台将定期回购CRT进行销毁，以保证您持有的CRT价值提升2.     满足条件CRT持有者将获得平台交易手续费减免，以降低您的交易成本3.     您可自由将CRT兑换其他数字货币，以保证您资产的灵活性4.     持有CRT代表拥有平台的投票权，您将有权利决定上线哪些交易品类，提议开发某个新功能，您将成为平台的建设者5.     CRT持有者将优先获得平台各种价值信息与优质投资产品与服务，协助您成为更聪明的投资者6.     您可使用CRT参与平台各种趣味活动，让您充分享受交易的乐趣": "CRT (CoinRising Token) is a token published by CoinRising.com which is a professional crypto currency exchange platform. CoinRising.com would share the growing profit with whole token holders. The total amount of CRT is 1 billion and would never be increased, token would be repurchased and destroyed periodically. The value and usage of CRT would be shared with CRT holders all over the world, include but not limited to:1. CoinRising.com would repurchase and destroy CRT periodically to insure the value of CRT will increase continuously.2. The commission fee of trading will be decreased for CRT holders according to the specific requirements, for the matter of decreasing your trading costs.3. The CRT holders could exchange CRT to other digital currencies, for a convenient and smooth trading experience.4. The CRT holders own the voting rights, you have the rights of deciding which currency would be listed. Besides, you can also have the rights to decide what function would be processed, it means that you are defiantly one of the platform builders.5. The CRT holders would receive all kinds of valuable information, excellent investments recommendations and other service in advance, you would totally benefit from these services for becoming a smarter investor.6. Holders can use CRT to participate various of activities on platform, to enjoy a fully fantastic trading experience.",
+    "Aeternity号称新一代区块链网络,由德裔计算机科学家“以太坊教父”Yanislav Malahov与前Augur核心开发者Zack Hess、前Synereo核心开发者Jack Pettersson于2016年发起，聚集诸多颠覆性创新于一身，旨在重树当今智能合约的底层协议。Aeternity的技术亮点是图灵完备状态通道(State Channels)和去中心化预言机（Oracles）。Aeternity项目曾经被看成是欧洲的以太坊，也被很多币粉视为超优质项目,但是在两轮ICO之后，项目组并没有像很多项目一样迅速发币，而雪上加霜的是，在以太坊钱包被盗事件中，AE第二轮ICO筹得的资金也大量丢失，这让参与ICO的币粉们非常失望。":
+      "Aeternity is known as the next-generation blockchain network. It was launched in 2016 by the German-speaking computer scientist 'Episte Ethereum' Yanislav Malahov and the former Augur core developer Zack Hess and the former Synereo core developer Jack Pettersson, and gathered many subversive innovations. An underlying protocol that aims to recapture today's smart contracts. The technical highlights of Aeternity are the Turing Complete State Channels and the Decentralized Prediction Engine (Oracles). The Aeternity project was once regarded as Ethereum in Europe and was considered as a super-quality project by many coins. However, after two rounds of ICO, the project team did not issue coins as quickly as many projects, and what was worse was that in Ethereum. In the event of a purse theft, the funds raised by AE's second round of ICOs were also lost. This made it very disappointing for the participating ICOs.",
+    "Bitquence是一种针对区块链的人力驱动的加密服务。Bitquence的使命是让每个人都能获得参与到令人生畏的加密货币市场的机会，加速区块链技术的采用，并让加密货币的所有权民主化。我们让加密货币变的更容易购买和转让，从而每个人都能够参与到新经济中。我们信奉中本聪创建的哲学使命。我们通过创建普通人可访问的安全层，将本该属于大家的权力交还给大家。Bitquence优势：1.安全：最先进的数字安全保证您的资产安全。2.简化和透明度：资产分配是透明的，可以完全了解详细的分配信息。分配是简单易懂的，所以你知道你在买什么。3.高流动性和访问性：所有资产仅分配在流动资产中，因此易于存款和取款。使用Bitquence流动性网络，任何类型的付款都可以立即发送到任何地方。4.快速入门：存入数字货币或法定货币，没有设置费和隐藏费用。快速的资产配置和管理钱包可以快速实现价值多元化。5.社区共识：社区共识风险预测奖励有经验的用户的专业知识，同时为新用户提供有关数字资产风险和质量的信息。6.移动通用电子钱包：我们的移动专家团队确保Bitquence是移动友好的，所以您可以随时监控和转移分配。":
+      "Bitquence is a human-driven encryption service for blockchains. Bitquence's mission is to give everyone the opportunity to participate in the daunting cryptocurrency market, accelerate the adoption of blockchain technology, and democratize the ownership of cryptocurrency. We make it easier to buy and transfer cryptocurrencies so that everyone can participate in the new economy. We believe in the philosophical mission created by Satoshi Nakamoto. By creating a security layer accessible to ordinary people, we return the power that belongs to everyone to everyone. Bitquence advantages: 1. Security: The most advanced digital security guarantees the safety of your assets. 2. Simplification and Transparency: Asset allocation is transparent and can fully understand detailed allocation information. Allocation is easy to understand, so you know what you are buying. 3. High liquidity and accessibility: All assets are only allocated in current assets and are therefore easy to deposit and withdraw funds. With the Bitquence mobility network, any type of payment can be sent instantly to anywhere. 4. Quick Start: Deposits into digital or legal currency, no setup fees and hidden charges. Rapid asset allocation and management wallets can quickly realize value diversification. 5. Community Consensus: Community consensus risk forecasting rewards the expertise of experienced users while providing new users with information on the risks and quality of digital assets. 6. Mobile Universal Wallet: Our team of mobile experts ensures that Bitquence is mobile friendly, so you can monitor and transfer assignments at any time.",
+    "WINGS是一个创造和发展社区的区块链平台，它致力于通过一个流动的组织模型来发动、支持和推广新的项目建议书，该模型被称作去中心化自治组织（DAO）。通过使用不可篡改的区块链和智能合约执行，DAO实现了自主和独立的组织统治、管理和运行。 WINGS结合了多个概念，包括关注奖励、预测市场、智能合约、治理模型和联邦基金安全。该平台着重鼓励WINGS社区进行高位值提案的认证和推广，以获取更多积极的财务回报。WINGS创造了一个去中心化预测生态系统，它给予WINGS代币持有者有形的奖励，以促进社区成员为最大化其奖励而努力做出最优的选择。":
+      "WINGS is a blockchain platform for creating and developing communities. It is committed to launching, supporting, and promoting new project proposals through a mobile organization model called the Decentralized Autonomous Organization (DAO). Through the use of non-tamperable blockchains and smart contract enforcement, DAO has achieved autonomous, independent organizational governance, management, and operations. WINGS combines several concepts, including attention to rewards, forecasting markets, smart contracts, governance models, and federal fund security. The platform focuses on encouraging the WINGS community to certify and promote high value proposals in order to obtain more positive financial returns. WINGS has created a decentralized forecasting ecosystem that gives tangible incentives to WINGS token holders to promote community members to make the best choices to maximize their rewards.",
+    "district0x网络社区是一个去中心化的开源自治社区，基于以太坊、Aragon、IPFS等技术开发的。其核心框架为d0xINFRA是基于以太坊的智能合约并通过IPFS分发存储，支持所有的社区成员部署自己的网络应用。":
+      "The district0x online community is a decentralized, open source, autonomous community based on technologies such as Ethereum, Aragon, and IPFS. Its core framework, d0xINFRA, is based on Ethereum's smart contracts and distributes storage over IPFS, allowing all community members to deploy their own web applications.",
+    "STORJ 是Storj项目的以太坊代币，Storj是一个去中心化的基于区块链的分布式云存储系统，功能与中心化的Dropbox，oneDrive类似。Storj激励用户分享自己的剩余空间和流量以获得区块奖励，因为其充分利用用户资源，成本极低，并且数据采用冗余和端对端加密存储，更加安全可靠。Storj已经达成与开源文件传输项目Filezilla的合作。STORJ在第二次ICO中募集到3000万美金，成本为约6CNY，发行后曾处于破发状态。为请务必注意投资风险。":
+      "STORJ is an Ethereum token for the Storj project. Storj is a decentralized blockchain-based distributed cloud storage system with similar functionality to the centralized Dropbox, oneDrive. Storj encourages users to share their remaining space and traffic to obtain block rewards because they make the best use of user resources. The cost is extremely low, and data is redundant and end-to-end encrypted storage, which is more secure and reliable. Storj has already reached an agreement with Filezilla, an open source file transfer project. STORJ raised 30 million dollars in the second ICO, and the cost was about 6CNY. After the release, STORJ was in a broken state. Please be sure to pay attention to investment risks.",
+    "SingularDTV是区块链智能合约技术支持的影视娱乐综合直销平台,  最终目标是建立并维护一个可靠的去中心化影视娱乐工业体系 。SingularDTV是全球性平台。虽然短期内平台及影视作品仅针对英文、西班牙语和中文，未来 SinglarDTV 将触及到全球更多种语言使用者。":
+      "SingularDTV is a video and entertainment integrated direct sales platform supported by blockchain smart contract technology. The ultimate goal is to establish and maintain a reliable decentralized film and television entertainment industry system. SingularDTV is a global platform. Although short-term platform and film and television works are only for English, Spanish and Chinese, SinglarDTV will reach more users in more languages in the world.",
+    "总部位于美国纽约的FunFair 是一个由以太坊智能合约支持的去中心化游戏平台，也是以太坊技术第一次真正意义地应用在了线上博彩游戏利于，解决了“赌场”游戏高费用和低信任度的问题。实际上，游戏是智能合约技术最主要的一个垂直应用领域，FunFair 公司创始人兼首席执行官 Jez San 则把区块链技术引入到了游戏领域，其平台不仅可以接受以太币，还可以接受比特币，ZCash，以及 ERC20 代币。":
+      "FunFair, headquartered in New York City, USA, is a decentralized gaming platform powered by Ethereum Smart Contracts. It is also the first time that Ethereum technology is truly applied to online gaming games. It solves the high cost and low cost of “casino” games. The problem of trust. In fact, the game is the most important vertical application field of smart contract technology. FunFair founder and CEO Jez San introduced blockchain technology to the game field. Its platform not only accepts Ethernet but also accepts Bitcoin. , ZCash, and ERC20 tokens.",
+    "Bancor协议使用支持智能合约的以太坊区块链，为其代币内嵌价格发现和流动机制。这些“智能代币”能把一个或数个代币作为储备金，让任何人随时通过智能合约快速兑换、销毁代币或储备金。":
+      "The Bancor agreement uses Ethereum blockchains that support smart contracts to embed price discovery and movement mechanisms for their tokens. These 'smart tokens' can use one or several tokens as reserves, allowing anyone to quickly convert and destroy tokens or reserves through smart contracts.",
+    "SNT(Status) Status是一个开源的聊天平台和支持以太坊上面的去中心化应用（dApp）的移动浏览器。在2017年6月22日开始的ICO因热度太高造成以太坊网络有史以来最拥堵的一天，因为其智能合约限制大额投入，投资分布较均匀，总共募集到约30万ETH。SNT ICO的成本价格为万分之一ETH，按当时币价计算约为0.25CNY，请务必注意投资风险。":
+      "SNT (Status) Status is an open source chat platform and mobile browser that supports decentralized applications (dApp) on Ethereum. The ICO, which began on June 22, 2017, was overheated, causing Ethereum Networks to be the most congested day in history. Because of its smart contracts that limit large-scale investment and the investment distribution is even, a total of about 300,000 ETHs were raised. The cost price of the SNT ICO is one ten-thousandth of an ETH, which is approximately 0.25 CNY at the current currency price. Please pay attention to the investment risk.",
+    "由于Segwit2X宣告失败，海外Evey团队和007团队联合开发的Bitcoin Diamond（比特币钻石）应运而生！    比特币钻石币背后有一个非常有趣的想法，因为有一小部分比特币核心开发商认为比特币创建是不可改变的，比特币作为分散货币创建的主要目的是为了给大众控制和管理自己的钱和通过自己的家用电脑的权力。这正是比特币钻石在比特币挖掘中重新赋予普通人的权利，从而实现真正的分权。通过采用新的工作证明挖掘算法来解决这个问题，该算法将再次使人们能够在家用电脑上挖掘比特币金币。比特币钻石,预计在十一月十八日       比特币钻石由Bitcoin Diamond Foundation负责全球运营，属比特币区块的新分叉币，英文缩写BCD，将于比特币区块高度495866分叉，在预定的区块高度下，比特币钻石矿工将使用新的工作验证算法开始创建区块，并将陆续在BTC原有特性上增加转账隐私保护等功能。原始的比特币区块链保持不变，比特币钻石是其一个新的硬分叉链。需要比特币交易平台系统开发关注VxinQKL17999新的分支与Bitcoin有相同的交易历史，直到分叉产生新链，这条新的BTC分叉链称为比特币钻石。比特币钻石在快速发展中的解决比特币的一系列问题1.隐私保护：BCD添加转账金额加密功能，从而保护参与者的交易隐私，使整个交易生态更安全更具备隐私性。2.提高交易速度：BCD提高单位区块大小并支持每个区块大小为一个动态值，更灵活地处理每个区块中的所有交易。除此之外，将出块速度提高了5倍，最终目的是为了提高整个链中的交易确认速度。3.降低转账手续费和用户参与门槛：BCD总量为BTC的10倍，降低了用户的单位参与成本与门槛，使得更多的用户能更容易地参与到BCD的交易活动当中。     但现在，比特币的网络大部分都是由强大的中国矿工提供的，这些矿工雇用专用硬件ASIC来挖掘新的比特币。所以他们对比特币的网络有更大的影响。然而，Segwit2x支持者指出，大约90％的矿工正在通过硬分叉来发信号通知协议升级，百度交易系统开发贺顾问。未来几个月我们可以看到比特币的短期波动，但长期看来非常乐观。货币的未来是数字化的，这是毫无疑问的。正可谓是：真正的比特币，价值就像钻石一样稀少。":
+      "Due to the failure of Segwit2X, the Bitcoin Diamond jointly developed by the overseas Evey team and the 007 team came into being! Bitcoin diamonds are operated globally by the Bitcoin Diamond Foundation and are new bifurcation coins in the Bitcoin block. The English initials BCD will be bifurcated at a bitcoin block height of 495866. Bitcoin diamond miners will be working at a predetermined block height. A new work verification algorithm is used to start the creation of blocks, and functions such as transfer privacy protection will be added to the original characteristics of BTC one after another. The original bitcoin blockchain remains unchanged, and bitcoin diamonds are a new hard bifurcation chain. Need Bitcoin Trading Platform System Development Focus on VxinQKL17999 The new branch has the same trading history as Bitcoin until the fork produces a new chain. This new BTC branching chain is called Bitcoin Diamond. Bitcoin Diamonds' rapid development of a series of issues to solve Bitcoin 1. Privacy Protection: BCD adds the transfer amount encryption function to protect the privacy of participants' transactions, making the entire transaction ecosystem safer and more private. 2. Increase transaction speed: BCD increases the size of unit blocks and supports each block size as a dynamic value, allowing more flexible handling of all transactions in each block. In addition, the block speed is increased by a factor of five. The ultimate goal is to increase the speed of transaction confirmation in the entire chain. 3. Reduce the transfer fee and user participation threshold: The total amount of BCD is 10 times that of BTC, which reduces the user's unit participation cost and threshold, so that more users can more easily participate in the BCD trading activities. But now, most of Bitcoin's network is provided by powerful Chinese miners who employ dedicated hardware ASICs to mine new bitcoins. So they have a greater impact on Bitcoin's network. However, Segwit2x supporters pointed out that about 90% of the miners are signaling a protocol upgrade through hard fork, and Baidu’s trading system development consultant. In the coming months we can see the short-term fluctuations of Bitcoin, but in the long term it looks very optimistic. The future of money is digital. There is no doubt about this. It can be said: The real bitcoin is as rare as diamonds.",
+    "比特币黄金在块491406（2017-10-24 01:17:35 UTC）之后按计划分叉比特币区块链。BTG是对比特币区块链进行硬分叉得到的一种新的数字货币，具体时间为比特币区块高度491406（2017-10-24 01:17:35 UTC），其主要特点为：类似于Bitcoin Cash，BTG已经添加SIGHASH_FORKED(一种硬分叉后的安全机制)。BTG将会采用Equihash PoW算法，这个算法和BTC用的SHA256的区别在于，哈希算力将受计算设备的内存大小影响。所以，ASIC矿机将不再有效用于BTG挖矿，这也是为了抵御ASIC导致的算力集中化，也算是给比特币未来能否修改挖矿算法做了一次实验路线猜想的实施。BTG目前存在的问题有：没有具名的代码开发者。同时，BTG代码库还包含8,000块(100,000 BTG)的私有预挖区块。开发商可能会在公开市场上出售其预挖的BTG。":
+      "Bitcoin Gold forked the Bitcoin blockchain as planned after Block 491406 (2017-10-24 01:17:35 UTC). BTG is a new digital currency obtained by hard bifurcation of the Bitcoin blockchain. The specific time is bitcoin block height 491406 (2017-10-24 01:17:35 UTC). Its main features are: In Bitcoin Cash, BTG has added SIGHASH_FORKED (a hard forked security mechanism). The BTG will use the Equihash PoW algorithm. The difference between this algorithm and the SHA256 BTC is that the hashing power will be affected by the memory size of the computing device. Therefore, the ASIC mining machine will no longer be effectively used for BTG mining. This is to resist the centralization of computing power caused by the ASIC, and it is also an implementation of an experimental route conjecture for Bitcoin's ability to modify the mining algorithm in the future. The current problems with BTG are: There is no named code developer. At the same time, the BTG code base also contains 8,000 (100,000 BTG) private pre-excavation blocks. Developers may sell their pre-excavated BTGs on the open market.",
+    "CVC公民的生态系统，Civic的模型允许通过块链接进行身份验证的按需，安全和低成本访问。每次新的机构或应用程序需要时，背景和个人信息验证检查可能不再需要从头开始。Civic已经拥有全球范围内的工作身份验证产品 。公民在2017年K（NO）W身份认证会议上获得了最佳新创业奖。 为了拥抱创建真正分散的身份生态系统的愿景，我们现在打算推出一个名为公民代币（CVC） 的实用程序代币。":
+      "CVC Citizen's Ecosystem, Civic's model allows on-demand, secure, and low-cost access for authentication via block links. Every time a new organization or application needs it, background and personal information verification checks may no longer need to start from scratch. Civic already has a worldwide work identity authentication product. Citizens won the Best New Entrepreneurship Award at the 2017 K(NO)W Identity Conference. In order to embrace the vision of creating a truly fragmented identity ecosystem, we now plan to introduce a utility token named Citizen Credits (CVC).",
+    "第一滴血，是一个可以让玩家随时随地挑战对手并获得赏金的去中心化电竞平台。全球电竞市场正在以迅猛的方式增长。2015年全球电竞市场的市值为7.48亿美元，预计到2018年，电竞市场在全球的市值将增长至19.2亿美元。而在如此高的市值下，电子竞技平台所提供的公平性与安全性却参差不齐。当前电子竞技平台面临的首要问题是没法提供一个可以信赖的仲裁机制并且没有自动化的赏金分发系统。第一滴血项目，是搭建于以太坊上的区块链平台。该平台致力于使用去中心化的方式解决中心平台的信任问题，并利用智能合约解决赏金支付问题。":
+      "The first blood is a decentralized e-sports platform that allows players to challenge their opponents and win prizes anytime, anywhere. The global gaming market is growing rapidly. The market value of the global gaming market in 2015 was 748 million U.S. dollars. It is estimated that by 2018, the market value of the eSports market will increase to 1.92 billion U.S. dollars. At such a high market value, the e-sports platform offers a wide range of fairness and security. The primary problem facing the current eSports platform is the inability to provide a trustworthy arbitration mechanism and no automated bounty distribution system. The first blood project is a blockchain platform built on Ethereum. The platform is committed to using a decentralized approach to resolve the trust issues of the central platform and to use smart contracts to resolve bounty payment issues.",
+    "比特币（BitCoin）的概念最初由中本聪在2009年提出，根据中本聪的思路设计发布的开源软件以及建构其上的P2P网络。比特币是一种P2P形式的数字货币。点对点的传输意味着一个去中心化的支付系统。与大多数货币不同，比特币不依靠特定货币机构发行，它依据特定算法，通过大量的计算产生，比特币经济使用整个P2P网络中众多节点构成的分布式数据库来确认并记录所有的交易行为，并使用密码学的设计来确保货币流通各个环节安全性。P2P的去中心化特性与算法本身可以确保无法通过大量制造比特币来人为操控币值。基于密码学的设计可以使比特币只能被真实的拥有者转移或支付。这同样确保了货币所有权与流通交易的匿名性。比特币与其他虚拟货币最大的不同，是其总数量非常有限，具有极强的稀缺性。该货币系统曾在4年内只有不超过1050万个，之后的总数量将被永久限制在2100万个。":
+      " Bitcoin is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central repository or single administrator. The network is peer-to-peer and transactions take place between users directly through the use of cryptography, without an intermediary. These transactions are verified by network nodes and recorded in a public distributed ledger called a blockchain. Bitcoin was invented by an unknown person or group of people under the name Satoshi Nakamoto and released as open-source software in 2009. In recent years, more and more financial institutions in Wall Street and central banks across the world start to study and analyze the bitcoin blockchain technology. People’s bank of China also announced and published its plan of developing the cryptocurrency. Japanese government even gave bitcoin legal status in payment methods.",
+    "Lisk是一个基于Node.js与Javascript，建立于区块链技术之上的区块链应用平台，开发者可以通过官方提供的SDK，使用JavaScript语言在Lisk平台内开发自已的Blockchain APP，我们认为，未来必定是中心化应用与去中心化应用共存的时代，Lisk提供这么一种简单，易行的方式，让开发者可以很快速的在区块链上建立自己的应用。Lisk的团队是由分别来自德国，英国，美国的经验丰富的专家组成，CEO是来自德国的Max Kordek，来自亚琛工业大学，在区块链行业有多年的经验，对于区块链行业的发展有自已独特的见解，Max最终成功地为Lisk项目筹集了14000多个BTC。核心开发者是来自英国的Oliver Beddows，具有15年的软件开发经验，另一位核心开发者François-Xavier Thoorens，以及其它还有多位开发者与多位在各自领域具备丰富经验的顾问团。":
+      " Lisk is a blockchain application platform based on Node.js and Javascript built on blockchain technology. Developers can develop their own Blockchain APP within the Lisk platform through the official SDK, using the JavaScript language. We think, The future must be the era of coexistence between centralized applications and decentralized applications. Lisk provides such a simple and easy way for developers to quickly build their own applications on the blockchain. Lisk's team is made up of experienced experts from Germany, the United Kingdom, and the United States. The CEO is Max Kordek from Germany. He is from Aachen University of Technology and has many years of experience in the blockchain industry. He has developed the blockchain industry. With his own unique insight, Max eventually managed to raise more than 14,000 BTCs for the Lisk project. The core developer is Oliver Beddows from the UK, with 15 years of software development experience, another core developer, François-Xavier Thoorens, and many other developers and consultants with extensive experience in their respective fields.",
+    "2017年7月21日，比特币分叉方案BIP91已经获得全网算力支持，一致同意先进行隔离见证升级，并在之后的6个月内把底层区块链的区块大小升级至2M。然而“搅局者”出现了——挖矿巨头比特币大陆旗下的矿池ViaBTC准备了一套硬分叉的体系，基于比特币的原链推出“比特币现金”。2017年8月1日20时20分，比特币现金开始挖矿，这是比特币的新的分支还是另外一种“山寨币”，业内论调不一，但是此前BCC提前报价已经达到2000元，也就是已经超过比特币价格的十分之一。比特币现金修改了比特币的代码，支持大区块（将区块大小提升至8M），不包含SegWit功能，是BitcoinABC方案产生的区块链资产。":
+      " BCC(BitConnect) is a blockchain asset generated under the Bitcoin ABC program. In order to keep the protocol stable and stable, the Bitcoin ABC solution removes the Segwit function and supports the upgrade of the block size to 8M, which is a technical solution for on-chain expansion. The Bitcoin ABC code is based on a stable version of the Bitcoin protocol that has been enhanced to include Segwit for greater stability, security, robustness. It is also a backup of the current bitcoin protocol and bitcoin system. BCC has began mining since 20:20 on 1/8/2017.",
+    "Ethereum（以太坊）是一个平台和一种编程语言，使开发人员能够建立和发布下一代分布式应用。 Ethereum可以用来编程，分散，担保和交易任何事物：投票，域名，金融交易所，众筹，公司管理， 合同和大部分的协议，知识产权，还有得益于硬件集成的智能资产。以太坊将使用混合型的安全协议，前期使用工作量证明机制（POW），用于分发以太币，然后会切换到权益证明机制（POS）。自上线时起，每年都将有0.26x，即每年有60102216 * 0.26 = 15626576个以太币被矿工挖出。转成POS后，每年产出的以太币将减少":
+      " Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third party interference. These apps run on a custom built blockchain, an enormously powerful shared global infrastructure that can move value around and represent the ownership of property. This enables developers to create markets, store registries of debts or promises, move funds in accordance with instructions given long in the past (like a will or a futures contract) and many other things that have not been invented yet, all without a middle man or counterparty risk.The project was bootstrapped via an ether presale in August 2014 by fans all around the world. It is developed by the Ethereum Foundation, a Swiss nonprofit, with contributions from great minds across the globe.",
+    "Asch是一个去中心化的应用平台，其设计初衷是为了降低开发者的门槛，比如使用javascript作为应用编程语言，支持关系数据库来存储交易数据，使得开发一个dapp与传统的web应用非常相似，相信这对开发者和中小型企业有很大的吸引力，只有开发者的生产力提高了，整个平台的生态才能够更迅速的繁荣起来。Asch在设计上也是开放的，并没有局限于某个细分领域，比如金融、文件存储、版权证明等，其提供的api都是较底层和抽象的，它们可以被自由组合实现各种不同的应用。在共识机制方面，Asch继承并增强了DPOS算法，大大降低了分叉几率和双重支付风险。另外，Asch的侧链即应用模式不但延缓了区块链膨胀问题，还使得dapp更加的灵活和个性化。Asch是一个具有前瞻性的、低成本的一站式应用解决方案，相信将成为新一代去中心化应用的孵化器。":
+      "Asch is an efficient, flexible and safe decentralized application platform, which was initially designed to lower the threshold / barrier to entry for developers. With the use of JavaScript as its application programming language, the platform makes use of relational databases to store data, drawing similarities between developing a DAPP and developing a traditional web application. This type of platform carries a great deal of appeal to developers, as well as small and medium enterprises, since its ease of use results in greater productivity, fueling and facilitating a more prosperous ecosystem in the process. Asch is open in design and is not limited to any particular niche market such as finance, document storage, copyright certification, etc. The APIs which it provides are underlying and abstract, and they can be combined freely so as to facilitate a variety of applications. In terms of the consensus mechanism, Asch has inherited and enhanced the DPOS algorithm, simultaneously reducing the probability of forking and double spending by a significant degree. Furthermore, Asch's side chain, i.e. the application mode, not only improves scalability by delaying the expansion of the blockchain, but also makes DAPPs more flexible and personalized. Asch is a forward-looking, low-cost and one-stop application solution, which is believed to be a new generation of incubator for decentralized application.",
+    "莱特币Litecoin（简写：LTC，货币符号：Ł）是一种基于“点对点”(peer-to-peer)技术的网络货币，也是MIT/X11许可下的一个开源软件项目。它可以帮助用户即时付款给世界上任何一个人。莱特币受到了比特币（BTC）的启发，并且在技术上具有相同的实现原理，莱特币的创造和转让基于一种开源的加密协议，不受到任何中央机构的管理。莱特币旨在改进比特币，与其相比，莱特币具有三种显著差异。第一，莱特币网络每2.5分钟（而不是10分钟）就可以处理一个块，因此可以提供更快的交易确认。第二，莱特币网络预期产出8400万个莱特币，是比特币网络发行货币量的四倍之多。第三，莱特币在其工作量证明算法中使用了由Colin Percival首次提出的scrypt加密算法，这使得相比于比特币，在普通计算机上进行莱特币挖掘更为容易。每一个莱特币被分成100,000,000个更小的单位，通过八位小数来界定。":
+      " By maintaining full compatibility with the Bitcoin API, Litecoin is very easy to integrate into existing applications that already offer Bitcoin support. One of the main advantages offered by the Litecoin network is faster transaction confirmation, making it ideal for small-size purchases. Comparing to Bitcoin, Litecoin has three main differences. Firstly, Litecoin network can deal with a block in every 2.5 minutes(instead of 10 minutes for Bitcoin blockchain). Secondly, Litecoin blockchain is expected to produce 84 million Litecoins, four times the amount of tokens issued by Bitcoin blockchain. Finally, Litecoin is based on Scrypt encryption algorithm, created by Colin Percival for the very first time.",
+    "达世币是一种可线上操作的数字货币，用户可以使用达世币进行安全的在线即时支付，商户则可以为店内添加由全球千万用户所建立的开源支付平台。达世币核心由独特的激励制P2P网络构成。 矿工们维护区块链安全得到奖励；而主节点持有者则是为用户验证交易、存储数据以及提供多种服务而获得奖励。主节点代表着新一层级的网络。 它们可组成高度安全的集群 – 仲裁链, 提供多种类的去中心化服务，如即时交易、匿名性、去中心化管理等等，同时它还可以防止低成本的网络攻击。得益于达世币的奖励机制，它的网络主节点自2014年发行以来已经增长到了4100个，这意味着达世币P2P网络已经成为全球最大的网络之一。更多的节点意味着更高的安全性能，达世币能为更多来自全球各地的终端用户提供全天候的数字货币服务。":
+      "Dash coin(DASH, used name Dark coin(DRK) has many innovations that are widely adopted by later generations. Using the original 11 rounds of scientific algorithms for hashing operations, the anonymous block transfer method has been first proposed and implemented. With a hybrid mining method similar to PoW + PoS, Masternodes received a 10% mining reward. For the first time, dark gravity wave (DGW) difficulty adjustment algorithm has been introduced to protect the block network. Total amount is about 22 million.",
+    "i量化链提供分布式资产及应用平台，让用户能够通过i量化链提供的基础架构和开发接口SDK开发数字资产以及相应的分布式应用。同时i量化链提供一系列的行业标准技术方案，包含智能合约，资产侧链等。我们期望能够提供简单易用、全方位的即插即用型选择。":
+      " i Quantization Chain (IQT) is a blockchain technology application which based on the i-quantification platform to create a close link between the first digital asset in the blockchain industry and the real financial business. As a world-class and authoritative quantitative platform, iQ is also the only one that has entered the blockchain application field and has successfully landed in the field of intelligent transaction in China.",
+    "《杀戮链条》(Killing chain)，是全球首款基于加密数字货币的大型多人在线竞技游戏，其核心为大逃杀玩法。核心研发团队来自暴雪、育碧等国际顶级游戏公司，研发至今历时2年、斥资过亿，现已经进入内测阶段，首个公开版本已于2017年11月3日上线。":
+      " Killing chain is the world's first massively multiplayer online gaming game based on cryptocurrency and its core characteristic is Battle Royale. The core R & D teams consists members from Blizzard, Ubisoft and other famous international game companies. The developing process lasted two years and over 100 million UDS dollars has been spent. It has now entered the beta test stage, and the first public version will launch on 3rd November 2017.",
+    "域链DOC是域链项目(Dochain)的以太坊代币，域链项目(Dochain)由原康盛创想社区运营负责人，火币联合创始人，金色财经创始人，资深域名投资人杜均领导和发起的数字区块链项目，目的是通过域链的区块链技术让域名、商标、网络账号等传统数字资产Bit化，打造全新的域名资产登记、流通的去中心化网络。":
+      " DOC is a Dochain's Ethereum token, and Dochain is running by Jun Du, the former CommScope Creator Community Operations operations manager, co-founder of Huobi.pro, founder of Golden Financea, a senior domain name investor. The goal of the digital blockchain project is to use the blockchain technology of the domainchain to make the traditional digital assets such as domain names, trademarks and online accounts digitized and meanwhile create a brand new domain name asset registration and circulation decentralized network.",
+    "2016.6以太坊最热项目TheDAO被黑客利用智能合约的漏洞，转移了市值五千万美元的以太币。为了挽回投资者资产，以太坊社区最终做出投票表决，大部分参与者同意更改以太坊代码，希望索回资金。为此，以太坊进行硬分叉，作出一个向后不兼容的改变，让所有的以太币——包括被黑客占有的——都回归原处。由于此次硬分叉是通过区块链公开进行的，因此虽然存在着反对的意见，但随着越来越多人对于硬分叉的支持，2016年7月21日，以太坊硬分叉成功。目前，以太坊的“官方”版本ETH，是由其原始开发者进行维护的;以太经典ETC则是由一个全新团队进行维护。这是第一次主流区块链为了补偿投资人而通过分叉来变更交易纪录。分叉以前就持有以太币的人在分叉后会同时持有ETH和ETC，存在交易所或在线钱包中的以太币也不例外。此次分叉衍生出来的两个市场，总价值达12亿美元以上。目前，越来越多的以太坊矿工投入大量算力到这款经典区块链中，ETC交易量上涨，不仅仅是因为理念上的符合，更是因为他们看到了保护交易安全及赢得相关挖矿奖励的价值。以太经典面世后一两天的数据让人印象深刻，其网络的哈希率是544GH/s，占了以太坊网络哈希总量的13%。":
+      " The DAO was a digital decentralized autonomous organization, and a form of investor-directed venture capital fund.The DAO had an objective to provide a new decentralized business model for organizing both commercial and non-profit enterprises. It was instantiated on the Ethereum blockchain, and had no conventional management structure or board of directors. The code of the DAO is open-source.The DAO was stateless, and not tied to any particular nation state. As a result, many questions of how government regulators would deal with a stateless fund were yet to be dealt with.The DAO was crowdfunded via a token sale in May 2016. It set the record for the largest crowdfunding campaign in history.In June 2016, users exploited a vulnerability in the DAO code to enable them to siphon off one third of The DAO's funds to a subsidiary account. On 20 July 2016 01:20:40 PM +UTC at Block 1920000, theEthereum community decided to hard-fork the Ethereum blockchain to restore virtually all funds to the original contract. This was controversial, and led to a fork in Ethereum, where the original unforked blockchain was maintained as Ethereum Classic, thus breaking Ethereum into two separate active blockchains, each with its own cryptocurrency.The DAO was delisted from trading on major exchanges such as Poloniex and Kraken in late 2016.",
+    "Zcash 是首个使用零知识证明机制的区块链系统，它可提供完全的支付保密性，同时仍能够使用公有区块链来维护一个去中心化网络。与比特币相同的是，Zcash代币（ZEC）的总量也是2100万，不同之处在于，Zcash交易自动隐藏区块链上所有交易的发送者、接受者及数额。只用那些拥有查看秘钥的人才能看到交易的内容。用户拥有完全的控制权，他们可自行选择向其他人提供查看秘钥。ZCash 是 bitcoin 的分支，保留了 bitcoin 原有的模式，基于比特币 0.11.2 版代码修改的。 ZCash 钱包资金分 2 种：透明资金、私有资金，透明资金类似比特币资金；私有资金加强了 隐私性，涉及到私有资金的交易是保密不可查的，透明资金与透明资金的交易是公开可查的。":
+      "Zcash is a cryptocurrency that grew out of the Zerocoin project, aimed at improving anonymity for Bitcoin users. Zcash payments are published on a public blockchain, but users are able to use an optional privacy feature to conceal the sender, recipient, and amount being transacted.Like Bitcoin, Zcash has a fixed total supply of 21 million units.",
+    "瑞波币是Ripple网络的基础货币，它可以在整个ripple网络中流通，总数量为1000亿，并且随着交易的增多而逐渐减少，瑞波币的运营公司为Ripple Labs（其前身为OpenCoin）。瑞波币是ripple系统中唯一的通用货币，其不同于ripple系统中的其他货币，其他货币比如CNY、USD不能跨网关提现的，换句话说，A网关发行的CNY只能在A网关提现，若想在B网关提现，必须通过ripple系统的挂单功能转化为B网关的CNY才可以到B网关提现。而瑞波币完全没有这方面的限制，它在ripple系统内是通用的。瑞波币（XRP）和比特币一样都是基于数学和密码学的数字货币，但是与比特币没有真正的用途不同，XRP在Ripple系统中有主要桥梁货币和有保障安全的功能，其中保障安全的功能是不可或缺的，这要求参与这个协议的网关都必须持有少量XRP。":
+      " Ripple provides an unobstructed global payment experience with blockchain technology. By joining Ripple's growing global payments network, financial institutions can handle the transactions of their clients to anywhere in the world and maintain real-time, reliable and low-cost. Banks and payment service providers can use digital currency XRP to further reduce costs and access new markets.",
+    "行云币是行云链的唯一内置资产，同时也是行云链协议的一部分，采用POE共识机制产出的发行模式，总量恒定，不可增发。":
+      "Moving Cloud Chain is a distributed data storage protocol based on block chaining technology. The development team is trying to build a safe and stable block chain asset platform to meet the current rapid development of financial, Internet of things, entertainment, health, public services and other traditional areas, and quickly enter the block chain+smart industry.",
+    "知产链是定位于各类有形无形知产物质实现资本化，商品化，商业化的区块链商业应用底层平台的公有区块链项目，其初衷是利用区块链技术为各类有形无形的知识智慧进行存证、确权、交换、防伪的底层保护，保障合法的知产产权权益，开创知识智慧新经济。知产币是在知产链上运行业务的代币，其用途包括并不限于：支持知产链交易；支持知产链记账节点押金；支持基于知产链构建的各种应用；支持基于知产链的侧链开发。":
+      " A decentralized IPR protection platform has been set up through the Intellectual Property Rights Chain. Anyone can set up their own IPR library and propose to the decentering platform to confirm their IPR content. After confirmation, the authorization or transfer of property rights could be completed by platform sales, consumption, lease and other means without the need of the approval from any centralized node.",
+    "量子链Qtum是首个基于UTXO模型的POS智能合约平台，可以实现和比特币生态和以太坊生态的兼容性，并通过移动端的战略，促进区块链技术的产品化和提高区块链行业的易用性，旨在将真实商业社会与区块链世界连接。因此，量子链是一个区块链应用平台的集大成者。量子链利用其学术合作伙伴、开发工具和方法论对商业智能合约的开发进行了标准化，包括将自然语言的合约准确的转译成机器可读智能合约、高容错度的细节及合约条款。第三方将在量子链的协助下开发专用的用户接口来加强智能合约生命周期管理。量子链旨在通过与一系列合作伙伴和第三方的协作建立一个智能合约枢纽，提供安全并经过反复测试的合约模板，适用于各种行业和用例，例如供应链管理、通讯、物联网、社交媒体等。":
+      "Qtum (read Quantum) is a Chinese hybrid platform that connects the existing blockchain with a virtual machine, such as Ethereum. A platform that enables developers to build applications and smart contracts on the current blockchain technology.Focusing on building a platform that helps companies create smart contracts on blockchain, Qtum is a toolkit in the first place. Designed to be both robust and modular, the platform can create small contracts to be used on most major blockchain.Qtum is a project for the creation of a public blockchain with an open-source code, combining the technologies of Bitcoin and Ethereum. The Qtum Foundation Company that is implementing the project is located in Singapore and was founded by Patrick Dai, the developer of the Chinese origin.",
+    "Omise成立于2013年，是一家总部位于泰国的金融科技初创公司，目前已经获得了有3轮的融资。Omise主要在泰国、日本、新加坡和印度尼西亚运营，并在亚太地区迅速扩张。2016年11月，Omise在福布斯杂志上被评为“金融科技明星”。2017年5月，Omise宣布与支付宝合作推出一款电子钱包，在自己的支付服务套件中整合“支付宝”支付解决方案，帮助泰国本地电子商务商户接受来自中国游客的线上支付交易。关于OmiseGo 这个项目是采取传统VC+ICO组合模式，之前通过VC融资了大概2500万美元的Omise发起的ICO，项目名称为OmiseGo。它打算利用以太坊的技术开发一个电子钱包，通过OmiseGo，任何人都可以以一种完全分布式和比较便宜的方式来进行金融交易。":
+      "OmiseGO is a public Ethereum-based financial technology for use in mainstream digital wallets, that enables real-time, peer-to-peer value exchange and payment services agnostically across jurisdictions and organizational silos, and across both fiat money and decentralized currencies. Designed to enable financial inclusion and disrupt existing institutions, access will be made available to everyone via the OmiseGO network and digital wallet framework.",
+    "TenX力求在最大程度上方便用户访问尽可能多的区块链资产，同时遵守生态系统中最高的安全标准。可以通过区块链来实现，利用COMIT标准，以完全去信任、实时和无成本的方式工作。我们为终端用户提供借记卡和随附的移动钱包，不仅可以使用比特币（BTC），以太坊（ETH），Dash（DASH），而且可以提供几乎所有的区块链资产。TenX钱包可以在近200个国家使用，今天接受验收的有超过3600万个节点。这是可能的，因为我们与主要的信用卡公司，如VISA和万事达卡达成了合作。":
+      "The goal of the TenX project is to create a payment system that connects the real world and the blockchain network. Hence, blockchain assets can be accessed and spent at anytime and anywhere in the world via TenX payment cards, mobile wallet, ATMs and bank accounts.",
+    "EOS 为区块链奇才 BM （Daniel Larimer）领导开发的类似操作系统的区块链架构平台，旨在实现分布式应用的性能扩展。EOS 提供帐户，身份验证，数据库，异步通信以及在数以百计的CPU或群集上的程序调度。该技术的最终形式是一个区块链体系架构，该区块链每秒可以支持数百万个交易，同时普通用户无需支付使用费用。":
+      "EOS.IO is leaded by Dan Larimer, CTO of Block.one. It aims at building a new blockchain architecture designed to enable vertical and hotizontal scaling of decentralized applications. The software provides accounts, authentication, databases and other necessary applications across hundreds of CPU cores or cluters.",
+    "REP是reputation的简写，是Augur系统的流通货币。Augur 是建立在以太坊平台上的去中心化预测市场平台。利用 Augur ，任何人都可以为任何自己感兴趣的主题（比如美国大选谁会获胜）创建一个预测市场，并提供初始流动性，这是一个去中心化的过程。作为回报，该市场的创建者将从市场中获得一半的交易费用。普通用户可以根据自己的信息和判断在 Augur 上预测、买卖事件的股票，例如美国总统大选。当事件发生以后，如果你预测正确、持有正确结果的股票，每股你将获得1美元，从而你的收益是1美元减去当初的买入成本。如果你预测错误、持有错误结果的股票，你将不会获得奖励，从而你的亏损就是当初的买入成本。":
+      " REP is a shorthand for reputation and is the currency of the Augur system. Augur is a de-centralized marketplace based on the Ethereum platform. With Augur, anyone can create a predictive market and provide initial liquidity for any subject of their own interest (such as who is going to win the US presidential election), with a decentralized process. In return, the creator of this market will get half of the transaction fees from the market. Ordinary users can predict, buy and sell stocks on augur, based on their own information and judgment, such as the US presidential election. If, after the incident, you predict the correct stock of the correct result, you will receive $ 1 per share, giving you a gain of $ 1 less the initial cost of the purchase. If you predict the wrong stocks that hold the wrong result, you will not be rewarded, so your loss will be your initial buying cost.",
+    "Golem 是建立在以太坊平台上的去中心化计算机算力租赁平台。通过 Golem 平台，任何用户都可以成为算力的发售方和租用者。无论用户提供的是一台闲置的家用电脑还是几台大型的数据中心，都可以加入到 Golem 平台中。基于以太坊的交易系统被应用于 Golem 平台，用于结算算力提供者的收益和算力使用者所需要支付的费用。":
+      " Golem is a global, open sourced, decentralized supercomputer that anyone can access. It’s made up of the combined power of user’s machines, from personal laptops to entire datacenter. Anyone will be able to use Golem to compute almost any program you can think of, from rendering to research to running websites, in a completely decentralized & inexpensive way. The Golem Network is a decentralized sharing economy of computing power, where anyone can make money ‘renting’ out their computing power or developing & selling software.",
+    "Monaco是一个基于以太坊智能合约的数字货币加密Visa卡。使用Monaco，可以直接消费卡中的比特币和以太币等ERC20数字货币，无论在线上线下，只要持有Monaco，就可以享受最佳汇率。Monaco团队具有传统金融机构和互联网的双重基因。公司CFO是前MasterCard移动支付CFO，顾问团队有前任VISA高管。这意味着公司在风险合规，发卡方和合作方优势明显。另外，公司CEO是前东南亚最大闪购电商联合创始人兼CEO，创立的电商公司曾获得唯品会、高盛、黑石、富达基金等金融机构投资。除此以外，Monaco Visa已经与全球知名的发卡机构达成合作，该发卡商在法兰克福证券交易所上市，并在德国拥有一系列全套银行牌照。而其支付处理平台是一家MasterCard和VISA全认证的处理平台，符合一级PCI DSS标准。":
+      " Founded in 2016, Monaco aims to give everyone's wallet a blockchain asset. By using Monaco's cryptocurrency credit card, users can pay with VISA credit cards using Bitcoin at the bank's best bank rate, saving $ 30-40 for every $ 500 spent. Monaco generated a total of US $ 26.7 million through ICO, making it one of the top ten tokens sales in 2017. Monaco’s headquarter is in Switzerland and has operations in Beijing and Singapore.",
+    "BAT(Basic Attention Token)是Javascript创始人，Mozilla和Firefox浏览器联合创始人Brendan Eich创办的一个用于在广告商和用户之间进行流通的数字资产，用于解决浏览器中的广告展示和用户激励问题。项目基于Brave浏览器开展去中心化数字广告业务，通过零知识证明的运用保护用户隐私，同时可以使用户的关注得到回报。Brave浏览器中有一个独特的概念——注意力。Brave使用ANONIZE算法，能统计用户行为，比如点击什么链接最多，或在哪个网站停留时间最久。这些行为都可以使用“注意力”这个单位量化，具体方式就是在浏览器中嵌入区块链账本系统，而这个系统流通的代币就是BAT（注意力币）。简单说，整合了BAT代币的Brave浏览器，会让商家、网站主和用户间保持良好的正反馈关系。平时Brave用户观看广告或优质内容时，因为花费了注意力，会获得BAT代币的奖励；而网站主凭借广告和优质内容成功吸引了用户的注意力，系统也会对其进行奖励。用户和网站主获得的BAT代币都来自商家的广告费用投入。":
+      " Basic Attention Token is an open-source, decentralized digital advertising platform based on Ethereum, founded by web pioneer Brendan Eich. Basic Attention Token (BAT) held an initial coin offering (ICO) on May 31, 2017 for its eponymous ERC20 utility token, raising approximately $35M USD at the time in less than 30 seconds. The BAT token is designed to correctly value and price user attention within the platform.",
+    "ICONOMI被冠以区块链基金管理中的优步，筹集了600万美元，成为目前第三大的众筹项目。该项目创始人必须证明公司的“优步化”(uberization，引入低廉而高效的替代品，改变市场或者某种经济模式)不仅仅适用于“消费者级别”的服务，还可以开启金融业“不可避免的变革”。":
+      "Published on Dec 29th 2013, scrypt algorithm, 10 minutes and 100 pieces per block, 3 confirmation for each transaction",
+    "Gnosis是建立在以太坊协议上的去中心化预测市场。Gnosis为人们对任何事件的结果预测提供了一个开放平台，大大简化了定制预测市场应用的创建过程。同时，Gnosis利用了区块链信任机器以及智能合约自动执行的特点使玩家可以更加灵活自由的进入预测市场，给预测市场的带来了更加巨大的想象空间。将来，Gnosis的参与者甚至不需要是自然人。在物联网中，传感器收集的信息也可以被轻易的录入区块链做为信息资产来买卖。":
+      " Gnosis.pm is a decentralized prediction market built on the Ethereum protocol. Gnosis provides an open platform for anyone to predict the outcome of any event and plans to drastically simplify the creation of customized prediction market applications.  Gnosis is a ConsenSys backed project and was founded by Martin Koeppelmann and Stefan George, who previously founded and built Fairlay.com, a centralized Bitcoin prediction market.  The token sold during the token launch is known as the Gnosis Token, or GNO. This is the only time that these tokens can be created, and therefore the total supply of GNO is fixed. In the Gnosis launch, 10 million Gnosis tokens (GNO) where created and a percentage of them where distributed through the token launch. ",
+    "DigixDAO是一个智能合同套件，由去中心化自治机构（DAO）创建、由DigixGlobal部署在区块链上，目标是与社区一起治理并建立21世纪以太坊金本位金融平台。作为一个开发、透明的机构，它会建立这样一个标准，利用以太坊智能合同的力量，DigixDAO代币持有人能直接对那些致力于DigixCore黄金平台成长和宣传的决定产生影响。作为回报，给予代币持有人以太坊平台Digix黄金代币交易费作为奖励。DigixDAO众筹于2016年3月31日启动，12小时内募集了550万美元，超出目标10倍。":
+      " DigixDAO is a Decentralized Autonomous Organization (DAO) based on the Ethereum platform that tokenizes gold and other physical assets. DigixDAO introduced a new Proof of Asset protocol that allows users to track their physical assets in the forms of tokens on the Ethereum blockchain. This allows for public verification of the asset existence without the need for a centralized database.  Each Dgix token represents 1 gram of gold, divisible up to 0.001gram and can be tracked back to the physical gold bar for redemption. DigixDAO is a Singapore-based company and they utilize a 3-pronged audit process to proof existence of the gold bar.",
+    "2014年11月下旬，注册地为马恩岛和香港的公司Realcoin改名为Tether。2015年2月发布时就抱上了一条粗腿，当时比特币期货交易量最大交易平台：bitfinex宣布支持泰达币（下称USDT）交易。随后竞争币交易平台Poloniex交易所也支持USDT。P网凭着以太币强势崛起，在竞争币交易平台中隐有龙头之势，也顺带提携了USDT的交易量。USDT的发行和交易使用的是Omni（原Mastercoin）协议，而Omni币可以说是市面上的第一个基于比特币区块链的2.0币种。所以USDT的交易确认等参数是与比特币一致的。根据Tether的CTO及联合创始人Craig Sellars 称，用户可以通过SWIFT电汇美元至Tether公司提供的银行帐户，或通过Bitfinex交易所换取USDT。赎回美元时，反向操作即可。用户也可在上述两个网站用比特币换取USDT。其网站宣称严格遵守1：1的准备金保证，即每发行1枚USDT代币，其银行帐户都会有1美元的资金保障。在合规方面，所有涉及到法币的操作，都要求用户完成KYC认证。当被问及用户如何验证银行帐户保证金时，Craig称法币由Tether Liminted公司保管，并有定期审计，但目前用户还不能直接查询保证金。目前USDT的交易量在所有稳定虚拟货币中的交易量是最大的。":
+      "Tether is a cryptocurrency token claimed by its creators to be backed by one dollar for each token issued, though Tether Limited has not issued a promised audit of their currency reserves. Subpoenas from the U.S. Commodity Futures Trading Commission were sent to Tether on December 6, 2017.A spokesperson for Bitfinex and Tether has said that the CEO of both firms is Jan Ludovicus van der Velde.Tether was issued on the Bitcoin blockchain through the Omni Layer Protocol. Tether says that each unit of Tether is backed by one United States dollar held in reserve by Tether Limited, and may be redeemed through the Tether Platform. The primary objective is to facilitate transactions between cryptocurrency exchanges with a rate fixed to the United States dollar allowing traders to take advantage of high speed arbitrage opportunities without resorting to slow bank wires. As of February 2018, Tether is ranked around the 15th highest market cap cryptocurrency in the world, with a market cap around $2 billion United States dollars as of 5 February 2018.Tether tokens are issued by Tether Limited.",
+    "CRT是CoinRising公司发行的代币，CoinRising通过CRT与全体支持者共享平台成长利益。CRT总量10亿枚，定期回购销毁，永不增发。CRT的价值与用途:CoinRising币荣将通过CRT与全球支持者实现利益共享，方式包括但不限于：1.     平台将定期回购CRT进行销毁，以保证您持有的CRT价值提升2.     满足条件CRT持有者将获得平台交易手续费减免，以降低您的交易成本3.     您可自由将CRT兑换其他数字货币，以保证您资产的灵活性4.     持有CRT代表拥有平台的投票权，您将有权利决定上线哪些交易品类，提议开发某个新功能，您将成为平台的建设者5.     CRT持有者将优先获得平台各种价值信息与优质投资产品与服务，协助您成为更聪明的投资者6.     您可使用CRT参与平台各种趣味活动，让您充分享受交易的乐趣":
+      "CRT (CoinRising Token) is a token published by CoinRising.com which is a professional crypto currency exchange platform. CoinRising.com would share the growing profit with whole token holders. The total amount of CRT is 1 billion and would never be increased, token would be repurchased and destroyed periodically. The value and usage of CRT would be shared with CRT holders all over the world, include but not limited to:1. CoinRising.com would repurchase and destroy CRT periodically to insure the value of CRT will increase continuously.2. The commission fee of trading will be decreased for CRT holders according to the specific requirements, for the matter of decreasing your trading costs.3. The CRT holders could exchange CRT to other digital currencies, for a convenient and smooth trading experience.4. The CRT holders own the voting rights, you have the rights of deciding which currency would be listed. Besides, you can also have the rights to decide what function would be processed, it means that you are defiantly one of the platform builders.5. The CRT holders would receive all kinds of valuable information, excellent investments recommendations and other service in advance, you would totally benefit from these services for becoming a smarter investor.6. Holders can use CRT to participate various of activities on platform, to enjoy a fully fantastic trading experience."
   };
 
   return Object.assign(
@@ -794,6 +958,6 @@ export default function en(state) {
     user,
     activity,
     login,
-    help,
+    help
   );
 }
