@@ -7,69 +7,7 @@ import $ from "../lib/jquery.min"
 
 export class Control {
 
-    static refreshFunction() {
-        Control.refreshCounter++;
-        let lang = ChartManager.instance.getLanguage();
-        if (Control.refreshCounter > 3600) {
-            let num = Number(Control.refreshCounter / 3600);
-            if (lang === "en-us") {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "h");
-            } else if (lang === "zh-tw") {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "小時");
-            } else {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "小时");
-            }
-        } else if (Control.refreshCounter > 60 && Control.refreshCounter <= 3600) {
-            let num = Number(Control.refreshCounter / 60);
-            if (lang === "en-us") {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "m");
-            } else if (lang === "zh-tw") {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "分鐘");
-            } else {
-                $("#chart_updated_time_text").html(num.toFixed(0) + "分钟");
-            }
-        } else if (Control.refreshCounter <= 60) {
-            if (lang === "en-us") {
-                $("#chart_updated_time_text").html(Control.refreshCounter + "s");
-            } else {
-                $("#chart_updated_time_text").html(Control.refreshCounter + "秒");
-            }
-        }
-    }
-
-    /*
-    static clearRefreshCounter() {
-        window.clearInterval(Control.refreshHandler);
-        Control.refreshCounter = 0;
-        let lang = ChartManager.instance.getLanguage();
-        if (lang === "en-us") {
-            $("#chart_updated_time_text").html(Control.refreshCounter + "s");
-        } else {
-            $("#chart_updated_time_text").html(Control.refreshCounter + "秒");
-        }
-        Control.refreshHandler = setInterval(Control.refreshFunction, Kline.instance.intervalTime);
-    }
-    */
-
     static requestData(showLoading) {
-        /*
-        window.clearTimeout(Kline.instance.timer);
-        if (showLoading === true) {
-            $("#chart_loading").addClass("activated");
-        }
-        Kline.instance.onRequestDataFunc(Kline.instance.requestParam,function(res){
-            if(res && res.success){
-                Control.requestSuccessHandler(res);
-            }else{
-                if (Kline.instance.debug) {
-                    console.log(res);
-                }
-                Kline.instance.timer = setTimeout(function () {
-                    Control.requestData(true);
-                }, Kline.instance.intervalTime);
-            }
-        })
-        */
         //请求参数发生变化
         Kline.instance.onRequestChangeFunc(Kline.instance.requestParam);
     }
@@ -82,50 +20,9 @@ export class Control {
         if (Kline.instance.debug) {
             console.log(lines);
         }
-        //$("#chart_loading").removeClass("activated");
-
-        //let chart = ChartManager.instance.getChart();
-        //chart.setTitle();
-        //Kline.instance.data = eval(res.data);
-
         let updateDataRes = Kline.instance.chartMgr.updateData("frame0.k0",lines);
-
-        //Kline.instance.requestParam = Control.setHttpRequestParam(Kline.instance.symbol, Kline.instance.range, null, Kline.instance.chartMgr.getDataSource("frame0.k0").getLastDate());
-
-        //let intervalTime = Kline.instance.intervalTime < Kline.instance.range ? Kline.instance.intervalTime : Kline.instance.range;
-
-        /*
-        if (!updateDataRes) {
-            Kline.instance.timer = setTimeout(Control.requestData, intervalTime);
-            return;
-        }
-        */
-
-        /*
-        let tmp = ChartSettings.get();
-        //画深度图
-        if (Kline.instance.data.depths && tmp.charts.depthStatus==="open") {
-            ChartManager.instance.getChart().updateDepth(Kline.instance.data.depths);
-        }
-        */
-
-        //Control.clearRefreshCounter();
-
-       // Kline.instance.timer = setTimeout(Control.TwoSecondThread, intervalTime);
         ChartManager.instance.redraw('All', false);
     }
-
-    /*
-    static TwoSecondThread() {
-        let f = Kline.instance.chartMgr.getDataSource("frame0.k0").getLastDate();
-        if (f === -1) {
-            Kline.instance.requestParam = Control.setHttpRequestParam(Kline.instance.symbol, Kline.instance.range, Kline.instance.limit, null);
-        } else {
-            Kline.instance.requestParam = Control.setHttpRequestParam(Kline.instance.symbol, Kline.instance.range, null, f.toString());
-        }
-        Control.requestData();
-    }
-    */
 
     static readCookie() {
         ChartSettings.get();
@@ -179,14 +76,6 @@ export class Control {
         }
         // 语言
         Control.chartSwitchLanguage(tmp.language || "zh-cn");
-        /*
-        // 深度图
-        if(tmp.charts.depthStatus==="close"){
-            Control.switchDepth("off")
-        }else if(tmp.charts.depthStatus==="open"){
-            Control.switchDepth("on");
-        }
-        */
     }
 
     static setHttpRequestParam(symbol, range, limit, since) {
@@ -535,10 +424,6 @@ export class Control {
     }
 
     static switchSymbol(symbol,symbolName) {
-        if (Kline.instance.type === "stomp" && Kline.instance.stompClient.ws.readyState === 1) {
-            Kline.instance.subscribed.unsubscribe();
-            Kline.instance.subscribed = Kline.instance.stompClient.subscribe(Kline.instance.subscribePath + '/' + symbol + '/' + Kline.instance.range, Control.subscribeCallback);
-        }
         Control.switchSymbolSelected(symbol,symbolName);
         let settings = ChartSettings.get();
         if (settings.charts.period === "line") {

@@ -7,45 +7,81 @@ class ReactKline extends exchangeViewBase {
   constructor(props) {
     super(props);
     const { controller } = props;
-    controller.setView(this)
-    // console.log('klinecontroller.................', controller)
-    // 绑定view
-    // controller.setView(this);
+    controller.setView(this);
     this.state = {
-      kline: null
+      kline: null,
+      timer: null,
     };
-    this.getData = controller.getKlineData.bind(controller)
-    this.joinRoom = controller.joinRoom.bind(controller)
-    this.update = controller.update.bind(controller)
+    this.getData = controller.getKlineData.bind(controller);
+    this.joinRoom = controller.joinRoom.bind(controller);
+    this.update = controller.update.bind(controller);
     /*
-       * 筛选条件【时间段，币种】改变时触发
-       */
+     * 筛选条件【时间段，币种】改变时触发
+     */
     this.onRequestChange = (param) => {
       // symbol-币种，range-时间区间(毫秒)
       let { symbol, symbolName, range } = param;
-      this.update('duration', range / 1000)
-      this.getData(range / 1000)
+      this.update('duration', range / 1000);
+      this.getData(range / 1000);
+      //更新定时器
+      this.state.timer && clearInterval(this.state.timer);
+      this.state.timer = setInterval(()=>{
+        this.setData(controller.kline);
+      },range);
     }
-  }
 
+  }
 
   /*
      * 调用setData设置k线图数据并渲染视图
      * lines数据格式:
      * [
      *      [1,2,3,4,5,6],      // 依次为：时间(ms), 开盘价, 最高价, 最低价, 收盘价, 成交量
-     *      [1,2,3,4,5,6],
-     *      [1,2,3,4,5,6],
-     *      [1,2,3,4,5,6],
-     *      [1,2,3,4,5,6],s
      * ]
      */
   setData(lines) {
-    this.state.kline && this.state.kline.setData(lines || []);
+
+    !lines && (lines = []);
+
+    //排序
+    lines.sort((a,b)=>a[0]-b[0]);
+
+    //数据补全
+    let newLines = [];
+    let range = this.state.kline.range;
+    let curTime = new Date().getTime();
+
+    //补全后台数据
+    if(lines.length <= 0){
+      newLines.push([curTime, 0, 0, 0, 0, 0]);
+    }else if(lines.length <= 1) {
+      newLines.push(lines[0]);
+    }else{
+      for(let i = 0; i < lines.length - 1; i++){
+        let curL = lines[i];
+        let nextL = lines[i + 1];
+        newLines.push(curL);
+        let time = curL[0];
+        while(time + range < nextL[0]){
+          time += range;
+          newLines.push([time, curL[4], curL[4], curL[4], curL[4], 0]);
+        }
+      }
+      newLines.push(lines[lines.length - 1]);
+    }
+
+    //补全至当前时间
+    let endL = newLines[newLines.length - 1];
+    let time = endL[0];
+    while(time + range < curTime){
+      time += range;
+      newLines.push([time, endL[4], endL[4], endL[4], endL[4], 0])
+    }
+
+    this.state.kline && this.state.kline.setData(newLines);
   }
 
   componentDidMount() {
-    // console.log('this.props.controller.language.........................,m', this.props.controller.language === 'en-us')
     let tradeChart = document.querySelector(".trade-chart");
     let cfg = {
       element: "#kline_container",
@@ -59,11 +95,9 @@ class ReactKline extends exchangeViewBase {
       debug: false,
       onRequestChange: this.onRequestChange
     };
-    // console.log(JSON.stringify(cfg))
     this.state.kline = new Kline(cfg);
     this.state.kline.draw();
     this.state.kline.setLanguage(this.props.controller.language);
-    // this.setData();
     //
     let _kline = this.state.kline;
     window.redrawKline = function () {
@@ -77,9 +111,10 @@ class ReactKline extends exchangeViewBase {
   }
 
   componentWillUnmount() {
-    this.joinRoom('')
+    this.joinRoom('');
     this.state.kline = null;
     window.redrawKline = null;
+    this.state.timer && clearInterval(this.state.timer);
   }
 
   resize(w, h) {

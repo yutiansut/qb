@@ -30,7 +30,7 @@ export default class KlineStore extends ExchangeStoreBase {
     let result = await this.Proxy.getKline({
       "n": this.state.tradePairName,
       "dur": this.state.duration // k线时间段秒数
-    })
+    });
     if (result.n) {
       if (!result.ns) { this.state.kline = []; return };
       this.state.kline = result.ns.map(v => {
@@ -44,6 +44,10 @@ export default class KlineStore extends ExchangeStoreBase {
         return arr;
       });
     }
+  }
+
+  get kline(){
+    return this.state.kline;
   }
 
   //websockt加入房间

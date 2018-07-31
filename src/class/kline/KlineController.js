@@ -50,6 +50,11 @@ export default class KlineController extends ExchangeControllerBase {
     // data.reverse();
     this.view.setData(data.reverse());
   }
+
+  get kline(){
+    return this.store.kline;
+  }
+
   // websocket切换房间
   joinRoom(to) {
     // console.log('joinroom,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,',this.roomId, to);

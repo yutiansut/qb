@@ -8,7 +8,6 @@ export default class Kline {
     constructor(option) {
         this.element = "#kline_container";
         this.chartMgr = null;
-        this.timer = null;
         this.buttonDown = false;
         this.init = false;
         this.requestParam = "";
@@ -21,7 +20,6 @@ export default class Kline {
         this.range = null;
         this.url = "";
         this.limit = 1000;
-        //this.intervalTime = 5000;
         this.debug = true;
         this.language = "zh-cn";
         this.theme = "dark";
@@ -92,8 +90,6 @@ export default class Kline {
             });
         }
 
-        //setInterval(Control.refreshFunction, this.intervalTime);
-
         this.registerMouseEvent();
         ChartManager.instance.bindCanvas("main", document.getElementById("chart_mainCanvas"));
         ChartManager.instance.bindCanvas("overlay", document.getElementById("chart_overlayCanvas"));
@@ -130,15 +126,6 @@ export default class Kline {
         this.language = lang;
         Control.chartSwitchLanguage(lang);
     }
-
-    /*
-    setIntervalTime(intervalTime) {
-        this.intervalTime = intervalTime;
-        if (this.debug) {
-            console.log('DEBUG: interval time changed to ' + intervalTime);
-        }
-    }
-    */
 
     setData(lines){
         Control.setData(lines);
