@@ -702,7 +702,7 @@ export default function en(state) {
     "activity-rule-40": `Total <i>{number}</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
     "activity-rule-42": `Invite friends`,
-    "asset-funds-transfer": 'Funds transfer',
+    "asset-funds-transfer": "Funds transfer"
   };
 
   const login = {
