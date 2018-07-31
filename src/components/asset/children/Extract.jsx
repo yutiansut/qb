@@ -445,6 +445,7 @@ export default class Extract extends exchangeViewBase {
         <div className="tip clearfix">
           <span className="title">{this.intl.get("asset-reminder")}</span>
           <ol>
+            <li>{this.intl.get('asset-safe-tip')}</li>
             <li>
               {this.intl.get("asset-depositReminder2-1")}{" "}
               <NavLink to={`/wallet/dashboard`}>
