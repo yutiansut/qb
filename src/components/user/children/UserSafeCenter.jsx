@@ -327,6 +327,9 @@ export default class userSafeCenter extends exchangeViewBase {
           <div className="name-list model-div clearfix">
             <h2>{this.intl.get("user-ipWhite")}</h2>
             <div className="fl">
+              <p>
+                {this.intl.get("user-ipAddRemind")}<em onClick={this.getIPAddr} className="ip-show">{this.intl.get("user-ipAddRemind3")}</em>{this.intl.get("user-ipAddRemind2")}
+              </p>
               <b>{this.intl.get("user-ipRemind")}</b>
               <div className="check-ip-wrap">
                 <div className="clearfix">
@@ -335,8 +338,6 @@ export default class userSafeCenter extends exchangeViewBase {
                 </div>
                 <em className="check-ip">{this.state.ipValue && this.state.errIp}</em>
               </div>
-
-              {/*<em>2222</em>*/}
 
               <span>{this.intl.get("user-ipExample")}</span>
               <table>
@@ -359,9 +360,6 @@ export default class userSafeCenter extends exchangeViewBase {
               {/*<p>*/}
                 {/*{this.intl.get("user-ipAddRemind")}<a href={this.props.controller.configController.initState.currentUrl} target="_blank">{this.props.controller.configController.initState.netUrl}</a>{this.intl.get("user-ipAddRemind2")}*/}
               {/*</p>*/}
-              <p>
-                {this.intl.get("user-ipAddRemind")}<em onClick={this.getIPAddr} className="ip-show">{this.intl.get("user-ipAddRemind3")}</em>{this.intl.get("user-ipAddRemind2")}
-              </p>
             </div>
           </div>
           <div className="login-device model-div clearfix">
