@@ -1,47 +1,43 @@
-import React from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase";
+import React from 'react';
+import exchangeViewBase from '../../../components/ExchangeViewBase';
 
 const orderStatusClass = {
   2: 'deal',
   3: 'cancel',
+  4: 'cancel',
   5: 'end',
   6: 'partdeal',
   7: 'partdeal'
 }
 
-export default class OrderItem extends exchangeViewBase{
-  constructor(props){
+export default class OrderItem extends exchangeViewBase {
+  constructor(props) {
     super(props);
     this.state = {
       orderStatus: {
-          0: this.intl.get("unDeal"),
-          1: this.intl.get("partDeal"),
-          2: this.intl.get("dealed"),
-          3: this.intl.get("reseted"),
-          4: this.intl.get("reseting"),
-          5: this.intl.get("overed"),
-          6: this.intl.get("partDeal"),
-          7: this.intl.get("partDeal")
+        0: this.intl.get('unDeal'),
+        1: this.intl.get('partDeal'),
+        2: this.intl.get('dealed'),
+        3: this.intl.get('reseted'),
+        4: this.intl.get('reseting'),
+        5: this.intl.get('overed'),
+        6: this.intl.get('partDeal'),
+        7: this.intl.get('partDeal')
       }
     }
-
-    this.controller = this.props.controller;
-
     this.goDetailDisplay = this.goDetailDisplay.bind(this);
   }
-  componentWillMount(){
 
-  }
-  componentDidMount(){
+  componentWillMount(){}
+  componentDidMount(){}
 
-  }
   goDetailDisplay() {
-    if (this.props.type === "current") {
-      if (this.props.orderInfo.orderStatus === 1) {
+    let orderStatus = this.props.orderInfo.orderStatus;
+    if (this.props.type === 'current') {
+      if (orderStatus === 1) {
         this.props.setDetailsDisplay(this.props.index);
       }
     } else {
-      const orderStatus = this.props.orderInfo.orderStatus;
       if (orderStatus === 2 || orderStatus === 6 || orderStatus === 7) {
         this.props.setDetailsDisplay(this.props.index);
       }
