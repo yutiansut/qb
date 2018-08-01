@@ -95,7 +95,6 @@ export default class TradePlan extends ExchangeViewBase {
     //   priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
     // }
     // console.log(this.state[diffArr[dealType].inputValue],789456,this.state.priceInit)
-    // console.log(this.state.marketChangePrice,'aaaa',priceValue)
     let value = e.target.value;
     let limitNum = value.split('.');
     if(limitNum.length > 2)

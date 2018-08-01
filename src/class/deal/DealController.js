@@ -159,6 +159,7 @@ export default class DealController extends ExchangeControllerBase {
       // console.log('aaaaaaaaaaaaaa',Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum))
       this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
     }
+    
   }
 
   async dealTrade(orderType,e) {

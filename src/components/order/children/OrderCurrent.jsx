@@ -326,6 +326,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         idArray: [],
         orderType: 2,
         typeSelect: this.intl.get('all'),
+        orderStatus: this.state.orderStatus,
         page,
         pageSize: this.state.pageSize
     };
@@ -414,13 +415,12 @@ export default class OrderCurrent extends ExchangeViewBase {
                       <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                       {/*todo 颜色改类名统一处理*/}
                       {/*价格*/}
-                      {type === 'orderCurrent' && <td>{Number(v.price).format({number:'digital'})}</td>}
-                      {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : Number(v.price).format({number:'legal'})}</td>}
-                      {type === 'orderDeal' && <td>{Number(v.avgPrice).format({number:'digital'})}</td>}
+                      {type === 'orderCurrent' && <td>{v.price}</td>}
+                      {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : Number(v.price).format({number:'digital'})}</td>}
+                      {type === 'orderDeal' && <td>{v.avgPrice}</td>}
                       {/*数量*/}
-                      {type !== 'orderDeal' && <td>{Number(v.count).formatFixNumberForAmount(v.price)}</td> || <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
-
-                      <td>{type === 'orderCurrent' && (Number(v.price * v.count).format({number: 'property'})) || Number(v.turnover).format({number: 'property'})}</td>
+                      {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
+                      <td>{type === 'orderCurrent' && (Number(Number(v.price).multi(v.count)).format({number: 'property'})) || Number(v.turnover).format({number: 'property'})}</td>
                       {type === 'orderDeal' && <td>{Number(v.fee).format({number: 'property'})}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
                       {type === 'orderCurrent' && <td>{Number(v.undealCount).formatFixNumberForAmount(v.price)}</td>}
                       {type !== 'orderDeal' && <td>{Number(v.dealDoneCount).formatFixNumberForAmount(v.avgPrice)}</td>}
