@@ -2,6 +2,7 @@ import ExchangeControllerBase from '../ExchangeControllerBase'
 import ActivityStore from './ActivityStore'
 
 import ServerConfig from "../../config/ServerConfig"
+import Progressive from "../lib/lazy";
 
 export default class ActivityController extends ExchangeControllerBase {
   constructor() {
@@ -61,7 +62,14 @@ export default class ActivityController extends ExchangeControllerBase {
     // console.log('活动页数据', homeBanner)
     this.view.setState({
         homeBanner
-    })
+    });
+    // 懒加载首页大图 js
+    // new Progressive({
+    //   el: '#lazy-container',
+    //   lazyClass: 'lazy',
+    //   removePreview: true,
+    //   scale: true
+    // }).fire()
   }
 
   async getInvited() {
