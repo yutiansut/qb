@@ -385,7 +385,7 @@ export default class DealController extends ExchangeControllerBase {
     let coinMinItem = coinMinTrade.find(v => v.coinName === coin);
     this.store.state.coinMin = coinMinItem && coinMinItem.minTrade;
     this.view.setState({
-      coinMin:coinMinItem.minTrade
+      coinMin:coinMinItem && coinMinItem.minTrade
     })
   }
 

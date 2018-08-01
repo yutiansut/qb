@@ -166,7 +166,6 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
-    console.log('valueeeeeeeeee',value)
     if(!value){
       return
     }
