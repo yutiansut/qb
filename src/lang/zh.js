@@ -133,7 +133,9 @@ export default function zh(state) {
     year: '年',
     yearSp: '年',
     month: '月',
-    normalProblem: '常见问题'
+    normalProblem: '常见问题',
+    languageCn: '中文',
+    languageEn: '英文',
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -317,6 +319,7 @@ export default function zh(state) {
     "asset-wait-auditing": '操作成功，日提现量超额，请耐心等待审核',
     "asset-name-existing": '此名称已存在',
     "asset-funds-transfer": '资金划转',
+    "h5-asset-record": "充提记录"
   };
   const market = {
     "market-favorite": "收藏",

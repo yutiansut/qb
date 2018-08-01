@@ -135,7 +135,9 @@ export default function en(state) {
     year: "",
     yearSp: " -",
     month: "",
-    normalProblem: 'FAQ'
+    normalProblem: 'FAQ',
+    languageCn: 'Chinese',
+    languageEn: 'English',
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -327,7 +329,8 @@ export default function en(state) {
       "Insufficient 24H withdrawal limit, please finish the real-name verification",
     "asset-wait-auditing":
       "Daily withdraw limit exceeded, please wait for auditing",
-    "asset-name-existing": "The name is existing"
+    "asset-name-existing": "The name is existing",
+    "h5-asset-record": "Charge record"
   };
   const market = {
     "market-favorite": "Favorites",

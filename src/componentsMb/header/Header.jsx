@@ -16,7 +16,7 @@ export default class Header extends ExchangeViewBase {
       assetFold: false,
       orderFold: false,
     };
-    let {loginController,userController,configController} = this.props;
+    let {loginController, userController, configController} = this.props;
     this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
     this.changeLanguage = configController.changeLanguage.bind(configController); // 改变语言
   }
@@ -29,7 +29,7 @@ export default class Header extends ExchangeViewBase {
     ChangeFontSize(375, 375 * 2, 375);
   }
 
-  logout(){
+  logout() {
     this.clearLoginInfo();
     this.props.history.push("/home");
   }

@@ -128,7 +128,7 @@ export default class UserCenterIndex extends exchangeViewBase {
           <div className="verify-fund-pass clearfix">
             <h1 className="clearfix">
               <span>{this.intl.get("fundPass")}</span>
-              <img src="/static/web/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.setState({ verifyFund: false });}}/>
+              <img src={this.$imagesMap.$guanbi_hei} alt="" className="close-popup" onClick={() => {this.setState({ verifyFund: false });}}/>
             </h1>
             <Input oriType="password" placeholder={this.intl.get("asset-inputFundPassword")} value={this.state.fundValue}  onInput={value => this.changeFundValue(value)}/>
             <Button title={this.intl.get("ok")} onClick={() => this.state.fundValue && this.setFundPwdSpace(this.state.fundPassType, this.state.fundValue)}/>

@@ -58,7 +58,7 @@ export default class ExchangeViewBase extends ViewBase {
       $user_progress: "/static/web/user/user_progress.svg",
       $user_succ: "/static/web/user/user_succ.svg",
       $user_add: "/static/web/user/user_add.svg",
-      $user_loading: "/static/web/user/loading.svg",
+      $user_loading: "/static/web/user/loading.png",
       $home_user_notice: "/static/web/home/new_bai.svg",
       $invite: "/static/web/genrealize/invite.png",
       $aside_erweima: "/static/web/footer/erweima.png",
@@ -73,6 +73,12 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_user_terms: '/static/mobile/user/icon_wd_yhxy@3x.png',
       $h5_user_about: '/static/mobile/user/icon_wd_gywm@3x.png',
       $h5_user_qianjb: '/static/mobile/user/icon_qianjb@3x.png',
+      $h5_header_header: "/static/mobile/header/icon_wode_head@2x.png",
+      $h5_header_home: "/static/mobile/header/icon_sy@2x.png",
+      $h5_header_asset: "/static/mobile/header/icon_zc@2x.png",
+      $h5_header_order: "/static/mobile/header/icon_dd@2x.png",
+      $h5_header_user: "/static/mobile/header/icon_gr@2x.png",
+      $h5_header_language: "/static/mobile/header/icon_yy@2x.png",
     }
   }
 
