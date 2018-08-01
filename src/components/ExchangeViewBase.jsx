@@ -59,6 +59,10 @@ export default class ExchangeViewBase extends ViewBase {
       $home_user_notice: "/static/web/home/new_bai.svg",
       $invite: "/static/web/genrealize/invite.png",
       $aside_erweima: "/static/web/footer/erweima.png",
+      $calendar_preYear: "/static/web/calendar/calendar_pre_year.svg", // 日历
+      $calendar_nextYear: "/static/web/calendar/calendar_next_year.svg",
+      $calendar_preMonth: "/static/web/calendar/calendar_pre_month.svg",
+      $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg"
     }
   }
 

@@ -8,8 +8,6 @@ import {
   Switch
 } from "react-router-dom";
 import OrderCurrent from './children/OrderCurrent'
-import OrderHistory from './children/OrderHistory'
-import OrderDeal from './children/OrderDeal'
 
 import './stylus/order.styl'
 
