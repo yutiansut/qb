@@ -88,7 +88,7 @@ export default class LoginController extends ExchangeControllerBase {
   async loginUpdata(obj) { // 监听退出消息
     // console.log('监听退出消息', obj)
     if(obj && obj.flag) {
-      this.headerView.setState({
+      this.headerView && this.headerView.setState({
         otherLoginCon: obj.ret,
         otherLogin: true
       })
@@ -97,7 +97,7 @@ export default class LoginController extends ExchangeControllerBase {
       return
     }
     if(obj.r === 2006 || obj.r === 2007) {
-      this.headerView.setState({
+      this.headerView && this.headerView.setState({
         otherLoginCon: obj.r,
         otherLogin: true
       })

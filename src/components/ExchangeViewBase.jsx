@@ -58,6 +58,7 @@ export default class ExchangeViewBase extends ViewBase {
       $user_progress: "/static/web/user/user_progress.svg",
       $user_succ: "/static/web/user/user_succ.svg",
       $user_add: "/static/web/user/user_add.svg",
+      $user_loading: "/static/web/user/loading.svg",
       $home_user_notice: "/static/web/home/new_bai.svg",
       $invite: "/static/web/genrealize/invite.png",
       $aside_erweima: "/static/web/footer/erweima.png",

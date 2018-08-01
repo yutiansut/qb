@@ -32,7 +32,7 @@ export default class TwoVerifyPopup extends exchangeViewBase {
     return (
       <div className="view-popup-wrap">
         <div className="view-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => { onClose && onClose() }} />
+          <img src={this.$imagesMap.$guanbi_hei} alt="" className="close-popup" onClick={() => { onClose && onClose() }} />
           <h2>{this.intl.get('twoStep')}</h2>
           <div className="clearfix">
             <Input

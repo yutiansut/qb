@@ -317,7 +317,7 @@ export default class userIdentity extends exchangeViewBase {
                 <img src={`${this.state.showPhotoList[index]}`} alt="" className={`${this.state.showPhotoList[index] ? '' : 'hide'} up-img`}/>
                 <img src={this.$imagesMap.$user_add} alt="" className="add-img"/>
                 {this.state.showPhotoList[index] !== '' && this.state[`image${index + 1}`] === '' && <div className="loading-wrap">
-                  <img src="/static/img/user/loading.png" alt="" />
+                  <img src={this.$imagesMap.$user_loading} alt="" />
                 </div>}
                 <p>{item.name}</p>
               </dd>))}

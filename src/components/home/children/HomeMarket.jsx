@@ -135,7 +135,7 @@ export default class HomeMarket extends ExchangeViewBase {
                   <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span>
                 </td>
                 <td>
-                  {/* 宽高等样式在homeMakt.styl里设置 */}
+                  {/* 宽高等样式在home.styl里设置 */}
                   <ReactTrend ratio={5} trends={v.points || []}/>
                 </td>
               </tr>
