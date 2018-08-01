@@ -50,10 +50,10 @@ export default class Header extends ExchangeViewBase {
           {isLogin ?
             <div className="nav-hidden">
               {/*头像昵称*/}
-              <a className="user">
+              <NavLink to="/user" className="user" onClick={e => this.setState({navHidden: true})}>
                   <img src="/static/mobile/header/icon_wode_head@2x.png" alt=""/>
                   <span>{userController.userName}</span>
-              </a>
+              </NavLink>
               {/*首页*/}
               <NavLink to="/home" onClick={e => this.setState({navHidden: true})}>
                   <img src="/static/mobile/header/icon_sy@2x.png"/>
@@ -106,7 +106,9 @@ export default class Header extends ExchangeViewBase {
               :
             <div className="nav-hidden">
                 {/*登录/注册*/}
-                <a className="login">{this.intl.get("deal-login")}</a>
+                <NavLink to="/login" className="login" onClick={e => this.setState({navHidden: true})}>
+                    {this.intl.get("deal-login")}
+                </NavLink>
                 {/*首页*/}
                 <NavLink to="/home" onClick={e => this.setState({navHidden: true})}>
                     <img src="/static/mobile/header/icon_sy@2x.png"/>

@@ -350,9 +350,9 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
-    if (!o) return [];
+    if (!o || !coin) return [];
     if (coin.toUpperCase() !== "USDT") {
-      return o.pairNameCoin[coin.toLowerCase()].map(v => {
+      return o.pairNameCoin && o.pairNameCoin[coin.toLowerCase()].map(v => {
         return {
           name: `${coin}/${v.toUpperCase()}`,
           id: o.pairIdCoin[coin.toLowerCase()][v]
@@ -360,7 +360,7 @@ export default class AssetController extends ExchangeControllerBase {
       })
     }
     if (coin.toUpperCase() === "USDT") {
-      return o.pairNameMarket[coin.toLowerCase()].map(v => {
+      return o.pairNameMarket && o.pairNameMarket[coin.toLowerCase()].map(v => {
         return {
           name: `${v.toUpperCase()}/USDT`,
           id: o.pairIdMarket[coin.toLowerCase()][v]

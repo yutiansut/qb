@@ -63,7 +63,7 @@ export default class AssetStore extends ExchangeStoreBase {
       this.state.totalAsset.valuationBTC = va; //总资产
       this.state.totalAsset.valuationEN = vae; //换算美元
       this.state.totalAsset.valuationCN = vac; //换算人民币
-      this.state.wallet = cl.map(({ cn, fn, cic, cid, avc, frc, va, tc, c, w, e}) => {
+      this.state.wallet = cl.map(({ cn, fn, cic, cid, avc, frc, va, tc, c, w, e, vac, vae}) => {
         return {
           coinName: cn,
           fullName: fn,
@@ -73,6 +73,8 @@ export default class AssetStore extends ExchangeStoreBase {
           frozenCount: frc, //冻结余额
           valuationBTC: va, //btc估值
           totalCount: tc, //总量
+          valuationCN: vac,
+          valuationEN: vae,
           c: c,
           w: w,
           e: e
@@ -133,7 +135,7 @@ export default class AssetStore extends ExchangeStoreBase {
     });
     this.state.wallet =
       (cl &&
-        cl.map(({ cn, fn, cic, cid, avc, frc, va, tc, c, w, e }) => {
+        cl.map(({ cn, fn, cic, cid, avc, frc, va, tc, c, w, e, vac, vae}) => {
           return {
             coinName: cn,
             fullName: fn,
@@ -143,6 +145,8 @@ export default class AssetStore extends ExchangeStoreBase {
             frozenCount: frc, //冻结余额
             valuationBTC: va, //btc估值
             totalCount: tc,//总量
+            valuationCN: vac,
+            valuationEN: vae,
             c:c,
             w:w,
             e:e
