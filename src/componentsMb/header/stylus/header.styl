@@ -2,7 +2,7 @@
 
 // h5 全局样式
 .route-mb
-  padding-top .5rem
+  padding-top .45rem
   background-color $h5-route-bg
   min-height calc(100vh);
   input
@@ -28,6 +28,7 @@
       opacity 0.6
       color $h5-button-color
 
+
 // h5 头部样式
 .header-nav-mb
   position fixed
@@ -35,93 +36,85 @@
   top 0
   z-index 9999999
   font-family PingFangSC-Medium
-  height .5rem
-  padding 0 .12rem 0 0.12rem
+  height .45rem
+  padding 0 .12rem
   background $h5-header-bg
   display flex
+  align-items center
   border-bottom .01rem solid $h5-header-border
   &.hide
     display none
-  .logo
-    display inline-block
-    height 100%
-    padding .15rem 0
-    >img
-      height .2rem
-  .nav-menu
+  .nav-jsx
     flex-grow 1
-    display flex
-    justify-content flex-end
-    align-items center
-    >a
-      color $h5-header-font-weight
-      margin-left .15rem
-    >img
+  .nav-menu
+    img
       height .18rem
-      margin-left .15rem
-    .drop-menu
-      position relative
-      img
-        height .14rem
-        margin-right .05rem
-        vertical-align -.02rem
-      ul
-        position absolute
-        right 0
-        margin-top .1rem
-        background $h5-header-bg
-        box-shadow 0 0 0.1rem $h5-header-border
-        border-radius .02rem
-        overflow hidden
-        li
-          line-height .3rem
-          padding 0 .1rem
-          white-space nowrap
-          color $h5-header-font-normal
-          font-size .13rem
+      width auto
   .nav-hidden
     position: fixed
     z-index: 100001
-    top .5rem
+    top .45rem
     bottom 0
     right 0
     left 37.5%;
     overflow auto
     background $h5-header-bg
     box-shadow 0.02rem 0 .1rem $h5-header-border
+    display flex
+    flex-direction column
     a
       width 100%
       height .45rem
       line-height .45rem
-      display block;
-      padding-left .2rem
+      padding-left .25rem
       color $h5-header-font-normal
+      display flex
+      align-items center
+      flex-shrink 0
       img
         margin-right .15rem
-        width .24rem
-        height .24rem
-        vertical-align middle
-    .user
-      height .7rem
-      line-height .7rem
-      border-bottom .01rem solid $h5-header-border
-      img
-        width .44rem
-        height .44rem
-    .logout
-      border-top .01rem solid $h5-header-border
-      position absolute
-      bottom 0
-      width 100%
-
-.nav-shadow
-    position: fixed;
-    z-index: 100000;
-    background-color: rgba(0,0,0,.2);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+        width .22rem
+        height auto
+        &.right
+          justify-self flex-end
+          width .11rem
+          height auto
+      span
+        flex-grow 1
+        overflow hidden
+        text-overflow ellipsis
+        padding-right .15rem
+        font-size .15rem
+      &.login
+        font-size .18rem
+        color $h5-header-font-normal
+        height .7rem
+        border-bottom .01rem solid $h5-header-border
+      &.user
+        height .7rem
+        border-bottom .01rem solid $h5-header-border
+        img
+          width .44rem
+          height .44rem
+        span
+          font-size .16rem
+      &.logout
+        border-top .01rem solid $h5-header-border
+      &.br
+        flex-grow 1
+    .fold
+      padding-left .5rem
+      .selected
+        color $h5-header-font-active
+  .nav-shadow
+    position fixed
+    z-index 100000
+    background-color #000000
+    opacity .5
+    top .45rem
+    bottom 0
+    left 0
+    right 0
 
 
 

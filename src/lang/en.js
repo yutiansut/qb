@@ -211,6 +211,7 @@ export default function en(state) {
     "header-logOut": "Log out",
     "header-login": "Sign in",
     "header-regist": "Sign up",
+    "header-lang": "Language",
     "footer-risk": "HIGH risk should be considered for all trading",
     "footer-protocol": "Service Protocol",
     "footer-info": "Info&Announcement",

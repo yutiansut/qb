@@ -4,6 +4,7 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 import HomeActivity from './children/HomeActivity.jsx'
 import HomeMarket from './children/HomeMarket.jsx'
 import HomeNotice from './children/HomeNotice.jsx'
+import Header from '../header/Header'
 
 import "./stylus/home.styl"
 
