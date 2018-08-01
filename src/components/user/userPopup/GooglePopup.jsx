@@ -28,7 +28,7 @@ export default class GooglePopup extends exchangeViewBase {
     return (
       <div className="google-wrap">
         <div className="google-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
+          <img src={this.$imagesMap.$guanbi_hei} alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.intl.get("user-googleStart")}</h1>
           <div className="clearfix">
             <ul>

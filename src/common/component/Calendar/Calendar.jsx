@@ -31,7 +31,7 @@ export default class Calendar extends exchangeViewBase {
   }
 
   componentDidMount(){
-    console.log(111, typeof this.props.startInputTime)
+    // console.log(111, typeof this.props.startInputTime)
     let statTime = new Date(this.props.startInputTime * 1000), endTime = new Date(this.props.endInputTime * 1000)
     document.addEventListener('click', this.hide)
     this.props.startInputTime && this.setState({

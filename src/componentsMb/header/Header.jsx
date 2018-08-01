@@ -46,16 +46,16 @@ export default class Header extends ExchangeViewBase {
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
         <Link to='/home' className="logo">
-          <img src="/static/img/logo_header.svg"/>
+          <img src="/static/logo/logo_header.svg"/>
         </Link>
         <div className="nav-menu">
           <a href="javascript:void(0)" className="drop-menu"
              onBlur={()=>{this.setState({showLangDrop:false})}}>
-            <img src={lang==="zh-CN" ? "/static/img/home/cn.svg":"/static/img/home/en.svg"}
+            <img src={lang==="zh-CN" ? "/static/web/header/cn.svg":"/static/web/header/en.svg"}
                  onClick={()=>{this.setState({showLangDrop:!this.state.showLangDrop})}}/>
             {this.state.showLangDrop && <ul>
-                <li onClick={this.changeLang.bind(this,"zh-CN")}><img src="/static/img/home/cn.svg"/>简体中文</li>
-                <li onClick={this.changeLang.bind(this,"en-US")}><img src="/static/img/home/en.svg"/>English</li>
+                <li onClick={this.changeLang.bind(this,"zh-CN")}><img src="/static/web/header/cn.svg"/>简体中文</li>
+                <li onClick={this.changeLang.bind(this,"en-US")}><img src="/static/web/header/en.svg"/>English</li>
             </ul>}
           </a>
          {!isLogin ?

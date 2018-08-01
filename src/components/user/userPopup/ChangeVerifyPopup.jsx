@@ -66,7 +66,7 @@ export default class ChangeVerifyPopup extends exchangeViewBase {
     return (
       <div className="change-popup-wrap">
         <div className="change-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
+          <img src={this.$imagesMap.$guanbi_hei} alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.props.isType !== 0 && this.state.contentList[contentArr[this.props.isType]].title}</h1>
           <div className="clearfix picture-div">
             <Input placeholder={this.intl.get("user-popPicturePlaceholder")}  value={this.state.popupInput2} onInput={value => this.changeInput2(value)}/>

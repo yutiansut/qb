@@ -45,7 +45,9 @@ export default class ExchangeViewBase extends ViewBase {
       $checkbox_check: "/static/web/checkbox_checked.svg",
       $home_star_sel: "/static/web/home/star_select.svg",
       $home_star_nor: "/static/web/home/star_normal.svg",
-      $user_id01: "/static/web/user/ID_01.svg", // 个人中心图片
+      $user_recommendCn: "/static/web/user/recommend_cn.svg", // 个人中心图片
+      $user_recommendEn: "/static/web/user/recommendEn.svg",
+      $user_id01: "/static/web/user/ID_01.svg",
       $user_id02: "/static/web/user/ID_02.svg",
       $user_id03: "/static/web/user/ID_03.svg",
       $user_passport01: "/static/web/user/passport_01.svg",

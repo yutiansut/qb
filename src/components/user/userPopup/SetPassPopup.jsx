@@ -185,7 +185,7 @@ export default class SetPassPopup extends exchangeViewBase {
     return (
       <div className="pass-wrap">
         <div className="pass-info">
-          <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
+          <img src={this.$imagesMap.$guanbi_hei} alt="" className="close-popup" onClick={() => {this.props.onClose && this.props.onClose()}}/>
           <h1 className="pop-title">{this.props.isType && this.state.popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>

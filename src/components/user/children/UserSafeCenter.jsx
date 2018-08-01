@@ -284,7 +284,7 @@ export default class userSafeCenter extends exchangeViewBase {
                 <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
                 <span>
                   {item.name}
-                  {item.imgFlag && <img src={this.props.controller.configController.language === 'zh-CN' ? '/static/img/user/recommend_cn.svg' : '/static/img/user/recommendEn.svg'}
+                  {item.imgFlag && <img src={this.props.controller.configController.language === 'zh-CN' ? this.$imagesMap.$user_recommendCn : this.$imagesMap.$user_recommendEn}
                                         className={this.props.controller.configController.language === 'zh-CN' ? 'img-cn' : 'img-en'} alt="" />}
                 </span>
               </dd>))}
@@ -453,7 +453,7 @@ export default class userSafeCenter extends exchangeViewBase {
                      onClose={() => {this.setState({ remindPopup: false });}}/>}
         {this.state.showIp && (
           <div className="ip-popup">
-            <img src="/static/img/guanbi_hei.svg" onClick={() => {this.setState({ showIp: false });}}/>
+            <img src={this.$imagesMap.$guanbi_hei} onClick={() => {this.setState({ showIp: false });}}/>
             <p>{this.state.ipAddr}</p>
           </div>)}
       </div>
