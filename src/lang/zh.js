@@ -132,7 +132,8 @@ export default function zh(state) {
     today: '今天',
     year: '年',
     yearSp: '年',
-    month: '月'
+    month: '月',
+    normalProblem: '常见问题'
   };
   const errMessage = {
     "-1": "FETCH错误",

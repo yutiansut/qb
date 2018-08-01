@@ -134,7 +134,8 @@ export default function en(state) {
     today: "Today",
     year: "",
     yearSp: " -",
-    month: ""
+    month: "",
+    normalProblem: 'FAQ'
   };
   const errMessage = {
     "-1": "FETCH ERROR",

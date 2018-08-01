@@ -75,6 +75,7 @@ export default class Footer extends ExchangeViewBase {
             {this.footerArray.map((item, index) => (<li key={index}>
               <Link to={item.to}>{item.label}</Link>
             </li>))}
+            <li><a href="http://qbservice.udesk.cn/hc" target='_blank'>{this.intl.get('normalProblem')}</a></li>
           </ul>
         </div>
         <div className="right-content">
