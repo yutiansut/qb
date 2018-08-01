@@ -115,7 +115,7 @@ export default class ExchangeStoreBase extends StoreBase {
       } catch (e) {
         console.error('解析json', e)
       }
-      // console.log('reciveWebsocket', body)
+      // body && console.log('reciveWebsocket', body)
       let dataCache = body
       if(body && body.r){
         delete body.m
@@ -150,7 +150,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = async (key, data) => {
-      // console.log('sendWebsocket', data)
+      // data && console.log('sendWebsocket', data)
       let emitData = await this.formatWebSocketEmitData(headerConfig, key, data)
       // console.log(emitData)
       // console.log('emitData.console....................', JSON.stringify(emitData), connectName, key, data)
