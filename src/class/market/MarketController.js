@@ -63,7 +63,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.setHomeMarketPairData(homeMarketPairData);
     this.store.setSort([], 0)
     this.view.setState({
-      searchValue: '',
+      // searchValue: '',
       sortIndex: 0,
       sortImg: this.view.$imagesMap.$rank_normal,
       searchRealt: [],

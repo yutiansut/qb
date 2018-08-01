@@ -245,7 +245,7 @@ export default class Login extends exchangeViewBase {
                 {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
               </p>
               {this.intl.get("login-read")}
-            <Link to="/help/terms" className="userAgree">{this.intl.get("login-readUser")}</Link>
+            <Link to="/help/terms" className="userAgree" target="_blank">{this.intl.get("login-readUser")}</Link>
           </div>}
         </div>
         {this.state.showPopup && (
