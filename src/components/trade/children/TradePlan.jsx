@@ -264,18 +264,18 @@ export default class TradePlan extends ExchangeViewBase {
                     onClick={this.changeEntrustType.bind(this, v)}>{v.name}</span>
             )
           })}
-          <div style={{float: 'right', marginRight: '.1rem'}} className="pop-parent">
-            <SelectButton
-              title={this.state.UnitSelected}
-              type="trade"
-              className="select"
-              valueArr={[`${this.intl.get('deal-digital')}`, "CNY", "USD"]}
-              onSelect={(e) => {
-                this.changeUnit(e,this.intl.get('deal-digital'))
-              }}
-            />
-            <em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>
-          </div>
+          {/*<div style={{float: 'right', marginRight: '.1rem'}} className="pop-parent">*/}
+            {/*<SelectButton*/}
+              {/*title={this.state.UnitSelected}*/}
+              {/*type="trade"*/}
+              {/*className="select"*/}
+              {/*valueArr={[`${this.intl.get('deal-digital')}`, "CNY", "USD"]}*/}
+              {/*onSelect={(e) => {*/}
+                {/*this.changeUnit(e,this.intl.get('deal-digital'))*/}
+              {/*}}*/}
+            {/*/>*/}
+            {/*<em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>*/}
+          {/*</div>*/}
 
         </div>
         <div className='trade-deal-exchanged'>
