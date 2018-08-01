@@ -66,10 +66,10 @@ export default class Header extends ExchangeViewBase {
                   <img src={this.state.assetFold ? "/static/mobile/header/icon_zk@2x.png" : "/static/mobile/header/icon_ss@2x.png"} className="right"/>
               </a>
               {this.state.assetFold && <div className="fold">
-                  <NavLink to="" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-balance")}</NavLink>
-                  <NavLink to="" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-charge")}</NavLink>
-                  <NavLink to="" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-withdraw")}</NavLink>
-                  <NavLink to="" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-records")}</NavLink>
+                  <NavLink to="/wallet/balance" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-balance")}</NavLink>
+                  <NavLink to="/wallet/charge" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-charge")}</NavLink>
+                  <NavLink to="/wallet/widthdraw" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-withdraw")}</NavLink>
+                  <NavLink to="/wallet/dashboard" onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-records")}</NavLink>
               </div>}
               {/*订单管理*/}
               <a onClick={e=>this.setState({orderFold:!this.state.orderFold})}>
