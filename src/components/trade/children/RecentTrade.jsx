@@ -7,7 +7,7 @@ export default class extends ExchangeViewBase {
     super(props);
     this.state = {
       sortIndex: -1,
-      tradeSortImg: '/static/img/trade_rank.svg',
+      tradeSortImg: this.$imagesMap.$trade_rank,
       recentTradeListArr: [],
       recentItem:
           [
@@ -74,7 +74,7 @@ export default class extends ExchangeViewBase {
               {this.state.recentTableHead.map((v, index) => {
                 return <td key={index} onClick={this.tradeSort.bind(this, v, index)}>
                     {v.name}
-                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt="" className={`${v.sortValue ? "" : "hide"}`} />
+                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : this.$imagesMap.$trade_rank} alt="" className={`${v.sortValue ? "" : "hide"}`} />
                   </td>;
               })}
             </tr>

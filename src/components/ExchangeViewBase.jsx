@@ -25,6 +25,8 @@ export default class ExchangeViewBase extends ViewBase {
       $trade_search: "/static/web/search_bai.svg", // 市场
       $trade_close: "/static/web/guanbi_bai.svg",
       $trade_rank: "/static/web/trade/trade_rank.svg",
+      $trade_star: "/static/web/trade/trade_star.svg",
+      $trade_star_select: "/static/web/trade/trade_star_select.svg",
       $guanbi_hei: "/static/web/guanbi_hei.svg",
       $warning: "/static/web/warning.svg",
       $succeed: "/static/web/succeed.svg",

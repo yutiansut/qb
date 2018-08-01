@@ -208,7 +208,7 @@ export default class MarketController extends ExchangeControllerBase {
   //排序功能
   pairSort(v, index) { // type 1 升序 0 降序
     let imgArr = [this.view.$imagesMap.$rank_down, this.view.$imagesMap.$rank_up],
-      tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
+      tradeSortImg = ["/static/web/trade/trade_rank_shang.svg", "/static/web/trade/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
 
     this.store.setSort(v.sortValue, v.type)
