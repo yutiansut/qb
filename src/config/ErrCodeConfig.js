@@ -49,6 +49,13 @@ export default {
     },
     errCode: "ErrCodeUnknown"
   },
+  2: {
+    // msg: "数据库错误",
+    get msg() {
+      return intl.get(2);
+    },
+    errCode: "ErrCodeUnknown"
+  },
   95: {
     // msg: "参数错误",
     get msg() {

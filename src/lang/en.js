@@ -145,6 +145,7 @@ export default function en(state) {
     "-5": "UNZIP error",
     "-6": "BLOB Parse error",
     1: "Unknow error",
+    2: "Database error",
     95: "Parameter error",
     101: "Id Verify underway",
     102: "Id Verify state nonrecognition",
