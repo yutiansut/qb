@@ -29,11 +29,6 @@ export default class UserCenterIndex extends exchangeViewBase {
       await this.getUserAuthData();
   }
 
-  isAuthentication() {
-    if (this.state.userAuth.state === 0 || this.state.userAuth.state === 3) {
-      this.setState({remindPopup:true,popType:"tip4",popMsg:this.intl.get("user-not-surport")})
-    }
-  }
 
   render() {
     const {url,controller} = this.props;
@@ -48,7 +43,7 @@ export default class UserCenterIndex extends exchangeViewBase {
         </div>
         <div className="user-center-main">
           <ul className="list-section">
-            <li className="list-item clearfix" onClick={this.isAuthentication.bind(this)}>
+            <li className="list-item clearfix">
               <div className="fl">
                 <img src="/static/mobile/user/icon_wd_sfrz@3x.png"/>
                 <span>{this.intl.get("header-idVerify")}</span>
@@ -88,12 +83,6 @@ export default class UserCenterIndex extends exchangeViewBase {
             </NavLink>
           </ul>
         </div>
-        {this.state.remindPopup && <RemindPopup
-          type={this.state.popType}
-          msg={this.state.popMsg}
-          h5={true}
-          autoClose = {true}
-          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     );
   }
