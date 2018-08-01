@@ -432,7 +432,8 @@ export default class UserController extends ExchangeControllerBase {
       remindPopup: true,
       popType: result && result.errCode ? 'tip3': 'tip1',
       popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-setSucc"),
-      verifyFund:  result && result.errCode ? true : false
+      verifyFund: result && result.errCode ? true : false,
+      fundPassType0: result && result.errCode ? this.view.state.fundPassType0 : this.view.state.fundPassType,
     })
     // console.log('设置资金密码间隔', result)
   }
