@@ -6,10 +6,10 @@ export default class HomeAdvantage extends exchangeViewBase {
   constructor() {
     super()
     this.imageArray = [
-      '/static/img/home/financial@2x.png',
-      '/static/img/home/4_2.svg',
-      '/static/img/home/4_3.svg',
-      '/static/img/home/muti@2x.png'
+      this.$imagesMap.$home_financial,
+      this.$imagesMap.$home_safe,
+      this.$imagesMap.$home_stable,
+      this.$imagesMap.$home_muti
     ];
     this.wordArray = [
       {head: this.intl.get("home-advantage-h1"), para: this.intl.get("home-advantage-p1")},
@@ -38,19 +38,19 @@ export default class HomeAdvantage extends exchangeViewBase {
         <div className="home-advan-header clearfix">
           <ul>
             <li className={this.state.index === 0 ?"active" : ""} onClick={() => {this.setState({index: 0})}}>
-              <img src="/static/img/home/financial@2x.png"/>
+              <img src={this.$imagesMap.$home_financial}/>
               <p>{this.intl.get("home-advantage-h1")}</p>
             </li>
             <li className={this.state.index === 1 ?"active" : ""} onClick={() => {this.setState({index: 1})}}>
-              <img src="/static/img/home/4_2.svg" style={{padding: ".02rem 0"}}/>
+              <img src={this.$imagesMap.$home_safe} style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h2")}</p>
             </li>
             <li className={this.state.index === 2 ?"active" : ""} onClick={() => {this.setState({index: 2})}}>
-              <img src="/static/img/home/4_3.svg" style={{padding: ".02rem 0"}}/>
+              <img src={this.$imagesMap.$home_stable} style={{padding: ".02rem 0"}}/>
               <p>{this.intl.get("home-advantage-h3")}</p>
             </li>
             <li className={this.state.index === 3 ?"active" : ""} onClick={() => {this.setState({index: 3})}}>
-              <img src="/static/img/home/muti@2x.png" style={{padding: ".05rem 0"}}/>
+              <img src={this.$imagesMap.$home_muti} style={{padding: ".05rem 0"}}/>
               <p>{this.intl.get("home-advantage-h4")}</p>
             </li>
           </ul>

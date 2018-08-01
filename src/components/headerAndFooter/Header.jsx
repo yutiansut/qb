@@ -19,12 +19,12 @@ import UserNoticeContent from '../notice/noticeChild/UserNoticePop.jsx'
 //     )}/>
 // );
 
-
-const languageArr = [
-  { imgUrl: '/static/img/home/cn.svg', content: '简体中文', value: "zh-CN"},
-  // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
-  {imgUrl: '/static/img/home/en.svg', content: 'English', value: "en-US"}
-]
+//
+// const languageArr = [
+//   {imgUrl: this.$imagesMap.$header_cn, content: '简体中文', value: "zh-CN"},
+//   // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
+//   {imgUrl: this.$imagesMap.$header_en, content: 'English', value: "en-US"}
+// ]
 
 export default class Header extends ExchangeViewBase {
   constructor(props) {
@@ -50,6 +50,11 @@ export default class Header extends ExchangeViewBase {
       showNews: false, // 消息下拉
       otherLogin: false, // 提示登录弹窗
       otherLoginCon: "", // 提示登录弹窗内容
+      languageArr: [
+        {imgUrl: this.$imagesMap.$header_cn, content: '简体中文', value: "zh-CN"},
+        // {imgUrl: '/static/img/home/chinese.svg', content: '繁體中文'},
+        {imgUrl: this.$imagesMap.$header_en, content: 'English', value: "en-US"}
+      ]
     }
     this.configController = this.props.configController;
     this.loginController = this.props.loginController;
@@ -89,7 +94,7 @@ export default class Header extends ExchangeViewBase {
     let changeBase = this.props.navClass === 'tradeNav' ? 1440 * 2 : 1440
     ChangeFontSize(1440*0.8, changeBase)
     this.props.userController.userToken && await this.getUserNoticeHeader(1, 0, 0)
-    languageArr.forEach((v,index)=>{
+    this.state.languageArr.forEach((v,index)=>{
       v.value === this.configController.language && this.setState({ languageIndex : index})
     })
     this.state.navArrayLeft.forEach(v => {
@@ -219,11 +224,11 @@ export default class Header extends ExchangeViewBase {
           </li>
           <li className="language-li">
             <p>
-              <img src={languageArr[this.state.languageIndex].imgUrl} alt=""/>
-              <span>{languageArr[this.state.languageIndex].content}</span>
+              <img src={this.state.languageArr[this.state.languageIndex].imgUrl} alt=""/>
+              <span>{this.state.languageArr[this.state.languageIndex].content}</span>
             </p>
             <ul className="language-ul">
-              {languageArr.map((v, index) => (<li key={index} className={this.state.languageIndex === index ? 'hide' : ''} onClick={i => {this.changeLanguage(v.value)}}>
+              {this.state.languageArr.map((v, index) => (<li key={index} className={this.state.languageIndex === index ? 'hide' : ''} onClick={i => {this.changeLanguage(v.value)}}>
                 <img src={v.imgUrl} alt=""/>
                 <span>{v.content}</span>
               </li>))}

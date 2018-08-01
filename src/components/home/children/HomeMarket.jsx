@@ -88,7 +88,7 @@ export default class HomeMarket extends ExchangeViewBase {
               onInput={value => {
                 (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
               }}/>
-            <img src="/static/img/home/home_search_btn.svg" alt=""/>
+            <img src={this.$imagesMap.$home_marketBtn} alt=""/>
           </div>
           
         </div>

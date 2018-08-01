@@ -70,7 +70,7 @@ export default class Footer extends ExchangeViewBase {
     return (
       <div className="footer-wrap">
         <div>
-          <Link to='/home' className="home-img"><img src="/static/img/home/logo_footer.svg" alt="" /></Link>
+          <Link to='/home' className="home-img"><img src={this.$imagesMap.$logo_footer} alt="" /></Link>
           <ul>
             {this.footerArray.map((item, index) => (<li key={index}>
               <Link to={item.to}>{item.label}</Link>
@@ -84,11 +84,11 @@ export default class Footer extends ExchangeViewBase {
         </div>
         <div>
           <ol className="clearfix">
-            <li><a href="https://twitter.com/QB_Exchange" target="_blank"><img src="/static/img/footer/twitter_new.svg" alt="" /></a></li>
-            <li><a href="https://www.facebook.com/qbexchange/" target="_blank"><img src="/static/img/footer/FaceBook_new.svg" alt="" /></a></li>
+            <li><a href="https://twitter.com/QB_Exchange" target="_blank"><img src={this.$imagesMap.$footer_twitter} alt="" /></a></li>
+            <li><a href="https://www.facebook.com/qbexchange/" target="_blank"><img src={this.$imagesMap.$footer_faceBook} alt="" /></a></li>
             {/*<li><img src="/static/img/footer/fill.svg" alt="" /></li>*/}
-            <li><img src="/static/img/footer/wechat.svg" alt="" className="wx-img" /><i className="wx-qrCode"></i></li>
-            <li><a href="https://t.me/QB_ExchangeEN" target="_blank"><img src="/static/img/footer/Telegram_new.svg" alt="" /></a></li>
+            <li><img src={this.$imagesMap.$footer_wechat} alt="" className="wx-img" /><i className="wx-qrCode"></i></li>
+            <li><a href="https://t.me/QB_ExchangeEN" target="_blank"><img src={this.$imagesMap.$footer_telegram} alt="" /></a></li>
           </ol>
         </div>
         <div className='aside-nav'>

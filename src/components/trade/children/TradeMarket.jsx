@@ -12,7 +12,7 @@ export default class TradeMarket extends ExchangeViewBase {
       searchInput: false,
       searchValue: '',
       sortIndex: -1,
-      tradeSortImg: '/static/img/trade_rank.svg',
+      tradeSortImg: this.$imagesMap.$trade_rank,
       collectActive: false, // 控制收藏区的active
       marketTableHead : [
         {name: `${this.intl.get('market-markets')}`, sortValue: ''},
@@ -93,14 +93,14 @@ export default class TradeMarket extends ExchangeViewBase {
             })}
           </ul>}
           <div className={this.state.searchInput ? 'input-div' : 'img-div'}>
-            <img src="/static/img/search_bai.svg" alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}}/>
+            <img src={this.$imagesMap.$trade_search} alt="" className={this.state.searchInput ? 'hide' : ''} onClick={() => {this.setState({searchInput: true, searchValue: ''})}}/>
             {this.state.searchInput && <p>
               <input type="text"
                      placeholder={this.intl.get("market-search")}
                      onChange={this.onInputValue.bind(this)}
                      onKeyDown={this.onEnter.bind(this)}
               />
-              <img src="/static/img/guanbi_bai.svg" alt="" onClick={() => {this.setState({searchInput: false, searchValue: ''})}}/>
+              <img src={this.$imagesMap.$trade_close} alt="" onClick={() => {this.setState({searchInput: false, searchValue: ''})}}/>
             </p>}
           </div>
         </div>
@@ -111,7 +111,7 @@ export default class TradeMarket extends ExchangeViewBase {
                 {this.state.marketTableHead.map((v, index) => {
                   return (<td onClick={this.pairSort.bind(this, v, index)} key={index} className={`${v.sortValue ? 'sort-img-td' : ''}`}>
                     {v.name}
-                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt=""
+                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : this.$imagesMap.$trade_rank} alt=""
                         className={`${v.sortValue ? '' : 'hide'}`}/>
                   </td>)
                 })}
