@@ -40,7 +40,7 @@ export default class Header extends ExchangeViewBase {
     let isLogin = !!userController.userToken;
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
-        <div className="nav-jsx">{this.props.jsx}</div>
+        <div className="nav-jsx">{"jsx here"}</div>
         <div className="nav-menu">
           <img src={this.state.navHidden ? "/static/mobile/header/icon_cd@2x.png" : "/static/mobile/header/icon_qx@2x.png"}
                onClick={() => this.setState({navHidden: !this.state.navHidden})}/>
