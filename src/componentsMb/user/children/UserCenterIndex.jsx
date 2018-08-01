@@ -33,57 +33,83 @@ export default class UserCenterIndex extends exchangeViewBase {
   render() {
     const {url,controller} = this.props;
     const userAuth=this.state.userAuth;
-    return (
-      <div className="user-center-index">
+    return <div className="user-center-index">
         <div className="user-center-header">
           <div>
-            <img src="/static/mobile/header/icon_wode_head@2x.png"/>
+            <img src="/static/mobile/header/icon_wode_head@2x.png" />
             <span>{controller.userName}</span>
           </div>
         </div>
         <div className="user-center-main">
-          <ul className="list-section">
-            <li className="list-item clearfix">
-              <div className="fl">
-                <img src="/static/mobile/user/icon_wd_sfrz@3x.png"/>
-                <span>{this.intl.get("header-idVerify")}</span>
-              </div>
-              <div className="fr">
-                <span>{this.verifyState[userAuth.state]}</span>
-              </div>
+          <ul className="list-section clearfix">
+            <li>
+              <NavLink className="list-item clearfix" to={`${url}/identity`}>
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_identity} />
+                  <span>{this.intl.get("header-idVerify")}</span>
+                </div>
+                <div className="fr">
+                  <span>{this.verifyState[userAuth.state]}</span>
+                </div>
+              </NavLink>
             </li>
-            <NavLink className="list-item clearfix" to={`${url}/safe`}>
-              <div className="fl">
-                <img src="/static/mobile/user/icon_wd_aqzx@3x.png"/>
-                <span>{this.intl.get("header-security")}</span>
-              </div>
-              <div className="fr">
-                <img src="/static/mobile/user/icon_qianjb@3x.png"/>
-              </div>
-            </NavLink>
-          </ul>
-          <ul className="list-section">
-            <NavLink to={`${url}/aboutUs`} className="list-item clearfix">
-              <div className="fl">
-                <img src="/static/mobile/user/icon_wd_gywm@3x.png"/>
-                <span>{this.intl.get("notice-about")}</span>
-              </div>
-              <div className="fr">
-                <img src="/static/mobile/user/icon_qianjb@3x.png"/>
-              </div>
-            </NavLink>
-            <NavLink to={"/help/terms"} className="list-item clearfix">
-              <div className="fl">
-                  <img src="/static/mobile/user/icon_wd_yhxy@2x.png"/>
+            <li>
+              <NavLink className="list-item clearfix" to={`${url}/safe`}>
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_safe} />
+                  <span>{this.intl.get("header-security")}</span>
+                </div>
+                <div className="fr">
+                  <img src={this.$imagesMap.$h5_user_qianjb} />
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="list-item clearfix" to={`/order`}>
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_order} />
+                  <span>{this.intl.get("header-order")}</span>
+                </div>
+                <div className="fr">
+                  <img src={this.$imagesMap.$h5_user_qianjb} />
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="list-item clearfix" to={`/help`}>
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_help} />
+                  <span>{this.intl.get("help-center")}</span>
+                </div>
+                <div className="fr">
+                  <img src={this.$imagesMap.$h5_user_qianjb} />
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/help/terms"} className="list-item clearfix">
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_terms} />
                   <span>{this.intl.get("login-readUser2")}</span>
-              </div>
-              <div className="fr">
-                  <img src="/static/mobile/user/icon_qianjb@3x.png"/>
-              </div>
-            </NavLink>
+                </div>
+                <div className="fr">
+                  <img src={this.$imagesMap.$h5_user_qianjb} />
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/aboutUs`} className="list-item clearfix">
+                <div className="fl">
+                  <img src={this.$imagesMap.$h5_user_about} />
+                  <span>{this.intl.get("notice-about")}</span>
+                </div>
+                <div className="fr">
+                  <img src={this.$imagesMap.$h5_user_qianjb} />
+                </div>
+              </NavLink>
+            </li>
           </ul>
         </div>
-      </div>
-    );
+      </div>;
   }
 }

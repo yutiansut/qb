@@ -65,7 +65,14 @@ export default class ExchangeViewBase extends ViewBase {
       $calendar_preYear: "/static/web/calendar/calendar_pre_year.svg", // 日历
       $calendar_nextYear: "/static/web/calendar/calendar_next_year.svg",
       $calendar_preMonth: "/static/web/calendar/calendar_pre_month.svg",
-      $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg"
+      $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg",
+      $h5_user_identity: '/static/mobile/user/icon_wd_sfrz@3x.png',
+      $h5_user_safe: '/static/mobile/user/icon_wd_aqzx@3x.png',
+      $h5_user_order: '/static/mobile/user/icon_wd_ddgl@3x.png',
+      $h5_user_help: '/static/mobile/user/icon_wd_bzzx@3x.png',
+      $h5_user_terms: '/static/mobile/user/icon_wd_yhxy@3x.png',
+      $h5_user_about: '/static/mobile/user/icon_wd_gywm@3x.png',
+      $h5_user_qianjb: '/static/mobile/user/icon_qianjb@3x.png',
     }
   }
 

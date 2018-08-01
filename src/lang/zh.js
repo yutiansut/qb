@@ -621,6 +621,7 @@ export default function zh(state) {
     "login-miss": "登录信息已失效,请重试"
   };
   const help = {
+    "help-center": "帮助中心",
     "help-fees": "费率标准",
     "help-level": "用户等级",
     "help-require-points": "需要积分",

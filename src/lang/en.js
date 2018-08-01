@@ -204,7 +204,7 @@ export default function en(state) {
     "header-home": "home",
     "header-exchange": "exchange",
     "header-assets": "assets",
-    "header-order": "order list",
+    "header-order": "Order list",
     "header-user": "Personal Center",
     "header-security": "Security center",
     "header-idVerify": "ID verification",
@@ -726,6 +726,7 @@ export default function en(state) {
     "login-miss": "The login information has failed, please try again"
   };
   const help = {
+    "help-center": "Help",
     "help-fees": "Fees",
     "help-level": "VIP Level",
     "help-require-points": "Required Points",
