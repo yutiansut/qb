@@ -42,7 +42,6 @@ export default class HomeActivity extends ExchangeViewBase {
     let lang = this.props.controller.configController.store.state.language;
     let homeBanner = this.state.homeBanner || {};
     let hB = {"zh-CN": homeBanner.hBc, "en-US": homeBanner.hBe}[lang] || ""; // 背景图片
-    debugger;
     let t = {"zh-CN": homeBanner.tc, "en-US": homeBanner.te}[lang] || ""; // 标题图片
     let btn = {"zh-CN": homeBanner.btc, "en-US": homeBanner.bte}[lang] || ""; // 按钮图片
     return (

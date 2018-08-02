@@ -1,7 +1,6 @@
 import "../../common/css/lazy.styl";
 export default class Progressive {
   constructor(option) {
-    debugger;
     this.el = option.el
     this.lazyClass = option.lazyClass || 'lazy'
     this.removePreview = option.removePreview || false
