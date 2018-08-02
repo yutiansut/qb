@@ -58,9 +58,9 @@ export class DarkTheme extends Theme {
 
         this._colors[Theme.Color.Background] = "#25292b";    //背景
         this._colors[Theme.Color.Cursor] = "#aaa";              // 鼠标十字线
-        this._colors[Theme.Color.RangeMark] = "#f9ee30";        // 最新价
+        this._colors[Theme.Color.RangeMark] = "#ffac00";        // 最新价
         this._colors[Theme.Color.Indicator0] = "#ddd";            //主指标-1
-        this._colors[Theme.Color.Indicator1] = "#f9ee30";         //主指标-2
+        this._colors[Theme.Color.Indicator1] = "#ffac00";         //主指标-2
         this._colors[Theme.Color.Indicator2] = "#f600ff";          //主指标-3
         this._colors[Theme.Color.Indicator3] = "#6bf";             //主指标-SAR
         this._colors[Theme.Color.Grid0] = "#555";                   // 网格线

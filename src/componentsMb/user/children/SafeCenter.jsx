@@ -22,7 +22,8 @@ export default class UserCenterIndex extends exchangeViewBase {
       remindPopup: false,
       popType: "tip1",
       popMsg: "",
-      fundPassType: 0,
+      popFundPassType: 0,
+      fundPassType: -1,
       fundValue: "",
     };
     const {controller} = props;
@@ -37,21 +38,20 @@ export default class UserCenterIndex extends exchangeViewBase {
     this.getCaptchaVerify = controller.getCaptchaVerify.bind(controller); // 获取图形验证码
     this.bindUser = controller.bindUser.bind(controller);
     this.setFundPwdSpace = controller.setFundPwdSpace.bind(controller); // 设置资金密码间隔
-    this.needFundPwdInterval = this.needFundPwdInterval.bind(this); // 设置密码间隔
-    this.fundPwdSpace = this.fundPwdSpace.bind(this); // 资金密码内容
-    this.changeFundValue = this.changeFundValue.bind(this) // 输入资金密码
-    // this.closeSet = this.closeSet.bind(this)
+    this.needFundPwdInterval = this.needFundPwdInterval.bind(this);
+    this.changeFundValue = this.changeFundValue.bind(this);
+    this.fundPwdSpace = this.fundPwdSpace.bind(this);
   }
 
-  componentWillMount() {
-  }
-
-  async componentDidMount() {
-    await AsyncAll([this.initData(), this.getCaptchaVerify()])
+  async componentWillMount() {
+    await AsyncAll([this.initData(), this.getCaptchaVerify()]);
+    const {controller} = this.props;
+    let {userInfo} = controller.initState;
+    this.setState({fundPassType:userInfo.interval});
   }
 
   needFundPwdInterval() {
-      // 是否需要资金密码
+    // 是否需要资金密码
     if (this.state.userInfo.fundPwd) {
         this.props.history.push('/muser/setPwd?type=5');
         return
@@ -63,12 +63,11 @@ export default class UserCenterIndex extends exchangeViewBase {
   }
 
   changeFundValue(value) { // 输入资金密码
-    this.setState({fundValue: value});
+      this.setState({fundValue: value});
   }
 
   fundPwdSpace(v, index) { // 资金密码内容
-    // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
-
+      // 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       if(index===3){
           this.setState({
               setFundPass:false,
@@ -78,12 +77,11 @@ export default class UserCenterIndex extends exchangeViewBase {
           this.setState({
               setFundPass: false,
               verifyFund: true,
-              fundPassType: index,
+              popFundPassType: index,
               fundValue: '',
           });
       }
   }
-
 
   render() {
     const {controller, url} = this.props;
@@ -131,7 +129,7 @@ export default class UserCenterIndex extends exchangeViewBase {
               <img src="/static/img/guanbi_hei.svg" alt="" className="close-popup" onClick={() => {this.setState({ verifyFund: false });}}/>
             </h1>
             <Input oriType="password" placeholder={this.intl.get("asset-inputFundPassword")} value={this.state.fundValue}  onInput={value => this.changeFundValue(value)}/>
-            <Button title={this.intl.get("ok")} onClick={() => this.state.fundValue && this.setFundPwdSpace(this.state.fundPassType, this.state.fundValue)}/>
+            <Button title={this.intl.get("ok")} onClick={() => this.state.fundValue && this.setFundPwdSpace(this.state.popFundPassType, this.state.fundValue)}/>
           </div>
         </div>}
         {/*提示框*/}

@@ -170,7 +170,7 @@ export default class Login extends exchangeViewBase {
           <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
               <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png":"/static/mobile/login/icon_wx@2x.png"}/>
               {this.intl.get("login-read")}
-              <Link to="/mhelp/terms" className="userAgree">《{this.intl.get("login-readUser")}》</Link>
+              <Link to="/mhelp/terms" className="userAgree">《{this.intl.get("login-readUser2")}》</Link>
           </label>
         </div>
         {this.state.showPopup && (

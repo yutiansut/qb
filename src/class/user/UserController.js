@@ -427,13 +427,23 @@ export default class UserController extends ExchangeControllerBase {
 
   // 移动端用
   async setFundPwdSpace(type, pwd) { // 设置资金密码间隔
-    let result = await this.setFundPwdInterval(type, pwd)
-    this.view.setState({
-      remindPopup: true,
-      popType: result && result.errCode ? 'tip3': 'tip1',
-      popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-setSucc"),
-      verifyFund:  result && result.errCode ? true : false
-    })
+    let result = await this.setFundPwdInterval(type, pwd);
+    if(!result){
+        this.view.setState({
+            remindPopup: true,
+            popType: 'tip1',
+            popMsg: this.view.intl.get("user-setSucc"),
+            verifyFund:  false,
+            fundPassType: type,
+        });
+    }else{
+        this.view.setState({
+            remindPopup: true,
+            popType: 'tip3',
+            popMsg: result.msg,
+            verifyFund:  true,
+        });
+    }
     // console.log('设置资金密码间隔', result)
   }
 

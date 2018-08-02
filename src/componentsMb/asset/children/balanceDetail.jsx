@@ -12,7 +12,9 @@ export default class BalanceDetail extends exchangeViewBase {
     let { controller } = props;
     //绑定view
     controller.setView(this);
-    this.state = {};
+    this.state = {
+        currency: "",
+    };
     let { totalAsset, wallet } = controller.initState;
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, { totalAsset, wallet });
@@ -22,13 +24,19 @@ export default class BalanceDetail extends exchangeViewBase {
 
   async componentWillMount() {
     await this.getAssets();
+    // 获取路由参数
+    let query = this.props.controller.getQuery("currency").toUpperCase();
+    let currency = query || (this.props.location.query && this.props.location.query.currency) || "btc";
+
+    currency = currency.toUpperCase();
+    this.setState({currency: currency.toUpperCase()});
+    // 更改url
+    this.props.controller.changeUrl("currency", currency.toLowerCase());
   }
 
   render() {
     //获取路由参数,选取对应币种
-    let coin =
-      (this.props.location.query && this.props.location.query.currency) ||
-      "BTC";
+    let coin = this.state.currency;
     let result =
       (this.state.wallet &&
         this.state.wallet.filter(

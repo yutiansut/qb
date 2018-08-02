@@ -11,7 +11,7 @@ export default class Charge extends exchangeViewBase {
         super(props);
         let { controller } = props;
         this.state = {
-            currency: "BTC",
+            currency: "",
             address: "",
             showPopup: false,
             popMsg: "",
@@ -47,9 +47,16 @@ export default class Charge extends exchangeViewBase {
 
     async componentWillMount() {
         await this.getWalletList();
-        let currency = this.props.location.query && this.props.location.query.currency;
-        currency && (currency=currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
-        this.getCoinAddress(currency || this.state.currency);
+        // 获取路由参数
+        let query = this.props.controller.getQuery("currency").toUpperCase();
+        let currency = query || (this.props.location.query && this.props.location.query.currency) || "btc";
+
+        currency = currency.toUpperCase();
+        this.setState({currency: currency.toUpperCase()});
+        // 更改url
+        this.props.controller.changeUrl("currency", currency.toLowerCase());
+
+        this.getCoinAddress(currency);
     }
 
     componentDidMount() {}
@@ -82,7 +89,7 @@ export default class Charge extends exchangeViewBase {
                        }}>
                         {this.intl.get("asset-copy")}</a>
                     <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
-                    <p>{this.intl.get("asset-depositReminder1",{currency:currency,number:verifyNumber})}</p>
+                    <p>{this.intl.getHTML("asset-depositReminder1",{currency:currency,number:verifyNumber})}</p>
                     <p>{this.intl.get("asset-charge-h5-tip3")}</p>
                 </div>
                 {/*提示框*/}
@@ -109,6 +116,7 @@ export default class Charge extends exchangeViewBase {
                         {walletList && walletList.map((item,index)=>{
                             return <li key={index} onClick={()=>{
                                 this.setState({currency:item,showSelect:false},()=>{
+                                    this.props.controller.changeUrl("currency", item.toLowerCase());
                                     this.getCoinAddress(this.state.currency);
                                 })
                             }}>{item.toUpperCase()}</li>
