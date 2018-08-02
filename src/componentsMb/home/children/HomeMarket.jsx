@@ -25,7 +25,7 @@ export default class HomeMarket extends ExchangeViewBase {
   }
 
   getCollect(v, index, e) { // 添加收藏
-    this.addCollect(v, index, e)
+    this.addCollect(v, index, e);
     if (v.isFavorite) { // 取消
       this.setState({
         remindPopup: true,
