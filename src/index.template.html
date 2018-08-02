@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=11">
+        <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1">
         <!--防止手机中网页放大和缩小。-->
         <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <!-- uc强制竖屏 -->
@@ -31,7 +31,7 @@
         <title>QB</title>
         <!--<script src="https://cdn.vaptcha.com/v.js"></script>-->
         <script type="text/javascript">
-            // console.log('aaaa')
+            console.log('navigator.userAgent', navigator.userAgent)
             if (!(navigator.userAgent.indexOf('Safari') >= 0)){
                 // alert('你是使用其他的浏览器浏览网页！')
                 function dynamicLoadJs(url, callback) {
