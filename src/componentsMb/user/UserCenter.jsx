@@ -13,7 +13,7 @@ import "./stylus/index.styl"
 
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   componentWillMount() {
