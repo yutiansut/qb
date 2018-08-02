@@ -395,6 +395,7 @@ export default function zh(state) {
     'order-bs': '买卖',
     'order-b':'买',
     'order-s':'卖',
+    'order-none': '当前列表中无符合条件的挂单'
   };
   const deal = {
     "deal-limit": "限价委托",

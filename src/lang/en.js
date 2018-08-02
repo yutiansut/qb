@@ -409,7 +409,8 @@ export default function en(state) {
     "cancel-successful": "Cancellation success",
     "order-bs": "Bid/Ask",
     "order-b": "buy",
-    "order-s": "sell"
+    "order-s": "sell",
+    'order-none': 'No eligible list in the current list'
   };
   const deal = {
     "deal-limit": "Limit price",

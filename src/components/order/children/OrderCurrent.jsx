@@ -113,7 +113,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     const {pairIdMsg} = this.props;
     let orderStatus = [];
     this.props.type === 'orderHistory' && (orderStatus = [2, 3, 4, 5, 6, 7]) && (this.setState({orderStatus}));
-    this.props.type === 'orderDeal' && (orderStatus = [2, 5, 6]) && (this.setState({orderStatus}));
+    this.props.type === 'orderDeal' && (orderStatus = [2, 5, 6, 7]) && (this.setState({orderStatus}));
     let params = {
       orderCurrent: {
         idArray: this.state.idArray, orderType: this.state.orderType, hideOther: this.state.hideOther
@@ -336,7 +336,6 @@ export default class OrderCurrent extends ExchangeViewBase {
     })
   }
   render() {
-    console.log('rendex',this.state.total)
     const {type} = this.props;
     return (
         <div className='order-detail'>

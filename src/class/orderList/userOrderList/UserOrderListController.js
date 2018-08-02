@@ -167,8 +167,8 @@ export default class UserOrderListController extends OrderListController {
      })
   }
   async cancelOrder(orderId, opType, dealType, tradePairId,v = 1) {
+    let orderListArray = this.view.state.orderListArray;
     let msg = await this.store.cancelOrder(orderId, opType, dealType, tradePairId);
-    let orderListArray = this.view.state.orderListArray
     if(orderListArray){
       let index = orderListArray.findIndex((item) => Number(item.orderId) === Number(orderId))
       orderListArray.splice(index,1)
@@ -177,7 +177,9 @@ export default class UserOrderListController extends OrderListController {
       })
     }
     if(!v){
-      this.view.setState({resetPopFlag:true}// 下单弹窗}
+      this.view.setState({
+        resetPopFlag:true,
+        resetPopMsg: this.view.intl.get('cancel-successful')},// 下单弹窗}
       );
     }
   }
