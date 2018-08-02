@@ -1,145 +1,147 @@
+@import "./variable.styl"
+
 .activity-wrap
-  color: #fff
+  color $h5-activity-font-main
   .activity-switch
-    width: 100%
-    position: fixed
-    top: .45rem
-    left: 0
-    background-color: #282B2D
+    width 100%
+    position fixed
+    top .45rem
+    left 0
+    background-color $h5-activity-bg-main
     ul 
       li
         float left
-        width: 33.33%
-        padding: .11rem 0
-        border-bottom: .02rem solid transparent
-        font-size: .16rem
-        line-height: .22rem
-        color: #828485
-        text-align: center
+        width 33.33%
+        padding .11rem 0
+        border-bottom .02rem solid transparent
+        font-size .16rem
+        line-height .22rem
+        color $h5-activity-font-dark
+        text-align center
       li.active
-        color: #299370
-        border-color: #299370
+        color $h5-activity-font-theme
+        border-color $h5-activity-font-theme
   .activity-content
-    margin-top: .45rem
+    margin-top .45rem
     .activity-index
-      background-color: #282B2D
+      background-color $h5-activity-bg-main
       .rule
-        padding: 0 .12rem .08rem
-        border-bottom: .08rem solid #232625
+        padding 0 .12rem .08rem
+        border-bottom .08rem solid $h5-activity-line-section
         p
-          font-size: .16rem
-          padding: .2rem 0
-          color: #d5d6d6
+          font-size .16rem
+          padding .2rem 0
+          color $h5-activity-font-light
         dt
-          font-size: .15rem
-          margin-bottom: .12rem
-          color: #d5d6d6
+          font-size .15rem
+          margin-bottom .12rem
+          color $h5-activity-font-light
         dd
-          font-size: .14rem
-          color: #828485
-          margin-bottom: .2rem
+          font-size .14rem
+          color $h5-activity-font-dark
+          margin-bottom .2rem
         li
-          margin-bottom: .12rem
-          font-size: .15rem
-          color: #d5d6d6
+          margin-bottom .12rem
+          font-size .15rem
+          color $h5-activity-font-light
           span
-            color: #299370
-            margin: 0 .05rem
+            color $h5-activity-font-theme
+            margin 0 .05rem
       .code
-        padding: 0 .11rem
+        padding 0 .11rem
         h1
-          font-size: .24rem
-          margin: .35rem 0 .33rem 0
-          text-align: center
+          font-size .24rem
+          margin .35rem 0 .33rem 0
+          text-align center
         img
-          width: 3.53rem
-          height: 4.86rem
+          width 3.53rem
+          height 4.86rem
       .introduce
-        padding: 0 .12rem
+        padding 0 .12rem
         h2
-          font-size: .2rem
-          color: #299370
-          text-align: center
-          margin: .56rem 0 .32rem 0
+          font-size .2rem
+          color $h5-activity-font-theme
+          text-align center
+          margin .56rem 0 .32rem 0
         p
-          font-size: .14rem
-          line-height: .24rem
+          font-size .14rem
+          line-height .24rem
         p.note
-          color: #D14740
+          color $h5-activity-font-warning
       .value
-        margin-bottom: .26rem
+        margin-bottom .26rem
         h2
-          font-size: .2rem
-          color: #299370
-          text-align: center
-          margin: .56rem 0 .32rem 0
+          font-size .2rem
+          color $h5-activity-font-theme
+          text-align center
+          margin .56rem 0 .32rem 0
         p
-          padding: 0 .12rem
-          font-size: .14rem
-          line-height: .2rem
+          padding 0 .12rem
+          font-size .14rem
+          line-height .2rem
         .feature
-          width: 3.69rem
-          margin: .2rem auto
+          width 3.69rem
+          margin .2rem auto
           .odd
-            width: 1.84rem
-            height: 1rem
+            width 1.84rem
+            height 1rem
           .even
-            width: 1.85rem
-            height: 1rem
+            width 1.85rem
+            height 1rem
       .invite
-        width: 100%
-        padding: .15rem 0
-        background-color: #299370
-        font-size: .15rem
-        color: #ffffff
-        text-align: center
+        width 100%
+        padding .15rem 0
+        background-color $h5-activity-font-theme
+        font-size .15rem
+        color $h5-activity-font-main
+        text-align center
     .activity-invite
       ul
         li
-          padding: .13rem .12rem
-          border-bottom: .01rem solid #282B2D
-          line-height: .2rem
-          color: #d5d6d6
+          padding .13rem .12rem
+          border-bottom .01rem solid $h5-activity-line-list
+          line-height .2rem
+          color $h5-activity-font-light
           .user
             float left
-            font-size: .15rem
+            font-size .15rem
           .mount
-            float: right 
-            font-size: .15rem
+            float right 
+            font-size .15rem
     .activity-board
       ul
         li
-          padding: .13rem .12rem
-          border-bottom: .01rem solid #282B2D
+          padding .13rem .12rem
+          border-bottom .01rem solid $h5-activity-line-list
           img
             float left
-            height: .2rem
-            margin-right: .12rem
+            height .2rem
+            margin-right .12rem
           span
-            font-size: .15rem
-            line-height: .2rem
-            color: #d5d6d6
+            font-size .15rem
+            line-height .2rem
+            color $h5-activity-font-light
           .user
             float left
           .mount
             float right
           .rank
             float left
-            display: block
-            width: .22rem
-            height: .2rem
-            margin-right: .12rem
-            font-size: .14rem
-            text-align: center
+            display block
+            width .22rem
+            height .2rem
+            margin-right .12rem
+            font-size .14rem
+            text-align center
     .ranking
-      padding: .21rem 0
-      border-bottom: .01rem solid #282B2D
+      padding .21rem 0
+      border-bottom .01rem solid $h5-activity-line-list
       p
-        width: 3.35rem
-        height: .38rem
-        margin: 0 auto
-        border-radius: .19rem
-        font-size: .15rem
-        line-height: .38rem
-        text-align: center
-        background-color: #299370
+        width 3.35rem
+        height .38rem
+        margin 0 auto
+        border-radius .19rem
+        font-size .15rem
+        line-height .38rem
+        text-align center
+        background-color $h5-activity-font-theme

@@ -75,7 +75,7 @@ export default class Activity extends exchangeViewBase {
               </div>
               <p>更多价值将进一步挖掘，敬请期待！</p>
             </div>
-            <button className="invite">一键邀请</button>
+            <button className="invite" onClick={() => {alert('邀请跳转还没有做！')}}>一键邀请</button>
           </div>}
           {this.state.showSection === 'invite' && 
           <div className='activity-invite'>
