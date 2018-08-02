@@ -328,7 +328,9 @@ export default function zh(state) {
     "market-currencyInfo": "币种资料",
     "market-volume": "24h量",
     "market-volume-h5": "24h量",
-    "market-search": "搜索全部币种"
+    "market-search": "搜索全部币种",
+    "h5-market-add": "添加收藏",
+    "h5-market-cancel": "取消收藏",
   };
   const notice = {
     "notice-about": "关于我们",

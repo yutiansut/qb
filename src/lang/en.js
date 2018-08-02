@@ -339,7 +339,9 @@ export default function en(state) {
     "market-currencyInfo": "Currency details",
     "market-volume": "24h Volume",
     "market-volume-h5": "24h Vol",
-    "market-search": "Search the whole currency"
+    "market-search": "Search the whole currency",
+    "h5-market-add": "Add collection",
+    "h5-market-cancel": "Cancel the collection",
   };
   const notice = {
     "notice-about": "About Us",
