@@ -90,7 +90,7 @@ export default class TradePlan extends ExchangeViewBase {
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    // let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue] || this.state.priceInit);
+    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue]);
     // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
     //   priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
     // }
@@ -244,6 +244,15 @@ export default class TradePlan extends ExchangeViewBase {
           dbPrePass: false
         }
     );
+    result && result.errCode === 'FREEZE_PASSWORD' && this.setState(
+          {
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            dbPrePass: false
+          }
+      );
+    
     result && result.errCode === 'PWD_ERROR' && this.setState(
         {
           dealPopMsg:this.intl.get('passError'),
