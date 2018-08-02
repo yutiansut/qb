@@ -30,15 +30,42 @@
         <!-- <link rel="bookmark" href="/favicon.ico" /> -->
         <title>QB</title>
         <!--<script src="https://cdn.vaptcha.com/v.js"></script>-->
-        <script src="/static/profill/es5-shim.min.js"></script>
-        <script src="/static/profill/es5-sham.min.js"></script>
+        <script type="text/javascript">
+            // console.log('aaaa')
+            if (!(navigator.userAgent.indexOf('Safari') >= 0)){
+                // alert('你是使用其他的浏览器浏览网页！')
+                function dynamicLoadJs(url, callback) {
+                    var head = document.getElementsByTagName('head')[0];
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = url;
+                    if(typeof(callback)=='function'){
+                        script.onload = script.onreadystatechange = function () {
+                            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete"){
+                                callback();
+                                script.onload = script.onreadystatechange = null;
+                            }
+                        };
+                    }
+                    head.appendChild(script);
+                }
+
+                dynamicLoadJs("/static/profill/es5-shim.min.js");
+                dynamicLoadJs("/static/profill/es5-sham.min.js");
+                dynamicLoadJs("/static/profill/es6-shim.min.js");
+                dynamicLoadJs("/static/profill/es6-sham.min.js");
+                dynamicLoadJs("/static/profill/es7-shim.min.js");
+            }
+        </script>
+        <!--<script src="/static/profill/es5-shim.min.js"></script>-->
+        <!--<script src="/static/profill/es5-sham.min.js"></script>-->
+        <!--<script src="/static/profill/es6-shim.min.js"></script>-->
+        <!--<script src="/static/profill/es6-sham.min.js"></script>-->
+        <!--<script src="/static/profill/es7-shim.min.js"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>-->
         <!--<script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js"></script>-->
-        <script src="/static/profill/es6-shim.min.js"></script>
-        <script src="/static/profill/es6-sham.min.js"></script>
-        <script src="/static/profill/es7-shim.min.js"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es7-shim/6.0.0/es7-shim.js"></script>-->
