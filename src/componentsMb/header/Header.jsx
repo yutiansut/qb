@@ -71,7 +71,7 @@ export default class Header extends ExchangeViewBase {
                   <span>{userController.userName}</span>
               </NavLink>
               {/*首页*/}
-              <NavLink to="/home" onClick={e => this.setState({navHidden: true})}>
+              <NavLink to="/home" activeClassName="home-active" onClick={e => this.setState({navHidden: true})}>
                   <img src="/static/mobile/header/icon_sy@2x.png"/>
                   <span>{this.intl.get("header-home")}</span>
               </NavLink>
