@@ -26,16 +26,16 @@ export default class HomeMarket extends ExchangeViewBase {
 
   getCollect(v, index, e) { // 添加收藏
     this.addCollect(v, index, e)
-    if (v.isFavorite) { // 添加
+    if (v.isFavorite) { // 取消
       this.setState({
         remindPopup: true,
-        popMsg: this.intl.get("h5-market-add")
+        popMsg: this.intl.get("h5-market-cancel")
       })
       return
     }
     this.setState({
       remindPopup: true,
-      popMsg: this.intl.get("h5-market-cancel")
+      popMsg: this.intl.get("h5-market-add")
     })
   }
 
