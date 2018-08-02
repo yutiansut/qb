@@ -1,4 +1,5 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
+// import React from 'react';
 
 export default class HeaderController extends ExchangeControllerBase {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class HeaderController extends ExchangeControllerBase {
   }
 
   addContent(con) {
-    return (`<div><img src="/static/logo/logo_h5.png" alt=""> <span class="nav-back">返回</span> <b>${con}</b></div>`)
+    this.view.addContent(con)
   }
 
 }

@@ -15,6 +15,7 @@ export default class Header extends ExchangeViewBase {
       langFold: false,
       assetFold: false,
       orderFold: false,
+      title: '首页'
     };
     let {loginController, userController, configController, headerController} = this.props;
     this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
@@ -35,13 +36,18 @@ export default class Header extends ExchangeViewBase {
     this.props.history.push("/home");
   }
 
+
   render() {
     const {userController, configController, history} = this.props;
     let lang = configController.language;
     let isLogin = !!userController.userToken;
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
-        <div className="nav-jsx" style={{color: '#FFF'}} dangerouslySetInnerHTML={{__html: this.addContent('22222')}}></div>
+        <div className="nav-jsx" style={{color: '#FFF'}}>
+          <img src="/static/logo/logo_h5.png" alt="" />
+          <span className="nav-back">返回</span>
+          <b>{this.state.title}</b>
+        </div>
         <div className="nav-menu">
           <img src={this.state.navHidden ? "/static/mobile/header/icon_cd@2x.png" : "/static/mobile/header/icon_qx@2x.png"}
                onClick={() => this.setState({navHidden: !this.state.navHidden})}/>
