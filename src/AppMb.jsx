@@ -163,7 +163,7 @@ export default class App extends Component {
     let AssetComponent = AsyncComponent(()=>import("./componentsMb/asset/AssetManage"), {controller:assetController});
     let OrderManageCompoment = AsyncComponent(()=>import("./componentsMb/order/OrderManage.jsx"), {controller:userOrderController});
     let UserCenterComponent = AsyncComponent(()=>import("./componentsMb/user/UserCenter.jsx"), {controller:userController});
-    let ActivityComponent = AsyncComponent(()=>import("./componentsMb/activity/Activity.jsx"), {controller:activityController});
+    let ActivityComponent = AsyncComponent(()=>import("./componentsMb/activity/Activity.jsx"), {controller:activityController, headerController});
 
     Routers = [
       { path: "/home", component: HomeCompoment },

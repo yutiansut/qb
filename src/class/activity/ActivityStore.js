@@ -101,9 +101,8 @@ export default class NoticeStore extends ExchangeStoreBase {
         "serialNumber": v.ser
       }
     })
-    resultObj.award = result.aw
-    resultObj.ranking = result.r
-
+    resultObj.award = result.r
+    resultObj.ranking = result.aw
     return resultObj
   }
 
