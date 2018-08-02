@@ -131,7 +131,7 @@ export default class Login extends exchangeViewBase {
   checkUserInput() { // 手机号／邮箱
     // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
     let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
-        reg2 = /^1[3456789]\d{9}$/;
+      reg2 = /^1[3456789]\d{9}$/;
 
     if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
       this.setState({
@@ -222,29 +222,30 @@ export default class Login extends exchangeViewBase {
                       }}/>
             </li>
             <li>
-              <Button title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('login')} / ${this.intl.get('header-regist')}`}`}
-                      className={`${this.canClick() ? 'can-click' : ''} login-btn`}
-                      disable={this.canClick() ? false : true}
-                      onClick={async () => {
-                        let res = this.state.query && await this.getAward({
-                          iv: JSON.parse(this.state.query),
-                          in: this.state.userInput
-                        }) || true
-                        if(!res)
-                          return
-                        this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
-                      }}/>
+              <Button
+                title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('login')} / ${this.intl.get('header-regist')}`}`}
+                className={`${this.canClick() ? 'can-click' : ''} login-btn`}
+                disable={this.canClick() ? false : true}
+                onClick={async () => {
+                  let res = this.state.query && await this.getAward({
+                    iv: JSON.parse(this.state.query),
+                    in: this.state.userInput
+                  }) || true
+                  if (!res)
+                    return
+                  this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
+                }}/>
             </li>
           </ul>
           {!this.state.titleIndex && <div className="checkbox-wrap">
             {/*<input type="checkbox"*/}
-                    {/*className="check-select"*/}
-                    {/*checked={this.state.checkState}*/}
-                    {/*onChange={this.checkUser}/>*/}
-              <p onClick={this.checkUser}>
-                {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
-              </p>
-              {this.intl.get("login-read")}
+            {/*className="check-select"*/}
+            {/*checked={this.state.checkState}*/}
+            {/*onChange={this.checkUser}/>*/}
+            <p onClick={this.checkUser}>
+              {this.state.checkState ? (<img src={this.$imagesMap.$checkbox_check} alt=""/>) : (<span></span>)}
+            </p>
+            {this.intl.get("login-read")}
             <Link to="/help/terms" className="userAgree" target="_blank">{this.intl.get("login-readUser")}</Link>
           </div>}
         </div>
@@ -258,12 +259,15 @@ export default class Login extends exchangeViewBase {
             autoClose={true}
           />
         )}
-        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0,  0)}} onClose={() => {
-          this.setState({ showTwoVerify: false });
+        {this.state.showTwoVerify &&
+        <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {
+          this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0, 0)
+        }} onClose={() => {
+          this.setState({showTwoVerify: false});
           this.getCaptchaVerify()
         }} destroy={this.destroy} onConfirm={code => {
           this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput, DetectOS(), Browser());
-        }} />}
+        }}/>}
       </div>
     );
   }

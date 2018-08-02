@@ -80,7 +80,7 @@ export default class Footer extends ExchangeViewBase {
         </div>
         <div className="right-content">
           <hr/>
-          <p>© 2018 QB.com . All rights reserved</p>
+          <p>© 2018 QB.com  All rights reserved</p>
         </div>
         <div>
           <ol className="clearfix">
