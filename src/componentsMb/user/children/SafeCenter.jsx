@@ -88,13 +88,13 @@ export default class UserCenterIndex extends exchangeViewBase {
     const { controller, url, match } = this.props;
     return (
       <div className="user-safe-center">
-        <div className="safe-center-header">
+        {/* <div className="safe-center-header">
           <div className="back">
             <img src="../../../../static/mobile/user/Back@3x.png" />
             <NavLink to={`${url}`}>{this.intl.get("back")}</NavLink>
           </div>
           <div className="name">{this.intl.get("header-security")}</div>
-        </div>
+        </div> */}
         <div className="safe-center-container">
           <NavLink
             className="item clearfix"
@@ -140,6 +140,7 @@ export default class UserCenterIndex extends exchangeViewBase {
               return { value: v, i: index };
             })}
             onSelect={value => {
+              if(value.i === this.state.fundPassType0) return;
               this.fundPwdSpace(value.value, value.i);
             }}
             onCancel={() => {
