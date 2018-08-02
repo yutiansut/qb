@@ -16,9 +16,10 @@ export default class Header extends ExchangeViewBase {
       assetFold: false,
       orderFold: false,
     };
-    let {loginController, userController, configController, controller} = this.props;
+    let {loginController, userController, configController, headerController} = this.props;
     this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
     this.changeLanguage = configController.changeLanguage.bind(configController); // 改变语言
+    this.addContent = headerController.addContent.bind(headerController); // 添加头部内容
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ export default class Header extends ExchangeViewBase {
     let isLogin = !!userController.userToken;
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
-        <div className="nav-jsx">{"jsx here"}</div>
+        <div className="nav-jsx" style={{color: '#FFF'}} dangerouslySetInnerHTML={{__html: this.addContent('22222')}}></div>
         <div className="nav-menu">
           <img src={this.state.navHidden ? "/static/mobile/header/icon_cd@2x.png" : "/static/mobile/header/icon_qx@2x.png"}
                onClick={() => this.setState({navHidden: !this.state.navHidden})}/>
@@ -121,8 +122,8 @@ export default class Header extends ExchangeViewBase {
                     <img src={this.state.langFold ? "/static/mobile/header/icon_zk@2x.png" : "/static/mobile/header/icon_ss@2x.png"} className="right"/>
                 </a>
                 {this.state.langFold && <div className="fold">
-                    <a className={lang==="zh-CN" && "selected"} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
-                    <a className={lang==="en-US" && "selected"} onClick={e => this.changeLanguage("en-US")}>English</a>
+                    <a className={lang==="zh-CN" ? "selected" : ''} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
+                    <a className={lang==="en-US" ? "selected" : ''} onClick={e => this.changeLanguage("en-US")}>English</a>
                 </div>}
             </div>}
         </div>}
