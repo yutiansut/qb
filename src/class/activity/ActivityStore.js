@@ -14,6 +14,25 @@ export default class NoticeStore extends ExchangeStoreBase {
       award: 0
     }
   }
+  // 获取我的QBT
+  async getMyQbt() {
+    // console.log(this.controller.token);
+    let result = await this.Proxy.getMyQbt({
+      token: this.controller.token
+    });
+    if (result && result.id) {
+      return {
+        availableCount: result.aw,
+        price: result.p,
+        coinIcon: "",
+        coinId: "",
+        coinName: "QBT",
+        fullName: "QBT",
+        valuationCN: result.vl
+      };
+    }
+    return false;
+  }
 
   async getQbtMargin(){
     let res = await this.Proxy.getQbtMargin();

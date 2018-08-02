@@ -463,6 +463,7 @@ export default class AssetController extends ExchangeControllerBase {
   async getMyQbt() {
     let result = await this.store.getMyQbt();
     if (result) this.view.setState({ Qbt: result });
+    // debugger;
     return result;
   }
   // 更新币币交易页委托币种可用

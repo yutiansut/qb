@@ -129,6 +129,8 @@ export default {
     { name: 'getCharge', data: { url: '/v1/common/', method: 'post'}, action: 'gai', actionBack: 'gair'}
   ],
   activity: [
+    // 获取我的QBT
+    { name: 'getMyQbt', data: { url: '/v1/user/', method: 'post' }, action: 'gmq', actionBack: 'gmqr', needToken: true  },
     // 获取邀请列表
     { name: 'getInvited', data: { url: '/v1/user/', method: 'post' }, action: 'gi', actionBack: 'gir', needToken: true },
     // 获取活动排行榜

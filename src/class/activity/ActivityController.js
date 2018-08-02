@@ -16,6 +16,13 @@ export default class ActivityController extends ExchangeControllerBase {
     // return this.store.data
   }
 
+  // 获取我的QBT
+  async getMyQbt() {
+    let result = await this.store.getMyQbt();
+    if (result) this.view.setState({ Qbt: result });
+    return result;
+  }
+
   get configData() {
     return this.configController.initState
   }
