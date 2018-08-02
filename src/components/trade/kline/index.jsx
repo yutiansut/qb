@@ -77,8 +77,7 @@ class ReactKline extends exchangeViewBase {
       time += range;
       newLines.push([time, endL[4], endL[4], endL[4], endL[4], 0])
     }
-
-    console.log("k线数据：=============================================\n", lines, newLines);
+    
     this.state.kline && this.state.kline.setData(newLines);
   }
 

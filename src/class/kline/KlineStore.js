@@ -10,6 +10,7 @@ export default class KlineStore extends ExchangeStoreBase {
       kline: []
     }
     this.WebSocket.general.on("tradeKline", data => {
+      console.log("k线推送数据：\n",data);
       this.state.kline = data.ns.map(v => {
         let arr = [];
         arr.push(v.et * 1000);
@@ -31,6 +32,7 @@ export default class KlineStore extends ExchangeStoreBase {
       "n": this.state.tradePairName,
       "dur": this.state.duration // k线时间段秒数
     });
+    console.log("k线初始数据：\n",result);
     if (result.n) {
       if (!result.ns) { this.state.kline = []; return };
       this.state.kline = result.ns.map(v => {
