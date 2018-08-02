@@ -37,6 +37,7 @@ export default class Login extends exchangeViewBase {
       from: props.location.state && props.location.state.from.pathname || '/home'
     };
     const {controller, match} = props
+    console.log('登录', controller)
     //绑定view
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
@@ -54,6 +55,7 @@ export default class Login extends exchangeViewBase {
     this.changePass = this.changePass.bind(this)
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
+    this.addContent = controller.headerController.addContent.bind(controller.headerController)
   }
 
   changeTitle(i) { // 登录切换
@@ -104,6 +106,7 @@ export default class Login extends exchangeViewBase {
   }
 
   componentDidMount() {
+    this.addContent('', false, true, false, '')
     this.getCaptchaVerify();
     let queryIndex = this.props.location.query && this.props.location.query.titleIndex
     queryIndex && this.setState({titleIndex: queryIndex})

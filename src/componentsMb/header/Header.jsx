@@ -15,12 +15,18 @@ export default class Header extends ExchangeViewBase {
       langFold: false,
       assetFold: false,
       orderFold: false,
-      title: '首页'
+      title: '',
+      logoShow: true,
+      backShow: true,
+      selectLink: false,
+      linkUrl: ''
     };
     let {loginController, userController, configController, headerController} = this.props;
+    headerController.setView(this)
     this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
     this.changeLanguage = configController.changeLanguage.bind(configController); // 改变语言
-    this.addContent = headerController.addContent.bind(headerController); // 添加头部内容
+    this.goBack = this.goBack.bind(this)
+    // this.addContent = headerController.addContent.bind(headerController); // 添加头部内容
   }
 
   componentDidMount() {
@@ -29,6 +35,9 @@ export default class Header extends ExchangeViewBase {
 
   componentWillUpdate(props, state, next) {
     ChangeFontSize(375, 375 * 2, 375);
+  }
+  goBack() {
+    this.props.history.goBack();
   }
 
   logout() {
@@ -43,9 +52,9 @@ export default class Header extends ExchangeViewBase {
     let isLogin = !!userController.userToken;
     return (
       <div className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
-        <div className="nav-jsx" style={{color: '#FFF'}}>
-          <img src="/static/logo/logo_h5.png" alt="" />
-          <span className="nav-back">返回</span>
+        <div className="nav-jsx">
+          {this.state.logoShow && <img src="/static/logo/logo_h5.png" alt="" />}
+          {this.state.backShow && (this.state.selectLink && <NavLink to={this.state.linkUrl} className="nav-back">{this.intl.get("back")}</NavLink> || <span className="nav-back" onClick={this.goBack}>{this.intl.get("back")}</span>)}
           <b>{this.state.title}</b>
         </div>
         <div className="nav-menu">
@@ -128,8 +137,8 @@ export default class Header extends ExchangeViewBase {
                     <img src={this.state.langFold ? "/static/mobile/header/icon_zk@2x.png" : "/static/mobile/header/icon_ss@2x.png"} className="right"/>
                 </a>
                 {this.state.langFold && <div className="fold">
-                    <a className={lang==="zh-CN" ? "selected" : ''} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
-                    <a className={lang==="en-US" ? "selected" : ''} onClick={e => this.changeLanguage("en-US")}>English</a>
+                    <a className={lang==="zh-CN" && "selected"} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
+                    <a className={lang==="en-US" && "selected"} onClick={e => this.changeLanguage("en-US")}>English</a>
                 </div>}
             </div>}
         </div>}

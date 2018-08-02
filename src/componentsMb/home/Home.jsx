@@ -7,10 +7,17 @@ import HomeNotice from './children/HomeNotice.jsx'
 import Header from '../header/Header'
 
 import "./stylus/home.styl"
+import {ChangeFontSize} from "../../core";
 
 export default class Home extends exchangeViewBase {
   constructor(props) {
     super(props);
+    let {headerController} = this.props;
+    this.addContent = headerController.addContent.bind(headerController); // 添加头部内容
+  }
+
+  componentDidMount() {
+    this.addContent('', true, false, false, '')
   }
 
   render() {

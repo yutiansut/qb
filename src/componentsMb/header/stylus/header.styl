@@ -48,11 +48,27 @@ html,body
   &.hide
     display none
   .nav-jsx
+    position relative
     flex-grow 1
     img
       height .19rem
+    b
+      margin-left 40%
+      color $h5-header-font-normal
     .nav-back
-      color red
+      position relative
+      padding-left .13rem
+      color $h5-header-font-normal
+      &:before
+        position absolute
+        top 50%
+        left 0
+        content ''
+        width .08rem
+        height .16rem
+        background-image $h5-back
+        background-size cover
+        transform translateY(-50%)
   .nav-menu
     img
       height .18rem
@@ -63,7 +79,7 @@ html,body
     top .45rem
     bottom 0
     right 0
-    left 37.5%;
+    left 37.5%
     overflow auto
     background $h5-header-bg
     box-shadow 0.02rem 0 .1rem $h5-header-border

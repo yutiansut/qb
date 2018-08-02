@@ -125,29 +125,38 @@ export default class App extends Component {
     headerController = new HeaderController()
     configController.getActivityState();
 
+    loginController.userController = userController;
+    loginController.headerController = headerController;
+
     noticeController.configController = configController;
+    noticeController.userController = userController;
+    noticeController.headerController = headerController;
 
     activityController.configController = configController;
     activityController.userController = userController;
-    noticeController.userController = userController;
+    activityController.headerController = headerController
+
     userController.configController = configController;
+    userController.headerController = headerController
 
     assetController.configController = configController;
     assetController.userController = userController;
     assetController.marketController = marketController;
-    loginController.userController = userController;
+    assetController.headerController = headerController;
 
     marketController.userController = userController;
     marketController.configController = configController;
     marketController.assetController = assetController;
+    marketController.headerController = headerController;
 
     userOrderController.userController = userController;
     userOrderController.marketController = marketController;
+    userOrderController.headerController = headerController;
 
     configController.setAppView(this);
 
     let Gener = AsyncComponent(()=>import("./componentsMb/genrealize/Genrealize.jsx"), {controller:activityController});
-    let HomeCompoment = AsyncComponent(()=>import("./componentsMb/home/Home.jsx"), {activityController, marketController,noticeController});
+    let HomeCompoment = AsyncComponent(()=>import("./componentsMb/home/Home.jsx"), {activityController, marketController,noticeController,headerController});
     let LoginComponent = AsyncComponent(()=>import("./componentsMb/login/Login.jsx"), {controller:loginController});
     let ForgetPassComponent = AsyncComponent(()=>import("./componentsMb/login/ForgetPass.jsx"), {controller:loginController});
     let HelpComponent = AsyncComponent(()=>import("./componentsMb/help/Help.jsx"), {activityController,assetController});
