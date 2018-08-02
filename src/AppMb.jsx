@@ -20,8 +20,10 @@ import NoticeController from "./class/notice/NoticeController";
 import ActivityController from "./class/activity/ActivityController";
 import UserOrderListController from "./class/orderList/userOrderList/UserOrderListController";
 import MarketController from "./class/market/MarketController";
+import HeaderController from "./class/header/HeaderController";
 
 import Header from "./componentsMb/header/Header.jsx";
+
 // import Home from "./componentsMb/home/Home.jsx";
 // import Login from "./componentsMb/login/Login.jsx";
 // import Help from "./componentsMb/help/Help.jsx";
@@ -38,13 +40,15 @@ let configController,
   noticeController,
   activityController,
   marketController,
-  userOrderController;
+  userOrderController,
+  headerController;
 
 const header = ({ match, history }) => {
   return (
     <Header
       userController={userController}
       loginController={loginController}
+      headerController={headerController}
       configController={configController}
       history={history}
     />
@@ -118,6 +122,7 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController("market");
     userOrderController = new UserOrderListController();
+    headerController = new HeaderController()
     configController.getActivityState();
 
     noticeController.configController = configController;

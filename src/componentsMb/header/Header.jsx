@@ -16,7 +16,7 @@ export default class Header extends ExchangeViewBase {
       assetFold: false,
       orderFold: false,
     };
-    let {loginController, userController, configController} = this.props;
+    let {loginController, userController, configController, controller} = this.props;
     this.clearLoginInfo = loginController.clearLoginInfo.bind(loginController); // 退出登录
     this.changeLanguage = configController.changeLanguage.bind(configController); // 改变语言
   }
