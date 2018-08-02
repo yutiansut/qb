@@ -1,3 +1,4 @@
+@import "./variable.styl"
 .need-fund-pass
     position fixed
     bottom 0
@@ -10,14 +11,17 @@
       position fixed
       bottom 0
       left 0
-      background-color $h5-user-bg-active
+      background-color $h5-vp-bg
       a
         display block
         font-size .15rem
         line-height .45rem
-        border-bottom .01rem solid $h5-user-line
-        color $h5-user-font-content
+        border-bottom .01rem solid $h5-vp-line
+        color $h5-vp-font-normal
         text-align center
+        i
+          font-size 0.14rem
+          color $h5-vp-font-light
       a:last-child
-        border-top .08rem solid $h5-user-line
+        border-top .08rem solid $h5-vp-line
         border-bottom 0

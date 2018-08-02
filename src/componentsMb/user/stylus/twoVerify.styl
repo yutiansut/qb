@@ -1,0 +1,29 @@
+.user-center-twoStep
+  color $h5-user-font-content
+  .verify-list
+    width 100%
+    padding 0 0 0 0.12rem
+    background $h5-user-bg-active
+    li
+      position relative
+      height 0.43rem
+      line-height 0.43rem
+      padding-right 0.3rem
+      font-size 0.15rem
+      border-bottom 0.01rem solid $h5-user-line
+      &::after
+        position absolute
+        top 0
+        right 0
+        content ''
+        width 0.3rem
+        height 100%
+        background $h5-user-next no-repeat center center
+        background-size 0.08rem auto
+      i
+        font-size 0.14rem
+        color $h5-user-font-title
+        letter-spacing 0
+      span
+        float right
+        color $h5-user-font-main

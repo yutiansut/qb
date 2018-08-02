@@ -27,6 +27,7 @@ export default class SelectButton extends exchangeViewBase {
               }}
             >
               {v.value}
+              {this.props.current !== undefined && this.props.current === v.i ? <i>（已设置）</i> : ''}
             </a>
           ))}
           <a
