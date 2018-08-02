@@ -13,6 +13,7 @@ export default class Balance extends exchangeViewBase {
         wallet: [],
         hideZero: false,
         showAsset: true,
+        sort: 0,  // 0-总资产降序,1-总资产升序
     };
     let { controller } = props;
     //绑定view
@@ -39,30 +40,41 @@ export default class Balance extends exchangeViewBase {
   }
 
   render() {
-    let {controller } = this.props;
-    let {totalAsset, wallet, hideZero, showAsset} = this.state;
+    let {controller,history} = this.props;
+    let {totalAsset, wallet, hideZero, showAsset, sort} = this.state;
     let result = this.filter(wallet, "", null, hideZero);
     let lang = controller.configData.language;
     return (
       <div className="balance">
         {/*总资产*/}
         <div className="total-asset">
-            <div className="total">
-                <div className="dv1">
-                    <label>{this.intl.get("asset-totalAssets")}(BTC):</label>
-                    <img src={showAsset ? "/static/mobile/asset/icon_show@2x.png" : "/static/mobile/asset/icon_hidden@2x.png"}/>
-                </div>
-                <div className="dv2">
-                    <b>{showAsset && Number(totalAsset.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}}) || "******"}</b>
-                    <i>≈{showAsset && (lang === "zh-CN" ?
-                          `${Number(totalAsset.valuationCN).format({ number: "legal" })} CNY` :
-                          `${Number(totalAsset.valuationEN).format({ number: "legal" })} USD`) || "******"}</i>
-                </div>
-                <div className="dv3">
-                  <p><label>24h提币额度：</label><i>267 BTC</i></p>
-                  <p><label>24h提币额度：</label><i>134 BTC</i></p>
-                  <NavLink to="">提额申请 &gt;</NavLink>
-                </div>
+            {/*总资产约(btc)*/}
+            <div className="dv1">
+                <label>{this.intl.get("asset-totalAssets")}(BTC):</label>
+                <img src={showAsset ? "/static/mobile/asset/icon_show@2x.png" : "/static/mobile/asset/icon_hidden@2x.png"}
+                    onClick={()=>this.setState({showAsset:!showAsset})}/>
+            </div>
+            <div className="dv2">
+                <b>{showAsset && Number(totalAsset.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}}) || "******"}</b>
+                <i>≈{showAsset && (lang === "zh-CN" ?
+                      `${Number(totalAsset.valuationCN).format({ number: "legal" })} ¥` :
+                      `${Number(totalAsset.valuationEN).format({ number: "legal" })} $`) || "******"}</i>
+            </div>
+            <div className="dv3">
+              {/*24h提币额度*/}
+              <p className="p1">
+                  <label>{this.intl.get("asset-24hQuota")}:</label>
+                  <i>{totalAsset.totalQuota} BTC</i>
+              </p>
+              {/*可用额度*/}
+              <p className="p2">
+                  <label>{this.intl.get("asset-usedAsset")}:</label>
+                  <i>{Number(totalAsset.usedQuota)} BTC</i>
+              </p>
+              {/*提币申请*/}
+              {totalAsset.totalQuota === 10 ?
+                  <a className="disable">{this.intl.get("asset-limitApply")}</a> :
+                  <NavLink to="/user/identity">{this.intl.get("asset-limitApply")}</NavLink>}
             </div>
         </div>
         {/*充提菜单*/}
@@ -74,41 +86,29 @@ export default class Balance extends exchangeViewBase {
         <div className="asset-wallet">
             {/*隐藏小额资产*/}
             <div className="filter">
-                <img src={hideZero ? "/static/mobile/asset/icon_zc_yincang" : "/static/mobile/asset/icon_zc_xianshi"}/>
-                <span>{this.intl.get("asset-hideZero")}</span>
-                <a className="sort">总资产</a>
+                <a className="f1" onClick={()=>this.setState({hideZero:!hideZero})}>
+                    <img src={hideZero ? "/static/mobile/asset/icon_zc_yincang@2x.png" : "/static/mobile/asset/icon_zc_xianshi@2x.png"}/>
+                    <i>{this.intl.get("asset-hideZero")}</i>
+                </a>
+                <a className="f2" onClick={()=>this.setState({sort:++sort%2})}>
+                    <i>总资产</i>
+                    <img src={["/static/web/home/rank_down.svg","/static/web/home/rank_up.svg"][sort]}/>
+                </a>
             </div>
             {/*列表数据显示*/}
             {result && result.map((item, index) => {
                 return item.coinName.toUpperCase() !== 'QBT' ?
-                    (<div className="wallet-li"  key={index}>
-                        <div className="d1">
-                            <label><img src={item.coinIcon}/>{item.coinName.toUpperCase()}</label>
-                            <NavLink to={{pathname: `/wallet/detail/`, query: { currency: item.coinName }}}>{this.intl.get("asset-detail")} ></NavLink>
-                        </div>
-                        <div className="d2">
-                            <p>
-                                <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
-                            </p>
-                            <p>
-                                <span>{this.intl.get("asset-lock")}</span>
-                                <i>{Number(item.frozenCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
-                            </p>
-                        </div>
-                    </div>) : (<div className="wallet-li" key={index}>
-                        <div className="d1">
-                            <label>{item.coinName.toUpperCase()}</label>
-                        </div>
-                        <div className="d2">
-                            <p>
-                                <span>{this.intl.get("asset-avail")}</span><i>{Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}</i>
-                            </p>
-                            <p>
-                                <span>{this.intl.get("asset-lock")}</span>
-                                <i>—</i>
-                            </p>
-                        </div>
-                    </div>)
+                    /*普通币种*/
+                    <div className="wallet-li" key={index} onClick={()=>history.push({pathname: `/wallet/detail/`, query: {currency: item.coinName}})}>
+                        <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
+                        <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
+                    </div>
+                    :
+                    /*QBT*/
+                    <div className="wallet-li" key={index}>
+                        <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
+                        <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
+                    </div>
             })}
         </div>
     </div>)

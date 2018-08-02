@@ -3,25 +3,63 @@
     font-family PingFangSC-Medium
     .total-asset
       background $h5-asset-bg
-      padding .25rem .15rem
-      .total
+      padding .2rem .12rem .12rem .12rem
+      .dv1
+        line-height .2rem
+        display flex
+        align-items center
         label
-          display block
-          line-height .2rem
           font-size .15rem
-          opacity 0.8
           color $h5-asset-font-light
-          margin-bottom .04rem
+          opacity .8
+        img
+          height .2rem
+          width auto
+          margin-left .12rem
+      .dv2
+        height .33rem
+        margin-top .08rem
+        display flex
+        align-items center
+        overflow hidden
+        white-space nowrap
         b
-          line-height .4rem
           font-size .24rem
           color $h5-asset-font-normal
-      .total-cny
-        span
+        i
           font-size .14rem
-          margin-top .08rem
           color $h5-asset-font-light
-          display block
+          margin-left .12rem
+      .dv3
+        padding .12rem .12rem 0 .12rem
+        margin-top .17rem
+        border-top .01rem solid $h5-asset-border
+        position relative
+        p
+          line-height .21rem
+          font-size .15rem
+          label
+            color $h5-asset-font-light
+            min-width 1.02rem
+            display inline-block
+          i
+            margin-left .07rem
+            color $h5-asset-font-normal
+          &.p2
+            margin-top .08rem
+        a
+          float right
+          font-size .15rem
+          display inline-block
+          line-height .2rem
+          position absolute
+          right .12rem
+          top .27rem
+          color $h5-asset-font-normal
+
+
+
+
     .menu-ul
       line-height .45rem
       border 1px solid $h5-asset-border
