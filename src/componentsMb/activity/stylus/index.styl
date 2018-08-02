@@ -7,6 +7,7 @@
     position fixed
     top .45rem
     left 0
+    z-index 100
     background-color $h5-activity-bg-main
     ul 
       li
@@ -48,14 +49,21 @@
             color $h5-activity-font-theme
             margin 0 .05rem
       .code
+        position relative
         padding 0 .11rem
         h1
           font-size .24rem
           margin .35rem 0 .33rem 0
           text-align center
-        img
+        .poster
           width 3.53rem
           height 4.86rem
+        .qrcode
+          position absolute
+          top 2.75rem
+          left .98rem
+          width 1.8rem !important
+          height 1.8rem !important
       .introduce
         padding 0 .12rem
         h2

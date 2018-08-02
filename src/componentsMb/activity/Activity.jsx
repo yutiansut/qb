@@ -1,5 +1,7 @@
 import React from 'react';
+import QRCode from 'qrcode.react';
 import exchangeViewBase from '../../components/ExchangeViewBase.jsx';
+import downloadIMG from '../../class/lib/DownloadCanvasImage.js'
 
 import './stylus/index.styl'
 
@@ -15,6 +17,7 @@ export default class Activity extends exchangeViewBase {
 
     this.getInvited = controller.getInvited.bind(controller);
     this.getRankingList = controller.getRankingList.bind(controller);
+    this.getQRCode = this.getQRCode.bind(this);
   }
 
   componentWillMount() {
@@ -25,15 +28,21 @@ export default class Activity extends exchangeViewBase {
     this.getRankingList();
   }
 
+  getQRCode() {
+    let canvas = document.querySelector('canvas');
+    downloadIMG(canvas, 'png', 'QR Code.png');
+  }
+
   render() {
+    let shareAddress = window.location.host + '/home'
     return(
       <div className='activity-wrap'>
         <div className='activity-header'></div>
         <div className='activity-switch'>
-          <ul className="clearfix">
-            <li className={this.state.showSection === "index" ? "active" : ""} onClick={() => {this.setState({showSection: 'index'})}}>邀请奖励</li>
-            <li className={this.state.showSection === "invite" ? "active" : ""} onClick={() => {this.setState({showSection: 'invite'})}}>已邀请</li>
-            <li className={this.state.showSection === "board" ? "active" : ""} onClick={() => {this.setState({showSection: 'board'})}}>排行榜</li>
+          <ul className='clearfix'>
+            <li className={this.state.showSection === 'index' ? 'active' : ''} onClick={() => {this.setState({showSection: 'index'})}}>邀请奖励</li>
+            <li className={this.state.showSection === 'invite' ? 'active' : ''} onClick={() => {this.setState({showSection: 'invite'})}}>已邀请</li>
+            <li className={this.state.showSection === 'board' ? 'active' : ''} onClick={() => {this.setState({showSection: 'board'})}}>排行榜</li>
           </ul>
         </div>
         <div className='activity-content'>
@@ -55,27 +64,28 @@ export default class Activity extends exchangeViewBase {
             </div>
             <div className='code'>
               <h1>{Math.floor(this.state.tv / 10000)}万QB欢迎你来拿！</h1>
-              <img src="../../../static/mobile/activity/img_qb_gywm_erweima@3x.png"/>
+              <img className='poster' src='../../../static/mobile/activity/img_qb_gywm_erweima@3x.png'/>
+              <QRCode value={shareAddress} level="M" size={180} className="qrcode" onClick={this.getQRCode}/>
             </div>
             <div className='introduce'>
               <h2>QB介绍</h2>
               <p>QB是QB.com发行的代币，QB网通过QB与全体支持者共享平台成长利益。</p>
-              <p className="note">QB总量{Math.floor(this.state.tv / 10000)}万枚，定期回购销毁，永不增发。</p>
+              <p className='note'>QB总量{Math.floor(this.state.tv / 10000)}万枚，定期回购销毁，永不增发。</p>
             </div>
             <div className='value'>
               <h2>QB的价值与用途</h2>
               <p>QB网将通过与全球支持者实现利益共享，方式包括但不限于：</p>
               <div className='feature'>
-                <img className="odd" src="../../../static/mobile/activity/img_qb_gywm_one@1x.png"/>
-                <img className="even" src="../../../static/mobile/activity/img_qb_gywm_two@1x.png"/>
-                <img className="odd" src="../../../static/mobile/activity/img_qb_gywm_three@1x.png"/>
-                <img className="even" src="../../../static/mobile/activity/img_qb_gywm_four@1x.png"/>
-                <img className="odd" src="../../../static/mobile/activity/img_qb_gywm_five@1x.png"/>
-                <img className="even" src="../../../static/mobile/activity/img_qb_gywm_six@1x.png"/>
+                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_one@1x.png'/>
+                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_two@1x.png'/>
+                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_three@1x.png'/>
+                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_four@1x.png'/>
+                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_five@1x.png'/>
+                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_six@1x.png'/>
               </div>
               <p>更多价值将进一步挖掘，敬请期待！</p>
             </div>
-            <button className="invite" onClick={() => {alert('邀请跳转还没有做！')}}>一键邀请</button>
+            <button className='invite' onClick={() => {alert('邀请跳转还没有做！')}}>一键邀请</button>
           </div>}
           {this.state.showSection === 'invite' && 
           <div className='activity-invite'>
@@ -83,9 +93,9 @@ export default class Activity extends exchangeViewBase {
               <p>恭喜你获得{this.state.ranking}QB，排名{this.state.award}</p>
             </div>
             <ul>
-              {this.state.recordList.map((item, index) => (<li key={index} className="clearfix">
-                <span className="user">136****1234</span>
-                <span className="mount">+5 QB</span>
+              {this.state.recordList.map((item, index) => (<li key={index} className='clearfix'>
+                <span className='user'>136****1234</span>
+                <span className='mount'>+5 QB</span>
               </li>))}
             </ul>
           </div>}
@@ -95,23 +105,23 @@ export default class Activity extends exchangeViewBase {
               <p>恭喜你获得{this.state.ranking}QB，排名{this.state.award}</p>
             </div>
             <ul>
-              {this.state.rankingList.map((item, index) => (<li key={index} className="clearfix">
-                {index === 0 && <img src="../../../static/mobile/activity/icon_zc_qb_paiming_one@3x.png"/>}
-                {index === 1 && <img src="../../../static/mobile/activity/icon_zc_qb_paiming_two@3x.png"/>}
-                {index === 2 && <img src="../../../static/mobile/activity/icon_zc_qb_paiming_three@3x.png"/>}
-                {index > 3 && <span className="rank">4</span>}
-                <span className="user">136****1234</span>
-                <span className="mount">+5 QB</span>
+              {this.state.rankingList.map((item, index) => (<li key={index} className='clearfix'>
+                {index === 0 && <img src='../../../static/mobile/activity/icon_zc_qb_paiming_one@3x.png'/>}
+                {index === 1 && <img src='../../../static/mobile/activity/icon_zc_qb_paiming_two@3x.png'/>}
+                {index === 2 && <img src='../../../static/mobile/activity/icon_zc_qb_paiming_three@3x.png'/>}
+                {index > 3 && <span className='rank'>4</span>}
+                <span className='user'>136****1234</span>
+                <span className='mount'>+5 QB</span>
               </li>))}
-              {/* <li className="clearfix">
-                <img src="../../../static/mobile/activity/icon_zc_qb_paiming_one@3x.png"/>
-                <span className="user">136****1234</span>
-                <span className="mount">+5 QB</span>
+              {/* <li className='clearfix'>
+                <img src='../../../static/mobile/activity/icon_zc_qb_paiming_one@3x.png'/>
+                <span className='user'>136****1234</span>
+                <span className='mount'>+5 QB</span>
               </li>
-              <li className="clearfix">
-                <span className="rank">5</span>
-                <span className="user">136****1234</span>
-                <span className="mount">+5 QB</span>
+              <li className='clearfix'>
+                <span className='rank'>5</span>
+                <span className='user'>136****1234</span>
+                <span className='mount'>+5 QB</span>
               </li> */}
             </ul>
           </div>}
