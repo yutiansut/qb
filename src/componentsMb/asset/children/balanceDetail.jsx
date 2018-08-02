@@ -15,6 +15,7 @@ export default class BalanceDetail extends exchangeViewBase {
     this.state = {
         result: {},
         tradePair: {},
+        showCoinInfo: false,
     };
     let { wallet } = controller.initState;
     let { coinInfo } = controller.marketController.initState;
@@ -39,7 +40,6 @@ export default class BalanceDetail extends exchangeViewBase {
     this.state.result = result;
   }
 
-
   render() {
     let result = this.state.result || {};
     let coinPair = this.getCoinPair(this.state.tradePair,result.coinName) || [];
@@ -54,6 +54,9 @@ export default class BalanceDetail extends exchangeViewBase {
       totalVolume,
       circulationVolume,
       description,
+      webSite,
+      whitePaper,
+      blockSites
     } = this.state.coinInfo;
     let lang = this.props.controller.configData.language;
 
@@ -92,7 +95,8 @@ export default class BalanceDetail extends exchangeViewBase {
                 </p>
             </div>
             <div className="to-trade">
-                {coinPair && coinPair.map((item,i) => <a key={i}>{item.name}</a>)}
+                <h3>{this.intl.get("asset-toTrade")}</h3>
+                <p>{coinPair && coinPair.map((item,i) => <a key={i}>{item.name && item.name.toUpperCase()}</a>)}</p>
             </div>
         </div>
 
@@ -110,10 +114,10 @@ export default class BalanceDetail extends exchangeViewBase {
         </div>
 
         {/*币种简介*/}
-        <div className="coin-data">
-          <a className="title">
+        <div className={`coin-data ${this.state.showCoinInfo ? "show" : ""}`} ref="coinData">
+          <a className="title" onClick={()=>this.setState({showCoinInfo:!this.state.showCoinInfo})}>
               {this.intl.get("market-currencyInfo")}
-              <img src="/static/mobile/btn_jy_dqddzk.png" />
+              <img src={this.state.showCoinInfo ? "/static/mobile/asset/icon_zc_select_click@2x.png" : "/static/mobile/asset/icon_zc_select_normal@2x.png"} />
           </a>
           <h3>{enName}&nbsp;({name && name.toUpperCase()})</h3>
           <div className="data-li">
@@ -138,15 +142,15 @@ export default class BalanceDetail extends exchangeViewBase {
           </div>
           <div className="data-li">
               <label>{this.intl.get('helo-coin-website')}：</label>
-              <span>{}</span>
+              <span>{webSite && webSite[0]}</span>
           </div>
           <div className="data-li">
               <label>{this.intl.get('helo-coin-browser')}：</label>
-              <span>{}</span>
+              <span>{blockSites && blockSites[0]}</span>
           </div>
           <div className="data-li">
               <label>{this.intl.get('helo-coin-white')}：</label>
-              <span>{}</span>
+              <span>{whitePaper && whitePaper[0]}</span>
           </div>
           <div className="detail">
               <label>{this.intl.get('helo-coin-introduction')}</label>
