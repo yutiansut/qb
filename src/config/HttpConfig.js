@@ -131,6 +131,8 @@ export default {
   activity: [
     // 获取邀请列表
     { name: 'getInvited', data: { url: '/v1/user/', method: 'post' }, action: 'gi', actionBack: 'gir', needToken: true },
+    // 获取活动排行榜
+    { name: 'getRankingList', data: { url: '/v1/user/', method: 'post' }, action: 'qr', actionBack: 'qrr', needToken: true },
     // 活动内容
     { name: 'getHomeBanner', data: { url: '/v1/common/', method: 'post' }, action: 'hb', actionBack: 'hbr' },
     // H5活动页，获取qbt活动余量

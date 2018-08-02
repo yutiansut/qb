@@ -123,6 +123,7 @@ export default class App extends Component {
     noticeController.configController = configController;
 
     activityController.configController = configController;
+    activityController.userController = userController;
     noticeController.userController = userController;
     userController.configController = configController;
 
@@ -148,6 +149,7 @@ export default class App extends Component {
     let AssetComponent = AsyncComponent(()=>import("./componentsMb/asset/AssetManage"), {controller:assetController});
     let OrderManageCompoment = AsyncComponent(()=>import("./componentsMb/order/OrderManage.jsx"), {controller:userOrderController});
     let UserCenterComponent = AsyncComponent(()=>import("./componentsMb/user/UserCenter.jsx"), {controller:userController});
+    let ActivityComponent = AsyncComponent(()=>import("./componentsMb/activity/Activity.jsx"), {controller:activityController});
 
     Routers = [
       { path: "/home", component: HomeCompoment },
@@ -158,7 +160,8 @@ export default class App extends Component {
       { path: "/help", component: HelpComponent },
       { path: "/wallet", component: AssetComponent, auth: true },
       { path: "/order", component: OrderManageCompoment, auth: true },
-      { path: "/user", component: UserCenterComponent, auth: true }
+      { path: "/user", component: UserCenterComponent, auth: true },
+      { path: "/activity", component: ActivityComponent, auth: true }
     ];
 
 

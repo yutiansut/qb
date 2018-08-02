@@ -5,10 +5,13 @@ export default class NoticeStore extends ExchangeStoreBase {
     super('activity');
     this.state = {
       recordList: [],
+      rankingList: [],
       bannerImgUrl:'',
       pr: 5,
       aw: 20,
       tv: 5000000,
+      ranking: 0,
+      award: 0
     }
   }
 
@@ -62,6 +65,27 @@ export default class NoticeStore extends ExchangeStoreBase {
         "timestamp": v.t
       }
     })
+  }
+
+  async getRankingList(userToken, page = 1, pageSize = 10){
+    let result = await this.Proxy.getRankingList({
+      token: userToken,
+      p: page,
+      s: pageSize
+    })
+    let resultObj = {}
+    resultObj.list = result && result.l && result.l.map(v=>{
+      return {
+        "avatar": v.av,
+        "inviterAccount": v.ac,
+        "award": v.aw,
+        "serialNumber": v.ser
+      }
+    })
+    resultObj.award = result.aw
+    resultObj.ranking = result.r
+
+    return resultObj
   }
 
   async getPrice(){

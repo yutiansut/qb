@@ -82,6 +82,18 @@ export default class ActivityController extends ExchangeControllerBase {
     })
   }
 
+  async getRankingList() {
+    if (!this.configData.activityState) {
+      return true
+    }
+    let result = await this.store.getRankingList(this.userToken)
+    this.view.setState({
+      rankingList: result.list || []
+    })
+    this.view.setState({ranking: result.ranking})
+    this.view.setState({award: result.award})
+  }
+
   async getAward({inviter, invited}) {
     if (!this.configData.activityState) {
       return true;
