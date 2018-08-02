@@ -8,12 +8,15 @@ import AboutUs from './children/AboutUs.jsx';
 import SetPwd from './children/SetPwd.jsx';
 import Identity from "./children/Identity";
 import SetTwoVerify from "./children/SetTwoVerify";
+import Verify from "./children/Verify";
 
 import "./stylus/index.styl"
 
 export default class UserCenter extends exchangeViewBase {
   constructor(props) {
     super(props)
+    const {controller} = this.props;
+    this.addContent = controller.headerController.addContent.bind(controller.headerController);//设置头部方法
   }
 
   componentWillMount() {
@@ -27,22 +30,25 @@ export default class UserCenter extends exchangeViewBase {
     return (
       <Switch>
         <Route exact path={`${match.url}`} component={() => (
-          <UserCenterIndex url={`${match.url}`} controller={controller}/>
+          <UserCenterIndex url={`${match.url}`} controller={controller} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/safe/twoverify`} component={() => (
-          <SetTwoVerify match={match} location={location} url={`${match.url}`} controller={controller} history={history}/>
+          <SetTwoVerify match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/safe`} component={() => (
-          <SafeCenter match={match} location={location} url={`${match.url}`} controller={controller} history={history}/>
+          <SafeCenter match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/identity`} component={() => (
-          <Identity match={match} location={location} url={`${match.url}`} controller={controller} history={history}/>
+          <Identity match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
+        )}/>
+        <Route path={`${match.url}/verifybind`} component={() => (
+          <Verify match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/aboutUs`} component={() => (
-          <AboutUs match={match} controller={controller} history={history}/>
+          <AboutUs match={match} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/setPwd`} component={() => (
-          <SetPwd match={match} location={location} controller={controller} history={history}/>
+          <SetPwd match={match} location={location} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Redirect to={`${match.url}`}/>
       </Switch>

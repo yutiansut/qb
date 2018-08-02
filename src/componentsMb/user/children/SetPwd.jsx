@@ -232,13 +232,13 @@ export default class SetPwd extends exchangeViewBase {
     let regEmail = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, regPhone = /^1[3456789]\d{9}$/ // 邮箱/手机
     return (
       <div className="set-pass-wrap">
-        <div className="safe-center-header">
+        {/* <div className="safe-center-header">
           <div className="back">
             <img src="../../../../static/mobile/user/Back@3x.png"/>
             <NavLink to="/user/safe">{this.intl.get("back")}</NavLink>
             <span>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].title}</span>
           </div>
-        </div>
+        </div> */}
         <div className="pass-info">
           <div className="clearfix">
             <ul>

@@ -43,6 +43,7 @@ export default class setTwoVerify extends exchangeViewBase {
   componentWillMount() {}
 
   async componentDidMount() {
+    this.props.addContent('两步验证', false, true, false, '')
     await this.initData();
   }
 
@@ -70,11 +71,11 @@ export default class setTwoVerify extends exchangeViewBase {
               {title: this.intl.get("user-verifyPhoneTitle"), k: 3},
               {title: this.intl.get("user-verifyEmailTitle"), k: 1}
               ].map((v, index) => {
-              return { value: v.title , i: v.k};
+              return { value: v.title , i: v.k, index: index};
             })}
             onSelect={value => {
               if (value.i === this.state.currentKey) return;
-
+              this.props.history.push({pathname: `/user/verifybind/?type=${value.i - 1}`})
             }}
             current={this.state.currentKey}
             onCancel={() => {

@@ -26,7 +26,8 @@ export default class UserCenterIndex extends exchangeViewBase {
   }
 
   async componentWillMount() {
-      await this.getUserAuthData();
+    this.props.addContent('个人中心', true, false, false, '')
+    await this.getUserAuthData();
   }
 
 
