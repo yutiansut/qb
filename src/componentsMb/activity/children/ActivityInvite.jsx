@@ -12,7 +12,6 @@ export default class ActivityInvite extends exchangeViewBase {
     this.state = {
       showSection: 'index' // index、invite、board
     };
-
     const {controller, headerController} = this.props;
     controller.setView(this);
     this.state = Object.assign(this.state, controller.initState);
