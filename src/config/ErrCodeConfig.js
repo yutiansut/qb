@@ -155,6 +155,12 @@ export default {
     },
     errCode: "CODE_NOT_EXPIRE"
   },
+  611: {
+    get msg() {
+      return intl.get('1416')
+    },
+    ret: 611
+  },
   612: {
     // msg: "与原密码相同",
     get msg() {
