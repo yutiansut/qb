@@ -77,7 +77,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
               </NavLink>
             </li>
             <li>
-              <NavLink className="list-item clearfix" to={`/help`}>
+              <NavLink className="list-item clearfix" to={`/help/assist`}>
                 <div className="fl">
                   <img src={this.$imagesMap.$h5_user_help} />
                   <span>{this.intl.get("help-center")}</span>

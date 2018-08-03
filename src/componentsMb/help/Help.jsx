@@ -25,6 +25,7 @@ export default class Help extends exchangeViewBase {
     super(props);
     this.assetController = props.assetController;
     this.activityController = props.activityController;
+    this.userController = props.userController;
   }
 
   render() {

@@ -87,6 +87,29 @@
       li
         padding 0.05rem 0
         margin 0
+  // 帮助中心
+  .assist-wrap
+    color $h5-help-font-content
+    &.nohead
+      margin-top -0.5rem
+    h1
+      padding-left .1rem
+      font-size .16rem
+      color $h5-help-font-active
+      margin-bottom .12rem
+      &:before
+        position relative
+        top .02rem
+        left -.1rem
+        display inline-block
+        content ""
+        width .02rem
+        height .16rem
+        background $h5-help-bg-active
+    li
+      margin-bottom .08rem
+    ul
+      margin-bottom .4rem
   //api文档
   .help-api
     color $h5-help-font-content

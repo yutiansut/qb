@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase";
+import ExchangeViewBase from "../../../components/ExchangeViewBase";
 
 
 
-export default class Terms extends exchangeViewBase {
+export default class Terms extends ExchangeViewBase {
 
   constructor(props) {
     super(props);

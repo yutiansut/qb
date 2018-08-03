@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase";
+import ExchangeViewBase from "../../../components/ExchangeViewBase";
 
-export default class Api extends exchangeViewBase {
+export default class Api extends ExchangeViewBase {
   constructor(props) {
     super(props);
     // const {controller} = props
