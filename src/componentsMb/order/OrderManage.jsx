@@ -4,6 +4,7 @@ import exchangeViewBase from '../../components/ExchangeViewBase';
 
 import OrderHistory from './children/OrderHistory.jsx';
 import OrderCurrent from './children/OrderCurrent.jsx';
+import OrderDetails from './children/OrderDetails.jsx';
 
 import './stylus/order.styl';
 
@@ -15,23 +16,31 @@ export default class OrderManage extends exchangeViewBase {
     }
   }
   componentWillMount() {
+
   }
   async componentDidMount() {
     let pairIdMsg = await this.props.controller.marketController.getTradePairHandle();
     this.setState({pairIdMsg});
   }
+
   render() {
-		const {match} = this.props;
+    const {match} = this.props;
     return (
       <div className='order-wrap'>
 				<Switch>
-          <Route path={`${match.url}/current`} component={({history}) => (
-						<OrderCurrent controller={this.props.controller} pairIdMsg={this.state.pairIdMsg} match={this.props.match} history={history}/>
+          <Route exact path={`${match.url}/current`} component={({history}) => (
+						<OrderCurrent controller={this.props.controller} pairIdMsg={this.state.pairIdMsg} history={history}/>
 					)}/>
-					<Route path={`${match.url}/history`} component={({history}) => (
+					<Route exact path={`${match.url}/history`} component={({history}) => (
 						<OrderHistory controller={this.props.controller} pairIdMsg={this.state.pairIdMsg} history={history}/>
 					)}/>
-					<Redirect to={`${match.url}/current`} />
+          <Route path={`${match.url}/current/details`} component={(history) => (
+						<OrderDetails controller={this.props.controller} history={history}/>
+					)}/>
+          <Route path={`${match.url}/history/details`} component={(history) => (
+						<OrderDetails controller={this.props.controller} history={history}/>
+					)}/>
+					<Redirect to={`${match.url}/current`}/>
 				</Switch>
       </div>
     );

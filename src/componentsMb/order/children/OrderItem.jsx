@@ -10,7 +10,7 @@ const orderStatusClass = {
   5: 'end',
   6: 'partdeal',
   7: 'partdeal'
-}
+};
 
 export default class OrderItem extends exchangeViewBase {
   constructor(props) {
@@ -26,22 +26,24 @@ export default class OrderItem extends exchangeViewBase {
         6: this.intl.get('partDeal'),
         7: this.intl.get('partDeal')
       }
-    }
+    };
+    const {controller} = this.props;
+
+    this.getOrderDetail = controller.getOrderDetail.bind(controller);
     this.goDetailDisplay = this.goDetailDisplay.bind(this);
   }
-
-  componentWillMount(){}
-  componentDidMount(){}
-
+  
   goDetailDisplay() {
     let orderStatus = this.props.orderInfo.orderStatus;
     if (this.props.type === 'current') {
       if (orderStatus === 1) {
-        this.props.setDetailsDisplay(this.props.index);
+        this.getOrderDetail(this.props.orderInfo.orderId);
+        this.props.history.push('/order/current/details')
       }
     } else {
       if (orderStatus === 2 || orderStatus === 6 || orderStatus === 7) {
-        this.props.setDetailsDisplay(this.props.index);
+        this.getOrderDetail(this.props.orderInfo.orderId);
+        this.props.history.push('/order/history/details')
       }
     }
   }

@@ -5,4 +5,24 @@
 @import "./orderDetails.styl"
 .order-wrap
   width 100%
-  min-height: calc(100vh - 50px)
+  .order-switch
+    position: fixed
+    top: 45px
+    left: 0
+    z-index: 100
+    display: flex
+    justify-content: space-between
+    width: 100%
+    padding: 0 46px
+    box-sizing: border-box
+    background-color: #282b2d
+    a
+      display: block
+      padding: 13px 18px 11px
+      border-bottom: 2px solid transparent
+      font-size: 15px
+      line-height: 21px
+      color: #828485
+    a.active
+      color: #299370
+      border-bottom-color: #299370

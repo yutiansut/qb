@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {NavLink} from 'react-router-dom';
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 
 import OrderItem from "./OrderItem.jsx"
@@ -41,13 +42,14 @@ export default class OrderHistory extends exchangeViewBase{
     this.changeDate = this.changeDate.bind(this);
     this.choiceReset = this.choiceReset.bind(this);
     this.choiceEnsure = this.choiceEnsure.bind(this);
-    // this.changeCoin = this.changeCoin.bind(this);
-    // this.changeMarket = this.changeMarket.bind(this);
+
+    this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
   }
   componentWillMount(){
     this.getOrderList()
   }
   componentDidMount(){
+    this.addContent({con: this.intl.get("header-order"), filter: true, selectFn: this.changeFilter})
     const {pairIdMsg} = this.props;
     let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
     let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
@@ -69,10 +71,7 @@ export default class OrderHistory extends exchangeViewBase{
       page: this.state.page,
       pageSize: this.state.pageSize
     }
-    controller.getHistoryOrder(true, params)
-    setTimeout(() => {
-      console.log(this.state.orderListArray)
-    }, 5000);
+    controller.getHistoryOrder(true, params);
   }
 
   setListDisplay() {
@@ -133,9 +132,8 @@ export default class OrderHistory extends exchangeViewBase{
       orderStatus,
       filterShow: false
     });
-    setTimeout(() => {
-      this.getOrderList();
-    }, 0);
+    console.log('确定按钮调用了！！！！')
+    this.getOrderList();
   }
   // 选择币种
   changeCoin(e) {
@@ -150,12 +148,10 @@ export default class OrderHistory extends exchangeViewBase{
     let hideOther = 1;
     if (coinValue) {
       marketArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()];
-      // marketArray.unshift(this.intl.get('all'));
       marketValue && (idArray.push(pairIdMsg.pairIdCoin[coinValue.toLowerCase()][marketValue.toLowerCase()])) || (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue.toLowerCase()]));
     }
     else {
       marketValue && (idArray = Object.values(pairIdMsg.pairIdMarket[marketValue.toLowerCase()])) || (idArray = []);
-    // && (marketArray = pairIdMsg.pairNameMarket[marketValue])
       marketArray = Object.keys(pairIdMsg.pairIdMarket)
       coinValue = this.intl.get('all');
     }
@@ -201,19 +197,12 @@ export default class OrderHistory extends exchangeViewBase{
     )
   }
 
-  render(){
-    const displayType = this.state.displayType;
-    return(displayType ==="list" ? (
+  render() {
+    return (
       <div className='order-history'>
-        <div className='order-history-header clearfix'>
-          <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
-            <img src="../../../../static/mobile/order/icon_fh@3x.png"/>
-            <span>{this.intl.get("back")}</span>
-          </div>
-          <div className="name">{this.intl.get("order-history")}</div>
-          <div className="filter fr" onClick={this.changeFilter}>
-            <img src="../../../../static/mobile/order/icon_shaixuan@3x.png"/>
-          </div>
+        <div className='order-switch'>
+          <NavLink to='/order/current'>当前订单</NavLink>
+          <NavLink to='/order/history'>历史订单</NavLink>
         </div>
         {this.state.filterShow &&
         <div className='order-history-filter'>
@@ -280,13 +269,11 @@ export default class OrderHistory extends exchangeViewBase{
         <div className="order-history-list">
           {this.state.orderListArray.map((order, index) => {
             return (
-              <OrderItem type="history" index={index} setDetailsDisplay={this.setDetailsDisplay} orderInfo={order} key={index}/>
+              <OrderItem type="history" index={index} orderInfo={order} key={index} controller={this.props.controller} history={this.props.history} changeViewType={this.props.changeViewType}/>
             )
           })}
         </div>
       </div>
-    ) : (
-      <OrderDetails type="history" setListDisplay={this.setListDisplay} orderInfo={this.state.orderListArray[this.state.viewIndex]} controller={this.props.controller}/>
-    ))
+    );
   }
 }

@@ -64,6 +64,7 @@ export default class UserOrderListController extends OrderListController {
       });
       return
     }
+    console.log('tttttttttttttt',historyOrder)
     this.view.setState({
       // 若orderList为undefined，则默认为空数组
       orderListArray: historyOrder && historyOrder.orderList || [],
