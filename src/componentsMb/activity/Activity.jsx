@@ -10,6 +10,7 @@ import {
 import ActivityInvite from './children/ActivityInvite'
 import Invite from './children/Invite'
 import MyQBT from './children/MyQBT'
+import QBT from './children/QBT'
 
 import "./stylus/activity.styl"
 
@@ -33,16 +34,18 @@ export default class Help extends exchangeViewBase {
     const MyQB = () => {
       return <MyQBT history={this.props.history} controller={controller} />;
     };
+    const QB = () => {
+      return <QBT history={this.props.history} controller={controller} />;
+    };
 
-    return <div className="activity-wrap">
-      <div className="activity-switch">
+    return <div className="activity">
           <Switch>
             <Route path={`${match.url}/activityinvite`} component={ActivityInvit} />
             <Route path={`${match.url}/invite`} component={Invit} />
             <Route path={`${match.url}/myqbt`} component={MyQB} />
+            <Route path={`${match.url}/qbt`} component={QB} />
             <Redirect to={`${match.url}/myqbt`} />
           </Switch>
-        </div>
     </div>
   }
 }

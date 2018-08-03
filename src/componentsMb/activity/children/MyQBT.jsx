@@ -67,19 +67,19 @@ export default class MyQBT extends exchangeViewBase {
       <div className="my-qbt">
         <div className="user-info">
           <div className="user-name">
-            <img src="/static/mobile/asset/icon_coin_qb@2x.png"/>
+            <img src="/static/mobile/activity/icon_coin_qb@2x.png"/>
             <label>{controller.userController.userName}</label>
           </div>
           <div className="user-other">
             <div className="left">
-              <img src="/static/mobile/asset/icon_qb_zhye@2x.png"/>
+              <img src="/static/mobile/activity/icon_qb_zhye@2x.png"/>
             </div>
             <div className="content content-left">
               <label>{Qbt.availableCount} QBT</label>
               <p>{this.intl.get("asset-balance")}</p>
             </div>
             <div className="right">
-              <img src="/static/mobile/asset/icon_qb_yqhy@2x.png"/>
+              <img src="/static/mobile/activity/icon_qb_yqhy@2x.png"/>
             </div>
             <div className="content">
               <label>邀请好友</label>
@@ -119,15 +119,18 @@ export default class MyQBT extends exchangeViewBase {
           </div>
         </div>
         <div className="scan">
-          <div className="sacn-title">
-            <img src="/static/mobile/asset/icon_scan_small@2x.png"/>
+          <div className="scan-title">
+            <img src="/static/mobile/activity/icon_scan_small@2x.png"/>
             <label>扫码进群</label>
           </div>
           <div className="info">
-            <p>
-              之前的随笔从阮一峰老师那里学到了flex的基本用法及作用，现在来把flex具体运用到实例中，看看flex的弹性布局效果。
-            </p>
-            <input type="text" id="wechat" readOnly ref="wechat" value="微信号 : 1234561"/>
+            <h2>加入CRT官方群，福利多多</h2>
+            <h2>加入CRT官方群，福利多多</h2>
+            <h2>加入CRT官方群，福利多多</h2>
+            <h2>
+              微信号:
+              <input type="text" id="wechat" readOnly ref="wechat" value="1234561"/>
+            </h2>
           </div>
           <div className="qrcode-container">
             <div className="qrcode">
@@ -145,37 +148,16 @@ export default class MyQBT extends exchangeViewBase {
 
           </div>
         </div>
-        {/*<div className="our-info">*/}
-          {/*<div className="our-title">*/}
-            {/*<img src="/static/mobile/asset/icon_scan_small@2x.png"/>*/}
-            {/*<label>扫码进群</label>*/}
-          {/*</div>*/}
-        {/*</div>*/}
-        <div className="scan">
-          <div className="sacn-title">
-            <img src="/static/mobile/asset/icon_scan_small@2x.png"/>
-            <label>扫码进群</label>
+        <div className="our-info">
+          <div className="our-title">
+            <img src="/static/mobile/activity/icon_qb_tishi@2x.png"/>
+            <label>我的帮助</label>
           </div>
-          <div className="info">
-            <p>
-              之前的随笔从阮一峰老师那里学到了flex的基本用法及作用，现在来把flex具体运用到实例中，看看flex的弹性布局效果。
-            </p>
-            <input type="text" id="wechat" readOnly ref="wechat" value="微信号 : 1234561"/>
-          </div>
-          <div className="qrcode-container">
-            <div className="qrcode">
-              <QRCode value="http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml"
-                      level="M" bgColor="#000"
-                      fgColor="#fff"/>
-            </div>
-
-            <div className="qr-btns">
-              <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
-              <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
-                this.copy(this.refs.wechat);
-              }}/>
-            </div>
-
+          <div className="our-content">
+            <h2>联系我们</h2>
+            <h2>微信: <span>aavvcc</span></h2>
+            <h2>QQ: <span>awdawdawd</span></h2>
+            <h2>电话:<span>435345345324</span></h2>
           </div>
         </div>
 
