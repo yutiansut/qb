@@ -61,7 +61,7 @@ export default class HomeMarket extends ExchangeViewBase {
     const {controller} = this.props;
     // console.log(1234, this.state.homeMarketPairData)
     return (
-      <div className='home-market inner'>
+      <div className='home-market'>
         <div className='home-market-con'>
         <div className="market-nav clearfix">
           <ul className="clearfix">
