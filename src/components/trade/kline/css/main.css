@@ -938,3 +938,25 @@
 .chart_container.light .symbol-title{
     color:#393c40;
 }
+
+#fullscreen-tip{
+    position: fixed;
+    width: 300px;
+    height: 60px;
+    z-index: 999999;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+    background: rgba(0,0,0,.8);
+    left: 50%;
+    top: 10%;
+    margin-left: -150px;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    display: none;
+}
+
+#fullscreen-tip.show{
+    display: block;
+}

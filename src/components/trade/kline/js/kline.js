@@ -497,12 +497,17 @@ export default class Kline {
                     Control.onSize();
                     $('html,body').css({width: '100%', height: '100%', overflow: 'hidden'});
                     $(this).addClass("qp");
+                    $("#fullscreen-tip").addClass("show");
+                    setTimeout(()=>{
+                        $("#fullscreen-tip").removeClass("show")
+                    },3000);
                 } else {
                     $(Kline.instance.element).attr('style', '');
                     $('html,body').css({width: '', height: '', overflow: ''});
                     Control.onSize(Kline.instance.width, Kline.instance.height);
                     $(Kline.instance.element).css({visibility: 'visible', height: Kline.instance.height + 'px'});
                     $(this).removeClass("qp");
+                    $("#fullscreen-tip").removeClass("show");
                 }
             });
         })

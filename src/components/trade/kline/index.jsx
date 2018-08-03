@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
 import "./css/main.css";
 import Kline from "./js/kline.js";
+import $ from "./lib/jquery.min";
 
 class ReactKline extends exchangeViewBase {
   constructor(props) {
@@ -138,6 +139,16 @@ class ReactKline extends exchangeViewBase {
           _kline.resize(tradeChart.clientWidth, tradeChart.clientHeight);
       }
     };
+    //esc键盘事件
+    document.onkeydown=(event)=>{
+      let e = event || window.event;
+      if(e && e.keyCode===27){ // 按 Esc
+          if(this.state.kline.isSized){
+              let $sizeIcon = document.querySelector("#sizeIcon");
+              $sizeIcon.click();
+          }
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -145,6 +156,7 @@ class ReactKline extends exchangeViewBase {
     this.state.kline = null;
     window.redrawKline = null;
     this.state.timer && clearInterval(this.state.timer);
+    document.onkeydown = null;
   }
 
   resize(w, h) {
@@ -170,6 +182,7 @@ class ReactKline extends exchangeViewBase {
         style={this.props.show ? {} : { display: "none" }}
       >
         <div className="chart_container dark">
+          <div id="fullscreen-tip" className="fullscreen_tip">按ESC退出全屏</div>
           <div id="chart_dom_elem_cache" />
           <div id="chart_toolbar">
             <div className="symbol-title" id="symbol_title" />
@@ -1055,6 +1068,12 @@ class ReactKline extends exchangeViewBase {
           </div>
         </div>
         <div style={{ display: "none" }} id="chart_language_switch_tmp">
+            <span
+                name="fullscreen_tip"
+                zh_tw="按ESC退出全屏"
+                zh_cn="按ESC退出全屏"
+                en_us="Exit full screen by ESC"
+            />
           <span
             name="chart_str_period"
             zh_tw="週期"
