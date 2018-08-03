@@ -57,24 +57,17 @@
           top .27rem
           color $h5-asset-font-normal
 
-
-
-
     .menu-ul
       line-height .45rem
-      border 1px solid $h5-asset-border
-      border-left none
-      border-right none
+      border-top 1px solid $h5-asset-border
       background $h5-asset-bg
-      height .45rem
+      height .47rem
       li
         display inline-block
-        width 33%
-        text-align center
+        width 50%
         position relative
         overflow hidden
-        .assets-record
-          font-size .12rem
+        padding-left .12rem
         &:not(:last-of-type)::after
           position absolute
           right 0
@@ -93,80 +86,46 @@
 
 
     .asset-wallet
-      padding-bottom .01rem
+      margin-top .08rem
       .filter
-        line-height .45rem
-        height .45rem
+        line-height .44rem
+        height .44rem
         background $h5-asset-bg
-        padding 0 .2rem
-        span
-          color $h5-asset-font-normal
-          font-size .15rem
-        img
-          height .2rem
-          width .2rem
-          margin-right .1rem
-          vertical-align -.05rem
-        .toggle-btn
-          display inline-block
-          width .48rem
-          height .24rem
-          float right
-          margin-top .1rem
-          border-radius  .24rem
-          background $h5-asset-bg-weight
-          position relative
-          border .02rem solid $h5-asset-bg-weight
-          i
-            display inline-block
+        padding 0 .12rem
+        a.f1
+          img
+            width auto
             height .2rem
-            width .2rem
-            background $h5-asset-font-weight
-            border-radius 50%
-            position absolute
-            top 0
-          &.active
-            background $h5-asset-font-active
-            border-color $h5-asset-font-active
-            i
-              right 0
-      .wallet-li
-        background $h5-asset-bg
-        padding .08rem .12rem
-        margin .12rem
-        border-radius .02rem
-        .d1
-          padding-bottom .08rem
-          border-bottom 1px solid $h5-asset-border
-          line-height .2rem
-          label
+            margin-right .1rem
+            vertical-align -.05rem
+          i
+            color $h5-asset-font-active
+            font-size .15rem
+        a.f2
+          float right
+          display flex
+          align-items center
+          i
             font-size .14rem
-            color $h5-asset-font-weight
-            img
-              height .2rem
-              width .2rem
-              margin-right .06rem
-              vertical-align -.05rem
-          a
-            float right
-            color $h5-asset-font-normal
-            font-size .12rem
-        .d2
-          padding .08rem 0 .05rem 0
-          p
-            display inline-block
-            vertical-align top
-            width 50%
-            span
-              color $h5-asset-font-light
-              font-size .12rem
-              display block
-              line-height .16rem
-              margin-bottom .08rem
-            i
-              font-size .14rem
-              color $h5-asset-font-normal
+            color $h5-asset-font-light
+          img
+            margin-left .08rem
+            width .08rem
+            height auto
 
-
-
-
+      .wallet-li
+        margin 0 .12rem
+        line-height .44rem
+        height .44rem
+        border-bottom .01rem solid $h5-asset-bg
+       label
+         font-size .15rem
+         color $h5-asset-font-normal
+         i
+           font-size .12rem
+           color $h5-asset-font-light
+           margin-left .08rem
+       span
+         float right
+         font-size .15rem
+         color $h5-asset-font-normal

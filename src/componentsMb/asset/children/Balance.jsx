@@ -11,9 +11,9 @@ export default class Balance extends exchangeViewBase {
     this.state = {
         totalAsset: {},
         wallet: [],
-        hideZero: false,
+        hideLittle: false,
         showAsset: true,
-        sort: 0,  // 0-总资产降序,1-总资产升序
+        sort: 0,  // 0-总资产降序,1-总资产升序,2-无序
     };
     let { controller } = props;
     //绑定view
@@ -41,9 +41,11 @@ export default class Balance extends exchangeViewBase {
 
   render() {
     let {controller,history} = this.props;
-    let {totalAsset, wallet, hideZero, showAsset, sort} = this.state;
-    let result = this.filter(wallet, "", null, hideZero);
     let lang = controller.configData.language;
+    let {totalAsset, wallet, hideLittle, showAsset, sort} = this.state;
+    let result = this.filter(wallet, "", hideLittle, null);
+    result = this.rank(result, {totalCount:sort});
+
     return (
       <div className="balance">
         {/*总资产*/}
@@ -86,9 +88,9 @@ export default class Balance extends exchangeViewBase {
         <div className="asset-wallet">
             {/*隐藏小额资产*/}
             <div className="filter">
-                <a className="f1" onClick={()=>this.setState({hideZero:!hideZero})}>
-                    <img src={hideZero ? "/static/mobile/asset/icon_zc_yincang@2x.png" : "/static/mobile/asset/icon_zc_xianshi@2x.png"}/>
-                    <i>{this.intl.get("asset-hideZero")}</i>
+                <a className="f1" onClick={()=>this.setState({hideLittle:!hideLittle})}>
+                    <img src={hideLittle ? "/static/mobile/asset/icon_zc_yincang@2x.png" : "/static/mobile/asset/icon_zc_xianshi@2x.png"}/>
+                    <i>{this.intl.get("asset-hideLittle")}</i>
                 </a>
                 <a className="f2" onClick={()=>this.setState({sort:++sort%2})}>
                     <i>总资产</i>
