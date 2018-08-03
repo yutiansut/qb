@@ -31,8 +31,12 @@ export default class Balance extends exchangeViewBase {
   }
 
   async componentDidMount() {
-      this.addContent({con: this.intl.get("header-assets2"), search: true, selectFn: () => {
-
+      let {controller,history} = this.props;
+      this.addContent({
+          con: this.intl.get("header-assets2"),
+          search: true,
+          selectFn: () => {
+            history.push({pathname: "/wallet/search/", query: {to: "/wallet/detail"}});
           }
       });
 
@@ -51,7 +55,7 @@ export default class Balance extends exchangeViewBase {
     let lang = controller.configData.language;
     let {totalAsset, wallet, hideLittle, showAsset, sort} = this.state;
     let result = this.filter(wallet, "", hideLittle, null);
-    result = this.rank(result, {totalCount:sort});
+    result = this.rank(result, {totalCount:sort}) || [];
 
     return (
       <div className="balance">
@@ -105,18 +109,18 @@ export default class Balance extends exchangeViewBase {
                 </a>
             </div>
             {/*列表数据显示*/}
-            {result && result.map((item, index) => {
+            {result.map((item, index) => {
                 return item.coinName.toUpperCase() !== 'QBT' ?
                     /*普通币种*/
                     <div className="wallet-li" key={index} onClick={()=>history.push({pathname: `/wallet/detail/`, query: {currency: item.coinName}})}>
                         <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
-                        <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
+                        <span>{showAsset && Number(item.totalCount).format({number: "property", style: {decimalLength: 8}}) || "****"}</span>
                     </div>
                     :
                     /*QBT*/
                     <div className="wallet-li" key={index}>
                         <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
-                        <span>{Number(item.availableCount).format({number: "property", style: {decimalLength: 8}})}</span>
+                        <span>{showAsset && Number(item.availableCount).format({number: "property", style: {decimalLength: 8}}) || "****"}</span>
                     </div>
             })}
         </div>

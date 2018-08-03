@@ -9,6 +9,7 @@ import Balance from "./children/Balance";
 import History from "./children/History";
 import BalanceDetail from "./children/balanceDetail";
 import Charge from "./children/Charge";
+import Search from "./children/Search";
 import "./style/asset.styl"
 
 export default class AssetManage extends exchangeViewBase {
@@ -42,6 +43,11 @@ export default class AssetManage extends exchangeViewBase {
     const Char = ({ match, location }) => {
         return <Charge controller={this.controller} location={location} />;
     };
+
+    const Srch = ({ match, location }) => {
+        return <Search controller={this.controller} location={location} />;
+    };
+
     return (
       <div className="asset-mb">
         <Switch>
@@ -49,6 +55,7 @@ export default class AssetManage extends exchangeViewBase {
           <Route path={`${match.url}/dashboard`} component={Hist} />
           <Route path={`${match.url}/detail`} component={Detail} />
           <Route path={`${match.url}/charge`} component={Char} />
+          <Route path={`${match.url}/search`} component={Srch} />
           <Redirect to={`${match.url}/balance`} />
         </Switch>
       </div>

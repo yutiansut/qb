@@ -331,7 +331,8 @@ export default function en(state) {
     "asset-wait-auditing":
       "Daily withdraw limit exceeded, please wait for auditing",
     "asset-name-existing": "The name is existing",
-    "h5-asset-record": "Charge record"
+    "h5-asset-record": "Charge record",
+    "h5-asset-search-history": "Search history",
   };
   const market = {
     "market-favorite": "Favorites",
