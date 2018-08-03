@@ -46,6 +46,7 @@ function bro() {
 function dynamicLoadJs(url, callback) {
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
+    head.appendChild(script);
     script.type = 'text/javascript';
     script.src = url;
     if (typeof(callback) == 'function') {
@@ -56,7 +57,6 @@ function dynamicLoadJs(url, callback) {
             }
         };
     }
-    head.appendChild(script);
 }
 var broDicScript = {
     Chrome: 51,

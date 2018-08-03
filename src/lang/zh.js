@@ -201,6 +201,7 @@ export default function zh(state) {
   const other = {
     "header-home": "首页",
     "header-exchange": "币币交易",
+    "header-legal": "法币交易",
     "header-assets": "资产管理",
     "header-order": "订单管理",
     "header-user": "个人中心",

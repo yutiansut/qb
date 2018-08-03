@@ -203,6 +203,7 @@ export default function en(state) {
   const other = {
     "header-home": "home",
     "header-exchange": "exchange",
+    "header-legal": "otc",
     "header-assets": "assets",
     "header-order": "order list",
     "header-user": "Personal Center",
