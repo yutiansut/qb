@@ -421,7 +421,15 @@ export default function zh(state) {
     "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考',
     "deal-num-err":'输入数量精度有误',
     "deal-pass-empty": '请输入资金密码',
-    "deal-num-limited":'可用余额不足以输入最小数量'
+    "deal-num-limited":'可用余额不足以输入最小数量',
+    "deal-sure-buy": '请确认买入订单',
+    "deal-sure-sell": '请确认卖出订单',
+    "deal-sure-buy-price": '买入价格',
+    "deal-sure-sell-price": '卖出价格',
+    "deal-sure-buy-volume": '买入数量',
+    "deal-sure-sell-volume": '卖出数量',
+    "deal-convert-into": '折合',
+    'deal-sure-order': '确认下单'
   };
   const user = {
     "user-score": "我的积分",

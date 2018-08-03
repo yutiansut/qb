@@ -441,7 +441,15 @@ export default function en(state) {
     "deal-login": "Sign in/Sign up",
     "deal-num-err": "Error of input quantity accuracy",
     "deal-pass-empty": "Please input fund password",
-    "deal-num-limited": "Insufficient balance"
+    "deal-num-limited": "Insufficient balance",
+    "deal-sure-buy": 'Please confirm the purchase order',
+    "deal-sure-sell": 'Please confirm the selling order',
+    "deal-sure-buy-price": 'Buy price',
+    "deal-sure-sell-price": 'Sell price',
+    "deal-sure-buy-volume": 'Buy volume',
+    "deal-sure-sell-volume": 'Sell volume',
+    "deal-convert-into": 'convert into',
+    'deal-sure-order': 'Confirm the order'
   };
   const user = {
     "user-score": "My VIP Status",

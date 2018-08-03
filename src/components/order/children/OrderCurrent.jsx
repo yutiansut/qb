@@ -414,15 +414,15 @@ export default class OrderCurrent extends ExchangeViewBase {
                       <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                       {/*todo 颜色改类名统一处理*/}
                       {/*价格*/}
-                      {type === 'orderCurrent' && <td>{v.price}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.price)}</td>}
                       {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : Number(v.price).format({number:'digital'})}</td>}
-                      {type === 'orderDeal' && <td>{v.avgPrice}</td>}
+                      {type === 'orderDeal' && <td>{Number(v.avgPrice)}</td>}
                       {/*数量*/}
-                      {type !== 'orderDeal' && <td>{v.count}</td> || <td>{v.dealDoneCount}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.count)}</td> || <td>{Number(v.dealDoneCount)}</td>}
                       <td>{type === 'orderCurrent' && (Number(Number(v.price).multi(v.count)).format({number: 'property'})) || Number(v.turnover).format({number: 'property'})}</td>
                       {type === 'orderDeal' && <td>{Number(v.fee).format({number: 'property'})}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
-                      {type === 'orderCurrent' && <td>{v.undealCount}</td>}
-                      {type !== 'orderDeal' && <td>{v.dealDoneCount}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.undealCount)}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.dealDoneCount)}</td>}
                       {type === 'orderHistory' && <td>{Number(v.avgPrice).format({number: 'digital'})}</td>}
                       {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
                       {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? this.intl.get('detail') : '—'}</td>}

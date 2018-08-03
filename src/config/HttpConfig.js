@@ -71,6 +71,7 @@ export default {
     {name: 'getFavoriteList', data: {url: '/v1/user/', method: 'post'}, action: 'fl', actionBack: 'flr', needToken: true},
     // 获取交易对
     {name: 'getAllChg', data: {url: '/v1/common/', method: 'post'}, action: 'gac', actionBack: 'gacr'},
+    {name: 'getBank', data: {url: '/v1/common/', method: 'post'}, action: 'ra', actionBack: 'rar'}
   ],
   asset: [
     // 获取交易对手续费5.16（pass）

@@ -34,7 +34,7 @@ export default class TradePairDeal extends ExchangeViewBase {
           </span>
         </div>
         <div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>
-          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN).format({number: 'legal', style:{name:'usd'}}))) }</span>
+          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'usd'}}))) }</span>
         </div>
       </div>
     )
