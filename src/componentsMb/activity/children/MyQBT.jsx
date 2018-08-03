@@ -11,13 +11,12 @@ export default class MyQBT extends exchangeViewBase {
     super(props);
     let {controller} = props;
     this.state = {
+      showSection: 'qbt',
       Qbt: {},
       recordList: []
     };
     //绑定view
     controller.setView(this);
-
-
     this.copy = el => {
       if (controller.copy(el)) {
         // this.setState({showPopup: true, popMsg: this.intl.get("asset-copySuccess"), popType: "tip1"})
@@ -25,14 +24,13 @@ export default class MyQBT extends exchangeViewBase {
         // this.setState({showPopup: true, popMsg: this.intl.get(""), popType: "tip3"})
       }
     };
-
     this.getMyQbt = controller.getMyQbt.bind(controller);
     this.getInvited = controller.getInvited.bind(controller);
-
   }
 
   saveIMG() {
     Download(document.querySelector(".qrcode canvas"), "png", "img");
+
   }
 
   async componentWillMount() {
@@ -42,6 +40,7 @@ export default class MyQBT extends exchangeViewBase {
     // this.getCoinAddress(currency || this.state.currency);
     this.getMyQbt();
     this.getInvited();
+
   }
 
   componentDidMount() {
@@ -53,114 +52,199 @@ export default class MyQBT extends exchangeViewBase {
     let Qbt = this.state.Qbt;
     // let walletList = this.deal(this.state.walletList, 'c');
     // let currency = this.state.currency.toUpperCase();
-    let relist = [
-      {
-        invited: '6666666',
-        prize: '666'
-      },
-      {
-        invited: '7777777',
-        prize: '777'
-      }
-    ];
     return (
-      <div className="my-qbt">
-        <div className="user-info">
-          <div className="user-name">
-            <img src="/static/mobile/activity/icon_coin_qb@2x.png"/>
-            <label>{controller.userController.userName}</label>
+      <div className="qbt-and-myqbt">
+
+        {this.state.showSection === 'qbt' &&
+        <div className="qbt">
+          <div className="qbt-banner">
+            <h1>QB</h1>
+            <h2>QB token</h2>
           </div>
-          <div className="user-other">
+          <div className="qbt-num">
             <div className="left">
-              <img src="/static/mobile/activity/icon_qb_zhye@2x.png"/>
+              <h1>持有量（枚）</h1>
+              <h2>100</h2>
             </div>
-            <div className="content content-left">
-              <label>{Qbt.availableCount} QBT</label>
-              <p>{this.intl.get("asset-balance")}</p>
-            </div>
+
             <div className="right">
-              <img src="/static/mobile/activity/icon_qb_yqhy@2x.png"/>
+              <h1>当前估值（元）</h1>
+              <h3>9999</h3>
             </div>
-            <div className="content">
-              <label>邀请好友</label>
-              <p>获取更多币啦~</p>
+          </div>
+          <div className="coin-data">
+            <div className="coin-data-title">
+              <img src={this.$imagesMap.$h5_activity_qb_jianjie}/>
+              <label>币种资料</label>
+            </div>
+            <div className="coin-data-content">
+              <div className="content-item">
+                <label className="key">发行时间</label>
+                <label className="val">bbb</label>
+              </div>
+              <div className="content-item">
+                <label className="key">发行总量</label>
+                <label className="val">bbb</label>
+              </div>
+              <div className="content-item">
+                <label className="key">流通总量</label>
+                <label className="val">bbb</label>
+              </div>
+              <div className="content-item">
+                <label className="key">众筹价格</label>
+                <label className="val">bbb</label>
+              </div>
+              <div className="content-item">
+                <label className="key">官网</label>
+                <label className="val">bbb</label>
+              </div>
+              <div className="content-item">
+                <label className="key">区域查询</label>
+                <label className="val">bbb</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="coin-introduction">
+            <h1 className="coin-introduction-title">简介</h1>
+            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
+            <h3>QB的发行上限为10亿，永不增加。</h3>
+          </div>
+          <div className="coin-introduction">
+            <h1 className="coin-introduction-title">简介</h1>
+            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
+            <h3>QB的发行上限为10亿，永不增加。</h3>
+          </div>
+          <div className="coin-value">
+            <h1 className="coin-value-title">简介</h1>
+            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
+            <h3>QB的发行上限为10亿，永不增加。</h3>
+          </div>
+          <div className="coin-get">
+            <h1 className="coin-get-title">如何获得Q币</h1>
+            <h2>1. 注册成为QB用户</h2>
+            <h2>2. 邀请好友来QB网交易</h2>
+            <h3>成为QB网的全球合作伙伴与代表，我们支持多种合作模式，欢迎咨询与探讨，我们希望与您成为朋友。</h3>
+          </div>
+
+        </div>
+        }
+
+        {this.state.showSection === 'my-qbt' &&
+        <div className="my-qbt">
+          <div className="user-info">
+            <div className="user-name">
+              <label>{controller.userController.userName}</label>
+            </div>
+            <div className="user-other">
+              <div className="left">
+                <img src="/static/mobile/activity/icon_qb_zhye@2x.png"/>
+              </div>
+              <div className="content content-left">
+                <label>{Qbt.availableCount} QBT</label>
+                <p>{this.intl.get("asset-balance")}</p>
+              </div>
+              <div className="right">
+                <img src="/static/mobile/activity/icon_qb_yqhy@2x.png"/>
+              </div>
+              <div className="content">
+                <label>邀请好友</label>
+                <p>获取更多币啦~</p>
+              </div>
+            </div>
+          </div>
+          <div className="my-invite">
+            <div className="invite-top">
+              <label>我的邀请</label>
+
+            </div>
+            <div className="invite-list">
+              {
+                this.state.recordList.length ?
+                  <ul className="list-ul">
+                    {
+                      this.state.recordList.map((v, index) => (
+                        <li key={index} className="list-li">
+                          <span className="invited-name">{v.invited}</span>
+                          <span className="invited-prize">+{v.prize} QB</span>
+                        </li>
+                      ))
+                    }
+                  </ul> : <label>暂无邀请记录</label>
+
+              }
+            </div>
+            <div className="invited">
+              <label>{`已邀请: ${ this.state.recordList.length}人 累计奖励:
+              ${ this.state.recordList.length * this.state.recordList.length ? this.state.recordList[0].prize : 0 } QBT `}
+              </label>
+            </div>
+          </div>
+          <div className="scan">
+            <div className="scan-title">
+              <img src="/static/mobile/activity/icon_scan_small@2x.png"/>
+              <label>扫码进群</label>
+            </div>
+            <div className="info">
+              <h2>加入CRT官方群，福利多多</h2>
+              <h2>1. 福利：第一时间获取QBT利好消息，不定期发放BTC、RSK、EOS等主流币糖果哦~</h2>
+              <h2>2. 入群方式：添加官方客服拉入群</h2>
+              <h2>
+                官方客服微信号:
+                <input type="text" id="wechat" readOnly ref="wechat" value="1234561"/>
+
+              </h2>
+            </div>
+            <div className="qrcode-container">
+              <div className="qrcode">
+                <QRCode value="http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml"
+                        level="M" bgColor="#000"
+                        fgColor="#fff"/>
+              </div>
+
+              <div className="qr-btns">
+                <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
+                <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
+                  this.copy(this.refs.wechat);
+                }}/>
+              </div>
+
+            </div>
+          </div>
+          <div className="our-info">
+            <div className="our-title">
+              <img src="/static/mobile/activity/icon_qb_tishi@2x.png"/>
+              <label>我的帮助</label>
+            </div>
+            <div className="our-content">
+              <h2>联系我们</h2>
+              <h2>微信: <span>aavvcc</span></h2>
+              <h2>QQ: <span>awdawdawd</span></h2>
+              <h2>电话:<span>435345345324</span></h2>
             </div>
           </div>
         </div>
+        }
 
-        <div className="my-invite">
-          <div className="invite-top">
-            <label>我的邀请</label>
-
-          </div>
-          <div className="invite-list">
-
-            {
-              // relist.length ?
-              this.state.recordList.length ?
-                <ul className="list-ul">
-                  {
-                    this.state.recordList.map((v, index) => (
-                    // relist.map((v, index) => (
-                      <li key={index} className="list-li">
-                        <span className="invited-name">{v.invited}</span>
-                        <span className="invited-prize">+{v.prize} QBT</span>
-                      </li>
-                    ))
-                  }
-                </ul> : <label>暂无邀请记录</label>
-
-            }
-          </div>
-          <div className="invited">
-            <label>{`已邀请: ${ this.state.recordList.length}人 累计奖励:
-              ${ this.state.recordList.length * this.state.recordList.length?this.state.recordList[0].prize : 0 } QBT `}
-            </label>
-          </div>
+        <div className="qbt-switch">
+          <ul className="clearfix">
+            <li className={this.state.showSection === 'qbt' ? 'active qbt-btn' : 'qbt-btn'}
+                onClick={() => {this.setState({showSection: 'qbt'})}}>
+              <div>
+                <img src={this.state.showSection === 'qbt'? this.$imagesMap.$h5_activity_qb_home_click : this.$imagesMap.$h5_activity_qb_home_normal }/>
+                <p>QBT</p>
+              </div>
+            </li>
+            <li className={this.state.showSection === 'my-qbt' ? 'active my-qbt-btn' : 'my-qbt-btn'}
+                onClick={() => {this.setState({showSection: 'my-qbt'})}}>
+              <div>
+                <img src={this.state.showSection === 'my-qbt'? this.$imagesMap.$h5_activity_qb_my_click : this.$imagesMap.$h5_activity_qb_my_normal}/>
+                <p>我的</p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div className="scan">
-          <div className="scan-title">
-            <img src="/static/mobile/activity/icon_scan_small@2x.png"/>
-            <label>扫码进群</label>
-          </div>
-          <div className="info">
-            <h2>加入CRT官方群，福利多多</h2>
-            <h2>加入CRT官方群，福利多多</h2>
-            <h2>加入CRT官方群，福利多多</h2>
-            <h2>
-              微信号:
-              <input type="text" id="wechat" readOnly ref="wechat" value="1234561"/>
-            </h2>
-          </div>
-          <div className="qrcode-container">
-            <div className="qrcode">
-              <QRCode value="http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml"
-                      level="M" bgColor="#000"
-                      fgColor="#fff"/>
-            </div>
-
-            <div className="qr-btns">
-              <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
-              <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
-                this.copy(this.refs.wechat);
-              }}/>
-            </div>
-
-          </div>
-        </div>
-        <div className="our-info">
-          <div className="our-title">
-            <img src="/static/mobile/activity/icon_qb_tishi@2x.png"/>
-            <label>我的帮助</label>
-          </div>
-          <div className="our-content">
-            <h2>联系我们</h2>
-            <h2>微信: <span>aavvcc</span></h2>
-            <h2>QQ: <span>awdawdawd</span></h2>
-            <h2>电话:<span>435345345324</span></h2>
-          </div>
-        </div>
-
 
       </div>
     );

@@ -1,136 +1,288 @@
-.my-qbt
-  .user-info
-    background  $h5-activity-bg-main
-    padding .20rem .15rem
-    .user-name
-      height .8rem
-      label
-        line-height .4rem
-        font-size .20rem
-        color $h5-activity-font-theme
-      img
-        height 0.6rem
-        width: 0.6rem
-        margin-right 0.1rem
-        vertical-align -0.2rem
-    .user-other
+.qbt-and-myqbt
+  .qbt-switch
+    width 100%
+    position fixed
+    bottom 0
+    left 0
+    padding  .05rem 0
+    z-index 100
+    border-top 2px solid $h5-activity-line-section
+    background-color $h5-activity-bg-main
+    color $h5-activity-font-main
+    ul
       display flex
-      .left
-        width 15%
-        margin-left 7px
+      justify-content center
+      li
+        padding 0 .4rem
         img
-          height 0.4rem
-          width 0.4rem
-          margin-right  0.1rem
-          vertical-align -0.4rem
-      .right
-        width 15%
-        img
-          height 0.4rem
-          width 0.4rem
-          margin-right  0.1rem
-          vertical-align -0.4rem
-      .content
-        width 30%
-        margin-left 0.1rem
+          height 0.3rem
+          width: 0.3rem
+          vertical-align -0.2rem
+        p
+          text-align center
+  .my-qbt
+    .user-info
+      background  $h5-activity-bg-main
+      padding .20rem .15rem
+      .user-name
+        height .8rem
         label
-          color  $h5-activity-font-main
+          line-height .4rem
+          font-size .20rem
+          color $h5-activity-font-theme
+        img
+          height 0.6rem
+          width: 0.6rem
+          margin-right 0.1rem
+          vertical-align -0.2rem
+      .user-other
+        display flex
+        .left
+          width 15%
+          margin-left 7px
+          img
+            height 0.4rem
+            width 0.4rem
+            margin-right  0.1rem
+            vertical-align -0.4rem
+        .right
+          width 15%
+          img
+            height 0.4rem
+            width 0.4rem
+            margin-right  0.1rem
+            vertical-align -0.4rem
+        .content
+          width 30%
+          margin-left 0.1rem
+          label
+            color  $h5-activity-font-main
+            line-height .4rem
+            font-size .15rem
+          p
+            color $h5-activity-font-light
+            font-size .10rem
+        .content-left
+          border-right 1px solid $h5-activity-line-section
+          margin-right .1rem
+
+    .my-invite
+      background $h5-activity-bg-main
+      margin .1rem .15rem
+      .invite-top
+        text-align center
+        padding-top .1rem
+        label
+          color $h5-activity-font-main
+
+      .invite-list
+        min-height 1rem
+        text-align center
+        label
+          display inline-block
+          margin .4rem
+          color $h5-activity-font-light
+
+        ul.list-ul
+
+          height .36rem
+          line-height .36rem
+
+        li.list-li
+          float none
+          width 100%
+          font-size .13rem
+          color $h5-activity-font-main
+          display flex
+          justify-content space-between
+          text-align center
+      .invited
+        text-align center
+        border-top 1px solid $h5-activity-line-section
+        padding .12rem
+        label
+          color $h5-activity-font-theme
+
+    .scan
+      background $h5-activity-bg-main
+      .scan-title
+        border-bottom 1px solid $h5-activity-line-section
+        label
           line-height .4rem
           font-size .15rem
-        p
-          color $h5-activity-font-light
-          font-size .10rem
-      .content-left
-        border-right 1px solid $h5-activity-line-section
-        margin-right .1rem
-
-  .my-invite
-    background $h5-activity-bg-main
-    margin .1rem .15rem
-    .invite-top
-      text-align center
-      padding-top .1rem
-      label
-        color $h5-activity-font-main
-
-    .invite-list
-      min-height 1rem
-      text-align center
-      label
-        display inline-block
-        margin .4rem
-        color $h5-activity-font-light
-
-      ul.list-ul
-
-        height .36rem
-        line-height .36rem
-
-      li.list-li
-        float none
-        width 100%
-        font-size .13rem
-        color $h5-activity-font-main
+          color $h5-activity-font-main
+        img
+          margin-left .12rem
+          height 0.2rem
+          width: 0.2rem
+          margin-right 0.1rem
+          vertical-align -0.04rem
+      .info
+        margin 0 .12rem
+        h2
+          color $h5-activity-font-main
+          line-height .3rem
+        #wechat
+          pointer-events none
+      .qrcode-container
         display flex
-        justify-content space-between
-        text-align center
-    .invited
+        .qrcode
+          margin .1rem .15rem
+          width 40%
+        .qr-btns
+          margin .1rem .15rem
+          width 60%
+          .copy-btn, .save-btn
+            width 80%
+            height 30%
+            margin 10px 0
+
+    .our-info
+      margin .1rem 0 .55rem 0
+      background $h5-activity-bg-main
+      .our-title
+        border-bottom 1px solid $h5-activity-line-section
+        label
+          line-height .4rem
+          font-size .15rem
+          color $h5-activity-font-main
+        img
+          margin-left .12rem
+          height 0.2rem
+          width: 0.16rem
+          margin-right 0.1rem
+          vertical-align -0.04rem
+      .our-content
+        margin-left .1rem
+        h2
+          font-size .15rem
+          line-height .3rem
+          color $h5-activity-font-main
+          span
+            text-decoration-line: underline
+
+  .qbt
+    .qbt-banner
+      height 1.2rem
       text-align center
-      border-top 1px solid $h5-activity-line-section
-      padding .12rem
-      label
-        color $h5-activity-font-theme
-
-  .scan
-    background $h5-activity-bg-main
-    .scan-title
-      label
-        line-height .4rem
+      //background $search-default
+      h1
+        line-height .6rem
+        font-size .25rem
+        color $h5-activity-font-main
+      h2
         font-size .15rem
         color $h5-activity-font-main
-      img
-        margin-left .12rem
-        height 0.2rem
-        width: 0.2rem
-        margin-right 0.1rem
-        vertical-align -0.04rem
-    .info
-      margin-left .12rem
-      h2
-        color $h5-activity-font-main
-        line-height .3rem
-      #wechat
-        pointer-events none
-    .qrcode-container
+    .qbt-num
       display flex
-      .qrcode
-        margin .1rem .15rem
-        width 40%
-      .qr-btns
-        margin .1rem .15rem
-        width 60%
-        .copy-btn, .save-btn
-          width 80%
-          height 30%
-          margin 10px 0
+      justify-content center
+      height .84rem
+      background $h5-activity-bg-main
+      .left, .right
+        width 50%
+        h1
+          font-size .15rem
+          padding .15rem 0  .1rem .2rem
+          color $h5-activity-font-light
+        h2
+          font-size .33rem
+          padding-left .2rem
+          color $h5-activity-font-light
+        h3
+          font-size .33rem
+          padding-left .2rem
+          color red
+      .left
+         border-right 2px solid $h5-activity-line-section
+    .coin-data
+      background  $h5-activity-bg-main
+      margin .10rem 0
 
-  .our-info
-    .our-title
-      label
+      .coin-data-title
+        border-bottom 1px solid $h5-activity-line-section
+        label
+          line-height .4rem
+          font-size .15rem
+          color $h5-activity-font-main
+        img
+          margin-left .12rem
+          height 0.2rem
+          width: 0.2rem
+          margin-right 0.1rem
+          vertical-align -0.04rem
+      .coin-data-content
+
+        width 85%
+        margin auto
+        .content-item
+          display flex
+          justify-content space-between
+          width 100%
+          border-bottom 1px solid $h5-activity-line-section
+          label.key
+            line-height .4rem
+            font-size .15rem
+            color $h5-activity-font-light
+          label.val
+            line-height .4rem
+            font-size .15rem
+            color $h5-activity-font-main
+    .coin-introduction
+      background $h5-activity-bg-main
+      margin .1rem 0
+      h1.coin-introduction-title
+        text-align center
         line-height .4rem
-        font-size .15rem
-        color $h5-activity-font-main
-      img
-        margin-left .12rem
-        height 0.2rem
-        width: 0.16rem
-        margin-right 0.1rem
-        vertical-align -0.04rem
-    .our-content
-      margin-left .1rem
+        font-size .2rem
+        color $h5-activity-font-theme
       h2
-        font-size .15rem
-        line-height .3rem
+        width 85%
+        line-height .4rem
+        font-size .16rem
         color $h5-activity-font-main
-        span
-          text-decoration-line: underline
+        margin auto
+      h3
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color red
+        margin auto
+    .coin-value
+      background $h5-activity-bg-main
+      h1.coin-value-title
+        text-align center
+        line-height .4rem
+        font-size .2rem
+        color $h5-activity-font-theme
+      h2
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color $h5-activity-font-main
+        margin auto
+      h3
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color red
+        margin auto
+    .coin-get
+      background $h5-activity-bg-main
+
+      h1.coin-get-title
+        text-align center
+        line-height .4rem
+        font-size .2rem
+        color $h5-activity-font-theme
+      h2
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color $h5-activity-font-main
+        margin auto
+      h3
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color $h5-activity-font-light
+        margin auto
