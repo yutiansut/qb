@@ -56,10 +56,14 @@ export default class AboutUs extends ExchangeViewBase {
               {/*<span>{v.title}</span>*/}
               {/*<b>{v.link}</b>*/}
             {/*</li>))}*/}
-            <li><span>{this.intl.get("user-aboutUsTwitter")}</span><b>{controller.configData.twitter}</b></li>
-            <li><span>{this.intl.get("user-aboutUsWeChat")}</span><b>{controller.configData.weChat}</b></li>
-            <li><span>{this.intl.get("user-aboutUsTelegraph")}</span><b>{controller.configData.telegraph}</b></li>
-            <li><span>{this.intl.get("user-aboutUsEmail")}</span><b>{controller.configData.contactEmailUrl}</b></li>
+            {/*<li><span>{this.intl.get("user-aboutUsTwitter")}</span><b>{controller.configData.twitter}</b></li>*/}
+            {/*<li><span>{this.intl.get("user-aboutUsWeChat")}</span><b>{controller.configData.weChat}</b></li>*/}
+            {/*<li><span>{this.intl.get("user-aboutUsTelegraph")}</span><b>{controller.configData.telegraph}</b></li>*/}
+            {/*<li><span>{this.intl.get("user-aboutUsEmail")}</span><b>{controller.configData.contactEmailUrl}</b></li>*/}
+            <li>{`${this.intl.get("user-aboutUsTwitter")}：${controller.configData.twitter}`}</li>
+            <li>{`${this.intl.get("user-aboutUsWeChat")}：${controller.configData.weChat}`}</li>
+            <li>{`${this.intl.get("user-aboutUsTelegraph")}：${controller.configData.telegraph}`}</li>
+            <li>{`${this.intl.get("user-aboutUsEmail")}：${controller.configData.contactEmailUrl}`}</li>
           </ol>
         </div>
         {this.props.controller.configData.activityState ? <a className="invite-btn" onClick={e => {

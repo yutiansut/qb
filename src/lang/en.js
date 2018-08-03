@@ -691,10 +691,10 @@ export default function en(state) {
     "- Securities market algorithms that support trading commands such as OK\IOC\GT;<br/>" +
     "- Multi-platform terminal access covering IOS, Android and Windows, seamlessly support full-service features;<br/>" +
     "- 7*24 multilingual online customer services to make sure an excellent user experience.",
-    "user-aboutUsTwitter": "Twitter:",
-    "user-aboutUsWeChat": "WeChat:",
-    "user-aboutUsTelegraph": "Telegraph:",
-    "user-aboutUsEmail": "E-mail:"
+    "user-aboutUsTwitter": "Twitter",
+    "user-aboutUsWeChat": "WeChat",
+    "user-aboutUsTelegraph": "Telegraph",
+    "user-aboutUsEmail": "E-mail"
   };
 
   const activity = {
@@ -926,6 +926,9 @@ export default function en(state) {
     "helo-coin-website": "Website",
     "helo-coin-browser": "Block chain browser",
     "helo-coin-white": "White paper",
+    // h5
+    "help-advise": "Suggestion",
+    "help-remind": "为保护投资者利益，QB.com会对所有上线交易品种进行评估审核，请申请人/机构提供相关信息并发送至",
 
     "help-download-title": `${nameUsd} Exchange Platform Mobile Client`,
     "help-download-intro": "Multi-Platform Covering IOS, Android and Windows, Seamlessly Support Trading Services",

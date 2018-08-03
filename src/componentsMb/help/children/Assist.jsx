@@ -24,17 +24,18 @@ export default class Pricing extends ExchangeViewBase {
       <div>
         <h1>{this.intl.get("notice-contact")}</h1>
         <ul>
-          <li>{`${this.intl.get("notice-addr")}：${controller.configData.addr}`}</li>
-          <li>{`${this.intl.get("user-email")}：${controller.configData.contactEmailUrl}`}</li>
-          <li>{`${this.intl.get("notice-web")}：${controller.configData.netUrl}`}</li>
+          <li>{`${this.intl.get("user-aboutUsTwitter")}：${controller.configData.twitter}`}</li>
+          <li>{`${this.intl.get("user-aboutUsWeChat")}：${controller.configData.weChat}`}</li>
+          <li>{`${this.intl.get("user-aboutUsTelegraph")}：${controller.configData.telegraph}`}</li>
+          <li>{`${this.intl.get("user-aboutUsEmail")}：${controller.configData.contactEmailUrl}`}</li>
         </ul>
       </div>
       <div>
         <h1>{this.intl.get("footer-request")}</h1>
+        <p>{this.intl.get("help-remind")}</p>
         <ol>
-          <li>{`${this.intl.get("notice-addr")}：${controller.configData.addr}`}</li>
-          <li>{`${this.intl.get("user-email")}：${controller.configData.contactEmailUrl}`}</li>
-          <li>{`${this.intl.get("notice-web")}：${controller.configData.netUrl}`}</li>
+          <li>{`${this.intl.get("user-popEmail")}：${controller.configData.applyEmailUrl}`}</li>
+          <li>{`${this.intl.get("help-advise")}：${controller.configData.contactEmailUrl}`}</li>
         </ol>
       </div>
     </div>

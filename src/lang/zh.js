@@ -652,10 +652,10 @@ export default function zh(state) {
     "- 证券级别算法，支持FOK\IOC\GT等多种专业交易指令；<br/>" +
     "- 多平台终端接入，覆盖iOS、Android、Windows，无缝支持全业务功能；<br/>" +
     "- 7*24多语种客服随时在线，支持多种反馈方式，保障优质客户体验",
-    "user-aboutUsTwitter": "Twitter:",
-    "user-aboutUsWeChat": "客服微信:",
-    "user-aboutUsTelegraph": "电报群:",
-    "user-aboutUsEmail": "联系邮箱:"
+    "user-aboutUsTwitter": "Twitter",
+    "user-aboutUsWeChat": "客服微信",
+    "user-aboutUsTelegraph": "电报群",
+    "user-aboutUsEmail": "联系邮箱"
 
   };
   const login = {
@@ -814,6 +814,10 @@ export default function zh(state) {
     "help-download-ios": "iPhone版",
     "help-download-android": "Android版",
     "help-download-tip": "微信内请点击右上角“…”按钮，使用浏览器打开。",
+
+    // h5
+    "help-advise": "建议反馈",
+    "help-remind": "为保护投资者利益，QB.com会对所有上线交易品种进行评估审核，请申请人/机构提供相关信息并发送至",
   };
   const activity = {
     "activity-rule-1": `即日起，新用户完成注册后，可领取20枚${coin}。`,
