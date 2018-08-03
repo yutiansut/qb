@@ -113,7 +113,9 @@ export default class MyQBT extends exchangeViewBase {
             }
           </div>
           <div className="invited">
-            <label>{`已邀请: ${ this.state.recordList.length}人 累计奖励: ${ this.state.recordList.length * 10} QBT `}</label>
+            <label>{`已邀请: ${ this.state.recordList.length}人 累计奖励:
+              ${ this.state.recordList.length * this.state.recordList.length?this.state.recordList[0].prize : 0 } QBT `}
+            </label>
           </div>
         </div>
         <div className="scan">
@@ -129,7 +131,41 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="qrcode-container">
             <div className="qrcode">
-              <QRCode value={`http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml`} level="M" bgColor="#000"
+              <QRCode value="http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml"
+                      level="M" bgColor="#000"
+                      fgColor="#fff"/>
+            </div>
+
+            <div className="qr-btns">
+              <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
+              <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
+                this.copy(this.refs.wechat);
+              }}/>
+            </div>
+
+          </div>
+        </div>
+        {/*<div className="our-info">*/}
+          {/*<div className="our-title">*/}
+            {/*<img src="/static/mobile/asset/icon_scan_small@2x.png"/>*/}
+            {/*<label>扫码进群</label>*/}
+          {/*</div>*/}
+        {/*</div>*/}
+        <div className="scan">
+          <div className="sacn-title">
+            <img src="/static/mobile/asset/icon_scan_small@2x.png"/>
+            <label>扫码进群</label>
+          </div>
+          <div className="info">
+            <p>
+              之前的随笔从阮一峰老师那里学到了flex的基本用法及作用，现在来把flex具体运用到实例中，看看flex的弹性布局效果。
+            </p>
+            <input type="text" id="wechat" readOnly ref="wechat" value="微信号 : 1234561"/>
+          </div>
+          <div className="qrcode-container">
+            <div className="qrcode">
+              <QRCode value="http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml"
+                      level="M" bgColor="#000"
                       fgColor="#fff"/>
             </div>
 
