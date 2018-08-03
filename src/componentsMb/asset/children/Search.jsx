@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 
-export default class Charge extends exchangeViewBase {
+export default class Search extends exchangeViewBase {
     constructor(props) {
         super(props);
         let { controller } = props;

@@ -66,7 +66,7 @@ export default class Header extends ExchangeViewBase {
       {this.state.navShow && <div
         className={`header-nav-mb ${history.location.pathname === '/help/terms' && configController.getQuery('os') === '0' ? 'hide' : ''}`}>
         <div className="nav-jsx clearfix">
-          {['/user', '/home', '/wallet/balance', '/wallet/charge', '/wallet/widthdraw', '/wallet/dashboard', '/order/current', '/order/history'].includes(path) ? (
+          {['/user', '/home', '/wallet/balance', '/wallet/charge', '/wallet/withdraw', '/wallet/dashboard', '/order/current', '/order/history'].includes(path) ? (
               <img src={this.$imagesMap.$h5_logo} className="fl home-logo" alt=""/>) :
             (this.state.selectLink &&
               <img src={this.$imagesMap.$h5_back} className="nav-back fl" onClick={this.goBack} alt=""/> ||

@@ -93,7 +93,7 @@ export default class Balance extends exchangeViewBase {
         {/*充提菜单*/}
         <ul className="menu-ul">
           <li><NavLink to="/wallet/charge"><img src="/static/mobile/asset/icon_zc_cb@2x.png"/>{this.intl.get("asset-charge")}</NavLink></li>
-          <li><NavLink to=""><img src="/static/mobile/asset/icon_zc_tb@2x.png"/>{this.intl.get("asset-withdraw")}</NavLink></li>
+          <li><NavLink to="/wallet/withdraw"><img src="/static/mobile/asset/icon_zc_tb@2x.png"/>{this.intl.get("asset-withdraw")}</NavLink></li>
         </ul>
         {/*钱包列表*/}
         <div className="asset-wallet">
