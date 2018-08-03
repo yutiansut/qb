@@ -163,7 +163,7 @@ export default class OrderCurrent extends ExchangeViewBase {
       }
     };
     this.setState(
-        {orderStatus,
+        { orderStatus,
           total: 0,
           searchSaveFlag: true
         }

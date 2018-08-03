@@ -34,8 +34,10 @@ export default class DealController extends ExchangeControllerBase {
         Market: market,
         Coin: coin,
         priceBank: {
-          CNY: Number(prices.priceCN * prices.price).toFixedWithoutUp(2),
-          USD: Number(prices.priceEN * prices.price).toFixedWithoutUp(2)
+          CNY: Number(prices.priceCN * prices.price).toFixed(2),
+          // CNY: Number(prices.priceCN).toFixed(2),
+          USD: Number(prices.priceEN * prices.price).toFixed(2)
+          // USD: Number(prices.priceEN).toFixed(2)
         },
         dealBank: prices
       }
@@ -57,8 +59,10 @@ export default class DealController extends ExchangeControllerBase {
       inputBuyFlag: false,
       inputSellFlag: false,
       priceBank: {
-        CNY: Number(prices.priceCN * prices.price).toFixedWithoutUp(2),
-        USD: Number(prices.priceEN * prices.price).toFixedWithoutUp(2)
+        // CNY: Number(prices.priceCN).toFixed(2),
+        CNY: Number(prices.priceCN * prices.price).toFixed(2),
+        USD: Number(prices.priceEN * prices.price).toFixed(2)
+        // USD: Number(prices.priceEN).toFixed(2)
       },
       dealBank: prices
     });
@@ -80,9 +84,10 @@ export default class DealController extends ExchangeControllerBase {
   setMarketPriceMaxNum(v){
     this.view.setState(
         {marketChangePrice: v.price}
-    )
+    );
     if(this.view.state.DealEntrustType === 0)
       return
+    
     this.view.setState({
       buyMax: Number(Number(this.view.state.buyWallet).div(v.price)),
     })
@@ -95,7 +100,7 @@ export default class DealController extends ExchangeControllerBase {
     };
     unitObj[init] = this.view.state.Market;
  
-    let fromValue = this.store.state.prices.price * (this.store.state.PriceUnit === 'CNY' ? this.store.state.prices.priceCN : (this.store.state.PriceUnit === 'USD' && this.store.state.prices.priceEN || 1));
+    let fromValue = (this.store.state.prices.price || 1) * (this.store.state.PriceUnit === 'CNY' ? this.store.state.prices.priceCN : (this.store.state.PriceUnit === 'USD' && this.store.state.prices.priceEN || 1));
     let unitSelected = unitObj[unit];
     this.view.setState({
       PriceUnit: unitSelected,
@@ -123,7 +128,7 @@ export default class DealController extends ExchangeControllerBase {
       initPrice: prices.price
     });
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
-      let toValue = this.store.state.prices.price * (v === 'CNY' ? this.store.state.prices.priceCN : (v === 'USD' && this.store.state.prices.priceEN || 1)),
+      let toValue = (this.store.state.prices.price || 1) * (v === 'CNY' ? this.store.state.prices.priceCN : (v === 'USD' && this.store.state.prices.priceEN || 1)),
         inputSellValue, inputBuyValue;
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
@@ -342,7 +347,7 @@ export default class DealController extends ExchangeControllerBase {
       );
       return
     }
-    if(result && (result.ret === 1416 || (result.ret === 1412 && params.priceType === 1))){
+    if(result && (result.ret === 611 || result.ret === 1416 || (result.ret === 1412 && params.priceType === 1))){
       this.view.setState(
           {
             // dealPopMsg: this.intl.get('passError'),
