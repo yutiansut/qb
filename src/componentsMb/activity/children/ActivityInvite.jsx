@@ -26,13 +26,13 @@ export default class ActivityInvite extends exchangeViewBase {
 
   }
   componentDidMount() {
-    this.addContent('邀请好友注册', false, true, false, '')
+    this.addContent({con: '邀请好友注册'});
     this.getInvited();
     this.getRankingList();
   }
 
   getQRCode() {
-    let canvas = document.querySelector('#haha')
+    let canvas = document.querySelector('#downloadCanvas')
     let image = document.querySelector('.poster');
     let code = document.querySelector('.qrcode');
     let ctx = canvas.getContext('2d');
@@ -82,7 +82,7 @@ export default class ActivityInvite extends exchangeViewBase {
               <p>QB是QB.com发行的代币，QB网通过QB与全体支持者共享平台成长利益。</p>
               <p className='note'>QB总量{Math.floor(this.state.tv / 10000)}万枚，定期回购销毁，永不增发。</p>
             </div>
-            <canvas id="haha" width="1059" height="1458" style={{display: 'none'}}></canvas>
+            <canvas id="downloadCanvas" width="1059" height="1458" style={{display: 'none'}}></canvas>
             <div className='value'>
               <h2>QB的价值与用途</h2>
               <p>QB网将通过与全球支持者实现利益共享，方式包括但不限于：</p>

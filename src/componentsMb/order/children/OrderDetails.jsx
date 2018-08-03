@@ -40,8 +40,8 @@ export default class OrderDetails extends exchangeViewBase {
     const orderDetail = this.state.orderDetail;
     console.log(orderDetail)
     const type = this.props.history.location.pathname.slice(7, -8);
-    const tradePairName = '待办/待办';
-    const tradePairArr = tradePairName.split('/');
+    const tradePairName = orderDetail.tradePairName && orderDetail.tradePairName.toUpperCase();
+    const tradePairArr = tradePairName && tradePairName.split('/');
     
     return(
       <div className='order-details'>
@@ -54,32 +54,32 @@ export default class OrderDetails extends exchangeViewBase {
           </div>
           <div className='info-item clearfix'>
             <span className='fl'>{type === 'current' ? this.intl.get('price') : this.intl.get('avgDealPrice')}</span>
-            <span className='fl'>({tradePairArr[1]})</span>
+            <span className='fl'>({tradePairArr && tradePairArr[1]})</span>
             <span className='fr'>{orderDetail.price}</span>
           </div>
           <div className='info-item clearfix'>
             <span className='fl'>{type === 'current' ? this.intl.get('amount') : this.intl.get('volume')}</span>
-            <span className='fl'>({tradePairArr[0]})</span>
+            <span className='fl'>({tradePairArr && tradePairArr[0]})</span>
             <span className='fr'>{type === 'current' ? orderDetail.count : orderDetail.doneCount}</span>
           </div>
           <div className='info-item clearfix'>
             <span className='fl'>{type === 'current' ? this.intl.get('deal-trunover') : this.intl.get('dealTurnover')}</span>
-            <span className='fl'>({tradePairArr[1]})</span>
+            <span className='fl'>({tradePairArr && tradePairArr[1]})</span>
             <span className='fr'>{type === 'current' ? parseFloat(orderDetail.count) * parseFloat(orderDetail.price) : orderDetail.dealedMoney}</span>
           </div>
           {orderDetail.orderStatus !== 0 && <div className='info-item clearfix'>
             <span className='fl'>{this.intl.get('fee')}</span>
-            <span className='fl'>({orderDetail.orderType ? tradePairArr[1] : tradePairArr[0]})</span>
+            <span className='fl'>({orderDetail.orderType ? tradePairArr && tradePairArr[1] : tradePairArr && tradePairArr[0]})</span>
             <span className='fr'>{orderDetail.fee}</span>
           </div>}
           <div className='info-item clearfix'>
             <span className='fl'>{this.intl.get('dealed')}</span>
-            <span className='fl'>({tradePairArr[0]})</span>
+            <span className='fl'>({tradePairArr && tradePairArr[0]})</span>
             <span className='fr'>{orderDetail.doneCount}</span>
           </div>
           {type === 'current' && <div className='info-item clearfix'>
             <span className='fl'>{this.intl.get('order-unDeal')}</span>
-            <span className='fl'>({tradePairArr[0]})</span>
+            <span className='fl'>({tradePairArr && tradePairArr[0]})</span>
             <span className='fr'>{orderDetail.undoneCount}</span>
           </div>}
         </div>
