@@ -16,6 +16,7 @@ import React from "react";
   readOnly,设置readOnly,
   className, 未预设宽高，自定义类名设置宽高，行高,
   children, 类似vue插槽,用作自定义下拉菜单
+  maxlength,输入长度限制
 */
 export default class Input extends React.Component {
   constructor(props) {
@@ -35,6 +36,12 @@ export default class Input extends React.Component {
       this.setState({ showSelect: false });
       this.props.clickOutSide && this.props.clickOutSide();
     };
+    this.focus = ()=>{
+      this.refs.input.focus()
+    }
+    this.blur = ()=>{
+      this.refs.input.blur()
+    }
   }
   componentDidMount() {
     window.addEventListener("click", this.clickoutside);
@@ -63,7 +70,8 @@ export default class Input extends React.Component {
         disabled,
         readOnly,
         className,
-        children
+        children,
+        maxlength
       } = props;
       !oriType && (oriType = "text");
       !["search1", "search2", "textarea", "select"].includes(type) &&
@@ -84,6 +92,7 @@ export default class Input extends React.Component {
           {["default", "search1", "search2", "select"].includes(type) && (
             <input
               ref="input"
+              maxLength={maxlength}
               type={oriType}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
@@ -118,6 +127,7 @@ export default class Input extends React.Component {
             <textarea
               ref="input"
               type={oriType}
+              maxLength={maxlength}
               className={`${className ? className : ""} ${
                 disabled ? "disabled" : ""
               } ${theme === 'dark' ? 'dark' : ''}`}

@@ -12,17 +12,22 @@ export default class AboutUs extends exchangeViewBase {
     this.state = {
       title: ["邮箱两步验证", "谷歌验证码", "短信两步验证"],
       // type: controller.getQuery('type'),//0 邮箱，1谷歌，2短信
-      type: 0,
+      type: 1,
       account: "",
       code: "",
       accountText: ["邮箱地址", "请输入谷歌验证码", "手机号码"],
       codeText: ["邮箱验证码", "", "短信验证码"],
-      googleCode: ["1", "2", "3", "4", "5", "6"]
+      googleCode: ["1", "2", "3", "4", "5", "6"],
+      inputContent: ''
     };
+    this.dealInput = controller.dealInput.bind(controller);
+    this.delNum = controller.delNum.bind(controller);
   }
 
   componentWillMount() {}
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.addContent({con: this.state.title[ this.state.type]})
+  }
 
   render() {
     const { controller, history } = this.props;
@@ -69,14 +74,11 @@ export default class AboutUs extends exchangeViewBase {
                 {googleCode.map((v, index) => (
                   <Input
                     className={`item-code ${index===5 ? 'last-child' : ''}`}
-                    ref={`input${v}`}
+                    ref={`input${index}`}
                     key={index}
                     value={this.state.googleCode[index]}
-                    oriType="password"
                     onInput={value => {
-                      googleCode[index] = value;
-                      console.log(value, googleCode)
-                      this.setState({ googleCode });
+                      this.dealInput(index, value)
                     }}
                   />
                 ))}

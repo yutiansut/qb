@@ -542,4 +542,28 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.getQbtTrade()
     result && result.li && this.view.setState({ qbtTrade: result.li });
   }
+
+  dealInput(num, value){
+    console.log(num, value)
+    if(!/^[0-9]\d*$/.test(value)) {
+      return;
+    };
+    if(this.view.state.googleCode[num] === '') {
+      this.view.state.googleCode[num] = value;
+      this.view.setState({googleCode: this.view.state.googleCode})
+      this.view.refs[`input${num + 1}`].focus()
+      return
+    }
+    if(this.view.state.googleCode[num] !== '' && num + 1 <= 5) {
+      this.view.refs[`input${num + 1}`].focus()
+      this.view.refs[`input${num}`].blur()
+    };
+  }
+  delNum(index) {
+    let oEvent = window.event;
+    if (this.view.state.googleCode[index - 1] === '' && oEvent.keyCode === 8) {
+      this.view.state.inputContent = index - 1;
+      this.view.state.googleCode[index - 2] = '';
+    }
+  }
 }

@@ -43,7 +43,7 @@ export default class setTwoVerify extends exchangeViewBase {
   componentWillMount() {}
 
   async componentDidMount() {
-    this.props.addContent('两步验证', false, true, false, '')
+    this.props.addContent({con: '两步验证'})
     await this.initData();
   }
 

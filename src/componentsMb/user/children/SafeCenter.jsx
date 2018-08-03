@@ -49,7 +49,7 @@ export default class UserCenterIndex extends exchangeViewBase {
   componentWillMount() { }
 
   async componentDidMount() {
-    this.props.addContent('安全中心', false, true, false, '')
+    this.props.addContent({con: '安全中心'})
     await AsyncAll([this.initData(), this.getCaptchaVerify()]);
     let result = await this.getFundPwdInterval();
     this.setState({
