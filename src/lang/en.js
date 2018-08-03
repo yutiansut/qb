@@ -241,10 +241,15 @@ export default function en(state) {
   };
   const asset = {
     "asset-totalAssets": "Total assets (approx)",
+
     "asset-balance": "Balance",
     "asset-24hQuota": "Withdraw quota in 24H",
     "asset-limitApply": "Apply for a higher withdrawal limit",
     "asset-usedAsset": "Already in used",
+    "h5-asset-totalAssets": "Total assets",
+    "h5-asset-24hQuota": "24H Withdraw Quota",
+    "h5-asset-limitApply": "Apply",
+    "h5-asset-usedAsset": "Used Quata",
     "asset-hideLittle": "Hide small balance",
     "asset-hideZero": "Hide 0 balances",
     "asset-charge": "Charge",

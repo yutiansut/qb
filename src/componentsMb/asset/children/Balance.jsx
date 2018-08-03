@@ -63,7 +63,7 @@ export default class Balance extends exchangeViewBase {
         <div className="total-asset">
             {/*总资产约(btc)*/}
             <div className="dv1">
-                <label>{this.intl.get("asset-totalAssets")}(BTC):</label>
+                <label>{this.intl.get("h5-asset-totalAssets")}(BTC):</label>
                 <img src={showAsset ? "/static/mobile/asset/icon_show@2x.png" : "/static/mobile/asset/icon_hidden@2x.png"}
                     onClick={()=>this.setState({showAsset:!showAsset})}/>
             </div>
@@ -76,18 +76,18 @@ export default class Balance extends exchangeViewBase {
             <div className="dv3">
               {/*24h提币额度*/}
               <p className="p1">
-                  <label>{this.intl.get("asset-24hQuota")}:</label>
+                  <label>{this.intl.get("h5-asset-24hQuota")}:</label>
                   <i>{totalAsset.totalQuota} BTC</i>
               </p>
               {/*可用额度*/}
               <p className="p2">
-                  <label>{this.intl.get("asset-usedAsset")}:</label>
+                  <label>{this.intl.get("h5-asset-usedAsset")}:</label>
                   <i>{Number(totalAsset.usedQuota)} BTC</i>
               </p>
               {/*提币申请*/}
               {totalAsset.totalQuota === 10 ?
-                  <a className="disable">{this.intl.get("asset-limitApply")}</a> :
-                  <NavLink to="/user/identity">{this.intl.get("asset-limitApply")}</NavLink>}
+                  <a className="disable">{this.intl.get("h5-asset-limitApply")}</a> :
+                  <NavLink to="/user/identity">{this.intl.get("h5-asset-limitApply")}</NavLink>}
             </div>
         </div>
         {/*充提菜单*/}

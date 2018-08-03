@@ -236,10 +236,15 @@ export default function zh(state) {
   };
   const asset = {
     "asset-totalAssets": "总资产约",
+
     "asset-balance": "账户余额",
     "asset-24hQuota": "24H提币额度",
     "asset-limitApply": "提额申请",
     "asset-usedAsset": "已用",
+    "h5-asset-totalAssets": "总资产",
+    "h5-asset-24hQuota": "24H提币额度",
+    "h5-asset-limitApply": "提额申请",
+    "h5-asset-usedAsset": "已用",
     "asset-hideLittle": "隐藏小额资产",
     "asset-hideZero": "隐藏0余额币种",
     "asset-charge": "充币",
