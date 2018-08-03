@@ -26,17 +26,24 @@ export default class Balance extends exchangeViewBase {
     this.rank = controller.rank.bind(controller);
     // 获取Qbt
     this.getQbt = controller.getMyQbt.bind(controller);
+    //头部
+    this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
   }
 
   async componentDidMount() {
-    await this.getAssets();
-    if (this.props.controller.configData.activityState) {
-      let qbt = await this.getQbt();
-      if (qbt && this.state.wallet) {
-        this.state.wallet.unshift(qbt);
-        this.setState({ wallet: this.state.wallet })
+      this.addContent({con: this.intl.get("header-assets2"), search: true, selectFn: () => {
+
+          }
+      });
+
+      await this.getAssets();
+      if (this.props.controller.configData.activityState) {
+          let qbt = await this.getQbt();
+          if (qbt && this.state.wallet) {
+              this.state.wallet.unshift(qbt);
+              this.setState({wallet: this.state.wallet})
+          }
       }
-    }
   }
 
   render() {
@@ -109,7 +116,7 @@ export default class Balance extends exchangeViewBase {
                     /*QBT*/
                     <div className="wallet-li" key={index}>
                         <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
-                        <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
+                        <span>{Number(item.availableCount).format({number: "property", style: {decimalLength: 8}})}</span>
                     </div>
             })}
         </div>

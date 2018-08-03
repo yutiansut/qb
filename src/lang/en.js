@@ -206,6 +206,7 @@ export default function en(state) {
     "header-home": "home",
     "header-exchange": "exchange",
     "header-assets": "assets",
+    "header-assets2": "assets",
     "header-order": "Order list",
     "header-user": "Personal Center",
     "header-security": "Security center",

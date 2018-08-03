@@ -26,9 +26,13 @@ export default class BalanceDetail extends exchangeViewBase {
     this.getCoinInfo = controller.marketController.getCoinInfo.bind(controller.marketController);
     this.getCoinPair = controller.getCoinPair.bind(controller);
     this.getTradePair = controller.getTradePair.bind(controller);
+    //头部
+    this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
   }
 
   async componentWillMount(){
+    this.addContent({con: this.intl.get("asset-detail")});
+
     await this.getAssets();
     //获取路由参数,选取对应币种
     let coin = (this.props.location.query && this.props.location.query.currency) || "BTC";
