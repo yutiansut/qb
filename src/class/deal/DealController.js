@@ -94,13 +94,14 @@ export default class DealController extends ExchangeControllerBase {
       'USD': 'USD',
     };
     unitObj[init] = this.view.state.Market;
-    let fromValue = this.store.state.prices[this.store.state.PriceUnit === 'CNY' && 'priceCN' || (this.store.state.PriceUnit === 'USD' && 'priceEN' || 'price')];
+ 
+    let fromValue = this.store.state.prices.price * (this.store.state.PriceUnit === 'CNY' ? this.store.state.prices.priceCN : (this.store.state.PriceUnit === 'USD' && this.store.state.prices.priceEN || 1));
     let unitSelected = unitObj[unit];
     this.view.setState({
       PriceUnit: unitSelected,
       UnitSelected: unit
-    });
-    this.changePrice(unitSelected, fromValue);
+    },this.changePrice(unitSelected, fromValue));
+    // this.changePrice(unitSelected, fromValue);
     this.TradeOrderListController.setChangeFlagClose();
     this.store.state.PriceUnit = unitSelected;
     this.TradeMarketController.setUnitsType(unitSelected);
@@ -122,9 +123,8 @@ export default class DealController extends ExchangeControllerBase {
       initPrice: prices.price
     });
     if (this.view.state.inputSellFlag || this.view.state.inputBuyFlag) {
-      let toValue = this.store.state.prices[v === 'CNY' && 'priceCN' || (v === 'USD' && 'priceEN' || 'price')],
+      let toValue = this.store.state.prices.price * (v === 'CNY' ? this.store.state.prices.priceCN : (v === 'USD' && this.store.state.prices.priceEN || 1)),
         inputSellValue, inputBuyValue;
-
       this.view.state.inputSellFlag && (inputSellValue = this.view.state.inputSellValue / fromValue * toValue);
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
       let checkValue = inputSellValue || inputBuyValue;
@@ -134,8 +134,8 @@ export default class DealController extends ExchangeControllerBase {
       // checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
       let limitedValue = (v === 'CNY' || v === 'USD') ? 2 : checkNum;
           this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue;
-      this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixedWithoutUp(limitedValue));
-      this.view.state.inputBuyFlag && (inputBuyValue = inputBuyValue.toFixedWithoutUp(limitedValue));
+      this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixed(limitedValue));
+      this.view.state.inputBuyFlag && (inputBuyValue = inputBuyValue.toFixed(limitedValue));
       this.view.setState({
             inputSellValue,
             inputBuyValue

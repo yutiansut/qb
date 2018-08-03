@@ -67,7 +67,7 @@ export default class TradeOrderListController extends OrderListController {
          updown: v.updown
         }
     );
-    flag && this.getDepth(v.tradePair)
+    flag !== 1 && this.getDepth(v.tradePair)
   }
 
 }

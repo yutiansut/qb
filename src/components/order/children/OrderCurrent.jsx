@@ -158,7 +158,7 @@ export default class OrderCurrent extends ExchangeViewBase {
         orderStatus: orderStatus,
         startTime: this.state.startTime,
         endTime: this.state.endTime,
-        page: this.state.page,
+        page: 1,
         pageSize: this.state.pageSize
       }
     };

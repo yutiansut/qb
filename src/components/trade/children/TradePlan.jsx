@@ -58,7 +58,7 @@ export default class TradePlan extends ExchangeViewBase {
       dealOrderType: 0,//下单类型
       dealSure: [{title:this.intl.get('deal-sure-buy'),
       price:this.intl.get('deal-sure-buy-price'),volume: this.intl.get("deal-sure-buy-volume")},{title:this.intl.get('deal-sure-sell'),
-        price:this.intl.get("deal-sure-buy-price"),volume: this.intl.get("deal-sure-sell-volume")}],
+        price:this.intl.get("deal-sure-sell-price"),volume: this.intl.get("deal-sure-sell-volume")}],
       dealSurePriceL: 0, //买入法币价格
       dealSurePriceD: 0, //买入数字币价格
       dealSureVolume: 0, //买入数量
@@ -457,8 +457,8 @@ export default class TradePlan extends ExchangeViewBase {
             </div>
             <div className='deal-exchange-pop-content'>
               <p>{this.state.dealSure[this.state.dealOrderType].price}:
-                <span style={{color: this.state.dealOrderType ? '#F25656' : '#2BB789'}}>{Number(this.state.dealSurePriceD.toFixed(this.state.priceLimit)).format({number:'digital', style:{decimalLength :this.state.priceLimit}})} </span>
-                <em>{`(${this.intl.get('deal-convert-into')}${this.state.dealSurePriceL.format({number: 'legal',style:{name:'cny'}})}${this.state.PriceUnit})`}</em>
+                <span style={{color: this.state.dealOrderType ? '#F25656' : '#2BB789'}}>{Number(this.state.dealSurePriceD.toFixed(this.state.priceLimit))} </span>
+                <em>{`(${this.intl.get('deal-convert-into')}${this.state.dealSurePriceL.format({number: 'legal',style:{name:this.state.PriceUnit && this.state.PriceUnit.toLowerCase()}})}${this.state.PriceUnit})`}</em>
               </p>
               <p>{this.state.dealSure[this.state.dealOrderType].volume}:
                 <span style={{color: this.state.dealOrderType ? '#F25656' : '#2BB789'}}>{this.state.dealSureVolume.formatFixNumberForAmount(this.state.numLimit, false)}</span>
