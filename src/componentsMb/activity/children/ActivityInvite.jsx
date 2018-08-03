@@ -32,7 +32,13 @@ export default class ActivityInvite extends exchangeViewBase {
   }
 
   getQRCode() {
-    let canvas  = document.querySelector('canvas');
+    let canvas = document.querySelector('#haha')
+    let image = document.querySelector('.poster');
+    let code = document.querySelector('.qrcode');
+    let ctx = canvas.getContext('2d');
+    console.log(123333333, ctx)
+    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(code, 260, 653);
     downloadCanvasImage(canvas, 'png', 'QR Code.png');
   }
 
@@ -69,13 +75,14 @@ export default class ActivityInvite extends exchangeViewBase {
             <div className='code'>
               <h1>{Math.floor(this.state.tv / 10000)}万QB欢迎你来拿！</h1>
               <img className='poster' src='../../../static/mobile/activity/img_qb_gywm_erweima@3x.png'/>
-              <QRCode value={shareAddress} level="M" size={180} className="qrcode" onClick={this.getQRCode}/>
+              <QRCode value={shareAddress} level="M" size={180} className="qrcode"/>
             </div>
             <div className='introduce'>
               <h2>QB介绍</h2>
               <p>QB是QB.com发行的代币，QB网通过QB与全体支持者共享平台成长利益。</p>
               <p className='note'>QB总量{Math.floor(this.state.tv / 10000)}万枚，定期回购销毁，永不增发。</p>
             </div>
+            <canvas id="haha" width="1059" height="1458" style={{display: 'none'}}></canvas>
             <div className='value'>
               <h2>QB的价值与用途</h2>
               <p>QB网将通过与全球支持者实现利益共享，方式包括但不限于：</p>
@@ -89,9 +96,7 @@ export default class ActivityInvite extends exchangeViewBase {
               </div>
               <p>更多价值将进一步挖掘，敬请期待！</p>
             </div>
-            <button className='invite' onClick={() => {
-              history.push(`/genrealize/register/?uid=${controller.userId}`)
-            }}>一键邀请</button>
+            <button className='invite' onClick={this.getQRCode}>一键邀请</button>
           </div>}
           {this.state.showSection === 'invite' && 
           <div className='activity-invite'>
