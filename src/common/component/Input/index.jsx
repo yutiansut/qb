@@ -16,7 +16,8 @@ import React from "react";
   readOnly,设置readOnly,
   className, 未预设宽高，自定义类名设置宽高，行高,
   children, 类似vue插槽,用作自定义下拉菜单
-  maxlength,输入长度限制
+  maxlength,输入长度限制,
+  onKeydown
 */
 export default class Input extends React.Component {
   constructor(props) {
@@ -71,7 +72,8 @@ export default class Input extends React.Component {
         readOnly,
         className,
         children,
-        maxlength
+        maxlength,
+        onKeydown
       } = props;
       !oriType && (oriType = "text");
       !["search1", "search2", "textarea", "select"].includes(type) &&

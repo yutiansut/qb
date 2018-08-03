@@ -17,7 +17,7 @@ export default class AboutUs extends exchangeViewBase {
       code: "",
       accountText: ["邮箱地址", "请输入谷歌验证码", "手机号码"],
       codeText: ["邮箱验证码", "", "短信验证码"],
-      googleCode: ["1", "2", "3", "4", "5", "6"],
+      googleCode: ["", "", "", "", "", ""],
       inputContent: ''
     };
     this.dealInput = controller.dealInput.bind(controller);
@@ -76,6 +76,7 @@ export default class AboutUs extends exchangeViewBase {
                     className={`item-code ${index===5 ? 'last-child' : ''}`}
                     ref={`input${index}`}
                     key={index}
+                    maxlength={1}
                     value={this.state.googleCode[index]}
                     onInput={value => {
                       this.dealInput(index, value)
