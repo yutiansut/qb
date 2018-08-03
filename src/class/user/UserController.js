@@ -154,9 +154,9 @@ export default class UserController extends ExchangeControllerBase {
       os: 3, // 1:android 2:iOS 3:borwser
     })
     this.view.setState({
-      remindPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : this.view.intl.get("user-bindSucc"),
+      remindPopup: this.view.state.bindOrigin === 1 ? (result && true) : true,
+      popType: this.view.state.bindOrigin === 1 ? (result && 'tip3') : (result ? 'tip3': 'tip1'),
+      popMsg: this.view.state.bindOrigin === 1 ? (result && result.msg) : (result ? result.msg : this.view.intl.get("user-bindSucc")),
       showSet: result ? true : false,
       setPassFlag: true
     })
@@ -172,6 +172,9 @@ export default class UserController extends ExchangeControllerBase {
       // console.log('绑定成功', this.view.state)
       this.getCaptchaVerify()
       this.getUserCreditsNum()
+      if (this.view.state.bindOrigin === 1) {
+        this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
+      }
       return
     }
 
@@ -185,6 +188,9 @@ export default class UserController extends ExchangeControllerBase {
       })
       this.getCaptchaVerify()
       this.getUserCreditsNum()
+      if (this.view.state.bindOrigin === 1) {
+        this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
+      }
       // console.log('绑定成功', this.view.state)
     }
 
@@ -360,14 +366,15 @@ export default class UserController extends ExchangeControllerBase {
       co: code
     })
     this.view.setState({
-      remindPopup: true,
-      popType: result ? 'tip3': 'tip1',
-      popMsg: result ? result.msg : this.view.intl.get("user-googleSucc"),
+      remindPopup: result && true,
+      popType: result && 'tip3',
+      popMsg: result && result.msg,
       showGoogle: result ? true : false,
       userInfo: result ? Object.assign(this.view.state.userInfo, {googleAuth: 1}) : Object.assign(this.view.state.userInfo, {googleAuth: 0})
     })
     if (result === null) {
       this.getUserCreditsNum()
+      this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
     }
     // if (result === null) {this.view.setState({showGoogle: false})}
     // console.log('验证谷歌', result)

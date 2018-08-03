@@ -53,6 +53,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showIp: false,
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
+      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定
     }
 
     const {controller} = props
@@ -94,7 +95,8 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       showSet: true,
       type: type,
-      verifyNum: this.intl.get("sendCode")
+      verifyNum: this.intl.get("sendCode"),
+      bindOrigin: 0
     })
   }
   showOther() { // 打开其他安全设置
@@ -102,7 +104,7 @@ export default class userSafeCenter extends exchangeViewBase {
       otherShow: true,
     })
   }
-  selectType(content, index, i, type, e) { // 两步认证单选
+  selectType(index, i, type) { // 两步认证单选
     if (i === 2 && this.state.userInfo.fundPwd) {
       this.setState({
         remindPopup: true,
@@ -115,6 +117,7 @@ export default class userSafeCenter extends exchangeViewBase {
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
+      bindOrigin: 1,
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
@@ -191,19 +194,23 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getCaptchaVerify()
   }
 
+  clearErr2() {
+    this.setState({
+      popupInputErr2: ''
+    })
+  }
 
   componentWillMount() {
 
   }
 
-  componentWillUpdate(...parmas) {
+  componentWillUpdate(props, state, next) {
 
   }
 
   componentWillUnmount() {
 
   }
-
 
   async componentDidMount() {
     // this.getCurrentLogin(),
@@ -222,21 +229,6 @@ export default class userSafeCenter extends exchangeViewBase {
     noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-noticePhone") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
     this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
 
-  }
-
-  componentWillUpdate(props, state, next) {
-    // console.log(232, state)
-    // if(state.showSet || state.showChange) { // 打开更换图片
-    //   // console.log(111)
-    //   // this.getCaptchaVerify()
-    // }
-  }
-
-
-  clearErr2() {
-    this.setState({
-      popupInputErr2: ''
-    })
   }
 
   render() {
@@ -279,7 +271,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <p>{this.intl.get("user-twoVerify")}</p>
             {this.state.verifyList.map((v, i) => (<dl className="clearfix" key={i}>
               <dt>{v.title}</dt>
-              {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(item, index, i, this.state.userInfo.email ? 2 : 1)}>
+              {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(index, i, this.state.userInfo.email ? 2 : 1)}>
                 <img src={this.$imagesMap.$checked} alt="" className={`${(item.flag) ? '' : 'hide'}`}/>
                 <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
                 <span>
