@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Redirect, Switch} from 'react-router-dom';
-import exchangeViewBase from '../../components/ExchangeViewBase.jsx';
+import ExchangeViewBase from '../../components/ExchangeViewBase.jsx';
 
 import UserCenterIndex from './children/UserCenterIndex.jsx';
 import SafeCenter from './children/SafeCenter.jsx';
@@ -9,10 +9,11 @@ import SetPwd from './children/SetPwd.jsx';
 import Identity from "./children/Identity";
 import SetTwoVerify from "./children/SetTwoVerify";
 import Verify from "./children/Verify";
+import GoogleKey from "./children/GoogleKey";
 
 import "./stylus/index.styl"
 
-export default class UserCenter extends exchangeViewBase {
+export default class UserCenter extends ExchangeViewBase {
   constructor(props) {
     super(props)
     const {controller} = this.props;
@@ -43,6 +44,9 @@ export default class UserCenter extends exchangeViewBase {
         )}/>
         <Route path={`${match.url}/verifybind`} component={() => (
           <Verify match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
+        )}/>
+        <Route path={`${match.url}/googlekey`} component={() => (
+          <GoogleKey match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>
         )}/>
         <Route exact path={`${match.url}/aboutUs`} component={() => (
           <AboutUs match={match} controller={controller} history={history} addContent={this.addContent}/>

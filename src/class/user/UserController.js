@@ -550,29 +550,29 @@ export default class UserController extends ExchangeControllerBase {
     result && result.li && this.view.setState({ qbtTrade: result.li });
   }
 
-  dealInput(num, value){
-    console.log(num, value)
+  dealInput(num, value, _this){
     if(!/^[0-9]\d*$/.test(value)) {
       return;
     };
     if(this.view.state.googleCode[num] === '') {
       this.view.state.googleCode[num] = value;
       this.view.setState({googleCode: this.view.state.googleCode})
-      num + 1 <= 5 && this.view.refs[`input${num + 1}`].focus()
+      num + 1 <= 5 && _this.refs[`input${num + 1}`].focus()
       return
     }
     if(this.view.state.googleCode[num] !== '' && num + 1 <= 5) {
       this.view.state.googleCode[num] = value;
       this.view.setState({googleCode: this.view.state.googleCode})
-      this.view.refs[`input${num + 1}`].focus()
-      this.view.refs[`input${num}`].blur()
+      _this.refs[`input${num + 1}`].focus()
+      _this.refs[`input${num}`].blur()
     };
   }
-  delNum(index) {
-    let oEvent = window.event;
-    if (this.view.state.googleCode[index] === '' && oEvent.keyCode === 8) {
-      this.view.refs[`input${num-1}`].focus()
-      // this.view.state.googleCode[index - 2] = '';
+  delNum(num, e, _this) {
+    if (e.nativeEvent.keyCode === 8) {
+      this.view.state.googleCode[num] = ''
+      this.view.setState({googleCode: this.view.state.googleCode})
+      num-1 >=0 && _this.refs[`input${num-1}`].focus()
+      return;
     }
     this.view.state.googleCode[num] = ''
     this.view.setState({googleCode: this.view.state.googleCode})

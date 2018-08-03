@@ -1,7 +1,7 @@
 import React from 'react';
-import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
+import ExchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 
-export default class AboutUs extends exchangeViewBase {
+export default class AboutUs extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {

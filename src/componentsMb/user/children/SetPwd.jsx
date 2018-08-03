@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
-import exchangeViewBase from "../../../components/ExchangeViewBase";
+import ExchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 
 import {AsyncAll} from "../../../core";
 
-export default class SetPwd extends exchangeViewBase {
+export default class SetPwd extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {

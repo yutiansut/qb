@@ -1,8 +1,9 @@
 import React from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase.jsx";
+import ExchangeViewBase from "../../../components/ExchangeViewBase.jsx";
 import BottomSelect from "../../viewsPopup/BottomSelect";
+import VerifyPopup from "../../viewsPopup/TwoVerifyPopupH5";
 
-export default class setTwoVerify extends exchangeViewBase {
+export default class setTwoVerify extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +31,9 @@ export default class setTwoVerify extends exchangeViewBase {
         this.intl.get("user-verifyPhoneTitle")
       ],
       showBottomSelect: false, //控制底部菜单显示隐藏
-      currentKey: '', //当前选中验证的验证类型1 email，2 google, 3 phone
+      currentKey: "", //当前选中验证的验证类型1 email，2 google, 3 phone
+      googleCode: ["", "", "", "", "", ""],
+      showPopup: true
     };
     const { controller } = this.props;
     controller.setView(this);
@@ -38,16 +41,16 @@ export default class setTwoVerify extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, { userInfo });
     this.initData = controller.initData.bind(controller); // 获取用户信息
+    this.dealInput = controller.dealInput.bind(controller);
+    this.delNum = controller.delNum.bind(controller);
   }
 
   componentWillMount() {}
 
   async componentDidMount() {
-    this.props.addContent({con: '两步验证'})
+    this.props.addContent({ con: "两步验证" });
     await this.initData();
   }
-
-
 
   render() {
     const { controller, url } = this.props;
@@ -57,7 +60,15 @@ export default class setTwoVerify extends exchangeViewBase {
       <div className="user-center-twoStep">
         <ul className="verify-list">
           {this.state.verifyList.map((v, i) => (
-            <li key={i} onClick={() => { this.setState({ showBottomSelect: true, currentKey: userInfo[v.key]})}}>
+            <li
+              key={i}
+              onClick={() => {
+                this.setState({
+                  showBottomSelect: true,
+                  currentKey: userInfo[v.key]
+                });
+              }}
+            >
               {v.title}
               {userInfo[v.key] ? <i>{`（${type[userInfo[v.key]]}）`}</i> : ""}
               {<span>{userInfo[v.key] ? `修改` : `设置`}</span>}
@@ -67,15 +78,19 @@ export default class setTwoVerify extends exchangeViewBase {
         {this.state.showBottomSelect && (
           <BottomSelect
             data={[
-              {title: this.intl.get("user-googleVerify"), k: 2},
-              {title: this.intl.get("user-verifyPhoneTitle"), k: 3},
-              {title: this.intl.get("user-verifyEmailTitle"), k: 1}
-              ].map((v, index) => {
-              return { value: v.title , i: v.k, index: index};
+              { title: this.intl.get("user-googleVerify"), k: 2 },
+              { title: this.intl.get("user-verifyPhoneTitle"), k: 3 },
+              { title: this.intl.get("user-verifyEmailTitle"), k: 1 }
+            ].map((v, index) => {
+              return { value: v.title, i: v.k, index: index };
             })}
             onSelect={value => {
+              console.log(value);
               if (value.i === this.state.currentKey) return;
-              this.props.history.push({pathname: `/user/verifybind/?type=${value.i - 1}`})
+              this.props.history.push({
+                pathname: `/user/verifybind/?type=${value.i - 1}`,
+                query: { from: true }
+              });
             }}
             current={this.state.currentKey}
             onCancel={() => {
@@ -84,6 +99,16 @@ export default class setTwoVerify extends exchangeViewBase {
               });
             }}
           />
+        )}
+        {this.state.showPopup ? (
+          <VerifyPopup
+            googleCode={this.state.googleCode}
+            dealInput={this.dealInput}
+            delNum={this.delNum}
+            onClose={()=>{this.setState({showPopup: false})}}
+          />
+        ) : (
+          ""
         )}
       </div>
     );

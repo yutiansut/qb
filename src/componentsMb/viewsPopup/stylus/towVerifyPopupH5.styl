@@ -1,0 +1,87 @@
+@import "./variable.styl"
+  .two-verify-popup-h5
+    position fixed
+    left 0
+    top 0
+    width 100%
+    height 100%
+    background-color $h5-vp-bg-popup
+    .poup
+      position absolute
+      width 3.27rem
+      height 2.04rem
+      left 50%
+      top 50%
+      padding 0.12rem 0.16rem 0
+      margin-top -1.02rem
+      margin-left -1.635rem
+      background-color $h5-vp-bg
+      border-radius(0.02rem)
+      h4
+        position relative
+        height 0.16rem
+        padding-left 0.09rem
+        margin-bottom 0.48rem
+        color $h5-vp-font-normal
+        font-size 0.16rem
+        line-height 0.16rem
+        border-left 0.03rem solid $h5-vp-border-active
+        &::after
+          position absolute
+          left -0.03rem
+          bottom -0.1rem
+          content ''
+          width calc(100%+0.03rem)
+          height 0.01rem
+          background-color $h5-vp-bg-weight
+        i
+          float right
+          color $h5-vp-font-active
+      .normal
+        position relative
+        input
+          width 1.84rem
+          height 0.45rem
+          background-color $h5-vp-bg-weight
+          font-size 0.15rem
+          color $h5-vp-font-light;
+          text-align left
+          line-height 0.18rem
+          placeholder($h5-vp-font-light, 0.15rem)
+        button
+          position absolute
+          top 0
+          right 0
+          width 1.11rem
+          height 0.45rem
+          border-radius(0 0.02rem 0.02rem 0)
+          background-color $h5-vp-bg-normal
+          color $h5-vp-font-active
+          :hover
+            background-color $h5-vp-bg-normal
+            color $h5-vp-font-active
+      .google
+        input
+          float left
+          width 0.4rem
+          height 0.45rem
+          line-height 0.45rem
+          font-size 0.42rem
+          margin-right 0.11rem
+          border-radius(0.02rem)
+          color transparent
+          text-shadow 0 0 0 $h5-vp-font-normal
+          background-color $h5-vp-bg-weight
+          text-align center
+          &:last-child
+            margin-right 0
+          &:focus
+            border 0.01rem solid $h5-vp-border-active
+      .submit
+        position absolute
+        bottom 0
+        left 0
+        width 100%
+        height 0.45rem
+        font-size 0.16rem
+        border-radius(0 0 0.02rem 0.02rem)

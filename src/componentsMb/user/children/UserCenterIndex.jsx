@@ -1,9 +1,9 @@
 import React from 'react';
-import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
+import ExchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import {NavLink} from 'react-router-dom'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 
-export default class UserCenterIndex extends exchangeViewBase {
+export default class UserCenterIndex extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.verifyState={

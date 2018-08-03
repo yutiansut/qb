@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 
-import exchangeViewBase from "../../components/ExchangeViewBase";
+import ExchangeViewBase from "../../components/ExchangeViewBase";
 import "./stylus/bottomSelect.styl";
 
 // destroy 组件销毁时执行的方法
-// onClose 关闭弹窗
 // onSelect
 // onCancel
 
-export default class SelectButton extends exchangeViewBase {
+export default class BottomSelect extends ExchangeViewBase {
   constructor(props) {
     super(props);
   }

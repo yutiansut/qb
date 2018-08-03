@@ -1,24 +1,25 @@
 import React from "react";
-import exchangeViewBase from "../../../components/ExchangeViewBase.jsx";
+import ExchangeViewBase from "../../../components/ExchangeViewBase.jsx";
 import Input from "../../../common/component/Input";
 import Button from "../../../common/component/Button";
 
-export default class AboutUs extends exchangeViewBase {
+export default class Verify extends ExchangeViewBase {
   constructor(props) {
     super(props);
-    this.state = {};
+    if(!this.props.location.query) this.props.history.push('/user/safe')
     const { controller } = this.props;
     controller.setView(this);
     this.state = {
       title: ["邮箱两步验证", "谷歌验证码", "短信两步验证"],
-      // type: controller.getQuery('type'),//0 邮箱，1谷歌，2短信
-      type: 1,
+      disable: true,
+      tip: false,
+      type: controller.getQuery('type') - 0,//0 邮箱，1谷歌，2短信
+      // type: 1,
       account: "",
       code: "",
       accountText: ["邮箱地址", "请输入谷歌验证码", "手机号码"],
       codeText: ["邮箱验证码", "", "短信验证码"],
       googleCode: ["", "", "", "", "", ""],
-      inputContent: ''
     };
     this.dealInput = controller.dealInput.bind(controller);
     this.delNum = controller.delNum.bind(controller);
@@ -31,7 +32,7 @@ export default class AboutUs extends exchangeViewBase {
 
   render() {
     const { controller, history } = this.props;
-    let { type, accountText, codeText, googleCode } = this.state;
+    let { type, accountText, codeText, googleCode, tip} = this.state;
     return (
       <div className="user-center-verify">
         {[0, 2].includes(type) ? (
@@ -72,25 +73,27 @@ export default class AboutUs extends exchangeViewBase {
               <h3>{accountText[type]}</h3>
               <div className="clearfix input">
                 {googleCode.map((v, index) => (
-                  <Input
-                    className={`item-code ${index===5 ? 'last-child' : ''}`}
+                  <input
+                    className={`item-code ${index===5 ? 'last-child' : ''} ${tip ? 'tip' : ''}`}
                     ref={`input${index}`}
+                    type="password"
                     key={index}
-                    maxlength={1}
+                    maxLength={1}
                     value={this.state.googleCode[index]}
-                    onInput={value => {
-                      this.dealInput(index, value)
+                    onInput={e => {
+                      this.dealInput(index, e.target.value, this)
                     }}
+                    onKeyDown={(e)=>{this.delNum(index, e, this)}}
                   />
                 ))}
               </div>
               <Button
               title="开启Google验证"
-              disable={true}
               type="base"
+              disable={googleCode.join('').length === 6 ? false : true}
               className="submit"
               onClick={() => {
-                console.log(999);
+                console.log(googleCode.join(''));
               }}
             />
             </div>
