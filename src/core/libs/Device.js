@@ -58,21 +58,12 @@ function dynamicLoadJs(url, callback) {
     }
     head.appendChild(script);
 }
-
-// var broScript = bro()
-//
 var broDicScript = {
     Chrome: 51,
     Safari: 10,
     Edge: 14,
     Firefox: 53,
 }
-// if(!broScript.device || broScript.version < broDicScript[broScript.device]){
-//     dynamicLoadJs("/static/profill/es5-shim.min.js");
-//     dynamicLoadJs("/static/profill/es5-sham.min.js");
-//     dynamicLoadJs("/static/profill/es6-shim.min.js");
-//     dynamicLoadJs("/static/profill/es6-sham.min.js");
-//     dynamicLoadJs("/static/profill/es7-shim.min.js");
-// }
+
 
 
