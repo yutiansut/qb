@@ -55,7 +55,7 @@ export default class UserOrderListController extends OrderListController {
       orderListArray: currentOrder,
     })
   }
-
+  
   async getHistoryOrder(trade, params) {
     let historyOrder = await this.store.getHistoryOrder(params);
     if (!trade) {
@@ -64,15 +64,17 @@ export default class UserOrderListController extends OrderListController {
       });
       return
     }
+    // console.log('tttttttttttttt',historyOrder)
     this.view.setState({
       // 若orderList为undefined，则默认为空数组
       orderListArray: historyOrder && historyOrder.orderList || [],
       // total: historyOrder && this.view.state.page === 1 && historyOrder.totalCount || 0
     });
-    historyOrder && this.view.state.page === 1 && this.view.setState(
+    historyOrder && historyOrder.page === 1 && this.view.setState(
         {total: historyOrder.totalCount}
     )
   }
+  
   async exportHistory(type){
     let result = await this.store.getHistoryOrder({
       "tradePairId": [],

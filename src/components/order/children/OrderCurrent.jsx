@@ -444,19 +444,19 @@ export default class OrderCurrent extends ExchangeViewBase {
               </div>
               <div className='detail-content-info'>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail.doneCount}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.doneCount) || ''}</p>
                   <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{Number(this.state.orderDetail.dealedMoney).format({number: 'property'})}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.dealedMoney) || ''}</p>
                   <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{Number(this.state.orderDetail.price).format({number: 'digital'})}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.price) || ''}</p>
                   <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{Number(this.state.orderDetail.fee).format({number: 'property'})}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.fee) || ''}</p>
                   <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1].toUpperCase() : this.state.orderDetail.tradePairName.split('/')[0].toUpperCase())}</span>
                 </div>
               </div>
