@@ -17,6 +17,56 @@
     letter-spacing 0.0157rem
     text-align center
     font-weight bold
+  .help-download
+    text-align center
+    h2
+      font-size 0.24rem
+      color $h5-color-normal
+      margin 0.12rem 0 0.16rem 0
+      text-align center
+    p
+      height 0.14rem
+      color $h5-color-normal
+      line-height 0.14rem
+      text-align center
+    .content
+      padding 0 0.28rem
+      text-align center
+      img
+        width 2.4rem
+      a
+        position relative
+        top -0.28rem
+        display block
+        height 0.48rem
+        line-height 0.48rem
+        padding-left 0.35rem
+        margin-bottom 0.22rem
+        font-size 0.18rem
+        color $normal-black-color
+        text-align center
+        border-radius(0.04rem)
+        &.iphone
+          background $h5-help-download-iphone no-repeat 0.9rem center $main-color
+          background-size 0.26rem auto
+          &:active
+            background-color $h5-color-green
+        &.android
+          background $h5-help-download-android no-repeat 0.9rem center $main-color
+          background-size 0.26rem auto
+          &:active
+            background-color $h5-color-green
+    .qrcode
+      position relative
+      top -0.08rem
+      margin-bottom 0.24rem
+      canvas
+        border 0.05rem solid $normal-white-color
+        width 1.2rem !important
+        height 1.2rem !important
+    span
+      font-size 0.14rem
+      color $line-light
   //服务协议
   .help-terms
     color $h5-color-normal

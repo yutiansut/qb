@@ -757,6 +757,12 @@ export default function zh(state) {
     "helo-coin-website": "官网",
     "helo-coin-browser": "区块浏览器",
     "helo-coin-white": "白皮书",
+
+    "help-download-title": `${nameUsd}交易所手机客户端`,
+    "help-download-intro": "覆盖iOS、Android多个平台，无障碍交易",
+    "help-download-ios": "iPhone版",
+    "help-download-android": "Android版",
+    "help-download-tip": "微信内请点击右上角“…”按钮，使用浏览器打开。",
   };
   const activity = {
     "activity-rule-1": `即日起，新用户完成注册后，可领取20枚${coin}。`,

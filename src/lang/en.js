@@ -875,6 +875,12 @@ export default function en(state) {
     "helo-coin-browser": "Block chain browser",
     "helo-coin-white": "White paper",
 
+    "help-download-title": `${nameUsd} Exchange Platform Mobile Client`,
+    "help-download-intro": "Multi-Platform Covering IOS, Android and Windows, Seamlessly Support Trading Services",
+    "help-download-ios": "iPhone",
+    "help-download-android": "Android",
+    "help-download-tip": "Click \"…\"  Button at Upper Right Corner in Wechat, and Open with Browser ",
+
     "Aeternity号称新一代区块链网络,由德裔计算机科学家“以太坊教父”Yanislav Malahov与前Augur核心开发者Zack Hess、前Synereo核心开发者Jack Pettersson于2016年发起，聚集诸多颠覆性创新于一身，旨在重树当今智能合约的底层协议。Aeternity的技术亮点是图灵完备状态通道(State Channels)和去中心化预言机（Oracles）。Aeternity项目曾经被看成是欧洲的以太坊，也被很多币粉视为超优质项目,但是在两轮ICO之后，项目组并没有像很多项目一样迅速发币，而雪上加霜的是，在以太坊钱包被盗事件中，AE第二轮ICO筹得的资金也大量丢失，这让参与ICO的币粉们非常失望。":
       "Aeternity is known as the next-generation blockchain network. It was launched in 2016 by the German-speaking computer scientist 'Episte Ethereum' Yanislav Malahov and the former Augur core developer Zack Hess and the former Synereo core developer Jack Pettersson, and gathered many subversive innovations. An underlying protocol that aims to recapture today's smart contracts. The technical highlights of Aeternity are the Turing Complete State Channels and the Decentralized Prediction Engine (Oracles). The Aeternity project was once regarded as Ethereum in Europe and was considered as a super-quality project by many coins. However, after two rounds of ICO, the project team did not issue coins as quickly as many projects, and what was worse was that in Ethereum. In the event of a purse theft, the funds raised by AE's second round of ICOs were also lost. This made it very disappointing for the participating ICOs.",
     "Bitquence是一种针对区块链的人力驱动的加密服务。Bitquence的使命是让每个人都能获得参与到令人生畏的加密货币市场的机会，加速区块链技术的采用，并让加密货币的所有权民主化。我们让加密货币变的更容易购买和转让，从而每个人都能够参与到新经济中。我们信奉中本聪创建的哲学使命。我们通过创建普通人可访问的安全层，将本该属于大家的权力交还给大家。Bitquence优势：1.安全：最先进的数字安全保证您的资产安全。2.简化和透明度：资产分配是透明的，可以完全了解详细的分配信息。分配是简单易懂的，所以你知道你在买什么。3.高流动性和访问性：所有资产仅分配在流动资产中，因此易于存款和取款。使用Bitquence流动性网络，任何类型的付款都可以立即发送到任何地方。4.快速入门：存入数字货币或法定货币，没有设置费和隐藏费用。快速的资产配置和管理钱包可以快速实现价值多元化。5.社区共识：社区共识风险预测奖励有经验的用户的专业知识，同时为新用户提供有关数字资产风险和质量的信息。6.移动通用电子钱包：我们的移动专家团队确保Bitquence是移动友好的，所以您可以随时监控和转移分配。":

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import exchangeViewBase from "../../../components/../components/ExchangeViewBase";
+import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Input from "../../../common/component/Input";
 import Button from "../../../common/component/Button";
 
