@@ -928,7 +928,7 @@ export default function en(state) {
     "helo-coin-white": "White paper",
     // h5
     "help-advise": "Suggestion",
-    "help-remind": "为保护投资者利益，QB.com会对所有上线交易品种进行评估审核，请申请人/机构提供相关信息并发送至",
+    "help-remind": "To protect the interests of the investors, QB.com will evaluate the all online trading products and audit, please provide the related information and sent to the applicant/organization:",
 
     "help-download-title": `${nameUsd} Exchange Platform Mobile Client`,
     "help-download-intro": "Multi-Platform Covering IOS, Android and Windows, Seamlessly Support Trading Services",

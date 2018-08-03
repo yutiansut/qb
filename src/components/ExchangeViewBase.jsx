@@ -66,6 +66,7 @@ export default class ExchangeViewBase extends ViewBase {
       $calendar_nextYear: "/static/web/calendar/calendar_next_year.svg",
       $calendar_preMonth: "/static/web/calendar/calendar_pre_month.svg",
       $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg",
+      $h5_logo: "/static/logo/logo_h5.png", // h5图片
       $h5_user_identity: '/static/mobile/user/icon_wd_sfrz@3x.png',
       $h5_user_safe: '/static/mobile/user/icon_wd_aqzx@3x.png',
       $h5_user_order: '/static/mobile/user/icon_wd_ddgl@3x.png',
