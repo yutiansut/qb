@@ -30,5 +30,7 @@ export default {
     {name: 'extractCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     {name: 'coinCurrency', duration: 0, expiryTime: 0, onlySession:true}, // 用户信息
     { name: 'language', duration: 0, expiryTime: 0 },//语言设置
+
+    {name: 'searchCoin', duration: 0, expiryTime: 0 },//h5-资产-搜索历史记录
   ]
 }

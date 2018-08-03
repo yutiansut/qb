@@ -333,6 +333,11 @@ export default function en(state) {
     "asset-name-existing": "The name is existing",
     "h5-asset-record": "Charge record",
     "h5-asset-search-history": "Search history",
+    "h5-asset-recommend-currency": "Recommend currency",
+    "h5-asset-common-currency": "Common currency",
+    "h5-asset-search-placeholder": "Please input keyword",
+    "h5-asset-empty1": "No search for the information you want",
+    "h5-asset-empty2": "Please reenter it.",
   };
   const market = {
     "market-favorite": "Favorites",

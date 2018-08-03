@@ -534,4 +534,25 @@ export default class AssetController extends ExchangeControllerBase {
   //     currencyAmount: this.view.state.currencyAmount
   //   });
   // }
+
+  //h5-资产搜索使用
+  //添加搜索历史
+  addSearchHistory(coin){
+      let his = this.store.Storage.searchCoin.get() || [];
+      let i = his.indexOf(coin.toLowerCase());
+      i>-1 && his.splice(i,1);
+      his.unshift(coin);
+      this.store.Storage.searchCoin.set(his);
+  }
+
+  //返回搜索历史
+  getSearchHistory(){
+      return this.store.Storage.searchCoin.get();
+  }
+
+  clearSearchHistory(){
+      this.store.Storage.searchCoin.removeAll();
+      this.view.setState({});
+  }
+
 }

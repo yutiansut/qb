@@ -31,7 +31,7 @@ export default class BalanceDetail extends exchangeViewBase {
   }
 
   async componentWillMount(){
-    this.addContent({con: this.intl.get("asset-detail")});
+    this.addContent({con: this.intl.get("asset-detail"),link: false, url: "/wallet"});
 
     await this.getAssets();
     //获取路由参数,选取对应币种

@@ -322,6 +322,11 @@ export default function zh(state) {
     "asset-funds-transfer": '资金划转',
     "h5-asset-record": "充提记录",
     "h5-asset-search-history": "搜索历史",
+    "h5-asset-recommend-currency": "推荐币种",
+    "h5-asset-common-currency": "常用币种",
+    "h5-asset-search-placeholder": "请输入关键词",
+    "h5-asset-empty1": "没有搜到您要的信息",
+    "h5-asset-empty2": "请重新输入哦～",
   };
   const market = {
     "market-favorite": "收藏",

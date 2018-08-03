@@ -132,7 +132,7 @@ export default class AssetStore extends ExchangeStoreBase {
     let { va, vae, vac, cl } = await this.Proxy.totalAsset({
       // userId: this.controller.userId,
       token: this.controller.token
-    });console.log(cl,"====");
+    });
     this.state.wallet =
       (cl &&
         cl.map(({ cn, fn, cic, cid, avc, frc, va, c, w, e, vac, vae}) => {
