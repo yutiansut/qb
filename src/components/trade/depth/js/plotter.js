@@ -247,6 +247,7 @@ export default class Plotter {
         ctx.stroke();
         ctx.fill();
 
+        /*
         //柱状图
         ctx.fillStyle=Theme._color["barFill1"];
         for(let i=0;i<bids.length-1;i++){
@@ -264,6 +265,7 @@ export default class Plotter {
             let bh=oY-by;
             ctx.fillRect(bx,by,bw,bh);
         }
+        */
 
         // ======================================================================================
         // draw overlay
