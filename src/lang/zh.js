@@ -572,7 +572,7 @@ export default function zh(state) {
     "user-passportErr": "护照填写有误",
     "user-supportPhone": "目前仅支持中国大陆手机号码",
     "user-errIp": "请输入正确的IP",
-    "user-gogleSucc": "谷歌验证设置成功",
+    "user-googleSucc": "谷歌验证设置成功",
     "user-setFundPwd": "请设置资金密码",
 
     "user-log-1": "登录日志",
@@ -611,7 +611,20 @@ export default function zh(state) {
     "user-verify-state4": "恶意上传",
     "user-verify-state5": "永久禁止",
     "user-not-surport": "请前往PC端完成",
-    "user-aboutUsIntroduce": 'QB.com 交易所,<br/>QB.com注重用户体验和产品安全，致力于提供全方位服务，打造高品质数字资产金融服务机构。QB.com交易平台以"品质"、"超越"为核心价值观，以用户利益为最高出发点，提供高品质服务和产品体验，努力推动区块链行业的发展和全球新金融改革，不断超越自己，为QB平台的全球数字资产投资用户提供愈发完善的全方位金融服务体验。<br/>目前，QB.com已完成全球多个国家及地区的布局。'
+    "user-aboutUsIntroduce": 'QB.com 交易所,<br/>' +
+    'QB.com注重用户体验和产品安全，致力于提供全方位服务，打造高品质数字资产金融服务机构。QB.com交易平台以"品质"、"超越"为核心价值观，以用户利益为最高出发点，提供高品质服务和产品体验，努力推动区块链行业的发展和全球新金融改革，不断超越自己，为QB平台的全球数字资产投资用户提供愈发完善的全方位金融服务体验。<br/>' +
+    '目前，QB.com已完成全球多个国家及地区的布局。',
+    "user-aboutUsAdvantages": "核心优势与特色",
+    "user-aboutUsSecurity": "顶级安全与风控",
+    "user-aboutUsQuality": "高品质产品与服务体验",
+    "user-aboutUsSecurityCon": "- 多网融合确保服务器集群24小时不间断服务，全程HTTPS传输；<br/>" +
+    "- 网络、服务器和第三方服务全部经过容错处理，确  保服务持续稳定；<br/>" +
+    "- 自研全球顶尖防DDOS攻击系统；<br/>" +
+    "- 自研风控系统，7×24小时不间断实时监控预警",
+    "user-aboutUsQualityCon": "- 交易系统完全自主研发，最高能处理每秒100万笔交易；<br/>" +
+    "- 证券级别算法，支持FOK\IOC\GT等多种专业交易指令；<br/>" +
+    "- 多平台终端接入，覆盖iOS、Android、Windows，无缝支持全业务功能；<br/>" +
+    "- 7*24多语种客服随时在线，支持多种反馈方式，保障优质客户体验",
 
   };
   const login = {

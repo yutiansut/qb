@@ -647,7 +647,21 @@ export default function en(state) {
     "user-verify-state3": "Failed",
     "user-verify-state4": "Malicious",
     "user-verify-state5": "Prohibit",
-    "user-not-surport": "Please go to the PC client to complete"
+    "user-not-surport": "Please go to the PC client to complete",
+    "user-aboutUsIntroduce": 'QB.com Cryptocurrency Exchange，<br/>' +
+    'QB.com focus on user experience and platform security, aiming to provide full round service to the customers, and create a high quality digital assets financial service platform. With "quality" and "beyond" as the core value, and the mission of providing quality service and product, promoting blockchain industry and new financial reform, QB exchange always takes customer interest to the highest level and strikes to push beyond. <br/>' +
+    'Right now QB exchange has finished the global layout in several countries and regions.',
+    "user-aboutUsAdvantages": "Advantages",
+    "user-aboutUsSecurity": "Top-class Security and Risk Control",
+    "user-aboutUsQuality": "High Quality Platform and Service",
+    "user-aboutUsSecurityCon": "- Multi-network integration ensures that the server cluster is available 24*7, and full HTTPS transmission;<br/>" +
+    "- Network, servers and third-party services are strongly fault-tolerant to ensure the platform's stability;<br/>" +
+    "- Independently developed the world-class anti-DDOS attack system;<br/>" +
+    "- Independently developed the world-class security risk control system with 24/7 real time monitoring and warming.",
+    "user-aboutUsQualityCon": "- Self-developed trading system with the processing speed of one million trading amount per second;<br/>" +
+    "- Securities market algorithms that support trading commands such as OK\IOC\GT;<br/>" +
+    "- Multi-platform terminal access covering IOS, Android and Windows, seamlessly support full-service features;<br/>" +
+    "- 7*24 multilingual online customer services to make sure an excellent user experience."
   };
 
   const activity = {

@@ -53,6 +53,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showIp: false,
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
+      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定
     }
 
     const {controller} = props
@@ -94,7 +95,8 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       showSet: true,
       type: type,
-      verifyNum: this.intl.get("sendCode")
+      verifyNum: this.intl.get("sendCode"),
+      bindOrigin: 0
     })
   }
   showOther() { // 打开其他安全设置
@@ -102,7 +104,8 @@ export default class userSafeCenter extends exchangeViewBase {
       otherShow: true,
     })
   }
-  selectType(content, index, i, type, e) { // 两步认证单选
+  selectType(index, i, type) { // 两步认证单选
+    console.log(111, index, i, type)
     if (i === 2 && this.state.userInfo.fundPwd) {
       this.setState({
         remindPopup: true,
@@ -118,6 +121,7 @@ export default class userSafeCenter extends exchangeViewBase {
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
+      bindOrigin: 1,
       showGoogle: this.state.userInfo.googleAuth === 1 && index === 0 ? true : false,
       showChange: (changeArr[changeTypeArr[i]] === index) || (changeTypeArr[i] === 0) || (this.state.userInfo.googleAuth === 1 && index === 0) || (!this.state.userInfo.email && index === 1) || (!this.state.userInfo.phone && index === 2) ? false : true
     })
@@ -279,7 +283,7 @@ export default class userSafeCenter extends exchangeViewBase {
             <p>{this.intl.get("user-twoVerify")}</p>
             {this.state.verifyList.map((v, i) => (<dl className="clearfix" key={i}>
               <dt>{v.title}</dt>
-              {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(item, index, i, this.state.userInfo.email ? 2 : 1)}>
+              {v.contentList.map((item, index) => (<dd key={index} onClick = {(content) => this.selectType(index, i, this.state.userInfo.email ? 2 : 1)}>
                 <img src={this.$imagesMap.$checked} alt="" className={`${(item.flag) ? '' : 'hide'}`}/>
                 <img src={this.$imagesMap.$nomal_check} alt="" className={`${(item.flag) ? 'hide' : ''}`}/>
                 <span>

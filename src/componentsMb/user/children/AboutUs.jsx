@@ -7,8 +7,8 @@ export default class AboutUs extends exchangeViewBase {
     this.state = {
       qbtTrade: [],
       introduceList: [
-        {title:"", url:"", content:""},
-        {title:"", url:"", content:""}
+        {title: this.intl.get("user-aboutUsSecurity"), url:"", content: this.intl.getHTML("user-aboutUsSecurityCon")},
+        {title: this.intl.get("user-aboutUsQuality"), url:"", content: this.intl.getHTML("user-aboutUsQualityCon")}
       ],
       contact: [
         {title:"", link:""},
@@ -40,8 +40,8 @@ export default class AboutUs extends exchangeViewBase {
           {/*)}*/}
         <div>
           <img src="" alt=""/>
-          <p></p>
-          <h1></h1>
+          <p>{this.intl.getHTML("user-aboutUsIntroduce")}</p>
+          <h1>{this.intl.get("user-aboutUsAdvantages")}</h1>
           <ul>
             {this.state.introduceList && this.state.introduceList.map((v, index) => (<li key={index}>
               <h2>{v.title}</h2>
