@@ -17,7 +17,10 @@ export default class MarketController extends ExchangeControllerBase {
     await this.store.getCoinInfo(coinId);
     this.view.setState({coinInfo: this.store.state.coinInfo});
   }
-
+  async getQb(){
+    await this.store.getQb();
+    return this.store.state.qb;
+  }
   async getMarket() {
     await this.store.getMarket();
   }

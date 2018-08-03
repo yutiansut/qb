@@ -42,6 +42,7 @@ export default class MarketStore extends ExchangeStoreBase {
         "icoPriceEN": 0  // 美元ico价格
 
       },
+      qb: {},
       "list": [
         {
           "tradePairId": 0,
@@ -298,7 +299,10 @@ export default class MarketStore extends ExchangeStoreBase {
       "icoPriceEN": r.ipe  // 美元ico价格
     });
   }
-
+  async getQb() {
+    let r = await this.Proxy.getQb();
+    r.d && (this.state.qb = r);
+  }
   //收藏列表
   async getFavoriteList(token) {
     this.state.collectArr = await this.Proxy.getFavoriteList({

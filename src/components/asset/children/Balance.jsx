@@ -20,13 +20,18 @@ export default class Balance extends exchangeViewBase {
     this.getAssets = controller.getAssets.bind(controller)
     // 获取Qbt
     this.getQbt = controller.getMyQbt.bind(controller);
+    // 获取Qb信息
+    this.getQb = controller.marketController.getQb.bind(controller.marketController);
+
   }
 
   async componentWillMount() {
     await this.getAssets();
     if(this.props.controller.configData.activityState) {
       let qbt = await this.getQbt();
+      let info = await this.getQb();
       if (qbt && this.state.wallet) {
+        qbt.coinIcon = info.d ? info.d.lu : '';
         this.state.wallet.unshift(qbt);
         this.setState({ wallet: this.state.wallet})
       }

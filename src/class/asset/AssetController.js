@@ -373,10 +373,11 @@ export default class AssetController extends ExchangeControllerBase {
   filte(wallet, value, hideLittle, hideZero) {
     let arr1 = this.filter(wallet, item => {
       return (
-        item.coinName.includes(value.toLowerCase()) ||
-        item.fullName.includes(value.toLowerCase())
+        item.coinName.toLowerCase().includes(value.toLowerCase()) ||
+        item.fullName.toLowerCase().includes(value.toLowerCase())
       );
     });
+    console.log(arr1)
     let arr2 = this.filter(arr1, item => {
       return !hideLittle || item.valuationBTC > 0.001;
     });
