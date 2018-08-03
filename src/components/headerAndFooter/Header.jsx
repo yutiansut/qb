@@ -35,7 +35,7 @@ export default class Header extends ExchangeViewBase {
       navArrayLeft : [
         {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false, tokenShow: false},
         {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false, tokenShow: false},
-        {label: `${this.intl.get('header-legal')}`, to: 'https://mixotc.com/', select: false, linkUser: false, tokenShow: false, notLink: true},
+        // {label: `${this.intl.get('header-legal')}`, to: 'https://mixotc.com/', select: false, linkUser: false, tokenShow: false, notLink: true},
         {
           label: `${this.intl.get('header-assets')}`,
           to: '/wallet',
