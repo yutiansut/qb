@@ -9,6 +9,12 @@ export default class AboutUs extends exchangeViewBase {
       introduceList: [
         {title:"", url:"", content:""},
         {title:"", url:"", content:""}
+      ],
+      contact: [
+        {title:"", link:""},
+        {title:"", link:""},
+        {title:"", link:""},
+        {title:"", link:""}
       ]
     }
     const {controller} = this.props
@@ -37,10 +43,13 @@ export default class AboutUs extends exchangeViewBase {
           <p></p>
           <h1></h1>
           <ul>
-            <li>
-              <h2></h2>
-            </li>
+            {this.state.introduceList && this.state.introduceList.map((v, index) => (<li key={index}>
+              <h2>{v.title}</h2>
+              <img src={v.url} alt=""/>
+              <p>{v.content}</p>
+            </li>))}
           </ul>
+          <h1></h1>
         </div>
         {this.props.controller.configData.activityState ? <a className="invite-btn" onClick={e => {
               history.push(`/mgenrealize/invite/?uid=${controller.userId}`)

@@ -611,6 +611,7 @@ export default function zh(state) {
     "user-verify-state4": "恶意上传",
     "user-verify-state5": "永久禁止",
     "user-not-surport": "请前往PC端完成",
+    "user-aboutUsIntroduce": 'QB.com 交易所,<br/>QB.com注重用户体验和产品安全，致力于提供全方位服务，打造高品质数字资产金融服务机构。QB.com交易平台以"品质"、"超越"为核心价值观，以用户利益为最高出发点，提供高品质服务和产品体验，努力推动区块链行业的发展和全球新金融改革，不断超越自己，为QB平台的全球数字资产投资用户提供愈发完善的全方位金融服务体验。<br/>目前，QB.com已完成全球多个国家及地区的布局。'
 
   };
   const login = {
