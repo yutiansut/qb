@@ -1,13 +1,13 @@
 .my-qbt
   .user-info
-    background $h5-asset-bg
+    background  $h5-activity-bg-main
     padding .20rem .15rem
     .user-name
       height .8rem
       label
         line-height .4rem
         font-size .20rem
-        color $h5-asset-font-active
+        color $h5-activity-font-theme
       img
         height 0.6rem
         width: 0.6rem
@@ -33,14 +33,14 @@
       .content
         width 30%
         label
-          color $h5-asset-font-normal
+          color  $h5-activity-font-main
           line-height .4rem
           font-size .15rem
         p
-          color $h5-asset-font-light
+          color $h5-activity-font-light
           font-size .10rem
       .content-left
-        border-right 1px solid $h5-asset-border
+        border-right 1px solid $h5-activity-font-dark
         margin-right 15px
 
   .my-invite
@@ -50,20 +50,32 @@
       text-align center
       padding-top 10px
       label
-        color $h5-asset-font-normal
+        color $h5-activity-font-main
 
     .invite-list
       min-height 1rem
       text-align center
       label
-        color $h5-asset-font-light
+        color $h5-activity-font-light
+      ul.list-ul
+
+        height .36rem
+        line-height .36rem
+
+      li.list-li
+        float none
+        width 100%
+        font-size .13rem
+        color $h5-activity-font-main
+        display flex
+        justify-content space-between
+        text-align center
     .invited
       text-align center
       border-top 1px solid $h5-asset-border
       padding 15px
       label
-
-        color $h5-asset-font-active
+        color $h5-activity-font-theme
 
   .scan
     background $h5-asset-bg

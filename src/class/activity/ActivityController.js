@@ -18,7 +18,9 @@ export default class ActivityController extends ExchangeControllerBase {
 
   // 获取我的QBT
   async getMyQbt() {
-    let result = await this.store.getMyQbt();
+    debugger;
+    let token = this.userToken;
+    let result = await this.store.getMyQbt(token);
     if (result) this.view.setState({ Qbt: result });
     return result;
   }

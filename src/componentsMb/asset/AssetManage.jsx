@@ -9,7 +9,7 @@ import Balance from "./children/Balance";
 import History from "./children/History";
 import BalanceDetail from "./children/balanceDetail";
 import Charge from "./children/Charge";
-import MyQBT from "./children/MyQBT";
+import MyQBT from "../activity/children/MyQBT";
 import "./style/asset.styl"
 
 export default class AssetManage extends exchangeViewBase {

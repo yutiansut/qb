@@ -15,10 +15,10 @@ export default class NoticeStore extends ExchangeStoreBase {
     }
   }
   // 获取我的QBT
-  async getMyQbt() {
+  async getMyQbt(token) {
     // console.log(this.controller.token);
     let result = await this.Proxy.getMyQbt({
-      token: this.controller.token
+      token: token
     });
     if (result && result.id) {
       return {
@@ -69,11 +69,13 @@ export default class NoticeStore extends ExchangeStoreBase {
   }
 
   async getInvited(userToken, page = 1, pageSize = 10){
+
     let result = await this.Proxy.getInvited({
       token: userToken,
       p: page,
       s: pageSize
-    })
+    });
+    debugger;
     return result && result.l && result.l.map(v=>{
       return {
         "inviter": v.in,

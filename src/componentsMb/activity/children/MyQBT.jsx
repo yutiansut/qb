@@ -3,34 +3,20 @@ import {NavLink} from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
 import Popup from '../../../common/component/Popup/index'
-import Button from "../../../common/component/Button"
-import Download from '../../../../src/class/lib/DownloadCanvasImage'
+import Button from "../../../common/component/Button/index"
+import Download from '../../../class/lib/DownloadCanvasImage'
 
 export default class MyQBT extends exchangeViewBase {
   constructor(props) {
     super(props);
     let {controller} = props;
     this.state = {
-      currency: "BTC",
-      address: "",
-      showPopup: false,
-      popMsg: "",
-      popType: "",
-      Qbt: {}
+      Qbt: {},
+      recordList: []
     };
     //绑定view
     controller.setView(this);
-    //初始化数据，数据来源即store里面的state
-    let {
-      walletList,
-      walletHandle,
-      coinAddress
-    } = controller.initState;
 
-    this.state = Object.assign(this.state, {
-      walletList,
-      coinAddress
-    });
 
     this.copy = el => {
       if (controller.copy(el)) {
@@ -39,35 +25,44 @@ export default class MyQBT extends exchangeViewBase {
         // this.setState({showPopup: true, popMsg: this.intl.get(""), popType: "tip3"})
       }
     };
-    this.deal = controller.dealCoin.bind(controller);
-    this.getWalletList = controller.getWalletList.bind(controller);
-    this.getCoinAddress = controller.getCoinAddress.bind(controller);
+
     this.getMyQbt = controller.getMyQbt.bind(controller);
+    this.getInvited = controller.getInvited.bind(controller);
 
   }
 
   saveIMG() {
-    debugger;
     Download(document.querySelector(".qrcode canvas"), "png", "img");
   }
 
   async componentWillMount() {
-    await this.getWalletList();
-    let currency = this.props.location.query && this.props.location.query.currency;
-    currency && (currency = currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
-    this.getCoinAddress(currency || this.state.currency);
+    // await this.getWalletList();
+    // let currency = this.props.location.query && this.props.location.query.currency;
+    // currency && (currency = currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
+    // this.getCoinAddress(currency || this.state.currency);
     this.getMyQbt();
+    this.getInvited();
   }
 
   componentDidMount() {
   }
 
   render() {
-    let {coinAddress, verifyNumber} = this.state.coinAddress;
+    // let {coinAddress, verifyNumber} = this.state.coinAddress;
     const {controller} = this.props;
     let Qbt = this.state.Qbt;
-    let walletList = this.deal(this.state.walletList, 'c');
-    let currency = this.state.currency.toUpperCase();
+    // let walletList = this.deal(this.state.walletList, 'c');
+    // let currency = this.state.currency.toUpperCase();
+    let relist = [
+      {
+        invited: '6666666',
+        prize: '666'
+      },
+      {
+        invited: '7777777',
+        prize: '777'
+      }
+    ];
     return (
       <div className="my-qbt">
         <div className="user-info">
@@ -100,11 +95,22 @@ export default class MyQBT extends exchangeViewBase {
 
           </div>
           <div className="invite-list">
-            <label>暂无邀请记录</label>
-          </div>
 
+            <ul className="list-ul">
+              {
+                // this.state.recordList && this.state.recordList.map((v, index) => (
+                relist && relist.map((v, index) => (
+                  <li key={index} className="list-li">
+                    <span className="invited-name">{v.invited}</span>
+                    <span className="invited-prize">+{v.prize} QBT</span>
+                  </li>
+                ))
+              }
+            </ul>
+            {/*<label>暂无邀请记录</label>*/}
+          </div>
           <div className="invited">
-            <label>已邀请: x人 累计奖励: x QBT </label>
+            <label>{`已邀请: ${relist.length}人 累计奖励: ${relist.length * 10} QBT `}</label>
           </div>
         </div>
         <div className="scan">
@@ -120,7 +126,8 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="qrcode-container">
             <div className="qrcode">
-              <QRCode value={`http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml`} level="M" bgColor="#000" fgColor="#fff" />
+              <QRCode value={`http://news.sina.com.cn/s/2018-08-02/doc-ihhehtqf4950150.shtml`} level="M" bgColor="#000"
+                      fgColor="#fff"/>
             </div>
 
             <div className="qr-btns">
