@@ -45,7 +45,7 @@ export default class Charge extends exchangeViewBase {
         let historyList = this.getSearchHistory() || [];
         let recommendList = recommendData || [];
         let resultList = this.filter(wallet, input) || [];
-        
+
         return (
            <div className="search">
                {/*搜索头部*/}
