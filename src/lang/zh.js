@@ -625,6 +625,10 @@ export default function zh(state) {
     "- 证券级别算法，支持FOK\IOC\GT等多种专业交易指令；<br/>" +
     "- 多平台终端接入，覆盖iOS、Android、Windows，无缝支持全业务功能；<br/>" +
     "- 7*24多语种客服随时在线，支持多种反馈方式，保障优质客户体验",
+    "user-aboutUsTwitter": "Twitter:",
+    "user-aboutUsWeChat": "客服微信:",
+    "user-aboutUsTelegraph": "电报群:",
+    "user-aboutUsEmail": "联系邮箱:"
 
   };
   const login = {

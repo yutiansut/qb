@@ -66,6 +66,7 @@ export default class ExchangeViewBase extends ViewBase {
       $calendar_nextYear: "/static/web/calendar/calendar_next_year.svg",
       $calendar_preMonth: "/static/web/calendar/calendar_pre_month.svg",
       $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg",
+      $h5_logo: "/static/logo/logo_h5.png", // h5图片
       $h5_user_identity: '/static/mobile/user/icon_wd_sfrz@3x.png',
       $h5_user_safe: '/static/mobile/user/icon_wd_aqzx@3x.png',
       $h5_user_order: '/static/mobile/user/icon_wd_ddgl@3x.png',
@@ -81,7 +82,9 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_header_language: "/static/mobile/header/icon_yy@2x.png",
       $h5_search: '/static/mobile/icon_search_big.png',
       $h5_order_select: '/static/mobile/order/icon_shaixuan@3x.png',
-      $h5_back: "/static/mobile/back_white@3x.png"
+      $h5_back: "/static/mobile/back_white@3x.png",
+      $h5_user_about_anquan: "/static/mobile/user/icon_wd_gywm_anquan@2x.png",
+      $h5_user_about_pinzhi: "/static/mobile/user/icon_wd_gywm_pinzhi@2x.png",
     }
   }
 

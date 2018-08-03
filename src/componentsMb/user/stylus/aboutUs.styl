@@ -2,8 +2,56 @@
 .about-us
   display flex
   flex-direction column
-  img
-    width 100%
+  //img
+  //  width 100%
+  .about-us-con
+    padding 0 .2rem
+    text-align center
+    .logo
+      width 2.2rem
+      margin .355rem 0
+    h1
+      margin-bottom .32rem
+      color $h5-user-font-main
+      opacity .8
+      font-size .24rem
+      text-align center
+    h2
+      margin-bottom .37rem
+      font-size .2rem
+      color $h5-user-font-content
+    p
+      text-align left
+      color $h5-user-font-content
+      line-height .26rem
+      margin-bottom .6rem
+    ul
+      margin-bottom .6rem
+      li
+        padding .4rem .11rem .48rem
+        background $h5-user-bg-con
+        text-align center
+        box-shadow 0 1px 5px 0 rgba(0,0,0,0.30)
+        border-radius .04rem
+        &:nth-of-type(1)
+          margin-bottom .16rem
+        img
+          width 1.2rem
+          margin-bottom .2rem
+        p
+          text-align left
+          margin-bottom 0
+    ol
+      margin-bottom .6rem
+      li
+        margin-bottom .12rem
+        text-align left
+        color $h5-user-font-content
+        span
+          display inline-block
+          width .75rem
+        //b
+        //  margin-left .1rem
   .invite-btn
     height .45rem
     line-height .45rem

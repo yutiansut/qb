@@ -9,11 +9,14 @@ const EXCHANGE_URl = 'qb.com';
 const EXCHANGE_Apply_EMAIL = 'business@qb.com';
 const EXCHANGE_CONTACT_EMAIL = 'support@qb.com';
 const EXCHANGE_ADDR = 'Kemp House 152 -160 City Road, London';
-const EXCHANGE_SERVICE_PHONE = '010-53348151'
+const EXCHANGE_SERVICE_PHONE = '010-53348151';
 const EXCHANGE_SERVICE_QQ = '3310267657';
 const EXCHANGE_COIN = 'QB';
-const CURRENT_URL = 'http://192.168.55.105:80'
+const CURRENT_URL = 'http://192.168.55.105:80';
 const CURRENT_IMGURL = "http://192.168.55.107/";
+const EXCHANGE_TWITTER = '@QB_Exchange';
+const EXCHANGE_WECHAT = 'QBservice';
+const EXCHANGE_TELEGRAPH = 'https://t.me/QB_ExchangeEN';
 
 export default class UserStore extends ExchangeStoreBase {
   constructor(count) {
@@ -35,7 +38,10 @@ export default class UserStore extends ExchangeStoreBase {
       currentImgUrl: CURRENT_IMGURL,
       // language: 'zh-CN',
       language: this.Storage.language.get() || "en-US",
-      activityState: 1
+      activityState: 1,
+      twitter: EXCHANGE_TWITTER,
+      weChat: EXCHANGE_WECHAT,
+      telegraph: EXCHANGE_TELEGRAPH
     }
   }
 

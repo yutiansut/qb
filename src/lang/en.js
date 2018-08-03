@@ -661,7 +661,11 @@ export default function en(state) {
     "user-aboutUsQualityCon": "- Self-developed trading system with the processing speed of one million trading amount per second;<br/>" +
     "- Securities market algorithms that support trading commands such as OK\IOC\GT;<br/>" +
     "- Multi-platform terminal access covering IOS, Android and Windows, seamlessly support full-service features;<br/>" +
-    "- 7*24 multilingual online customer services to make sure an excellent user experience."
+    "- 7*24 multilingual online customer services to make sure an excellent user experience.",
+    "user-aboutUsTwitter": "Twitter:",
+    "user-aboutUsWeChat": "WeChat:",
+    "user-aboutUsTelegraph": "Telegraph:",
+    "user-aboutUsEmail": "E-mail:"
   };
 
   const activity = {

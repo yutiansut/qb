@@ -12,6 +12,7 @@ let marketController
 import Terms from './children/Terms' // 服务协议
 import Pricing from './children/Pricing' // 费率标准
 import Api from './children/Api' // API文档
+import Assist from './children/Assist' // 帮助中心
 
 import "./style/index.styl"
 
@@ -35,6 +36,9 @@ export default class Help extends exchangeViewBase {
     const api = () => {
       return <Api controller={this.assetController} />;
     };
+    const assist = () => {
+      return <Assist controller={this.assetController} />;
+    }
 
     return <div className="help-wrap-mb">
       <div className="route">
@@ -42,6 +46,7 @@ export default class Help extends exchangeViewBase {
             <Route path={`${match.url}/terms`} component={terms} />
             <Route path={`${match.url}/pricing`} component={pricing} />
             <Route path={`${match.url}/api`} component={api} />
+            <Route path={`${match.url}/assist`} component={assist} />
             <Redirect to={`${match.url}/terms`} />
           </Switch>
         </div>

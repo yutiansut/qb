@@ -7,18 +7,19 @@ export default class AboutUs extends exchangeViewBase {
     this.state = {
       qbtTrade: [],
       introduceList: [
-        {title: this.intl.get("user-aboutUsSecurity"), url:"", content: this.intl.getHTML("user-aboutUsSecurityCon")},
-        {title: this.intl.get("user-aboutUsQuality"), url:"", content: this.intl.getHTML("user-aboutUsQualityCon")}
+        {title: this.intl.get("user-aboutUsSecurity"), url: this.$imagesMap.$h5_user_about_anquan, content: this.intl.getHTML("user-aboutUsSecurityCon")},
+        {title: this.intl.get("user-aboutUsQuality"), url: this.$imagesMap.$h5_user_about_pinzhi, content: this.intl.getHTML("user-aboutUsQualityCon")}
       ],
-      contact: [
-        {title:"", link:""},
-        {title:"", link:""},
-        {title:"", link:""},
-        {title:"", link:""}
-      ]
+      // contactList: [
+      //   {title: this.intl.get("user-aboutUsTwitter"), link:"@QB_Exchange"},
+      //   {title: this.intl.get("user-aboutUsWeChat"), link:"QBservice"},
+      //   {title: this.intl.get("user-aboutUsTelegraph"), link:"https://t.me/QB_ExchangeEN"},
+      //   {title: this.intl.get("user-aboutUsEmail"), link:"support@qb.com"}
+      // ]
     }
     const {controller} = this.props
     controller.setView(this)
+    console.log('关于我们', controller.configData)
     this.getQbtTrade = controller.getQbtTrade.bind(controller)
     this.addContent = controller.headerController.addContent.bind(controller.headerController)
   }
@@ -38,8 +39,8 @@ export default class AboutUs extends exchangeViewBase {
         {/*{this.state.qbtTrade && this.state.qbtTrade.map((v,index) =>*/}
           {/*<img key={index} src={language === "zh-CN" ? v.uc : v.ue}/>*/}
           {/*)}*/}
-        <div>
-          <img src="" alt=""/>
+        <div className="about-us-con">
+          <img src={this.$imagesMap.$h5_logo} alt="" className="logo"/>
           <p>{this.intl.getHTML("user-aboutUsIntroduce")}</p>
           <h1>{this.intl.get("user-aboutUsAdvantages")}</h1>
           <ul>
@@ -49,7 +50,17 @@ export default class AboutUs extends exchangeViewBase {
               <p>{v.content}</p>
             </li>))}
           </ul>
-          <h1></h1>
+          <h1>{this.intl.get("notice-contact")}</h1>
+          <ol>
+            {/*{this.state.contactList && this.state.contactList.map((v, index) => (<li key={index}>*/}
+              {/*<span>{v.title}</span>*/}
+              {/*<b>{v.link}</b>*/}
+            {/*</li>))}*/}
+            <li><span>{this.intl.get("user-aboutUsTwitter")}</span><b>{controller.configData.twitter}</b></li>
+            <li><span>{this.intl.get("user-aboutUsWeChat")}</span><b>{controller.configData.weChat}</b></li>
+            <li><span>{this.intl.get("user-aboutUsTelegraph")}</span><b>{controller.configData.telegraph}</b></li>
+            <li><span>{this.intl.get("user-aboutUsEmail")}</span><b>{controller.configData.contactEmailUrl}</b></li>
+          </ol>
         </div>
         {this.props.controller.configData.activityState ? <a className="invite-btn" onClick={e => {
               history.push(`/mgenrealize/invite/?uid=${controller.userId}`)

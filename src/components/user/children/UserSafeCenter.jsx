@@ -149,9 +149,6 @@ export default class userSafeCenter extends exchangeViewBase {
     // }
   }
 
-
-
-
   // selectNotice(index, type) { // 选择通知
   //   this.setState({
   //     type: type,
@@ -195,12 +192,17 @@ export default class userSafeCenter extends exchangeViewBase {
     this.getCaptchaVerify()
   }
 
+  clearErr2() {
+    this.setState({
+      popupInputErr2: ''
+    })
+  }
 
   componentWillMount() {
 
   }
 
-  componentWillUpdate(...parmas) {
+  componentWillUpdate(props, state, next) {
 
   }
 
@@ -226,21 +228,6 @@ export default class userSafeCenter extends exchangeViewBase {
     noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-noticePhone") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
     this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
 
-  }
-
-  componentWillUpdate(props, state, next) {
-    // console.log(232, state)
-    // if(state.showSet || state.showChange) { // 打开更换图片
-    //   // console.log(111)
-    //   // this.getCaptchaVerify()
-    // }
-  }
-
-
-  clearErr2() {
-    this.setState({
-      popupInputErr2: ''
-    })
   }
 
   render() {
