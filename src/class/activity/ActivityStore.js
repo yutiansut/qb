@@ -75,7 +75,6 @@ export default class NoticeStore extends ExchangeStoreBase {
       p: page,
       s: pageSize
     });
-    debugger;
     return result && result.l && result.l.map(v=>{
       return {
         "inviter": v.in,

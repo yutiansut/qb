@@ -86,7 +86,6 @@ export default class MyQBT extends exchangeViewBase {
               <p>获取更多币啦~</p>
             </div>
           </div>
-
         </div>
 
         <div className="my-invite">
@@ -96,21 +95,25 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="invite-list">
 
-            <ul className="list-ul">
-              {
-                // this.state.recordList && this.state.recordList.map((v, index) => (
-                relist && relist.map((v, index) => (
-                  <li key={index} className="list-li">
-                    <span className="invited-name">{v.invited}</span>
-                    <span className="invited-prize">+{v.prize} QBT</span>
-                  </li>
-                ))
-              }
-            </ul>
-            {/*<label>暂无邀请记录</label>*/}
+            {
+              // relist.length ?
+              this.state.recordList.length ?
+                <ul className="list-ul">
+                  {
+                    this.state.recordList.map((v, index) => (
+                    // relist.map((v, index) => (
+                      <li key={index} className="list-li">
+                        <span className="invited-name">{v.invited}</span>
+                        <span className="invited-prize">+{v.prize} QBT</span>
+                      </li>
+                    ))
+                  }
+                </ul> : <label>暂无邀请记录</label>
+
+            }
           </div>
           <div className="invited">
-            <label>{`已邀请: ${relist.length}人 累计奖励: ${relist.length * 10} QBT `}</label>
+            <label>{`已邀请: ${ this.state.recordList.length}人 累计奖励: ${ this.state.recordList.length * 10} QBT `}</label>
           </div>
         </div>
         <div className="scan">
