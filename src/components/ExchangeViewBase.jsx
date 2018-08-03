@@ -79,6 +79,9 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_header_order: "/static/mobile/header/icon_dd@2x.png",
       $h5_header_user: "/static/mobile/header/icon_gr@2x.png",
       $h5_header_language: "/static/mobile/header/icon_yy@2x.png",
+      $h5_search: '/static/mobile/icon_search_big.png',
+      $h5_order_select: '/static/mobile/order/icon_shaixuan@3x.png',
+      $h5_back: "/static/mobile/back_white@3x.png"
     }
   }
 

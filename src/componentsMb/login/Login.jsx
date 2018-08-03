@@ -106,7 +106,7 @@ export default class Login extends exchangeViewBase {
   }
 
   componentDidMount() {
-    this.addContent('', false, true, false, '')
+    this.addContent({})
     this.getCaptchaVerify();
     let queryIndex = this.props.location.query && this.props.location.query.titleIndex
     queryIndex && this.setState({titleIndex: queryIndex})

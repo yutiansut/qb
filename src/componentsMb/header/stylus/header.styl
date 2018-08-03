@@ -42,37 +42,51 @@ html,body
   height .45rem
   padding 0 .12rem
   background $h5-header-bg
-  display flex
-  align-items center
+  line-height .45rem
+  //display flex
+  //align-items center
   border-bottom .01rem solid $h5-header-border
   &.hide
     display none
   .nav-jsx
+    width 100%
+    height 100%
     position relative
-    flex-grow 1
+    //flex-grow 1
     img
+      margin-top .13rem
+    .home-logo
+      position absolute
       height .19rem
+    .search-img
+      width .16rem
+      height .16rem
+      margin-top .14rem
     b
-      margin-left 40%
+      position absolute
+      margin-left 50%
+      transform translateX(-50%)
       color $h5-header-font-normal
     .nav-back
-      position relative
-      padding-left .13rem
-      color $h5-header-font-normal
-      &:before
-        position absolute
-        top 50%
-        left 0
-        content ''
-        width .08rem
-        height .16rem
-        background-image $h5-back
-        background-size cover
-        transform translateY(-50%)
-  .nav-menu
-    img
+      width .08rem
+      height .16rem
+      //position relative
+      //padding-left .13rem
+      //color $h5-header-font-normal
+      //&:before
+      //  position absolute
+      //  top 50%
+      //  left 0
+      //  content ''
+      //  width .08rem
+      //  height .16rem
+      //  background-image $h5-back
+      //  background-size cover
+      //  transform translateY(-50%)
+    .nav-menu
       height .18rem
       width auto
+      margin-left .29rem
   .nav-hidden
     position: fixed
     z-index: 100001

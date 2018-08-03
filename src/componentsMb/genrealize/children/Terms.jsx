@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
-import "../style/terms.styl"
+// import "../style/terms.styl"
 
 export default class Terms extends exchangeViewBase {
   constructor(props) {

@@ -17,7 +17,7 @@ export default class Home extends exchangeViewBase {
   }
 
   componentDidMount() {
-    this.addContent('', true, false, false, '')
+    this.addContent({})
   }
 
   render() {

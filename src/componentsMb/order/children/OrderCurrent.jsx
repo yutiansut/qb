@@ -25,9 +25,9 @@ export default class OrderCurrent extends exchangeViewBase{
       hideZero: false,
     };
     const {controller} = props;
+    console.log('订单', controller)
     controller.setView(this);
     this.state = Object.assign(this.state, controller.initState);
-
     this.getOrderList = this.getOrderList.bind(this);
     this.setListDisplay = this.setListDisplay.bind(this);
     this.setDetailsDisplay = this.setDetailsDisplay.bind(this);
@@ -36,12 +36,14 @@ export default class OrderCurrent extends exchangeViewBase{
     this.choiceReset = this.choiceReset.bind(this);
     this.choiceEnsure = this.choiceEnsure.bind(this);
     // this.changeCoin = this.changeCoin.bind(this);
+    this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
     // this.changeMarket = this.changeMarket.bind(this);
   }
   componentWillMount(){
     this.getOrderList();
   }
   componentDidMount(){
+    this.addContent({con: this.intl.get("order-current"), filter: true, selectFn: this.changeFilter})
     const {pairIdMsg} = this.props;
     let coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin);
     let marketArray = pairIdMsg.pairIdMarket && Object.keys(pairIdMsg.pairIdMarket);
@@ -174,29 +176,28 @@ export default class OrderCurrent extends exchangeViewBase{
     return (this.state.displayType === 'list' ?
     (
       <div className='order-current'>
-
-        <div className='order-current-header clearfix'>
-          <div className="back fl" onClick={() =>{this.props.history.goBack()}}>
-            <img src="../../../../static/mobile/order/icon_fh@3x.png"/>
-            <span>{this.intl.get("back")}</span>
-          </div>
-          <div className="name">{this.intl.get("order-current")}</div>
-          <NavLink to={`${match.url}/history`}>
-          <div className="history fr">
-            <img src="../../../../static/mobile/order/icon_cd@3x.png"/>
-          </div>
-          </NavLink>
-          <div className="filter fr" onClick={this.changeFilter}>
-            <img src="../../../../static/mobile/order/icon_shaixuan@3x.png"/>
-          </div>
-        </div>
-        {/* <div className="order-current-hide">
+        {/*<div className='order-current-header clearfix'>*/}
+          {/*<div className="back fl" onClick={() =>{this.props.history.goBack()}}>*/}
+            {/*<img src="../../../../static/mobile/order/icon_fh@3x.png"/>*/}
+            {/*<span>{this.intl.get("back")}</span>*/}
+          {/*</div>*/}
+          {/*<div className="name">{this.intl.get("order-current")}</div>*/}
+          {/*<NavLink to={`${match.url}/history`}>*/}
+          {/*<div className="history fr">*/}
+            {/*<img src="../../../../static/mobile/order/icon_cd@3x.png"/>*/}
+          {/*</div>*/}
+          {/*</NavLink>*/}
+          {/*<div className="filter fr" onClick={this.changeFilter}>*/}
+            {/*<img src="../../../../static/mobile/order/icon_shaixuan@3x.png"/>*/}
+          {/*</div>*/}
+        {/*</div>*/}
+        <div className="order-current-hide">
           <span className={this.state.hideZero ? "toggle-btn active" : "toggle-btn"}
             onClick={()=>{
               this.setState({hideZero:!this.state.hideZero});
             }}><i/></span>
           <span className="hide-pair">隐藏其他交易对</span>
-        </div> */}
+        </div>
         {this.state.filterShow && 
         <div className='order-current-filter'>
           <div className="filter-container">

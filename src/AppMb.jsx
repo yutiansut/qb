@@ -51,6 +51,7 @@ const header = ({ match, history }) => {
       headerController={headerController}
       configController={configController}
       history={history}
+      match={match}
     />
   );
 };
