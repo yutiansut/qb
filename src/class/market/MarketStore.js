@@ -94,7 +94,7 @@ export default class MarketStore extends ExchangeStoreBase {
     if (name === 'recommend') {
       // 监听推荐币种
       this.WebSocket.general.on('recommendCurrency', data => {
-        console.log('recommendCurrency', data, this.controller)
+        // console.log('recommendCurrency', data, this.controller)
         let result = data && data.d && data.d.map(v=>{
           return {
             coinName: v.n,

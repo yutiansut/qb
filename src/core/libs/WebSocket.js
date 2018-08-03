@@ -33,7 +33,7 @@ export default function () {
       connects.push(webSocket);
       poolSize = connects.length;
       // console.log('webSocket开启 1', webSocket.binaryType)
-      // pool.onOpen && pool.onOpen(event)
+      pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
 

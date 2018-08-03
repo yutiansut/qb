@@ -33,7 +33,7 @@ export default class KlineStore extends ExchangeStoreBase {
       "n": this.state.tradePairName,
       "dur": this.state.duration // k线时间段秒数
     });
-    console.log("k线-http请求：\n",result);
+    // console.log("k线-http请求：\n",result);
     if (result.n) {
       if (!result.ns) { this.state.kline = []; return };
       this.state.kline = result.ns.map(v => {

@@ -56,7 +56,7 @@ const MESSAGE_HANDLER = {
    * @param webSocketList
    */
   install(config) {
-    console.log('aaaaaaa')
+    // console.log('aaaaaaa')
     let pool = {}
     PoolDic[config.name] = pool;
     pool.EMIT_QUENE = [];
@@ -100,7 +100,7 @@ const MESSAGE_HANDLER = {
 
   installWebsocket(transfer, name){
     let pool = PoolDic[name]
-    console.log('bbbbbbbbbbb', JSON.stringify(pool.EMIT_QUENE))
+    // console.log('bbbbbbbbbbb', JSON.stringify(pool.EMIT_QUENE))
     pool.transfer = transfer
     transfer.onMessage = function (data){
       // console.log('pool.onMessage = function (data){', data)
