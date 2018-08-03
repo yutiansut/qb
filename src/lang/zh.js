@@ -560,7 +560,7 @@ export default function zh(state) {
     "user-passportErr": "护照填写有误",
     "user-supportPhone": "目前仅支持中国大陆手机号码",
     "user-errIp": "请输入正确的IP",
-    "user-gogleSucc": "谷歌验证设置成功",
+    "user-googleSucc": "谷歌验证设置成功",
     "user-setFundPwd": "请设置资金密码",
 
     "user-log-1": "登录日志",
