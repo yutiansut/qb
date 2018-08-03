@@ -12,6 +12,7 @@ export default class MyQBT extends exchangeViewBase {
     let {controller} = props;
     this.state = {
       showSection: 'qbt',
+      QbtInfo: {},
       Qbt: {},
       recordList: []
     };
@@ -26,6 +27,7 @@ export default class MyQBT extends exchangeViewBase {
     };
     this.getMyQbt = controller.getMyQbt.bind(controller);
     this.getInvited = controller.getInvited.bind(controller);
+    this.getQbtInfo = controller.getQbtInfo.bind(controller);
   }
 
   saveIMG() {
@@ -39,6 +41,7 @@ export default class MyQBT extends exchangeViewBase {
     // currency && (currency = currency.toUpperCase()) && this.setState({currency: currency.toUpperCase()});
     // this.getCoinAddress(currency || this.state.currency);
     this.getMyQbt();
+    this.getQbtInfo();
     this.getInvited();
 
   }
@@ -64,12 +67,12 @@ export default class MyQBT extends exchangeViewBase {
           <div className="qbt-num">
             <div className="left">
               <h1>持有量（枚）</h1>
-              <h2>100</h2>
+              <h2>NNNN</h2>
             </div>
 
             <div className="right">
               <h1>当前估值（元）</h1>
-              <h3>9999</h3>
+              <h3>XXX</h3>
             </div>
           </div>
           <div className="coin-data">
@@ -107,15 +110,11 @@ export default class MyQBT extends exchangeViewBase {
           </div>
 
           <div className="coin-introduction">
-            <h1 className="coin-introduction-title">简介</h1>
+            <h1 className="coin-introduction-title">QB的价值与用途</h1>
             <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
             <h3>QB的发行上限为10亿，永不增加。</h3>
           </div>
-          <div className="coin-introduction">
-            <h1 className="coin-introduction-title">简介</h1>
-            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
-            <h3>QB的发行上限为10亿，永不增加。</h3>
-          </div>
+
           <div className="coin-value">
             <h1 className="coin-value-title">简介</h1>
             <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
@@ -126,8 +125,26 @@ export default class MyQBT extends exchangeViewBase {
             <h2>1. 注册成为QB用户</h2>
             <h2>2. 邀请好友来QB网交易</h2>
             <h3>成为QB网的全球合作伙伴与代表，我们支持多种合作模式，欢迎咨询与探讨，我们希望与您成为朋友。</h3>
-          </div>
+            <div className="coin-invite" >
+              <Button title="立即邀请"/>
+            </div>
 
+            <div className="contact">
+              <h1>联系方式</h1>
+              <h2>微信: <span>aavvcc</span></h2>
+              <h2>QQ: <span>awdawdawd</span></h2>
+              <h2>电话:<span>435345345324</span></h2>
+            </div>
+          </div>
+          <div className="coin-join">
+            <h1 className="coin-join-title">参与合作</h1>
+            <h2>1. 参与QB网丰富有趣的活动</h2>
+            <h2>2. 参与QB网平台建设与运营，提出各种建设性建议与合作资源引荐</h2>
+            <h2>合作方式：xxxx</h2>
+            <h2>建议邮箱：xxxx</h2>
+            <h2>其他价值与用途持续挖掘中，敬请期待！</h2>
+            <h3>* 通过QB网币币交易与场外交易购买Q币，交易功能暂缓开放。</h3>
+          </div>
         </div>
         }
 
@@ -135,18 +152,19 @@ export default class MyQBT extends exchangeViewBase {
         <div className="my-qbt">
           <div className="user-info">
             <div className="user-name">
+              <img src={this.$imagesMap.$h5_activity_qb}/>
               <label>{controller.userController.userName}</label>
             </div>
             <div className="user-other">
               <div className="left">
-                <img src="/static/mobile/activity/icon_qb_zhye@2x.png"/>
+                <img src={this.$imagesMap.$h5_activity_qb_num}/>
               </div>
               <div className="content content-left">
                 <label>{Qbt.availableCount} QBT</label>
                 <p>{this.intl.get("asset-balance")}</p>
               </div>
               <div className="right">
-                <img src="/static/mobile/activity/icon_qb_yqhy@2x.png"/>
+                <img src={this.$imagesMap.$h5_activity_qb_heart}/>
               </div>
               <div className="content">
                 <label>邀请好友</label>
@@ -183,7 +201,7 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="scan">
             <div className="scan-title">
-              <img src="/static/mobile/activity/icon_scan_small@2x.png"/>
+              <img src={this.$imagesMap.$h5_activity_qb_scan}/>
               <label>扫码进群</label>
             </div>
             <div className="info">
@@ -191,7 +209,7 @@ export default class MyQBT extends exchangeViewBase {
               <h2>1. 福利：第一时间获取QBT利好消息，不定期发放BTC、RSK、EOS等主流币糖果哦~</h2>
               <h2>2. 入群方式：添加官方客服拉入群</h2>
               <h2>
-                官方客服微信号:
+                官方客服微信号：
                 <input type="text" id="wechat" readOnly ref="wechat" value="1234561"/>
 
               </h2>
@@ -214,7 +232,7 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="our-info">
             <div className="our-title">
-              <img src="/static/mobile/activity/icon_qb_tishi@2x.png"/>
+              <img src={this.$imagesMap.$h5_activity_qb_tishi}/>
               <label>我的帮助</label>
             </div>
             <div className="our-content">

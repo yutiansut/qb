@@ -122,8 +122,10 @@
         h2
           color $h5-activity-font-main
           line-height .3rem
-        #wechat
-          pointer-events none
+          #wechat
+            pointer-events none
+            color $h5-activity-font-main
+
       .qrcode-container
         display flex
         .qrcode
@@ -201,7 +203,7 @@
       .coin-data-title
         border-bottom 1px solid $h5-activity-line-section
         label
-          line-height .4rem
+          line-height 1rem
           font-size .15rem
           color $h5-activity-font-main
         img
@@ -232,7 +234,7 @@
       margin .1rem 0
       h1.coin-introduction-title
         text-align center
-        line-height .4rem
+        line-height 1rem
         font-size .2rem
         color $h5-activity-font-theme
       h2
@@ -268,10 +270,9 @@
         margin auto
     .coin-get
       background $h5-activity-bg-main
-
       h1.coin-get-title
         text-align center
-        line-height .4rem
+        line-height 1rem
         font-size .2rem
         color $h5-activity-font-theme
       h2
@@ -285,4 +286,46 @@
         line-height .4rem
         font-size .16rem
         color $h5-activity-font-light
+        margin auto
+      .coin-invite
+        display flex
+        justify-content center
+        button
+          width 80%
+          height .45rem
+          margin .2rem 0
+          font-size .2rem
+      .contact
+        h1
+          width 85%
+          line-height 1rem
+          font-size .2rem
+          color $h5-activity-font-main
+          margin auto
+
+        h2
+          width 85%
+          line-height .4rem
+          font-size .16rem
+          color $h5-activity-font-light
+
+    .coin-join
+      background $h5-activity-bg-main
+      margin 0 0 .55rem 0
+      h1.coin-join-title
+        text-align center
+        line-height 1rem
+        font-size .2rem
+        color $h5-activity-font-theme
+      h2
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color $h5-activity-font-main
+        margin auto
+      h3
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color red
         margin auto

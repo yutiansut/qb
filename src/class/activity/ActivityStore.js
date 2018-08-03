@@ -33,6 +33,22 @@ export default class NoticeStore extends ExchangeStoreBase {
     }
     return false;
   }
+  // 获取QBT信息
+  async getQbtInfo() {
+    // console.log(this.controller.token);
+    let result = await this.Proxy.getQbtInfo();
+    debugger;
+    if (result) {
+      return {
+        coinNameCN: result.d.cn,
+        coinNameEN: result.d.ne,
+        des: result.d.des,
+        priceCN: result.d.pc,
+        priceCN: result.d.pe,
+      };
+    }
+    return false;
+  }
 
   async getQbtMargin(){
     let res = await this.Proxy.getQbtMargin();
