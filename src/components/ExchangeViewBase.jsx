@@ -84,7 +84,6 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_back: "/static/mobile/back_white@3x.png",
       $h5_user_about_anquan: "/static/mobile/user/icon_wd_gywm_anquan@2x.png",
       $h5_user_about_pinzhi: "/static/mobile/user/icon_wd_gywm_pinzhi@2x.png",
-      $h5_back: "/static/mobile/back_white@3x.png",
       $h5_activity_qb: "/static/mobile/activity/icon_coin_qb@2x.png",
       $h5_activity_qb_num: "/static/mobile/activity/icon_qb_zhye@2x.png",
       $h5_activity_qb_heart: "/static/mobile/activity/icon_qb_yqhy@2x.png",
@@ -95,6 +94,13 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_activity_qb_home_click: "/static/mobile/activity/icon_qb_home_click@2x.png",
       $h5_activity_qb_my_click: "/static/mobile/activity/icon_qb_wode_click@2x.png",
       $h5_activity_qb_jianjie: "/static/mobile/activity/icon_qb_jianjie@2x.png",
+
+      $h5_activity_qb_jj_one: "/static/mobile/activity/icon_zc_qb_jj_one@3x.png",
+      $h5_activity_qb_jj_two: "/static/mobile/activity/icon_zc_qb_jj_two@3x.png",
+      $h5_activity_qb_jj_three: "/static/mobile/activity/icon_zc_qb_jj_three@3x.png",
+      $h5_activity_qb_jj_four: "/static/mobile/activity/icon_zc_qb_jj_four@3x.png",
+      $h5_activity_qb_jj_five: "/static/mobile/activity/icon_zc_qb_jj_five@3x.png",
+      $h5_activity_qb_jj_six: "/static/mobile/activity/icon_zc_qb_jj_six@3x.png",
 
     }
   }

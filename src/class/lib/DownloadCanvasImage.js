@@ -18,7 +18,6 @@ function convertBase64UrlToBlob(urlData, type) {
 }
 
 function downloadIMG(dom, fileType, fileName) {
-  debugger;
   let a = document.createElement('a');
   a.innerHTML = fileName;
   a.download = fileName;

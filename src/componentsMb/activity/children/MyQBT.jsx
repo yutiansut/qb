@@ -67,12 +67,12 @@ export default class MyQBT extends exchangeViewBase {
           <div className="qbt-num">
             <div className="left">
               <h1>持有量（枚）</h1>
-              <h2>NNNN</h2>
+              <h2>{this.state.Qbt.availableCount}</h2>
             </div>
 
             <div className="right">
               <h1>当前估值（元）</h1>
-              <h3>XXX</h3>
+              <h3>{this.state.Qbt.valuationCN}</h3>
             </div>
           </div>
           <div className="coin-data">
@@ -83,43 +83,81 @@ export default class MyQBT extends exchangeViewBase {
             <div className="coin-data-content">
               <div className="content-item">
                 <label className="key">发行时间</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.publishTime?this.state.QbtInfo.publishTime.toDate('yyyy-MM-dd'):''}</label>
               </div>
               <div className="content-item">
                 <label className="key">发行总量</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.publishNum}</label>
               </div>
               <div className="content-item">
                 <label className="key">流通总量</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.circulationNum}</label>
               </div>
               <div className="content-item">
                 <label className="key">众筹价格</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.crowdfundingPrice}</label>
               </div>
               <div className="content-item">
                 <label className="key">官网</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.website}</label>
               </div>
               <div className="content-item">
                 <label className="key">区域查询</label>
-                <label className="val">bbb</label>
+                <label className="val">{this.state.QbtInfo.locationSearch}</label>
               </div>
 
             </div>
           </div>
 
           <div className="coin-introduction">
-            <h1 className="coin-introduction-title">QB的价值与用途</h1>
-            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
+            <h1 className="coin-introduction-title">简介</h1>
+            {/*<h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>*/}
+            <h2>{this.state.QbtInfo.description}</h2>
             <h3>QB的发行上限为10亿，永不增加。</h3>
           </div>
 
           <div className="coin-value">
-            <h1 className="coin-value-title">简介</h1>
-            <h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>
-            <h3>QB的发行上限为10亿，永不增加。</h3>
+            <h1 className="coin-value-title">QB的价值与用途</h1>
+            <div className="coin-value-box">
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_one} />
+                <h2>保证价值提升</h2>
+                <h3>QB定期回购销毁</h3>
+              </div>
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_two} />
+                <h2>降低交易成本</h2>
+                <h3>QB可支付手续费</h3>
+
+              </div>
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_three} />
+                <h2>更多灵活用法</h2>
+                <h3>QB兑换数字货币</h3>
+
+              </div>
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_four} />
+                <h2>福利大权在握</h2>
+                <h3>QB用于权益投票</h3>
+
+              </div>
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_five} />
+                <h2>让交易更有趣</h2>
+                <h3>QB参与趣味活动</h3>
+
+              </div>
+              <div className="coin-box-item">
+                <img src={this.$imagesMap.$h5_activity_qb_jj_six} />
+                <h2>更多智囊服务</h2>
+                <h3>QB提升身份等级</h3>
+
+              </div>
+            </div>
           </div>
+
+
           <div className="coin-get">
             <h1 className="coin-get-title">如何获得Q币</h1>
             <h2>1. 注册成为QB用户</h2>

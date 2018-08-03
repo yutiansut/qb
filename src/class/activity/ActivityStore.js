@@ -37,7 +37,6 @@ export default class NoticeStore extends ExchangeStoreBase {
   async getQbtInfo() {
     // console.log(this.controller.token);
     let result = await this.Proxy.getQbtInfo();
-    debugger;
     if (result) {
       return {
         coinNameCN: result.d.cn,
@@ -45,6 +44,14 @@ export default class NoticeStore extends ExchangeStoreBase {
         des: result.d.des,
         priceCN: result.d.pc,
         priceCN: result.d.pe,
+        publishTime: result.d.rt,
+        publishNum: result.d.tv,
+        circulationNum: result.d.cv,
+        crowdfundingPrice: result.d.ipc,
+        website: result.d.ws,
+        locationSearch: result.d.bs,
+        description: result.d.des
+
       };
     }
     return false;

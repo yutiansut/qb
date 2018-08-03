@@ -27,7 +27,6 @@ export default class ActivityController extends ExchangeControllerBase {
   async getQbtInfo() {
     let result = await this.store.getQbtInfo();
     if (result) this.view.setState({ QbtInfo: result });
-    debugger;
     return result;
   }
   get configData() {
