@@ -86,12 +86,48 @@ export default class ActivityInvite extends exchangeViewBase {
               <h2>QB的价值与用途</h2>
               <p>QB网将通过与全球支持者实现利益共享，方式包括但不限于：</p>
               <div className='feature'>
-                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_one@1x.png'/>
-                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_two@1x.png'/>
-                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_three@1x.png'/>
-                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_four@1x.png'/>
-                <img className='odd' src='../../../static/mobile/activity/img_qb_gywm_five@1x.png'/>
-                <img className='even' src='../../../static/mobile/activity/img_qb_gywm_six@1x.png'/>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_one@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_two@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_three@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_four@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_five@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
+                <div className="feature-item clearfix">
+                  <div>
+                    <img src="../../../../static/mobile/activity/icon_zc_qb_jj_six@3x.png"/>
+                    <h3>保证价值提升</h3>
+                    <p>QB定期回购销毁</p>
+                  </div>
+                </div>
               </div>
               <p>更多价值将进一步挖掘，敬请期待！</p>
             </div>
