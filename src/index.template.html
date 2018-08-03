@@ -1,79 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1">
-        <!--防止手机中网页放大和缩小。-->
-        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <!-- uc强制竖屏 -->
-        <meta name="screen-orientation" content="portrait"/>
-        <!-- QQ强制竖屏 -->
-        <meta name="x5-orientation" content="portrait">
-        <!--设置Web应用是否以全屏模式运行。-->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <!--启动或禁用自动识别页面中的电话号码。-->
-        <meta name="format-detection" content="telephone=no">
-        <!--设置缓存-->
-        <meta http-equiv="Cache-Control" content="no-cache" />
-        <!-- 全屏模式 --><!-- UC浏览器私有 -->
-        <meta name="full-screen" content="yes">
-        <!-- 全屏模式 --><!-- QQ浏览器私有 -->
-        <meta name="x5-fullscreen" content="true">
-        <!--,针对手持设备优化-->
-        <meta name="HandheldFriendly" content="true">
-        <!--微软的老式浏览器-->
-        <meta name="MobileOptimized" content="320">
-        <!--控制选项卡颜色-->
-        <meta name="theme-color" content="#000000">
-        <link rel="shortcut icon" href="/static/favicon-20180802125315932.ico" type="image/x-icon" />
-        <!-- <link rel="bookmark" href="/favicon.ico" /> -->
-        <title>QB</title>
-        <!--<script src="https://cdn.vaptcha.com/v.js"></script>-->
-        <script type="text/javascript">
-            console.log('navigator.userAgent', navigator.userAgent)
-            if (!(navigator.userAgent.indexOf('Safari') >= 0)){
-                // alert('你是使用其他的浏览器浏览网页！')
-                function dynamicLoadJs(url, callback) {
-                    var head = document.getElementsByTagName('head')[0];
-                    var script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.src = url;
-                    if(typeof(callback)=='function'){
-                        script.onload = script.onreadystatechange = function () {
-                            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete"){
-                                callback();
-                                script.onload = script.onreadystatechange = null;
-                            }
-                        };
-                    }
-                    head.appendChild(script);
-                }
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--防止手机中网页放大和缩小。-->
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait"/>
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!--设置Web应用是否以全屏模式运行。-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--启动或禁用自动识别页面中的电话号码。-->
+    <meta name="format-detection" content="telephone=no">
+    <!--设置缓存-->
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <!-- 全屏模式 --><!-- UC浏览器私有 -->
+    <meta name="full-screen" content="yes">
+    <!-- 全屏模式 --><!-- QQ浏览器私有 -->
+    <meta name="x5-fullscreen" content="true">
+    <!--,针对手持设备优化-->
+    <meta name="HandheldFriendly" content="true">
+    <!--微软的老式浏览器-->
+    <meta name="MobileOptimized" content="320">
+    <!--控制选项卡颜色-->
+    <meta name="theme-color" content="#000000">
+    <link rel="shortcut icon" href="/static/favicon-20180802125315932.ico" type="image/x-icon"/>
+    <!-- <link rel="bookmark" href="/favicon.ico" /> -->
+    <title>QB</title>
+    <!--<script src="https://cdn.vaptcha.com/v.js"></script>-->
+    <script type="text/javascript">
+        'use strict';function bro(){var a=0,b=0,c='',d='',e=window.navigator.userAgent;return-1!=e.indexOf('Firefox')&&(a=e.indexOf('Firefox'),c='Firefox'),-1!=e.indexOf('Safari')&&(-1==e.indexOf('Chrome')?(a=e.indexOf('Version'),b=e.indexOf(' Safari'),c='Safari'):(a=e.indexOf('Chrome'),b=e.indexOf(' Safari'),c='Chrome')),-1!=e.indexOf('Edge')&&(a=e.indexOf('Edge'),b=e.length,c='Edge'),b=b||e.length,d=e.substring(a,b).split('/')[1].split('.')[0],{version:d,device:c}}function dynamicLoadJs(a,b){var c=document.getElementsByTagName('head')[0],d=document.createElement('script');d.type='text/javascript',d.src=a,'function'==typeof b&&(d.onload=d.onreadystatechange=function(){this.readyState&&'loaded'!==this.readyState&&'complete'!==this.readyState||(b(),d.onload=d.onreadystatechange=null)}),c.appendChild(d)}var broScript=bro(),broDicScript={Chrome:51,Safari:10,Edge:14,Firefox:53};(!broScript.device||broScript.version<broDicScript[broScript.device])&&(dynamicLoadJs('/static/profill/es5-shim.min.js'),dynamicLoadJs('/static/profill/es5-sham.min.js'),dynamicLoadJs('/static/profill/es6-shim.min.js'),dynamicLoadJs('/static/profill/es6-sham.min.js'),dynamicLoadJs('/static/profill/es7-shim.min.js'));
+    </script>
 
-                dynamicLoadJs("/static/profill/es5-shim.min.js");
-                dynamicLoadJs("/static/profill/es5-sham.min.js");
-                dynamicLoadJs("/static/profill/es6-shim.min.js");
-                dynamicLoadJs("/static/profill/es6-sham.min.js");
-                dynamicLoadJs("/static/profill/es7-shim.min.js");
-            }
-        </script>
-        <!--<script src="/static/profill/es5-shim.min.js"></script>-->
-        <!--<script src="/static/profill/es5-sham.min.js"></script>-->
-        <!--<script src="/static/profill/es6-shim.min.js"></script>-->
-        <!--<script src="/static/profill/es6-sham.min.js"></script>-->
-        <!--<script src="/static/profill/es7-shim.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>-->
-        <!--<script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es7-shim/6.0.0/es7-shim.js"></script>-->
-    </head>
-    <body>
-        <div id="app">
-        </div>
-    </body>
+    <!--<script src="/static/profill/es5-shim.min.js"></script>-->
+    <!--<script src="/static/profill/es5-sham.min.js"></script>-->
+    <!--<script src="/static/profill/es6-shim.min.js"></script>-->
+    <!--<script src="/static/profill/es6-sham.min.js"></script>-->
+    <!--<script src="/static/profill/es7-shim.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es7-shim/6.0.0/es7-shim.js"></script>-->
+</head>
+<body>
+<div id="app">
+</div>
+</body>
 
 
 </html>
