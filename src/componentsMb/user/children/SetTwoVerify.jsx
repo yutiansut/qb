@@ -2,11 +2,17 @@ import React from "react";
 import ExchangeViewBase from "../../../components/ExchangeViewBase.jsx";
 import BottomSelect from "../../viewsPopup/BottomSelect";
 import VerifyPopup from "../../viewsPopup/TwoVerifyPopupH5";
+import Popup from "../../../common/component/Popup";
 
 export default class setTwoVerify extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      popupFlag: false,
+      popupType: false,
+      popupText: "",
+      verifyNum: this.intl.get("sendCode"),
+      mode: { 2: 0, 0: 1, 1: 2 },
       verifyList: [
         {
           key: "loginVerify",
@@ -30,10 +36,13 @@ export default class setTwoVerify extends ExchangeViewBase {
         this.intl.get("user-googleVerify"),
         this.intl.get("user-verifyPhoneTitle")
       ],
+      setType: "",
       showBottomSelect: false, //控制底部菜单显示隐藏
       currentKey: "", //当前选中验证的验证类型1 email，2 google, 3 phone
+      currentType: "", //选中的要修改的两步验证 1登陆   2提现   3资金密码
       googleCode: ["", "", "", "", "", ""],
-      showPopup: true
+      showPopup: false,
+      verifyPopupType: 1
     };
     const { controller } = this.props;
     controller.setView(this);
@@ -43,6 +52,10 @@ export default class setTwoVerify extends ExchangeViewBase {
     this.initData = controller.initData.bind(controller); // 获取用户信息
     this.dealInput = controller.dealInput.bind(controller);
     this.delNum = controller.delNum.bind(controller);
+    this.dealTwoVerify = controller.dealTwoVerify.bind(controller);
+    this.getVerify = controller.getVerify.bind(controller); //获取验证码
+    this.setTwoVerifyH5 = controller.setTwoVerifyH5.bind(controller); //修改两步验证
+    this.clearVerify = controller.clearVerify.bind(controller)
   }
 
   componentWillMount() {}
@@ -54,8 +67,7 @@ export default class setTwoVerify extends ExchangeViewBase {
 
   render() {
     const { controller, url } = this.props;
-    let userInfo = this.state.userInfo,
-      type = this.state.type;
+    let { userInfo, verifyPopupType, type, mode, verifyNum } = this.state;
     return (
       <div className="user-center-twoStep">
         <ul className="verify-list">
@@ -65,7 +77,8 @@ export default class setTwoVerify extends ExchangeViewBase {
               onClick={() => {
                 this.setState({
                   showBottomSelect: true,
-                  currentKey: userInfo[v.key]
+                  currentKey: userInfo[v.key],
+                  currentType: i + 1
                 });
               }}
             >
@@ -85,12 +98,8 @@ export default class setTwoVerify extends ExchangeViewBase {
               return { value: v.title, i: v.k, index: index };
             })}
             onSelect={value => {
-              console.log(value);
               if (value.i === this.state.currentKey) return;
-              this.props.history.push({
-                pathname: `/user/verifybind/?type=${value.i - 1}`,
-                query: { from: true }
-              });
+              this.dealTwoVerify(value.i);
             }}
             current={this.state.currentKey}
             onCancel={() => {
@@ -105,10 +114,53 @@ export default class setTwoVerify extends ExchangeViewBase {
             googleCode={this.state.googleCode}
             dealInput={this.dealInput}
             delNum={this.delNum}
-            onClose={()=>{this.setState({showPopup: false})}}
+            type={verifyPopupType}
+            destroy={this.clearVerify}
+            verifyNum={
+              verifyNum
+                ? verifyNum === this.intl.get("sendCode")
+                  ? verifyNum
+                  : verifyNum + "s"
+                : this.intl.get("sendCode")
+            }
+            onSend={() => {
+              this.getVerify(
+                userInfo[!verifyPopupType ? "email" : "phone"],
+                mode[verifyPopupType],
+                9,
+                4
+              );
+            }}
+            onClose={() => {
+              this.setState({ showPopup: false });
+            }}
+            onConfirm={code => {
+              this.setTwoVerifyH5(
+                userInfo[!verifyPopupType ? "email" : "phone"],
+                mode[verifyPopupType],
+                code,
+                this.state.currentType,
+                this.state.setType
+              );
+            }}
           />
         ) : (
           ""
+        )}
+        {this.state.popupFlag && (
+          <Popup
+            type={this.state.popupType ? "tip1" : "tip3"}
+            msg={this.state.popupText}
+            h5={true}
+            onClose={() => {
+              this.setState({
+                popupFlag: false,
+                showPopup: this.state.popupType ? false : true,
+                showBottomSelect: this.state.popupType ? false : true
+              });
+            }}
+            autoClose={true}
+          />
         )}
       </div>
     );

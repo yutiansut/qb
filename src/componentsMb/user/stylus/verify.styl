@@ -1,6 +1,11 @@
 .user-center-verify
   padding 0.07rem 0.12rem 0
   .user-center-phonemail, .user-center-google
+    .error
+      border 0.01rem solid $h5-user-theme-active
+      border-radius(0.02rem)
+      input
+        border none
     h3
       height 0.6rem
       line-height 0.6rem
@@ -10,6 +15,16 @@
       width 100%
       height 0.45rem
       placeholder($h5-user-font-title, 0.15rem)
+    .error-tip
+      position absolute
+      left 0
+      bottom -0.25rem
+      color $h5-user-theme-active
+      font-size 0.14rem
+      letter-spacing 0
+    .account
+      position relative
+      margin-bottom 0.1rem
     .code
       position relative
       margin-bottom 0.35rem
@@ -17,8 +32,8 @@
         width 2.39rem
       .send-code
         position absolute
-        right 0
-        bottom 0
+        right 0.01rem
+        bottom 0.01rem
         width 1.12rem
         height 0.45rem
         color $h5-user-font-main
@@ -50,8 +65,8 @@
         border 0.01rem solid $h5-user-border-main
       &.tip
         border 0.01rem solid $h5-user-theme-active
-    .tips
-      font-size 0.14rem
-      line-height 0.21rem
-      color $h5-user-font-title
-      margin-top 0.12rem
+  .tips
+    font-size 0.14rem
+    line-height 0.21rem
+    color $h5-user-font-title
+    margin-top 0.12rem

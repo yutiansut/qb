@@ -7,6 +7,7 @@ import Input from "../../../common/component/Input";
 export default class GoogleKey extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    if(!this.props.location.query) this.props.history.push('/user/safe/twoverify')
     this.state = {
       key: "2NEOSUGE4MBPIT5W",
       intro: [
@@ -16,7 +17,6 @@ export default class GoogleKey extends ExchangeViewBase {
         `请将16位密钥记录在纸上，并保存在安全的地方。如遇手机丢失，你可以通过该密钥恢复你的谷歌验证。`
       ]
     };
-    // if(!this.props.location.query) this.props.history.push('/user/safe')
     const { controller } = this.props;
     controller.setView(this);
     this.copy = (el)=>{

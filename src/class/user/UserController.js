@@ -26,11 +26,11 @@ export default class UserController extends ExchangeControllerBase {
   }
 
 
-  async getVerify(account, mode, type) { // 获取短信验证码
+  async getVerify(account, mode, type, os=3) { // 获取短信验证码
     if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)
-    this.getCode(account, mode, type)
+    this.getCode(account, mode, type, os)
   }
 
   clearVerify() { // 清除短信验证码
@@ -136,7 +136,32 @@ export default class UserController extends ExchangeControllerBase {
     })
     // result.ret === 101 && this.view.setState({userAuth: Object.assign(this.view.state.userAuth, succObj), checkVerifyArr: false})
   }
-
+  async bindUserH5(account, mode, code) {
+    // let {history} = this.view.props;
+    let result = await this.store.Proxy.bindUser({
+      token: this.store.token,
+      ac: account,// 手机号或邮箱
+      mo: mode,// 0:phone 1:email
+      co: code,
+      cid: '', // 图形验证码id，没有就传空
+      cco: '', // 图形验证码，没有就传空
+      os: 4, // 1:android 2:iOS 3:borwser 4 H5
+    })
+    if (result === null){
+      this.view.setState({
+        popupFlag: true,
+        popupType: true,
+        popupText: '绑定成功',
+      })
+    }
+    if(result && result.errCode){
+      this.view.setState({
+        popupFlag: true,
+        popupType: false,
+        popupText: result.msg,
+      })
+    }
+  }
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
     if(!this.view.state.setPassFlag)
       return
@@ -267,6 +292,40 @@ export default class UserController extends ExchangeControllerBase {
     if(result===null){
       //修改成功跳转至...
       this.view.state.to && this.view.history.push(this.view.state.to);
+    }
+  }
+
+  async setTwoVerifyH5(account, mode, code, position, verifyType) { // 修改两步认证
+    let twoVerifyArr = ['loginVerify', 'withdrawVerify', 'fundPassVerify'], changeVerifyArr = [3, 1, 0, 2];
+    let twoVerifyState = twoVerifyArr[position-1]
+    let twoVerifyUser = {}
+    twoVerifyUser[twoVerifyState] = verifyType;
+    let result = await this.store.Proxy.setTwoVerify({
+      token: this.store.token,
+      ac: account,
+      mo: mode, //0手机 1邮箱 2Google
+      co: code, //验证码
+      os: 4, // 1:android 2:iOS 3:borwser
+      pc: '',//图形验证码
+      pi: '',//验证码图片的id
+      po: position,//修改的位置 1登陆   2提现   3资金密码
+      vty: verifyType//2谷歌验证 1邮件  3短信  0无
+    })
+    if (result === null){
+      let userInfo = Object.assign(this.view.state.userInfo, twoVerifyUser)
+      this.view.setState({
+        popupFlag: true,
+        popupType: true,
+        popupText: this.view.intl.get("user-modifiedSucc"),
+        userInfo: userInfo
+      })
+    }
+    if(result && result.errCode){
+      this.view.setState({
+        popupFlag: true,
+        popupType: false,
+        popupText: result.msg,
+      })
     }
   }
 
@@ -524,12 +583,12 @@ export default class UserController extends ExchangeControllerBase {
     return resultObj
   }
 
-  async getCode(account, mode, type) { // 获取短信验证码
+  async getCode(account, mode, type, os) { // 获取短信验证码
     let result = await this.store.Proxy.getVerifyCode({
       "ac": account, // 手机号或者邮箱
       "mo": mode,//0 phone 1 email
       "ty": type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
-      "os": 3// 1 android 2 iOS 3 browser
+      "os": os// 1 android 2 iOS 3 browser 4 h5
     })
     // console.log('发送验证码', result, account, mode, type )
     return result
@@ -549,7 +608,7 @@ export default class UserController extends ExchangeControllerBase {
     let result = await this.store.getQbtTrade()
     result && result.li && this.view.setState({ qbtTrade: result.li });
   }
-
+// 谷歌验证六个输入的两个处理方法
   dealInput(num, value, _this){
     if(!/^[0-9]\d*$/.test(value)) {
       return;
@@ -576,5 +635,47 @@ export default class UserController extends ExchangeControllerBase {
     }
     this.view.state.googleCode[num] = ''
     this.view.setState({googleCode: this.view.state.googleCode})
+  }
+
+  // 判断对应的两次验证方式是否绑定，触发弹窗或跳转至绑定页面
+  dealTwoVerify(type){
+    let {userInfo, currentKey} = this.view.state;
+    let {history} = this.view.props;
+    console.log(userInfo, currentKey)
+    //已绑定直接弹窗
+    if(type === 2 && userInfo.googleAuth){
+      history.push({
+        pathname: `/user/googlekey`,
+        query: { from: true }
+      });
+      return;
+    }
+    if(type === 1 && !userInfo.email|| type === 3 && !userInfo.phone){
+      history.push({
+        pathname: `/user/verifybind/?type=${type - 1}`,
+        query: { from: true }
+      });
+      return;
+    }
+    if(currentKey === 0 ) {
+        this.setTwoVerifyH5('',0,'', this.view.state.currentType, type)
+      return
+    }
+    if(type === 1 && userInfo.email || type === 2 && !userInfo.googleAuth || type === 3 && userInfo.phone){
+      this.view.setState({
+        showPopup: true,
+        verifyPopupType: currentKey - 1,
+        setType: type
+      })
+      return;
+    }
+  }
+  verifyAccount(type, account){
+    // type 0 手机, 1 邮箱
+    if(!type){
+      return /^1[34578]\d{9}$/.test(account);
+    }else{
+      return /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(account);
+    }
   }
 }

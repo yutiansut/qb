@@ -8,26 +8,35 @@ import "./stylus/towVerifyPopupH5.styl";
 // destroy 组件销毁时执行的方法
 // onClose 关闭弹窗
 // onConfirm 确认触发的handel
+// onSend
 // onSend 发送的handel
 // type 验证类型
 export default class VerifyPopupH5 extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      type: 2,
-      // type: this.props.type, //0,1,2 邮箱、谷歌、短信
+      // type: 2,
+      code: '',
+      type: this.props.type, //0,1,2 邮箱、谷歌、短信
       title: ["邮箱安全验证", "谷歌安全验证", "手机安全验证"],
       holderText: ["邮箱验证码", "", "手机验证码"],
       googleCode: ["", "", "", "", "", ""]
     };
-
   }
   componentWillUnmount() {
     this.props.destroy && this.props.destroy();
   }
   render() {
     let { title, type, holderText } = this.state;
-    let { onClose, googleCode, dealInput, delNum  } = this.props;
+    let {
+      onClose,
+      googleCode,
+      dealInput,
+      delNum,
+      verifyNum,
+      onSend,
+      onConfirm
+    } = this.props;
     return (
       <div className="two-verify-popup-h5">
         <div className="poup">
@@ -43,8 +52,14 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
           </h4>
           {[0, 2].includes(type) ? (
             <div className="normal clearfix">
-              <Input placeholder={holderText[type]} />
-              <Button title="获取验证码" type="base" />
+              <Input placeholder={holderText[type]} value={this.state.code} onInput={(value)=>{this.setState({code: value})}}/>
+              <Button
+                title={verifyNum}
+                type="base"
+                onClick={() => {
+                  onSend && onSend();
+                }}
+              />
             </div>
           ) : (
             <div className="google">
@@ -66,7 +81,16 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
               ))}
             </div>
           )}
-          <Button title="确定" type="base" className="submit" />
+          <Button
+            title="确定"
+            type="base"
+            className="submit"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+              onConfirm && onConfirm(this.state.code || googleCode.join(''));
+            }}
+          />
         </div>
       </div>
     );
