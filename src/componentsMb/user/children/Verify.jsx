@@ -41,7 +41,8 @@ export default class Verify extends ExchangeViewBase {
     this.delNum = controller.delNum.bind(controller);
     this.bindUserH5 = controller.bindUserH5.bind(controller); //绑定邮箱或手机
     this.getVerify = controller.getVerify.bind(controller); //获取验证码
-    this.verifyAccount = controller.verifyAccount.bind(controller);
+    this.setGoogleVerifyH5 = controller.setGoogleVerifyH5.bind(controller)//验证开启谷歌验证
+    this.verifyAccount = controller.verifyAccount.bind(controller);//验证账户正则
   }
 
   componentWillMount() {}
@@ -154,7 +155,7 @@ export default class Verify extends ExchangeViewBase {
                 disable={googleCode.join("").length === 6 ? false : true}
                 className="submit"
                 onClick={() => {
-                  console.log(googleCode.join(""));
+                  this.setGoogleVerifyH5(googleCode.join(""));
                 }}
               />
             </div>

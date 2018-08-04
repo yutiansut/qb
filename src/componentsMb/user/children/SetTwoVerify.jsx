@@ -55,7 +55,19 @@ export default class setTwoVerify extends ExchangeViewBase {
     this.dealTwoVerify = controller.dealTwoVerify.bind(controller);
     this.getVerify = controller.getVerify.bind(controller); //获取验证码
     this.setTwoVerifyH5 = controller.setTwoVerifyH5.bind(controller); //修改两步验证
-    this.clearVerify = controller.clearVerify.bind(controller)
+    this.clearVerify = controller.clearVerify.bind(controller);
+
+    this.dealBottomArr = ()=>{
+      let arr = [
+        { value: this.intl.get("user-googleVerify"), i: 2},
+        { value: this.intl.get("user-verifyPhoneTitle"), i: 3},
+        { value: this.intl.get("user-verifyEmailTitle"), i: 1},
+      ];
+      if(this.state.currentType === 1) {
+        arr.unshift({ value: '无', i: 0})
+      }
+      return arr;
+    }
   }
 
   componentWillMount() {}
@@ -90,13 +102,7 @@ export default class setTwoVerify extends ExchangeViewBase {
         </ul>
         {this.state.showBottomSelect && (
           <BottomSelect
-            data={[
-              { title: this.intl.get("user-googleVerify"), k: 2 },
-              { title: this.intl.get("user-verifyPhoneTitle"), k: 3 },
-              { title: this.intl.get("user-verifyEmailTitle"), k: 1 }
-            ].map((v, index) => {
-              return { value: v.title, i: v.k, index: index };
-            })}
+            data={this.dealBottomArr()}
             onSelect={value => {
               if (value.i === this.state.currentKey) return;
               this.dealTwoVerify(value.i);

@@ -418,7 +418,28 @@ export default class UserController extends ExchangeControllerBase {
     // console.log('获取图形验证码', captcha)
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
-
+  async setGoogleVerifyH5(code) {
+    console.log(code)
+    let result = await this.store.Proxy.setGoogleVerify({
+      token: this.store.token,
+      co: code
+    })
+    console.log(result)
+    if (result === null){
+      this.view.setState({
+        popupFlag: true,
+        popupType: true,
+        popupText: '绑定成功',
+      })
+    }
+    if(result && result.errCode){
+      this.view.setState({
+        popupFlag: true,
+        popupType: false,
+        popupText: result.msg,
+      })
+    }
+  }
   async setGoogleVerify(code) { // 验证谷歌验证码
     let result = await this.store.Proxy.setGoogleVerify({
       token: this.store.token,
@@ -661,7 +682,7 @@ export default class UserController extends ExchangeControllerBase {
         this.setTwoVerifyH5('',0,'', this.view.state.currentType, type)
       return
     }
-    if(type === 1 && userInfo.email || type === 2 && !userInfo.googleAuth || type === 3 && userInfo.phone){
+    if(type === 1 && userInfo.email || type === 2 && !userInfo.googleAuth || type === 3 && userInfo.phone || type === 0){
       this.view.setState({
         showPopup: true,
         verifyPopupType: currentKey - 1,
