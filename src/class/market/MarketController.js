@@ -56,6 +56,7 @@ export default class MarketController extends ExchangeControllerBase {
       this.querySelectPair(this.view.state.query,priceLimitValue,volumeLimitValue)
       return
     }
+    console.log('homeMarketPairData',homeMarketPairData)
     this.tradePairChange(homeMarketPairData[0]);
     // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
   }

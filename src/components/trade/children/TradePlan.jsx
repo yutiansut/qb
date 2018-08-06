@@ -99,6 +99,8 @@ export default class TradePlan extends ExchangeViewBase {
       max: 'buyMax',
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
+    console.log('his.state.buyNumFlag', this.state.buyNumFlag, this.state, diffArr[dealType].max)
+    // this.setState({buyNumFlag: false, sellNumFlag: false})
     let maxNum = this.state[diffArr[dealType].max];
     let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue]);
     // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
@@ -135,17 +137,17 @@ export default class TradePlan extends ExchangeViewBase {
     let flag =  type ? reg.test(limitNum[1]) : true;
     if(!flag)
       return
-
+  
+    console.log('his.state.buyNumFlag', flag)
     // let limitPrice = 0;
     // priceValue >= 100 && (limitPrice = 6);
     // priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
     // priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
     let numValue = e.target.value > maxNum ? maxNum.toFixedWithoutUp(numLimit) : value;
-    if(type){
+    if(type) {
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
       dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
-    }
-   else{
+    } else {
       // let a = Number(numValue).formatFixNumberForAmount(Number(priceValue));
       // let b = a.split(',');
       // let c;
