@@ -54,7 +54,7 @@ NUMBER_PROPERTY_FUNC.push(number => parseFloat(number.toFixedWithoutUp(8)));
 const NUMBER_LEGAL_VALUE = []; //数字分类
 const LEGAL_DECIMAL_LENGTH = [2];//小数部分最小长度
 const NUMBER_LEGAL_FUNC = [];// 对不同大小数字操作的函数数组
-NUMBER_LEGAL_FUNC.push(number => parseFloat(number.toFixedWithoutUp(2)));
+NUMBER_LEGAL_FUNC.push(number => parseFloat(number.toFixed(2)));
 
 let config = {
   format: {
