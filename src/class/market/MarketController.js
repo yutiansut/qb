@@ -160,12 +160,9 @@ export default class MarketController extends ExchangeControllerBase {
       this.changeMarket(queryValue.split('/')[1]);
       // return
     }
-    
-    console.log('type',type)
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
-
     (type === 3 || type === 0) && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
   }
 
@@ -255,8 +252,6 @@ export default class MarketController extends ExchangeControllerBase {
       return
     //改变deal模块中的信息
     let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
-    console.log('tradePairMsg',tradePairMsg, this.store.state.tradePair)
-    
     let dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].coinIcon,
