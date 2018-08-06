@@ -108,7 +108,7 @@ Number.prototype.formatFixStyle = function (para) {
     decimalLength = para.decimalLength || -1,
     decimalSign = para.decimalSign || '.',
     thousandSign = typeof para.thousandSign !== 'boolean' && (para.thousandSign || ',') || '',
-    numberArr = (number < 0.000001 && number !== 0) ? number.toFixed(8).split('.') : number.toString().split('.'),
+    numberArr = (number < 0.000001 && number !== 0) ? (number < 0.0000001 && number.toFixed(8).split('.') || number.toFixed(7).split('.')) : number.toString().split('.'),
     numberSuffix = "", decimal = numberArr[1] || '',
     i = numberArr[0],
     j = i.length > 3 ? i.length % 3 : 0;

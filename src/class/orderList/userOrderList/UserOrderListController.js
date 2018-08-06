@@ -100,15 +100,15 @@ export default class UserOrderListController extends OrderListController {
           "," +
           (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
           "," +
-          (v.priceType ? this.view.intl.get('marketPrice') : v.price) +
+          (v.priceType ? this.view.intl.get('marketPrice') : v.price.format()) +
           "," +
-          v.count +
+          v.count.format() +
           "," +
-          (v.turnover + ' ' + v.tradePairName.split('/')[1].toUpperCase()) +
+          (v.turnover.format() + ' ' + v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
-          v.dealDoneCount +
+          v.dealDoneCount.format() +
           "," +
-          v.avgPrice +
+          v.avgPrice.format() +
           "," +
           this.view.state.orderStatusItems[v.orderStatus]
       });
@@ -126,13 +126,13 @@ export default class UserOrderListController extends OrderListController {
           "," +
           (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
           "," +
-          v.avgPrice +
+          v.avgPrice.format() +
           "," +
-          v.count +
+          v.count.format() +
           "," + (
-          v.turnover + ' ' +  v.tradePairName.split('/')[1].toUpperCase()) +
+          v.turnover.format() + ' ' +  v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
-          v.fee + ' ' + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
+          v.fee.format() + ' ' + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
       });
       this.exportExcel(str, `${this.view.intl.get("order-deal")}.xls`);
       return;
