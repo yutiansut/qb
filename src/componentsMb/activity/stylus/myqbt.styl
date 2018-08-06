@@ -8,7 +8,7 @@
     z-index 100
     border-top 2px solid $h5-activity-line-section
     background-color $h5-activity-bg-main
-    color $h5-activity-font-main
+    color $h5-activity-font-dark
     ul
       display flex
       justify-content center
@@ -16,7 +16,7 @@
         padding 0 .4rem
         img
           height 0.3rem
-          width: 0.3rem
+          width 0.3rem
           vertical-align -0.2rem
         p
           text-align center
@@ -31,8 +31,8 @@
           font-size .20rem
           color $h5-activity-font-theme
         img
-          height 0.6rem
-          width: 0.6rem
+          height 0.5rem
+          width 0.5rem
           margin-right 0.1rem
           vertical-align -0.2rem
       .user-other
@@ -58,10 +58,10 @@
           label
             color  $h5-activity-font-main
             line-height .4rem
-            font-size .15rem
+            font-size .16rem
           p
-            color $h5-activity-font-light
-            font-size .10rem
+            color $h5-activity-font-dark
+            font-size .12rem
         .content-left
           border-right 1px solid $h5-activity-line-section
           margin-right .1rem
@@ -73,7 +73,8 @@
         text-align center
         padding-top .1rem
         label
-          color $h5-activity-font-main
+          color $h5-activity-font-light
+          font-size .16rem
 
       .invite-list
         min-height 1rem
@@ -81,7 +82,8 @@
         label
           display inline-block
           margin .4rem
-          color $h5-activity-font-light
+          color $h5-activity-font-dark
+          font-size .13rem
 
         ul.list-ul
 
@@ -92,7 +94,7 @@
           float none
           width 100%
           font-size .13rem
-          color $h5-activity-font-main
+          color $h5-activity-font-light
           display flex
           justify-content space-between
           text-align center
@@ -102,6 +104,7 @@
         padding .12rem
         label
           color $h5-activity-font-theme
+          font-size .13rem
 
     .scan
       background $h5-activity-bg-main
@@ -109,22 +112,23 @@
         border-bottom 1px solid $h5-activity-line-section
         label
           line-height .4rem
-          font-size .15rem
-          color $h5-activity-font-main
+          font-size .16rem
+          color $h5-activity-font-light
         img
           margin-left .12rem
           height 0.2rem
-          width: 0.2rem
+          width 0.2rem
           margin-right 0.1rem
           vertical-align -0.04rem
       .info
         margin 0 .12rem
-        h2
-          color $h5-activity-font-main
+        p
+          color $h5-activity-font-light
           line-height .3rem
+          font-size .15rem
           #wechat
             pointer-events none
-            color $h5-activity-font-main
+            color $h5-activity-font-light
 
       .qrcode-container
         display flex
@@ -144,25 +148,25 @@
       background $h5-activity-bg-main
       .our-title
         border-bottom 1px solid $h5-activity-line-section
+        font-size .16rem
         label
           line-height .4rem
           font-size .15rem
-          color $h5-activity-font-main
+          color $h5-activity-font-light
         img
           margin-left .12rem
           height 0.2rem
-          width: 0.16rem
+          width 0.16rem
           margin-right 0.1rem
           vertical-align -0.04rem
       .our-content
         margin-left .1rem
-        h2
+        p
           font-size .15rem
           line-height .3rem
-          color $h5-activity-font-main
+          color $h5-activity-font-light
           span
-            text-decoration-line: underline
-
+            text-decoration-line underline
   .qbt
     .qbt-banner
       height 1.2rem
@@ -182,34 +186,31 @@
       background $h5-activity-bg-main
       .left, .right
         width 50%
-        h1
+        p
           font-size .15rem
           padding .15rem 0  .1rem .2rem
-          color $h5-activity-font-light
-        h2
+          color $h5-activity-font-dark
+        span
           font-size .33rem
           padding-left .2rem
           color $h5-activity-font-light
-        h3
-          font-size .33rem
-          padding-left .2rem
+        span.red
           color red
       .left
          border-right 2px solid $h5-activity-line-section
     .coin-data
       background  $h5-activity-bg-main
       margin .10rem 0
-
       .coin-data-title
         border-bottom 1px solid $h5-activity-line-section
         label
           line-height .4rem
-          font-size .15rem
+          font-size .16rem
           color $h5-activity-font-main
         img
           margin-left .12rem
           height 0.2rem
-          width: 0.2rem
+          width 0.2rem
           margin-right 0.1rem
           vertical-align -0.04rem
       .coin-data-content
@@ -224,50 +225,36 @@
           label.key
             line-height .4rem
             font-size .15rem
-            color $h5-activity-font-light
+            color $h5-activity-font-dark
           label.val
             line-height .4rem
-            font-size .15rem
-            color $h5-activity-font-main
+            font-size .14rem
+            color $h5-activity-font-light
     .coin-introduction
       background $h5-activity-bg-main
       margin .1rem 0
       h1.coin-introduction-title
         text-align center
         line-height 1rem
-        font-size .2rem
+        font-size .23rem
         color $h5-activity-font-theme
-      h2
+      p
         width 85%
         line-height .4rem
         font-size .16rem
-        color $h5-activity-font-main
+        text-indent .35rem
+        color $h5-activity-font-light
         margin auto
-      h3
-        width 85%
-        line-height .4rem
-        font-size .16rem
+      p.red
         color red
-        margin auto
     .coin-value
       background $h5-activity-bg-main
       h1.coin-value-title
         text-align center
         line-height 1rem
-        font-size .2rem
+        font-size .23rem
         color $h5-activity-font-theme
-      h2
-        width 85%
-        line-height .4rem
-        font-size .18rem
-        color $h5-activity-font-main
-        margin auto
-      h3
-        width 85%
-        line-height .2rem
-        font-size .14rem
-        color $h5-activity-font-light
-        margin 0 auto .4rem auto
+
       .coin-value-box
         display flex
         justify-content center
@@ -281,6 +268,18 @@
             height 0.6rem
             width 0.6rem
             margin .4rem 0 .1rem 0
+          h2
+            width 85%
+            line-height .4rem
+            font-size .18rem
+            color $h5-activity-font-light
+            margin auto
+          h3
+            width 85%
+            line-height .2rem
+            font-size .14rem
+            color $h5-activity-font-dark
+            margin 0 auto .4rem auto
     .coin-get
       background $h5-activity-bg-main
       h1.coin-get-title
@@ -288,17 +287,17 @@
         line-height 1rem
         font-size .2rem
         color $h5-activity-font-theme
-      h2
-        width 85%
-        line-height .4rem
-        font-size .16rem
-        color $h5-activity-font-main
-        margin auto
-      h3
+      p
         width 85%
         line-height .4rem
         font-size .16rem
         color $h5-activity-font-light
+        margin auto
+      p.dark
+        width 85%
+        line-height .4rem
+        font-size .16rem
+        color $h5-activity-font-dark
         margin auto
       .coin-invite
         display flex
@@ -311,16 +310,15 @@
       .contact
         h1
           width 85%
-          line-height 1rem
+          line-height .8rem
           font-size .2rem
-          color $h5-activity-font-main
+          color $h5-activity-font-light
           margin auto
-
-        h2
+        p
           width 85%
           line-height .4rem
           font-size .16rem
-          color $h5-activity-font-light
+          color $h5-activity-font-dark
 
     .coin-join
       background $h5-activity-bg-main
@@ -328,17 +326,13 @@
       h1.coin-join-title
         text-align center
         line-height 1rem
-        font-size .2rem
+        font-size .23rem
         color $h5-activity-font-theme
-      h2
+      p
         width 85%
         line-height .4rem
         font-size .16rem
-        color $h5-activity-font-main
+        color $h5-activity-font-light
         margin auto
-      h3
-        width 85%
-        line-height .4rem
-        font-size .16rem
+      p.red
         color red
-        margin auto

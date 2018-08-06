@@ -66,19 +66,19 @@ export default class MyQBT extends exchangeViewBase {
           </div>
           <div className="qbt-num">
             <div className="left">
-              <h1>持有量（枚）</h1>
-              <h2>{this.state.Qbt.availableCount}</h2>
+              <p>持有量（枚）</p>
+              <span>{this.state.Qbt.availableCount}</span>
             </div>
 
             <div className="right">
-              <h1>当前估值（元）</h1>
-              <h3>{this.state.Qbt.valuationCN}</h3>
+              <p>当前估值（元）</p>
+              <span className="red">{this.state.Qbt.valuationCN}</span>
             </div>
           </div>
           <div className="coin-data">
             <div className="coin-data-title">
               <img src={this.$imagesMap.$h5_activity_qb_jianjie}/>
-              <label>币种资料</label>
+              <label>币种简介</label>
             </div>
             <div className="coin-data-content">
               <div className="content-item">
@@ -112,8 +112,8 @@ export default class MyQBT extends exchangeViewBase {
           <div className="coin-introduction">
             <h1 className="coin-introduction-title">简介</h1>
             {/*<h2>QB（QB Token）是交易平台发行的生态币，是交易平台自身所有权益的代表，可以在Q币生态众多场景下使用并流通。</h2>*/}
-            <h2>{this.state.QbtInfo.description}</h2>
-            <h3>QB的发行上限为10亿，永不增加。</h3>
+            <p>{this.state.QbtInfo.description}</p>
+            <p className="red">QB的发行上限为10亿，永不增加。</p>
           </div>
 
           <div className="coin-value">
@@ -160,28 +160,28 @@ export default class MyQBT extends exchangeViewBase {
 
           <div className="coin-get">
             <h1 className="coin-get-title">如何获得Q币</h1>
-            <h2>1. 注册成为QB用户</h2>
-            <h2>2. 邀请好友来QB网交易</h2>
-            <h3>成为QB网的全球合作伙伴与代表，我们支持多种合作模式，欢迎咨询与探讨，我们希望与您成为朋友。</h3>
+            <p>1. 注册成为QB用户</p>
+            <p>2. 邀请好友来QB网交易</p>
+            <p className="dark">成为QB网的全球合作伙伴与代表，我们支持多种合作模式，欢迎咨询与探讨，我们希望与您成为朋友。</p>
             <div className="coin-invite" >
               <Button title="立即邀请"/>
             </div>
 
             <div className="contact">
               <h1>联系方式</h1>
-              <h2>微信: <span>aavvcc</span></h2>
-              <h2>QQ: <span>awdawdawd</span></h2>
-              <h2>电话:<span>435345345324</span></h2>
+              <p>微信: <span>aavvcc</span></p>
+              <p>QQ: <span>awdawdawd</span></p>
+              <p>电话:<span>435345345324</span></p>
             </div>
           </div>
           <div className="coin-join">
             <h1 className="coin-join-title">参与合作</h1>
-            <h2>1. 参与QB网丰富有趣的活动</h2>
-            <h2>2. 参与QB网平台建设与运营，提出各种建设性建议与合作资源引荐</h2>
-            <h2>合作方式：xxxx</h2>
-            <h2>建议邮箱：xxxx</h2>
-            <h2>其他价值与用途持续挖掘中，敬请期待！</h2>
-            <h3>* 通过QB网币币交易与场外交易购买Q币，交易功能暂缓开放。</h3>
+            <p>1. 参与QB网丰富有趣的活动</p>
+            <p>2. 参与QB网平台建设与运营，提出各种建设性建议与合作资源引荐</p>
+            <p>合作方式：xxxx</p>
+            <p>建议邮箱：xxxx</p>
+            <p>其他价值与用途持续挖掘中，敬请期待！</p>
+            <p className="red">* 通过QB网币币交易与场外交易购买Q币，交易功能暂缓开放。</p>
           </div>
         </div>
         }
@@ -243,14 +243,13 @@ export default class MyQBT extends exchangeViewBase {
               <label>扫码进群</label>
             </div>
             <div className="info">
-              <h2>加入CRT官方群，福利多多</h2>
-              <h2>1. 福利：第一时间获取QBT利好消息，不定期发放BTC、RSK、EOS等主流币糖果哦~</h2>
-              <h2>2. 入群方式：添加官方客服拉入群</h2>
-              <h2>
+              <p>加入CRT官方群，福利多多</p>
+              <p>1. 福利：第一时间获取QBT利好消息，不定期发放BTC、RSK、EOS等主流币糖果哦~</p>
+              <p>2. 入群方式：添加官方客服拉入群</p>
+              <p>
                 官方客服微信号：
                 <input type="text" id="wechat" readOnly ref="wechat" value="1234561"/>
-
-              </h2>
+              </p>
             </div>
             <div className="qrcode-container">
               <div className="qrcode">
@@ -258,7 +257,6 @@ export default class MyQBT extends exchangeViewBase {
                         level="M" bgColor="#000"
                         fgColor="#fff"/>
               </div>
-
               <div className="qr-btns">
                 <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
                 <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
@@ -274,10 +272,10 @@ export default class MyQBT extends exchangeViewBase {
               <label>我的帮助</label>
             </div>
             <div className="our-content">
-              <h2>联系我们</h2>
-              <h2>微信: <span>aavvcc</span></h2>
-              <h2>QQ: <span>awdawdawd</span></h2>
-              <h2>电话:<span>435345345324</span></h2>
+              <p>联系我们</p>
+              <p>微信: <span>aavvcc</span></p>
+              <p>QQ: <span>awdawdawd</span></p>
+              <p>电话:<span>435345345324</span></p>
             </div>
           </div>
         </div>
