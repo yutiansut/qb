@@ -55,7 +55,7 @@ const HTTP_PROXY = {
           }
         }
         req = formatParams(req)
-        // console.log(req.url, ' sendHttp ',  req.data.body)
+        console.log(req.url, ' sendHttp ',  req.data.body)
         if(HttpZip){
           try {
             req.data.body = await zip(req.data.body)
@@ -87,7 +87,7 @@ const HTTP_PROXY = {
         } catch (e) {
           res.result = {ret: -3, data: e}
         }
-        // console.log(req.url, ' reciveHttp ', res.result)
+        console.log(req.url, ' reciveHttp ', res.result)
         if (afterHandler && afterHandler.length) {
           for (let i = 0; i < afterHandler.length; i++) {
             await afterHandler[i](this, req, res, v)
