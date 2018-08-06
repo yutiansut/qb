@@ -112,6 +112,7 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
+    console.log('getMinerFee............', coin, address)
     await this.store.getMinerFee(coin, address.address);
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
@@ -201,21 +202,20 @@ export default class AssetController extends ExchangeControllerBase {
     return result;
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
-  async getExtract() {
-    await this.store.getwalletExtract();
-    this.view.setState({
-      walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
-    });
-    let curExtract = this.store.state.walletExtract.extractAddr.filter(
-      v => v.coinName === this.view.state.currency.toLowerCase()
+  async getExtract(currency) {
+    let result = await this.store.getwalletExtract();
+    let curExtract = result.extractAddr.filter(
+      v => v.coinName === (currency || this.view.state.currency).toLowerCase()
     )[0];
+    let address = (curExtract &&
+      curExtract.addressList[0] &&
+      this.sort(curExtract.addressList, ["addressName"], 1)[0]) || {address: ''};
     this.view.setState({
-      address:
-        (curExtract &&
-          curExtract.addressList[0] &&
-          this.sort(curExtract.addressList, ["addressName"], 1)[0]) ||
-        ""
+      walletExtract: this.Util.deepCopy(result),
+      address: address,
     });
+    this.view.state.address = address
+    return address;
   }
 
   // 请求验证码

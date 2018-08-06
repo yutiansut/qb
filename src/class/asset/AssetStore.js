@@ -377,7 +377,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
   // 获取提币地址信息
   async getwalletExtract() {
-    if (this.state.walletExtract.extractAddr.length) return;
+    // if (this.state.walletExtract.extractAddr.length) return;
     let result = await this.Proxy.extractAddress({
       // userId: this.controller.userId,
       token: this.controller.token
@@ -400,6 +400,7 @@ export default class AssetStore extends ExchangeStoreBase {
         })
       };
     });
+    return this.state.walletExtract;
   }
 
   // 提交提币订单

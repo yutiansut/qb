@@ -154,6 +154,7 @@ export default class Charge extends exchangeViewBase {
             <span className="title">{this.intl.get("asset-selectCoin")}</span>
             <div className="currency-asset">
               <SearchInput
+                history={this.props.history}
                 filte={this.props.controller.filter}
                 walletList={this.deal(this.state.walletList,'c')}
                 value={this.state.value}
