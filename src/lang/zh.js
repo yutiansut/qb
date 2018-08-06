@@ -337,6 +337,10 @@ export default function zh(state) {
     "h5-asset-search-placeholder": "请输入关键词",
     "h5-asset-empty1": "没有搜到您要的信息",
     "h5-asset-empty2": "请重新输入哦～",
+    "h5-asset-selectCoin": "请选择币种",
+    "h5-asset-empty3": "当前无内容",
+    "h5-asset-empty4": "赶快去选择币种吧～",
+    "h5-asset-withdraw-tip": "提币须知",
   };
   const market = {
     "market-favorite": "收藏",

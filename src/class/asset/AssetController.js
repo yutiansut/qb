@@ -377,7 +377,6 @@ export default class AssetController extends ExchangeControllerBase {
         item.fullName.toLowerCase().includes(value.toLowerCase())
       );
     });
-    console.log(arr1)
     let arr2 = this.filter(arr1, item => {
       return !hideLittle || item.valuationBTC > 0.001;
     });

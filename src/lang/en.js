@@ -348,6 +348,10 @@ export default function en(state) {
     "h5-asset-search-placeholder": "Please input keyword",
     "h5-asset-empty1": "No search for the information you want",
     "h5-asset-empty2": "Please reenter it.",
+    "h5-asset-selectCoin": "Choose currency",
+    "h5-asset-empty3": "No content",
+    "h5-asset-empty4": "Go ahead and choose the currency ～",
+    "h5-asset-withdraw-tip": "Withdraw notice",
   };
   const market = {
     "market-favorite": "Favorites",

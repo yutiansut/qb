@@ -37,7 +37,7 @@ export default class History extends exchangeViewBase {
     this.getHistory = controller.getHistory.bind(controller);
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     //路由参数
     let type = this.props.location.query && this.props.location.query.type;
     if(type===1 || type===2){

@@ -10,27 +10,23 @@ export default class Charge extends exchangeViewBase {
         let { controller } = props;
         this.state = {
             currency: "",
-            address: "",
+            coinAddress: {},
+
             showPopup: false,
             popMsg: "",
             popType: "",
-            showSelect: false
         };
         //绑定view
         controller.setView(this);
         //初始化数据，数据来源即store里面的state
-        let {
-            walletList,
-            walletHandle,
-            coinAddress
-        } = controller.initState;
-
-        this.state = Object.assign(this.state, {
-            walletList,
-            coinAddress
-        });
+        let {coinAddress} = controller.initState;
+        this.state = Object.assign(this.state, {coinAddress});
 
         // 绑定方法
+        this.getCoinAddress = controller.getCoinAddress.bind(controller);
+        //头部
+        this.addContent = controller.headerController.addContent.bind(controller.headerController);
+
         this.copy = el => {
             if(controller.copy(el)){
                 this.setState({showPopup:true,popMsg:this.intl.get("asset-copySuccess"),popType:"tip1"})
@@ -38,89 +34,56 @@ export default class Charge extends exchangeViewBase {
                 this.setState({showPopup:true,popMsg:this.intl.get(""),popType:"tip3"})
             }
         };
-        this.deal = controller.dealCoin.bind(controller);
-        this.getWalletList = controller.getWalletList.bind(controller);
-        this.getCoinAddress = controller.getCoinAddress.bind(controller);
     }
 
-    async componentWillMount() {
-        await this.getWalletList();
+    async componentDidMount() {
+        let {controller,history} = this.props;
+        this.addContent({con: this.intl.get("asset-charge")});
         // 获取路由参数
-        let query = this.props.controller.getQuery("currency").toUpperCase();
-        let currency = query || (this.props.location.query && this.props.location.query.currency) || "btc";
-
-        currency = currency.toUpperCase();
-        this.setState({currency: currency.toUpperCase()});
-        // 更改url
-        this.props.controller.changeUrl("currency", currency.toLowerCase());
+        let currency = this.props.controller.getQuery("currency").toUpperCase() || "";
 
         this.getCoinAddress(currency);
+        this.setState({currency: currency});
     }
 
-    componentDidMount() {}
-
     render() {
+        let {history} = this.props;
+        let {showPopup,currency} = this.state;
         let {coinAddress,verifyNumber} = this.state.coinAddress;
-        let walletList = this.deal(this.state.walletList, 'c');
-        let currency=this.state.currency.toUpperCase();
+
         return (
             <div className="charge">
-                <div className="nav">
-                    <NavLink to="/wallet" className="left">&lt; {this.intl.get("back")}</NavLink>
-                    <h3>{this.intl.get("asset-charge")}</h3>
-                    <NavLink to={{pathname: "/wallet/dashboard", query: {type:1}}} className="right"><img src="/static/mobile/asset/icon_dd_pre@2x.png"/></NavLink>
-                </div>
-                <div className="filter" onClick={()=>{
-                    this.setState({showSelect:true});
-                }}>
-                    <label>{this.intl.get("asset-selectCoin")}</label>
-                    <b>{currency}</b>
-                    <i>&gt;</i>
-                </div>
-                <div className="info">
-                    <QRCode value={coinAddress || "-"} level="M" size={160} className="qrcode"/>
-                    {/* <a className="save-qrcode">保存二维码</a>*/}
-                    <input type="text" ref="addr" value={coinAddress || "-"} readOnly="readOnly"/>
-                    <a className="copy-addr"
-                       onClick={()=>{
-                           this.copy(this.refs.addr);
-                       }}>
-                        {this.intl.get("asset-copy")}</a>
-                    <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
-                    <p>{this.intl.getHTML("asset-depositReminder1",{currency:currency,number:verifyNumber})}</p>
-                    <p>{this.intl.get("asset-charge-h5-tip3")}</p>
-                </div>
-                {/*提示框*/}
-                {this.state.showPopup && (
-                    <Popup
-                        type={this.state.popType}
-                        msg={this.state.popMsg}
-                        h5={true}
-                        onClose={() => {
-                            this.setState({ showPopup: false });
-                        }}
-                        autoClose = {true}
-                    />
-                )}
                 {/*选择币种*/}
-                {this.state.showSelect && <div className="select">
-                    <div className="nav sl-head">
-                        <a className="left" onClick={()=>{
-                            this.setState({showSelect:false});
-                        }}>&lt; 返回</a>
-                        <h3>选择币种</h3>
+                <div className="filter" onClick={()=>history.push(`/wallet/select?to=/wallet/charge`)}>
+                    <label>{this.intl.get("asset-selectCoin")}</label>
+                    <b className={currency ? "":"gray"}>{currency || this.intl.get("h5-asset-selectCoin")}</b>
+                    <img src="/static/mobile/asset/icon_next@2x.png"/>
+                </div>
+                {/*充币信息*/}
+                {currency ?
+                    <div className="info">
+                        <QRCode value={coinAddress || "-"} level="M" size={160} className="qrcode"/>
+                        {/* <a className="save-qrcode">保存二维码</a>*/}
+                        <input type="text" ref="addr" value={coinAddress || "-"} readOnly="readOnly"/>
+                        <a className="copy-addr" onClick={()=> this.copy(this.refs.addr)}>{this.intl.get("asset-copy")}</a>
+                        <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
+                        <p>{this.intl.getHTML("asset-depositReminder1",{currency:currency,number:verifyNumber})}</p>
+                        <p>{this.intl.get("asset-charge-h5-tip3")}</p>
                     </div>
-                    <ul>
-                        {walletList && walletList.map((item,index)=>{
-                            return <li key={index} onClick={()=>{
-                                this.setState({currency:item,showSelect:false},()=>{
-                                    this.props.controller.changeUrl("currency", item.toLowerCase());
-                                    this.getCoinAddress(this.state.currency);
-                                })
-                            }}>{item.toUpperCase()}</li>
-                        })}
-                    </ul>
-                </div>}
+                        :
+                    <div className="empty">
+                        <b>{this.intl.get("h5-asset-empty3")}</b>
+                        <i>{this.intl.get("h5-asset-empty4")}</i>
+                    </div>}
+                {/*提示框*/}
+                {showPopup && <Popup
+                    type={this.state.popType}
+                    msg={this.state.popMsg}
+                    h5={true}
+                    onClose={() => {
+                        this.setState({ showPopup: false });
+                    }}
+                    autoClose = {true}/>}
             </div>
         );
     }

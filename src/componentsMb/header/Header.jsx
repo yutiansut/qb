@@ -146,8 +146,8 @@ export default class Header extends ExchangeViewBase {
                   className="right"/>
               </a>
               {this.state.langFold && <div className="fold">
-                <a className={lang === "zh-CN" && "selected"} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
-                <a className={lang === "en-US" && "selected"} onClick={e => this.changeLanguage("en-US")}>English</a>
+                <a className={lang === "zh-CN" ? "selected" : ""} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
+                <a className={lang === "en-US" ? "selected" : ""} onClick={e => this.changeLanguage("en-US")}>English</a>
               </div>}
               {/*退出*/}
               <a className="br"/>
@@ -176,8 +176,8 @@ export default class Header extends ExchangeViewBase {
                   className="right"/>
               </a>
               {this.state.langFold && <div className="fold">
-                <a className={lang === "zh-CN" && "selected"} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
-                <a className={lang === "en-US" && "selected"} onClick={e => this.changeLanguage("en-US")}>English</a>
+                <a className={lang === "zh-CN" ? "selected" : ""} onClick={e => this.changeLanguage("zh-CN")}>简体中文</a>
+                <a className={lang === "en-US" ? "selected" : ""} onClick={e => this.changeLanguage("en-US")}>English</a>
               </div>}
             </div>}
         </div>}

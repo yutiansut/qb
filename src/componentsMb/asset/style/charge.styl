@@ -1,49 +1,28 @@
-
 .asset-mb
   .charge
     font-family PingFangSC-Medium
     position relative
-    .nav
-      height .45rem
-      line-height .45rem
-      background $h5-asset-bg
-      border-bottom .01rem solid $h5-asset-border
-      position relative
-      color $h5-asset-font-weight
-      h3
-        text-align center
-        font-size .18rem
-        position absolute
-        width 100%
-        pointer-events none
-      a
-        font-size .14rem
-        color $h5-asset-font-weight
-        &.left
-          float left
-          margin-left .12rem
-        &.right
-          float right
-          margin-right .12rem
-          img
-            height .2rem
-            vertical-align -.04rem
     .filter
       padding 0 .12rem
-      line-height .4rem
-      height .4rem
+      line-height .45rem
+      height .45rem
       background $h5-asset-bg
+      display flex
+      align-items center
       label
         color $h5-asset-font-normal
         font-size .15rem
       b
         color $h5-asset-font-normal
-        margin-left .3rem
-        font-size .15rem
-      i
-        color $h5-asset-font-normal
-        font-size .18rem
-        float right
+        margin-left .31rem
+        font-size .16rem
+        flex-grow 1
+        &.gray
+          color $h5-asset-font-light
+          font-size .14rem
+      img
+        height .14rem
+        width auto
     .info
       margin-top .12rem
       margin-bottom .2rem
@@ -54,8 +33,7 @@
       .qrcode
         width 1.6rem
         height 1.6rem
-        margin-top .4rem
-        margin-bottom .4rem
+        margin .4rem 0
         border .04rem solid $h5-asset-font-weight
       .save-qrcode
         line-height .2rem
@@ -78,25 +56,23 @@
         color $h5-asset-font-light
         font-size .14rem
         line-height .2rem
-        margin .05rem 0
+        margin .03rem 0
         text-align justify
         align-self: flex-start;
 
-    .select
-      position absolute
-      top 0
-      bottom 0
-      width 100%
-      background $h5-asset-bg
-      ul
-        li
-          line-height .4rem
-          border-bottom .01rem solid $h5-asset-border
-          padding 0 .12rem
-          color $h5-asset-font-normal
-          font-size .15rem
 
-
+    .empty
+      text-align center
+      padding-top 1.55rem
+      b
+        font-size .16rem
+        color $h5-asset-font-active
+        display block
+      i
+        display block
+        margin-top .05rem
+        color $h5-asset-font-light
+        font-size .14rem
 
 
 

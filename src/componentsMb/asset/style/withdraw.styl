@@ -10,7 +10,7 @@
       label
         font-size .15rem
         color $h5-asset-font-normal
-      span
+      b
         font-size .14rem
         color $h5-asset-font-light
         flex-grow 1
@@ -19,146 +19,207 @@
         height .14rem
         width auto
 
-
-    .addr-info
-      height .4rem
-      padding .08rem .12rem 0 .12rem
-      line-height .32rem
-      color $h5-asset-font-light
-      font-size .12rem
-
-    .addr
-      padding .12rem
-      background $h5-asset-bg
-      label
-        font-size .12rem
-        color $h5-asset-font-light
-        display block
-        margin-bottom .08rem
-      p
-        display flex
-        span
-          color $h5-asset-font-normal
-          font-size .15rem
-          word-break break-all
-          padding-right .12rem
-          border-right .01rem solid $h5-asset-border
-        img
-          height .2rem
-          width auto
-          margin-left .16rem
-
-
-    .num-info
-      height .4rem
-      padding .08rem .12rem 0 .12rem
-      line-height .32rem
-      span
+    .form
+      .addr-info
+        height .4rem
+        padding .08rem .12rem 0 .12rem
+        line-height .32rem
         color $h5-asset-font-light
         font-size .12rem
-        &.s2
-          float right
 
-    .num
-      background $h5-asset-bg
-      padding-top .12rem
-      label
-        font-size .12rem
-        color $h5-asset-font-light
-        display block
-        padding 0 .12rem
-        margin-bottom .08rem
-      .p1
-        padding 0 .12rem
-        display flex
-        line-height .21rem
-        padding-bottom .12rem
-        border-bottom .01rem solid $h5-asset-border
-        input
-          border 0
-          outline 0
-          font-size .15rem
-          color $h5-asset-font-normal
-          flex-grow 1
-        i
-          font-size .15rem
-          color $h5-asset-font-normal
-          padding-right .12rem
-          border-right .01rem solid $h5-asset-border
-        a
-          font-size .15rem
-          color $h5-asset-font-active
-          margin-left .12rem
-      .p2
-        line-height .33rem
-        height .33rem
-        padding 0 .12rem
-        span
+      .addr
+        padding .12rem
+        background $h5-asset-bg
+        label
           font-size .12rem
           color $h5-asset-font-light
+          display block
+          margin-bottom .08rem
+        p
+          display flex
+          span
+            color $h5-asset-font-normal
+            font-size .15rem
+            word-break break-all
+            padding-right .12rem
+            border-right .01rem solid $h5-asset-border
+            flex-grow 1
+            min-height .6rem
+          img
+            height .2rem
+            width auto
+            margin-left .16rem
+
+      .num-info
+        height .4rem
+        padding .08rem .12rem 0 .12rem
+        line-height .32rem
+        span
+          color $h5-asset-font-light
+          font-size .12rem
           &.s2
             float right
 
-    .pass
+      .num
+        background $h5-asset-bg
+        padding-top .12rem
+        label
+          font-size .12rem
+          color $h5-asset-font-light
+          display block
+          padding 0 .12rem
+          margin-bottom .08rem
+        .p1
+          padding 0 .12rem
+          display flex
+          line-height .21rem
+          padding-bottom .12rem
+          border-bottom .01rem solid $h5-asset-border
+          input
+            border 0
+            outline 0
+            font-size .15rem
+            color $h5-asset-font-normal
+            flex-grow 1
+          i
+            font-size .15rem
+            color $h5-asset-font-normal
+            padding-right .12rem
+            border-right .01rem solid $h5-asset-border
+          a
+            font-size .15rem
+            color $h5-asset-font-active
+            margin-left .12rem
+        .p2
+          line-height .33rem
+          height .33rem
+          padding 0 .12rem
+          span
+            font-size .12rem
+            color $h5-asset-font-light
+            &.s2
+              float right
+
+      .pass
+        background $h5-asset-bg
+        margin-top .08rem
+        padding 0 .12rem
+        >a
+          line-height .45rem
+          height .45rem
+          display flex
+          align-items center
+          i
+            color $h5-asset-font-normal
+            font-size .15rem
+            flex-grow 1
+          img
+            height .14rem
+            width auto
+        >p
+          line-height .45rem
+          height .45rem
+          display flex
+          align-items center
+          &:first-of-type
+            border-bottom .01rem solid $h5-asset-border
+          label
+            font-size .15rem
+            color $h5-asset-font-normal
+            white-space nowrap
+          input
+            flex-grow 1
+            padding 0 .12rem
+            margin-left .04rem
+            color $h5-asset-font-light
+            font-size .14rem
+            min-width 0
+          a
+            font-size .15rem
+            color $h5-asset-font-active
+            white-space nowrap
+
+      .txt
+        padding .24rem .12rem .14rem .12rem
+        h3
+          display block
+          line-height .2rem
+          margin-bottom .04rem
+          color $h5-asset-font-light
+          font-size .14rem
+        p
+          font-size .14rem
+          color $h5-asset-font-light
+          text-align justify
+          line-height .21rem
+
+      .submit
+        padding 0 .12rem
+        margin-bottom .14rem
+        button
+          height .45rem
+          line-height .45rem
+          background $h5-asset-font-active
+          color $h5-asset-font-normal
+          width 100%
+          border-radius .02rem
+          font-size .18rem
+
+    .empty
+      text-align center
+      padding-top 1.55rem
+      b
+        font-size .16rem
+        color $h5-asset-font-active
+        display block
+      i
+        display block
+        margin-top .05rem
+        color $h5-asset-font-light
+        font-size .14rem
+
+    .layer-shadow
+      position fixed
+      background rgba(0,0,0,.6)
+      top 0
+      left 0
+      right 0
+      bottom 0
+    .layer
+      position fixed
+      left .25rem
+      right .25rem
+      top 2.18rem
       background $h5-asset-bg
-      margin-top .08rem
-      padding 0 .12rem
-      >a
-        line-height .45rem
-        height .45rem
+      border-radius .02rem
+      overflow hidden
+      h3
+        margin 0 .16rem
+        border-bottom .01rem solid $h5-asset-border
+        height .4rem
         display flex
         align-items center
-        i
+        b
+          font-size .16rem
           color $h5-asset-font-normal
-          font-size .15rem
+          border-left .03rem solid $h5-asset-font-active
+          height .16rem
+          padding-left .08rem
           flex-grow 1
         img
           height .14rem
           width auto
-      >p
-        line-height .45rem
-        height .45rem
-        display flex
-        align-items center
-        &:first-of-type
-          border-bottom .01rem solid $h5-asset-border
-        label
-          font-size .15rem
-          color $h5-asset-font-normal
-        input
-          flex-grow 1
-          margin-left .16rem
-          color $h5-asset-font-light
-          font-size .14rem
-        a
-          font-size .15rem
-          color $h5-asset-font-active
-
-    .txt
-      padding .24rem .12rem .14rem .12rem
-      h3
-        display block
-        line-height .2rem
-        margin-bottom .04rem
-        color $h5-asset-font-light
-        font-size .14rem
-      p
-        font-size .14rem
-        color $h5-asset-font-light
-        text-align justify
-        line-height .21rem
-
-    .submit
-      padding 0 .12rem
-      margin-bottom .14rem
       button
         height .45rem
-        line-height .45rem
         background $h5-asset-font-active
-        color $h5-asset-font-normal
+        display block
+        font-size .16rem
+        color #fff
         width 100%
-        border-radius .02rem
-        font-size .18rem
+      p
+        padding .16rem
+        color $h5-asset-font-normal
+
 
 
 

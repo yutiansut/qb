@@ -72,7 +72,7 @@ export default class AssetStore extends ExchangeStoreBase {
           availableCount: avc, //可用余额
           frozenCount: frc, //冻结余额
           valuationBTC: va, //btc估值
-          totalCount: avc + frc, //总量
+          totalCount: Number(avc).plus(frc), //总量
           valuationCN: vac,
           valuationEN: vae,
           c: c,
@@ -144,7 +144,7 @@ export default class AssetStore extends ExchangeStoreBase {
             availableCount: avc, //可用余额
             frozenCount: frc, //冻结余额
             valuationBTC: va, //btc估值
-            totalCount: avc + frc,//总量
+            totalCount: Number(avc).plus(frc),//总量
             valuationCN: vac,
             valuationEN: vae,
             c:c,

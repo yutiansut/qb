@@ -30,21 +30,19 @@ export default class BalanceDetail extends exchangeViewBase {
     this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
   }
 
-  async componentWillMount(){
-    this.addContent({con: this.intl.get("asset-detail"),link: false, url: "/wallet"});
+  async componentDidMount(){
+    this.addContent({con: this.intl.get("asset-detail")});
 
     await this.getAssets();
-  
-    // 更改url
-    this.props.controller.changeUrl("currency", currency.toLowerCase());
-    //获取路由参数,选取对应币种
-    let coin = (this.props.location.query && this.props.location.query.currency) || "BTC";
-    let result = (this.state.wallet && this.state.wallet.filter(item => item.coinName.toUpperCase() === coin.toUpperCase())[0]) || {};
-    //加载币种信息和交易对
 
+    //获取路由参数,选取对应币种
+    let coin = this.props.controller.getQuery("currency").toUpperCase() || "BTC";
+    let result = (this.state.wallet && this.state.wallet.filter(item => item.coinName.toUpperCase() === coin.toUpperCase())[0]) || {};
+
+    //加载币种信息和交易对
     this.getCoinInfo(result.coinId);
     this.getTradePair();
-    this.state.result = result;
+    this.setState({result: result});
   }
 
   render() {

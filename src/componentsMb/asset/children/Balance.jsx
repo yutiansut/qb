@@ -35,9 +35,7 @@ export default class Balance extends exchangeViewBase {
       this.addContent({
           con: this.intl.get("header-assets2"),
           search: true,
-          selectFn: () => {
-            history.push({pathname: "/wallet/search/", query: {to: "/wallet/detail"}});
-          }
+          selectFn: () => history.push(`/wallet/search?to=/wallet/detail`)
       });
 
       await this.getAssets();
@@ -112,7 +110,7 @@ export default class Balance extends exchangeViewBase {
             {result.map((item, index) => {
                 return item.coinName.toUpperCase() !== 'QBT' ?
                     /*普通币种*/
-                    <div className="wallet-li" key={index} onClick={()=>history.push({pathname: `/wallet/detail/`, query: {currency: item.coinName}})}>
+                    <div className="wallet-li" key={index} onClick={()=>history.push(`/wallet/detail/?currency=${item.coinName}`)}>
                         <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
                         <span>{showAsset && Number(item.totalCount).format({number: "property", style: {decimalLength: 8}}) || "****"}</span>
                     </div>

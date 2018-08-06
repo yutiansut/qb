@@ -33,10 +33,11 @@ export default class Search extends exchangeViewBase {
     async componentWillMount() {
         this.addContent({nav: false});
         //路由参数to
-        this.state.to = this.props.location.query && this.props.location.query.to || "/wallet";
+        let to = this.props.controller.getQuery("to") || "/wallet";
 
         await this.getAssets();
         await this.getRecommendCoins();
+        this.setState({to: to});
     }
 
     render() {
@@ -66,7 +67,7 @@ export default class Search extends exchangeViewBase {
                        </h3>
                        <p>
                            {historyList.map((item, index) => {
-                               return <a key={index} onClick={() => history.push({pathname: to, query: {currency: item}})}>{item}</a>
+                               return <a key={index} onClick={() => history.push(`${to}?currency=${item}`)}>{item}</a>
                            })}
                        </p>
                    </div>)}
@@ -76,7 +77,7 @@ export default class Search extends exchangeViewBase {
                        <h3>{this.intl.get("h5-asset-recommend-currency")}</h3>
                        <p>
                            {recommendList.map((item,index)=>{
-                               return <a key={index} onClick={()=>history.push({pathname:to,query:{currency:item.coinName}})}>{item.coinName}</a>
+                               return <a key={index} onClick={() => history.push(`${to}?currency=${item.coinName}`)}>{item.coinName}</a>
                            })}
                        </p>
                    </div>}
@@ -89,10 +90,10 @@ export default class Search extends exchangeViewBase {
                                <div className="li" key={index}
                                     onClick={() => {
                                         this.addSearchHistory(item.coinName);
-                                        history.push({pathname: to, query: {currency: item.coinName}})
+                                        history.push(`${to}?currency=${item.coinName}`);
                                     }}>
                                    <label><b>{item.coinName}</b><i>({item.fullName})</i></label>
-                                   <span>{item.totalCount}</span>
+                                   <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
                                </div>
                            )
                        })}
