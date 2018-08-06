@@ -164,7 +164,7 @@ export default class MyQBT extends exchangeViewBase {
             <p>2. 邀请好友来QB网交易</p>
             <p className="dark">成为QB网的全球合作伙伴与代表，我们支持多种合作模式，欢迎咨询与探讨，我们希望与您成为朋友。</p>
             <div className="coin-invite" >
-              <Button title="立即邀请"/>
+              <Button type="base" title="立即邀请"/>
             </div>
 
             <div className="contact">
@@ -258,8 +258,8 @@ export default class MyQBT extends exchangeViewBase {
                         fgColor="#fff"/>
               </div>
               <div className="qr-btns">
-                <Button title="保存二维码" type="default" theme="main" className="save-btn" onClick={this.saveIMG}/>
-                <Button title="复制微信号" type="default" theme="main" className="copy-btn" onClick={() => {
+                <Button title="保存二维码" type="base" theme="main" className="save-btn" onClick={this.saveIMG}/>
+                <Button title="复制微信号" type="base" theme="main" className="copy-btn" onClick={() => {
                   this.copy(this.refs.wechat);
                 }}/>
               </div>
