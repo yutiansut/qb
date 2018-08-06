@@ -1,0 +1,189 @@
+//@import "../../../common/css/variable.styl"
+
+@keyframes loading
+  0%
+    transform rotate(0deg)
+    -ms-transform rotate(0deg)
+    -moz-transform rotate(0deg)
+    -webkit-transform rotate(0deg)
+    -o-transform rotate(0deg)
+  100%
+    transform rotate(360deg)
+    -ms-transform rotate(360deg)
+    -moz-transform rotate(360deg)
+    -webkit-transform rotate(360deg)
+    -o-transform rotate(360deg)
+
+.identify-wrap
+  .hide
+    display none
+  .auth-res
+    color $user-font-normal
+  span
+    color $user-font-normal
+  .number-err
+    position absolute
+    color $user-font-warn
+    margin-top .05rem
+  input
+    width 2.06rem
+    height .4rem
+    padding-left .1rem
+    //background $col2F30
+    //border 1px solid $cola2225
+    border-radius (.02rem)
+    vertical-align bottom
+  .identify-result
+    padding .16rem 0 .32rem 1.5rem
+    border-bottom 1px solid $user-line-main
+    img
+      width .44rem
+      height .44rem
+      margin-right .1rem
+      vertical-align middle
+  .name-identify
+    padding .47rem 0 .44rem
+    border-bottom 1px solid $user-line-main
+    span
+      display block
+      width 8rem
+      margin-bottom .44rem
+      fz11()
+      color $user-font-warn
+    ul
+      float left
+      margin 0 .44rem .44rem 0
+      color $user-font-normal
+      li:first-child
+        margin-bottom .18rem
+    dl
+      color $user-font-normal
+      dt
+        margin-bottom .32rem
+      dd
+        float left
+        width 1.05rem
+        margin-bottom .18rem
+        cursor pointer
+        img
+          width 0.14rem
+          height 0.14rem
+          margin-right .1rem
+          vertical-align top
+
+    .id-input
+      width 4.56rem
+
+  .photo-identify
+    padding .44rem 0 .58rem
+    .user-req4
+      color $user-font-warn
+    div
+      width 8rem
+    .identify-btn
+      width 2.5rem
+      height .4rem
+      background $user-bg-btn
+      color $user-font-btn
+      border-radius (.02rem)
+      opacity .5
+      &.identify-btn-active
+        opacity 1
+    input
+      width .12rem
+      height .12rem
+      margin-right .08rem
+      vertical-align top
+    h3
+      margin-bottom .24rem
+      fz11()
+      color $user-font-remind
+      p
+        display inline-block
+        position relative
+        top .02rem
+        margin-right .1rem
+        cursor pointer
+        span
+          display inline-block
+          width .14rem
+          height .14rem
+          border 1px solid $user-border-select
+          border-radius .03rem
+        img
+          width .15rem
+          height .15rem
+    dl
+      color $user-font-normal
+      margin-bottom .44rem
+      dt
+        margin-bottom .32rem
+      &.user-photoVerify-req
+        dd
+          margin-bottom .18rem
+
+      &.user-photoVerify-type
+        dd
+          float left
+          width 1.05rem
+          margin-bottom .18rem
+          cursor pointer
+          img
+            width 0.14rem
+            height 0.14rem
+            margin-right .1rem
+            vertical-align top
+
+      &.user-photoVerify-upload
+        dd
+          float left
+          position relative
+          width 1.9rem
+          height 1.3rem
+          text-align center
+          cursor pointer
+          &:nth-of-type(2)
+            margin 0 .2rem 0 .2rem
+          img
+            width 1.9rem
+            height 1.3rem
+            vertical-align middle
+          .add-img
+            position absolute
+            top 50%
+            left 50%
+            transform translateX(-50%) translateY(-50%)
+            width .44rem
+            height .44rem
+            z-index 2
+          .up-img
+            position absolute
+            top 0
+            left 0
+            z-index 1
+          p
+            position absolute
+            top 1.4rem
+            left 0
+            width 100%
+            text-align center
+          .loading-wrap
+            position absolute
+            width 1.9rem
+            height 1.3rem
+            left 50%
+            top 50%
+            transform translateX(-50%) translateY(-50%)
+            z-index 99
+            background rgba(0, 0, 0, .5)
+            img
+              position absolute
+              left 50%
+              top 50%
+              transform translateX(-50%) translateY(-50%)
+              width .32rem
+              height .32rem
+              margin-top -.16rem
+              margin-left -.16rem
+              animation loading 1.5s linear infinite;
+              -webkit-animation loading 1.5s linear infinite;
