@@ -17,10 +17,10 @@ export default class DownLoad extends exchangeViewBase {
         <div className="content">
           <img src={this.$imagesMap.$help_download_bg} alt=""/>
           {/* <a href="#" className="iphone">{this.intl.get('help-download-ios')}</a> */}
-          <a href="http://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.apk" className="android">{this.intl.get('help-download-android')}</a>
+          <a href="https://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.1.apk" className="android">{this.intl.get('help-download-android')}</a>
         </div>
         <div className="qrcode">
-          <QRCode value='http://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.apk' level="M"/>
+          <QRCode value='https://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.1.apk' level="M"/>
         </div>
         <span>{this.intl.get('help-download-tip')}</span>
       </div>;

@@ -414,15 +414,15 @@ export default class OrderCurrent extends ExchangeViewBase {
                       <td style={{color: `${v.orderType ? '#D84747' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
                       {/*todo 颜色改类名统一处理*/}
                       {/*价格*/}
-                      {type === 'orderCurrent' && <td>{Number(v.price)}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.price).format()}</td>}
                       {type === 'orderHistory' && <td>{v.priceType ? this.intl.get('marketPrice') : Number(v.price).format({number:'digital'})}</td>}
-                      {type === 'orderDeal' && <td>{Number(v.avgPrice)}</td>}
+                      {type === 'orderDeal' && <td>{Number(v.avgPrice).format()}</td>}
                       {/*数量*/}
-                      {type !== 'orderDeal' && <td>{Number(v.count)}</td> || <td>{Number(v.dealDoneCount)}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.count).format()}</td> || <td>{Number(v.dealDoneCount).format()}</td>}
                       <td>{type === 'orderCurrent' && (Number(Number(v.price).multi(v.count)).format({number: 'property'})) || Number(v.turnover).format({number: 'property'})}</td>
                       {type === 'orderDeal' && <td>{Number(v.fee).format({number: 'property'})}{v.orderType ? tradePairArr[1] : tradePairArr[0]}</td>}
-                      {type === 'orderCurrent' && <td>{Number(v.undealCount)}</td>}
-                      {type !== 'orderDeal' && <td>{Number(v.dealDoneCount)}</td>}
+                      {type === 'orderCurrent' && <td>{Number(v.undealCount).format()}</td>}
+                      {type !== 'orderDeal' && <td>{Number(v.dealDoneCount).format()}</td>}
                       {type === 'orderHistory' && <td>{Number(v.avgPrice).format({number: 'digital'})}</td>}
                       {type !== 'orderDeal' && <td>{this.state.orderStatusItems[v.orderStatus]}</td>}
                       {type === 'orderCurrent' && <td style={{color:'#2BB789', cursor:'pointer'}} onClick={this.cancelOrder.bind(this, v)}>{this.intl.get('cancel')}</td> || type === 'orderHistory' && <td onClick={this.checkoutDetail.bind(this, v)} style={{color: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? '#2BB789' : '#D5D6D6', cursor: (v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? 'pointer' : 'auto'}}>{(v.orderStatus === 2 || v.orderStatus === 6 || v.orderStatus === 7) ? this.intl.get('detail') : '—'}</td>}
@@ -444,19 +444,19 @@ export default class OrderCurrent extends ExchangeViewBase {
               </div>
               <div className='detail-content-info'>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail && Number(this.state.orderDetail.doneCount) || ''}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.doneCount).format() || ''}</p>
                   <span>{this.intl.get('order-deal-total')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[0].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail && Number(this.state.orderDetail.dealedMoney) || ''}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.dealedMoney).format() || ''}</p>
                   <span>{this.intl.get('order-deal-money')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail && Number(this.state.orderDetail.price) || ''}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.price).format() || ''}</p>
                   <span>{this.intl.get('avgPrice')}{this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='content-info-items'>
-                  <p>{this.state.orderDetail && Number(this.state.orderDetail.fee) || ''}</p>
+                  <p>{this.state.orderDetail && Number(this.state.orderDetail.fee).format() || ''}</p>
                   <span>{this.intl.get('fee')}{this.state.orderDetail.tradePairName && (this.state.orderDetail.orderType ? this.state.orderDetail.tradePairName.split('/')[1].toUpperCase() : this.state.orderDetail.tradePairName.split('/')[0].toUpperCase())}</span>
                 </div>
               </div>
@@ -478,7 +478,7 @@ export default class OrderCurrent extends ExchangeViewBase {
                         {/*<td>{v.seller}</td>*/}
                         <td>{Number(v.orderTime).toDate()}</td>
                         <td>{Number(v.price).format({number:'digital'})}</td>
-                        <td>{v.volume}</td>
+                        <td>{Number(v.volume).format()}</td>
                         <td>{Number(v.turnover).format({number:'property'})}</td>
                       </tr>
                   )
