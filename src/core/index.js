@@ -9,6 +9,7 @@ import Storage from './storage/index'
 import './libs/Prototype'
 import ZipUtil from './libs/ZipUtil'
 import StoreBase from './StoreBase'
+import Regular from './libs/Regular'
 
 
 
@@ -34,5 +35,6 @@ module.exports = {
   ChangeFontSize,
   Storage,
   ZipUtil,
-  StoreBase
+  StoreBase,
+  Regular
 }
