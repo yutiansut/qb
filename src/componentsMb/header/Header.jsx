@@ -60,7 +60,7 @@ export default class Header extends ExchangeViewBase {
     let lang = configController.language;
     let isLogin = !!userController.userToken;
     let path = history.location.pathname
-    console.log(123456, match, history.location.pathname)
+    // console.log(123456, match, history.location.pathname)
     return (
       <div>
       {this.state.navShow && <div

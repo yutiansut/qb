@@ -40,7 +40,6 @@ export default class MarketStore extends ExchangeStoreBase {
         "totalValueEN": 0, // 美元总市值
         "icoPriceCN": 0,              // 人民币ico价格
         "icoPriceEN": 0  // 美元ico价格
-
       },
       qb: {},
       "list": [

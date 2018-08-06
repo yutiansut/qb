@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ControllerBase from './ControllerBase';
-
 // const controllerBase = new ControllerBase()
 
 export default class ViewBase extends React.Component {

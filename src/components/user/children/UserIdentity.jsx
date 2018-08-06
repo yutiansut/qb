@@ -6,6 +6,7 @@ import Input from '../../../common/component/Input/index.jsx'
 import RemindPopup from '../../../common/component/Popup/index.jsx'
 import "../stylus/identify.styl"
 import Server from '../../../config/ServerConfig'
+import {Regular} from '../../../core'
 
 export default class userIdentity extends exchangeViewBase {
   constructor(props) {
@@ -157,18 +158,19 @@ export default class userIdentity extends exchangeViewBase {
     this.state.errNum && (this.setState({errNum: ""}))
   }
   checkNumber() { // 验证身份证 ／ 护照
-    let reg1 = /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
-        reg2 = /^[a-zA-Z]{5,17}$/,
-        reg3 = /^[a-zA-Z0-9]{5,17}$/;
+    // console.log('正则', Regular('regId', this.state.numberValue))
+    let reg1 = Regular('regId', this.state.numberValue),
+        reg2 = Regular('regPassPort1', this.state.numberValue),
+        reg3 = Regular('regPassPort2', this.state.numberValue);
     if (this.state.selectIndex === 0) { // 身份证
-      if(!reg1.test(this.state.numberValue)) {
+      if(!reg1) {
         this.setState({
           errNum: this.intl.get("user-idErr")
         })
       }
     }
     if (this.state.selectIndex === 1) { // 护照
-      if(!reg2.test(this.state.numberValue) && !reg3.test(this.state.numberValue)) {
+      if(!reg2 && !reg3) {
         this.setState({
           errNum: this.intl.get("user-passportErr")
         })

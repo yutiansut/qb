@@ -59,7 +59,6 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   // 点击收藏区
-
   collectMarket() {
     let homeMarketPairData = this.getCollectArr()
     this.store.setSelecedMarket('收藏区');

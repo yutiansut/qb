@@ -14,7 +14,8 @@ export default class HeaderController extends ExchangeControllerBase {
    * link 是采用goback 默认为true
    * url 不采用goback时的地址 默认为''
    * search 筛选按钮是否显示 默认为false
-   * filter 过滤按钮是否显示 默认为false
+   * filter 过滤按钮是否显示 默认为false,
+   * selectFn 导航头部点击事件
    */
 
   addContent({nav, con, navBtn, link, url, search, filter, selectFn}) {
@@ -27,8 +28,6 @@ export default class HeaderController extends ExchangeControllerBase {
       searchShow: search === undefined ? false : search,
       filterShow: filter === undefined ? false : filter,
       selectFn
-    }, ()=>{
-      console.log(11111, this.view.state)
     })
   }
 }
