@@ -376,7 +376,9 @@ export default class Extract extends exchangeViewBase {
                 />
                 <a
                   onClick={() => {
-                    this.setState({ extractAmount: availableCount });
+                    this.setState({ extractAmount: availableCount },()=>{
+                      document.querySelector('.extract .extract-amount .input input').focus()
+                    });
                   }}
                 >
                   {this.intl.get("asset-withdrawAvailable")}: {availableCount}
