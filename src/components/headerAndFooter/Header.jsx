@@ -207,7 +207,7 @@ export default class Header extends ExchangeViewBase {
             </div>}
           </li>
           <li className={`${userToken ? 'hide' : 'login-li'}`}>
-            <NavLink activeClassName="header-right-active" to="/login" style={{fontSize: '14px'}}>{`${this.intl.get('login')}`}/{`${this.intl.get('header-regist')}`}</NavLink>
+            <NavLink activeClassName="header-right-active" to="/login" style={{fontSize: '14px'}}>{`${this.intl.get('header-regist')}/${this.intl.get('login')}`}</NavLink>
           </li>
           <li className={`${userToken ? 'user-li' : 'hide'}`} >
             <p>{userName}</p>
