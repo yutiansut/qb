@@ -11,10 +11,10 @@ export default class GoogleKey extends ExchangeViewBase {
     if(!controller.store.state.userInfo.googleAuth) this.props.history.push('/user/safe/twoverify')
     this.state = {
       intro: [
-        `1.安装在“Google Authenticator”应用程序中，点击右上角“+”号，然后选择“手动输入验证码/扫描条形码”。`,
-        `2.选择手动输入，则复制上面的“密钥”到“密钥”输入栏，并填写您的QB账号，点击“完成”；选择扫描则会自动生成谷歌验证码；`,
-        `3.点击下一步，将“谷歌验证码”输入到下一页的“谷歌验证码”输入栏。`,
-        `请将16位密钥记录在纸上，并保存在安全的地方。如遇手机丢失，你可以通过该密钥恢复你的谷歌验证。`
+        this.intl.get('user-googleKey1'),
+        this.intl.get('user-googleKey2'),
+        this.intl.get('user-googleKey3'),
+        this.intl.get('user-googleKey4'),
       ]
     };
     controller.setView(this);
@@ -28,7 +28,7 @@ export default class GoogleKey extends ExchangeViewBase {
 
   componentWillMount() {}
   async componentDidMount() {
-    this.props.addContent({ con: "绑定谷歌身份认证器" });
+    this.props.addContent({ con: this.intl.get('user-googleKey-title') });
     await this.getGoogle()
   }
 
@@ -50,7 +50,7 @@ export default class GoogleKey extends ExchangeViewBase {
             {this.state.intro.map((v, index) => <li key={index}>{v}</li>)}
           </ul>
         </div>
-        <Button title="下一步" type="base" onClick={()=>{
+        <Button title={this.intl.get('next')} type="base" onClick={()=>{
           history.push({pathname:'/user/verifybind/?type=1', query:{from:true}})
         }}/>
       </div>

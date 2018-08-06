@@ -26,7 +26,7 @@ export default class setTwoVerify extends ExchangeViewBase {
         },
         {
           key: "fundPassVerify",
-          title: this.intl.get("user-fundVerify"),
+          title: this.intl.get("user-fundVerify-h5"),
           verifyType: { title: "", type: "" }
         }
       ],
@@ -80,6 +80,7 @@ export default class setTwoVerify extends ExchangeViewBase {
   render() {
     const { controller, url } = this.props;
     let { userInfo, verifyPopupType, type, mode, verifyNum } = this.state;
+    console.log(userInfo)
     return (
       <div className="user-center-twoStep">
         <ul className="verify-list">
@@ -95,7 +96,7 @@ export default class setTwoVerify extends ExchangeViewBase {
               }}
             >
               {v.title}
-              {userInfo[v.key] ? <i>{`（${type[userInfo[v.key]]}）`}</i> : ""}
+              {userInfo[v.key] ? <i>{`(${type[userInfo[v.key]]})`}</i> : ""}
               {<span>{userInfo[v.key] ? this.intl.get('alter') : this.intl.get('set')}</span>}
             </li>
           ))}

@@ -18,7 +18,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
       // type: 2,
       code: '',
       type: this.props.type, //0,1,2 邮箱、谷歌、短信
-      title: ["邮箱安全验证", "谷歌安全验证", "手机安全验证"],
+      title: [this.intl.get('user-verifyEmailTitle'), this.intl.get('user-googleVerify'), this.intl.get('user-verifyPhoneTitle')],
       holderText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
       googleCode: ["", "", "", "", "", ""]
     };
@@ -27,7 +27,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
     this.props.destroy && this.props.destroy();
   }
   render() {
-    let { title, type, holderText } = this.state;
+    let { title, type, holderText, code } = this.state;
     let {
       onClose,
       googleCode,
@@ -47,7 +47,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
                 onClose && onClose();
               }}
             >
-              取消
+              {this.intl.get('cance')}
             </i>
           </h4>
           {[0, 2].includes(type) ? (
@@ -82,9 +82,10 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
             </div>
           )}
           <Button
-            title="确定"
+            title={this.intl.get('ok')}
             type="base"
             className="submit"
+            disable={!code.length}
             onClick={(e) => {
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();

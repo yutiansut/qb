@@ -112,7 +112,7 @@ export default class Verify extends ExchangeViewBase {
               </div>
             </div>
             <Button
-              title="提交"
+              title={this.intl.get('submit')}
               type="base"
               disable={!(account && code && !tip1 && !tip2)}
               className="submit"
@@ -150,7 +150,7 @@ export default class Verify extends ExchangeViewBase {
                 ))}
               </div>
               <Button
-                title="开启Google验证"
+                title={this.intl.get('user-googleOn')}
                 type="base"
                 disable={googleCode.join("").length === 6 ? false : true}
                 className="submit"
@@ -161,7 +161,7 @@ export default class Verify extends ExchangeViewBase {
             </div>
             <p className="tips">
             {this.intl.get('asset-reminder')}：<br />
-              谷歌验证器丢失，请联系客服进行申诉～
+              {this.intl.get('user-googleLost')}
             </p>
           </div>
         )}

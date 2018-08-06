@@ -32,6 +32,7 @@ export default function en(state) {
     phone: "Mobile",
     alter: "Update",
     set: "Settings",
+    seted: 'Set',
     fundPass: "Funding Password",
     twoStep: "2-Step Verification",
     save: "Save",
@@ -42,6 +43,7 @@ export default function en(state) {
     copy: "Copy",
     reset: "Reset",
     example: "example",
+    submit: "Submit",
     or: "or",
     action: "Action",
     buy: "Buy",
@@ -139,6 +141,7 @@ export default function en(state) {
     normalProblem: 'FAQ',
     languageCn: 'Chinese',
     languageEn: 'English',
+    next: 'Next'
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -481,6 +484,7 @@ export default function en(state) {
     "user-loginVerify": "Login Verification",
     "user-cashVerify": "Withdrawal Verification",
     "user-fundVerify": "Recover Funding Password Verification",
+    "user-fundVerify-h5": "FundPass Verification",
     "user-googleVerify": "Google Verification",
     "user-bindEmail": "bind/verify email address",
     "user-bindPhone": "Available after binding mobile",
@@ -604,6 +608,8 @@ export default function en(state) {
     "user-verifyPhone": "Cellphone Verification Code",
     "user-emailAddress": "Email Address",
     "user-phoneNumber": "Cellphone Number",
+    "user-verifyEmailTitle": "Email authentication",
+    "user-verifyPhoneTitle": "SMS Verification",
     "user-checkAgainPwd": "Please ensure that both password entries match",
     // "user-checkNewPwd": "Code length must be 6~18 digits",
     "user-checkNewPwd":
@@ -627,6 +633,13 @@ export default function en(state) {
     "user-errIp": "Please enter the correct IP",
     "user-googleSucc": "Google verification Setup Success",
     "user-setFundPwd": "Please set up the fund password",
+    "user-googleLost": "Google verifier lost, please contact customer service.",
+    "user-googleOn": "Turn On Google Verification",
+    "user-googleKey1": `1. Installed from "Google Authenticator" application, click "+" from upper right corner. Then choose "Input verification code manually/Scan QR code".`,
+    "user-googleKey2": `2. Choose "Input manually", and copy the "Key" above then goto the input field for "Key". Fill in the ${nameUsd} account and click "Finish"; The Google verification code will be generated automatically if you chosse "Scan QR code".`,
+    "user-googleKey3": `3. Click "Next", fill in the Google verification code into the input field for "Google verification code".`,
+    "user-googleKey4": `Please write down the 16-digits key on a paper, and make it safe. If your mobile is lost, you can recover the Google verification via the "key".`,
+    "user-googleKey-title": "Bound Goodle ID Verifier",
 
     "user-log-1": "Logon log",
     "user-log-2": "Register log",

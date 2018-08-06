@@ -32,6 +32,7 @@ export default function zh(state) {
     phone: "手机号",
     alter: "修改",
     set: "设置",
+    seted: '已设置',
     fundPass: "资金密码",
     twoStep: "两步验证",
     save: "保存",
@@ -41,6 +42,7 @@ export default function zh(state) {
     search: "搜索",
     copy: "复制",
     reset: "重置",
+    submit: "提交",
     example: "例如",
     or: "或",
     action: "操作",
@@ -137,6 +139,7 @@ export default function zh(state) {
     normalProblem: '常见问题',
     languageCn: '中文',
     languageEn: '英文',
+    next: '下一步'
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -459,6 +462,7 @@ export default function zh(state) {
     "user-loginVerify": "登录验证",
     "user-cashVerify": "提现验证",
     "user-fundVerify": "修改资金密码验证",
+    "user-fundVerify-h5": "修改资金密码验证",
     "user-googleVerify": "谷歌验证",
     "user-bindEmail": "绑定/验证邮箱后开启",
     "user-bindPhone": "绑定手机号后开启",
@@ -590,6 +594,13 @@ export default function zh(state) {
     "user-errIp": "请输入正确的IP",
     "user-googleSucc": "谷歌验证设置成功",
     "user-setFundPwd": "请设置资金密码",
+    "user-googleLost": "谷歌验证器丢失，请联系客服进行申诉～",
+    "user-googleOn": "开启Google验证",
+    "user-googleKey1": "1.安装在“Google Authenticator”应用程序中，点击右上角“+”号，然后选择“手动输入验证码/扫描条形码”。",
+    "user-googleKey2": `2.选择手动输入，则复制上面的“密钥”到“密钥”输入栏，并填写您的${nameUsd}账号，点击“完成”；选择扫描则会自动生成谷歌验证码；`,
+    "user-googleKey3": "3.点击下一步，将“谷歌验证码”输入到下一页的“谷歌验证码”输入栏。",
+    "user-googleKey4": "请将16位密钥记录在纸上，并保存在安全的地方。如遇手机丢失，你可以通过该密钥恢复你的谷歌验证。",
+    "user-googleKey-title": "绑定谷歌身份认证器",
 
     "user-log-1": "登录日志",
     "user-log-2": "注册日志",
