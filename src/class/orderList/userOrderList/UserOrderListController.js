@@ -55,7 +55,7 @@ export default class UserOrderListController extends OrderListController {
       orderListArray: currentOrder,
     })
   }
-  
+
   async getHistoryOrder(trade, params) {
     let historyOrder = await this.store.getHistoryOrder(params);
     if (!trade) {
@@ -74,7 +74,7 @@ export default class UserOrderListController extends OrderListController {
         {total: historyOrder.totalCount}
     )
   }
-  
+
   async exportHistory(type){
     let result = await this.store.getHistoryOrder({
       "tradePairId": [],
@@ -100,15 +100,15 @@ export default class UserOrderListController extends OrderListController {
           "," +
           (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
           "," +
-          (v.priceType ? this.view.intl.get('marketPrice') : v.price.format()) +
+          (v.priceType ? this.view.intl.get('marketPrice') : v.price.format({style:{thousandSign:false}})) +
           "," +
-          v.count.format() +
+          v.count.format({style:{thousandSign:false}}) +
           "," +
-          (v.turnover.format() + ' ' + v.tradePairName.split('/')[1].toUpperCase()) +
+          (v.turnover.format({style:{thousandSign:false}}) + ' ' + v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
-          v.dealDoneCount.format() +
+          v.dealDoneCount.format({style:{thousandSign:false}}) +
           "," +
-          v.avgPrice.format() +
+          v.avgPrice.format({style:{thousandSign:false}}) +
           "," +
           this.view.state.orderStatusItems[v.orderStatus]
       });
@@ -117,6 +117,7 @@ export default class UserOrderListController extends OrderListController {
     }
     // str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";
       str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("avgPrice")},${this.view.intl.get("volume")},${this.view.intl.get("total")},${this.view.intl.get("fee")}`;
+      console.log(result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)))
       result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)).forEach(v => {
         str +=
           "\n" +
@@ -126,14 +127,15 @@ export default class UserOrderListController extends OrderListController {
           "," +
           (v.orderType ? this.view.intl.get('sell') : this.view.intl.get('buy')) +
           "," +
-          v.avgPrice.format() +
+          v.avgPrice.format({style:{thousandSign:false}}) +
           "," +
-          v.count.format() +
+          v.count.format({style:{thousandSign:false}}) +
           "," + (
-          v.turnover.format() + ' ' +  v.tradePairName.split('/')[1].toUpperCase()) +
+          v.turnover.format({style:{thousandSign:false}}) + ' ' +  v.tradePairName.split('/')[1].toUpperCase()) +
           "," +
-          v.fee.format() + ' ' + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
+          v.fee.format({style:{thousandSign:false}}) + ' ' + (v.orderType ? v.tradePairName.split('/')[1].toUpperCase() : v.tradePairName.split('/')[0].toUpperCase())
       });
+      console.log(str)
       this.exportExcel(str, `${this.view.intl.get("order-deal")}.xls`);
       return;
   }
