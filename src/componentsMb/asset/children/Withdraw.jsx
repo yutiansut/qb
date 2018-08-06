@@ -68,7 +68,6 @@ export default class Withdraw extends exchangeViewBase {
         let {minCount,addressList} = extractAddr && extractAddr.filter(item => item.coinName.toLowerCase() === currency.toLowerCase())[0] || {};
         //let addressList = [{addressId:0, addressName:"xx", address:"xxx"}]
         let {addressName,address} = addressList && addressList.sort((a,b) => a.addressName<b.addressName?-1:1)[0] || {};
-        console.log(availableCount,this.state.currencyAmount)
 
         //实际到账
         let num = Number(inputNum);
@@ -110,7 +109,10 @@ export default class Withdraw extends exchangeViewBase {
                         <div className="num">
                             <label>{this.intl.get("asset-withdrawAmount")}</label>
                             <p className="p1">
-                                <input type="text" value={inputNum}/>
+                                <input type="text" value={inputNum} onInput={e=>{
+                                    console.log(e.target.value);
+                                    this.setState({inputNum:e.target.value})
+                                }}/>
                                 <i>{currency}</i>
                                 <a>{this.intl.get("all")}</a>
                             </p>
