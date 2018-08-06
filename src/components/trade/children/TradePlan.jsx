@@ -99,8 +99,8 @@ export default class TradePlan extends ExchangeViewBase {
       max: 'buyMax',
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
-    console.log('his.state.buyNumFlag', this.state.buyNumFlag, this.state, diffArr[dealType].max)
-    // this.setState({buyNumFlag: false, sellNumFlag: false})
+    // console.log('his.state.buyNumFlag', this.state.buyNumFlag, this.state, diffArr[dealType].max)
+    this.setState({buyNumFlag: false, sellNumFlag: false})
     let maxNum = this.state[diffArr[dealType].max];
     let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue]);
     // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){

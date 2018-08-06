@@ -126,10 +126,6 @@ export default class DealController extends ExchangeControllerBase {
     this.userOrderController.setUnitsType(unitSelected);
     this.TradeRecentController.setUnitsType(unitSelected);
     this.TradeOrderListController.setUnitsType(unitSelected);
-    
-    
-    console.log('aaaaaaaaaaaaaaaaaaaa', this.view.state)
-
     this.changeMaxNum(1, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
     this.changeMaxNum(0, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
   }
@@ -153,9 +149,6 @@ export default class DealController extends ExchangeControllerBase {
       this.view.state.inputBuyFlag && (inputBuyValue = this.view.state.inputBuyValue / fromValue * toValue);
       let checkValue = inputSellValue || inputBuyValue;
       let checkNum = this.view.state.priceLimit;
-      // checkValue >= 100 && (checkNum = 2);
-      // checkValue >= 0.1 && checkValue < 100 && (checkNum = 4);
-      // checkValue >= 0.01 && checkValue < 0.1 && (checkNum = 6);
       let limitedValue = (v === 'CNY' || v === 'USD') ? 2 : checkNum;
           this.view.statehandleValue = this.view.state.inputValue / fromValue * toValue;
       this.view.state.inputSellFlag && (inputSellValue = inputSellValue.toFixed(limitedValue));
@@ -172,25 +165,14 @@ export default class DealController extends ExchangeControllerBase {
     
     let a = Number(v) ? v : 0.000001;
     let changeBankPrice = this.store.state.PriceUnit === "CNY" ? (a * this.store.state.prices.price / this.store.state.prices.priceCN) :(this.store.state.PriceUnit === "USD" && (a * this.store.state.prices.price / this.store.state.prices.priceEN) || a);
-    console.log('changeMaxNum',t, v, changeBankPrice, this.view.state.PriceUnit);
-    
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
     (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / changeBankPrice}));
     if(this.store.state.PriceUnit === "CNY" || this.store.state.PriceUnit === "USD") {
       t === 1 && (this.view.setState({changBankPriceS : changeBankPrice}));
       t === 0 && (this.view.setState({changBankPriceB : changeBankPrice}))
     }
-    
-    
-    console.log('this.view.state.buyNumFlag', this.store.state.buyNumFlag)
-    
     if (this.view.state.buyNumFlag && (t === 0)) {
-      // let checkNum = 0;
       let checkNum = this.view.state.numLimit;
-      // changeBankPrice >= 100 && (checkNum = 6);
-      // changeBankPrice >= 0.1 && changeBankPrice < 100 && (checkNum = 4);
-      // changeBankPrice >= 0.01 && changeBankPrice < 0.1 && (checkNum = 2);
-      // console.log('aaaaaaaaaaaaaa',Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum))
       this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
     }
     
