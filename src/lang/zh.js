@@ -392,7 +392,7 @@ export default function zh(state) {
     "order-export": '导出订单记录',
     "cancel-successful": '撤销成功',
     "deal-after":'后可进行交易',
-    "deal-login": '登录/注册',
+    "deal-login": '注册/登录',
     'order-bs': '买卖',
     'order-b':'买',
     'order-s':'卖',

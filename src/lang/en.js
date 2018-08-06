@@ -438,7 +438,7 @@ export default function en(state) {
     "deal-price-tip":
       "Final trasaction price shall be subject to the actual price of the  digital currency",
     "deal-after": "Then can trade",
-    "deal-login": "Sign in/Sign up",
+    "deal-login": "Sign up/Sign in",
     "deal-num-err": "Error of input quantity accuracy",
     "deal-pass-empty": "Please input fund password",
     "deal-num-limited": "Insufficient balance",
