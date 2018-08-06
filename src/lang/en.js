@@ -205,6 +205,7 @@ export default function en(state) {
   const other = {
     "header-home": "home",
     "header-exchange": "exchange",
+    "header-legal": "otc",
     "header-assets": "assets",
     "header-assets2": "assets",
     "header-order": "Order list",
@@ -355,7 +356,9 @@ export default function en(state) {
     "market-currencyInfo": "Currency details",
     "market-volume": "24h Volume",
     "market-volume-h5": "24h Vol",
-    "market-search": "Search the whole currency"
+    "market-search": "Search the whole currency",
+    "h5-market-add": "Add collection",
+    "h5-market-cancel": "Cancel the collection",
   };
   const notice = {
     "notice-about": "About Us",
@@ -423,7 +426,8 @@ export default function en(state) {
     "cancel-successful": "Cancellation success",
     "order-bs": "Bid/Ask",
     "order-b": "buy",
-    "order-s": "sell"
+    "order-s": "sell",
+    'order-none': 'No eligible list in the current list'
   };
   const deal = {
     "deal-limit": "Limit price",
@@ -453,7 +457,15 @@ export default function en(state) {
     "deal-login": "Sign in/Sign up",
     "deal-num-err": "Error of input quantity accuracy",
     "deal-pass-empty": "Please input fund password",
-    "deal-num-limited": "Insufficient balance"
+    "deal-num-limited": "Insufficient balance",
+    "deal-sure-buy": 'Please confirm the purchase order',
+    "deal-sure-sell": 'Please confirm the selling order',
+    "deal-sure-buy-price": 'Buy price',
+    "deal-sure-sell-price": 'Sell price',
+    "deal-sure-buy-volume": 'Buy volume',
+    "deal-sure-sell-volume": 'Sell volume',
+    "deal-convert-into": 'convert into',
+    'deal-sure-order': 'Confirm the order'
   };
   const user = {
     "user-score": "My VIP Status",
@@ -897,6 +909,12 @@ export default function en(state) {
     "helo-coin-website": "Website",
     "helo-coin-browser": "Block chain browser",
     "helo-coin-white": "White paper",
+
+    "help-download-title": `${nameUsd} Exchange Platform Mobile Client`,
+    "help-download-intro": "Multi-Platform Covering IOS, Android and Windows, Seamlessly Support Trading Services",
+    "help-download-ios": "iPhone",
+    "help-download-android": "Android",
+    "help-download-tip": "Click \"…\"  Button at Upper Right Corner in Wechat, and Open with Browser ",
 
     "Aeternity号称新一代区块链网络,由德裔计算机科学家“以太坊教父”Yanislav Malahov与前Augur核心开发者Zack Hess、前Synereo核心开发者Jack Pettersson于2016年发起，聚集诸多颠覆性创新于一身，旨在重树当今智能合约的底层协议。Aeternity的技术亮点是图灵完备状态通道(State Channels)和去中心化预言机（Oracles）。Aeternity项目曾经被看成是欧洲的以太坊，也被很多币粉视为超优质项目,但是在两轮ICO之后，项目组并没有像很多项目一样迅速发币，而雪上加霜的是，在以太坊钱包被盗事件中，AE第二轮ICO筹得的资金也大量丢失，这让参与ICO的币粉们非常失望。":
       "Aeternity is known as the next-generation blockchain network. It was launched in 2016 by the German-speaking computer scientist 'Episte Ethereum' Yanislav Malahov and the former Augur core developer Zack Hess and the former Synereo core developer Jack Pettersson, and gathered many subversive innovations. An underlying protocol that aims to recapture today's smart contracts. The technical highlights of Aeternity are the Turing Complete State Channels and the Decentralized Prediction Engine (Oracles). The Aeternity project was once regarded as Ethereum in Europe and was considered as a super-quality project by many coins. However, after two rounds of ICO, the project team did not issue coins as quickly as many projects, and what was worse was that in Ethereum. In the event of a purse theft, the funds raised by AE's second round of ICOs were also lost. This made it very disappointing for the participating ICOs.",

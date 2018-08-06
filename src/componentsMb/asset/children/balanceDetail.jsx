@@ -34,6 +34,9 @@ export default class BalanceDetail extends exchangeViewBase {
     this.addContent({con: this.intl.get("asset-detail"),link: false, url: "/wallet"});
 
     await this.getAssets();
+  
+    // 更改url
+    this.props.controller.changeUrl("currency", currency.toLowerCase());
     //获取路由参数,选取对应币种
     let coin = (this.props.location.query && this.props.location.query.currency) || "BTC";
     let result = (this.state.wallet && this.state.wallet.filter(item => item.coinName.toUpperCase() === coin.toUpperCase())[0]) || {};

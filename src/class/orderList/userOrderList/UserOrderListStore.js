@@ -28,7 +28,7 @@ export default class UserOrderListStore extends OrderListStore {
         "avgPrice": data.ap,//成交均价
         "avgPriceCN": data.apc,
         "avgPriceEN": data.ape,
-        "undealCount": data.c - data.ddc,//未成交量
+        "undealCount": Number(Number(data.c).minus(data.ddc)) ,//未成交量
         "turnover": data.to,//成交额
         "turnoverCN": data.toc,
         "turnoverEN": data.toe,
@@ -60,7 +60,7 @@ export default class UserOrderListStore extends OrderListStore {
         "orderType": v.ot, //0买 1卖
         "priceType": v.pt, //0限价 1市价
         "orderId": v.oi,
-        "undealCount": v.c - v.ddc,
+        "undealCount": v.uc || Number(Number(v.c).minus(v.ddc)),
         "orderTime": v.t,
         "orderStatus": v.ost,//订单状态 0未成交 1部分成交 2全部成交 3已撤单 4撤单中 5已结束(市价单独有的。市价买单没买到任何东西时) 6部分成交(市价单没买够) 7部分成交(限价单部分成交后撤单)
         "price": v.p,

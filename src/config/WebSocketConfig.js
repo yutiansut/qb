@@ -26,7 +26,8 @@ export default {
         market: {
           recommendCurrency: {v: 1, o: 108, s: 0, resOp: 108},//推荐币种
           marketPair: {v: 1, o: 107, s: 0, resOp: 107},//涨跌幅数据更新
-          collectArr: {v: 1, o: 109, s: 0, resOp: 109}//收藏
+          collectArr: {v: 1, o: 109, s: 0, resOp: 109},//收藏
+          bankArr: {v:1, o: 112, s: 0, resOp: 112}//汇率更新
         },
         userOrder: {
           tradeKline: { v: 1, o: 104, s: 0, resOp: 104 }, //K线更新

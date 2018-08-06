@@ -53,7 +53,17 @@ export default class TradePlan extends ExchangeViewBase {
       fundPwdIntervalWindow: [{id: 'pwd_e', value: 0, label:this.intl.get('deal-every')}, {id: 'pwd_2', value: 1, label:this.intl.get('deal-2h')}, {id: 'pwd_n', value: 2, label:this.intl.get('deal-never')}],
       fundPwdIntervalWindowFlag: false,
       fundPwdIntervalSetFlag: false,
-      setPass: ''
+      setPass: '',
+      dealSurePop: false,//下单确认弹窗
+      dealOrderType: 0,//下单类型
+      dealSure: [{title:this.intl.get('deal-sure-buy'),
+      price:this.intl.get('deal-sure-buy-price'),volume: this.intl.get("deal-sure-buy-volume")},{title:this.intl.get('deal-sure-sell'),
+        price:this.intl.get("deal-sure-sell-price"),volume: this.intl.get("deal-sure-sell-volume")}],
+      dealSurePriceL: 0, //买入法币价格
+      dealSurePriceD: 0, //买入数字币价格
+      dealSureVolume: 0, //买入数量
+      dealSureFlag: false, // 下单确认
+      dealBank: {}
     };
     const {controller} = this.props;
     //绑定view
@@ -90,7 +100,7 @@ export default class TradePlan extends ExchangeViewBase {
       changeBank: 'changBankPriceB'
     }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
     let maxNum = this.state[diffArr[dealType].max];
-    // let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue] || this.state.priceInit);
+    let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue]);
     // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
     //   priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
     // }
@@ -244,6 +254,15 @@ export default class TradePlan extends ExchangeViewBase {
           dbPrePass: false
         }
     );
+    result && result.errCode === 'FREEZE_PASSWORD' && this.setState(
+          {
+            dealPopMsg: result.msg,
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            dbPrePass: false
+          }
+      );
+    
     result && result.errCode === 'PWD_ERROR' && this.setState(
         {
           dealPopMsg:this.intl.get('passError'),
@@ -252,6 +271,91 @@ export default class TradePlan extends ExchangeViewBase {
           dbPrePass: false
         }
     )
+  }
+  dealTradeSure(orderType,e){
+    e.preventDefault();
+    e.stopPropagation();
+    let sellPriceValue = this.state.inputSellFlag ? (this.state.inputSellValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+    let buyPriceValue = this.state.inputBuyFlag ? (this.state.inputBuyValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+    let emptyCharge = orderType === 'buy' ? this.state.funpassBuy : this.state.funpassSell;
+    let params = {
+      "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
+      "priceType": this.state.DealEntrustType,//0限价  1市价
+      "price": this.state.DealEntrustType ? 0 : Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格
+      "count": Number(orderType === 'buy' ? this.state.inputBuyNum : this.state.inputSellNum),//数量
+      "interval": this.state.fundPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "priceUnit": this.state.PriceUnit === 'CNY' && 1 || (this.state.PriceUnit === 'USD' && 2 || 0)//计价单位  0数字币  1人民币 2美元
+      // "priceUnit": 0
+    };
+    if(this.state.fundPwdInterval === -1){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get("pleaseSetFund"),
+            dealPassType:'positi',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      );
+      return
+    }
+    //   价格判断不能为空
+    if(!params.price && params.priceType === 0){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get("noEmptyPrice"),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+          }
+      )
+      return
+    }
+    // 数量不能为最小交易量
+    if(Number(orderType === 'buy' ? this.state.inputBuyNum : this.state.inputSellNum) < this.state.coinMin){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get("noLowerMiniTradeNum"),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          });
+      return
+    }
+    if(params.interval === 0 && emptyCharge === ''){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get("deal-pass-empty"),
+            dealPassType:'passive',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+          }
+      )
+      return
+    }
+    if((params.priceUnit !== 0) && this.state.DealEntrustType === 0 ){
+      let sellPriceValue = this.state.inputSellFlag ? (this.state.inputSellValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+      let buyPriceValue = this.state.inputBuyFlag ? (this.state.inputBuyValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
+      let legalPrice = Number(orderType === 'buy' ? buyPriceValue : sellPriceValue);
+      let transBank = this.state.dealBank;
+      let digitalPrice = this.state.PriceUnit === 'CNY' ? Number(Number(legalPrice).div(transBank.priceCN)) : Number(Number(legalPrice).div(transBank.priceEN));
+      this.setState(
+          {
+            dealOrderType: orderType === 'buy' ? 0 : 1,
+            dealSurePop: true,
+            dealSurePriceL: legalPrice,
+            dealSurePriceD: digitalPrice,
+            dealSureVolume: Number(orderType === 'buy' ? this.state.inputBuyNum : this.state.inputSellNum)
+          }
+      );
+      return
+    }
+      this.dealTrade(orderType,e)
+  }
+  dealTradeConfirm(e){
+    e.preventDefault();
+    e.stopPropagation();
+    let orderType = this.state.dealOrderType ? 'sell' : 'buy';
+   this.setState({dealSureFlag: true},
+       );
+    this.dealTrade(orderType,e)
   }
   render() {
     return (
@@ -263,18 +367,18 @@ export default class TradePlan extends ExchangeViewBase {
                     onClick={this.changeEntrustType.bind(this, v)}>{v.name}</span>
             )
           })}
-          {/*<div style={{float: 'right', marginRight: '.1rem'}} className="pop-parent">*/}
-            {/*<SelectButton*/}
-              {/*title={this.state.UnitSelected}*/}
-              {/*type="trade"*/}
-              {/*className="select"*/}
-              {/*valueArr={[`${this.intl.get('deal-digital')}`, "CNY", "USD"]}*/}
-              {/*onSelect={(e) => {*/}
-                {/*this.changeUnit(e,this.intl.get('deal-digital'))*/}
-              {/*}}*/}
-            {/*/>*/}
-            {/*<em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>*/}
-          {/*</div>*/}
+          <div style={{float: 'right', marginRight: '.1rem'}} className="pop-parent">
+            <SelectButton
+              title={this.state.UnitSelected}
+              type="trade"
+              className="select"
+              valueArr={[`${this.intl.get('deal-digital')}`, "CNY", "USD"]}
+              onSelect={(e) => {
+                this.changeUnit(e,this.intl.get('deal-digital'))
+              }}
+            />
+            <em className="pop-children rightpop-children">{this.intl.get("deal-price-tip")}</em>
+          </div>
 
         </div>
         <div className='trade-deal-exchanged'>
@@ -295,7 +399,7 @@ export default class TradePlan extends ExchangeViewBase {
                                  wallet={index ? this.state.sellWallet : this.state.buyWallet}
                                  priceInput={this.priceInput.bind(this)}
                                  numInput={this.numInput.bind(this)}
-                                 dealTrade={this.dealTrade.bind(this)}
+                                 dealTrade={this.dealTradeSure.bind(this)}
                                  passInput={this.passInput.bind(this)}
                                  fundPwdInterval={this.state.fundPwdInterval}
                                  fundPassVerify={this.state.fundPwdInterval<0}
@@ -345,6 +449,27 @@ export default class TradePlan extends ExchangeViewBase {
             <a href="/login/">{this.intl.get('deal-login')}</a>
             <span>{this.intl.get('deal-after')}</span>
           </p>
+        </div>
+        <div className='deal-exchange-pop' style={{display: this.state.dealSurePop ? 'block' : 'none'}}>
+          <div className='deal-exchange-pop-detail'>
+            <div className='deal-exchange-pop-title'>
+              {this.state.dealSure[this.state.dealOrderType].title}
+            </div>
+            <div className='deal-exchange-pop-content'>
+              <p>{this.state.dealSure[this.state.dealOrderType].price}:
+                <span style={{color: this.state.dealOrderType ? '#F25656' : '#2BB789'}}>{Number(this.state.dealSurePriceD.toFixed(this.state.priceLimit))} </span>
+                <em>{`(${this.intl.get('deal-convert-into')}${this.state.dealSurePriceL.format({number: 'legal',style:{name:this.state.PriceUnit && this.state.PriceUnit.toLowerCase()}})}${this.state.PriceUnit})`}</em>
+              </p>
+              <p>{this.state.dealSure[this.state.dealOrderType].volume}:
+                <span style={{color: this.state.dealOrderType ? '#F25656' : '#2BB789'}}>{this.state.dealSureVolume.formatFixNumberForAmount(this.state.numLimit, false)}</span>
+                <em>{this.state.NumUnit.toUpperCase()}</em>
+              </p>
+              <div className='deal-exchange-pop-button'>
+                <button onClick={this.dealTradeConfirm.bind(this)}>{this.intl.get('deal-sure-order')}</button>
+                <button className='deal-exchange-pop-exit' onClick={() => {this.setState({dealSureFlag: false,dealSurePop: false,})}}>{this.intl.get('cance')}</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>)
   }

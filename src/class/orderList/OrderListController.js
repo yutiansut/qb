@@ -120,4 +120,19 @@ export default class OrderListController extends ExchangeControllerBase {
       priceAccuracy: this.store.state.priceAccuracy
     }
   }
+  
+  setBank(value){
+    this.store.state.bank = {
+      cny: value.priceCN,
+      usd: value.priceEN
+    }
+    this.view.setState(
+        {
+          recentBank: {
+            cny: value.priceCN,
+            usd: value.priceEN
+          }
+        }
+    );
+  }
 }

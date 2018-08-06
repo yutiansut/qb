@@ -139,4 +139,58 @@
 		span
 			color $trade-font-title
 			font-size .28rem
-
+	.deal-exchange-pop
+		position fixed
+		top 0
+		left 0
+		right 0
+		bottom 0
+		z-index 10000
+		background rgba(0,0,0,.5)
+		.deal-exchange-pop-detail
+			position absolute
+			width 3.8rem
+			height 1.93rem
+			top 50%
+			left 50%
+			transform translate(-50% ,-50%)
+			background: #25292B;
+			box-shadow: 0 0 20px 0 rgba(0,0,0,0.30);
+			border-radius: 2px;
+			.deal-exchange-pop-title
+				width 100%
+				height .36rem
+				line-height .36rem
+				padding-left .16rem
+				background $dark-font-color
+				color $normal-white-color
+				font-size .14rem
+			.deal-exchange-pop-content
+				width 100%
+				height 1.57rem
+				padding .24rem .16rem
+				color $normal-white-color-a9
+				p
+					font-size .14rem
+					margin-bottom .2rem
+					span
+						margin-left .1rem
+						font-size 18px
+					em
+						font-size 12px
+						margin-left 5px
+						color $normal-white-color-a
+				.deal-exchange-pop-button
+					display flex
+					justify-content space-between
+					button
+						border-radius .02rem
+						color $normal-white-color
+						width 1.42rem
+						height .34rem
+						line-height .34rem
+						text-align center
+						background $exchange-blue
+						cursor pointer
+					.deal-exchange-pop-exit
+						background $exchange-red

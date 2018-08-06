@@ -105,7 +105,7 @@ export default class userSafeCenter extends exchangeViewBase {
     })
   }
   selectType(index, i, type) { // 两步认证单选
-    console.log(111, index, i, type)
+    // console.log(111, index, i, type)
     if (i === 2 && this.state.userInfo.fundPwd) {
       this.setState({
         remindPopup: true,
@@ -118,6 +118,7 @@ export default class userSafeCenter extends exchangeViewBase {
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
+      bindOrigin: 1,
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
@@ -209,7 +210,6 @@ export default class userSafeCenter extends exchangeViewBase {
   componentWillUnmount() {
 
   }
-
 
   async componentDidMount() {
     // this.getCurrentLogin(),

@@ -203,6 +203,7 @@ export default function zh(state) {
   const other = {
     "header-home": "首页",
     "header-exchange": "币币交易",
+    "header-legal": "OTC",
     "header-assets": "资产管理",
     "header-assets2": "资产",
     "header-order": "订单管理",
@@ -344,7 +345,9 @@ export default function zh(state) {
     "market-currencyInfo": "币种资料",
     "market-volume": "24h量",
     "market-volume-h5": "24h量",
-    "market-search": "搜索全部币种"
+    "market-search": "搜索全部币种",
+    "h5-market-add": "添加收藏",
+    "h5-market-cancel": "取消收藏",
   };
   const notice = {
     "notice-about": "关于我们",
@@ -409,6 +412,7 @@ export default function zh(state) {
     'order-bs': '买卖',
     'order-b':'买',
     'order-s':'卖',
+    'order-none': '当前列表中无符合条件的挂单'
   };
   const deal = {
     "deal-limit": "限价委托",
@@ -433,7 +437,15 @@ export default function zh(state) {
     "deal-price-tip": '实际成交价以数字币价格为准，CNY/USD计价只提供估值参考',
     "deal-num-err":'输入数量精度有误',
     "deal-pass-empty": '请输入资金密码',
-    "deal-num-limited":'可用余额不足以输入最小数量'
+    "deal-num-limited":'可用余额不足以输入最小数量',
+    "deal-sure-buy": '请确认买入订单',
+    "deal-sure-sell": '请确认卖出订单',
+    "deal-sure-buy-price": '买入价格',
+    "deal-sure-sell-price": '卖出价格',
+    "deal-sure-buy-volume": '买入数量',
+    "deal-sure-sell-volume": '卖出数量',
+    "deal-convert-into": '折合',
+    'deal-sure-order': '确认下单'
   };
   const user = {
     "user-score": "我的积分",
@@ -781,6 +793,12 @@ export default function zh(state) {
     "helo-coin-website": "官网",
     "helo-coin-browser": "区块浏览器",
     "helo-coin-white": "白皮书",
+
+    "help-download-title": `${nameUsd}交易所手机客户端`,
+    "help-download-intro": "覆盖iOS、Android多个平台，无障碍交易",
+    "help-download-ios": "iPhone版",
+    "help-download-android": "Android版",
+    "help-download-tip": "微信内请点击右上角“…”按钮，使用浏览器打开。",
   };
   const activity = {
     "activity-rule-1": `即日起，新用户完成注册后，可领取20枚${coin}。`,

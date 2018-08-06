@@ -7,20 +7,22 @@ export default class KlineStore extends ExchangeStoreBase {
     this.state = {
       duration: '',
       tradePairName: '',
-      kline: []
-    }
+      kline: [],
+      klineUpdate: [],   // ws推送数据
+    };
     this.WebSocket.general.on("tradeKline", data => {
-      this.state.kline = data.ns.map(v => {
-        let arr = [];
-        arr.push(v.et * 1000);
-        arr.push(v.op);
-        arr.push(v.hp);
-        arr.push(v.lp);
-        arr.push(v.cp);
-        arr.push(v.vol);
-        return arr;
+      console.log("k线-ws推送：\n",data);
+      data.ns.map(v => {
+          let arr = [];
+          arr.push(v.et * 1000);
+          arr.push(v.op);
+          arr.push(v.hp);
+          arr.push(v.lp);
+          arr.push(v.cp);
+          arr.push(v.vol);
+          this.state.klineUpdate.push(arr);
       });
-      this.controller.setKline(this.state.kline)
+      this.controller.setKlineUpdate(this.state.klineUpdate);
     });
   }
   setController(ctrl) {
@@ -31,6 +33,7 @@ export default class KlineStore extends ExchangeStoreBase {
       "n": this.state.tradePairName,
       "dur": this.state.duration // k线时间段秒数
     });
+    // console.log("k线-http请求：\n",result);
     if (result.n) {
       if (!result.ns) { this.state.kline = []; return };
       this.state.kline = result.ns.map(v => {

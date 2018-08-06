@@ -35,6 +35,7 @@ export default class Header extends ExchangeViewBase {
       navArrayLeft : [
         {label: `${this.intl.get('header-home')}`, to: '/home', select: false, linkUser: false, tokenShow: false},
         {label: `${this.intl.get('header-exchange')}`, to: '/trade', select: false, linkUser: false, tokenShow: false},
+        // {label: `${this.intl.get('header-legal')}`, to: 'https://mixotc.com/', select: false, linkUser: false, tokenShow: false, notLink: true},
         {
           label: `${this.intl.get('header-assets')}`,
           to: '/wallet',
@@ -99,7 +100,9 @@ export default class Header extends ExchangeViewBase {
     })
     this.state.navArrayLeft.forEach(v => {
       this.userToken && (v.tokenShow = false)
+      this.userToken && v.to === "https://mixotc.com/" && (v.to = `https://mixotc.com/?token=${this.userToken}`)
     })
+
     //
     document.addEventListener("click",this.hideNotice)
   }
@@ -154,6 +157,7 @@ export default class Header extends ExchangeViewBase {
     let userName = this.props.userController.userName || null
     this.state.navArrayLeft.forEach(v => {
       userToken && (v.tokenShow = false)
+      userToken && v.to === "https://mixotc.com/" && (v.to = `https://mixotc.com/?token=${userToken}`)
     })
     return (
       <div className={`${this.props.navClass} clearfix`} id="header">
@@ -164,7 +168,7 @@ export default class Header extends ExchangeViewBase {
           {this.state.navArrayLeft.map((v, index) => (<Route path={v.to} key={index} children={({match}) => {
             // console.log(match)
             return <li className={`header-nav${match ? '-active' : ''} ${v.tokenShow ? 'hide' : ''} ${v.select ? 'select-list' : ''}`} >
-                    <Link to={v.to}>{v.label.toUpperCase()}</Link>
+                    {v.notLink && (<a href={v.to} target="_blank">{v.label.toUpperCase()}</a>) || (<Link to={v.to}>{v.label.toUpperCase()}</Link>)}
                     {/*<img src={this.$imagesMap.$nomal_down} alt=""/>*/}
                       {v.select && (
                         <ul className='select-router'>

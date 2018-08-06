@@ -37,6 +37,7 @@ export default class TradeMarket extends ExchangeViewBase {
     this.joinHome = controller.joinHome.bind(controller) // 加入房间
     this.clearRoom = controller.clearRoom.bind(controller) //推出房间
     this.clearHistory = controller.clearHistory.bind(controller) //推出房间
+    // this.getBank = controller.getBank.bind(controller) //获取汇率
   }
 
   componentDidMount() {
@@ -48,6 +49,8 @@ export default class TradeMarket extends ExchangeViewBase {
     //清除websocket历史
     this.clearHistory()
     this.joinHome();
+    // this.getBank()
+    
   }
   
   componentWillUnmount() {
@@ -123,7 +126,7 @@ export default class TradeMarket extends ExchangeViewBase {
                 <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
                     onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                   <td>{v.tradePairName.toUpperCase()}</td>
-                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.price * v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.price * v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
                   <td>{Number(v.rise).toPercent()}</td>
                   {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                     <img src={v.isFavorite ? this.$imagesMap.$trade_star :  this.$imagesMap.$trade_star_select} alt=""/>

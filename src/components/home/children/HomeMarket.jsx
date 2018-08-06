@@ -61,7 +61,7 @@ export default class HomeMarket extends ExchangeViewBase {
     const {controller} = this.props;
     // console.log(1234, this.state.homeMarketPairData)
     return (
-      <div className='home-market inner'>
+      <div className='home-market'>
         <div className='home-market-con'>
         <div className="market-nav clearfix">
           <ul className="clearfix">
@@ -125,10 +125,10 @@ export default class HomeMarket extends ExchangeViewBase {
                 >{v.tradePairName.toUpperCase()}</NavLink></td>
                 <td><span
                   className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span className="second-span">
-                  {controller.language === 'zh-CN' && Number(v.priceCN || 0).format({
+                  {controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({
                     number: 'legal',
                     style: {name: 'cny'}
-                  }) || Number(v.priceEN || 0).format({number: 'legal', style: {name: 'usd'}})}</span></td>
+                  }) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span></td>
                 <td>{Number(v.turnover).format({number: 'property'}) || 0}</td>
                 <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
                 <td >

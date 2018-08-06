@@ -174,10 +174,30 @@ export class Control {
         });
         let mainCanvas = $('#chart_mainCanvas')[0];
         let overlayCanvas = $('#chart_overlayCanvas')[0];
+
+        /*
+        let dpr = window.devicePixelRatio;
+        console.log("devicePixelRatio:\n",dpr);
+
+        mainCanvas.width = canvasGroupRect.w * dpr;
+        mainCanvas.height = canvasGroupRect.h * dpr;
+        overlayCanvas.width = canvasGroupRect.w * dpr;
+        overlayCanvas.height = canvasGroupRect.h * dpr;
+        $(mainCanvas).css({
+            width: canvasGroupRect.w,
+            height: canvasGroupRect.h,
+        });
+        $(overlayCanvas).css({
+            width: canvasGroupRect.w,
+            height: canvasGroupRect.h,
+        });
+        */
+
         mainCanvas.width = canvasGroupRect.w;
         mainCanvas.height = canvasGroupRect.h;
         overlayCanvas.width = canvasGroupRect.w;
         overlayCanvas.height = canvasGroupRect.h;
+
         if (tabBarShown) {
             tabBar.css({
                 left: tabBarRect.x + 'px',

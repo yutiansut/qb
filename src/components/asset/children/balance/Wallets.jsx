@@ -16,6 +16,7 @@ export default class Wallets extends exchangeViewBase {
       availableCount: 2,
       frozenCount: 2,
       valuationBTC: 2,
+      coin: controller.configData.coin,
       sortIcon: [
         this.$imagesMap.$rank_down,
         this.$imagesMap.$rank_up,
@@ -158,7 +159,7 @@ export default class Wallets extends exchangeViewBase {
               frozenCount,
               valuationBTC
             }).map((item, index) => {
-              return item.coinName !== "QBT" ?
+              return item.coinName !== this.state.coin ?
               (
                 <tr key={index}>
                   <td className="currency">

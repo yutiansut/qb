@@ -24,6 +24,7 @@ export default class Kline {
         this.language = "zh-cn";
         this.theme = "dark";
         this.ranges = ["1w", "1d","12h", "1h", "30m", "15m", "5m", "1m", "line"];
+        this.lines = []; //k线数据
 
         this.periodMap = {
             "01w": 7 * 86400 * 1000,
@@ -128,6 +129,7 @@ export default class Kline {
     }
 
     setData(lines){
+        this.lines = lines;
         Control.setData(lines);
     }
 
@@ -495,12 +497,17 @@ export default class Kline {
                     Control.onSize();
                     $('html,body').css({width: '100%', height: '100%', overflow: 'hidden'});
                     $(this).addClass("qp");
+                    $("#fullscreen-tip").addClass("show");
+                    setTimeout(()=>{
+                        $("#fullscreen-tip").removeClass("show")
+                    },3000);
                 } else {
                     $(Kline.instance.element).attr('style', '');
                     $('html,body').css({width: '', height: '', overflow: ''});
                     Control.onSize(Kline.instance.width, Kline.instance.height);
                     $(Kline.instance.element).css({visibility: 'visible', height: Kline.instance.height + 'px'});
                     $(this).removeClass("qp");
+                    $("#fullscreen-tip").removeClass("show");
                 }
             });
         })

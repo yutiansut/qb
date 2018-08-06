@@ -17,7 +17,10 @@ export default class MarketController extends ExchangeControllerBase {
     await this.store.getCoinInfo(coinId);
     this.view.setState({coinInfo: this.store.state.coinInfo});
   }
-
+  async getQb(){
+    await this.store.getQb();
+    return this.store.state.qb;
+  }
   async getMarket() {
     await this.store.getMarket();
   }
@@ -34,7 +37,7 @@ export default class MarketController extends ExchangeControllerBase {
   // 切换市场
   async changeMarket(v) {
     this.store.setSelecedMarket(v);
-    this.store.setSort([], 0)
+    this.store.setSort([], 0);
     let homeMarketPairData = await this.store.selectMarketData();
     this.view.setState({
       // searchValue: '',
@@ -103,6 +106,7 @@ export default class MarketController extends ExchangeControllerBase {
     let homeMarket = [...new Set(this.store.pairInfo.map(v => v.marketName))].sort()
     //默认设置为第一市场
     this.store.setSelecedMarket(homeMarket[0])
+    // this.bankHandle(homeMarket[0])
     this.view.setState({
       marketDataHandle: homeMarket,
       market: homeMarket[0],
@@ -128,20 +132,25 @@ export default class MarketController extends ExchangeControllerBase {
       collectIdArr = await this.store.getFavoriteList(this.userController.userToken)
     }
     this.store.updateAllPairListFromCollect(collectIdArr)
+    //请求汇率接口
+    let bankArray = await this.store.getBank();
+    this.store.updateAllPairListFromBank(bankArray)
     //更新视图层
-    this.updateMarketAll([], 2)
+    this.updateMarketAll([], 3)
+    
+  
   }
 
   //更新MarketAll数据
   async updateMarketAll(List, type) {
-    let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData'];
+    let arr = ['updateAllPairListFromCollect', 'updateAllPairListFromData', 'updateAllPairListFromBank'];
     //根据数据更新allPair
-    type < 2 && this.store[arr[type]](List)
+    type < 3 && this.store[arr[type]](List)
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
 
-    type > 1 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName);
-    if(this.view.state.query && type === 2) {
+    type > 2 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName);
+    if(this.view.state.query && type === 3) {
       let pairMsg = await this.getTradePairHandle();
       let queryValue = this.view.state.query;
       if(queryValue.split('/').length === 1){
@@ -153,9 +162,9 @@ export default class MarketController extends ExchangeControllerBase {
     }
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
-    }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg());
+    }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
 
-    type === 2 && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
+    type === 3 && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据
@@ -249,17 +258,18 @@ export default class MarketController extends ExchangeControllerBase {
         coinIcon: tradePairMsg[0].coinIcon,
         prices: {
           price: tradePairMsg[0].price,
-          priceCN: tradePairMsg[0].priceCN.toFixedWithoutUp(2),
-          priceEN: tradePairMsg[0].priceEN.toFixedWithoutUp(2),
+          priceCN: tradePairMsg[0].priceCN,
+          priceEN: tradePairMsg[0].priceEN,
         },
         priceAccuracy: tradePairMsg[0].priceAccuracy,
         volumeAccuracy: tradePairMsg[0].volumeAccuracy,
         updown: tradePairMsg[0].updown
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
-    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices) && this.TradePlanController.coinMinTradeHandle();
-    this.TradePlanController && this.TradeOrderListController && flag && this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices)
+    this.TradePlanController && this.TradeOrderListController  && flag !== 1 &&  this.TradePlanController.tradePairHandle(this.store.state.tradePair, dealMsg.prices,flag) && this.TradePlanController.coinMinTradeHandle();
+    this.TradePlanController && this.TradeOrderListController  && this.TradePlanController.setMarketPriceMaxNum(dealMsg.prices)
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg,flag)
+    this.TradeRecentController && flag !== 1 && this.TradeRecentController.setBank(dealMsg.prices)
   }
 
   setUnitsType(v) {
@@ -286,4 +296,20 @@ export default class MarketController extends ExchangeControllerBase {
     }
 
   }
+  async getBank(){
+    await this.store.getBank()
+  }
+  // async bankHandle(market){
+  //   let bankValue = await this.store.getBank();
+  //   let bankValueItems = bankValue.find(v => v.na === market);
+  //   let initBank = {
+  //     bankCN : bankValueItems.cr,
+  //     bankEN : bankValueItems.ur
+  //   };
+  //   this.store.state.initBank = initBank;
+  //   console.log('bankkkkkkkkk', this.store.state.initBank)
+  // }
+  // setBank(){
+  //   let bank = this.store.state.initBank
+  // }
 }

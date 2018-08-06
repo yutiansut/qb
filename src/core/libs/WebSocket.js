@@ -15,7 +15,7 @@ export default function () {
     connects = [], //连接数组
     size, //传入的大小
     url, //地址
-    reConnectTime = 0 //重连次数
+    reConnectTime = 0; //重连次数
 
   /**
    * 建立websocket连接方法
@@ -23,22 +23,22 @@ export default function () {
    * @param callBack
    */
   function createConnect(url, callBack) {
-    let webSocket = new WebSocket(url) // 创建链接
+    let webSocket = new WebSocket(url); // 创建链接
     // webSocket.binaryType = "arraybuffer"
     //webSocket连接之后的操作
-    webSocket.onopen = event => onOpen(pool, event)
+    webSocket.onopen = event => onOpen(pool, event);
 
     function onOpen(pool, event) {
       // console.log('webSocket开启 0', event.target.url, pool.onOpen, event)
-      connects.push(webSocket)
+      connects.push(webSocket);
       poolSize = connects.length;
       // console.log('webSocket开启 1', webSocket.binaryType)
-      // pool.onOpen && pool.onOpen(event)
+      pool.onOpen && pool.onOpen(event)
       callBack && connects.length === size && callBack.resolve(true)
     }
 
     //webSocket接收信息的操作
-    webSocket.onmessage = event => onMessage(pool, event)
+    webSocket.onmessage = event => onMessage(pool, event);
 
     function onMessage(pool, event) {
       // console.log('webSocket接收信息', event.data, event)
@@ -46,19 +46,16 @@ export default function () {
       pool.onMessage && pool.onMessage(event.data)
     }
 
-
-
-
     //webSocket断开之后的操作
-    webSocket.onclose = onClose
+    webSocket.onclose = onClose;
 
     async function onClose(event) {
       // console.log('webSocket断开', event.target.url)
       // console.log('webSocket断开', event)
-      pool.onClose && pool.onClose(event)
+      pool.onClose && pool.onClose(event);
       if(reConnectTime > 4) {
         // console.log('reConnect 重连 onClose', reConnectTime);
-        await Sleep(7000)
+        await Sleep(7000);
         reConnectTime = 0
       }
       if(reConnectTime === 0){
@@ -69,14 +66,14 @@ export default function () {
     }
 
     //webSocket出错之后的操作
-    webSocket.onerror = onError
+    webSocket.onerror = onError;
 
     async function onError(event) {
       // console.error('webSocket出错', event.target.url,event )
-      pool.onError && pool.onError(event)
+      pool.onError && pool.onError(event);
       if(reConnectTime > 4){
         // console.log('reConnect 重连 onError', reConnectTime);
-        await Sleep(7000)
+        await Sleep(7000);
         reConnectTime = 0
       }
       if(reConnectTime === 0){
@@ -95,15 +92,15 @@ export default function () {
   }
 
   pool.start = async function (_url, _size) {
-    url = _url
+    url = _url;
     size = _size;
-    pool.reConnectFlag = true //控制是否开启重连，主动断开不开启重连
+    pool.reConnectFlag = true; //控制是否开启重连，主动断开不开启重连
     return new Promise((resolve, reject) => {
-      var callBack = {size, resolve, reject}
-      for (var i = 0; i < size; i++)
+        const callBack = {size, resolve, reject};
+        for (let i = 0; i < size; i++)
         createConnect(url, callBack)
     })
-  }
+  };
 
   /**
    * 发送信息调用函数
@@ -114,10 +111,10 @@ export default function () {
   pool.send = function (text) {
     // console.log('send text', connects.length )
     if (connects.length === 0)
-      console.error('==connect is all down!===')
+      console.error('==connect is all down!===');
     // console.log('websocket 发送信息', text)
     poolSize && connects[index++ % poolSize] && connects[index++ % poolSize].send(text)
-  }
+  };
 
   /**
    * 关闭连接，
@@ -125,10 +122,10 @@ export default function () {
   pool.close = function () {
     // console.log('close all connects in pool')
     if (connects.length === 0)
-      console.error('==connect is all down!===')
-    pool.reConnectFlag = false
+      console.error('==connect is all down!===');
+    pool.reConnectFlag = false;
     poolSize && connects && connects.forEach(v => v.close())
-  }
+  };
 
   return pool
 }

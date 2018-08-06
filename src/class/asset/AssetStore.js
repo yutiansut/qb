@@ -119,8 +119,8 @@ export default class AssetStore extends ExchangeStoreBase {
         price: result.p,
         coinIcon: "",
         coinId: "",
-        coinName: "QBT",
-        fullName: "QBT",
+        coinName: this.controller.configData.coin,
+        fullName: this.controller.configData.coin,
         valuationCN: result.vl
       };
     }

@@ -48,7 +48,8 @@ export default class userOrder extends ExchangeViewBase {
       orderDetail: {},
       currentOrder: [],
       historyOrder: [],
-      resetPopFlag: false
+      resetPopFlag: false,
+      resetPopMsg: ''
     };
     const {controller} = this.props;
     this.noticeController = controller.noticeController;
@@ -59,12 +60,24 @@ export default class userOrder extends ExchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
   }
   
-  cancelOrder(cancelType, v = 0){
-    let orderId, opType, dealType, tradePairId;
+  cancelOrder(cancelType,v,e){
+    e && e.preventDefault();
+    e && e.stopPropagation();
+    let orderId, opType, dealType, tradePairId,currentOrder;
     orderId = cancelType ? 0 : v.orderId;
     opType = cancelType;
     dealType = cancelType ? 0 : v.orderType;
-    tradePairId = this.props.controller.TradeMarketController.tradePair.tradePairId
+    tradePairId = this.props.controller.TradeMarketController.tradePair.tradePairId;
+    currentOrder = this.state.currentOrder;
+    if(opType === 1 || opType === 2){
+      let arrayIndex = opType === 1 ? currentOrder.findIndex((items) => items.orderType === 0) : currentOrder.findIndex((items) => items.orderType === 1);
+      if(arrayIndex === -1) {
+        this.setState({
+          resetPopFlag:true,
+          resetPopMsg: this.intl.get('order-none')})
+        return
+      }
+    }
     this.props.controller.cancelOrder(orderId, opType, dealType,tradePairId, 0)
   }
   componentWillMount() {
@@ -90,7 +103,7 @@ export default class userOrder extends ExchangeViewBase {
             <div style={{display: 'flex'}}>
               {this.state.currentOrder && this.state.currentOrder.length && this.state.resetHandleItems.map((v, index) => {
                 return (
-                    <div className='reset-handle' key={index} onClick={this.cancelOrder.bind(this,index + 1)}>{v.name}</div>
+                    <div className='reset-handle' key={index} onClick={this.cancelOrder.bind(this,index + 1, 0)}>{v.name}</div>
                 )
               }) || null}
             </div>
@@ -120,9 +133,9 @@ export default class userOrder extends ExchangeViewBase {
                     {/*todo 颜色改类名统一处理*/}
                     <td>{this.state.unitsType === 'CNY' && Number(v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))}</td>
                     <td>{Number(v.count).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number((v.priceCN).multi(v.count)).format({number: 'legal', style: {name: 'cny'}}) || (this.state.unitsType === 'USD' && Number((v.priceEN).multi(v.count)).format({number: 'legal', style: {name: 'usd'}})) || Number((v.price).multi(v.count)).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</td>
-                    <td>{v.dealDoneCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
-                    <td>{v.undealCount && v.undealCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(Number((v.priceCN)).multi(v.count)).format({number: 'legal', style: {name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(Number((v.priceEN)).multi(v.count)).format({number: 'legal', style: {name: 'usd'}})) || Number(Number((v.price)).multi(v.count)).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})}</td>
+                    <td>{Number(v.dealDoneCount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
+                    <td>{Number(v.undealCount) && Number(v.undealCount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor: 'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                     <td onClick={this.cancelOrder.bind(this, 0, v)} className={`cancel`} style={{cursor: 'pointer'}} >{this.intl.get('cancel')}</td>
                   </tr>
@@ -241,7 +254,7 @@ export default class userOrder extends ExchangeViewBase {
             </div>
           </div>}
           <div className='reset-pop'>
-            {this.state.resetPopFlag && <TradePopup  msg={this.intl.get('cancel-successful')} onClose={() => {this.setState({ resetPopFlag: false })}} className='reset-pop-location'/>}
+            {this.state.resetPopFlag && <TradePopup  msg={this.state.resetPopMsg} onClose={() => {this.setState({ resetPopFlag: false })}} className='reset-pop-location'/>}
           </div>
         </div>
     )

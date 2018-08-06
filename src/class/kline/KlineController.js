@@ -51,6 +51,11 @@ export default class KlineController extends ExchangeControllerBase {
     this.view.setData(data.reverse());
   }
 
+  // set K线数据更新
+  setKlineUpdate(data){
+    this.view.setDataUpdate(data);
+  }
+
   get kline(){
     return this.store.kline;
   }

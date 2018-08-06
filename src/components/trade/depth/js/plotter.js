@@ -31,6 +31,7 @@ export default class Plotter {
         this.strY1=0;
 
         this.rangeX = 0.8;   // 数据过滤：[中间价*(1-rangeX),中间价*(1+rangeX)]
+        this.gapX = 5;   //数据过滤: 买和卖中间gapX像素数据过滤掉
 
         this.initOverlay=false;
 
@@ -180,9 +181,35 @@ export default class Plotter {
         let strW=ctx.measureText(str).width;
         ctx.fillText(str, oX-scaleLength-strW-5, oY+6);
 
-        //折线图
+
         let bids=this.bids;
         let asks=this.asks;
+
+        //数据过滤 gapX
+        let gapX = this.gapX;
+        let gapStrX = ratioStrX * gapX;
+        if(asks[0][0] - bids[bids.length-1][0] < gapStrX){
+            let maxBidsX = (asks[0][0] + bids[bids.length-1][0]) / 2 - gapStrX / 2;
+            let minAsksX = (asks[0][0] + bids[bids.length-1][0]) / 2 + gapStrX / 2;
+            for(let i=0;i<bids.length;i++){
+                if(bids[i][0]>maxBidsX){
+                    bids.splice(i,1);
+                    i--;
+                }
+            }
+            for(let i=0;i<asks.length;i++){
+                if(asks[i][0]<minAsksX){
+                    asks.splice(i,1);
+                    i--;
+                }
+            }
+            if(bids.length<2 || asks.length<2){
+                bids=[[0,0],[0,0]];
+                asks=[[0,0],[0,0]];
+            }
+        }
+
+        //画深度图
         // 买单
         ctx.beginPath();
         ctx.lineWidth=2;
@@ -220,6 +247,7 @@ export default class Plotter {
         ctx.stroke();
         ctx.fill();
 
+        /*
         //柱状图
         ctx.fillStyle=Theme._color["barFill1"];
         for(let i=0;i<bids.length-1;i++){
@@ -237,6 +265,7 @@ export default class Plotter {
             let bh=oY-by;
             ctx.fillRect(bx,by,bw,bh);
         }
+        */
 
         // ======================================================================================
         // draw overlay

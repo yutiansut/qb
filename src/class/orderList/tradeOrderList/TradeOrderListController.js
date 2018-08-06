@@ -34,8 +34,8 @@ export default class TradeOrderListController extends OrderListController {
   orderListSelect(v){
     let prices = {
       price: v.price,
-      priceCN: v.priceCN.toFixed(2),
-      priceEN: v.priceEN.toFixed(2),
+      priceCN:  this.view.state.prices.priceCN,
+      priceEN:  this.view.state.prices.priceEN,
     };
     this.TradePlanController && this.TradePlanController.orderHandle(prices);
     this.view.state.changeFlag = false
@@ -63,11 +63,11 @@ export default class TradeOrderListController extends OrderListController {
   getNewPrice(v,flag){
     this.view.setState(
         {
-         prices:v.prices,
-          updown: v.updown
+         prices: v.prices,
+         updown: v.updown
         }
     );
-    flag && this.getDepth(v.tradePair)
+    flag !== 1 && this.getDepth(v.tradePair)
   }
 
 }

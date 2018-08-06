@@ -49,7 +49,7 @@ export default class homeNotice extends ExchangeViewBase {
             "top2",
             this.state.criticalArr,
             10,
-            3000
+            1500
           );
         }
       );

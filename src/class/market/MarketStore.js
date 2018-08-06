@@ -42,6 +42,7 @@ export default class MarketStore extends ExchangeStoreBase {
         "icoPriceEN": 0  // 美元ico价格
 
       },
+      qb: {},
       "list": [
         {
           "tradePairId": 0,
@@ -78,8 +79,8 @@ export default class MarketStore extends ExchangeStoreBase {
           return {
             points: v.ps,
             price: v.p,
-            priceCN: v.pc,
-            priceEN: v.pe,
+            // priceCN: v.pc,
+            // priceEN: v.pe,
             rise: v.r,
             tradePairId: v.id,
             tradePairName: v.n,
@@ -88,18 +89,22 @@ export default class MarketStore extends ExchangeStoreBase {
           }
         })
         this.controller.updateMarketAll(result, 1)
+      });
+      this.WebSocket.general.on('bankArr', data => {
+        // console.log('dataaaaaaaaaaaaa',data.is)
+        this.controller.updateMarketAll(data.is, 2)
       })
     }
 
     if (name === 'recommend') {
       // 监听推荐币种
       this.WebSocket.general.on('recommendCurrency', data => {
-        console.log('recommendCurrency', data, this.controller)
+        // console.log('recommendCurrency', data, this.controller)
         let result = data && data.d && data.d.map(v=>{
           return {
             coinName: v.n,
-            priceCN: v.pc,
-            priceEN: v.pe,
+            // priceCN: v.pc,
+            // priceEN: v.pe,
             rise: v.r,
             coinId: v.id,
           }
@@ -180,7 +185,16 @@ export default class MarketStore extends ExchangeStoreBase {
   updateRecListFromData(list) {
     list && list.length && (this.state.recommendData = this.state.recommendData.map(v => Object.assign(v, list.find(vv => vv.coinId === v.coinId) || {})))
   }
-
+// 汇率变化更新
+  updateAllPairListFromBank(list) {
+    list && list.length && (this.state.allPairData = this.state.allPairData.map(v => {
+      let res = list.find(vv => vv.na === v.marketName);
+      v.priceCN = res.cr;
+      v.priceEN = res.ur;
+      return Object.assign(v)
+    }));
+  }
+  
   setHomeMarketPairData(homeMarketPairData) {
     this.state.homeMarketPairData = homeMarketPairData
   }
@@ -273,7 +287,10 @@ export default class MarketStore extends ExchangeStoreBase {
       "icoPriceEN": r.ipe  // 美元ico价格
     });
   }
-
+  async getQb() {
+    let r = await this.Proxy.getQb();
+    r.d && (this.state.qb = r);
+  }
   //收藏列表
   async getFavoriteList(token) {
     this.state.collectArr = await this.Proxy.getFavoriteList({
@@ -314,8 +331,8 @@ export default class MarketStore extends ExchangeStoreBase {
       return {
         points: v.ps,
         price: v.p,
-        priceCN: v.pc,
-        priceEN: v.pe,
+        // priceCN: v.pc,
+        // priceEN: v.pe,
         rise: v.r,
         tradePairId: v.id,
         tradePairName: v.n,
@@ -354,5 +371,12 @@ export default class MarketStore extends ExchangeStoreBase {
     pairMsg.pairNameCoin = coinCorrespondingPair;
     pairMsg.pairNameMarket = marketCorrespondingPair;
     return pairMsg
+  }
+  
+  //获取当前汇率接口
+  async getBank(){
+    let bank = await this.Proxy.getBank();
+    this.state.bank = bank.is;
+    return bank.is
   }
 }

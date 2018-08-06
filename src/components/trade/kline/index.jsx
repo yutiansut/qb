@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
 import "./css/main.css";
 import Kline from "./js/kline.js";
+import $ from "./lib/jquery.min";
 
 class ReactKline extends exchangeViewBase {
   constructor(props) {
@@ -26,7 +27,7 @@ class ReactKline extends exchangeViewBase {
       //更新定时器
       this.state.timer && clearInterval(this.state.timer);
       this.state.timer = setInterval(()=>{
-        this.setData(controller.kline);
+        this.setData(this.state.kline.lines);
       },range);
     }
 
@@ -78,8 +79,37 @@ class ReactKline extends exchangeViewBase {
       newLines.push([time, endL[4], endL[4], endL[4], endL[4], 0])
     }
 
-    console.log("k线数据：=============================================\n", lines, newLines);
+    //console.log("k线-setData：\n",lines);
+    //console.log("k线-数据补全：\n",newLines);
     this.state.kline && this.state.kline.setData(newLines);
+  }
+
+  // 更新k线数据
+  setDataUpdate(updateLines){
+      !updateLines && (updateLines = []);
+
+      //排序
+      updateLines.sort((a,b)=>a[0]-b[0]);
+
+      //合并相同range
+      let lines = this.state.kline.lines;
+
+      for(let i = 0; i < updateLines.length; i++){
+        let topL = lines[lines.length-1];
+        let curL = updateLines[i];
+        if(curL[0] === topL[0]){
+            topL[0] = curL[0];
+            topL[1] = curL[1];
+            topL[2] = curL[2];
+            topL[3] = curL[3];
+            topL[4] = curL[4];
+            topL[5] = curL[5];
+        }else if(curL[0] > topL[0]){
+          lines.push(curL);
+        }
+      }
+
+      this.setData(lines);
   }
 
   componentDidMount() {
@@ -109,6 +139,16 @@ class ReactKline extends exchangeViewBase {
           _kline.resize(tradeChart.clientWidth, tradeChart.clientHeight);
       }
     };
+    //esc键盘事件
+    document.onkeydown=(event)=>{
+      let e = event || window.event;
+      if(e && e.keyCode===27){ // 按 Esc
+          if(this.state.kline.isSized){
+              let $sizeIcon = document.querySelector("#sizeIcon");
+              $sizeIcon.click();
+          }
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -116,6 +156,7 @@ class ReactKline extends exchangeViewBase {
     this.state.kline = null;
     window.redrawKline = null;
     this.state.timer && clearInterval(this.state.timer);
+    document.onkeydown = null;
   }
 
   resize(w, h) {
@@ -141,6 +182,7 @@ class ReactKline extends exchangeViewBase {
         style={this.props.show ? {} : { display: "none" }}
       >
         <div className="chart_container dark">
+          <div id="fullscreen-tip" className="fullscreen_tip">按ESC退出全屏</div>
           <div id="chart_dom_elem_cache" />
           <div id="chart_toolbar">
             <div className="symbol-title" id="symbol_title" />
@@ -1026,6 +1068,12 @@ class ReactKline extends exchangeViewBase {
           </div>
         </div>
         <div style={{ display: "none" }} id="chart_language_switch_tmp">
+            <span
+                name="fullscreen_tip"
+                zh_tw="按ESC退出全屏"
+                zh_cn="按ESC退出全屏"
+                en_us="Exit full screen by ESC"
+            />
           <span
             name="chart_str_period"
             zh_tw="週期"

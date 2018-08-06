@@ -6,6 +6,7 @@ export default class extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      recentBank:{},
       sortIndex: -1,
       tradeSortImg: this.$imagesMap.$trade_rank,
       recentTradeListArr: [],
@@ -86,7 +87,7 @@ export default class extends ExchangeViewBase {
                   <tr key={index}>
                     <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.dealTime).toDate('HH:mm:ss'):Number(v.orderTime).toDate('HH:mm:ss')}</td>
                     <td  style={{color: this.state.recentItemSelect !== 'mineLess' ? (v.orderType === 1 ? '#f25656' : '#2bb789') : 'rgba(255,255,255,0.8)'}}>
-                      {this.state.recentItemSelect === 'mineLess' ? ((this.state.unitsType === "CNY" && Number(v.priceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.priceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital', style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))): ((this.state.unitsType === "CNY" && Number(v.avgPriceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.avgPriceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.avgPrice).format({number:'digital', style:{decimalLength :this.props.controller.accuracy}})))}
+                      {this.state.recentItemSelect === 'mineLess' ? ((this.state.unitsType === "CNY" && Number(v.price * this.state.recentBank.cny).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.price * this.state.recentBank.usd).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital', style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))): ((this.state.unitsType === "CNY" && Number(v.avgPriceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.avgPriceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.avgPrice).format({number:'digital', style:{decimalLength :this.props.controller.accuracy}})))}
                     </td>
                     <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.volume).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false) : Number(v.dealDoneCount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
                   </tr>
