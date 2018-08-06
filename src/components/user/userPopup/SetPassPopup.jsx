@@ -4,6 +4,7 @@ import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
 import "../stylus/passPopup.styl"
+import {Regular} from '../../../core'
 
 export default class SetPassPopup extends exchangeViewBase {
   constructor(props) {
