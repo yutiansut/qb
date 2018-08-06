@@ -154,9 +154,14 @@ export default class HomeMarket extends ExchangeViewBase {
                   >
                     <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span></NavLink>
                 </td>
-                <td>
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                >
                   {/* 宽高等样式在homeMakt.styl里设置 */}
-                  <ReactTrend ratio={5} trends={v.points || []}/>
+                  <ReactTrend ratio={5} trends={v.points || []}/></NavLink>
                 </td>
               </tr>
             )
