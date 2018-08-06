@@ -46,6 +46,7 @@ export default class MarketController extends ExchangeControllerBase {
       searchRealt: [],
       collectActive: false,
       market: v,
+      // unitsType: '',
       homeMarketPairData
     });
     if(this.view.state.query) {
@@ -56,6 +57,7 @@ export default class MarketController extends ExchangeControllerBase {
       return
     }
     this.tradePairChange(homeMarketPairData[0]);
+    // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
   }
 
   // 点击收藏区

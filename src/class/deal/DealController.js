@@ -28,11 +28,13 @@ export default class DealController extends ExchangeControllerBase {
     let pairArr = pair.split('/'),
       coin = pairArr[0],
       market = pairArr[1];
+
     this.view.setState(
       {
         NumUnit: coin,
         Market: market,
         Coin: coin,
+        PriceUnit: ['CNY', 'USD'].includes(this.view.state.PriceUnit) && this.view.state.PriceUnit || market,
         priceBank: {
           CNY: Number(prices.priceCN * prices.price).toFixed(2),
           // CNY: Number(prices.priceCN).toFixed(2),
@@ -42,6 +44,14 @@ export default class DealController extends ExchangeControllerBase {
         dealBank: prices
       }
     );
+    // console.log('deal', pair, market)
+    if (!['CNY', 'USD'].includes(this.view.state.PriceUnit)) {
+      this.TradeMarketController.setUnitsType(market);
+      this.userOrderController.setUnitsType(market);
+      this.TradeRecentController.setUnitsType(market);
+      this.TradeOrderListController.setUnitsType(market);
+    }
+
     this.store.state.prices = prices;
     this.setPriceInit(prices, flag);
     this.userOrderController.setInitUnit(market, coin);
@@ -51,6 +61,8 @@ export default class DealController extends ExchangeControllerBase {
     this.store.state.NumUnit = coin;
     this.coinMinTradeHandle(coin);//最小交易量的处理
     this.getCharge(coin, market)
+    // this.changeUnit(market, init)
+
   }
 
   orderHandle(prices) {

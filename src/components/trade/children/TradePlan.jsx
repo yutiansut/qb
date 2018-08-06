@@ -358,6 +358,7 @@ export default class TradePlan extends ExchangeViewBase {
     this.dealTrade(orderType,e)
   }
   render() {
+    // console.log('交易市场', this.state)
     return (
       <div className='trade-plan-deal'>
         <div className='deal-entrust'>

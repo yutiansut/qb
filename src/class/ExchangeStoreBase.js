@@ -141,7 +141,7 @@ export default class ExchangeStoreBase extends StoreBase {
       this.Loop.websocketHeartBreak.stop()
       this.Loop.websocketHeartBreak.clear()
       websocket.onOpen(data => {
-        // console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
+        console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
         this.startWebsocket(connectName)
         Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
       })
