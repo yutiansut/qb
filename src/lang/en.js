@@ -39,6 +39,7 @@ export default function en(state) {
     cance: "Cancel",
     delete: "Delete",
     search: "Search",
+    copy: "Copy",
     reset: "Reset",
     example: "example",
     or: "or",
@@ -599,7 +600,10 @@ export default function en(state) {
     "user-inputVerifyGoogle": "Please enter google verification  code",
     "user-inputVerify": "Enter the verification code",
     "user-verifyEmail": "Email Verification Code",
+    "user-verifySMS": "SMS Verification Code",
     "user-verifyPhone": "Cellphone Verification Code",
+    "user-emailAddress": "Email Address",
+    "user-phoneNumber": "Cellphone Number",
     "user-checkAgainPwd": "Please ensure that both password entries match",
     // "user-checkNewPwd": "Code length must be 6~18 digits",
     "user-checkNewPwd":

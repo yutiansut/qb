@@ -16,8 +16,8 @@ export default class Verify extends ExchangeViewBase {
       popupType: false,
       popupText: '',
       verifyNum: this.intl.get("sendCode"),
-      title: ["邮箱两步验证", "谷歌验证码", "短信两步验证"],
-      placeholderText: ["请输入你的邮箱地址", "", "请输入你的手机号码"],
+      title: [this.intl.get('user-verifyEmailTitle'), this.intl.get('user-popGoole'), this.intl.get('user-verifyPhoneTitle')],
+      placeholderText: [this.intl.get('user-inputEmail'), "", this.intl.get('user-inputPhone')],
       disable: true,
       tip1: false,
       tip2: false,
@@ -32,8 +32,8 @@ export default class Verify extends ExchangeViewBase {
       // type: 1,
       account: "",
       code: "",
-      accountText: ["邮箱地址", "请输入谷歌验证码", "手机号码"],
-      codeText: ["邮箱验证码", "", "短信验证码"],
+      accountText: [this.intl.get('user-emailAddress'), this.intl.get('user-inputVerifyGoogle'), this.intl.get('user-phoneNumber')],
+      codeText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
       googleCode: ["", "", "", "", "", ""]
       // userInfo: this.props.location.query && this.props.location.query.userInfo
     };
@@ -120,10 +120,10 @@ export default class Verify extends ExchangeViewBase {
                 this.bindUserH5(account, mode[type], code);
               }}
             />
-            <p className="tips">
-              温馨提示：<br />
+            {type === 0 && <p className="tips">
+              {this.intl.get('asset-reminder')}：<br />
               若未收到邮件，请检查邮箱垃圾箱～
-            </p>
+            </p>}
           </div>
         ) : (
           <div className="user-center-google">
@@ -160,7 +160,7 @@ export default class Verify extends ExchangeViewBase {
               />
             </div>
             <p className="tips">
-              温馨提示：<br />
+            {this.intl.get('asset-reminder')}：<br />
               谷歌验证器丢失，请联系客服进行申诉～
             </p>
           </div>

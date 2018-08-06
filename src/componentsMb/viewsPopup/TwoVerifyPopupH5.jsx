@@ -19,7 +19,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
       code: '',
       type: this.props.type, //0,1,2 邮箱、谷歌、短信
       title: ["邮箱安全验证", "谷歌安全验证", "手机安全验证"],
-      holderText: ["邮箱验证码", "", "手机验证码"],
+      holderText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
       googleCode: ["", "", "", "", "", ""]
     };
   }

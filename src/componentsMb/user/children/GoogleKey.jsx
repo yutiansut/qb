@@ -43,7 +43,7 @@ export default class GoogleKey extends ExchangeViewBase {
           <div className="input">
             <input value={this.state.googleSecret} readOnly ref="key"/>
           </div>
-          <span onClick={()=>{this.copy(this.refs.key)}}>复制</span>
+          <span onClick={()=>{this.copy(this.refs.key)}}>{this.intl.get("copy")}</span>
         </div>
         <div className="intro">
           <ul>

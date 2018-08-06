@@ -64,7 +64,7 @@ export default class setTwoVerify extends ExchangeViewBase {
         { value: this.intl.get("user-verifyEmailTitle"), i: 1},
       ];
       if(this.state.currentType === 1) {
-        arr.unshift({ value: '无', i: 0})
+        arr.unshift({ value: this.intl.get('none'), i: 0})
       }
       return arr;
     }
@@ -73,7 +73,7 @@ export default class setTwoVerify extends ExchangeViewBase {
   componentWillMount() {}
 
   async componentDidMount() {
-    this.props.addContent({ con: "两步验证" });
+    this.props.addContent({ con: this.intl.get('twoStep') });
     await this.initData();
   }
 
@@ -96,7 +96,7 @@ export default class setTwoVerify extends ExchangeViewBase {
             >
               {v.title}
               {userInfo[v.key] ? <i>{`（${type[userInfo[v.key]]}）`}</i> : ""}
-              {<span>{userInfo[v.key] ? `修改` : `设置`}</span>}
+              {<span>{userInfo[v.key] ? this.intl.get('alter') : this.intl.get('set')}</span>}
             </li>
           ))}
         </ul>

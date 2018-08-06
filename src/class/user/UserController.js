@@ -151,7 +151,7 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         popupFlag: true,
         popupType: true,
-        popupText: '绑定成功',
+        popupText: this.view.intl.get('user-bindSucc'),
       })
     }
     if(result && result.errCode){
@@ -429,7 +429,7 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         popupFlag: true,
         popupType: true,
-        popupText: '绑定成功',
+        popupText: this.view.intl.get('user-bindSucc'),
       })
     }
     if(result && result.errCode){
