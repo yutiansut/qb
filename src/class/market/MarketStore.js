@@ -186,7 +186,7 @@ export default class MarketStore extends ExchangeStoreBase {
       res.points = (res.points && res.points.length) && res.points || v.points
       return Object.assign(v, res)
     }))
-    console.log('updateAllPairListFromData 1', this.state.allPairData)
+    // console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //数据变动更新推荐币种

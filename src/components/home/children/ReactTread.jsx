@@ -16,9 +16,9 @@ class ReactTrend extends React.Component {
         Object.assign(this.state, this.props);
     }
   
-  componentWillUpdate(...parmas) {
-    console.log(333, ...parmas)
-  }
+  // componentWillUpdate(...parmas) {
+  //   console.log(333, ...parmas)
+  // }
 
     render() {
 

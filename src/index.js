@@ -14,7 +14,7 @@ import Device from './core/libs/Device'
 let str = Date.now() + '-' + Math.random().toString(36).substr(2);
 
 const renderDom = async Component => {
-    console.log('version 1.01');
+    console.log('version 1.02');
     await RUNAPP({ServerConfig, WebSocketConfig, HttpConfig, LoopTaskConfig, StorageConfig})
     WebSocketConfig.useWebSocket && Websocket.general({test: str})
     render(

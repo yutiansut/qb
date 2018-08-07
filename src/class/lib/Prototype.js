@@ -94,7 +94,7 @@ Number.prototype.toFixedWithoutUp = function (length) {
 
 //添加前缀后缀函数，分隔符，补零函数
 Number.prototype.formatFixStyle = function (para) {
-  console.log('formatFixStyle',Math.abs(this).toFixed(8))
+  // console.log('formatFixStyle',Math.abs(this).toFixed(8))
   // console.log('formatFixStyle', para.name)
   // if(Math.abs(this) === 0)
   //   return ''+this
