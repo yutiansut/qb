@@ -10,17 +10,17 @@ export default class SetPassPopup extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      popupInput1: "",
-      popupInput2: "",
-      popupInput3: "",
-      popupInput4: "",
-      popupInput5: "",
-      popupInput6: "",
-      errUser: "", // 新密码
-      errUser2: "", // 再次输入密码
-      errUser3: "", // 修改密码
+      currentPwdValue: "", // 当前密码输入框
+      userValue: "", // 手机号／邮箱／新密码输入框
+      againPwdValue: "", // 再次输入密码输入框
+      pictureValue: "", // 图形验证码输入框
+      verifyValue: "", // 短信／邮箱验证码输入框
+      googleValue: "", // 谷歌验证码输入框
+      errUser: "", // 新密码/手机／邮箱
+      errAgainPwd: "", // 再次输入密码
+      errCurrentPwd: "", // 修改密码
       popupTypeList: [
-        {
+        { // 绑定邮箱
           title: this.intl.get("user-popBindEmail"),
           numTitle: this.intl.get("user-popEmail"),
           numInput: this.intl.get("user-inputEmail"),
@@ -28,7 +28,7 @@ export default class SetPassPopup extends exchangeViewBase {
           verifyInput: this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("user-popBind")
         },
-        {
+        { // 绑定手机
           title: this.intl.get("help-phone-bind"),
           numTitle: this.intl.get("phone"),
           numInput: this.intl.get("user-inputPhone"),
@@ -36,7 +36,7 @@ export default class SetPassPopup extends exchangeViewBase {
           verifyInput: this.intl.get("user-inputVerifyPhone"),
           btnTitle: this.intl.get("user-popBind")
         },
-        {
+        { // 设置密码
           title: this.intl.get("user-popSetLoginPwd"),
           numTitle: this.intl.get("user-newPwd"),
           numInput: this.intl.get("user-inputNewPwd"),
@@ -44,7 +44,7 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput2: this.intl.get("user-inputAgainPwd"),
           btnTitle: this.intl.get("set")
         },
-        {
+        { // 修改密码
           title: this.intl.get("user-popRecoverLoginPwd"),
           numTitleNew: this.intl.get("user-currentPwd"),
           numInputNew: this.intl.get("user-inputNowPwd"),
@@ -54,7 +54,7 @@ export default class SetPassPopup extends exchangeViewBase {
           numInput2: this.intl.get("user-inputAgainPwd"),
           btnTitle: this.intl.get("alter")
         },
-        {
+        { // 设置资金密码
           title: this.intl.get("user-popSetFundPwd"),
           numTitle: this.intl.get("user-newPwd"),
           numInput: this.intl.get("user-inputNewPwd"),
@@ -63,7 +63,7 @@ export default class SetPassPopup extends exchangeViewBase {
           verifyTitle: this.props.fundPassType === 3 ? this.intl.get("user-verifyPhone") : this.intl.get("user-verifyEmail"),
           verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("save")},
-        {
+        { // 修改资金密码
           title: this.intl.get("user-popRecoverFundPwd"),
           // numTitleNew: this.intl.get("user-currentPwd"),
           // numInputNew: this.intl.get("user-inputNowPwd"),
@@ -77,78 +77,77 @@ export default class SetPassPopup extends exchangeViewBase {
         },
       ]
     }
-    this.changeInput1 = this.changeInput1.bind(this)
-    this.changeInput2 = this.changeInput2.bind(this)
-    this.changeInput3 = this.changeInput3.bind(this)
-    this.changeInput4 = this.changeInput4.bind(this)
-    this.changeInput5 = this.changeInput5.bind(this)
-    this.changeInput6 = this.changeInput6.bind(this)
+    this.changeCurrentPwd = this.changeCurrentPwd.bind(this) // 当前密码输入框
+    this.changeUser = this.changeUser.bind(this) // 手机号／邮箱／新密码输入框
+    this.changeAgainPwd = this.changeAgainPwd.bind(this) // 再次输入密码
+    this.changePicture = this.changePicture.bind(this) // 输入图形验证码
+    this.changeVerify = this.changeVerify.bind(this) // 输入验证码
+    this.changeGoogle = this.changeGoogle.bind(this) // 输入谷歌验证码
     // 校验部分
-    this.checkInput1 = this.checkInput1.bind(this)
-    this.checkInput2 = this.checkInput2.bind(this)
-    this.checkInput3 = this.checkInput3.bind(this)
+    this.checkCurrentPwd = this.checkCurrentPwd.bind(this)
+    this.checkUser = this.checkUser.bind(this)
+    this.checkAgainPwd = this.checkAgainPwd.bind(this)
   }
-  changeInput1(value) { // 输入
-    this.setState({popupInput1: value});
+  changeCurrentPwd(value) { // 输入
+    this.setState({currentPwdValue: value});
     // console.log(1, value)
-    this.state.errUser3 && (this.setState({errUser3: ""}))
+    this.state.errCurrentPwd && (this.setState({errCurrentPwd: ""}))
   }
-  changeInput2(value) { // 输入
-    this.setState({popupInput2: value});
+  changeUser(value) { // 输入
+    this.setState({userValue: value});
     // console.log(2, value)
     this.state.errUser && (this.setState({errUser: ""}))
   }
-  changeInput3(value) {
-    this.setState({popupInput3: value});
+  changeAgainPwd(value) {
+    this.setState({againPwdValue: value});
     // console.log(3, value)
-    this.state.errUser2 && (this.setState({errUser2: ""}))
+    this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
   }
-  changeInput4(value) {
-    this.setState({popupInput4: value});
+  changePicture(value) {
+    this.setState({pictureValue: value});
     // console.log(4, value)
   }
-  changeInput5(value) {
-    this.setState({popupInput5: value});
+  changeVerify(value) {
+    this.setState({verifyValue: value});
     // console.log(5, value)
   }
-  changeInput6(value) {
-    this.setState({popupInput6: value});
+  changeGoogle(value) {
+    this.setState({googleValue: value});
     // console.log(6, value)
   }
 
   // 检验部分
-  checkInput1() {
-    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, // 邮箱
-        reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    if (this.props.isType === 4) { // 验证密码
-      if(!reg2.test(this.state.popupInput1)) {
+  checkCurrentPwd() { // 检验当前密码
+    let reg1 = Regular('regPwd', this.state.currentPwdValue)
+    if (this.props.isType === 4) {
+      if(!reg1) {
         this.setState({
-          errUser3: this.intl.get("user-checkNewPwd")
+          errCurrentPwd: this.intl.get("user-checkNewPwd")
         })
       }
     }
   }
 
-  checkInput2() { // 离开
-    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, // 邮箱
-        reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/, // 密码
-        reg3 = /^1[3456789]\d{9}$/ // 手机
+  checkUser() { // 离开
+    let reg1 = Regular('regEmail', this.state.userValue), // 邮箱
+        reg2 = Regular('regPwd', this.state.userValue), // 密码
+        reg3 = Regular('regPhone', this.state.userValue) // 手机
     if (this.props.isType === 1) { // 验证邮箱
-      if(!reg1.test(this.state.popupInput2)) {
+      if(!reg1) {
         this.setState({
           errUser: this.intl.get("user-checkEmail")
         })
       }
     }
     if (this.props.isType === 2) { // 验证手机
-      if(!reg3.test(this.state.popupInput2)) {
+      if(!reg3) {
         this.setState({
           errUser: this.intl.get("user-checkPhone")
         })
       }
     }
     if ([3, 4, 5, 6].includes(this.props.isType)) { // 验证密码
-      if(!reg2.test(this.state.popupInput2)) {
+      if(!reg2) {
         this.setState({
           errUser: this.intl.get("user-checkNewPwd")
         })
@@ -156,23 +155,23 @@ export default class SetPassPopup extends exchangeViewBase {
     }
   }
 
-  checkInput3() { // 离开
-    if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
-      if(this.state.popupInput3 && (this.state.popupInput3 !== this.state.popupInput2)) {
+  checkAgainPwd() { // 再次输入密码
+    if ([3, 4, 5, 6].includes(this.props.isType)) {
+      if(this.state.againPwdValue && (this.state.againPwdValue !== this.state.userValue)) {
         this.setState({
-          errUser2: this.intl.get("user-checkAgainPwd")
+          errAgainPwd: this.intl.get("user-checkAgainPwd")
         })
       }
     }
   }
 
   canClick() {
-    if (this.state.errUser || this.state.errUser2 || this.state.errUser3) return false
-    if ((this.props.isType === 1 || this.props.isType === 2) && this.state.popupInput2 && this.state.popupInput4 && this.state.popupInput5) return true // 绑定
-    if (this.props.isType === 3 && this.state.popupInput2 && this.state.popupInput3) return true // 设置登录密码
-    if (this.props.isType === 4 && this.state.popupInput1 && this.state.popupInput2 && this.state.popupInput3) return true // 修改登录密码
-    if (this.props.isType === 5 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && this.state.popupInput5) return true // 设置资金密码
-    if (this.props.isType === 6 && this.state.popupInput2 && this.state.popupInput3 && this.state.popupInput4 && (this.state.popupInput5 || this.state.popupInput6)) return true // 修改资金密码
+    if (this.state.errUser || this.state.errAgainPwd || this.state.errCurrentPwd) return false
+    if ((this.props.isType === 1 || this.props.isType === 2) && this.state.userValue && this.state.pictureValue && this.state.verifyValue) return true // 绑定
+    if (this.props.isType === 3 && this.state.userValue && this.state.againPwdValue) return true // 设置登录密码
+    if (this.props.isType === 4 && this.state.currentPwdValue && this.state.userValue && this.state.againPwdValue) return true // 修改登录密码
+    if (this.props.isType === 5 && this.state.userValue && this.state.againPwdValue && this.state.pictureValue && this.state.verifyValue) return true // 设置资金密码
+    if (this.props.isType === 6 && this.state.userValue && this.state.againPwdValue && this.state.pictureValue && (this.state.verifyValue || this.state.googleValue)) return true // 修改资金密码
     return false
   }
 
@@ -182,7 +181,8 @@ export default class SetPassPopup extends exchangeViewBase {
 
   render() {
     // console.log(222, this.props.isType, this.props.fundPassType)
-    let regEmail = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, regPhone = /^1[3456789]\d{9}$/ // 邮箱/手机
+    // Regular('regEmail', this.state.userValue)
+    // let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3456789]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">
         <div className="pass-info">
@@ -193,51 +193,51 @@ export default class SetPassPopup extends exchangeViewBase {
               <li className={[4].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInputNew}
-                       value={this.state.popupInput1}
+                       value={this.state.currentPwdValue}
                        oriType={[4].includes(this.props.isType) ? 'password' : 'text'}
-                       onInput={value => this.changeInput1(value)}
-                       onBlur={this.checkInput1}/>
-                <em>{this.state.errUser3}</em>
+                       onInput={value => this.changeCurrentPwd(value)}
+                       onBlur={this.checkCurrentPwd}/>
+                <em>{this.state.errCurrentPwd}</em>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle}</p>
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInput}
-                       value={this.state.popupInput2}
-                       onInput={value => this.changeInput2(value)}
+                       value={this.state.userValue}
+                       onInput={value => this.changeUser(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
-                       onBlur={this.checkInput2}/>
+                       onBlur={this.checkUser}/>
                 <em>{this.props.popupInputErr2 || this.state.errUser}</em>
               </li>
               <li className={[3, 4, 5, 6].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle2}</p>
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInput2}
-                       value={this.state.popupInput3}
-                       onInput={value => this.changeInput3(value)}
+                       value={this.state.againPwdValue}
+                       onInput={value => this.changeAgainPwd(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
-                       onBlur={this.checkInput3}/>
-                <em>{this.state.errUser2}</em>
+                       onBlur={this.checkAgainPwd}/>
+                <em>{this.state.errAgainPwd}</em>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
                 <p>{this.intl.get("user-popPicture")}</p>
                 <div className="clearfix pass-btn-group">
-                  <Input placeholder={this.intl.get("user-popPicturePlaceholder")}  value={this.state.popupInput4} onInput={value => this.changeInput4(value)}/>
+                  <Input placeholder={this.intl.get("user-popPicturePlaceholder")}  value={this.state.pictureValue} onInput={value => this.changePicture(value)}/>
                   <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
                 </div>
               </li>
               <li className={([3, 4].includes(this.props.isType) || (this.props.isType === 6 && this.props.fundPassType === 2)) ? 'hide' : ''}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
-                  <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.popupInput5} onInput={value => this.changeInput5(value)}/>
-                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regEmail.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 1, 3)}}/>}
-                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {regPhone.test(this.state.popupInput2) && this.props.getVerify(this.state.popupInput2, 0, 3)}}/>}
+                  <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.verifyValue} onInput={value => this.changeVerify(value)}/>
+                  {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regEmail', this.state.userValue) && this.props.getVerify(this.state.userValue, 1, 3)}}/>}
+                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regPhone', this.state.userValue) && this.props.getVerify(this.state.userValue, 0, 3)}}/>}
                   {[5, 6].includes(this.props.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.props.isType)}}/>}
                 </div>
               </li>
               <li className={this.props.isType === 6 && this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
                 <p>{this.intl.get("user-popGoole")}</p>
                 <Input placeholder= {this.intl.get("user-inputVerifyGoogle")}
-                       value={this.state.popupInput6}
-                       onInput={value => this.changeInput6(value)}/>
+                       value={this.state.googleValue}
+                       onInput={value => this.changeGoogle(value)}/>
               </li>
               <li className={[3, 5].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
                 <p>{this.intl.get("user-popPwdRule")}</p>
@@ -250,26 +250,26 @@ export default class SetPassPopup extends exchangeViewBase {
                 <p>*{this.intl.get("user-supportPhone")}</p>
               </li>
               <li>
-                {this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
-                {this.props.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.props.captchaId, this.state.popupInput4)}/>}
-                {this.props.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.props.setLoginPass('', this.state.popupInput2, 0)}/>}
-                {this.props.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.props.setLoginPass(this.state.popupInput1, this.state.popupInput2, 1)}/>}
+                {this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 1, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}
+                {this.props.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 0, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}
+                {this.props.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.props.setLoginPass('', this.state.userValue, 0)}/>}
+                {this.props.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.props.setLoginPass(this.state.currentPwdValue, this.state.userValue, 1)}/>}
                 {this.props.isType === 5 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
                                                     onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : this.props.email,
                                                                    this.props.fundPassType === 3 ? 0 : 1,
                                                                    0,
-                                                                   this.state.popupInput2,
-                                                                   this.state.popupInput4,
+                                                                   this.state.userValue,
+                                                                   this.state.pictureValue,
                                                                    this.props.captchaId,
-                                                                   this.state.popupInput5)}/>}
+                                                                   this.state.verifyValue)}/>}
                 {this.props.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
                                                     onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ?this.props.email : ''),
                                                                    this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 2),
                                                                    1,
-                                                                   this.state.popupInput2,
-                                                                   this.state.popupInput4,
+                                                                   this.state.userValue,
+                                                                   this.state.pictureValue,
                                                                    this.props.captchaId,
-                                                                   this.props.fundPassType === 2 ? this.state.popupInput6 : this.state.popupInput5)}/>}
+                                                                   this.props.fundPassType === 2 ? this.state.googleValue : this.state.verifyValue)}/>}
               </li>
             </ul>
           </div>

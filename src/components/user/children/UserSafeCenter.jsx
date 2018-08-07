@@ -10,7 +10,7 @@ import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
 import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
 
-import {AsyncAll} from '../../../core'
+import {AsyncAll, Regular} from '../../../core'
 import DetectOS from '../../../class/lib/Os'
 import Browser from '../../../class/lib/Browser'
 
@@ -169,8 +169,9 @@ export default class userSafeCenter extends exchangeViewBase {
 
   checkIp() {
     // let reg =  /^\d+\.\d+\.\d+.\d+$/
-    let reg = /^(?:(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)\.){3}(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)$/
-    if(!reg.test(this.state.ipValue)) {
+    // let reg = /^(?:(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)\.){3}(?:25[0-5]|2[0-4]\d|(?!0)[01]?\d\d?|0)$/
+    let reg = Regular('regIp', this.state.ipValue)
+    if(!reg) {
       this.setState({
         errIp: this.intl.get("user-errIp")
       })
