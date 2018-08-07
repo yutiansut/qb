@@ -15,8 +15,8 @@ const devServerOptions = Object.assign({}, webpackConfig.devServer, {
     stats: {
       colors: true
     },
-    inline: true, // 自动刷新
-    hot: true, // 开启热模块替换
+    inline: false, // 自动刷新
+    hot: false, // 开启热模块替换
     historyApiFallback: true, //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
     host: HOST || config.dev.host,
     port: PORT || config.dev.port, //如果省略，默认8080

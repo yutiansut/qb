@@ -44,8 +44,8 @@ export default class AssetController extends ExchangeControllerBase {
   dealCoin(o, type){
     let j = {}
     for (let k in o) {
-      if (this.view.state.walletHandle[k][type] === 1) {
-        j[k] = this.view.state.walletList[k];
+      if (this.store.state. walletHandle[k][type] === 1) {
+        j[k] = o[k];
       }
     }
     return Object.keys(j)
@@ -105,10 +105,14 @@ export default class AssetController extends ExchangeControllerBase {
   async getWalletList() {
     this.store.state.walletList["BTC"] === undefined &&
       (await this.store.getWalletList());
-    await this.view.setState({
+    this.view.setState({
       walletList: this.store.state.walletList,
       walletHandle: this.store.state.walletHandle
     });
+    return {
+      walletList: this.store.state.walletList,
+      walletHandle: this.store.state.walletHandle
+    }
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
@@ -201,21 +205,20 @@ export default class AssetController extends ExchangeControllerBase {
     return result;
   }
   // 获取提币信息(币种可用额度,冻结额度，24小时提现额度等信息)
-  async getExtract() {
-    await this.store.getwalletExtract();
-    this.view.setState({
-      walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
-    });
-    let curExtract = this.store.state.walletExtract.extractAddr.filter(
-      v => v.coinName === this.view.state.currency.toLowerCase()
+  async getExtract(currency) {
+    let result = await this.store.getwalletExtract();
+    let curExtract = result.extractAddr.filter(
+      v => v.coinName === (currency || this.view.state.currency).toLowerCase()
     )[0];
+    let address = (curExtract &&
+      curExtract.addressList[0] &&
+      this.sort(curExtract.addressList, ["addressName"], 1)[0]) || {address: ''};
     this.view.setState({
-      address:
-        (curExtract &&
-          curExtract.addressList[0] &&
-          this.sort(curExtract.addressList, ["addressName"], 1)[0]) ||
-        ""
+      walletExtract: this.Util.deepCopy(result),
+      address: address,
     });
+    this.view.state.address = address
+    return address;
   }
 
   // 请求验证码
@@ -344,8 +347,8 @@ export default class AssetController extends ExchangeControllerBase {
       return false;
     }
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
-    if (this.view.state.address === obj.address)
-      this.view.setState({ address: "" });
+    if (this.view.state.address.address === obj.address)
+      this.view.setState({ address: {address: ''} });
   }
 
   // 处理出币种对应的交易对数组
@@ -417,7 +420,7 @@ export default class AssetController extends ExchangeControllerBase {
       orderTipContent: ""
     };
     // 校验地址不为空
-    if (this.view.state.address === "") {
+    if (this.view.state.address.address === "") {
       obj.orderTipContent = this.view.intl.get("asset-input-address");
       this.view.setState(obj);
       return;

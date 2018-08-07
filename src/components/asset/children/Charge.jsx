@@ -79,7 +79,8 @@ export default class Charge extends exchangeViewBase {
 
   async componentWillMount() {
     await this.getWalletList();
-    let arr = this.deal(this.state.walletList, 'c');
+    let {walletList, walletHandle} = await this.getWalletList();
+    let arr = this.deal(walletList, 'c');
     let query = this.props.controller.getQuery("currency").toUpperCase();
     let currency = query && (arr.includes(query) && query || 'BTC')  || (this.props.location.query && this.props.location.query.currency.toUpperCase()) || "BTC";
     currency &&
@@ -98,7 +99,7 @@ export default class Charge extends exchangeViewBase {
     this.getHistory({
       page: 0,
       pageSize: 10,
-      coinId: this.state.walletList[coin.toUpperCase()],
+      coinId: walletList[coin.toUpperCase()],
       coinName: coin.toUpperCase(),
       orderType: 1,
       orderStatus: -1,
@@ -154,8 +155,9 @@ export default class Charge extends exchangeViewBase {
             <span className="title">{this.intl.get("asset-selectCoin")}</span>
             <div className="currency-asset">
               <SearchInput
+                history={this.props.history}
                 filte={this.props.controller.filter}
-                walletList={this.deal(this.state.walletList,'c')}
+                walletList={this.deal(this.state.walletList, 'c')}
                 value={this.state.value}
                 setValue={value => {
                   this.setState({ value });

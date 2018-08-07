@@ -18,7 +18,6 @@ export default class Charge extends exchangeViewBase {
       this.props.setValue(value);
     };
     this.setCurrency = currency => {
-      console.log('setCurrency')
       this.props.setCurrency(currency);
     };
   }
@@ -27,7 +26,7 @@ export default class Charge extends exchangeViewBase {
       this.props.walletList,
       this.props.value.toUpperCase()
     );
-    let { totalCount, frozenCount, availableCount, currency} = this.props;
+    let { totalCount, frozenCount, availableCount, currency, type, history} = this.props;
     return (
       <div className="input">
         <Input
@@ -39,17 +38,18 @@ export default class Charge extends exchangeViewBase {
           onFocus={this.show}
           onEnter={() => {
             let value = searchArr[0] || "BTC";
-            this.setValue(value);
-            console.log("setCurrency1");
+            history.push({pathname:history.location.pathname, query:{currency:value}})
+            {/* this.setValue(value);
             this.setCurrency(value);
-            this.hide();
+            this.hide(); */}
           }}
           clickOutSide={() => {
+            if(!this.state.showSearch) return;
             let value = searchArr[0] || "BTC";
-            this.setValue(value);
-            console.log("setCurrency2");
-            this.setCurrency(value);
-            this.hide();
+            history.push({pathname:history.location.pathname, query:{currency:value}})
+            {/* this.setValue(value);
+            this.setCurrency(value); */}
+            {/* this.hide(); */}
           }}
         >
           {
@@ -64,10 +64,10 @@ export default class Charge extends exchangeViewBase {
                   onClick={e => {
                     e.stopPropagation();
                     e.nativeEvent.stopImmediatePropagation();
-                    this.setValue(item);
-                    console.log("setCurrency3");
+                    history.push({pathname:history.location.pathname, query:{currency:item}})
+                    {/* this.setValue(item);
                     this.setCurrency(item);
-                    this.hide();
+                    this.hide(); */}
                   }}
                 >
                   {item}

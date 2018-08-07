@@ -341,6 +341,7 @@ export default function en(state) {
     "asset-wait-auditing":
       "Daily withdraw limit exceeded, please wait for auditing",
     "asset-name-existing": "The name is existing",
+    "asset-address-notSaved": 'Address not saved',
     "h5-asset-record": "Charge record",
     "h5-asset-search-history": "Search history",
     "h5-asset-recommend-currency": "Recommend currency",
@@ -462,7 +463,7 @@ export default function en(state) {
     "deal-price-tip":
       "Final trasaction price shall be subject to the actual price of the  digital currency",
     "deal-after": "Then can trade",
-    "deal-login": "Sign in/Sign up",
+    "deal-login": "Sign up/Sign in",
     "deal-num-err": "Error of input quantity accuracy",
     "deal-pass-empty": "Please input fund password",
     "deal-num-limited": "Insufficient balance",

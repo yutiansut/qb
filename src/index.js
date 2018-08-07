@@ -29,25 +29,25 @@ if (Device.mobile()) {
     import ('./AppMb').then(Component => renderDom(Component.default))
 
 
-    if (module.hot) {
-        module.hot.accept('./AppMb', async () => {
-            const App = require('./AppMb').default;
-            await renderDom(App);
-        })
-    }
+    // if (module.hot) {
+    //     module.hot.accept('./AppMb', async () => {
+    //         const App = require('./AppMb').default;
+    //         await renderDom(App);
+    //     })
+    // }
 } else {
 
     //desktop
     // renderDom('./App');
     import ('./App').then(Component => renderDom(Component.default))
 
-
-    if (module.hot) {
-        module.hot.accept('./App', async () => {
-            const App = require('./App').default;
-            await renderDom(App);
-        })
-    }
+    //
+    // if (module.hot) {
+    //     module.hot.accept('./App', async () => {
+    //         const App = require('./App').default;
+    //         await renderDom(App);
+    //     })
+    // }
 }
 
 

@@ -55,8 +55,8 @@ export default class AssetManage extends exchangeViewBase {
         />
       );
     };
-    const Char = ({ match, location }) => {
-      return <Charge controller={this.controller} location={location} />;
+    const Char = ({ match, location, history }) => {
+      return <Charge controller={this.controller} location={location} history={history}/>;
     };
     const Extr = ({ match, location, history}) => {
       return <Extract controller={this.controller} location={location} history={history}/>;

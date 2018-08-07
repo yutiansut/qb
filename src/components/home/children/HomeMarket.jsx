@@ -123,20 +123,45 @@ export default class HomeMarket extends ExchangeViewBase {
                     query: {pairName: v.tradePairName}
                   }}
                 >{v.tradePairName.toUpperCase()}</NavLink></td>
-                <td><span
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                ><span
                   className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span className="second-span">
                   {controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({
                     number: 'legal',
                     style: {name: 'cny'}
-                  }) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span></td>
-                <td>{Number(v.turnover).format({number: 'property'}) || 0}</td>
-                <td>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
-                <td >
-                  <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span>
+                  }) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span></NavLink></td>
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                >{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                >{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
+                <td><NavLink
+                    to={{
+                      pathname: `/trade`,
+                      query: {pairName: v.tradePairName}
+                    }}
+                  >
+                    <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span></NavLink>
                 </td>
-                <td>
-                  {/* 宽高等样式在home.styl里设置 */}
-                  <ReactTrend ratio={5} trends={v.points || []}/>
+                <td><NavLink
+                  to={{
+                    pathname: `/trade`,
+                    query: {pairName: v.tradePairName}
+                  }}
+                >
+                  {/* 宽高等样式在homeMakt.styl里设置 */}
+                  <ReactTrend ratio={5} trends={v.points || []}/></NavLink>
                 </td>
               </tr>
             )

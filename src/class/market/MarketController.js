@@ -46,6 +46,7 @@ export default class MarketController extends ExchangeControllerBase {
       searchRealt: [],
       collectActive: false,
       market: v,
+      // unitsType: '',
       homeMarketPairData
     });
     if(this.view.state.query) {
@@ -55,7 +56,9 @@ export default class MarketController extends ExchangeControllerBase {
       this.querySelectPair(this.view.state.query,priceLimitValue,volumeLimitValue)
       return
     }
+    console.log('homeMarketPairData',homeMarketPairData)
     this.tradePairChange(homeMarketPairData[0]);
+    // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
   }
 
   // 点击收藏区
@@ -148,6 +151,7 @@ export default class MarketController extends ExchangeControllerBase {
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
 
+    // console.log('homeMarketPairData', homeMarketPairData);
     type > 2 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName);
     if(this.view.state.query && type === 3) {
       let pairMsg = await this.getTradePairHandle();
@@ -162,8 +166,8 @@ export default class MarketController extends ExchangeControllerBase {
     this.view.setState({
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
-
-    type === 3 && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
+    // console.log('type', type);
+    (type === 3  || type === 0)  && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据
@@ -174,6 +178,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
+    // console.log('tradePairChange', value)
     if(!value){
       return
     }
@@ -190,7 +195,8 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradeOrderListController && this.TradeOrderListController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
     this.userOrderController && this.userOrderController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
     this.TradePlanController && this.TradePlanController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
-    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);          this.TradeOrderListController && this.TradeOrderListController.setChangeFlag();
+    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);
+    this.TradeOrderListController && this.TradeOrderListController.setChangeFlag();
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);

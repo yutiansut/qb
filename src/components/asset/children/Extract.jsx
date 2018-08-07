@@ -22,13 +22,15 @@ export default class Extract extends exchangeViewBase {
       0: this.intl.get("pending"),
       1: this.intl.get("passed"),
       2: this.intl.get("failed"),
-      3: this.intl.get("cancel")
+      3: this.intl.get("cancel"),
+      4: this.intl.get("dealing"),
+      5: this.intl.get("dealing")
     };
     this.state = {
       currency: "BTC",
       value: "BTC",
       showAddressPopup: false,
-      address: "",
+      address: {address: ''},
       extractAmount: "", //提现数量
       password: "",
       showTwoVerify: false,
@@ -97,11 +99,20 @@ export default class Extract extends exchangeViewBase {
     this.hideSelect = () => {
       this.setState({ showSelect: false });
     };
+    this.notSaved = () =>{
+      this.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: this.intl.get('asset-address-notSaved')
+      });
+    }
   }
 
-  async componentWillMount() {
-    await this.getWalletList();
-    let arr = this.deal(this.state.walletList, 'c');
+  async componentDidMount() {
+    window.addEventListener("click", this.hideSelect);
+    let {walletList} = await this.getWalletList();
+    let arr = this.deal(walletList, 'w');
+
     let query = this.props.controller.getQuery("currency").toUpperCase();
     let currency = query && (arr.includes(query) && query || 'BTC') || (this.props.location.query && this.props.location.query.currency.toUpperCase()) || "BTC";
     currency && this.setState({ currency: currency, value: currency });
@@ -109,8 +120,9 @@ export default class Extract extends exchangeViewBase {
       "currency",
       currency.toLowerCase()
     );
-    await this.getExtract();
-    this.getMinerFee(currency || this.state.currency, this.state.address);
+
+    let address = await this.getExtract(currency && currency);
+    !address.address && this.getMinerFee(currency || this.state.currency, address);
     this.getTradePair(currency || this.state.currency);
     this.getCurrencyAmount(currency || this.state.currency);
     this.getUserInfo();
@@ -118,7 +130,7 @@ export default class Extract extends exchangeViewBase {
     this.getHistory({
       page: 0,
       pageSize: 10,
-      coinId: this.state.walletList[coin.toUpperCase()],
+      coinId: walletList[coin.toUpperCase()],
       coinName: coin.toUpperCase(),
       orderType: 2,
       orderStatus: -1,
@@ -127,14 +139,21 @@ export default class Extract extends exchangeViewBase {
     });
   }
 
-  componentDidMount() {
-    window.addEventListener("click", this.hideSelect);
-  }
+  // componentDidMount() {
+  //   window.addEventListener("click", this.hideSelect);
+  // }
   componentWillUnmount() {
     window.removeEventListener("click", this.hideSelect);
   }
   componentWillUpdate(nextProps, nextState) {
-    // 切换地址后重新请求矿工费
+    // 更换提币地址时请求矿工费(币种不变)
+    if(nextState.address.address!==this.state.address.address){
+      this.getMinerFee(nextState.currency, nextState.address);
+      this.setState({
+        extractAmount: ""
+      })
+    }
+    // 币种未变化，地址列表发生变化时设置提币地址为列表第一项
     if (
       JSON.stringify(nextState.walletExtract) !==
       JSON.stringify(this.state.walletExtract) && nextState.currency === this.state.currency
@@ -150,50 +169,48 @@ export default class Extract extends exchangeViewBase {
         {
           address:
             (curExtract &&
-              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0] || ""),
-          extractAmount: ""
-        },
-        () => {
-          this.getMinerFee(nextState.currency, this.state.address);
+              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0] || {address: ''}),
         }
       );
     }
-    if (nextState.currency !== this.state.currency) {
-      this.props.controller.changeUrl(
-        "currency",
-        nextState.currency.toLowerCase()
-      );
-      // 切换币种后，重新set address，之后根据address和currency请求矿工费
-      let curExtract = this.state.walletExtract.extractAddr.filter(
-        v => v.coinName === nextState.currency.toLowerCase()
-      )[0];
-      this.setState(
-        {
-          address:
-            (curExtract &&
-              curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0]||""),
-          extractAmount: "",
-          password: "",
-          noSufficTip: false, // 余额不足提示
-          quotaTip: false
-        },
-        () => {
-          this.getMinerFee(nextState.currency, this.state.address);
-        }
-      );
-      this.getCurrencyAmount(nextState.currency);
-      this.props.controller.initHistory();
-      this.getHistory({
-        page: this.state.page - 1,
-        pageSize: 10,
-        coinId: this.state.walletList[nextState.currency],
-        coinName: nextState.currency,
-        orderType: 2,
-        orderStatus: -1,
-        startTime: -1,
-        endTime: -1
-      });
-    }
+
+    // 切换币种时的操作
+    // if (nextState.currency !== this.state.currency) {
+      // this.props.controller.changeUrl(
+      //   "currency",
+      //   nextState.currency.toLowerCase()
+      // );
+      // // 切换币种后，重新set address，之后根据address和currency请求矿工费
+      // let curExtract = this.state.walletExtract.extractAddr.filter(
+      //   v => v.coinName === nextState.currency.toLowerCase()
+      // )[0];
+      // this.setState(
+      //   {
+      //     address:
+      //       (curExtract &&
+      //         curExtract.addressList[0] && this.props.controller.sort(curExtract.addressList, ["addressName"], 1)[0]||{address: ''}),
+      //     extractAmount: "",
+      //     password: "",
+      //     noSufficTip: false, // 余额不足提示
+      //     quotaTip: false
+      //   }
+      // );
+      // if(nextState.address.address===this.state.address.address) {
+      //   this.getMinerFee(nextState.currency, nextState.address);
+      // }
+      // this.getCurrencyAmount(nextState.currency);
+      // this.props.controller.initHistory();
+      // this.getHistory({
+      //   page: this.state.page - 1,
+      //   pageSize: 10,
+      //   coinId: this.state.walletList[nextState.currency],
+      //   coinName: nextState.currency,
+      //   orderType: 2,
+      //   orderStatus: -1,
+      //   startTime: -1,
+      //   endTime: -1
+      // });
+    // }
     // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
   }
 
@@ -227,6 +244,7 @@ export default class Extract extends exchangeViewBase {
             <span className="title">{this.intl.get("asset-selectCoin")}</span>
             <div className="currency-asset">
               <SearchInput
+                history={this.props.history}
                 filte={this.props.controller.filter}
                 walletList={this.deal(this.state.walletList, 'w')}
                 value={this.state.value}
@@ -289,7 +307,7 @@ export default class Extract extends exchangeViewBase {
                                     addressName: v.addressName
                                   }
                                 });
-                                this.getMinerFee(this.state.currency, v);
+                                {/* this.getMinerFee(this.state.currency, v); */}
                               }}
                             >
                               <span>{v.addressName}</span>
@@ -302,7 +320,9 @@ export default class Extract extends exchangeViewBase {
                 </div>
               </div>
               <a
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
                   this.setState({ showAddressPopup: true });
                 }}
               >
@@ -376,7 +396,9 @@ export default class Extract extends exchangeViewBase {
                 />
                 <a
                   onClick={() => {
-                    this.setState({ extractAmount: availableCount });
+                    this.setState({ extractAmount: availableCount },()=>{
+                      document.querySelector('.extract .extract-amount .input input').focus()
+                    });
                   }}
                 >
                   {this.intl.get("asset-withdrawAvailable")}: {availableCount}
@@ -559,6 +581,7 @@ export default class Extract extends exchangeViewBase {
           <Popup
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
+            addTip={this.notSaved}
             onSave={async add => {
               let result = await this.appendAddress(
                 Object.assign({ coinName: this.state.currency }, add),

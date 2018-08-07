@@ -61,10 +61,10 @@ export default class CoinData extends exchangeViewBase {
   }
   async componentDidMount() {
     // console.log('mounting..................',this.props.controller.getQuery)
-    await this.getWalletList();
+    let {walletList} = await this.getWalletList();
     let currency = this.props.controller.getQuery('currency').toUpperCase() || this.props.location.query && this.props.location.query.currency.toUpperCase();
     currency && this.setState({ currency: currency, value: currency });
-    (!currency || currency === this.state.currency) && await this.getCoinInfo(this.state.walletList[currency || this.state.currency]);
+    (!currency || currency === this.state.currency) && await this.getCoinInfo(walletList[currency || this.state.currency]);
 
     this.getTradePair();
   }
@@ -79,7 +79,6 @@ export default class CoinData extends exchangeViewBase {
   }
 
   render() {
-    console.log(this.state.walletHandle);
     let {
       name,
       enName,

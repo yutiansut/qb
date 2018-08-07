@@ -223,7 +223,7 @@ export default class Login extends exchangeViewBase {
             </li>
             <li>
               <Button
-                title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('login')} / ${this.intl.get('header-regist')}`}`}
+                title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('header-regist')} / ${this.intl.get('login')}`}`}
                 className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                 disable={this.canClick() ? false : true}
                 onClick={async () => {

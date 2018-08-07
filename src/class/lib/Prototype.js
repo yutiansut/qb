@@ -54,7 +54,7 @@ NUMBER_PROPERTY_FUNC.push(number => parseFloat(number.toFixedWithoutUp(8)));
 const NUMBER_LEGAL_VALUE = []; //数字分类
 const LEGAL_DECIMAL_LENGTH = [2];//小数部分最小长度
 const NUMBER_LEGAL_FUNC = [];// 对不同大小数字操作的函数数组
-NUMBER_LEGAL_FUNC.push(number => parseFloat(number.toFixedWithoutUp(2)));
+NUMBER_LEGAL_FUNC.push(number => parseFloat(number.toFixed(2)));
 
 let config = {
   format: {
@@ -108,7 +108,7 @@ Number.prototype.formatFixStyle = function (para) {
     decimalLength = para.decimalLength || -1,
     decimalSign = para.decimalSign || '.',
     thousandSign = typeof para.thousandSign !== 'boolean' && (para.thousandSign || ',') || '',
-    numberArr = (number > 0.000001 || number === 0) ? number.toString().split('.') : number.toFixed(8).split('.'),
+    numberArr = (number < 0.000001 && number !== 0) ? (number < 0.0000001 && number.toFixed(8).split('.') || number.toFixed(7).split('.')) : number.toString().split('.'),
     numberSuffix = "", decimal = numberArr[1] || '',
     i = numberArr[0],
     j = i.length > 3 ? i.length % 3 : 0;
