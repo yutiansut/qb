@@ -135,4 +135,9 @@ export default class OrderListController extends ExchangeControllerBase {
         }
     );
   }
+  
+  //改变数据渲染的数组(计价方式切换,数据来源切换)
+  changeRenderRecent(){
+  
+  }
 }
