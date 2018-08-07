@@ -12,6 +12,7 @@ import Charge from "./children/Charge";
 import Search from "./children/Search";
 import Select from "./children/Select";
 import Withdraw from "./children/Withdraw";
+import Address from "./children/Address";
 import "./style/asset.styl"
 
 export default class AssetManage extends exchangeViewBase {
@@ -58,6 +59,10 @@ export default class AssetManage extends exchangeViewBase {
         return <Withdraw controller={this.controller} location={location} history={history} />;
     };
 
+    const Addr = ({ match, location, history }) => {
+        return <Address controller={this.controller} location={location} history={history} />;
+    };
+
     return (
       <div className="asset-mb">
         <Switch>
@@ -68,6 +73,7 @@ export default class AssetManage extends exchangeViewBase {
           <Route path={`${match.url}/withdraw`} component={WDraw} />
           <Route path={`${match.url}/search`} component={Srch} />
           <Route path={`${match.url}/select`} component={Sel} />
+          <Route path={`${match.url}/address`} component={Addr} />
           <Redirect to={`${match.url}/balance`} />
         </Switch>
       </div>

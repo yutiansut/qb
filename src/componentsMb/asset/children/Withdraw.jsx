@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
-import Input from "../../../common/component/Input";
 
 export default class Withdraw extends exchangeViewBase {
     constructor(props) {
@@ -12,17 +11,14 @@ export default class Withdraw extends exchangeViewBase {
             currencyAmount: {},
             address: {},
             walletExtract: {},
+            userInfo: {},
 
             inputNum: 0,            //提现数量
             inputPass: "",           //资金密码
-            inputPhoneCode: "",
-            inputEmailCode: "",
-            inputGoogleCode: "",
+            inputCode: "",
 
             userTwoVerify: {withdrawVerify: -1, fundPwd: -1},   //fundPwd: 0-未设置密码，1-已设置  withdrawVerify: 0 无 1 邮件 2 谷歌验证 3 短信
             verifyNum: 0,       //验证码倒计时
-
-            showLayer: false,   //超过可用额度弹框
         };
         //绑定view
         controller.setView(this);
@@ -33,10 +29,12 @@ export default class Withdraw extends exchangeViewBase {
         this.getExtract = controller.getExtract.bind(controller);
         // 获取矿工费
         this.getMinerFee = controller.getMinerFee.bind(controller);
-        // 获取资金密码设置状态和两步验证方式
+        // 获取用户信息
         this.getUserInfo = controller.getUserInfo.bind(controller);
         // 发送验证码
-        this.getVerify = controller.userController.getVerify.bind(controller.userController);
+        this.getVerify = controller.getVerify.bind(controller);
+        // 提交提币订单
+        this.extractOrder = controller.extractOrder.bind(controller);
 
         this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
     }
@@ -57,17 +55,15 @@ export default class Withdraw extends exchangeViewBase {
     render() {
         let {history} = this.props;
         let {
+            verifyNum,
             currency,
-            showLayer,
             inputNum,
             inputPass,
-            inputPhoneCode,
-            inputEmailCode,
-            inputGoogleCode } = this.state;
+            inputCode } = this.state;
 
-        //可用，总额度，已用额度
+        //可用，总额度，已用额度，可用额度
         //let currencyAmount = {availableCount:9987.755108, availableQuota:10, frozenCount:0.01144746, totalCount:9987.76655546, totalQuota:10, usedQuota:0}
-        let {availableCount,totalQuota,usedQuota} = this.state.currencyAmount || {};
+        let {availableCount,totalQuota,usedQuota,availableQuota} = this.state.currencyAmount || {};
 
         //旷工费，最小提币量，提币地址
         //let walletExtract = {extractAddr: [{coinId: 9, coinName: "ltc", minCount: 0.1, addressList: []}], minerFee: 0.0005}
@@ -81,8 +77,14 @@ export default class Withdraw extends exchangeViewBase {
         let toNum = num.minus(minerFee).toString();
         toNum = toNum>0 && num>=minCount && num<=availableCount ? toNum : 0;
 
-        //两步验证状态
+        //提币验证方式，是否设置资金密码
         let {withdrawVerify,fundPwd} = this.state.userTwoVerify || {};
+
+        //验证码倒计时文本
+        let verifyNumStr = verifyNum>0 ? verifyNum+"s" : this.intl.get("sendCode");
+
+        //是否能提交
+        let canSubmit = address && toNum>0 && inputPass && inputCode;
 
         return (
             <div className="withdraw">
@@ -103,7 +105,7 @@ export default class Withdraw extends exchangeViewBase {
                             <label>{this.intl.get("asset-withdrawAddress")}</label>
                             <p>
                                 <span>{address || "-"}</span>
-                                <img src="/static/mobile/asset/icon_position@2x.png"/>
+                                <img src="/static/mobile/asset/icon_position@2x.png" onClick={()=>history.push(`/wallet/address?currency=${currency}`)}/>
                             </p>
                         </div>
                         {/*可用，提币额度，已用*/}
@@ -159,32 +161,26 @@ export default class Withdraw extends exchangeViewBase {
                                     <p>
                                         <label>{this.intl.get("user-verifyPhone")}</label>
                                         <input type="text" placeholder={this.intl.get("user-inputVerify")}
-                                               value={inputPhoneCode}
-                                               onInput={e =>
-                                                   this.setState({inputPhoneCode:e.target.value})
-                                               }/>
-                                        <a onClick={()=>this.getVerify()}>{this.intl.get("login-sendCode")}</a>
+                                               value={inputCode}
+                                               onInput={e => this.setState({inputCode: e.target.value})}/>
+                                        <a onClick={()=>this.getVerify()}>{verifyNumStr}</a>
                                     </p>}
                                 {/*邮箱验证码*/}
                                 {withdrawVerify === 1 &&
                                     <p>
                                         <label>{this.intl.get("user-verifyEmail")}</label>
                                         <input type="text" placeholder={this.intl.get("user-inputVerify")}
-                                               value={inputEmailCode}
-                                               onInput={e =>
-                                                   this.setState({inputEmailCode:e.target.value})
-                                               }/>
-                                        <a>{this.intl.get("login-sendCode")}</a>
+                                               value={inputCode}
+                                               onInput={e => this.setState({inputCode: e.target.value})}/>
+                                        <a onClick={()=>this.getVerify()}>{verifyNumStr}</a>
                                     </p>}
                                 {/*谷歌验证码*/}
                                 {withdrawVerify === 2 &&
                                     <p>
                                         <label>{this.intl.get("user-popGoole")}</label>
                                         <input type="text" placeholder={this.intl.get("user-inputVerify")}
-                                               value={inputGoogleCode}
-                                               onInput={e =>
-                                                   this.setState({inputGoogleCode:e.target.value})
-                                               }/>
+                                               value={inputCode}
+                                               onInput={e => this.setState({inputCode: e.target.value})}/>
                                     </p>}
                             </div>}
 
@@ -196,7 +192,15 @@ export default class Withdraw extends exchangeViewBase {
                         </div>
                         {/*提币*/}
                         <div className="submit">
-                            <button>提币</button>
+                            <button className={canSubmit ? "":"disable"} onClick={()=>{
+                                this.extractOrder({
+                                    coinName: currency,
+                                    toAddr: address,
+                                    amount: Number(inputNum),
+                                    fundPass: inputPass,
+                                    code: inputCode
+                                });
+                            }}>{this.intl.get("asset-withdraw")}</button>
                         </div>
                     </div>
                     :
@@ -207,16 +211,16 @@ export default class Withdraw extends exchangeViewBase {
                     </div>}
 
                 {/*遮罩层*/}
-                {showLayer && <div className="layer-shadow"/>}
-                {/*弹框 -超过可用额度*/}
-                {showLayer &&
+                {availableQuota<=0 && <div className="layer-shadow"/>}
+                {/*弹框 -可用额度不足*/}
+                {availableQuota<=0 &&
                     <div className="layer">
                         <h3>
-                            <b>温馨提示</b>
+                            <b>{this.intl.get("asset-reminder")}</b>
                             <img src="/static/mobile/asset/icon_cancel@3x.png"/>
                         </h3>
-                        <p>您已超过2BTC可用额度，请先进行实名认证方可提币～～</p>
-                        <button>实名认证</button>
+                        <p>{this.intl.get("h5-asset-withdraw-tip2")}</p>
+                        <button>{this.intl.get("user-name")}</button>
                     </div>}
             </div>
         );

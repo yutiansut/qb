@@ -353,6 +353,10 @@ export default function en(state) {
     "h5-asset-empty3": "No content",
     "h5-asset-empty4": "Go ahead and choose the currency ～",
     "h5-asset-withdraw-tip": "Withdraw notice",
+    "h5-asset-withdraw-tip2": "You have exceeded the available quota of 2BTC. Please authentication to continue.",
+    "h5-asset-copy-addr": "Copy",
+    "h5-asset-empty5": "No record at present",
+    "h5-asset-empty6": "Add it first.",
   };
   const market = {
     "market-favorite": "Favorites",

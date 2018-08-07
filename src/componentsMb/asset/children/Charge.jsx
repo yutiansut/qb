@@ -31,7 +31,7 @@ export default class Charge extends exchangeViewBase {
             if(controller.copy(el)){
                 this.setState({showPopup:true,popMsg:this.intl.get("asset-copySuccess"),popType:"tip1"})
             }else{
-                this.setState({showPopup:true,popMsg:this.intl.get(""),popType:"tip3"})
+                this.setState({showPopup:true,popMsg:this.intl.get("asset-copyFail"),popType:"tip3"})
             }
         };
     }
@@ -48,7 +48,7 @@ export default class Charge extends exchangeViewBase {
 
     render() {
         let {history} = this.props;
-        let {showPopup,currency} = this.state;
+        let {showPopup,popType,popMsg,currency} = this.state;
         let {coinAddress,verifyNumber} = this.state.coinAddress;
 
         return (
@@ -76,14 +76,13 @@ export default class Charge extends exchangeViewBase {
                         <i>{this.intl.get("h5-asset-empty4")}</i>
                     </div>}
                 {/*提示框*/}
-                {showPopup && <Popup
-                    type={this.state.popType}
-                    msg={this.state.popMsg}
-                    h5={true}
-                    onClose={() => {
-                        this.setState({ showPopup: false });
-                    }}
-                    autoClose = {true}/>}
+                {showPopup &&
+                    <Popup
+                        type={popType}
+                        msg={popMsg}
+                        h5={true}
+                        onClose={() => this.setState({showPopup: false})}
+                        autoClose = {true}/>}
             </div>
         );
     }

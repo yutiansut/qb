@@ -342,6 +342,10 @@ export default function zh(state) {
     "h5-asset-empty3": "当前无内容",
     "h5-asset-empty4": "赶快去选择币种吧～",
     "h5-asset-withdraw-tip": "提币须知",
+    "h5-asset-withdraw-tip2": "您已超过2BTC可用额度，请先进行实名认证方可提币～～",
+    "h5-asset-copy-addr": "复制地址",
+    "h5-asset-empty5": "当前无记录",
+    "h5-asset-empty6": "赶快去添加吧～",
   };
   const market = {
     "market-favorite": "收藏",

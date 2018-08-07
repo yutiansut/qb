@@ -339,6 +339,37 @@ export default class AssetController extends ExchangeControllerBase {
     return true;
   }
 
+    // 添加提现地址-h5
+    async appendAddressH5(obj, addressList) {
+        // 验证地址是否存在
+        let flag = false;
+        addressList && addressList.forEach(v => {
+            v.address === obj.address && (flag = 713);
+            v.addressName === obj.addressName && (flag = "asset-name-existing");
+        });
+        if (flag) {
+            this.setState({
+                showPopup: true,
+                popMsg: this.view.intl.get(flag),
+                popType: "tip3"
+            });
+            return false;
+        }
+        // 发送添加地址请求交由后台校验
+        let result = await this.store.appendAddress(obj);
+        if (result.errCode) {
+            this.view.setState({
+                showPopup: true,
+                popMsg: result.msg,
+                popType: "tip3"
+            });
+            return;
+        }
+        this.view.setState({
+            walletExtract: this.Util.deepCopy(result)
+        });
+    }
+
   //删除提现地址
   async deletAddress(obj) {
     let result = await this.store.deletAddress(obj);
@@ -350,6 +381,22 @@ export default class AssetController extends ExchangeControllerBase {
     if (this.view.state.address.address === obj.address)
       this.view.setState({ address: {address: ''} });
   }
+
+  async deletAddressH5(obj) {
+    let result = await this.store.deletAddress(obj);
+    if (!result || result.errCode) {
+        this.view.setState({
+            showPopup: true,
+            popMsg: this.view.intl.get("asset-delet-fail"),
+            popType: "tip3"
+        });
+        return;
+    }
+    this.view.setState({
+        walletExtract: this.Util.deepCopy(result)
+    });
+  }
+
 
   // 处理出币种对应的交易对数组
   getCoinPair(o, coin) {
