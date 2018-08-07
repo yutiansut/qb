@@ -15,18 +15,19 @@ module.exports = merge(webpackConfig, {
   mode: config.dev.mode,
   entry: [
     `webpack-dev-server/client?http://${HOST || config.dev.host}:${PORT || config.dev.port}`,
-    'webpack/hot/only-dev-server',
-    'whatwg-fetch',
+    // 'webpack/hot/only-dev-server',
+    // 'whatwg-fetch',
     path.resolve(__dirname, '../src/index.js'),
   ],
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': env
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.template.html'),
       inject: true,
+      // hot: false,
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     //配置static目录拷贝到服务器目录下
