@@ -64,7 +64,8 @@ export default class OrderListStore extends ExchangeStoreBase {
           "avgPriceCN": v.apc,
           "avgPriceEN": v.ape,
           "dealDoneCount": v.a,
-          "orderType": v.ot
+          "orderType": v.ot,
+          "orderId": v.oi
         }
       })
     } : {
