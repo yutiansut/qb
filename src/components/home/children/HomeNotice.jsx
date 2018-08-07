@@ -31,11 +31,12 @@ export default class homeNotice extends ExchangeViewBase {
 
   async componentDidMount() {
     await this.getNoticeCon(0, 5);
-    let result = Object.keys(this.state.noticeList).length && this.state.noticeList.data || []
-    if (Object.keys(this.state.noticeList).length) {
+    let result = this.state.noticeList && Object.keys(this.state.noticeList).length && this.state.noticeList.data || []
+    if (this.state.noticeList && Object.keys(this.state.noticeList).length) {
       this.setState(
         {
           top2: Math.ceil(result.length) * 100,
+          
           criticalArr: Array.from(
             {length: Math.ceil(result.length + 1)},
             (item, index) => index * 100

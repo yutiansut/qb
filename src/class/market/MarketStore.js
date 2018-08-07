@@ -375,7 +375,7 @@ export default class MarketStore extends ExchangeStoreBase {
   //获取当前汇率接口
   async getBank(){
     let bank = await this.Proxy.getBank();
-    this.state.bank = bank.is;
+    this.state.bank = bank && bank.is;
     return bank.is
   }
 }
