@@ -19,6 +19,7 @@ export default class OrderListStore extends ExchangeStoreBase {
         orders: data.ors.map(v => {
           return {
             "dealTime": v.t,
+            "priceR": v.p,
             "price": v.p,
             "priceCN": v.pc,
             "priceEN": v.pe,
@@ -59,24 +60,27 @@ export default class OrderListStore extends ExchangeStoreBase {
     let recentTradeListArrAf = isPersonal ? {
       orders: recentTradeListArr && recentTradeListArr.ors && recentTradeListArr.ors.map(v => {
         return{
-          "orderTime": v.t,
-          "avgPrice": v.ap,
-          "avgPriceCN": v.apc,
-          "avgPriceEN": v.ape,
-          "dealDoneCount": v.a,
-          "orderType": v.ot
-          // "dealTime": v.t,
-          // "price": v.ap,
-          // "priceCN": v.apc,
-          // "priceEN": v.ape,
-          // "volume": v.a,
+          // "orderTime": v.t,
+          // "avgPrice": v.ap,
+          // "avgPriceCN": v.apc,
+          // "avgPriceEN": v.ape,
+          // "dealDoneCount": v.a,
           // "orderType": v.ot
+          "dealTime": v.t,
+          "price": v.ap,
+          "priceCN": v.apc,
+          "priceEN": v.ape,
+          "priceR": v.ap,
+          "volume": v.a,
+          "orderType": v.ot,
+          "orderId": v.oi
         }
       })
     } : {
       orders: recentTradeListArr.ors && recentTradeListArr.ors.length && recentTradeListArr.ors.map(v => {
         return{
           "dealTime": v.t,
+          "priceR": v.p,
           "price": v.p,
           "priceCN": v.pc,
           "priceEN": v.pe,

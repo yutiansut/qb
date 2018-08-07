@@ -18,8 +18,8 @@ export default class extends ExchangeViewBase {
       isPersonal: 0,
       recentTableHead:[
         {name: this.intl.get('time'), sortValue: ''},
-        {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
-        {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'price'},],
+        {name: this.intl.get('price'), sortValue: ['priceR'], type: 0, sortDefault: 'priceR'},
+        {name: this.intl.get('amount'), sortValue: ['volume'], type: 1, sortDefault: 'priceR'},],
       recentTableMarketHead : [
         {name: this.intl.get('time'), sortValue: ''},
         {name: this.intl.get('price'), sortValue: ['price'], type: 0, sortDefault: 'price'},
@@ -85,11 +85,11 @@ export default class extends ExchangeViewBase {
               (v, index) =>
                 index <= 50 && (
                   <tr key={index}>
-                    <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.dealTime).toDate('HH:mm:ss'):Number(v.orderTime).toDate('HH:mm:ss')}</td>
+                    <td>{Number(v.dealTime).toDate('HH:mm:ss')}</td>
                     <td  style={{color: this.state.recentItemSelect !== 'mineLess' ? (v.orderType === 1 ? '#f25656' : '#2bb789') : 'rgba(255,255,255,0.8)'}}>
-                      {this.state.recentItemSelect === 'mineLess' ? ((this.state.unitsType === "CNY" && Number(v.price * this.state.recentBank.cny).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.price * this.state.recentBank.usd).format({number:'legal',style:{name:'usd'}})) || Number(v.price).format({number:'digital', style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))): ((this.state.unitsType === "CNY" && Number(v.avgPriceCN).format({number:'legal',style:{name:'cny'}})) || ((this.state.unitsType === "USD" && Number(v.avgPriceEN).format({number:'legal',style:{name:'usd'}})) || Number(v.avgPrice).format({number:'digital', style:{decimalLength :this.props.controller.accuracy}})))}
+                      {v.priceR}
                     </td>
-                    <td>{this.state.recentItemSelect === 'mineLess' ? Number(v.volume).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false) : Number(v.dealDoneCount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
+                    <td>{v.volume}</td>
                   </tr>
                 )
             ) || <tr><td><span>{this.intl.get('noRecords')}</span></td></tr>}

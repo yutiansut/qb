@@ -35,7 +35,18 @@ export default class UserOrderListStore extends OrderListStore {
         "fee": data.fee//手续费
       }
       this.controller.updateUserOrder(dataAf);
-      this.controller.TradeRecentController && this.controller.TradeRecentController.updateRecentOrderUser(dataAf)
+      let dataAfWs = {
+        "dealTime": data.t,
+        "price": data.ap,
+        "priceR": data.ap,
+        "priceCN": data.apc,
+        "priceEN": data.ape,
+        "volume": data.ddc,
+        "orderType": data.ot,
+        "orderStatus": data.ost,
+        "orderId": data.oi
+      }
+      this.controller.TradeRecentController && this.controller.TradeRecentController.updateRecentOrderUser(dataAfWs)
     })
   }
   

@@ -14,7 +14,10 @@ export default class OrderListController extends ExchangeControllerBase {
   setUnitsType(v){
     this.view.setState({
       unitsType: v
-    })
+    });
+    this.store.state.unitsType = v;
+    let recentTradeListArr = this.view.state.recentTradeListArr;
+    this.changeRenderRecent(recentTradeListArr)
   }
 
   setInitUnit(market,coin){
@@ -26,22 +29,21 @@ export default class OrderListController extends ExchangeControllerBase {
 
   async getRecentOrder(isPersonal, id){
     let recentTradeListArr = await this.store.getRecentOrder(isPersonal, id);
-    this.view.setState({
-      recentTradeListArr
-    })
+    this.changeRenderRecent(recentTradeListArr)
+    // this.view.setState({
+    //   recentTradeListArr
+    // })
   }
 
   changeRecentItem(v) {
+      // recentTableHead: v.isPersonal && this.view.state.recentTableMineHead || this.view.state.recentTableMarketHead //改变排序的头部
     this.view.setState({
       recentTradeListArr: [],
-      recentTableHead: v.isPersonal && this.view.state.recentTableMineHead || this.view.state.recentTableMarketHead
-    })
-    this.getRecentOrder(v.isPersonal, this.store.state.tradePairId);
-    this.view.setState({
       recentItemSelect: v.type,
       isPersonal: v.isPersonal
     });
     this.store.state.recentItemSelect = v.type;
+    this.getRecentOrder(v.isPersonal, this.store.state.tradePairId);
   };
 
   setTradePairId(id, tradePairName){
@@ -79,26 +81,28 @@ export default class OrderListController extends ExchangeControllerBase {
     data.orders.map((v, index) => {
       recentTradeListArr.unshift(v)
     })
-    this.view.setState(
-        {
-          recentTradeListArr
-        }
-    )
+    this.changeRenderRecent(recentTradeListArr)
+    // this.view.setState(
+    //     {
+    //       recentTradeListArr
+    //     }
+    // )
   }
   //ws更新用户成交列表
   updateRecentOrderUser(data){
     if(this.view.state.recentItemSelect === 'mineLess' || data.orderStatus === 0){
       return
     }
-    let recentTradeListArr = this.view.state.recentTradeListArr;
+    let recentTradeListArr = this.store.state.recentTradeListArr;
     let findIndex = recentTradeListArr.findIndex(v => Number(v.orderId) === Number(data.orderId));
     if(data.orderStatus === 2 && findIndex === -1){
       recentTradeListArr.unshift(data);
-      this.view.setState(
-          {
-            recentTradeListArr
-          }
-      )
+      this.changeRenderRecent(recentTradeListArr)
+      // this.view.setState(
+      //     {
+      //       recentTradeListArr
+      //     }
+      // )
     }
     
   }
@@ -137,7 +141,41 @@ export default class OrderListController extends ExchangeControllerBase {
   }
   
   //改变数据渲染的数组(计价方式切换,数据来源切换)
-  changeRenderRecent(){
-  
+  changeRenderRecent(initData){
+    let unitsType = this.store.state.unitsType;
+    let recentItemSelect = this.store.state.recentItemSelect;
+    let renderData = initData;
+    let recentBank = this.store.state.bank;
+    this.store.state.recentTradeListArr = initData;
+    if(recentItemSelect === 'mineLess' && (unitsType === 'CNY' || unitsType === 'USD')) {
+      renderData = renderData && renderData.map(v => {
+          v.priceR = Number(v.price * recentBank[unitsType.toLowerCase()]).format({number:'legal',style:{name:unitsType.toLowerCase()}});
+          v.volume = Number(v.volume).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false)
+          return Object.assign(v)
+        })
+    }
+    if(recentItemSelect !== 'mineLess' && (unitsType === 'CNY' || unitsType === 'USD')){
+      let items = {
+        CNY: 'priceCN',
+        USD: 'priceEN'
+      };
+      renderData =renderData && renderData.map(v => {
+        v.volume = Number(v.volume).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false)
+        v.priceR = Number(v[items[unitsType]]).format({number:'legal',style:{name:unitsType.toLowerCase()}})
+        return Object.assign(v)
+      })
+    }
+    if(unitsType !== 'CNY' && unitsType !== 'USD'){
+      renderData = renderData && renderData.map(v => {
+        v.volume = Number(v.volume).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false)
+        v.priceR = Number(v.price).format({number:'digital', style:{decimalLength :this.accuracy.priceAccuracy}})
+        return Object.assign(v)
+      })
+    }
+    this.view.setState(
+        {
+          recentTradeListArr: renderData
+        }
+    )
   }
 }
