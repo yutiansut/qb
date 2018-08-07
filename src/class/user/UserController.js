@@ -57,6 +57,7 @@ export default class UserController extends ExchangeControllerBase {
     let userAuth = await this.store.userAuth();
     // console.log('获取用户认证信息', userAuth)
     this.view.setState({userAuth})
+    return userAuth;
   }
 
   async getCurrentLogin() { // 获取当前登录设备

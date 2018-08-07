@@ -31,7 +31,7 @@ export default class UserCenter extends ExchangeViewBase {
     return (
       <Switch>
         <Route exact path={`${match.url}`} component={() => (
-          <UserCenterIndex url={`${match.url}`} controller={controller} addContent={this.addContent}/>
+          <UserCenterIndex url={`${match.url}`} controller={controller} addContent={this.addContent} history={history}/>
         )}/>
         <Route exact path={`${match.url}/safe/twoverify`} component={() => (
           <SetTwoVerify match={match} location={location} url={`${match.url}`} controller={controller} history={history} addContent={this.addContent}/>

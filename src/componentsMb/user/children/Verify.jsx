@@ -7,8 +7,13 @@ import Popup from "../../../common/component/Popup"
 export default class Verify extends ExchangeViewBase {
   constructor(props) {
     super(props);
-    if (!this.props.location.query)
-      this.props.history.push("/user/safe/twoverify");
+    if (!this.props.location.query){
+      history.replaceState(
+        null,
+        "",
+        `${window.location.origin}/user`
+      );
+      this.props.history.push("/user/safe/twoverify");}
     const { controller } = this.props;
     controller.setView(this);
     this.state = {

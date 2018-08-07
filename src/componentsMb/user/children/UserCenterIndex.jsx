@@ -44,7 +44,10 @@ export default class UserCenterIndex extends ExchangeViewBase {
         <div className="user-center-main">
           <ul className="list-section clearfix">
             <li>
-              <NavLink className="list-item clearfix" to={`${url}/identity`}>
+              <a className="list-item clearfix" onClick={()=>{
+                if([1,2].includes(userAuth.state)) return;
+                this.props.history.push({pathname: `${url}/identity`})
+              }}>
                 <div className="fl">
                   <img src={this.$imagesMap.$h5_user_identity} />
                   <span>{this.intl.get("header-idVerify")}</span>
@@ -52,7 +55,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
                 <div className="fr">
                   <span>{this.verifyState[userAuth.state]}</span>
                 </div>
-              </NavLink>
+              </a>
             </li>
             <li>
               <NavLink className="list-item clearfix" to={`${url}/safe`}>

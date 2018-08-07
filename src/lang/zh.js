@@ -78,6 +78,7 @@ export default function zh(state) {
     ip: 'IP',
     place: '地点',
     upLoad: '上传',
+    reupload: '重新上传',
     volume: "成交量",
     avgPrice: '平均成交价',
     dealed: '已成交',
@@ -664,8 +665,13 @@ export default function zh(state) {
     "user-aboutUsTwitter": "Twitter",
     "user-aboutUsWeChat": "客服微信",
     "user-aboutUsTelegraph": "电报群",
-    "user-aboutUsEmail": "联系邮箱"
-
+    "user-aboutUsEmail": "联系邮箱",
+    "user-id-num": '证件号码',
+    "user-inputId-num": '填写该证件的号码',
+    "user-input-name": '填写该证件的名字',
+    "user-input-firstName": '填写该证件的姓氏',
+    "user-id-type": '请选择证件类型',
+    "user-id-wrong": '!证件格式错误'
   };
   const login = {
     "login-verify": "验证登录",

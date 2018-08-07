@@ -42,16 +42,64 @@
       margin-right .1rem
       vertical-align middle
   .name-identify
-    padding .47rem 0 .44rem
+    padding 0 0.12rem
+    background-color $h5-user-bg-con
     border-bottom 1px solid $user-line-main
-    span
-      display block
-      width 8rem
-      margin-bottom .44rem
-      fz11()
-      color $user-font-warn
+    .form
+      width 100%
+      height 0.43rem
+      color $h5-user-font-content
+      line-height 0.43rem
+      border-bottom 0.01rem solid $h5-user-line
+      &:last-child
+        border none
+      span
+        width 0.9rem
+      .item
+        position relative
+        float left
+        font-size 0.15rem
+        i
+          position absolute
+          right -0.8rem
+          bottom 0
+          height 0.43rem
+          line-height 0.43rem
+          color $h5-user-theme-active
+        &.user-type
+          width 2.6rem
+          position relative
+          &::after
+            position absolute
+            top 0
+            right 0
+            content ''
+            width 0.2rem
+            height 100%
+            background $h5-user-next no-repeat center center;
+            background-size 0.08rem auto;
+          &.none
+            color $h5-user-font-title
+            font-size 0.14rem
+        input
+          width 2.5rem
+          height 0.43rem
+          padding-left 0
+          border none
+          font-size 0.15rem
+          color $h5-user-font-content
+          letter-spacing 0
+          background-color transparent
+          placeholder($h5-user-font-title, 0.14rem)
+          &.id-num
+            width 1.8rem
+    // span
+    //   display block
+    //   width 8rem
+    //   margin-bottom .44rem
+    //   fz11()
+    //   color $user-font-warn
     ul
-      float left
       margin 0 .44rem .44rem 0
       color $user-font-normal
       li:first-child
@@ -75,29 +123,32 @@
       width 4.56rem
 
   .photo-identify
-    padding .44rem 0 .58rem
+    padding 0.08rem 0 .58rem
     .user-req4
       color $user-font-warn
     div
-      // width 8rem
-    .identify-btn
-      width 2.5rem
-      height .4rem
-      background $user-bg-btn
-      color $user-font-btn
-      border-radius (.02rem)
-      opacity .5
-      &.identify-btn-active
-        opacity 1
+      .user-indentity-submit
+        position fixed
+        bottom 0
+        left 0
+        width 100%
+        height 0.7rem
+        z-index 999
+        background-color $h5-user-bg
+        .identify-btn
+          display block
+          width 3.51rem
+          height .45rem
+          margin 0.12rem auto 0
+          font-size 0.18rem
+          color $h5-user-font-none
+          letter-spacing 0
+          text-align center
     input
       width .12rem
       height .12rem
       margin-right .08rem
       vertical-align top
-    h3
-      margin-bottom .24rem
-      fz11()
-      color $user-font-remind
       p
         display inline-block
         position relative
@@ -131,40 +182,49 @@
             vertical-align top
 
       &.user-photoVerify-upload
+        background-color $h5-user-bg-con
+        .user-verify-imgs
+          margin-bottom 0.1rem
         dd
           position relative
           width 3.51rem
-          height 2.2rem
+          padding 0.45rem 0 0 0
           text-align center
           cursor pointer
           margin 0 auto
+          border-bottom 0.01rem solid $h5-user-line;
+          &:last-child
+            border none
           img
             width 3.51rem
             height 2.2rem
             display block
             vertical-align middle
-          .add-img
-            position absolute
-            top 50%
-            left 50%
-            transform translateX(-50%) translateY(-50%)
-            width .44rem
-            height .44rem
-            z-index 2
           .up-img
             position absolute
-            top 0
+            top 0.45rem
             left 0
             z-index 1
           p
+            position absolute
+            left 0
+            top 0
+            width 100%
+            height 0.45rem
+            font-size 15px
+            color $h5-user-font-content
+            letter-spacing 0
+            line-height 0.45rem
             text-align left
+            span
+              float right
+              color $h5-user-font-main
           .loading-wrap
             position absolute
             width 3.51rem
             height 2.2rem
-            left 50%
-            top 50%
-            transform translateX(-50%) translateY(-50%)
+            left 0
+            top 0.45rem
             z-index 99
             background rgba(0, 0, 0, .5)
             img

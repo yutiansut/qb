@@ -73,7 +73,7 @@ export default class setTwoVerify extends ExchangeViewBase {
   componentWillMount() {}
 
   async componentDidMount() {
-    this.props.addContent({ con: this.intl.get('twoStep') });
+    this.props.addContent({ con: this.intl.get('twoStep'), linkUrl: '/user/safe/'});
     await this.initData();
   }
 

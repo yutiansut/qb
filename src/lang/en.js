@@ -79,6 +79,7 @@ export default function en(state) {
     ip: "IP adress",
     place: "Place",
     upLoad: "Upload",
+    reupload: 'ReUpload',
     avgPrice: "Average deal price",
     pair: "Exchange Pair",
     dealed: "Deal done",
@@ -703,7 +704,13 @@ export default function en(state) {
     "user-aboutUsTwitter": "Twitter",
     "user-aboutUsWeChat": "WeChat",
     "user-aboutUsTelegraph": "Telegraph",
-    "user-aboutUsEmail": "E-mail"
+    "user-aboutUsEmail": "E-mail",
+    "user-id-num": 'ID No.',
+    "user-inputId-num": 'ID No.',
+    "user-input-name": 'ID Name',
+    "user-input-firstName": 'First Name',
+    "user-id-type": 'Please ID Type',
+    "user-id-wrong": '!ID is wrong'
   };
 
   const activity = {
