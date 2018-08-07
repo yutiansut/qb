@@ -317,6 +317,7 @@ export default function zh(state) {
     "asset-wait-auditing": '操作成功，日提现量超额，请耐心等待审核',
     "asset-name-existing": '此名称已存在',
     "asset-funds-transfer": '资金划转',
+    "asset-address-notSaved": '地址尚未保存'
   };
   const market = {
     "market-favorite": "收藏",

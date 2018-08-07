@@ -77,6 +77,10 @@ export default class Popup extends exchangeViewBase {
             <h3>
               {this.intl.get('asset-addAddress')}<span
                 onClick={() => {
+                  if(this.state.newAddress.length){
+                    this.props.addTip()
+                    return;
+                  }
                   this.state.newAddress.push({ addressName: "", address: "" });
                   this.setState({
                     showInput: true,

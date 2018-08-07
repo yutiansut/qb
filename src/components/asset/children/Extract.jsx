@@ -99,6 +99,13 @@ export default class Extract extends exchangeViewBase {
     this.hideSelect = () => {
       this.setState({ showSelect: false });
     };
+    this.notSaved = () =>{
+      this.setState({
+        tip: true,
+        tipSuccess: false,
+        tipContent: this.intl.get('asset-address-notSaved')
+      });
+    }
   }
 
   async componentDidMount() {
@@ -574,6 +581,7 @@ export default class Extract extends exchangeViewBase {
           <Popup
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
+            addTip={this.notSaved}
             onSave={async add => {
               let result = await this.appendAddress(
                 Object.assign({ coinName: this.state.currency }, add),

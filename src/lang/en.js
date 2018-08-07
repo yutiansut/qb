@@ -327,7 +327,8 @@ export default function en(state) {
       "Insufficient 24H withdrawal limit, please finish the real-name verification",
     "asset-wait-auditing":
       "Daily withdraw limit exceeded, please wait for auditing",
-    "asset-name-existing": "The name is existing"
+    "asset-name-existing": "The name is existing",
+    "asset-address-notSaved": 'Address not saved'
   };
   const market = {
     "market-favorite": "Favorites",
