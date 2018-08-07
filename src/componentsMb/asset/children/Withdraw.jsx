@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
+import Input from "../../../common/component/Input";
 
 export default class Withdraw extends exchangeViewBase {
     constructor(props) {
@@ -9,14 +10,18 @@ export default class Withdraw extends exchangeViewBase {
         this.state = {
             currency: "",
             currencyAmount: {},
-            address: "",
+            address: {},
             walletExtract: {},
 
             inputNum: 0,            //提现数量
-            inputPass: 0,      //资金密码
-            inputCode: 0,      //短信验证码
+            inputPass: "",           //资金密码
+            inputPhoneCode: "",
+            inputEmailCode: "",
+            inputGoogleCode: "",
 
             userTwoVerify: {withdrawVerify: -1, fundPwd: -1},   //fundPwd: 0-未设置密码，1-已设置  withdrawVerify: 0 无 1 邮件 2 谷歌验证 3 短信
+            verifyNum: 0,       //验证码倒计时
+
             showLayer: false,   //超过可用额度弹框
         };
         //绑定view
@@ -28,10 +33,10 @@ export default class Withdraw extends exchangeViewBase {
         this.getExtract = controller.getExtract.bind(controller);
         // 获取矿工费
         this.getMinerFee = controller.getMinerFee.bind(controller);
-        // 请求验证码
-        this.requestCode = controller.requestCode.bind(controller);
         // 获取资金密码设置状态和两步验证方式
         this.getUserInfo = controller.getUserInfo.bind(controller);
+        // 发送验证码
+        this.getVerify = controller.userController.getVerify.bind(controller.userController);
 
         this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
     }
@@ -56,7 +61,9 @@ export default class Withdraw extends exchangeViewBase {
             showLayer,
             inputNum,
             inputPass,
-            inputCode } = this.state;
+            inputPhoneCode,
+            inputEmailCode,
+            inputGoogleCode } = this.state;
 
         //可用，总额度，已用额度
         //let currencyAmount = {availableCount:9987.755108, availableQuota:10, frozenCount:0.01144746, totalCount:9987.76655546, totalQuota:10, usedQuota:0}
@@ -71,8 +78,8 @@ export default class Withdraw extends exchangeViewBase {
 
         //实际到账
         let num = Number(inputNum);
-        let toNum = num.minus(minerFee);
-        toNum = toNum>0 && num>minCount && num<availableCount ? toNum : 0;
+        let toNum = num.minus(minerFee).toString();
+        toNum = toNum>0 && num>=minCount && num<=availableCount ? toNum : 0;
 
         //两步验证状态
         let {withdrawVerify,fundPwd} = this.state.userTwoVerify || {};
@@ -109,18 +116,23 @@ export default class Withdraw extends exchangeViewBase {
                         <div className="num">
                             <label>{this.intl.get("asset-withdrawAmount")}</label>
                             <p className="p1">
-                                <input type="text" value={inputNum} onInput={e=>{
-                                    console.log(e.target.value);
-                                    this.setState({inputNum:e.target.value})
-                                }}/>
+                                <input type="text"
+                                       value={inputNum}
+                                       onInput={e => {
+                                           let value = e.target.value;
+                                           value = value.replace(/[^\d.]/g, "");
+                                           if (!/^[0-9]+\.?[0-9]{0,8}$/.test(value) && value !== "") return;
+                                           this.setState({inputNum: value});
+                                        }}/>
                                 <i>{currency}</i>
-                                <a>{this.intl.get("all")}</a>
+                                <a onClick={()=>this.setState({inputNum: availableCount})}>{this.intl.get("all")}</a>
                             </p>
                             <p className="p2">
                                 <span>{this.intl.get("asset-gasFee")}：{minerFee}BTC</span>
                                 <span className="s2">{this.intl.get("asset-withdrawActual")} {toNum}</span>
                             </p>
                         </div>
+
                         {/*未设置资金密码*/}
                         {fundPwd === 1 &&
                             <div className="pass">
@@ -129,36 +141,53 @@ export default class Withdraw extends exchangeViewBase {
                                     <img src="/static/mobile/asset/icon_next@2x.png"/>
                                 </NavLink>
                             </div>}
+
                         {/*已设置资金密码*/}
                         {fundPwd === 0 &&
                             <div className="pass">
                                 {/*资金密码*/}
                                 <p>
                                     <label>{this.intl.get("fundPass")}</label>
-                                    <input type="password" placeholder={this.intl.get("deal-inputpwd")}/>
+                                    <input type="password" placeholder={this.intl.get("deal-inputpwd")}
+                                           value={inputPass}
+                                           onInput={e =>
+                                               this.setState({inputPass: e.target.value})
+                                           }/>
                                 </p>
-
                                 {/*短信验证码*/}
                                 {withdrawVerify === 3 &&
                                     <p>
                                         <label>{this.intl.get("user-verifyPhone")}</label>
-                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}/>
-                                        <a>{this.intl.get("login-sendCode")}</a>
+                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}
+                                               value={inputPhoneCode}
+                                               onInput={e =>
+                                                   this.setState({inputPhoneCode:e.target.value})
+                                               }/>
+                                        <a onClick={()=>this.getVerify()}>{this.intl.get("login-sendCode")}</a>
                                     </p>}
                                 {/*邮箱验证码*/}
                                 {withdrawVerify === 1 &&
                                     <p>
                                         <label>{this.intl.get("user-verifyEmail")}</label>
-                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}/>
+                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}
+                                               value={inputEmailCode}
+                                               onInput={e =>
+                                                   this.setState({inputEmailCode:e.target.value})
+                                               }/>
                                         <a>{this.intl.get("login-sendCode")}</a>
                                     </p>}
                                 {/*谷歌验证码*/}
                                 {withdrawVerify === 2 &&
                                     <p>
                                         <label>{this.intl.get("user-popGoole")}</label>
-                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}/>
+                                        <input type="text" placeholder={this.intl.get("user-inputVerify")}
+                                               value={inputGoogleCode}
+                                               onInput={e =>
+                                                   this.setState({inputGoogleCode:e.target.value})
+                                               }/>
                                     </p>}
                             </div>}
+
                         {/*提币须知*/}
                         <div className="txt">
                             <h3>{this.intl.get("h5-asset-withdraw-tip")}</h3>
