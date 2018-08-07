@@ -116,7 +116,6 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 获取矿工费
   async getMinerFee(coin, address) {
-    console.log('getMinerFee............', coin, address)
     await this.store.getMinerFee(coin, address.address);
     this.view.setState({
       walletExtract: this.Util.deepCopy(this.store.state.walletExtract)
@@ -348,8 +347,8 @@ export default class AssetController extends ExchangeControllerBase {
       return false;
     }
     this.view.setState({ walletExtract: this.Util.deepCopy(result) });
-    if (this.view.state.address === obj.address)
-      this.view.setState({ address: "" });
+    if (this.view.state.address.address === obj.address)
+      this.view.setState({ address: {address: ''} });
   }
 
   // 处理出币种对应的交易对数组
@@ -422,7 +421,7 @@ export default class AssetController extends ExchangeControllerBase {
       orderTipContent: ""
     };
     // 校验地址不为空
-    if (this.view.state.address === "") {
+    if (this.view.state.address.address === "") {
       obj.orderTipContent = this.view.intl.get("asset-input-address");
       this.view.setState(obj);
       return;
