@@ -183,9 +183,10 @@ export default class MarketStore extends ExchangeStoreBase {
         // console.log('计算涨跌', res.price, v.price)
         res.updown = (res.price - v.price) || v.updown
       }
+      res.points = (res.points && res.points.length) && res.points || v.points
       return Object.assign(v, res)
     }))
-    // console.log('updateAllPairListFromData 1', this.state.allPairData)
+    console.log('updateAllPairListFromData 1', this.state.allPairData)
   }
 
   //数据变动更新推荐币种

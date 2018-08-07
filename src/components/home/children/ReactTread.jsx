@@ -13,17 +13,21 @@ class ReactTrend extends React.Component {
             strokeWidth: 1,                 // 线宽
         };
         // console.log(this.props)
-        Object.assign(this.state,this.props);
+        Object.assign(this.state, this.props);
     }
+  
+  componentWillUpdate(...parmas) {
+    console.log(333, ...parmas)
+  }
 
     render() {
 
-        let trends=this.state.trends;
+        let trends=this.props.trends;
         if(trends.length<2) return (
             <span/>
         );
 
-        let ratio = this.state.ratio;
+        let ratio = this.props.ratio;
         let viewHeight=100 / ratio;
         let viewBox = "0 0 100 " + viewHeight;
 

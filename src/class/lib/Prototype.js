@@ -94,7 +94,7 @@ Number.prototype.toFixedWithoutUp = function (length) {
 
 //添加前缀后缀函数，分隔符，补零函数
 Number.prototype.formatFixStyle = function (para) {
-  // console.log('formatFixStyle',Math.abs(this) , Math.abs(this) === 0)
+  console.log('formatFixStyle',Math.abs(this).toFixed(8))
   // console.log('formatFixStyle', para.name)
   // if(Math.abs(this) === 0)
   //   return ''+this
@@ -108,11 +108,12 @@ Number.prototype.formatFixStyle = function (para) {
     decimalLength = para.decimalLength || -1,
     decimalSign = para.decimalSign || '.',
     thousandSign = typeof para.thousandSign !== 'boolean' && (para.thousandSign || ',') || '',
-    numberArr = (number < 0.000001 && number !== 0) ? (number < 0.0000001 && number.toFixed(8).split('.') || number.toFixed(7).split('.')) : number.toString().split('.'),
-    numberSuffix = "", decimal = numberArr[1] || '',
+    numberArr = (number < 0.000001 && number !== 0) ? (number.toFixed(8).split('.')) : number.toString().split('.'),
+    numberSuffix = "", decimal = (number < 0.000001 && number !== 0) ? (numberArr[1].replace(/0$/,'')) : (numberArr[1] || ''),
     i = numberArr[0],
     j = i.length > 3 ? i.length % 3 : 0;
   decimal.length < decimalLength && new Array(decimalLength - decimal.length).fill(0).forEach(v => decimal+=v)
+  // decimal.length > decimalLength && decimal && decimal
   numberSuffixArr.forEach(v => number>=v.value && (numberSuffix = v.suffix));
   suffix += numberSuffix;
   return prefix + negative + (j ? i.substr(0, j) + thousandSign : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousandSign) + (decimal.length > 0 ? decimalSign + decimal : '') + suffix;

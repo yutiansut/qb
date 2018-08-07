@@ -56,7 +56,7 @@ export default class MarketController extends ExchangeControllerBase {
       this.querySelectPair(this.view.state.query,priceLimitValue,volumeLimitValue)
       return
     }
-    console.log('homeMarketPairData',homeMarketPairData)
+    // console.log('homeMarketPairData',homeMarketPairData)
     this.tradePairChange(homeMarketPairData[0]);
     // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
   }
@@ -77,6 +77,10 @@ export default class MarketController extends ExchangeControllerBase {
       market: '',
       homeMarketPairData
     });
+    if(!homeMarketPairData.length){
+      return
+    }
+    
     this.tradePairChange(homeMarketPairData[0]);
   }
 
@@ -258,7 +262,7 @@ export default class MarketController extends ExchangeControllerBase {
     if(!this.store.state.tradePair)
       return
     //改变deal模块中的信息
-    let tradePairMsg = this.store.state.homeMarketPairData.filter(v => v.tradePairName === this.store.state.tradePair);
+    let tradePairMsg = this.store.state.allPairData.filter(v => v.tradePairName === this.store.state.tradePair);
     let dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].coinIcon,
