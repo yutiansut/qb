@@ -117,7 +117,7 @@ export default class SetPassPopup extends exchangeViewBase {
 
   // 检验部分
   checkInput1() {
-    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, // 邮箱
+    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, // 邮箱
         reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
     if (this.props.isType === 4) { // 验证密码
       if(!reg2.test(this.state.popupInput1)) {
@@ -129,9 +129,9 @@ export default class SetPassPopup extends exchangeViewBase {
   }
 
   checkInput2() { // 离开
-    let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, // 邮箱
+    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, // 邮箱
         reg2 = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/, // 密码
-        reg3 = /^1[3578]\d{9}$/ // 手机
+        reg3 = /^1[3456789]\d{9}$/ // 手机
     if (this.props.isType === 1) { // 验证邮箱
       if(!reg1.test(this.state.popupInput2)) {
         this.setState({
@@ -181,7 +181,7 @@ export default class SetPassPopup extends exchangeViewBase {
 
   render() {
     // console.log(222, this.props.isType, this.props.fundPassType)
-    let regEmail = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/, regPhone = /^1[3578]\d{9}$/ // 邮箱/手机
+    let regEmail = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, regPhone = /^1[3456789]\d{9}$/ // 邮箱/手机
     return (
       <div className="pass-wrap">
         <div className="pass-info">
