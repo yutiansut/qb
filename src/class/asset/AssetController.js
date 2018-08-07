@@ -44,8 +44,8 @@ export default class AssetController extends ExchangeControllerBase {
   dealCoin(o, type){
     let j = {}
     for (let k in o) {
-      if (this.view.state.walletHandle[k][type] === 1) {
-        j[k] = this.view.state.walletList[k];
+      if (this.store.state. walletHandle[k][type] === 1) {
+        j[k] = o[k];
       }
     }
     return Object.keys(j)
@@ -105,10 +105,14 @@ export default class AssetController extends ExchangeControllerBase {
   async getWalletList() {
     this.store.state.walletList["BTC"] === undefined &&
       (await this.store.getWalletList());
-    await this.view.setState({
+    this.view.setState({
       walletList: this.store.state.walletList,
       walletHandle: this.store.state.walletHandle
     });
+    return {
+      walletList: this.store.state.walletList,
+      walletHandle: this.store.state.walletHandle
+    }
   }
   // 获取矿工费
   async getMinerFee(coin, address) {

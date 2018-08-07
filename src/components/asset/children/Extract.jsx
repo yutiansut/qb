@@ -103,8 +103,9 @@ export default class Extract extends exchangeViewBase {
 
   async componentDidMount() {
     window.addEventListener("click", this.hideSelect);
-    await this.getWalletList();
-    let arr = this.deal(this.state.walletList, 'c');
+    let {walletList} = await this.getWalletList();
+    let arr = this.deal(walletList, 'w');
+
     let query = this.props.controller.getQuery("currency").toUpperCase();
     let currency = query && (arr.includes(query) && query || 'BTC') || (this.props.location.query && this.props.location.query.currency.toUpperCase()) || "BTC";
     currency && this.setState({ currency: currency, value: currency });
@@ -112,6 +113,7 @@ export default class Extract extends exchangeViewBase {
       "currency",
       currency.toLowerCase()
     );
+
     let address = await this.getExtract(currency && currency);
     !address.address && this.getMinerFee(currency || this.state.currency, address);
     this.getTradePair(currency || this.state.currency);
@@ -121,7 +123,7 @@ export default class Extract extends exchangeViewBase {
     this.getHistory({
       page: 0,
       pageSize: 10,
-      coinId: this.state.walletList[coin.toUpperCase()],
+      coinId: walletList[coin.toUpperCase()],
       coinName: coin.toUpperCase(),
       orderType: 2,
       orderStatus: -1,
@@ -166,7 +168,7 @@ export default class Extract extends exchangeViewBase {
     }
 
     // 切换币种时的操作
-    if (nextState.currency !== this.state.currency) {
+    // if (nextState.currency !== this.state.currency) {
       // this.props.controller.changeUrl(
       //   "currency",
       //   nextState.currency.toLowerCase()
@@ -201,7 +203,7 @@ export default class Extract extends exchangeViewBase {
       //   startTime: -1,
       //   endTime: -1
       // });
-    }
+    // }
     // if (nextState.address !== this.state.address) this.getMinerFee(nextState.currency, this.state.address);
   }
 
@@ -298,7 +300,7 @@ export default class Extract extends exchangeViewBase {
                                     addressName: v.addressName
                                   }
                                 });
-                                this.getMinerFee(this.state.currency, v);
+                                {/* this.getMinerFee(this.state.currency, v); */}
                               }}
                             >
                               <span>{v.addressName}</span>
