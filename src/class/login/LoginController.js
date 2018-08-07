@@ -1,6 +1,7 @@
 import ExchangeControllerBase from '../ExchangeControllerBase'
 import LoginStore from './LoginStore'
 import Sleep from "../../core/libs/Sleep";
+import {Regular} from "../../core";
 
 export default class LoginController extends ExchangeControllerBase {
   constructor(props) {
@@ -19,8 +20,11 @@ export default class LoginController extends ExchangeControllerBase {
   }
 
   getVerify(account, mode, type) { // 获取验证码
-    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, reg2 = /^1[3456789]\d{9}$/;
-    if(!reg1.test(this.view.state.userInput) && !reg2.test(this.view.state.userInput)) return
+    // console.log('正则', Regular)
+    let reg1 = Regular('regEmail', this.view.state.userInput),
+        reg2 = Regular('regPhone', this.view.state.userInput);
+    // let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, reg2 = /^1[3456789]\d{9}$/;
+    if(!reg1 && !reg2) return
     if (this.view.state.verifyNum !== this.view.intl.get("sendCode") && this.view.state.verifyNum !== 0) return
     this.view.setState({verifyNum: 60})
     this.countDown('verifyCountDown', 'verifyNum', this.view)

@@ -20,11 +20,8 @@ export default class userSafeCenter extends exchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
-      // showGoogle: 'none',
-      // showSet: 'none',
       showGoogle: false,
       showSet: false,
-      // showVerify: 'none',
       showChange: false,
       otherShow: false, // 打开其他安全设置
       noticeIndex: 0, // 选择通知设置
@@ -53,7 +50,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showIp: false,
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
-      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定
+      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定 2 修改通知设置
     }
 
     const {controller} = props
@@ -118,7 +115,6 @@ export default class userSafeCenter extends exchangeViewBase {
     let changeTypeArr = [this.state.userInfo.loginVerify, this.state.userInfo.withdrawVerify, this.state.userInfo.fundPassVerify]
     this.setState({
       type: type,
-      bindOrigin: 1,
       changeType: changeTypeArr[i],
       isTwoVerify: i,
       sureTwoVerify: index,
@@ -163,7 +159,6 @@ export default class userSafeCenter extends exchangeViewBase {
       ipValue: value
     })
     this.state.errIp && (this.setState({errIp: ""}))
-
     // console.log(this.state.ipValue)
   }
 
@@ -228,7 +223,6 @@ export default class userSafeCenter extends exchangeViewBase {
     noticeList[0].name = this.state.userInfo.email ? this.intl.get("user-noticeEmail") : this.intl.get("user-bindEmail") // 通知设置未绑定邮箱时
     noticeList[1].name = this.state.userInfo.phone ? this.intl.get("user-noticePhone") : this.intl.get("user-bindPhone") // 通知设置未绑定手机号时
     this.setState({verifyList, noticeList, noticeIndex: this.state.userInfo.notifyMethod === 0 ? 1 : 0})
-
   }
 
   render() {
@@ -404,7 +398,6 @@ export default class userSafeCenter extends exchangeViewBase {
             </tbody>
           </table>
         </div>
-        {/*changeGooglePopup = {state => this.changeGooglePopup(state)}*/}
         {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret}
                      setGoogleVerify = {this.setGoogleVerify}
                      onClose={() => {this.setState({ showGoogle: false });}}/>}

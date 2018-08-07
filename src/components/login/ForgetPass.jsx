@@ -4,6 +4,7 @@ import exchangeViewBase from "../ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
+import {Regular} from '../../core'
 
 export default class ForgetPass extends exchangeViewBase {
   constructor(props) {
@@ -42,8 +43,8 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeUserInput(value) {
     this.setState({userInput: value});
-    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
-    if (reg.test(value)){
+    let reg = Regular('regEmail', value)
+    if (reg){
       this.setState({userType: 1})
     } else {
       this.setState({userType: 0})
@@ -70,11 +71,10 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkUserInput() { // 手机号／邮箱
-    // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
-    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
-      reg2 = /^1[3456789]\d{9}$/;
+    let reg1 = Regular('regEmail', this.state.userInput),
+        reg2 = Regular('regPhone', this.state.userInput);
 
-    if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
+    if (!reg1 && !reg2) {
       this.setState({
         userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
       })
@@ -82,8 +82,8 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkPassInput() {
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    if(!reg.test(this.state.passInput)) {
+    let reg = Regular('regPwd', this.state.passInput) // 密码
+    if(!reg) {
       this.setState({
         errPass: this.intl.get("user-checkNewPwd")
       })
