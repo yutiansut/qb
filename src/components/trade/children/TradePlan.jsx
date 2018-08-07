@@ -111,6 +111,7 @@ export default class TradePlan extends ExchangeViewBase {
     let limitNum = value.split('.');
     if(limitNum.length > 2)
       return
+    
     limitNum[1] = limitNum[1] || '';
     // console.log('limitNum[1]1',limitNum[1])
     if(maxNum < this.state.coinMin){
@@ -138,7 +139,7 @@ export default class TradePlan extends ExchangeViewBase {
     if(!flag)
       return
   
-    console.log('his.state.buyNumFlag', flag)
+    // console.log('his.state.buyNumFlag', flag)
     // let limitPrice = 0;
     // priceValue >= 100 && (limitPrice = 6);
     // priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
