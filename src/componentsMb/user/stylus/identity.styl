@@ -14,7 +14,7 @@
     -webkit-transform rotate(360deg)
     -o-transform rotate(360deg)
 
-.identify-wrap
+.identify-wrap-h5
   .hide
     display none
   .auth-res
@@ -79,7 +79,7 @@
     .user-req4
       color $user-font-warn
     div
-      width 8rem
+      // width 8rem
     .identify-btn
       width 2.5rem
       height .4rem
@@ -118,10 +118,6 @@
       margin-bottom .44rem
       dt
         margin-bottom .32rem
-      &.user-photoVerify-req
-        dd
-          margin-bottom .18rem
-
       &.user-photoVerify-type
         dd
           float left
@@ -136,17 +132,16 @@
 
       &.user-photoVerify-upload
         dd
-          float left
           position relative
-          width 1.9rem
-          height 1.3rem
+          width 3.51rem
+          height 2.2rem
           text-align center
           cursor pointer
-          &:nth-of-type(2)
-            margin 0 .2rem 0 .2rem
+          margin 0 auto
           img
-            width 1.9rem
-            height 1.3rem
+            width 3.51rem
+            height 2.2rem
+            display block
             vertical-align middle
           .add-img
             position absolute
@@ -162,15 +157,11 @@
             left 0
             z-index 1
           p
-            position absolute
-            top 1.4rem
-            left 0
-            width 100%
-            text-align center
+            text-align left
           .loading-wrap
             position absolute
-            width 1.9rem
-            height 1.3rem
+            width 3.51rem
+            height 2.2rem
             left 50%
             top 50%
             transform translateX(-50%) translateY(-50%)
