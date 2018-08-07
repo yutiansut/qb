@@ -2,37 +2,17 @@
 .asset-mb
   .hist
     font-family PingFangSC-Medium
-  .nav
-    height .45rem
-    line-height .45rem
-    background $h5-asset-bg
-    border-bottom .01rem solid $h5-asset-border
-    position relative
-    color $h5-asset-font-weight
-    h3
-      text-align center
-      font-size .18rem
-      position absolute
-      width 100%
-      pointer-events none
-    a
-      font-size .14rem
-      color $h5-asset-font-weight
-      &.left
-        float left
-        margin-left .12rem
-      &.right
-        float right
-        margin-right .12rem
   .tab-ul
     display flex
     background $h5-asset-bg
+    padding 0 .5rem
+    justify-content space-between
     li
-      width 100%
-      line-height .38rem
+      padding 0 .12rem
+      width .88rem
+      line-height .43rem
       text-align center
       font-size .16rem
-      margin 0 .4rem
       border-bottom .02rem solid transparent
       overflow hidden
       text-overflow ellipsis
@@ -44,14 +24,14 @@
   .hist-li
     background $h5-asset-bg
     margin .12rem
-    padding .12rem
+    padding 0 .12rem
     border-radius .02rem
+    box-shadow 0 .01rem .03rem 0 rgba(0,0,0,.5)
     .d1
-      line-height .2rem
-      padding-bottom .07rem
+      line-height .36rem
       border-bottom .01rem solid $h5-asset-border
       label
-        font-size .14rem
+        font-size .15rem
         color $h5-asset-font-weight
         img
           height .2rem
@@ -67,6 +47,7 @@
     .d2
       margin-top .1rem
       display flex
+      padding .12rem 0
       p
         display inline-block
         vertical-align top
@@ -74,26 +55,16 @@
         span
           display block
           color $h5-asset-font-light
-          line-height .2rem
+          line-height .17rem
           margin-bottom .08rem
           font-size .12rem
         i
           color $h5-asset-font-normal
-          font-size .14rem
-          line-height .2rem
+          font-size .15rem
+          line-height .21rem
       p:last-of-type
         text-align right
         flex-grow 0
-  .kong
-    margin-top .2rem
-    height 4rem
-    text-align center
-    font-size .14rem
-    color $h5-asset-font-light
-    letter-spacing 0
-    background $icon-nothing no-repeat center 1rem
-    background-size auto 1rem
-    padding-top 2.2rem
 
   .pagination-wrap
     margin .2rem 0 .4rem 0

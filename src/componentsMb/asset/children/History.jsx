@@ -7,7 +7,9 @@ export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = this.props;
+
     controller.setView(this);
+
     // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
       orderType: {
@@ -26,24 +28,23 @@ export default class History extends exchangeViewBase {
     this.state = {
       page: 1,
       orderType: 1,    // 充1 2
+      assetHistory: {},
     };
 
-    let { wallList, assetHistory } = controller.initState;
-    this.state = Object.assign(this.state, {
-      wallList,
-      assetHistory
-    });
+    let {assetHistory} = controller.initState;
+    this.state = Object.assign(this.state, {assetHistory});
     //绑定方法
     this.getHistory = controller.getHistory.bind(controller);
   }
 
   async componentDidMount() {
+    //头部
+    this.addContent({con: this.intl.get("asset-records")});
+
     //路由参数
-    let type = this.props.location.query && this.props.location.query.type;
-    if(type===1 || type===2){
-        this.setState({orderType: type});
-    }
-    //
+    let type = this.props.controller.getQuery("type") || 1;
+    this.setState({orderType: type});
+
     await this.getHistory({
       page: 0,
       pageSize: 20,
@@ -72,13 +73,9 @@ export default class History extends exchangeViewBase {
 
   render() {
     let {total, orderList} = this.state.assetHistory;
-    let orderType=this.state.orderType;
+    let {orderType,page}=this.state;
     return (
       <div className="hist">
-          <div className="nav">
-              <NavLink to="/wallet" className="left">&lt; {this.intl.get("back")}</NavLink>
-              <h3>{this.intl.get("asset-records")}</h3>
-          </div>
           <ul className="tab-ul">
             <li className={orderType===1 ? "active" : ""}
                 onClick={()=>{
@@ -112,15 +109,21 @@ export default class History extends exchangeViewBase {
                           <span className={orderStatus===1 ? "success" : "fail"}>{this.staticData.status[orderStatus]}</span>
                       </div>
                       <div className="d2">
-                          <p><span>{this.intl.get("asset-withdrawalsAmount")}</span><i>{count}</i></p>
-                          <p><span>{this.intl.get("asset-confirm")}</span>
-                              {orderType===1 && <i>{doneCount}/{verifyCount}</i>}
-                              {orderType===2 && <i>-</i>}
+                          <p>
+                              <span>{this.intl.get("asset-withdrawalsAmount")}</span>
+                              <i>{count}</i>
                           </p>
-                          <p><span>{this.intl.get("time")}</span><i>{orderTime.toDate("yyyy-MM-dd")} {orderTime.toDate("hh:mm:ss")}</i></p>
+                          {orderType === 1 &&
+                              <p>
+                                  <span>{this.intl.get("asset-confirm")}</span>
+                                  <i>{doneCount}/{verifyCount}</i>
+                              </p>}
+                          <p>
+                              <span>{this.intl.get("time")}</span>
+                              <i>{orderTime.toDate("yyyy-MM-dd")} {orderTime.toDate("hh:mm:ss")}</i>
+                          </p>
                       </div>
                   </div>))}
-          {(!orderList || orderList.length<=0) && <div className="kong">{this.intl.get("noRecords")}</div>}
           <Pagination
               total={total}
               pageSize={20}

@@ -113,7 +113,7 @@ export default class Header extends ExchangeViewBase {
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-balance")}</NavLink>
                 <NavLink to="/wallet/charge"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-charge")}</NavLink>
-                <NavLink to="/wallet/widthdraw"
+                <NavLink to="/wallet/withdraw"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-withdraw")}</NavLink>
                 <NavLink to="/wallet/dashboard"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-records")}</NavLink>
