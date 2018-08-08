@@ -21,7 +21,8 @@ const devServerOptions = Object.assign({}, webpackConfig.devServer, {
     host: HOST || config.dev.host,
     port: PORT || config.dev.port, //如果省略，默认8080
     publicPath: config.dev.assetsPublicPath,
-    open: config.dev.autoOpenBrowser
+    open: config.dev.autoOpenBrowser,
+  
 });
 
 const server = new WebpackDevServer(compiler, devServerOptions);
@@ -29,7 +30,9 @@ const server = new WebpackDevServer(compiler, devServerOptions);
 const port = PORT || config.dev.port;
 const host = HOST || config.dev.host;
 
-server.listen(port, 'localhost', function (err) {
+// console.log()
+
+server.listen(port, host, function (err) {
    console.log(`Starting server on ${host}:${port}`);
     if (err) throw err
 })
