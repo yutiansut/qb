@@ -587,9 +587,10 @@ export default function en(state) {
     "user-currentPwd": "Current Password",
     "user-popBind": "Bind",
     "user-popPwdRule":
-      "*New passwords must have at least 6 letters, numbers or special characters, and cannot be only letters or only numbers",
+      "* New passwords must have at least 6 letters, numbers or special characters, and cannot be only letters or only numbers",
     "user-popFundRule":
-      "*Upon password change, withdrawals on your account will be blocked for 24 hours for security reasons.",
+      "* Upon password change, withdrawals on your account will be blocked for 24 hours for security reasons.",
+    "user-popPassSame": "* The login password cannot be the same as the fund password",
     "user-popGoole": "Google Verification Code",
     "user-popPicture": "CAPTCHA Code",
     "user-popPicturePlaceholder": "Please fill in the CAPTCHA code",

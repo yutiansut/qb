@@ -295,6 +295,11 @@ export default class SetPwd extends ExchangeViewBase {
                 <p>{this.intl.get("user-popPwdRule")}</p>
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
+              {[5, 6].includes(this.state.isType) && <li className="password-tip">
+                <p>{this.intl.get('user-popPwdRule')}</p>
+                <p>{this.intl.get('user-popPassSame')}</p>
+                <p>{this.intl.get('user-popFundRule')}</p>
+              </li>}
               <li className="submit-li">
                 {this.state.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 1, this.state.popupInput5, this.state.captchaId, this.state.popupInput4)}/>}
                 {this.state.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.popupInput2, 0, this.state.popupInput5, this.state.captchaId, this.state.popupInput4)}/>}
