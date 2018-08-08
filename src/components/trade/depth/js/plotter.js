@@ -101,7 +101,7 @@ export default class Plotter {
         };
         let verAxisWidth=Math.floor(this.maxStrYW);
         let horAxisHeight=12;
-        let scaleLength=5;
+        let scaleLength=3;
         let chartWidth=KDepth.instance.width-verAxisWidth-(padding.left+padding.right);
         let chartHeight=KDepth.instance.height-horAxisHeight-(padding.top+padding.bottom);
         let scaleXNum=Math.floor(chartWidth/(this.maxStrXW+40));
@@ -111,8 +111,11 @@ export default class Plotter {
 
         let strX0=Math.min(this.asks_min[0],this.bids_min[0]);
         let strX1=Math.max(this.asks_max[0],this.bids_max[0]);
+        strX0 -= (strX1-strX0)*0.01;
+        strX1 += (strX1-strX0)*0.01;
         let strY0=0;
         let strY1=Math.max(this.asks_max[2],this.bids_max[2]);
+        strY1 += strY1*0.01;
         let ratioStrX=(strX1-strX0)/chartWidth;
         let ratioStrY=(strY1-strY0)/chartHeight;
 
@@ -209,18 +212,45 @@ export default class Plotter {
             }
         }
 
-        //画深度图
-        // 买单
-        ctx.beginPath();
+        //画图数据
+        let drawBids = [];
+        drawBids.push([oX,oY-(bids[0][2]-strY0)/ratioStrY]);
+        for(let i=0;i<bids.length-1;i++){
+            drawBids.push([oX+(bids[i][0]-strX0)/ratioStrX, oY-(bids[i][2]-strY0)/ratioStrY]);
+            //drawBids.push([oX+(bids[i][0]-strX0)/ratioStrX, oY-(bids[i+1][2]-strY0)/ratioStrY]);
+        }
+        drawBids.push([oX+(bids[bids.length-1][0]-strX0)/ratioStrX, oY-(bids[bids.length-1][2]-strY0)/ratioStrY]);
+        drawBids.push([oX+(bids[bids.length-1][0]-strX0)/ratioStrX, oY]);
+
+        let drawAsks = [];
+        drawAsks.push([oX+(asks[0][0]-strX0)/ratioStrX, oY]);
+        for(let i=0;i<asks.length-1;i++){
+            drawAsks.push([oX+(asks[i][0]-strX0)/ratioStrX, oY-(asks[i][2]-strY0)/ratioStrY]);
+            //drawAsks.push([oX+(asks[i+1][0]-strX0)/ratioStrX, oY-(asks[i][2]-strY0)/ratioStrY]);
+        }
+        drawAsks.push([oX+(asks[asks.length-1][0]-strX0)/ratioStrX, oY-(asks[asks.length-1][2]-strY0)/ratioStrY]);
+        drawAsks.push([oX+(strX1-strX0)/ratioStrX, oY-(asks[asks.length-1][2]-strY0)/ratioStrY]);
+
+        //画深度图，二次贝塞尔曲线
+        //买单
         ctx.lineWidth=2;
         ctx.strokeStyle=Theme._color["depthLine1"];
         ctx.fillStyle=Theme._color["depthLine1Fill"];
-        ctx.moveTo(oX, oY-(bids[0][2]-strY0)/ratioStrY);
-        for(let i=0;i<bids.length-1;i++){
-            ctx.lineTo(oX+(bids[i][0]-strX0)/ratioStrX, oY-(bids[i][2]-strY0)/ratioStrY);
-            ctx.lineTo(oX+(bids[i][0]-strX0)/ratioStrX, oY-(bids[i+1][2]-strY0)/ratioStrY);
+        ctx.beginPath();
+        ctx.moveTo(drawBids[0][0],drawBids[0][1]);
+        for(let i=0;i<drawBids.length;i++){
+            let nowX = drawBids[i][0];
+            let nowY = drawBids[i][1];
+            let cx,cy;
+            if(i===drawBids.length-1){
+                cx = nowX;
+                cy = nowY;
+            }else{
+                cx = (drawBids[i][0]+drawBids[i+1][0])/2;
+                cy = (drawBids[i][1]+drawBids[i+1][1])/2;
+            }
+            ctx.quadraticCurveTo(nowX, nowY, cx, cy);
         }
-        ctx.lineTo(oX+(bids[bids.length-1][0]-strX0)/ratioStrX, oY);
         ctx.stroke();
         ctx.lineWidth=1;
         ctx.strokeStyle="transparent";
@@ -228,17 +258,26 @@ export default class Plotter {
         ctx.closePath();
         ctx.stroke();
         ctx.fill();
+
         // 卖单
-        ctx.beginPath();
         ctx.lineWidth=2;
         ctx.strokeStyle=Theme._color["depthLine2"];
         ctx.fillStyle=Theme._color["depthLine2Fill"];
-        ctx.moveTo(oX+(asks[0][0]-strX0)/ratioStrX, oY);
-        for(let i=0;i<asks.length-1;i++){
-            ctx.lineTo(oX+(asks[i][0]-strX0)/ratioStrX, oY-(asks[i][2]-strY0)/ratioStrY);
-            ctx.lineTo(oX+(asks[i+1][0]-strX0)/ratioStrX, oY-(asks[i][2]-strY0)/ratioStrY);
+        ctx.beginPath();
+        ctx.moveTo(drawAsks[0][0],drawAsks[0][1]);
+        for(let i=0;i<drawAsks.length;i++){
+            let nowX = drawAsks[i][0];
+            let nowY = drawAsks[i][1];
+            let cx,cy;
+            if(i===drawAsks.length-1){
+                cx = nowX;
+                cy = nowY;
+            }else{
+                cx = (drawAsks[i][0]+drawAsks[i+1][0])/2;
+                cy = (drawAsks[i][1]+drawAsks[i+1][1])/2;
+            }
+            ctx.quadraticCurveTo(nowX, nowY, cx, cy);
         }
-        ctx.lineTo(oX+(strX1-strX0)/ratioStrX, oY-(asks[asks.length-1][2]-strY0)/ratioStrY);
         ctx.stroke();
         ctx.lineWidth=1;
         ctx.strokeStyle="transparent";
@@ -321,6 +360,9 @@ export default class Plotter {
             let strY_Tip = this.formatFloat(strY,0);
             let strXW = oCtx.measureText(strX_Tip).width;
             let strYW = oCtx.measureText(strY_Tip).width;
+            oCtx.fillStyle=Theme._color["background"];
+            oCtx.fillRect(x-strXW/2-10,oY+scaleLength,strXW+20,22);  //padding:0 10px
+            oCtx.fillRect(oX-scaleLength-strYW-7,y-10,strYW,22);     //padding: 5px 0,font-size:12px
             oCtx.fillStyle = Theme._color["infoFontColor"];
             oCtx.font = Theme._fonts;
             oCtx.fillText(strX_Tip, x - strXW / 2, oY + scaleLength + 17);
@@ -369,7 +411,7 @@ export default class Plotter {
 
             oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
                 + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
-
+            
         });
 
         this._overlayCanvas.addEventListener("mouseout",event=>{
