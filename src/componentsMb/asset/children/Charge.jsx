@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
 import Popup from '../../../common/component/Popup'
+import DownLoadImg from  "../../../class/lib/DownloadCanvasImage";
 
 export default class Charge extends exchangeViewBase {
     constructor(props) {
@@ -68,7 +69,7 @@ export default class Charge extends exchangeViewBase {
                 {currency ?
                     <div className="info">
                         <QRCode value={coinAddress || "-"} level="M" size={160} className="qrcode"/>
-                        {/* <a className="save-qrcode">保存二维码</a>*/}
+                        <a className="save-qrcode" onClick={()=> DownLoadImg(document.querySelector(".info canvas"), "png", "img")}>{this.intl.get("asset-save-qrcode")}</a>
                         <input type="text" ref="addr" value={coinAddress || "-"} readOnly="readOnly"/>
                         <a className="copy-addr" onClick={()=> this.copy(this.refs.addr)}>{this.intl.get("asset-copy")}</a>
                         <p>{this.intl.get("asset-depositTip",{currency:currency})}</p>
