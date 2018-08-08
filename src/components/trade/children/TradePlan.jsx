@@ -293,22 +293,23 @@ export default class TradePlan extends ExchangeViewBase {
         }
     )
   }
-  dealTradeSure(orderType,e){
+  async dealTradeSure(orderType,e){
     e.preventDefault();
     e.stopPropagation();
     let sellPriceValue = this.state.inputSellFlag ? (this.state.inputSellValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
     let buyPriceValue = this.state.inputBuyFlag ? (this.state.inputBuyValue) : (this.state.priceBank[this.state.PriceUnit] || this.state.priceInit);
     let emptyCharge = orderType === 'buy' ? this.state.funpassBuy : this.state.funpassSell;
+    let funPwdInterval = await this.props.controller.getFundPwdInterval();
     let params = {
       "orderType": orderType === 'buy' ? 0 : 1,//0买 1 卖
       "priceType": this.state.DealEntrustType,//0限价  1市价
       "price": this.state.DealEntrustType ? 0 : Number(orderType === 'buy' ? buyPriceValue : sellPriceValue),//价格
       "count": Number(orderType === 'buy' ? this.state.inputBuyNum : this.state.inputSellNum),//数量
-      "interval": this.state.fundPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "interval": funPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       "priceUnit": this.state.PriceUnit === 'CNY' && 1 || (this.state.PriceUnit === 'USD' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       // "priceUnit": 0
     };
-    if(this.state.fundPwdInterval === -1){
+    if(funPwdInterval === -1){
       this.setState(
           {
             dealPopMsg: this.intl.get("pleaseSetFund"),

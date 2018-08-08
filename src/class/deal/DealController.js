@@ -175,8 +175,10 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   async dealTrade(orderType,e) {
+    // e.persist()
     e.preventDefault();
     e.stopPropagation();
+    
   
    
     // if(this.view.state.fundPwdInterval === -1){
@@ -189,9 +191,10 @@ export default class DealController extends ExchangeControllerBase {
     //   );
     //   return
     // }
+    let funPwdInterval = await this.getFundPwdInterval();
     let numLimit = this.view.state.numLimit;
     let priceLimit = this.view.state.priceLimit;
-    let sellPriceValue = (this.view.state.PriceUnit === 'CNY' || this.view.state.PriceUnit === 'USD')?(this.view.state.dealSurePriceD.toFixed(priceLimit)) :(this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit));
+    let sellPriceValue = (this.view.state.PriceUnit === 'CNY' || this.view.state.PriceUnit === 'USD') ? (this.view.state.dealSurePriceD.toFixed(priceLimit)) :(this.view.state.inputSellFlag ? (this.view.state.inputSellValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit));
     let buyPriceValue = (this.view.state.PriceUnit === 'CNY' || this.view.state.PriceUnit === 'USD')?(this.view.state.dealSurePriceD.toFixed(priceLimit)) :(this.view.state.inputBuyFlag ? (this.view.state.inputBuyValue) : (this.view.state.priceBank[this.view.state.PriceUnit] || this.view.state.priceInit));
     // let emptyCharge = orderType === 'buy' ? this.view.state.funpassBuy : this.view.state.funpassSell
     let params = {
@@ -202,8 +205,8 @@ export default class DealController extends ExchangeControllerBase {
       "count": Number(orderType === 'buy' ? this.view.state.inputBuyNum : this.view.state.inputSellNum),//数量
       "tradePairId": this.TradeMarketController.tradePair.tradePairId,
       "tradePairName": this.TradeMarketController.tradePair.tradePairName,
-      "funpass": orderType === 'buy' ? this.RSAencrypt(this.view.state.funpassBuy) : this.RSAencrypt(this.view.state.funpassSell),//资金密码
-      "interval": this.view.state.fundPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
+      "funpass": funPwdInterval ? '' :orderType === 'buy' ? this.RSAencrypt(this.view.state.funpassBuy) : this.RSAencrypt(this.view.state.funpassSell),//资金密码
+      "interval": funPwdInterval || 0,// 0:每次都需要密码 1:2小时内不需要 2:每次都不需要
       // "priceUnit": this.view.state.PriceUnit === 'CNY' && 1 || (this.view.state.PriceUnit === 'USD' && 2 || 0)//计价单位  0数字币  1人民币 2美元
       "priceUnit": 0
     };
@@ -292,7 +295,7 @@ export default class DealController extends ExchangeControllerBase {
       dbPreOrder:true,
       dealSurePop: false
     });
-    if(result === null){
+    if(result === null && funPwdInterval > 0){
       this.view.setState(
           {
             dealPopMsg: this.view.intl.get("orderSuccess"),
@@ -300,7 +303,20 @@ export default class DealController extends ExchangeControllerBase {
             dealPass:true,// 下单弹窗
             inputSellNum: 0, // 数量清空
             inputBuyNum: 0,
-            
+          }
+      );
+      return
+    }
+    if(result === null && funPwdInterval === 0){
+      this.view.setState(
+          {
+            dealPopMsg: this.view.intl.get("orderSuccess"),
+            dealPassType:'positi',// 弹窗类型倾向
+            dealPass:true,// 下单弹窗
+            inputSellNum: 0, // 数量清空
+            inputBuyNum: 0,
+            funpassBuy: '',
+            funpassSell: ''
           }
       );
       return
@@ -402,6 +418,7 @@ export default class DealController extends ExchangeControllerBase {
     this.view.setState({
       fundPwdInterval: fundPwdInterval.mode
     })
+    return fundPwdInterval.mode
   }
 
   //设置可用额度
