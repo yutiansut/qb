@@ -92,12 +92,11 @@ export default class ForgetPass extends exchangeViewBase {
     }
     if(this.state.againInput && (this.state.againInput !== this.state.passInput)) { // 两次密码不一致
       this.setState({
-        errPass: this.intl.get("user-checkAgainPwd")
+        errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
-    if (this.state.againInput === this.state.passInput) { // 两次密码一致
+    if (reg.test(this.state.againInput) && (this.state.againInput === this.state.passInput)) { // 两次密码一致
       this.state.errPassAgain && (this.setState({errPassAgain: ""}))
-      this.state.errPass && (this.setState({errPass: ""}))
     }
   }
 
@@ -114,9 +113,8 @@ export default class ForgetPass extends exchangeViewBase {
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
-    if (this.state.againInput === this.state.passInput) { // 两次密码一致
+    if (reg.test(this.state.againInput) && (this.state.againInput === this.state.passInput)) { // 两次密码一致
       this.state.errPassAgain && (this.setState({errPassAgain: ""}))
-      this.state.errPass && (this.setState({errPass: ""}))
     }
   }
 

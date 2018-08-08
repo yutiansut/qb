@@ -154,11 +154,10 @@ export default class SetPassPopup extends exchangeViewBase {
       }
       if(this.state.popupInput3 && (this.state.popupInput2 !== this.state.popupInput3)) {
         this.setState({
-          errUser: this.intl.get("user-checkAgainPwd")
+          errUser2: this.intl.get("user-checkAgainPwd")
         })
       }
-      if (this.state.popupInput3 === this.state.popupInput2) {
-        this.state.errUser && (this.setState({errUser: ""}))
+      if (reg2.test(this.state.popupInput3) && (this.state.popupInput3 === this.state.popupInput2)) {
         this.state.errUser2 && (this.setState({errUser2: ""}))
       }
     }
@@ -178,8 +177,7 @@ export default class SetPassPopup extends exchangeViewBase {
           errUser2: this.intl.get("user-checkAgainPwd")
         })
       }
-      if (this.state.popupInput3 === this.state.popupInput2) {
-        this.state.errUser && (this.setState({errUser: ""}))
+      if (reg.test(this.state.popupInput3) && (this.state.popupInput3 === this.state.popupInput2)) {
         this.state.errUser2 && (this.setState({errUser2: ""}))
       }
     }
