@@ -73,9 +73,10 @@ export default class extends ExchangeViewBase {
           <thead>
             <tr>
               {this.state.recentTableHead.map((v, index) => {
-                return <td key={index} onClick={this.tradeSort.bind(this, v, index)}>
+                return <td key={index}>
+                {/*return <td key={index} onClick={this.tradeSort.bind(this, v, index)}>*/}
                     {v.name}
-                    <img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt="" className={`${v.sortValue ? "" : "hide"}`} />
+                    {/*<img src={this.state.sortIndex === index ? this.state.tradeSortImg : "/static/img/trade_rank.svg"} alt="" className={`${v.sortValue ? "" : "hide"}`} />*/}
                   </td>;
               })}
             </tr>

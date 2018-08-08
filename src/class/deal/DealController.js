@@ -97,11 +97,9 @@ export default class DealController extends ExchangeControllerBase {
     this.view.setState(
         {marketChangePrice: v.price}
     );
-    if(this.view.state.DealEntrustType === 0)
-      return
-    console.log('setPriceInit', v, Number(Number(this.view.state.buyWallet).div(v.price)),)
     this.view.setState({
-      buyMax: Number(Number(this.view.state.buyWallet).div(v.price)),
+      marketBuyMax: Number(Number(this.view.state.buyWallet).div(v.price)),
+      marketSellMax: Number(this.view.state.sellWallet)
     })
   }
 
@@ -168,9 +166,10 @@ export default class DealController extends ExchangeControllerBase {
       t === 1 && (this.view.setState({changBankPriceS : changeBankPrice}));
       t === 0 && (this.view.setState({changBankPriceB : changeBankPrice}))
     }
-    if (this.view.state.buyNumFlag && (t === 0)) {
+    if (this.store.state.buyNumFlag && (t === 0)) {
       let checkNum = this.view.state.numLimit;
-      this.view.setState({inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
+      this.view.setState({
+        inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
     }
     
   }

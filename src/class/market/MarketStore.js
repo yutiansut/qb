@@ -201,6 +201,8 @@ export default class MarketStore extends ExchangeStoreBase {
       let res = list.find(vv => vv.na === v.marketName);
       v.priceCN = res.cr;
       v.priceEN = res.ur;
+      v.priceCNY = res.cr * v.price;
+      v.priceUSD = res.ur * v.price;
       return Object.assign(v)
     }));
   }

@@ -10,6 +10,7 @@ export default class TradePlan extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.state = {
+      marketBuyMax: 0,// 市价最大数量
       coinChargeFlag: false, // 币种充币开关
       marketChargeFlag: false, // 币种充币开关
       priceLimit : 6, // 价格精度限制
@@ -87,7 +88,9 @@ export default class TradePlan extends ExchangeViewBase {
 //切换市价委托/限价委托
   changeEntrustType(v) {
     this.setState({
-      DealEntrustType: v.type
+      DealEntrustType: v.type,
+      inputBuyNum: 0,
+      inputSellNum: 0
     })
   }
 
@@ -97,11 +100,19 @@ export default class TradePlan extends ExchangeViewBase {
       wallet: 'buyWallet',
       setValue: 'inputBuyNum',
       max: 'buyMax',
-      changeBank: 'changBankPriceB'
-    }, {inputValue: 'inputSellValue', wallet: 'sellWallet', setValue: 'inputSellNum', max: 'sellMax',changeBank: 'changBankPriceS'}];
+      changeBank: 'changBankPriceB',
+      marketMax: 'marketBuyMax'
+    }, {
+      inputValue: 'inputSellValue',
+      wallet: 'sellWallet',
+      setValue: 'inputSellNum',
+      max: 'sellMax',
+      changeBank: 'changBankPriceS',
+      marketMax: 'marketSellMax'
+    }];
     // console.log('his.state.buyNumFlag', this.state.buyNumFlag, this.state, diffArr[dealType].max)
-    this.setState({buyNumFlag: false, sellNumFlag: false})
-    let maxNum = this.state[diffArr[dealType].max];
+    this.setState({buyNumFlag: false, sellNumFlag: false});
+    let maxNum = this.state.DealEntrustType ? this.state[diffArr[dealType].marketMax] : this.state[diffArr[dealType].max];
     let priceValue = this.state.DealEntrustType ? this.state.marketChangePrice : (this.state[diffArr[dealType].inputValue]);
     // if(this.state.DealEntrustType === 0 && (this.state.PriceUnit === 'CNY' || this.state.PriceUnit === 'USD')){
     //   priceValue = this.state[diffArr[dealType].changeBank] || this.state.priceInit
@@ -147,7 +158,8 @@ export default class TradePlan extends ExchangeViewBase {
     let numValue = e.target.value > maxNum ? maxNum.toFixedWithoutUp(numLimit) : value;
     if(type) {
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
-      dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+      dealType ? (numValue>= maxNum.toFixedWithoutUp(numLimit) && this.setState({sellNumFlag: true}))
+          : (numValue>= maxNum.toFixedWithoutUp(numLimit) && (this.props.controller.store.state.buyNumFlag = true) && this.setState({buyNumFlag: true}))
     } else {
       // let a = Number(numValue).formatFixNumberForAmount(Number(priceValue));
       // let b = a.split(',');
@@ -155,8 +167,9 @@ export default class TradePlan extends ExchangeViewBase {
       // b.length > 1 && (c = b.join(''));
       // dealType ? (this.setState({inputSellNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))})) : (this.setState({inputBuyNum: c && Number(c) || Number(numValue).formatFixNumberForAmount(Number(priceValue))}))
       // dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+      
       dealType ? (this.setState({inputSellNum: Number(numValue).toFixedWithoutUp(numLimit)})) : (this.setState({inputBuyNum: Number(numValue).toFixedWithoutUp(numLimit)}));
-      dealType ? (e.target.value >= maxNum && this.setState({sellNumFlag: true})) : (e.target.value >= maxNum && this.setState({buyNumFlag: true}))
+      dealType ? (numValue >= maxNum.toFixedWithoutUp(numLimit) && this.setState({sellNumFlag: true})) : (numValue >= maxNum.toFixedWithoutUp(numLimit) && (this.props.controller.store.state.buyNumFlag = true) && this.setState({buyNumFlag: true}))
     }
   }
 
@@ -187,7 +200,12 @@ export default class TradePlan extends ExchangeViewBase {
         inputSellValue: value,
         inputSellFlag: true,
         dealType
-      })) : (this.setState({inputBuyValue: value, inputBuyFlag: true, dealType}));
+      })) :
+          (this.setState({
+            inputBuyValue: value,
+            inputBuyFlag: true,
+            dealType
+          }));
       value && this.changeMaxNum(dealType, value)
     }
 
@@ -397,6 +415,8 @@ export default class TradePlan extends ExchangeViewBase {
                                  buyNum={this.state.inputBuyNum}
                                  buyMax={this.state.buyMax}
                                  sellMax={this.state.sellMax}
+                                 marketBuyMax={this.state.marketBuyMax}
+                                 marketSellMax={this.state.marketSellMax}
                                  // funpass={this.state.funpass}
                                  funpassBuy={this.state.funpassBuy}
                                  funpassSell={this.state.funpassSell}

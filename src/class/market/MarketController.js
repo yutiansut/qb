@@ -232,11 +232,14 @@ export default class MarketController extends ExchangeControllerBase {
     let imgArr = [this.view.$imagesMap.$rank_down, this.view.$imagesMap.$rank_up],
       tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
-
-    this.store.setSort(v.sortValue, v.type)
+    let sortValue = v.sortValue;
+    if((this.store.state.unitsType === 'CNY' || this.store.state.unitsType === 'USD') && sortValue[0] === 'price'){
+      sortValue = [`price${this.store.state.unitsType}`]
+    }
+    this.store.setSort(sortValue, v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
-      homeMarketPairData: this.sort(sortArray, v.sortValue, v.type),
+      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, v.type),
       sortImg: imgArr[v.type],
       sortIndex: index,
       tradeSortImg: tradeSortImg[v.type]
@@ -288,7 +291,8 @@ export default class MarketController extends ExchangeControllerBase {
   setUnitsType(v) {
     this.view.setState({
       unitsType: v
-    })
+    });
+    this.store.state.unitsType = v
   }
 
   pairDataHandle() {
