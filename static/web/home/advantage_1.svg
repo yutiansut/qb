@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="124px" height="123px" viewBox="0 0 124 123" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>金融交易@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-19.5%" y="-18.5%" width="139.0%" height="140.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="-17.815%" y1="50%" x2="97.5180321%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#1AC7AB" offset="0%"></stop>
+            <stop stop-color="#1AC7AB" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-10.0510817%" y1="100%" x2="100%" y2="0%" id="linearGradient-3">
+            <stop stop-color="#5C6265" offset="0%"></stop>
+            <stop stop-color="#2F3335" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-4" cx="50" cy="50" r="50"></circle>
+        <filter x="-6.2%" y="-5.8%" width="112.5%" height="112.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="0.5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="确定" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-cn-" transform="translate(-171.000000, -1588.000000)">
+            <g id="优势" transform="translate(183.000000, 1597.000000)">
+                <g id="金融交易" filter="url(#filter-1)" transform="translate(0.000000, 1.000000)">
+                    <rect id="Rectangle-path" fill="url(#linearGradient-2)" fill-rule="nonzero" x="40.3846154" y="88.4615385" width="15.3846154" height="5.76923077" rx="0.5"></rect>
+                    <rect id="Rectangle-path" fill="url(#linearGradient-2)" fill-rule="nonzero" x="40.3846154" y="69.2307692" width="15.3846154" height="5.76923077" rx="0.5"></rect>
+                    <g id="Oval-2">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                    <g id="交易" transform="translate(49.870058, 50.000000) rotate(-45.000000) translate(-49.870058, -50.000000) translate(29.870058, 32.000000)" fill="#2BB789">
+                        <path d="M36.5857864,10 L28.7071068,2.12132034 C28.3165825,1.73079605 28.3165825,1.09763107 28.7071068,0.707106781 C29.0976311,0.316582489 29.7307961,0.316582489 30.1213203,0.707106781 L39.3137085,9.89949494 C39.382,9.96778644 39.4383493,10.0434979 39.4827563,10.1240342 C39.7911407,10.2943515 40,10.6227849 40,11 C40,11.5522847 39.5522847,12 39,12 L1,12 C0.44771525,12 6.76353751e-17,11.5522847 0,11 C-6.76353751e-17,10.4477153 0.44771525,10 1,10 L36.5857864,10 Z" id="Combined-Shape"></path>
+                        <path d="M36.5857864,33.3670004 L28.7071068,25.4883208 C28.3165825,25.0977965 28.3165825,24.4646315 28.7071068,24.0741072 C29.0976311,23.6835829 29.7307961,23.6835829 30.1213203,24.0741072 L39.3137085,33.2664953 C39.382,33.3347868 39.4383493,33.4104983 39.4827563,33.4910346 C39.7911407,33.6613519 40,33.9897853 40,34.3670004 C40,34.9192852 39.5522847,35.3670004 39,35.3670004 L1,35.3670004 C0.44771525,35.3670004 6.76353751e-17,34.9192852 0,34.3670004 C-6.76353751e-17,33.8147157 0.44771525,33.3670004 1,33.3670004 L36.5857864,33.3670004 Z" id="Combined-Shape" transform="translate(20.000000, 29.574107) scale(-1, -1) translate(-20.000000, -29.574107) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

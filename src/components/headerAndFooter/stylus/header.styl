@@ -26,6 +26,7 @@
         font-weight 100
         &:hover
           color $header-font-hover
+          font-weight: 500
       &.header-nav-active
         >a
           color $header-font-active
@@ -336,32 +337,30 @@
 .headerNav, .homeNav
   width 100%
   min-width 1160px
-  height 70px
+  height 50px
   padding 0 120px
-  line-height 70px
-  background $header-bg-active
+  line-height 50px
+  background $header-bg-main //$header-bg-active
   >ul
-    height 70px
+    height 50px
     li
-      height 70px
+      height 50px
       margin-right 40px
       &.header-nav-active
         >a
           //border-bottom 2px solid $colB789
           color $header-font-active
           padding 6px 2px
-          font-weight 400
+          font-weight 500
       &:last-child
         margin-right 0
       &.nav-logo
         margin-right 120px
         a
           display block
-          width 121px
+          width 101px
           height 50px
-          margin-top 10px
-          background $header-image-logo no-repeat 0 12.5px / 121px 24px
-
+          background $header-image-logo no-repeat 0 15px / 101px 20px
   >ol
     >li
       &.language-li
@@ -382,14 +381,14 @@
           vertical-align middle
 
 .homeNav
-  background transparent
+  background $header-bg-main // transparent
   box-shadow none
   color $header-font-hover
   >ul
     li
       &.select-list
         .select-router
-          margin-top -10px
+          margin-top 0
           //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
           box-shadow  0 0 1px 0 rgba(0,0,0,0.5)
   >ol
@@ -399,7 +398,7 @@
         p
           text-align center
         ul
-          margin-top -10px
+          margin-top 0
           li
             &:nth-of-type(1)
               border-bottom none
@@ -411,12 +410,12 @@
           vertical-align middle
       &.user-li
         ul
-          margin-top -10px
+          margin-top 0
           //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22), 0 0 6px 0 rgba(0,0,0,0.3);
           box-shadow  0 0 10px rgba(0,0,0,0.5)
       &.new-li
         .new-li-content
-          margin-top -10px
+          margin-top 0
           box-shadow  0 0 10px 0 rgba(0,0,0,0.5)
 
 // 其他地方登录弹窗
