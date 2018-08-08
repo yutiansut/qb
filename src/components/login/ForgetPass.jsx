@@ -69,6 +69,7 @@ export default class ForgetPass extends exchangeViewBase {
     this.setState({picInput: value});
   }
 
+  // 检验部分
   checkUserInput() { // 手机号／邮箱
     // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
     let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
@@ -83,24 +84,39 @@ export default class ForgetPass extends exchangeViewBase {
 
   checkPassInput() {
     let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    if(!reg.test(this.state.passInput)) {
+    if(!reg.test(this.state.passInput)) { // 密码格式不对
       this.setState({
         errPass: this.intl.get("user-checkNewPwd")
       })
+      return
     }
-    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) { // 两次密码不一致
       this.setState({
-        errPassAgain: this.intl.get("user-checkAgainPwd")
+        errPass: this.intl.get("user-checkAgainPwd")
       })
     }
-
+    if (this.state.againInput === this.state.passInput) { // 两次密码一致
+      this.state.errPassAgain && (this.setState({errPassAgain: ""}))
+      this.state.errPass && (this.setState({errPass: ""}))
+    }
   }
 
   checkAgainInput() {
-    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 再次输入密码
+    if(!reg.test(this.state.againInput)) { // 密码格式不对
+      this.setState({
+        errPassAgain: this.intl.get("user-checkNewPwd")
+      })
+      return
+    }
+    if(this.state.passInput && (this.state.againInput !== this.state.passInput)) { // 两次密码不一致
       this.setState({
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
+    }
+    if (this.state.againInput === this.state.passInput) { // 两次密码一致
+      this.state.errPassAgain && (this.setState({errPassAgain: ""}))
+      this.state.errPass && (this.setState({errPass: ""}))
     }
   }
 

@@ -152,15 +152,35 @@ export default class SetPassPopup extends exchangeViewBase {
           errUser: this.intl.get("user-checkNewPwd")
         })
       }
+      if(this.state.popupInput3 && (this.state.popupInput2 !== this.state.popupInput3)) {
+        this.setState({
+          errUser: this.intl.get("user-checkAgainPwd")
+        })
+      }
+      if (this.state.popupInput3 === this.state.popupInput2) {
+        this.state.errUser && (this.setState({errUser: ""}))
+        this.state.errUser2 && (this.setState({errUser2: ""}))
+      }
     }
   }
 
   checkInput3() { // 离开
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
     if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
-      if(this.state.popupInput3 && (this.state.popupInput3 !== this.state.popupInput2)) {
+      if(!reg.test(this.state.popupInput3)) {
+        this.setState({
+          errUser2: this.intl.get("user-checkNewPwd")
+        })
+        return
+      }
+      if(this.state.popupInput2 && (this.state.popupInput3 !== this.state.popupInput2)) {
         this.setState({
           errUser2: this.intl.get("user-checkAgainPwd")
         })
+      }
+      if (this.state.popupInput3 === this.state.popupInput2) {
+        this.state.errUser && (this.setState({errUser: ""}))
+        this.state.errUser2 && (this.setState({errUser2: ""}))
       }
     }
   }
@@ -196,7 +216,7 @@ export default class SetPassPopup extends exchangeViewBase {
                        oriType={[4].includes(this.props.isType) ? 'password' : 'text'}
                        onInput={value => this.changeInput1(value)}
                        onBlur={this.checkInput1}/>
-                <em>{this.state.errUser3}</em>
+                <em>{this.state.popupInput1 && this.state.errUser3}</em>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle}</p>
@@ -205,7 +225,7 @@ export default class SetPassPopup extends exchangeViewBase {
                        onInput={value => this.changeInput2(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
                        onBlur={this.checkInput2}/>
-                <em>{this.props.popupInputErr2 || this.state.errUser}</em>
+                <em>{this.state.popupInput2 && (this.props.popupInputErr2 || this.state.errUser)}</em>
               </li>
               <li className={[3, 4, 5, 6].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle2}</p>
@@ -214,7 +234,7 @@ export default class SetPassPopup extends exchangeViewBase {
                        onInput={value => this.changeInput3(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
                        onBlur={this.checkInput3}/>
-                <em>{this.state.errUser2}</em>
+                <em>{this.state.popupInput3 && this.state.errUser2}</em>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
                 <p>{this.intl.get("user-popPicture")}</p>
