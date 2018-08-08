@@ -29,7 +29,7 @@ const server = new WebpackDevServer(compiler, devServerOptions);
 const port = PORT || config.dev.port;
 const host = HOST || config.dev.host;
 
-server.listen(port, 'localhost', function (err) {
+server.listen(port, host, function (err) {
    console.log(`Starting server on ${host}:${port}`);
     if (err) throw err
 })
