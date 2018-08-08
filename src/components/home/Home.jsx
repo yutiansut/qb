@@ -7,6 +7,8 @@ import HomeMarket from './children/HomeMarket.jsx' //交易盘市场
 import HomeNotice from './children/HomeNotice.jsx' // 首页公告
 import HomeActivity from './children/HomeActivity.jsx' // 首页活动
 import HomeAdvantage from './children/HomeAdvantage.jsx'
+import HomeBanner from './children/HomeBanner.jsx'
+import HomeSuperiority from './children/HomeSuperiority.jsx'
 
 import MarketController from '../../class/market/MarketController'
 
@@ -96,12 +98,14 @@ export default class Home extends exchangeViewBase {
     return (
       <div className="home-wrap">
         <div className="home-top">
-          <HomeActivity controller={this.props.activityController} ref="dfa"/>
+          {/* <HomeActivity controller={this.props.activityController} ref="dfa"/> */}
+          <HomeBanner controller={this.props.activityController}/>
           <HomeNotice controller={this.props.noticeController}/>
           <HomeRecommend controller={recommendController}/>
         </div>
         <HomeMarket controller={this.props.marketController}/>
-        <HomeAdvantage/>
+        {/* <HomeAdvantage/> */}
+        <HomeSuperiority controller={this.props.activityController}/>
       </div>
     );
   }
