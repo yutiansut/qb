@@ -126,6 +126,16 @@ export default class MarketStore extends ExchangeStoreBase {
   get selecedMarket() {
     return this.state.market
   }
+  
+  //设置选择的交易对
+  setMarketDataHandle(data) {
+    this.state.marketDataHandle = data
+  }
+  
+  //得到选择的交易对
+  get marketDataHandle() {
+    return this.state.marketDataHandle
+  }
 
   setAllPair(data) {
     // console.log('setAllPair 0', data)
