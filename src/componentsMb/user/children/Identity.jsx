@@ -105,6 +105,7 @@ export default class userIdentity extends ExchangeViewBase {
     this.setState({
       imgUrlIndex: i
     });
+    this.refs.files.value = '';
     this.refs.files.click();
   }
   selectVerifyType(index) {
