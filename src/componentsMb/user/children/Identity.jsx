@@ -52,7 +52,7 @@ export default class userIdentity extends ExchangeViewBase {
     controller.setView(this);
     //初始化数据，数据来源即store里面的state
     this.state = Object.assign(this.state, controller.initState);
-    this.getUserAuthData = controller.getUserAuthData.bind(controller); // 获取用户认证信息
+    this.getUserAuthData = controller.getUserAuthVerify.bind(controller); // 获取用户认证信息
     this.selectPhoto = this.selectPhoto.bind(this);
     this.checkPhoto = this.checkPhoto.bind(this);
     this.uploadInfo = controller.uploadInfo.bind(controller);
@@ -107,12 +107,12 @@ export default class userIdentity extends ExchangeViewBase {
     });
     this.refs.files.click();
   }
-  selectVerifyType(index, content) {
+  selectVerifyType(index) {
     // 单选切换
     this.setState({
       selectIndex: index,
-      numberValue: "",
-      errNum: ""
+      errNum: !index ? this.intl.get("user-idErr") : this.intl.get("user-passportErr"),
+      showBottomSelect: false
     });
   }
   firstInput(value) {
@@ -125,7 +125,6 @@ export default class userIdentity extends ExchangeViewBase {
   }
   numberInput(value) {
     this.setState({ numberValue: value.trim() });
-    this.state.errNum && this.setState({ errNum: "" });
   }
   checkNumber() {
     // 验证身份证 ／ 护照
@@ -135,9 +134,6 @@ export default class userIdentity extends ExchangeViewBase {
     if (this.state.selectIndex === 0) {
       // 身份证
       if (!reg1.test(this.state.numberValue)) {
-        this.setState({
-          errNum: this.intl.get("user-idErr")
-        });
         return false;
       }
     }
@@ -147,16 +143,13 @@ export default class userIdentity extends ExchangeViewBase {
         !reg2.test(this.state.numberValue) &&
         !reg3.test(this.state.numberValue)
       ) {
-        this.setState({
-          errNum: this.intl.get("user-passportErr")
-        });
         return false;
       }
     }
   }
   canClick() {
     let userAuth = this.state.userAuth;
-    if (this.state.errNum) return false;
+    // if (this.state.errNum) return false;
     if (
       this.state.userAuth.state === 0 &&
       this.state.firstNameValue &&
@@ -188,11 +181,10 @@ export default class userIdentity extends ExchangeViewBase {
     this.props.addContent({ con: this.intl.get("header-idVerify") });
     let result = await this.getUserAuthData();
     // 审核中和已审核路由进来阻止
-    // if([1,2].includes(result.state)){
-    //   this.props.history.push({pathname:'/user'})
-    // }
+    if([1,2].includes(result.state)){
+      this.props.history.push({pathname:'/user'})
+    }
     let verifyArr = [0, 0, 2, 1]; // 0 身份证 1 护照 -> 1 身份证 3 护照
-    console.log(this.state.userAuth)
     this.setState({
       // 选择护照／身份证
       selectIndex: this.state.userAuth.type
@@ -262,7 +254,6 @@ export default class userIdentity extends ExchangeViewBase {
               <span className="item">{this.intl.get("user-id-num")}</span>
               <div className="item">
                 <Input
-                  className="id-num"
                   placeholder={this.intl.get('user-inputId-num')}
                   value={
                     this.state.userAuth.number
@@ -281,7 +272,7 @@ export default class userIdentity extends ExchangeViewBase {
                   onInput={value => this.numberInput(value)}
                   onBlur={this.checkNumber}
                 />
-                {this.state.errNum && <i>{this.intl.get('user-id-wrong')}</i>}
+                {/* {this.state.errNum && <i>{this.intl.get('user-id-wrong')}</i>} */}
               </div>
             </div>
           </div>
@@ -332,7 +323,16 @@ export default class userIdentity extends ExchangeViewBase {
                 } identify-btn`}
                 disable={this.canClick() ? false : true}
                 onClick={()=>{
-                  if(!this.checkNumber()) return;
+                  let flag = this.checkNumber();
+                  if(!flag) {
+                    this.setState({
+                      remindPopup: true,
+                      popType:'tip3',
+                      popMsg: this.state.errNum
+
+                    })
+                    return;
+                  };
                   this.submitInfo()
                 }}
               />
@@ -345,7 +345,6 @@ export default class userIdentity extends ExchangeViewBase {
             name="uploadimage"
             type="file"
             ref="files"
-            capture="camera"
             accept="image/png, image/jpeg"
             onChange={this.selectPhoto}
           />
@@ -373,7 +372,7 @@ export default class userIdentity extends ExchangeViewBase {
             data={this.state.verifyTypeArr.slice(0, -1)}
             onSelect={value => {
               if (value.i === this.state.selectIndex) return;
-              this.setState({selectIndex: value.i, showBottomSelect: false})
+              this.selectVerifyType(value.i);
             }}
             current={this.state.selectIndex}
             onCancel={() => {
