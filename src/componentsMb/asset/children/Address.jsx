@@ -135,7 +135,6 @@ export default class Address extends exchangeViewBase {
                             :
                         <button className={canSubmit ? "":"disable"}
                                 onClick={()=> {
-                                    debugger;
                                     this.appendAddressH5({
                                         coinName: currency,
                                         addressName: inputAddrName,
