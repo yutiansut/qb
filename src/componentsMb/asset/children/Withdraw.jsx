@@ -99,7 +99,7 @@ export default class Withdraw extends exchangeViewBase {
                 {currency ?
                     <div className="form">
                         {/*地址名称*/}
-                        <p className="addr-info">{this.intl.get("name")} {addressName}</p>
+                        <p className="addr-info">{this.intl.get("asset-address-name")} {addressName}</p>
                         {/*提币地址*/}
                         <div className="addr">
                             <label>{this.intl.get("asset-withdrawAddress")}</label>
@@ -159,7 +159,7 @@ export default class Withdraw extends exchangeViewBase {
                                 {/*短信验证码*/}
                                 {withdrawVerify === 3 &&
                                     <p>
-                                        <label>{this.intl.get("user-verifyPhone")}</label>
+                                        <label>{this.intl.get("user-verifySMS")}</label>
                                         <input type="text" placeholder={this.intl.get("user-inputVerify")}
                                                value={inputCode}
                                                onInput={e => this.setState({inputCode: e.target.value})}/>

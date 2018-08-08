@@ -246,7 +246,9 @@ export default function en(state) {
     "home-advantage-p4": "IOS, Android and PC terminal access"
   };
   const asset = {
+
     "asset-totalAssets": "Total assets (approx)",
+    "asset-address-name": "Address Name",
     "asset-copy": "Copy Qr Address",
     "asset-save-qrcode": "Save Qr Code",
     "asset-balance": "Balance",

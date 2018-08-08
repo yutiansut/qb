@@ -242,6 +242,7 @@ export default function zh(state) {
   };
   const asset = {
     "asset-totalAssets": "总资产约",
+    "asset-address-name": "地址名称",
 
     "asset-balance": "账户余额",
     "asset-24hQuota": "24h提币额度",
@@ -293,12 +294,12 @@ export default function zh(state) {
     "asset-minWithdraw":
       "注意：最小提现数量为{number}{currency};<br/>请勿直接提现至众筹或ICO地址 ，我们不会处理未来代币的发放。",
     "asset-minWithdraw-tip":'最小提现数量为{number}{currency}',
-    "asset-withdrawAddress": "提现地址",
+    "asset-withdrawAddress": "提币地址",
     "asset-addAddress": "添加地址",
     "asset-withdrawAmount": "提现数量",
     "asset-withdrawAvailable": "可提现余额",
     "asset-gasFee": "矿工费",
-    "asset-withdrawActual": "实际到账",
+    "asset-withdrawActual": "到账数量",
     "asset-inputFundPassword": "请输入您的资金密码",
     "asset-setFundPassword": "设置资金密码",
     "asset-submit": "确认提交",
@@ -577,7 +578,7 @@ export default function zh(state) {
     "user-inputVerifyPhone": "请输入手机号验证码",
     "user-inputVerifyEmail": "请输入邮箱验证码",
     "user-inputVerifyGoogle": "请输入谷歌验证码",
-    "user-inputVerify": "请输入验证码",
+    "user-inputVerify": "输入验证码",
     "user-verifyEmail": "邮箱验证码",
     "user-verifySMS": "短信验证码",
     "user-verifyPhone": "手机号验证码",
