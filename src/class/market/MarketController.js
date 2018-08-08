@@ -37,8 +37,9 @@ export default class MarketController extends ExchangeControllerBase {
   // 切换市场
   async changeMarket(v) {
     this.store.setSelecedMarket(v);
-    this.store.setSort([], 0);
+    this.store.setSort(['turnover'], 0);
     let homeMarketPairData = await this.store.selectMarketData();
+    homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
     this.view.setState({
       // searchValue: '',
       sortIndex: 0,
@@ -66,6 +67,7 @@ export default class MarketController extends ExchangeControllerBase {
 
   collectMarket() {
     let homeMarketPairData = this.getCollectArr()
+    // homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
     this.store.setSelecedMarket('收藏区');
     this.store.setHomeMarketPairData(homeMarketPairData);
     this.store.setSort([], 0)
@@ -156,7 +158,7 @@ export default class MarketController extends ExchangeControllerBase {
     type < 3 && this.store[arr[type]](List)
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
-
+    homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
     // console.log('homeMarketPairData', homeMarketPairData);
     type > 2 && (this.store.state.tradePair = homeMarketPairData[0].tradePairName);
     if(this.view.state.query && type === 3) {
@@ -170,7 +172,7 @@ export default class MarketController extends ExchangeControllerBase {
       // return
     }
     this.view.setState({
-      homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
+      homeMarketPairData,
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
     // console.log('type', type);
     (type === 3 )  && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
