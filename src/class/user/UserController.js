@@ -154,9 +154,9 @@ export default class UserController extends ExchangeControllerBase {
       os: 3, // 1:android 2:iOS 3:borwser
     })
     this.view.setState({
-      remindPopup: this.view.state.bindOrigin === 1 ? (result && true) : true,
-      popType: this.view.state.bindOrigin === 1 ? (result && 'tip3') : (result ? 'tip3': 'tip1'),
-      popMsg: this.view.state.bindOrigin === 1 ? (result && result.msg) : (result ? result.msg : this.view.intl.get("user-bindSucc")),
+      remindPopup: [1, 2].includes(this.view.state.bindOrigin) ? (result && true) : true,
+      popType: [1, 2].includes(this.view.state.bindOrigin) ? (result && 'tip3') : (result ? 'tip3': 'tip1'),
+      popMsg: [1, 2].includes(this.view.state.bindOrigin) ? (result && result.msg) : (result ? result.msg : this.view.intl.get("user-bindSucc")),
       showSet: result ? true : false,
       setPassFlag: true
     })
@@ -175,6 +175,9 @@ export default class UserController extends ExchangeControllerBase {
       if (this.view.state.bindOrigin === 1) {
         this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
       }
+      if (this.view.state.bindOrigin === 2) {
+        this.view.setUserNotify(noticeArr[this.view.state.noticeIndex])
+      }
       return
     }
 
@@ -190,6 +193,9 @@ export default class UserController extends ExchangeControllerBase {
       this.getUserCreditsNum()
       if (this.view.state.bindOrigin === 1) {
         this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
+      }
+      if (this.view.state.bindOrigin === 2) {
+        this.view.setUserNotify(noticeArr[this.view.state.noticeIndex])
       }
       // console.log('绑定成功', this.view.state)
     }
@@ -381,18 +387,22 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async setUserNotify(index) { // 修改通知方式
+    // console.log(124, this.view.state.userInfo.notifyMethod, index)
+    let userInfo = this.view.state.userInfo, noticeArr = [1, 0]
     this.view.setState({
       type: index + 1,
+      bindOrigin: 2
     })
-    this.view.state.userInfo.notifyMethod === 0 && this.view.setState({ // 默认手机
-      noticeIndex: !this.view.state.userInfo.email && index === 0 ? 1 : index,
-      showSet: !this.view.state.userInfo.email && index === 0 ? true : false
+    if (noticeArr[index] === userInfo.notifyMethod) return // 点击以选中不发请求
+    userInfo.notifyMethod === 0 && this.view.setState({ // 默认手机
+      noticeIndex: !userInfo.email && index === 0 ? 1 : index,
+      showSet: !userInfo.email && index === 0 ? true : false
     })
-    this.view.state.userInfo.notifyMethod === 1 &&  this.view.setState({ // 默认邮箱
-      noticeIndex: !this.view.state.userInfo.phone && index === 1 ? 0 : index,
-      showSet: !this.view.state.userInfo.phone && index === 1 ? true : false
+    userInfo.notifyMethod === 1 &&  this.view.setState({ // 默认邮箱
+      noticeIndex: !userInfo.phone && index === 1 ? 0 : index,
+      showSet: !userInfo.phone && index === 1 ? true : false
     })
-    if (this.view.state.userInfo.email && index === 0 || this.view.state.userInfo.phone && index === 1) { // 两步认证修改
+    if (userInfo.email && index === 0 || userInfo.phone && index === 1) { // 通知方式修改
       let result = await this.store.Proxy.setUserNotify({
         token: this.store.token,
         ty: index === 0 ? 1 : 0 // 0:phone 1:email
@@ -400,7 +410,8 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         remindPopup: true,
         popType: result ? 'tip3': 'tip1',
-        popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc")
+        popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc"),
+        userInfo: result ? userInfo : Object.assign(userInfo, {notifyMethod: index === 0 ? 1 : 0})
       })
       // console.log('改变通知', result, index)
     }
