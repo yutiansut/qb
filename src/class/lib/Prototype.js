@@ -113,11 +113,9 @@ Number.prototype.formatFixStyle = function (para) {
     i = numberArr[0],
     j = i.length > 3 ? i.length % 3 : 0;
 
-  debugger;
   // 补0
   if (para.decimalLength) {
     console.log("before add 0 -------------", number, "decimalLength: ", decimalLength);
-    debugger;
     // number = numberArr[0] +  new Array(decimalLength - decimal.length).fill(0).forEach(v => decimal+=v);
     number = number.toFixed(para.decimalLength);
     console.log("after add 0 -------------", number, "decimalLength: ", decimalLength);
