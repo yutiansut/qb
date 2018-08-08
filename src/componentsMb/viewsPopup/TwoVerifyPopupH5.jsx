@@ -17,7 +17,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
     this.state = {
       // type: 2,
       code: '',
-      type: this.props.type, //0,1,2 邮箱、谷歌、短信
+      type: props.type, //0,1,2 邮箱、谷歌、短信
       title: [this.intl.get('user-verifyEmailTitle'), this.intl.get('user-googleVerify'), this.intl.get('user-verifyPhoneTitle')],
       holderText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
     };

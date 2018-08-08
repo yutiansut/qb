@@ -7,7 +7,8 @@ export default class GoogleKey extends ExchangeViewBase {
   constructor(props) {
     super(props);
     const { controller } = this.props;
-    console.log(controller.store.state.userInfo.googleAuth)
+    let currentType = controller.getQuery("currentType") && Number(controller.getQuery("currentType")),
+        currentKey = controller.getQuery("currentKey") && Number(controller.getQuery("currentKey"));
     if(!controller.store.state.userInfo.googleAuth) this.props.history.push('/user/safe/twoverify')
     this.state = {
       intro: [
@@ -15,7 +16,9 @@ export default class GoogleKey extends ExchangeViewBase {
         this.intl.get('user-googleKey2'),
         this.intl.get('user-googleKey3'),
         this.intl.get('user-googleKey4'),
-      ]
+      ],
+      currentType: currentType || false,
+      currentKey: currentKey || false,
     };
     controller.setView(this);
     let { googleSecret } = controller.initState;
@@ -51,7 +54,7 @@ export default class GoogleKey extends ExchangeViewBase {
           </ul>
         </div>
         <Button title={this.intl.get('next')} type="base" onClick={()=>{
-          history.push({pathname:'/user/verifybind/?type=1', query:{from:true}})
+          history.push({pathname:`/user/verifybind/?type=1&currentType=${this.state.currentType}&currentKey=${this.state.currentKey}`, query:{from:true}})
         }}/>
       </div>
     );

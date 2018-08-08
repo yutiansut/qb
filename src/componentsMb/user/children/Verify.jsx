@@ -7,6 +7,7 @@ import Popup from "../../../common/component/Popup"
 export default class Verify extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    const { controller } = this.props;
     if (!this.props.location.query){
       history.replaceState(
         null,
@@ -14,7 +15,8 @@ export default class Verify extends ExchangeViewBase {
         `${window.location.origin}/user`
       );
       this.props.history.push("/user/safe/twoverify");}
-    const { controller } = this.props;
+    let currentType = controller.getQuery("currentType") && Number(controller.getQuery("currentType")),
+        currentKey = controller.getQuery("currentKey") && Number(controller.getQuery("currentKey"));
     controller.setView(this);
     this.state = {
       popupFlag: false,
@@ -39,7 +41,9 @@ export default class Verify extends ExchangeViewBase {
       code: "",
       accountText: [this.intl.get('user-emailAddress'), this.intl.get('user-inputVerifyGoogle'), this.intl.get('user-phoneNumber')],
       codeText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
-      googleCode: ["", "", "", "", "", ""]
+      googleCode: ["", "", "", "", "", ""],
+      currentType: currentType || false,
+      currentKey: currentKey || false
       // userInfo: this.props.location.query && this.props.location.query.userInfo
     };
     this.dealInput = controller.dealInput.bind(controller);
@@ -141,7 +145,6 @@ export default class Verify extends ExchangeViewBase {
                       tip2 ? "tip" : ""
                     }`}
                     ref={`input${index}`}
-                    type="password"
                     key={index}
                     maxLength={1}
                     value={this.state.googleCode[index]}
@@ -175,7 +178,10 @@ export default class Verify extends ExchangeViewBase {
             msg={this.state.popupText}
             h5={true}
             onClose={() => {
-              this.state.popupType && history.push({pathname: '/user/safe/twoverify'})
+              if(this.state.popupType){
+                history.push({pathname: '/user/safe/twoverify', query:{showBottom: true, currentType: this.state.currentType, currentKey: this.state.currentKey}})
+                return;
+              }
               this.setState({ popupFlag: false });
             }}
             autoClose={true}
