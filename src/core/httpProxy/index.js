@@ -5,7 +5,7 @@
  *      注：若需要参数，this.Proxy.XXX（params）
  */
 
-import Fetch from "../libs/Fetch";
+  import Fetch from "../libs/Fetch";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
 import {zip, unZip} from '../libs/ZipUtil'
 
