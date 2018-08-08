@@ -320,6 +320,7 @@ export default function zh(state) {
     "asset-address-notSaved": '地址尚未保存'
   };
   const market = {
+    "market-trade-volume": '交易量',
     "market-favorite": "收藏",
     "market-favorites": "收藏区",
     "market-market": "市场",

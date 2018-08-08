@@ -331,6 +331,7 @@ export default function en(state) {
     "asset-address-notSaved": 'Address not saved'
   };
   const market = {
+    "market-trade-volume": 'volume',
     "market-favorite": "Favorites",
     "market-favorites": "Favourites",
     "market-market": "Market",

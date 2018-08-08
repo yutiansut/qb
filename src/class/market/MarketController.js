@@ -54,10 +54,11 @@ export default class MarketController extends ExchangeControllerBase {
       let priceLimitValue = queryValue.priceAccuracy;
       let volumeLimitValue = queryValue.volumeAccuracy;
       this.querySelectPair(this.view.state.query,priceLimitValue,volumeLimitValue)
+      this.tradePairChange(homeMarketPairData[0]);
       return
     }
     // console.log('homeMarketPairData',homeMarketPairData)
-    this.tradePairChange(homeMarketPairData[0]);
+   
     // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
   }
 
@@ -77,11 +78,11 @@ export default class MarketController extends ExchangeControllerBase {
       market: '',
       homeMarketPairData
     });
-    if(!homeMarketPairData.length){
-      return
-    }
+    // if(!homeMarketPairData.length){
+    //   return
+    // }
     
-    this.tradePairChange(homeMarketPairData[0]);
+    // this.tradePairChange(homeMarketPairData[0]);
   }
 
   // 添加/取消收藏
@@ -172,7 +173,7 @@ export default class MarketController extends ExchangeControllerBase {
       homeMarketPairData: this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending),
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
     // console.log('type', type);
-    (type === 3  || type === 0)  && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
+    (type === 3 )  && this.view.name === 'tradeMarket' && this.view.state.query === '' && this.tradePairChange(homeMarketPairData[0]);
   }
 
   //更新recommend数据
