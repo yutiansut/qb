@@ -699,6 +699,7 @@ export default class UserController extends ExchangeControllerBase {
         showPopup: true,
         verifyPopupType: currentKey - 1,
         setType: type,
+        googleCode: ["", "", "", "", "", ""],
         showBottomSelect: false
       })
       return;

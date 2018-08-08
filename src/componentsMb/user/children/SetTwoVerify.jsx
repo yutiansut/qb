@@ -163,7 +163,6 @@ export default class setTwoVerify extends ExchangeViewBase {
               this.setState({
                 popupFlag: false,
                 showPopup: this.state.popupType ? false : true,
-                showBottomSelect: this.state.popupType ? false : true
               });
             }}
             autoClose={true}

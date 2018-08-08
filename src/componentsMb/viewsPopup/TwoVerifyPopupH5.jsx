@@ -20,7 +20,6 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
       type: this.props.type, //0,1,2 邮箱、谷歌、短信
       title: [this.intl.get('user-verifyEmailTitle'), this.intl.get('user-googleVerify'), this.intl.get('user-verifyPhoneTitle')],
       holderText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
-      googleCode: ["", "", "", "", "", ""]
     };
   }
   componentWillUnmount() {
@@ -85,7 +84,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
             title={this.intl.get('ok')}
             type="base"
             className="submit"
-            disable={!code.length}
+            disable={[0, 2].includes(type) ? !code.length : googleCode.join("").length !== 6}
             onClick={(e) => {
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();
