@@ -84,7 +84,6 @@ export default class DealController extends ExchangeControllerBase {
 
   // 数字币计价 初始值获取
   setPriceInit(v, flag) {
-    console.log('setPriceInit', v, flag)
     flag && this.view.setState({
       priceInit:v.price,
       buyMax:this.view.state.buyWallet / v.price,
@@ -126,8 +125,8 @@ export default class DealController extends ExchangeControllerBase {
     this.userOrderController.setUnitsType(unitSelected);
     this.TradeRecentController.setUnitsType(unitSelected);
     this.TradeOrderListController.setUnitsType(unitSelected);
-    this.changeMaxNum(1, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
-    this.changeMaxNum(0, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
+    // this.changeMaxNum(1, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
+    // this.changeMaxNum(0, this.view.state.priceBank[this.store.state.PriceUnit] || this.view.state.priceInit)
   }
 
   changePrice(v, fromValue) {
@@ -161,8 +160,6 @@ export default class DealController extends ExchangeControllerBase {
   }
 
   changeMaxNum(t, v) {
-    
-    
     let a = Number(v) ? v : 0.000001;
     let changeBankPrice = this.store.state.PriceUnit === "CNY" ? (a * this.store.state.prices.price / this.store.state.prices.priceCN) :(this.store.state.PriceUnit === "USD" && (a * this.store.state.prices.price / this.store.state.prices.priceEN) || a);
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
