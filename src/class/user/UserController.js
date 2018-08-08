@@ -675,7 +675,6 @@ export default class UserController extends ExchangeControllerBase {
   dealTwoVerify(type){
     let {userInfo, currentKey} = this.view.state;
     let {history} = this.view.props;
-    console.log(userInfo, currentKey)
     //已绑定直接弹窗
     if(type === 2 && userInfo.googleAuth){
       history.push({
@@ -699,7 +698,8 @@ export default class UserController extends ExchangeControllerBase {
       this.view.setState({
         showPopup: true,
         verifyPopupType: currentKey - 1,
-        setType: type
+        setType: type,
+        showBottomSelect: false
       })
       return;
     }

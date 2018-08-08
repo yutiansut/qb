@@ -137,6 +137,7 @@ export default class userIdentity extends ExchangeViewBase {
       if (!reg1.test(this.state.numberValue)) {
         return false;
       }
+      return true
     }
     if (this.state.selectIndex === 1) {
       // 护照
@@ -146,6 +147,7 @@ export default class userIdentity extends ExchangeViewBase {
       ) {
         return false;
       }
+      return true
     }
   }
   canClick() {
@@ -271,7 +273,6 @@ export default class userIdentity extends ExchangeViewBase {
                   }
                   disabled={this.state.userAuth.number ? true : false}
                   onInput={value => this.numberInput(value)}
-                  onBlur={this.checkNumber}
                 />
                 {/* {this.state.errNum && <i>{this.intl.get('user-id-wrong')}</i>} */}
               </div>
