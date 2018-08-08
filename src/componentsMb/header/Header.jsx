@@ -34,11 +34,11 @@ export default class Header extends ExchangeViewBase {
 
   componentDidMount() {
     // console.log(1234, this.props.match, this.props.history.location.pathname)
-    ChangeFontSize(375, 375 * 2, 375);
+    ChangeFontSize(320, 375 * 2, 375);
   }
 
   componentWillUpdate(props, state, next) {
-    ChangeFontSize(375, 375 * 2, 375);
+    ChangeFontSize(320, 375 * 2, 375);
   }
 
   componentWillUnmount() {
