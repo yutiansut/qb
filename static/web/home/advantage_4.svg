@@ -21,11 +21,7 @@
             <stop stop-color="#5C6265" offset="0%"></stop>
             <stop stop-color="#2F3335" offset="100%"></stop>
         </linearGradient>
-        <linearGradient x1="0%" y1="100%" x2="136.205363%" y2="-31.7618075%" id="linearGradient-4">
-            <stop stop-color="#2BB789" offset="0%"></stop>
-            <stop stop-color="#2F3335" offset="100%"></stop>
-        </linearGradient>
-        <filter x="-11.9%" y="-6.2%" width="123.8%" height="115.6%" filterUnits="objectBoundingBox" id="filter-5">
+        <filter x="-11.9%" y="-6.2%" width="123.8%" height="115.6%" filterUnits="objectBoundingBox" id="filter-4">
             <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
             <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
             <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
@@ -34,7 +30,7 @@
                 <feMergeNode in="SourceGraphic"></feMergeNode>
             </feMerge>
         </filter>
-        <linearGradient x1="10.707%" y1="70.7098824%" x2="82.694%" y2="15.6734694%" id="linearGradient-6">
+        <linearGradient x1="10.707%" y1="70.7098824%" x2="82.694%" y2="15.6734694%" id="linearGradient-5">
             <stop stop-color="#5C6265" offset="0%"></stop>
             <stop stop-color="#2F3335" offset="100%"></stop>
         </linearGradient>
@@ -46,11 +42,11 @@
                     <g id="mac" transform="translate(22.727273, 0.000000)">
                         <path d="M56.5253263,81.6097561 L65.9156227,81.6097561 L65.9156227,88.5644662 C65.9156227,91.2546099 77.2861613,95.2394894 75.3982228,98.019999 C73.5102843,100.800509 46.3414634,100.515653 46.3414634,98.019999 C46.3414634,95.5243453 56.5253263,91.2496282 56.5253263,88.5644662 L56.5253263,81.6097561 Z" id="Shape" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
                         <rect id="Rectangle-9" fill="url(#linearGradient-3)" x="0" y="0" width="127.07" height="82.9300003" rx="4"></rect>
-                        <path d="M12,81 L126.634146,81 L126.634146,81 C126.634146,82.1045695 125.738716,83 124.634146,83 L12,83 L12,81 Z" id="Rectangle-14" fill="url(#linearGradient-4)"></path>
+                        <path d="M12,80 L126.634146,80 L126.634146,80 C126.634146,81.1045695 125.738716,82 124.634146,82 L12,82 L12,80 Z" id="Rectangle-14" fill="#2BB789"></path>
                     </g>
-                    <g id="mobile" filter="url(#filter-5)" transform="translate(0.000000, 35.818182)" fill-rule="nonzero">
+                    <g id="mobile" filter="url(#filter-4)" transform="translate(0.000000, 35.818182)" fill-rule="nonzero">
                         <path d="M0,51.3986014 L0,4.29817818 C0,1.92435992 1.84650061,-5.68434189e-14 4.11152742,-5.68434189e-14 L37.4968642,-5.68434189e-14 C39.767598,-5.68434189e-14 41.6083916,1.93644451 41.6083916,4.29817818 L41.6083916,51.3986014 C36.5649502,51.3986014 5.04344141,51.3986014 0,51.3986014 Z" id="Shape" fill="#2BB789"></path>
-                        <rect id="Rectangle-path" fill="url(#linearGradient-6)" x="0" y="2" width="39.5" height="49.5"></rect>
+                        <rect id="Rectangle-path" fill="url(#linearGradient-5)" x="0" y="2" width="39.5" height="49.5"></rect>
                         <path d="M0,51 L41.6083916,51 L41.6083916,59.89374 C41.6083916,61.7405924 39.9257597,63.2377622 37.8240989,63.2377622 L3.78429267,63.2377622 C1.69428551,63.2377622 0,61.7371724 0,59.89374 L0,51 Z" id="Shape" fill="#484D4F"></path>
                         <circle id="c" fill="#3B4042" cx="21.25" cy="57.25" r="3.25"></circle>
                     </g>

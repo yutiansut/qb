@@ -28,7 +28,7 @@
                 <g id="稳定" filter="url(#filter-1)" transform="translate(638.000000, 1.000000)">
                     <polygon id="Triangle-2" fill="url(#linearGradient-2)" points="50 0 100 100 0 100"></polygon>
                     <polygon id="Triangle-2" fill="#2BB789" transform="translate(50.000000, 75.000000) scale(1, -1) translate(-50.000000, -75.000000) " points="50 50 75 100 25 100"></polygon>
-                    <polygon id="Triangle-2" fill="url(#linearGradient-3)" transform="translate(50.004456, 73.730769) scale(1, -1) translate(-50.004456, -73.730769) " points="50.2307692 52 71.0089111 95.4615385 29 95.4615385"></polygon>
+                    <polygon id="Triangle-2" fill="url(#linearGradient-3)" transform="translate(50.184448, 73.910823) scale(1, -1) translate(-50.184448, -73.910823) " points="50.1425124 51.364502 72.6506348 96.4571439 27.7182617 96.4571439"></polygon>
                 </g>
             </g>
         </g>
