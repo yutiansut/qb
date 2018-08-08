@@ -82,7 +82,7 @@ export default class Address extends exchangeViewBase {
                           <input type="text" placeholder=""
                                  value={inputAddrName}
                                  onInput={e=>{
-                                     this.setState({inputAddrName: e.target.value})
+                                     this.setState({inputAddrName: e.target.value});
                                  }}/>
                       </p>
                       <p className="p2">
@@ -98,10 +98,14 @@ export default class Address extends exchangeViewBase {
                 {/*地址列表*/}
                 {addressList.map((item,index) => {
                     return (
-                        <div className="li">
+                        <div className="li" key={index}>
                             <h3>
                                 <label>{item.addressName || "-"}</label>
-                                <a onClick={()=>this.copy(this.ref[`addr_${index}`])}>{this.intl.get("h5-asset-copy-addr")}</a>
+                                <a onClick={
+                                    ()=> (
+                                        this.copy(this.refs["text"])
+                                    )
+                                }>{this.intl.get("h5-asset-copy-addr")}</a>
                                 <img src="/static/mobile/asset/icon_delete_green@2x.png"
                                      onClick={()=>{
                                          this.deletAddressH5({
@@ -112,7 +116,8 @@ export default class Address extends exchangeViewBase {
                                          });
                                      }}/>
                             </h3>
-                            <textarea readOnly="true" ref={`addr_${index}`}>{item.address || "-"}</textarea>
+                            {/*<textarea readOnly="true" ref={`addr_${index}`}>{item.address || "-"}</textarea>*/}
+                            <textarea readOnly="true" ref="text" >{item.address || "-"}</textarea>
                         </div>
                     )})}
 
@@ -130,9 +135,10 @@ export default class Address extends exchangeViewBase {
                             :
                         <button className={canSubmit ? "":"disable"}
                                 onClick={()=> {
+                                    debugger;
                                     this.appendAddressH5({
                                         coinName: currency,
-                                        addressName, inputAddrName,
+                                        addressName: inputAddrName,
                                         address: inputAddr,
                                     }, addressList);
                                 }}>{this.intl.get("save")}</button>}

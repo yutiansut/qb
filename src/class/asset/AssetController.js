@@ -348,7 +348,7 @@ export default class AssetController extends ExchangeControllerBase {
             v.addressName === obj.addressName && (flag = "asset-name-existing");
         });
         if (flag) {
-            this.setState({
+            this.view.setState({
                 showPopup: true,
                 popMsg: this.view.intl.get(flag),
                 popType: "tip3"

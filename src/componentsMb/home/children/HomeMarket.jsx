@@ -94,9 +94,11 @@ export default class HomeMarket extends ExchangeViewBase {
                   </td>
                   <td className="td2">
                     <b>{Number(v.price).format({number: 'digital'}) || 0}</b>
-                    <span>{controller.language === 'zh-CN' ?
-                      Number(v.priceCN || 0).format({number: 'legal', style: {name: 'cny'}}) :
-                      Number(v.priceEN || 0).format({number: 'legal', style: {name: 'usd'}})}</span>
+                    <span>
+                      {controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({
+                        number: 'legal',
+                        style: {name: 'cny'}
+                      }) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span>
                   </td>
                   <td className="td3">
                     <a className={v.rise < 0 ? "down" : "up"}>{Number(v.rise).toPercent()}</a>
