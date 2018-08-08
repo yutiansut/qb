@@ -58,7 +58,7 @@ export class ChartSettings {
         _frame.chartStyle = _chart_style;
         _frame.mIndic = _m_indic;
         _frame.indics = _indic;
-        _frame.indicsStatus = 'close';
+        _frame.indicsStatus = 'open';
         _frame.period = _range;
         //_frame.depthStatus = 'close';
         ChartSettings._data = {

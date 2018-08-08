@@ -146,10 +146,10 @@ export class MAIndicator extends Indicator {
 
     constructor() {
         super();
-        let M1 = new exprs.ParameterExpr("M1", 2, 1000, 7);
-        let M2 = new exprs.ParameterExpr("M2", 2, 1000, 30);
-        let M3 = new exprs.ParameterExpr("M3", 2, 1000, 0);
-        let M4 = new exprs.ParameterExpr("M4", 2, 1000, 0);
+        let M1 = new exprs.ParameterExpr("M1", 2, 1000, 5);
+        let M2 = new exprs.ParameterExpr("M2", 2, 1000, 10);
+        let M3 = new exprs.ParameterExpr("M3", 2, 1000, 30);
+        let M4 = new exprs.ParameterExpr("M4", 2, 1000, 60);
         let M5 = new exprs.ParameterExpr("M5", 2, 1000, 0);
         let M6 = new exprs.ParameterExpr("M6", 2, 1000, 0);
         this.addParameter(M1);
