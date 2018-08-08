@@ -34,6 +34,9 @@ export default class Charge extends exchangeViewBase {
                 this.setState({showPopup:true,popMsg:this.intl.get("asset-copyFail"),popType:"tip3"})
             }
         };
+
+
+      this.getWalletList = controller.getWalletList.bind(controller);
     }
 
     async componentDidMount() {
@@ -42,6 +45,8 @@ export default class Charge extends exchangeViewBase {
         // 获取路由参数
         let currency = this.props.controller.getQuery("currency").toUpperCase() || "";
 
+        //加入了这个
+        await this.getWalletList();
         this.getCoinAddress(currency);
         this.setState({currency: currency});
     }
