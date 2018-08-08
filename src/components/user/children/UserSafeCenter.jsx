@@ -53,7 +53,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showIp: false,
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
-      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定
+      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定 2 通知设置绑定
     }
 
     const {controller} = props
