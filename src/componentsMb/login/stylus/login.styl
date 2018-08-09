@@ -49,9 +49,12 @@
           border-radius (.02rem 0 0 .02rem)
       .send-code-btn
         background $h5-login-bg
-        color $h5-login-font-title
+        color $h5-login-font-btn
         border-radius (0 .02rem .02rem 0)
         border 0
+        &:hover
+          color $h5-login-font-btn
+          opacity 1
       .picture-btn
         width 1rem
         border-radius (0 .02rem .02rem 0)
@@ -68,23 +71,6 @@
       .base-input-wrap
         input
           padding-right .9rem
-      span
-        position absolute
-        top 50%
-        right .1rem
-        transform translateY(-50%)
-        line-height .2rem
-        a
-         color $h5-login-font-title
-         font-size .12rem
-        &:before
-          position absolute
-          top 0
-          left -.1rem
-          width .01rem
-          height .2rem
-          content ''
-          background-color $h5-login-font-title
     .login-li
       margin-top .36rem
       .login-btn
@@ -96,18 +82,31 @@
   .agree
     display block
     margin-top -.15rem
-    font-size .12rem
     color $h5-login-font-title
-    line-height .24rem
     text-align justify
     img
+      position relative
+      top .02rem
+      float left
       width .12rem
       height .12rem
       margin-right .08rem
-      vertical-align -.02rem
+    p
+      width 2.75rem
+      float left
+      line-height .17rem
+      span
+        font-size .12rem
+        color $h5-login-font-content
+      a
+        font-size .12rem
+        margin 0 .02rem
+
+  .forget-pass-p
+    margin-top -0.15rem
     a
       font-size .12rem
-      margin 0 .02rem
+      color $h5-login-font-remind
 
 
 

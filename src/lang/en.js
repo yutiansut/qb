@@ -807,7 +807,9 @@ export default function en(state) {
       "Please fill in correct mobile phone number",
     "login-other": "Log on in other places, please log in again",
     "login-err": "Login failed, please try again",
-    "login-miss": "The login information has failed, please try again"
+    "login-miss": "The login information has failed, please try again",
+    "h5-logo-useVerify": "Login With Verification Code",
+    "h5-logo-usePass": "Login With Password",
   };
   const help = {
     "help-center": "Help",

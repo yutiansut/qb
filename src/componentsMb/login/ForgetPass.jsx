@@ -4,6 +4,7 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
+import {Regular} from '../../core'
 
 export default class ForgetPass extends exchangeViewBase {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class ForgetPass extends exchangeViewBase {
       errPassAgain: "",
       verifyNum: this.intl.get("sendCode"),
       to: "/login",
+      passTest: true
     }
     //绑定view
     controller.setView(this)
@@ -40,7 +42,6 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeUserInput(value) {
     this.setState({userInput: value});
-    console.log(1, value)
     let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     if (reg.test(value)){
       this.setState({userType: 1})
@@ -51,33 +52,32 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeVerifyInput(value) {
     this.setState({verifyInput: value});
-    console.log(2, value)
   }
 
   changePassInput(value) {
     this.setState({passInput: value});
     this.state.errPass && (this.setState({errPass: ""}))
-    console.log(3, value)
   }
 
   changeAgainInput(value) {
     this.setState({againInput: value});
     this.state.errPassAgain && (this.setState({errPassAgain: ""}))
-    console.log(4, value)
   }
 
   changePicInput(value) {
     this.setState({picInput: value});
-    console.log(5, value)
   }
 
   checkPassInput() {
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    if(!reg.test(this.state.passInput)) {
-      this.setState({
-        errPass: this.intl.get("user-checkNewPwd")
-      })
-    }
+    // let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
+    // if(!reg.test(this.state.passInput)) {
+    //   this.setState({
+    //     errPass: this.intl.get("user-checkNewPwd")
+    //   })
+    // }
+    this.setState({
+      passTest: this.state.passInput && Regular('regPwd', this.state.passInput)
+    })
     if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
       this.setState({
         errPassAgain: this.intl.get("user-checkAgainPwd")
@@ -86,7 +86,7 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkAgainInput() {
-    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+    if(this.state.passInput && (this.state.againInput !== this.state.passInput)) {
       this.setState({
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
@@ -112,17 +112,16 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   render() {
+
     return (
       <div>
         <div className="find-pass-wrap-mb">
           <h1>{this.intl.get("login-findPass")}</h1>
           <ul>
             <li>
-              <p>{this.intl.get("login-userInput")}</p>
               <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUserInput(value)}/>
             </li>
             <li className="send-verify-li">
-              <p>{this.intl.get("login-code")}</p>
               <div className="clearfix">
                 <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.verifyInput} onInput={value => this.changeVerifyInput(value)}/>
                 <Button className="send-code-btn"
@@ -131,25 +130,22 @@ export default class ForgetPass extends exchangeViewBase {
               </div>
             </li>
             <li className="pass-li">
-              <p>{this.intl.get("login-passInput")}</p>
               <Input placeholder={this.intl.get("user-inputNewPwd")}
                      oriType="password"
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
-              <em>{this.state.errPass}</em>
+              <em className={this.state.passTest ? 'normal-remind' : ''}>{this.intl.get("login-passRule")}</em>
             </li>
             <li>
-              <p>{this.intl.get("login-passAgain")}</p>
               <Input placeholder={this.intl.get("login-passAgainPlaceholder")}
                      oriType="password"
                      value={this.state.againInput}
                      onBlur={this.checkAgainInput}
                      onInput={value => this.changeAgainInput(value)}/>
-              <em>{this.state.errPassAgain}</em>
+              <em>{this.state.againInput && this.state.errPassAgain}</em>
             </li>
             <li className="send-picture-li">
-              <p>{this.intl.get("user-popPicture")}</p>
               <div className="clearfix">
                 <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePicInput(value)}/>
                 <img src={this.state.captcha || ''} alt="" className="picture-btn btn" onClick={this.getCaptchaVerify} />

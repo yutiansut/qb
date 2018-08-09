@@ -8,7 +8,7 @@ import exchangeViewBase from "../../components/ExchangeViewBase";
 import Button from '../../common/component/Button/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
-import TwoVerifyPopup from  '../viewsPopup/TwoVerifyPopup.jsx'
+import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
 
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
@@ -16,9 +16,10 @@ import Browser from '../../class/lib/Browser'
 export default class Login extends exchangeViewBase {
   constructor(props) {
     super(props);
-    this.name="login";
+    this.name = "login";
     this.state = {
       titleList: [this.intl.get("login-verify"), this.intl.get("login-pass")],
+      titleUseList: [this.intl.get("h5-logo-useVerify"), this.intl.get("h5-logo-usePass")],
       titleIndex: 0, // 点击下标
       userInput: "",
       passInput: "",
@@ -60,14 +61,14 @@ export default class Login extends exchangeViewBase {
 
   changeTitle(i) { // 登录切换
     this.setState({
-        titleIndex: i,
-        userInput: "",
-        picInput: "",
-        codeInput: "",
-        passInput: "",
-        //userErr: "", // 手机号/邮箱错误
-        //pwdErr: "", // 密码错误
-        verifyNum: this.intl.get("sendCode"),
+      titleIndex: i,
+      userInput: "",
+      picInput: "",
+      codeInput: "",
+      passInput: "",
+      //userErr: "", // 手机号/邮箱错误
+      //pwdErr: "", // 密码错误
+      verifyNum: this.intl.get("sendCode"),
     });
     this.getCaptchaVerify();
     this.destroy();
@@ -76,20 +77,23 @@ export default class Login extends exchangeViewBase {
   changeUser(value) {
     this.setState({userInput: value});
     let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
-    if (reg.test(value)){
+    if (reg.test(value)) {
       this.setState({userType: 1})
     } else {
       this.setState({userType: 0})
     }
   }
+
   changePass(value) {
     this.setState({passInput: value});
     //console.log(2, value)
   }
+
   changeCode(value) {
     this.setState({codeInput: value});
     //console.log(3, value)
   }
+
   changePic(value) {
     this.setState({picInput: value});
     //console.log(4, value)
@@ -131,49 +135,62 @@ export default class Login extends exchangeViewBase {
         <div className="login-wrap-mb">
           <h1>{this.state.titleList[this.state.titleIndex]}</h1>
           <div className="tab-ul">
-            {this.state.titleList.map((v, index) => (<span key={index} className={this.state.titleIndex === index ? '' : 'show'} onClick={i => this.changeTitle(index)}>{v}</span>))}
+            {this.state.titleUseList.map((v, index) => (
+              <span key={index} className={this.state.titleIndex === index ? '' : 'show'}
+                    onClick={i => this.changeTitle(index)}>{v}</span>))}
           </div>
           <ul>
             <li>
-              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUser(value)}/>
+              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput}
+                     onInput={value => this.changeUser(value)}/>
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
-              <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput} onInput={value => this.changePass(value)}/>
-              <span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>
+              <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput}
+                     onInput={value => this.changePass(value)}/>
+              {/*<span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>*/}
             </li>
             <li className="verify-li">
-              <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput} onInput={value => this.changePic(value)}/>
-              <div className="picture-btn" >
+              <Input placeholder={this.intl.get("user-popPicturePlaceholder")} value={this.state.picInput}
+                     onInput={value => this.changePic(value)}/>
+              <div className="picture-btn">
                 <img src={this.state.captcha || ''} alt="" onClick={this.getCaptchaVerify}/>
               </div>
             </li>
             <li className={`${this.state.titleIndex === 0 ? '' : 'hide'} send-code-li clearfix`}>
-              <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput} onInput={value => this.changeCode(value)}/>
+              <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput}
+                     onInput={value => this.changeCode(value)}/>
               <Button className="send-code-btn"
                       title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
-                      onClick={()=>{this.getVerify(this.state.userInput, this.state.userType, 0)}}/>
+                      onClick={() => {
+                        this.getVerify(this.state.userInput, this.state.userType, 0)
+                      }}/>
             </li>
             <li className="login-li">
-              <Button title={this.intl.get("login")}
+              <Button title={`${this.state.titleIndex ? this.intl.get("login") : `${this.intl.get('header-regist')} / ${this.intl.get('login')}`}`}
                       className={`${this.canClick() ? 'can-click' : ''} login-btn`}
                       disable={this.canClick() ? false : true}
                       onClick={
-                          async () => {
-                              let res = this.state.query && await this.getAward({
-                                  inviter: JSON.parse(this.state.query),
-                                  invited: this.state.userInput
-                              }) || true
-                              if(!res)
-                                  return
-                              this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
-                          }
+                        async () => {
+                          let res = this.state.query && await this.getAward({
+                            inviter: JSON.parse(this.state.query),
+                            invited: this.state.userInput
+                          }) || true
+                          if (!res)
+                            return
+                          this.login(this.state.userInput, this.state.titleIndex === 0 ? this.state.codeInput : this.state.passInput, this.state.userType, this.state.titleIndex === 0 ? 0 : 1, this.state.captchaId, this.state.picInput, DetectOS(), Browser())
+                        }
                       }/>
             </li>
           </ul>
-          {this.state.titleIndex===0 && <label className="agree" onClick={()=>{this.setState({checkState:!this.state.checkState})}}>
-              <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png":"/static/mobile/login/icon_wx@2x.png"}/>
-              {this.intl.get("h5-login-read")}
+          <p className={`${this.state.titleIndex === 1 ? '' : 'hide'} forget-pass-p`}>
+            <NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink>
+          </p>
+          {this.state.titleIndex === 0 && <label className="agree clearfix" onClick={() => {this.setState({checkState: !this.state.checkState})}}>
+            <img src={this.state.checkState ? "/static/mobile/login/icon_yx@2x.png" : "/static/mobile/login/icon_wx@2x.png"}/>
+            <p>
+              <span>{this.intl.get("h5-login-read")}</span>
               <Link to="/help/terms" className="userAgree" target="_blank">{this.intl.get("login-readUser")}</Link>
+            </p>
           </label>}
         </div>
         {this.state.showPopup && (
@@ -182,18 +199,20 @@ export default class Login extends exchangeViewBase {
             msg={this.state.popMsg}
             h5={true}
             onClose={() => {
-              this.setState({ showPopup: false });
+              this.setState({showPopup: false});
             }}
-            h5={true}
-            autoClose = {true}
+            autoClose={true}
           />
         )}
-        {this.state.showTwoVerify && <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0,  0)}} onClose={() => {
-            this.setState({ showTwoVerify: false });
-            this.getCaptchaVerify()
+        {this.state.showTwoVerify &&
+        <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {
+          this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0, 0)
+        }} onClose={() => {
+          this.setState({showTwoVerify: false});
+          this.getCaptchaVerify()
         }} destroy={this.destroy} onConfirm={code => {
-            this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput, DetectOS(), Browser());
-        }} />}
+          this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput, DetectOS(), Browser());
+        }}/>}
       </div>
     );
   }

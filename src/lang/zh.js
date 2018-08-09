@@ -697,7 +697,9 @@ export default function zh(state) {
     "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱",
     "login-other": "已在其他地方登录，请重新登录",
     "login-err": "登录失败,请重试",
-    "login-miss": "登录信息已失效,请重试"
+    "login-miss": "登录信息已失效,请重试",
+    "h5-logo-useVerify": "使用验证码登录",
+    "h5-logo-usePass": "使用密码登录",
   };
   const help = {
     "help-center": "帮助中心",
