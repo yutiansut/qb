@@ -5,18 +5,19 @@ import { NavLink } from "react-router-dom";
 export default class Wallets extends exchangeViewBase {
   constructor(props) {
     super(props);
+    let { controller } = this.props;
     this.state = {
       hideZero: false,
+      coin: controller.configData.coin,
     };
 
-    let { controller } = this.props;
     this.filter = controller.filte.bind(controller);
     this.rank = controller.rank.bind(controller);
   }
 
   render() {
     let {wallet, controller} = this.props;
-    let {hideZero} = this.state;
+    let {hideZero, coin} = this.state;
     let result = this.filter(wallet, "", null, hideZero);
 
     return <div className="asset-wallet">
@@ -30,7 +31,7 @@ export default class Wallets extends exchangeViewBase {
               <i/></span>
         </div>
         {result && result.map((item, index) => {
-            return item.coinName.toUpperCase() !== 'QBT' ?
+            return item.coinName.toUpperCase() !== coin ?
             (<div className="wallet-li"  key={index}>
                 <div className="d1">
                     <label><img src={item.coinIcon}/>{item.coinName.toUpperCase()}</label>
