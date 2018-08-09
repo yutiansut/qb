@@ -86,8 +86,10 @@ export default class Balance extends exchangeViewBase {
             </p>
             {/*提币申请*/}
             {totalAsset.totalQuota === 10 ?
-              <a className="disable">{this.intl.get("h5-asset-limitApply")}</a> :
-              <NavLink to="/user/identity">{this.intl.get("h5-asset-limitApply")}</NavLink>}
+              <a className="disable">{this.intl.get("h5-asset-limitApply")}
+              <img src={this.$imagesMap.$h5_asset_next} />
+              </a> :
+              <NavLink to="/user/identity">{this.intl.get("h5-asset-limitApply")}<img src={this.$imagesMap.$h5_asset_next} /></NavLink>}
           </div>
         </div>
         {/*充提菜单*/}
@@ -110,8 +112,8 @@ export default class Balance extends exchangeViewBase {
             <a className="f2" onClick={() => this.setState({sort: ++sort % 2})}>
               <i>{this.intl.get("h5-asset-totalAssets")}</i>
 
-              {/*<img src={["/static/web/home/rank_down.svg","/static/web/home/rank_up.svg"][sort]}/>*/}
-              <span>{sort == 0 ?" ↓ ":" ↑ "}</span>
+              <img src={[this.$imagesMap.$h5_asset_xia, this.$imagesMap.$h5_asset_shang][sort]}/>
+              {/*<span>{sort == 0 ?" ↓ ":" ↑ "}</span>*/}
             </a>
           </div>
           {/*列表数据显示*/}

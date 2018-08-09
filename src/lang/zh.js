@@ -246,11 +246,11 @@ export default function zh(state) {
 
     "asset-balance": "账户余额",
     "asset-24hQuota": "24h提币额度",
-    "asset-limitApply": "提额申请 >",
+    "asset-limitApply": "提额申请",
     "asset-usedAsset": "已使用额度",
     "h5-asset-totalAssets": "总资产",
     "h5-asset-24hQuota": "24h提币额度",
-    "h5-asset-limitApply": "提额申请 >",
+    "h5-asset-limitApply": "提额申请",
     "h5-asset-usedAsset": "已使用额度",
     "asset-hideLittle": "隐藏小额资产",
     "asset-hideZero": "隐藏0余额币种",

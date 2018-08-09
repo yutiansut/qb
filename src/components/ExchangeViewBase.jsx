@@ -99,13 +99,15 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_activity_qb_home_click: "/static/mobile/activity/icon_qb_home_click@2x.png",
       $h5_activity_qb_my_click: "/static/mobile/activity/icon_qb_wode_click@2x.png",
       $h5_activity_qb_jianjie: "/static/mobile/activity/icon_qb_jianjie@2x.png",
-
       $h5_activity_qb_jj_one: "/static/mobile/activity/icon_zc_qb_jj_one@3x.png",
       $h5_activity_qb_jj_two: "/static/mobile/activity/icon_zc_qb_jj_two@3x.png",
       $h5_activity_qb_jj_three: "/static/mobile/activity/icon_zc_qb_jj_three@3x.png",
       $h5_activity_qb_jj_four: "/static/mobile/activity/icon_zc_qb_jj_four@3x.png",
       $h5_activity_qb_jj_five: "/static/mobile/activity/icon_zc_qb_jj_five@3x.png",
       $h5_activity_qb_jj_six: "/static/mobile/activity/icon_zc_qb_jj_six@3x.png",
+      $h5_asset_next: "/static/mobile/asset/icon_next@2x.png",
+      $h5_asset_shang: "/static/mobile/asset/img_shang@2x.png",
+      $h5_asset_xia: "/static/mobile/asset/img_xia@2x.png",
 
     }
   }

@@ -31,7 +31,7 @@
           color $h5-asset-font-light
           margin-left .12rem
       .dv3
-        padding .12rem .12rem 0 .12rem
+        padding .12rem .12rem 0 0
         margin-top .17rem
         border-top .01rem solid $h5-asset-border
         position relative
@@ -53,11 +53,15 @@
           display inline-block
           line-height .2rem
           position absolute
-          right .12rem
+          right 0
           top .27rem
           color $h5-asset-font-normal
           &.disable
             color $h5-asset-font-light
+          img
+            height .15rem
+            margin-left .08rem
+            vertical-align -.02rem
 
     .menu-ul
       line-height .45rem
@@ -113,7 +117,7 @@
           img
             margin-left .08rem
             width .08rem
-            height auto
+            height .15rem
           span
             font-size .14rem
             color $h5-asset-font-normal

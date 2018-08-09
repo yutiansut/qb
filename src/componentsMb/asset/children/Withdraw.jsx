@@ -70,6 +70,8 @@ export default class Withdraw extends exchangeViewBase {
         let {minerFee,extractAddr} = this.state.walletExtract;
         let {minCount,addressList} = extractAddr && extractAddr.filter(item => item.coinName.toLowerCase() === currency.toLowerCase())[0] || {};
         //let addressList = [{addressId:0, addressName:"xx", address:"xxx"}]
+
+        // 这里应该是从addressList 里取到Address.jsx 点击的那个地址
         let {addressName,address} = addressList && addressList.sort((a,b) => a.addressName<b.addressName?-1:1)[0] || {};
 
         //实际到账
