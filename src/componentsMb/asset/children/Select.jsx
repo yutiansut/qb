@@ -32,7 +32,6 @@ export default class Select extends exchangeViewBase {
         // let to = this.props.controller.getQuery("to") || "/wallet";
         let to = this.props.location.query && this.props.location.query.to || "/wallet";
         let selectCoin = this.props.location.query && this.props.location.query.selectCoin || "";
-        console.log(222,to);
         await this.getAssets();
         this.setState({to: to});
         this.setState({selectCoin: selectCoin});
@@ -49,7 +48,6 @@ export default class Select extends exchangeViewBase {
                         <div className="li" key={index} onClick={() =>{
                           this.setState({selectIndex: index});
                           this.setState({selectCoin: item.coinName});
-                          console.log("select的history push 了item.coinName: ",item.coinName," ---over");
                           history.push({
                             pathname:`${to}`,
                             query: {currency: `${item.coinName}`,selectCoin: item.coinName}

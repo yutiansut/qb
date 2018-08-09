@@ -46,7 +46,6 @@ export default class Charge extends exchangeViewBase {
         // 获取路由参数
         let currency =  this.props.location.query && this.props.location.query.currency.toUpperCase() || "";
         let coinName =  this.props.location.query && this.props.location.query.selectCoin.toUpperCase() || "";
-        console.log("Charge获取location.query.selectCoin: ",coinName);
 
         //加入了这个
         await this.getWalletList();
