@@ -22,6 +22,10 @@ export default class ExchangeViewBase extends ViewBase {
       $home_safe: "/static/web/home/4_2.svg",
       $home_stable: "/static/web/home/4_3.svg",
       $home_muti: "/static/web/home/muti@2x.png",
+      $home_advan_1: '/static/web/home/advantage_1.png',
+      $home_advan_2: '/static/web/home/advantage_2.png',
+      $home_advan_3: '/static/web/home/advantage_3.png',
+      $home_advan_4: '/static/web/home/advantage_4.png',
       $trade_search: "/static/web/search_bai.svg", // 市场
       $trade_close: "/static/web/guanbi_bai.svg",
       $trade_rank: "/static/web/trade/trade_rank.svg",

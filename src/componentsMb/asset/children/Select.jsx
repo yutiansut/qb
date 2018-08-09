@@ -47,7 +47,7 @@ export default class Select extends exchangeViewBase {
                         <div className="li" key={index} onClick={() =>
                             this.setState({selectIndex: index}, ()=> history.push(`${to}?currency=${item.coinName}`))
                         }>
-                            <span>{item.coinName}</span>
+                            <span>{item.coinName.toUpperCase()}</span>
                             {selectIndex === index &&
                                 <img src="/static/mobile/asset/icon_select_green@3x.png"/>}
                         </div>

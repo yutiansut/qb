@@ -678,20 +678,23 @@ export default class UserController extends ExchangeControllerBase {
     //已绑定直接弹窗
     if(type === 2 && userInfo.googleAuth){
       history.push({
-        pathname: `/user/googlekey`,
-        query: { from: true }
+        pathname: `/user/googlekey/?currentType=${this.view.state.currentType}&currentKey=${this.view.state.currentKey}`,
+        query: { from: true}
       });
       return;
     }
     if(type === 1 && !userInfo.email|| type === 3 && !userInfo.phone){
       history.push({
-        pathname: `/user/verifybind/?type=${type - 1}`,
+        pathname: `/user/verifybind/?type=${type - 1}&currentType=${this.view.state.currentType}&currentKey=${this.view.state.currentKey}`,
         query: { from: true }
       });
       return;
     }
     if(currentKey === 0 ) {
         this.setTwoVerifyH5('',0,'', this.view.state.currentType, type)
+        this.view.setState({
+          showBottomSelect: false
+        })
       return
     }
     if(type === 1 && userInfo.email || type === 2 && !userInfo.googleAuth || type === 3 && userInfo.phone || type === 0){

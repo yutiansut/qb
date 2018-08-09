@@ -172,7 +172,6 @@ export default class AssetStore extends ExchangeStoreBase {
   // 获取walletList
   async getWalletList() {
     let result = await this.Proxy.getAllCoinList();
-    console.warn("getWalletList before ----------  ", result);
     if (result && result.l && result.l.length) {
       let obj = {};
       this.controller.sort(result.l, ["n"], 1).forEach(v => {
@@ -218,7 +217,6 @@ export default class AssetStore extends ExchangeStoreBase {
       id: this.state.walletList[coin],
       token: this.controller.token
     });
-    console.warn("getChargeAddress this.state.walletList ----------  ", this.state.walletList);
     result.cad
       ? (this.state.coinAddress = {
           coinId: result.id, //币种ID

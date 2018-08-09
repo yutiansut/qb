@@ -127,7 +127,7 @@ export default class BalanceDetail extends exchangeViewBase {
           <h3>{enName}&nbsp;({name && name.toUpperCase()})</h3>
           <div className="data-li">
               <label>{this.intl.get('helo-coin-date')}：</label>
-              <span>{releaseTime.toDate("yyyy-MM-dd")}</span>
+              <span>{releaseTime.toDate("yyyy/MM/dd")}</span>
           </div>
           <div className="data-li">
               <label>{this.intl.get('helo-coin-total')}：</label>

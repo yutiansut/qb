@@ -29,6 +29,12 @@ export default class ActivityInvite extends exchangeViewBase {
     this.getInvited();
     this.getRankingList();
   }
+  componentDidUpdate() {
+    let list;
+    if (this.state.showSection === 'board') {
+      list = document.querySelector('.activity-board')
+    }
+  }
 
   getQRCode() {
     let canvas = document.querySelector('#downloadCanvas')

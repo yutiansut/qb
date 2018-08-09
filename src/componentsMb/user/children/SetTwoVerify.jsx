@@ -7,6 +7,8 @@ import Popup from "../../../common/component/Popup";
 export default class setTwoVerify extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    let currentType = props.location.query && props.location.query.currentType,
+        currentKey = props.location.query && props.location.query.currentKey;
     this.state = {
       popupFlag: false,
       popupType: false,
@@ -37,9 +39,9 @@ export default class setTwoVerify extends ExchangeViewBase {
         this.intl.get("user-verifyPhoneTitle")
       ],
       setType: "",
-      showBottomSelect: false, //控制底部菜单显示隐藏
-      currentKey: "", //当前选中验证的验证类型1 email，2 google, 3 phone
-      currentType: "", //选中的要修改的两步验证 1登陆   2提现   3资金密码
+      showBottomSelect: props.location.query && props.location.query.showBottom ? true : false, //控制底部菜单显示隐藏
+      currentKey: currentKey || 0, //当前选中验证的验证类型1 email，2 google, 3 phone
+      currentType: currentType || '', //选中的要修改的两步验证 1登陆   2提现   3资金密码
       googleCode: ["", "", "", "", "", ""],
       showPopup: false,
       verifyPopupType: 1
@@ -80,7 +82,6 @@ export default class setTwoVerify extends ExchangeViewBase {
   render() {
     const { controller, url } = this.props;
     let { userInfo, verifyPopupType, type, mode, verifyNum } = this.state;
-    console.log(userInfo)
     return (
       <div className="user-center-twoStep">
         <ul className="verify-list">

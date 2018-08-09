@@ -16,22 +16,22 @@ export default class HomeSuperiority extends exchangeViewBase {
         <h1>{this.intl.get("home-advantage")}</h1>
         <ul className={`clearfix ${lang === 'zh-CN' ? '' : 'active'}`}>
           <li>
-            <img src={this.$imagesMap.$home_financial}/>
+            <img src={this.$imagesMap.$home_advan_1}/>
             <h2>{this.intl.get("home-advantage-h1")}</h2>
             <p>{this.intl.get("home-advantage-p1")}</p>
           </li>
           <li>
-            <img src={this.$imagesMap.$home_safe}/>
+            <img src={this.$imagesMap.$home_advan_2}/>
             <h2>{this.intl.get("home-advantage-h2")}</h2>
             <p>{this.intl.get("home-advantage-p2")}</p>
           </li>
           <li>
-            <img src={this.$imagesMap.$home_stable}/>
+            <img src={this.$imagesMap.$home_advan_3}/>
             <h2>{this.intl.get("home-advantage-h3")}</h2>
             <p>{this.intl.get("home-advantage-p3")}</p>
           </li>
           <li>
-            <img className='muti' src={this.$imagesMap.$home_muti}/>
+            <img src={this.$imagesMap.$home_advan_4}/>
             <h2>{this.intl.get("home-advantage-h4")}</h2>
             <p>{this.intl.get("home-advantage-p4")}</p>
           </li>

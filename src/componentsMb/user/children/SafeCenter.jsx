@@ -21,7 +21,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
       showSet: false,
       verifyFund: false,
       remindPopup: false,
-      popType: "tip1",
+      popType: "tip3",
       popMsg: "",
       fundPassType0: 0,
       fundPassType: 0,
@@ -61,7 +61,10 @@ export default class UserCenterIndex extends ExchangeViewBase {
   needFundPwdInterval() {
     // 是否需要资金密码
     if (this.state.userInfo.fundPwd) {
-      this.props.history.push("/user/setPwd?type=5");
+      this.setState({
+        remindPopup: true,
+        popMsg: this.intl.get('user-setFundPwd'),
+      })
       return;
     }
     this.setState({

@@ -56,7 +56,7 @@ const header = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: "70px" }} />
+      <div style={{ height: "50px" }} />
     </div>
   );
 };
@@ -73,7 +73,7 @@ const homeHeader = ({ match, history }) => {
         match={match}
         history={history}
       />
-      <div style={{ height: "70px" }} />
+      <div style={{ height: "50px" }} />
     </div>
   );
 };
