@@ -8,7 +8,6 @@ export default class UserController extends ExchangeControllerBase {
     super(props)
     this.store = new UserStore()
     this.store.setController(this)
-
   }
 
   // setView(view){
@@ -617,7 +616,7 @@ export default class UserController extends ExchangeControllerBase {
     return resultObj
   }
 
-  async getCode(account, mode, type, os) { // 获取短信验证码
+  async getCode(account, mode, type, os=3) { // 获取短信验证码
     let result = await this.store.Proxy.getVerifyCode({
       "ac": account, // 手机号或者邮箱
       "mo": mode,//0 phone 1 email
