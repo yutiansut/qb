@@ -85,14 +85,6 @@ export class ChartManager {
         return this._captureMouseWheelDirectly;
     }
 
-    setCaptureMouseWheelDirectly(v) {
-        this._captureMouseWheelDirectly = v;
-        if (v)
-            $(this._overlayCanvas).bind('mousewheel', Control.mouseWheel);
-        else
-            $(this._overlayCanvas).unbind('mousewheel');
-    }
-
     getChart(nouseParam) {
         return this._chart["defaultFrame"];
     }

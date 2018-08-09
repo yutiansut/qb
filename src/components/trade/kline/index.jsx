@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import exchangeViewBase from "../../ExchangeViewBase";
 import "./css/main.css";
 import Kline from "./js/kline.js";
-import $ from "./lib/jquery.min";
 
 class ReactKline extends exchangeViewBase {
   constructor(props) {

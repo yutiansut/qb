@@ -3,7 +3,7 @@ import {ChartManager} from './chart_manager'
 import {ChartSettings} from './chart_settings'
 import {DefaultTemplate, Template} from './templates'
 import {MEvent} from './mevent'
-import $ from "../lib/jquery.min"
+import $ from "../lib/dom"
 
 export class Control {
 
@@ -304,11 +304,7 @@ export class Control {
             tmp.theme = 'Light';
             ChartSettings.save();
         }
-        let a = {};
-        a.command = "set current themes";
-        a.content = name;
-        $('#chart_output_interface_text').val(JSON.stringify(a));
-        $('#chart_output_interface_submit').submit();
+
         new MEvent().raise(name);
         ChartManager.instance.redraw();
 

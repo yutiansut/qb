@@ -6,17 +6,31 @@ class Dom{
 
     constructor(sel){
         if(typeof sel === "object"){
-            this.el = sel;
+            if(sel instanceof Dom){
+                return sel;
+            }else if(sel instanceof Array){
+                this.el = sel;
+            }else{
+                this.el = [sel];
+            }
         }else{
             this.el = document.querySelectorAll(sel);
         }
-    }
-
-    bind(event,handler){
-        this.el.forEach(el=>{
-            el.addEventListener(event,handler.bind(el));
-        });
-        return this;
+        //
+        this.registerEvent("mouseover");
+        this.registerEvent("mouseout");
+        this.registerEvent("mousemove");
+        this.registerEvent("mouseleave");
+        this.registerEvent("mouseup");
+        this.registerEvent("mousedown");
+        this.registerEvent("keyup");
+        this.registerEvent("keydown");
+        this.registerEvent("click");
+        this.registerEvent("change");
+        //
+        for(let i=0;i<this.el.length;i++){
+            this[i] = this.el[i];
+        }
     }
 
     attr(){
@@ -80,10 +94,6 @@ class Dom{
         return this.el[0].classList.contains(name);
    }
 
-   parent(){
-        return this.el[0].parentNode;
-   }
-
    html(){
         if(arguments.length===0){
             return this.el[0].innerHTML;
@@ -106,63 +116,189 @@ class Dom{
        return this;
    }
 
-   /////////////////////////////////////
-   before(nEl){
-       let el = this.el;
-       let parent = el.parentNode;
-       for(let i=0;i<parent.childNodes.length;i++){
-           if(parent.childNodes[i]===el){
-               parent.insertBefore(nEl,parent.childNodes[i]);
-           }
-       }
-       return this;
-   }
-
-   after(nEl){
-        let el = this.el;
-        let parent = el.parentNode;
-        for(let i=0;i<parent.childNodes.length;i++){
-            if(parent.childNodes[i]===el){
-                if(i===parent.childNodes.length-1){
-                    parent.appendChild(nEl);
-                }else{
-                    parent.insertBefore(nEl,parent.childNodes[i+1]);
-                }
-            }
+    width(){
+        if(arguments.length===0){
+            return this.el[0].offsetWidth;
+        }else if(arguments.length===1){
+            this.el.forEach(el=>{
+                el.style.width = arguments[0];
+            })
         }
         return this;
-   }
-
-   append(nEl){
-        let el=this.el;
-        el.appendChild(nEl);
-        return this;
-   }
-
-   //******************************************************************************************
-
-    find(sel){
-        let el = this.el;
-        return el.querySelector(sel);
-    }
-
-    findA(sel){
-        let el = this.el;
-        return el.querySelectorAll(sel);
-    }
-
-    getEl(){
-        return this.el;
-    }
-
-    width(){
-        let el = this.el;
-        return el.offsetWidth;
     }
 
     height(){
-        let el = this.el;
-        return el.offsetHeight;
+        if(arguments.length===0){
+            return this.el[0].offsetHeight;
+        }else if(arguments.length===1){
+            this.el.forEach(el=>{
+                el.style.height = arguments[0];
+            })
+        }
+        return this;
+    }
+
+    offset(){
+        if(arguments.length===0){
+            let el = this.el[0];
+            let left = 0,top = 0;
+            while(el !== document.body){
+                left += el.offsetLeft;
+                top += el.offsetTop;
+                el = el.parentNode;
+            }
+            return {left: left, top: top};
+        }else{
+            console.log("Dom.js：offset不支持此用法");
+        }
+        return this;
+    }
+
+    val(){
+        if(arguments.length===0){
+            return this.el[0].value;
+        }else if(arguments.length===1){
+            this.el.forEach(el=>{
+                el.value = arguments[0];
+            })
+        }
+        return this;
+    }
+
+    before(html){
+        if(typeof html === "string"){
+            this.el.forEach(el=>{
+                el.insertAdjacentHTML("beforeBegin",html);
+            });
+        }else{
+            this.el.forEach(el=>{
+                el.insertAdjacentElement("beforeBegin",html);
+            });
+        }
+        return this;
+    }
+
+    after(html){
+        if(typeof html === "string"){
+            this.el.forEach(el=>{
+                el.insertAdjacentHTML("afterEnd",html);
+            });
+        }else{
+            this.el.forEach(el=>{
+                el.insertAdjacentElement("afterEnd",html);
+            });
+        }
+        return this;
+    }
+
+    append(html){
+        if(typeof html === "string"){
+            this.el.forEach(el=>{
+                el.insertAdjacentHTML("beforeEnd",html);
+            });
+        }else{
+            this.el.forEach(el=>{
+                el.insertAdjacentElement("beforeEnd",html);
+            });
+        }
+        return this;
+    }
+
+    prepend(html){
+        if(typeof html === "string"){
+            this.el.forEach(el=>{
+                el.insertAdjacentHTML("afterBegin",html);
+            });
+        }else{
+            this.el.forEach(el=>{
+                el.insertAdjacentElement("afterBegin",html);
+            });
+        }
+        return this;
+    }
+
+   //-------------------------------------------------------
+    parent(){
+        return new Dom(this.el[0].parentNode);
+    }
+
+   find(sel){
+        let newEl=[];
+        this.el.forEach(el=>{
+            el.querySelectorAll(sel).forEach(el2=>{
+                newEl.push(el2);
+            });
+        });
+        return new Dom(newEl);
+   }
+
+   next(){
+        let newEl = [];
+        this.el.forEach(el=>{
+            newEl.push(el.nextSibling);
+        });
+        return new Dom(newEl)
+   }
+
+   prev(){
+        let newEl = [];
+        this.el.forEach(el=>{
+            newEl.push(el.previousSibling);
+        });
+        return new Dom(newEl);
+   }
+
+   children(){
+        if(arguments.length===0){
+
+        }else if(arguments.length===1){
+            let newEl=[];
+            this.el.forEach(el=>{
+                el.querySelectorAll(arguments[0]).forEach(el2=>{
+                    el2.parentNode === el && newEl.push(el2);
+                });
+            });
+            return new Dom(newEl);
+        }
+
+   }
+
+   //------------------------------------------------------
+
+    each(func){
+        this.el.forEach((item,index)=>{
+            func.bind(item)(index,item);
+        })
+    }
+
+   //--------------------------------------------------------class
+    //注册事件
+    registerEvent(name){
+        this[name]= (func)=>{
+            this.el.forEach(el=>{
+                el.addEventListener(name,event=>{
+                    func.bind(el)(event);
+                });
+            });
+            return this;
+        }
+    }
+
+    on(name,func){
+        return this.bind(name,func);
+    }
+
+    bind(name,func){
+        this.el.forEach(el=>{
+            el.addEventListener(name,event=>{
+                func.bind(el)(event);
+            });
+        });
+        return this;
+    }
+
+    unbind(name,func){
+
     }
 
 }
