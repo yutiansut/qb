@@ -6,9 +6,35 @@
   height 100%
   background-color $common-bg-popup
   z-index 999
-  &.h5
-    &.trans
-      background-color $common-bg-popup
+  .h5
+    position absolute
+    right 50%
+    bottom 60%
+    transform translateX(50%) translateY(50%)
+    -ms-transform translateX(50%) translateY(50%)
+    -moz-transform translateX(50%) translateY(50%)
+    -webkit-transform translateX(50%) translateY(50%)
+    -o-transform translateX(50%) translateY(50%)
+    &.tip1
+      min-height 1.1rem
+      padding 0.14rem 0.24rem 0
+    &.tip3
+      padding 0.08rem 0.24rem
+    &.tip3, &.tip1
+      min-width 1.1rem
+      max-width 2rem
+      text-align center
+      background $common-bg-h5-tip
+      border-radius(0.04rem)
+      p
+        font-size 0.16rem
+        color $common-font-none
+        line-height 0.35rem
+        letter-spacing 0
+        text-align center
+      img
+        width 0.62rem
+        margin-bottom 0.05rem
   &.trans
     background-color transparent
   .base-popup
@@ -78,14 +104,6 @@
       -o-transform translateX(0%) translateY(0%)
       width 3.3rem
       padding 0.2rem 0.2rem 0.2rem 0.74rem
-      &.h5
-        right 50%
-        bottom 20%
-        transform translateX(50%) translateY(50%)
-        -ms-transform translateX(50%) translateY(50%)
-        -moz-transform translateX(50%) translateY(50%)
-        -webkit-transform translateX(50%) translateY(50%)
-        -o-transform translateX(50%) translateY(50%)
       h5
         margin-bottom 0.1rem
       .img

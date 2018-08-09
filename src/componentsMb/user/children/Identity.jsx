@@ -359,6 +359,7 @@ export default class userIdentity extends ExchangeViewBase {
             type={this.state.popType}
             msg={this.state.popMsg}
             autoClose={true}
+            h5={true}
             onClose={() => {
               if(this.state.popType === 'tip1'){
                 this.props.history.push({pathname:'/user'})
