@@ -7,13 +7,18 @@ export default class Terms extends ExchangeViewBase {
 
   constructor(props) {
     super(props);
+    this.addContent = props.headerController.addContent.bind(props.headerController) // 获取头部内容
+
+  }
+  async componentDidMount() {
+    this.addContent({con: this.intl.get("help-terms")});
+
   }
 
   render() {
     const {controller} = this.props;
     const content = this.getContent();
     return <div className={`help-terms ${controller.getQuery("os") === "0" ? "nohead" : ''}`}>
-        <h2 className="title">{this.intl.get("help-terms")}</h2>
         <p>{this.intl.get("help-termsFirst")}</p>
         <p>{this.intl.get("help-termsSecond")}</p>
         {content.map((v, index) => <div key={index}>

@@ -26,12 +26,13 @@ export default class Help extends exchangeViewBase {
     this.assetController = props.assetController;
     this.activityController = props.activityController;
     this.userController = props.userController;
+    this.headerController = props.headerController;
   }
 
   render() {
     let match = this.props.match;
     const terms = () => {
-      return <Terms controller={this.assetController}/>;
+      return <Terms controller={this.assetController} headerController={this.headerController}/>;
     };
     const pricing = () => {
       return <Pricing controller={this.assetController} />;
