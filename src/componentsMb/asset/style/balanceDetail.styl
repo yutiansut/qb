@@ -140,13 +140,20 @@
         line-height .36rem
         border-bottom .01rem solid $h5-asset-bg
         margin 0 .12rem
+        display flex
+        justify-content space-between
         label
           font-size .15rem
           color $h5-asset-font-light
+          word-break keep-all
+          white-space nowrap
         span
           font-size .14rem
           color $h5-asset-font-normal
-          float right
+          word-break break-all
+          text-align right
+          line-height .21rem
+          padding .07rem 0
       .detail
         label
           display block
