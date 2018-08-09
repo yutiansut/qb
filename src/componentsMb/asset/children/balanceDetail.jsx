@@ -109,13 +109,14 @@ export default class BalanceDetail extends exchangeViewBase {
         <div className="footer">
           <Button
             title={this.intl.get("asset-charge")}
+            type="base"
             className="active"
             disable={result.c === 0 ? true : false}
             onClick={() => {
                 this.props.history.push({ pathname: "/wallet/charge", query: { currency: result.coinName }})
             }}
           />
-          <Button title={this.intl.get("asset-withdraw")} />
+          <Button type="base" className="tiBbtn" title={this.intl.get("asset-withdraw")} />
         </div>
 
         {/*币种简介*/}

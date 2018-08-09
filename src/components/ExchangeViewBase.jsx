@@ -108,6 +108,7 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_asset_next: "/static/mobile/asset/icon_next@2x.png",
       $h5_asset_shang: "/static/mobile/asset/img_shang@2x.png",
       $h5_asset_xia: "/static/mobile/asset/img_xia@2x.png",
+      $h5_asset_search_cancel: "/static/mobile/asset/icon_search_cancel@2x.png",
 
       $h5_tip_success: "/static/mobile/icon_success@3x.png",
 

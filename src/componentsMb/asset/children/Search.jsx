@@ -51,11 +51,15 @@ export default class Search extends exchangeViewBase {
            <div className="search">
                {/*搜索头部*/}
                 <div className="header">
-                    <img src={this.$imagesMap.$h5_search}/>
+                    <img className="img-search" src={this.$imagesMap.$h5_search}/>
                     <input type="text"
                            value={input}
                            placeholder={this.intl.get("h5-asset-search-placeholder")}
                            onInput={e=>this.setState({input: e.target.value})}/>
+
+                  {input && <img className="img-cancel" src={this.$imagesMap.$h5_asset_search_cancel}
+                    onClick={e=>this.setState({input: ""})}
+                  />}
                     <a onClick={()=>history.goBack()}>{this.intl.get("cance")}</a>
                 </div>
                {/*搜索历史*/}
