@@ -173,8 +173,9 @@ export default class MarketController extends ExchangeControllerBase {
     market && this.store.setSelecedMarket(market);
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
+    console.log('homeMarketPairData', homeMarketPairData,this.store.sortValue);
     homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
-    console.log('homeMarketPairData', homeMarketPairData, this.store.state.tradePair, selectPair);
+  
     type > 2 && (this.store.state.tradePair = selectPair || homeMarketPairData[0].tradePairName);
     this.view.setState({
       homeMarketPairData, market : this.store.selecedMarket, marketDataHandle: this.store.marketDataHandle
@@ -232,7 +233,7 @@ export default class MarketController extends ExchangeControllerBase {
   //排序功能
   pairSort(v, index) { // type 1 升序 0 降序
     let imgArr = [this.view.$imagesMap.$rank_down, this.view.$imagesMap.$rank_up],
-      tradeSortImg = ["/static/img/trade_rank_shang.svg", "/static/img/trade_rank_xia.svg"],
+      tradeSortImg = [ "/static/img/trade_rank_xia.svg","/static/img/trade_rank_shang.svg"],
       sortArray = this.store.state.homeMarketPairData;
     let sortValue = v.sortValue;
     if((this.store.state.unitsType === 'CNY' || this.store.state.unitsType === 'USD') && sortValue[0] === 'price'){
@@ -241,7 +242,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.setSort(sortValue, v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
-      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, v.type),
+      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, this.store.state.ascending),
       sortImg: imgArr[v.type],
       sortIndex: index,
       tradeSortImg: tradeSortImg[v.type]
