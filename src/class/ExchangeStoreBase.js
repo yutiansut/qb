@@ -131,8 +131,10 @@ export default class ExchangeStoreBase extends StoreBase {
       websocket.onOpen(data => {
         // console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
         this.startWebsocket(connectName)
-        Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
-
+        Object.keys(websocketHistory).forEach(v => {
+          websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv));
+          websocketHistory[v].length = 0
+        })
       })
     })
 
@@ -143,7 +145,10 @@ export default class ExchangeStoreBase extends StoreBase {
       websocket.onOpen(data => {
         console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
         this.startWebsocket(connectName)
-        Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
+        Object.keys(websocketHistory).forEach(v => {
+          websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv));
+          websocketHistory[v].length = 0
+        })
       })
     })
 

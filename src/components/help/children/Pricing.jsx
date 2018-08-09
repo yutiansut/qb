@@ -164,11 +164,11 @@ export default class Pricing extends exchangeViewBase {
             score: `+(${this.intl.get('help-usd-equivalent')}*0.01)`,
             info: this.intl.get('help-rounded-up')
           },
-          {
-            op: this.intl.get('help-improv'),
-            score: `+100`,
-            info: this.intl.get('help-idea-accepted')
-          },
+          // {
+          //   op: this.intl.get('help-improv'),
+          //   score: `+100`,
+          //   info: this.intl.get('help-idea-accepted')
+          // },
           {
             op: this.intl.get('help-verification'),
             score: `+500`,
