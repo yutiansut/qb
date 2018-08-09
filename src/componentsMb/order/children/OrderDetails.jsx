@@ -50,7 +50,7 @@ export default class OrderDetails extends exchangeViewBase {
     const tradePairName = this.props.orderInfo.tradePairName.toUpperCase();
     const tradePairArr = tradePairName.split('/');
     setTimeout(() => {
-      console.log(orderDetail);
+      // console.log(orderDetail);
     }, 5000);
     return(
       <div className="order-details">

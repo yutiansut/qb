@@ -11,7 +11,7 @@ export default class KlineStore extends ExchangeStoreBase {
       klineUpdate: [],   // ws推送数据
     };
     this.WebSocket.general.on("tradeKline", data => {
-      console.log("k线-ws推送：\n",data);
+      // console.log("k线-ws推送：\n",data);
       data.ns.map(v => {
           let arr = [];
           arr.push(v.et * 1000);

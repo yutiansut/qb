@@ -73,7 +73,7 @@ export default class OrderHistory extends exchangeViewBase{
     }
     controller.getHistoryOrder(true, params)
     setTimeout(() => {
-      console.log(this.state.orderListArray)
+      // console.log(this.state.orderListArray)
     }, 5000);
   }
 
@@ -81,7 +81,7 @@ export default class OrderHistory extends exchangeViewBase{
     this.setState({displayType: "list"})
   }
   setDetailsDisplay(index) {
-    console.log('index1111111111111111', index)
+    // console.log('index1111111111111111', index)
     this.setState({viewIndex: index});
     this.setState({displayType: "details"})
   }

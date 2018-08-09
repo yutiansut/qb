@@ -40,7 +40,7 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeUserInput(value) {
     this.setState({userInput: value});
-    console.log(1, value)
+    // console.log(1, value)
     let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     if (reg.test(value)){
       this.setState({userType: 1})
@@ -51,24 +51,24 @@ export default class ForgetPass extends exchangeViewBase {
 
   changeVerifyInput(value) {
     this.setState({verifyInput: value});
-    console.log(2, value)
+    // console.log(2, value)
   }
 
   changePassInput(value) {
     this.setState({passInput: value});
     this.state.errPass && (this.setState({errPass: ""}))
-    console.log(3, value)
+    // console.log(3, value)
   }
 
   changeAgainInput(value) {
     this.setState({againInput: value});
     this.state.errPassAgain && (this.setState({errPassAgain: ""}))
-    console.log(4, value)
+    // console.log(4, value)
   }
 
   changePicInput(value) {
     this.setState({picInput: value});
-    console.log(5, value)
+    // console.log(5, value)
   }
 
   checkPassInput() {
