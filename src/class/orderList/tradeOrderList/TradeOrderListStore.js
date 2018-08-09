@@ -6,6 +6,7 @@ export default class TradeOrderListStore extends OrderListStore{
     this.state={
       changeFlag: true,
       room: '',
+      titleSelect:'all',
       liveTradeList: {
         buy: [
           {
@@ -99,16 +100,16 @@ export default class TradeOrderListStore extends OrderListStore{
         "buy": data.b && data.b.map(v => {
           return {
             "price": v.p,
-            "priceCN": v.pc,
-            "priceEN": v.pe,
+            // "priceCN": v.pc,
+            // "priceEN": v.pe,
             "amount": v.a
           }
         }) || [],
         "sell": data.s && data.s.map(v => {
           return {
             "price": v.p,
-            "priceCN": v.pc,
-            "priceEN": v.pe,
+            // "priceCN": v.pc,
+            // "priceEN": v.pe,
             "amount": v.a
           }
         }) || [],
@@ -135,21 +136,22 @@ export default class TradeOrderListStore extends OrderListStore{
       "buy": orderListArray.b && orderListArray.b.map(v => {
         return {
           "price": v.p,
-          "priceCN": v.pc,
-          "priceEN": v.pe,
+          // "priceCN": v.pc,
+          // "priceEN": v.pe,
           "amount": v.a
         }
       }) || [],
       "sell": orderListArray.s && orderListArray.s.map(v => {
         return {
           "price": v.p,
-          "priceCN": v.pc,
-          "priceEN": v.pe,
+          // "priceCN": v.pc,
+          // "priceEN": v.pe,
           "amount": v.a
         }
       }) || [],
     }
     this.state.liveTrade = orderListArrayAf;
+    // this.controller.liveTradeListHandle(dataAf)
     this.controller.kdepthController && this.controller.kdepthController.setData(orderListArrayAf);
     return orderListArrayAf
   }

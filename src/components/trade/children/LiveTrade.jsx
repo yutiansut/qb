@@ -21,18 +21,20 @@ export default class LiveTrade extends ExchangeViewBase{
     this.liveTradeListHandle = controller.liveTradeListHandle.bind(controller);
     this.orderListSelect = controller.orderListSelect.bind(controller);
     // this.getNewPrice = controller.getNewPrice.bind(controller)
-    this.clearRoom = controller.clearRoom.bind(controller)
+    this.clearRoom = controller.clearRoom.bind(controller);
+    this.changeLiveTitleSelect = controller.changeLiveTitleSelect.bind(controller)
   }
   componentWillMount(){
   
   }
   componentDidMount(){
   }
-  changeLiveTitleSelect(v){
-    this.setState({
-      titleSelect: v.type
-    });
-  }
+  // changeLiveTitleSelect(v){
+  //   this.setState({
+  //     titleSelect: v.type
+  //   });
+  //   //预留方法
+  // }
   componentWillUnmount() {
     this.clearRoom()
   }
@@ -62,28 +64,28 @@ export default class LiveTrade extends ExchangeViewBase{
             <tr className={`no-content-${this.state.titleSelect !== 'all' ? 'none' : ''}`} style={{height: `${(13 - (this.state.liveSellArray && this.state.liveSellArray.length || 0)) >= 0 ? (13 - (this.state.liveSellArray && this.state.liveSellArray.length ) || 0) * .21 : 0}rem`}}>
             </tr>
             {this.state.liveSellArray && this.state.liveSellArray.map((v,index) =>
-                ((this.state.titleSelect === 'all' && this.state.liveSellArray.length - 13 <= index) || (this.state.titleSelect === 'sell' && this.state.liveSellArray.length - 26 <= index)) && (
+               (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</td>
-                    <td style={{color : '#F25656 '}}>{this.state.unitsType === 'CNY' && Number(v.price * this.state.prices.priceCN).format({number: 'legal', style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.price * this.state.prices.priceEN).format({number: 'legal',style:{name:'usd'}}) || Number(v.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})) }</td>
-                    <td>{Number(v.amount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(Number(v.price * this.state.prices.priceCN).multi(v.amount)).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(Number(v.price * this.state.prices.priceEN).multi(v.amount)).format({number:'legal',style:{name:'usd'}}) || Number(Number(v.price).multi(v.amount)).format({number:'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}})) }</td>
+                    <td style={{color : '#F25656 '}}>{v.priceR}</td>
+                    <td>{v.amountR}</td>
+                    <td>{v.turnover}</td>
                   </tr>
               )
             )}
             </tbody>
 
           <tbody className='live-deal'>
-            <tr><td colSpan='4' className={`${this.state.updown && (this.state.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(this.state.prices.priceCN * this.state.prices.price).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(this.state.prices.priceEN * this.state.prices.price).format({number:'legal',style:{name:'usd'}}) || Number(this.state.prices.price).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}}))}</td></tr>
+            <tr><td colSpan='4' className={`${this.state.updown && (this.state.updown > 0 && "market-up" || "market-down")}`}>{this.state.dealPrice}</td></tr>
           </tbody>
             <tbody>
             {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>
-                ((this.state.titleSelect === 'all' && index < 13) || (this.state.titleSelect === 'buy' && index < 26)) && (
+                (
                   <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td>{`${this.intl.get('order-b')}${index + 1}`}</td>
-                    <td style={{color : '#2BB789 '}}>{this.state.unitsType === 'CNY' && Number(v.price * this.state.prices.priceCN).format({number: 'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.price * this.state.prices.priceEN).format({number: 'legal',style:{name:'usd'}}) || Number(v.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})) }</td>
-                    <td>{Number(v.amount).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy, false)}</td>
-                    <td>{this.state.unitsType === 'CNY' && (Number(Number(v.price * this.state.prices.priceCN).multi(v.amount)).format({number:'legal',style:{name:'cny'}})) || (this.state.unitsType === 'USD' && (Number(Number(v.price * this.state.prices.priceEN).multi(v.amount)).format({number:'legal',style:{name:'usd'}})) || (Number(Number(v.price).multi(v.amount)).format({number:'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}}))) }</td>
+                    <td style={{color : '#2BB789 '}}>{v.priceR}</td>
+                    <td>{v.amountR}</td>
+                    <td>{v.turnover}</td>
                   </tr>
               )
             )}

@@ -5,6 +5,7 @@ import '../stylus/tradeRecent.styl'
 export default class extends ExchangeViewBase {
   constructor(props) {
     super(props);
+    this.name = 'recentTrade'
     this.state = {
       recentBank:{},
       sortIndex: -1,

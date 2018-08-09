@@ -176,8 +176,8 @@ export default class DealController extends ExchangeControllerBase {
 
   async dealTrade(orderType,e) {
     // e.persist()
-    e.preventDefault();
-    e.stopPropagation();
+    // e.preventDefault();
+    // e.stopPropagation();
     
   
    

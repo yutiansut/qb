@@ -185,6 +185,8 @@ export default class MarketStore extends ExchangeStoreBase {
       //除第一次外需要计算增长值改变字体颜色
       if (type) {
         res.updown = (res.price - v.price) || v.updown;
+        res.priceCNY = res.price * v.priceCN;
+        res.priceUSD = res.price * v.priceEN;
       }
       res.points = (res.points && res.points.length) && res.points || v.points
       return Object.assign(v, res)

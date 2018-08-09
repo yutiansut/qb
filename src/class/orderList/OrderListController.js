@@ -17,7 +17,7 @@ export default class OrderListController extends ExchangeControllerBase {
     });
     this.store.state.unitsType = v;
     let recentTradeListArr = this.view.state.recentTradeListArr;
-    this.changeRenderRecent(recentTradeListArr)
+    this.view.name === 'recentTrade' && this.changeRenderRecent(recentTradeListArr)
   }
 
   setInitUnit(market,coin){
@@ -106,7 +106,7 @@ export default class OrderListController extends ExchangeControllerBase {
     }
     
   }
-  // 设置价格及数量精度
+  // 设置价格及数量精度(共用)
   setAccuracy(priceAccuracy,volumeAccuracy) {
     this.view.setState(
         {
