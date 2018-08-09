@@ -44,14 +44,12 @@ export default class Charge extends exchangeViewBase {
         let {controller,history} = this.props;
         this.addContent({con: this.intl.get("asset-charge")});
         // 获取路由参数
-        let currency =  this.props.location.query && this.props.location.query.currency.toUpperCase() || "";
-        let coinName =  this.props.location.query && this.props.location.query.selectCoin.toUpperCase() || "";
+        let currency = this.props.controller.getQuery("currency").toUpperCase() || "";
 
         //加入了这个
         await this.getWalletList();
         this.getCoinAddress(currency);
         this.setState({currency: currency});
-        this.setState({coinName: coinName});
     }
 
     render() {
@@ -62,14 +60,7 @@ export default class Charge extends exchangeViewBase {
         return (
             <div className="charge">
                 {/*选择币种*/}
-                {/*<div className="filter" onClick={()=>history.push(`/wallet/select?to=/wallet/charge`)}>*/}
-                <div className="filter" onClick={()=>history.push({
-                  pathname: "/wallet/select",
-                  query: {
-                    to: "/wallet/charge",
-                    selectCoin: this.state.coinName
-                  }
-                })}>
+                <div className="filter" onClick={()=>history.push(`/wallet/select?to=/wallet/charge`)}>
                     <label>{this.intl.get("asset-selectCoin")}</label>
                     <b className={currency ? "":"gray"}>{currency || this.intl.get("h5-asset-selectCoin")}</b>
                     <img src="/static/mobile/asset/icon_next@2x.png"/>
