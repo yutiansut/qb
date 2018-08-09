@@ -1,6 +1,7 @@
 import React from "react";
 import ExchangeViewBase from "../../../components/ExchangeViewBase.jsx";
 import QRCode from "qrcode.react";
+import RemindPopup from "../../../common/component/Popup/index.jsx";
 import Button from "../../../common/component/Button";
 
 export default class GoogleKey extends ExchangeViewBase {
@@ -19,13 +20,18 @@ export default class GoogleKey extends ExchangeViewBase {
       ],
       currentType: currentType || false,
       currentKey: currentKey || false,
+      remindPopup: false,
+      popMsg: "",
     };
     controller.setView(this);
     let { googleSecret } = controller.initState;
     this.state = Object.assign(this.state, { googleSecret });
     this.getGoogle = controller.getGoogle.bind(controller)
     this.copy = (el)=>{
-      controller.copy(el)
+      this.setState({
+        remindPopup: true,
+        popMsg: controller.copy(el) ? this.intl.get("asset-copySuccess") : this.intl.get("asset-option-failed")
+      });
     }
   }
 
@@ -56,6 +62,17 @@ export default class GoogleKey extends ExchangeViewBase {
         <Button title={this.intl.get('next')} type="base" onClick={()=>{
           history.push({pathname:`/user/verifybind/?type=1&currentType=${this.state.currentType}&currentKey=${this.state.currentKey}`, query:{from:true}})
         }}/>
+        {this.state.remindPopup && (
+          <RemindPopup
+            type="tip1"
+            msg={this.state.popMsg}
+            h5={true}
+            autoClose={true}
+            onClose={() => {
+              this.setState({ remindPopup: false });
+            }}
+          />
+        )}
       </div>
     );
   }

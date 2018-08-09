@@ -131,7 +131,7 @@ export default class Verify extends ExchangeViewBase {
             />
             {type === 0 && <p className="tips">
               {this.intl.get('asset-reminder')}：<br />
-              若未收到邮件，请检查邮箱垃圾箱～
+              {this.intl.get('user-emailLost')}
             </p>}
           </div>
         ) : (

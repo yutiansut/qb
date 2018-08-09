@@ -89,7 +89,7 @@ export default class Popup extends exchangeViewBase {
     return (
       <div
         className={`wrap ${
-          ["tip1", "tip2", "tip3", "tip4"].includes(type) ? "trans" : ""
+          ["tip1", "tip2", "tip3", "tip4"].includes(type) || h5 ? "trans" : ""
         }`}
       >
         <div>

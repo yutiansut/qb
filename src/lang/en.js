@@ -658,6 +658,7 @@ export default function en(state) {
     "user-googleSucc": "Google verification Setup Success",
     "user-setFundPwd": "Please set up the fund password",
     "user-googleLost": "Google verifier lost, please contact customer service.",
+    "user-emailLost": "If you have not received the mail, please check the trash.",
     "user-googleOn": "Turn On Google Verification",
     "user-googleKey1": `1. Installed from "Google Authenticator" application, click "+" from upper right corner. Then choose "Input verification code manually/Scan QR code".`,
     "user-googleKey2": `2. Choose "Input manually", and copy the "Key" above then goto the input field for "Key". Fill in the ${nameUsd} account and click "Finish"; The Google verification code will be generated automatically if you chosse "Scan QR code".`,
