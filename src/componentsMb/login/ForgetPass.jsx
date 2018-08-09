@@ -22,11 +22,11 @@ export default class ForgetPass extends exchangeViewBase {
       popMsg: "成功",
       captcha: "",
       captchaId: "",
-      errPass: "",
+      userErr: "",
       errPassAgain: "",
       verifyNum: this.intl.get("sendCode"),
       to: "/login",
-      passTest: true
+      passTest: true // 判断密码输入对错显示
     }
     //绑定view
     controller.setView(this)
@@ -38,12 +38,13 @@ export default class ForgetPass extends exchangeViewBase {
     this.forgetLoginPass = controller.forgetLoginPass.bind(controller) // 图形验证码
     this.checkPassInput = this.checkPassInput.bind(this) // 检验密码
     this.checkAgainInput = this.checkAgainInput.bind(this) // 检验密码
+    this.checkUserInput = this.checkUserInput.bind(this) // 检验用户
   }
 
   changeUserInput(value) {
     this.setState({userInput: value});
-    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
-    if (reg.test(value)){
+    let reg = Regular('regEmail', value)
+    if (reg){
       this.setState({userType: 1})
     } else {
       this.setState({userType: 0})
@@ -56,7 +57,6 @@ export default class ForgetPass extends exchangeViewBase {
 
   changePassInput(value) {
     this.setState({passInput: value});
-    this.state.errPass && (this.setState({errPass: ""}))
   }
 
   changeAgainInput(value) {
@@ -68,22 +68,48 @@ export default class ForgetPass extends exchangeViewBase {
     this.setState({picInput: value});
   }
 
-  checkPassInput() {
-    this.setState({
-      passTest: this.state.passInput ? Regular('regPwd', this.state.passInput) : true
-    })
-    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
+  // 检验部分
+  checkUserInput() { // 手机号／邮箱
+    let reg1 = Regular('regEmail', this.state.userInput),
+      reg2 = Regular('regPhone', this.state.userInput);
+
+    if (!reg1 && !reg2) {
       this.setState({
-        errPassAgain: this.intl.get("user-checkAgainPwd")
+        userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
       })
     }
   }
 
-  checkAgainInput() {
-    if(this.state.passInput && (this.state.againInput !== this.state.passInput)) {
+  checkPassInput() {
+    let reg = Regular('regPwd', this.state.passInput)
+    this.setState({
+      passTest: this.state.passInput ? reg : true
+    })
+    if(this.state.againInput && (this.state.againInput !== this.state.passInput)) { // 两次密码不一致
       this.setState({
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
+    }
+    if (reg && (this.state.againInput === this.state.passInput)) { // 两次密码一致
+      this.state.errPassAgain && (this.setState({errPassAgain: ""}))
+    }
+  }
+
+  checkAgainInput() {
+    let reg = Regular('regPwd', this.state.againInput) // 再次输入密码
+    if(!reg) { // 密码格式不对
+      this.setState({
+        errPassAgain: this.intl.get("login-passRule")
+      })
+      return
+    }
+    if(this.state.passInput && (this.state.againInput !== this.state.passInput)) { // 两次密码不一致
+      this.setState({
+        errPassAgain: this.intl.get("user-checkAgainPwd")
+      })
+    }
+    if (reg && (this.state.againInput === this.state.passInput)) { // 两次密码一致
+      this.state.errPassAgain && (this.setState({errPassAgain: ""}))
     }
   }
 
@@ -113,7 +139,11 @@ export default class ForgetPass extends exchangeViewBase {
           <h1>{this.intl.get("login-findPass")}</h1>
           <ul>
             <li>
-              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput} onInput={value => this.changeUserInput(value)}/>
+              <Input placeholder={this.intl.get("login-userInput")}
+                     value={this.state.userInput}
+                     onInput={value => this.changeUserInput(value)}
+                     onBlur={this.checkUserInput}/>
+              <em>{this.state.userInput && this.state.userErr}</em>
             </li>
             <li className="send-verify-li">
               <div className="clearfix">

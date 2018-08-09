@@ -95,14 +95,14 @@ export default class ForgetPass extends exchangeViewBase {
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
-    if (reg.test(this.state.againInput) && (this.state.againInput === this.state.passInput)) { // 两次密码一致
+    if (reg && (this.state.againInput === this.state.passInput)) { // 两次密码一致
       this.state.errPassAgain && (this.setState({errPassAgain: ""}))
     }
   }
 
   checkAgainInput() {
     let reg = Regular('regPwd', this.state.againInput) // 再次输入密码
-    if(!reg.test(this.state.againInput)) { // 密码格式不对
+    if(!reg) { // 密码格式不对
       this.setState({
         errPassAgain: this.intl.get("user-checkNewPwd")
       })
@@ -113,7 +113,7 @@ export default class ForgetPass extends exchangeViewBase {
         errPassAgain: this.intl.get("user-checkAgainPwd")
       })
     }
-    if (reg.test(this.state.againInput) && (this.state.againInput === this.state.passInput)) { // 两次密码一致
+    if (reg && (this.state.againInput === this.state.passInput)) { // 两次密码一致
       this.state.errPassAgain && (this.setState({errPassAgain: ""}))
     }
   }
