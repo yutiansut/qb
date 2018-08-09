@@ -188,29 +188,12 @@ export default class Plotter {
         let bids=this.bids;
         let asks=this.asks;
 
-        //数据过滤 gapX
+        //画图过滤 gapX
         let gapX = this.gapX;
-        let gapStrX = ratioStrX * gapX;
-        if(asks[0][0] - bids[bids.length-1][0] < gapStrX){
-            let maxBidsX = (asks[0][0] + bids[bids.length-1][0]) / 2 - gapStrX / 2;
-            let minAsksX = (asks[0][0] + bids[bids.length-1][0]) / 2 + gapStrX / 2;
-            for(let i=0;i<bids.length;i++){
-                if(bids[i][0]>maxBidsX){
-                    bids.splice(i,1);
-                    i--;
-                }
-            }
-            for(let i=0;i<asks.length;i++){
-                if(asks[i][0]<minAsksX){
-                    asks.splice(i,1);
-                    i--;
-                }
-            }
-            if(bids.length<2 || asks.length<2){
-                bids=[[0,0],[0,0]];
-                asks=[[0,0],[0,0]];
-            }
-        }
+        let bid0X = (bids[bids.length-1][0]-strX0)/ratioStrX + oX;
+        let ask0X = (asks[0][0]-strX0)/ratioStrX + oX;
+        let maxBidsX = (bid0X + ask0X)/2 - gapX/2;
+        let minAsksX = (bid0X + ask0X)/2 + gapX/2;
 
         //画图数据
         let drawBids = [];
@@ -249,10 +232,11 @@ export default class Plotter {
                 cx = (drawBids[i][0]+drawBids[i+1][0])/2;
                 cy = (drawBids[i][1]+drawBids[i+1][1])/2;
             }
+            nowX = Math.min(nowX,maxBidsX);
+            cx = Math.min(cx,maxBidsX);
             ctx.quadraticCurveTo(nowX, nowY, cx, cy);
         }
         ctx.stroke();
-        ctx.lineWidth=1;
         ctx.strokeStyle="transparent";
         ctx.lineTo(oX,oY);
         ctx.closePath();
@@ -276,10 +260,11 @@ export default class Plotter {
                 cx = (drawAsks[i][0]+drawAsks[i+1][0])/2;
                 cy = (drawAsks[i][1]+drawAsks[i+1][1])/2;
             }
+            nowX = Math.max(nowX,minAsksX);
+            cx = Math.max(cx,minAsksX);
             ctx.quadraticCurveTo(nowX, nowY, cx, cy);
         }
         ctx.stroke();
-        ctx.lineWidth=1;
         ctx.strokeStyle="transparent";
         ctx.lineTo(oX+(strX1-strX0)/ratioStrX, oY);
         ctx.closePath();
@@ -390,7 +375,9 @@ export default class Plotter {
                         strAccu = bids[i][2];
                     }
                 }
-            } else {
+                oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
+                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
+            } else if(strX >= this.asks_min[0]) {
                 if(KDepth.instance.lang==="zh-cn"){
                     strInfos = ["出售价格: ", "出售量: ", "累计出售量: "];
                 }else if(KDepth.instance.lang==="en-us"){
@@ -407,11 +394,9 @@ export default class Plotter {
                         strAccu = asks[i][2];
                     }
                 }
+                oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
+                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
             }
-
-            oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
-                + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
-
         });
 
         this._overlayCanvas.addEventListener("mouseout",event=>{
