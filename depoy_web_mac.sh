@@ -14,7 +14,10 @@ else
   WEBDIR=/usr/share/nginx/html
 fi
 
-#zip ./dist dist.zip
+npm run build
+
+zip -m -r dist.zip ./dist
+
 scp -r ./dist.zip root@$SERVER:$WEBDIR
 
 ssh root@$SERVER "sudo rm -rf $WEBDIR/index.html $WEBDIR/app $WEBDIR/static"
@@ -24,4 +27,3 @@ ssh root@$SERVER "sudo mv $WEBDIR/dist/* $WEBDIR/"
 ssh root@$SERVER "sudo rm -rf $WEBDIR/dist"
 
 rm -f dist.zip
-rm -rf dist/
