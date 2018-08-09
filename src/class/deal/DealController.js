@@ -176,21 +176,8 @@ export default class DealController extends ExchangeControllerBase {
 
   async dealTrade(orderType,e) {
     // e.persist()
-    e.preventDefault();
-    e.stopPropagation();
-    
-  
-   
-    // if(this.view.state.fundPwdInterval === -1){
-    //   this.view.setState(
-    //       {
-    //         dealPopMsg: this.view.intl.get("pleaseSetFund"),
-    //         dealPassType:'positi',// 弹窗类型倾向
-    //         dealPass:true,// 下单弹窗
-    //       }
-    //   );
-    //   return
-    // }
+    // e.preventDefault();
+    // e.stopPropagation();
     let funPwdInterval = await this.getFundPwdInterval();
     let numLimit = this.view.state.numLimit;
     let priceLimit = this.view.state.priceLimit;
