@@ -28,10 +28,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
   //   console.log(e.target.value,this.props.prices[this.props.PriceUnit === 'CNY' && 'priceCN' || (this.props.PriceUnit === 'USD' && 'priceEN' || 'price')])
   // }
   render(){
-    // console.log('交易盘1', this.props.PriceUnit)
-    // console.log('交易盘2', this.props.Market)
-    // console.log('交易盘3', this.props.NumUnit)
-    let maxValue = this.props.ControllerProps.dealType ? this.props.sellMax : this.props.buyMax;
+    let maxValue = this.props.ControllerProps.dealType ? (this.props.DealEntrustType ? this.props.marketSellMax :this.props.sellMax) : (this.props.DealEntrustType ? this.props.marketBuyMax :this.props.buyMax);
     return(
         <div className='trade-deal-exchange'>
           <div className='trade-deal-asset'>

@@ -21,7 +21,8 @@ const devServerOptions = Object.assign({}, webpackConfig.devServer, {
     host: HOST || config.dev.host,
     port: PORT || config.dev.port, //如果省略，默认8080
     publicPath: config.dev.assetsPublicPath,
-    open: config.dev.autoOpenBrowser
+    open: config.dev.autoOpenBrowser,
+  
 });
 
 const server = new WebpackDevServer(compiler, devServerOptions);

@@ -63,15 +63,15 @@ export default class HomeMarket extends ExchangeViewBase {
     return (
       <div className='home-market'>
         <div className='home-market-con'>
-        <div className="market-nav clearfix">
-          <ul className="clearfix">
-            {controller.token && <li onClick={this.collectMarket}>
+          <div className="market-nav clearfix">
+            <ul className="clearfix">
+              {controller.token && <li onClick={this.collectMarket}>
               <span
                 className={`${this.state.collectActive ? 'home-market-item-active' : ''}`}>{this.intl.get('market-favorites')}</span>
-            </li> || null}
-            {this.state.marketDataHandle.map((v, index) => {
-              return (
-                <li key={index} onClick={this.changeMarket.bind(this, v)}>
+              </li> || null}
+              {this.state.marketDataHandle.map((v, index) => {
+                return (
+                  <li key={index} onClick={this.changeMarket.bind(this, v)}>
                   <span
                     className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active' : ''}`}>{v.toUpperCase()}</span>
                 </li>

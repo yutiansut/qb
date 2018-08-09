@@ -126,12 +126,12 @@ export default class TradeMarket extends ExchangeViewBase {
                 <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
                     onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                   <td>{v.tradePairName.toUpperCase()}</td>
-                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.price * v.priceCN).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.price * v.priceEN).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCNY).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceUSD).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
                   <td>{Number(v.rise).toPercent()}</td>
                   {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                     <img src={v.isFavorite ? this.$imagesMap.$trade_star :  this.$imagesMap.$trade_star_select} alt=""/>
                   </td>) || null}
-                  <td className="pop-children rightpop-children trade-remind">交易量：{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
+                  <td className="pop-children rightpop-children trade-remind">{`${this.intl.get('market-trade-volume')}`}：{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
                 </tr>
               )
             })}

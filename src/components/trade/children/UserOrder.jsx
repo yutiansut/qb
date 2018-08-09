@@ -154,7 +154,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
-            {this.state.historyOrder && this.state.historyOrder.length !== 0 && <NavLink to={{pathname: "/order/history/"}}>{this.intl.get('seeMore')}</NavLink>}
+            {<NavLink to={{pathname: "/order/history/"}}>{this.intl.get('seeMore')}</NavLink>}
         </div>
           {this.state.historyOrder && this.state.historyOrder.length !== 0 && <table className='trade-current-table'>
             <thead>
@@ -173,8 +173,8 @@ export default class userOrder extends ExchangeViewBase {
             </tr>
             </thead>
             <tbody>
-            {this.state.historyOrder && this.state.historyOrder.length && this.state.historyOrder.map((v, index) => {
-              return (
+            {this.state.historyOrder && this.state.historyOrder.length && this.state.historyOrder.map((v, index) =>
+             index< 10 &&  (
                   <tr key={index}>
                     <td>{Number(v.orderTime).toDate()}</td>
                     <td style={{color: `${v.orderType ? '#F25656' : '#2BB789'}`}}>{v.orderType ? this.intl.get('sell') : this.intl.get('buy')}</td>
@@ -183,11 +183,11 @@ export default class userOrder extends ExchangeViewBase {
                     <td>{Number(v.count).formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy,false)}</td>
                     <td>{v.dealDoneCount.formatFixNumberForAmount(this.props.controller.accuracy.volumeAccuracy,false)}</td>
                     <td>{(this.state.unitsType === 'CNY' && (v.turnoverCN && Number(v.turnoverCN).format({number: 'legal',style:{name: 'cny'}}) || Number(v.dealDoneCount.multi(v.avgPriceCN)).format({number: 'legal',style:{name: 'cny'}}))) || (this.state.unitsType === 'USD' && (v.turnoverEN && Number(v.turnoverEN).format({number: 'legal',style:{name: 'usd'}}) || Number(v.dealDoneCount.multi(v.avgPriceEN)).format({number: 'legal',style:{name: 'usd'}}))) || (v.turnover && Number(v.turnover).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}}) || Number(v.dealDoneCount.multi(v.avgPrice)).format({number: 'property',style:{decimalLength :this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy}}))}</td>
-                    <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal',style:{name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal',style:{name: 'usd'}})) || Number(v.avgPrice).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</td>
+                    <td>{this.state.unitsType === 'CNY' && Number(v.avgPriceCN).format({number:'legal',style:{name: 'cny'}}) || (this.state.unitsType === 'USD' && Number(v.avgPriceEN).format({number:'legal',style:{name: 'usd'}})) || Number(Number(v.avgPrice).toFixed(this.props.controller.accuracy.priceAccuracy)).format({number:'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</td>
                     <td onClick={this.tradeOrderDetail.bind(this, v)} style={{cursor:'pointer'}}>{this.state.orderStatus[v.orderStatus]}</td>
                   </tr>
               )
-            }) || null}
+            ) || null}
             </tbody>
           </table>|| <div className='trader-order-none'>
             {this.intl.get('noRecords')}
@@ -217,7 +217,7 @@ export default class userOrder extends ExchangeViewBase {
                   <span>{this.intl.get('order-deal-money')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
-                  <p>{Number(this.state.orderDetail.price).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</p>
+                  <p>{Number(Number(this.state.orderDetail.price).toFixed(this.props.controller.accuracy.priceAccuracy)).format({number: 'digital',style:{decimalLength :this.props.controller.accuracy.priceAccuracy}})}</p>
                   <span>{this.intl.get('avgPrice')} {this.state.orderDetail.tradePairName && this.state.orderDetail.tradePairName.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className='trade-order-info'>
@@ -238,6 +238,7 @@ export default class userOrder extends ExchangeViewBase {
                   </thead>
                   <tbody>
                   {this.state.orderDetail.orderList && this.state.orderDetail.orderList.map((v, index) => {
+                    // console.log('aaaa', v.turnover.toFixed(8), this.props.controller.accuracy.priceAccuracy + this.props.controller.accuracy.volumeAccuracy)
                     return (
                         <tr key={index}>
                           <td>{Number(v.orderTime).toDate()}</td>

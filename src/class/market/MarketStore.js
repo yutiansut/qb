@@ -14,7 +14,7 @@ export default class MarketStore extends ExchangeStoreBase {
       marketDataHandle: [],
       homeMarketPairData: [],
       coin: '',
-      sortValue: [],//排序值
+      sortValue: ['turnover'],//排序值
       ascending: 0,//是否升序， 0 否 1 是
       pairInfo: [],
       unitsType: '',
@@ -125,6 +125,16 @@ export default class MarketStore extends ExchangeStoreBase {
   get selecedMarket() {
     return this.state.market
   }
+  
+  //设置选择的交易对
+  setMarketDataHandle(data) {
+    this.state.marketDataHandle = data
+  }
+  
+  //得到选择的交易对
+  get marketDataHandle() {
+    return this.state.marketDataHandle
+  }
 
   setAllPair(data) {
     // console.log('setAllPair 0', data)
@@ -176,6 +186,7 @@ export default class MarketStore extends ExchangeStoreBase {
       if (type) {
         res.updown = (res.price - v.price) || v.updown;
       }
+      res.points = (res.points && res.points.length) && res.points || v.points
       return Object.assign(v, res)
     }))
   }
@@ -190,6 +201,8 @@ export default class MarketStore extends ExchangeStoreBase {
       let res = list.find(vv => vv.na === v.marketName);
       v.priceCN = res.cr;
       v.priceEN = res.ur;
+      v.priceCNY = res.cr * v.price;
+      v.priceUSD = res.ur * v.price;
       return Object.assign(v)
     }));
   }

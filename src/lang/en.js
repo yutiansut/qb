@@ -360,6 +360,7 @@ export default function en(state) {
     "h5-asset-empty6": "Add it first.",
   };
   const market = {
+    "market-trade-volume": 'volume',
     "market-favorite": "Favorites",
     "market-favorites": "Favourites",
     "market-market": "Market",

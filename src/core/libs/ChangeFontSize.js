@@ -23,9 +23,9 @@ export default function (minWidth, maxWidth, originWidth = 1440) {
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {
       // console.log('win', window.location.pathname)
-      setTimeout(function(){
-        document.body.scrollTop = document.body.scrollHeight;
-      },300);
+      // setTimeout(function(){
+      //   document.body.scrollTop = document.body.scrollHeight;
+      // },300)
       let clientWidth = document.body.clientWidth, minRate = minWidth/originWidth, maxRate = maxWidth/originWidth;
       clientWidth && (clientWidth /= originWidth, clientWidth > maxRate && (clientWidth = maxRate), clientWidth < minRate && (clientWidth = minRate), docEl.style.fontSize = 100 * clientWidth + "px");
       // 字体改变，通知k线图重绘
