@@ -74,7 +74,7 @@ module.exports = merge(webpackConfig, {
       "process.env": env
     }),
 
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
 
     //配置static目录拷贝到服务器目录下
     new CopyWebpackPlugin([
