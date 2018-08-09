@@ -125,12 +125,16 @@ class ReactKline extends exchangeViewBase {
       debug: false,
       onRequestChange: this.onRequestChange
     };
-    this.state.kline = new Kline(cfg);
+    if(!window.klineInstance){
+      window.klineInstance = new Kline(cfg);
+    }
+    this.state.kline = window.klineInstance;
     this.state.kline.draw();
     this.state.kline.setLanguage(this.props.controller.language);
     //
-    let _kline = this.state.kline;
+
     window.redrawKline = function () {
+      let _kline = window.klineInstance;
       let tradeChart = document.querySelector(".trade-chart");
       if(_kline.isSized){
           _kline.resize();

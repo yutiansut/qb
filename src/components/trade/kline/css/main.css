@@ -12,7 +12,7 @@
 }
 
 .chart_container *{
-    font-size:12px;
+    font-size:12px !important;
     box-sizing: content-box;
 }
 

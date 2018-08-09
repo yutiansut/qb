@@ -2,6 +2,7 @@ import {Control} from './control'
 import {ChartManager} from './chart_manager'
 import {ChartSettings} from './chart_settings'
 import $ from "../lib/dom"
+//import $ from "../lib/jquery.min"
 
 export default class Kline {
 

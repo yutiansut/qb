@@ -2,8 +2,8 @@
  * Dom 模拟jquery常用的操作
  * 用于替换jquery
  */
-class Dom{
 
+class Dom{
     constructor(sel){
         if(typeof sel === "object"){
             if(sel instanceof Dom){
@@ -30,6 +30,10 @@ class Dom{
         //
         for(let i=0;i<this.el.length;i++){
             this[i] = this.el[i];
+        }
+        //事件池
+        if(!window.DomEventHandlers){
+            window.DomEventHandlers = {};
         }
     }
 
@@ -250,7 +254,13 @@ class Dom{
 
    children(){
         if(arguments.length===0){
-
+            let newEl = [];
+            this.el.forEach(el=>{
+                el.childNodes.forEach(el2=>{
+                    newEl.push(el2);
+                });
+            });
+            return new Dom(newEl);
         }else if(arguments.length===1){
             let newEl=[];
             this.el.forEach(el=>{
@@ -260,7 +270,6 @@ class Dom{
             });
             return new Dom(newEl);
         }
-
    }
 
    //------------------------------------------------------
@@ -275,11 +284,7 @@ class Dom{
     //注册事件
     registerEvent(name){
         this[name]= (func)=>{
-            this.el.forEach(el=>{
-                el.addEventListener(name,event=>{
-                    func.bind(el)(event);
-                });
-            });
+            this.bind(name,func);
             return this;
         }
     }
@@ -289,16 +294,86 @@ class Dom{
     }
 
     bind(name,func){
-        this.el.forEach(el=>{
-            el.addEventListener(name,event=>{
-                func.bind(el)(event);
-            });
-        });
+        console.log("k线绑定事件：",name,"=====");
+        if(name === "mousewheel"){
+            this.bindMousewheel(func);
+        }else{
+            this.bindEvent(name,func);
+        }
         return this;
     }
 
-    unbind(name,func){
+    isFirefox(){
+        if(navigator.userAgent.indexOf('Firefox') >= 0){
+            return true;
+        }
+        return false;
+    }
 
+    bindEvent(name,func){
+        this.el.forEach(el=>{
+            let eid = el["eid"];
+            if(!eid){
+                eid = Date.now();
+                el["eid"] = eid;
+            }
+            let handler = (event)=>{
+                func.bind(el)(event);
+            };
+            el.addEventListener(name, handler);
+            !window.DomEventHandlers[eid] && (window.DomEventHandlers[eid] = []);
+            window.DomEventHandlers[eid].push(handler);
+            //console.log("k线-绑定事件：",name,el,eid);
+            //console.log("k线-事件池：",window.DomEventHandlers);
+        });
+    }
+
+    bindMousewheel(func){
+        this.el.forEach(el=>{
+            let eid = el["eid"];
+            if(!eid){
+                eid = Date.now();
+                el["eid"] = eid;
+            }
+            if(this.isFirefox()){       //火狐
+                let handler = (event)=>{
+                    let delta = event.detail>0 ? -1 : 1;
+                    func.bind(el)(event,delta);
+                    event.preventDefault();
+                    event.stopPropagation();
+                };
+                el.addEventListener("DOMMouseScroll",handler);
+                !window.DomEventHandlers[eid] && (window.DomEventHandlers[eid] = []);
+                window.DomEventHandlers[eid].push(handler);
+
+            }else{                      //其他
+                let handler = (event)=>{
+                    let delta = event.wheelDelta>0 ? 1 : -1;
+                    func.bind(el)(event, delta);
+                    event.preventDefault();
+                    event.stopPropagation();
+                };
+                el.addEventListener("mousewheel",handler);
+                !window.DomEventHandlers[eid] && (window.DomEventHandlers[eid] = []);
+                window.DomEventHandlers[eid].push(handler);
+            }
+        });
+    }
+
+    unbind(){
+        if(arguments.length===1){
+            this.el.forEach(el=>{
+                let eid = el["eid"];
+                let handlers = window.DomEventHandlers[eid];
+                handlers.forEach(hdl =>{
+                    el.removeEventListener(arguments[0],hdl);
+                });
+            });
+        }else if(arguments.length===2){
+            this.el.forEach(el=>{
+                el.removeEventListener(arguments[0],arguments[1]);
+            });
+        }
     }
 
 }

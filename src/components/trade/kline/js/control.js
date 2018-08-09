@@ -4,6 +4,7 @@ import {ChartSettings} from './chart_settings'
 import {DefaultTemplate, Template} from './templates'
 import {MEvent} from './mevent'
 import $ from "../lib/dom"
+//import $ from "../lib/jquery.min"
 
 export class Control {
 
