@@ -8,70 +8,105 @@ class Dom{
         if(typeof sel === "object"){
             this.el = sel;
         }else{
-            this.el = document.querySelector(sel);
+            this.el = document.querySelectorAll(sel);
         }
     }
 
     bind(event,handler){
-        let el = this.el;
-        el.addEventListener(event,handler.bind(el));
-        return this;
-    }
-
-    attr(name,value){
-        let el = this.el;
-        el.setAttribute(name,value);
-        return this;
-    }
-
-    css(name,value){
-        let el = this.el;
-        let name1=name.replace(/-./g , function(str){
-            return str.substr(1).toUpperCase();
-        });
-        el.style[name1]=value;
-        return this;
-    }
-
-    cssA(obj){
-        Object.keys(obj).forEach(key=>{
-            this.css(key , obj[key]);
+        this.el.forEach(el=>{
+            el.addEventListener(event,handler.bind(el));
         });
         return this;
     }
 
-   removeClass(cls){
-        let el = this.el;
-        el.className = el.className.replace(new RegExp(cls,"g"),"");
-        el.className = el.className.replace(/^\s+|\s+$/g, '');
+    attr(){
+        if(arguments.length === 1){
+            if(typeof arguments[0] === "object"){
+                this.el.forEach(el=>{
+                    Object.keys(arguments[0]).forEach(key=>{
+                        el.setAttribute(key, arguments[0][key]);
+                    });
+                });
+            }
+            if(typeof arguments[0] === "string"){
+                return this.el[0].getAttribute(arguments[0]);
+            }
+        }else if(arguments.length === 2){
+            this.el.forEach(el=>{
+                el.setAttribute(arguments[0],arguments[1]);
+            })
+        }
+        return this;
+    }
+
+    css() {
+        if (arguments.length === 1) {
+            if (typeof arguments[0] === "object") {
+                this.el.forEach(el => {
+                    Object.keys(arguments[0]).forEach(key => {
+                        let nKey = key.replace(/-(\w)/g, (all, letter) => letter.toUpperCase());
+                        el.style[nKey] = arguments[0][key];
+                    });
+                });
+            }
+            if (typeof arguments[0] === "string") {
+                let nKey = arguments[0].replace(/-(\w)/g, (all, letter) => letter.toUpperCase());
+                return this.el[0].style[nKey];
+            }
+        } else if (arguments.length === 2) {
+            this.el.forEach(el => {
+                let nKey = arguments[0].replace(/-(\w)/g, (all, letter) => letter.toUpperCase());
+                el.style[nKey] = arguments[1];
+            })
+        }
+        return this;
+    }
+
+   removeClass(name){
+        this.el.forEach(el=>{
+            el.classList.remove(name);
+        });
         return this;
    }
 
-   addClass(cls){
-        let el = this.el;
-        el.className += " " + cls;
-        el.className = el.className.replace(/^\s+|\s+$/g, '');
+   addClass(name){
+        this.el.forEach(el=>{
+            el.classList.add(name);
+        });
         return this;
+   }
+
+   hasClass(name){
+        return this.el[0].classList.contains(name);
    }
 
    parent(){
-        let el = this.el;
-        this.el = el.parentNode;
+        return this.el[0].parentNode;
+   }
+
+   html(){
+        if(arguments.length===0){
+            return this.el[0].innerHTML;
+        }else if(arguments.length===1){
+            this.el.forEach(el=>{
+                el.innerHTML = arguments[0];
+            })
+        }
         return this;
    }
 
-   html(txt){
-        let el = this.el;
-        el.innerHTML = txt;
-        return this;
+   text(){
+       if(arguments.length===0){
+           return this.el[0].innerText;
+       }else if(arguments.length===1){
+           this.el.forEach(el=>{
+               el.innerText = arguments[0];
+           })
+       }
+       return this;
    }
 
-   text(txt){
-        let el = this.el;
-        el.innerText = txt;
-        return this;
-   }
-
+   /////////////////////////////////////
    before(nEl){
        let el = this.el;
        let parent = el.parentNode;
