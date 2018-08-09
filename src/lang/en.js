@@ -170,6 +170,7 @@ export default function en(state) {
     623: "Account has been occupied",
     624: "Excessive number of error in verifying code",
     625: "Excessive number of errors in the Google verifying code",
+    628: "Please go to the personal center to set up the fund code",
     704: "The fund password was changed within 24 hours and there was a security wall",
     705: "Insufficient quantity available",
     706: "Less than the minimum withdrawal limit",
@@ -737,7 +738,8 @@ export default function en(state) {
       "Please fill in correct mobile phone number",
     "login-other": "Log on in other places, please log in again",
     "login-err": "Login failed, please try again",
-    "login-miss": "The login information has failed, please try again"
+    "login-miss": "The login information has failed, please try again",
+    "login-wait": "System maintenance, temporarily unable to register, please wait patiently, thank you for your understanding"
   };
   const help = {
     "help-fees": "Fees",

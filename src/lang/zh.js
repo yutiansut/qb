@@ -168,6 +168,7 @@ export default function zh(state) {
     623: "账户已被占用",
     624: "验证码输入错误次数过多",
     625: "谷歌验证码输入错误次数过多",
+    628: "请前往个人中心设置资金密码",
     704: "24小时内修改过资金密码,存在安全保护墙",
     705: "可用数量不足",
     706: "小于最小提币限额",
@@ -630,7 +631,8 @@ export default function zh(state) {
     "login-inputVerifyPhoneAndEmail": "请填写正确的手机号/邮箱",
     "login-other": "已在其他地方登录，请重新登录",
     "login-err": "登录失败,请重试",
-    "login-miss": "登录信息已失效,请重试"
+    "login-miss": "登录信息已失效,请重试",
+    "login-wait": "系统维护中，暂时无法注册，请耐心等待，谢谢您的理解"
   };
   const help = {
     "help-fees": "费率标准",

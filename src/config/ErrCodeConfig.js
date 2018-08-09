@@ -111,7 +111,8 @@ export default {
     get msg() {
       return intl.get(604);
     },
-    errCode: "USER_NO_EXIST"
+    errCode: "USER_NO_EXIST",
+    ret: 604
   },
   605: {
     // msg: "用户服务系统访问失败",
