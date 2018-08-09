@@ -156,17 +156,18 @@ export default class MarketController extends ExchangeControllerBase {
     type < 3 && this.store[arr[type]](List)
     if(this.view.state.query && type === 3) {
       let queryValue = this.view.state.query;
+      selectPair = queryValue
+      market = queryValue.split('/')[1]
+      // console.log('11111111',(queryValue.split('/').length), )
       if(queryValue.split('/').length === 1){
-        if(this.store.marketDataHandle.indexOf(queryValue) !== -1) {
-          market = queryValue
-        } else {
+        selectPair = null
+        market = queryValue
+        // console.log('22222222',this.store.marketDataHandle, this.store.marketDataHandle.indexOf(queryValue), queryValue)
+        if(this.store.marketDataHandle.indexOf(queryValue) < 0) {
           let pairMsg = await this.store.getPairMsg()
           market = pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]
           selectPair = `${queryValue}/${market}`
         }
-      } else {
-        selectPair = queryValue
-        market = queryValue.split('/')[1]
       }
     }
     console.log(market,this.view.state.query)

@@ -86,6 +86,7 @@ export default class Footer extends ExchangeViewBase {
           <ol className="clearfix">
             <li><a href="https://twitter.com/QB_Exchange" target="_blank"><img src="/static/img/footer/twitter_new.svg" alt="" /></a></li>
             <li><a href="https://www.facebook.com/qbexchange/" target="_blank"><img src="/static/img/footer/FaceBook_new.svg" alt="" /></a></li>
+            <li><a href="https://weibo.com/u/6596593083/home?wvr=5" target="_blank"><img src="/static/img/footer/wb.svg" alt="" /></a></li>
             {/*<li><img src="/static/img/footer/fill.svg" alt="" /></li>*/}
             <li><img src="/static/img/footer/wechat.svg" alt="" className="wx-img" /><i className="wx-qrCode"></i></li>
             <li><a href="https://t.me/QB_ExchangeEN" target="_blank"><img src="/static/img/footer/Telegram_new.svg" alt="" /></a></li>
@@ -93,13 +94,14 @@ export default class Footer extends ExchangeViewBase {
         </div>
         <div className='aside-nav'>
           <div className='aside-nav-app'>
+          {this.props.configController.versionAndroidInfo && this.props.configController.versionAndroidInfo.url && this.props.configController.versionAndroidInfo.qr && (
             <div className='erweima'>
-              <a href="https://www.qb.com/package/com.mix.coinrising_internet_release_v1.1.1.apk">
-                <img src={this.$imagesMap.$aside_erweima} alt=""/>
+              <a href={this.props.configController.versionAndroidInfo.url}>
+                <img src={this.props.configController.versionAndroidInfo.qr} alt=""/>
                 <span>Android</span>
               </a>
             </div>
-          </div>
+          ) || null}</div>
           <div className='aside-nav-desk'></div>
           <div className='aside-nav-top' onClick={() => {window.scroll(0, 0)}}></div>
         </div>
