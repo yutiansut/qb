@@ -219,7 +219,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     }
     else {
     // && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]))
-      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) || (idArray = []);
+      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue.toLowerCase()])) || (idArray = []);
       coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)
       marketValue = this.intl.get('all')
     }

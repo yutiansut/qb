@@ -33,6 +33,7 @@ export default class DealController extends ExchangeControllerBase {
       {
         NumUnit: coin,
         Market: market,
+        buyNumFlag: false,
         Coin: coin,
         PriceUnit: ['CNY', 'USD'].includes(this.view.state.PriceUnit) && this.view.state.PriceUnit || market,
         priceBank: {
@@ -50,14 +51,15 @@ export default class DealController extends ExchangeControllerBase {
       this.userOrderController.setUnitsType(market);
       this.TradeRecentController.setUnitsType(market);
       this.TradeOrderListController.setUnitsType(market);
+      this.store.state.PriceUnit = market;
     }
 
     this.store.state.prices = prices;
+    this.store.state.buyNumFlag = false;
     this.setPriceInit(prices, flag);
     this.userOrderController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
     this.TradeOrderListController.setInitUnit(market, coin);
-    this.store.state.PriceUnit = market;
     this.store.state.NumUnit = coin;
     this.coinMinTradeHandle(coin);//最小交易量的处理
     this.getCharge(coin, market)
@@ -109,9 +111,9 @@ export default class DealController extends ExchangeControllerBase {
       'USD': 'USD',
     };
     unitObj[init] = this.view.state.Market;
- 
     let fromValue = (this.store.state.prices.price || 1) * (this.store.state.PriceUnit === 'CNY' ? this.store.state.prices.priceCN : (this.store.state.PriceUnit === 'USD' && this.store.state.prices.priceEN || 1));
     let unitSelected = unitObj[unit];
+    this.store.state.PriceUnit = unitSelected;
     this.view.setState({
       PriceUnit: unitSelected,
       UnitSelected: unit
