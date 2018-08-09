@@ -114,6 +114,7 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_asset_search_cancel: "/static/mobile/asset/icon_search_cancel@2x.png",
 
       $h5_tip_success: "/static/mobile/icon_success@3x.png",
+      $h5_tip_fail: "/static/mobile/img_ts_czcc@3x.png",
 
     }
   }

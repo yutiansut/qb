@@ -34,9 +34,9 @@ export default class setTwoVerify extends ExchangeViewBase {
       ],
       type: [
         "",
-        this.intl.get("user-verifyEmailTitle"),
+        this.intl.get("user-verifyEmailTitle-h5"),
         this.intl.get("user-googleVerify"),
-        this.intl.get("user-verifyPhoneTitle")
+        this.intl.get("user-verifyPhoneTitle-h5")
       ],
       setType: "",
       showBottomSelect: props.location.query && props.location.query.showBottom ? true : false, //控制底部菜单显示隐藏
@@ -62,8 +62,8 @@ export default class setTwoVerify extends ExchangeViewBase {
     this.dealBottomArr = ()=>{
       let arr = [
         { value: this.intl.get("user-googleVerify"), i: 2},
-        { value: this.intl.get("user-verifyPhoneTitle"), i: 3},
-        { value: this.intl.get("user-verifyEmailTitle"), i: 1},
+        { value: this.intl.get("user-verifyPhoneTitle-h5"), i: 3},
+        { value: this.intl.get("user-verifyEmailTitle-h5"), i: 1},
       ];
       if(this.state.currentType === 1) {
         arr.unshift({ value: this.intl.get('none'), i: 0})
@@ -75,7 +75,7 @@ export default class setTwoVerify extends ExchangeViewBase {
   componentWillMount() {}
 
   async componentDidMount() {
-    this.props.addContent({ con: this.intl.get('twoStep'), linkUrl: '/user/safe/'});
+    this.props.addContent({ con: this.intl.get('twoStep-h5'), linkUrl: '/user/safe/'});
     await this.initData();
   }
 
@@ -98,7 +98,7 @@ export default class setTwoVerify extends ExchangeViewBase {
             >
               {v.title}
               {userInfo[v.key] ? <i>{`(${type[userInfo[v.key]]})`}</i> : ""}
-              {<span>{userInfo[v.key] ? this.intl.get('alter') : this.intl.get('set')}</span>}
+              {<span>{userInfo[v.key] ? this.intl.get('alter-h5') : this.intl.get('set')}</span>}
             </li>
           ))}
         </ul>
@@ -158,6 +158,7 @@ export default class setTwoVerify extends ExchangeViewBase {
         {this.state.popupFlag && (
           <Popup
             type={this.state.popupType ? "tip1" : "tip3"}
+            useType={true}
             msg={this.state.popupText}
             h5={true}
             onClose={() => {

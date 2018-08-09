@@ -12,9 +12,9 @@ export default class UserCenterIndex extends ExchangeViewBase {
   constructor(props) {
     super(props);
     this.fundPassArr = [
-      this.intl.get("deal-every"),
-      this.intl.get("deal-2h"),
-      this.intl.get("deal-never"),
+      this.intl.get("deal-every-h5"),
+      this.intl.get("deal-2h-h5"),
+      this.intl.get("deal-never-h5"),
     ];
     this.state = {
       setFundPass: false,
@@ -49,7 +49,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
   componentWillMount() { }
 
   async componentDidMount() {
-    this.props.addContent({con: '安全中心'})
+    this.props.addContent({con: this.intl.get('header-security')})
     await AsyncAll([this.initData(), this.getCaptchaVerify()]);
     let result = await this.getFundPwdInterval();
     this.setState({
@@ -123,7 +123,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
             <img className="fr" src="/static/mobile/user/icon_qianjb@3x.png" />
           </NavLink>
           <a className="item clearfix" onClick={this.needFundPwdInterval}>
-            <span className="fl">{this.intl.get("user-needFundPwd")}</span>
+            <span className="fl">{this.intl.get("user-needFundPwd-h5")}</span>
             <span className="fr">
               {this.fundPassArr[this.state.fundPassType0]}
             </span>
@@ -133,7 +133,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
             className="item clearfix"
             to={`${match.url}/safe/twoverify`}
           >
-            <span className="fl">{this.intl.get("twoStep")}</span>
+            <span className="fl">{this.intl.get("twoStep-h5")}</span>
             <img className="fr" src="/static/mobile/user/icon_qianjb@3x.png" />
           </NavLink>
         </div>

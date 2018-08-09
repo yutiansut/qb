@@ -67,6 +67,7 @@ export default class Popup extends exchangeViewBase {
       autoClose,
       icon,
       h5,
+      useType,
       className
     } = this.props;
     (!icon || !["succeed", "warning", "wrong", "message"].includes(icon)) &&
@@ -93,8 +94,9 @@ export default class Popup extends exchangeViewBase {
       >
         <div>
           {h5 ? (
-            <div className={`h5 ${type}`}>
-              {type === 'tip1' && <img src={this.$imagesMap.$h5_tip_success} alt=""/>}
+            <div className={`h5 ${useType ? type : ''}`}>
+              {useType && type === 'tip1' && <img src={this.$imagesMap.$h5_tip_success} alt=""/>}
+              {useType && type === 'tip3' && <img src={this.$imagesMap.$h5_tip_fail} alt=""/>}
               <p>{msg}</p>
             </div>
           ) : (
