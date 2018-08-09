@@ -101,7 +101,7 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkAgainInput() {
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 再次输入密码
+    let reg = Regular('regPwd', this.state.againInput) // 再次输入密码
     if(!reg.test(this.state.againInput)) { // 密码格式不对
       this.setState({
         errPassAgain: this.intl.get("user-checkNewPwd")

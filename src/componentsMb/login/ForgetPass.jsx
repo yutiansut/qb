@@ -69,12 +69,6 @@ export default class ForgetPass extends exchangeViewBase {
   }
 
   checkPassInput() {
-    // let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    // if(!reg.test(this.state.passInput)) {
-    //   this.setState({
-    //     errPass: this.intl.get("user-checkNewPwd")
-    //   })
-    // }
     this.setState({
       passTest: this.state.passInput ? Regular('regPwd', this.state.passInput) : true
     })
