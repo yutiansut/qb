@@ -158,7 +158,6 @@ export default class setTwoVerify extends ExchangeViewBase {
         {this.state.popupFlag && (
           <Popup
             type={this.state.popupType ? "tip1" : "tip3"}
-            useType={true}
             msg={this.state.popupText}
             h5={true}
             onClose={() => {
