@@ -46,6 +46,29 @@ export default class Balance extends exchangeViewBase {
         this.setState({wallet: this.state.wallet})
       }
     }
+
+    // 划出屏幕时 固定冲币提币和隐藏资产
+    let dom = document.querySelector(".menu-ul");
+    let dom2 = document.querySelector(".filter");
+    window.onscroll = function () {
+      if (document.documentElement.scrollTop >= dom.offsetTop) {
+        dom.style.position = "fixed";
+        dom.style.width = "100%";
+        dom.style.top = ".45rem";
+
+        dom2.style.position = "fixed";
+        dom2.style.width = "100%";
+        dom2.style.top = ".90rem";
+      }
+      else {
+        dom.style.position = "";
+        dom.style.top = ""
+        dom2.style.position = "";
+        dom2.style.top = "";
+      }
+    }
+
+
   }
 
   render() {
@@ -87,18 +110,21 @@ export default class Balance extends exchangeViewBase {
             {/*提币申请*/}
             {totalAsset.totalQuota === 10 ?
               <a className="disable">{this.intl.get("h5-asset-limitApply")}
-              <img src={this.$imagesMap.$h5_asset_next} />
+                <img src={this.$imagesMap.$h5_asset_next}/>
               </a> :
-              <NavLink to="/user/identity">{this.intl.get("h5-asset-limitApply")}<img src={this.$imagesMap.$h5_asset_next} /></NavLink>}
+              <NavLink to="/user/identity">{this.intl.get("h5-asset-limitApply")}<img
+                src={this.$imagesMap.$h5_asset_next}/></NavLink>}
           </div>
         </div>
         {/*充提菜单*/}
-        <ul className="menu-ul">
-          <li><NavLink to="/wallet/charge"><img
-            src="/static/mobile/asset/icon_zc_cb@2x.png"/>{this.intl.get("asset-charge")}</NavLink></li>
-          <li><NavLink to="/wallet/withdraw"><img
-            src="/static/mobile/asset/icon_zc_tb@2x.png"/>{this.intl.get("asset-withdraw")}</NavLink></li>
-        </ul>
+        <div className="menu-div">
+          <ul className="menu-ul">
+            <li><NavLink to="/wallet/charge"><img
+              src="/static/mobile/asset/icon_zc_cb@2x.png"/>{this.intl.get("asset-charge")}</NavLink></li>
+            <li><NavLink to="/wallet/withdraw"><img
+              src="/static/mobile/asset/icon_zc_tb@2x.png"/>{this.intl.get("asset-withdraw")}</NavLink></li>
+          </ul>
+        </div>
         {/*钱包列表*/}
         <div className="asset-wallet">
           {/*隐藏小额资产*/}
