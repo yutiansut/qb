@@ -67,7 +67,7 @@ export default class Search extends exchangeViewBase {
                        </h3>
                        <p>
                            {historyList.map((item, index) => {
-                               return <a key={index} onClick={() => history.push(`${to}?currency=${item}`)}>{item}</a>
+                               return <a key={index} onClick={() => history.push(`${to}?currency=${item}`)}>{item.toUpperCase()}</a>
                            })}
                        </p>
                    </div>)}
@@ -77,7 +77,7 @@ export default class Search extends exchangeViewBase {
                        <h3>{this.intl.get("h5-asset-recommend-currency")}</h3>
                        <p>
                            {recommendList.map((item,index)=>{
-                               return <a key={index} onClick={() => history.push(`${to}?currency=${item.coinName}`)}>{item.coinName}</a>
+                               return <a key={index} onClick={() => history.push(`${to}?currency=${item.coinName}`)}>{item.coinName.toUpperCase()}</a>
                            })}
                        </p>
                    </div>}
@@ -92,7 +92,7 @@ export default class Search extends exchangeViewBase {
                                         this.addSearchHistory(item.coinName);
                                         history.push(`${to}?currency=${item.coinName}`);
                                     }}>
-                                   <label><b>{item.coinName}</b><i>({item.fullName})</i></label>
+                                   <label><b>{item.coinName.toUpperCase()}</b><i>({item.fullName})</i></label>
                                    <span>{Number(item.totalCount).format({number: "property", style: {decimalLength: 8}})}</span>
                                </div>
                            )
