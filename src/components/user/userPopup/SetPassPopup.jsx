@@ -152,33 +152,33 @@ export default class SetPassPopup extends exchangeViewBase {
           errUser: this.intl.get("user-checkNewPwd")
         })
       }
-      if(this.state.popupInput3 && (this.state.popupInput2 !== this.state.popupInput3)) {
-        this.setState({
-          errUser2: this.intl.get("user-checkAgainPwd")
-        })
-      }
-      if (reg2.test(this.state.popupInput3) && (this.state.popupInput3 === this.state.popupInput2)) {
-        this.state.errUser2 && (this.setState({errUser2: ""}))
-      }
-    }
-  }
-
-  checkInput3() { // 离开
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
-    if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
-      if(!reg.test(this.state.againPwdValue)) {
-        this.setState({
-          errUser2: this.intl.get("user-checkNewPwd")
-        })
-        return
-      }
-      if(this.state.popupInput2 && (this.state.popupInput3 !== this.state.popupInput2)) {
+      if(this.state.againPwdValue && (this.state.userValue !== this.state.againPwdValue)) {
         this.setState({
           errAgainPwd: this.intl.get("user-checkAgainPwd")
         })
       }
-      if (reg.test(this.state.againPwdValue) && (this.state.popupInput3 === this.state.popupInput2)) {
-        this.state.errUser2 && (this.setState({errUser2: ""}))
+      if (reg2.test(this.state.againPwdValue) && (this.state.againPwdValue === this.state.userValue)) {
+        this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
+      }
+    }
+  }
+
+  checkAgainPwd() { // 离开
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
+    if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
+      if(!reg.test(this.state.againPwdValue)) {
+        this.setState({
+          errAgainPwd: this.intl.get("user-checkNewPwd")
+        })
+        return
+      }
+      if(this.state.userValue && (this.state.againPwdValue !== this.state.userValue)) {
+        this.setState({
+          errAgainPwd: this.intl.get("user-checkAgainPwd")
+        })
+      }
+      if (reg.test(this.state.againPwdValue) && (this.state.againPwdValue === this.state.userValue)) {
+        this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
       }
     }
   }
@@ -213,9 +213,9 @@ export default class SetPassPopup extends exchangeViewBase {
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInputNew}
                        value={this.state.currentPwdValue}
                        oriType={[4].includes(this.props.isType) ? 'password' : 'text'}
-                       onInput={value => this.changeInput1(value)}
-                       onBlur={this.checkInput1}/>
-                <em>{this.state.popupInput1 && this.state.errUser3}</em>
+                       onInput={value => this.changeCurrentPwd(value)}
+                       onBlur={this.checkCurrentPwd}/>
+                <em>{this.state.currentPwdValue && this.state.errCurrentPwd}</em>
               </li>
               <li className="long-li">
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle}</p>
@@ -223,8 +223,8 @@ export default class SetPassPopup extends exchangeViewBase {
                        value={this.state.userValue}
                        onInput={value => this.changeUser(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
-                       onBlur={this.checkInput2}/>
-                <em>{this.state.popupInput2 && (this.props.popupInputErr2 || this.state.errUser)}</em>
+                       onBlur={this.checkUser}/>
+                <em>{this.state.userValue && (this.props.popupInputErr2 || this.state.errUser)}</em>
               </li>
               <li className={[3, 4, 5, 6].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitle2}</p>
@@ -232,8 +232,8 @@ export default class SetPassPopup extends exchangeViewBase {
                        value={this.state.againPwdValue}
                        onInput={value => this.changeAgainPwd(value)}
                        oriType={[3, 4, 5, 6].includes(this.props.isType) ? 'password' : 'text'}
-                       onBlur={this.checkInput3}/>
-                <em>{this.state.popupInput3 && this.state.errUser2}</em>
+                       onBlur={this.checkAgainPwd}/>
+                <em>{this.state.againPwdValue && this.state.errAgainPwd}</em>
               </li>
               <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
                 <p>{this.intl.get("user-popPicture")}</p>
