@@ -8,7 +8,14 @@ export default class HomeMarket extends ExchangeViewBase {
     this.state = {
       remindPopup: false,
       popType: 'tip1',
-      popMsg: this.intl.get("asset-add-success")
+      popMsg: this.intl.get("asset-add-success"),
+      sortIndexMobile: 0,
+      sortImgMobile: '',
+      sortArr: [
+        {sortValue: ['coinName'], type: 1, sortDefault: 'turnover'},
+        {sortValue: ['price'], type: 1, sortDefault: 'turnover'},
+        {sortValue: ['rise'], type: 1, sortDefault: 'turnover'}
+      ]
     };
     const {controller} = this.props;
     //绑定view
@@ -21,6 +28,7 @@ export default class HomeMarket extends ExchangeViewBase {
     this.collectMarket = controller.collectMarket.bind(controller);// 点击收藏
     this.addCollect = controller.addCollect.bind(controller); // 添加收藏
     this.joinHome = controller.joinHome.bind(controller);
+    this.pairSort = controller.pairSort.bind(controller); // 排序
     this.getCollect = this.getCollect.bind(this)
   }
 
@@ -45,11 +53,14 @@ export default class HomeMarket extends ExchangeViewBase {
     //进入home
     this.joinHome();
   }
-
+  
   render() {
     const {controller} = this.props;
     let marketData = this.state.marketDataHandle;     //市场列表
     let marketPair = this.state.homeMarketPairData;  //交易对
+    setTimeout(() => {
+      console.log(marketPair)
+    }, 5000);
     return (
       <div className="market">
         <ul>
@@ -70,9 +81,15 @@ export default class HomeMarket extends ExchangeViewBase {
           <table>
             <thead align="left">
             <tr>
-              <th style={{width: "40%"}}>{this.intl.get("market-market")}</th>
-              <th>{this.intl.get("market-lastPrice")}</th>
-              <th style={{width: "20%"}}>{this.intl.get("market-change")}</th>
+              <th style={controller.token ? {width: "40%", paddingLeft: '.4rem'} : {width: "40%", paddingLeft: '.12rem'}} onClick={this.pairSort.bind(this, this.state.sortArr[0], 1)}>{this.intl.get("market-market")}
+                {this.state.sortIndexMobile === 1 && <img src={this.state.sortImgMobile}/>}
+              </th>
+              <th onClick={this.pairSort.bind(this, this.state.sortArr[1], 2)}>{this.intl.get("market-lastPrice")}
+                {this.state.sortIndexMobile === 2 && <img src={this.state.sortImgMobile}/>}
+              </th>
+              <th style={{width: "20%"}} onClick={this.pairSort.bind(this, this.state.sortArr[2], 5)}>{this.intl.get("market-change")}
+                {this.state.sortIndexMobile === 5 && <img src={this.state.sortImgMobile}/>}
+              </th>
             </tr>
             </thead>
             <tbody>

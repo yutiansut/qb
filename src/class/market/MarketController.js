@@ -49,7 +49,8 @@ export default class MarketController extends ExchangeControllerBase {
       collectActive: false,
       market: v,
       // unitsType: '',
-      homeMarketPairData
+      homeMarketPairData,
+      sortIndexMobile: 0
     });
     // if(this.view.state.query) {
     //   console.log('this.view.state.query', this.view.state.query)
@@ -231,6 +232,7 @@ export default class MarketController extends ExchangeControllerBase {
   //排序功能
   pairSort(v, index) { // type 1 升序 0 降序
     let imgArr = [this.view.$imagesMap.$rank_down, this.view.$imagesMap.$rank_up],
+      imgArrMobile = ["/static/mobile/home/img_xia@3x.png", "/static/mobile/home/img_shang@3x.png"],
       tradeSortImg = ["/static/web/trade/trade_rank_shang.svg", "/static/web/trade/trade_rank_xia.svg"],
       sortArray = this.store.state.homeMarketPairData;
     let sortValue = v.sortValue;
@@ -243,7 +245,9 @@ export default class MarketController extends ExchangeControllerBase {
       homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, v.type),
       sortImg: imgArr[v.type],
       sortIndex: index,
-      tradeSortImg: tradeSortImg[v.type]
+      tradeSortImg: tradeSortImg[v.type],
+      sortImgMobile: imgArrMobile[v.type],
+      sortIndexMobile: index,
     });
     v.type = !v.type
   }

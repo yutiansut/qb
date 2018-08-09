@@ -42,6 +42,7 @@
     position relative
     height .4rem
     padding .08rem 0
+    margin-bottom .12rem
     background $h5-home-bg
     &.hide
       display none
@@ -69,7 +70,7 @@
 
   //市场
   .market
-    margin-top .12rem
+    // margin-top .12rem
     ul
       display flex
       justify-content space-between
@@ -84,13 +85,13 @@
         span
           display inline-block
           padding 0 .08rem
-          line-height .34rem
+          line-height .33rem
         &.active
           span
             color $h5-home-font-active
             border-bottom .02rem solid $h5-home-font-active
     .market-list
-      padding 0 .12rem
+      // padding 0 .12rem
       table
         width 100%
         thead
@@ -98,9 +99,13 @@
             height .3rem
             line-height .3rem
             border-bottom .01rem solid $h5-home-bg
+            vertical-align middle
             th
               font-size .12rem
               color $h5-home-font-light
+              img
+                height .12rem
+                padding-left .07rem
         tbody
           tr
             line-height 0.24rem
@@ -124,7 +129,7 @@
                   white-space nowrap
                 h3
                   font-size 0.17rem
-                  color $h5-home-font-light
+                  color $h5-home-font-normal
                   small
                     font-size 0.12rem
                     color $h5-home-font-weight
@@ -153,8 +158,12 @@
                   background $h5-home-font-down
         th:last-child, td:last-child
           text-align right
-        th:first-child
-          padding-left .12rem
+        // th:first-child
+        //   padding-left .12rem
+        td:first-child
+          margin-left: .12rem
+        .td3
+          padding-right: .12rem
         th:last-child
           padding-right .12rem
 
