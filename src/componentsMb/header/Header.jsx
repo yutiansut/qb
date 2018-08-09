@@ -97,7 +97,7 @@ export default class Header extends ExchangeViewBase {
               </NavLink>
               {/*首页*/}
               <NavLink to="/home" activeClassName="home-active" onClick={e => this.setState({navHidden: true})}>
-                <img src="/static/mobile/header/icon_sy@2x.png"/>
+                <img src={path === '/home' ? this.$imagesMap.$h5_header_home_active : this.$imagesMap.$h5_header_home}/>
                 <span>{this.intl.get("header-home")}</span>
               </NavLink>
               {/*资产管理*/}
@@ -109,13 +109,13 @@ export default class Header extends ExchangeViewBase {
                   className="right"/>
               </a>
               {this.state.assetFold && <div className="fold">
-                <NavLink to="/wallet/balance"
+                <NavLink to="/wallet/balance" activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-balance")}</NavLink>
-                <NavLink to="/wallet/charge"
+                <NavLink to="/wallet/charge"  activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-charge")}</NavLink>
-                <NavLink to="/wallet/withdraw"
+                <NavLink to="/wallet/withdraw"  activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-withdraw")}</NavLink>
-                <NavLink to="/wallet/dashboard"
+                <NavLink to="/wallet/dashboard"  activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("asset-records")}</NavLink>
               </div>}
               {/*订单管理*/}
@@ -127,14 +127,14 @@ export default class Header extends ExchangeViewBase {
                   className="right"/>
               </a>
               {this.state.orderFold && <div className="fold">
-                <NavLink to="/order/current"
+                <NavLink to="/order/current" activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("order-current")}</NavLink>
-                <NavLink to="/order/history"
+                <NavLink to="/order/history" activeClassName="link-active"
                          onClick={e => this.setState({navHidden: true})}>{this.intl.get("order-history")}</NavLink>
               </div>}
               {/*个人中心*/}
-              <NavLink to="/user" onClick={e => this.setState({navHidden: true})}>
-                <img src="/static/mobile/header/icon_gr@2x.png"/>
+              <NavLink to="/user" activeClassName="user-active" onClick={e => this.setState({navHidden: true})}>
+                <img src={path === '/user' ? this.$imagesMap.$h5_header_user_active : this.$imagesMap.$h5_header_user}/>
                 <span>{this.intl.get("header-user")}</span>
               </NavLink>
               {/*语言*/}
@@ -159,12 +159,12 @@ export default class Header extends ExchangeViewBase {
             :
             <div className="nav-hidden">
               {/*登录/注册*/}
-              <NavLink to="/login" className="login" onClick={e => this.setState({navHidden: true})}>
+              <NavLink to="/login" className="login" activeClassName="link-active" onClick={e => this.setState({navHidden: true})}>
                 {this.intl.get("deal-login")}
               </NavLink>
               {/*首页*/}
-              <NavLink to="/home" onClick={e => this.setState({navHidden: true})}>
-                <img src="/static/mobile/header/icon_sy@2x.png"/>
+              <NavLink to="/home" activeClassName="home-active" onClick={e => this.setState({navHidden: true})}>
+                <img src={path === '/home' ? this.$imagesMap.$h5_header_home_active : this.$imagesMap.$h5_header_home}/>
                 <span>{this.intl.get("header-home")}</span>
               </NavLink>
               {/*语言*/}

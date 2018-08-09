@@ -12,6 +12,7 @@ import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
 
 import DetectOS from '../../class/lib/Os'
 import Browser from '../../class/lib/Browser'
+import {Regular} from "../../core";
 
 export default class Login extends exchangeViewBase {
   constructor(props) {
@@ -56,6 +57,8 @@ export default class Login extends exchangeViewBase {
     this.changePass = this.changePass.bind(this)
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
+    this.checkUserInput = this.checkUserInput.bind(this)
+    this.checkPassInput = this.checkPassInput.bind(this)
     this.addContent = controller.headerController.addContent.bind(controller.headerController)
   }
 
@@ -66,8 +69,8 @@ export default class Login extends exchangeViewBase {
       picInput: "",
       codeInput: "",
       passInput: "",
-      //userErr: "", // 手机号/邮箱错误
-      //pwdErr: "", // 密码错误
+      userErr: "", // 手机号/邮箱错误
+      pwdErr: "", // 密码错误
       verifyNum: this.intl.get("sendCode"),
     });
     this.getCaptchaVerify();
@@ -82,10 +85,12 @@ export default class Login extends exchangeViewBase {
     } else {
       this.setState({userType: 0})
     }
+    this.state.userErr && (this.setState({userErr: ""}))
   }
 
   changePass(value) {
     this.setState({passInput: value});
+    this.state.pwdErr && (this.setState({pwdErr: ""}))
     //console.log(2, value)
   }
 
@@ -99,7 +104,29 @@ export default class Login extends exchangeViewBase {
     //console.log(4, value)
   }
 
+  checkUserInput() { // 手机号／邮箱
+    let reg1 = Regular('regEmail', this.state.userInput), // 邮箱
+      reg2 = Regular('regPhone', this.state.userInput); // 手机
+
+    if (!reg1 && !reg2) {
+      this.setState({
+        userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
+      })
+    }
+  }
+
+  checkPassInput() { // 密码
+    let reg = Regular('regPwd', this.state.passInput)
+    if (!reg) {
+      this.setState({
+        pwdErr: this.intl.get("user-checkNewPwd")
+      })
+    }
+  }
+
   canClick() {
+    if (this.state.titleIndex === 0 && this.state.userErr) return false
+    if (this.state.titleIndex === 1 && this.state.userErr && this.state.pwdErr) return false
     if (this.state.titleIndex === 0 && this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
     if (this.state.titleIndex === 1 && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false
@@ -141,12 +168,19 @@ export default class Login extends exchangeViewBase {
           </div>
           <ul>
             <li>
-              <Input placeholder={this.intl.get("login-userInput")} value={this.state.userInput}
-                     onInput={value => this.changeUser(value)}/>
+              <Input placeholder={this.intl.get("login-userInput")}
+                     value={this.state.userInput}
+                     onInput={value => this.changeUser(value)}
+                     onBlur={this.checkUserInput}/>
+              <em>{this.state.userInput && this.state.userErr}</em>
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
-              <Input placeholder={this.intl.get("login-passInput")} oriType="password" value={this.state.passInput}
-                     onInput={value => this.changePass(value)}/>
+              <Input placeholder={this.intl.get("login-passInput")}
+                     oriType="password"
+                     value={this.state.passInput}
+                     onInput={value => this.changePass(value)}
+                     onBlur={this.checkPassInput}/>
+              <em>{this.state.passInput && this.state.pwdErr}</em>
               {/*<span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>*/}
             </li>
             <li className="verify-li">
@@ -159,7 +193,7 @@ export default class Login extends exchangeViewBase {
             <li className={`${this.state.titleIndex === 0 ? '' : 'hide'} send-code-li clearfix`}>
               <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.codeInput}
                      onInput={value => this.changeCode(value)}/>
-              <Button className="send-code-btn"
+              <Button className={`${(typeof this.state.verifyNum === 'number' || this.state.verifyNum === this.intl.get("sendAgain")) ? 'disabled-btn' : ''} send-code-btn`}
                       title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
                       onClick={() => {
                         this.getVerify(this.state.userInput, this.state.userType, 0)

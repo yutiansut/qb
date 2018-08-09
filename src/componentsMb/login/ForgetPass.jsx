@@ -76,7 +76,7 @@ export default class ForgetPass extends exchangeViewBase {
     //   })
     // }
     this.setState({
-      passTest: this.state.passInput && Regular('regPwd', this.state.passInput)
+      passTest: this.state.passInput ? Regular('regPwd', this.state.passInput) : true
     })
     if(this.state.againInput && (this.state.againInput !== this.state.passInput)) {
       this.setState({
@@ -124,7 +124,7 @@ export default class ForgetPass extends exchangeViewBase {
             <li className="send-verify-li">
               <div className="clearfix">
                 <Input placeholder={this.intl.get("login-placeholderPhoneAndEmail")} value={this.state.verifyInput} onInput={value => this.changeVerifyInput(value)}/>
-                <Button className="send-code-btn"
+                <Button className={`${(typeof this.state.verifyNum === 'number' || this.state.verifyNum === this.intl.get("sendAgain")) ? 'disabled-btn' : ''} send-code-btn`}
                         title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum}
                         onClick={() => {this.getVerify(this.state.userInput, this.state.userType, 1)}}/>
               </div>
@@ -135,7 +135,7 @@ export default class ForgetPass extends exchangeViewBase {
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
-              <em className={this.state.passTest ? 'normal-remind' : ''}>{this.intl.get("login-passRule")}</em>
+              <em className={this.state.passTest ? 'normal-remind' : 'err-remind'}>{this.intl.get("login-passRule")}</em>
             </li>
             <li>
               <Input placeholder={this.intl.get("login-passAgainPlaceholder")}

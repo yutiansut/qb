@@ -12,6 +12,7 @@ import Button from '../../common/component/Button/index.jsx'
 import Popup from '../../common/component/Popup/index.jsx'
 import Input from '../../common/component/Input/index.jsx'
 import TwoVerifyPopup from '../viewsPopup/TwoVerifyPopup.jsx'
+import {Regular} from '../../core'
 
 
 import DetectOS from '../../class/lib/Os'
@@ -89,8 +90,8 @@ export default class Login extends exchangeViewBase {
 
   changeUser(value) {
     this.setState({userInput: value});
-    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
-    if (reg.test(value)) {
+    let reg = Regular('regEmail', this.state.userInput)
+    if (reg) {
       this.setState({userType: 1})
     } else {
       this.setState({userType: 0})
@@ -130,10 +131,10 @@ export default class Login extends exchangeViewBase {
 
   checkUserInput() { // 手机号／邮箱
     // let reg1 = /^\w+@[0-9a-z]{2,}(\.[a-z\u4e00-\u9fa5]{2,8}){1,2}$/,
-    let reg1 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
-      reg2 = /^1[3456789]\d{9}$/;
+    let reg1 = Regular('regEmail', this.state.userInput), // 邮箱
+        reg2 = Regular('regPhone', this.state.userInput); // 手机
 
-    if (!reg1.test(this.state.userInput) && !reg2.test(this.state.userInput)) {
+    if (!reg1 && !reg2) {
       this.setState({
         userErr: this.intl.get("login-inputVerifyPhoneAndEmail")
       })
@@ -141,8 +142,8 @@ export default class Login extends exchangeViewBase {
   }
 
   checkPassInput() { // 密码
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/
-    if (!reg.test(this.state.passInput)) {
+    let reg = Regular('regPwd', this.state.passInput)
+    if (!reg) {
       this.setState({
         pwdErr: this.intl.get("user-checkNewPwd")
       })
@@ -263,7 +264,7 @@ export default class Login extends exchangeViewBase {
         <TwoVerifyPopup verifyNum={this.state.verifyNum} type={verifyTypeObj[this.state.verifyType]} getVerify={() => {
           this.getVerify(this.state.twoVerifyUser, this.state.verifyType === 2009 ? 1 : 0, 0)
         }} onClose={() => {
-          this.setState({showTwoVerify: false});
+          this.setState({showTwoVerify: false, verifyType: ""});
           this.getCaptchaVerify()
         }} destroy={this.destroy} onConfirm={code => {
           this.login(this.state.verifyType === 2008 ? this.state.userInput : this.state.twoVerifyUser, code, this.state.verifyType === 2008 ? this.state.userType : (this.state.verifyType === 2009 ? 1 : 0), this.state.verifyType === 2008 ? 2 : 3, this.state.captchaId, this.state.picInput, DetectOS(), Browser());

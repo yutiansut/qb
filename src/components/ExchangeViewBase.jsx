@@ -80,10 +80,13 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_user_qianjb: '/static/mobile/user/icon_qianjb@3x.png',
       $h5_header_header: "/static/mobile/header/icon_wode_head@2x.png",
       $h5_header_home: "/static/mobile/header/icon_sy@2x.png",
+      $h5_header_home_active: "/static/mobile/header/icon_sy_active.png",
       $h5_header_asset: "/static/mobile/header/icon_zc@2x.png",
       $h5_header_order: "/static/mobile/header/icon_dd@2x.png",
       $h5_header_user: "/static/mobile/header/icon_gr@2x.png",
+      $h5_header_user_active: "/static/mobile/header/icon_gr_active.png",
       $h5_header_language: "/static/mobile/header/icon_yy@2x.png",
+
       $h5_search: '/static/mobile/icon_search_big.png',
       $h5_order_select: '/static/mobile/order/icon_shaixuan@3x.png',
       $h5_back: "/static/mobile/back_white@3x.png",
