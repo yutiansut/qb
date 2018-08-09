@@ -19,6 +19,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
       remindPopup: false,
       popType: "tip1",
       popMsg: "",
+      language: props.controller.configData.language === 'en-US' ? 0 : 1
     };
     let controller=this.props.controller;
     controller.setView(this);
@@ -49,11 +50,13 @@ export default class UserCenterIndex extends ExchangeViewBase {
                 this.props.history.push({pathname: `${url}/identity`})
               }}>
                 <div className="fl">
-                  <img src={this.$imagesMap.$h5_user_identity} />
-                  <span>{this.intl.get("header-idVerify")}</span>
-                </div>
-                <div className="fr">
-                  <span>{this.verifyState[userAuth.state]}</span>
+                  <div className="img">
+                    <img src={this.$imagesMap.$h5_user_identity} />
+                  </div>
+                  <span className={!this.state.language ? 'en' : ''}>{this.intl.get("header-idVerify")}</span>
+                  <div className={`fr ${!this.state.language ? 'en' : ''}`}>
+                    <span>{this.verifyState[userAuth.state]}</span>
+                  </div>
                 </div>
               </a>
             </li>
@@ -63,9 +66,6 @@ export default class UserCenterIndex extends ExchangeViewBase {
                   <img src={this.$imagesMap.$h5_user_safe} />
                   <span>{this.intl.get("header-security")}</span>
                 </div>
-                <div className="fr">
-                  <img src={this.$imagesMap.$h5_user_qianjb} />
-                </div>
               </NavLink>
             </li>
             <li>
@@ -73,9 +73,6 @@ export default class UserCenterIndex extends ExchangeViewBase {
                 <div className="fl">
                   <img src={this.$imagesMap.$h5_user_order} />
                   <span>{this.intl.get("header-order")}</span>
-                </div>
-                <div className="fr">
-                  <img src={this.$imagesMap.$h5_user_qianjb} />
                 </div>
               </NavLink>
             </li>
@@ -85,9 +82,6 @@ export default class UserCenterIndex extends ExchangeViewBase {
                   <img src={this.$imagesMap.$h5_user_help} />
                   <span>{this.intl.get("help-center")}</span>
                 </div>
-                <div className="fr">
-                  <img src={this.$imagesMap.$h5_user_qianjb} />
-                </div>
               </NavLink>
             </li>
             <li>
@@ -96,9 +90,6 @@ export default class UserCenterIndex extends ExchangeViewBase {
                   <img src={this.$imagesMap.$h5_user_terms} />
                   <span>{this.intl.get("login-readUser2")}</span>
                 </div>
-                <div className="fr">
-                  <img src={this.$imagesMap.$h5_user_qianjb} />
-                </div>
               </NavLink>
             </li>
             <li>
@@ -106,9 +97,6 @@ export default class UserCenterIndex extends ExchangeViewBase {
                 <div className="fl">
                   <img src={this.$imagesMap.$h5_user_about} />
                   <span>{this.intl.get("notice-about")}</span>
-                </div>
-                <div className="fr">
-                  <img src={this.$imagesMap.$h5_user_qianjb} />
                 </div>
               </NavLink>
             </li>

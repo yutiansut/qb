@@ -213,10 +213,10 @@ export default function en(state) {
     "header-legal": "otc",
     "header-assets": "assets",
     "header-assets2": "assets",
-    "header-order": "Order list",
+    "header-order": "Order List",
     "header-user": "Personal Center",
-    "header-security": "Security center",
-    "header-idVerify": "ID verification",
+    "header-security": "Security Center",
+    "header-idVerify": "ID Verification",
     "header-logOut": "Log out",
     "header-login": "Sign in",
     "header-regist": "Sign up",
@@ -813,7 +813,7 @@ export default function en(state) {
     "h5-logo-usePass": "Login With Password",
   };
   const help = {
-    "help-center": "Help",
+    "help-center": "Help Center",
     "help-fees": "Fees",
     "help-level": "VIP Level",
     "help-require-points": "Required Points",

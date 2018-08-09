@@ -17,17 +17,46 @@
         font-size .2rem
         color $h5-user-font-content
   .user-center-main
-    margin-top .12rem
+    margin-top .08rem
     padding 0 .12rem
+    background-color $h5-user-bg-active
     .list-section
       margin-bottom .16rem
       background-color $h5-user-bg-active
       li
-        padding 0 .12rem
-        border-bottom 1px solid $h5-user-line
+        float left
+        width 50%
+        height 0.81rem
+        padding 0 .12rem 0 .12rem
+        border-bottom 0.02rem solid $h5-user-line
+      li:nth-child(5),li:nth-child(6)
+        border-bottom none
+      li:nth-of-type(odd)
+        border-right 0.02rem solid $h5-user-line
+      li:nth-of-type(even)
+        padding 0 0 0 .23rem
+      li:nth-child(1)
+        .fl
+          position relative
+          overflow hidden
+          width 100%
+          .img
+            float left
+          span
+            float left
+            &.en
+              height 0.7rem
+              line-height 0.7rem
+        .fr.en
+          position absolute
+          left 0.32rem
+          bottom 0.2rem
+          span
+            height 0.14rem
+            line-height 0.14rem
       .list-item
-        height .45rem
-        line-height .45rem
+        height 0.81rem
+        line-height 0.81rem
         border-bottom .01rem solid $h5-user-line
         display block
         clear both
@@ -37,7 +66,7 @@
             vertical-align middle
             margin-right .13rem
           span
-            font-size .15rem
+            font-size .14rem
             color $h5-user-font-content
             vertical-align middle
         .fr
