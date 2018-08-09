@@ -286,6 +286,7 @@ export default function en(state) {
     "asset-reminder": "Friendly reminder",
     "asset-depositReminder1":
       "Deposit to {currency} address, <i> {number} </i> confirmations would be needed",
+    "asset-hideLittle": "Hide All 0 Assets",
     "asset-depositReminder2-1": "Deposit & Withdraw",
     "asset-depositReminder2-2": "Tracking progress",
     "asset-safe-tip": "Please make sure that your computer and browser are secure and your information is protected from being tampered or leaked.",

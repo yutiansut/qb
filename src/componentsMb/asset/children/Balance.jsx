@@ -164,6 +164,11 @@ export default class Balance extends exchangeViewBase {
                 }) || "****"}</span>
               </div>
           })}
+          {
+            hideLittle && result.length === 0 && <div className="hideLittle-info">
+              <span>{this.intl.get("asset-hideLittle-hidden")}</span>
+            </div>
+          }
         </div>
       </div>)
   }

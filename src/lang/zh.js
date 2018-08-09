@@ -253,6 +253,7 @@ export default function zh(state) {
     "h5-asset-limitApply": "提额申请",
     "h5-asset-usedAsset": "已使用额度",
     "asset-hideLittle": "隐藏小额资产",
+    "asset-hideLittle-hidden": "已隐藏全部小额资产",
     "asset-hideZero": "隐藏0余额币种",
     "asset-charge": "充币",
     "asset-withdraw": "提币",
