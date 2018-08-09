@@ -30,14 +30,15 @@ export default class Select extends exchangeViewBase {
         });
         //路由参数to
         let to = this.props.controller.getQuery("to") || "/wallet";
+        let currency = this.props.controller.getQuery("currency") || "";
         console.error(to);
         await this.getAssets();
-        this.setState({to: to});
+        this.setState({to: to, currency: currency});
     }
 
     render() {
         let {history} = this.props;
-        let {wallet, selectIndex, to} = this.state;
+        let {wallet, selectIndex, to, currency} = this.state;
         return (
             <div className="select">
                 {/*钱包列表*/}
@@ -54,7 +55,7 @@ export default class Select extends exchangeViewBase {
                         }
                         }>
                             <span>{item.coinName.toUpperCase()}</span>
-                            {selectIndex === index &&
+                            {currency === item.coinName.toUpperCase() &&
                                 <img src="/static/mobile/asset/icon_select_green@3x.png"/>}
                         </div>
                     )

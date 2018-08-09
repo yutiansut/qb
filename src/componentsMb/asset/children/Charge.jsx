@@ -60,7 +60,7 @@ export default class Charge extends exchangeViewBase {
         return (
             <div className="charge">
                 {/*选择币种*/}
-                <div className="filter" onClick={()=>history.push(`/wallet/select?to=/wallet/charge`)}>
+                <div className="filter" onClick={()=>history.push(`/wallet/select?to=/wallet/charge&currency=${currency}`)}>
                     <label>{this.intl.get("asset-selectCoin")}</label>
                     <b className={currency ? "":"gray"}>{currency || this.intl.get("h5-asset-selectCoin")}</b>
                     <img src="/static/mobile/asset/icon_next@2x.png"/>
