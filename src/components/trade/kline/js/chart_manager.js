@@ -12,6 +12,7 @@ import * as ctools from './ctools'
 import * as areas from './areas'
 import {Util} from './util'
 import $ from "../lib/dom"
+import Kline from "./kline";
 //import $ from "../lib/jquery.min"
 //import mousewheel from '../lib/jquery.mousewheel';
 //mousewheel($);
@@ -1007,9 +1008,9 @@ export class ChartManager {
         this.removePlotter(areaName + "Range.decoration");
         dp.setIndicator(indic);
         this.setRange(areaName, range);
-        range.setPaddingTop(20);
-        range.setPaddingBottom(4);
-        range.setMinInterval(20);
+        range.setPaddingTop(20 * Kline.instance.dpr);
+        range.setPaddingBottom(20* Kline.instance.dpr);
+        range.setMinInterval(20* Kline.instance.dpr);
         if (Util.isInstance(indic, indicators.VOLUMEIndicator)) {
             let plotter = new plotters.LastVolumePlotter(areaName + "Range.decoration");
             this.setPlotter(plotter.getName(), plotter);

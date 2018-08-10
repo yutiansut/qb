@@ -9,6 +9,7 @@ import {CName} from './cname'
 import * as layouts from './layouts'
 import * as themes from './themes'
 import * as ranges from './ranges'
+import Kline from "./kline";
 
 export class Template {
 
@@ -45,8 +46,9 @@ export class Template {
         mgr.setMainIndicator(dsName, "MA");
         let range = new ranges.MainRange(areaName);
         mgr.setRange(range.getName(), range);
-        range.setPaddingTop(28);
-        range.setPaddingBottom(12);
+        range.setPaddingTop(20* Kline.instance.dpr);
+        range.setPaddingBottom(20* Kline.instance.dpr);
+        range.setMinInterval(20* Kline.instance.dpr);
         let plotter = new plotters.MainAreaBackgroundPlotter(areaName + ".background");
         mgr.setPlotter(plotter.getName(), plotter);
         plotter = new plotters.CGridPlotter(areaName + ".grid");
@@ -188,7 +190,7 @@ export class TemplateMeasuringHandler {
         let height = args.Height;
         let areaName = sender.getNameObject().getCompAt(2);
         if (areaName === "timeline") {
-            sender.setMeasuredDimension(width, 22);
+            sender.setMeasuredDimension(width, 22 * Kline.instance.dpr);
         }
     }
 

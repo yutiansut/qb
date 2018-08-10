@@ -1,6 +1,7 @@
 import {NamedObject} from './named_object'
 import {ChartManager} from './chart_manager'
 import {DataSource} from './data_sources'
+import Kline from "./kline";
 
 export class Timeline extends NamedObject {
 
@@ -10,7 +11,7 @@ export class Timeline extends NamedObject {
         this._innerLeft = 0;
         this._innerWidth = 0;
         this._firstColumnLeft = 0;
-        this._scale = 3;
+        this._scale = 3 * Kline.instance.dpr;
         this._lastScale = -1;
         this._maxItemCount = 0;
         this._maxIndex = 0;
@@ -122,6 +123,7 @@ export class Timeline extends NamedObject {
             this._updated = true;
         }
         this._firstColumnLeft = this.calcFirstColumnLeft(newMaxItemCount);
+
     }
 
     validateFirstIndex(firstIndex, maxItemCount) {
@@ -251,7 +253,8 @@ export class Timeline extends NamedObject {
     }
 
 }
-Timeline.itemWidth = [1, 3, 3, 5, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29];
-Timeline.spaceWidth = [1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 7, 7, 7];
-Timeline.PADDING_LEFT = 4;
-Timeline.PADDING_RIGHT = 8;
+let dpr = window.devicePixelRatio;
+Timeline.itemWidth = [1* dpr, 3* dpr, 3* dpr, 5* dpr, 5* dpr, 7* dpr, 9* dpr, 11* dpr, 13* dpr, 15* dpr, 17* dpr, 19* dpr, 21* dpr, 23* dpr, 25* dpr, 27* dpr, 29* dpr];
+Timeline.spaceWidth = [1* dpr, 1* dpr, 2* dpr, 2* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 5* dpr, 5* dpr, 5* dpr, 5* dpr, 7* dpr, 7* dpr, 7* dpr];
+Timeline.PADDING_LEFT = 4 * dpr;
+Timeline.PADDING_RIGHT = 8 * dpr;

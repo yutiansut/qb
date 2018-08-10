@@ -17,6 +17,7 @@ export class Plotter extends NamedObject {
 
     static drawLine(context, x1, y1, x2, y2) {
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.moveTo((x1 << 0) + 0.5, (y1 << 0) + 0.5);
         context.lineTo((x2 << 0) + 0.5, (y2 << 0) + 0.5);
         context.stroke();
@@ -25,6 +26,7 @@ export class Plotter extends NamedObject {
     static drawLines(context, points) {
         let i, cnt = points.length;
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.moveTo(points[0].x, points[0].y);
         for (i = 1; i < cnt; i++)
             context.lineTo(points[i].x, points[i].y);
@@ -37,12 +39,13 @@ export class Plotter extends NamedObject {
     }
 
     static drawDashedLine(context, x1, y1, x2, y2, dashLen, dashSolid) {
-        if (dashLen < 2) {
-            dashLen = 2;
+        if (dashLen < 2* Kline.instance.dpr) {
+            dashLen = 2* Kline.instance.dpr;
         }
         let dX = x2 - x1;
         let dY = y2 - y1;
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         if (dY === 0) {
             let count = (dX / dashLen + 0.5) << 0;
             for (let i = 0; i < count; i++) {
@@ -67,8 +70,8 @@ export class Plotter extends NamedObject {
     }
 
     static createHorzDashedLine(context, x1, x2, y, dashLen, dashSolid) {
-        if (dashLen < 2) {
-            dashLen = 2;
+        if (dashLen < 2* Kline.instance.dpr) {
+            dashLen = 2* Kline.instance.dpr;
         }
         let dX = x2 - x1;
         let count = (dX / dashLen + 0.5) << 0;
@@ -80,6 +83,7 @@ export class Plotter extends NamedObject {
 
     static createRectangles(context, rects) {
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         let e, i, cnt = rects.length;
         for (i = 0; i < cnt; i++) {
             e = rects[i];
@@ -89,6 +93,7 @@ export class Plotter extends NamedObject {
 
     static createPolygon(context, points) {
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.moveTo(points[0].x + 0.5, points[0].y + 0.5);
         let i, cnt = points.length;
         for (i = 1; i < cnt; i++)
@@ -227,11 +232,12 @@ export class CGridPlotter extends NamedObject {
         let theme = mgr.getTheme(this.getFrameName());
         context.fillStyle = theme.getColor(themes.Theme.Color.Grid0);
         context.beginPath();
-        let dashLen = 4,
-            dashSolid = 1;
+        context.lineWidth = Kline.instance.dpr;
+        let dashLen = 4* Kline.instance.dpr,
+            dashSolid = 1* Kline.instance.dpr;
         if (Plotter.isChrome) {
-            dashLen = 4;
-            dashSolid = 1;
+            dashLen = 4* Kline.instance.dpr;
+            dashSolid = 1* Kline.instance.dpr;
         }
         let gradations = range.getGradations();
         for (let n in gradations) {
@@ -568,10 +574,10 @@ export class MainInfoPlotter extends Plotter {
         context.textBaseline = "top";
         context.fillStyle = theme.getColor(themes.Theme.Color.Text4);
         let rect = {
-            x: area.getLeft() + 4,
-            y: area.getTop() + 2,
-            w: area.getWidth() - 8,
-            h: 20
+            x: area.getLeft() + 4* Kline.instance.dpr,
+            y: area.getTop() + 2* Kline.instance.dpr,
+            w: area.getWidth() - 8* Kline.instance.dpr,
+            h: 20* Kline.instance.dpr
         };
         let selIndex = timeline.getSelectedIndex();
         if (selIndex < 0)
@@ -903,6 +909,7 @@ export class IndicatorPlotter extends NamedObject {
         context.translate(0.5, 0.5);
         context.strokeStyle = theme.getColor(themes.Theme.Color.Indicator3);
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         for (let i = first; i < last; i++) {
             let y = range.toY(output.execute(i));
             context.moveTo(right, y);
@@ -933,10 +940,10 @@ export class IndicatorInfoPlotter extends Plotter {
         context.textBaseline = "top";
         context.fillStyle = theme.getColor(themes.Theme.Color.Text4);
         let rect = {
-            x: area.getLeft() + 4,
-            y: area.getTop() + 2,
-            w: area.getWidth() - 8,
-            h: 20
+            x: area.getLeft() + 4 * Kline.instance.dpr,
+            y: area.getTop() + 2* Kline.instance.dpr,
+            w: area.getWidth() - 8* Kline.instance.dpr,
+            h: 20* Kline.instance.dpr
         };
         let indic = dp.getIndicator();
         let title;
@@ -1034,25 +1041,26 @@ export class MinMaxPlotter extends NamedObject {
         let textStart;
         if (index > center) {
             context.textAlign = "right";
-            arrowStart = timeline.toItemCenter(index) - 4;
-            arrowStop = arrowStart - 7;
-            _arrowStop = arrowStart - 3;
-            textStart = arrowStop - 4;
+            arrowStart = timeline.toItemCenter(index) - 4 * Kline.instance.dpr;
+            arrowStop = arrowStart - 7 * Kline.instance.dpr;
+            _arrowStop = arrowStart - 3 * Kline.instance.dpr;
+            textStart = arrowStop - 4 * Kline.instance.dpr;
         } else {
             context.textAlign = "left";
-            arrowStart = timeline.toItemCenter(index) + 4;
-            arrowStop = arrowStart + 7;
-            _arrowStop = arrowStart + 3;
-            textStart = arrowStop + 4;
+            arrowStart = timeline.toItemCenter(index) + 4 * Kline.instance.dpr;
+            arrowStop = arrowStart + 7 * Kline.instance.dpr;
+            _arrowStop = arrowStart + 3 * Kline.instance.dpr;
+            textStart = arrowStop + 4 * Kline.instance.dpr;
         }
         Plotter.drawLine(context, arrowStart, y, arrowStop, y);
-        Plotter.drawLine(context, arrowStart, y, _arrowStop, y + 2);
-        Plotter.drawLine(context, arrowStart, y, _arrowStop, y - 2);
+        Plotter.drawLine(context, arrowStart, y, _arrowStop, y + 2 * Kline.instance.dpr);
+        Plotter.drawLine(context, arrowStart, y, _arrowStop, y - 2 * Kline.instance.dpr);
         context.fillText(Util.fromFloat(v, digits), textStart, y);
     }
 
 }
 
+//横轴文字
 export class TimelinePlotter extends Plotter {
 
     constructor(name) {
@@ -1077,7 +1085,7 @@ export class TimelinePlotter extends Plotter {
         }
         for (; n < cnt; n++) {
             if (TimelinePlotter.TIME_INTERVAL[n] % timeInterval === 0)
-                if ((TimelinePlotter.TIME_INTERVAL[n] / timeInterval) * timeline.getColumnWidth() > 60)
+                if ((TimelinePlotter.TIME_INTERVAL[n] / timeInterval) * timeline.getColumnWidth() > 60 * Kline.instance.dpr)
                     break;
         }
         let first = timeline.getFirstIndex();
@@ -1140,7 +1148,7 @@ export class TimelinePlotter extends Plotter {
             }
             if (text.length > 0) {
                 let x = timeline.toItemCenter(i);
-                gridRects.push({x: x, y: top, w: 1, h: 4});
+                gridRects.push({x: x, y: top, w: Kline.instance.dpr, h: 4 * Kline.instance.dpr});
                 context.fillText(text, x, middle);
             }
         }
@@ -1183,6 +1191,7 @@ TimelinePlotter.MonthConvert = {
     12: "Dec."
 };
 
+//纵轴文字
 export class RangePlotter extends NamedObject {
 
     constructor(name) {
@@ -1193,7 +1202,7 @@ export class RangePlotter extends NamedObject {
         let mgr = ChartManager.instance;
         let theme = mgr.getTheme(this.getFrameName());
         context.font = theme.getFont(themes.Theme.Font.Default);
-        return context.measureText((Math.floor(v) + 0.88).toString()).width + 16;
+        return context.measureText((Math.floor(v) + 0.88).toString()).width + 16 * Kline.instance.dpr;
     }
 
     Draw(context) {
@@ -1224,8 +1233,8 @@ export class RangePlotter extends NamedObject {
         let gridRects = [];
         for (let n in gradations) {
             let y = range.toY(gradations[n]);
-            gridRects.push({x: left, y: y, w: 6, h: 1});
-            gridRects.push({x: right - 6, y: y, w: 6, h: 1});
+            gridRects.push({x: left, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
+            gridRects.push({x: right - 6 * Kline.instance.dpr, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
             context.fillText(Util.fromFloat(gradations[n], 2), center, y);
         }
         if (gridRects.length > 0) {
@@ -1314,6 +1323,7 @@ export class COrderGraphPlotter extends NamedObject {
         if (this.m_mode === 0 || this.m_mode === 1) {
             context.strokeStyle = this.m_pTheme.getColor(themes.Theme.Color.Positive);
             context.beginPath();
+            context.lineWidth = Kline.instance.dpr;
             context.moveTo(Math.floor(this.m_ask_points[0].x) + 0.5, Math.floor(this.m_ask_points[0].y) + 0.5);
             for (let i = 1; i < this.m_ask_points.length; i++) {
                 context.lineTo(Math.floor(this.m_ask_points[i].x) + 0.5, Math.floor(this.m_ask_points[i].y) + 0.5);
@@ -1323,6 +1333,7 @@ export class COrderGraphPlotter extends NamedObject {
         if (this.m_mode === 0 || this.m_mode === 2) {
             context.strokeStyle = this.m_pTheme.getColor(themes.Theme.Color.Negative);
             context.beginPath();
+            context.lineWidth = Kline.instance.dpr;
             context.moveTo(this.m_bid_points[0].x + 0.5, this.m_bid_points[0].y + 0.5);
             for (let i = 1; i < this.m_bid_points.length; i++) {
                 context.lineTo(this.m_bid_points[i].x + 0.5, this.m_bid_points[i].y + 0.5);
@@ -1486,8 +1497,8 @@ export class COrderGraphPlotter extends NamedObject {
         let gridRects = [];
         for (let n in gradations) {
             let y = range.toY(gradations[n]);
-            gridRects.push({x: left, y: y, w: 6, h: 1});
-            gridRects.push({x: right - 6, y: y, w: 6, h: 1});
+            gridRects.push({x: left, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
+            gridRects.push({x: right - 6 * Kline.instance.dpr, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
         }
         if (gridRects.length > 0) {
             let theme = mgr.getTheme(this.getFrameName());
@@ -1518,12 +1529,14 @@ export class COrderGraphPlotter extends NamedObject {
         bid_point.push(bid_last_add);
         context.fillStyle = this.m_pTheme.getColor(themes.Theme.Color.Background);
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.moveTo(Math.floor(ask_point[0].x) + 0.5, Math.floor(ask_point[0].y) + 0.5);
         for (let i = 1; i < ask_point.length; i++) {
             context.lineTo(Math.floor(ask_point[i].x) + 0.5, Math.floor(ask_point[i].y) + 0.5);
         }
         context.fill();
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.moveTo(Math.floor(bid_point[0].x) + 0.5, Math.floor(bid_point[0].y) + 0.5);
         for (let i = 1; i < bid_point.length; i++) {
             context.lineTo(Math.floor(bid_point[i].x) + 0.5, Math.floor(bid_point[i].y) + 0.5);
@@ -1537,20 +1550,21 @@ export class COrderGraphPlotter extends NamedObject {
 
     DrawTickerGraph(context) {
         // return;
-        let mgr = ChartManager.instance;
-        let ds = mgr.getDataSource(this.getDataSourceName());
-        let ticker = ds._dataItems[ds._dataItems.length - 1].close;
-        let p1x = this.m_left + 1;
-        let p1y = this.m_pRange.toY(ticker);
-        let p2x = p1x + 5;
-        let p2y = p1y + 2.5;
-        let p3x = p1x + 5;
-        let p3y = p1y - 2.5;
+        // let mgr = ChartManager.instance;
+        // let ds = mgr.getDataSource(this.getDataSourceName());
+        // let ticker = ds._dataItems[ds._dataItems.length - 1].close;
+        // let p1x = this.m_left + 1;
+        // let p1y = this.m_pRange.toY(ticker);
+        // let p2x = p1x + 5;
+        // let p2y = p1y + 2.5;
+        // let p3x = p1x + 5;
+        // let p3y = p1y - 2.5;
         context.fillStyle = this.m_pTheme.getColor(themes.Theme.Color.Mark);
         context.strokeStyle = this.m_pTheme.getColor(themes.Theme.Color.Mark);
     };
 }
 
+//最新成交量
 export class LastVolumePlotter extends Plotter {
 
     constructor(name) {
@@ -1577,15 +1591,16 @@ export class LastVolumePlotter extends Plotter {
         context.strokeStyle = theme.getColor(themes.Theme.Color.RangeMark);
         let v = ds.getDataAt(ds.getDataCount() - 1).volume;
         let y = range.toY(v);
-        let left = area.getLeft() + 1;
-        Plotter.drawLine(context, left, y, left + 7, y);
-        Plotter.drawLine(context, left, y, left + 3, y + 2);
-        Plotter.drawLine(context, left, y, left + 3, y - 2);
-        context.fillText(Util.fromFloat(v, 2), left + 10, y);
+        let left = area.getLeft() + 5 * Kline.instance.dpr;
+        Plotter.drawLine(context, left, y, left + 7 * Kline.instance.dpr, y);
+        Plotter.drawLine(context, left, y, left + 3 * Kline.instance.dpr, y + 2 * Kline.instance.dpr);
+        Plotter.drawLine(context, left, y, left + 3 * Kline.instance.dpr, y - 2 * Kline.instance.dpr);
+        context.fillText(Util.fromFloat(v, 2) || 0, left + 10 * Kline.instance.dpr, y);
     }
 
 }
 
+//最新收盘价
 export class LastClosePlotter extends Plotter {
 
     constructor(name) {
@@ -1614,11 +1629,11 @@ export class LastClosePlotter extends Plotter {
         context.fillStyle = theme.getColor(themes.Theme.Color.RangeMark);
         context.strokeStyle = theme.getColor(themes.Theme.Color.RangeMark);
         let y = range.toY(v);
-        let left = area.getLeft() + 1;
-        Plotter.drawLine(context, left, y, left + 7, y);
-        Plotter.drawLine(context, left, y, left + 3, y + 2);
-        Plotter.drawLine(context, left, y, left + 3, y - 2);
-        context.fillText(Util.fromFloat(v, ds.getDecimalDigits()), left + 10, y);
+        let left = area.getLeft() + 5 * Kline.instance.dpr;
+        Plotter.drawLine(context, left, y, left + 7 * Kline.instance.dpr, y);
+        Plotter.drawLine(context, left, y, left + 3 * Kline.instance.dpr, y + 2 * Kline.instance.dpr);
+        Plotter.drawLine(context, left, y, left + 3 * Kline.instance.dpr, y - 2 * Kline.instance.dpr);
+        context.fillText(Util.fromFloat(v, ds.getDecimalDigits()), left + 10 * Kline.instance.dpr, y);
     }
 
 }
@@ -1670,9 +1685,9 @@ export class TimelineSelectionPlotter extends Plotter {
         let lang = mgr.getLanguage();
         let x = timeline.toItemCenter(timeline.getSelectedIndex());
         context.fillStyle = theme.getColor(themes.Theme.Color.Background);
-        context.fillRect(x - 52.5, area.getTop() + 2.5, 106, 18);
+        context.fillRect(x - 52.5 * Kline.instance.dpr, area.getTop() + 2.5* Kline.instance.dpr, 106* Kline.instance.dpr, 18* Kline.instance.dpr);
         context.strokeStyle = theme.getColor(themes.Theme.Color.Grid3);
-        context.strokeRect(x - 52.5, area.getTop() + 2.5, 106, 18);
+        context.strokeRect(x - 52.5* Kline.instance.dpr, area.getTop() + 2.5* Kline.instance.dpr, 106* Kline.instance.dpr, 18* Kline.instance.dpr);
         context.font = theme.getFont(themes.Theme.Font.Default);
         context.textAlign = "center";
         context.textBaseline = "middle";
@@ -1753,10 +1768,10 @@ export class RangeSelectionPlotter extends NamedObject {
         let y = range.getSelectedPosition();
         Plotter.createPolygon(context, [
             {"x": area.getLeft(), "y": y},
-            {"x": area.getLeft() + 5, "y": y + 10},
-            {"x": area.getRight() - 3, "y": y + 10},
-            {"x": area.getRight() - 3, "y": y - 10},
-            {"x": area.getLeft() + 5, "y": y - 10}
+            {"x": area.getLeft() + 5* Kline.instance.dpr, "y": y + 10* Kline.instance.dpr},
+            {"x": area.getRight() - 3* Kline.instance.dpr, "y": y + 10* Kline.instance.dpr},
+            {"x": area.getRight() - 3* Kline.instance.dpr, "y": y - 10* Kline.instance.dpr},
+            {"x": area.getLeft() + 5* Kline.instance.dpr, "y": y - 10* Kline.instance.dpr}
         ]);
         let theme = mgr.getTheme(this.getFrameName());
         context.fillStyle = theme.getColor(themes.Theme.Color.Background);
@@ -1799,10 +1814,10 @@ export class CToolPlotter extends NamedObject {
             bottom: pArea.getBottom()
         };
         this.crossPt = {};
-        this.normalSize = 4;
-        this.selectedSize = 6;
-        this.cursorLen = 4;
-        this.cursorGapLen = 3;
+        this.normalSize = 4 * Kline.instance.dpr;
+        this.selectedSize = 6 * Kline.instance.dpr;
+        this.cursorLen = 4 * Kline.instance.dpr;
+        this.cursorGapLen = 3 * Kline.instance.dpr;
         this.theme = ChartManager.instance.getTheme(this.getFrameName());
     }
 
@@ -1832,6 +1847,7 @@ export class CToolPlotter extends NamedObject {
         let centerX = center.x;
         let centerY = center.y;
         context.beginPath();
+        context.lineWidth = Kline.instance.dpr;
         context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
         context.fillStyle = this.theme.getColor(themes.Theme.Color.CircleColorFill);
         context.fill();
@@ -2018,7 +2034,7 @@ export class DrawArrowLinesPlotter extends CToolPlotter {
         super(name, toolObject);
         this.toolObject = toolObject;
         this.arrowSizeRatio = 0.03;
-        this.arrowSize = 4;
+        this.arrowSize = 4 * Kline.instance.dpr;
         this.crossPt = {x: -1, y: -1};
         this.ctrlPtsNum = 2;
         this.ctrlPts = [new Array(this.ctrlPtsNum), new Array(2)];
@@ -2152,7 +2168,7 @@ export class DrawPriceLinesPlotter extends CToolPlotter {
     }
 
     draw(context) {
-        context.font = "12px Tahoma";
+        context.font = theme.getFont(themes.Theme.Font.Default);
         context.textAlign = "left";
         context.fillStyle = this.theme.getColor(themes.Theme.Color.LineColorNormal);
         this.updateCtrlPtPos();
@@ -2291,7 +2307,7 @@ export class BandLinesPlotter extends CToolPlotter {
     }
 
     drawLinesAndInfo(context, startPoint, endPoint) {
-        context.font = "12px Tahoma";
+        context.font = theme.getFont(themes.Theme.Font.Default);
         context.textAlign = "left";
         context.fillStyle = this.theme.getColor(themes.Theme.Color.LineColorNormal);
         let text;

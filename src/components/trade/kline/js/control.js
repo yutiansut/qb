@@ -178,15 +178,12 @@ export class Control {
         let mainCanvas = $('#chart_mainCanvas')[0];
         let overlayCanvas = $('#chart_overlayCanvas')[0];
 
+        let dpr = Kline.instance.dpr;
 
-        let dpr = window.devicePixelRatio;
-        console.log("devicePixelRatio:\n",dpr);
-        //dpr = 0.5;
-
-        mainCanvas.width = canvasGroupRect.w;
-        mainCanvas.height = canvasGroupRect.h;
-        overlayCanvas.width = canvasGroupRect.w;
-        overlayCanvas.height = canvasGroupRect.h;
+        mainCanvas.width = canvasGroupRect.w * dpr;
+        mainCanvas.height = canvasGroupRect.h * dpr;
+        overlayCanvas.width = canvasGroupRect.w * dpr;
+        overlayCanvas.height = canvasGroupRect.h * dpr;
         $(mainCanvas).css({
             width: canvasGroupRect.w + "px",
             height: canvasGroupRect.h + "px",
@@ -196,7 +193,7 @@ export class Control {
             height: canvasGroupRect.h + "px",
         });
 
-        console.log("k线-尺寸：",canvasGroupRect, dpr, mainCanvas.width, mainCanvas.height, $(mainCanvas));
+        //console.log("k线-尺寸：",canvasGroupRect, dpr, mainCanvas.width, mainCanvas.height, $(mainCanvas));
 
         /*
         mainCanvas.width = canvasGroupRect.w;

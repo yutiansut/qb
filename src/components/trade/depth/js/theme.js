@@ -12,7 +12,7 @@ let Theme={
         //barFill2: "#d84747",                        //卖-柱状线
         infoFontColor: "rgb(43, 183, 137)",       //左上方-鼠标提示文本
     },
-    _fonts:"12px Tahoma",                               //字体
+    _fonts: window.devicePixelRatio * 12 +"px Tahoma",                               //字体
 };
 
 export default Theme;

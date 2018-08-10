@@ -26,6 +26,7 @@ export default class Kline {
         this.theme = "dark";
         this.ranges = ["1w", "1d","12h", "1h", "30m", "15m", "5m", "1m", "line"];
         this.lines = []; //k线数据
+        this.dpr = window.devicePixelRatio;
 
         this.periodMap = {
             "01w": 7 * 86400 * 1000,
@@ -382,8 +383,8 @@ export default class Kline {
         $("#chart_overlayCanvas")
             .mousemove(function (e) {
                 let r = e.target.getBoundingClientRect();
-                let x = e.clientX - r.left;
-                let y = e.clientY - r.top;
+                let x = (e.clientX - r.left) * Kline.instance.dpr;
+                let y = (e.clientY - r.top) * Kline.instance.dpr;
                 let mgr = ChartManager.instance;
                 if (Kline.instance.buttonDown === true) {
                     mgr.onMouseMove("frame0", x, y, true);
@@ -395,8 +396,8 @@ export default class Kline {
             })
             .mouseleave(function (e) {
                 let r = e.target.getBoundingClientRect();
-                let x = e.clientX - r.left;
-                let y = e.clientY - r.top;
+                let x = (e.clientX - r.left) * Kline.instance.dpr;
+                let y = (e.clientY - r.top) * Kline.instance.dpr;
                 let mgr = ChartManager.instance;
                 mgr.onMouseLeave("frame0", x, y, false);
                 mgr.redraw("OverlayCanvas");
@@ -407,8 +408,8 @@ export default class Kline {
                 }
                 Kline.instance.buttonDown = false;
                 let r = e.target.getBoundingClientRect();
-                let x = e.clientX - r.left;
-                let y = e.clientY - r.top;
+                let x = (e.clientX - r.left) * Kline.instance.dpr;
+                let y = (e.clientY - r.top) * Kline.instance.dpr;
                 let mgr = ChartManager.instance;
                 mgr.onMouseUp("frame0", x, y);
                 mgr.redraw("All");
@@ -421,8 +422,8 @@ export default class Kline {
                 }
                 Kline.instance.buttonDown = true;
                 let r = e.target.getBoundingClientRect();
-                let x = e.clientX - r.left;
-                let y = e.clientY - r.top;
+                let x = (e.clientX - r.left) * Kline.instance.dpr;
+                let y = (e.clientY - r.top) * Kline.instance.dpr;
                 ChartManager.instance.onMouseDown("frame0", x, y);
             });
         $("#chart_parameter_settings input").change(function () {

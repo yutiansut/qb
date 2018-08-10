@@ -2,6 +2,7 @@ import * as areas from './areas'
 import {ChartManager} from './chart_manager'
 import * as themes from './themes'
 import {ChartSettings} from './chart_settings'
+import Kline from "./kline";
 
 export class TableLayout extends areas.ChartAreaGroup {
 
@@ -56,10 +57,10 @@ export class TableLayout extends areas.ChartAreaGroup {
             }
             rh[0] = h;
         }
-        let nw = 8;
+        let nw = 8 * Kline.instance.dpr;
         // chart depths sidebar (深度图侧边栏宽度)
-        let minRW = 80;
-        let maxRW = Math.min(240, width >> 1);
+        let minRW = 80 * Kline.instance.dpr;
+        let maxRW = Math.min(240 * Kline.instance, width >> 1);
         let rw = minRW;
         let mgr = ChartManager.instance;
         let timeline = mgr.getTimeline(this.getDataSourceName());

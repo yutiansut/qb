@@ -77,7 +77,7 @@ export class DarkTheme extends Theme {
         this._colors[Theme.Color.CircleColorFill] = "#161616";      //画线工具-线端点-填充
         this._colors[Theme.Color.CircleColorStroke] = "#ffffff";    //画线工具-线端点-边框
         this._fonts = [];
-        this._fonts[Theme.Font.Default] = "12px Tahoma";     // 字体
+        this._fonts[Theme.Font.Default] = Kline.instance.dpr * 12 +"px Tahoma";     // 字体
     }
 
 }
@@ -115,7 +115,7 @@ export class LightTheme extends Theme {
         this._colors[Theme.Color.CircleColorFill] = "#f6f6f6";
         this._colors[Theme.Color.CircleColorStroke] = "#393c40";
         this._fonts = [];
-        this._fonts[Theme.Font.Default] = "12px Tahoma";
+        this._fonts[Theme.Font.Default] = Kline.instance.dpr * 12 + "px Tahoma";
     }
 
 }
