@@ -51,11 +51,20 @@
 <div id="app">
 
     <canvas id="chart_mainCanvas" style="width:400px;height:400px;"></canvas>
-    <div style="font-size:20px;color: #333;">
-        测试文本
-    </div>
+    <div style="font-size:20px;color: #333;">测试文本</div>
+    <div id="d2"></div>
+    <div id="d3"></div>
     <script>
         let dpr = window.devicePixelRatio;
+        var s = "";
+        s += " 屏幕分辨率的宽："+ window.screen.width+"<br>";
+        s += " 屏幕分辨率的高："+ window.screen.height+"<br>";
+        s += " 屏幕可用工作区宽度："+ window.screen.availWidth+"<br>";
+        s += " 屏幕可用工作区高度："+ window.screen.availHeight+"<br>";
+        s += " 颜色深度 "+ window.screen.colorDepth +" 位彩色"+"<br>";
+        s += " 像素深度 "+ window.screen.pixelDepth +" 像素/英寸"+"<br>";
+        document.querySelector("#d2").innerHTML ="devicePixelRatio：" + dpr;
+        document.querySelector("#d3").innerHTML =s;
 
         let mainCanvas = document.querySelector("#chart_mainCanvas");
         mainCanvas.width = 400 * dpr;
@@ -65,14 +74,22 @@
         mctx.fillRect(0,0, mainCanvas.width ,mainCanvas.height);
 
         mctx.fillStyle = "#fff";
-        mctx.font = (20 * dpr)+"px Arial";
+        mctx.font = 30 +"px Arial";
         mctx.fillText("测试文本1",50,50);
+
+        mctx.font = (30 * dpr)+"px Arial";
         mctx.fillText("测试文本2",50,150);
 
         mctx.strokeStyle = "#fff";
-        mctx.lineWidth = dpr;
+        mctx.lineWidth = 2;
         mctx.moveTo(50,200);
         mctx.lineTo(400,200);
+        mctx.stroke();
+
+        mctx.strokeStyle = "#fff";
+        mctx.lineWidth = 2 * dpr;
+        mctx.moveTo(50,300);
+        mctx.lineTo(400,300);
         mctx.stroke();
 
     </script>
