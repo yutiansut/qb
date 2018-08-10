@@ -1235,7 +1235,7 @@ export class RangePlotter extends NamedObject {
             let y = range.toY(gradations[n]);
             gridRects.push({x: left, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
             gridRects.push({x: right - 6 * Kline.instance.dpr, y: y, w: 6 * Kline.instance.dpr, h: 1 * Kline.instance.dpr});
-            context.fillText(Util.fromFloat(gradations[n], 2), center, y);
+            context.fillText(Util.fromFloat(gradations[n], 2) , center, y);
         }
         if (gridRects.length > 0) {
             context.fillStyle = theme.getColor(themes.Theme.Color.Grid1);
