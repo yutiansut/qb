@@ -53,7 +53,7 @@ export default class ChargeMessage extends exchangeViewBase {
         <ul className="clearfix" style={{ top: this.state.top1 + "%" }}>
           {this.state.content.map((v, i) => (
             <li key={i}>
-              <NavLink to="/wallet/dashboard">
+              <NavLink to="/wallet/dashboard/?type=1">
                 【{this.intl.get("deposit")}】{v.orderTime.toDate()} {v.count}{" "}
                 {v.coinName.toUpperCase()} {this.intl.get("asset-confirming")}({`${
                   v.doneCount || 0
@@ -65,7 +65,7 @@ export default class ChargeMessage extends exchangeViewBase {
         <ul className="clearfix" style={{ top: this.state.top2 + "%" }}>
           {this.state.content.map((v, i) => (
             <li key={i}>
-              <NavLink to="/wallet/dashboard">
+              <NavLink to="/wallet/dashboard/?type=1">
                 【{this.intl.get("deposit")}】{v.orderTime.toDate()} {v.count}{" "}
                 {v.coinName.toUpperCase()} {this.intl.get("asset-confirming")}({`${
                   v.doneCount
