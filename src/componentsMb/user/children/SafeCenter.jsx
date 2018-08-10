@@ -102,7 +102,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
         <div className="safe-center-container">
           <NavLink
             className="item clearfix"
-            to={`${url}/setPwd?type=${this.state.userInfo.loginPwd ? 3 : 4}`}
+            to={`${url}/setPwd?type=${this.state.userInfo.loginPwd ? 1 : 2}`}
           >
             <span className="fl">
               {(this.state.userInfo.loginPwd &&
@@ -113,7 +113,7 @@ export default class UserCenterIndex extends ExchangeViewBase {
           </NavLink>
           <NavLink
             className="item clearfix"
-            to={`${url}/setPwd?type=${this.state.userInfo.fundPwd ? 5 : 6}`}
+            to={`${url}/setPwd?type=${this.state.userInfo.fundPwd ? 3 : 4}`}
           >
             <span className="fl">
               {(this.state.userInfo.fundPwd &&

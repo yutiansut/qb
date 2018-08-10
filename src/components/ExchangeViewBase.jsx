@@ -70,6 +70,7 @@ export default class ExchangeViewBase extends ViewBase {
       $calendar_nextYear: "/static/web/calendar/calendar_next_year.svg",
       $calendar_preMonth: "/static/web/calendar/calendar_pre_month.svg",
       $calendar_nextMonth: "/static/web/calendar/calendar_next_month.svg",
+
       $h5_logo: "/static/logo/logo_h5.png", // h5图片
       $h5_user_identity: '/static/mobile/user/icon_wd_sfrz@3x.png',
       $h5_user_safe: '/static/mobile/user/icon_wd_aqzx@3x.png',
@@ -116,6 +117,8 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_tip_success: "/static/mobile/icon_success@3x.png",
       $h5_tip_fail: "/static/mobile/img_ts_czcc@3x.png",
 
+      $h5_hidden: "/static/mobile/asset/icon_hidden@2x.png",
+      $h5_show: "/static/mobile/asset/icon_show@2x.png"
     }
   }
 

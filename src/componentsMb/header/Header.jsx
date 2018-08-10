@@ -22,6 +22,8 @@ export default class Header extends ExchangeViewBase {
       linkUrl: '',
       searchShow: false,
       filterShow: false,
+      eyeShow: false,
+      eyeChangeShow: true,
       selectFn: () => {
       }
     };
@@ -81,6 +83,7 @@ export default class Header extends ExchangeViewBase {
           <img src={this.$imagesMap.$h5_search} className="fr search-img" alt="" onClick={this.state.selectFn}/>}
           {this.state.filterShow &&
           <img src={this.$imagesMap.$h5_order_select} className="fr search-img" alt="" onClick={this.state.selectFn}/>}
+          {this.state.eyeShow && (this.state.eyeChangeShow && (<img src={this.$imagesMap.$h5_hidden} className="fr search-img" alt="" onClick={this.state.selectFn}/>) || (<img src={this.$imagesMap.$h5_show} className="fr search-img" alt="" onClick={this.state.selectFn}/>))}
         </div>
         {/*<div className="nav-menu fr">*/}
         {/*<img src={this.state.navHidden ? "/static/mobile/header/icon_cd@2x.png" : "/static/mobile/header/icon_qx@2x.png"}*/}

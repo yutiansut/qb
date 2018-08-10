@@ -65,8 +65,6 @@ export default class SetPassPopup extends exchangeViewBase {
           btnTitle: this.intl.get("save")},
         { // 修改资金密码
           title: this.intl.get("user-popRecoverFundPwd"),
-          // numTitleNew: this.intl.get("user-currentPwd"),
-          // numInputNew: this.intl.get("user-inputNowPwd"),
           numTitle: this.intl.get("user-newPwd"),
           numInput: this.intl.get("user-inputNewPwd"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
@@ -157,16 +155,16 @@ export default class SetPassPopup extends exchangeViewBase {
           errAgainPwd: this.intl.get("user-checkAgainPwd")
         })
       }
-      if (reg2.test(this.state.againPwdValue) && (this.state.againPwdValue === this.state.userValue)) {
+      if (reg2 && (this.state.againPwdValue === this.state.userValue)) {
         this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
       }
     }
   }
 
   checkAgainPwd() { // 离开
-    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,18}$/ // 密码
+    let reg = Regular('regPwd', this.state.againPwdValue) // 密码
     if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
-      if(!reg.test(this.state.againPwdValue)) {
+      if(!reg) {
         this.setState({
           errAgainPwd: this.intl.get("user-checkNewPwd")
         })
@@ -177,7 +175,7 @@ export default class SetPassPopup extends exchangeViewBase {
           errAgainPwd: this.intl.get("user-checkAgainPwd")
         })
       }
-      if (reg.test(this.state.againPwdValue) && (this.state.againPwdValue === this.state.userValue)) {
+      if (reg && (this.state.againPwdValue === this.state.userValue)) {
         this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
       }
     }
@@ -191,6 +189,18 @@ export default class SetPassPopup extends exchangeViewBase {
     if (this.props.isType === 5 && this.state.userValue && this.state.againPwdValue && this.state.pictureValue && this.state.verifyValue) return true // 设置资金密码
     if (this.props.isType === 6 && this.state.userValue && this.state.againPwdValue && this.state.pictureValue && (this.state.verifyValue || this.state.googleValue)) return true // 修改资金密码
     return false
+  }
+
+
+
+  aaa(type){
+    aaa = 11
+    bb = 22
+    if()
+      aaa =  ``;
+    if()
+      bb =    ``
+    return (<Button aa={aa} bb={{}} onclick={xxx[type]}>)
   }
 
   componentWillUnmount() {
