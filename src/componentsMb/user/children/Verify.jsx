@@ -57,6 +57,7 @@ export default class Verify extends ExchangeViewBase {
   componentWillMount() {}
   componentDidMount() {
     this.props.addContent({ con: this.state.title[this.state.type] });
+    this.refs.input0.focus()
   }
 
   render() {
@@ -88,6 +89,7 @@ export default class Verify extends ExchangeViewBase {
                 onInput={value => {
                   this.setState({ account: value });
                 }}
+                ref="input0"
                 className={`${tip1 ? 'error' : ''}`}
                 onBlur={() => {
                   if(this.verifyAccount(mode[type], account)){

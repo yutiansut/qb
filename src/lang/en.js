@@ -725,7 +725,8 @@ export default function en(state) {
     "user-input-name": 'ID Name',
     "user-input-firstName": 'First Name',
     "user-id-type": 'Please ID Type',
-    "user-id-wrong": '!ID is wrong'
+    "user-id-wrong": '!ID is wrong',
+    "user-safe-verify": "Security Verification",
   };
 
   const activity = {

@@ -18,7 +18,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
       // type: 2,
       code: '',
       type: props.type, //0,1,2 邮箱、谷歌、短信
-      title: [this.intl.get('user-verifyEmailTitle'), this.intl.get('user-googleVerify'), this.intl.get('user-verifyPhoneTitle')],
+      title: this.intl.get('user-safe-verify'),
       holderText: [this.intl.get('user-verifyEmail'), "", this.intl.get('user-verifySMS')],
     };
   }
@@ -40,7 +40,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
       <div className="two-verify-popup-h5">
         <div className="poup">
           <h4>
-            {title[type]}{" "}
+            {title}{" "}
             <i
               onClick={() => {
                 onClose && onClose();
@@ -66,7 +66,6 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
                 <input
                   className={`item-code`}
                   ref={`input${index}`}
-                  type="password"
                   key={index}
                   maxLength={1}
                   value={googleCode[index]}

@@ -452,7 +452,7 @@ export default class AssetController extends ExchangeControllerBase {
       sortValue = ["valuationBTC"];
       type = 0;
     }
-    return this.sort(arr, sortValue, type);
+    return this.sort(arr, sortValue, type, ['coinName']);
   }
 
   clearVerify() {

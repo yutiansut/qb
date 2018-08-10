@@ -426,12 +426,10 @@ export default class UserController extends ExchangeControllerBase {
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
   async setGoogleVerifyH5(code) {
-    console.log(code)
     let result = await this.store.Proxy.setGoogleVerify({
       token: this.store.token,
       co: code
     })
-    console.log(result)
     if (result === null){
       this.view.setState({
         popupFlag: true,

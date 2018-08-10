@@ -595,7 +595,7 @@ export default function zh(state) {
     "user-verifyEmailTitle": "邮箱验证",
     "user-verifyEmailTitle-h5": "邮箱验证",
     "user-verifyPhoneTitle": "短信验证",
-    "user-verifyPhoneTitle-h5": "短信验证",
+    "user-verifyPhoneTitle-h5": "手机验证",
     "user-checkAgainPwd": "请保证两次输入的新密码一致",
     // "user-checkNewPwd": "登录密码长度必须在6-18位之间",
     "user-checkNewPwd": "必须是 6-18 位英文字母、数字或符号组合",
@@ -685,7 +685,8 @@ export default function zh(state) {
     "user-input-name": '填写该证件的名字',
     "user-input-firstName": '填写该证件的姓氏',
     "user-id-type": '请选择证件类型',
-    "user-id-wrong": '!证件格式错误'
+    "user-id-wrong": '!证件格式错误',
+    "user-safe-verify": "安全验证",
   };
   const login = {
     "login-verify": "验证登录",

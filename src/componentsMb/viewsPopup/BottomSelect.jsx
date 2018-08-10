@@ -25,8 +25,7 @@ export default class BottomSelect extends ExchangeViewBase {
                 this.props.onSelect && this.props.onSelect(v);
               }}
             >
-              {v.value}
-              {this.props.current !== undefined && this.props.current === v.i ? <i>（{this.intl.get('seted')}）</i> : ''}
+              <span>{v.value}{this.props.current !== undefined && this.props.current === v.i ? <i>（{this.intl.get('seted')}）</i> : ''}</span>
             </a>
           ))}
           <a
