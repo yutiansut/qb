@@ -40,7 +40,7 @@ export default class LoginStore extends ExchangeStoreBase {
     this.WebSocket.general.emit('loginOut')
   }
 
-  async getAward(obj){
+  async getAward(obj) {
     // let result =
     return await this.Proxy.getAward(obj);
   }

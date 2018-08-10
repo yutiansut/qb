@@ -116,7 +116,6 @@ export default class App extends Component {
     activityController = new ActivityController();
     marketController = new MarketController("market");
     userOrderController = new UserOrderListController();
-    configController.getActivityState();
 
     noticeController.configController = configController;
 
@@ -142,7 +141,7 @@ export default class App extends Component {
     let HomeCompoment = AsyncComponent(()=>import("./componentsMb/home/Home.jsx"), {activityController, marketController,noticeController});
     let LoginComponent = AsyncComponent(()=>import("./componentsMb/login/Login.jsx"), {controller:loginController});
     let ForgetPassComponent = AsyncComponent(()=>import("./componentsMb/login/ForgetPass.jsx"), {controller:loginController});
-    let HelpComponent = AsyncComponent(()=>import("./componentsMb/help/Help.jsx"), {activityController,assetController});
+    let HelpComponent = AsyncComponent(()=>import("./componentsMb/help/Help.jsx"), {activityController,assetController,configController});
     let AssetComponent = AsyncComponent(()=>import("./componentsMb/asset/AssetManage"), {controller:assetController});
     let OrderManageCompoment = AsyncComponent(()=>import("./componentsMb/order/OrderManage.jsx"), {controller:userOrderController});
     let UserCenterComponent = AsyncComponent(()=>import("./componentsMb/user/UserCenter.jsx"), {controller:userController});
@@ -165,7 +164,9 @@ export default class App extends Component {
 
   componentWillMount() {}
 
-  componentDidMount() {
+  async componentDidMount() {
+    await configController.getActivityState();
+    await configController.checkVersion();
     configController.loadLocales();
   }
 

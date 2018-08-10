@@ -162,7 +162,7 @@ export default function en(state) {
     610: "Same as the original password",
     612: "Password wrong, your account has been frozen, try after {number}mins！",
     613: "Login exception, please log in again",
-    616: "Please log in first, and set the login password in the personal center.",
+    616: "Please go to the personal center to set up the fund code",
     617: "The user has no real name authentication",
     619: "Wrong graphic verification code",
     620: "The same as the capital password",
@@ -170,7 +170,7 @@ export default function en(state) {
     623: "Account has been occupied",
     624: "Excessive number of error in verifying code",
     625: "Excessive number of errors in the Google verifying code",
-    628: "Please go to the personal center to set up the fund code",
+    628: "Please log in first, and set the login password in the personal center.",
     704: "The fund password was changed within 24 hours and there was a security wall",
     705: "Insufficient quantity available",
     706: "Less than the minimum withdrawal limit",
@@ -739,7 +739,7 @@ export default function en(state) {
     "login-other": "Log on in other places, please log in again",
     "login-err": "Login failed, please try again",
     "login-miss": "The login information has failed, please try again",
-    "login-wait": "System maintenance, temporarily unable to register, please wait patiently, thank you for your understanding"
+    "login-wait": "System maintenance, temporarily unable to register"
   };
   const help = {
     "help-fees": "Fees",

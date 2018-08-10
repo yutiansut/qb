@@ -24,6 +24,7 @@ export default class Help extends exchangeViewBase {
     super(props);
     this.assetController = props.assetController;
     this.activityController = props.activityController;
+    this.configController = props.configController;
   }
 
   render() {
@@ -40,6 +41,10 @@ export default class Help extends exchangeViewBase {
     const coin = ({location}) => {
       return <CoinData controller={this.assetController} location={location} />;
     };
+  
+    const downLoad = ({location}) => {
+      return <DownLoad controller={this.assetController} configController={this.configController} location={location} />;
+    };
 
     return <div className="help-wrap-mb">
       <div className="route">
@@ -48,7 +53,7 @@ export default class Help extends exchangeViewBase {
             <Route path={`${match.url}/pricing`} component={pricing} />
             <Route path={`${match.url}/api`} component={api} />
             <Route path={`${match.url}/currency`} component={coin} />
-            <Route path={`${match.url}/download`} component={DownLoad} />
+            <Route path={`${match.url}/download`} component={downLoad} />
             <Redirect to={`${match.url}/terms`} />
           </Switch>
         </div>
