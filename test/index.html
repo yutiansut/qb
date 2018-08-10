@@ -58,20 +58,21 @@
         let dpr = window.devicePixelRatio;
 
         let mainCanvas = document.querySelector("#chart_mainCanvas");
-        mainCanvas.width = 400;
-        mainCanvas.height = 400;
+        mainCanvas.width = 400 * dpr;
+        mainCanvas.height = 400 * dpr;
 
         let mctx = mainCanvas.getContext("2d");
         mctx.fillRect(0,0, mainCanvas.width ,mainCanvas.height);
 
         mctx.fillStyle = "#fff";
-        mctx.font = "20px Arial";
-        mctx.fillText("测试文本",50,50);
-        mctx.fillText("测试文本",50 * dpr,50 * dpr);
+        mctx.font = (20 * dpr)+"px Arial";
+        mctx.fillText("测试文本1",50,50);
+        mctx.fillText("测试文本2",50,150);
 
         mctx.strokeStyle = "#fff";
-        mctx.moveTo(50,70);
-        mctx.lineTo(200,80);
+        mctx.lineWidth = dpr;
+        mctx.moveTo(50,200);
+        mctx.lineTo(400,200);
         mctx.stroke();
 
     </script>
