@@ -180,7 +180,7 @@ export class Control {
 
 
         let dpr = window.devicePixelRatio;
-        console.log("devicePixelRatio:\n",dpr);
+        //console.log("devicePixelRatio:\n",dpr);
         //dpr = 0.5;
 
         mainCanvas.width = canvasGroupRect.w;
@@ -196,7 +196,7 @@ export class Control {
             height: canvasGroupRect.h + "px",
         });
 
-        console.log("k线-尺寸：",canvasGroupRect, dpr, mainCanvas.width, mainCanvas.height, $(mainCanvas));
+        //console.log("k线-尺寸：",canvasGroupRect, dpr, mainCanvas.width, mainCanvas.height, $(mainCanvas));
 
         /*
         mainCanvas.width = canvasGroupRect.w;
