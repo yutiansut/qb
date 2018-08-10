@@ -511,7 +511,7 @@ export default class AssetController extends ExchangeControllerBase {
   // }
   // 获取我的QBT
   async getMyQbt() {
-    let result = await this.store.getMyQbt();
+    let result = await this.activityController.getMyQbt();
     if (result) this.view.setState({ Qbt: result });
     return result;
   }

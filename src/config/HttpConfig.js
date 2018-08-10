@@ -78,8 +78,6 @@ export default {
   asset: [
     // 获取交易对手续费5.16（pass）
     {name: 'getFee', data: {url: '/v1/common/', method: 'post'}, action: 'atp', actionBack: 'atpr'},
-    // 获取我的QBT
-    {name: 'getMyQbt', data: {url: '/v1/user/', method: 'post'}, action: 'gmq', actionBack: 'gmqr', needToken: true},
     // 获取总资产(包含各个钱包币种的详细信息)4.1
     {name: 'totalAsset', data: {url: '/v1/property/', method: 'post'}, action: 'gp', actionBack: 'gpr', needToken: true},
     // 获取全部币种列表

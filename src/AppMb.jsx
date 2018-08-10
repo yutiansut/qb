@@ -144,6 +144,7 @@ export default class App extends Component {
     assetController.userController = userController;
     assetController.marketController = marketController;
     assetController.headerController = headerController;
+    assetController.activityController = activityController;
 
     marketController.userController = userController;
     marketController.configController = configController;

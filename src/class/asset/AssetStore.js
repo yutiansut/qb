@@ -108,24 +108,24 @@ export default class AssetStore extends ExchangeStoreBase {
     return result;
   }
   // 获取我的QBT
-  async getMyQbt() {
-    // console.log(this.controller.token);
-    let result = await this.Proxy.getMyQbt({
-      token: this.controller.token
-    });
-    if (result && result.id) {
-      return {
-        availableCount: result.aw,
-        price: result.p,
-        coinIcon: "",
-        coinId: "",
-        coinName: this.controller.configData.coin,
-        fullName: this.controller.configData.coin,
-        valuationCN: result.vl
-      };
-    }
-    return false;
-  }
+  // async getMyQbt() {
+  //   // console.log(this.controller.token);
+  //   let result = await this.Proxy.getMyQbt({
+  //     token: this.controller.token
+  //   });
+  //   if (result && result.id) {
+  //     return {
+  //       availableCount: result.aw,
+  //       price: result.p,
+  //       coinIcon: "",
+  //       coinId: "",
+  //       coinName: this.controller.configData.coin,
+  //       fullName: this.controller.configData.coin,
+  //       valuationCN: result.vl
+  //     };
+  //   }
+  //   return false;
+  // }
 
   // 获取总资产
   async getTotalAsset() {

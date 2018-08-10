@@ -8,6 +8,7 @@ export default class ActivityController extends ExchangeControllerBase {
   constructor() {
     super('activity')
     this.store = new ActivityStore()
+    this.store.setController(this);
   }
 
   setView(view) {
@@ -20,7 +21,7 @@ export default class ActivityController extends ExchangeControllerBase {
   async getMyQbt() {
     let token = this.userToken;
     let result = await this.store.getMyQbt(token);
-    if (result) this.view.setState({ Qbt: result });
+    if (result) this.view && this.view.setState({ Qbt: result });
     return result;
   }
   // 获取QBT信息

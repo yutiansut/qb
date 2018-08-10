@@ -14,6 +14,7 @@ export default class NoticeStore extends ExchangeStoreBase {
       award: 0
     }
   }
+
   // 获取我的QBT
   async getMyQbt(token) {
     // console.log(this.controller.token);
@@ -26,8 +27,8 @@ export default class NoticeStore extends ExchangeStoreBase {
         price: result.p,
         coinIcon: "",
         coinId: "",
-        coinName: "QBT",
-        fullName: "QBT",
+        coinName: this.controller.configData.coin,
+        fullName: this.controller.configData.coin,
         valuationCN: result.vl
       };
     }
