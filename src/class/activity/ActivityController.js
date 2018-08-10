@@ -96,11 +96,11 @@ export default class ActivityController extends ExchangeControllerBase {
     })
   }
 
-  async getRankingList() {
+  async getRankingList(page = 1, pageSize= 10) {
     if (!this.configData.activityState) {
       return true
     }
-    let result = await this.store.getRankingList(this.userToken)
+    let result = await this.store.getRankingList(this.userToken, page, pageSize)
     this.view.setState({
       rankingList: result.list || []
     })
