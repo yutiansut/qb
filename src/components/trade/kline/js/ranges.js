@@ -1,5 +1,6 @@
 import {NamedObject} from './named_object'
 import {ChartManager} from './chart_manager'
+import Kline from "./kline";
 
 export class Range extends NamedObject {
 
@@ -15,7 +16,7 @@ export class Range extends NamedObject {
         this._bottom = 0;
         this._paddingTop = 0;
         this._paddingBottom = 0;
-        this._minInterval = 36;
+        this._minInterval = 36 * Kline.instance.dpr;
         this._selectedPosition = -1;
         this._selectedValue = -Number.MAX_VALUE;
         this._gradations = [];
@@ -114,10 +115,10 @@ export class Range extends NamedObject {
     }
 
     toHeight(value) {
-		if (value == Infinity || this._ratio == 0) {
-		  return 1.5;
-		}
-	  	return Math.floor(value * this._ratio + 1.5);
+        if (value == Infinity || this._ratio == 0) {
+            return 1.5;
+        }
+        return Math.floor(value * this._ratio + 1.5);
     }
 
     update() {

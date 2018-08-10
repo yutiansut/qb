@@ -31,7 +31,7 @@ export default class Plotter {
         this.strY1=0;
 
         this.rangeX = 0.8;   // 数据过滤：[中间价*(1-rangeX),中间价*(1+rangeX)]
-        this.gapX = 5;   //数据过滤: 买和卖中间gapX像素数据过滤掉
+        this.gapX = 5 * KDepth.instance.dpr;   //数据过滤: 买和卖中间gapX像素数据过滤掉
 
         this.initOverlay=false;
 
@@ -41,15 +41,19 @@ export default class Plotter {
     }
 
     bindCanvas(canvas) {
-        canvas.setAttribute("width",KDepth.instance.width);
-        canvas.setAttribute("height",KDepth.instance.height);
+        canvas.setAttribute("width",KDepth.instance.width * KDepth.instance.dpr);
+        canvas.setAttribute("height",KDepth.instance.height * KDepth.instance.dpr);
+        canvas.style.width = KDepth.instance.width + "px";
+        canvas.style.height = KDepth.instance.height + "px";
         this._canvas=canvas;
         this._context=canvas.getContext("2d");
     }
 
     bindOverlayCanvas(canvas){
-        canvas.setAttribute("width",KDepth.instance.width);
-        canvas.setAttribute("height",KDepth.instance.height);
+        canvas.setAttribute("width",KDepth.instance.width * KDepth.instance.dpr);
+        canvas.setAttribute("height",KDepth.instance.height * KDepth.instance.dpr);
+        canvas.style.width = KDepth.instance.width + "px";
+        canvas.style.height = KDepth.instance.height + "px";
         this._overlayCanvas=canvas;
         this._overlayContext=canvas.getContext("2d");
     }
@@ -77,6 +81,7 @@ export default class Plotter {
             xv = Math.round(x/count),
             yv = Math.round(y/count);
         ctx.beginPath();
+        ctx.lineWidth = KDepth.instance.dpr;
         for (let i = 0; i < count; i ++) {
             if (i % 2 === 0) {
                 ctx.moveTo(x1, y1);
@@ -93,19 +98,20 @@ export default class Plotter {
     draw() {
         if (this.asks.length < 2 || this.bids < 2) return;
         let ctx=this._context;
+        let canvas = this._canvas;
         let padding={
-            left: 20,
-            right: 20,
-            top: 30,
-            bottom: 20,
+            left: 20 * KDepth.instance.dpr,
+            right: 20 * KDepth.instance.dpr,
+            top: 30 * KDepth.instance.dpr,
+            bottom: 20 * KDepth.instance.dpr,
         };
         let verAxisWidth=Math.floor(this.maxStrYW);
-        let horAxisHeight=12;
-        let scaleLength=3;
-        let chartWidth=KDepth.instance.width-verAxisWidth-(padding.left+padding.right);
-        let chartHeight=KDepth.instance.height-horAxisHeight-(padding.top+padding.bottom);
-        let scaleXNum=Math.floor(chartWidth/(this.maxStrXW+40));
-        let scaleYNum=Math.floor(chartHeight/50);
+        let horAxisHeight=12 * KDepth.instance.dpr;
+        let scaleLength=3 * KDepth.instance.dpr;
+        let chartWidth=canvas.width-verAxisWidth-(padding.left+padding.right);
+        let chartHeight=canvas.height-horAxisHeight-(padding.top+padding.bottom);
+        let scaleXNum=Math.floor(chartWidth/(this.maxStrXW + 40 * KDepth.instance.dpr));
+        let scaleYNum=Math.floor(chartHeight/ (50* KDepth.instance.dpr));
         let oX=padding.left+verAxisWidth;
         let oY=padding.top+chartHeight;
 
@@ -134,6 +140,7 @@ export default class Plotter {
         //坐标轴
         ctx.strokeStyle=Theme._color["axisLine"];
         ctx.beginPath();
+        ctx.lineWidth = KDepth.instance.dpr;
         ctx.moveTo(oX+0.5,oY+0.5);
         ctx.lineTo(oX+chartWidth+0.5,oY+0.5);
         ctx.moveTo(oX+0.5,oY+0.5);
@@ -146,6 +153,7 @@ export default class Plotter {
         //网格线
         ctx.strokeStyle=Theme._color["gridLine"];
         ctx.beginPath();
+        ctx.lineWidth = KDepth.instance.dpr;
         for(let i=1;i<scaleXNum;i++){
             this.drawDashLine(oX+i*gapW+0.5, oY+0.5, oX+i*gapW+0.5, oY-chartHeight+0.5)
         }
@@ -157,6 +165,7 @@ export default class Plotter {
         //刻度线
         ctx.strokeStyle=Theme._color["axisLine"];
         ctx.beginPath();
+        ctx.lineWidth = KDepth.instance.dpr;
         for(let i=1;i<=scaleXNum;i++){
             ctx.moveTo(oX+i*gapW+0.5, oY+0.5);
             ctx.lineTo(oX+i*gapW+0.5, oY+scaleLength+0.5);
@@ -173,16 +182,16 @@ export default class Plotter {
         for(let i=1;i<=scaleXNum;i++){
             let str=this.formatFloat(strX0+i*gapW*ratioStrX,4);
             let strW=ctx.measureText(str).width;
-            ctx.fillText(str, oX+i*gapW-strW/2, oY+scaleLength+17);
+            ctx.fillText(str, oX+i*gapW-strW/2, oY + scaleLength + 17 * KDepth.instance.dpr);
         }
         for(let i=1;i<=scaleYNum;i++){
             let str=this.formatFloat(strY0+i*gapH*ratioStrY,0);
             let strW=ctx.measureText(str).width;
-            ctx.fillText(str, oX-scaleLength-strW-7, oY-i*gapH+6)
+            ctx.fillText(str, oX-scaleLength-strW - 7 * KDepth.instance.dpr, oY-i*gapH+ 6 * KDepth.instance.dpr)
         }
         let str=this.formatFloat(strY0,0);
         let strW=ctx.measureText(str).width;
-        ctx.fillText(str, oX-scaleLength-strW-5, oY+6);
+        ctx.fillText(str, oX-scaleLength-strW- 5 * KDepth.instance.dpr, oY + 6 * KDepth.instance.dpr);
 
 
         let bids=this.bids;
@@ -216,10 +225,10 @@ export default class Plotter {
 
         //画深度图，二次贝塞尔曲线
         //买单
-        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.lineWidth=2 * KDepth.instance.dpr;
         ctx.strokeStyle=Theme._color["depthLine1"];
         ctx.fillStyle=Theme._color["depthLine1Fill"];
-        ctx.beginPath();
         ctx.moveTo(drawBids[0][0],drawBids[0][1]);
         for(let i=0;i<drawBids.length;i++){
             let nowX = drawBids[i][0];
@@ -244,10 +253,10 @@ export default class Plotter {
         ctx.fill();
 
         // 卖单
-        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.lineWidth=2 * KDepth.instance.dpr;
         ctx.strokeStyle=Theme._color["depthLine2"];
         ctx.fillStyle=Theme._color["depthLine2Fill"];
-        ctx.beginPath();
         ctx.moveTo(drawAsks[0][0],drawAsks[0][1]);
         for(let i=0;i<drawAsks.length;i++){
             let nowX = drawAsks[i][0];
@@ -302,10 +311,10 @@ export default class Plotter {
             let oCanvas=this._overlayCanvas;
             let oCtx=this._overlayContext;
 
-            oCtx.clearRect(0, 0, KDepth.instance.width, KDepth.instance.height);
+            oCtx.clearRect(0, 0, oCanvas.width, oCanvas.height);
 
-            let x = Math.round(event.clientX - oCanvas.getBoundingClientRect().left);
-            let y = Math.round(event.clientY - oCanvas.getBoundingClientRect().top);
+            let x = Math.round(event.clientX - oCanvas.getBoundingClientRect().left) * KDepth.instance.dpr;
+            let y = Math.round(event.clientY - oCanvas.getBoundingClientRect().top) * KDepth.instance.dpr;
 
             let chartWidth=this.chartWidth;
             let chartHeight=this.chartHeight;
@@ -330,6 +339,7 @@ export default class Plotter {
 
             //测量线
             oCtx.beginPath();
+            oCtx.lineWidth = KDepth.instance.dpr;
             oCtx.strokeStyle = "#aaa";
             oCtx.moveTo(oX + 0.5, y + 0.5);
             oCtx.lineTo(oX + chartWidth + 0.5, y + 0.5);
@@ -346,12 +356,12 @@ export default class Plotter {
             let strXW = oCtx.measureText(strX_Tip).width;
             let strYW = oCtx.measureText(strY_Tip).width;
             oCtx.fillStyle=Theme._color["background"];
-            oCtx.fillRect(x-strXW/2-10,oY+scaleLength,strXW+20,22);  //padding:0 10px
-            oCtx.fillRect(oX-scaleLength-strYW-7,y-10,strYW,22);     //padding: 5px 0,font-size:12px
+            oCtx.fillRect(x-strXW/2- 10 * KDepth.instance.dpr,oY+scaleLength,strXW + 20 * KDepth.instance.dpr,22 * KDepth.instance.dpr);  //padding:0 10px
+            oCtx.fillRect(oX-scaleLength-strYW-7* KDepth.instance.dpr,y-10* KDepth.instance.dpr,strYW,22* KDepth.instance.dpr);     //padding: 5px 0,font-size:12px
             oCtx.fillStyle = Theme._color["infoFontColor"];
             oCtx.font = Theme._fonts;
-            oCtx.fillText(strX_Tip, x - strXW / 2, oY + scaleLength + 17);
-            oCtx.fillText(strY_Tip, oX - scaleLength - strYW - 7, y + 6);
+            oCtx.fillText(strX_Tip, x - strXW / 2, oY + scaleLength + 17* KDepth.instance.dpr);
+            oCtx.fillText(strY_Tip, oX - scaleLength - strYW - 7* KDepth.instance.dpr, y + 6* KDepth.instance.dpr);
 
             //信息文本
             let strInfos = [];
@@ -366,27 +376,17 @@ export default class Plotter {
                 }else if(KDepth.instance.lang==="zh-tw"){
                     strInfos = ["購買價格: ", "購買量: ", "累計購買量: "];
                 }
-                let hasIntersect = 0;
                 for (let i = bids.length - 1; i >= 0; i--) {
                     if (bids[i][0]>=strX && bids[i][0]-strX<ratioStrX * 2) {
                         strPrice = bids[i][0];
                         strVol = bids[i][1];
-                        //hasIntersect++;
                     }
                     if(bids[i][0]>= strX){
                         strAccu = bids[i][2];
                     }
                 }
                 oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
-                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
-                if(hasIntersect>0){
-                    let x = (strPrice - strX0) / ratioStrX + oX;
-                    let y = oY - (strAccu - strY0) / ratioStrY;
-                    oCtx.beginPath();
-                    oCtx.arc(x,y,5,0,2*Math.PI);
-                    oCtx.strokeStyle = "#ccc";
-                    oCtx.stroke();
-                }
+                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20 * KDepth.instance.dpr, oY - chartHeight + 16 * KDepth.instance.dpr);
             } else if(strX >= this.asks_min[0]) {
                 if(KDepth.instance.lang==="zh-cn"){
                     strInfos = ["出售价格: ", "出售量: ", "累计出售量: "];
@@ -395,33 +395,24 @@ export default class Plotter {
                 }else if(KDepth.instance.lang==="zh-tw"){
                     strInfos = ["出售價格: ", "出售量: ", "累計出售量: "];
                 }
-                let hasIntersect = 0;
                 for (let i = 0; i < asks.length; i++) {
                     if (asks[i][0]<=strX && strX-asks[i][0]<ratioStrX * 2) {
                         strPrice = asks[i][0];
                         strVol = asks[i][1];
-                        //hasIntersect++;
                     }
                     if(asks[i][0]<=strX){
                         strAccu = asks[i][2];
                     }
                 }
                 oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
-                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
-                if(hasIntersect>0){
-                    let x = (strPrice - strX0) / ratioStrX + oX;
-                    let y = oY - (strAccu - strY0) / ratioStrY;
-                    oCtx.beginPath();
-                    oCtx.arc(x,y,5,0,2*Math.PI);
-                    oCtx.strokeStyle = "#ccc";
-                    oCtx.stroke();
-                }
+                    + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20* KDepth.instance.dpr, oY - chartHeight + 16* KDepth.instance.dpr);
             }
         });
 
         this._overlayCanvas.addEventListener("mouseout",event=>{
-            let oCtx=this._overlayContext;
-            oCtx.clearRect(0,0,KDepth.instance.width,KDepth.instance.height);
+            let oCanvas = this._overlayCanvas;
+            let oCtx = this._overlayContext;
+            oCtx.clearRect(0,0,oCanvas.width,oCanvas.height);
         });
     }
 
@@ -431,15 +422,19 @@ export default class Plotter {
         let oCanvas=this._overlayCanvas;
         let oCtx=this._overlayContext;
 
-        canvas.setAttribute("width",w);
-        canvas.setAttribute("height",h);
-        oCanvas.setAttribute("width",w);
-        oCanvas.setAttribute("height",h);
+        canvas.setAttribute("width",w * KDepth.instance.dpr);
+        canvas.setAttribute("height",h * KDepth.instance.dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        oCanvas.setAttribute("width",w * KDepth.instance.dpr);
+        oCanvas.setAttribute("height",h * KDepth.instance.dpr);
+        oCanvas.style.width = w + "px";
+        oCanvas.style.height = h + "px";
 
         ctx.fillStyle=Theme._color["background"];
-        ctx.fillRect(0,0,KDepth.instance.width,KDepth.instance.height);
+        ctx.fillRect(0,0,canvas.width,canvas.height);
         oCtx.fillStyle="transparent";
-        oCtx.fillRect(0,0,KDepth.instance.width,KDepth.instance.height);
+        oCtx.fillRect(0,0,oCanvas.width,oCanvas.height);
         this.draw();
     }
 
@@ -509,6 +504,7 @@ export default class Plotter {
 
         //计算文字最大宽度,x轴2位小数,y轴0位小数
         let ctx=this._context;
+        ctx.font = Theme._fonts;
         let maxStrXW=0;
         let maxStrYW=0;
         for(let i=0;i<asks.length;i++){
