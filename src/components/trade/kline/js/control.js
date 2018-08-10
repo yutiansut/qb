@@ -3,7 +3,8 @@ import {ChartManager} from './chart_manager'
 import {ChartSettings} from './chart_settings'
 import {DefaultTemplate, Template} from './templates'
 import {MEvent} from './mevent'
-import $ from "../lib/jquery.min"
+import $ from "../lib/dom"
+//import $ from "../lib/jquery.min"
 
 export class Control {
 
@@ -117,9 +118,10 @@ export class Control {
     }
 
     static onSize(w, h) {
+
         let width = w || window.innerWidth;
-        let chartWidth=width;
         let height = h || window.innerHeight;
+        let chartWidth=width;
         let container = $(Kline.instance.element);
         container.css({
             width: width + 'px',
@@ -129,8 +131,8 @@ export class Control {
         let toolPanel = $('#chart_toolpanel');
         let canvasGroup = $('#chart_canvasGroup');
         let tabBar = $('#chart_tabbar');
-        let toolPanelShown = toolPanel[0].style.display !== 'inline' ? false : true;
-        let tabBarShown = tabBar[0].style.display !== 'block' ? false : true;
+        let toolPanelShown = toolPanel[0].style.display === 'inline';
+        let tabBarShown = tabBar[0].style.display === 'block';
         let toolBarRect = {};
         toolBarRect.x = 0;
         toolBarRect.y = 0;
@@ -169,34 +171,39 @@ export class Control {
         canvasGroup.css({
             left: canvasGroupRect.x + 'px',
             top: canvasGroupRect.y + 'px',
-            // width: canvasGroupRect.w + 'px',
+            width: canvasGroupRect.w + 'px',
             height: canvasGroupRect.h + 'px'
         });
+
         let mainCanvas = $('#chart_mainCanvas')[0];
         let overlayCanvas = $('#chart_overlayCanvas')[0];
 
-        /*
+
         let dpr = window.devicePixelRatio;
         console.log("devicePixelRatio:\n",dpr);
-
-        mainCanvas.width = canvasGroupRect.w * dpr;
-        mainCanvas.height = canvasGroupRect.h * dpr;
-        overlayCanvas.width = canvasGroupRect.w * dpr;
-        overlayCanvas.height = canvasGroupRect.h * dpr;
-        $(mainCanvas).css({
-            width: canvasGroupRect.w,
-            height: canvasGroupRect.h,
-        });
-        $(overlayCanvas).css({
-            width: canvasGroupRect.w,
-            height: canvasGroupRect.h,
-        });
-        */
+        //dpr = 0.5;
 
         mainCanvas.width = canvasGroupRect.w;
         mainCanvas.height = canvasGroupRect.h;
         overlayCanvas.width = canvasGroupRect.w;
         overlayCanvas.height = canvasGroupRect.h;
+        $(mainCanvas).css({
+            width: canvasGroupRect.w + "px",
+            height: canvasGroupRect.h + "px",
+        });
+        $(overlayCanvas).css({
+            width: canvasGroupRect.w + "px",
+            height: canvasGroupRect.h + "px",
+        });
+
+        console.log("k线-尺寸：",canvasGroupRect, dpr, mainCanvas.width, mainCanvas.height, $(mainCanvas));
+
+        /*
+        mainCanvas.width = canvasGroupRect.w;
+        mainCanvas.height = canvasGroupRect.h;
+        overlayCanvas.width = canvasGroupRect.w;
+        overlayCanvas.height = canvasGroupRect.h;
+        */
 
         if (tabBarShown) {
             tabBar.css({
@@ -208,13 +215,13 @@ export class Control {
         }
         let dlgSettings = $("#chart_parameter_settings");
         dlgSettings.css({
-            left: (window.innerWidth - dlgSettings.width()) >> 1,
-            top: (window.innerHeight - dlgSettings.height()) >> 1
+            left: (window.innerWidth - dlgSettings.width()) >> 1 + "px",
+            top: (window.innerHeight - dlgSettings.height()) >> 1 + "px"
         });
         let dlgLoading = $("#chart_loading");
         dlgLoading.css({
-            left: (chartWidth - dlgLoading.width()) >> 1,
-            top: (height - dlgLoading.height()) >> 2
+            left: (chartWidth - dlgLoading.width()) >> 1 + "px",
+            top: (height - dlgLoading.height()) >> 2 + "px"
         });
         let domElemCache = $('#chart_dom_elem_cache');
         let rowTheme = $('#chart_select_theme')[0];
@@ -304,11 +311,7 @@ export class Control {
             tmp.theme = 'Light';
             ChartSettings.save();
         }
-        let a = {};
-        a.command = "set current themes";
-        a.content = name;
-        $('#chart_output_interface_text').val(JSON.stringify(a));
-        $('#chart_output_interface_submit').submit();
+
         new MEvent().raise(name);
         ChartManager.instance.redraw();
 
