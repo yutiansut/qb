@@ -8,7 +8,7 @@ if [ -n "$1" ]; then
 else
   SERVER=192.168.55.111
 fi
-if [ -n "$1" ]; then
+if [ -n "$2" ]; then
   WEBDIR=$2
 else
   WEBDIR=/usr/share/nginx/html

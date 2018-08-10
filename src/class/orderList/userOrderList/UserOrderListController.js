@@ -46,9 +46,11 @@ export default class UserOrderListController extends OrderListController {
   async getCurrentOrder(trade, params) {
     let currentOrder = await this.store.getCurrentOrder(params);
     if (!trade) {
-      this.view.setState({
-        currentOrder
-      });
+      this.store.state.currentOrder = currentOrder;
+      // this.view.setState({
+      //   currentOrder
+      // });
+      this.changeRenderUseOrder(0)
       return
     }
     this.view.setState({
@@ -59,9 +61,11 @@ export default class UserOrderListController extends OrderListController {
   async getHistoryOrder(trade, params) {
     let historyOrder = await this.store.getHistoryOrder(params);
     if (!trade) {
-      this.view.setState({
-        historyOrder: historyOrder && historyOrder.orderList || []
-      });
+      this.store.state.historyOrder = historyOrder;
+      // this.view.setState({
+      //   historyOrder: historyOrder && historyOrder.orderList || []
+      // });
+      this.changeRenderUseOrder(1)
       return
     }
     this.view.setState({
@@ -153,21 +157,26 @@ export default class UserOrderListController extends OrderListController {
   updateUserOrder(para) {
     if(this.view.name !== 'tradeOrder')
       return
-     let currentOrder = this.view.state.currentOrder;
-     let historyOrder = this.view.state.historyOrder;
+     let currentOrder = this.store.state.currentOrder;
+     let historyOrder = this.store.state.historyOrder && this.store.state.historyOrder.orderList || [];
      let changeIndex = currentOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId));
      let historyIndex = historyOrder.findIndex(v => JSON.stringify(v.orderId) === JSON.stringify(para.orderId))
      if((para.orderStatus === 0 || para.orderStatus === 1) && para.priceType === 0) {
        changeIndex !== -1 && currentOrder.splice(changeIndex, 1, para) || currentOrder.unshift(para);
-        this.view.setState(currentOrder);
+        // this.view.setState(currentOrder);
+        this.store.state.currentOrder = currentOrder;
+       this.changeRenderUseOrder(0)
         return
      }
     para.priceType === 0 && changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
      historyIndex !== -1 && historyOrder.splice(historyIndex, 1, para) || historyOrder.unshift(para);
-     this.view.setState({
-       historyOrder,
-       currentOrder
-     })
+     this.store.state.historyOrder.orderList = historyOrder;
+     this.store.state.currentOrder = currentOrder;
+     // this.view.setState({
+     //   historyOrder,
+     //   currentOrder
+     // })
+    this.changeRenderUseOrder(2)
   }
   async cancelOrder(orderId, opType, dealType, tradePairId,v = 1) {
     let orderListArray = this.view.state.orderListArray;
@@ -185,5 +194,67 @@ export default class UserOrderListController extends OrderListController {
         resetPopMsg: this.view.intl.get('cancel-successful')},// 下单弹窗}
       );
     }
+  }
+  setUnitsType(v){
+    this.view.setState({
+      unitsType: v
+    });
+    this.store.state.unitsType = v;
+    this.changeRenderUseOrder(2)
+  }
+  changeRenderUseOrder(type){
+  let historyOrder = this.store.state.historyOrder && this.store.state.historyOrder.orderList || [];
+  let currentOrder = this.store.state.currentOrder;
+  let unitsType = this.store.state.unitsType;
+    let items = {
+      CNY: 'priceCN',
+      USD: 'priceEN'
+    };
+    let formatKey = (unitsType === "CNY" || unitsType === 'USD') ? 'legal' : 'digital';
+    let formatProperty = (unitsType === "CNY" || unitsType === 'USD') ? 'legal' : 'property';
+    let itemsAvg = {
+      CNY: 'avgPriceCN',
+      USD: 'avgPriceEN',
+    };
+    let itemsTurnover = {
+      CNY: 'turnoverCN',
+      USD: 'turnoverEN'
+    };
+    let formatObj = {
+      digital: {number: 'digital', style: {decimalLength: this.accuracy.priceAccuracy}},
+      legal: {number: 'legal', style: {name: unitsType && unitsType.toLowerCase()}},
+      property: {number: 'property', style: {decimalLength: this.accuracy.priceAccuracy + this.accuracy.volumeAccuracy}}
+    };
+  if(type !== 1){
+  currentOrder = currentOrder && currentOrder.map(v => {
+    v.priceH = items[unitsType] ? v[items[unitsType]] : v.price;
+    v.priceR = Number(v.priceH).format(formatObj[formatKey]);
+    v.countR = Number(v.count).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+    v.turnoverR = Number(Number(v.priceH).multi(v.count)).format(formatObj[formatProperty]);
+    v.dealDoneCountR = Number(v.dealDoneCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+    v.undealCountR = Number(v.undealCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+    return v
+  })
+    this.view.setState({
+      currentOrder
+    })
+  }
+  if(type !== 0){
+    historyOrder = historyOrder.slice(0,10);
+    historyOrder = historyOrder && historyOrder.map(v => {
+      v.priceH = items[unitsType] ? v[items[unitsType]] : v.price;
+      v.priceR = Number(v.priceH).format(formatObj[formatKey]);
+      v.countR = Number(v.count).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+      v.dealDoneCountR = Number(v.dealDoneCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+      v.undealCountR = Number(v.undealCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+      v.avgPriceR = itemsAvg[unitsType] ? Number(v[itemsAvg[unitsType]]).format(formatObj.digital) : Number(v.avgPrice).toFixed(this.accuracy.priceAccuracy);
+      v.turnoverH = itemsTurnover[unitsType] ? v[itemsTurnover[unitsType]] : v.turnover;
+      v.turnoverR = Number(v.turnoverH).format(formatObj[formatProperty]);
+      return v
+    });
+    this.view.setState({
+      historyOrder
+    })
+  }
   }
 }
