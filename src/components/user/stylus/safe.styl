@@ -33,6 +33,16 @@
           color $user-font-pointLevel
           &:hover
             text-decoration underline
+        span
+          margin-left .2rem
+          color $user-font-set
+          cursor pointer
+        em
+          display inline-block
+          width 1.42rem
+        i
+          color $user-font-set
+          cursor pointer
       .basic-popup
         cursor pointer
         color $user-font-bind
@@ -143,18 +153,38 @@
       padding-bottom .44rem
       li
         cursor pointer
+        color $user-font-normal
         img
           width .14rem
           height .14rem
           margin-right .08rem
           vertical-align top
-      li:first-child
-        margin-bottom .44rem
-        color $user-font-normal
-      li:last-child
-        span
-          margin-right .46rem
-          color $user-font-normal
+        &:first-child
+          margin-bottom .44rem
+        &.select-notify
+          span
+            margin-right .46rem
+        &.fish-code
+          margin-top .2rem
+          img, span
+            float left
+          .fish-input
+            float left
+            height .4rem
+            .base-input-wrap
+              float left
+              margin 0 .2rem
+              input
+                width 3rem
+                height .4rem
+            button
+              float left
+              width .6rem
+              height .4rem
+              &.ok-btn
+                margin-right .2rem
+
+
 
   .name-list
     .ip-show

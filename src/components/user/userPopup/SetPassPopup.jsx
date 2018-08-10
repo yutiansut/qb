@@ -73,6 +73,14 @@ export default class SetPassPopup extends exchangeViewBase {
           verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : (this.props.fundPassType === 1 ? this.intl.get("user-inputVerifyEmail") : this.intl.get("user-inputVerifyGoogle")),
           btnTitle: this.intl.get("save")
         },
+        { // 解绑手机
+          title: "修改手机号",
+          numTitle: "新手机号",
+          numInput: this.intl.get("user-inputPhone"),
+          verifyTitle: this.intl.get("user-verifyPhone"),
+          verifyInput: this.intl.get("user-inputVerifyPhone"),
+          btnTitle: "确定"
+        },
       ]
     }
     this.changeCurrentPwd = this.changeCurrentPwd.bind(this) // 当前密码输入框
@@ -81,6 +89,7 @@ export default class SetPassPopup extends exchangeViewBase {
     this.changePicture = this.changePicture.bind(this) // 输入图形验证码
     this.changeVerify = this.changeVerify.bind(this) // 输入验证码
     this.changeGoogle = this.changeGoogle.bind(this) // 输入谷歌验证码
+    this.selectBtn = this.selectBtn.bind(this) // 选择button
     // 校验部分
     this.checkCurrentPwd = this.checkCurrentPwd.bind(this)
     this.checkUser = this.checkUser.bind(this)
@@ -191,16 +200,41 @@ export default class SetPassPopup extends exchangeViewBase {
     return false
   }
 
-
-
-  aaa(type){
-    aaa = 11
-    bb = 22
-    if()
-      aaa =  ``;
-    if()
-      bb =    ``
-    return (<Button aa={aa} bb={{}} onclick={xxx[type]}>)
+  selectBtn(type) { // 根据传入参数生成所需btn
+    let clickType, // 选择点击事件
+        userValue = this.state.userValue, // 手机号/邮箱/密码
+        typeFlag = 0, // 参数类型
+        verifyValue = this.state.verifyValue, // 验证码
+        captchaId = this.props.captchaId, // 图形验证码Id
+        pictureValue = this.state.pictureValue, // 图形验证码
+        currentPwdValue = this.state.currentPwdValue, // 当前密码
+        fundValue = this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ? this.props.email : ''), // 资金密码信息
+        fundType = this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 2), // 资金密码类型
+        fundTypeValue = this.props.fundPassType === 2 ? this.state.googleValue : this.state.verifyValue; // 资金密码验证码
+    if ([1, 4, 6].includes(type)) {
+      typeFlag = 1
+    }
+    if (type === 3) {
+      currentPwdValue = ''
+    }
+    if ([1, 2].includes(type)) {
+      clickType = 0
+    }
+    if ([3, 4].includes(type)) {
+      clickType = 1
+    }
+    if ([5, 6].includes(type)) {
+      clickType = 2
+    }
+    let btnClickArr = [
+      ()=>this.props.bindUser(userValue, typeFlag, verifyValue, captchaId, pictureValue),
+      ()=>this.props.setLoginPass(currentPwdValue, userValue, typeFlag),
+      ()=>this.props.modifyFundPwd(fundValue, fundType, typeFlag, userValue, pictureValue, captchaId, fundTypeValue)
+    ]
+    return (<Button title={type && this.state.popupTypeList[type - 1].btnTitle}
+                    className={`${this.canClick() ? 'can-click' : ''} set-btn btn`}
+                    disable={this.canClick() ? false : true}
+                    onClick={() => btnClickArr[clickType]()} />)
   }
 
   componentWillUnmount() {
@@ -218,6 +252,9 @@ export default class SetPassPopup extends exchangeViewBase {
           <h1 className="pop-title">{this.props.isType && this.state.popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>
+              <li className={this.props.isType === 8 ? '' : 'hide'}>
+                <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>
+              </li>
               <li className={[4].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInputNew}
@@ -245,11 +282,18 @@ export default class SetPassPopup extends exchangeViewBase {
                        onBlur={this.checkAgainPwd}/>
                 <em>{this.state.againPwdValue && this.state.errAgainPwd}</em>
               </li>
-              <li className={[3, 4].includes(this.props.isType) ? 'hide' : ''}>
+              <li className={[3, 4, 7].includes(this.props.isType) ? 'hide' : ''}>
                 <p>{this.intl.get("user-popPicture")}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.intl.get("user-popPicturePlaceholder")}  value={this.state.pictureValue} onInput={value => this.changePicture(value)}/>
                   <img src={this.props.captcha || ''} alt="" className="picture-btn btn" onClick={this.props.getCaptcha}/>
+                </div>
+              </li>
+              <li className={this.props.isType === 7 ? '' : 'hide'}>
+                <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyTitle}</p>
+                <div className="clearfix pass-btn-group">
+                  <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.verifyValue} onInput={value => this.changeVerify(value)}/>
+                  <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regEmail', this.state.userValue) && this.props.getVerify(this.state.userValue, 1, 3)}}/>
                 </div>
               </li>
               <li className={([3, 4].includes(this.props.isType) || (this.props.isType === 6 && this.props.fundPassType === 2)) ? 'hide' : ''}>
@@ -257,11 +301,11 @@ export default class SetPassPopup extends exchangeViewBase {
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].verifyInput} value={this.state.verifyValue} onInput={value => this.changeVerify(value)}/>
                   {this.props.isType === 1 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regEmail', this.state.userValue) && this.props.getVerify(this.state.userValue, 1, 3)}}/>}
-                  {this.props.isType === 2 && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regPhone', this.state.userValue) && this.props.getVerify(this.state.userValue, 0, 3)}}/>}
+                  {[2, 7].includes(this.props.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {Regular('regPhone', this.state.userValue) && this.props.getVerify(this.state.userValue, 0, 3)}}/>}
                   {[5, 6].includes(this.props.isType) && <Button title={typeof this.props.verifyNum === 'number' && (this.props.verifyNum === 0 && this.intl.get("sendAgain") || `${this.props.verifyNum}s`) || this.props.verifyNum} className="verify-btn btn" onClick={() => {this.props.getVerify(this.props.fundPassType === 3 ? this.props.phone : this.props.email, this.props.fundPassType === 3 ? 0 : 1, this.props.isType)}}/>}
                 </div>
               </li>
-              <li className={this.props.isType === 6 && this.props.fundPassType === 2 ? 'long-li' : 'hide'}>
+              <li className={(this.props.isType === 6 && this.props.fundPassType === 2) || this.props.isType === 7 ? 'long-li' : 'hide'}>
                 <p>{this.intl.get("user-popGoole")}</p>
                 <Input placeholder= {this.intl.get("user-inputVerifyGoogle")}
                        value={this.state.googleValue}
@@ -277,28 +321,29 @@ export default class SetPassPopup extends exchangeViewBase {
               <li className={[2].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
                 <p>*{this.intl.get("user-supportPhone")}</p>
               </li>
-              <li>
-                {this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 1, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}
-                {this.props.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 0, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}
-                {this.props.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.props.setLoginPass('', this.state.userValue, 0)}/>}
-                {this.props.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.props.setLoginPass(this.state.currentPwdValue, this.state.userValue, 1)}/>}
-                {this.props.isType === 5 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
-                                                    onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : this.props.email,
-                                                                   this.props.fundPassType === 3 ? 0 : 1,
-                                                                   0,
-                                                                   this.state.userValue,
-                                                                   this.state.pictureValue,
-                                                                   this.props.captchaId,
-                                                                   this.state.verifyValue)}/>}
-                {this.props.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
-                                                    onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ?this.props.email : ''),
-                                                                   this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 2),
-                                                                   1,
-                                                                   this.state.userValue,
-                                                                   this.state.pictureValue,
-                                                                   this.props.captchaId,
-                                                                   this.props.fundPassType === 2 ? this.state.googleValue : this.state.verifyValue)}/>}
-              </li>
+              {/*<li>*/}
+                {/*{this.props.isType === 1 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 1, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}*/}
+                {/*{this.props.isType === 2 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("user-popBind")} onClick={() => this.props.bindUser(this.state.userValue, 0, this.state.verifyValue, this.props.captchaId, this.state.pictureValue)}/>}*/}
+                {/*{this.props.isType === 3 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("set")} onClick={() => this.props.setLoginPass('', this.state.userValue, 0)}/>}*/}
+                {/*{this.props.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("alter")} onClick={() => this.props.setLoginPass(this.state.currentPwdValue, this.state.userValue, 1)}/>}*/}
+                {/*{this.props.isType === 5 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}*/}
+                                                    {/*onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : this.props.email,*/}
+                                                                   {/*this.props.fundPassType === 3 ? 0 : 1,*/}
+                                                                   {/*0,*/}
+                                                                   {/*this.state.userValue,*/}
+                                                                   {/*this.state.pictureValue,*/}
+                                                                   {/*this.props.captchaId,*/}
+                                                                   {/*this.state.verifyValue)}/>}*/}
+                {/*{this.props.isType === 6 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}*/}
+                                                    {/*onClick={() => this.props.modifyFundPwd(this.props.fundPassType === 3 ? this.props.phone : (this.props.fundPassType === 1 ? this.props.email : ''),*/}
+                                                                   {/*this.props.fundPassType === 3 ? 0 : (this.props.fundPassType === 1 ? 1 : 2),*/}
+                                                                   {/*1,*/}
+                                                                   {/*this.state.userValue,*/}
+                                                                   {/*this.state.pictureValue,*/}
+                                                                   {/*this.props.captchaId,*/}
+                                                                   {/*this.props.fundPassType === 2 ? this.state.googleValue : this.state.verifyValue)}/>}*/}
+              {/*</li>*/}
+              <li>{this.selectBtn(this.props.isType)}</li>
             </ul>
           </div>
         </div>

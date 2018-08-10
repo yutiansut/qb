@@ -50,7 +50,8 @@ export default class userSafeCenter extends exchangeViewBase {
       showIp: false,
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
-      bindOrigin: 0 // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定 2 通知设置绑定
+      bindOrigin: 0, // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定 2 通知设置绑定
+      showFishCode: false // 是否显示钓鱼码
     }
 
     const {controller} = props
@@ -86,6 +87,7 @@ export default class userSafeCenter extends exchangeViewBase {
     this.closeChange = this.closeChange.bind(this)
     this.closeSet = this.closeSet.bind(this)
     this.checkIp = this.checkIp.bind(this)
+    // this.changeFishCode = this.changeFishCode.bind(this) // 改变设置钓鱼码选项
   }
 
   changeSetPopup(type) { // 设置密码显示
@@ -238,11 +240,18 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>{this.intl.get("email")}</li>
             <li className={`${this.state.userInfo.email ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.email && this.changeSetPopup(1)}>{this.state.userInfo.email && this.state.userInfo.email || this.intl.get("user-popBindEmail")}</li>
             <li>{this.intl.get("phone")}</li>
-            <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>{this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}</li>
+            <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>
+              {this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}
+              {this.state.userInfo.phone && <span onClick = {state => this.changeSetPopup(7)}>修改</span>}
+            </li>
             <li>{this.intl.get("user-level")}</li>
             <li>
               <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/user/integration">{this.state.userCreditsNum}</Link>)
             </li>
+            {this.state.userInfo.googleAuth === 0 && <li>
+              <em>{this.intl.get("user-googleVerify")}</em>
+              <i>修改</i>
+            </li>}
           </ul>
         </div>
         <div className="change-pass model-div" style={{display: 'flex'}}>
@@ -301,13 +310,22 @@ export default class userSafeCenter extends exchangeViewBase {
             <h2>{this.intl.get("user-noticeSet")}</h2>
             <ul className="fl">
               <li>{this.intl.get("user-noticeRemind")}</li>
-              <li>
+              <li className="select-notify">
                 {this.state.noticeList.map((v, index) => (<span key={index}  onClick={i => this.setUserNotify(index)}>
                   <img src={this.$imagesMap.$checked} alt="" className={`${this.state.noticeIndex === index ? '' : 'hide'}`}/>
                   <img src={this.$imagesMap.$nomal_check} alt="" className={`${this.state.noticeIndex === index ? 'hide' : ''}`}/>
                   <b>{v.name}</b>
                 </span>))}
               </li>
+              {this.state.noticeIndex === 0 && <li className="fish-code clearfix">
+                <img src={this.state.showFishCode ? this.$imagesMap.$checked : this.$imagesMap.$nomal_check} alt="" onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}/>
+                <span onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}>防钓鱼码</span>
+                {this.state.showFishCode && <div className="fish-input clearfix">
+                  <Input/>
+                  <Button className="ok-btn" title={this.intl.get("ok")}/>
+                  <Button className="cancel-btn" title={this.intl.get("cance")} onClick={() => {this.setState({ showFishCode: false});}}/>
+                </div>}
+              </li>}
             </ul>
           </div>
           <div className="name-list model-div clearfix">
