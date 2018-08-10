@@ -125,7 +125,7 @@ class Dom{
             return this.el[0].offsetWidth;
         }else if(arguments.length===1){
             this.el.forEach(el=>{
-                el.style.width = arguments[0];
+                el.style.width = arguments[0] + "px";
             })
         }
         return this;
@@ -136,7 +136,7 @@ class Dom{
             return this.el[0].offsetHeight;
         }else if(arguments.length===1){
             this.el.forEach(el=>{
-                el.style.height = arguments[0];
+                el.style.height = arguments[0] + "px";
             })
         }
         return this;
@@ -294,7 +294,6 @@ class Dom{
     }
 
     bind(name,func){
-        console.log("k线绑定事件：",name,"=====");
         if(name === "mousewheel"){
             this.bindMousewheel(func);
         }else{

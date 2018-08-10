@@ -184,12 +184,20 @@ export default class Kline {
             e.preventDefault();
             e.stopPropagation();
             return false;
+        }).bind("selectstart", function (e) {
+            e.cancelBubble = true;
+            e.returnValue = false;
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
         });
         $(".chart_container .chart_dropdown .chart_dropdown_t")
             .mouseover(function () {
                 let container = $(".chart_container");
                 let title = $(this);
                 let dropdown = title.next();
+                title.addClass("chart_dropdown-hover");
+                dropdown.addClass("chart_dropdown-hover");
                 let containerLeft = container.offset().left;
                 let titleLeft = title.offset().left;
                 let containerWidth = container.width();
@@ -203,9 +211,7 @@ export default class Kline {
                 } else {
                     d += 4;
                 }
-                dropdown.css({"margin-left": -d});
-                title.addClass("chart_dropdown-hover");
-                dropdown.addClass("chart_dropdown-hover");
+                dropdown.css({"margin-left": -d + "px"});
             })
             .mouseout(function () {
                 $(this).next().removeClass("chart_dropdown-hover");

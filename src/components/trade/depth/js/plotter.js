@@ -366,17 +366,27 @@ export default class Plotter {
                 }else if(KDepth.instance.lang==="zh-tw"){
                     strInfos = ["購買價格: ", "購買量: ", "累計購買量: "];
                 }
+                let hasIntersect = 0;
                 for (let i = bids.length - 1; i >= 0; i--) {
-                    if (Math.abs(bids[i][0] - strX) < ratioStrX) {
+                    if (bids[i][0]>=strX && bids[i][0]-strX<ratioStrX * 2) {
                         strPrice = bids[i][0];
                         strVol = bids[i][1];
+                        //hasIntersect++;
                     }
-                    if (bids[i][0] >= strX) {
+                    if(bids[i][0]>= strX){
                         strAccu = bids[i][2];
                     }
                 }
                 oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
                     + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
+                if(hasIntersect>0){
+                    let x = (strPrice - strX0) / ratioStrX + oX;
+                    let y = oY - (strAccu - strY0) / ratioStrY;
+                    oCtx.beginPath();
+                    oCtx.arc(x,y,5,0,2*Math.PI);
+                    oCtx.strokeStyle = "#ccc";
+                    oCtx.stroke();
+                }
             } else if(strX >= this.asks_min[0]) {
                 if(KDepth.instance.lang==="zh-cn"){
                     strInfos = ["出售价格: ", "出售量: ", "累计出售量: "];
@@ -385,17 +395,27 @@ export default class Plotter {
                 }else if(KDepth.instance.lang==="zh-tw"){
                     strInfos = ["出售價格: ", "出售量: ", "累計出售量: "];
                 }
+                let hasIntersect = 0;
                 for (let i = 0; i < asks.length; i++) {
-                    if (Math.abs(asks[i][0] - strX) < ratioStrX) {
+                    if (asks[i][0]<=strX && strX-asks[i][0]<ratioStrX * 2) {
                         strPrice = asks[i][0];
                         strVol = asks[i][1];
+                        //hasIntersect++;
                     }
-                    if (asks[i][0] <= strX) {
+                    if(asks[i][0]<=strX){
                         strAccu = asks[i][2];
                     }
                 }
                 oCtx.fillText(strInfos[0] + this.formatFloat(Number(strPrice), 8) + "  " + strInfos[1] + this.formatFloat(strVol, 4) + "  "
                     + strInfos[2] + this.formatFloat(strAccu, 4), oX + 20, oY - chartHeight + 16);
+                if(hasIntersect>0){
+                    let x = (strPrice - strX0) / ratioStrX + oX;
+                    let y = oY - (strAccu - strY0) / ratioStrY;
+                    oCtx.beginPath();
+                    oCtx.arc(x,y,5,0,2*Math.PI);
+                    oCtx.strokeStyle = "#ccc";
+                    oCtx.stroke();
+                }
             }
         });
 
