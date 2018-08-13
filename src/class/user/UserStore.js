@@ -14,6 +14,7 @@ export default class UserStore extends ExchangeStoreBase {
       userId: "",
       token: "",
       userName: "",
+      userIsNew: false,
       // verifyNum: "",
       userInfo: {}, // 用户基本信息
       userAuth: {}, // 认证信息
@@ -23,8 +24,6 @@ export default class UserStore extends ExchangeStoreBase {
       currentLogin: [], // 当前登录设备
       ipList: [], // 白名单列表
       googleSecret: '', // 谷歌验证密钥
-
-
       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyMjcxNzAxMzc0NTc4Mjc4NDAiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.tr6AowdEPkZJQRnib28_dfUjY_MTmI_aNu9UN-Cl5y0'
     }
     this.state.token && this.userInfo()
@@ -61,12 +60,14 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.userId = data && data.id;
     this.state.token = data && data.tk;
     this.state.userName = data && data.na;
+    this.state.userIsNew = data && data.in;
     this.Storage.userToken.set(data && data.tk);
     this.Storage.userId.set(data && data.id);
     this.Storage.userName.set(data && data.na);
     // data && await this.userInfo()
     // data && await this.userAuth()
-    data && data.in && this.getAward()
+    data && data.in && this.getAward() // 新用户领取奖励
+
     // console.log('loginUser', this.state.userId, this.state.token, this.userInfo())
   }
 

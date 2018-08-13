@@ -9,6 +9,7 @@ import "../stylus/safe.styl"
 import GooglePopup from '../userPopup/GooglePopup.jsx'
 import PassPopup from '../userPopup/SetPassPopup.jsx'
 import ChangeVerifyPopup from '../userPopup/ChangeVerifyPopup.jsx'
+import ModifyGooglePopup from '../userPopup/ModifyGooglePopup.jsx'
 
 import {AsyncAll, Regular} from '../../../core'
 import DetectOS from '../../../class/lib/Os'
@@ -23,6 +24,7 @@ export default class userSafeCenter extends exchangeViewBase {
       showGoogle: false,
       showSet: false,
       showChange: false,
+      modifyGoogle: false, // 修改谷歌验证弹窗
       otherShow: false, // 打开其他安全设置
       noticeIndex: 0, // 选择通知设置
       type: 0, // 设置密码弹窗所需参数
@@ -250,7 +252,7 @@ export default class userSafeCenter extends exchangeViewBase {
             </li>
             {this.state.userInfo.googleAuth === 0 && <li>
               <em>{this.intl.get("user-googleVerify")}</em>
-              <i>修改</i>
+              <i onClick={() => {this.setState({modifyGoogle: true});}}>修改</i>
             </li>}
           </ul>
         </div>
@@ -419,6 +421,13 @@ export default class userSafeCenter extends exchangeViewBase {
         {this.state.showGoogle && <GooglePopup googleSecret = {this.state.googleSecret}
                      setGoogleVerify = {this.setGoogleVerify}
                      onClose={() => {this.setState({ showGoogle: false });}}/>}
+        {this.state.modifyGoogle && <ModifyGooglePopup googleSecret = {this.state.googleSecret}
+                                                       phone = {this.state.userInfo.phone}
+                                                       email = {this.state.userInfo.email}
+                                                       copy = {this.props.controller.copy}
+                                                       verifyNum = {this.state.verifyNum}
+                                                       getVerify = {this.getVerify}
+                                                       onClose={() => {this.setState({ modifyGoogle: false });}}/>}
         {this.state.showSet && <PassPopup onClose={this.closeSet}
                    phone = {this.state.userInfo.phone}
                    email = {this.state.userInfo.email}

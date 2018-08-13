@@ -142,7 +142,9 @@ export default function zh(state) {
     normalProblem: '常见问题',
     languageCn: '中文',
     languageEn: '英文',
-    next: '下一步'
+    next: '下一步',
+    pwdRule: '6~18位英文字母、数字或符号，两种组合以上',
+    pwdSameAgain: '与密码相同一致'
   };
   const errMessage = {
     "-1": "FETCH错误",
@@ -240,7 +242,9 @@ export default function zh(state) {
     "home-advantage-p1": "证券级别算法，每秒处理100万笔交易",
     "home-advantage-p2": "多重签名、离线签名、及冷钱包存储",
     "home-advantage-p3": "多网融合确保服务器集群24小时不间断服务",
-    "home-advantage-p4": "支持iOS、Android、PC等终端接入"
+    "home-advantage-p4": "支持iOS、Android、PC等终端接入",
+    "home-setPwdJump": "跳过设置",
+    "home-setPwdGo": "前往安全中心设置"
   };
   const asset = {
     "asset-totalAssets": "总资产约",
@@ -625,6 +629,9 @@ export default function zh(state) {
     "user-googleKey3": "3.点击下一步，将“谷歌验证码”输入到下一页的“谷歌验证码”输入栏。",
     "user-googleKey4": "请将16位密钥记录在纸上，并保存在安全的地方。如遇手机丢失，你可以通过该密钥恢复你的谷歌验证。",
     "user-googleKey-title": "绑定谷歌身份认证器",
+    "user-modifyGoogle": "修改谷歌验证",
+    "user-newGoogle": "新谷歌验证码",
+    "user-modifyGoogleRemind": "注：修改谷歌验证后24小时内无法体现",
 
     "user-log-1": "登录日志",
     "user-log-2": "注册日志",

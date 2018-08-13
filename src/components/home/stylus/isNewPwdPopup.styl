@@ -1,0 +1,66 @@
+.new-pwd-wrap
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .5)
+  z-index 9999
+  .new-pwd-info
+    position absolute
+    left 50%
+    top 50%
+    width 5.64rem
+    //height 2.56rem
+    color $home-font-normal
+    padding .24rem .3rem
+    background $home-bg-pwdPopup
+    border-radius (.06rem)
+    transform translateX(-50%) translateY(-50%)
+    .title-wrap
+      margin-bottom .24rem
+      .close-popup
+        float right
+        width .16rem
+        height .16rem
+        cursor pointer
+      h1
+        float left
+        font-size 0.2rem
+        font-weight bold
+        letter-spacing 0
+        margin .04rem 0
+    ul
+      li
+        margin-bottom .2rem
+        &.btn-li
+          text-align center
+          i
+            cursor pointer
+        a
+          color $home-font-normal
+      span
+        display block
+        margin-bottom .1rem
+      em
+        display block
+        margin-top .1rem
+        color $home-font-warn
+      .base-input-wrap
+        width 100%
+        input
+          width 100%
+          height .4rem
+      button
+        width 1rem
+        height .4rem
+        margin-right .2rem
+        vertical-align bottom
+        background $home-bg-btn
+        color $home-font-btn
+        opacity .5
+        &.can-click
+          opacity 1
+
+
+

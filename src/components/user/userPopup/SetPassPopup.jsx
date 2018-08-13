@@ -39,9 +39,9 @@ export default class SetPassPopup extends exchangeViewBase {
         { // 设置密码
           title: this.intl.get("user-popSetLoginPwd"),
           numTitle: this.intl.get("user-newPwd"),
-          numInput: this.intl.get("user-inputNewPwd"),
+          numInput: this.intl.get("pwdRule"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
-          numInput2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("pwdSameAgain"),
           btnTitle: this.intl.get("set")
         },
         { // 修改密码
@@ -252,9 +252,9 @@ export default class SetPassPopup extends exchangeViewBase {
           <h1 className="pop-title">{this.props.isType && this.state.popupTypeList[this.props.isType - 1].title}</h1>
           <div className="clearfix">
             <ul>
-              <li className={this.props.isType === 8 ? '' : 'hide'}>
-                <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>
-              </li>
+              {/*<li className={this.props.isType === 8 ? '' : 'hide'}>*/}
+                {/*<p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>*/}
+              {/*</li>*/}
               <li className={[4].includes(this.props.isType) ? 'long-li' : 'hide'}>
                 <p>{this.props.isType && this.state.popupTypeList[this.props.isType - 1].numTitleNew}</p>
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInputNew}
@@ -311,7 +311,7 @@ export default class SetPassPopup extends exchangeViewBase {
                        value={this.state.googleValue}
                        onInput={value => this.changeGoogle(value)}/>
               </li>
-              <li className={[3, 5].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
+              <li className={[5].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
                 <p>{this.intl.get("user-popPwdRule")}</p>
               </li>
               <li className={[4, 6].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>

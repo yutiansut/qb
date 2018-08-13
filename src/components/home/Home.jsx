@@ -9,6 +9,7 @@ import HomeActivity from './children/HomeActivity.jsx' // 首页活动
 import HomeAdvantage from './children/HomeAdvantage.jsx'
 import HomeBanner from './children/HomeBanner.jsx'
 import HomeSuperiority from './children/HomeSuperiority.jsx'
+import IsNewPwdPopup from './children/IsNewPwdPopup.jsx' // 新用户设置密码弹窗
 
 import MarketController from '../../class/market/MarketController'
 
@@ -95,6 +96,7 @@ export default class Home extends exchangeViewBase {
   }
 
   render() {
+    // console.log('首页', this.props.userController.userIsNew)
     return (
       <div className="home-wrap">
         <div className="home-top">
@@ -106,6 +108,7 @@ export default class Home extends exchangeViewBase {
         <HomeMarket controller={this.props.marketController}/>
         {/* <HomeAdvantage/> */}
         <HomeSuperiority controller={this.props.activityController}/>
+        {this.props.userController.userIsNew && <IsNewPwdPopup controller={this.props.userController}/>}
       </div>
     );
   }

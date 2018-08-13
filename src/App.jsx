@@ -156,7 +156,7 @@ export default class App extends Component {
     let NoticeDetail = AsyncComponent(()=>import("./components/notice/noticeChild/NoticeContentDetail.jsx"), {controller:noticeController});
     let Order = AsyncComponent(()=>import("./components/order/OrderManage.jsx"), {controller:userOrderController});
     let Trade = AsyncComponent(()=>import("./components/trade/Trade.jsx"), {marketController, userOrderController, assetController, userController, klineController});
-    let HomeComponent = AsyncComponent(()=>import("./components/home/Home.jsx"), {marketController, activityController, noticeController});
+    let HomeComponent = AsyncComponent(()=>import("./components/home/Home.jsx"), {marketController, activityController, noticeController, userController});
 
     Routers = [
       { path: "/home", component: HomeComponent },

@@ -522,6 +522,7 @@ export default class UserController extends ExchangeControllerBase {
     this.store.state.userCreditsNum = 0
   }
 
+
   // 移动端用
   async setFundPwdSpace(type, pwd) { // 设置资金密码间隔
     let result = await this.setFundPwdInterval(type, pwd)
@@ -592,6 +593,10 @@ export default class UserController extends ExchangeControllerBase {
     // let storage = this.Storage.userName.get().length === 0 ? '' : this.Storage.userName.get()
     // let userName = storage ? storage : this.store.state.userName
     return this.store.name
+  }
+
+  get userIsNew() {
+    return this.store.state.userIsNew
   }
 
   async setFundPwdInterval(type, pwd) { // 设置资金密码输入间隔

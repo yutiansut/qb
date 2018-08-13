@@ -1,0 +1,78 @@
+.modify-google-wrap
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .5)
+  z-index 9999
+  .modify-google-info
+    position absolute
+    left 50%
+    top 50%
+    width 5rem
+    color $user-font-normal
+    padding .24rem .3rem
+    background $user-bg-popup
+    border-radius (.06rem)
+    transform translateX(-50%) translateY(-50%)
+    .title-wrap
+      margin-bottom .24rem
+      .close-popup
+        float right
+        width .16rem
+        height .16rem
+        cursor pointer
+      h1
+        float left
+        font-size 0.2rem
+        font-weight bold
+        letter-spacing 0
+        margin .04rem 0
+    ul
+      li
+        margin-bottom .2rem
+        input
+          height .4rem
+        button
+          width 1rem
+          height .4rem
+          background $user-bg-btn
+          color $user-font-btn
+        span
+          display block
+          margin-bottom .1rem
+        &.copy-li
+          text-align center
+          canvas
+            margin-bottom .1rem
+          p
+            input
+              height .2rem
+              color $user-font-normal
+            b
+              margin-left .1rem
+              cursor pointer
+              color $user-font-copy
+        &.new-google-li
+          .base-input-wrap
+            width 100%
+            input
+              width 100%
+        &.verify-li
+          .base-input-wrap
+            float left
+            width 3.2rem
+            input
+              width 100%
+          button
+            float right
+        &.remind-li
+          color $user-font-warn
+        &.btn-li
+          text-align right
+          button
+            opacity .5
+            &.can-click
+              opacity 1
+

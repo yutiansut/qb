@@ -144,7 +144,9 @@ export default function en(state) {
     normalProblem: 'FAQ',
     languageCn: 'Chinese',
     languageEn: 'English',
-    next: 'Next'
+    next: 'Next',
+    pwdRule: '6~18位英文字母、数字或符号，两种组合以上',
+    pwdSameAgain: '与密码相同一致'
   };
   const errMessage = {
     "-1": "FETCH ERROR",
@@ -245,7 +247,9 @@ export default function en(state) {
       "Multiple signatures, off-line signatures, and cold wallet storage",
     "home-advantage-p3":
       "Multi-network integration ensures that the server cluster is available 24*7",
-    "home-advantage-p4": "IOS, Android and PC terminal access"
+    "home-advantage-p4": "IOS, Android and PC terminal access",
+    "home-setPwdJump": "跳过设置",
+    "home-setPwdGo": "前往安全中心设置"
   };
   const asset = {
 
@@ -665,6 +669,9 @@ export default function en(state) {
     "user-googleKey3": `3. Click "Next", fill in the Google verification code into the input field for "Google verification code".`,
     "user-googleKey4": `Please write down the 16-digits key on a paper, and make it safe. If your mobile is lost, you can recover the Google verification via the "key".`,
     "user-googleKey-title": "Bound Goodle ID Verifier",
+    "user-modifyGoogle": "修改谷歌验证",
+    "user-newGoogle": "新谷歌验证码",
+    "user-modifyGoogleRemind": "注：修改谷歌验证后24小时内无法体现",
 
     "user-log-1": "Logon log",
     "user-log-2": "Register log",
