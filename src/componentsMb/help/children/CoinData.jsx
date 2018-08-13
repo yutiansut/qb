@@ -98,7 +98,7 @@ export default class CoinData extends exchangeViewBase {
           <div className="input">
             <Input
               type="search2"
-              placeholder={this.intl.get('helo-coin-search')}
+              placeholder={this.intl.get('help-coin-search')}
               value={this.state.value}
               onInput={value => {
                 this.setValue(value);
@@ -165,37 +165,37 @@ export default class CoinData extends exchangeViewBase {
                         query: { currency: this.state.currency }
                     }}
                 >
-                    {this.intl.get('helo-coin-deposit')}
+                    {this.intl.get('help-coin-deposit')}
                 </NavLink> : <span>-</span>
               }
           </div>
           <div className="right">
             <p>
               <span>
-                  <b>{this.intl.get('helo-coin-market')}：</b>{this.state.unit
+                  <b>{this.intl.get('help-coin-market')}：</b>{this.state.unit
                   ? `¥${Number(totalValueCN).format({ number: "legal" })}`
                   : `$${Number(totalValueEN).format({
                     number: "legal"
                   })}`}
               </span>
               <span>
-                  <b>{this.intl.get('helo-coin-total')}：</b>{totalVolume.format({ number: "general" })}
+                  <b>{this.intl.get('help-coin-total')}：</b>{totalVolume.format({ number: "general" })}
               </span>
               <span>
-                  <b>{this.intl.get('helo-coin-liquidity')}：</b>{circulationVolume.format({ number: "general" })}
+                  <b>{this.intl.get('help-coin-liquidity')}：</b>{circulationVolume.format({ number: "general" })}
               </span>
             </p>
             <p>
               <span>
-                  <b>{this.intl.get('helo-coin-price')}：</b>{this.state.unit
+                  <b>{this.intl.get('help-coin-price')}：</b>{this.state.unit
                   ? `¥${Number(priceCN).format({ number: "legal" })}`
                   : `$${Number(priceEN).format({ number: "legal" })}`}
               </span>
-                <span><b>{this.intl.get('helo-coin-date')}：</b>{releaseTime.toDate("yyyy-MM-dd")}</span>
+                <span><b>{this.intl.get('help-coin-date')}：</b>{releaseTime.toDate("yyyy-MM-dd")}</span>
             </p>
           </div>
           <div className="detail">
-            <h3>{this.intl.get('helo-coin-introduction')}<br /></h3>
+            <h3>{this.intl.get('help-coin-introduction')}<br /></h3>
             <p>
               {description && this.intl.get(description) ? this.intl.get(description) : description}
             </p>
