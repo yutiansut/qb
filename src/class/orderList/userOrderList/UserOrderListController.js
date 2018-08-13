@@ -164,7 +164,7 @@ export default class UserOrderListController extends OrderListController {
         return
      }
     para.priceType === 0 && changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
-     historyIndex !== -1 && historyOrder.splice(historyIndex, 1, para) || historyOrder.unshift(para);
+     historyIndex === -1 &&  historyOrder.unshift(para) || (para.orderStatus === 2 && historyOrder.splice(historyIndex, 1, para)) ;
      this.view.setState({
        historyOrder,
        currentOrder

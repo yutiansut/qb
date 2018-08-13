@@ -170,11 +170,9 @@ export default class MarketController extends ExchangeControllerBase {
         }
       }
     }
-    console.log(market,this.view.state.query)
     market && this.store.setSelecedMarket(market);
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
-    console.log('homeMarketPairData', homeMarketPairData,this.store.sortValue);
     homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
   
     type > 2 && (this.store.state.tradePair = selectPair || homeMarketPairData[0].tradePairName);
@@ -193,7 +191,6 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
-    console.log('tradePairChange', value)
     if(!value){
       return
     }
