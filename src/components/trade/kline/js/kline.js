@@ -461,7 +461,7 @@ export default class Kline {
             }
         });
         $("#chart_parameter_settings button").click(function () {
-            let name = $(this).parents("tr").children("th").html();
+            let name = $(this).parent().parent().children("th").html();
             let index = 0;
             let value = ChartManager.instance.getIndicatorParameters(name);
             let valueArray = [];
