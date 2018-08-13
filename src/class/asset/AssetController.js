@@ -68,6 +68,7 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair() {
     let result = await this.marketController.getTradePairHandle();
+    console.log(result)
     this.view.setState({
       tradePair: result
     });

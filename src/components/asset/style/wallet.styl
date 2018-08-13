@@ -175,6 +175,41 @@
                 background $asset-bg-btn
             &.handle
               padding-left 0.2rem
+              .button
+                display inline-block
+                width 0.66rem
+                height 0.3rem
+                line-height 0.3rem
+                position relative
+                &:hover
+                  ul
+                    display block
+                &.disable:hover
+                  ul
+                    display none
+                ul
+                  display none
+                  position absolute
+                  top 0.3rem
+                  left 0
+                  z-index 999
+                  border 0.01rem solid $col292B
+                  li
+                    height 0.3rem
+                    line-height 0.3rem
+                    padding 0 0.04rem
+                    background $asset-bg-btn
+                    border 0.01rem solid $col292B
+                    font-size 0.14rem
+                    text-align center
+                    border-radius(0.02rem)
+                    cursor pointer
+                    &:hover
+                      background-color $asset-bg-main
+                      color $asset-font-none
+                    &:active
+                      background-color $asset-bg-main-active
+                      color $asset-font-main
               button
                 width 0.66rem
                 height 0.3rem

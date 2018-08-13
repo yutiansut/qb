@@ -10,6 +10,7 @@ export default class Wallets extends exchangeViewBase {
     let { controller } = this.props;
     this.state = {
       value: "",
+      tradePair: null,
       hideLittle: false,
       hideZero: false,
       coinName: 2,
@@ -38,7 +39,7 @@ export default class Wallets extends exchangeViewBase {
 
     this.filter = controller.filte.bind(controller);
     this.rank = controller.rank.bind(controller);
-    // 充值前的身份认证状态验证
+
     this.verify = currency => {
       props.history.push({
         pathname: `/wallet/charge/`,
@@ -46,8 +47,9 @@ export default class Wallets extends exchangeViewBase {
       });
     };
   }
+
   render() {
-    let { wallet, controller } = this.props;
+    let { wallet, getCoinPair } = this.props;
     let {
       value,
       hideLittle,
@@ -128,7 +130,11 @@ export default class Wallets extends exchangeViewBase {
                 {this.intl.get("asset-lock")}
                 <b className="pop-parent">
                   <span className="img" />
-                  <em className={`pop-children uppop-children ${this.state.lang === 'en-US' ? 'en' : 'cn'}`}>
+                  <em
+                    className={`pop-children uppop-children ${
+                      this.state.lang === "en-US" ? "en" : "cn"
+                    }`}
+                  >
                     {this.intl.get("asset-tip2")}
                   </em>
                 </b>
@@ -159,8 +165,7 @@ export default class Wallets extends exchangeViewBase {
               frozenCount,
               valuationBTC
             }).map((item, index) => {
-              return item.coinName !== this.state.coin ?
-              (
+              return item.coinName !== this.state.coin ? (
                 <tr key={index}>
                   <td className="currency">
                     <img src={item.coinIcon} alt="" />
@@ -177,48 +182,59 @@ export default class Wallets extends exchangeViewBase {
                     </NavLink>
                   </td>
                   <td className="avail">
-                    {Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}
+                    {Number(item.availableCount).format({
+                      number: "property",
+                      style: { decimalLength: 8 }
+                    })}
                   </td>
                   <td className="lock">
-                    {Number(item.frozenCount).format({ number: "property" , style:{ decimalLength: 8}})}
+                    {Number(item.frozenCount).format({
+                      number: "property",
+                      style: { decimalLength: 8 }
+                    })}
                   </td>
                   <td className="tobtc">
-                    {Number(item.valuationBTC).format({ number: "property" , style:{ decimalLength: 8}})}
+                    {Number(item.valuationBTC).format({
+                      number: "property",
+                      style: { decimalLength: 8 }
+                    })}
                   </td>
                   <td className="handle">
                     <Button
                       type="base"
                       theme="main"
-                      disable={ item.c === 0 ? true : false}
+                      disable={item.c === 0 ? true : false}
                       title={this.intl.get("deposit")}
-                      onClick={(e) => {
+                      onClick={e => {
                         e.stopPropagation();
                         e.nativeEvent.stopImmediatePropagation();
                         this.verify(item.coinName);
                       }}
                     />
-                      <Button
-                        type="base"
-                        className="withdraw"
-                        theme="main"
-                        disable={item.w === 0 ? true : false}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.nativeEvent.stopImmediatePropagation();
-                          this.props.history.push({
-                            pathname: `/wallet/extract/`,
-                            query: {
-                              currency: item.coinName
-                            }
-                          });
-                        }}
-                        title={this.intl.get("asset-withdraw")}
-                      />
+                    <Button
+                      type="base"
+                      className="withdraw"
+                      theme="main"
+                      disable={item.w === 0 ? true : false}
+                      onClick={e => {
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        this.props.history.push({
+                          pathname: `/wallet/extract/`,
+                          query: {
+                            currency: item.coinName
+                          }
+                        });
+                      }}
+                      title={this.intl.get("asset-withdraw")}
+                    />
+                    <div className={`button ${item.e === 0 ? 'disable' : ''}`}>
                       <Button
                         type="base"
                         theme="main"
                         disable={item.e === 0 ? true : false}
-                        onClick={(e) => {
+                        onClick={e => {
+                          if(item.coinName.toUpperCase()!=="USDT") return;
                           e.stopPropagation();
                           e.nativeEvent.stopImmediatePropagation();
                           this.props.history.push({
@@ -229,11 +245,31 @@ export default class Wallets extends exchangeViewBase {
                           });
                         }}
                         title={this.intl.get("asset-trade")}
-                      />
+                      />{
+                        item.coinName.toUpperCase()!=="USDT" && <ul>
+                          {getCoinPair(
+                            this.props.tradePair,
+                            item.coinName.toUpperCase()
+                          ).map((v, i) => (
+                            <li key={i}
+                              onClick={e => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopImmediatePropagation();
+                              this.props.history.push({
+                                pathname: `/trade`,
+                                query: {
+                                  pairName: v.name.toLowerCase()
+                                }
+                              });
+                          }}
+                            >{v.name}</li>
+                          ))}
+                      </ul>
+                      }
+                    </div>
                   </td>
                 </tr>
-              ) :
-              (
+              ) : (
                 <tr key={index}>
                   <td className="currency">
                     <img src={item.coinIcon} alt="" />
@@ -243,7 +279,10 @@ export default class Wallets extends exchangeViewBase {
                     <a>{item.fullName}</a>
                   </td>
                   <td className="avail">
-                    {Number(item.availableCount).format({ number: "property" , style:{ decimalLength: 8}})}
+                    {Number(item.availableCount).format({
+                      number: "property",
+                      style: { decimalLength: 8 }
+                    })}
                   </td>
                   <td className="lock tac">{"—"}</td>
                   <td className="tobtc tac">{"—"}</td>
