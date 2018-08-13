@@ -116,6 +116,7 @@ export default class TradeOrderListController extends OrderListController {
       property: {number: 'property', style: {decimalLength: this.accuracy.priceAccuracy + this.accuracy.volumeAccuracy}}
     };
     let dealPrice = Number(liveBank.price && liveBank.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
+    let sellSortArray = [],buySortArray = [],sellMid = 0,buyMid = 0;
     if (liveTitleSelect === 'all') {
       liveSellArray = (liveSellArray.slice(0,13)).reverse();
       liveBuyArray = liveBuyArray.slice(0,13);
@@ -124,6 +125,7 @@ export default class TradeOrderListController extends OrderListController {
           v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
           v.amountR = Number(v.amount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
           v.turnover = Number(v.priceH.multi(v.amount)).format(formatObj[formatProperty]);
+          sellSortArray.push(v.amount)
         return v
       });
       liveBuyArray = liveBuyArray &&  liveBuyArray.map(v => {
@@ -131,12 +133,19 @@ export default class TradeOrderListController extends OrderListController {
           v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
           v.amountR = Number(v.amount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
           v.turnover = Number(v.priceH.multi(v.amount)).format(formatObj[formatProperty]);
+        buySortArray.push(v.amount)
         return Object.assign(v)
       });
+      sellSortArray && sellSortArray.sort((a,b) => a > b);
+      buySortArray && buySortArray.sort((a,b) => a > b);
+      sellSortArray.length % 2 === 0 && (sellMid = (sellSortArray[sellSortArray.length/2] + sellSortArray[sellSortArray.length/2 - 1]) / 2) || (sellMid = sellSortArray[(sellSortArray.length - 1 )/ 2]);
+      buySortArray.length % 2 === 0 && (buyMid = (buySortArray[buySortArray.length/2] + buySortArray[buySortArray.length/2 - 1]) / 2) || (buyMid = buySortArray[(buySortArray.length - 1 )/ 2]);
       this.view.setState({
         liveBuyArray,
         liveSellArray,
-        dealPrice
+        dealPrice,
+        sellMid,
+        buyMid
       })
     }
     if (liveTitleSelect === 'buy') {
@@ -146,9 +155,13 @@ export default class TradeOrderListController extends OrderListController {
         v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
         v.amountR = Number(v.amount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
         v.turnover = Number(v.priceH.multi(v.amount)).format(formatObj[formatProperty]);
+        buySortArray.push(v.amount)
         return v
-      })
+      });
+      buySortArray.sort((a,b) => a > b);
+      buySortArray.length % 2 === 0 && (buyMid = (buySortArray[buySortArray.length/2] + buySortArray[buySortArray.length/2 - 1]) / 2) || (buyMid = buySortArray[(buySortArray.length - 1) / 2]);
       this.view.setState({
+        buyMid,
         liveBuyArray,
         liveSellArray: [],
         dealPrice
@@ -161,9 +174,13 @@ export default class TradeOrderListController extends OrderListController {
         v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
         v.amountR = Number(v.amount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
         v.turnover = Number(v.priceH.multi(v.amount)).format(formatObj[formatProperty]);
+        sellSortArray.push(v.amount)
         return v
-      })
+      });
+      sellSortArray.sort((a,b) => a > b);
+      sellSortArray.length % 2 === 0 && (sellMid = (sellSortArray[sellSortArray.length/2] + sellSortArray[sellSortArray.length/2 - 1]) / 2) || (sellMid = sellSortArray[(sellSortArray.length - 1) / 2]);
       this.view.setState({
+        sellMid,
         liveSellArray,
         liveBuyArray: [],
         dealPrice

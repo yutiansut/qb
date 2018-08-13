@@ -27,6 +27,8 @@
 		tr
 			height .21rem
 			line-height .21rem
+			position relative
+			z-index 667
 			//border-top .02rem solid $col292B
 			//border-bottom .02rem solid $col292B
 			//&:first-child
@@ -36,10 +38,10 @@
 			
 		.distance
 			td
-				padding-bottom .14rem
+				padding-bottom .12rem
 		.distance-b
 			td
-				padding-top .14rem
+				padding-top .12rem
 	.live-deal
 		tr
 			height .52rem
@@ -50,6 +52,38 @@
 			color $trade-change-positive
 		.market-down
 			color $trade-change-negative
-	
-	
+	.trade-live-sell
+		tr
+			td
+				position relative
+				z-index 999
+				span
+					position relative
+					z-index 999
+					font-size .11rem
+				div
+					position absolute
+					height .21rem
+					left 0
+					background rgba(242,86,86,.3)
+					top 0
+					z-index 666
+	.trade-live-buy
+		tr
+			td
+				position relative
+				z-index 999
+				height .21rem
+				span
+					position relative
+					z-index 999
+					font-size .11rem
+				div
+					position absolute
+					height .21rem
+					left 0
+					background $trade-buy-bg
+					opacity .3
+					bottom 0
+					z-index 666
 		
