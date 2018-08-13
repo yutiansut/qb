@@ -946,7 +946,7 @@
     z-index: 999999;
     line-height: 60px;
     text-align: center;
-    font-size: 16px;
+    font-size: 16px !important;
     background: rgba(0,0,0,.8);
     left: 50%;
     top: 10%;
