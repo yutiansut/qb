@@ -52,16 +52,18 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   async getUserInfo() {
-    if (this.userTwoVerify.fundPwd === undefined) {
+    // if (this.userTwoVerify.fundPwd === undefined) {
       let {
         //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
         withdrawVerify,
         fundPwd
       } = await this.userController.initData();
-      this.view.setState({ userTwoVerify: { withdrawVerify, fundPwd } });
-    } else {
-      this.view.setState({ userTwoVerify: this.userTwoVerify });
-    }
+      let result = { withdrawVerify, fundPwd };
+      this.view.setState({ userTwoVerify: result });
+      return result;
+    // } else {
+    //   this.view.setState({ userTwoVerify: this.userTwoVerify });
+    // }
   }
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair() {
@@ -478,12 +480,6 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
-    // 校验是否设置资金密码
-    // if (this.userTwoVerify.fundPwd === 1) {
-    //   obj.orderTipContent = this.view.intl.get("asset-password-unset");
-    //   this.view.setState(obj);
-    //   return;
-    // }
     // 校验是否输入密码
     if (this.view.state.password === "") {
       obj.orderTipContent = this.view.intl.get("asset-inputFundPassword");
@@ -495,6 +491,19 @@ export default class AssetController extends ExchangeControllerBase {
     if (result && result.msg) {
       obj.orderTipContent = result.msg;
       this.view.setState(obj);
+      return;
+    }
+    let verify = await this.getUserInfo();
+    // 校验是否设置资金密码
+    if (verify.fundPwd === 1) {
+      obj.orderTipContent = this.view.intl.get("asset-password-unset");
+      this.view.setState(obj);
+      return;
+    }
+    if (verify.withdrawVerify !== 2) {
+      this.view.setState({
+        recoGoogle: true
+      });
       return;
     }
     this.view.setState({

@@ -357,3 +357,38 @@
         padding-top 31px
         text-align right
         float right
+    .recoGoogle
+      position fixed
+      left 0
+      top 0
+      width 100%
+      height 100%
+      background rgba(0,0,0,0.4)
+      .recoGoogle-popup
+        position absolute
+        left 50%
+        top 50%
+        width 3.9rem
+        height 2rem
+        margin-left -1.95rem
+        margin-top -1rem
+        padding 0.4rem 0.2rem 0.2rem
+        border-radius(0.02rem)
+        background $asset-bg-normal
+        h3
+          height 0.24rem
+          line-height 0.24rem
+          text-align center
+          font-size 0.15rem
+        .button
+          display flex
+          justify-content space-around
+          .cancel, .tosafe
+            width 1.5rem
+            height 0.4rem
+            line-height 0.4rem
+           .tosafe
+             background $asset-bg-main
+             color $asset-font-none
+             &:active
+               background $asset-bg-main-active
