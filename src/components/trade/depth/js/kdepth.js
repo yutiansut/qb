@@ -8,7 +8,7 @@ export default class KDepth {
         this.width=800;
         this.height=400;
         this.lang = "zh-cn";
-        this.dpr = window.devicePixelRatio;
+        this.dpr = Math.max(window.devicePixelRatio,1);
 
         Object.assign(this,option);
         if(!KDepth.instance){

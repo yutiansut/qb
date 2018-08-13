@@ -253,7 +253,7 @@ export class Timeline extends NamedObject {
     }
 
 }
-let dpr = window.devicePixelRatio;
+let dpr = Math.max(window.devicePixelRatio,1);
 Timeline.itemWidth = [1* dpr, 3* dpr, 3* dpr, 5* dpr, 5* dpr, 7* dpr, 9* dpr, 11* dpr, 13* dpr, 15* dpr, 17* dpr, 19* dpr, 21* dpr, 23* dpr, 25* dpr, 27* dpr, 29* dpr];
 Timeline.spaceWidth = [1* dpr, 1* dpr, 2* dpr, 2* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 3* dpr, 5* dpr, 5* dpr, 5* dpr, 5* dpr, 7* dpr, 7* dpr, 7* dpr];
 Timeline.PADDING_LEFT = 4 * dpr;
