@@ -21,7 +21,7 @@ export default {
         global: {
           connect: {v: 1, o: 0, s: 0, resOp: 1},//握手
           heartBreak: {v: 1, o: 2, s: 0, resOp: 3},//心跳
-          joinRoom: {v: 1, o: 4, s: 0, resOp: 5, history:true},//加入房间
+          joinRoom: {v: 1, o: 4, s: 0, resOp: 5},//加入房间
         },
         market: {
           recommendCurrency: {v: 1, o: 108, s: 0, resOp: 108},//推荐币种

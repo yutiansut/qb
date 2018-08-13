@@ -131,10 +131,7 @@ export default class ExchangeStoreBase extends StoreBase {
       websocket.onOpen(data => {
         // console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
         this.startWebsocket(connectName)
-        Object.keys(websocketHistory).forEach(v => {
-          websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv));
-          websocketHistory[v].length = 0
-        })
+        Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
       })
     })
 
@@ -145,10 +142,7 @@ export default class ExchangeStoreBase extends StoreBase {
       websocket.onOpen(data => {
         console.log('websocket.onOpen', data, JSON.stringify(websocketHistory))
         this.startWebsocket(connectName)
-        Object.keys(websocketHistory).forEach(v => {
-          websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv));
-          websocketHistory[v].length = 0
-        })
+        Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
       })
     })
 
@@ -164,7 +158,7 @@ export default class ExchangeStoreBase extends StoreBase {
         websocket.send(emitData)
 
 
-      headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data))
+      // headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data))
       // console.log('websocketHistory',websocketHistory)
     }
     this.WebSocket[connectName].on = (key, func) => {
