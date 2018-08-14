@@ -53,7 +53,9 @@ export default class userSafeCenter extends exchangeViewBase {
       setPassFlag: true, // 设置／绑定防连点
       verifyFlag: true, // 两步验证防连点
       bindOrigin: 0, // 判断绑定邮箱／手机来源 0 普通绑定 1 两步验证绑定 2 通知设置绑定
-      showFishCode: false // 是否显示钓鱼码
+      showFishCode: false, // 是否显示钓鱼码
+      errFishCode: "",  // 钓鱼码错误提示
+      fishCodeValue: "", // 输入钓鱼码
     }
 
     const {controller} = props
@@ -89,7 +91,8 @@ export default class userSafeCenter extends exchangeViewBase {
     this.closeChange = this.closeChange.bind(this)
     this.closeSet = this.closeSet.bind(this)
     this.checkIp = this.checkIp.bind(this)
-    // this.changeFishCode = this.changeFishCode.bind(this) // 改变设置钓鱼码选项
+    this.changeFishCode = this.changeFishCode.bind(this) // 改变设置钓鱼码选项
+    this.checkFishCode = this.checkFishCode.bind(this)
   }
 
   changeSetPopup(type) { // 设置密码显示
@@ -197,6 +200,15 @@ export default class userSafeCenter extends exchangeViewBase {
     this.setState({
       popupInputErr2: ''
     })
+  }
+
+  changeFishCode(value) {
+    this.setState({fishCodeValue: value});
+    this.state.errFishCode && (this.setState({errFishCode: ""}))
+  }
+
+  checkFishCode() {
+
   }
 
   componentWillMount() {
@@ -319,13 +331,18 @@ export default class userSafeCenter extends exchangeViewBase {
                   <b>{v.name}</b>
                 </span>))}
               </li>
-              {this.state.noticeIndex === 0 && <li className="fish-code clearfix">
-                <img src={this.state.showFishCode ? this.$imagesMap.$checked : this.$imagesMap.$nomal_check} alt="" onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}/>
+              {this.state.noticeIndex === 0 && <li className="fish-code">
+                {!this.state.showFishCode && <img src={this.state.showFishCode ? this.$imagesMap.$checked : this.$imagesMap.$nomal_check} alt="" onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}/>}
                 <span onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}>防钓鱼码</span>
-                {this.state.showFishCode && <div className="fish-input clearfix">
-                  <Input/>
-                  <Button className="ok-btn" title={this.intl.get("ok")}/>
-                  <Button className="cancel-btn" title={this.intl.get("cance")} onClick={() => {this.setState({ showFishCode: false});}}/>
+                {this.state.showFishCode && <div className="fish-input">
+                  <div className="clearfix">
+                    <Input value={this.state.fishCodeValue}
+                           onInput={value => this.changeFishCode(value)}
+                           onBlur={this.checkFishCode}/>
+                    <Button className="ok-btn" title={this.intl.get("ok")}/>
+                    <Button className="cancel-btn" title={this.intl.get("cance")} onClick={() => {this.setState({ showFishCode: false});}}/>
+                  </div>
+                  <em>{this.state.errFishCode}</em>
                 </div>}
               </li>}
             </ul>
