@@ -49,7 +49,7 @@ export default class Select extends exchangeViewBase {
                           //   pathname:`${to}?currency=${item.coinName}`,
                           //
                           // });
-                          history.push(`${to}?currency=${item.coinName}`);
+                          history.push(`${to}/?currency=${item.coinName}`);
 
                         }
                         }>

@@ -131,8 +131,8 @@ export default class NoticeController extends ExchangeControllerBase {
       content: obj.content,
       createAt: new Date().getTime() / 1000
     }
-    userNoticeHeader.list && userNoticeHeader.list.unshift(noticeObj)
-    userNotice.list && userNotice.list.unshift(noticeObj)
+    userNoticeHeader && userNoticeHeader.list && userNoticeHeader.list.unshift(noticeObj)
+    userNotice && userNotice.list && userNotice.list.unshift(noticeObj)
     this.noticeHeaderView && this.noticeHeaderView.setState({userNoticeHeader})
     this.view && this.view.setState({userNotice})
   }

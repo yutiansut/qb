@@ -407,7 +407,7 @@ export default class AssetStore extends ExchangeStoreBase {
   }
 
   // 提交提币订单
-  async extractOrder(obj) {
+  async extractOrder(obj, isH5) {
     obj.fundPass = this.controller.RSAencrypt(obj.fundPass);
 
     let result = await this.Proxy.extractOrder({

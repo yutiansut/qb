@@ -215,7 +215,7 @@ export default class AssetController extends ExchangeControllerBase {
     )[0];
     let address = (curExtract &&
       curExtract.addressList[0] &&
-      this.sort(curExtract.addressList, ["addressName"], 1)[0]) || {address: ''};
+      this.sort(curExtract.addressList, ["addressName"], 0)[0]) || {address: ''};
     this.view.setState({
       walletExtract: this.Util.deepCopy(result),
       address: address,
@@ -260,7 +260,7 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   //提交提币订单
-  async extractOrder(obj) {
+  async extractOrder(obj, isH5) {
     let type = this.userTwoVerify.withdrawVerify;
     (type === 1 || type === 3) && (obj.account = this.account[type]);
     type === 1 && (obj.mode = 1);
@@ -268,6 +268,44 @@ export default class AssetController extends ExchangeControllerBase {
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
     // console.log('提交订单', result)
+    // h5处理
+    if(isH5){
+      // 错误处理
+      if (result && result.errCode) {
+        if (result.errCode === "NO_VERIFIED"){
+          this.view.setState({
+            showVerify: true
+          })
+          return;
+        }
+        let o = {
+          showPopup: true,
+          popType: 'tip3',
+          popMsg: result.errCode === "CWS_ERROR"
+              ? this.view.intl.get("asset-withdrawal-failed")
+              : result.msg
+        };
+        this.view.setState(o);
+        return;
+      }
+      if (result && result.quota !== undefined) {
+        this.view.setState({
+          showPopup: true,
+          popType: !result.quota ? 'tip1' : 'tip3',
+          popMsg: !result.quota
+            ? this.view.intl.get("optionSuccess")
+            : this.view.intl.get("asset-wait-auditing"),
+          verifyNum: 0,
+          inputNum: 0, //提现数量
+          inputPass: "", //资金密码
+          inputCode: "",
+        });
+        this.clearVerify()
+        this.getCurrencyAmount(this.view.state.currency);
+      }
+      return
+    }
+    // web端处理
     if (result && result.errCode) {
       let o = {
         orderTip: true,

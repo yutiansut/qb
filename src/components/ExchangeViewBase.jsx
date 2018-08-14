@@ -118,7 +118,8 @@ export default class ExchangeViewBase extends ViewBase {
       $h5_tip_fail: "/static/mobile/img_ts_czcc@3x.png",
 
       $h5_hidden: "/static/mobile/asset/icon_hidden@2x.png",
-      $h5_show: "/static/mobile/asset/icon_show@2x.png"
+      $h5_show: "/static/mobile/asset/icon_show@2x.png",
+      $h5_icon_cancel: '/static/mobile/asset/icon_cancel@3x.png'
     }
   }
 
