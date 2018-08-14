@@ -2,6 +2,7 @@ import React from 'react';
 import QRCode from 'qrcode.react';
 import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import downloadCanvasImage from '../../../class/lib/DownloadCanvasImage.js';
+import {downloadCanvas} from '../../../class/lib/DownloadCanvas.js'
 
 import '../stylus/activityinvite.styl'
 import '../stylus/activity.styl'
@@ -28,12 +29,12 @@ export default class ActivityInvite extends exchangeViewBase {
     this.addContent({con: '邀请好友注册'});
     this.getInvited();
     this.getRankingList();
+    let tab = this.props.tab;
+    if (tab) {
+      this.setState({showSection: tab});
+    }
   }
   componentDidUpdate() {
-    let list;
-    if (this.state.showSection === 'board') {
-      list = document.querySelector('.activity-board')
-    }
   }
 
   getQRCode() {
@@ -45,6 +46,17 @@ export default class ActivityInvite extends exchangeViewBase {
     ctx.drawImage(image, 0, 0);
     ctx.drawImage(code, 260, 653);
     downloadCanvasImage(canvas, 'png', 'QR Code.png');
+    
+    // downloadCanvas(canvas, 'png', 'QRCode.png');
+ 
+    // let base64 = canvas.toDataURL('image/png')
+    // let image1 = new Image()
+    // image1.src = base64
+    // console.log(image1)
+    // let link = document.createElement('a');
+    // link.download = 'QR.png';
+    // link.href = image1
+    // link.dispatchEvent(new MouseEvent('click', {}))
   }
 
   render() {

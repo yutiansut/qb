@@ -28,11 +28,11 @@ export default class MyQBT extends exchangeViewBase {
     this.getMyQbt = controller.getMyQbt.bind(controller);
     this.getInvited = controller.getInvited.bind(controller);
     this.getQbtInfo = controller.getQbtInfo.bind(controller);
+    this.goactivity = this.goactivity.bind(this);
   }
 
   saveIMG() {
     Download(document.querySelector(".qrcode canvas"), "png", "img");
-
   }
 
   async componentWillMount() {
@@ -47,6 +47,11 @@ export default class MyQBT extends exchangeViewBase {
   }
 
   componentDidMount() {
+  }
+
+  goactivity(tab) {
+    this.props.changeTab(tab)
+    this.props.history.push(`/activity/index`)
   }
 
   render() {
@@ -201,16 +206,16 @@ export default class MyQBT extends exchangeViewBase {
                 <label>{Qbt.availableCount} QBT</label>
                 <p>{this.intl.get("asset-balance")}</p>
               </div>
-              <div className="right">
+              <div className="right" onClick={() => {this.goactivity('index')}}>
                 <img src={this.$imagesMap.$h5_activity_qb_heart}/>
               </div>
-              <div className="content">
+              <div className="content" onClick={() => {this.goactivity('index')}}>
                 <label>邀请好友</label>
                 <p>获取更多币啦~</p>
               </div>
             </div>
           </div>
-          <div className="my-invite">
+          <div className="my-invite" onClick={() => {this.goactivity('invite')}}>
             <div className="invite-top">
               <label>我的邀请</label>
 
