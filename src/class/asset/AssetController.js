@@ -55,11 +55,13 @@ export default class AssetController extends ExchangeControllerBase {
     // if (this.userTwoVerify.fundPwd === undefined) {
       let {
         //0: 已设置资金密码 1: 未设置资金密码; 2 谷歌验证 1 邮件 3 短信 0 无
+        phone,
+        googleAuth,
         withdrawVerify,
         fundPwd
       } = await this.userController.initData();
       let result = { withdrawVerify, fundPwd };
-      this.view.setState({ userTwoVerify: result });
+      this.view.setState({ userTwoVerify: result , firstVerify: !googleAuth ? 2 : phone ? 3 : 1});
       return result;
     // } else {
     //   this.view.setState({ userTwoVerify: this.userTwoVerify });
@@ -347,11 +349,6 @@ export default class AssetController extends ExchangeControllerBase {
   }
   // 添加提现地址
   async appendAddress(obj, curExtract) {
-    // 验证名称地址不为空
-    if (obj.addressName === "" || obj.address === "") {
-      this.setViewTip(false, this.view.intl.get("asset-incomplete"));
-      return false;
-    }
     // 验证地址名称是否存在
     // 验证地址是否存在
     let flag = false;
@@ -421,9 +418,16 @@ export default class AssetController extends ExchangeControllerBase {
       this.setViewTip(false, this.view.intl.get("asset-delet-fail"));
       return false;
     }
-    this.view.setState({ walletExtract: this.Util.deepCopy(result) });
+    this.view.setState({ walletExtract: this.Util.deepCopy(result),
+      tip: true,
+      tipSuccess: true,
+      tipContent: this.view.intl.get('asset-delete-success')
+    });
     if (this.view.state.address.address === obj.address)
-      this.view.setState({ address: {address: ''} });
+      this.view.setState({
+        address: {address: ''},
+      });
+    return true;
   }
 
   async deletAddressH5(obj) {
@@ -545,6 +549,7 @@ export default class AssetController extends ExchangeControllerBase {
       this.view.setState(obj);
       return;
     }
+    //不是谷歌二次，推荐谷歌二次
     if (verify.withdrawVerify !== 2) {
       this.view.setState({
         recoGoogle: true
@@ -553,6 +558,7 @@ export default class AssetController extends ExchangeControllerBase {
     }
     this.view.setState({
       showTwoVerify: true,
+      verifyType: 0,
       verifyNum: this.view.intl.get("sendCode")
     });
   }

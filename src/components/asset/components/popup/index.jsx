@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../ExchangeViewBase";
 import Button from "../../../../common/component/Button";
 import Input from "../../../../common/component/Input";
+import BasePopup from "../../../../common/component/Popup";
 // import "./style.styl";
 
 export default class Popup extends exchangeViewBase {
@@ -10,28 +10,25 @@ export default class Popup extends exchangeViewBase {
     super(props);
     this.state = {
       showInput: false,
-      newAddress: []
+      deleTip: false,
+      deleText: this.intl.get('asset-delet-confirm'),
+      deleItem: ''
     };
-    this.add = async (item, index) => {
+    this.setAddress = props.changeNewAddress
+    this.add = async () => {
       let flag;
-      this.props.onSave && (flag = await this.props.onSave(item));
+      this.props.onSave && (flag = await this.props.onSave());
       if (flag) {
-        this.state.newAddress.splice(index, 1);
-        this.setState({
-          newAddress: this
-            .state
-            .newAddress
-        });
+        this.setAddress([]);
       }
     }
-    //绑定方法
-    // this.getData = controller.getData.bind(controller)
-    // this.state = {
-    // console.log(this.controller)
-    // }
+  }
+  componentWillUnmount(){
+    this.setAddress([])
   }
   render() {
-    let { type, onClose, addressArr, onSave, onCancel, onDelete } = this.props;
+    let {onClose, addressArr, onDelete } = this.props;
+    let newAddress = JSON.parse(JSON.stringify(this.props.newAddress))
     this.popup = {
       // popup1: () => {
       //   return <div className="asset-popup-content base1">
@@ -77,15 +74,15 @@ export default class Popup extends exchangeViewBase {
             <h3>
               {this.intl.get('asset-addAddress')}<span
                 onClick={() => {
-                  if(this.state.newAddress.length){
+                  if(newAddress.length){
                     this.props.addTip()
                     return;
                   }
-                  this.state.newAddress.push({ addressName: "", address: "" });
+                  newAddress.push({ addressName: "", address: "" });
                   this.setState({
                     showInput: true,
-                    newAddress: this.state.newAddress
-                  });
+                  })
+                  this.setAddress(newAddress);
                 }}
               >
                 {this.intl.get('add')}
@@ -101,7 +98,7 @@ export default class Popup extends exchangeViewBase {
               </thead>
               <tbody>
                 {this.state.showInput &&
-                  this.state.newAddress.map((item, index) => {
+                  newAddress.map((item, index) => {
                     return (
                       <tr className="input" key={index}>
                         <td>
@@ -111,9 +108,7 @@ export default class Popup extends exchangeViewBase {
                             placeholder={this.intl.get('asset-inputName')}
                             onInput={value => {
                               item.addressName = value;
-                              this.setState({
-                                newAddress: this.state.newAddress
-                              });
+                              this.setAddress(newAddress);
                             }}
                           />
                         </td>
@@ -124,9 +119,7 @@ export default class Popup extends exchangeViewBase {
                             placeholder={this.intl.get('asset-inputAddress')}
                             onInput={value => {
                               item.address = value;
-                              this.setState({
-                                newAddress: this.state.newAddress
-                              });
+                              this.setAddress(newAddress);
                             }}
                           />
                         </td>
@@ -139,10 +132,7 @@ export default class Popup extends exchangeViewBase {
                           <Button
                             title={this.intl.get('cance')}
                             onClick={() => {
-                              this.state.newAddress.splice(index, 1);
-                              this.setState({
-                                newAddress: this.state.newAddress
-                              });
+                              this.setAddress([]);
                             }}
                           />
                         </td>
@@ -157,7 +147,7 @@ export default class Popup extends exchangeViewBase {
                       <Button
                         title={this.intl.get('delete')}
                         theme="danger"
-                        onClick={() => { onDelete && onDelete(item) }}
+                        onClick={() => { this.setState({deleTip: true, deleItem: item}) }}
                       />
                     </td>
                   </tr>
@@ -168,6 +158,25 @@ export default class Popup extends exchangeViewBase {
         );
       }
     };
-    return <div className="asset-popup">{this.popup[this.props.type]()}</div>;
+    return <div className="asset-popup">
+        {this.popup[this.props.type]()}
+        {/*确认弹窗  */}
+        {this.state.deleTip && (
+          <BasePopup
+            type="confirm"
+            msg={this.state.deleText}
+            onClose={() => {
+              this.setState({ deleTip: false });
+            }}
+            onConfirm={async () => {
+              onDelete && await onDelete(this.state.deleItem)
+              this.setState({ deleTip: false });
+            }}
+            onCancel={()=>{
+              this.setState({ deleTip: false });
+            }}
+          />
+        )}
+    </div>;
   }
 }

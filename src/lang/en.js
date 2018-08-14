@@ -341,6 +341,7 @@ export default function en(state) {
     "asset-add-success": "Successfully added!",
     "asset-add-success-h5": "Saved",
     "asset-delet-fail": "Delete failed!",
+    "asset-delet-confirm": 'Are you sure you want to delete?',
     "asset-input-address": "Please select a withdrawal address",
     "asset-password-unset":
     "You haven't created a funding password, cannot withdraw!",

@@ -29,11 +29,14 @@ export default class Extract extends exchangeViewBase {
     this.state = {
       currency: "BTC",
       value: "BTC",
+      newAddress: [],//地址管理的待编辑地址
       showAddressPopup: false,
       address: {address: ''},
       extractAmount: "", //提现数量
       password: "",
       showTwoVerify: false,
+      verifyType: 0, //两步验证确认后的操作 0 申请提币订单，1 添加提币地址
+      firstVerify: 2,//增加提币地址时优先的二次验证类型 1 右键，2谷歌，3短信
       verifyNum: this.intl.get("sendCode"),
       tradePair: null,
       page: 1,
@@ -106,6 +109,9 @@ export default class Extract extends exchangeViewBase {
         tipSuccess: false,
         tipContent: this.intl.get('asset-address-notSaved')
       });
+    }
+    this.changeNewAddress = (value)=>{
+      this.setState({newAddress: value})
     }
   }
 
@@ -582,18 +588,30 @@ export default class Extract extends exchangeViewBase {
           <Popup
             type="popup3"
             addressArr={curExtract && curExtract.addressList}
+            newAddress={this.state.newAddress}
             addTip={this.notSaved}
-            onSave={async add => {
-              let result = await this.appendAddress(
-                Object.assign({ coinName: this.state.currency }, add),
-                curExtract
-              );
-              return result;
+            changeNewAddress={this.changeNewAddress}
+            onSave={async ()=>{
+              let obj = Object.assign({ coinName: this.state.currency }, this.state.newAddress[0]);
+              if (obj.addressName === "" || obj.address === "") {
+                this.setState({
+                  tip: true,
+                  tipSuccess: false,
+                  tipContent: this.intl.get("asset-incomplete")
+                });
+                return false;
+              }
+              this.setState({
+                showTwoVerify: true,
+                verifyType: 1,
+                verifyNum: this.intl.get("sendCode")
+              })
             }}
-            onDelete={del => {
-              this.deletAddress(
+            onDelete={async (del) => {
+              let result = this.deletAddress(
                 Object.assign({ coinName: this.state.currency }, del)
               );
+              return result
             }}
             onClose={() => {
               this.setState({ showAddressPopup: false });
@@ -603,21 +621,29 @@ export default class Extract extends exchangeViewBase {
         {this.state.showTwoVerify && (
           <TwoVerifyPopup
             verifyNum={this.state.verifyNum}
-            type={this.state.userTwoVerify.withdrawVerify} //两步验证码类型
+            type={!this.state.verifyType ? this.state.userTwoVerify.withdrawVerify : this.state.firstVerify} //两步验证码类型
             getVerify={this.getVerify}
             onClose={() => {
               this.setState({ showTwoVerify: false });
             }}
             destroy={this.destroy}
-            onConfirm={code => {
-              let { currency, address, password, extractAmount } = this.state;
-              this.extractOrder({
+            onConfirm={async (code) => {
+              let { verifyType, currency, address, password, extractAmount } = this.state;
+              if(!verifyType) this.extractOrder({
                 coinName: currency,
                 toAddr: address.address,
                 amount: Number(extractAmount),
                 fundPass: password,
                 code: code
               });
+              if(verifyType){
+                let obj = Object.assign({ coinName: this.state.currency }, this.state.newAddress[0]);
+                let result = await this.appendAddress(
+                  obj,
+                  curExtract
+                );
+                if(result) this.setState({newAddress: [], showTwoVerify: false})
+              }
             }}
           />
         )}
@@ -660,6 +686,7 @@ export default class Extract extends exchangeViewBase {
               <Button title="下次再说" className="cancel" onClick={()=>{
                 this.setState({
                   showTwoVerify: true,
+                  verifyType: 0,
                   recoGoogle: false,
                   verifyNum: this.intl.get("sendCode")
                 })

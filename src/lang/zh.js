@@ -333,6 +333,7 @@ export default function zh(state) {
     "asset-add-success": '添加成功！',
     "asset-add-success-h5": '保存成功',
     "asset-delet-fail": '删除失败！',
+    "asset-delet-confirm": '确定要删除该提现地址？',
     "asset-input-address": '您未选择提现地址，不允许提交',
     "asset-password-unset": '你还未设置资金密码，不能提现',
     "asset-withdrawal-failed": '提币失败',
