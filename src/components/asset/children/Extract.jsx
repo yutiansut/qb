@@ -654,16 +654,14 @@ export default class Extract extends exchangeViewBase {
           <div className="recoGoogle-popup">
             <h3>进行提现二次验证时，<br/>推荐使用谷歌验证</h3>
             <div className="button">
+              <Button title="前往安全中心设置" className="tosafe" onClick={()=>{
+                  this.props.history.push({pathname: '/user/safe/'})
+                }}></Button>
               <Button title="下次再说" className="cancel" onClick={()=>{
                 this.setState({
                   showTwoVerify: true,
                   recoGoogle: false,
                   verifyNum: this.intl.get("sendCode")
-                })
-              }}></Button>
-              <Button title="前往安全中心设置" href="/user/safe/" target="_blank" className="tosafe" onClick={()=>{
-                this.setState({
-                  recoGoogle: false,
                 })
               }}></Button>
             </div>

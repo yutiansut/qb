@@ -181,6 +181,12 @@
                 height 0.3rem
                 line-height 0.3rem
                 position relative
+                button
+                  background-color $asset-bg-btn
+                  color $asset-font-main
+                  &:hover, &:active
+                    background-color $asset-bg-btn
+                    color $asset-font-main
                 &:hover
                   ul
                     display block
@@ -191,18 +197,17 @@
                   display none
                   position absolute
                   top 0.3rem
-                  left 0
+                  left -0.15rem
                   z-index 999
                   border 0.01rem solid $col292B
+                  border-radius(0.02rem)
                   li
-                    height 0.3rem
-                    line-height 0.3rem
-                    padding 0 0.04rem
+                    min-width 0.95rem
+                    height 0.32rem
+                    line-height 0.32rem
                     background $asset-bg-btn
-                    border 0.01rem solid $col292B
                     font-size 0.14rem
                     text-align center
-                    border-radius(0.02rem)
                     cursor pointer
                     &:hover
                       background-color $asset-bg-main

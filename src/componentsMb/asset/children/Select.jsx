@@ -31,7 +31,6 @@ export default class Select extends exchangeViewBase {
         //路由参数to
         let to = this.props.controller.getQuery("to") || "/wallet";
         let currency = this.props.controller.getQuery("currency") || "";
-        console.error(to);
         await this.getAssets();
         this.setState({to: to, currency: currency});
     }
