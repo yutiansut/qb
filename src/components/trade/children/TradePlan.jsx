@@ -126,14 +126,14 @@ export default class TradePlan extends ExchangeViewBase {
     limitNum[1] = limitNum[1] || '';
     // console.log('limitNum[1]1',limitNum[1])
     if(maxNum < this.state.coinMin){
-      this.setState(
-          {
-            dealPopMsg: this.intl.get('deal-num-limited'),
-            dealPassType: 'passive',// 弹窗类型倾向
-            dealPass: true,// 下单弹窗
-          }
-      )
-      return
+        this.setState(
+            {
+              dealPopMsg: this.intl.get('deal-num-limited'),
+              dealPassType: 'passive',// 弹窗类型倾向
+              dealPass: true,// 下单弹窗
+            }
+        )
+        return
     }
     if (!((/^[0-9]*$/).test(limitNum[0]) && (/^[0-9]*$/).test(limitNum[1])))
       return
@@ -371,6 +371,7 @@ export default class TradePlan extends ExchangeViewBase {
     }
       this.dealTrade(orderType,e)
   }
+  //法币下单确认弹窗
   dealTradeConfirm(e){
     e.preventDefault();
     e.stopPropagation();
@@ -378,6 +379,44 @@ export default class TradePlan extends ExchangeViewBase {
    this.setState({dealSureFlag: true},
        );
     this.dealTrade(orderType,e)
+  }
+  //滑动尺节点点击
+  rangeItemsSelect(dealType, index, e){
+    e.preventDefault();
+    e.stopPropagation();
+    let diffArr = [{
+      // inputValue: 'inputBuyValue',
+      // wallet: 'buyWallet',
+      // setValue: 'inputBuyNum',
+      max: 'buyMax',
+      // changeBank: 'changBankPriceB',
+      marketMax: 'marketBuyMax'
+    }, {
+      // inputValue: 'inputSellValue',
+      // wallet: 'sellWallet',
+      // setValue: 'inputSellNum',
+      max: 'sellMax',
+      // changeBank: 'changBankPriceS',
+      marketMax: 'marketSellMax'
+    }];
+    
+    // console.log('his.state.buyNumFlag', this.state.buyNumFlag, this.state, diffArr[dealType].max)
+    this.setState({buyNumFlag: false, sellNumFlag: false});
+    let maxNum = this.state.DealEntrustType ? this.state[diffArr[dealType].marketMax] : this.state[diffArr[dealType].max];
+    if(maxNum < this.state.coinMin){
+      this.setState(
+          {
+            dealPopMsg: this.intl.get('deal-num-limited'),
+            dealPassType: 'passive',// 弹窗类型倾向
+            dealPass: true,// 下单弹窗
+          }
+      )
+      return
+    }
+    let numValue = maxNum * 0.25 * index;
+    let numLimit = this.state.numLimit;
+    dealType ? (this.setState({inputSellNum: Number(numValue).toFixedWithoutUp(numLimit)})) : (this.setState({inputBuyNum: Number(numValue).toFixedWithoutUp(numLimit)}));
+    dealType ? (index === 4 && this.setState({sellNumFlag: true})) : (index === 4 && (this.props.controller.store.state.buyNumFlag = true) && this.setState({buyNumFlag: true}))
   }
   render() {
     // console.log('交易市场', this.state)
@@ -426,6 +465,7 @@ export default class TradePlan extends ExchangeViewBase {
                                  numInput={this.numInput.bind(this)}
                                  dealTrade={this.dealTradeSure.bind(this)}
                                  passInput={this.passInput.bind(this)}
+                                 rangeItemsSelect={this.rangeItemsSelect.bind(this)}
                                  fundPwdInterval={this.state.fundPwdInterval}
                                  fundPassVerify={this.state.fundPwdInterval<0}
                                  DealEntrustType={this.state.DealEntrustType}

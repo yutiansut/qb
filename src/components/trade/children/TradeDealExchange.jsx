@@ -63,7 +63,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             <ul>
               {rangeItems.map((v, index) => {
                 return(
-                    <li key={index}>
+                    <li key={index} onClick={this.props.rangeItemsSelect.bind(this,this.props.ControllerProps.dealType,index)}>
                       {/*{v.value}*/}
                     </li>
                 )
