@@ -35,9 +35,11 @@ export default class Charge extends exchangeViewBase {
                 this.setState({showPopup:true,popMsg:this.intl.get("asset-copyFail"),popType:"tip3"})
             }
         };
-
-
+  
+      this.deal = controller.dealCoin.bind(controller);
       this.getWalletList = controller.getWalletList.bind(controller);
+      this.getCoinAddress = controller.getCoinAddress.bind(controller);
+      // this.getWalletList = controller.getWalletList.bind(controller);
     }
 
     async componentWillMount() {
