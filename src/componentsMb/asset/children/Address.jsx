@@ -31,6 +31,7 @@ export default class Address extends exchangeViewBase {
         this.getExtract = controller.getExtract.bind(controller);
 
         this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
+        this.getWalletList = controller.getWalletList.bind(controller);
 
         this.copy = el => {
             if(controller.copy(el)){
@@ -42,7 +43,7 @@ export default class Address extends exchangeViewBase {
     }
 
     async componentDidMount() {
-
+        await this.getWalletList()
         // 获取路由参数
         let currency = this.props.controller.getQuery("currency").toUpperCase() || "";
         this.addContent({con: currency + this.intl.get("notice-addr")});
@@ -78,7 +79,7 @@ export default class Address extends exchangeViewBase {
                 {showForm &&
                     <div className="form">
                       <p className="p1">
-                          <label>地址名称</label>
+                          <label>{this.intl.get("asset-address-name")}</label>
                           <input type="text" placeholder=""
                                  value={inputAddrName}
                                  onInput={e=>{
@@ -86,7 +87,7 @@ export default class Address extends exchangeViewBase {
                                  }}/>
                       </p>
                       <p className="p2">
-                          <label>地址</label>
+                          <label>{this.intl.get('address')}</label>
                           <textarea rows="2"
                                 value={inputAddr}
                                 onInput={e=>{
@@ -117,7 +118,7 @@ export default class Address extends exchangeViewBase {
                                      }}/>
                             </h3>
                             {/*<textarea readOnly="true" ref={`addr_${index}`}>{item.address || "-"}</textarea>*/}
-                            <textarea readOnly="true" ref="text" >{item.address || "-"}</textarea>
+                            <textarea readOnly="true" ref="text" value={`${item.address|| "-"} `}></textarea>
                         </div>
                     )})}
 
@@ -148,6 +149,7 @@ export default class Address extends exchangeViewBase {
                     <Popup
                         type={popType}
                         msg={popMsg}
+                        useType={popType === 'tip1' ? true : false}
                         h5={true}
                         onClose={() => this.setState({ showPopup: false})}
                         autoClose = {true}/>}

@@ -12,7 +12,6 @@ export default class Charge extends exchangeViewBase {
         this.state = {
             currency: "",
             coinAddress: {},
-
             showPopup: false,
             popMsg: "",
             popType: "",
@@ -27,6 +26,7 @@ export default class Charge extends exchangeViewBase {
         this.getCoinAddress = controller.getCoinAddress.bind(controller);
         //头部
         this.addContent = controller.headerController.addContent.bind(controller.headerController);
+        this.deal = controller.dealCoin.bind(controller);
 
         this.copy = el => {
             if(controller.copy(el)){
@@ -43,7 +43,7 @@ export default class Charge extends exchangeViewBase {
     async componentWillMount() {
       let {controller,history} = this.props;
       this.addContent({con: this.intl.get("asset-charge")});
-  
+
       let {walletList, walletHandle} = await this.getWalletList();
         let arr = this.deal(walletList, 'c');
         // 获取路由参数

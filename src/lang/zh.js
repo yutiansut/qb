@@ -331,6 +331,7 @@ export default function zh(state) {
     "asset-input-twoVerify3": "请输入短信验证密码",
     "asset-incomplete": "请填写完整",
     "asset-add-success": '添加成功！',
+    "asset-add-success-h5": '保存成功',
     "asset-delet-fail": '删除失败！',
     "asset-input-address": '您未选择提现地址，不允许提交',
     "asset-password-unset": '你还未设置资金密码，不能提现',
@@ -341,6 +342,7 @@ export default function zh(state) {
     "asset-wait-auditing": '操作成功，日提现量超额，请耐心等待审核',
     "asset-name-existing": '此名称已存在',
     "asset-funds-transfer": '资金划转',
+    "asset-delete-success": '删除成功',
     "h5-asset-record": "充提记录",
     "asset-address-notSaved": '地址尚未保存',
     "h5-asset-search-history": "搜索历史",
@@ -717,7 +719,7 @@ export default function zh(state) {
     "login-other": "已在其他地方登录，请重新登录",
     "login-err": "登录失败,请重试",
     "login-miss": "登录信息已失效,请重试",
-    "login-wait": "系统维护中，暂时无法注册，请耐心等待，谢谢您的理解"
+    "login-wait": "系统维护中，暂时无法注册，请耐心等待，谢谢您的理解",
     "h5-logo-useVerify": "使用验证码登录",
     "h5-logo-usePass": "使用密码登录",
   };
@@ -851,8 +853,8 @@ export default function zh(state) {
     "help-coin-white": "白皮书",
     "help-coin-none": "暂无该币种",
     "help-coin-location-search": "区域查询",
-  
-  
+
+
     "help-download-title": `${nameUsd}交易所手机客户端`,
     "help-download-intro": "覆盖iOS、Android多个平台，无障碍交易",
     "help-download-ios": "iPhone版",

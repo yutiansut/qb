@@ -339,19 +339,22 @@ export default function en(state) {
     "asset-input-twoVerify3": "Please enter 2-Factor Authentication phone code",
     "asset-incomplete": "Information incomplete!",
     "asset-add-success": "Successfully added!",
+    "asset-add-success-h5": "Saved",
     "asset-delet-fail": "Delete failed!",
     "asset-input-address": "Please select a withdrawal address",
     "asset-password-unset":
-      "You haven't created a funding password, cannot withdraw!",
+    "You haven't created a funding password, cannot withdraw!",
     "asset-withdrawal-failed": "Withdrawal failed",
     "asset-detail": "Asset Detail",
     "asset-charge-h5-tip3":
-      "Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.",
+    "Make sure that computers and browsers are secure to prevent information from being tampered with or leaked.",
     "asset-auth-tip":
-      "Insufficient 24H withdrawal limit, please finish the real-name verification",
+    "Insufficient 24H withdrawal limit, please finish the real-name verification",
     "asset-wait-auditing":
-      "Daily withdraw limit exceeded, please wait for auditing",
+    "Daily withdraw limit exceeded, please wait for auditing",
     "asset-name-existing": "The name is existing",
+    "asset-funds-transfer": "Funds transfer",
+    "asset-delete-success": 'Successfully deleted',
     "asset-address-notSaved": 'Address not saved',
     "h5-asset-record": "Charge record",
     "h5-asset-search-history": "Search history",
@@ -800,7 +803,7 @@ export default function en(state) {
     "activity-rule-40": `Total <i>{number}</i> ${coin} will be distributed.`,
     "activity-rule-41": `Input Your Phone Number/Email Address`,
     "activity-rule-42": `Invite friends`,
-    "asset-funds-transfer": "Funds transfer"
+
   };
 
   const login = {
