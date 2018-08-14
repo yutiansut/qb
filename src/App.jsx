@@ -114,8 +114,6 @@ export default class App extends Component {
     userOrderController = new UserOrderListController();
     klineController = new KlineController();
 
-    configController.getActivityState();
-
     userOrderController.userController = userController; //订单管理获取用户id
 
     noticeController.configController = configController;
@@ -177,7 +175,9 @@ export default class App extends Component {
   componentWillMount() {
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await configController.getActivityState();
+    await configController.checkVersion();
     configController.loadLocales();
     // marketController.getTradePairHandle();
     // console.log(222, window.innerHeight)

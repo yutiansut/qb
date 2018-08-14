@@ -80,7 +80,11 @@ export default class LoginController extends ExchangeControllerBase {
       this.getCaptchaVerify()
     }
     data = Object.assign(data, data.d);
-    this.view && this.view.setState({showPopup: true, popType: 'tip3', popMsg: data.msg || this.view.intl.get("login-err")})
+    this.view && this.view.setState({
+      showPopup: true,
+      popType: 'tip3',
+      popMsg: (this.view.state.titleIndex === 0 && data.ret === 604) ? this.view.intl.get("login-wait") : (data.msg || this.view.intl.get("login-err"))
+    })
   }
 
   async clearLoginInfo() { // 退出登陆

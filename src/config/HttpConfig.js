@@ -22,7 +22,8 @@ export default {
   // httpPreHandler,
   // httpAfterHandler,
   config: [
-    {name: 'activityState', data: {url: '/v1/common/', method: 'post'}, action: 'cfg', actionBack: 'cfgr'}
+    {name: 'activityState', data: {url: '/v1/common/', method: 'post'}, action: 'cfg', actionBack: 'cfgr'},
+    {name: 'checkVersion', data: {url: '/v1/common/', method: 'post'}, action: 'cv', actionBack: 'cvr'}
   ],
   user: [ // 用户
     {name: 'getUserInfo', data: {url: '/v1/user/', method: 'post'}, action: 'ui', actionBack: 'uir', needToken: true}, // 获取用户信息

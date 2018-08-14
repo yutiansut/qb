@@ -87,7 +87,7 @@ class Dom{
         return this;
    }
 
-   addClass(name){
+    addClass(name){
         this.el.forEach(el=>{
             el.classList.add(name);
         });
@@ -107,7 +107,7 @@ class Dom{
             })
         }
         return this;
-   }
+    }
 
    text(){
        if(arguments.length===0){
@@ -226,7 +226,7 @@ class Dom{
         return new Dom(this.el[0].parentNode);
     }
 
-   find(sel){
+    find(sel){
         let newEl=[];
         this.el.forEach(el=>{
             el.querySelectorAll(sel).forEach(el2=>{
@@ -234,25 +234,25 @@ class Dom{
             });
         });
         return new Dom(newEl);
-   }
+    }
 
-   next(){
+    next(){
         let newEl = [];
         this.el.forEach(el=>{
             newEl.push(el.nextSibling);
         });
         return new Dom(newEl)
-   }
+    }
 
-   prev(){
+    prev(){
         let newEl = [];
         this.el.forEach(el=>{
             newEl.push(el.previousSibling);
         });
         return new Dom(newEl);
-   }
+    }
 
-   children(){
+    children(){
         if(arguments.length===0){
             let newEl = [];
             this.el.forEach(el=>{
@@ -270,9 +270,9 @@ class Dom{
             });
             return new Dom(newEl);
         }
-   }
+    }
 
-   //------------------------------------------------------
+    //------------------------------------------------------
 
     each(func){
         this.el.forEach((item,index)=>{
@@ -280,7 +280,7 @@ class Dom{
         })
     }
 
-   //--------------------------------------------------------class
+    //--------------------------------------------------------class
     //注册事件
     registerEvent(name){
         this[name]= (func)=>{

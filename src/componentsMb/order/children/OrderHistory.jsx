@@ -78,7 +78,7 @@ export default class OrderHistory extends exchangeViewBase{
     this.setState({displayType: "list"})
   }
   setDetailsDisplay(index) {
-    console.log('index1111111111111111', index)
+    // console.log('index1111111111111111', index)
     this.setState({viewIndex: index});
     this.setState({displayType: "details"})
   }

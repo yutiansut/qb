@@ -156,25 +156,25 @@ export default class MarketController extends ExchangeControllerBase {
     type < 3 && this.store[arr[type]](List)
     if(this.view.state.query && type === 3) {
       let queryValue = this.view.state.query;
+      selectPair = queryValue
+      market = queryValue.split('/')[1]
+      // console.log('11111111',(queryValue.split('/').length), )
       if(queryValue.split('/').length === 1){
-        if(this.store.marketDataHandle.indexOf(queryValue) !== -1) {
-          market = queryValue
-        } else {
+        selectPair = null
+        market = queryValue
+        // console.log('22222222',this.store.marketDataHandle, this.store.marketDataHandle.indexOf(queryValue), queryValue)
+        if(this.store.marketDataHandle.indexOf(queryValue) < 0) {
           let pairMsg = await this.store.getPairMsg()
           market = pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]
           selectPair = `${queryValue}/${market}`
         }
-      } else {
-        selectPair = queryValue
-        market = queryValue.split('/')[1]
       }
     }
-    console.log(market,this.view.state.query)
     market && this.store.setSelecedMarket(market);
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
     homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
-    console.log('homeMarketPairData', homeMarketPairData, this.store.state.tradePair, selectPair);
+  
     type > 2 && (this.store.state.tradePair = selectPair || homeMarketPairData[0].tradePairName);
     this.view.setState({
       homeMarketPairData, market : this.store.selecedMarket, marketDataHandle: this.store.marketDataHandle
@@ -191,7 +191,6 @@ export default class MarketController extends ExchangeControllerBase {
 
   //交易对的选中
   tradePairChange(value) {
-    console.log('tradePairChange', value)
     if(!value){
       return
     }
@@ -242,7 +241,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.setSort(sortValue, v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
-      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, v.type),
+      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, this.store.state.ascending),
       sortImg: imgArr[v.type],
       sortIndex: index,
       tradeSortImg: tradeSortImg[v.type],

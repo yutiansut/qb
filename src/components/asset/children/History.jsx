@@ -10,6 +10,7 @@ export default class History extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = this.props;
+    let type = controller.getQuery('type') && Number(controller.getQuery('type'));
     controller.setView(this);
     // 生成充提币类型及进度的状态码映射表；
     this.staticData = {
@@ -58,13 +59,13 @@ export default class History extends exchangeViewBase {
       tipContent: "",
       // 搜索条件
       currency: this.intl.get("all"),
-      orderType: this.intl.get("all"),
+      orderType: [1,2,4,8].includes(type) && this.staticData.orderType[type] || this.intl.get("all"),
       status: this.intl.get("all"),
       startTime: this.dealTime().start,
       endTime: this.dealTime().end,
       //选择条件
       currency_s: this.intl.get("all"),
-      orderType_s: this.intl.get("all"),
+      orderType_s: [1,2,4,8].includes(type) && this.staticData.orderType[type] || this.intl.get("all"),
       status_s: this.intl.get("all"),
       startTime_s: this.dealTime().start,
       endTime_s: this.dealTime().end

@@ -28,6 +28,8 @@ export default class Balance extends exchangeViewBase {
     this.getQbt = controller.getMyQbt.bind(controller);
     //头部
     this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
+    // 获取Qb信息
+    this.getQb = controller.marketController.getQb.bind(controller.marketController);
   }
 
   async componentDidMount() {
@@ -41,9 +43,11 @@ export default class Balance extends exchangeViewBase {
     await this.getAssets();
     if (this.props.controller.configData.activityState) {
       let qbt = await this.getQbt();
+      let info = await this.getQb();
       if (qbt && this.state.wallet) {
+        qbt.coinIcon = info.d ? info.d.lu : '';
         this.state.wallet.unshift(qbt);
-        this.setState({wallet: this.state.wallet})
+        this.setState({ wallet: this.state.wallet})
       }
     }
 
@@ -132,7 +136,7 @@ export default class Balance extends exchangeViewBase {
             <a className="f1" onClick={() => this.setState({hideLittle: !hideLittle})}>
               <img
                 src={hideLittle ? "/static/mobile/asset/icon_zc_yincang@2x.png" : "/static/mobile/asset/icon_zc_xianshi@2x.png"}/>
-              <i>{this.intl.get("asset-hideLittle")}</i>
+              <i>{this.intl.get("h5-asset-hideLittle")}</i>
             </a>
             {/*总资产*/}
             <a className="f2" onClick={() => this.setState({sort: ++sort % 2})}>

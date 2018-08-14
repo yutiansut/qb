@@ -57,6 +57,7 @@ export default class ForgetPass extends exchangeViewBase {
 
   changePassInput(value) {
     this.setState({passInput: value});
+    this.state.errPass && (this.setState({errPass: ""}))
   }
 
   changeAgainInput(value) {

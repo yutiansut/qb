@@ -11,7 +11,7 @@ export class Timeline extends NamedObject {
         this._innerLeft = 0;
         this._innerWidth = 0;
         this._firstColumnLeft = 0;
-        this._scale = 3 * Kline.instance.dpr;
+        this._scale = Math.ceil(3 * Kline.instance.dpr);
         this._lastScale = -1;
         this._maxItemCount = 0;
         this._maxIndex = 0;
@@ -34,11 +34,11 @@ export class Timeline extends NamedObject {
     }
 
     getItemWidth() {
-        return Timeline.itemWidth[this._scale];
+      return Timeline.itemWidth[this._scale];
     }
 
     getSpaceWidth() {
-        return Timeline.spaceWidth[this._scale];
+      return Timeline.spaceWidth[this._scale];
     }
 
     getColumnWidth() {

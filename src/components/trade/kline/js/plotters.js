@@ -665,9 +665,9 @@ export class MainInfoPlotter extends Plotter {
 
         let amplitude;
         if ((data.low > 0 && (data.high - data.low) / data.low) * 100.0) {
-          amplitude = ((data.high - data.low) / data.low) * 100.0;
+            amplitude = ((data.high - data.low) / data.low) * 100.0;
         } else {
-          amplitude = 0.0;
+            amplitude = 0.0;
         }
 
         if (lang === "zh-cn") {

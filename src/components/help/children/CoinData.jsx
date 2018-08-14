@@ -48,7 +48,7 @@ export default class CoinData extends exchangeViewBase {
       this.setState({ currency });
     };
     this.search = () => {
-      let value = (this.state.value !== "" && this.searchArr[0]) || "ETH";
+      let value = (this.state.value !== "" && this.searchArr[0]) || "BTC";
       this.setValue(value);
       this.setCurrency(value);
       this.hide();
@@ -111,7 +111,7 @@ export default class CoinData extends exchangeViewBase {
         </h2>
         <div className="search clearfix">
           <div className="input">
-            <Input type="search2" placeholder={this.intl.get("helo-coin-search")} value={this.state.value} onInput={value => {
+            <Input type="search2" placeholder={this.intl.get("help-coin-search")} value={this.state.value} onInput={value => {
                 this.setValue(value);
               }} onFocus={this.show} onEnter={this.search} clickOutSide={this.search}>
               {this.state.showSearch && this.searchArr.length ? <ul className="search-list">
@@ -129,7 +129,15 @@ export default class CoinData extends exchangeViewBase {
                       {item}
                     </li>
                   ))}
-                </ul> : ""}
+                </ul> : this.state.showSearch && this.searchArr.length === 0 ? <ul className="search-list">
+                    <li onClick={e => {
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        this.setValue('BTC');
+                        this.setCurrency('BTC');
+                        this.hide();
+                      }}>{this.intl.get('help-coin-none')}</li>
+                  </ul> : ''}
             </Input>
           </div>
           <button className={`${!this.state.unit && "active"}`} onClick={() => {
@@ -156,43 +164,43 @@ export default class CoinData extends exchangeViewBase {
                   : `$${Number(priceEN).format({ number: "legal" })}`}
               </p>
               {this.state.walletHandle[name.toUpperCase()] && this.state.walletHandle[name.toUpperCase()].c ? <NavLink to={{ pathname: "/wallet/charge", query: { currency: this.state.currency } }}>
-                  {this.intl.get("helo-coin-deposit")}
+                  {this.intl.get("help-coin-deposit")}
                 </NavLink> : ""}
             </div>
             <div className="right">
               <p>
                 <span>
-                  {this.intl.get("helo-coin-market")}：{this.state.unit ? `¥${Number(totalValueCN).format(
+                  {this.intl.get("help-coin-market")}：{this.state.unit ? `¥${Number(totalValueCN).format(
                         { number: "legal" }
                       )}` : `$${Number(totalValueEN).format({
                         number: "legal"
                       })}`}
                 </span>
                 <span>
-                  {this.intl.get("helo-coin-total")}：{totalVolume.format({
+                  {this.intl.get("help-coin-total")}：{totalVolume.format({
                     number: "general"
                   })}
                 </span>
                 <span>
-                  {this.intl.get("helo-coin-liquidity")}：{circulationVolume.format(
+                  {this.intl.get("help-coin-liquidity")}：{circulationVolume.format(
                     { number: "general" }
                   )}
                 </span>
               </p>
               <p>
                 <span>
-                  {this.intl.get("helo-coin-price")}：{this.state.unit ? `¥${Number(icoPriceCN).format(
+                  {this.intl.get("help-coin-price")}：{this.state.unit ? `¥${Number(icoPriceCN).format(
                         { number: "legal" }
                       )}` : `$${Number(icoPriceEN).format({
                         number: "legal"
                       })}`}
                 </span>
                 <span>
-                  {this.intl.get("helo-coin-date")}：{releaseTime.toDate("yyyy-MM-dd")}
+                  {this.intl.get("help-coin-date")}：{releaseTime.toDate("yyyy-MM-dd")}
                 </span>
               </p>
               <p>
-                <span>{this.intl.get("helo-coin-trade")}：</span>
+                <span>{this.intl.get("help-coin-trade")}：</span>
                 {this.getCoinPair(this.state.tradePair, this.state.currency).map(
                   (v, index) => (
                     <NavLink
@@ -211,14 +219,14 @@ export default class CoinData extends exchangeViewBase {
           </div>
           <div className="detail">
             <p>
-              {this.intl.get("helo-coin-introduction")}
+              {this.intl.get("help-coin-introduction")}
               <br />
               {description && this.intl.get(description) ? this.intl.get(description) : description}
             </p>
             <div className="button">
-              {webSite && webSite.length ? <Button type="base" title={this.intl.get("helo-coin-website")} href={webSite[0]} target={true} /> : ""}
-              {blockSites && blockSites.length ? <Button type="base" title={this.intl.get("helo-coin-browser")} href={blockSites[0]} target={true} /> : ""}
-              {whitePaper && whitePaper.length ? <Button type="base" title={this.intl.get("helo-coin-white")} href={whitePaper[0]} target={true} /> : ""}
+              {webSite && webSite.length ? <Button type="base" title={this.intl.get("help-coin-website")} href={webSite[0]} target={true} /> : ""}
+              {blockSites && blockSites.length ? <Button type="base" title={this.intl.get("help-coin-browser")} href={blockSites[0]} target={true} /> : ""}
+              {whitePaper && whitePaper.length ? <Button type="base" title={this.intl.get("help-coin-white")} href={whitePaper[0]} target={true} /> : ""}
             </div>
           </div>
         </div>

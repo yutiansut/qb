@@ -38,7 +38,6 @@ export default class OrderDetails extends exchangeViewBase {
 
   render(){
     const orderDetail = this.state.orderDetail;
-    console.log(orderDetail)
     const type = this.props.history.location.pathname.slice(7, -8);
     const tradePairName = orderDetail.tradePairName && orderDetail.tradePairName.toUpperCase();
     const tradePairArr = tradePairName && tradePairName.split('/');

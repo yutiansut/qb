@@ -498,7 +498,7 @@ export default class Kline {
                 $("#fullscreen-tip").addClass("show");
                 setTimeout(()=>{
                     $("#fullscreen-tip").removeClass("show")
-                },5000);
+                },3000);
             } else {
                 $(Kline.instance.element).attr('style', '');
                 $('html,body').css({width: '', height: '', overflow: ''});

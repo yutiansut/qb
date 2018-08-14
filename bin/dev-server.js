@@ -31,6 +31,6 @@ const port = PORT || config.dev.port;
 const host = HOST || config.dev.host;
 
 server.listen(port, host, function (err) {
-   console.log(`Starting server on ${host}:${port}`);
+   // console.log(`Starting server on ${host}:${port}`);
     if (err) throw err
 })

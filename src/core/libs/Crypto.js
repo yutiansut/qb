@@ -55,6 +55,6 @@ export default function getSafePass(pwd, uid) {
       32,
       "sha1"
     ); //bit bytes
-  console.log('getSafePass 5',encryptResult,encryptResult.slice(0, 32).toString('base64'), encryptResult.toString('base64'))
+  // console.log('getSafePass 5',encryptResult,encryptResult.slice(0, 32).toString('base64'), encryptResult.toString('base64'))
   return encryptResult.toString("base64"); // Base64加密再 encode;
 }

@@ -189,7 +189,7 @@ export default class OrderCurrent extends ExchangeViewBase {
     }
     else {
     // && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue]))
-      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) || (idArray = []);
+      coinValue  && (coinArray = pairIdMsg.pairNameCoin[coinValue.toLowerCase()]) && (idArray = Object.values(pairIdMsg.pairIdCoin[coinValue.toLowerCase()])) || (idArray = []);
       coinArray = pairIdMsg.pairIdCoin && Object.keys(pairIdMsg.pairIdCoin)
       marketValue = this.intl.get('all')
     }
@@ -235,7 +235,8 @@ export default class OrderCurrent extends ExchangeViewBase {
         orderStatus: this.state.orderStatus,
         startTime: this.state.startTime,
         endTime: this.state.endTime,
-        page: this.state.page,
+        // page: this.state.page,
+        page: 1,
         pageSize: this.state.pageSize
       },
       orderDeal: {
@@ -244,7 +245,8 @@ export default class OrderCurrent extends ExchangeViewBase {
         orderStatus: this.state.orderStatus,
         startTime: this.state.startTime,
         endTime: this.state.endTime,
-        page: this.state.page,
+        // page: this.state.page,
+        page: 1,
         pageSize: this.state.pageSize
       }
     };

@@ -120,7 +120,7 @@ export default class UserOrderListController extends OrderListController {
     }
     // str = "时间,交易对,类型,平均成交价,成交量,成交额,手续费";
       str = `${this.view.intl.get("time")},${this.view.intl.get("pair")},${this.view.intl.get("notice-type")},${this.view.intl.get("avgPrice")},${this.view.intl.get("volume")},${this.view.intl.get("total")},${this.view.intl.get("fee")}`;
-      console.log(result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)))
+      // console.log(result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)))
       result.orderList.filter(v=>[ 2, 5, 6, 7].includes(v.orderStatus)).forEach(v => {
         str +=
           "\n" +
@@ -169,8 +169,9 @@ export default class UserOrderListController extends OrderListController {
         return
      }
     para.priceType === 0 && changeIndex !== -1 && currentOrder.splice(changeIndex, 1);
-     historyIndex !== -1 && historyOrder.splice(historyIndex, 1, para) || historyOrder.unshift(para);
-     this.store.state.historyOrder.orderList = historyOrder;
+    historyIndex === -1 &&  historyOrder.unshift(para) || (para.orderStatus === 2 && historyOrder.splice(historyIndex, 1, para)) ;
+  
+    this.store.state.historyOrder.orderList = historyOrder;
      this.store.state.currentOrder = currentOrder;
      // this.view.setState({
      //   historyOrder,

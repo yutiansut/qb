@@ -116,8 +116,7 @@ export default class Login extends exchangeViewBase {
   }
 
   canClick() {
-    if (this.state.titleIndex === 0 && this.state.userErr) return false
-    if (this.state.titleIndex === 1 && this.state.userErr && this.state.pwdErr) return false
+    if (this.state.userErr || this.state.pwdErr) return false
     if (this.state.titleIndex === 0 && this.state.checkState && this.state.userInput && this.state.codeInput && this.state.picInput) return true
     if (this.state.titleIndex === 1 && this.state.checkState && this.state.userInput && this.state.passInput && this.state.picInput) return true
     return false

@@ -160,6 +160,8 @@ export default class ControllerBase {
           second = second[v];
         });
       }
+      first = Number(first);
+      second = Number(second);
       if (type) {
         if (first > second) return 1;
         if (first <= second) return -1;
