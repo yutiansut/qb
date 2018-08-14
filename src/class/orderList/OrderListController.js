@@ -106,6 +106,9 @@ export default class OrderListController extends ExchangeControllerBase {
     }
     
   }
+  setPairName(value){
+    this.store.state.tradePairName = value;
+  }
   // 设置价格及数量精度(共用)
   setAccuracy(priceAccuracy,volumeAccuracy) {
     this.view.setState(
@@ -113,7 +116,7 @@ export default class OrderListController extends ExchangeControllerBase {
           priceAccuracy,
           volumeAccuracy
         },
-    )
+    );
     this.store.state.volumeAccuracy = volumeAccuracy;
     this.store.state.priceAccuracy = priceAccuracy;
   }
@@ -121,7 +124,8 @@ export default class OrderListController extends ExchangeControllerBase {
   get accuracy(){
     return{
       volumeAccuracy: this.store.state.volumeAccuracy,
-      priceAccuracy: this.store.state.priceAccuracy
+      priceAccuracy: this.store.state.priceAccuracy,
+      depthArray: this.store.state.priceAccuracy === 6 ? [6,5,4,3] : [2,1,0]
     }
   }
   

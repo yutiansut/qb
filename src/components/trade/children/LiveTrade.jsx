@@ -1,5 +1,6 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, { Component } from "react";
+import SelectButton from "../../../common/component/SelectButton";
 import '../stylus/tradeLive.styl'
 
 const tradeLiveItem = [{name:'买卖', type:'all'}, {name:'买入', type:'buy'}, {name:'卖出', type:'sell'}];
@@ -7,6 +8,8 @@ export default class LiveTrade extends ExchangeViewBase{
   constructor(props){
     super(props);
     this.state = {
+      depthSelected: -1,
+      userTagArr:[], //用户挂单数组
       sellMid: 0, //中位数
       buyMid: 0, //中位数
       changeFlag:true,
@@ -24,7 +27,8 @@ export default class LiveTrade extends ExchangeViewBase{
     this.orderListSelect = controller.orderListSelect.bind(controller);
     // this.getNewPrice = controller.getNewPrice.bind(controller)
     this.clearRoom = controller.clearRoom.bind(controller);
-    this.changeLiveTitleSelect = controller.changeLiveTitleSelect.bind(controller)
+    this.changeLiveTitleSelect = controller.changeLiveTitleSelect.bind(controller);
+    this.depthSelect = controller.depthSelect.bind(controller)
   }
   componentWillMount(){
   
@@ -52,6 +56,12 @@ export default class LiveTrade extends ExchangeViewBase{
                   </div>
               )
             })}
+            <SelectButton
+                title={this.state.depthSelected === -1 ? this.props.controller.accuracy.depthArray[0] : this.state.depthSelected }
+                type="trade"
+                className="select-depth"
+                valueArr={this.props.controller.accuracy.depthArray}
+                onSelect={this.depthSelect.bind(this)}/>
           </div>
           <table className='trade-live-table'>
             <thead>
@@ -69,7 +79,7 @@ export default class LiveTrade extends ExchangeViewBase{
                (
                   <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td style={{position: 'relative'}}>
-                      <span>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</span>
+                      <span style={{color: this.state.userTagArr.indexOf(v.price) === -1 ? 'rgba(255,255,255,0.8)' : 'black'}}>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</span>
                     <div style={{width: v.amount >= this.state.sellMid ? '3.18rem' : `${3.18 * v.amount / this.state.sellMid}rem`}}></div></td>
                     <td style={{color : '#F25656 '}}>{v.priceR}</td>
                     <td>{v.amountR}</td>
@@ -87,7 +97,7 @@ export default class LiveTrade extends ExchangeViewBase{
                 (
                   <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td style={{position: 'relative'}}>
-                      <span>{`${this.intl.get('order-b')}${index + 1}`}</span>
+                      <span style={{color: this.state.userTagArr.indexOf(v.price) === -1 ? 'rgba(255,255,255,0.8)' : 'black'}}>{`${this.intl.get('order-b')}${index + 1}`}</span>
                       <div style={{width: v.amount >= this.state.buyMid ? '3.18rem' : `${3.18 * v.amount / this.state.buyMid}rem`}}></div>
                     </td>
                     <td style={{color : '#2BB789 '}}>{v.priceR}</td>

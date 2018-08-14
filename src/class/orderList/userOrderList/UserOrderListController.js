@@ -207,6 +207,7 @@ export default class UserOrderListController extends OrderListController {
   let historyOrder = this.store.state.historyOrder && this.store.state.historyOrder.orderList || [];
   let currentOrder = this.store.state.currentOrder;
   let unitsType = this.store.state.unitsType;
+  let userPriceList = [];
     let items = {
       CNY: 'priceCN',
       USD: 'priceEN'
@@ -234,8 +235,10 @@ export default class UserOrderListController extends OrderListController {
     v.turnoverR = Number(Number(v.priceH).multi(v.count)).format(formatObj[formatProperty]);
     v.dealDoneCountR = Number(v.dealDoneCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
     v.undealCountR = Number(v.undealCount).formatFixNumberForAmount(this.accuracy.volumeAccuracy, false);
+    userPriceList.push({price: v.price, type: v.orderType});
     return v
-  })
+  });
+    this.TradeOrderListController && this.TradeOrderListController.setPriceList(userPriceList)
     this.view.setState({
       currentOrder
     })

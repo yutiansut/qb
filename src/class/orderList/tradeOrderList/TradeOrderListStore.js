@@ -4,6 +4,8 @@ export default class TradeOrderListStore extends OrderListStore{
   constructor() {
     super('userOrder', 'general');
     this.state={
+      depthType: 0,
+      userPriceList:[],
       changeFlag: true,
       room: '',
       titleSelect:'all',
@@ -125,8 +127,8 @@ export default class TradeOrderListStore extends OrderListStore{
   async getDepth(tradePairName) {
     let orderListArray = await this.Proxy.getDepth(
         {
-          n: tradePairName,
-          lv: 0 //深度 可传6,5,4,3
+          n: this.state.tradePairName,
+          lv: this.state.depthType //深度 可传6,5,4,3
         }
     );
     let orderListArrayAf = orderListArray && {

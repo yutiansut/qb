@@ -207,7 +207,8 @@ export default class MarketController extends ExchangeControllerBase {
     this.TradeOrderListController && this.TradeOrderListController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
     this.userOrderController && this.userOrderController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
     this.TradePlanController && this.TradePlanController.setAccuracy(value.priceAccuracy, value.volumeAccuracy);
-    this.TradeOrderListController && this.TradeOrderListController.joinRoom(value.tradePairName);
+    this.TradeOrderListController && this.TradeOrderListController.setPairName(value.tradePairName)
+    this.TradeOrderListController && this.TradeOrderListController.joinRoom();
     this.TradeOrderListController && this.TradeOrderListController.setChangeFlag();
     this.userOrderController && this.userOrderController.changeTradePairId(value.tradePairId);
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});

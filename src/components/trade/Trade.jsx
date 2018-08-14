@@ -80,6 +80,7 @@ export default class extends exchangeViewBase {
     //id处理的两种方式:
     TradeMarketController.userOrderController = userOrderController;
     userOrderController.TradeMarketController = TradeMarketController;
+    userOrderController.TradeOrderListController = TradeOrderListController;
 
 
     TradePlanController.TradeMarketController = TradeMarketController;

@@ -5,7 +5,7 @@ export default class TradeOrderListController extends OrderListController {
   constructor() {
     super();
     this.store = new TradeOrderListStore()
-    this.store.setController(this)
+    this.store.setController(this);
   }
   
   setView(view) {
@@ -22,8 +22,8 @@ export default class TradeOrderListController extends OrderListController {
     this.changeRenderLive();
   }
   
-  async getDepth(tradePairName) {
-    let liveTradeData = await this.store.getDepth(tradePairName);
+  async getDepth() {
+    let liveTradeData = await this.store.getDepth();
     this.store.state.liveBuyArray = liveTradeData && liveTradeData.buy || [];
     this.store.state.liveSellArray = liveTradeData && liveTradeData.sell || [];
     this.changeRenderLive();
@@ -61,9 +61,9 @@ export default class TradeOrderListController extends OrderListController {
     })
   }
   
-  joinRoom(tradePairName) {
+  joinRoom() {
     // console.log(this.store.room)
-    let room = `${tradePairName}-0`
+    let room = `${this.store.state.tradePairName}-${this.store.state.depthType}`;
     this.emitRecentOrderWs(this.store.room, room)
     this.store.setRoom(room)
   }
@@ -77,7 +77,7 @@ export default class TradeOrderListController extends OrderListController {
     );
     this.store.state.prices = v.prices;
     this.changeRenderLive();
-    flag !== 1 && this.getDepth(v.tradePair)
+    flag !== 1 && this.getDepth()
   }
   
   setUnitsType(v) {
@@ -96,7 +96,42 @@ export default class TradeOrderListController extends OrderListController {
     this.changeRenderLive()
     //预留方法
   }
-  
+  setPriceList(value){
+    this.store.userPriceList = value;
+    this.userPriceListHandle();
+  }
+  //深度合并位数切换
+  depthSelect(e){
+    let accuracy = this.accuracy.priceAccuracy;
+    this.view.setState({
+      depthSelected: e
+    });
+    this.store.state.depthType = accuracy - e;
+    this.userPriceListHandle();
+    this.joinRoom();
+    this.getDepth();
+  }
+  // 用户挂单数据处理
+  userPriceListHandle(){
+   let userPriceList = this.store.userPriceList;
+   let depthType = this.store.state.depthType;
+   let accuracy = this.accuracy.priceAccuracy;
+   let userTagArr = [];
+   userPriceList.map(v => {
+      if(v.type){
+        v.priceU = depthType ? (v.price === v.price.toFixedWithoutUp(accuracy - depthType) ? v.price : v.price.toFixedWithoutUp(accuracy - depthType) + Math.pow(0.1,accuracy - depthType)) : v.price
+      }
+      else{
+        v.priceU = Number(v.price).toFixedWithoutUp(accuracy - depthType);
+      }
+     userTagArr.push(v.priceU)
+   });
+   this.view.setState(
+       {
+         userTagArr
+       }
+   )
+  }
   // 挂单列表渲染数据的处理
   changeRenderLive() {
     let liveSellArray = this.store.state.liveSellArray;
@@ -118,8 +153,8 @@ export default class TradeOrderListController extends OrderListController {
     let dealPrice = Number(liveBank.price && liveBank.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
     let sellSortArray = [],buySortArray = [],sellMid = 0,buyMid = 0;
     if (liveTitleSelect === 'all') {
-      liveSellArray = (liveSellArray.slice(0,13)).reverse();
-      liveBuyArray = liveBuyArray.slice(0,13);
+      liveSellArray = (liveSellArray.slice(0,50)).reverse();
+      liveBuyArray = liveBuyArray.slice(0,50);
       liveSellArray = liveSellArray && liveSellArray.map(v => {
           v.priceH = Number(v.price * (liveBank[items[unitsType]] || 1));
           v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
@@ -140,6 +175,8 @@ export default class TradeOrderListController extends OrderListController {
       buySortArray && buySortArray.sort((a,b) => a > b);
       sellSortArray.length % 2 === 0 && (sellMid = (sellSortArray[sellSortArray.length/2] + sellSortArray[sellSortArray.length/2 - 1]) / 2) || (sellMid = sellSortArray[(sellSortArray.length - 1 )/ 2]);
       buySortArray.length % 2 === 0 && (buyMid = (buySortArray[buySortArray.length/2] + buySortArray[buySortArray.length/2 - 1]) / 2) || (buyMid = buySortArray[(buySortArray.length - 1 )/ 2]);
+      liveSellArray = liveSellArray.slice(0,13);
+      liveBuyArray = liveBuyArray.slice(0,13);
       this.view.setState({
         liveBuyArray,
         liveSellArray,
