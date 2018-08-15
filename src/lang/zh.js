@@ -287,6 +287,7 @@ export default function zh(state) {
     "asset-reminder": "温馨提示",
     "asset-depositReminder1":
       "使用{currency}地址充值需要<i> {number} </i>个网络确认才能到账",
+    "h5-asset-hideLittle": "隐藏小额资产",
     "asset-depositReminder2-1": "您可以在充值提现",
     "asset-depositReminder2-2": "页面跟踪进度",
     "asset-safe-tip": "请务必确认电脑及浏览器安全，防止信息被篡改或泄露。",
