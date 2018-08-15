@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Button from "../../../common/component/Button"
 import Input from "../../../common/component/Input"
-// import "../style/register.styl";
+import "../style/register.styl";
 
 export default class Register extends exchangeViewBase {
   constructor(props) {

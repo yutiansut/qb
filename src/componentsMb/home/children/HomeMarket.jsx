@@ -58,9 +58,6 @@ export default class HomeMarket extends ExchangeViewBase {
     const {controller} = this.props;
     let marketData = this.state.marketDataHandle;     //市场列表
     let marketPair = this.state.homeMarketPairData;  //交易对
-    setTimeout(() => {
-      console.log(marketPair)
-    }, 5000);
     return (
       <div className="market">
         <ul>

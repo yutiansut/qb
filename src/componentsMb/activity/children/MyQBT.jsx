@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import QRCode from "qrcode.react";
 import Popup from '../../../common/component/Popup/index'
@@ -51,7 +50,7 @@ export default class MyQBT extends exchangeViewBase {
 
   goactivity(tab) {
     this.props.changeTab(tab)
-    this.props.history.push(`/activity/index`)
+    this.props.history.push('/activity/invite')
   }
 
   render() {

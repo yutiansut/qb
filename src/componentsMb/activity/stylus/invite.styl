@@ -1,214 +1,171 @@
-@import "./variable.styl"
-
-.minvite{
-  padding: 0.2rem 0.12rem 0.12rem 0.12rem;
-  background $h5-activity-bg
-}
-/* 文案部分 */
-.minvite h3{
-  font-size: 0.16rem;
-  color: $h5-activity-font-active
-  line-height: 0.16rem;
-  margin-bottom: 0.16rem;
-}
-.minvite dl dd p{
-  font-size: 13px;
-  color: $h5-activity-font-light;
-  line-height: 13px;
-  margin-bottom: 0.16rem;
-}
-.minvite dl dt, .minvite dl dd h4, .minvite .welfare, .minvite .welfare span{
-  font-weight bold
-  font-size: 15px;
-  color: $h5-activity-font-normal;
-  line-height: 15px;
-  margin-bottom: 0.12rem;
-}
-.minvite .welfare{
-  font-weight: bold;
-  margin-bottom: 0.16rem;
-}
-.minvite .welfare i{
-  margin: 0 0.07rem;
-  color: $h5-activity-font-active;
-  font-weight bold
-}
-/* 海报部分 */
-.minvite .poster{
-  text-align: center;
-  margin 0 -.12rem
-  border-top .08rem solid $h5-activity-border
-}
-.minvite .poster .up{
-  position relative
-  padding-top: 0.24rem;
-  background: $invite-bg1 no-repeat 0 0;
-  background-size: 100% 100%;
-}
-.minvite .poster .up img{
-  width 100%
-  height auto
-}
-// .minvite .poster .down{
-//   height: 5.9rem;
-//   background: $invite-bg2 no-repeat 0 0;
-//   background-size: 100% 100%;
-// }
-// .minvite .poster .up .header{
-//   height: 0.55rem;
-//   line-height: 0.4rem;
-//   font-size: 0.2rem;
-//   color: #ff5142;
-//   margin-bottom: 0.12rem;
-//   font-weight: bold;
-//   background: $invite-header-bg no-repeat center center;
-//   background-size: auto 100%;
-// }
-// .minvite .poster .up .wait{
-//   height: 1.53rem;
-//   margin-bottom: 0.20rem;
-//   background: $invite-wait no-repeat center center;
-//   background-size: auto 100%;
-// }
-// .minvite .poster .up .code-text{
-//   line-height: 0.26rem;
-//   margin-bottom: 0.16rem;
-//   color: $colFFFF;
-//   font-size: 0.18rem;
-// }
-// .minvite .poster .up .code-text span{
-//   margin: 0 0.07rem;
-//   color: #fbf288;
-//   font-size: 0.23rem;
-// }
-.minvite .poster .up .qrcode{
-  position absolute
-  left 50%
-  top 27%
-  height: 1.36rem;
-}
-.minvite .poster .up .qrcode .qrcode-wrap{
-  position: absolute;
-  left: 50%;
-  margin-left: -0.75rem;
-  width: 1.4rem;
-  height: 1.4rem;
-  // border: 0.04rem solid $colFFFF;
-  border-radius: 0.1rem
-}
-.minvite .poster .up .qrcode .qrcode-wrap canvas {
-  display block
-  position absolute
-  left 5%
-  top 5%
-  width 100% !important
-  height 100% !important
-  border 0.05rem solid $h5-activity-font-normal
-}
-// .minvite .poster .down .crt-intro-header{
-//   height: 0.55rem;
-//   line-height: 0.4rem;
-//   font-size: 0.25rem;
-//   color: #7380f0;
-//   margin-bottom: 0.16rem;
-//   font-weight: bold;
-//   background: $invite-crt-bg no-repeat center center;
-//   background-size: auto 100%;
-// }
-// .minvite .poster .down .crt-intro-text1{
-//   padding:  0 0.12rem;
-//   text-align: left;
-//   font-size: 0.15rem;
-//   color: $colFFFF;
-//   line-height: 0.24rem;
-// }
-// .minvite .poster .down .crt-intro-text2{
-//   padding:  0 0.12rem;
-//   text-align: left;
-//   font-size: 0.16rem;
-//   font-weight: bold;
-//   letter-spacing: -0.01rem;
-//   color: #fbf288;
-//   margin-bottom: 0.36rem;
-// }
-// .minvite .poster .down .crt-func-header{
-//   height: 0.55rem;
-//   line-height: 0.4rem;
-//   font-size: 0.25rem;
-//   color: #7380f0;
-//   margin-bottom: 0.24rem;
-//   font-weight: bold;
-//   background: $invite-crt-func no-repeat center center;
-//   background-size: auto 100%;
-// }
-// .minvite .poster .down .crt-func-intro{
-//   text-align: left;
-//   padding: 0 0.12rem;
-//   color: $colFFFF;
-//   font-size: 0.16rem;
-//   margin-bottom: 0.15rem;
-// }
-// .minvite .poster .down .crt-func{
-//   width: 3.24rem;
-//   margin-left: 0.13rem;
-//   margin-bottom: 0.28rem;
-// }
-// .minvite .poster .down .crt-func h5{
-//   margin-bottom:0.05rem
-// }
-// .minvite .poster .down .crt-func li{
-//   box-sizing: border-box;
-//   float: left;
-//   width: 1.62rem;
-//   height: 0.7rem;
-//   background: $invite-value no-repeat 0.1rem center $colFFFF;
-//   background-size: 0.4rem auto;
-//   padding: 0.18rem 0 0 0.55rem;
-// }
-// .minvite .poster .down .crt-func li h5{
-//   font-size: 0.16rem;
-//   font-weight: bold;
-//   text-align: left;
-//   color: #636262;
-// }
-// .minvite .poster .down .crt-func li p{
-//   font-size: 0.12rem;
-//   color: #80807f;
-//   text-align: left;
-// }
-// .minvite .poster .down .crt-func .value,.minvite .poster .down .crt-func .usage{
-//   border-right: 0.01rem solid rgba(255,0,0,0.2);
-//   border-bottom: 0.01rem solid rgba(255,0,0,0.2)
-// }
-// .minvite .poster .down .crt-func .cost,.minvite .poster .down .crt-func .welfa{
-//   background-image: $invite-welfa;
-//   border-bottom: 0.01rem solid rgba(255,0,0,0.2)
-// }
-// .minvite .poster .down .crt-func .usage{
-//   background-image: $invite-usage;
-// }
-// .minvite .poster .down .crt-func .interesting{
-//   border-right: 0.01rem solid rgba(255,0,0,0.2);
-// }
-// .minvite .poster .down .crt-func .value {
-//   border-radius: 0.1rem 0 0 0;
-// }
-// .minvite .poster .down .crt-func .cost{
-//   background-image: $invite-cost;
-//   border-radius: 0 0.1rem 0 0;
-// }
-// .minvite .poster .down .crt-func .interesting{
-//   background-image: $invite-interesting;
-//   border-radius: 0 0 0 0.1rem;
-// }
-// .minvite .poster .down .crt-func .more{
-//   background-image: $invite-more;
-//   border-radius: 0 0 0.1rem 0;
-// }
-
-// .minvite .poster .down .coming-soon{
-//   font-size: 0.16rem;
-//   height: 0.16rem;
-//   line-height: 0.16rem;
-//   color: rgba(255,255,255,0.6)
-// }
+.activity-wrap
+  color $h5-activity-font-main
+  .activity-switch
+    width 100%
+    position fixed
+    top .45rem
+    left 0
+    z-index 100
+    background-color $h5-activity-bg-main
+    ul
+      li
+        float left
+        width 33.33%
+        padding .11rem 0
+        border-bottom .02rem solid transparent
+        font-size .16rem
+        line-height .22rem
+        color $h5-activity-font-dark
+        text-align center
+      li.active
+        color $h5-activity-font-theme
+        border-color $h5-activity-font-theme
+  .activity-content
+    margin-top .45rem
+    .activity-index
+      background-color $h5-activity-bg-main
+      .rule
+        padding 0 .12rem .08rem
+        border-bottom .08rem solid $h5-activity-line-section
+        p
+          font-size .16rem
+          padding .2rem 0
+          color $h5-activity-font-light
+        dt
+          font-size .15rem
+          margin-bottom .12rem
+          color $h5-activity-font-light
+        dd
+          font-size .14rem
+          color $h5-activity-font-dark
+          margin-bottom .2rem
+        li
+          margin-bottom .12rem
+          font-size .15rem
+          color $h5-activity-font-light
+          span
+            color $h5-activity-font-theme
+            margin 0 .05rem
+      .code
+        position relative
+        padding 0 .11rem
+        h1
+          font-size .24rem
+          margin .35rem 0 .33rem 0
+          text-align center
+        .poster
+          width 3.53rem
+          height 4.86rem
+        .qrcode
+          position absolute
+          top 2.75rem
+          left .98rem
+          width 1.8rem !important
+          height 1.8rem !important
+      .introduce
+        padding 0 .12rem
+        h2
+          font-size .2rem
+          color $h5-activity-font-theme
+          text-align center
+          margin .56rem 0 .32rem 0
+        p
+          font-size .14rem
+          line-height .24rem
+        p.note
+          color $h5-activity-font-warning
+      .value
+        margin-bottom .26rem
+        h2
+          font-size .2rem
+          color $h5-activity-font-theme
+          text-align center
+          margin .56rem 0 .32rem 0
+        p
+          padding 0 .12rem
+          font-size .14rem
+          line-height .2rem
+        .feature
+          width 3.51rem
+          display flex
+          justify-content space-between
+          flex-wrap wrap
+          margin .2rem auto
+          .feature-item
+            padding .24rem .12rem
+            box-shadow 0 0 5px 0 rgba(0,0,0,.3)
+            div
+              width 1.5rem
+              height .41rem
+              img
+                width .41rem
+                height .41rem
+                float left
+                margin-right 10px
+              h3
+                font-size .15rem
+                line-height .18rem
+                margin-bottom .06rem
+              p
+                padding 0
+                font-size .12rem
+                line-height .17rem
+                color $h5-activity-font-dark
+      .invite
+        width 100%
+        padding .15rem 0
+        background-color $h5-activity-font-theme
+        font-size .15rem
+        color $h5-activity-font-main
+        text-align center
+    .activity-invite
+      ul
+        li
+          padding .13rem .12rem
+          border-bottom .01rem solid $h5-activity-line-list
+          line-height .2rem
+          color $h5-activity-font-light
+          .user
+            float left
+            font-size .15rem
+          .mount
+            float right 
+            font-size .15rem
+    .activity-board
+      ul
+        li
+          padding .13rem .12rem
+          border-bottom .01rem solid $h5-activity-line-list
+          img
+            float left
+            height .2rem
+            margin-right .12rem
+          span
+            font-size .15rem
+            line-height .2rem
+            color $h5-activity-font-light
+          .user
+            float left
+          .mount
+            float right
+          .rank
+            float left
+            display block
+            width .22rem
+            height .2rem
+            margin-right .12rem
+            font-size .14rem
+            text-align center
+    .ranking
+      width 100%
+      padding .21rem .2rem
+      border-bottom .01rem solid $h5-activity-line-list
+      box-sizing border-box
+      p
+        width 100%
+        height .38rem
+        border-radius .19rem
+        font-size .15rem
+        line-height .38rem
+        text-align center
+        background-color $h5-activity-font-theme
