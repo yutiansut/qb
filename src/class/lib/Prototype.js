@@ -91,7 +91,10 @@ Number.prototype.toFixedWithoutUp = function (length) {
   let numberCache = this.toFixed(length+1)
   return Number(numberCache.substring(0, numberCache.toString().length - 1))
 }
-
+Number.prototype.formatTurnover = function (){
+  let turnover = this >= 1000 ? (this.toFixed(2)) : (this >= 1 ? this.toFixed(4) : this.toFixed(8));
+  return Number(turnover)
+}
 //添加前缀后缀函数，分隔符，补零函数
 Number.prototype.formatFixStyle = function (para) {
   // console.log('formatFixStyle', para.name)

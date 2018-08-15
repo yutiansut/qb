@@ -5,24 +5,37 @@
   align-items center
   justify-content space-around
   //margin: 0.17rem 0.05rem 0.1rem 0.16rem;
-  img
-    width .34rem
-    height .34rem
-    //margin-right .06rem
-  h2
-    font-size .28rem
-    color $trade-font-title
+  .trade-pair-deal-info
+    display flex
+    align-items center
+    img
+      width .34rem
+      height .34rem
+      margin-right .1rem
+    b
+      font-size .24rem
+      color $trade-font-title
+      margin-right .02rem
     //padding 0 .01rem
-  span
-    a
-      color $trade-market-materials
-      font-size .11rem
+    em
+      font-size .16rem
+      color $trade-font-title
+      margin-right .26rem
+    span
+      a
+        color $trade-market-materials
+        font-size .11rem
+  .trade-pair-deal-items
+    p
+      margin-bottom .08rem
+    div
+      color $trade-font-normal
+    .market-up
+      color $trade-change-positive
+    .market-down
+      color $trade-change-negative
 .trade-pair-deal-price
   width 100%
   text-align center
   color $trade-font-normal
   font-size .16rem
-.market-up
-  color $trade-change-positive
-.market-down
-  color $trade-change-negative

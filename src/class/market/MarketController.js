@@ -274,7 +274,6 @@ export default class MarketController extends ExchangeControllerBase {
       return
     //改变deal模块中的信息
     let tradePairMsg = this.store.state.allPairData.filter(v => v.tradePairName === this.store.state.tradePair);
-    console.log('1111111111111',tradePairMsg)
     let dealMsg = {
         tradePair: this.store.state.tradePair,
         coinIcon: tradePairMsg[0].coinIcon,
@@ -292,8 +291,8 @@ export default class MarketController extends ExchangeControllerBase {
         volume: tradePairMsg[0].volume,
         priceY: tradePairMsg[0].priceY,
         turnover: tradePairMsg[0].turnover,
-        marketName: tradePairMsg[0].marketName,
-        coinName: tradePairMsg[0].coinName,
+        marketName: tradePairMsg[0].marketName.toUpperCase(),
+        coinName: tradePairMsg[0].coinName.toUpperCase(),
       };
     this.TradeDealController && this.TradeDealController.setPairMsg(dealMsg);
     this.TradeOrderListController && this.TradeOrderListController.getNewPrice(dealMsg,flag)
