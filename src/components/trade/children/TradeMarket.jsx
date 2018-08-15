@@ -127,7 +127,7 @@ export default class TradeMarket extends ExchangeViewBase {
                     onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
                   <td>{v.tradePairName.toUpperCase()}</td>
                   <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCNY).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceUSD).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
-                  <td>{Number(v.rise).toPercent()}</td>
+                  <td className={`${v.rise < 0 ? 'down-td' : 'up-td'}`}>{Number(v.rise).toPercent()}</td>
                   {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
                     <img src={v.isFavorite ? this.$imagesMap.$trade_star :  this.$imagesMap.$trade_star_select} alt=""/>
                   </td>) || null}

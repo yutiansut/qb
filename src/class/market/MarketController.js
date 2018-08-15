@@ -36,40 +36,15 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 切换市场
   async changeMarket(v) {
-    // console.log('changeMarket', v)
+    console.log('changeMarket', v)
     this.store.setSelecedMarket(v);
     this.store.setSort(['turnover'], 0);
-    let homeMarketPairData = await this.store.selectMarketData();
-    homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
-    this.view.setState({
-      // searchValue: '',
-      sortIndex: 0,
-      sortImg: this.view.$imagesMap.$rank_normal,
-      searchRealt: [],
-      collectActive: false,
-      market: v,
-      // unitsType: '',
-      homeMarketPairData,
-      sortIndexMobile: 0
-    });
-    // if(this.view.state.query) {
-    //   console.log('this.view.state.query', this.view.state.query)
-    //   let queryValue = homeMarketPairData.find(v => v.tradePairName === this.view.state.query)
-    //   let priceLimitValue = queryValue.priceAccuracy;
-    //   let volumeLimitValue = queryValue.volumeAccuracy;
-    //   this.querySelectPair(this.view.state.query,priceLimitValue,volumeLimitValue)
-    //   this.tradePairChange(homeMarketPairData[0]);
-    //   return
-    // }
-    // console.log('homeMarketPairData',homeMarketPairData)
-   
-    // console.log('市场2', this.view.state, v, this.store.state.tradePair, this.store.state.PriceUnit, this.view.state.PriceUnit,)
+    this.updateMarketAll([], 3)
   }
 
   // 点击收藏区
   collectMarket() {
     let homeMarketPairData = this.getCollectArr()
-    // homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
     this.store.setSelecedMarket('收藏区');
     this.store.setHomeMarketPairData(homeMarketPairData);
     this.store.setSort([], 0)
@@ -83,11 +58,6 @@ export default class MarketController extends ExchangeControllerBase {
       homeMarketPairData,
       sortIndexMobile: 0
     });
-    // if(!homeMarketPairData.length){
-    //   return
-    // }
-    
-    // this.tradePairChange(homeMarketPairData[0]);
   }
 
   // 添加/取消收藏
@@ -174,14 +144,21 @@ export default class MarketController extends ExchangeControllerBase {
     market && this.store.setSelecedMarket(market);
     //根据市场从交易对池中选择该市场中的交易对
     let homeMarketPairData = await this.store.selectMarketData();
-    homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
-  
-    type > 2 && (this.store.state.tradePair = selectPair || homeMarketPairData[0].tradePairName);
+    // 创新／主流分区
+    let newMarketPair = [], mainMarketPair = []
+
+    newMarketPair = this.sort(homeMarketPairData.filter(v=>v.isNew), this.store.sortValue, this.store.ascending)
+    mainMarketPair = this.sort(homeMarketPairData.filter(v=>!v.isNew), this.store.sortValue, this.store.ascending)
+
+    console.log(newMarketPair, mainMarketPair)
+    // homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
+
+    type > 2 && (this.store.state.tradePair = selectPair || mainMarketPair[0].tradePairName);
     this.view.setState({
-      homeMarketPairData, market : this.store.selecedMarket, marketDataHandle: this.store.marketDataHandle
+      market : this.store.selecedMarket, marketDataHandle: this.store.marketDataHandle, newMarketPair, mainMarketPair
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
     // console.log('type', type);
-    (type === 3 )  && this.view.name === 'tradeMarket' && this.tradePairChange(homeMarketPairData.find(v=>v.tradePairName===this.store.state.tradePair));
+    (type === 3 )  && this.view.name === 'tradeMarket' && this.tradePairChange(this.store.allPair.find(v=>v.tradePairName===this.store.state.tradePair));
   }
 
   //更新recommend数据

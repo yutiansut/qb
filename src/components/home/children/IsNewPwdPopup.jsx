@@ -6,6 +6,8 @@ import {
 import exchangeViewBase from "../../ExchangeViewBase";
 import Button from '../../../common/component/Button/index.jsx'
 import Input from '../../../common/component/Input/index.jsx'
+import RemindPopup from '../../../common/component/Popup/index.jsx'
+
 import {Regular} from "../../../core";
 
 export default class IsNewPwdPopup extends exchangeViewBase {
@@ -13,12 +15,14 @@ export default class IsNewPwdPopup extends exchangeViewBase {
     super(props);
     this.state = {
       popupShow: true,
-      to: '/home',
       pwdValue: "",
       againPwdValue: "",
       errPwd: "",
       errAgainPwd: "",
       setPassFlag: true, // 设置／绑定防连点
+      remindPopup: false,
+      popType: 'tip1',
+      popMsg: '',
     }
     const {controller} = props
     //绑定view
@@ -118,12 +122,19 @@ export default class IsNewPwdPopup extends exchangeViewBase {
                         className={`${this.canClick() ? 'can-click' : ''}`}
                         disable={this.canClick() ? false : true}
                         onClick={() => this.setLoginPass('', this.state.pwdValue, 0)}/>
+              </li>
+              <li className="set-li clearfix">
+                <Link to="/user">{this.intl.get("home-setPwdGo")}</Link>
                 <i onClick={() => {this.setState({popupShow: false})}}>{this.intl.get("home-setPwdJump")}</i>
               </li>
-              <li><Link to="/user">{this.intl.get("home-setPwdGo")}</Link></li>
             </ul>
           </div>
         </div>}
+        {this.state.remindPopup && <RemindPopup
+          type={this.state.popType}
+          msg={this.state.popMsg}
+          autoClose = {true}
+          onClose={() => {this.setState({ remindPopup: false });}}/>}
       </div>
     )
   }

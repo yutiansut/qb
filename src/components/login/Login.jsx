@@ -90,7 +90,8 @@ export default class Login extends exchangeViewBase {
 
   changeUser(value) {
     this.setState({userInput: value});
-    let reg = Regular('regEmail', this.state.userInput)
+    let reg = Regular('regEmail', value)
+    // console.log(1223233, reg)
     if (reg) {
       this.setState({userType: 1})
     } else {

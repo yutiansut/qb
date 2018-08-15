@@ -84,9 +84,9 @@ export default class Footer extends ExchangeViewBase {
         </div>
         <div>
           <ol className="clearfix">
-            <li><a href="https://twitter.com/QB_Exchange" target="_blank"><img src="/static/img/footer/twitter_new.svg" alt="" /></a></li>
-            <li><a href="https://www.facebook.com/qbexchange/" target="_blank"><img src="/static/img/footer/FaceBook_new.svg" alt="" /></a></li>
-            <li><a href="https://weibo.com/u/6596593083/home?wvr=5" target="_blank"><img src="/static/img/footer/wb.svg" alt="" /></a></li>
+            <li><a href="https://twitter.com/QB_Exchange" target="_blank"><img src={this.$imagesMap.$footer_twitter} alt="" /></a></li>
+            <li><a href="https://www.facebook.com/qbexchange/" target="_blank"><img src={this.$imagesMap.$footer_faceBook} alt="" /></a></li>
+            <li><a href="https://weibo.com/u/6596593083/home?wvr=5" target="_blank"><img src={this.$imagesMap.$footer_wb} alt="" /></a></li>
             {/*<li><img src="/static/img/footer/fill.svg" alt="" /></li>*/}
             <li><img src={this.$imagesMap.$footer_wechat} alt="" className="wx-img" /><i className="wx-qrCode"></i></li>
             <li><a href="https://t.me/QB_ExchangeEN" target="_blank"><img src={this.$imagesMap.$footer_telegram} alt="" /></a></li>

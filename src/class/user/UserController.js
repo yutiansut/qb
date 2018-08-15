@@ -252,10 +252,12 @@ export default class UserController extends ExchangeControllerBase {
       setPassFlag: true
     })
     if (result === null) {
-      this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})});
+      this.view.state.userInfo && this.view.setState({userInfo: Object.assign(this.view.state.userInfo, {loginPwd: 0})});
       this.store.state.userInfo.loginPwd = 0
       // 修改密码成功跳转至...
       this.view.state.to && this.view.history.push(this.view.state.to);
+      // 首页登录密码三秒后消失
+      this.view.state.popupShow && (setTimeout(()=>{this.view.setState({popupShow: false})}, 3000))
     }
     // console.log('设置密码', result)
   }

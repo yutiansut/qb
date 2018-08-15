@@ -226,6 +226,7 @@ export default class MarketStore extends ExchangeStoreBase {
     return this.state.homeMarketPairData
   }
 
+
   getRecommendCurrency() {
     // console.log('getData recommendCurrency', this.WebSocket)
     // this.WebSocket.general.emit('recommendCurrency', {test:'test'})
@@ -326,6 +327,7 @@ export default class MarketStore extends ExchangeStoreBase {
         marketName: v.mn,
         coinIcon : v.i,
         priceAccuracy: v.pb,
+        isNew: v.new,
         volumeAccuracy: v.vb
       }
     }) || []

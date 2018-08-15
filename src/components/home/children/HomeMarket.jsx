@@ -15,6 +15,8 @@ export default class HomeMarket extends ExchangeViewBase {
       sortImg: this.$imagesMap.$rank_normal,
       searchRealt: [],
       collectActive: false, // 控制收藏区的active
+      newMarketPair: [],
+      mainMarketPair: [],
       // collectImg: "/static/img/star_select.svg",
       // collectType: 0
       marketTableHead: [
@@ -42,6 +44,37 @@ export default class HomeMarket extends ExchangeViewBase {
     this.joinHome = controller.joinHome.bind(controller) // 加入房间
     this.clearRoom = controller.clearRoom.bind(controller) //推出房间
     this.clearHistory = controller.clearHistory.bind(controller) //推出房间
+    this.marketContent = this.marketContent.bind(this)
+  }
+
+  marketContent(v, index) { // 市场内容
+    return (
+      <tr key={index}>
+        {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
+        {this.props.controller.token && <td>
+          <img src={`${v.isFavorite ? this.$imagesMap.$home_star_sel : this.$imagesMap.$home_star_nor}`} onClick={e => this.addCollect(v, index, e)}/>
+        </td> || null}
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{v.tradePairName.toUpperCase()}</NavLink></td>
+        <td>
+          <NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>
+            <span className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/
+            <span className="second-span">{this.props.controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({number: 'legal', style: {name: 'cny'}}) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span>
+          </NavLink>
+        </td>
+        <td><NavLink to={{thname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
+        <td>
+          <NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>
+            <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span>
+          </NavLink>
+        </td>
+        <td>
+          <NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>
+            {/* 宽高等样式在homeMakt.styl里设置 */}
+            <ReactTrend ratio={5} trends={v.points || []}/></NavLink>
+        </td>
+      </tr>
+    )
   }
 
   componentDidMount() {
@@ -59,7 +92,8 @@ export default class HomeMarket extends ExchangeViewBase {
 
   render() {
     const {controller} = this.props;
-    // console.log(1234, this.state.homeMarketPairData)
+    let newMarketPairLength = this.filte(this.state.newMarketPair, this.state.searchValue).length,
+        mainMarketPairLength = this.filte(this.state.mainMarketPair, this.state.searchValue).length
     return (
       <div className='home-market'>
         <div className='home-market-con'>
@@ -90,9 +124,7 @@ export default class HomeMarket extends ExchangeViewBase {
               }}/>
             <img src={this.$imagesMap.$home_marketBtn} alt=""/>
           </div>
-          
         </div>
-
         <table>
           <thead align="left">
           <tr>
@@ -108,66 +140,21 @@ export default class HomeMarket extends ExchangeViewBase {
             <th>{this.intl.get('market-change7D')}</th>
           </tr>
           </thead>
-          <tbody>
-          {this.filte(this.state.homeMarketPairData, this.state.searchValue).length ? this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-            // console.log(12345, this.filte(this.state.homeMarketPairData, this.state.searchValue))
-            return (
-              <tr key={index}>
-                {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
-                {controller.token && <td>
-                  <img src={`${v.isFavorite ? this.$imagesMap.$home_star_sel : this.$imagesMap.$home_star_nor}`} onClick={e => this.addCollect(v, index, e)}/>
-                </td> || null}
-                <td><NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: {pairName: v.tradePairName}
-                  }}
-                >{v.tradePairName.toUpperCase()}</NavLink></td>
-                <td><NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: {pairName: v.tradePairName}
-                  }}
-                ><span
-                  className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{Number(v.price).format({number: 'digital'}) || 0}</span>/<span className="second-span">
-                  {controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({
-                    number: 'legal',
-                    style: {name: 'cny'}
-                  }) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span></NavLink></td>
-                <td><NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: {pairName: v.tradePairName}
-                  }}
-                >{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
-                <td><NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: {pairName: v.tradePairName}
-                  }}
-                >{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
-                <td><NavLink
-                    to={{
-                      pathname: `/trade`,
-                      query: {pairName: v.tradePairName}
-                    }}
-                  >
-                    <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span></NavLink>
-                </td>
-                <td><NavLink
-                  to={{
-                    pathname: `/trade`,
-                    query: {pairName: v.tradePairName}
-                  }}
-                >
-                  {/* 宽高等样式在homeMakt.styl里设置 */}
-                  <ReactTrend ratio={5} trends={v.points || []}/></NavLink>
-                </td>
-              </tr>
-            )
-          }) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
-          </tbody>
+          {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || mainMarketPairLength) && <tbody className="main-tbody">
+            <tr className="zone-name"><td colSpan={controller.token ? 7 : 6}>主流区</td></tr>
+            {mainMarketPairLength ? this.filte(this.state.mainMarketPair, this.state.searchValue).map((v, index) =>
+               this.marketContent(v, index)
+            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
+          </tbody> || null}
+
+          {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || newMarketPairLength) && <tbody>
+            <tr className="zone-name new-zone-name"><td colSpan={controller.token ? 7 : 6}>创新区</td></tr>
+            {newMarketPairLength ? this.filte(this.state.newMarketPair, this.state.searchValue).map((v, index) =>
+              this.marketContent(v, index)
+            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
+          </tbody> || null}
         </table>
+
         </div>
       </div>
     )

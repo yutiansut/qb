@@ -160,7 +160,7 @@ export default class Pricing extends exchangeViewBase {
             info: this.intl.get('help-per-day')
           },
           {
-            op: `BTC ${this.intl.get('Deposit')}`,
+            op: `BTC ${this.intl.get('deposit')}`,
             score: `+(${this.intl.get('help-usd-equivalent')}*0.01)`,
             info: this.intl.get('help-rounded-up')
           },

@@ -15,6 +15,7 @@ export default class ExchangeViewBase extends ViewBase {
       $logo_footer: "/static/logo/logo_footer.svg", // 底部
       $footer_twitter: "/static/web/footer/twitter_new.svg",
       $footer_faceBook: "/static/web/footer/FaceBook_new.svg",
+      $footer_wb: "/static/web/footer/wb.svg",
       $footer_wechat: "/static/web/footer/wechat.svg",
       $footer_telegram: "/static/web/footer/Telegram_new.svg",
       $home_marketBtn: "/static/web/home/home_search_btn.svg", // 首页
