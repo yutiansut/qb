@@ -105,6 +105,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
     this.store.updateAllPairListFromData(marketAll, 0)
+    console.log('111112', this.store.allPair, marketAll)
     //请求收藏列表
     let collectIdArr = []
     if (this.userController.userToken) {
@@ -220,7 +221,9 @@ export default class MarketController extends ExchangeControllerBase {
     this.store.setSort(sortValue, v.type)
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
-      homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, this.store.state.ascending),
+      // homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, this.store.state.ascending),
+      newMarketPair: this.sort(sortArray.filter(v=>v.isNew), this.store.state.sortValue, this.store.state.ascending),
+      mainMarketPair: this.sort(sortArray.filter(v=>!v.isNew), this.store.state.sortValue, this.store.state.ascending),
       sortImg: imgArr[v.type],
       sortIndex: index,
       tradeSortImg: tradeSortImg[v.type],

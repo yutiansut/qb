@@ -243,8 +243,6 @@
       thead
         tr
           color $home-title-table
-        th:nth-of-type(1)
-          padding-left .3rem
         .sort-img-li
           cursor pointer
           img
@@ -254,7 +252,14 @@
             top .03rem
             left .06rem
         th
+          text-align right
           font-weight 100
+          &.left-th
+            text-align left
+          &:first-child
+            padding-left .2rem
+          &:last-child
+            padding-right .2rem
       tbody
         &.main-tbody
           margin-bottom .36rem
@@ -263,6 +268,7 @@
           &.zone-name
             border-bottom 1px solid $home-line-zone-title
             td
+              padding-left .34rem
               font-size .2rem
               letter-spacing 0.08px
               color $home-font-marketTitle
@@ -287,11 +293,13 @@
             &:hover
               background $home-bg-marketActive
               box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.30)
-        td:first-child
-          padding-left .3rem
         td
           font-weight 100
           color $home-font-table
+          &:first-child
+            padding-left .2rem
+          &:last-child
+            padding-right .2rem
           span
             font-weight 100
             color $home-font-table

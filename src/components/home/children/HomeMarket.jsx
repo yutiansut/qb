@@ -27,12 +27,12 @@ export default class HomeMarket extends ExchangeViewBase {
       //   {name: `${this.intl.get('market-change')}`, sortValue: ['rise'], type: 1, sortDefault: 'turnover'},
       // ],
       marketTableHead: [
-        {name: `${this.intl.get('market-markets')}`, sortValue: ''},
-        {name: `${this.intl.get('market-lastPrice')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
-        {name: `24H${this.intl.get('market-change')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
-        {name: `24H${this.intl.get('market-priceHighest')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
-        {name: `24H${this.intl.get('market-priceLowest')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
-        {name: `24H${this.intl.get('market-trade-volume')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover'},
+        {name: `${this.intl.get('market-markets')}`, sortValue: '', class: 'left-th'},
+        {name: `${this.intl.get('market-lastPrice')}`, sortValue: ['price'], type: 1, sortDefault: 'turnover', class: 'left-th'},
+        {name: `24H${this.intl.get('market-change')}`, sortValue: ['rise'], type: 1, sortDefault: 'turnover', class: 'right-th'},
+        {name: `24H${this.intl.get('market-priceHighest')}`, sortValue: ['highestPrice'], type: 1, sortDefault: 'turnover', class: 'right-th'},
+        {name: `24H${this.intl.get('market-priceLowest')}`, sortValue: ['lowestPrice'], type: 1, sortDefault: 'turnover', class: 'right-th'},
+        {name: `24H${this.intl.get('total')}`, sortValue: ['turnover'], type: 1, sortDefault: 'turnover', class: 'right-th'},
 
         // {name: `${this.intl.get('total')}`, sortValue: ['turnover'], type: 1, sortDefault: 'turnover'},
         // {name: `${this.intl.get('volume')}`, sortValue: ['volume'], type: 1, sortDefault: 'turnover'},
@@ -63,7 +63,7 @@ export default class HomeMarket extends ExchangeViewBase {
     return (
       <tr key={index} className="table-data">
         {/*<td onClick={value => this.addCollect(v, index)}><img src={this.state.collectIndex === index ? this.state.collectImg :  "/static/img/star_select.svg"} alt=""/></td>*/}
-        {this.props.controller.token && <td>
+        {this.props.controller.token && <td className="left-td">
           <img src={`${v.isFavorite ? this.$imagesMap.$home_star_sel : this.$imagesMap.$home_star_nor}`} onClick={e => this.addCollect(v, index, e)}/>
         </td> || null}
         <td className="left-td"><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{v.tradePairName.toUpperCase()}</NavLink></td>
@@ -73,13 +73,14 @@ export default class HomeMarket extends ExchangeViewBase {
             <span className="second-span">{this.props.controller.language === 'zh-CN' && Number(Number(v.priceCN).multi(v.price) || 0).format({number: 'legal', style: {name: 'cny'}}) || Number(Number(v.priceEN).multi(v.price) || 0).format({number: 'legal', style: {name: 'usd'}})}</span>
           </NavLink>
         </td>
-        <td><NavLink to={{thname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
-        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
         <td>
           <NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>
             <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span>
           </NavLink>
         </td>
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.highestPrice) && Number(v.highestPrice).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.lowestPrice) && Number(v.lowestPrice).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
+        <td><NavLink to={{thname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
         {/*<td>*/}
           {/*<NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>*/}
             {/*/!* 宽高等样式在homeMakt.styl里设置 *!/*/}
@@ -138,12 +139,12 @@ export default class HomeMarket extends ExchangeViewBase {
           </div>
         </div>
         <table>
-          <thead align="left">
+          <thead>
           <tr>
-            {controller.token && <th>{this.intl.get('market-favorite')}</th> || null}
+            {controller.token && <th className="left-th">{this.intl.get('market-favorite')}</th> || null}
             {this.state.marketTableHead.map((v, index) => {
               return (<th onClick={this.pairSort.bind(this, v, index)} key={index}
-                          className={`${v.sortValue ? 'sort-img-li' : ''}`}>
+                          className={`${v.sortValue ? 'sort-img-li' : ''} ${v.class}`}>
                 {v.name}
                 <img src={this.state.sortIndex === index ? this.state.sortImg : this.$imagesMap.$rank_normal} alt=""
                      className={`${v.sortValue ? '' : 'hide'}`}/>
