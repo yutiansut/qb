@@ -1,9 +1,11 @@
 @import "./variable.styl"
 
 .login-wrap-mb
+  position relative
   width 100%
-  padding 0 .16rem
-  margin-top .36rem
+  min-height: calc(100vh - 0.45rem)
+  padding .36rem .16rem 0
+  // margin-top .36rem
   font-family PingFangSC-Medium
   .hide
     display none !important
@@ -16,7 +18,7 @@
   .tab-ul
     width 2.6rem
     height 0
-    position fixed
+    position absolute
     bottom 0
     left 50%
     margin-left -1.3rem
@@ -91,6 +93,7 @@
   .agree
     display block
     margin-top -.15rem
+    padding-bottom: .4rem
     color $h5-login-font-title
     text-align justify
     img
