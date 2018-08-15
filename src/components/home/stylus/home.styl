@@ -288,8 +288,12 @@
           &.table-data
             td
               text-align right
+              padding-right .2rem
               &.left-td
                 text-align left
+                padding-right 0
+              &:last-child
+                padding-right .4rem
             &:hover
               background $home-bg-marketActive
               box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.30)
@@ -298,8 +302,6 @@
           color $home-font-table
           &:first-child
             padding-left .2rem
-          &:last-child
-            padding-right .2rem
           span
             font-weight 100
             color $home-font-table

@@ -123,7 +123,7 @@ export default class extends exchangeViewBase {
                 <div className="trade-pair-msg">
                   <TradePairDeal controller={TradeDealController} />
                 </div>
-              <div>
+              <div className="clearfix">
                 <div className='trade-pair-market'>
                   <TradeMarket controller={TradeMarketController} location={this.props.location}/>
                 </div>

@@ -1,7 +1,5 @@
 import ExchangeViewBase from '../../ExchangeViewBase'
 import React, {Component} from "react";
-import '../stylus/tradeMarket.styl'
-
 
 export default class TradeMarket extends ExchangeViewBase {
   constructor(props) {
@@ -11,6 +9,8 @@ export default class TradeMarket extends ExchangeViewBase {
       query:'',
       searchInput: false,
       searchValue: '',
+      mainMarketPair: [], // 主流区数据
+      newMarketPair: [],  // 创新区数据
       sortIndex: -1,
       tradeSortImg: this.$imagesMap.$trade_rank,
       collectActive: false, // 控制收藏区的active
@@ -37,6 +37,7 @@ export default class TradeMarket extends ExchangeViewBase {
     this.joinHome = controller.joinHome.bind(controller) // 加入房间
     this.clearRoom = controller.clearRoom.bind(controller) //推出房间
     this.clearHistory = controller.clearHistory.bind(controller) //推出房间
+    this.marketContent = this.marketContent.bind(this)
     // this.getBank = controller.getBank.bind(controller) //获取汇率
   }
 
@@ -57,6 +58,21 @@ export default class TradeMarket extends ExchangeViewBase {
     this.clearRoom()
   }
 
+  marketContent(v, index) { // 市场内容
+    return (
+      <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
+          onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
+        <td>{v.tradePairName.toUpperCase()}</td>
+        <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCNY).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceUSD).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
+        <td className={`${v.rise < 0 ? 'down-td' : 'up-td'}`}>{Number(v.rise).toPercent()}</td>
+        {this.props.controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
+          <img src={v.isFavorite ? this.$imagesMap.$trade_star :  this.$imagesMap.$trade_star_select} alt=""/>
+        </td>) || null}
+        <td className="pop-children rightpop-children trade-remind">{`${this.intl.get('market-trade-volume')}`}：{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
+      </tr>
+    )
+  }
+
   pairChange(v, e) {
     e.preventDefault();
     this.tradePairChange(v)
@@ -68,18 +84,19 @@ export default class TradeMarket extends ExchangeViewBase {
   }
   onEnter(e) { // 搜索回车选中事件
     if (e.nativeEvent.keyCode !== 13) return;
-
-    let result = this.filte(this.state.homeMarketPairData, this.state.searchValue)
+    let resultLength = this.filte(this.state.mainMarketPair, this.state.searchValue).length
+    let result = resultLength ? this.filte(this.state.mainMarketPair, this.state.searchValue) : this.filte(this.state.newMarketPair, this.state.searchValue)
     this.setState({
       searchInput: false,
       searchValue: ''
     })
-    // console.log()
     this.pairChange(result[0], e)
   }
 
   render() {
     const {controller} = this.props;
+    let newMarketPairLength = this.filte(this.state.newMarketPair, this.state.searchValue).length,
+        mainMarketPairLength = this.filte(this.state.mainMarketPair, this.state.searchValue).length
     return (
       <div className='trade-market'>
         <div className='trade-market-list'>
@@ -120,22 +137,23 @@ export default class TradeMarket extends ExchangeViewBase {
                 })}
               </tr>
             </thead>
-            <tbody>
-            {this.filte(this.state.homeMarketPairData, this.state.searchValue).map((v, index) => {
-              return (
-                <tr key={index} className={`pair-items${this.state.tradePair === v.tradePairName ? '-active' : ''} pop-parent`}
-                    onClick={this.pairChange.bind(this, v)} style={{cursor: 'pointer'}}>
-                  <td>{v.tradePairName.toUpperCase()}</td>
-                  <td className={`${v.updown && (v.updown > 0 && "market-up" || "market-down")}`}>{this.state.unitsType === 'CNY' && Number(v.priceCNY).format({number:'legal',style:{name:'cny'}}) || (this.state.unitsType === 'USD' && Number(v.priceUSD).format({number:'legal',style:{name:'usd'}}) || Number(v.price).format({number:'digital'})) || 0 }</td>
-                  <td className={`${v.rise < 0 ? 'down-td' : 'up-td'}`}>{Number(v.rise).toPercent()}</td>
-                  {controller.token && (<td onClick={e => this.addCollect(v, index, e)} className="img-td">
-                    <img src={v.isFavorite ? this.$imagesMap.$trade_star :  this.$imagesMap.$trade_star_select} alt=""/>
-                  </td>) || null}
-                  <td className="pop-children rightpop-children trade-remind">{`${this.intl.get('market-trade-volume')}`}：{Number(v.volume) && Number(v.volume).formatFixNumberForAmount(v.priceCN) || 0}</td>
-                </tr>
-              )
-            })}
-            </tbody>
+            {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || mainMarketPairLength) && <tbody className="main-tbody">
+            <tr className="zone-name">
+              <td colSpan={controller.token ? 4 : 3}><p>主流区</p></td>
+            </tr>
+            {mainMarketPairLength ? this.filte(this.state.mainMarketPair, this.state.searchValue).map((v, index) =>
+              this.marketContent(v, index)
+            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 4 : 3}>{this.intl.get('noDate')}</td></tr>}
+            </tbody> || null}
+
+            {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || newMarketPairLength) && <tbody>
+            <tr className="zone-name new-zone-name">
+              <td colSpan={controller.token ? 4 : 3}><p>创新区</p></td>
+            </tr>
+            {newMarketPairLength ? this.filte(this.state.newMarketPair, this.state.searchValue).map((v, index) =>
+              this.marketContent(v, index)
+            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 4 : 3}>{this.intl.get('noDate')}</td></tr>}
+            </tbody> || null}
           </table>
         </div>
       </div>

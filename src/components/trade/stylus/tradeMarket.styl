@@ -1,7 +1,7 @@
 //@import "../../../common/css/variable.styl"
 .trade-market
   width 2.92rem
-  height 3.09rem
+  height 100%
   background $trade-model-bg
   float left
   color $trade-font-title
@@ -115,13 +115,36 @@
       td
         font-size .11rem
         color $trade-font-thead
-        padding .11rem 0
+        padding .14rem 0
         img
           position relative
           top .02rem
           width .1rem
           height .1rem
     tbody
+      .zone-name
+        margin 2rem
+        p
+          margin-left .16rem
+          margin-right .1rem
+          padding 0 0 .05rem .06rem
+          color $trade-font-normal
+          font-size .12rem
+          border-bottom 1px solid $trade-market-lineTitle
+          &:before
+            position relative
+            top 0
+            left -.06rem
+            display inline-block
+            content ""
+            width .02rem
+            height .1rem
+            background $trade-market-lineTitle
+        td:first-child
+          padding-left 0
+      .new-zone-name
+        td
+          padding-top .2rem
       tr
         height .21rem
         line-height .21rem
@@ -142,10 +165,10 @@
         .img-td
           cursor pointer
     tr
-      td:nth-child(1)
-        padding-left .10rem
-      // td:last-child
-      //   padding-right .01rem
+      td:first-child
+        padding-left .16rem
+      td:nth-last-child(2)
+        padding-right .1rem
     .trade-remind
       left 3rem
       z-index 99
