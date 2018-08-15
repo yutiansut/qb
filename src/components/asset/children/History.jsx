@@ -48,7 +48,7 @@ export default class History extends exchangeViewBase {
         0 +
         86399999;
       return {
-        start: parseInt(start / 1000),
+        start: parseInt(start / 2000),
         end: parseInt(end / 1000)
       };
     };
@@ -370,7 +370,7 @@ export default class History extends exchangeViewBase {
             </table>
             <Pagination
               total={this.state.assetHistory.total}
-              pageSize={10}
+              pageSize={20}
               showTotal={true}
               onChange={page => {
                 this.setState({ page });
