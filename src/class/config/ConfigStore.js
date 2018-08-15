@@ -24,6 +24,9 @@ export default class UserStore extends ExchangeStoreBase {
     super("config", "general");
     let language = this.getQuery("language") === '0' ? "zh-CN" : this.getQuery("language") === '1' ? "en-US" : undefined;
     language && this.Storage.language.set(language);
+    if(window.location.pathname === '/'){
+      this.getQuery("c") && this.Storage.c.set(this.getQuery("c"))
+    }
     this.state = {
       nameCny: EXCHANGE_NAME_CNY,
       nameUsd: EXCHANGE_NAME_USD,
@@ -54,7 +57,7 @@ export default class UserStore extends ExchangeStoreBase {
     let result = await this.Proxy.activityState();
     this.state.activityState = result && result.qe;
   }
-  
+
   async checkVersion() {
     let result = await this.Proxy.checkVersion({
       app:1,
@@ -62,11 +65,11 @@ export default class UserStore extends ExchangeStoreBase {
     });
     this.state.versionAndroidInfo = result;
   }
-  
+
   get versionAndroidInfo(){
     return this.state.versionAndroidInfo
   }
-  
+
   get language(){
     return this.state.language;
   }

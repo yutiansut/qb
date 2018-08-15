@@ -71,7 +71,7 @@ export default class SelectButton extends Component {
             }}
           >
             <p>{simple ? "" : title}</p>
-            {type === 'trade' && <i></i>}
+            {type === 'trade' && <i className={show ? 'selected' : ''}></i>}
           </div>
         )}
 
