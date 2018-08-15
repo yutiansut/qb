@@ -371,6 +371,8 @@ export default function zh(state) {
     "market-markets": "交易盘",
     "market-lastPrice": "最新成交价",
     "market-change": "涨跌幅",
+    "market-priceHighest": "最高价",
+    "market-priceLowest": "最低价",
     "market-change7D": "7日涨跌幅",
     "market-currencyInfo": "币种资料",
     "market-volume": "24h量",

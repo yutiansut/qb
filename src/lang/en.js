@@ -383,6 +383,8 @@ export default function en(state) {
     "market-markets": "Markets",
     "market-lastPrice": "Latest price",
     "market-change": "Change",
+    "market-priceHighest": "最高价",
+    "market-priceLowest": "最低价",
     "market-change7D": "7D Change",
     "market-currencyInfo": "Currency details",
     "market-volume": "24h Volume",

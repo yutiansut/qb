@@ -24,55 +24,55 @@
     font-weight 100
     &.up-i
       color $home-font-up
-      //&:before
-      //  position absolute
-      //  top 50%
-      //  transform translate(0, -50%)
-      //  left 0
-      //  content ''
-      //  width .12rem
-      //  height .12rem
-      //  background $home-up no-repeat center center
-      //  background-size .12rem .12rem
+    //&:before
+    //  position absolute
+    //  top 50%
+    //  transform translate(0, -50%)
+    //  left 0
+    //  content ''
+    //  width .12rem
+    //  height .12rem
+    //  background $home-up no-repeat center center
+    //  background-size .12rem .12rem
     &.down-i
       color $home-font-down
-      //&:before
-      //  position absolute
-      //  top 50%
-      //  transform translate(0, -50%)
-      //  left 0
-      //  content ''
-      //  width .12rem
-      //  height .12rem
-      //  background $home-down no-repeat center center
-      //  background-size .12rem .12rem
+  //&:before
+  //  position absolute
+  //  top 50%
+  //  transform translate(0, -50%)
+  //  left 0
+  //  content ''
+  //  width .12rem
+  //  height .12rem
+  //  background $home-down no-repeat center center
+  //  background-size .12rem .12rem
   .market-updown
     position relative
     font-weight 100
     &.up-after
       color $home-font-up
-      //&:after
-      //  position absolute
-      //  top 50%
-      //  transform translate(0, -50%)
-      //  right -.15rem
-      //  content ''
-      //  width .12rem
-      //  height .12rem
-      //  background $home-up no-repeat center center
-      //  background-size .12rem .12rem
+    //&:after
+    //  position absolute
+    //  top 50%
+    //  transform translate(0, -50%)
+    //  right -.15rem
+    //  content ''
+    //  width .12rem
+    //  height .12rem
+    //  background $home-up no-repeat center center
+    //  background-size .12rem .12rem
     &.down-after
       color $home-font-down
-      //&:after
-      //  position absolute
-      //  top 50%
-      //  transform translate(0, -50%)
-      //  right -.15rem
-      //  content ''
-      //  width .12rem
-      //  height .12rem
-      //  background $home-down no-repeat center center
-      //  background-size .12rem .12rem
+  //&:after
+  //  position absolute
+  //  top 50%
+  //  transform translate(0, -50%)
+  //  right -.15rem
+  //  content ''
+  //  width .12rem
+  //  height .12rem
+  //  background $home-down no-repeat center center
+  //  background-size .12rem .12rem
   .hide
     display none
 
@@ -84,7 +84,7 @@
     //padding .64rem 1.2rem .93rem
     height .46rem
     background $home-bg-recommend
-    box-shadow 0 1px 10px 1px rgba(0,0,0,0.10)
+    box-shadow 0 1px 10px 1px rgba(0, 0, 0, 0.10)
     ul
       display -webkit-flex
       display flex
@@ -143,7 +143,6 @@
           font-size .12rem
           opacity .8
 
-
   //市场
   .home-market
     width 12rem
@@ -152,7 +151,7 @@
     background $home-bg-main
     .home-market-con
       padding .5rem .55rem .98rem
-      box-shadow 0 1px 10px 0 rgba(0,0,0,0.20)
+      box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.20)
       border-radius 6px
       background $home-bg-market
     .market-nav
@@ -218,7 +217,7 @@
             background $home-bg-input
           button
             width .44rem
-          //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
+        //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
         img
           position relative
           top -.05rem
@@ -260,7 +259,7 @@
         &.main-tbody
           margin-bottom .36rem
         tr
-          border-bottom 1px solid $home-line-market-light  // $home-line-market
+          border-bottom 1px solid $home-line-market-light // $home-line-market
           &.zone-name
             border-bottom 1px solid $home-line-zone-title
             td
@@ -280,13 +279,14 @@
           &.new-zone-name
             td
               padding-top .36rem
-          &:hover
-            background $home-bg-marketActive
-            box-shadow 0 1px 10px 0 rgba(0,0,0,0.30)
-          // &.table-data
-          //   &:hover
-          //     background rgba(255,255,255,0.03)
-
+          &.table-data
+            td
+              text-align right
+              &.left-td
+                text-align left
+            &:hover
+              background $home-bg-marketActive
+              box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.30)
         td:first-child
           padding-left .3rem
         td
