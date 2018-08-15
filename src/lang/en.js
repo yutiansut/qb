@@ -501,7 +501,12 @@ export default function en(state) {
     "deal-sure-buy-volume": 'Buy volume',
     "deal-sure-sell-volume": 'Sell volume',
     "deal-convert-into": 'convert into',
-    'deal-sure-order': 'Confirm the order'
+    'deal-sure-order': 'Confirm the order',
+    "deal-trade-price": 'The latest price',
+    "deal-trade-rise": '24H Change',
+    "deal-trade-high": '24H Highest Price',
+    "deal-trade-low": '24H Lowest Price',
+    "deal-trade-turnover": '24H Turnover',
   };
   const user = {
     "user-score": "My VIP Status",

@@ -175,8 +175,8 @@ export default class TradeOrderListController extends OrderListController {
       buySortArray && buySortArray.sort((a,b) => a > b);
       sellSortArray.length % 2 === 0 && (sellMid = (sellSortArray[sellSortArray.length/2] + sellSortArray[sellSortArray.length/2 - 1]) / 2) || (sellMid = sellSortArray[(sellSortArray.length - 1 )/ 2]);
       buySortArray.length % 2 === 0 && (buyMid = (buySortArray[buySortArray.length/2] + buySortArray[buySortArray.length/2 - 1]) / 2) || (buyMid = buySortArray[(buySortArray.length - 1 )/ 2]);
-      liveSellArray = liveSellArray.slice(0,13);
-      liveBuyArray = liveBuyArray.slice(0,13);
+      liveSellArray = liveSellArray.slice(0,15);
+      liveBuyArray = liveBuyArray.slice(0,15);
       this.view.setState({
         liveBuyArray,
         liveSellArray,
@@ -186,7 +186,7 @@ export default class TradeOrderListController extends OrderListController {
       })
     }
     if (liveTitleSelect === 'buy') {
-      liveBuyArray = liveBuyArray.slice(0,26);
+      liveBuyArray = liveBuyArray.slice(0,30);
       liveBuyArray = liveBuyArray && liveBuyArray.length && liveBuyArray.map(v => {
         v.priceH = Number(v.price * (liveBank[items[unitsType]] || 1));
         v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);
@@ -205,7 +205,7 @@ export default class TradeOrderListController extends OrderListController {
       })
     }
     if (liveTitleSelect === 'sell') {
-      liveSellArray = (liveSellArray.slice(0,26)).reverse();
+      liveSellArray = (liveSellArray.slice(0,30)).reverse();
       liveSellArray = liveSellArray && liveSellArray.length && liveSellArray.map(v => {
         v.priceH = Number(v.price * (liveBank[items[unitsType]] || 1));
         v.priceR = Number(v.price * (liveBank[items[unitsType]] || 1)).format(formatObj[formatKey]);

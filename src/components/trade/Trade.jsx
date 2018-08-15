@@ -22,6 +22,7 @@ import KdepthController from '../../class/kdepth/KdepthController'
 import './stylus/trade.styl'
 import UserOrder from "./children/UserOrder";
 import ConfigController from "../../class/config/ConfigController";
+import {ChangeFontSize} from "../../core";
 
 let TradeMarketController,
   TradeOrderListController,
@@ -113,7 +114,9 @@ export default class extends exchangeViewBase {
     TradeMarketController.TradeOrderListController = null;
     TradeMarketController.userOrderController = null;
   }
-
+  componentDidMount(){
+    ChangeFontSize(1440*0.8, 1440*2)
+  }
 
   render() {
     return <div id="trade">

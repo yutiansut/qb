@@ -113,8 +113,8 @@ export default class Header extends ExchangeViewBase {
 
   componentWillUpdate(props, state, next) {
     // ChangeFontSize
-    // console.log(props, state, next)
     if(props.navClass === 'tradeNav'){
+      // console.log(props, state, next)
       ChangeFontSize(1440*0.8, 1440*2)
     }
   }

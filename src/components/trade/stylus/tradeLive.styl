@@ -3,19 +3,21 @@
 	height .4rem
 	align-items center
 	background $trade-bg-title
-	padding-left .2rem
-	.trade-live-item
-		font-size .12rem
-		margin 0 .2rem -.01rem 0
-		cursor pointer
-		height .4rem
-		line-height .4rem
-		//border-bottom .02rem solid $colFFFF
-	.live-item-active
-		color $trade-tab-active-font
-		border-bottom .02rem solid $trade-tab-active-border
-	.select-button .trade
-		width 0.75rem
+	justify-content space-around
+	width 3.2rem
+	.trade-live-title-items
+		//margin-left .2rem
+		.trade-live-item
+			font-size .12rem
+			margin 0 .2rem -.01rem 0
+			cursor pointer
+			height .4rem
+			line-height .4rem
+			float left
+			//border-bottom .02rem solid $colFFFF
+		.live-item-active
+			color $trade-tab-active-font
+			border-bottom .02rem solid $trade-tab-active-border
 .trade-live-table
 	width 3.18rem
 	thead
@@ -27,7 +29,7 @@
 		.no-content-none
 			display none
 		tr
-			height .21rem
+			//height .21rem
 			line-height .21rem
 			position relative
 			z-index 667
@@ -70,6 +72,13 @@
 					background rgba(242,86,86,.06)
 					top 0
 					z-index 666
+				.user-arrow:before
+					content ''
+					width .06rem
+					height .1rem
+					background  $trade-sell-arrow no-repeat center center / cover
+					position absolute
+					top .04rem
 	.trade-live-buy
 		tr
 			td
@@ -88,3 +97,11 @@
 					opacity .3
 					bottom 0
 					z-index 666
+				.user-arrow:before
+					content ''
+					width .06rem
+					height .1rem
+					background  $trade-buy-arrow no-repeat center center / cover
+					position absolute
+					top .04rem
+					

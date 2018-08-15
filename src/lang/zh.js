@@ -480,7 +480,12 @@ export default function zh(state) {
     "deal-sure-buy-volume": '买入数量',
     "deal-sure-sell-volume": '卖出数量',
     "deal-convert-into": '折合',
-    'deal-sure-order': '确认下单'
+    'deal-sure-order': '确认下单',
+    "deal-trade-price": '最新价格',
+    "deal-trade-rise": '24H涨跌',
+    "deal-trade-high": '24H最高价',
+    "deal-trade-low": '24H最低价',
+    "deal-trade-turnover": '24H成交额',
   };
   const user = {
     "user-score": "我的积分",

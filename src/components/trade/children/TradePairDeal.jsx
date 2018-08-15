@@ -36,7 +36,7 @@ export default class TradePairDeal extends ExchangeViewBase {
           </span>
           </div>
          <div className='trade-pair-deal-items'>
-           <p>最新价格</p>
+           <p>{this.intl.get('deal-trade-price')}</p>
            <div>
            <span className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>
              ≈
@@ -44,26 +44,26 @@ export default class TradePairDeal extends ExchangeViewBase {
            </div>
          </div>
           <div className='trade-pair-deal-items'>
-            <p>24H涨跌</p>
+            <p>{this.intl.get('deal-trade-rise')}</p>
             <div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>
               <span style={{marginRight: '.06rem'}}>{this.state.tradePairMsg.prices && Number((this.state.tradePairMsg.prices.price).minus(this.state.tradePairMsg.priceY))}</span>
               <span>{this.state.tradePairMsg.rise && this.state.tradePairMsg.rise.toPercent()}</span>
             </div>
           </div>
           <div className='trade-pair-deal-items'>
-            <p>24H最高价</p>
+            <p>{this.intl.get('deal-trade-high')}</p>
             <div>
               {this.state.tradePairMsg.highestPrice && this.state.tradePairMsg.highestPrice.format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}
             </div>
           </div>
           <div className='trade-pair-deal-items'>
-            <p>24H最低价</p>
+            <p>{this.intl.get('deal-trade-low')}</p>
             <div>
               {this.state.tradePairMsg.lowestPrice && this.state.tradePairMsg.lowestPrice.format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}
             </div>
           </div>
           <div className='trade-pair-deal-items'>
-            <p>24H成交额</p>
+            <p>{this.intl.get('deal-trade-turnover')}</p>
             <div>
               <span>{this.state.tradePairMsg.turnover && this.state.tradePairMsg.turnover.formatTurnover()}</span>
               <span>{this.state.tradePairMsg.marketName}</span>
