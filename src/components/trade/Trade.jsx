@@ -120,23 +120,25 @@ export default class extends exchangeViewBase {
         <div className="clearfix">
           <div className="trade-left">
             <div className="trade-left-top">
-              <div className="fl" style={{width: '2.92rem', height: '4rem'}}>
                 <div className="trade-pair-msg">
                   <TradePairDeal controller={TradeDealController} />
                 </div>
-                <TradeMarket controller={TradeMarketController} location={this.props.location}/>
-              </div>
-              <div className="trade-chart">
-                <div className="k-menu">
-                  <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
-                      {this.intl.get("kline")}
-                  </button>
-                  <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
-                      {this.intl.get("depth")}
-                  </button>
+              <div>
+                <div className='trade-pair-market'>
+                  <TradeMarket controller={TradeMarketController} location={this.props.location}/>
                 </div>
-                <ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />
-                <ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>
+                <div className="trade-chart">
+                  <div className="k-menu">
+                    <button className={this.state.curChart === "kline" ? "active" : ""} onClick={this.switchChart.bind(this, "kline")}>
+                      {this.intl.get("kline")}
+                    </button>
+                    <button className={this.state.curChart === "depth" ? "active" : ""} onClick={this.switchChart.bind(this, "depth")}>
+                      {this.intl.get("depth")}
+                    </button>
+                  </div>
+                  <ReactKline show={this.state.curChart === "kline"} controller={TradeMarketController.klineController} />
+                  <ReactKDepth show={this.state.curChart === "depth"} controller={kdepthController}/>
+                </div>
               </div>
             </div>
             <div className="trade-left-bottom">

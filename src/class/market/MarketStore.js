@@ -352,6 +352,9 @@ export default class MarketStore extends ExchangeStoreBase {
         tradePairName: v.n,
         turnover: v.to,
         volume: v.vol,
+        highestPrice: v.hp,
+        lowestPrice: v.lp,
+        priceY: v.op
       }
     }) || []
     // console.log('arr',arr)

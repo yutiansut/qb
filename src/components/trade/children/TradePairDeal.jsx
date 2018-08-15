@@ -25,17 +25,52 @@ export default class TradePairDeal extends ExchangeViewBase {
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className='trade-pair-deal-title'>
-          <img src={this.state.tradePairMsg.coinIcon} alt="" />
-          <h2>{this.state.tradePairMsg.tradePair && this.state.tradePairMsg.tradePair.toUpperCase()}</h2>
-          <span>
+          <div className='trade-pair-deal-info'>
+            <img src={this.state.tradePairMsg.coinIcon} alt="" />
+            <span>{`${this.state.tradePairMsg.coinName}/`}</span>
+            <em>{this.state.tradePairMsg.marketName}</em>
+            <span>
             <NavLink to={{ pathname: "/help/currency/", query: { currency: this.state.tradePairMsg.tradePair && this.state.tradePairMsg.tradePair.split('/')[0] } }}>
               {this.intl.get('market-currencyInfo')}
             </NavLink>
           </span>
+          </div>
+         <div className='trade-pair-deal-items'>
+           <p>最新价格</p>
+           <div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>
+           <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'usd'}}))) }</span>
+           </div>
+         </div>
+          <div className='trade-pair-deal-items'>
+            <p>24H涨跌</p>
+            <div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>
+              <span style={{marginRight: '.06rem'}}>{this.state.tradePairMsg.prices && Number((this.state.tradePairMsg.prices.price).minus(this.state.tradePairMsg.priceY))}</span>
+              <span>{this.state.tradePairMsg.rise && this.state.tradePairMsg.rise.toPercent()}</span>
+            </div>
+          </div>
+          <div className='trade-pair-deal-items'>
+            <p>24H最高价</p>
+            <div>
+              {this.state.tradePairMsg.highestPrice && this.state.tradePairMsg.highestPrice.format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}
+            </div>
+          </div>
+          <div className='trade-pair-deal-items'>
+            <p>24H最低价</p>
+            <div>
+              {this.state.tradePairMsg.lowestPrice && this.state.tradePairMsg.lowestPrice.format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}
+            </div>
+          </div>
+          <div className='trade-pair-deal-items'>
+            <p>24H成交额</p>
+            <div>
+              <span>{this.state.tradePairMsg.turnover && this.state.tradePairMsg.turnover.format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy + this.state.tradePairMsg.volumeAccuracy}})}</span>
+              <span>{this.state.tradePairMsg.marketName}</span>
+            </div>
+          </div>
         </div>
-        <div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>
-          <span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'usd'}}))) }</span>
-        </div>
+        {/*<div className={`${this.state.tradePairMsg.updown && (this.state.tradePairMsg.updown > 0 && "market-up" || "market-down")} trade-pair-deal-price`}>*/}
+          {/*<span>{this.state.tradePairMsg.prices && Number(this.state.tradePairMsg.prices.price).format({number: 'digital', style: {decimalLength :this.state.tradePairMsg.priceAccuracy}})}</span>≈<span>{this.state.tradePairMsg.prices && (this.props.controller.configController.language === 'zh-CN' ? (Number(this.state.tradePairMsg.prices.priceCN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'cny'}})) :(Number(this.state.tradePairMsg.prices.priceEN * this.state.tradePairMsg.prices.price).format({number: 'legal', style:{name:'usd'}}))) }</span>*/}
+        {/*</div>*/}
       </div>
     )
   }
