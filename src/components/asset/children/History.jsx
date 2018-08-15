@@ -79,7 +79,6 @@ export default class History extends exchangeViewBase {
     //绑定方法
     this.getHistory = controller.getHistory.bind(controller);
     this.getWalletList = controller.getWalletList.bind(controller);
-    this.cancelOreder = controller.cancelOreder.bind(controller);
     this.exportHistory = controller.exportHistory.bind(controller);
     this.initSearch = () => {
       this.setState(
@@ -371,7 +370,7 @@ export default class History extends exchangeViewBase {
             </table>
             <Pagination
               total={this.state.assetHistory.total}
-              pageSize={20}
+              pageSize={10}
               showTotal={true}
               onChange={page => {
                 this.setState({ page });
