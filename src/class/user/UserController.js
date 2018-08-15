@@ -262,7 +262,7 @@ export default class UserController extends ExchangeControllerBase {
     // console.log('设置密码', result)
   }
 
-  async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code) { // 设置／修改资金密码
+  async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code, os=3) { // 设置／修改资金密码
     if(!this.view.state.setPassFlag)
       return
     this.view.setState({
@@ -277,7 +277,7 @@ export default class UserController extends ExchangeControllerBase {
       cc: captchaCode, // 图形验证码，没有就传空
       ci: captchaId, // 图形验证码id，没有就传空
       co: code,
-      os: 3, // 1:android 2:iOS 3:browser
+      os: os, // 1:android 2:iOS 3:browser
     })
     // console.log('设置密码', result)
     this.view.setState({

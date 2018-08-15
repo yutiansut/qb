@@ -48,7 +48,7 @@ export default class History extends exchangeViewBase {
         0 +
         86399999;
       return {
-        start: parseInt(start / 2000),
+        start: parseInt(start / 1000),
         end: parseInt(end / 1000)
       };
     };

@@ -270,7 +270,7 @@ export default class SetPwd extends ExchangeViewBase {
                 <p>{this.state.isType && this.state.popupTypeList[this.state.isType - 1].verifyTitle}</p>
                 <div className="clearfix pass-btn-group">
                   <Input placeholder={this.state.isType && this.state.popupTypeList[this.state.isType - 1].verifyInput} value={this.state.verifyValue} onInput={value => this.changeVerify(value)}/>
-                  {[3, 4].includes(this.state.isType) && <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={() => {this.getVerify(this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : this.state.userInfo.email, this.state.userInfo.fundPassVerify === 3 ? 0 : 1, this.state.isType)}}/>}
+                  {[3, 4].includes(this.state.isType) && <Button title={typeof this.state.verifyNum === 'number' && (this.state.verifyNum === 0 && this.intl.get("sendAgain") || `${this.state.verifyNum}s`) || this.state.verifyNum} className="verify-btn btn" onClick={() => {this.getVerify(this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : this.state.userInfo.email, this.state.userInfo.fundPassVerify === 3 ? 0 : 1, this.state.isType+2, 4)}}/>}
                 </div>
               </li>
               <li className={this.state.userInfo && this.state.userInfo.fundPassVerify === 2 ? 'long-li' : 'hide'}>
@@ -289,7 +289,7 @@ export default class SetPwd extends ExchangeViewBase {
                                                       this.state.userValue,
                                                       this.state.pictureValue,
                                                       this.state.captchaId,
-                                                      this.state.verifyValue)}/>}
+                                                      this.state.verifyValue, 4)}/>}
                 {this.state.isType === 4 && <Button className={`${this.canClick() ? 'can-click' : ''} set-btn btn`} disable={this.canClick() ? false : true} title={this.intl.get("save")}
                                                     onClick={() => this.modifyFundPwd(this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? this.state.userInfo.phone : (this.state.userInfo && this.state.userInfo.fundPassVerify === 1 ?this.state.userInfo.email : ''),
                                                       this.state.userInfo && this.state.userInfo.fundPassVerify === 3 ? 0 : (this.state.userInfo && this.state.userInfo.fundPassVerify === 1 ? 1 : 0),
@@ -297,7 +297,7 @@ export default class SetPwd extends ExchangeViewBase {
                                                       this.state.userValue,
                                                       this.state.pictureValue,
                                                       this.state.captchaId,
-                                                      this.state.userInfo && this.state.userInfo.fundPassVerify === 2 ? this.state.googleValue : this.state.verifyValue)}/>}
+                                                      this.state.userInfo && this.state.userInfo.fundPassVerify === 2 ? this.state.googleValue : this.state.verifyValue, 4)}/>}
               </li>
               <li className={[1, 2].includes(this.state.isType) ? 'remind-pass-li' : 'hide'}>
                 <p>{this.intl.get("user-popPwdRule")}</p>
