@@ -80,7 +80,8 @@ export default class MarketController extends ExchangeControllerBase {
       searchRealt: [],
       collectActive: true,
       market: '',
-      homeMarketPairData
+      homeMarketPairData,
+      sortIndexMobile: 0
     });
     // if(!homeMarketPairData.length){
     //   return
