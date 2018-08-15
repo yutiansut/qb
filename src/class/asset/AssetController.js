@@ -407,7 +407,9 @@ export default class AssetController extends ExchangeControllerBase {
             showPopup: true,
             popMsg: this.view.intl.get("asset-add-success-h5"),
             popType: "tip1",
-            walletExtract: this.Util.deepCopy(result)
+            walletExtract: this.Util.deepCopy(result),
+            inputAddrName: "",
+            inputAddr: "",
         });
     }
 
