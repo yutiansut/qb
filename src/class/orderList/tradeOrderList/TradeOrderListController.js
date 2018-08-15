@@ -103,10 +103,11 @@ export default class TradeOrderListController extends OrderListController {
   //深度合并位数切换
   depthSelect(e){
     let accuracy = this.accuracy.priceAccuracy;
+    let selected = e.charAt(0)
     this.view.setState({
       depthSelected: e
     });
-    this.store.state.depthType = accuracy - e;
+    this.store.state.depthType = accuracy - selected;
     this.userPriceListHandle();
     this.joinRoom();
     this.getDepth();

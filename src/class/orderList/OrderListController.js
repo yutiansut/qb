@@ -125,7 +125,7 @@ export default class OrderListController extends ExchangeControllerBase {
     return{
       volumeAccuracy: this.store.state.volumeAccuracy,
       priceAccuracy: this.store.state.priceAccuracy,
-      depthArray: this.store.state.priceAccuracy === 6 ? [6,5,4,3] : [2,1,0]
+      depthArray: this.store.state.priceAccuracy === 6 ? [`6${this.view.intl.get('order-little')}`,`5${this.view.intl.get('order-little')}`,`4${this.view.intl.get('order-little')}`,`3${this.view.intl.get('order-little')}`] : [`2${this.view.intl.get('order-little')}`,`1${this.view.intl.get('order-little')}`,`0${this.view.intl.get('order-little')}`]
     }
   }
   

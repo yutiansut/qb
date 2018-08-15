@@ -460,7 +460,9 @@ export default function en(state) {
     "order-bs": "Bid/Ask",
     "order-b": "buy",
     "order-s": "sell",
-    'order-none': 'No eligible list in the current list'
+    'order-none': 'No eligible list in the current list',
+    "order-little": 'decimal places',
+    'order-depth': 'depth'
   };
   const deal = {
     "deal-limit": "Limit price",

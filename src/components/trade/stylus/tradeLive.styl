@@ -6,7 +6,6 @@
 	justify-content space-around
 	width 3.2rem
 	.trade-live-title-items
-		//margin-left .2rem
 		.trade-live-item
 			font-size .12rem
 			margin 0 .2rem -.01rem 0
@@ -14,7 +13,6 @@
 			height .4rem
 			line-height .4rem
 			float left
-			//border-bottom .02rem solid $colFFFF
 		.live-item-active
 			color $trade-tab-active-font
 			border-bottom .02rem solid $trade-tab-active-border
@@ -22,30 +20,24 @@
 	width 3.18rem
 	thead
 		td
-			//padding .11rem 0
 			padding  0
 	tbody
 		color $trade-font-normal
 		.no-content-none
 			display none
 		tr
-			//height .21rem
+			height .21rem
 			line-height .21rem
 			position relative
-			z-index 667
-			//border-top .02rem solid $col292B
-			//border-bottom .02rem solid $col292B
-			//&:first-child
-			//	border none
+			z-index 650
 			td:nth-child(1)
 				padding-left .16rem
-
-		.distance
-			td
-				padding-bottom .12rem
-		.distance-b
-			td
-				padding-top .12rem
+		//.distance
+	//	td
+	//		padding-bottom .1rem
+	//.distance-b
+	//	td
+	//		padding-top .1rem
 	.live-deal
 		tr
 			height .52rem
@@ -59,19 +51,20 @@
 	.trade-live-sell
 		tr
 			td
+				height .21rem
 				position relative
-				z-index 999
+				z-index 650
 				span
 					position relative
-					z-index 999
+					z-index 650
 					font-size .11rem
 				div
 					position absolute
-					height .21rem
+					height 100%
 					left 0
 					background rgba(242,86,86,.06)
 					top 0
-					z-index 666
+					z-index 649
 				.user-arrow:before
 					content ''
 					width .06rem
@@ -82,21 +75,21 @@
 	.trade-live-buy
 		tr
 			td
-				position relative
-				z-index 999
 				height .21rem
+				//overflow hidden
+				position relative
+				z-index 650
 				span
 					position relative
-					z-index 999
+					z-index 650
 					font-size .11rem
 				div
 					position absolute
-					height .21rem
+					height 100%
 					left 0
 					background rgba(43,183,137,.06)
-					opacity .3
 					bottom 0
-					z-index 666
+					z-index 649
 				.user-arrow:before
 					content ''
 					width .06rem

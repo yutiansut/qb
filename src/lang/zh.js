@@ -444,7 +444,9 @@ export default function zh(state) {
     'order-bs': '买卖',
     'order-b':'买',
     'order-s':'卖',
-    'order-none': '当前列表中无符合条件的挂单'
+    'order-none': '当前列表中无符合条件的挂单',
+    "order-little": '位小数',
+    'order-depth': '深度'
   };
   const deal = {
     "deal-limit": "限价委托",
@@ -455,7 +457,7 @@ export default function zh(state) {
     "deal-every-h5": "每次",
     "deal-2h": "每两小时输入",
     "deal-2h-h5": "2小时",
-    "deal-never": "二十四小时不输入",
+    "deal-never": "永久不输入",
     "deal-never-h5": "24小时免输",
     "deal-inputpwdplease": "开启免输资金密码, 需要输入资金密码进行身份认证才能继续,请输入",
     "deal-marketbuy": "以市场最优价格买入",

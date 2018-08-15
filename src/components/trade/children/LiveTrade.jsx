@@ -60,7 +60,7 @@ export default class LiveTrade extends ExchangeViewBase{
             </div>
             <div className='trade-depth'>
               <SelectButton
-                  title={this.state.depthSelected === -1 ? this.props.controller.accuracy.depthArray[0] : this.state.depthSelected }
+                  title={`${this.intl.get('order-depth')} ${this.state.depthSelected === -1 ? this.props.controller.accuracy.depthArray[0] : this.state.depthSelected}` }
                   type="trade"
                   className="select-depth"
                   valueArr={this.props.controller.accuracy.depthArray}
@@ -82,7 +82,7 @@ export default class LiveTrade extends ExchangeViewBase{
             </tr>
             {this.state.liveSellArray && this.state.liveSellArray.map((v,index) =>
                (
-                  <tr key={index} className={index === this.state.liveSellArray.length - 1 ? 'distance' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
+                  <tr key={index} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td style={{position: 'relative'}}>
                       <span>{`${this.intl.get('order-s')}${this.state.liveSellArray.length - index}`}</span>
                     <div style={{width: v.amount >= this.state.sellMid ? '3.18rem' : `${3.18 * v.amount / this.state.sellMid}rem`}} className={this.state.userTagArr.indexOf(v.price) === -1 ? 'user-none' : 'user-arrow'}></div></td>
@@ -92,15 +92,17 @@ export default class LiveTrade extends ExchangeViewBase{
                   </tr>
               )
             ) || null}
+            <tr style={{height: '.1rem'}}> </tr>
             </tbody>
           
           <tbody className='live-deal'>
-            <tr><td colSpan='4' className={`${this.state.updown && (this.state.updown > 0 && "market-up" || "market-down")}`}>{this.state.dealPrice}</td></tr>
+            <tr><td colSpan='4' className={`${this.state.updown && (this.state.updown > 0 && "market-up" || "market-down")}`} style={{fontSize: '28px'}}>{this.state.dealPrice}</td></tr>
           </tbody>
             <tbody className='trade-live-buy'>
+            <tr style={{height: '.1rem'}}> </tr>
             {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>
                 (
-                  <tr key={index} className={index === 0 ? 'distance-b' : ''} onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
+                  <tr key={index}  onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>
                     <td style={{position: 'relative'}}>
                       <span>{`${this.intl.get('order-b')}${index + 1}`}</span>
                       <div style={{width: v.amount >= this.state.buyMid ? '3.18rem' : `${3.18 * v.amount / this.state.buyMid}rem`}} className={this.state.userTagArr.indexOf(v.price) === -1 ? 'user-none' : 'user-arrow'}></div>

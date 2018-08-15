@@ -22,7 +22,6 @@ export default function (minWidth, maxWidth, originWidth = 1440) {
   let docEl = document.documentElement,
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {
-      console.log('ddddddddddddddddddd', document.body.clientWidth)
   
       // console.log('win', window.location.pathname)
       // setTimeout(function(){
