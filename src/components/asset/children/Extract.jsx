@@ -99,6 +99,8 @@ export default class Extract extends exchangeViewBase {
     this.destroy = controller.clearVerify.bind(controller);
     // 获取资金密码设置状态和两步验证方式
     this.getUserInfo = controller.getUserInfo.bind(controller);
+    // 二次验证的确认操纵
+    this.twoVerify = controller.twoVerify.bind(controller);
 
     this.hideSelect = () => {
       this.setState({ showSelect: false });
@@ -628,22 +630,7 @@ export default class Extract extends exchangeViewBase {
             }}
             destroy={this.destroy}
             onConfirm={async (code) => {
-              let { verifyType, currency, address, password, extractAmount } = this.state;
-              if(!verifyType) this.extractOrder({
-                coinName: currency,
-                toAddr: address.address,
-                amount: Number(extractAmount),
-                fundPass: password,
-                code: code
-              });
-              if(verifyType){
-                let obj = Object.assign({ coinName: this.state.currency }, this.state.newAddress[0]);
-                let result = await this.appendAddress(
-                  obj,
-                  curExtract
-                );
-                if(result) this.setState({newAddress: [], showTwoVerify: false})
-              }
+              this.twoVerify(code, curExtract)
             }}
           />
         )}
@@ -678,12 +665,12 @@ export default class Extract extends exchangeViewBase {
         )}
         <div className="recoGoogle" style={{display: this.state.recoGoogle ? 'block' : 'none'}}>
           <div className="recoGoogle-popup">
-            <h3>进行提现二次验证时，<br/>推荐使用谷歌验证</h3>
+            <h3>{this.intl.get('asset-recoGoogle')}</h3>
             <div className="button">
-              <Button title="前往安全中心设置" className="tosafe" onClick={()=>{
+              <Button title={this.intl.get('home-setPwdGo')} className="tosafe" onClick={()=>{
                   this.props.history.push({pathname: '/user/safe/'})
                 }}></Button>
-              <Button title="下次再说" className="cancel" onClick={()=>{
+              <Button title={this.intl.get('asset-nextTime')} className="cancel" onClick={()=>{
                 this.setState({
                   showTwoVerify: true,
                   verifyType: 0,

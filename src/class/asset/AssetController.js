@@ -338,15 +338,15 @@ export default class AssetController extends ExchangeControllerBase {
   }
 
   // 撤销提币申请
-  async cancelOreder(id) {
-    let result = await this.store.cancelOrder(id);
-    if (result && result.errCode) {
-      this.setViewTip(false, result.msg);
-      return false;
-    }
-    this.setViewTip(true, this.view.intl.get("optionSuccess"));
-    this.view.setState({ assetHistory: this.Util.deepCopy(result) });
-  }
+  // async cancelOreder(id) {
+  //   let result = await this.store.cancelOrder(id);
+  //   if (result && result.errCode) {
+  //     this.setViewTip(false, result.msg);
+  //     return false;
+  //   }
+  //   this.setViewTip(true, this.view.intl.get("optionSuccess"));
+  //   this.view.setState({ assetHistory: this.Util.deepCopy(result) });
+  // }
   // 添加提现地址
   async appendAddress(obj, curExtract) {
     // 验证地址名称是否存在
@@ -562,13 +562,26 @@ export default class AssetController extends ExchangeControllerBase {
       verifyNum: this.view.intl.get("sendCode")
     });
   }
-  // 为market提供获得币种可用余额的api
-  // async getCoinAvailable(coin) {
-  //   if (!this.store.state.wallet.length) {
-  //     await this.store.getTotalAsset();
-  //   }
-  //   return this.store.state.wallet.filter(v => v.coinName === coin)[0];
-  // }
+  //两步验证的确认操作
+  async twoVerify(code, curExtract){
+    let { verifyType, currency, address, password, extractAmount } = this.view.state;
+    if(!verifyType) this.extractOrder({
+      coinName: currency,
+      toAddr: address.address,
+      amount: Number(extractAmount),
+      fundPass: password,
+      code: code
+    });
+    if(verifyType){
+      let obj = Object.assign({ coinName: this.view.state.currency }, this.view.state.newAddress[0]);
+      let result = await this.appendAddress(
+        obj,
+        curExtract
+      );
+      if(result) this.view.setState({newAddress: [], showTwoVerify: false})
+    }
+  }
+
   // 获取我的QBT
   async getMyQbt() {
     let result = await this.activityController.getMyQbt();

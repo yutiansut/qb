@@ -357,6 +357,8 @@ export default function en(state) {
     "asset-funds-transfer": "Funds transfer",
     "asset-delete-success": 'Successfully deleted',
     "asset-address-notSaved": 'Address not saved',
+    "asset-recoGoogle": 'Google verification is recommended for second verification of withdrawal',
+    "asset-nextTime": 'Next Time',
     "h5-asset-record": "Charge record",
     "h5-asset-search-history": "Search history",
     "h5-asset-recommend-currency": "Recommend currency",
