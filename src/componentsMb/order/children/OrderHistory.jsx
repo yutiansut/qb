@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import {NavLink} from 'react-router-dom';
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 
 import OrderItem from "./OrderItem.jsx"
-import OrderDetails from "./OrderDetails.jsx"
-import SelectButton from '../../../common/component/SelectButton'
+import SelectButton from '../../../common/component/SelectButton';
 
 export default class OrderHistory extends exchangeViewBase{
   constructor(props){
@@ -26,12 +25,14 @@ export default class OrderHistory extends exchangeViewBase{
       startTimeType: 'all',
       endTime: Math.floor(new Date().getTime() / 1000),
       page: 1,
-      pageSize: 100,
+      pageSize: 1000,
       filterShow: false,
       displayType: "list",
       viewIndex: 0,
       pairIdMsg : {},
     };
+    // this.pageIndex = 1;
+
     controller.setView(this)
     this.state = Object.assign(this.state, controller.initState);
 
@@ -42,6 +43,7 @@ export default class OrderHistory extends exchangeViewBase{
     this.changeDate = this.changeDate.bind(this);
     this.choiceReset = this.choiceReset.bind(this);
     this.choiceEnsure = this.choiceEnsure.bind(this);
+    // this.loadData = this.loadData.bind(this);
 
     this.addContent = controller.headerController.addContent.bind(controller.headerController) // 获取头部内容
   }
@@ -59,7 +61,25 @@ export default class OrderHistory extends exchangeViewBase{
       coinArray,
       marketArray,
     })
+
+    // 懒加载
+    // let container = document.querySelector('.order-history-list');
+    // let list = document.querySelector('.list')
+    // container.addEventListener('scroll', () => {
+    //   if (container.clientHeight + container.scrollTop - list.clientHeight > 0) {
+    //     this.loadData()
+    //   }
+    // })
   }
+
+  // 懒加载
+  // async loadData() {
+  //   this.pageIndex += 1;
+  //   await this.setState({pageSize: this.pageIndex * 10})
+  //   console.log(this.pageIndex)
+  //   this.getOrderList();
+  // }
+
   getOrderList() {
     const {controller} = this.props;
     const params = {
@@ -122,17 +142,16 @@ export default class OrderHistory extends exchangeViewBase{
     });
   }
   // 根据筛选项选择列表
-  choiceEnsure() {
+  async choiceEnsure() {
     let orderStatus = [];
     this.state.totalDeal && orderStatus.push(2);
     this.state.reseted && orderStatus.push(3);
     this.state.partDeal && orderStatus.push(6);
     this.state.partDeal && orderStatus.push(7);
-    this.setState({
+    await this.setState({
       orderStatus,
       filterShow: false
     });
-    console.log('确定按钮调用了！！！！')
     this.getOrderList();
   }
   // 选择币种
@@ -201,8 +220,8 @@ export default class OrderHistory extends exchangeViewBase{
     return (
       <div className='order-history'>
         <div className='order-switch'>
-          <NavLink to='/order/current'>当前订单</NavLink>
-          <NavLink to='/order/history'>历史订单</NavLink>
+          <NavLink to='/order/current'>{this.intl.get('order-current')}</NavLink>
+          <NavLink to='/order/history'>{this.intl.get('order-history')}</NavLink>
         </div>
         {this.state.filterShow &&
         <div className='order-history-filter'>
@@ -267,11 +286,13 @@ export default class OrderHistory extends exchangeViewBase{
         </div>
         }
         <div className="order-history-list">
-          {this.state.orderListArray.map((order, index) => {
-            return (
-              <OrderItem type="history" index={index} orderInfo={order} key={index} controller={this.props.controller} history={this.props.history} changeViewType={this.props.changeViewType}/>
-            )
-          })}
+          {/* <div className="list"> */}
+            {this.state.orderListArray.map((order, index) => {
+              return (
+                <OrderItem type="history" index={index} orderInfo={order} key={index} controller={this.props.controller} history={this.props.history} changeViewType={this.props.changeViewType}/>
+              )
+            })}
+          {/* </div> */}
         </div>
       </div>
     );

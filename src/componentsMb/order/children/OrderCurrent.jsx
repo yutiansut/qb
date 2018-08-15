@@ -3,7 +3,6 @@ import exchangeViewBase from '../../../components/ExchangeViewBase';
 import {NavLink} from 'react-router-dom';
 
 import OrderItem from './OrderItem.jsx';
-import OrderDetails from './OrderDetails.jsx';
 import SelectButton from "../../../common/component/SelectButton"
 
 export default class OrderCurrent extends exchangeViewBase{
@@ -160,8 +159,8 @@ export default class OrderCurrent extends exchangeViewBase{
     return (
       <div className='order-current'>
         <div className='order-switch'>
-          <NavLink to='/order/current'>当前订单</NavLink>
-          <NavLink to='/order/history'>历史订单</NavLink>
+        <NavLink to='/order/current'>{this.intl.get('order-current')}</NavLink>
+          <NavLink to='/order/history'>{this.intl.get('order-history')}</NavLink>
         </div>
         {/* <div className="order-current-hide">
           <span className={this.state.hideZero ? "toggle-btn active" : "toggle-btn"}
