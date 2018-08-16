@@ -49,26 +49,26 @@ export default class SetPassPopup extends exchangeViewBase {
           numTitleNew: this.intl.get("user-currentPwd"),
           numInputNew: this.intl.get("user-inputNowPwd"),
           numTitle: this.intl.get("user-newPwd"),
-          numInput: this.intl.get("user-inputNewPwd"),
+          numInput: this.intl.get("pwdRule"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
-          numInput2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("pwdSameAgain"),
           btnTitle: this.intl.get("alter")
         },
         { // 设置资金密码
           title: this.intl.get("user-popSetFundPwd"),
           numTitle: this.intl.get("user-newPwd"),
-          numInput: this.intl.get("user-inputNewPwd"),
+          numInput: this.intl.get("fundPwdRule"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
-          numInput2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("pwdSameAgain"),
           verifyTitle: this.props.fundPassType === 3 ? this.intl.get("user-verifyPhone") : this.intl.get("user-verifyEmail"),
           verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : this.intl.get("user-inputVerifyEmail"),
           btnTitle: this.intl.get("save")},
         { // 修改资金密码
           title: this.intl.get("user-popRecoverFundPwd"),
           numTitle: this.intl.get("user-newPwd"),
-          numInput: this.intl.get("user-inputNewPwd"),
+          numInput: this.intl.get("fundPwdRule"),
           numTitle2: this.intl.get("user-inputAgainPwd"),
-          numInput2: this.intl.get("user-inputAgainPwd"),
+          numInput2: this.intl.get("pwdSameAgain"),
           verifyTitle: this.props.fundPassType === 3 ? this.intl.get("user-verifyPhone") : (this.props.fundPassType === 1 ? this.intl.get("user-verifyEmail") : this.intl.get("user-popGoole")),
           verifyInput: this.props.fundPassType === 3 ? this.intl.get("user-inputVerifyPhone") : (this.props.fundPassType === 1 ? this.intl.get("user-inputVerifyEmail") : this.intl.get("user-inputVerifyGoogle")),
           btnTitle: this.intl.get("save")
@@ -91,7 +91,7 @@ export default class SetPassPopup extends exchangeViewBase {
     this.changeGoogle = this.changeGoogle.bind(this) // 输入谷歌验证码
     this.selectBtn = this.selectBtn.bind(this) // 选择button
     // 校验部分
-    this.checkCurrentPwd = this.checkCurrentPwd.bind(this)
+    // this.checkCurrentPwd = this.checkCurrentPwd.bind(this)
     this.checkUser = this.checkUser.bind(this)
     this.checkAgainPwd = this.checkAgainPwd.bind(this)
   }
@@ -124,21 +124,22 @@ export default class SetPassPopup extends exchangeViewBase {
   }
 
   // 检验部分
-  checkCurrentPwd() { // 检验当前密码
-    let reg1 = Regular('regPwd', this.state.currentPwdValue)
-    if (this.props.isType === 4) {
-      if(!reg1) {
-        this.setState({
-          errCurrentPwd: this.intl.get("user-checkNewPwd")
-        })
-      }
-    }
-  }
+  // checkCurrentPwd() { // 检验当前密码
+  //   let reg1 = Regular('regPwd', this.state.currentPwdValue)
+  //   if (this.props.isType === 4) {
+  //     if(!reg1) {
+  //       this.setState({
+  //         errCurrentPwd: this.intl.get("user-checkNewPwd")
+  //       })
+  //     }
+  //   }
+  // }
 
   checkUser() { // 离开
     let reg1 = Regular('regEmail', this.state.userValue), // 邮箱
         reg2 = Regular('regPwd', this.state.userValue), // 密码
-        reg3 = Regular('regPhone', this.state.userValue) // 手机
+        reg3 = Regular('regPhone', this.state.userValue), // 手机
+        reg4 = Regular('regFundPwd', this.state.userValue) // 资金密码
     if (this.props.isType === 1) { // 验证邮箱
       if(!reg1) {
         this.setState({
@@ -153,7 +154,7 @@ export default class SetPassPopup extends exchangeViewBase {
         })
       }
     }
-    if ([3, 4, 5, 6].includes(this.props.isType)) { // 验证密码
+    if ([3, 4].includes(this.props.isType)) { // 验证登录密码
       if(!reg2) {
         this.setState({
           errUser: this.intl.get("user-checkNewPwd")
@@ -168,11 +169,27 @@ export default class SetPassPopup extends exchangeViewBase {
         this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
       }
     }
+    if ([5, 6].includes(this.props.isType)) { // 验证资金密码
+      if(!reg4) {
+        this.setState({
+          errUser: this.intl.get("user-checkNewPwd")
+        })
+      }
+      if(this.state.againPwdValue && (this.state.userValue !== this.state.againPwdValue)) {
+        this.setState({
+          errAgainPwd: this.intl.get("user-checkAgainPwd")
+        })
+      }
+      if (reg4 && (this.state.againPwdValue === this.state.userValue)) {
+        this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
+      }
+    }
   }
 
   checkAgainPwd() { // 离开
-    let reg = Regular('regPwd', this.state.againPwdValue) // 密码
-    if ([3, 4, 5, 6].includes(this.props.isType)) { // 再次输入密码
+    let reg = Regular('regPwd', this.state.againPwdValue), // 密码
+        reg2 = Regular('regFundPwd', this.state.userValue) // 资金密码
+    if ([3, 4].includes(this.props.isType)) { // 再次输入密码
       if(!reg) {
         this.setState({
           errAgainPwd: this.intl.get("user-checkNewPwd")
@@ -185,6 +202,22 @@ export default class SetPassPopup extends exchangeViewBase {
         })
       }
       if (reg && (this.state.againPwdValue === this.state.userValue)) {
+        this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
+      }
+    }
+    if ([5, 6].includes(this.props.isType)) { // 再次输入密码
+      if(!reg2) {
+        this.setState({
+          errAgainPwd: this.intl.get("user-checkNewPwd")
+        })
+        return
+      }
+      if(this.state.userValue && (this.state.againPwdValue !== this.state.userValue)) {
+        this.setState({
+          errAgainPwd: this.intl.get("user-checkAgainPwd")
+        })
+      }
+      if (reg2 && (this.state.againPwdValue === this.state.userValue)) {
         this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
       }
     }
@@ -260,8 +293,7 @@ export default class SetPassPopup extends exchangeViewBase {
                 <Input placeholder={this.props.isType && this.state.popupTypeList[this.props.isType - 1].numInputNew}
                        value={this.state.currentPwdValue}
                        oriType={[4].includes(this.props.isType) ? 'password' : 'text'}
-                       onInput={value => this.changeCurrentPwd(value)}
-                       onBlur={this.checkCurrentPwd}/>
+                       onInput={value => this.changeCurrentPwd(value)}/>
                 <em>{this.state.currentPwdValue && this.state.errCurrentPwd}</em>
               </li>
               <li className="long-li">
@@ -311,11 +343,7 @@ export default class SetPassPopup extends exchangeViewBase {
                        value={this.state.googleValue}
                        onInput={value => this.changeGoogle(value)}/>
               </li>
-              <li className={[5].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
-                <p>{this.intl.get("user-popPwdRule")}</p>
-              </li>
               <li className={[4, 6].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>
-                <p>{this.intl.get("user-popPwdRule")}</p>
                 <p>{this.intl.get("user-popFundRule")}</p>
               </li>
               <li className={[2].includes(this.props.isType) ? 'remind-pass-li' : 'hide'}>

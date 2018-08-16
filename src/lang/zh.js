@@ -143,7 +143,8 @@ export default function zh(state) {
     languageCn: '中文',
     languageEn: '英文',
     next: '下一步',
-    pwdRule: '6~18位英文字母、数字或符号，两种组合以上',
+    pwdRule: '6位以上英文字母、数字或符号，两种以上组合，必须包含大写字母',
+    fundPwdRule: '请输入6位数字',
     pwdSameAgain: '与密码相同一致'
   };
   const errMessage = {
@@ -379,6 +380,8 @@ export default function zh(state) {
     "market-volume": "24h量",
     "market-volume-h5": "24h量",
     "market-search": "搜索全部币种",
+    "market-main": "主流区",
+    "market-new": "创新区",
     "h5-market-add": "添加收藏",
     "h5-market-cancel": "取消收藏",
   };
@@ -616,9 +619,9 @@ export default function zh(state) {
     "user-verifyEmailTitle-h5": "邮箱验证",
     "user-verifyPhoneTitle": "短信验证",
     "user-verifyPhoneTitle-h5": "手机验证",
-    "user-checkAgainPwd": "请保证两次输入的新密码一致",
-    // "user-checkNewPwd": "登录密码长度必须在6-18位之间",
-    "user-checkNewPwd": "必须是 6-18 位英文字母、数字或符号组合",
+    "user-checkAgainPwd": "*两次输入不一致",
+    // "user-checkNewPwd": "必须是 6-18 位英文字母、数字或符号组合",
+    "user-checkNewPwd": "*密码格式不正确",
     "user-checkEmail": "邮箱格式不正确",
     "user-checkPhone": "手机号有误",
     "user-photoSucc": "上传成功",

@@ -150,7 +150,7 @@
     margin 0 auto
     background $home-bg-main
     .home-market-con
-      padding .5rem .55rem .98rem
+      padding .5rem .6rem 1.17rem .54rem
       box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.20)
       border-radius 6px
       background $home-bg-market
@@ -204,28 +204,31 @@
         float right
         width 2rem
         height .32rem
-        //margin-top .05rem
+        margin-right -.15rem
         .base-input-wrap
           float left
+          height .32rem
           //float right
           //width 2rem
           //height .36rem
-          display flex
-          justify-content center
+          //display flex
+          //justify-content center
           input
-            width 1.5rem
+            width 1.58rem
+            height .32rem
             background $home-bg-input
+            vertical-align top
           button
             width .44rem
         //background-image linear-gradient(-123deg, #5C6265 0%, #2F3335 92%) !important
         img
           position relative
           top -.05rem
-          left -.2rem
+          left -.1rem
           float right
           width .42rem
           height .42rem
-          vertical-align top
+          //vertical-align top
           cursor pointer
 
     table
@@ -258,50 +261,49 @@
             text-align left
           &:first-child
             padding-left .2rem
-          &:last-child
-            padding-right .2rem
       tbody
-        &.main-tbody
-          margin-bottom .36rem
         tr
-          border-bottom 1px solid $home-line-market-light // $home-line-market
           &.zone-name
-            border-bottom 1px solid $home-line-zone-title
             td
-              padding-left .34rem
-              font-size .2rem
+              //padding-left .34rem
               letter-spacing 0.08px
               color $home-font-marketTitle
-              font-weight 300
-              &:before
-                position relative
-                top .02rem
-                left -.14rem
-                display inline-block
-                content ""
-                width .04rem
-                height .16rem
-                background $home-line-zone-title
+              p
+                padding-left .34rem
+                margin-bottom .19rem
+                font-size .2rem
+                font-weight 300
+                border-bottom 1px solid $home-line-zone-titleBottom
+                &:before
+                  position relative
+                  top .02rem
+                  left -.14rem
+                  display inline-block
+                  content ""
+                  width .04rem
+                  height .16rem
+                  background $home-line-zone-title
           &.new-zone-name
             td
               padding-top .36rem
           &.table-data
+            border-bottom 1px solid $home-line-market-light // $home-line-market
             td
               text-align right
               padding-right .2rem
               &.left-td
                 text-align left
                 padding-right 0
+              &:first-child
+                padding-left .2rem
               &:last-child
-                padding-right .4rem
+                padding-right .2rem
             &:hover
               background $home-bg-marketActive
               box-shadow 0 1px 10px 0 rgba(0, 0, 0, 0.30)
         td
           font-weight 100
           color $home-font-table
-          &:first-child
-            padding-left .2rem
           span
             font-weight 100
             color $home-font-table

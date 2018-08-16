@@ -145,7 +145,8 @@ export default function en(state) {
     languageCn: 'Chinese',
     languageEn: 'English',
     next: 'Next',
-    pwdRule: '6~18位英文字母、数字或符号，两种组合以上',
+    pwdRule: '6位以上英文字母、数字或符号，两种以上组合，必须包含大写字母',
+    fundPwdRule: '请输入6位数字',
     pwdSameAgain: '与密码相同一致'
   };
   const errMessage = {
@@ -390,6 +391,8 @@ export default function en(state) {
     "market-volume": "24h Volume",
     "market-volume-h5": "24h Vol",
     "market-search": "Search the whole currency",
+    "market-main": "主流区",
+    "market-new": "创新区",
     "h5-market-add": "Add collection",
     "h5-market-cancel": "Cancel the collection",
   };
@@ -653,10 +656,9 @@ export default function en(state) {
     "user-verifyEmailTitle-h5": "Email Verification",
     "user-verifyPhoneTitle": "SMS Verification",
     "user-verifyPhoneTitle-h5": "Mobile Verification",
-    "user-checkAgainPwd": "Please ensure that both password entries match",
-    // "user-checkNewPwd": "Code length must be 6~18 digits",
-    "user-checkNewPwd":
-      "Must be 6-18 combinations of letters, numbers or symbols in English",
+    "user-checkAgainPwd": "*两次输入不一致",
+    // "user-checkNewPwd": "Must be 6-18 combinations of letters, numbers or symbols in English",
+    "user-checkNewPwd": "*密码格式不正确",
     "user-checkEmail": "Invalid email address format",
     "user-checkPhone": "Cellphone number incorrect",
     "user-photoSucc": "Upload success",

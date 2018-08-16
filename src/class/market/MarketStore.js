@@ -12,6 +12,8 @@ export default class MarketStore extends ExchangeStoreBase {
       market: '',//选择市场
       recommendDataHandle: [],
       marketDataHandle: [],
+      newMarketPair:[],
+      mainMarketPair:[],
       homeMarketPairData: [],
       coin: '',
       sortValue: ['turnover'],//排序值

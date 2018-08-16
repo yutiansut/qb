@@ -57,7 +57,8 @@ export default class HomeMarket extends ExchangeViewBase {
   render() {
     const {controller} = this.props;
     let marketData = this.state.marketDataHandle;     //市场列表
-    let marketPair = this.state.homeMarketPairData;  //交易对
+    console.log(this.state)
+    let marketPair = [...this.state.newMarketPair, ...this.state.mainMarketPair];  //交易对
 
     return (
       <div className="market">

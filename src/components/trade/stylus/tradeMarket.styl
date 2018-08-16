@@ -5,6 +5,19 @@
   background $trade-model-bg
   float left
   color $trade-font-title
+  overflow auto
+  &::-webkit-scrollbar-button
+    display none
+  &::-webkit-scrollbar
+    position relative
+    width 3px
+    height 100%
+  &::-webkit-scrollbar-track
+    width 3px
+    background $trade-scrollbar-track
+  &::-webkit-scrollbar-thumb
+    width 3px
+    background $trade-scrollbar-thumb
   .hide
     display none
   .trade-market-list

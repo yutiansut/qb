@@ -139,7 +139,7 @@ export default class TradeMarket extends ExchangeViewBase {
             </thead>
             {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || mainMarketPairLength) && <tbody className="main-tbody">
             <tr className="zone-name">
-              <td colSpan={controller.token ? 4 : 3}><p>主流区</p></td>
+              <td colSpan={controller.token ? 4 : 3}><p>{this.intl.get('market-main')}</p></td>
             </tr>
             {mainMarketPairLength ? this.filte(this.state.mainMarketPair, this.state.searchValue).map((v, index) =>
               this.marketContent(v, index)
@@ -147,8 +147,8 @@ export default class TradeMarket extends ExchangeViewBase {
             </tbody> || null}
 
             {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || newMarketPairLength) && <tbody>
-            <tr className="zone-name new-zone-name">
-              <td colSpan={controller.token ? 4 : 3}><p>创新区</p></td>
+            <tr className={`zone-name ${mainMarketPairLength ? 'new-zone-name' : ''}`}>
+              <td colSpan={controller.token ? 4 : 3}><p>{this.intl.get('market-new')}</p></td>
             </tr>
             {newMarketPairLength ? this.filte(this.state.newMarketPair, this.state.searchValue).map((v, index) =>
               this.marketContent(v, index)

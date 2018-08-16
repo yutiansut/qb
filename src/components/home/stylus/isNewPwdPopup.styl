@@ -13,7 +13,7 @@
     width 5.64rem
     //height 2.56rem
     color $home-font-normal
-    padding .24rem .3rem
+    padding .24rem .3rem .49rem
     background $home-bg-pwdPopup
     border-radius (.06rem)
     transform translateX(-50%) translateY(-50%)
@@ -32,19 +32,34 @@
         margin .04rem 0
     ul
       li
-        margin-bottom .2rem
+        position relative
+        margin-bottom .43rem
+        &.btn-li
+          margin-bottom .18rem
         &.set-li
           a
+            position relative
             float left
-            color $home-font-normal
+            color $home-font-set
+            &:after
+              position absolute
+              top .02rem
+              right -.2rem
+              content ''
+              width .15rem
+              height .11rem
+              background $home-arrow no-repeat center center
+              background-size 100%
           i
             float right
             cursor pointer
+            color $home-font-set
       span
         display block
         margin-bottom .1rem
       em
         display block
+        position absolute
         margin-top .1rem
         color $home-font-warn
       .base-input-wrap
@@ -55,7 +70,6 @@
       button
         width 100%
         height .4rem
-        margin-right .2rem
         vertical-align bottom
         background $home-bg-btn
         color $home-font-btn

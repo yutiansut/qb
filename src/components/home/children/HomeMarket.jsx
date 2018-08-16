@@ -78,9 +78,9 @@ export default class HomeMarket extends ExchangeViewBase {
             <span className={`market-updown ${v.rise < 0 ? 'down-after' : 'up-after'}`}>{Number(v.rise).toPercent()}</span>
           </NavLink>
         </td>
-        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.highestPrice) && Number(v.highestPrice).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
-        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.lowestPrice) && Number(v.lowestPrice).formatFixNumberForAmount(v.priceCN) || 0}</NavLink></td>
-        <td><NavLink to={{thname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.turnover).format({number: 'property'}) || 0}</NavLink></td>
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.highestPrice) && Number(v.highestPrice).format() || '--'}</NavLink></td>
+        <td><NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.lowestPrice) && Number(v.lowestPrice).format() || '--'}</NavLink></td>
+        <td><NavLink to={{thname: `/trade`, query: {pairName: v.tradePairName}}}>{Number(v.turnover).formatTurnover() || '--'}</NavLink></td>
         {/*<td>*/}
           {/*<NavLink to={{pathname: `/trade`, query: {pairName: v.tradePairName}}}>*/}
             {/*/!* 宽高等样式在homeMakt.styl里设置 *!/*/}
@@ -122,52 +122,54 @@ export default class HomeMarket extends ExchangeViewBase {
                   <span
                     className={`home-market-item${this.state.market.toUpperCase() === v.toUpperCase() ? '-active' : ''}`}>{v.toUpperCase()}</span>
                 </li>
-              )
-            })}
-          </ul>
-          <div className="search_wrap clearfix">
-            <Input
-              // type="search1"
-              onEnter={() => {
-                this.filte(this.state.homeMarketPairData, this.state.searchValue)
-              }}
-              value={this.state.searchValue}
-              onInput={value => {
-                (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
-              }}/>
-            <img src={this.$imagesMap.$home_marketBtn} alt=""/>
+              )})}
+            </ul>
+            <div className="search_wrap clearfix">
+              <Input
+                // type="search1"
+                onEnter={() => {
+                  this.filte(this.state.homeMarketPairData, this.state.searchValue)
+                }}
+                value={this.state.searchValue}
+                onInput={value => {
+                  (/^[a-zA-Z]*$/).test(value) && this.setState({searchValue: value})
+                }}/>
+              <img src={this.$imagesMap.$home_marketBtn} alt=""/>
+            </div>
           </div>
-        </div>
-        <table>
-          <thead>
-          <tr>
-            {controller.token && <th className="left-th">{this.intl.get('market-favorite')}</th> || null}
-            {this.state.marketTableHead.map((v, index) => {
-              return (<th onClick={this.pairSort.bind(this, v, index)} key={index}
-                          className={`${v.sortValue ? 'sort-img-li' : ''} ${v.class}`}>
-                {v.name}
-                <img src={this.state.sortIndex === index ? this.state.sortImg : this.$imagesMap.$rank_normal} alt=""
-                     className={`${v.sortValue ? '' : 'hide'}`}/>
-              </th>)
-            })}
-            {/*<th>{this.intl.get('market-change7D')}</th>*/}
-          </tr>
-          </thead>
-          {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || mainMarketPairLength) && <tbody className="main-tbody">
-            <tr className="zone-name"><td colSpan={controller.token ? 7 : 6}>主流区</td></tr>
-            {mainMarketPairLength ? this.filte(this.state.mainMarketPair, this.state.searchValue).map((v, index) =>
-               this.marketContent(v, index)
-            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
-          </tbody> || null}
+          <table>
+            <thead>
+            <tr>
+              {controller.token && <th className="left-th">{this.intl.get('market-favorite')}</th> || null}
+              {this.state.marketTableHead.map((v, index) => {
+                return (<th onClick={this.pairSort.bind(this, v, index)} key={index}
+                            className={`${v.sortValue ? 'sort-img-li' : ''} ${v.class}`}>
+                  {v.name}
+                  <img src={this.state.sortIndex === index ? this.state.sortImg : this.$imagesMap.$rank_normal} alt=""
+                       className={`${v.sortValue ? '' : 'hide'}`}/>
+                </th>)
+              })}
+              {/*<th>{this.intl.get('market-change7D')}</th>*/}
+            </tr>
+            </thead>
+            {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || mainMarketPairLength) && <tbody className="main-tbody">
+              <tr className="zone-name">
+                <td colSpan={controller.token ? 7 : 6}><p>{this.intl.get('market-main')}</p></td>
+              </tr>
+              {mainMarketPairLength ? this.filte(this.state.mainMarketPair, this.state.searchValue).map((v, index) =>
+                 this.marketContent(v, index)
+              ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
+            </tbody> || null}
 
-          {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || newMarketPairLength) && <tbody>
-            <tr className="zone-name new-zone-name"><td colSpan={controller.token ? 7 : 6}>创新区</td></tr>
-            {newMarketPairLength ? this.filte(this.state.newMarketPair, this.state.searchValue).map((v, index) =>
-              this.marketContent(v, index)
-            ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
-          </tbody> || null}
-        </table>
-
+            {((newMarketPairLength && mainMarketPairLength) || (!newMarketPairLength && !mainMarketPairLength) || newMarketPairLength) && <tbody>
+              <tr className={`zone-name ${mainMarketPairLength ? 'new-zone-name' : ''}`}>
+                <td colSpan={controller.token ? 7 : 6}><p>{this.intl.get('market-new')}</p></td>
+              </tr>
+              {newMarketPairLength ? this.filte(this.state.newMarketPair, this.state.searchValue).map((v, index) =>
+                this.marketContent(v, index)
+              ) : <tr className="nothing-market-pair" ><td colSpan={controller.token ? 7 : 6}>{this.intl.get('noDate')}</td></tr>}
+            </tbody> || null}
+          </table>
         </div>
       </div>
     )

@@ -161,12 +161,13 @@ export default class ForgetPass extends exchangeViewBase {
             </li>
             <li className="pass-li">
               <p>{this.intl.get("login-passInput")}</p>
-              <Input placeholder={this.intl.get("user-inputNewPwd")}
+              <Input placeholder={this.intl.get("pwdRule")}
                      oriType="password"
                      value={this.state.passInput}
                      onBlur={this.checkPassInput}
                      onInput={value => this.changePassInput(value)}/>
-              <em>{this.state.passInput && this.state.errPass || this.intl.get("login-passRule")}</em>
+              {/*<em>{this.state.passInput && this.state.errPass || this.intl.get("login-passRule")}</em>*/}
+              <em>{this.state.passInput && this.state.errPass}</em>
             </li>
             <li>
               <p>{this.intl.get("login-passAgain")}</p>
