@@ -82,7 +82,7 @@ export default class VerifyPopupH5 extends ExchangeViewBase {
           <Button
             title={this.intl.get('ok')}
             type="base"
-            className="submit"
+            className="ver-submit"
             disable={[0, 2].includes(type) ? !code.length : googleCode.join("").length !== 6}
             onClick={(e) => {
               e.stopPropagation();

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import exchangeViewBase from "../../../components/ExchangeViewBase";
 import Popup from "../../../common/component/Popup";
+import TwoVerify from "../../viewsPopup/TwoVerifyPopupH5";
 
 export default class Address extends exchangeViewBase {
   constructor(props) {
@@ -18,7 +19,13 @@ export default class Address extends exchangeViewBase {
       popMsg: "",
       popType: "",
 
-      showForm: false //添加地址表单隐藏
+      showForm: false, //添加地址表单隐藏
+      showTwoVerify: false,
+      verifyType: 1,
+      googleCode: ["", "", "", "", "", ""],
+      verifyNum: this.intl.get("sendCode"),
+      firstVerify: 2//1邮件 2谷歌 3短信
+      // this.state.firstVerify: 1 //1邮件 2谷歌 3短信
     };
     //绑定view
     controller.setView(this);
@@ -34,6 +41,12 @@ export default class Address extends exchangeViewBase {
       controller.headerController
     ); // 获取头部内容
     this.getWalletList = controller.getWalletList.bind(controller);
+
+    this.dealInput = controller.dealInput.bind(controller);
+    this.delNum = controller.delNum.bind(controller);
+    this.getVerify = controller.getVerify.bind(controller); //获取验证码
+    this.clearVerify = controller.clearVerify.bind(controller);
+    this.getUserInfo = controller.getUserInfo.bind(controller);
 
     this.copy = el => {
       if (controller.copy(el)) {
@@ -56,11 +69,12 @@ export default class Address extends exchangeViewBase {
     await this.getWalletList();
     // 获取路由参数
     let currency =
-      this.props.controller.getQuery("currency").toUpperCase() || "";
+    this.props.controller.getQuery("currency").toUpperCase() || "";
     this.addContent({ con: currency + " " + this.intl.get("notice-addr") });
     this.setState({ currency: currency });
 
     await this.getExtract();
+    await this.getUserInfo()
   }
 
   render() {
@@ -72,7 +86,8 @@ export default class Address extends exchangeViewBase {
       popType,
       inputAddrName,
       inputAddr,
-      showForm
+      showForm,
+      verifyNum
     } = this.state;
 
     //地址列表
@@ -171,14 +186,28 @@ export default class Address extends exchangeViewBase {
             <button
               className={canSubmit ? "" : "disable"}
               onClick={() => {
-                this.appendAddressH5(
-                  {
+                // 验证地址是否存在
+                let flag = false, obj = {
                     coinName: currency,
                     addressName: inputAddrName,
                     address: inputAddr
-                  },
-                  addressList
-                );
+                  };
+                addressList && addressList.forEach(v => {
+                    v.address === obj.address && (flag = 713);
+                    v.addressName === obj.addressName && (flag = "asset-name-existing");
+                });
+                if (flag) {
+                    this.setState({
+                      showPopup: true,
+                      popMsg: this.intl.get(flag),
+                      popType: "tip3"
+                    });
+                  return false;
+                }
+                this.setState({
+                  showTwoVerify:true,
+                  verifyNum: this.intl.get("sendCode")
+                })
               }}
             >
               {this.intl.get("save")}
@@ -197,6 +226,38 @@ export default class Address extends exchangeViewBase {
             autoClose={true}
           />
         )}
+        {this.state.showTwoVerify && <TwoVerify
+            googleCode={this.state.googleCode}
+            dealInput={this.dealInput}
+            delNum={this.delNum}
+            type={this.state.firstVerify - 1}
+            destroy={this.clearVerify}
+            verifyNum={
+              verifyNum
+                ? verifyNum === this.intl.get("sendCode")
+                  ? verifyNum
+                  : verifyNum + "s"
+                : this.intl.get("sendCode")
+            }
+            onSend={() => {
+              this.getVerify();
+            }}
+            onClose={() => {
+              this.setState({ showTwoVerify: false });
+            }}
+            onConfirm={code => {
+              this.Logger.dev(code);
+              this.appendAddressH5(
+                  {
+                    coinName: currency,
+                    addressName: inputAddrName,
+                    address: inputAddr
+                  },
+                  addressList
+                );
+            }}
+          />
+        }
       </div>
     );
   }
