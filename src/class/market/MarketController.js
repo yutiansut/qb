@@ -121,7 +121,7 @@ export default class MarketController extends ExchangeControllerBase {
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
     this.store.updateAllPairListFromData(marketAll, 0)
-    console.log('111112', this.store.allPair, marketAll)
+    this.Logger('111112', this.store.allPair, marketAll)
     //请求收藏列表
     let collectIdArr = []
     if (this.userController.userToken) {
