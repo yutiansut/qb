@@ -64,7 +64,6 @@ export default class Home extends exchangeViewBase {
 
   componentDidMount() { // 滚动事件 改变头部
     super.componentDidMount();
-
     let lang = this.props.marketController.configController.language;
 
 

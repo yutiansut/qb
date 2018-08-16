@@ -10,7 +10,7 @@ import './libs/Prototype'
 import ZipUtil from './libs/ZipUtil'
 import StoreBase from './StoreBase'
 import Regular from './libs/Regular'
-
+import Logger from './libs/Logger'
 
 
 const RUNAPP = async (config) => {
@@ -36,5 +36,6 @@ module.exports = {
   Storage,
   ZipUtil,
   StoreBase,
-  Regular
+  Regular,
+  Logger
 }

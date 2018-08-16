@@ -6,6 +6,7 @@ import GlobalUtil from "./libs/GlobalUtil";
 import Storage from "./storage";
 import FileSaver from "file-saver";
 import './libs/RSAUtil'
+import Logger from "./libs/Logger";
 const encrypt = new JSEncrypt();
 let rsaPublicKeyFlag = false
 
@@ -35,6 +36,7 @@ export default class ControllerBase {
     this.Loop = Loop;
     this.Util = GlobalUtil;
     this.Storage = Storage;
+    this.Logger = Logger;
   }
 
   setView(view) {

@@ -6,6 +6,7 @@
  */
 
   import Fetch from "../libs/Fetch";
+  import Logger from "../libs/Logger";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
 import {zip, unZip} from '../libs/ZipUtil'
 
@@ -55,7 +56,6 @@ const HTTP_PROXY = {
           }
         }
         req = formatParams(req)
-        console.log(req.url, ' sendHttp ',  req.data.body)
         if(HttpZip){
           try {
             req.data.body = await zip(req.data.body)
@@ -87,7 +87,6 @@ const HTTP_PROXY = {
         } catch (e) {
           res.result = {ret: -3, data: e}
         }
-        console.log(req.url, ' reciveHttp ', res.result)
         if (afterHandler && afterHandler.length) {
           for (let i = 0; i < afterHandler.length; i++) {
             await afterHandler[i](this, req, res, v)

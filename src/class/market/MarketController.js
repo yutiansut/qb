@@ -236,6 +236,7 @@ export default class MarketController extends ExchangeControllerBase {
       sortValue = [`price${this.store.state.unitsType}`]
     }
     this.store.setSort(sortValue, v.type)
+    
     v.type = v.type === false ? 0 : 1
     v.sortValue && this.view.setState({
       // homeMarketPairData: this.sort(sortArray, this.store.state.sortValue, this.store.state.ascending),

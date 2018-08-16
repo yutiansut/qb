@@ -17,11 +17,14 @@ export default {
   webSocketList: [
     {
       name: 'general', url: '/sub', optionList: {
-        // test:{testEmit:{var: 1, op: 2}},
         global: {
           connect: {v: 1, o: 0, s: 0, resOp: 1},//握手
           heartBreak: {v: 1, o: 2, s: 0, resOp: 3},//心跳
-          joinRoom: {v: 1, o: 4, s: 0, resOp: 5},//加入房间
+          joinRoom: {v: 1, o: 4, s: 0, resOp: 5, history: true,
+            historyFunc: (arr, value) => (!arr.length && arr.push({f: "", t: value.t}),
+              value.f && arr.map(v=>v.t).includes(value.f) && arr.splice(arr.findIndex(v=>v.t === value.f), 1),
+              value.t && !arr.map(v=>v.t).includes(value.t) && arr.push({f: "", t: value.t}), arr)
+             },//加入房间
         },
         market: {
           recommendCurrency: {v: 1, o: 108, s: 0, resOp: 108},//推荐币种
@@ -51,5 +54,6 @@ export default {
 
   ],
 }
+
 
 

@@ -56,7 +56,6 @@ const MESSAGE_HANDLER = {
    * @param webSocketList
    */
   install(config) {
-    // console.log('aaaaaaa')
     let pool = {}
     PoolDic[config.name] = pool;
     pool.EMIT_QUENE = [];
@@ -64,11 +63,9 @@ const MESSAGE_HANDLER = {
 
 
     MESSAGE_HANDLER[config.name] = {}
-    MESSAGE_HANDLER[config.name].send = data => {
-      // console.log('MESSAGE_HANDLER[config.name].send',data, pool)
-      pool.EMIT_QUENE.push(data)
-    }
-    MESSAGE_HANDLER[config.name].config = JSON.parse(JSON.stringify(config))
+    MESSAGE_HANDLER[config.name].send = data => pool.EMIT_QUENE.push(data)
+    
+    MESSAGE_HANDLER[config.name].config = config
 
     //此处需被重写
     MESSAGE_HANDLER[config.name].onMessage = async data => data && console.log('data', data)
@@ -100,13 +97,9 @@ const MESSAGE_HANDLER = {
 
   installWebsocket(transfer, name){
     let pool = PoolDic[name]
-    // console.log('bbbbbbbbbbb', JSON.stringify(pool.EMIT_QUENE))
     pool.transfer = transfer
-    transfer.onMessage = function (data){
-      // console.log('pool.onMessage = function (data){', data)
-      pool.RECEIVE_QUENE.push(data)
-      // console.log(pool.RECEIVE_QUENE)
-    }
+    transfer.onMessage = (data) => pool.RECEIVE_QUENE.push(data)
+    
     transfer.onClose = pool.onClose
     transfer.onError = pool.onError
     transfer.onOpen = pool.onOpen

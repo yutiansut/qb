@@ -11,6 +11,7 @@ import StorageConfig from './config/StorageConfig'
 import './class/lib/Prototype'
 import Device from './core/libs/Device'
 
+
 let str = Date.now() + '-' + Math.random().toString(36).substr(2);
 
 const renderDom = async Component => {
