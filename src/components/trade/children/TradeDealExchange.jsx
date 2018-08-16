@@ -59,7 +59,7 @@ export default class TradeDealExchange extends  ExchangeViewBase{
             </div>
           </div>
           <div className='deal-number-range'>
-            <input type="range"  min='0' max={maxValue || 0} step={(maxValue/100) || 0} className={`r-${this.props.ControllerProps.tradeType}`} value={this.props.ControllerProps.dealType ? Number(this.props.sellNum) : Number(this.props.buyNum)} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType,false)}/>
+            <input type="range"  min='0' max={maxValue || 0} step={Number(maxValue.div(100)) || 0} className={`r-${this.props.ControllerProps.tradeType}`} value={this.props.ControllerProps.dealType ? Number(this.props.sellNum) : Number(this.props.buyNum)} onChange={this.props.numInput.bind(this, this.props.ControllerProps.dealType,false)}/>
             <ul>
               {rangeItems.map((v, index) => {
                 return(

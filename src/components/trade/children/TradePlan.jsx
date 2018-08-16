@@ -155,7 +155,7 @@ export default class TradePlan extends ExchangeViewBase {
     // priceValue >= 100 && (limitPrice = 6);
     // priceValue >= 0.1 && priceValue < 100 && (limitPrice = 4);
     // priceValue >= 0.01 && priceValue < 0.1 && (limitPrice = 2);
-    let numValue = e.target.value > maxNum ? maxNum.toFixedWithoutUp(numLimit) : value;
+    let numValue = value > maxNum ? maxNum.toFixedWithoutUp(numLimit) : value;
     if(type) {
       dealType ? (this.setState({inputSellNum: numValue})) : (this.setState({inputBuyNum: numValue}))
       dealType ? (numValue>= maxNum.toFixedWithoutUp(numLimit) && this.setState({sellNumFlag: true}))
@@ -472,6 +472,7 @@ export default class TradePlan extends ExchangeViewBase {
                                  freePwd={this.freePwd.bind(this)}
                                  coinChargeFlag={this.state.coinChargeFlag}
                                  marketChargeFlag={this.state.marketChargeFlag}
+                                 numLimit={this.state.numLimit}
               />
 
             )

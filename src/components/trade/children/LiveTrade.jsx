@@ -71,7 +71,7 @@ export default class LiveTrade extends ExchangeViewBase{
             <thead>
               {/*<tr style={{height: this.state.liveSellArray && this.state.liveSellArray.length ? "0.49rem" : '0.63rem', lineHeight: '0.49rem'}}>  */}
                 <tr style={{height: '.31rem', lineHeight: '.31rem'}}>
-                <td> </td>
+                <td></td>
                 <td>{`${this.intl.get('price')}(${(this.state.unitsType && this.state.unitsType.toUpperCase()) || (this.state.market && this.state.market.toUpperCase())})`}</td>
                 <td>{`${this.intl.get('amount')}(${(this.state.coin && this.state.coin.toUpperCase())})`}</td>
                 <td>{`${this.intl.get('total')}(${(this.state.unitsType && this.state.unitsType.toUpperCase()) || (this.state.market && this.state.market.toUpperCase())})`}</td>
@@ -92,14 +92,14 @@ export default class LiveTrade extends ExchangeViewBase{
                   </tr>
               )
             ) || null}
-            <tr style={{height: '.1rem'}}> </tr>
+            <tr style={{height: '.1rem'}}></tr>
             </tbody>
           
           <tbody className='live-deal'>
             <tr><td colSpan='4' className={`${this.state.updown && (this.state.updown > 0 && "market-up" || "market-down")}`} style={{fontSize: '28px'}}>{this.state.dealPrice}</td></tr>
           </tbody>
             <tbody className='trade-live-buy'>
-            <tr style={{height: '.1rem'}}> </tr>
+            <tr style={{height: '.1rem'}}></tr>
             {this.state.liveBuyArray && this.state.liveBuyArray.map((v,index) =>
                 (
                   <tr key={index}  onClick={this.orderListSelect.bind(this,v)} style={{cursor:'pointer'}}>

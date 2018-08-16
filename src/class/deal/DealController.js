@@ -33,7 +33,6 @@ export default class DealController extends ExchangeControllerBase {
       {
         NumUnit: coin,
         Market: market,
-        buyNumFlag: false,
         Coin: coin,
         PriceUnit: ['CNY', 'USD'].includes(this.view.state.PriceUnit) && this.view.state.PriceUnit || market,
         priceBank: {
@@ -55,7 +54,8 @@ export default class DealController extends ExchangeControllerBase {
 
     this.store.state.prices = prices;
     this.store.state.buyNumFlag = false;
-    this.setPriceInit(prices, flag);
+    flag === 3 && this.setPriceInit(prices, flag);
+    flag === 3 && this.view.setState({buyNumFlag: false,});
     this.userOrderController.setInitUnit(market, coin);
     this.TradeRecentController.setInitUnit(market, coin);
     this.TradeOrderListController.setInitUnit(market, coin);
@@ -80,26 +80,28 @@ export default class DealController extends ExchangeControllerBase {
       dealBank: prices
     });
     this.store.state.prices = prices;
-    this.setPriceInit(prices,true);
+    this.setPriceInit(prices);
   }
 
   // 数字币计价 初始值获取
-  setPriceInit(v, flag) {
-    flag && this.view.setState({
+  setPriceInit(v) {
+    let checkNum = this.view.state.numLimit;
+     this.view.setState({
       priceInit:v.price,
-      buyMax:this.view.state.buyWallet / v.price,
+      buyMax:Number(Number(this.view.state.buyWallet).div(v.price)).toFixedWithoutUp(checkNum),
       inputSellNum: 0,
-      inputBuyNum: 0
+      inputBuyNum: 0,
       // sellMax:this.view.state.sellWallet
     })
   }
   // 设置市价交易的最大数量值
   setMarketPriceMaxNum(v){
+    let checkNum = this.view.state.numLimit;
     this.view.setState(
         {marketChangePrice: v.price}
     );
     this.view.setState({
-      marketBuyMax: Number(Number(this.view.state.buyWallet).div(v.price)),
+      marketBuyMax: Number(Number(this.view.state.buyWallet).div(v.price)).toFixedWithoutUp(checkNum),
       marketSellMax: Number(this.view.state.sellWallet)
     })
   }
@@ -161,14 +163,14 @@ export default class DealController extends ExchangeControllerBase {
   changeMaxNum(t, v) {
     let a = Number(v) ? v : 0.000001;
     let changeBankPrice = this.store.state.PriceUnit === "CNY" ? (a * this.store.state.prices.price / this.store.state.prices.priceCN) :(this.store.state.PriceUnit === "USD" && (a * this.store.state.prices.price / this.store.state.prices.priceEN) || a);
+    let checkNum = this.view.state.numLimit;
     (t === 1) && (this.view.setState({sellMax: this.view.state.sellWallet}));
-    (t === 0) && (this.view.setState({buyMax: this.view.state.buyWallet / changeBankPrice}));
+    (t === 0) && (this.view.setState({buyMax: Number(Number(this.view.state.buyWallet).div(changeBankPrice)).toFixedWithoutUp(checkNum)}));
     if(this.store.state.PriceUnit === "CNY" || this.store.state.PriceUnit === "USD") {
       t === 1 && (this.view.setState({changBankPriceS : changeBankPrice}));
       t === 0 && (this.view.setState({changBankPriceB : changeBankPrice}))
     }
     if (this.store.state.buyNumFlag && (t === 0)) {
-      let checkNum = this.view.state.numLimit;
       this.view.setState({
         inputBuyNum: Number(this.view.state.buyWallet.div(changeBankPrice)).toFixedWithoutUp(checkNum)})
     }

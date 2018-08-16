@@ -121,7 +121,6 @@ export default class MarketController extends ExchangeControllerBase {
     //更新交易对池，只在第一次打开时，发送http请求更新
     let marketAll = await this.store.getMarketAll()
     this.store.updateAllPairListFromData(marketAll, 0)
-    this.Logger('111112', this.store.allPair, marketAll)
     //请求收藏列表
     let collectIdArr = []
     if (this.userController.userToken) {
@@ -146,11 +145,9 @@ export default class MarketController extends ExchangeControllerBase {
       let queryValue = this.view.state.query;
       selectPair = queryValue
       market = queryValue.split('/')[1]
-      // console.log('11111111',(queryValue.split('/').length), )
       if(queryValue.split('/').length === 1){
         selectPair = null
         market = queryValue
-        // console.log('22222222',this.store.marketDataHandle, this.store.marketDataHandle.indexOf(queryValue), queryValue)
         if(this.store.marketDataHandle.indexOf(queryValue) < 0) {
           let pairMsg = await this.store.getPairMsg()
           market = pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]
@@ -210,7 +207,7 @@ export default class MarketController extends ExchangeControllerBase {
     this.assetController && this.assetController.setSimpleAsset({tradePairId: value.tradePairId});
     this.klineController && this.klineController.setPair(value.tradePairName.split("/")[0], value.tradePairName);
     this.TradePlanController && this.TradePlanController.setPriceFlag();
-    this.setDealMsg(true);
+    this.setDealMsg(3);
   }
 
   clearRoom(){
