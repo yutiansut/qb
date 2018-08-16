@@ -256,16 +256,16 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>{this.intl.get("phone")}</li>
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>
               {this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}
-              {/*{this.state.userInfo.phone && <span onClick = {state => this.changeSetPopup(7)}>修改</span>}*/}
+              {this.state.userInfo.phone && <span onClick = {state => this.changeSetPopup(7)}>{this.intl.get('alter')}</span>}
             </li>
             <li>{this.intl.get("user-level")}</li>
             <li>
               <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/user/integration">{this.state.userCreditsNum}</Link>)
             </li>
-            {/*{this.state.userInfo.googleAuth === 0 && <li>*/}
-              {/*<em>{this.intl.get("user-googleVerify")}</em>*/}
-            {/*<i onClick={() => {this.setState({modifyGoogle: true});}}>修改</i>*/}
-            {/*</li>}*/}
+            {this.state.userInfo.googleAuth === 0 && <li>
+              <em>{this.intl.get("user-googleVerify")}</em>
+              <i onClick={() => {this.setState({modifyGoogle: true});}}>{this.intl.get('alter')}</i>
+            </li>}
           </ul>
         </div>
         <div className="change-pass model-div" style={{display: 'flex'}}>

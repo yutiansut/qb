@@ -232,6 +232,43 @@ export default {
     },
     errCode: "GCODE_EXCESSIVE"
   },
+  629: {
+    // msg: "登录错误次数过多，封号状态",
+    get msg() {
+      if(this.wt === 5) {
+        return intl.get('629-1', { number: this.ft % 60 ? parseInt(this.ft / 60) + 1 : parseInt(this.ft / 60)});
+      }
+      if(this.wt === 6){
+        return intl.get('629-2', { number: this.ft % 3600 ? parseInt(this.ft / 3600) + 1 : parseInt(this.ft / 3600)});
+      }
+      if(this.wt >= 7){
+        if(this.ft === 604800) {
+          return intl.get('629-4')
+        }
+        return intl.get('629-3', { number: this.ft % 86400 ? parseInt(this.ft / 86400) + 1 : parseInt(this.ft / 86400)});
+      }
+    },
+    errCode: "FREEZE_ACCOUNT"
+  },
+  630: {
+    // msg: "密码错误",
+    get msg() {
+      if(this.wt < 4) {
+        return intl.get(601);
+      }
+      if(this.wt === 4){
+        return intl.get('630-1');
+      }
+    },
+    errCode: "LOGIN_PWD_ERROR"
+  },
+  631: {
+    // msg: "账号被封时，验证登录提示",
+    get msg() {
+      return intl.get(631);
+    },
+    errCode: "FREEZE_ACCOUNT_VERIFY_TIP"
+  },
   704: {
     // msg: "24小时内修改过资金密码,存在安全保护墙",
     get msg() {

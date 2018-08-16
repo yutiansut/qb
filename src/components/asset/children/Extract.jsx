@@ -36,7 +36,7 @@ export default class Extract extends exchangeViewBase {
       password: "",
       showTwoVerify: false,
       verifyType: 0, //两步验证确认后的操作 0 申请提币订单，1 添加提币地址
-      firstVerify: 2,//增加提币地址时优先的二次验证类型 1 右键，2谷歌，3短信
+      firstVerify: 2,//增加提币地址时优先的二次验证类型 1 邮件，2谷歌，3短信
       verifyNum: this.intl.get("sendCode"),
       tradePair: null,
       page: 1,

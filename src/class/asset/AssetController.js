@@ -225,10 +225,11 @@ export default class AssetController extends ExchangeControllerBase {
 
   // 请求验证码
   async requestCode() {
-    let type = this.userTwoVerify.withdrawVerify;
+    let type = !this.view.state.verifyType ? this.view.state.userTwoVerify.withdrawVerify : this.view.state.firstVerify
     let result = await this.userController.getCode(
       this.account[type],
       type === 1 ? 1 : 0,
+      // this.view.state.verifyType === 0 ? 8 : 2,
       8
     );
     if (result && result.errCode) {
