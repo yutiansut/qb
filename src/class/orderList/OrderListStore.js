@@ -84,7 +84,8 @@ export default class OrderListStore extends ExchangeStoreBase {
           "price": v.p,
           "priceCN": v.pc,
           "priceEN": v.pe,
-          "volume": v.vol
+          "volume": v.vol,
+          "orderType": v.ot
         }
       })
     }

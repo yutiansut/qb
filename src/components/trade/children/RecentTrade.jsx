@@ -88,7 +88,7 @@ export default class extends ExchangeViewBase {
                 index <= 50 && (
                   <tr key={index}>
                     <td>{Number(v.dealTime).toDate('HH:mm:ss')}</td>
-                    <td  style={{color: this.state.recentItemSelect !== 'mineLess' ? (v.orderType === 1 ? '#f25656' : '#2bb789') : 'rgba(255,255,255,0.8)'}}>
+                    <td  style={{color: v.orderType === 1 ? '#f25656' : '#2bb789'}}>
                       {v.priceR}
                     </td>
                     <td>{v.volume}</td>

@@ -80,7 +80,7 @@ export default class SelectButton extends Component {
             {valueArr.map((item, index) => {
               return (
                 <li
-                  className={item === title ? "active" : ""}
+                  className={type !== 'trade' ? (item === title ? "active" : "") : (title.indexOf(item) > -1 ? "active" : '')}
                   key={index}
                   onClick={e => {
                     e.nativeEvent.stopImmediatePropagation();
