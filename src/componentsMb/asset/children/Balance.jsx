@@ -7,6 +7,7 @@ import {
 export default class Balance extends exchangeViewBase {
   constructor(props) {
     super(props);
+    let {controller} = props;
     this.name = "balance";
     this.state = {
       totalAsset: {},
@@ -14,8 +15,8 @@ export default class Balance extends exchangeViewBase {
       hideLittle: false,
       showAsset: true,
       sort: 0,  // 0-总资产降序,1-总资产升序,2-无序
+      coin: controller.configData.coin,
     };
-    let {controller} = props;
     //绑定view
     controller.setView(this);
     let {totalAsset, wallet} = controller.initState;
@@ -78,7 +79,7 @@ export default class Balance extends exchangeViewBase {
   render() {
     let {controller, history} = this.props;
     let lang = controller.configData.language;
-    let {totalAsset, wallet, hideLittle, showAsset, sort} = this.state;
+    let {totalAsset, wallet, hideLittle, showAsset, sort, coin} = this.state;
     let result = this.filter(wallet, "", hideLittle, null);
     result = this.rank(result, {totalCount: sort}) || [];
     return (
@@ -148,7 +149,7 @@ export default class Balance extends exchangeViewBase {
           </div>
           {/*列表数据显示*/}
           {result.map((item, index) => {
-            return item.coinName.toUpperCase() !== 'QBT' ?
+            return item.coinName.toUpperCase() !== coin ?
               /*普通币种*/
               <div className="wallet-li" key={index}
                    onClick={() => history.push(`/wallet/detail/?currency=${item.coinName}`)}>
@@ -160,7 +161,7 @@ export default class Balance extends exchangeViewBase {
               </div>
               :
               /*QBT*/
-              <div className="wallet-li" key={index}>
+              <div className="wallet-li" key={index} onClick={() => history.push(`/activity/myqbt`)}>
                 <label>{item.coinName.toUpperCase()}<i>({item.fullName})</i></label>
                 <span>{showAsset && Number(item.availableCount).format({
                   number: "property",
