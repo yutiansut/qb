@@ -448,7 +448,7 @@ export default class AssetStore extends ExchangeStoreBase {
     return result;
   }
   // 增加提现地址
-  async appendAddress({ coinName, addressName, address }) {
+  async appendAddress({ coinName, addressName, address, code, account, mode, os=3 }) {
     let result = await this.Proxy.addAddress({
       // userId: this.controller.userId,
       address: address,
@@ -456,7 +456,11 @@ export default class AssetStore extends ExchangeStoreBase {
       id: this.state.walletList[coinName], //coin id
       na: coinName.toLowerCase(), //coin name
       ana: addressName, //address name
-      add: address //address
+      add: address,//address
+      cd: code,
+      ac: account,
+      md: mode,
+      os: os
     });
     if (result && result.errCode) {
       return result;

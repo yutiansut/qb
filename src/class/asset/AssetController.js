@@ -229,8 +229,7 @@ export default class AssetController extends ExchangeControllerBase {
     let result = await this.userController.getCode(
       this.account[type],
       type === 1 ? 1 : 0,
-      // this.view.state.verifyType === 0 ? 8 : 2,
-      8
+      !this.view.state.verifyType ? 8 : 10,
     );
     if (result && result.errCode) {
       this.view.setState({ orderTip: true, orderTipContent: result.msg });
@@ -573,7 +572,18 @@ export default class AssetController extends ExchangeControllerBase {
       code: code
     });
     if(verifyType){
-      let obj = Object.assign({ coinName: this.view.state.currency }, this.view.state.newAddress[0]);
+      let obj = Object.assign({
+        coinName: this.view.state.currency,
+        code: code,
+        account: '',
+        mode: 2,
+        os: 3
+      }, this.view.state.newAddress[0]);
+      let type = this.view.state.firstVerify;
+        (type === 1 || type === 3) && (obj.account = this.account[type]);
+        type === 1 && (obj.mode = 1);
+        type === 3 && (obj.mode = 0);
+        type === 2 && (obj.mode = 2);
       let result = await this.appendAddress(
         obj,
         curExtract

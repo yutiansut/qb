@@ -84,7 +84,7 @@ export default class Extract extends exchangeViewBase {
     // 获取提币信息
     this.getHistory = controller.getHistory.bind(controller);
     // 添加提币地址
-    this.appendAddress = controller.appendAddress.bind(controller);
+    // this.appendAddress = controller.appendAddress.bind(controller);
     // 删除提币地址
     this.deletAddress = controller.deletAddress.bind(controller);
     // 提交提币订单前的验证

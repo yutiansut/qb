@@ -8,10 +8,15 @@ export default class Address extends exchangeViewBase {
   constructor(props) {
     super(props);
     let { controller } = props;
+    console.log(controller)
     this.state = {
       currency: "",
       walletExtract: {},
-
+      mode:{
+        1: 1,
+        2: 2,
+        3: 0
+      },
       inputAddrName: "",
       inputAddr: "",
 
@@ -246,13 +251,20 @@ export default class Address extends exchangeViewBase {
               this.setState({ showTwoVerify: false });
             }}
             onConfirm={code => {
-              this.Logger.dev(code);
-              this.appendAddressH5(
-                  {
+              let obj = {
                     coinName: currency,
                     addressName: inputAddrName,
-                    address: inputAddr
-                  },
+                    address: inputAddr,
+                    code: code,
+                    account: '',
+                    mode: 2,
+                    os: 4
+                  };
+                  let type = this.state.firstVerify;
+                  (type === 1 || type === 3) && (obj.account = this.props.controller.account[type]);
+                  obj.mode = this.state.mode[type];
+              this.appendAddressH5(
+                  obj,
                   addressList
                 );
             }}

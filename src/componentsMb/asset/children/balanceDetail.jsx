@@ -116,7 +116,15 @@ export default class BalanceDetail extends exchangeViewBase {
                 this.props.history.push({ pathname: "/wallet/charge", query: { currency: result.coinName }})
             }}
           />
-          <Button type="base" className="tiBbtn" title={this.intl.get("asset-withdraw")} />
+          <Button
+            type="base"
+            className="tiBbtn"
+            title={this.intl.get("asset-withdraw")}
+            disable={result.w === 0 ? true : false}
+            onClick={() => {
+                this.props.history.push({ pathname: `/wallet/withdraw/?currency=${result.coinName}`})
+            }}
+        />
         </div>
 
         {/*币种简介*/}
@@ -127,39 +135,39 @@ export default class BalanceDetail extends exchangeViewBase {
           </a>
           <h3>{enName}&nbsp;({name && name.toUpperCase()})</h3>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-date')}：</label>
+              <label>{this.intl.get('help-coin-date')}：</label>
               <span>{releaseTime.toDate("yyyy/MM/dd")}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-total')}：</label>
+              <label>{this.intl.get('help-coin-total')}：</label>
               <span>{totalVolume.format({ number: "general" })}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-market')}：</label>
+              <label>{this.intl.get('help-coin-market')}：</label>
               <span>{lang === "zh-CN" ? `¥${Number(totalValueCN).format({ number: "legal" })}` : `$${Number(totalValueEN).format({number: "legal"})}`}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-liquidity')}：</label>
+              <label>{this.intl.get('help-coin-liquidity')}：</label>
               <span>{circulationVolume.format({ number: "general" })}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-price')}：</label>
+              <label>{this.intl.get('help-coin-price')}：</label>
               <span>{lang === "zh-CN" ? `¥${Number(priceCN).format({ number: "legal" })}` : `$${Number(priceEN).format({ number: "legal" })}`}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-website')}：</label>
+              <label>{this.intl.get('help-coin-website')}：</label>
               <span>{webSite && webSite[0]}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-browser')}：</label>
+              <label>{this.intl.get('help-coin-browser')}：</label>
               <span>{blockSites && blockSites[0]}</span>
           </div>
           <div className="data-li">
-              <label>{this.intl.get('helo-coin-white')}：</label>
+              <label>{this.intl.get('help-coin-white')}：</label>
               <span>{whitePaper && whitePaper[0]}</span>
           </div>
           <div className="detail">
-              <label>{this.intl.get('helo-coin-introduction')}</label>
+              <label>{this.intl.get('help-coin-introduction')}</label>
               <p>{description && this.intl.get(description) ? this.intl.get(description) : description}</p>
           </div>
         </div>
