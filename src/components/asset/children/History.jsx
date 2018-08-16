@@ -121,9 +121,7 @@ export default class History extends exchangeViewBase {
         pageSize: 20
       });
     };
-    // this.state = {
-    // console.log(this.controller)
-    // }
+  
   }
   async componentWillMount() {
     await this.getWalletList();

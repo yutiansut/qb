@@ -17,14 +17,8 @@ const FILTERFUNC = {
   string: (arr, str) =>
     arr.filter(v => typeof v === "string" && v.indexOf(str) > -1),
   object: (arr, obj) =>
-    arr.filter(
-      v =>
-        typeof v === "object" &&
-        Object.keys(obj).filter(
-          vv =>
-            v[vv] !== "undefined" &&
-            FILTERFUNC[typeof obj[vv]]([v[vv]], obj[vv]).length
-        ).length === Object.keys(obj).length
+    arr.filter(v => typeof v === "object" &&
+        Object.keys(obj).filter(vv => v[vv] !== "undefined" && FILTERFUNC[typeof obj[vv]]([v[vv]], obj[vv]).length).length === Object.keys(obj).length
     ),
   boolean: (arr, bool) => (bool && arr.filter(v => v)) || arr.filter(v => !v)
 };
@@ -64,11 +58,9 @@ export default class ControllerBase {
    * 倒计时方法
    */
   countDown(key, state, view) {
-    // console.log(this.Loop[key], view.state[state])
     this.Loop[key].clear();
     this.Loop[key].setDelayTime(1000);
     this.Loop[key].set(async () => {
-      // console.log('倒计时',state, view.state[state], view)
       if (view.state[state] === 0) {
         this.Loop[key].stop();
         return;
@@ -81,7 +73,6 @@ export default class ControllerBase {
   }
 
   countDownStop(key) {
-    // console.log('清除倒计时', key)
     this.Loop[key].stop();
     this.Loop[key].clear();
   }
@@ -131,7 +122,6 @@ export default class ControllerBase {
    * return 筛选后的数组
    */
   filter(arr, rule) {
-    // console.log('aaaa', arr, rule)
     return (
       (FILTERFUNC[typeof rule] && FILTERFUNC[typeof rule](arr, rule)) || arr
     );

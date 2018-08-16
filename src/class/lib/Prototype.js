@@ -1,17 +1,11 @@
 import JsonBig from 'json-bigint'
 import { BigNumber } from "bignumber.js";
 
-JSON.stringify = (...parmas)=>{
-  // console.log("修改JSON.stringify", ...parmas);
-  // let res =
-  // console.log("修改JSON.stringify结果", res);
-  return JsonBig.stringify(...parmas)
-}
+JSON.stringify = (...parmas) => JsonBig.stringify(...parmas)
 
-JSON.parse = (...parmas)=>{
-  // console.log("修改JSON.parse", ...parmas);
-  return JsonBig.parse(...parmas)
-}
+
+JSON.parse = (...parmas) => JsonBig.parse(...parmas)
+
 
 const NUMBER_SUFFIX_ARR = []; // 数字后缀格式{value:10000,suffix:'万'},{value:100000000,suffix:'亿'}
 const NUMBER_PREFIX_ARR = {
@@ -97,7 +91,6 @@ Number.prototype.formatTurnover = function (){
 }
 //添加前缀后缀函数，分隔符，补零函数
 Number.prototype.formatFixStyle = function (para) {
-  // console.log('formatFixStyle', para.name)
   // if(Math.abs(this) === 0)
   //   return ''+this
   let number = Math.abs(this),
@@ -144,7 +137,6 @@ function findFlag(number, formatType) {
 // TODO: 目前仅支持传入类型修改精度，有待扩展
 // TODO: 无法根据其他值修改精度要求，必须扩展
 Number.prototype.formatFixNumber = function (formatType) {
-  // console.log('formatFixNumber',Math.abs(this) , Math.abs(this) === 0)
   if(Math.abs(this) === 0)
     return this
   formatType = formatType || 'general'
@@ -161,20 +153,6 @@ Number.prototype.formatFixNumberForAmount = function (accuracy, test = true){
   if(test)
     return this
   return (''+this.toFixedWithoutUp(accuracy).formatFixStyle({})).addZero(accuracy)
-  // console.log('number amount 0',this, price, price < 100)
-  // if(price < 100 && price >= 0.1){
-  //   // console.log('number amount 1',this.toFixedWithoutUp(4).formatFixStyle({}).addZero(4))
-  //   return (''+this.toFixedWithoutUp(4).formatFixStyle({})).addZero(4)
-  // }
-  // if(price < 0.1 && price >= 0.01){
-  //   return (''+this.toFixedWithoutUp(2).formatFixStyle({})).addZero(2)
-  // }
-  // if(price < 0.01){
-  //   return (''+this.toFixedWithoutUp(0).formatFixStyle({})).addZero(0)
-  // }
-  // if(price)
-  // // console.log('number amount 2',this.toFixedWithoutUp(6).formatFixStyle({}).addZero(6))
-  // return (''+this.toFixedWithoutUp(6).formatFixStyle({})).addZero(6)
 }
 
 //数字format
@@ -190,7 +168,6 @@ Number.prototype.format = function (para) {
     numberTypeStyle = (numberType === 'digital' || numberType === 'legal') && {thousandSign:false} || {},
     str = number.formatFixStyle(Object.assign(style,numberTypeStyle))
     // flag = findFlag(Math.abs(number), numberType);
-  // console.log('Number.prototype.format', this, str, flag, decimalLength[flag], numberType)
   // if(decimalLength[flag])
   //   str = str.addZero(decimalLength[flag])
   return str
@@ -198,12 +175,6 @@ Number.prototype.format = function (para) {
 
 //百分比
 Number.prototype.toPercent = function (type = true){
-  // console.log('aaa')
-  // return `${Math.abs(this*100).toFixed(2)}%`
-  //   return (this*100).toFixed(2)
-  // if(type && (this*100) > 0)
-  //   return `+${(this*100).toFixed(2)}%`
-  // return `${(this*100).toFixed(2)}%`
   if(type && (this*100) === 0)
     return (this*100).toFixed(2)
   if(type && (this*100) > 0)

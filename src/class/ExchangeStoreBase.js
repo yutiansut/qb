@@ -24,7 +24,7 @@ export default class ExchangeStoreBase extends StoreBase {
       paramsObj['d'] = req.data.params
     };
     req.data.params = paramsObj
-    app.Logger(1, 'sendHttp', req.url.path, req.data.params)
+    app.Logger.dev('sendHttp', req.url.path, req.data.params)
     //添加token
     if (!config.needToken) return
     if (!req.data.params.d.token) return
@@ -35,7 +35,7 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config) {
-    app.Logger(1, 'receiveHttp', req.url, res.result)
+    app.Logger.dev('receiveHttp', req.url, res.result)
     if (res.result.r !== 0) {
       res.result = res.result.d ? Object.assign(Msg[res.result.r], res.result.d) : Msg[res.result.r];
       return
@@ -75,7 +75,7 @@ export default class ExchangeStoreBase extends StoreBase {
       try{
         data = await ZipUtil.BlobParse(data)
       } catch (e) {
-        console.error('解析Blob',e)
+        this.Logger.error('解析Blob',e)
       }
       try{
         data = Buffer.from(data)
@@ -85,23 +85,23 @@ export default class ExchangeStoreBase extends StoreBase {
         zip = data.readInt8(8)
         body = data.length > 9 && data.slice(9)
       } catch (e) {
-        console.error('操作buffer', e)
+        this.Logger.error('操作buffer', e)
       }
 
       if(zip){
         try{
           body = await ZipUtil.unZip(body)
         } catch (e) {
-          console.error('解压缩', e)
+          this.Logger.error('解压缩', e)
         }
 
       }
       try{
         body = JSON.parse(body.toString())
       } catch (e) {
-        console.error('解析json', e)
+        this.Logger.error('解析json', e)
       }
-      body && this.Logger(1, 'reciveWebsocket', body)
+      body && this.Logger.dev('reciveWebsocket', body)
       let dataCache = body
       if(body && body.r){
         delete body.m
@@ -114,7 +114,7 @@ export default class ExchangeStoreBase extends StoreBase {
       this.Loop.websocketHeartBreak.stop()
       this.Loop.websocketHeartBreak.clear()
       websocket.onOpen(data => {
-        this.Logger(1, 'onClose', 'websocketHistory', websocketHistory)
+        this.Logger.dev('onClose', 'websocketHistory', websocketHistory)
         this.startWebsocket(connectName)
         Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
       })
@@ -124,7 +124,7 @@ export default class ExchangeStoreBase extends StoreBase {
       this.Loop.websocketHeartBreak.stop()
       this.Loop.websocketHeartBreak.clear()
       websocket.onOpen(data => {
-        this.Logger(1, 'onClose', 'websocketHistory', websocketHistory)
+        this.Logger.dev('onClose', 'websocketHistory', websocketHistory)
         this.startWebsocket(connectName)
         Object.keys(websocketHistory).forEach(v => websocketHistory[v].forEach(vv => this.WebSocket[connectName].emit(v, vv)))
       })
@@ -133,8 +133,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = async (key, data) => {
-      data && this.Logger(1, 'sendWebsocket', data)
-      // console.log(headerConfig[key])
+      data && this.Logger.dev('sendWebsocket', data)
       headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data), headerConfig[key].historyFunc)
       let emitData = await this.formatWebSocketEmitData(headerConfig, key, data)
       websocket.send(emitData)
@@ -162,13 +161,12 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   async formatWebSocketEmitData(headerConfig, key, data){
-    // console.log('this.WebSocket[connectName]', data)
     let dataBuffer, flag = 0, buffer
     try{
       dataBuffer = data && Buffer.from(JSON.stringify(data)) || null
       buffer = Buffer.allocUnsafe(9)
     } catch (e) {
-      console.error('操作buffer', e)
+      this.Logger.error('操作buffer', e)
     }
 
     if(dataBuffer && dataBuffer.length > 5000){
@@ -181,14 +179,14 @@ export default class ExchangeStoreBase extends StoreBase {
       buffer.writeInt32BE(Math.floor(Math.random() * 1000000000), 4)
       buffer.writeInt8(flag, 8)
     } catch (e) {
-      console.error('操作buffer', e)
+      this.Logger.error('操作buffer', e)
     }
     try {
       if (dataBuffer && dataBuffer.length) {
         buffer = Buffer.concat([buffer, dataBuffer], 9 + dataBuffer.length)
       }
     } catch (e) {
-      console.error('操作buffer', e)
+      this.Logger.error('操作buffer', e)
     }
     return buffer
   }

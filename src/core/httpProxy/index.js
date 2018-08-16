@@ -5,8 +5,8 @@
  *      注：若需要参数，this.Proxy.XXX（params）
  */
 
-  import Fetch from "../libs/Fetch";
-  import Logger from "../libs/Logger";
+import Fetch from "../libs/Fetch";
+import Logger from "../libs/Logger";
 // import HttpConfig from "../../config/HttpConfig"; //引入Fetch
 import {zip, unZip} from '../libs/ZipUtil'
 
@@ -60,7 +60,7 @@ const HTTP_PROXY = {
           try {
             req.data.body = await zip(req.data.body)
           } catch (e) {
-            console.error(e)
+            Logger.error(e)
             return e
           }
         }

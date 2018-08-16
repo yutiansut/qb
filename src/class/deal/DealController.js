@@ -45,7 +45,6 @@ export default class DealController extends ExchangeControllerBase {
         dealBank: prices
       }
     );
-    // console.log('deal', pair, market)
     if (!['CNY', 'USD'].includes(this.view.state.PriceUnit)) {
       this.TradeMarketController.setUnitsType(market);
       this.userOrderController.setUnitsType(market);

@@ -15,12 +15,10 @@ const deepCopy = (obj) => {
  */
 const isObjectValueEqual =  (a, b) => {
 
-  // console.log('isObjectValueEqual 0', a, b)
 
   let aProps = Object.keys(a);
   let bProps = Object.keys(b);
 
-  // console.log('isObjectValueEqual 1', aProps, bProps)
 
   if (aProps.length != bProps.length) {
     return false;
@@ -28,15 +26,12 @@ const isObjectValueEqual =  (a, b) => {
 
   for (let i = 0; i < aProps.length; i++) {
     let propName = aProps[i];
-    // console.log('isObjectValueEqual 2', propName, typeof a[propName], typeof b[propName])
     if (typeof a[propName] === 'object' || typeof b[propName] === 'object') {
       let res = this.isObjectValueEqual(a[propName], b[propName])
-      // console.log('isObjectValueEqual 2.5', res)
       if (res)
         continue;
       return res
     }
-    // console.log('isObjectValueEqual 3', propName, a[propName], b[propName], a[propName] !== b[propName])
     if (a[propName] !== b[propName]) {
       return false;
     }

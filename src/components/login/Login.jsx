@@ -52,10 +52,8 @@ export default class Login extends exchangeViewBase {
     //初始化数据，数据来源即store里面的state
     this.history = props.history
     this.state = Object.assign(this.state, controller.initState);
-    // console.log("marthc........................", match.params);
     let query = match.params && match.params.uid || null;
     this.state.query = query
-    // console.log('query', query)
     this.getAward = controller.getAward.bind(controller)
     this.getVerify = controller.getVerify.bind(controller)
     this.clearVerify = controller.clearVerify.bind(controller)
@@ -91,7 +89,6 @@ export default class Login extends exchangeViewBase {
   changeUser(value) {
     this.setState({userInput: value});
     let reg = Regular('regEmail', value)
-    // console.log(1223233, reg)
     if (reg) {
       this.setState({userType: 1})
     } else {
@@ -102,18 +99,15 @@ export default class Login extends exchangeViewBase {
 
   changePass(value) {
     this.setState({passInput: value});
-    // console.log(2, value)
     this.state.pwdErr && (this.setState({pwdErr: ""}))
   }
 
   changeCode(value) {
     this.setState({codeInput: value});
-    // console.log(3, value)
   }
 
   changePic(value) {
     this.setState({picInput: value});
-    // console.log(4, value)
   }
 
   canClick() {
@@ -174,7 +168,6 @@ export default class Login extends exchangeViewBase {
   }
 
   render() {
-    // console.log('地址', this.props.params && this.props.params)
     let verifyTypeObj = {
       2008: 2,
       2009: 1,

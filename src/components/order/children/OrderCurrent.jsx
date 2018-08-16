@@ -70,7 +70,6 @@ export default class OrderCurrent extends ExchangeViewBase {
     this.state = Object.assign(this.state, controller.initState);
     this.orderListHandle = controller.orderListHandle.bind(controller);
     // this.checkoutDetail = controller.getOrderDetail.bind(controller)
-    // console.log(controller)
     this.exportHistory = controller.exportHistory.bind(controller);
     // this.getCurrent = controller.getCurrentOrder.bind(controller)
   }

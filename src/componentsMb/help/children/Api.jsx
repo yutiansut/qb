@@ -5,7 +5,6 @@ export default class Api extends ExchangeViewBase {
   constructor(props) {
     super(props);
     // const {controller} = props
-    // console.log('jsxconfig',controller.configData)
   }
 
   componentWillMount() {}

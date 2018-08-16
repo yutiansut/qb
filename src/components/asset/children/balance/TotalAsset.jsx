@@ -14,7 +14,6 @@ export default class TotalAsset extends exchangeViewBase {
   }
   render() {
     let { totalAsset } = this.props;
-    console.log(this.props.totalAsset);
     return <div className="total-asset clearfix">
         <h3>{this.intl.get("asset-balance")}</h3>
         <div className="item total clearfix">

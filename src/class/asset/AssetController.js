@@ -70,7 +70,6 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取对应市场下的交易对信息（调用market的api）
   async getTradePair() {
     let result = await this.marketController.getTradePairHandle();
-    console.log(result)
     this.view.setState({
       tradePair: result
     });
@@ -93,7 +92,6 @@ export default class AssetController extends ExchangeControllerBase {
     if (result && result.errCode) {
       return;
     }
-    // console.log(this.store.state.currencyAmount);
     this.view.setState({
       currencyAmount: this.store.state.currencyAmount
     });
@@ -150,7 +148,6 @@ export default class AssetController extends ExchangeControllerBase {
   // 获取充提记录
   async getHistory(obj) {
     let result = await this.store.getHistory(obj);
-    // console.log('history,,,,,,,,,,,,,,,,,,,,,,,,,,,',result)
     this.view.setState({
       assetHistory: this.Util.deepCopy(result)
     });
@@ -269,7 +266,6 @@ export default class AssetController extends ExchangeControllerBase {
     type === 3 && (obj.mode = 0);
     type === 2 && (obj.mode = 2);
     let result = await this.store.extractOrder(obj);
-    // console.log('提交订单', result)
     // h5处理
     if(isH5){
       // 错误处理
@@ -604,7 +600,6 @@ export default class AssetController extends ExchangeControllerBase {
       avail2 = this.store.state.wallet.filter(
         item => item.coinName === (currencyArr && currencyArr[1])
       )[0];
-    // console.log("updataMarketAvaile", avail1, avail2);
     !flag && this.TradePlanController &&
       this.TradePlanController.setWallet(
         (avail1 && avail1.availableCount) || 0,
@@ -620,9 +615,7 @@ export default class AssetController extends ExchangeControllerBase {
 
   // websocke更新
   userAssetUpdate(obj) {
-    // console.log('执行。。。。。。。。。。')
     if (this.view.name === "simple") {
-      // console.log("进入。。。。。。。。。。。。。");
       this.setSimpleAsset({
         totalAsset: this.store.state.totalAsset,
         wallet: this.store.state.wallet

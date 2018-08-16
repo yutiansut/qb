@@ -99,25 +99,20 @@ export default class SetPwd extends ExchangeViewBase {
   // }
   changeUser(value) { // 输入
     this.setState({userValue: value});
-    // console.log(2, value)
     this.state.errUser && (this.setState({errUser: ""}))
   }
   changeAgainPwd(value) {
     this.setState({againPwdValue: value});
-    // console.log(3, value)
     this.state.errAgainPwd && (this.setState({errAgainPwd: ""}))
   }
   changePicture(value) {
     this.setState({pictureValue: value});
-    // console.log(4, value)
   }
   changeVerify(value) {
     this.setState({verifyValue: value});
-    // console.log(5, value)
   }
   changeGoogle(value) {
     this.setState({googleValue: value});
-    // console.log(6, value)
   }
 
   // 检验部分

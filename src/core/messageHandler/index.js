@@ -21,6 +21,7 @@
 
 
 import Sleep from '../libs/Sleep'
+import Logger from "../libs/Logger";
 const PoolDic = {}
 
 //循环读取完成收发消息队列的处理
@@ -68,7 +69,7 @@ const MESSAGE_HANDLER = {
     MESSAGE_HANDLER[config.name].config = config
 
     //此处需被重写
-    MESSAGE_HANDLER[config.name].onMessage = async data => data && console.log('data', data)
+    MESSAGE_HANDLER[config.name].onMessage = async data => data && Logger('data', data)
 
     MESSAGE_HANDLER[config.name].onClose = func => {
       pool.onClose = func

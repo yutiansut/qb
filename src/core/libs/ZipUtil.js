@@ -25,11 +25,9 @@ const BlobParse = data =>{
       var reader = new FileReader();
       reader.addEventListener("loadend", function() {
         // reader.result 包含转化为类型数组的blob
-        // console.log('reader.result 包含转化为类型数组的blob',reader.result)
         resolve(reader.result)
       });
       reader.readAsArrayBuffer(data);
-      // console.log(res)
     } catch (e) {
       reject({ret: -6, data: e})
     }

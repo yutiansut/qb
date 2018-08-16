@@ -1,4 +1,5 @@
 import Sleep from '../libs/Sleep'
+import Logger from "../libs/Logger";
 
 // 循环任务执行函数
 async function taskRun() {
@@ -7,7 +8,7 @@ async function taskRun() {
     await this.func()
   } catch (e) {
     throw e
-    console.err(e)
+    Logger.error(e)
   }
   this.status = 2
 }
@@ -114,11 +115,6 @@ const TASK_HANDLER = {
     })
     taskLoop()
   },
-  // setTask(tasks){
-  //   TASKS[tasks].task = []
-  //   TASKS[tasks].step = 0 // 记录当前系列任务执行到第几步
-  //   TASKS[tasks].flag = 0
-  // }
 }
 
 export default TASK_HANDLER

@@ -38,10 +38,7 @@ export default class UserController extends ExchangeControllerBase {
   }
   // 从登录接口获取信息
   getUserId(data) {
-    // console.log('ccc3', data)
     this.store.userLogin(data)
-    // console.log('this.view',this.view)
-    // this.view.history.goBack()
   }
 
   // 接口调用部分
@@ -54,7 +51,6 @@ export default class UserController extends ExchangeControllerBase {
 
   async getUserAuthData() { // 获取用户认证信息
     let userAuth = await this.store.userAuth();
-    // console.log('获取用户认证信息', userAuth)
     this.view.setState({userAuth})
     return userAuth;
   }
@@ -71,7 +67,6 @@ export default class UserController extends ExchangeControllerBase {
 
   async getIpList() { // 获取ip白名单
     let ipList = await this.store.ipList();
-    // console.log('ip白名单', ipList)
     this.view.setState({ipList})
   }
 
@@ -91,13 +86,11 @@ export default class UserController extends ExchangeControllerBase {
   }
 
   async uploadImg(file) { // 上传图片
-    // console.log('上传图片', file)
     let imgUrl = `image${this.view.state.imgUrlIndex + 1}`
     let res = await this.store.uploadImg(file),
         result = await res.text()
     let obj={}
     obj[imgUrl] = result
-    // console.log('上传图片2', result, obj)
     this.view.setState(obj)
   }
 
@@ -114,7 +107,6 @@ export default class UserController extends ExchangeControllerBase {
       "im2": this.view.state.image2 || userAuth.image2, // 背面照
       "im3": this.view.state.image3 || userAuth.image3  // 手持照
     })
-    // console.log('上传信息', result)
     succObj = {
       state: 1,
       firstName: userAuth.number ? userAuth.firstName : this.view.state.firstNameValue,
@@ -163,7 +155,6 @@ export default class UserController extends ExchangeControllerBase {
     }
   }
   async bindUser(account, mode, code, captchaId, captchaCode) { // 绑定邮箱／手机号
-    // console.log(111, this.view.state.noticeIndex)
     if(!this.view.state.setPassFlag)
       return
     this.view.setState({
@@ -195,7 +186,6 @@ export default class UserController extends ExchangeControllerBase {
         noticeList,
         verifyList
       })
-      // console.log('绑定成功', this.view.state)
       this.getCaptchaVerify()
       this.getUserCreditsNum()
       if (this.view.state.bindOrigin === 1) {
@@ -223,13 +213,11 @@ export default class UserController extends ExchangeControllerBase {
       if (this.view.state.bindOrigin === 2) {
         this.view.setUserNotify(noticeArr[this.view.state.noticeIndex])
       }
-      // console.log('绑定成功', this.view.state)
     }
 
     if (result !== null) {
       this.getCaptchaVerify()
     }
-    // console.log('绑定手机号／邮箱', result)
   }
 
   async setLoginPass(oldPwd, newPwd, type) { // 设置／修改登录密码
@@ -259,7 +247,6 @@ export default class UserController extends ExchangeControllerBase {
       // 首页登录密码三秒后消失
       this.view.state.popupShow && (setTimeout(()=>{this.view.setState({popupShow: false})}, 3000))
     }
-    // console.log('设置密码', result)
   }
 
   async modifyFundPwd(account, mode, opType, newPass, captchaCode, captchaId, code, os=3) { // 设置／修改资金密码
@@ -279,7 +266,6 @@ export default class UserController extends ExchangeControllerBase {
       co: code,
       os: os, // 1:android 2:iOS 3:browser
     })
-    // console.log('设置密码', result)
     this.view.setState({
       remindPopup: true,
       popType: result ? 'tip3': 'tip1',
@@ -381,8 +367,6 @@ export default class UserController extends ExchangeControllerBase {
       showChange: result ? true : false,
       verifyList
     })
-    // }
-    // console.log('修改两步认证', result)
   }
 
   async addIp(ipAdd) { // 添加ip白名单
@@ -392,7 +376,6 @@ export default class UserController extends ExchangeControllerBase {
       token: this.store.token,
       ipd: ipAdd
     })
-    // console.log('添加ip白名单', result)
     if (result && result.ipd) {
       ipList.push({IPAddress: ipAdd, createAt: time, IPId: result.ipd})
     }
@@ -424,7 +407,6 @@ export default class UserController extends ExchangeControllerBase {
 
   async getCaptchaVerify() { // 获取图形验证码
     let captcha = await this.getCaptcha()
-    // console.log('获取图形验证码', captcha)
     this.view.setState({captcha: captcha.data, captchaId: captcha.id})
   }
   async setGoogleVerifyH5(code) {
@@ -464,11 +446,9 @@ export default class UserController extends ExchangeControllerBase {
       this.view.selectType(this.view.state.sureTwoVerify, this.view.state.isTwoVerify, this.view.state.type)
     }
     // if (result === null) {this.view.setState({showGoogle: false})}
-    // console.log('验证谷歌', result)
   }
 
   async setUserNotify(index) { // 修改通知方式
-    // console.log(124, this.view.state.userInfo.notifyMethod, index)
     let userInfo = this.view.state.userInfo, noticeArr = [1, 0]
     this.view.setState({
       type: index + 1,
@@ -494,7 +474,6 @@ export default class UserController extends ExchangeControllerBase {
         popMsg: result ? result.msg : this.view.intl.get("user-modifiedSucc"),
         userInfo: result ? userInfo : Object.assign(userInfo, {notifyMethod: index === 0 ? 1 : 0})
       })
-      // console.log('改变通知', result, index)
     }
   }
 
@@ -508,12 +487,10 @@ export default class UserController extends ExchangeControllerBase {
       popType: result && result.errCode ? 'tip3': 'tip1',
       popMsg: result && result.errCode ? result.msg : this.view.intl.get("user-outSucc"),
     })
-    // console.log('退出其他设备', result)
   }
 
   async getIPAddr() { // 获取当前IP
     let result = await this.store.Proxy.getIPAddr()
-    // console.log('获取ip', result, this.view)
     this.view.setState({
       ipAddr: result.ip,
       showIp: true
@@ -535,7 +512,6 @@ export default class UserController extends ExchangeControllerBase {
       verifyFund: result && result.errCode ? true : false,
       fundPassType0: result && result.errCode ? this.view.state.fundPassType0 : this.view.state.fundPassType,
     })
-    // console.log('设置资金密码间隔', result)
   }
 
 
@@ -545,12 +521,10 @@ export default class UserController extends ExchangeControllerBase {
     let {  //0: 已设置资金密码 1: 未设置资金密码; d
       fundPassVerify, loginVerify, withdrawVerify, fundPwd
     } = this.store.state.userInfo
-    // console.log(this.store.state)
     return {fundPassVerify, loginVerify, withdrawVerify, fundPwd}
   }
 
   get userInfo() { // 提供用户手机号或者邮箱
-    // console.log('userInfo', this.store.state.userInfo)
     let {
       email, phone
     } = this.store.state.userInfo
@@ -617,7 +591,6 @@ export default class UserController extends ExchangeControllerBase {
     let resultObj = {
       mode: result.mo
     }
-    // console.log('查看资金密码', result)
     return resultObj
   }
 
@@ -628,7 +601,6 @@ export default class UserController extends ExchangeControllerBase {
       "ty": type,//0 登录; 1 修改密码; 2 支付; 3 绑定手机／邮箱; 5 设置资金密码 6 修改资金密码 7登陆第二次验证 8提币 9二次验证
       "os": os// 1 android 2 iOS 3 browser 4 h5
     })
-    // console.log('发送验证码', result, account, mode, type )
     return result
   }
 

@@ -31,7 +31,6 @@ export default class SeletMonthView extends exchangeViewBase {
         let temp = [];
         for (let j = 0; j < 4; j++) {
           let month = firstMonth + i * 4 + j;
-          // console.log(month)
           // i * 4 + j > 10 && (month = firstMonth + 10)
           temp .push(<td
             key={j}

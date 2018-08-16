@@ -180,11 +180,9 @@ export default class App extends Component {
     await configController.checkVersion();
     configController.loadLocales();
     // marketController.getTradePairHandle();
-    // console.log(222, window.innerHeight)
   }
 
   componentWillUpdate(...parmas) {
-    // console.log(333, window.innerHeight)
   }
 
   render() {

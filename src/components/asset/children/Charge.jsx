@@ -143,7 +143,6 @@ export default class Charge extends exchangeViewBase {
     let { totalCount, frozenCount, availableCount } = this.state.currencyAmount;
     let { total, orderList } = this.state.assetHistory;
     let address = this.state.coinAddress;
-    // console.log(address);
     return (
       <div className="charge">
         <h3>
