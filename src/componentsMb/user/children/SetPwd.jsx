@@ -81,7 +81,7 @@ export default class SetPwd extends ExchangeViewBase {
     this.destroy = controller.clearVerify.bind(controller); // 清除定时器
 
     this.eyeChange = this.eyeChange.bind(this)
-    this.changeCurrentPwd = this.changeCurrentPwd.bind(this) // 当前密码输入框
+    // this.changeCurrentPwd = this.changeCurrentPwd.bind(this) // 当前密码输入框
     this.changeUser = this.changeUser.bind(this) // 手机号／邮箱／新密码输入框
     this.changeAgainPwd = this.changeAgainPwd.bind(this) // 再次输入密码
     this.changePicture = this.changePicture.bind(this) // 输入图形验证码
@@ -92,11 +92,11 @@ export default class SetPwd extends ExchangeViewBase {
     this.checkUser = this.checkUser.bind(this)
     this.checkAgainPwd = this.checkAgainPwd.bind(this)
   }
-  changeCurrentPwd(value) { // 输入
-    this.setState({currentPwdValue: value});
-    // console.log(1, value)
-    this.state.errCurrentPwd && (this.setState({errCurrentPwd: ""}))
-  }
+  // changeCurrentPwd(value) { // 输入
+  //   this.setState({currentPwdValue: value});
+  //   // console.log(1, value)
+  //   this.state.errCurrentPwd && (this.setState({errCurrentPwd: ""}))
+  // }
   changeUser(value) { // 输入
     this.setState({userValue: value});
     // console.log(2, value)
@@ -237,7 +237,6 @@ export default class SetPwd extends ExchangeViewBase {
                 <Input placeholder={this.state.isType && this.state.popupTypeList[this.state.isType - 1].numInputNew}
                        value={this.state.currentPwdValue}
                        oriType={this.state.inputType ? 'password' : 'text'}
-                       onInput={value => this.changeCurrentPwd(value)}
                        onBlur={this.checkCurrentPwd}/>
                 <em>{this.state.errCurrentPwd}</em>
               </li>

@@ -5,19 +5,6 @@
   background $trade-model-bg
   float left
   color $trade-font-title
-  overflow auto
-  &::-webkit-scrollbar-button
-    display none
-  &::-webkit-scrollbar
-    position relative
-    width 3px
-    height 100%
-  &::-webkit-scrollbar-track
-    width 3px
-    background $trade-scrollbar-track
-  &::-webkit-scrollbar-thumb
-    width 3px
-    background $trade-scrollbar-thumb
   .hide
     display none
   .trade-market-list
@@ -107,7 +94,7 @@
         cursor pointer
   .scroll-bar
     overflow-y auto
-    max-height 2.69rem
+    max-height 3.5rem
     &::-webkit-scrollbar-button
       display none
     &::-webkit-scrollbar
@@ -138,8 +125,7 @@
       .zone-name
         margin 2rem
         p
-          margin-left .16rem
-          margin-right .1rem
+          margin 0 .1rem .08rem .16rem
           padding 0 0 .05rem .06rem
           color $trade-font-normal
           font-size .12rem

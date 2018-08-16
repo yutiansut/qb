@@ -256,16 +256,16 @@ export default class userSafeCenter extends exchangeViewBase {
             <li>{this.intl.get("phone")}</li>
             <li className={`${this.state.userInfo.phone ? '' : 'basic-popup'}`} onClick = {state => !this.state.userInfo.phone && this.changeSetPopup(2)}>
               {this.state.userInfo.phone && this.state.userInfo.phone || this.intl.get("help-phone-bind")}
-              {this.state.userInfo.phone && <span onClick = {state => this.changeSetPopup(7)}>修改</span>}
+              {/*{this.state.userInfo.phone && <span onClick = {state => this.changeSetPopup(7)}>修改</span>}*/}
             </li>
             <li>{this.intl.get("user-level")}</li>
             <li>
               <Link to="/help/pricing">VIP{this.state.userInfo.level}</Link>({this.intl.get("points")}：<Link to="/user/integration">{this.state.userCreditsNum}</Link>)
             </li>
-            {this.state.userInfo.googleAuth === 0 && <li>
-              <em>{this.intl.get("user-googleVerify")}</em>
-              <i onClick={() => {this.setState({modifyGoogle: true});}}>修改</i>
-            </li>}
+            {/*{this.state.userInfo.googleAuth === 0 && <li>*/}
+              {/*<em>{this.intl.get("user-googleVerify")}</em>*/}
+            {/*<i onClick={() => {this.setState({modifyGoogle: true});}}>修改</i>*/}
+            {/*</li>}*/}
           </ul>
         </div>
         <div className="change-pass model-div" style={{display: 'flex'}}>
@@ -331,20 +331,20 @@ export default class userSafeCenter extends exchangeViewBase {
                   <b>{v.name}</b>
                 </span>))}
               </li>
-              {this.state.noticeIndex === 0 && <li className="fish-code">
-                {!this.state.showFishCode && <img src={this.state.showFishCode ? this.$imagesMap.$checked : this.$imagesMap.$nomal_check} alt="" onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}/>}
-                <span onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}>防钓鱼码</span>
-                {this.state.showFishCode && <div className="fish-input">
-                  <div className="clearfix">
-                    <Input value={this.state.fishCodeValue}
-                           onInput={value => this.changeFishCode(value)}
-                           onBlur={this.checkFishCode}/>
-                    <Button className="ok-btn" title={this.intl.get("ok")}/>
-                    <Button className="cancel-btn" title={this.intl.get("cance")} onClick={() => {this.setState({ showFishCode: false});}}/>
-                  </div>
-                  <em>{this.state.errFishCode}</em>
-                </div>}
-              </li>}
+              {/*{this.state.noticeIndex === 0 && <li className="fish-code">*/}
+                {/*{!this.state.showFishCode && <img src={this.state.showFishCode ? this.$imagesMap.$checked : this.$imagesMap.$nomal_check} alt="" onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}/>}*/}
+                {/*<span onClick={() => {this.setState({ showFishCode: !this.state.showFishCode });}}>防钓鱼码</span>*/}
+                {/*{this.state.showFishCode && <div className="fish-input">*/}
+                  {/*<div className="clearfix">*/}
+                    {/*<Input value={this.state.fishCodeValue}*/}
+                           {/*onInput={value => this.changeFishCode(value)}*/}
+                           {/*onBlur={this.checkFishCode}/>*/}
+                    {/*<Button className="ok-btn" title={this.intl.get("ok")}/>*/}
+                    {/*<Button className="cancel-btn" title={this.intl.get("cance")} onClick={() => {this.setState({ showFishCode: false});}}/>*/}
+                  {/*</div>*/}
+                  {/*<em>{this.state.errFishCode}</em>*/}
+                {/*</div>}*/}
+              {/*</li>}*/}
             </ul>
           </div>
           <div className="name-list model-div clearfix">

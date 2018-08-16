@@ -58,7 +58,7 @@ export default class Login extends exchangeViewBase {
     this.changeCode = this.changeCode.bind(this)
     this.changePic = this.changePic.bind(this)
     this.checkUserInput = this.checkUserInput.bind(this)
-    this.checkPassInput = this.checkPassInput.bind(this)
+    // this.checkPassInput = this.checkPassInput.bind(this)
     this.addContent = controller.headerController.addContent.bind(controller.headerController)
   }
 
@@ -115,14 +115,14 @@ export default class Login extends exchangeViewBase {
     }
   }
 
-  checkPassInput() { // 密码
-    let reg = Regular('regPwd', this.state.passInput)
-    if (!reg) {
-      this.setState({
-        pwdErr: this.intl.get("user-checkNewPwd")
-      })
-    }
-  }
+  // checkPassInput() { // 密码
+  //   let reg = Regular('regPwd', this.state.passInput)
+  //   if (!reg) {
+  //     this.setState({
+  //       pwdErr: this.intl.get("user-checkNewPwd")
+  //     })
+  //   }
+  // }
 
   canClick() {
     if (this.state.titleIndex === 0 && this.state.userErr) return false
@@ -178,8 +178,7 @@ export default class Login extends exchangeViewBase {
               <Input placeholder={this.intl.get("login-passInput")}
                      oriType="password"
                      value={this.state.passInput}
-                     onInput={value => this.changePass(value)}
-                     onBlur={this.checkPassInput}/>
+                     onInput={value => this.changePass(value)}/>
               <em>{this.state.passInput && this.state.pwdErr}</em>
               {/*<span><NavLink to="/findPass">{this.intl.get("login-forget")}</NavLink></span>*/}
             </li>

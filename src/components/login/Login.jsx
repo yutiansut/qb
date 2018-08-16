@@ -198,6 +198,7 @@ export default class Login extends exchangeViewBase {
             </li>
             <li className={`${this.state.titleIndex === 1 ? '' : 'hide'} pass-li clearfix`}>
               <Input placeholder={this.intl.get("login-passInput")}
+                     maxlength="36"
                      oriType="password"
                      value={this.state.passInput}
                      onInput={value => this.changePass(value)}/>
