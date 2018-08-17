@@ -24,6 +24,8 @@ export default class UserStore extends ExchangeStoreBase {
     super("config", "general");
     let language = this.getQuery("language") === '0' ? "zh-CN" : this.getQuery("language") === '1' ? "en-US" : undefined;
     language && this.Storage.language.set(language);
+
+    // 渠道存储
     if(window.location.pathname === '/'){
       this.getQuery("c") && this.Storage.c.set(this.getQuery("c"))
     }
@@ -66,6 +68,10 @@ export default class UserStore extends ExchangeStoreBase {
     this.state.versionAndroidInfo = result;
   }
 
+  async sendChannel(){
+    let id = this.Storage.c.get();
+    id && await this.Proxy.sendChannel({id: Number(id)});
+  }
   get versionAndroidInfo(){
     return this.state.versionAndroidInfo
   }

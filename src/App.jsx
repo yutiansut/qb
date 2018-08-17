@@ -210,6 +210,8 @@ export default class App extends Component {
                     key={i}
                     render={props => {
                       document.getElementById("app").scrollIntoView(true);
+                      console.log('window.location.pathname............................',configController, window.location.pathname)
+                      configController.sendChannel()
                       return !item.auth ? (
                         ["/login", "/login/:uid", '/findPass'].includes(item.path) && userController.Storage.userToken.get() ? (
                           <Redirect to={{ pathname: "/home" }} />

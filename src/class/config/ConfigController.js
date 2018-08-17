@@ -43,16 +43,20 @@ export default class ConfigController extends ExchangeControllerBase {
   async getActivityState() {
     await this.store.getActivityState();
   }
-  
+
   //checkVersion
   async checkVersion() {
     await this.store.checkVersion();
   }
-  
+// 发送渠道号
+  async sendChannel(){
+    await this.store.sendChannel();
+  }
+
   get versionAndroidInfo(){
     return this.store.versionAndroidInfo
   }
-  
+
   async loadLocales() {
     const locales = {
       "en-US": en(this.store.state),

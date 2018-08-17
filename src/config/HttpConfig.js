@@ -23,7 +23,8 @@ export default {
   // httpAfterHandler,
   config: [
     {name: 'activityState', data: {url: '/v1/common/', method: 'post'}, action: 'cfg', actionBack: 'cfgr'},
-    {name: 'checkVersion', data: {url: '/v1/common/', method: 'post'}, action: 'cv', actionBack: 'cvr'}
+    {name: 'checkVersion', data: {url: '/v1/common/', method: 'post'}, action: 'cv', actionBack: 'cvr'},
+    {name: 'sendChannel', data: {url: '/v1/common/', method: 'post'}, action: 'cs', actionBack: 'csr'}
   ],
   user: [ // 用户
     {name: 'getUserInfo', data: {url: '/v1/user/', method: 'post'}, action: 'ui', actionBack: 'uir', needToken: true}, // 获取用户信息
