@@ -37,7 +37,6 @@ export default class MarketController extends ExchangeControllerBase {
 
   // 切换市场
   async changeMarket(v) {
-    console.log('changeMarket', v)
     this.store.setSelecedMarket(v);
     this.store.setSort(['turnover'], 0);
     // this.setState({
@@ -74,22 +73,18 @@ export default class MarketController extends ExchangeControllerBase {
   }
 
   get language() {
-    // console.log('this.configController', this.configController)
     return this.configController && this.configController.language
   }
 
   get ascending() {
-    // console.log('this.configController', this.configController)
     return this.store.ascending
   }
 
   get sortValue() {
-    // console.log('this.configController', this.configController)
     return this.store.sortValue
   }
 
   get token() {
-    // console.log('this.userController', this.userController)
     return this.userController.userToken
   }
 
@@ -150,12 +145,6 @@ export default class MarketController extends ExchangeControllerBase {
         coin = pairMsg.pairNameMarket[queryValue][0]
         market = queryValue
         selectPair = `${coin}/${market}`
-        
-        // if(this.store.marketDataHandle.indexOf(queryValue) < 0) {
-        //   let pairMsg = await this.store.getPairMsg()
-        //   market = pairMsg.pairNameCoin[queryValue].sort((a,b)=>a>b)[0]
-        //   selectPair = `${queryValue}/${market}`
-        // }
       }
       this.changeUrl('tradePair',selectPair)
     }
@@ -168,7 +157,6 @@ export default class MarketController extends ExchangeControllerBase {
     let newMarketPair = [], mainMarketPair = [];
     newMarketPair = this.sort(homeMarketPairData.filter(v=>v.isNew), this.store.sortValue, this.store.ascending);
     mainMarketPair = this.sort(homeMarketPairData.filter(v=>!v.isNew), this.store.sortValue, this.store.ascending);
-    // console.log(newMarketPair, mainMarketPair)
     // homeMarketPairData = this.sort(homeMarketPairData, this.store.sortValue, this.store.ascending)
     type === 3 && (this.store.state.tradePair = selectPair || mainMarketPair[0].tradePairName);
     this.view.setState({
@@ -178,7 +166,6 @@ export default class MarketController extends ExchangeControllerBase {
       newMarketPair,
       mainMarketPair
     }, () => this.view.name === 'tradeMarket' && type > 0 && this.setDealMsg(type));
-    // console.log('type', type);
     (type === 3 ) && this.view.name === 'tradeMarket' && tradePairQ && (this.store.state.tradePair = tradePairQ);
     (type === 3 ) && this.view.name === 'tradeMarket' && this.tradePairChange(this.store.allPair.find(v=>v.tradePairName === this.store.state.tradePair));
   }
@@ -341,7 +328,6 @@ export default class MarketController extends ExchangeControllerBase {
   //     bankEN : bankValueItems.ur
   //   };
   //   this.store.state.initBank = initBank;
-  //   console.log('bankkkkkkkkk', this.store.state.initBank)
   // }
   // setBank(){
   //   let bank = this.store.state.initBank

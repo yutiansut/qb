@@ -13,14 +13,6 @@ import {zip, unZip} from '../libs/ZipUtil'
 let host, port, HttpList, protocol, HttpZip;
 
 const formatParams = req => {
-  if (req.url.path.indexOf(":") > 0) {
-    let urlArr = req.url.path.split(":"),
-      url = urlArr[0],
-      replaceKey = urlArr[1];
-    req.url.path = `${url}${req.data.params[replaceKey]}`;
-    delete req.data.params[replaceKey];
-  }
-  req.url.path && (req.url = `${req.url.protocol}://${req.url.host}:${req.url.port}${req.url.path}`);
   if (req.data && req.data.method === "post" && req.data.params)
     Object.keys(req.data.params).length > 0 && (req.data.body = JSON.stringify(req.data.params));
   if (req.data && req.data.method === "get" && req.data.params)
@@ -28,6 +20,17 @@ const formatParams = req => {
       (req.url += `${key}=${req.data.params[key]}`) && Object.keys(req.data.params).length - 1 !== index && (req.url += "&"));
   delete req.data.params
   return req
+}
+
+const formatUrl = req =>{
+  if (req.url.path.indexOf(":") > 0) {
+    let urlArr = req.url.path.split(":"),
+        url = urlArr[0],
+        replaceKey = urlArr[1];
+    req.url.path = `${url}${req.data.params[replaceKey]}`;
+    delete req.data.params[replaceKey];
+  }
+  req.url.path && (req.url = `${req.url.protocol}://${req.url.host}:${req.url.port}${req.url.path}`);
 }
 
 
@@ -50,6 +53,7 @@ const HTTP_PROXY = {
         let data = JSON.parse(JSON.stringify(v.data));
         delete data.url
         req.data = Object.assign({params}, data);
+        formatUrl(req)
         if (preHandler && preHandler.length) {
           for (let i = 0; i < preHandler.length; i++) {
             await preHandler[i](this, req, v)

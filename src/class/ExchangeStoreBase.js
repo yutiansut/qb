@@ -24,7 +24,7 @@ export default class ExchangeStoreBase extends StoreBase {
       paramsObj['d'] = req.data.params
     };
     req.data.params = paramsObj
-    app.Logger.dev('sendHttp', req.url.path, req.data.params)
+    app.Logger.dev('sendHttp', req.url, `action:${config.action}`, req.data.params)
     //添加token
     if (!config.needToken) return
     if (!req.data.params.d.token) return
@@ -35,7 +35,7 @@ export default class ExchangeStoreBase extends StoreBase {
   }
 
   exchangeStoreBaseAfterHandler(app, req, res, config) {
-    app.Logger.dev('receiveHttp', req.url, res.result)
+    app.Logger.dev('receiveHttp', req.url, `action:${config.actionBack}`, res.result)
     if (res.result.r !== 0) {
       res.result = res.result.d ? Object.assign(Msg[res.result.r], res.result.d) : Msg[res.result.r];
       return
@@ -101,7 +101,7 @@ export default class ExchangeStoreBase extends StoreBase {
       } catch (e) {
         this.Logger.error('解析json', e)
       }
-      body && this.Logger.dev('reciveWebsocket', body)
+      body && this.Logger.dev('reciveWebsocket', `op:${op}`, body)
       let dataCache = body
       if(body && body.r){
         delete body.m
@@ -133,7 +133,7 @@ export default class ExchangeStoreBase extends StoreBase {
     this.WebSocket[connectName] = {}
 
     this.WebSocket[connectName].emit = async (key, data) => {
-      data && this.Logger.dev('sendWebsocket', data)
+      data && this.Logger.dev('sendWebsocket', `op:${headerConfig[key].o}`, data)
       headerConfig[key].history && this.WebSocket[connectName].pushWebsocketHistoryArr(key, this.Util.deepCopy(data), headerConfig[key].historyFunc)
       let emitData = await this.formatWebSocketEmitData(headerConfig, key, data)
       websocket.send(emitData)
