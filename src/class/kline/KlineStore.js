@@ -14,7 +14,7 @@ export default class KlineStore extends ExchangeStoreBase {
       // console.log("k线-ws推送：\n",data);
       data.ns.map(v => {
           let arr = [];
-          arr.push(v.et * 1000);
+          arr.push(v.st * 1000);
           arr.push(v.op);
           arr.push(v.hp);
           arr.push(v.lp);
@@ -38,7 +38,7 @@ export default class KlineStore extends ExchangeStoreBase {
       if (!result.ns) { this.state.kline = []; return };
       this.state.kline = result.ns.map(v => {
         let arr = [];
-        arr.push(v.et * 1000);
+        arr.push(v.st * 1000);
         arr.push(v.op);
         arr.push(v.hp);
         arr.push(v.lp);
