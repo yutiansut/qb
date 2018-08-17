@@ -198,7 +198,6 @@ export default class MarketController extends ExchangeControllerBase {
       tradePair: value.tradePairName,
       tradePairId: value.tradePairId
     });
-    this.Logger.warn(value)
     this.changeUrl('tradePair',value.tradePairName)
     this.store.state.tradePair = value.tradePairName;
     this.store.state.tradePairId = value.tradePairId;

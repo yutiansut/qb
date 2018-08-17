@@ -109,7 +109,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order' >
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-current')}</h3>
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', marginRight: '.16rem'}}>
               {this.state.currentOrder && this.state.currentOrder.length && this.state.resetHandleItems.map((v, index) => {
                 return (
                     <div className='reset-handle' key={index} onClick={this.cancelOrder.bind(this,index + 1, 0)}>{v.name}</div>
@@ -163,7 +163,7 @@ export default class userOrder extends ExchangeViewBase {
         <div className='trade-current-order'>
           <div className='trade-current-title'>
             <h3>{this.intl.get('order-history')}</h3>
-            {<NavLink to={{pathname: "/order/history/"}}>{this.intl.get('seeMore')}</NavLink>}
+            {<NavLink to={{pathname: "/order/history/"}} className='order-jump'>{this.intl.get('seeMore')}</NavLink>}
         </div>
           {this.state.historyOrder && this.state.historyOrder.length !== 0 && <table className='trade-current-table'>
             <thead>
