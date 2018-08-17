@@ -2,7 +2,7 @@ import React from 'react';
 import QRCode from 'qrcode.react';
 import exchangeViewBase from '../../../components/ExchangeViewBase.jsx';
 import downloadCanvasImage from '../../../class/lib/DownloadCanvasImage.js';
-import {downloadCanvas} from '../../../class/lib/DownloadCanvas.js'
+// import {downloadCanvas} from '../../../class/lib/DownloadCanvas.js'
 
 export default class ActivityInvite extends exchangeViewBase {
   constructor(props) {
